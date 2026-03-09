@@ -81,6 +81,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'Quote'
         }
+        /// <summary>
+        /// Test the property 'Increment'
+        /// </summary>
+        [Fact]
+        public void IncrementTest()
+        {
+            // TODO unit test for the property 'Increment'
+        }
 
     }
 

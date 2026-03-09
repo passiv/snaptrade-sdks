@@ -8,21 +8,25 @@ Name | Type | Description | Notes
 **BrokerageAuthorization** | **string** | Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. | 
 **Name** | **NullableString** | A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. | 
 **Number** | **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | 
+**InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. | [optional] 
 **InstitutionName** | **string** | The name of the brokerage that holds the account. | 
 **CreatedDate** | **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. | 
+**FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. | [optional] 
+**OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. | [optional] 
 **SyncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  | 
 **Balance** | [**AccountBalance**](AccountBalance.md) |  | 
 **Status** | Pointer to **NullableString** | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage. | [optional] 
 **RawType** | Pointer to **NullableString** | The account type as provided by the brokerage | [optional] 
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
-**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
+**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it. | [optional] 
 **CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
+**IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 
 ## Methods
 
 ### NewAccount
 
-`func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance, ) *Account`
+`func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance, isPaper bool, ) *Account`
 
 NewAccount instantiates a new Account object
 This constructor will assign default values to properties that have it defined,
@@ -127,6 +131,41 @@ and a boolean to check if the value has been set.
 SetNumber sets Number field to given value.
 
 
+### GetInstitutionAccountId
+
+`func (o *Account) GetInstitutionAccountId() string`
+
+GetInstitutionAccountId returns the InstitutionAccountId field if non-nil, zero value otherwise.
+
+### GetInstitutionAccountIdOk
+
+`func (o *Account) GetInstitutionAccountIdOk() (*string, bool)`
+
+GetInstitutionAccountIdOk returns a tuple with the InstitutionAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstitutionAccountId
+
+`func (o *Account) SetInstitutionAccountId(v string)`
+
+SetInstitutionAccountId sets InstitutionAccountId field to given value.
+
+### HasInstitutionAccountId
+
+`func (o *Account) HasInstitutionAccountId() bool`
+
+HasInstitutionAccountId returns a boolean if a field has been set.
+
+### SetInstitutionAccountIdNil
+
+`func (o *Account) SetInstitutionAccountIdNil(b bool)`
+
+ SetInstitutionAccountIdNil sets the value for InstitutionAccountId to be an explicit nil
+
+### UnsetInstitutionAccountId
+`func (o *Account) UnsetInstitutionAccountId()`
+
+UnsetInstitutionAccountId ensures that no value is present for InstitutionAccountId, not even an explicit nil
 ### GetInstitutionName
 
 `func (o *Account) GetInstitutionName() string`
@@ -167,6 +206,76 @@ and a boolean to check if the value has been set.
 SetCreatedDate sets CreatedDate field to given value.
 
 
+### GetFundingDate
+
+`func (o *Account) GetFundingDate() time.Time`
+
+GetFundingDate returns the FundingDate field if non-nil, zero value otherwise.
+
+### GetFundingDateOk
+
+`func (o *Account) GetFundingDateOk() (*time.Time, bool)`
+
+GetFundingDateOk returns a tuple with the FundingDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFundingDate
+
+`func (o *Account) SetFundingDate(v time.Time)`
+
+SetFundingDate sets FundingDate field to given value.
+
+### HasFundingDate
+
+`func (o *Account) HasFundingDate() bool`
+
+HasFundingDate returns a boolean if a field has been set.
+
+### SetFundingDateNil
+
+`func (o *Account) SetFundingDateNil(b bool)`
+
+ SetFundingDateNil sets the value for FundingDate to be an explicit nil
+
+### UnsetFundingDate
+`func (o *Account) UnsetFundingDate()`
+
+UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
+### GetOpeningDate
+
+`func (o *Account) GetOpeningDate() time.Time`
+
+GetOpeningDate returns the OpeningDate field if non-nil, zero value otherwise.
+
+### GetOpeningDateOk
+
+`func (o *Account) GetOpeningDateOk() (*time.Time, bool)`
+
+GetOpeningDateOk returns a tuple with the OpeningDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpeningDate
+
+`func (o *Account) SetOpeningDate(v time.Time)`
+
+SetOpeningDate sets OpeningDate field to given value.
+
+### HasOpeningDate
+
+`func (o *Account) HasOpeningDate() bool`
+
+HasOpeningDate returns a boolean if a field has been set.
+
+### SetOpeningDateNil
+
+`func (o *Account) SetOpeningDateNil(b bool)`
+
+ SetOpeningDateNil sets the value for OpeningDate to be an explicit nil
+
+### UnsetOpeningDate
+`func (o *Account) UnsetOpeningDate()`
+
+UnsetOpeningDate ensures that no value is present for OpeningDate, not even an explicit nil
 ### GetSyncStatus
 
 `func (o *Account) GetSyncStatus() AccountSyncStatus`
@@ -351,6 +460,26 @@ SetCashRestrictions sets CashRestrictions field to given value.
 `func (o *Account) HasCashRestrictions() bool`
 
 HasCashRestrictions returns a boolean if a field has been set.
+
+### GetIsPaper
+
+`func (o *Account) GetIsPaper() bool`
+
+GetIsPaper returns the IsPaper field if non-nil, zero value otherwise.
+
+### GetIsPaperOk
+
+`func (o *Account) GetIsPaperOk() (*bool, bool)`
+
+GetIsPaperOk returns a tuple with the IsPaper field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPaper
+
+`func (o *Account) SetIsPaper(v bool)`
+
+SetIsPaper sets IsPaper field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

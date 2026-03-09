@@ -13,11 +13,12 @@ require 'time'
 module SnapTrade
   class TradingInstrumentType
     EQUITY = "EQUITY".freeze
+    OPTION = "OPTION".freeze
     CRYPTOCURRENCY = "CRYPTOCURRENCY".freeze
     CRYPTOCURRENCY_PAIR = "CRYPTOCURRENCY_PAIR".freeze
 
     def self.all_vars
-      @all_vars ||= [EQUITY, CRYPTOCURRENCY, CRYPTOCURRENCY_PAIR].freeze
+      @all_vars ||= [EQUITY, OPTION, CRYPTOCURRENCY, CRYPTOCURRENCY_PAIR].freeze
     end
 
     # Builds the enum from string

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | [optional] 
 **Name** | Pointer to **string** | A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. | [optional] 
 **Number** | Pointer to **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | [optional] 
+**InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. | [optional] 
 **SyncStatus** | Pointer to [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 
 
 ## Methods
@@ -103,6 +104,41 @@ SetNumber sets Number field to given value.
 
 HasNumber returns a boolean if a field has been set.
 
+### GetInstitutionAccountId
+
+`func (o *AccountSimple) GetInstitutionAccountId() string`
+
+GetInstitutionAccountId returns the InstitutionAccountId field if non-nil, zero value otherwise.
+
+### GetInstitutionAccountIdOk
+
+`func (o *AccountSimple) GetInstitutionAccountIdOk() (*string, bool)`
+
+GetInstitutionAccountIdOk returns a tuple with the InstitutionAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstitutionAccountId
+
+`func (o *AccountSimple) SetInstitutionAccountId(v string)`
+
+SetInstitutionAccountId sets InstitutionAccountId field to given value.
+
+### HasInstitutionAccountId
+
+`func (o *AccountSimple) HasInstitutionAccountId() bool`
+
+HasInstitutionAccountId returns a boolean if a field has been set.
+
+### SetInstitutionAccountIdNil
+
+`func (o *AccountSimple) SetInstitutionAccountIdNil(b bool)`
+
+ SetInstitutionAccountIdNil sets the value for InstitutionAccountId to be an explicit nil
+
+### UnsetInstitutionAccountId
+`func (o *AccountSimple) UnsetInstitutionAccountId()`
+
+UnsetInstitutionAccountId ensures that no value is present for InstitutionAccountId, not even an explicit nil
 ### GetSyncStatus
 
 `func (o *AccountSimple) GetSyncStatus() AccountSyncStatus`

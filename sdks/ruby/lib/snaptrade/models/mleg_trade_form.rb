@@ -53,7 +53,7 @@ module SnapTrade
         :'time_in_force' => :'TimeInForceStrict',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
-        :'price_effect' => :'String',
+        :'price_effect' => :'MlegPriceEffectStrict',
         :'legs' => :'Array<MlegLeg>'
       }
     end

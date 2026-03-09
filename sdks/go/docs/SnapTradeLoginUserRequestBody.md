@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Broker** | Pointer to **string** | Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs. | [optional] 
+**Broker** | Pointer to **string** | Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs. | [optional] 
 **ImmediateRedirect** | Pointer to **bool** | When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information. | [optional] 
 **CustomRedirect** | Pointer to **string** | URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information. | [optional] 
 **Reconnect** | Pointer to **string** | The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information. | [optional] 
-**ConnectionType** | Pointer to **string** | Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified. | [optional] [default to "read"]
+**ConnectionType** | Pointer to **string** | Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  | [optional] [default to "read"]
+**ShowCloseButton** | Pointer to **bool** | Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true. | [optional] 
+**DarkMode** | Pointer to **bool** | Enable dark mode for the connection portal. Defaults to false. | [optional] 
 **ConnectionPortalVersion** | Pointer to **string** | Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. | [optional] [default to "v4"]
 
 ## Methods
@@ -154,6 +156,56 @@ SetConnectionType sets ConnectionType field to given value.
 `func (o *SnapTradeLoginUserRequestBody) HasConnectionType() bool`
 
 HasConnectionType returns a boolean if a field has been set.
+
+### GetShowCloseButton
+
+`func (o *SnapTradeLoginUserRequestBody) GetShowCloseButton() bool`
+
+GetShowCloseButton returns the ShowCloseButton field if non-nil, zero value otherwise.
+
+### GetShowCloseButtonOk
+
+`func (o *SnapTradeLoginUserRequestBody) GetShowCloseButtonOk() (*bool, bool)`
+
+GetShowCloseButtonOk returns a tuple with the ShowCloseButton field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowCloseButton
+
+`func (o *SnapTradeLoginUserRequestBody) SetShowCloseButton(v bool)`
+
+SetShowCloseButton sets ShowCloseButton field to given value.
+
+### HasShowCloseButton
+
+`func (o *SnapTradeLoginUserRequestBody) HasShowCloseButton() bool`
+
+HasShowCloseButton returns a boolean if a field has been set.
+
+### GetDarkMode
+
+`func (o *SnapTradeLoginUserRequestBody) GetDarkMode() bool`
+
+GetDarkMode returns the DarkMode field if non-nil, zero value otherwise.
+
+### GetDarkModeOk
+
+`func (o *SnapTradeLoginUserRequestBody) GetDarkModeOk() (*bool, bool)`
+
+GetDarkModeOk returns a tuple with the DarkMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDarkMode
+
+`func (o *SnapTradeLoginUserRequestBody) SetDarkMode(v bool)`
+
+SetDarkMode sets DarkMode field to given value.
+
+### HasDarkMode
+
+`func (o *SnapTradeLoginUserRequestBody) HasDarkMode() bool`
+
+HasDarkMode returns a boolean if a field has been set.
 
 ### GetConnectionPortalVersion
 

@@ -51,6 +51,7 @@ class TradingInstrument(
                 class MetaOapg:
                     enum_value_to_name = {
                         "EQUITY": "EQUITY",
+                        "OPTION": "OPTION",
                         "CRYPTOCURRENCY": "CRYPTOCURRENCY",
                         "CRYPTOCURRENCY_PAIR": "CRYPTOCURRENCY_PAIR",
                     }
@@ -58,6 +59,10 @@ class TradingInstrument(
                 @schemas.classproperty
                 def EQUITY(cls):
                     return cls("EQUITY")
+                
+                @schemas.classproperty
+                def OPTION(cls):
+                    return cls("OPTION")
                 
                 @schemas.classproperty
                 def CRYPTOCURRENCY(cls):

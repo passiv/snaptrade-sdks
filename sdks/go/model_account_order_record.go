@@ -28,13 +28,13 @@ type AccountOrderRecord struct {
 	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
-	TotalQuantity NullableFloat32 `json:"total_quantity,omitempty"`
+	TotalQuantity NullableString `json:"total_quantity,omitempty"`
 	// The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
-	OpenQuantity NullableFloat32 `json:"open_quantity,omitempty"`
+	OpenQuantity NullableString `json:"open_quantity,omitempty"`
 	// The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
-	CanceledQuantity NullableFloat32 `json:"canceled_quantity,omitempty"`
+	CanceledQuantity NullableString `json:"canceled_quantity,omitempty"`
 	// The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
-	FilledQuantity NullableFloat32 `json:"filled_quantity,omitempty"`
+	FilledQuantity NullableString `json:"filled_quantity,omitempty"`
 	// The price at which the order was executed.
 	ExecutionPrice NullableFloat32 `json:"execution_price,omitempty"`
 	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
@@ -304,9 +304,9 @@ func (o *AccountOrderRecord) SetAction(v string) {
 }
 
 // GetTotalQuantity returns the TotalQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetTotalQuantity() float32 {
+func (o *AccountOrderRecord) GetTotalQuantity() string {
 	if o == nil || isNil(o.TotalQuantity.Get()) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.TotalQuantity.Get()
@@ -315,7 +315,7 @@ func (o *AccountOrderRecord) GetTotalQuantity() float32 {
 // GetTotalQuantityOk returns a tuple with the TotalQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetTotalQuantityOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetTotalQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -331,8 +331,8 @@ func (o *AccountOrderRecord) HasTotalQuantity() bool {
 	return false
 }
 
-// SetTotalQuantity gets a reference to the given NullableFloat32 and assigns it to the TotalQuantity field.
-func (o *AccountOrderRecord) SetTotalQuantity(v float32) {
+// SetTotalQuantity gets a reference to the given NullableString and assigns it to the TotalQuantity field.
+func (o *AccountOrderRecord) SetTotalQuantity(v string) {
 	o.TotalQuantity.Set(&v)
 }
 // SetTotalQuantityNil sets the value for TotalQuantity to be an explicit nil
@@ -346,9 +346,9 @@ func (o *AccountOrderRecord) UnsetTotalQuantity() {
 }
 
 // GetOpenQuantity returns the OpenQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetOpenQuantity() float32 {
+func (o *AccountOrderRecord) GetOpenQuantity() string {
 	if o == nil || isNil(o.OpenQuantity.Get()) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.OpenQuantity.Get()
@@ -357,7 +357,7 @@ func (o *AccountOrderRecord) GetOpenQuantity() float32 {
 // GetOpenQuantityOk returns a tuple with the OpenQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetOpenQuantityOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetOpenQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -373,8 +373,8 @@ func (o *AccountOrderRecord) HasOpenQuantity() bool {
 	return false
 }
 
-// SetOpenQuantity gets a reference to the given NullableFloat32 and assigns it to the OpenQuantity field.
-func (o *AccountOrderRecord) SetOpenQuantity(v float32) {
+// SetOpenQuantity gets a reference to the given NullableString and assigns it to the OpenQuantity field.
+func (o *AccountOrderRecord) SetOpenQuantity(v string) {
 	o.OpenQuantity.Set(&v)
 }
 // SetOpenQuantityNil sets the value for OpenQuantity to be an explicit nil
@@ -388,9 +388,9 @@ func (o *AccountOrderRecord) UnsetOpenQuantity() {
 }
 
 // GetCanceledQuantity returns the CanceledQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetCanceledQuantity() float32 {
+func (o *AccountOrderRecord) GetCanceledQuantity() string {
 	if o == nil || isNil(o.CanceledQuantity.Get()) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.CanceledQuantity.Get()
@@ -399,7 +399,7 @@ func (o *AccountOrderRecord) GetCanceledQuantity() float32 {
 // GetCanceledQuantityOk returns a tuple with the CanceledQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetCanceledQuantityOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetCanceledQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -415,8 +415,8 @@ func (o *AccountOrderRecord) HasCanceledQuantity() bool {
 	return false
 }
 
-// SetCanceledQuantity gets a reference to the given NullableFloat32 and assigns it to the CanceledQuantity field.
-func (o *AccountOrderRecord) SetCanceledQuantity(v float32) {
+// SetCanceledQuantity gets a reference to the given NullableString and assigns it to the CanceledQuantity field.
+func (o *AccountOrderRecord) SetCanceledQuantity(v string) {
 	o.CanceledQuantity.Set(&v)
 }
 // SetCanceledQuantityNil sets the value for CanceledQuantity to be an explicit nil
@@ -430,9 +430,9 @@ func (o *AccountOrderRecord) UnsetCanceledQuantity() {
 }
 
 // GetFilledQuantity returns the FilledQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetFilledQuantity() float32 {
+func (o *AccountOrderRecord) GetFilledQuantity() string {
 	if o == nil || isNil(o.FilledQuantity.Get()) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.FilledQuantity.Get()
@@ -441,7 +441,7 @@ func (o *AccountOrderRecord) GetFilledQuantity() float32 {
 // GetFilledQuantityOk returns a tuple with the FilledQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetFilledQuantityOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetFilledQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -457,8 +457,8 @@ func (o *AccountOrderRecord) HasFilledQuantity() bool {
 	return false
 }
 
-// SetFilledQuantity gets a reference to the given NullableFloat32 and assigns it to the FilledQuantity field.
-func (o *AccountOrderRecord) SetFilledQuantity(v float32) {
+// SetFilledQuantity gets a reference to the given NullableString and assigns it to the FilledQuantity field.
+func (o *AccountOrderRecord) SetFilledQuantity(v string) {
 	o.FilledQuantity.Set(&v)
 }
 // SetFilledQuantityNil sets the value for FilledQuantity to be an explicit nil

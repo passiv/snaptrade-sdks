@@ -46,16 +46,16 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     action: str
 
     # The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
-    total_quantity: typing.Optional[typing.Union[int, float]]
+    total_quantity: typing.Optional[str]
 
     # The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
-    open_quantity: typing.Optional[typing.Union[int, float]]
+    open_quantity: typing.Optional[str]
 
     # The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
-    canceled_quantity: typing.Optional[typing.Union[int, float]]
+    canceled_quantity: typing.Optional[str]
 
     # The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
-    filled_quantity: typing.Optional[typing.Union[int, float]]
+    filled_quantity: typing.Optional[str]
 
     # The price at which the order was executed.
     execution_price: typing.Optional[typing.Union[int, float]]

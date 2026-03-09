@@ -30,12 +30,6 @@ export interface ManualTradeFormBracket {
      */
     'action': ActionStrictWithOptions;
     /**
-     * The security\'s trading ticker symbol.
-     * @type {string}
-     * @memberof ManualTradeFormBracket
-     */
-    'symbol'?: string;
-    /**
      * 
      * @type {TradingInstrument}
      * @memberof ManualTradeFormBracket

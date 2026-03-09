@@ -21,13 +21,13 @@ module SnapTrade
     # This field is deprecated and the caller should use the `symbol` child property's `description` instead.
     attr_accessor :description
 
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     attr_accessor :local_id
 
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     attr_accessor :is_quotable
 
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     attr_accessor :is_tradable
 
     # Attribute mapping from ruby-style variable name to JSON key.

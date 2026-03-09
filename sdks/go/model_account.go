@@ -26,10 +26,16 @@ type Account struct {
 	Name NullableString `json:"name"`
 	// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
 	Number string `json:"number"`
+	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
 	// The name of the brokerage that holds the account.
 	InstitutionName string `json:"institution_name"`
 	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
 	CreatedDate time.Time `json:"created_date"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+	FundingDate NullableTime `json:"funding_date,omitempty"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+	OpeningDate NullableTime `json:"opening_date,omitempty"`
 	SyncStatus AccountSyncStatus `json:"sync_status"`
 	Balance AccountBalance `json:"balance"`
 	// The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
@@ -39,12 +45,14 @@ type Account struct {
 	// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
 	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
-	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
 	// Deprecated
 	PortfolioGroup *string `json:"portfolio_group,omitempty"`
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
+	// Indicates whether the account is a paper (simulated) trading account.
+	IsPaper bool `json:"is_paper"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -54,7 +62,7 @@ type _Account Account
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance) *Account {
+func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance, isPaper bool) *Account {
 	this := Account{}
 	this.Id = id
 	this.BrokerageAuthorization = brokerageAuthorization
@@ -64,6 +72,7 @@ func NewAccount(id string, brokerageAuthorization string, name NullableString, n
 	this.CreatedDate = createdDate
 	this.SyncStatus = syncStatus
 	this.Balance = balance
+	this.IsPaper = isPaper
 	return &this
 }
 
@@ -173,6 +182,48 @@ func (o *Account) SetNumber(v string) {
 	o.Number = v
 }
 
+// GetInstitutionAccountId returns the InstitutionAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetInstitutionAccountId() string {
+	if o == nil || isNil(o.InstitutionAccountId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.InstitutionAccountId.Get()
+}
+
+// GetInstitutionAccountIdOk returns a tuple with the InstitutionAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetInstitutionAccountIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.InstitutionAccountId.Get(), o.InstitutionAccountId.IsSet()
+}
+
+// HasInstitutionAccountId returns a boolean if a field has been set.
+func (o *Account) HasInstitutionAccountId() bool {
+	if o != nil && o.InstitutionAccountId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInstitutionAccountId gets a reference to the given NullableString and assigns it to the InstitutionAccountId field.
+func (o *Account) SetInstitutionAccountId(v string) {
+	o.InstitutionAccountId.Set(&v)
+}
+// SetInstitutionAccountIdNil sets the value for InstitutionAccountId to be an explicit nil
+func (o *Account) SetInstitutionAccountIdNil() {
+	o.InstitutionAccountId.Set(nil)
+}
+
+// UnsetInstitutionAccountId ensures that no value is present for InstitutionAccountId, not even an explicit nil
+func (o *Account) UnsetInstitutionAccountId() {
+	o.InstitutionAccountId.Unset()
+}
+
 // GetInstitutionName returns the InstitutionName field value
 func (o *Account) GetInstitutionName() string {
 	if o == nil {
@@ -219,6 +270,90 @@ func (o *Account) GetCreatedDateOk() (*time.Time, bool) {
 // SetCreatedDate sets field value
 func (o *Account) SetCreatedDate(v time.Time) {
 	o.CreatedDate = v
+}
+
+// GetFundingDate returns the FundingDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetFundingDate() time.Time {
+	if o == nil || isNil(o.FundingDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.FundingDate.Get()
+}
+
+// GetFundingDateOk returns a tuple with the FundingDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetFundingDateOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.FundingDate.Get(), o.FundingDate.IsSet()
+}
+
+// HasFundingDate returns a boolean if a field has been set.
+func (o *Account) HasFundingDate() bool {
+	if o != nil && o.FundingDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFundingDate gets a reference to the given NullableTime and assigns it to the FundingDate field.
+func (o *Account) SetFundingDate(v time.Time) {
+	o.FundingDate.Set(&v)
+}
+// SetFundingDateNil sets the value for FundingDate to be an explicit nil
+func (o *Account) SetFundingDateNil() {
+	o.FundingDate.Set(nil)
+}
+
+// UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
+func (o *Account) UnsetFundingDate() {
+	o.FundingDate.Unset()
+}
+
+// GetOpeningDate returns the OpeningDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetOpeningDate() time.Time {
+	if o == nil || isNil(o.OpeningDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.OpeningDate.Get()
+}
+
+// GetOpeningDateOk returns a tuple with the OpeningDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetOpeningDateOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.OpeningDate.Get(), o.OpeningDate.IsSet()
+}
+
+// HasOpeningDate returns a boolean if a field has been set.
+func (o *Account) HasOpeningDate() bool {
+	if o != nil && o.OpeningDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpeningDate gets a reference to the given NullableTime and assigns it to the OpeningDate field.
+func (o *Account) SetOpeningDate(v time.Time) {
+	o.OpeningDate.Set(&v)
+}
+// SetOpeningDateNil sets the value for OpeningDate to be an explicit nil
+func (o *Account) SetOpeningDateNil() {
+	o.OpeningDate.Set(nil)
+}
+
+// UnsetOpeningDate ensures that no value is present for OpeningDate, not even an explicit nil
+func (o *Account) UnsetOpeningDate() {
+	o.OpeningDate.Unset()
 }
 
 // GetSyncStatus returns the SyncStatus field value
@@ -458,6 +593,30 @@ func (o *Account) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 
+// GetIsPaper returns the IsPaper field value
+func (o *Account) GetIsPaper() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsPaper
+}
+
+// GetIsPaperOk returns a tuple with the IsPaper field value
+// and a boolean to check if the value has been set.
+func (o *Account) GetIsPaperOk() (*bool, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.IsPaper, true
+}
+
+// SetIsPaper sets field value
+func (o *Account) SetIsPaper(v bool) {
+	o.IsPaper = v
+}
+
 func (o Account) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -472,11 +631,20 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["number"] = o.Number
 	}
+	if o.InstitutionAccountId.IsSet() {
+		toSerialize["institution_account_id"] = o.InstitutionAccountId.Get()
+	}
 	if true {
 		toSerialize["institution_name"] = o.InstitutionName
 	}
 	if true {
 		toSerialize["created_date"] = o.CreatedDate
+	}
+	if o.FundingDate.IsSet() {
+		toSerialize["funding_date"] = o.FundingDate.Get()
+	}
+	if o.OpeningDate.IsSet() {
+		toSerialize["opening_date"] = o.OpeningDate.Get()
 	}
 	if true {
 		toSerialize["sync_status"] = o.SyncStatus
@@ -498,6 +666,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions
+	}
+	if true {
+		toSerialize["is_paper"] = o.IsPaper
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -521,8 +692,11 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "brokerage_authorization")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "number")
+		delete(additionalProperties, "institution_account_id")
 		delete(additionalProperties, "institution_name")
 		delete(additionalProperties, "created_date")
+		delete(additionalProperties, "funding_date")
+		delete(additionalProperties, "opening_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "balance")
 		delete(additionalProperties, "status")
@@ -530,6 +704,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "cash_restrictions")
+		delete(additionalProperties, "is_paper")
 		o.AdditionalProperties = additionalProperties
 	}
 

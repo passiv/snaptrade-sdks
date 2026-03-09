@@ -468,7 +468,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted. """
+        """ Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted. """
         args = self._remove_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -523,7 +523,7 @@ class ApiFordelete(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted. """
+        """ Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted. """
         args = self._remove_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,

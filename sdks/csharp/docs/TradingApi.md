@@ -4,25 +4,27 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**CancelOrder**](TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel an order. |
-| [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
-| [**GetCryptocurrencyPairQuote**](TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote |
-| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check order impact |
-| [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order |
-| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place order |
-| [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order |
-| [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order |
-| [**PlaceSimpleOrder**](TradingApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place order |
-| [**PreviewSimpleOrder**](TradingApi.md#previewsimpleorder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview order |
-| [**ReplaceOrder**](TradingApi.md#replaceorder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one |
+| [**CancelOrder**](TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order |
+| [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
+| [**GetCryptocurrencyPairQuote**](TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
+| [**GetOptionImpact**](TradingApi.md#getoptionimpact) | **POST** /accounts/{accountId}/trading/options/impact | Get option order impact |
+| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact |
+| [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
+| [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
+| [**PlaceCryptoOrder**](TradingApi.md#placecryptoorder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
+| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order |
+| [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order |
+| [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order |
+| [**PreviewCryptoOrder**](TradingApi.md#previewcryptoorder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order |
+| [**ReplaceOrder**](TradingApi.md#replaceorder) | **POST** /accounts/{accountId}/trading/replace | Replace order |
+| [**SearchCryptocurrencyPairInstruments**](TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
 
 
 # **CancelOrder**
 
 
 
-Cancels an order in the specified account. 
+Cancels an order in the specified account. Accepts order IDs for all asset types. 
 
 ### Example
 ```csharp
@@ -47,12 +49,16 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var brokerageOrderId = "brokerageOrderId_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
+                brokerageOrderId
+            );
             
             try
             {
-                // Cancel an order.
-                OrderUpdatedResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, brokerageOrderId);
+                // Cancel order
+                CancelOrderResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -78,8 +84,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Cancel an order.
-    ApiResponse<OrderUpdatedResponse> response = apiInstance.CancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+    // Cancel order
+    ApiResponse<CancelOrderResponse> response = apiInstance.CancelOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -99,11 +105,11 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **brokerageOrderId** | **string** |  |  |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md) |  |  |
 
 ### Return type
 
-[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
+[**CancelOrderResponse**](CancelOrderResponse.md)
 
 
 ### HTTP response details
@@ -120,7 +126,7 @@ catch (ApiException e)
 
 
 
-Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
 
 ### Example
 ```csharp
@@ -147,14 +153,14 @@ namespace Example
             var accountId = "accountId_example";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 brokerageOrderId
             );
             
             try
             {
-                // Cancel order
-                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+                // Cancel equity order
+                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -180,8 +186,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Cancel order
-    ApiResponse<AccountOrderRecord> response = apiInstance.CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+    // Cancel equity order
+    ApiResponse<AccountOrderRecord> response = apiInstance.CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -201,7 +207,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) |  |  |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md) |  |  |
 
 ### Return type
 
@@ -251,7 +257,7 @@ namespace Example
             
             try
             {
-                // Get cryptocurrency pair quote
+                // Get crypto pair quote
                 CryptocurrencyPairQuote result = client.Trading.GetCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol);
                 Console.WriteLine(result);
             }
@@ -278,7 +284,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get cryptocurrency pair quote
+    // Get crypto pair quote
     ApiResponse<CryptocurrencyPairQuote> response = apiInstance.GetCryptocurrencyPairQuoteWithHttpInfo(userId, userSecret, accountId, instrumentSymbol);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -312,6 +318,120 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **400** | Invalid request |  -  |
 | **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **GetOptionImpact**
+
+
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class GetOptionImpactExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var orderType = MlegOrderTypeStrict.MARKET;
+            var timeInForce = TimeInForceStrict.FOK;
+            var limitPrice = ""; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+            var stopPrice = ""; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+            var priceEffect = MlegPriceEffectStrictNullable.CREDIT;
+            var legs = new List<MlegLeg>();
+            
+            var mlegTradeForm = new MlegTradeForm(
+                orderType,
+                timeInForce,
+                limitPrice,
+                stopPrice,
+                priceEffect,
+                legs
+            );
+            
+            try
+            {
+                // Get option order impact
+                OptionImpact result = client.Trading.GetOptionImpact(userId, userSecret, accountId, mlegTradeForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.GetOptionImpact: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetOptionImpactWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get option order impact
+    ApiResponse<OptionImpact> response = apiInstance.GetOptionImpactWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TradingApi.GetOptionImpactWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
+| **mlegTradeForm** | [**MlegTradeForm**](MlegTradeForm.md) |  |  |
+
+### Return type
+
+[**OptionImpact**](OptionImpact.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Invalid request |  -  |
+| **403** | Forbidden |  -  |
+| **500** | Unexpected Error |  -  |
+| **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -368,7 +488,7 @@ namespace Example
             
             try
             {
-                // Check order impact
+                // Check equity order impact
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -395,7 +515,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Check order impact
+    // Check equity order impact
     ApiResponse<ManualTradeAndImpact> response = apiInstance.GetOrderImpactWithHttpInfo(userId, userSecret, manualTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -437,7 +557,7 @@ catch (ApiException e)
 
 
 
-Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
 
 ### Example
 ```csharp
@@ -467,7 +587,7 @@ namespace Example
             
             try
             {
-                // Get symbol quotes
+                // Get equity symbol quotes
                 List<SymbolsQuotesInner> result = client.Trading.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
                 Console.WriteLine(result);
             }
@@ -494,7 +614,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get symbol quotes
+    // Get equity symbol quotes
     ApiResponse<List<SymbolsQuotesInner>> response = apiInstance.GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -562,7 +682,6 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var action = ActionStrictWithOptions.BUY;
-            var symbol = "AAPL"; // The security's trading ticker symbol.
             var instrument = new TradingInstrument();
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
@@ -574,7 +693,6 @@ namespace Example
             
             var manualTradeFormBracket = new ManualTradeFormBracket(
                 action,
-                symbol,
                 instrument,
                 orderType,
                 timeInForce,
@@ -587,7 +705,7 @@ namespace Example
             
             try
             {
-                // Place a Bracket Order
+                // Place bracket order
                 AccountOrderRecord result = client.Trading.PlaceBracketOrder(accountId, userId, userSecret, manualTradeFormBracket);
                 Console.WriteLine(result);
             }
@@ -614,7 +732,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place a Bracket Order
+    // Place bracket order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -653,6 +771,124 @@ catch (ApiException e)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+# **PlaceCryptoOrder**
+
+
+
+Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class PlaceCryptoOrderExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var instrument = new CryptoTradingInstrument();
+            var side = ActionStrict.BUY;
+            var type = CryptoOrderForm.TypeEnum.MARKET; // The type of order to place.
+            var timeInForce = CryptoOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+            var amount = "123.45"; // The amount of the base currency to buy or sell.
+            var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+            var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+            var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+            var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
+            
+            var cryptoOrderForm = new CryptoOrderForm(
+                instrument,
+                side,
+                type,
+                timeInForce,
+                amount,
+                limitPrice,
+                stopPrice,
+                postOnly,
+                expirationDate
+            );
+            
+            try
+            {
+                // Place crypto order
+                OrderUpdatedResponse result = client.Trading.PlaceCryptoOrder(userId, userSecret, accountId, cryptoOrderForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PlaceCryptoOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the PlaceCryptoOrderWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Place crypto order
+    ApiResponse<OrderUpdatedResponse> response = apiInstance.PlaceCryptoOrderWithHttpInfo(userId, userSecret, accountId, cryptoOrderForm);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TradingApi.PlaceCryptoOrderWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
+| **cryptoOrderForm** | [**CryptoOrderForm**](CryptoOrderForm.md) |  |  |
+
+### Return type
+
+[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Invalid request |  -  |
+| **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 # **PlaceForceOrder**
 
 
@@ -684,9 +920,10 @@ namespace Example
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrictWithOptions.BUY;
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-            var symbol = "AAPL  131124C00240000"; // The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+            var symbol = "AAPL"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
+            var tradingSession = TradingSession.REGULAR;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = "units_example"; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
@@ -699,6 +936,7 @@ namespace Example
                 symbol,
                 orderType,
                 timeInForce,
+                tradingSession,
                 price,
                 stop,
                 units,
@@ -707,7 +945,7 @@ namespace Example
             
             try
             {
-                // Place order
+                // Place equity order
                 AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeFormWithOptions);
                 Console.WriteLine(result);
             }
@@ -734,7 +972,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place order
+    // Place equity order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -776,7 +1014,7 @@ catch (ApiException e)
 
 
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
 
 ### Example
 ```csharp
@@ -805,7 +1043,7 @@ namespace Example
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = ""; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
             var stopPrice = ""; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-            var priceEffect = "DEBIT"; // The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+            var priceEffect = MlegPriceEffectStrictNullable.CREDIT;
             var legs = new List<MlegLeg>();
             
             var mlegTradeForm = new MlegTradeForm(
@@ -819,7 +1057,7 @@ namespace Example
             
             try
             {
-                // Place multi-leg option order
+                // Place option order
                 MlegOrderResponse result = client.Trading.PlaceMlegOrder(userId, userSecret, accountId, mlegTradeForm);
                 Console.WriteLine(result);
             }
@@ -846,7 +1084,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place multi-leg option order
+    // Place option order
     ApiResponse<MlegOrderResponse> response = apiInstance.PlaceMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -921,7 +1159,7 @@ namespace Example
             
             try
             {
-                // Place checked order
+                // Place checked equity order
                 AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }
@@ -948,7 +1186,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place checked order
+    // Place checked equity order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -986,125 +1224,7 @@ catch (ApiException e)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-# **PlaceSimpleOrder**
-
-
-
-Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-
-### Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using SnapTrade.Net.Client;
-using SnapTrade.Net.Model;
-
-namespace Example
-{
-    public class PlaceSimpleOrderExample
-    {
-        public static void Main()
-        {
-            Snaptrade client = new Snaptrade();
-            // Configure custom BasePath if desired
-            // client.SetBasePath("https://api.snaptrade.com/api/v1");
-            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
-
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
-            var instrument = new TradingInstrument();
-            var side = ActionStrict.BUY;
-            var type = SimpleOrderForm.TypeEnum.MARKET; // The type of order to place.
-            var timeInForce = SimpleOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-            var amount = "123.45"; // The amount of the base currency to buy or sell.
-            var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-            var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-            var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-            var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
-            
-            var simpleOrderForm = new SimpleOrderForm(
-                instrument,
-                side,
-                type,
-                timeInForce,
-                amount,
-                limitPrice,
-                stopPrice,
-                postOnly,
-                expirationDate
-            );
-            
-            try
-            {
-                // Place order
-                OrderUpdatedResponse result = client.Trading.PlaceSimpleOrder(userId, userSecret, accountId, simpleOrderForm);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling TradingApi.PlaceSimpleOrder: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-    }
-}
-```
-
-#### Using the PlaceSimpleOrderWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Place order
-    ApiResponse<OrderUpdatedResponse> response = apiInstance.PlaceSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling TradingApi.PlaceSimpleOrderWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **userId** | **string** |  |  |
-| **userSecret** | **string** |  |  |
-| **accountId** | **string** |  |  |
-| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md) |  |  |
-
-### Return type
-
-[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **400** | Invalid request |  -  |
-| **500** | Unexpected Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-# **PreviewSimpleOrder**
+# **PreviewCryptoOrder**
 
 
 
@@ -1120,7 +1240,7 @@ using SnapTrade.Net.Model;
 
 namespace Example
 {
-    public class PreviewSimpleOrderExample
+    public class PreviewCryptoOrderExample
     {
         public static void Main()
         {
@@ -1133,17 +1253,17 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var instrument = new TradingInstrument();
+            var instrument = new CryptoTradingInstrument();
             var side = ActionStrict.BUY;
-            var type = SimpleOrderForm.TypeEnum.MARKET; // The type of order to place.
-            var timeInForce = SimpleOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+            var type = CryptoOrderForm.TypeEnum.MARKET; // The type of order to place.
+            var timeInForce = CryptoOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
             var amount = "123.45"; // The amount of the base currency to buy or sell.
             var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
             var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
             var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             
-            var simpleOrderForm = new SimpleOrderForm(
+            var cryptoOrderForm = new CryptoOrderForm(
                 instrument,
                 side,
                 type,
@@ -1157,13 +1277,13 @@ namespace Example
             
             try
             {
-                // Preview order
-                SimpleOrderPreview result = client.Trading.PreviewSimpleOrder(userId, userSecret, accountId, simpleOrderForm);
+                // Preview crypto order
+                CryptoOrderPreview result = client.Trading.PreviewCryptoOrder(userId, userSecret, accountId, cryptoOrderForm);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling TradingApi.PreviewSimpleOrder: " + e.Message);
+                Console.WriteLine("Exception when calling TradingApi.PreviewCryptoOrder: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -1178,21 +1298,21 @@ namespace Example
 }
 ```
 
-#### Using the PreviewSimpleOrderWithHttpInfo variant
+#### Using the PreviewCryptoOrderWithHttpInfo variant
 This returns an ApiResponse object which contains the response data, status code and headers.
 
 ```csharp
 try
 {
-    // Preview order
-    ApiResponse<SimpleOrderPreview> response = apiInstance.PreviewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
+    // Preview crypto order
+    ApiResponse<CryptoOrderPreview> response = apiInstance.PreviewCryptoOrderWithHttpInfo(userId, userSecret, accountId, cryptoOrderForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling TradingApi.PreviewSimpleOrderWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling TradingApi.PreviewCryptoOrderWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -1205,11 +1325,11 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md) |  |  |
+| **cryptoOrderForm** | [**CryptoOrderForm**](CryptoOrderForm.md) |  |  |
 
 ### Return type
 
-[**SimpleOrderPreview**](SimpleOrderPreview.md)
+[**CryptoOrderPreview**](CryptoOrderPreview.md)
 
 
 ### HTTP response details
@@ -1249,9 +1369,9 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
             var accountId = "accountId_example"; // The ID of the account to execute the trade on.
-            var brokerageOrderId = "brokerageOrderId_example"; // The Brokerage Order ID of the order to replace.
             var userId = "userId_example";
             var userSecret = "userSecret_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             var action = ActionStrict.BUY;
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
@@ -1261,6 +1381,7 @@ namespace Example
             var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             
             var manualTradeReplaceForm = new ManualTradeReplaceForm(
+                brokerageOrderId,
                 action,
                 orderType,
                 timeInForce,
@@ -1272,8 +1393,8 @@ namespace Example
             
             try
             {
-                // Replaces an order with a new one
-                AccountOrderRecord result = client.Trading.ReplaceOrder(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+                // Replace order
+                AccountOrderRecord result = client.Trading.ReplaceOrder(accountId, userId, userSecret, manualTradeReplaceForm);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -1299,8 +1420,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Replaces an order with a new one
-    ApiResponse<AccountOrderRecord> response = apiInstance.ReplaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+    // Replace order
+    ApiResponse<AccountOrderRecord> response = apiInstance.ReplaceOrderWithHttpInfo(accountId, userId, userSecret, manualTradeReplaceForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1318,7 +1439,6 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **accountId** | **string** | The ID of the account to execute the trade on. |  |
-| **brokerageOrderId** | **string** | The Brokerage Order ID of the order to replace. |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **manualTradeReplaceForm** | [**ManualTradeReplaceForm**](ManualTradeReplaceForm.md) |  |  |
@@ -1334,6 +1454,106 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **400** | Trade could not be placed |  -  |
 | **403** | User does not have permissions to place trades |  -  |
+| **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **SearchCryptocurrencyPairInstruments**
+
+
+
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class SearchCryptocurrencyPairInstrumentsExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var _base = "_base_example";
+            var quote = "quote_example";
+            
+            try
+            {
+                // Get crypto pairs
+                TradingSearchCryptocurrencyPairInstruments200Response result = client.Trading.SearchCryptocurrencyPairInstruments(userId, userSecret, accountId, _base, quote);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.SearchCryptocurrencyPairInstruments: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the SearchCryptocurrencyPairInstrumentsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get crypto pairs
+    ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> response = apiInstance.SearchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, _base, quote);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TradingApi.SearchCryptocurrencyPairInstrumentsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
+| **_base** | **string** |  | [optional]  |
+| **quote** | **string** |  | [optional]  |
+
+### Return type
+
+[**TradingSearchCryptocurrencyPairInstruments200Response**](TradingSearchCryptocurrencyPairInstruments200Response.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Invalid request |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

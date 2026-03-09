@@ -28,65 +28,67 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Cancel an order.
+        /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Cancels an order in the specified account. 
+        /// Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>OrderUpdatedResponse</returns>
-        OrderUpdatedResponse CancelOrder(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0);
+        /// <returns>CancelOrderResponse</returns>
+        CancelOrderResponse CancelOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
 
-        /// <summary>
-        /// Cancel an order.
-        /// </summary>
-        /// <remarks>
-        /// Cancels an order in the specified account. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
-        ApiResponse<OrderUpdatedResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0);
         /// <summary>
         /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of CancelOrderResponse</returns>
+        ApiResponse<CancelOrderResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
+        /// <summary>
+        /// Cancel equity order
+        /// </summary>
+        /// <remarks>
+        /// **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
+        [Obsolete]
+        AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
 
         /// <summary>
-        /// Cancel order
+        /// Cancel equity order
         /// </summary>
         /// <remarks>
-        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
+        [Obsolete]
+        ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
         /// <summary>
-        /// Get cryptocurrency pair quote
+        /// Get crypto pair quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -101,7 +103,7 @@ namespace SnapTrade.Net.Api
         CryptocurrencyPairQuote GetCryptocurrencyPairQuote(string userId, string userSecret, string accountId, string instrumentSymbol, int operationIndex = 0);
 
         /// <summary>
-        /// Get cryptocurrency pair quote
+        /// Get crypto pair quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -115,7 +117,36 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of CryptocurrencyPairQuote</returns>
         ApiResponse<CryptocurrencyPairQuote> GetCryptocurrencyPairQuoteWithHttpInfo(string userId, string userSecret, string accountId, string instrumentSymbol, int operationIndex = 0);
         /// <summary>
-        /// Check order impact
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>OptionImpact</returns>
+        OptionImpact GetOptionImpact(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0);
+
+        /// <summary>
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of OptionImpact</returns>
+        ApiResponse<OptionImpact> GetOptionImpactWithHttpInfo(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0);
+        /// <summary>
+        /// Check equity order impact
         /// </summary>
         /// <remarks>
         /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
@@ -129,7 +160,7 @@ namespace SnapTrade.Net.Api
         ManualTradeAndImpact GetOrderImpact(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
 
         /// <summary>
-        /// Check order impact
+        /// Check equity order impact
         /// </summary>
         /// <remarks>
         /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
@@ -142,10 +173,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of ManualTradeAndImpact</returns>
         ApiResponse<ManualTradeAndImpact> GetOrderImpactWithHttpInfo(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
         /// <summary>
-        /// Get symbol quotes
+        /// Get equity symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -158,10 +189,10 @@ namespace SnapTrade.Net.Api
         List<SymbolsQuotesInner> GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
 
         /// <summary>
-        /// Get symbol quotes
+        /// Get equity symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -173,7 +204,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;SymbolsQuotesInner&gt;</returns>
         ApiResponse<List<SymbolsQuotesInner>> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
         /// <summary>
-        /// Place a Bracket Order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -188,7 +219,7 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord PlaceBracketOrder(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
 
         /// <summary>
-        /// Place a Bracket Order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -202,7 +233,36 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
         /// <summary>
-        /// Place order
+        /// Place crypto order
+        /// </summary>
+        /// <remarks>
+        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>OrderUpdatedResponse</returns>
+        OrderUpdatedResponse PlaceCryptoOrder(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0);
+
+        /// <summary>
+        /// Place crypto order
+        /// </summary>
+        /// <remarks>
+        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
+        ApiResponse<OrderUpdatedResponse> PlaceCryptoOrderWithHttpInfo(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0);
+        /// <summary>
+        /// Place equity order
         /// </summary>
         /// <remarks>
         /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -216,7 +276,7 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord PlaceForceOrder(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0);
 
         /// <summary>
-        /// Place order
+        /// Place equity order
         /// </summary>
         /// <remarks>
         /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -229,10 +289,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> PlaceForceOrderWithHttpInfo(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0);
         /// <summary>
-        /// Place multi-leg option order
+        /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -244,10 +304,10 @@ namespace SnapTrade.Net.Api
         MlegOrderResponse PlaceMlegOrder(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0);
 
         /// <summary>
-        /// Place multi-leg option order
+        /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -258,7 +318,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of MlegOrderResponse</returns>
         ApiResponse<MlegOrderResponse> PlaceMlegOrderWithHttpInfo(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0);
         /// <summary>
-        /// Place checked order
+        /// Place checked equity order
         /// </summary>
         /// <remarks>
         /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -273,7 +333,7 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord PlaceOrder(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
 
         /// <summary>
-        /// Place checked order
+        /// Place checked equity order
         /// </summary>
         /// <remarks>
         /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -287,36 +347,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
         /// <summary>
-        /// Place order
-        /// </summary>
-        /// <remarks>
-        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>OrderUpdatedResponse</returns>
-        OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
-
-        /// <summary>
-        /// Place order
-        /// </summary>
-        /// <remarks>
-        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
-        ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
-        /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -325,13 +356,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SimpleOrderPreview</returns>
-        SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
+        /// <returns>CryptoOrderPreview</returns>
+        CryptoOrderPreview PreviewCryptoOrder(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0);
 
         /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -340,41 +371,70 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SimpleOrderPreview</returns>
-        ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
+        /// <returns>ApiResponse of CryptoOrderPreview</returns>
+        ApiResponse<CryptoOrderPreview> PreviewCryptoOrderWithHttpInfo(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0);
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord ReplaceOrder(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
+        AccountOrderRecord ReplaceOrder(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
 
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> ReplaceOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> ReplaceOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
+        /// <summary>
+        /// Get crypto pairs
+        /// </summary>
+        /// <remarks>
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>TradingSearchCryptocurrencyPairInstruments200Response</returns>
+        TradingSearchCryptocurrencyPairInstruments200Response SearchCryptocurrencyPairInstruments(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0);
+
+        /// <summary>
+        /// Get crypto pairs
+        /// </summary>
+        /// <remarks>
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of TradingSearchCryptocurrencyPairInstruments200Response</returns>
+        ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> SearchCryptocurrencyPairInstrumentsWithHttpInfo(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -385,69 +445,71 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Cancel an order.
+        /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Cancels an order in the specified account. 
+        /// Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of OrderUpdatedResponse</returns>
-        System.Threading.Tasks.Task<OrderUpdatedResponse> CancelOrderAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of CancelOrderResponse</returns>
+        System.Threading.Tasks.Task<CancelOrderResponse> CancelOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
-        /// <summary>
-        /// Cancel an order.
-        /// </summary>
-        /// <remarks>
-        /// Cancels an order in the specified account. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CancelOrderResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<CancelOrderResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Cancel equity order
+        /// </summary>
+        /// <remarks>
+        /// **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        [Obsolete]
+        System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Cancel order
+        /// Cancel equity order
         /// </summary>
         /// <remarks>
-        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        [Obsolete]
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get cryptocurrency pair quote
+        /// Get crypto pair quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -463,7 +525,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<CryptocurrencyPairQuote> GetCryptocurrencyPairQuoteAsync(string userId, string userSecret, string accountId, string instrumentSymbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get cryptocurrency pair quote
+        /// Get crypto pair quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -478,7 +540,38 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (CryptocurrencyPairQuote)</returns>
         System.Threading.Tasks.Task<ApiResponse<CryptocurrencyPairQuote>> GetCryptocurrencyPairQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string instrumentSymbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Check order impact
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of OptionImpact</returns>
+        System.Threading.Tasks.Task<OptionImpact> GetOptionImpactAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (OptionImpact)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OptionImpact>> GetOptionImpactWithHttpInfoAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Check equity order impact
         /// </summary>
         /// <remarks>
         /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
@@ -493,7 +586,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<ManualTradeAndImpact> GetOrderImpactAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Check order impact
+        /// Check equity order impact
         /// </summary>
         /// <remarks>
         /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
@@ -507,10 +600,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (ManualTradeAndImpact)</returns>
         System.Threading.Tasks.Task<ApiResponse<ManualTradeAndImpact>> GetOrderImpactWithHttpInfoAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get symbol quotes
+        /// Get equity symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -524,10 +617,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<SymbolsQuotesInner>> GetUserAccountQuotesAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get symbol quotes
+        /// Get equity symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -540,7 +633,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;SymbolsQuotesInner&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<SymbolsQuotesInner>>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place a Bracket Order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -556,7 +649,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place a Bracket Order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -571,7 +664,38 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place order
+        /// Place crypto order
+        /// </summary>
+        /// <remarks>
+        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of OrderUpdatedResponse</returns>
+        System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceCryptoOrderAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Place crypto order
+        /// </summary>
+        /// <remarks>
+        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> PlaceCryptoOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Place equity order
         /// </summary>
         /// <remarks>
         /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -586,7 +710,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceForceOrderAsync(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place order
+        /// Place equity order
         /// </summary>
         /// <remarks>
         /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -600,10 +724,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceForceOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place multi-leg option order
+        /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -616,10 +740,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<MlegOrderResponse> PlaceMlegOrderAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place multi-leg option order
+        /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -631,7 +755,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (MlegOrderResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<MlegOrderResponse>> PlaceMlegOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place checked order
+        /// Place checked equity order
         /// </summary>
         /// <remarks>
         /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -647,7 +771,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceOrderAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place checked order
+        /// Place checked equity order
         /// </summary>
         /// <remarks>
         /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -662,38 +786,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place order
-        /// </summary>
-        /// <remarks>
-        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of OrderUpdatedResponse</returns>
-        System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Place order
-        /// </summary>
-        /// <remarks>
-        /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -702,14 +795,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SimpleOrderPreview</returns>
-        System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of CryptoOrderPreview</returns>
+        System.Threading.Tasks.Task<CryptoOrderPreview> PreviewCryptoOrderAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -718,44 +811,75 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SimpleOrderPreview)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (CryptoOrderPreview)</returns>
+        System.Threading.Tasks.Task<ApiResponse<CryptoOrderPreview>> PreviewCryptoOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> ReplaceOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> ReplaceOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get crypto pairs
+        /// </summary>
+        /// <remarks>
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of TradingSearchCryptocurrencyPairInstruments200Response</returns>
+        System.Threading.Tasks.Task<TradingSearchCryptocurrencyPairInstruments200Response> SearchCryptocurrencyPairInstrumentsAsync(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get crypto pairs
+        /// </summary>
+        /// <remarks>
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (TradingSearchCryptocurrencyPairInstruments200Response)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response>> SearchCryptocurrencyPairInstrumentsWithHttpInfoAsync(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -877,32 +1001,32 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel order Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>OrderUpdatedResponse</returns>
-        public OrderUpdatedResponse CancelOrder(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0)
+        /// <returns>CancelOrderResponse</returns>
+        public CancelOrderResponse CancelOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = CancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+            SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> localVarResponse = CancelOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel order Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0)
+        /// <returns>ApiResponse of CancelOrderResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -922,15 +1046,16 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelOrder");
             }
 
-            // verify the required parameter 'brokerageOrderId' is set
-            if (brokerageOrderId == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling TradingApi->CancelOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -951,9 +1076,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -975,7 +1100,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<OrderUpdatedResponse>("/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<CancelOrderResponse>("/accounts/{accountId}/trading/cancel", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CancelOrder", localVarResponse);
@@ -989,34 +1114,34 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel order Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of OrderUpdatedResponse</returns>
-        public async System.Threading.Tasks.Task<OrderUpdatedResponse> CancelOrderAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of CancelOrderResponse</returns>
+        public async System.Threading.Tasks.Task<CancelOrderResponse> CancelOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await CancelOrderWithHttpInfoAsync(userId, userSecret, accountId, brokerageOrderId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> localVarResponse = await CancelOrderWithHttpInfoAsync(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel order Cancels an order in the specified account. Accepts order IDs for all asset types. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (CancelOrderResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<CancelOrderResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1036,16 +1161,17 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelOrder");
             }
 
-            // verify the required parameter 'brokerageOrderId' is set
-            if (brokerageOrderId == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling TradingApi->CancelOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelOrder");
             }
 
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1066,9 +1192,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1090,7 +1216,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<OrderUpdatedResponse>("/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<CancelOrderResponse>("/accounts/{accountId}/trading/cancel", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1105,32 +1231,34 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// Cancel equity order **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
+        [Obsolete]
+        public AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// Cancel equity order **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
+        [Obsolete]
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1150,10 +1278,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelUserAccountOrder");
             }
 
-            // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
-            if (tradingCancelUserAccountOrderRequest == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingCancelUserAccountOrderRequest' when calling TradingApi->CancelUserAccountOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelUserAccountOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1182,7 +1310,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingCancelUserAccountOrderRequest;
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelUserAccountOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1218,34 +1346,36 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// Cancel equity order **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        [Obsolete]
+        public async System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await CancelUserAccountOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await CancelUserAccountOrderWithHttpInfoAsync(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+        /// Cancel equity order **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        [Obsolete]
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1265,10 +1395,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelUserAccountOrder");
             }
 
-            // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
-            if (tradingCancelUserAccountOrderRequest == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingCancelUserAccountOrderRequest' when calling TradingApi->CancelUserAccountOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelUserAccountOrder");
             }
 
 
@@ -1298,7 +1428,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingCancelUserAccountOrderRequest;
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelUserAccountOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1335,7 +1465,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get cryptocurrency pair quote Gets a quote for the specified account. 
+        /// Get crypto pair quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1351,7 +1481,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get cryptocurrency pair quote Gets a quote for the specified account. 
+        /// Get crypto pair quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1447,7 +1577,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get cryptocurrency pair quote Gets a quote for the specified account. 
+        /// Get crypto pair quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1464,7 +1594,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get cryptocurrency pair quote Gets a quote for the specified account. 
+        /// Get crypto pair quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1563,7 +1693,237 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>OptionImpact</returns>
+        public OptionImpact GetOptionImpact(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<OptionImpact> localVarResponse = GetOptionImpactWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of OptionImpact</returns>
+        public SnapTrade.Net.Client.ApiResponse<OptionImpact> GetOptionImpactWithHttpInfo(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'mlegTradeForm' is set
+            if (mlegTradeForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'mlegTradeForm' when calling TradingApi->GetOptionImpact");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = mlegTradeForm;
+
+            localVarRequestOptions.Operation = "TradingApi.GetOptionImpact";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<OptionImpact>("/accounts/{accountId}/trading/options/impact", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOptionImpact", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of OptionImpact</returns>
+        public async System.Threading.Tasks.Task<OptionImpact> GetOptionImpactAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<OptionImpact> localVarResponse = await GetOptionImpactWithHttpInfoAsync(userId, userSecret, accountId, mlegTradeForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (OptionImpact)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OptionImpact>> GetOptionImpactWithHttpInfoAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'mlegTradeForm' is set
+            if (mlegTradeForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'mlegTradeForm' when calling TradingApi->GetOptionImpact");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = mlegTradeForm;
+
+            localVarRequestOptions.Operation = "TradingApi.GetOptionImpact";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<OptionImpact>("/accounts/{accountId}/trading/options/impact", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOptionImpact", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Check equity order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1578,7 +1938,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
+        /// Check equity order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1667,7 +2027,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
+        /// Check equity order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1683,7 +2043,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
+        /// Check equity order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1775,7 +2135,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Get equity symbol quotes Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1792,7 +2152,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Get equity symbol quotes Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1893,7 +2253,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Get equity symbol quotes Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1911,7 +2271,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+        /// Get equity symbol quotes Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2015,7 +2375,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2031,7 +2391,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2128,7 +2488,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2145,7 +2505,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2245,7 +2605,237 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>OrderUpdatedResponse</returns>
+        public OrderUpdatedResponse PlaceCryptoOrder(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = PlaceCryptoOrderWithHttpInfo(userId, userSecret, accountId, cryptoOrderForm);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> PlaceCryptoOrderWithHttpInfo(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            // verify the required parameter 'cryptoOrderForm' is set
+            if (cryptoOrderForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'cryptoOrderForm' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = cryptoOrderForm;
+
+            localVarRequestOptions.Operation = "TradingApi.PlaceCryptoOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<OrderUpdatedResponse>("/accounts/{accountId}/trading/crypto", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("PlaceCryptoOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of OrderUpdatedResponse</returns>
+        public async System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceCryptoOrderAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await PlaceCryptoOrderWithHttpInfoAsync(userId, userSecret, accountId, cryptoOrderForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="cryptoOrderForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> PlaceCryptoOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+            // verify the required parameter 'cryptoOrderForm' is set
+            if (cryptoOrderForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'cryptoOrderForm' when calling TradingApi->PlaceCryptoOrder");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = cryptoOrderForm;
+
+            localVarRequestOptions.Operation = "TradingApi.PlaceCryptoOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<OrderUpdatedResponse>("/accounts/{accountId}/trading/crypto", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("PlaceCryptoOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Place equity order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2260,7 +2850,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place equity order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2349,7 +2939,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place equity order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2365,7 +2955,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place equity order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2457,7 +3047,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place multi-leg option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2473,7 +3063,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place multi-leg option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2570,7 +3160,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place multi-leg option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2587,7 +3177,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place multi-leg option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2687,7 +3277,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place checked equity order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
@@ -2703,7 +3293,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place checked equity order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
@@ -2794,7 +3384,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place checked equity order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
@@ -2811,7 +3401,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
+        /// Place checked equity order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
@@ -2905,55 +3495,55 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>OrderUpdatedResponse</returns>
-        public OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
+        /// <returns>CryptoOrderPreview</returns>
+        public CryptoOrderPreview PreviewCryptoOrder(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = PlaceSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
+            SnapTrade.Net.Client.ApiResponse<CryptoOrderPreview> localVarResponse = PreviewCryptoOrderWithHttpInfo(userId, userSecret, accountId, cryptoOrderForm);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
+        /// <returns>ApiResponse of CryptoOrderPreview</returns>
+        public SnapTrade.Net.Client.ApiResponse<CryptoOrderPreview> PreviewCryptoOrderWithHttpInfo(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PreviewCryptoOrder");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PreviewCryptoOrder");
             }
 
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PreviewCryptoOrder");
             }
 
-            // verify the required parameter 'simpleOrderForm' is set
-            if (simpleOrderForm == null)
+            // verify the required parameter 'cryptoOrderForm' is set
+            if (cryptoOrderForm == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'cryptoOrderForm' when calling TradingApi->PreviewCryptoOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -2982,9 +3572,9 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = simpleOrderForm;
+            localVarRequestOptions.Data = cryptoOrderForm;
 
-            localVarRequestOptions.Operation = "TradingApi.PlaceSimpleOrder";
+            localVarRequestOptions.Operation = "TradingApi.PreviewCryptoOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -3004,10 +3594,10 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<OrderUpdatedResponse>("/accounts/{accountId}/trading/simple", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<CryptoOrderPreview>("/accounts/{accountId}/trading/crypto/preview", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("PlaceSimpleOrder", localVarResponse);
+                Exception _exception = this.ExceptionFactory("PreviewCryptoOrder", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -3018,287 +3608,57 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of OrderUpdatedResponse</returns>
-        public async System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of CryptoOrderPreview</returns>
+        public async System.Threading.Tasks.Task<CryptoOrderPreview> PreviewCryptoOrderAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await PlaceSimpleOrderWithHttpInfoAsync(userId, userSecret, accountId, simpleOrderForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<CryptoOrderPreview> localVarResponse = await PreviewCryptoOrderWithHttpInfoAsync(userId, userSecret, accountId, cryptoOrderForm, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
+        /// <param name="cryptoOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (CryptoOrderPreview)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<CryptoOrderPreview>> PreviewCryptoOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, CryptoOrderForm cryptoOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PreviewCryptoOrder");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PreviewCryptoOrder");
             }
 
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PreviewCryptoOrder");
             }
 
-            // verify the required parameter 'simpleOrderForm' is set
-            if (simpleOrderForm == null)
+            // verify the required parameter 'cryptoOrderForm' is set
+            if (cryptoOrderForm == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PlaceSimpleOrder");
-            }
-
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = simpleOrderForm;
-
-            localVarRequestOptions.Operation = "TradingApi.PlaceSimpleOrder";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<OrderUpdatedResponse>("/accounts/{accountId}/trading/simple", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("PlaceSimpleOrder", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Preview order Previews an order using the specified account. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SimpleOrderPreview</returns>
-        public SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
-        {
-            SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> localVarResponse = PreviewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Preview order Previews an order using the specified account. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SimpleOrderPreview</returns>
-        public SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            // verify the required parameter 'simpleOrderForm' is set
-            if (simpleOrderForm == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = simpleOrderForm;
-
-            localVarRequestOptions.Operation = "TradingApi.PreviewSimpleOrder";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Post<SimpleOrderPreview>("/accounts/{accountId}/trading/simple/preview", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("PreviewSimpleOrder", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Preview order Previews an order using the specified account. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SimpleOrderPreview</returns>
-        public async System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> localVarResponse = await PreviewSimpleOrderWithHttpInfoAsync(userId, userSecret, accountId, simpleOrderForm, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Preview order Previews an order using the specified account. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="simpleOrderForm"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SimpleOrderPreview)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PreviewSimpleOrder");
-            }
-
-            // verify the required parameter 'simpleOrderForm' is set
-            if (simpleOrderForm == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PreviewSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'cryptoOrderForm' when calling TradingApi->PreviewCryptoOrder");
             }
 
 
@@ -3328,9 +3688,9 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = simpleOrderForm;
+            localVarRequestOptions.Data = cryptoOrderForm;
 
-            localVarRequestOptions.Operation = "TradingApi.PreviewSimpleOrder";
+            localVarRequestOptions.Operation = "TradingApi.PreviewCryptoOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -3350,11 +3710,11 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<SimpleOrderPreview>("/accounts/{accountId}/trading/simple/preview", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<CryptoOrderPreview>("/accounts/{accountId}/trading/crypto/preview", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("PreviewSimpleOrder", localVarResponse);
+                Exception _exception = this.ExceptionFactory("PreviewCryptoOrder", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -3365,45 +3725,37 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord ReplaceOrder(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0)
+        public AccountOrderRecord ReplaceOrder(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = ReplaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = ReplaceOrderWithHttpInfo(accountId, userId, userSecret, manualTradeReplaceForm);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> ReplaceOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> ReplaceOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0)
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->ReplaceOrder");
-            }
-
-            // verify the required parameter 'brokerageOrderId' is set
-            if (brokerageOrderId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling TradingApi->ReplaceOrder");
             }
 
             // verify the required parameter 'userId' is set
@@ -3448,7 +3800,6 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = manualTradeReplaceForm;
@@ -3473,7 +3824,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Patch<AccountOrderRecord>("/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<AccountOrderRecord>("/accounts/{accountId}/trading/replace", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ReplaceOrder", localVarResponse);
@@ -3487,47 +3838,39 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await ReplaceOrderWithHttpInfoAsync(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await ReplaceOrderWithHttpInfoAsync(accountId, userId, userSecret, manualTradeReplaceForm, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
-        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeReplaceForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> ReplaceOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> ReplaceOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->ReplaceOrder");
-            }
-
-            // verify the required parameter 'brokerageOrderId' is set
-            if (brokerageOrderId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling TradingApi->ReplaceOrder");
             }
 
             // verify the required parameter 'userId' is set
@@ -3573,7 +3916,6 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = manualTradeReplaceForm;
@@ -3598,11 +3940,245 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PatchAsync<AccountOrderRecord>("/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecord>("/accounts/{accountId}/trading/replace", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ReplaceOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>TradingSearchCryptocurrencyPairInstruments200Response</returns>
+        public TradingSearchCryptocurrencyPairInstruments200Response SearchCryptocurrencyPairInstruments(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> localVarResponse = SearchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, _base, quote);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of TradingSearchCryptocurrencyPairInstruments200Response</returns>
+        public SnapTrade.Net.Client.ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> SearchCryptocurrencyPairInstrumentsWithHttpInfo(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->SearchCryptocurrencyPairInstruments");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->SearchCryptocurrencyPairInstruments");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->SearchCryptocurrencyPairInstruments");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (_base != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "base", _base, ""));
+            }
+            if (quote != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "quote", quote, ""));
+            }
+
+            localVarRequestOptions.Operation = "TradingApi.SearchCryptocurrencyPairInstruments";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<TradingSearchCryptocurrencyPairInstruments200Response>("/accounts/{accountId}/trading/instruments/cryptocurrencyPairs", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchCryptocurrencyPairInstruments", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of TradingSearchCryptocurrencyPairInstruments200Response</returns>
+        public async System.Threading.Tasks.Task<TradingSearchCryptocurrencyPairInstruments200Response> SearchCryptocurrencyPairInstrumentsAsync(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> localVarResponse = await SearchCryptocurrencyPairInstrumentsWithHttpInfoAsync(userId, userSecret, accountId, _base, quote, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="_base"> (optional)</param>
+        /// <param name="quote"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (TradingSearchCryptocurrencyPairInstruments200Response)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response>> SearchCryptocurrencyPairInstrumentsWithHttpInfoAsync(string userId, string userSecret, string accountId, string _base = default(string), string quote = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->SearchCryptocurrencyPairInstruments");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->SearchCryptocurrencyPairInstruments");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->SearchCryptocurrencyPairInstruments");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (_base != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "base", _base, ""));
+            }
+            if (quote != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "quote", quote, ""));
+            }
+
+            localVarRequestOptions.Operation = "TradingApi.SearchCryptocurrencyPairInstruments";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<TradingSearchCryptocurrencyPairInstruments200Response>("/accounts/{accountId}/trading/instruments/cryptocurrencyPairs", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SearchCryptocurrencyPairInstruments", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

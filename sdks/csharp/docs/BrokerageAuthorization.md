@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **DisabledDate** | **DateTime?** | Timestamp of when the connection was disabled in SnapTrade. | [optional] 
 **Meta** | **Dictionary&lt;string, Object&gt;** | Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **UpdatedDate** | **DateTime** | Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field. | [optional] 
-**IsEligibleForPayout** | **bool** | Whether the connection is eligible for a payout. | [optional] 
+**IsEligibleForPayout** | **bool** | Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -190,16 +190,16 @@ class AccountOrderRecord(
             
             
             class total_quantity(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'total_quantity':
                     return super().__new__(
@@ -210,16 +210,16 @@ class AccountOrderRecord(
             
             
             class open_quantity(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'open_quantity':
                     return super().__new__(
@@ -230,16 +230,16 @@ class AccountOrderRecord(
             
             
             class canceled_quantity(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'canceled_quantity':
                     return super().__new__(
@@ -250,16 +250,16 @@ class AccountOrderRecord(
             
             
             class filled_quantity(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'filled_quantity':
                     return super().__new__(
@@ -610,10 +610,10 @@ class AccountOrderRecord(
         quote_universal_symbol: typing.Union[MetaOapg.properties.quote_universal_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         quote_currency: typing.Union[MetaOapg.properties.quote_currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
-        total_quantity: typing.Union[MetaOapg.properties.total_quantity, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        open_quantity: typing.Union[MetaOapg.properties.open_quantity, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        canceled_quantity: typing.Union[MetaOapg.properties.canceled_quantity, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        filled_quantity: typing.Union[MetaOapg.properties.filled_quantity, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        total_quantity: typing.Union[MetaOapg.properties.total_quantity, None, str, schemas.Unset] = schemas.unset,
+        open_quantity: typing.Union[MetaOapg.properties.open_quantity, None, str, schemas.Unset] = schemas.unset,
+        canceled_quantity: typing.Union[MetaOapg.properties.canceled_quantity, None, str, schemas.Unset] = schemas.unset,
+        filled_quantity: typing.Union[MetaOapg.properties.filled_quantity, None, str, schemas.Unset] = schemas.unset,
         execution_price: typing.Union[MetaOapg.properties.execution_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         limit_price: typing.Union[MetaOapg.properties.limit_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         stop_price: typing.Union[MetaOapg.properties.stop_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,

@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **QuoteUniversalSymbol** | Pointer to [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
 **QuoteCurrency** | Pointer to [**AccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  | [optional] 
 **Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
-**TotalQuantity** | Pointer to **NullableFloat32** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
-**OpenQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
-**CanceledQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. | [optional] 
-**FilledQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. | [optional] 
+**TotalQuantity** | Pointer to **NullableString** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
+**OpenQuantity** | Pointer to **NullableString** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
+**CanceledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. | [optional] 
+**FilledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. | [optional] 
 **ExecutionPrice** | Pointer to **NullableFloat32** | The price at which the order was executed. | [optional] 
 **LimitPrice** | Pointer to **NullableFloat32** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **StopPrice** | Pointer to **NullableFloat32** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
@@ -223,20 +223,20 @@ HasAction returns a boolean if a field has been set.
 
 ### GetTotalQuantity
 
-`func (o *AccountOrderRecord) GetTotalQuantity() float32`
+`func (o *AccountOrderRecord) GetTotalQuantity() string`
 
 GetTotalQuantity returns the TotalQuantity field if non-nil, zero value otherwise.
 
 ### GetTotalQuantityOk
 
-`func (o *AccountOrderRecord) GetTotalQuantityOk() (*float32, bool)`
+`func (o *AccountOrderRecord) GetTotalQuantityOk() (*string, bool)`
 
 GetTotalQuantityOk returns a tuple with the TotalQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalQuantity
 
-`func (o *AccountOrderRecord) SetTotalQuantity(v float32)`
+`func (o *AccountOrderRecord) SetTotalQuantity(v string)`
 
 SetTotalQuantity sets TotalQuantity field to given value.
 
@@ -258,20 +258,20 @@ HasTotalQuantity returns a boolean if a field has been set.
 UnsetTotalQuantity ensures that no value is present for TotalQuantity, not even an explicit nil
 ### GetOpenQuantity
 
-`func (o *AccountOrderRecord) GetOpenQuantity() float32`
+`func (o *AccountOrderRecord) GetOpenQuantity() string`
 
 GetOpenQuantity returns the OpenQuantity field if non-nil, zero value otherwise.
 
 ### GetOpenQuantityOk
 
-`func (o *AccountOrderRecord) GetOpenQuantityOk() (*float32, bool)`
+`func (o *AccountOrderRecord) GetOpenQuantityOk() (*string, bool)`
 
 GetOpenQuantityOk returns a tuple with the OpenQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOpenQuantity
 
-`func (o *AccountOrderRecord) SetOpenQuantity(v float32)`
+`func (o *AccountOrderRecord) SetOpenQuantity(v string)`
 
 SetOpenQuantity sets OpenQuantity field to given value.
 
@@ -293,20 +293,20 @@ HasOpenQuantity returns a boolean if a field has been set.
 UnsetOpenQuantity ensures that no value is present for OpenQuantity, not even an explicit nil
 ### GetCanceledQuantity
 
-`func (o *AccountOrderRecord) GetCanceledQuantity() float32`
+`func (o *AccountOrderRecord) GetCanceledQuantity() string`
 
 GetCanceledQuantity returns the CanceledQuantity field if non-nil, zero value otherwise.
 
 ### GetCanceledQuantityOk
 
-`func (o *AccountOrderRecord) GetCanceledQuantityOk() (*float32, bool)`
+`func (o *AccountOrderRecord) GetCanceledQuantityOk() (*string, bool)`
 
 GetCanceledQuantityOk returns a tuple with the CanceledQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCanceledQuantity
 
-`func (o *AccountOrderRecord) SetCanceledQuantity(v float32)`
+`func (o *AccountOrderRecord) SetCanceledQuantity(v string)`
 
 SetCanceledQuantity sets CanceledQuantity field to given value.
 
@@ -328,20 +328,20 @@ HasCanceledQuantity returns a boolean if a field has been set.
 UnsetCanceledQuantity ensures that no value is present for CanceledQuantity, not even an explicit nil
 ### GetFilledQuantity
 
-`func (o *AccountOrderRecord) GetFilledQuantity() float32`
+`func (o *AccountOrderRecord) GetFilledQuantity() string`
 
 GetFilledQuantity returns the FilledQuantity field if non-nil, zero value otherwise.
 
 ### GetFilledQuantityOk
 
-`func (o *AccountOrderRecord) GetFilledQuantityOk() (*float32, bool)`
+`func (o *AccountOrderRecord) GetFilledQuantityOk() (*string, bool)`
 
 GetFilledQuantityOk returns a tuple with the FilledQuantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFilledQuantity
 
-`func (o *AccountOrderRecord) SetFilledQuantity(v float32)`
+`func (o *AccountOrderRecord) SetFilledQuantity(v string)`
 
 SetFilledQuantity sets FilledQuantity field to given value.
 

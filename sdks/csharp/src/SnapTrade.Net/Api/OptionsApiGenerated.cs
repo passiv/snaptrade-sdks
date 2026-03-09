@@ -28,97 +28,37 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Create options strategy
+        /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Creates an option strategy object that will be used to place an option strategy order. 
+        /// Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>StrategyQuotes</returns>
-        StrategyQuotes GetOptionStrategy(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
+        /// <returns>OptionQuote</returns>
+        OptionQuote GetOptionQuote(string userId, string userSecret, string symbol, int operationIndex = 0);
 
         /// <summary>
-        /// Create options strategy
+        /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Creates an option strategy object that will be used to place an option strategy order. 
+        /// Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of StrategyQuotes</returns>
-        ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
-        /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;OptionChainInner&gt;</returns>
-        List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
-
-        /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
-        ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
-        /// <summary>
-        /// Get options strategy quotes
-        /// </summary>
-        /// <remarks>
-        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>StrategyQuotes</returns>
-        StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
-
-        /// <summary>
-        /// Get options strategy quotes
-        /// </summary>
-        /// <remarks>
-        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of StrategyQuotes</returns>
-        ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
+        /// <returns>ApiResponse of OptionQuote</returns>
+        ApiResponse<OptionQuote> GetOptionQuoteWithHttpInfo(string userId, string userSecret, string symbol, int operationIndex = 0);
         /// <summary>
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -132,7 +72,7 @@ namespace SnapTrade.Net.Api
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -141,37 +81,6 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
         ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
-        /// <summary>
-        /// Place an option strategy order
-        /// </summary>
-        /// <remarks>
-        /// Places the option strategy order and returns the order record received from the brokerage.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>StrategyOrderRecord</returns>
-        StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
-
-        /// <summary>
-        /// Place an option strategy order
-        /// </summary>
-        /// <remarks>
-        /// Places the option strategy order and returns the order record received from the brokerage.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of StrategyOrderRecord</returns>
-        ApiResponse<StrategyOrderRecord> PlaceOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -182,103 +91,39 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Create options strategy
+        /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Creates an option strategy object that will be used to place an option strategy order. 
+        /// Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StrategyQuotes</returns>
-        System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of OptionQuote</returns>
+        System.Threading.Tasks.Task<OptionQuote> GetOptionQuoteAsync(string userId, string userSecret, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Create options strategy
+        /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Creates an option strategy object that will be used to place an option strategy order. 
+        /// Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;OptionChainInner&gt;</returns>
-        System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
-        /// Get options strategy quotes
-        /// </summary>
-        /// <remarks>
-        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StrategyQuotes</returns>
-        System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Get options strategy quotes
-        /// </summary>
-        /// <remarks>
-        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (OptionQuote)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OptionQuote>> GetOptionQuoteWithHttpInfoAsync(string userId, string userSecret, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -293,7 +138,7 @@ namespace SnapTrade.Net.Api
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -303,39 +148,6 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<OptionsPosition>>> ListOptionHoldingsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
-        /// Place an option strategy order
-        /// </summary>
-        /// <remarks>
-        /// Places the option strategy order and returns the order record received from the brokerage.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StrategyOrderRecord</returns>
-        System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Place an option strategy order
-        /// </summary>
-        /// <remarks>
-        /// Places the option strategy order and returns the order record received from the brokerage.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StrategyOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StrategyOrderRecord>> PlaceOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -457,285 +269,47 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
+        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>StrategyQuotes</returns>
-        public StrategyQuotes GetOptionStrategy(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0)
+        /// <returns>OptionQuote</returns>
+        public OptionQuote GetOptionQuote(string userId, string userSecret, string symbol, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = GetOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+            SnapTrade.Net.Client.ApiResponse<OptionQuote> localVarResponse = GetOptionQuoteWithHttpInfo(userId, userSecret, symbol);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
+        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of StrategyQuotes</returns>
-        public SnapTrade.Net.Client.ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0)
+        /// <returns>ApiResponse of OptionQuote</returns>
+        public SnapTrade.Net.Client.ApiResponse<OptionQuote> GetOptionQuoteWithHttpInfo(string userId, string userSecret, string symbol, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionStrategy");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionQuote");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionStrategy");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionStrategy");
-            }
-
-            // verify the required parameter 'optionsGetOptionStrategyRequest' is set
-            if (optionsGetOptionStrategyRequest == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionsGetOptionStrategyRequest' when calling OptionsApi->GetOptionStrategy");
-            }
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = optionsGetOptionStrategyRequest;
-
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionStrategy";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Post<StrategyQuotes>("/accounts/{accountId}/optionStrategy", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetOptionStrategy", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StrategyQuotes</returns>
-        public async System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = await GetOptionStrategyWithHttpInfoAsync(userId, userSecret, accountId, optionsGetOptionStrategyRequest, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to create the option strategy object in.</param>
-        /// <param name="optionsGetOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionStrategy");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionStrategy");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionStrategy");
-            }
-
-            // verify the required parameter 'optionsGetOptionStrategyRequest' is set
-            if (optionsGetOptionStrategyRequest == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionsGetOptionStrategyRequest' when calling OptionsApi->GetOptionStrategy");
-            }
-
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = optionsGetOptionStrategyRequest;
-
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionStrategy";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<StrategyQuotes>("/accounts/{accountId}/optionStrategy", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetOptionStrategy", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;OptionChainInner&gt;</returns>
-        public List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
-        {
-            SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> localVarResponse = GetOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsChain");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionQuote");
             }
 
             // verify the required parameter 'symbol' is set
             if (symbol == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionsChain");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionQuote");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -760,12 +334,11 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
 
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
+            localVarRequestOptions.Operation = "OptionsApi.GetOptionQuote";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -785,10 +358,10 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<OptionChainInner>>("/accounts/{accountId}/optionsChain", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<OptionQuote>("/marketData/options/quotes", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetOptionsChain", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetOptionQuote", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -799,57 +372,49 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
+        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;OptionChainInner&gt;</returns>
-        public async System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of OptionQuote</returns>
+        public async System.Threading.Tasks.Task<OptionQuote> GetOptionQuoteAsync(string userId, string userSecret, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> localVarResponse = await GetOptionsChainWithHttpInfoAsync(userId, userSecret, accountId, symbol, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<OptionQuote> localVarResponse = await GetOptionQuoteWithHttpInfoAsync(userId, userSecret, symbol, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
+        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
+        /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (OptionQuote)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OptionQuote>> GetOptionQuoteWithHttpInfoAsync(string userId, string userSecret, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionsChain");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionQuote");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsChain");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionQuote");
             }
 
             // verify the required parameter 'symbol' is set
             if (symbol == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionsChain");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionQuote");
             }
 
 
@@ -875,12 +440,11 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
 
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
+            localVarRequestOptions.Operation = "OptionsApi.GetOptionQuote";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -900,11 +464,11 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<OptionChainInner>>("/accounts/{accountId}/optionsChain", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<OptionQuote>("/marketData/options/quotes", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetOptionsChain", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetOptionQuote", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -915,235 +479,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>StrategyQuotes</returns>
-        public StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0)
-        {
-            SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = GetOptionsStrategyQuoteWithHttpInfo(userId, userSecret, accountId, optionStrategyId);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of StrategyQuotes</returns>
-        public SnapTrade.Net.Client.ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            // verify the required parameter 'optionStrategyId' is set
-            if (optionStrategyId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionsStrategyQuote";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Get<StrategyQuotes>("/accounts/{accountId}/optionStrategy/{optionStrategyId}", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetOptionsStrategyQuote", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StrategyQuotes</returns>
-        public async System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            SnapTrade.Net.Client.ApiResponse<StrategyQuotes> localVarResponse = await GetOptionsStrategyQuoteWithHttpInfoAsync(userId, userSecret, accountId, optionStrategyId, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account the strategy will be placed in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-            // verify the required parameter 'optionStrategyId' is set
-            if (optionStrategyId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->GetOptionsStrategyQuote");
-            }
-
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionsStrategyQuote";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<StrategyQuotes>("/accounts/{accountId}/optionStrategy/{optionStrategyId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetOptionsStrategyQuote", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1158,7 +494,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1246,7 +582,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1262,7 +598,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1343,254 +679,6 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListOptionHoldings", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>StrategyOrderRecord</returns>
-        public StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0)
-        {
-            SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> localVarResponse = PlaceOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of StrategyOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> PlaceOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'optionStrategyId' is set
-            if (optionStrategyId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'optionsPlaceOptionStrategyRequest' is set
-            if (optionsPlaceOptionStrategyRequest == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionsPlaceOptionStrategyRequest' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = optionsPlaceOptionStrategyRequest;
-
-            localVarRequestOptions.Operation = "OptionsApi.PlaceOptionStrategy";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Post<StrategyOrderRecord>("/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("PlaceOptionStrategy", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of StrategyOrderRecord</returns>
-        public async System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord> localVarResponse = await PlaceOptionStrategyWithHttpInfoAsync(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to execute the strategy in.</param>
-        /// <param name="optionStrategyId">Option strategy id obtained from response when creating option strategy object</param>
-        /// <param name="optionsPlaceOptionStrategyRequest"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (StrategyOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<StrategyOrderRecord>> PlaceOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'optionStrategyId' is set
-            if (optionStrategyId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionStrategyId' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-            // verify the required parameter 'optionsPlaceOptionStrategyRequest' is set
-            if (optionsPlaceOptionStrategyRequest == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'optionsPlaceOptionStrategyRequest' when calling OptionsApi->PlaceOptionStrategy");
-            }
-
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("optionStrategyId", SnapTrade.Net.Client.ClientUtils.ParameterToString(optionStrategyId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = optionsPlaceOptionStrategyRequest;
-
-            localVarRequestOptions.Operation = "OptionsApi.PlaceOptionStrategy";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<StrategyOrderRecord>("/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("PlaceOptionStrategy", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

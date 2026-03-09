@@ -17,208 +17,72 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Create options strategy
+    # Get option quote
     #
-    # Creates an option strategy object that will be used to place an option strategy order.
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+    # 
+    # OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
     #
-    # @param underlying_symbol_id [String] 
-    # @param legs [Array<OptionLeg>] 
-    # @param strategy_type [StrategyType] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to create the option strategy object in.
-    # @param body [OptionsGetOptionStrategyRequest] 
+    # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_strategy(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
-      _body = {}
-      _body[:underlying_symbol_id] = underlying_symbol_id if underlying_symbol_id != SENTINEL
-      _body[:legs] = legs if legs != SENTINEL
-      _body[:strategy_type] = strategy_type if strategy_type != SENTINEL
-      options_get_option_strategy_request = _body
-      data, _status_code, _headers = get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, extra)
+    def get_option_quote(user_id:, user_secret:, symbol:, extra: {})
+      data, _status_code, _headers = get_option_quote_with_http_info_impl(user_id, user_secret, symbol, extra)
       data
     end
 
-    # Create options strategy
+    # Get option quote
     #
-    # Creates an option strategy object that will be used to place an option strategy order.
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+    # 
+    # OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
     #
-    # @param underlying_symbol_id [String] 
-    # @param legs [Array<OptionLeg>] 
-    # @param strategy_type [StrategyType] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to create the option strategy object in.
-    # @param body [OptionsGetOptionStrategyRequest] 
+    # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_strategy_with_http_info(underlying_symbol_id:, legs:, strategy_type:, user_id:, user_secret:, account_id:, extra: {})
-      _body = {}
-      _body[:underlying_symbol_id] = underlying_symbol_id if underlying_symbol_id != SENTINEL
-      _body[:legs] = legs if legs != SENTINEL
-      _body[:strategy_type] = strategy_type if strategy_type != SENTINEL
-      options_get_option_strategy_request = _body
-      get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, extra)
+    def get_option_quote_with_http_info(user_id:, user_secret:, symbol:, extra: {})
+      get_option_quote_with_http_info_impl(user_id, user_secret, symbol, extra)
     end
 
-    # Create options strategy
-    # Creates an option strategy object that will be used to place an option strategy order. 
+    # Get option quote
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to create the option strategy object in.
-    # @param options_get_option_strategy_request [OptionsGetOptionStrategyRequest] 
+    # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] opts the optional parameters
-    # @return [StrategyQuotes]
-    private def get_option_strategy_impl(user_id, user_secret, account_id, options_get_option_strategy_request, opts = {})
-      data, _status_code, _headers = get_option_strategy_with_http_info(user_id, user_secret, account_id, options_get_option_strategy_request, opts)
+    # @return [OptionQuote]
+    private def get_option_quote_impl(user_id, user_secret, symbol, opts = {})
+      data, _status_code, _headers = get_option_quote_with_http_info(user_id, user_secret, symbol, opts)
       data
     end
 
-    # Create options strategy
-    # Creates an option strategy object that will be used to place an option strategy order. 
+    # Get option quote
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to create the option strategy object in.
-    # @param options_get_option_strategy_request [OptionsGetOptionStrategyRequest] 
+    # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(StrategyQuotes, Integer, Hash)>] StrategyQuotes data, response status code and response headers
-    private def get_option_strategy_with_http_info_impl(user_id, user_secret, account_id, options_get_option_strategy_request, opts = {})
+    # @return [Array<(OptionQuote, Integer, Hash)>] OptionQuote data, response status code and response headers
+    private def get_option_quote_with_http_info_impl(user_id, user_secret, symbol, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: OptionsApi.get_option_strategy ...'
+        @api_client.config.logger.debug 'Calling API: OptionsApi.get_option_quote ...'
       end
       # verify the required parameter 'user_id' is set
       if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_option_strategy"
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_option_quote"
       end
       # verify the required parameter 'user_secret' is set
       if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_option_strategy"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.get_option_strategy"
-      end
-      # verify the required parameter 'options_get_option_strategy_request' is set
-      if @api_client.config.client_side_validation && options_get_option_strategy_request.nil?
-        fail ArgumentError, "Missing the required parameter 'options_get_option_strategy_request' when calling OptionsApi.get_option_strategy"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/optionStrategy'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-        header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(options_get_option_strategy_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'StrategyQuotes'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"OptionsApi.get_option_strategy",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OptionsApi#get_option_strategy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Get the options chain for a symbol
-    #
-    # Returns the option chain for the specified symbol in the specified account.
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get the options chain from.
-    # @param symbol [String] Universal symbol ID if symbol
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_chain(user_id:, user_secret:, account_id:, symbol:, extra: {})
-      data, _status_code, _headers = get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
-      data
-    end
-
-    # Get the options chain for a symbol
-    #
-    # Returns the option chain for the specified symbol in the specified account.
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get the options chain from.
-    # @param symbol [String] Universal symbol ID if symbol
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_chain_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
-      get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
-    end
-
-    # Get the options chain for a symbol
-    # Returns the option chain for the specified symbol in the specified account.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get the options chain from.
-    # @param symbol [String] Universal symbol ID if symbol
-    # @param [Hash] opts the optional parameters
-    # @return [Array<OptionChainInner>]
-    private def get_options_chain_impl(user_id, user_secret, account_id, symbol, opts = {})
-      data, _status_code, _headers = get_options_chain_with_http_info(user_id, user_secret, account_id, symbol, opts)
-      data
-    end
-
-    # Get the options chain for a symbol
-    # Returns the option chain for the specified symbol in the specified account.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get the options chain from.
-    # @param symbol [String] Universal symbol ID if symbol
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<OptionChainInner>, Integer, Hash)>] Array<OptionChainInner> data, response status code and response headers
-    private def get_options_chain_with_http_info_impl(user_id, user_secret, account_id, symbol, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: OptionsApi.get_options_chain ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_options_chain"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_options_chain"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.get_options_chain"
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_option_quote"
       end
       # verify the required parameter 'symbol' is set
       if @api_client.config.client_side_validation && symbol.nil?
-        fail ArgumentError, "Missing the required parameter 'symbol' when calling OptionsApi.get_options_chain"
+        fail ArgumentError, "Missing the required parameter 'symbol' when calling OptionsApi.get_option_quote"
       end
       # resource path
-      local_var_path = '/accounts/{accountId}/optionsChain'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+      local_var_path = '/marketData/options/quotes'
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -238,13 +102,13 @@ module SnapTrade
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<OptionChainInner>'
+      return_type = opts[:debug_return_type] || 'OptionQuote'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
 
       new_options = opts.merge(
-        :operation => :"OptionsApi.get_options_chain",
+        :operation => :"OptionsApi.get_option_quote",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -255,118 +119,7 @@ module SnapTrade
 
       data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OptionsApi#get_options_chain\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Get options strategy quotes
-    #
-    # Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account the strategy will be placed in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_strategy_quote(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
-      data, _status_code, _headers = get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
-      data
-    end
-
-    # Get options strategy quotes
-    #
-    # Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account the strategy will be placed in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_options_strategy_quote_with_http_info(user_id:, user_secret:, account_id:, option_strategy_id:, extra: {})
-      get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, extra)
-    end
-
-    # Get options strategy quotes
-    # Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account the strategy will be placed in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param [Hash] opts the optional parameters
-    # @return [StrategyQuotes]
-    private def get_options_strategy_quote_impl(user_id, user_secret, account_id, option_strategy_id, opts = {})
-      data, _status_code, _headers = get_options_strategy_quote_with_http_info(user_id, user_secret, account_id, option_strategy_id, opts)
-      data
-    end
-
-    # Get options strategy quotes
-    # Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account the strategy will be placed in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(StrategyQuotes, Integer, Hash)>] StrategyQuotes data, response status code and response headers
-    private def get_options_strategy_quote_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: OptionsApi.get_options_strategy_quote ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_options_strategy_quote"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_options_strategy_quote"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.get_options_strategy_quote"
-      end
-      # verify the required parameter 'option_strategy_id' is set
-      if @api_client.config.client_side_validation && option_strategy_id.nil?
-        fail ArgumentError, "Missing the required parameter 'option_strategy_id' when calling OptionsApi.get_options_strategy_quote"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/optionStrategy/{optionStrategyId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'optionStrategyId' + '}', CGI.escape(option_strategy_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'StrategyQuotes'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"OptionsApi.get_options_strategy_quote",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OptionsApi#get_options_strategy_quote\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: OptionsApi#get_option_quote\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end
@@ -376,7 +129,9 @@ module SnapTrade
     #
     # Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
     # 
-    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+    #   - If you do, this endpoint returns real-time data.
+    #   - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -391,7 +146,9 @@ module SnapTrade
     #
     # Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
     # 
-    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+    #   - If you do, this endpoint returns real-time data.
+    #   - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -402,7 +159,7 @@ module SnapTrade
     end
 
     # List account option positions
-    # Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+    # Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -414,7 +171,7 @@ module SnapTrade
     end
 
     # List account option positions
-    # Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+    # Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -474,146 +231,6 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: OptionsApi#list_option_holdings\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Place an option strategy order
-    #
-    # Places the option strategy order and returns the order record received from the brokerage.
-    #
-    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
-    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to execute the strategy in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param price [Float] Trade Price if limit or stop limit order
-    # @param body [OptionsPlaceOptionStrategyRequest] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_option_strategy(order_type:, time_in_force:, user_id:, user_secret:, account_id:, option_strategy_id:, price: SENTINEL, extra: {})
-      _body = {}
-      _body[:order_type] = order_type if order_type != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
-      _body[:price] = price if price != SENTINEL
-      options_place_option_strategy_request = _body
-      data, _status_code, _headers = place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, extra)
-      data
-    end
-
-    # Place an option strategy order
-    #
-    # Places the option strategy order and returns the order record received from the brokerage.
-    #
-    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
-    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to execute the strategy in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param price [Float] Trade Price if limit or stop limit order
-    # @param body [OptionsPlaceOptionStrategyRequest] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_option_strategy_with_http_info(order_type:, time_in_force:, user_id:, user_secret:, account_id:, option_strategy_id:, price: SENTINEL, extra: {})
-      _body = {}
-      _body[:order_type] = order_type if order_type != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
-      _body[:price] = price if price != SENTINEL
-      options_place_option_strategy_request = _body
-      place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, extra)
-    end
-
-    # Place an option strategy order
-    # Places the option strategy order and returns the order record received from the brokerage.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to execute the strategy in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param options_place_option_strategy_request [OptionsPlaceOptionStrategyRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [StrategyOrderRecord]
-    private def place_option_strategy_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts = {})
-      data, _status_code, _headers = place_option_strategy_with_http_info(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts)
-      data
-    end
-
-    # Place an option strategy order
-    # Places the option strategy order and returns the order record received from the brokerage.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to execute the strategy in.
-    # @param option_strategy_id [String] Option strategy id obtained from response when creating option strategy object
-    # @param options_place_option_strategy_request [OptionsPlaceOptionStrategyRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(StrategyOrderRecord, Integer, Hash)>] StrategyOrderRecord data, response status code and response headers
-    private def place_option_strategy_with_http_info_impl(user_id, user_secret, account_id, option_strategy_id, options_place_option_strategy_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: OptionsApi.place_option_strategy ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.place_option_strategy"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.place_option_strategy"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.place_option_strategy"
-      end
-      # verify the required parameter 'option_strategy_id' is set
-      if @api_client.config.client_side_validation && option_strategy_id.nil?
-        fail ArgumentError, "Missing the required parameter 'option_strategy_id' when calling OptionsApi.place_option_strategy"
-      end
-      # verify the required parameter 'options_place_option_strategy_request' is set
-      if @api_client.config.client_side_validation && options_place_option_strategy_request.nil?
-        fail ArgumentError, "Missing the required parameter 'options_place_option_strategy_request' when calling OptionsApi.place_option_strategy"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'optionStrategyId' + '}', CGI.escape(option_strategy_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-        header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(options_place_option_strategy_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'StrategyOrderRecord'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"OptionsApi.place_option_strategy",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OptionsApi#place_option_strategy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

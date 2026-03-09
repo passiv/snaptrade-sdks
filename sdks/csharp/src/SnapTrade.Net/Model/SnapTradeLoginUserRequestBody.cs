@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeLoginUserRequestBody : IEquatable<SnapTradeLoginUserRequestBody>, IValidatableObject
     {
         /// <summary>
-        /// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+        /// Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
         /// </summary>
-        /// <value>Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.</value>
+        /// <value>Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionTypeEnum
         {
@@ -49,15 +49,21 @@ namespace SnapTrade.Net.Model
             /// Enum Trade for value: trade
             /// </summary>
             [EnumMember(Value = "trade")]
-            Trade = 2
+            Trade = 2,
+
+            /// <summary>
+            /// Enum TradeIfAvailable for value: trade-if-available
+            /// </summary>
+            [EnumMember(Value = "trade-if-available")]
+            TradeIfAvailable = 3
 
         }
 
 
         /// <summary>
-        /// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+        /// Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
         /// </summary>
-        /// <value>Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.</value>
+        /// <value>Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. </value>
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
@@ -97,26 +103,30 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeLoginUserRequestBody" /> class.
         /// </summary>
-        /// <param name="broker">Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs..</param>
+        /// <param name="broker">Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs..</param>
         /// <param name="immediateRedirect">When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information..</param>
-        /// <param name="connectionType">Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified. (default to ConnectionTypeEnum.Read).</param>
+        /// <param name="connectionType">Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (default to ConnectionTypeEnum.Read).</param>
+        /// <param name="showCloseButton">Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true..</param>
+        /// <param name="darkMode">Enable dark mode for the connection portal. Defaults to false..</param>
         /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
-        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
+        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, bool showCloseButton = default(bool), bool darkMode = default(bool), ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
         {
             this.Broker = broker;
             this.ImmediateRedirect = immediateRedirect;
             this.CustomRedirect = customRedirect;
             this.Reconnect = reconnect;
             this.ConnectionType = connectionType;
+            this.ShowCloseButton = showCloseButton;
+            this.DarkMode = darkMode;
             this.ConnectionPortalVersion = connectionPortalVersion;
         }
 
         /// <summary>
-        /// Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs.
+        /// Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
         /// </summary>
-        /// <value>Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs.</value>
+        /// <value>Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.</value>
         [DataMember(Name = "broker", EmitDefaultValue = false)]
         public string Broker { get; set; }
 
@@ -142,6 +152,20 @@ namespace SnapTrade.Net.Model
         public string Reconnect { get; set; }
 
         /// <summary>
+        /// Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+        /// </summary>
+        /// <value>Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.</value>
+        [DataMember(Name = "showCloseButton", EmitDefaultValue = true)]
+        public bool ShowCloseButton { get; set; }
+
+        /// <summary>
+        /// Enable dark mode for the connection portal. Defaults to false.
+        /// </summary>
+        /// <value>Enable dark mode for the connection portal. Defaults to false.</value>
+        [DataMember(Name = "darkMode", EmitDefaultValue = true)]
+        public bool DarkMode { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -154,6 +178,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  CustomRedirect: ").Append(CustomRedirect).Append("\n");
             sb.Append("  Reconnect: ").Append(Reconnect).Append("\n");
             sb.Append("  ConnectionType: ").Append(ConnectionType).Append("\n");
+            sb.Append("  ShowCloseButton: ").Append(ShowCloseButton).Append("\n");
+            sb.Append("  DarkMode: ").Append(DarkMode).Append("\n");
             sb.Append("  ConnectionPortalVersion: ").Append(ConnectionPortalVersion).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -214,6 +240,14 @@ namespace SnapTrade.Net.Model
                     this.ConnectionType.Equals(input.ConnectionType)
                 ) && 
                 (
+                    this.ShowCloseButton == input.ShowCloseButton ||
+                    this.ShowCloseButton.Equals(input.ShowCloseButton)
+                ) && 
+                (
+                    this.DarkMode == input.DarkMode ||
+                    this.DarkMode.Equals(input.DarkMode)
+                ) && 
+                (
                     this.ConnectionPortalVersion == input.ConnectionPortalVersion ||
                     this.ConnectionPortalVersion.Equals(input.ConnectionPortalVersion)
                 );
@@ -242,6 +276,8 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Reconnect.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.ConnectionType.GetHashCode();
+                hashCode = (hashCode * 59) + this.ShowCloseButton.GetHashCode();
+                hashCode = (hashCode * 59) + this.DarkMode.GetHashCode();
                 hashCode = (hashCode * 59) + this.ConnectionPortalVersion.GetHashCode();
                 return hashCode;
             }

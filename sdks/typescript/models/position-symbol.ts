@@ -41,21 +41,21 @@ export interface PositionSymbol {
      */
     'description'?: string;
     /**
-     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      * @type {string}
      * @memberof PositionSymbol
      * @deprecated
      */
     'local_id'?: string | null;
     /**
-     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      * @type {boolean}
      * @memberof PositionSymbol
      * @deprecated
      */
     'is_quotable'?: boolean;
     /**
-     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      * @type {boolean}
      * @memberof PositionSymbol
      * @deprecated

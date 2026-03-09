@@ -6,7 +6,6 @@ Inputs for placing an order with the brokerage.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **_Action** | **ActionStrictWithOptions** |  | 
-**Symbol** | **string** | The security&#39;s trading ticker symbol. | [optional] 
 **Instrument** | [**TradingInstrument**](TradingInstrument.md) |  | 
 **OrderType** | **OrderTypeStrict** |  | 
 **TimeInForce** | **TimeInForceStrict** |  | 

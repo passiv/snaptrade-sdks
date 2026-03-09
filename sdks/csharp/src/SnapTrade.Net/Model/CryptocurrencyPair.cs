@@ -46,7 +46,8 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">Cryptocurrency pair instrument symbol.</param>
         /// <param name="_base">The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
         /// <param name="quote">The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
-        public CryptocurrencyPair(string symbol = default(string), string _base = default(string), string quote = default(string)) : base()
+        /// <param name="increment">The precision or smallest price incremental step available for this cryptocurrency pair .</param>
+        public CryptocurrencyPair(string symbol = default(string), string _base = default(string), string quote = default(string), string increment = default(string)) : base()
         {
             // to ensure "_base" is required (not null)
             if (_base == null)
@@ -61,6 +62,7 @@ namespace SnapTrade.Net.Model
             }
             this.Quote = quote;
             this.Symbol = symbol;
+            this.Increment = increment;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -86,6 +88,13 @@ namespace SnapTrade.Net.Model
         public string Quote { get; set; }
 
         /// <summary>
+        /// The precision or smallest price incremental step available for this cryptocurrency pair 
+        /// </summary>
+        /// <value>The precision or smallest price incremental step available for this cryptocurrency pair </value>
+        [DataMember(Name = "increment", EmitDefaultValue = true)]
+        public string Increment { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -103,6 +112,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Base: ").Append(Base).Append("\n");
             sb.Append("  Quote: ").Append(Quote).Append("\n");
+            sb.Append("  Increment: ").Append(Increment).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -153,6 +163,11 @@ namespace SnapTrade.Net.Model
                     this.Quote == input.Quote ||
                     (this.Quote != null &&
                     this.Quote.Equals(input.Quote))
+                ) && base.Equals(input) && 
+                (
+                    this.Increment == input.Increment ||
+                    (this.Increment != null &&
+                    this.Increment.Equals(input.Increment))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -177,6 +192,10 @@ namespace SnapTrade.Net.Model
                 if (this.Quote != null)
                 {
                     hashCode = (hashCode * 59) + this.Quote.GetHashCode();
+                }
+                if (this.Increment != null)
+                {
+                    hashCode = (hashCode * 59) + this.Increment.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

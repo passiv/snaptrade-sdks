@@ -25,11 +25,20 @@ module SnapTrade
     # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
     attr_accessor :number
 
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    attr_accessor :institution_account_id
+
     # The name of the brokerage that holds the account.
     attr_accessor :institution_name
 
     # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
     attr_accessor :created_date
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+    attr_accessor :funding_date
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+    attr_accessor :opening_date
 
     attr_accessor :sync_status
 
@@ -44,11 +53,14 @@ module SnapTrade
     # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
     attr_accessor :meta
 
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
     attr_accessor :portfolio_group
 
     # This field is deprecated.
     attr_accessor :cash_restrictions
+
+    # Indicates whether the account is a paper (simulated) trading account.
+    attr_accessor :is_paper
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -57,15 +69,19 @@ module SnapTrade
         :'brokerage_authorization' => :'brokerage_authorization',
         :'name' => :'name',
         :'number' => :'number',
+        :'institution_account_id' => :'institution_account_id',
         :'institution_name' => :'institution_name',
         :'created_date' => :'created_date',
+        :'funding_date' => :'funding_date',
+        :'opening_date' => :'opening_date',
         :'sync_status' => :'sync_status',
         :'balance' => :'balance',
         :'status' => :'status',
         :'raw_type' => :'raw_type',
         :'meta' => :'meta',
         :'portfolio_group' => :'portfolio_group',
-        :'cash_restrictions' => :'cash_restrictions'
+        :'cash_restrictions' => :'cash_restrictions',
+        :'is_paper' => :'is_paper'
       }
     end
 
@@ -81,15 +97,19 @@ module SnapTrade
         :'brokerage_authorization' => :'String',
         :'name' => :'String',
         :'number' => :'String',
+        :'institution_account_id' => :'String',
         :'institution_name' => :'String',
         :'created_date' => :'Time',
+        :'funding_date' => :'Time',
+        :'opening_date' => :'Time',
         :'sync_status' => :'AccountSyncStatus',
         :'balance' => :'AccountBalance',
         :'status' => :'AccountStatus',
         :'raw_type' => :'String',
         :'meta' => :'Hash<String, Object>',
         :'portfolio_group' => :'String',
-        :'cash_restrictions' => :'Array<String>'
+        :'cash_restrictions' => :'Array<String>',
+        :'is_paper' => :'Boolean'
       }
     end
 
@@ -97,6 +117,9 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'institution_account_id',
+        :'funding_date',
+        :'opening_date',
         :'status',
         :'raw_type',
       ])
@@ -133,12 +156,24 @@ module SnapTrade
         self.number = attributes[:'number']
       end
 
+      if attributes.key?(:'institution_account_id')
+        self.institution_account_id = attributes[:'institution_account_id']
+      end
+
       if attributes.key?(:'institution_name')
         self.institution_name = attributes[:'institution_name']
       end
 
       if attributes.key?(:'created_date')
         self.created_date = attributes[:'created_date']
+      end
+
+      if attributes.key?(:'funding_date')
+        self.funding_date = attributes[:'funding_date']
+      end
+
+      if attributes.key?(:'opening_date')
+        self.opening_date = attributes[:'opening_date']
       end
 
       if attributes.key?(:'sync_status')
@@ -171,6 +206,10 @@ module SnapTrade
         if (value = attributes[:'cash_restrictions']).is_a?(Array)
           self.cash_restrictions = value
         end
+      end
+
+      if attributes.key?(:'is_paper')
+        self.is_paper = attributes[:'is_paper']
       end
     end
 
@@ -206,6 +245,10 @@ module SnapTrade
         invalid_properties.push('invalid value for "balance", balance cannot be nil.')
       end
 
+      if @is_paper.nil?
+        invalid_properties.push('invalid value for "is_paper", is_paper cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -219,6 +262,7 @@ module SnapTrade
       return false if @created_date.nil?
       return false if @sync_status.nil?
       return false if @balance.nil?
+      return false if @is_paper.nil?
       true
     end
 
@@ -231,15 +275,19 @@ module SnapTrade
           brokerage_authorization == o.brokerage_authorization &&
           name == o.name &&
           number == o.number &&
+          institution_account_id == o.institution_account_id &&
           institution_name == o.institution_name &&
           created_date == o.created_date &&
+          funding_date == o.funding_date &&
+          opening_date == o.opening_date &&
           sync_status == o.sync_status &&
           balance == o.balance &&
           status == o.status &&
           raw_type == o.raw_type &&
           meta == o.meta &&
           portfolio_group == o.portfolio_group &&
-          cash_restrictions == o.cash_restrictions
+          cash_restrictions == o.cash_restrictions &&
+          is_paper == o.is_paper
     end
 
     # @see the `==` method
@@ -251,7 +299,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions].hash
+      [id, brokerage_authorization, name, number, institution_account_id, institution_name, created_date, funding_date, opening_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
     end
 
     # Builds the object from hash

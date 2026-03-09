@@ -24,13 +24,13 @@ type PositionSymbol struct {
 	// This field is deprecated and the caller should use the `symbol` child property's `description` instead.
 	// Deprecated
 	Description *string `json:"description,omitempty"`
-	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
 	// Deprecated
 	LocalId NullableString `json:"local_id,omitempty"`
-	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
 	// Deprecated
 	IsQuotable *bool `json:"is_quotable,omitempty"`
-	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
 	// Deprecated
 	IsTradable *bool `json:"is_tradable,omitempty"`
 	AdditionalProperties map[string]interface{}

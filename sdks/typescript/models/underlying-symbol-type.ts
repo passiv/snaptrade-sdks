@@ -25,7 +25,7 @@ export interface UnderlyingSymbolType {
      */
     'id'?: string;
     /**
-     * A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
+     * A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `pm` - Precious Metals   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
      * @type {string}
      * @memberof UnderlyingSymbolType
      */
@@ -37,7 +37,7 @@ export interface UnderlyingSymbolType {
      */
     'description'?: string;
     /**
-     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      * @type {boolean}
      * @memberof UnderlyingSymbolType
      * @deprecated

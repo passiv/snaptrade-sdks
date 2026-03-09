@@ -44,10 +44,15 @@ class CryptocurrencyPair(
             base = schemas.StrSchema
             quote = schemas.StrSchema
             symbol = schemas.StrSchema
+        
+            @staticmethod
+            def increment() -> typing.Type['CryptocurrencyIncrementNullable']:
+                return CryptocurrencyIncrementNullable
             __annotations__ = {
                 "base": base,
                 "quote": quote,
                 "symbol": symbol,
+                "increment": increment,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -64,9 +69,12 @@ class CryptocurrencyPair(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["increment"]) -> 'CryptocurrencyIncrementNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["quote"], typing_extensions.Literal["base"], typing_extensions.Literal["symbol"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["quote"], typing_extensions.Literal["base"], typing_extensions.Literal["symbol"], typing_extensions.Literal["increment"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -80,9 +88,12 @@ class CryptocurrencyPair(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["increment"]) -> typing.Union['CryptocurrencyIncrementNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["quote"], typing_extensions.Literal["base"], typing_extensions.Literal["symbol"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["quote"], typing_extensions.Literal["base"], typing_extensions.Literal["symbol"], typing_extensions.Literal["increment"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -91,6 +102,7 @@ class CryptocurrencyPair(
         quote: typing.Union[MetaOapg.properties.quote, str, ],
         base: typing.Union[MetaOapg.properties.base, str, ],
         symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
+        increment: typing.Union['CryptocurrencyIncrementNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'CryptocurrencyPair':
@@ -100,6 +112,9 @@ class CryptocurrencyPair(
             quote=quote,
             base=base,
             symbol=symbol,
+            increment=increment,
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.cryptocurrency_increment_nullable import CryptocurrencyIncrementNullable

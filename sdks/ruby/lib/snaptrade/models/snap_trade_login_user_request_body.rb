@@ -13,7 +13,7 @@ require 'time'
 module SnapTrade
   # Data to login a user via SnapTrade Partner
   class SnapTradeLoginUserRequestBody
-    # Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+    # Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
     attr_accessor :broker
 
     # When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
@@ -25,8 +25,14 @@ module SnapTrade
     # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     attr_accessor :reconnect
 
-    # Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+    # Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     attr_accessor :connection_type
+
+    # Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+    attr_accessor :show_close_button
+
+    # Enable dark mode for the connection portal. Defaults to false.
+    attr_accessor :dark_mode
 
     # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     attr_accessor :connection_portal_version
@@ -39,6 +45,8 @@ module SnapTrade
         :'custom_redirect' => :'customRedirect',
         :'reconnect' => :'reconnect',
         :'connection_type' => :'connectionType',
+        :'show_close_button' => :'showCloseButton',
+        :'dark_mode' => :'darkMode',
         :'connection_portal_version' => :'connectionPortalVersion'
       }
     end
@@ -56,6 +64,8 @@ module SnapTrade
         :'custom_redirect' => :'String',
         :'reconnect' => :'String',
         :'connection_type' => :'ConnectionType',
+        :'show_close_button' => :'Boolean',
+        :'dark_mode' => :'Boolean',
         :'connection_portal_version' => :'ConnectionPortalVersion'
       }
     end
@@ -103,6 +113,14 @@ module SnapTrade
         self.connection_type = 'read'
       end
 
+      if attributes.key?(:'show_close_button')
+        self.show_close_button = attributes[:'show_close_button']
+      end
+
+      if attributes.key?(:'dark_mode')
+        self.dark_mode = attributes[:'dark_mode']
+      end
+
       if attributes.key?(:'connection_portal_version')
         self.connection_portal_version = attributes[:'connection_portal_version']
       else
@@ -133,6 +151,8 @@ module SnapTrade
           custom_redirect == o.custom_redirect &&
           reconnect == o.reconnect &&
           connection_type == o.connection_type &&
+          show_close_button == o.show_close_button &&
+          dark_mode == o.dark_mode &&
           connection_portal_version == o.connection_portal_version
     end
 
@@ -145,7 +165,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, connection_portal_version].hash
+      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, show_close_button, dark_mode, connection_portal_version].hash
     end
 
     # Builds the object from hash

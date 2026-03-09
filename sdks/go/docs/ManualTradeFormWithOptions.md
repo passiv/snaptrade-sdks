@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 **AccountId** | **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | 
 **Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
 **UniversalSymbolId** | Pointer to **NullableString** | The universal symbol ID of the security to trade. Must be &#39;null&#39; if &#x60;symbol&#x60; is provided, otherwise must be provided. | [optional] 
-**Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
+**Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
+**TradingSession** | Pointer to [**TradingSession**](TradingSession.md) |  | [optional] [default to TRADINGSESSION_REGULAR]
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). | [optional] 
@@ -183,6 +184,31 @@ and a boolean to check if the value has been set.
 
 SetTimeInForce sets TimeInForce field to given value.
 
+
+### GetTradingSession
+
+`func (o *ManualTradeFormWithOptions) GetTradingSession() TradingSession`
+
+GetTradingSession returns the TradingSession field if non-nil, zero value otherwise.
+
+### GetTradingSessionOk
+
+`func (o *ManualTradeFormWithOptions) GetTradingSessionOk() (*TradingSession, bool)`
+
+GetTradingSessionOk returns a tuple with the TradingSession field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTradingSession
+
+`func (o *ManualTradeFormWithOptions) SetTradingSession(v TradingSession)`
+
+SetTradingSession sets TradingSession field to given value.
+
+### HasTradingSession
+
+`func (o *ManualTradeFormWithOptions) HasTradingSession() bool`
+
+HasTradingSession returns a boolean if a field has been set.
 
 ### GetPrice
 

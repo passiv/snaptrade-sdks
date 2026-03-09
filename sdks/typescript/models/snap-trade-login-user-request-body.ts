@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface SnapTradeLoginUserRequestBody {
     /**
-     * Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+     * Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
@@ -42,11 +42,23 @@ export interface SnapTradeLoginUserRequestBody {
      */
     'reconnect'?: string;
     /**
-     * Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+     * Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
     'connectionType'?: SnapTradeLoginUserRequestBodyConnectionTypeEnum;
+    /**
+     * Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+     * @type {boolean}
+     * @memberof SnapTradeLoginUserRequestBody
+     */
+    'showCloseButton'?: boolean;
+    /**
+     * Enable dark mode for the connection portal. Defaults to false.
+     * @type {boolean}
+     * @memberof SnapTradeLoginUserRequestBody
+     */
+    'darkMode'?: boolean;
     /**
      * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
      * @type {string}
@@ -55,7 +67,7 @@ export interface SnapTradeLoginUserRequestBody {
     'connectionPortalVersion'?: SnapTradeLoginUserRequestBodyConnectionPortalVersionEnum;
 }
 
-type SnapTradeLoginUserRequestBodyConnectionTypeEnum = 'read' | 'trade'
+type SnapTradeLoginUserRequestBodyConnectionTypeEnum = 'read' | 'trade' | 'trade-if-available'
 type SnapTradeLoginUserRequestBodyConnectionPortalVersionEnum = 'v4' | 'v3' | 'v2'
 
 

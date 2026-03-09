@@ -16,4 +16,4 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-MlegPriceEffectStrictNullable = str
+MlegPriceEffectStrictNullable = Literal["CREDIT", "DEBIT", "EVEN"]

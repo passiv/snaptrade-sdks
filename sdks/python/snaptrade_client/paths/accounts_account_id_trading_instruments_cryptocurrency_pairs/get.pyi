@@ -301,7 +301,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Search cryptocurrency pairs instruments
+        Get crypto pairs
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -431,7 +431,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Search cryptocurrency pairs instruments
+        Get crypto pairs
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -563,7 +563,7 @@ class SearchCryptocurrencyPairInstruments(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Searches cryptocurrency pairs instruments accessible to the specified account.  """
+        """ Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.  """
         args = self._search_cryptocurrency_pair_instruments_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -624,7 +624,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Searches cryptocurrency pairs instruments accessible to the specified account.  """
+        """ Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.  """
         args = self._search_cryptocurrency_pair_instruments_mapped_args(
             query_params=query_params,
             path_params=path_params,

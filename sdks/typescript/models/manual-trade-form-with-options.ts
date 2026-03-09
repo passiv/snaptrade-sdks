@@ -14,6 +14,7 @@ import { ActionStrictWithOptions } from './action-strict-with-options';
 import { ManualTradeFormNotionalValue } from './manual-trade-form-notional-value';
 import { OrderTypeStrict } from './order-type-strict';
 import { TimeInForceStrict } from './time-in-force-strict';
+import { TradingSession } from './trading-session';
 
 /**
  * Inputs for placing an order with the brokerage.
@@ -40,7 +41,7 @@ export interface ManualTradeFormWithOptions {
      */
     'universal_symbol_id'?: string | null;
     /**
-     * The security\'s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \'symbol\' is provided, then \'universal_symbol_id\' must be \'null\'.
+     * The security\'s trading ticker symbol. If \'symbol\' is provided, then \'universal_symbol_id\' must be \'null\'.
      * @type {string}
      * @memberof ManualTradeFormWithOptions
      */
@@ -57,6 +58,12 @@ export interface ManualTradeFormWithOptions {
      * @memberof ManualTradeFormWithOptions
      */
     'time_in_force': TimeInForceStrict;
+    /**
+     * The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:   - `REGULAR` - Regular trading hours.   - `EXTENDED` - Extended trading hours. 
+     * @type {TradingSession}
+     * @memberof ManualTradeFormWithOptions
+     */
+    'trading_session'?: TradingSession;
     /**
      * The limit price for `Limit` and `StopLimit` orders.
      * @type {number}

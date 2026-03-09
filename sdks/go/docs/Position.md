@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **OpenPnl** | Pointer to **NullableFloat32** | The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field. | [optional] 
 **AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per share_ of this position. | [optional] 
 **FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
+**Currency** | Pointer to [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
+**CashEquivalent** | Pointer to **NullableBool** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power | [optional] 
+**TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | List of tax lots for the given position (disabled by default, contact support if needed) | [optional] 
 
 ## Methods
 
@@ -230,6 +233,91 @@ HasFractionalUnits returns a boolean if a field has been set.
 `func (o *Position) UnsetFractionalUnits()`
 
 UnsetFractionalUnits ensures that no value is present for FractionalUnits, not even an explicit nil
+### GetCurrency
+
+`func (o *Position) GetCurrency() PositionCurrency`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *Position) GetCurrencyOk() (*PositionCurrency, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *Position) SetCurrency(v PositionCurrency)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *Position) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### GetCashEquivalent
+
+`func (o *Position) GetCashEquivalent() bool`
+
+GetCashEquivalent returns the CashEquivalent field if non-nil, zero value otherwise.
+
+### GetCashEquivalentOk
+
+`func (o *Position) GetCashEquivalentOk() (*bool, bool)`
+
+GetCashEquivalentOk returns a tuple with the CashEquivalent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCashEquivalent
+
+`func (o *Position) SetCashEquivalent(v bool)`
+
+SetCashEquivalent sets CashEquivalent field to given value.
+
+### HasCashEquivalent
+
+`func (o *Position) HasCashEquivalent() bool`
+
+HasCashEquivalent returns a boolean if a field has been set.
+
+### SetCashEquivalentNil
+
+`func (o *Position) SetCashEquivalentNil(b bool)`
+
+ SetCashEquivalentNil sets the value for CashEquivalent to be an explicit nil
+
+### UnsetCashEquivalent
+`func (o *Position) UnsetCashEquivalent()`
+
+UnsetCashEquivalent ensures that no value is present for CashEquivalent, not even an explicit nil
+### GetTaxLots
+
+`func (o *Position) GetTaxLots() []TaxLot`
+
+GetTaxLots returns the TaxLots field if non-nil, zero value otherwise.
+
+### GetTaxLotsOk
+
+`func (o *Position) GetTaxLotsOk() (*[]TaxLot, bool)`
+
+GetTaxLotsOk returns a tuple with the TaxLots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxLots
+
+`func (o *Position) SetTaxLots(v []TaxLot)`
+
+SetTaxLots sets TaxLots field to given value.
+
+### HasTaxLots
+
+`func (o *Position) HasTaxLots() bool`
+
+HasTaxLots returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

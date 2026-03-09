@@ -15,10 +15,10 @@ Describes a single recent order in an account. Each record here represents a sin
 |**quoteUniversalSymbol** | [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  |  [optional] |
 |**quoteCurrency** | [**AccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  |  [optional] |
 |**action** | **String** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  |  [optional] |
-|**totalQuantity** | **Double** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. |  [optional] |
-|**openQuantity** | **Double** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. |  [optional] |
-|**canceledQuantity** | **Double** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. |  [optional] |
-|**filledQuantity** | **Double** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. |  [optional] |
+|**totalQuantity** | **String** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. |  [optional] |
+|**openQuantity** | **String** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. |  [optional] |
+|**canceledQuantity** | **String** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. |  [optional] |
+|**filledQuantity** | **String** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. |  [optional] |
 |**executionPrice** | **Double** | The price at which the order was executed. |  [optional] |
 |**limitPrice** | **Double** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
 |**stopPrice** | **Double** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |

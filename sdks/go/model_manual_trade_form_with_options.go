@@ -22,10 +22,11 @@ type ManualTradeFormWithOptions struct {
 	Action ActionStrictWithOptions `json:"action"`
 	// The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
 	UniversalSymbolId NullableString `json:"universal_symbol_id,omitempty"`
-	// The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+	// The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 	Symbol NullableString `json:"symbol,omitempty"`
 	OrderType OrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
+	TradingSession *TradingSession `json:"trading_session,omitempty"`
 	// The limit price for `Limit` and `StopLimit` orders.
 	Price NullableFloat32 `json:"price,omitempty"`
 	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
@@ -45,6 +46,8 @@ func NewManualTradeFormWithOptions(accountId string, action ActionStrictWithOpti
 	this.Action = action
 	this.OrderType = orderType
 	this.TimeInForce = timeInForce
+	var tradingSession TradingSession = TRADINGSESSION_REGULAR
+	this.TradingSession = &tradingSession
 	return &this
 }
 
@@ -53,6 +56,8 @@ func NewManualTradeFormWithOptions(accountId string, action ActionStrictWithOpti
 // but it doesn't guarantee that properties required by API are set
 func NewManualTradeFormWithOptionsWithDefaults() *ManualTradeFormWithOptions {
 	this := ManualTradeFormWithOptions{}
+	var tradingSession TradingSession = TRADINGSESSION_REGULAR
+	this.TradingSession = &tradingSession
 	return &this
 }
 
@@ -234,6 +239,38 @@ func (o *ManualTradeFormWithOptions) GetTimeInForceOk() (*TimeInForceStrict, boo
 // SetTimeInForce sets field value
 func (o *ManualTradeFormWithOptions) SetTimeInForce(v TimeInForceStrict) {
 	o.TimeInForce = v
+}
+
+// GetTradingSession returns the TradingSession field value if set, zero value otherwise.
+func (o *ManualTradeFormWithOptions) GetTradingSession() TradingSession {
+	if o == nil || isNil(o.TradingSession) {
+		var ret TradingSession
+		return ret
+	}
+	return *o.TradingSession
+}
+
+// GetTradingSessionOk returns a tuple with the TradingSession field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualTradeFormWithOptions) GetTradingSessionOk() (*TradingSession, bool) {
+	if o == nil || isNil(o.TradingSession) {
+    return nil, false
+	}
+	return o.TradingSession, true
+}
+
+// HasTradingSession returns a boolean if a field has been set.
+func (o *ManualTradeFormWithOptions) HasTradingSession() bool {
+	if o != nil && !isNil(o.TradingSession) {
+		return true
+	}
+
+	return false
+}
+
+// SetTradingSession gets a reference to the given TradingSession and assigns it to the TradingSession field.
+func (o *ManualTradeFormWithOptions) SetTradingSession(v TradingSession) {
+	o.TradingSession = &v
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -423,6 +460,9 @@ func (o ManualTradeFormWithOptions) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["time_in_force"] = o.TimeInForce
+	}
+	if !isNil(o.TradingSession) {
+		toSerialize["trading_session"] = o.TradingSession
 	}
 	if o.Price.IsSet() {
 		toSerialize["price"] = o.Price.Get()

@@ -47,95 +47,24 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetOptionStrategy
+        /// Test GetOptionQuote
         /// </summary>
         [Fact]
-        public void GetOptionStrategyTest()
+        public void GetOptionQuoteTest()
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to create the option strategy object in.
-            var underlyingSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
-            var legs = new List<OptionLeg>();
-            var strategyType = OptionsGetOptionStrategyRequest.StrategyTypeEnum.CUSTOM;
-            
-            var optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest(
-                underlyingSymbolId,
-                legs,
-                strategyType
-            );
+            var symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
             
             try
             {
-                // Create options strategy
-                StrategyQuotes result = client.Options.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
+                // Get option quote
+                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, symbol);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionStrategy: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test GetOptionsChain
-        /// </summary>
-        [Fact]
-        public void GetOptionsChainTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to get the options chain from.
-            var symbol = "symbol_example"; // Universal symbol ID if symbol
-            
-            try
-            {
-                // Get the options chain for a symbol
-                List<OptionChainInner> result = client.Options.GetOptionsChain(userId, userSecret, accountId, symbol);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionsChain: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test GetOptionsStrategyQuote
-        /// </summary>
-        [Fact]
-        public void GetOptionsStrategyQuoteTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account the strategy will be placed in.
-            var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
-            
-            try
-            {
-                // Get options strategy quotes
-                StrategyQuotes result = client.Options.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionsStrategyQuote: " + e.Message);
+                Console.WriteLine("Exception when calling OptionsApi.GetOptionQuote: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -166,46 +95,6 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling OptionsApi.ListOptionHoldings: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test PlaceOptionStrategy
-        /// </summary>
-        [Fact]
-        public void PlaceOptionStrategyTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to execute the strategy in.
-            var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
-            var orderType = OrderTypeStrict.Limit;
-            var timeInForce = TimeInForceStrict.FOK;
-            var price = 31.33; // Trade Price if limit or stop limit order
-            
-            var optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(
-                orderType,
-                timeInForce,
-                price
-            );
-            
-            try
-            {
-                // Place an option strategy order
-                StrategyOrderRecord result = client.Options.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.PlaceOptionStrategy: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

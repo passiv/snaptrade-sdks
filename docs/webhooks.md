@@ -6,11 +6,61 @@ To get started with webhooks, visit the webhook tab of the SnapTrade Dashboard t
 
 # Verifying Webhook Authenticity
 
-You can verify the authenticity of any SnapTrade webhook by verifying the `webhookSecret` field contained in the body of any webhook.
+> Note: Webhook secrets are deprecated.
 
-The correct value of this secret can be found when you configure a webhook listener in the SnapTrade Dashboard.
+You can verify the authenticity of any SnapTrade webhook by using the `Signature` header contained in the webhook headers, and comparing that to the expected signature generated using your **client secret**. Note that the client secret is different from the webhook secret that is being deprecated.
 
-Aside from webhook secrets:
+The `Signature` header contains an HMAC SHA256 hash of the request body, using your client secret as the key.
+
+Here's an example implementation of a Flask webhook handler that verifies the authenticity of incoming webhooks:
+
+```python
+from base64 import b64encode
+from hashlib import sha256
+import datetime
+import hmac
+import json
+import os
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+SECRET = os.getenv("SNAPTRADE_CLIENT_SECRET")
+
+@app.route('/', methods=['POST'])
+def webhook_listener():
+    # Extract the payload
+    payload = request.get_json()
+
+    # Extract the Signature header
+    signature = request.headers.get('Signature')
+
+    # Verify the signature
+    sig_content = json.dumps(payload, separators=(",", ":"), sort_keys=True)
+    sig_digest = hmac.new(SECRET.encode(), sig_content.encode(), sha256).digest()
+    calculated_signature = b64encode(sig_digest).decode()
+
+    if calculated_signature != signature:
+        raise Exception("Signature verification failed!")
+    
+    # Prevent replay attacks by checking the timestamp and making sure it was sent recently
+    timestamp = datetime.datetime.fromisoformat(payload["eventTimestamp"])
+    if (datetime.datetime.now(datetime.timezone.utc) - timestamp).total_seconds() > 300:
+        raise Exception("Payload is too old.")
+
+    print("Signature verified successfully.")
+
+    # Log the received data
+    print("Received payload:", payload)
+
+    # Respond with a success message
+    return jsonify({}), 200
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5123)
+```
+
+Aside from signature verification:
 
 - SnapTrade supports custom webhook request headers (which are useful if your webhook handler is protected by Cloudflare)
 - SnapTrade does not support IP whitelisting at this time
@@ -50,7 +100,7 @@ Example payload is below:
 
 ```json
 {
-   "userId":"TOD1ACWHxnO9cnpq9XgNmFaRwXRMRu2taaFPpvYi6ng3uD2UN9_deleted",
+   "userId":"TOD1ACWHxnO9cnpq9XgNmFaRwXRMRu2taaFPpvYi6ng3uD2UN9",
    "clientId":"phjBdpKfpN",
    "eventType":"USER_DELETED",
    "webhookId":"dbaee13a-1184-4677-9741-b6845e60ee3a",
@@ -130,7 +180,7 @@ Example payload is below:
 
 ## CONNECTION_BROKEN
 
-Sent when a user's connection is broken for some reason, usually an inability to handshake with the brokerage's API.
+Sent when a user's connection is broken (also referred to as disabled) for some reason, usually an inability to handshake with the brokerage's API. To resolve this state, see [Fix Disabled Connections](https://docs.snaptrade.com/docs/fix-broken-connections).
 
 Example payload is below:
 
@@ -148,7 +198,7 @@ Example payload is below:
 
 ## CONNECTION_FIXED
 
-Sent when a broken connection is fixed.
+Sent when a broken (disabled) connection is fixed.
 
 Example payload is below:
 
@@ -220,7 +270,7 @@ Example payload is below:
 
 ## ACCOUNT_TRANSACTIONS_INITIAL_UPDATE
 
-Sent the first time that we collect transactions data from a brokerage account.
+Sent when we complete the initial transactions sync after a new account is connected. The duration needed for the first sync can vary by brokerage and by how many historical transactions the user has, but usually takes between 1-60 seconds.
 
 Example payload is below:
 
@@ -239,7 +289,7 @@ Example payload is below:
 
 ## ACCOUNT_TRANSACTIONS_UPDATED
 
-Sent when account transactions are updated.
+Sent when account transactions are incrementally updated. After the initial sync has already completed, account will be checked for new transactions daily. If new transactions are found they will be saved and this webhook will be sent. Only ACCOUNT_TRANSACTIONS_INITIAL_UPDATE gets sent upon first connection.
 
 Example payload is below:
 
@@ -272,31 +322,6 @@ Example payload is below:
   "webhookSecret": "DDAVBuPPGgqwADXgbcOE",
   "accountId": "6e30be12-4ab0-4ec0-8d4d-0dfdce509e36",
   "brokerageAuthorizationId": "8105b33e-3dd6-4189-b93e-31ccaa9d3b69"
-}
-```
-
-## TRADES_PLACED
-
-Gets sent when new trades are detected in a user's account.
-
-On average, you'll receive a webhook within 30 minutes of activity occurring in the account (we poll once per hour).
-
-We send 1 webhook regardless of how many new trades are identified in your account. So if we identify 1 trade in the account, we'll send 1 webhook; and if we identify 10 trades in the account, we also only send 1 webhook.
-
-Please contact us in order to receive these webhooks as they are disabled by default.
-
-Example payload is below:
-```json
-{
-  "userId": "vAzgPrUHizYheZVi_WEALTHSIMPLETRADE_oiuzalkd",
-  "clientId": "PARTNERAPP",
-  "accountId": "45a2g56a-eef6-4904-a68e-d3f90c3e07c5",
-  "eventType": "TRADES_PLACED",
-  "webhookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
-  "brokerageId": "905872ac-a7b1-4031-a31f-790cba1bfc94",
-  "webhookSecret": "yfqvPlWrTFILBcjCERPh",
-  "eventTimestamp": "2023-03-01T14:38:13.111991+00:00",
-  "brokerageAuthorizationId": "6bb0ahb0-b8c8-4b59-8bf9-7841d7a89c63"
 }
 ```
 

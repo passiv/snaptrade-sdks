@@ -138,6 +138,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'MaintenanceMode'
         }
         /// <summary>
+        /// Test the property 'IsDegraded'
+        /// </summary>
+        [Fact]
+        public void IsDegradedTest()
+        {
+            // TODO unit test for the property 'IsDegraded'
+        }
+        /// <summary>
         /// Test the property 'AllowsTrading'
         /// </summary>
         [Fact]

@@ -11,6 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols |
 | [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail |
 | [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
+| [**ListAllBrokerageInstruments**](ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments |
 | [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages |
 | [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies |
 | [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates |
@@ -640,6 +641,97 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | A list of all defined Brokerage Authorization Type objects. |  -  |
+| **0** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **ListAllBrokerageInstruments**
+
+
+
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class ListAllBrokerageInstrumentsExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var slug = "QUESTRADE"; // A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+            
+            try
+            {
+                // Get brokerage instruments
+                BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(slug);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ReferenceDataApi.ListAllBrokerageInstruments: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the ListAllBrokerageInstrumentsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get brokerage instruments
+    ApiResponse<BrokerageInstrumentsResponse> response = apiInstance.ListAllBrokerageInstrumentsWithHttpInfo(slug);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ReferenceDataApi.ListAllBrokerageInstrumentsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **slug** | **string** | A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. |  |
+
+### Return type
+
+[**BrokerageInstrumentsResponse**](BrokerageInstrumentsResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of brokerage instruments. |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

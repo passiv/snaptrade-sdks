@@ -111,12 +111,17 @@ class SchemaForRequestBodyApplicationJson(
 
 
     class MetaOapg:
+        required = {
+            "brokerage_order_id",
+        }
         
         class properties:
             brokerage_order_id = schemas.StrSchema
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
             }
+    
+    brokerage_order_id: MetaOapg.properties.brokerage_order_id
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
@@ -130,7 +135,7 @@ class SchemaForRequestBodyApplicationJson(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_order_id, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -142,7 +147,7 @@ class SchemaForRequestBodyApplicationJson(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, schemas.Unset] = schemas.unset,
+        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':
@@ -235,10 +240,10 @@ class BaseApi(api_client.Api):
     def _cancel_user_account_order_mapped_args(
         self,
         body: typing.Optional[typing.Any] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -276,7 +281,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Cancel order
+        Cancel equity order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -422,7 +427,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Cancel order
+        Cancel equity order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -525,13 +530,14 @@ class BaseApi(api_client.Api):
 class CancelUserAccountOrder(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def acancel_user_account_order(
         self,
         body: typing.Optional[typing.Any] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -544,10 +550,10 @@ class CancelUserAccountOrder(BaseApi):
             body=body,
             query_params=query_params,
             path_params=path_params,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            brokerage_order_id=brokerage_order_id,
         )
         return await self._acancel_user_account_order_oapg(
             body=args.body,
@@ -556,28 +562,29 @@ class CancelUserAccountOrder(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def cancel_user_account_order(
         self,
         body: typing.Optional[typing.Any] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
+        """ **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
         args = self._cancel_user_account_order_mapped_args(
             body=body,
             query_params=query_params,
             path_params=path_params,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            brokerage_order_id=brokerage_order_id,
         )
         return self._cancel_user_account_order_oapg(
             body=args.body,
@@ -588,13 +595,14 @@ class CancelUserAccountOrder(BaseApi):
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def apost(
         self,
         body: typing.Optional[typing.Any] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -607,10 +615,10 @@ class ApiForpost(BaseApi):
             body=body,
             query_params=query_params,
             path_params=path_params,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            brokerage_order_id=brokerage_order_id,
         )
         return await self._acancel_user_account_order_oapg(
             body=args.body,
@@ -619,28 +627,29 @@ class ApiForpost(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def post(
         self,
         body: typing.Optional[typing.Any] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
+        """ **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
         args = self._cancel_user_account_order_mapped_args(
             body=body,
             query_params=query_params,
             path_params=path_params,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            brokerage_order_id=brokerage_order_id,
         )
         return self._cancel_user_account_order_oapg(
             body=args.body,

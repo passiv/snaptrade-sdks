@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Url** | Pointer to **string** | URL to the brokerage&#39;s website. | [optional] 
 **Enabled** | Pointer to **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
 **MaintenanceMode** | Pointer to **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
+**IsDegraded** | Pointer to **bool** | Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues. | [optional] 
 **AllowsTrading** | Pointer to **NullableBool** | Whether the brokerage allows trading through SnapTrade. | [optional] 
 **AllowsFractionalUnits** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **HasReporting** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
@@ -300,6 +301,31 @@ SetMaintenanceMode sets MaintenanceMode field to given value.
 `func (o *Brokerage) HasMaintenanceMode() bool`
 
 HasMaintenanceMode returns a boolean if a field has been set.
+
+### GetIsDegraded
+
+`func (o *Brokerage) GetIsDegraded() bool`
+
+GetIsDegraded returns the IsDegraded field if non-nil, zero value otherwise.
+
+### GetIsDegradedOk
+
+`func (o *Brokerage) GetIsDegradedOk() (*bool, bool)`
+
+GetIsDegradedOk returns a tuple with the IsDegraded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDegraded
+
+`func (o *Brokerage) SetIsDegraded(v bool)`
+
+SetIsDegraded sets IsDegraded field to given value.
+
+### HasIsDegraded
+
+`func (o *Brokerage) HasIsDegraded() bool`
+
+HasIsDegraded returns a boolean if a field has been set.
 
 ### GetAllowsTrading
 

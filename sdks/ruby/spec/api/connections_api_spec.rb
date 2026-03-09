@@ -27,6 +27,20 @@ describe 'ConnectionsApi' do
     end
   end
 
+  # unit tests for delete_connection
+  # Delete connection
+  # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+  # @param connection_id 
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteConnectionConfirmation]
+  describe 'delete_connection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for detail_brokerage_authorization
   # Get connection detail
   # Returns a single connection for the specified ID.
@@ -70,7 +84,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for refresh_brokerage_authorization
   # Refresh holdings for a connection
-  # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
+  # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
   # @param authorization_id 
   # @param user_id 
   # @param user_secret 
@@ -84,7 +98,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for remove_brokerage_authorization
   # Delete connection
-  # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+  # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
   # @param authorization_id 
   # @param user_id 
   # @param user_secret 

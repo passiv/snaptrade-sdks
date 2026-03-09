@@ -38,12 +38,14 @@ namespace SnapTrade.Net.Model
         /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade..</param>
         /// <param name="name">A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity..</param>
         /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons..</param>
+        /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections..</param>
         /// <param name="syncStatus">syncStatus.</param>
-        public AccountSimple(string id = default(string), string name = default(string), string number = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
+        public AccountSimple(string id = default(string), string name = default(string), string number = default(string), string institutionAccountId = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
         {
             this.Id = id;
             this.Name = name;
             this.Number = number;
+            this.InstitutionAccountId = institutionAccountId;
             this.SyncStatus = syncStatus;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -70,6 +72,13 @@ namespace SnapTrade.Net.Model
         public string Number { get; set; }
 
         /// <summary>
+        /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+        /// </summary>
+        /// <value>A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.</value>
+        [DataMember(Name = "institution_account_id", EmitDefaultValue = true)]
+        public string InstitutionAccountId { get; set; }
+
+        /// <summary>
         /// Gets or Sets SyncStatus
         /// </summary>
         [DataMember(Name = "sync_status", EmitDefaultValue = false)]
@@ -93,6 +102,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
+            sb.Append("  InstitutionAccountId: ").Append(InstitutionAccountId).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -146,6 +156,11 @@ namespace SnapTrade.Net.Model
                     this.Number.Equals(input.Number))
                 ) && base.Equals(input) && 
                 (
+                    this.InstitutionAccountId == input.InstitutionAccountId ||
+                    (this.InstitutionAccountId != null &&
+                    this.InstitutionAccountId.Equals(input.InstitutionAccountId))
+                ) && base.Equals(input) && 
+                (
                     this.SyncStatus == input.SyncStatus ||
                     (this.SyncStatus != null &&
                     this.SyncStatus.Equals(input.SyncStatus))
@@ -173,6 +188,10 @@ namespace SnapTrade.Net.Model
                 if (this.Number != null)
                 {
                     hashCode = (hashCode * 59) + this.Number.GetHashCode();
+                }
+                if (this.InstitutionAccountId != null)
+                {
+                    hashCode = (hashCode * 59) + this.InstitutionAccountId.GetHashCode();
                 }
                 if (this.SyncStatus != null)
                 {

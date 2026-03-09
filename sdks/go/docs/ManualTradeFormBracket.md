@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
-**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol. | [optional] 
 **Instrument** | [**TradingInstrument**](TradingInstrument.md) |  | 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
@@ -53,31 +52,6 @@ and a boolean to check if the value has been set.
 
 SetAction sets Action field to given value.
 
-
-### GetSymbol
-
-`func (o *ManualTradeFormBracket) GetSymbol() string`
-
-GetSymbol returns the Symbol field if non-nil, zero value otherwise.
-
-### GetSymbolOk
-
-`func (o *ManualTradeFormBracket) GetSymbolOk() (*string, bool)`
-
-GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSymbol
-
-`func (o *ManualTradeFormBracket) SetSymbol(v string)`
-
-SetSymbol sets Symbol field to given value.
-
-### HasSymbol
-
-`func (o *ManualTradeFormBracket) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
 
 ### GetInstrument
 

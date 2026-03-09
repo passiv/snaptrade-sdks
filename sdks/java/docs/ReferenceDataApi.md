@@ -11,6 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search symbols |
 | [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get symbol detail |
 | [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
+| [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments |
 | [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
 | [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies |
 | [**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Get currency exchange rates |
@@ -27,14 +28,14 @@ Returns an Exchange Rate Pair object for the specified Currency Pair.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -122,14 +123,14 @@ Returns configurations for your SnapTrade Client ID, including allowed brokerage
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -223,14 +224,14 @@ Return all available security types supported by SnapTrade.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -312,14 +313,14 @@ Returns a list of all supported Exchanges.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -400,14 +401,14 @@ Returns a list of Universal Symbol objects that match the given query. The match
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -495,14 +496,14 @@ Returns the Universal Symbol object specified by the ticker or the Universal Sym
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -598,14 +599,14 @@ Returns a list of all defined Brokerage authorization Type objects.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -683,6 +684,100 @@ public class Example {
 | **200** | A list of all defined Brokerage Authorization Type objects. |  -  |
 | **0** | Unexpected error. |  -  |
 
+<a name="listAllBrokerageInstruments"></a>
+# **listAllBrokerageInstruments**
+> BrokerageInstrumentsResponse listAllBrokerageInstruments(slug).execute();
+
+Get brokerage instruments
+
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String slug = "QUESTRADE"; // A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    try {
+      BrokerageInstrumentsResponse result = client
+              .referenceData
+              .listAllBrokerageInstruments(slug)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getInstruments());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageInstruments");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<BrokerageInstrumentsResponse> response = client
+              .referenceData
+              .listAllBrokerageInstruments(slug)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listAllBrokerageInstruments");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **slug** | **String**| A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. | |
+
+### Return type
+
+[**BrokerageInstrumentsResponse**](BrokerageInstrumentsResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A list of brokerage instruments. |  -  |
+| **0** | Unexpected error. |  -  |
+
 <a name="listAllBrokerages"></a>
 # **listAllBrokerages**
 > List&lt;Brokerage&gt; listAllBrokerages().execute();
@@ -693,14 +788,14 @@ Returns a list of all defined Brokerage objects.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -782,14 +877,14 @@ Returns a list of all defined Currency objects.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -871,14 +966,14 @@ Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -959,14 +1054,14 @@ Returns a list of Universal Symbol objects that match the given query. The match
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ReferenceDataApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

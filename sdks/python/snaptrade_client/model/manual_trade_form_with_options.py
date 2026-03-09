@@ -80,6 +80,10 @@ class ManualTradeFormWithOptions(
                         *args,
                         _configuration=_configuration,
                     )
+        
+            @staticmethod
+            def trading_session() -> typing.Type['TradingSession']:
+                return TradingSession
             
             
             class price(
@@ -168,6 +172,7 @@ class ManualTradeFormWithOptions(
                 "time_in_force": time_in_force,
                 "universal_symbol_id": universal_symbol_id,
                 "symbol": symbol,
+                "trading_session": trading_session,
                 "price": price,
                 "stop": stop,
                 "units": units,
@@ -198,6 +203,9 @@ class ManualTradeFormWithOptions(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["trading_session"]) -> 'TradingSession': ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
     
     @typing.overload
@@ -212,7 +220,7 @@ class ManualTradeFormWithOptions(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "price", "stop", "units", "notional_value", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "trading_session", "price", "stop", "units", "notional_value", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -236,6 +244,9 @@ class ManualTradeFormWithOptions(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["trading_session"]) -> typing.Union['TradingSession', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
     
     @typing.overload
@@ -250,7 +261,7 @@ class ManualTradeFormWithOptions(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "price", "stop", "units", "notional_value", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "trading_session", "price", "stop", "units", "notional_value", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -263,6 +274,7 @@ class ManualTradeFormWithOptions(
         order_type: 'OrderTypeStrict',
         universal_symbol_id: typing.Union['UniversalSymbolIDNullable', schemas.Unset] = schemas.unset,
         symbol: typing.Union[MetaOapg.properties.symbol, None, str, schemas.Unset] = schemas.unset,
+        trading_session: typing.Union['TradingSession', schemas.Unset] = schemas.unset,
         price: typing.Union[MetaOapg.properties.price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         stop: typing.Union[MetaOapg.properties.stop, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
@@ -279,6 +291,7 @@ class ManualTradeFormWithOptions(
             order_type=order_type,
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
+            trading_session=trading_session,
             price=price,
             stop=stop,
             units=units,
@@ -291,4 +304,5 @@ from snaptrade_client.model.action_strict_with_options import ActionStrictWithOp
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.model.trading_session import TradingSession
 from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable

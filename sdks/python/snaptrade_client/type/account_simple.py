@@ -30,6 +30,9 @@ class OptionalAccountSimple(TypedDict, total=False):
     # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
     number: str
 
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    institution_account_id: typing.Optional[str]
+
     sync_status: AccountSyncStatus
 
 class AccountSimple(RequiredAccountSimple, OptionalAccountSimple):

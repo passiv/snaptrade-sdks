@@ -8,6 +8,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Get account detail |
+| [**getUserAccountOrderDetail**](AccountInformationApi.md#getUserAccountOrderDetail) | **POST** /accounts/{accountId}/orders/details | Get account order detail |
 | [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account orders |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserAccountRecentOrders**](AccountInformationApi.md#getUserAccountRecentOrders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
@@ -23,18 +24,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 List account activities
 
-Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
+Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class Example {
     LocalDate endDate = LocalDate.now(); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     Integer offset = 56; // An integer that specifies the starting point of the paginated results. Default is 0.
     Integer limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000.
-    String type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
+    String type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
     try {
       PaginatedUniversalActivity result = client
               .accountInformation
@@ -115,7 +116,7 @@ public class Example {
 | **endDate** | **LocalDate**| The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional] |
 | **offset** | **Integer**| An integer that specifies the starting point of the paginated results. Default is 0. | [optional] |
 | **limit** | **Integer**| An integer that specifies the maximum number of transactions to return. Default of 1000. | [optional] |
-| **type** | **String**| Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  | [optional] |
+| **type** | **String**| Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split.  | [optional] |
 
 ### Return type
 
@@ -146,14 +147,14 @@ List all accounts for the user, plus balances, positions, and orders for each ac
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -241,18 +242,18 @@ public class Example {
 
 List account balances
 
-Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -338,18 +339,18 @@ public class Example {
 
 Get account detail
 
-Returns account detail known to SnapTrade for the specified account.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -375,8 +376,11 @@ public class Example {
       System.out.println(result.getBrokerageAuthorization());
       System.out.println(result.getName());
       System.out.println(result.getNumber());
+      System.out.println(result.getInstitutionAccountId());
       System.out.println(result.getInstitutionName());
       System.out.println(result.getCreatedDate());
+      System.out.println(result.getFundingDate());
+      System.out.println(result.getOpeningDate());
       System.out.println(result.getSyncStatus());
       System.out.println(result.getBalance());
       System.out.println(result.getStatus());
@@ -384,6 +388,7 @@ public class Example {
       System.out.println(result.getMeta());
       System.out.println(result.getPortfolioGroup());
       System.out.println(result.getCashRestrictions());
+      System.out.println(result.getIsPaper());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
       System.err.println("Status code: " + e.getStatusCode());
@@ -442,24 +447,144 @@ public class Example {
 | **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
+<a name="getUserAccountOrderDetail"></a>
+# **getUserAccountOrderDetail**
+> AccountOrderRecord getUserAccountOrderDetail(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest).execute();
+
+Get account order detail
+
+Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    UUID accountId = UUID.randomUUID();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    try {
+      AccountOrderRecord result = client
+              .accountInformation
+              .getUserAccountOrderDetail(brokerageOrderId, accountId, userId, userSecret)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+      System.out.println(result.getStatus());
+      System.out.println(result.getUniversalSymbol());
+      System.out.println(result.getOptionSymbol());
+      System.out.println(result.getQuoteUniversalSymbol());
+      System.out.println(result.getQuoteCurrency());
+      System.out.println(result.getAction());
+      System.out.println(result.getTotalQuantity());
+      System.out.println(result.getOpenQuantity());
+      System.out.println(result.getCanceledQuantity());
+      System.out.println(result.getFilledQuantity());
+      System.out.println(result.getExecutionPrice());
+      System.out.println(result.getLimitPrice());
+      System.out.println(result.getStopPrice());
+      System.out.println(result.getOrderType());
+      System.out.println(result.getTimeInForce());
+      System.out.println(result.getTimePlaced());
+      System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
+      System.out.println(result.getExpiryDate());
+      System.out.println(result.getSymbol());
+      System.out.println(result.getChildBrokerageOrderIds());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountOrderDetail");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountOrderRecord> response = client
+              .accountInformation
+              .getUserAccountOrderDetail(brokerageOrderId, accountId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountOrderDetail");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**|  | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md)|  | |
+
+### Return type
+
+[**AccountOrderRecord**](AccountOrderRecord.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
 <a name="getUserAccountOrders"></a>
 # **getUserAccountOrders**
 > List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId).state(state).days(days).execute();
 
 List account orders
 
-Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -552,18 +677,18 @@ public class Example {
 
 List account positions
 
-Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -649,18 +774,18 @@ public class Example {
 
 List account recent orders (last 24 hours only)
 
-A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -754,14 +879,14 @@ Returns a list of rate of return percents for a given account. Will include time
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -847,18 +972,18 @@ public class Example {
 
 List account holdings
 
-Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -950,18 +1075,18 @@ public class Example {
 
 List accounts
 
-Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  Please note that this data is cached and only refreshed once a day.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).   - If you don&#39;t, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -1049,14 +1174,14 @@ Updates various properties of a specified account.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AccountInformationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

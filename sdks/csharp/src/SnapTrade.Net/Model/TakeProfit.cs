@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Details of the take profit order. Only to be used when order_class &#x3D; BRACKET.
+    /// Takes in a string value for limit_price
     /// </summary>
     [DataContract(Name = "TakeProfit")]
     public partial class TakeProfit : IEquatable<TakeProfit>, IValidatableObject

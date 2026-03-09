@@ -4,70 +4,24 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel an order.
-[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
-[**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote
-[**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check order impact
-[**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
-[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place a Bracket Order
-[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place order
-[**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place multi-leg option order
-[**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked order
-[**PlaceSimpleOrder**](TradingApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place order
-[**PreviewSimpleOrder**](TradingApi.md#PreviewSimpleOrder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview order
-[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one
+[**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
+[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
+[**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
+[**GetOptionImpact**](TradingApi.md#GetOptionImpact) | **Post** /accounts/{accountId}/trading/options/impact | Get option order impact
+[**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
+[**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
+[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
+[**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
+[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
+[**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
+[**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked equity order
+[**PreviewCryptoOrder**](TradingApi.md#PreviewCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
+[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Post** /accounts/{accountId}/trading/replace | Replace order
+[**SearchCryptocurrencyPairInstruments**](TradingApi.md#SearchCryptocurrencyPairInstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 
 
 
 ## CancelOrder
-
-Cancel an order.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.TradingApi.CancelOrder(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "brokerageOrderId_example",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.CancelOrder``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `CancelOrder`: OrderUpdatedResponse
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CancelOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CancelOrder.Order`: %v\n", *resp.Order)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CancelUserAccountOrder
 
 Cancel order
 
@@ -91,14 +45,69 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    tradingCancelUserAccountOrderRequest := *snaptrade.NewTradingCancelUserAccountOrderRequest()
-    tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("66a033fa-da74-4fcf-b527-feefdec9257e")
+    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
+    
+    request := client.TradingApi.CancelOrder(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        accountInformationGetUserAccountOrderDetailRequest,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.CancelOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `CancelOrder`: CancelOrderResponse
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CancelOrderResponse.CancelOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `CancelOrderResponse.CancelOrder.RawResponse`: %v\n", *resp.RawResponse)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelUserAccountOrder
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+Cancel equity order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    
+    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
     
     request := client.TradingApi.CancelUserAccountOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        tradingCancelUserAccountOrderRequest,
+        accountInformationGetUserAccountOrderDetailRequest,
     )
     
     resp, httpRes, err := request.Execute()
@@ -141,7 +150,7 @@ func main() {
 
 ## GetCryptocurrencyPairQuote
 
-Get cryptocurrency pair quote
+Get crypto pair quote
 
 
 
@@ -189,9 +198,68 @@ func main() {
 [[Back to README]](../README.md)
 
 
+## GetOptionImpact
+
+Get option order impact
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    priceEffect := *snaptrade.NewMlegPriceEffectStrict()
+    
+    mlegTradeForm := *snaptrade.NewMlegTradeForm(
+        null,
+        null,
+        null,
+    )
+    mlegTradeForm.SetLimitPrice("")
+    mlegTradeForm.SetStopPrice("")
+    mlegTradeForm.SetPriceEffect(priceEffect)
+    
+    request := client.TradingApi.GetOptionImpact(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        mlegTradeForm,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.GetOptionImpact``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetOptionImpact`: OptionImpact
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.GetOptionImpact`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedCost`: %v\n", *resp.EstimatedCost)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedTransactionFee`: %v\n", *resp.EstimatedTransactionFee)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetOrderImpact
 
-Check order impact
+Check equity order impact
 
 
 
@@ -254,7 +322,7 @@ func main() {
 
 ## GetUserAccountQuotes
 
-Get symbol quotes
+Get equity symbol quotes
 
 
 
@@ -307,7 +375,7 @@ func main() {
 
 ## PlaceBracketOrder
 
-Place a Bracket Order
+Place bracket order
 
 
 
@@ -340,7 +408,6 @@ func main() {
         stopLoss,
         takeProfit,
     )
-    manualTradeFormBracket.SetSymbol("AAPL")
     manualTradeFormBracket.SetPrice(31.33)
     manualTradeFormBracket.SetStop(31.33)
     manualTradeFormBracket.SetUnits(10.5)
@@ -390,9 +457,71 @@ func main() {
 [[Back to README]](../README.md)
 
 
+## PlaceCryptoOrder
+
+Place crypto order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    instrument := *snaptrade.NewCryptoTradingInstrument()
+    
+    cryptoOrderForm := *snaptrade.NewCryptoOrderForm(
+        instrument,
+        null,
+        "null",
+        "null",
+        "123.45",
+    )
+    cryptoOrderForm.SetLimitPrice("123.45")
+    cryptoOrderForm.SetStopPrice("123.45")
+    cryptoOrderForm.SetPostOnly(false)
+    cryptoOrderForm.SetExpirationDate(2024-01-01T00:00Z)
+    
+    request := client.TradingApi.PlaceCryptoOrder(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        cryptoOrderForm,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceCryptoOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `PlaceCryptoOrder`: OrderUpdatedResponse
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceCryptoOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceCryptoOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceCryptoOrder.Order`: %v\n", *resp.Order)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PlaceForceOrder
 
-Place order
+Place equity order
 
 
 
@@ -424,7 +553,8 @@ func main() {
         null,
     )
     manualTradeFormWithOptions.SetUniversalSymbolId(universalSymbolId)
-    manualTradeFormWithOptions.SetSymbol("AAPL  131124C00240000")
+    manualTradeFormWithOptions.SetSymbol("AAPL")
+    manualTradeFormWithOptions.SetTradingSession(null)
     manualTradeFormWithOptions.SetPrice(31.33)
     manualTradeFormWithOptions.SetStop(31.33)
     manualTradeFormWithOptions.SetUnits(units)
@@ -476,7 +606,7 @@ func main() {
 
 ## PlaceMlegOrder
 
-Place multi-leg option order
+Place option order
 
 
 
@@ -497,7 +627,7 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    priceEffect := *snaptrade.Newstring()
+    priceEffect := *snaptrade.NewMlegPriceEffectStrict()
     
     mlegTradeForm := *snaptrade.NewMlegTradeForm(
         null,
@@ -535,7 +665,7 @@ func main() {
 
 ## PlaceOrder
 
-Place checked order
+Place checked equity order
 
 
 
@@ -605,71 +735,9 @@ func main() {
 [[Back to README]](../README.md)
 
 
-## PlaceSimpleOrder
+## PreviewCryptoOrder
 
-Place order
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    instrument := *snaptrade.NewTradingInstrument()
-    
-    simpleOrderForm := *snaptrade.NewSimpleOrderForm(
-        instrument,
-        null,
-        "null",
-        "null",
-        "123.45",
-    )
-    simpleOrderForm.SetLimitPrice("123.45")
-    simpleOrderForm.SetStopPrice("123.45")
-    simpleOrderForm.SetPostOnly(false)
-    simpleOrderForm.SetExpirationDate(2024-01-01T00:00Z)
-    
-    request := client.TradingApi.PlaceSimpleOrder(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        simpleOrderForm,
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceSimpleOrder``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `PlaceSimpleOrder`: OrderUpdatedResponse
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceSimpleOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceSimpleOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceSimpleOrder.Order`: %v\n", *resp.Order)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PreviewSimpleOrder
-
-Preview order
+Preview crypto order
 
 
 
@@ -690,36 +758,36 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    instrument := *snaptrade.NewTradingInstrument()
+    instrument := *snaptrade.NewCryptoTradingInstrument()
     
-    simpleOrderForm := *snaptrade.NewSimpleOrderForm(
+    cryptoOrderForm := *snaptrade.NewCryptoOrderForm(
         instrument,
         null,
         "null",
         "null",
         "123.45",
     )
-    simpleOrderForm.SetLimitPrice("123.45")
-    simpleOrderForm.SetStopPrice("123.45")
-    simpleOrderForm.SetPostOnly(false)
-    simpleOrderForm.SetExpirationDate(2024-01-01T00:00Z)
+    cryptoOrderForm.SetLimitPrice("123.45")
+    cryptoOrderForm.SetStopPrice("123.45")
+    cryptoOrderForm.SetPostOnly(false)
+    cryptoOrderForm.SetExpirationDate(2024-01-01T00:00Z)
     
-    request := client.TradingApi.PreviewSimpleOrder(
+    request := client.TradingApi.PreviewCryptoOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        simpleOrderForm,
+        cryptoOrderForm,
     )
     
     resp, httpRes, err := request.Execute()
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PreviewSimpleOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PreviewCryptoOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `PreviewSimpleOrder`: SimpleOrderPreview
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PreviewSimpleOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `SimpleOrderPreview.PreviewSimpleOrder.EstimatedFee`: %v\n", *resp.EstimatedFee)
+    // response from `PreviewCryptoOrder`: CryptoOrderPreview
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PreviewCryptoOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CryptoOrderPreview.PreviewCryptoOrder.EstimatedFee`: %v\n", *resp.EstimatedFee)
 }
 ```
 
@@ -730,7 +798,7 @@ func main() {
 
 ## ReplaceOrder
 
-Replaces an order with a new one
+Replace order
 
 
 
@@ -754,6 +822,7 @@ func main() {
     units := *snaptrade.Newfloat32()
     
     manualTradeReplaceForm := *snaptrade.NewManualTradeReplaceForm(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
         null,
         null,
         null,
@@ -765,7 +834,6 @@ func main() {
     
     request := client.TradingApi.ReplaceOrder(
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "brokerageOrderId_example",
         "userId_example",
         "userSecret_example",
         manualTradeReplaceForm,
@@ -801,6 +869,54 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchCryptocurrencyPairInstruments
+
+Get crypto pairs
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.TradingApi.SearchCryptocurrencyPairInstruments(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    request.Base("base_example")
+    request.Quote("quote_example")
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.SearchCryptocurrencyPairInstruments``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `SearchCryptocurrencyPairInstruments`: TradingSearchCryptocurrencyPairInstruments200Response
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.SearchCryptocurrencyPairInstruments`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `TradingSearchCryptocurrencyPairInstruments200Response.SearchCryptocurrencyPairInstruments.Items`: %v\n", resp.Items)
 }
 ```
 

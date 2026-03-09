@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.111-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.111)
+[![npm](https://img.shields.io/badge/gem-v2.0.169-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.169)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -23,6 +23,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
+  * [`snaptrade.account_information.get_user_account_order_detail`](#snaptradeaccount_informationget_user_account_order_detail)
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_positions`](#snaptradeaccount_informationget_user_account_positions)
   * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
@@ -36,6 +37,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.login_snap_trade_user`](#snaptradeauthenticationlogin_snap_trade_user)
   * [`snaptrade.authentication.register_snap_trade_user`](#snaptradeauthenticationregister_snap_trade_user)
   * [`snaptrade.authentication.reset_snap_trade_user_secret`](#snaptradeauthenticationreset_snap_trade_user_secret)
+  * [`snaptrade.connections.delete_connection`](#snaptradeconnectionsdelete_connection)
   * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
   * [`snaptrade.connections.disable_brokerage_authorization`](#snaptradeconnectionsdisable_brokerage_authorization)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
@@ -43,12 +45,12 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.crypto_trading.search_cryptocurrency_pair_instruments`](#snaptradecrypto_tradingsearch_cryptocurrency_pair_instruments)
-  * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
-  * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
-  * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
+  * [`snaptrade.experimental_endpoints.get_account_balance_history`](#snaptradeexperimental_endpointsget_account_balance_history)
+  * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
+  * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
+  * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.options.get_option_quote`](#snaptradeoptionsget_option_quote)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
-  * [`snaptrade.options.place_option_strategy`](#snaptradeoptionsplace_option_strategy)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
   * [`snaptrade.reference_data.get_security_types`](#snaptradereference_dataget_security_types)
@@ -56,6 +58,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.reference_data.get_symbols`](#snaptradereference_dataget_symbols)
   * [`snaptrade.reference_data.get_symbols_by_ticker`](#snaptradereference_dataget_symbols_by_ticker)
   * [`snaptrade.reference_data.list_all_brokerage_authorization_type`](#snaptradereference_datalist_all_brokerage_authorization_type)
+  * [`snaptrade.reference_data.list_all_brokerage_instruments`](#snaptradereference_datalist_all_brokerage_instruments)
   * [`snaptrade.reference_data.list_all_brokerages`](#snaptradereference_datalist_all_brokerages)
   * [`snaptrade.reference_data.list_all_currencies`](#snaptradereference_datalist_all_currencies)
   * [`snaptrade.reference_data.list_all_currencies_rates`](#snaptradereference_datalist_all_currencies_rates)
@@ -63,15 +66,17 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancel_order`](#snaptradetradingcancel_order)
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
   * [`snaptrade.trading.get_cryptocurrency_pair_quote`](#snaptradetradingget_cryptocurrency_pair_quote)
+  * [`snaptrade.trading.get_option_impact`](#snaptradetradingget_option_impact)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
+  * [`snaptrade.trading.place_crypto_order`](#snaptradetradingplace_crypto_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
-  * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
-  * [`snaptrade.trading.preview_simple_order`](#snaptradetradingpreview_simple_order)
+  * [`snaptrade.trading.preview_crypto_order`](#snaptradetradingpreview_crypto_order)
   * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
+  * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
 
@@ -82,7 +87,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.111'
+gem 'snaptrade', '~> 2.0.169'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -141,6 +146,8 @@ Transaction are returned in reverse chronological order, using the `trade_date` 
 
 The data returned here is always cached and refreshed once a day.
 
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -189,9 +196,10 @@ values. Here are some of the most popular values: - `BUY` - Asset bought. -
 contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment.
 - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares
 instead of cash - `INTEREST` - Interest deposited into the account. - `FEE` -
-Fee withdrawn from the account. - `OPTIONEXPIRATION` - Option expiration event.
-- `OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option
-exercise event. - `TRANSFER` - Transfer of assets from one account to another
+Fee withdrawn from the account. - `TAX` - A tax related fee. -
+`OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option
+assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` -
+Transfer of assets from one account to another. - `SPLIT` - A stock share split.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -251,7 +259,11 @@ needed on one or more authorizations).
 
 Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
 
-The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -287,7 +299,11 @@ p result
 
 Returns account detail known to SnapTrade for the specified account.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -319,11 +335,60 @@ p result
 ---
 
 
+### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
+
+Returns the detail of a single order using the external order ID provided in the request body.
+
+This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_user_account_order_detail(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
+
+##### account_id: `String`<a id="account_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/details` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.account_information.get_user_account_orders`<a id="snaptradeaccount_informationget_user_account_orders"></a>
 
 Returns a list of recent orders in the specified account.
 
-The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -368,7 +433,11 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
-The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -402,11 +471,10 @@ p result
 
 ### `snaptrade.account_information.get_user_account_recent_orders`<a id="snaptradeaccount_informationget_user_account_recent_orders"></a>
 
-A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
-Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+Differs from /orders in that it is always realtime, and only checks the last 24 hours
 By default only returns executed orders, but that can be changed by setting *only_executed* to false
-**Please contact support for access as this endpoint is not enabled by default.**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -481,7 +549,11 @@ p result
 
 Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
-The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -517,7 +589,11 @@ p result
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Please note that this data is cached and only refreshed once a day.
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
+  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -673,6 +749,8 @@ result = snaptrade.authentication.login_snap_trade_user(
   custom_redirect: "https://snaptrade.com",
   reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
   connection_type: "read",
+  show_close_button: true,
+  dark_mode: true,
   connection_portal_version: "v4",
 )
 p result
@@ -684,8 +762,8 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### broker: `String`<a id="broker-string"></a>
 Slug of the brokerage to connect the user to. See [the integrations
-page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4)
-for a list of supported brokerages and their slugs.
+page](https://support.snaptrade.com/brokerages) for a list of supported
+brokerages and their slugs.
 
 ##### immediateRedirect: `Boolean`<a id="immediateredirect-boolean"></a>
 When set to `true`, user will be redirected back to the partner's site instead
@@ -705,8 +783,17 @@ left empty unless you are reconnecting a disabled connection. See the [guide on
 fixing broken connections](/docs/fix-broken-connections) for more information.
 
 ##### connectionType: [`ConnectionType`](./lib/snaptrade/models/connection_type.rb)<a id="connectiontype-connectiontypelibsnaptrademodelsconnection_typerb"></a>
-Sets whether the connection should be read-only or trade-enabled. Defaults to
-read-only if not specified.
+Determines connection permissions (default: read) - `read`: Data access only. -
+`trade`: Data and trading access. - `trade-if-available`: Attempts to establish
+a trading connection if the brokerage supports it, otherwise falls back to
+read-only access automatically.
+
+##### showCloseButton: `Boolean`<a id="showclosebutton-boolean"></a>
+Controls whether the close (X) button is displayed in the connection portal.
+When false, you control closing behavior from your app. Defaults to true.
+
+##### darkMode: `Boolean`<a id="darkmode-boolean"></a>
+Enable dark mode for the connection portal. Defaults to false.
 
 ##### connectionPortalVersion: [`ConnectionPortalVersion`](./lib/snaptrade/models/connection_portal_version.rb)<a id="connectionportalversion-connectionportalversionlibsnaptrademodelsconnection_portal_versionrb"></a>
 Sets the connection portal version to render. Currently only v4 is supported and
@@ -797,6 +884,39 @@ endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/resetUserSecret` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.delete_connection`<a id="snaptradeconnectionsdelete_connection"></a>
+
+Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.connections.delete_connection(
+  connection_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### connection_id: `String`<a id="connection_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[DeleteConnectionConfirmation](./lib/snaptrade/models/delete_connection_confirmation.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connection/{connectionId}` `DELETE`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -914,7 +1034,7 @@ p result
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-**Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05**
+**Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -948,7 +1068,7 @@ p result
 
 ### `snaptrade.connections.remove_brokerage_authorization`<a id="snaptradeconnectionsremove_brokerage_authorization"></a>
 
-Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1047,20 +1167,18 @@ specific users
 ---
 
 
-### `snaptrade.crypto_trading.search_cryptocurrency_pair_instruments`<a id="snaptradecrypto_tradingsearch_cryptocurrency_pair_instruments"></a>
+### `snaptrade.experimental_endpoints.get_account_balance_history`<a id="snaptradeexperimental_endpointsget_account_balance_history"></a>
 
-Searches cryptocurrency pairs instruments accessible to the specified account.
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
-result = snaptrade.crypto_trading.search_cryptocurrency_pair_instruments(
+result = snaptrade.experimental_endpoints.get_account_balance_history(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  base: "BTC",
-  quote: "USD",
 )
 p result
 ```
@@ -1070,81 +1188,80 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### base: `String`<a id="base-string"></a>
-##### quote: `String`<a id="quote-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
-[TradingSearchCryptocurrencyPairInstruments200Response](./lib/snaptrade/models/trading_search_cryptocurrency_pair_instruments200_response.rb)
+[AccountValueHistoryResponse](./lib/snaptrade/models/account_value_history_response.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
+`/accounts/{accountId}/balanceHistory` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
 
-### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
+### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
 
-Creates an option strategy object that will be used to place an option strategy order.
+Returns the detail of a single order using the brokerage order ID provided as a path parameter.
+
+The V2 order response format includes all legs of the order in the `legs` list field.
+If the order is single legged, `legs` will be a list of one leg.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
-result = snaptrade.options.get_option_strategy(
-  underlying_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  legs: [
-        {
-            "action" => "BUY_TO_OPEN",
-            "option_symbol_id" => "SPY220819P00200000",
-            "quantity" => 1,
-        }
-    ],
-  strategy_type: "CUSTOM",
+result = snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "accountId_example",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### underlying_symbol_id: `String`<a id="underlying_symbol_id-string"></a>
-##### legs: Array<[`OptionLeg`](./lib/snaptrade/models/option_leg.rb)><a id="legs-array"></a>
-##### strategy_type: [`StrategyType`](./lib/snaptrade/models/strategy_type.rb)<a id="strategy_type-strategytypelibsnaptrademodelsstrategy_typerb"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to create the option strategy object in.
-
 #### 🔄 Return<a id="🔄-return"></a>
 
-[StrategyQuotes](./lib/snaptrade/models/strategy_quotes.rb)
+[AccountOrderRecordV2](./lib/snaptrade/models/account_order_record_v2.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/optionStrategy` `POST`
+`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
 ---
 
 
-### `snaptrade.options.get_options_chain`<a id="snaptradeoptionsget_options_chain"></a>
+### `snaptrade.experimental_endpoints.get_user_account_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_orders_v2"></a>
 
-Returns the option chain for the specified symbol in the specified account.
+Returns a list of recent orders in the specified account.
+
+The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
-result = snaptrade.options.get_options_chain(
+result = snaptrade.experimental_endpoints.get_user_account_orders_v2(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "accountId_example",
-  symbol: "symbol_example",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  state: "all",
+  days: 30,
 )
 p result
 ```
@@ -1154,58 +1271,101 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to get the options chain from.
+##### state: `String`<a id="state-string"></a>
+defaults value is set to \"all\"
 
+##### days: `Integer`<a id="days-integer"></a>
+Number of days in the past to fetch the most recent orders. Defaults to the last
+30 days if no value is passed in.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrdersV2Response](./lib/snaptrade/models/account_orders_v2_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/v2` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_recent_orders_v2"></a>
+
+A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
+By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.experimental_endpoints.get_user_account_recent_orders_v2(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  only_executed: true,
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### only_executed: `Boolean`<a id="only_executed-boolean"></a>
+Defaults to true. Indicates if request should fetch only executed orders. Set to
+false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrdersV2Response](./lib/snaptrade/models/account_orders_v2_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders/v2` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.options.get_option_quote`<a id="snaptradeoptionsget_option_quote"></a>
+
+Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+
+OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.options.get_option_quote(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  symbol: "AAPL  251219C00150000",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
 ##### symbol: `String`<a id="symbol-string"></a>
-Universal symbol ID if symbol
+The OCC-formatted option symbol.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OptionChainInner](./lib/snaptrade/models/option_chain_inner.rb)
+[OptionQuote](./lib/snaptrade/models/option_quote.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/optionsChain` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.get_options_strategy_quote`<a id="snaptradeoptionsget_options_strategy_quote"></a>
-
-Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.options.get_options_strategy_quote(
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "accountId_example",
-  option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account the strategy will be placed in.
-
-##### option_strategy_id: `String`<a id="option_strategy_id-string"></a>
-Option strategy id obtained from response when creating option strategy object
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./lib/snaptrade/models/strategy_quotes.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
+`/marketData/options/quotes` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1216,7 +1376,9 @@ Option strategy id obtained from response when creating option strategy object
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1242,66 +1404,6 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.place_option_strategy`<a id="snaptradeoptionsplace_option_strategy"></a>
-
-Places the option strategy order and returns the order record received from the brokerage.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.options.place_option_strategy(
-  order_type: "Market",
-  time_in_force: "Day",
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  price: 31.33,
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
-The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
-field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
-required.
-
-##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
-The Time in Force type for the order. This field indicates how long the order
-will remain active before it is executed or expires. Here are the supported
-values: - `Day` - Day. The order is valid only for the trading day on which it
-is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
-or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
-must be executed immediately. Any portion of the order that cannot be filled
-immediately will be canceled.
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to execute the strategy in.
-
-##### option_strategy_id: `String`<a id="option_strategy_id-string"></a>
-Option strategy id obtained from response when creating option strategy object
-
-##### price: `Float`<a id="price-float"></a>
-Trade Price if limit or stop limit order
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyOrderRecord](./lib/snaptrade/models/strategy_order_record.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1506,6 +1608,38 @@ Comma separated value of brokerage slugs
 ---
 
 
+### `snaptrade.reference_data.list_all_brokerage_instruments`<a id="snaptradereference_datalist_all_brokerage_instruments"></a>
+
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.reference_data.list_all_brokerage_instruments(
+  slug: "QUESTRADE",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### slug: `String`<a id="slug-string"></a>
+A short, unique identifier for the brokerage. It is usually the name of the
+brokerage in capital letters and will never change.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageInstrumentsResponse](./lib/snaptrade/models/brokerage_instruments_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/brokerages/{slug}/instruments` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.reference_data.list_all_brokerages`<a id="snaptradereference_datalist_all_brokerages"></a>
 
 Returns a list of all defined Brokerage objects.
@@ -1620,34 +1754,37 @@ The search query for symbols.
 
 ### `snaptrade.trading.cancel_order`<a id="snaptradetradingcancel_order"></a>
 
-Cancels an order in the specified account.
+Cancels an order in the specified account. Accepts order IDs for all asset types.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
 result = snaptrade.trading.cancel_order(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
+
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OrderUpdatedResponse](./lib/snaptrade/models/order_updated_response.rb)
+[CancelOrderResponse](./lib/snaptrade/models/cancel_order_response.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+`/accounts/{accountId}/trading/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1655,7 +1792,9 @@ p result
 
 
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
+**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
@@ -1663,23 +1802,23 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
 
 ```ruby
 result = snaptrade.trading.cancel_user_account_order(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
 ##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 Order ID returned by brokerage. This is the unique identifier for the order in
 the brokerage system.
 
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
@@ -1723,6 +1862,77 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.get_option_impact(
+  order_type: "MARKET",
+  time_in_force: "Day",
+  legs: [
+        {
+            "instrument" => {
+                "symbol" => "PBI   250718C00006000",
+                "instrument_type" => "OPTION",
+            },
+            "action" => "BUY_TO_OPEN",
+            "units" => 1,
+        }
+    ],
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "",
+  stop_price: "",
+  price_effect: "DEBIT",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: [`MlegOrderTypeStrict`](./lib/snaptrade/models/mleg_order_type_strict.rb)<a id="order_type-mlegordertypestrictlibsnaptrademodelsmleg_order_type_strictrb"></a>
+The type of order to place.
+
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
+
+##### legs: Array<[`MlegLeg`](./lib/snaptrade/models/mleg_leg.rb)><a id="legs-array"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### limit_price: `Float`<a id="limit_price-float"></a>
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `Float`<a id="stop_price-float"></a>
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect: [`MlegPriceEffectStrict`](./lib/snaptrade/models/mleg_price_effect_strict.rb)<a id="price_effect-mlegpriceeffectstrictlibsnaptrademodelsmleg_price_effect_strictrb"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionImpact](./lib/snaptrade/models/option_impact.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options/impact` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1806,7 +2016,16 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+Returns quotes from the brokerage for the specified symbols and account.
+
+The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
+
+**This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**
+
+This endpoint does not work for options quotes.
+
+This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1874,7 +2093,6 @@ result = snaptrade.trading.place_bracket_order(
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  symbol: "AAPL",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -1912,9 +2130,6 @@ The ID of the account to execute the trade on.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
-##### symbol: `String`<a id="symbol-string"></a>
-The security's trading ticker symbol.
-
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.
 
@@ -1932,6 +2147,88 @@ Must be `null` if `notional_value` is provided.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/bracket` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.place_crypto_order`<a id="snaptradetradingplace_crypto_order"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.place_crypto_order(
+  instrument: {
+        "symbol" => "BTC",
+        "type" => "CRYPTOCURRENCY",
+    },
+  side: "BUY",
+  type: "MARKET",
+  time_in_force: "GTC",
+  amount: "123.45",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "123.45",
+  stop_price: "123.45",
+  post_only: false,
+  expiration_date: "2024-01-01T00:00:00Z",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`CryptoTradingInstrument`](./lib/snaptrade/models/crypto_trading_instrument.rb)<a id="instrument-cryptotradinginstrumentlibsnaptrademodelscrypto_trading_instrumentrb"></a>
+##### side: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="side-actionstrictlibsnaptrademodelsaction_strictrb"></a>
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL`.
+
+##### type: [`CryptoOrderFormType`](./lib/snaptrade/models/crypto_order_form_type.rb)<a id="type-cryptoorderformtypelibsnaptrademodelscrypto_order_form_typerb"></a>
+The type of order to place.
+
+##### time_in_force: [`CryptoOrderFormTimeInForce`](./lib/snaptrade/models/crypto_order_form_time_in_force.rb)<a id="time_in_force-cryptoorderformtimeinforcelibsnaptrademodelscrypto_order_form_time_in_forcerb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. - `GTC` - Good Til
+Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
+Kill. The order must be executed in its entirety immediately or be canceled
+completely. - `IOC` - Immediate Or Cancel. The order must be executed
+immediately. Any portion of the order that cannot be filled immediately will be
+canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
+
+##### amount: `Float`<a id="amount-float"></a>
+The amount of the base currency to buy or sell.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### limit_price: `Float`<a id="limit_price-float"></a>
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
+TAKE_PROFIT_LIMIT.
+
+##### stop_price: `Float`<a id="stop_price-float"></a>
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
+TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `Boolean`<a id="post_only-boolean"></a>
+Valid and required only for order type LIMIT. If true orders that would be
+filled immediately are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `Time`<a id="expiration_date-time"></a>
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OrderUpdatedResponse](./lib/snaptrade/models/order_updated_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1958,7 +2255,8 @@ result = snaptrade.trading.place_force_order(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  symbol: "AAPL  131124C00240000",
+  symbol: "AAPL",
+  trading_session: "REGULAR",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -2000,12 +2298,14 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is
 provided, otherwise must be provided.
 
 ##### symbol: `String`<a id="symbol-string"></a>
-The security's trading ticker symbol. This currently supports stock symbols and
-Options symbols in the 21 character OCC format. For example `AAPL
-131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a
-strike price of $240. For more information on the OCC format, see
-[here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is
-provided, then 'universal_symbol_id' must be 'null'.
+The security's trading ticker symbol. If 'symbol' is provided, then
+'universal_symbol_id' must be 'null'.
+
+##### trading_session: [`TradingSession`](./lib/snaptrade/models/trading_session.rb)<a id="trading_session-tradingsessionlibsnaptrademodelstrading_sessionrb"></a>
+The trading session for the order. This field indicates which market session the
+order will be placed in. This is only available for certain brokerages. Defaults
+to REGULAR. Here are the supported values: - `REGULAR` - Regular trading hours.
+- `EXTENDED` - Extended trading hours.
 
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.
@@ -2035,7 +2335,7 @@ contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ### `snaptrade.trading.place_mleg_order`<a id="snaptradetradingplace_mleg_order"></a>
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2089,7 +2389,7 @@ The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 ##### stop_price: `Float`<a id="stop_price-float"></a>
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 
-##### price_effect: [`String`](./lib/snaptrade/models/string.rb)<a id="price_effect-stringlibsnaptrademodelsstringrb"></a>
+##### price_effect: [`MlegPriceEffectStrict`](./lib/snaptrade/models/mleg_price_effect_strict.rb)<a id="price_effect-mlegpriceeffectstrictlibsnaptrademodelsmleg_price_effect_strictrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [MlegOrderResponse](./lib/snaptrade/models/mleg_order_response.rb)
@@ -2149,89 +2449,7 @@ before responding to the request.
 ---
 
 
-### `snaptrade.trading.place_simple_order`<a id="snaptradetradingplace_simple_order"></a>
-
-Places an order in the specified account.
-This endpoint does not compute the impact to the account balance from the order before submitting the order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.trading.place_simple_order(
-  instrument: {
-        "symbol" => "AAPL",
-        "type" => "EQUITY",
-    },
-  side: "BUY",
-  type: "MARKET",
-  time_in_force: "GTC",
-  amount: "123.45",
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  limit_price: "123.45",
-  stop_price: "123.45",
-  post_only: false,
-  expiration_date: "2024-01-01T00:00:00Z",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### instrument: [`TradingInstrument`](./lib/snaptrade/models/trading_instrument.rb)<a id="instrument-tradinginstrumentlibsnaptrademodelstrading_instrumentrb"></a>
-##### side: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="side-actionstrictlibsnaptrademodelsaction_strictrb"></a>
-The action describes the intent or side of a trade. This is either `BUY` or
-`SELL`.
-
-##### type: [`SimpleOrderFormType`](./lib/snaptrade/models/simple_order_form_type.rb)<a id="type-simpleorderformtypelibsnaptrademodelssimple_order_form_typerb"></a>
-The type of order to place.
-
-##### time_in_force: [`SimpleOrderFormTimeInForce`](./lib/snaptrade/models/simple_order_form_time_in_force.rb)<a id="time_in_force-simpleorderformtimeinforcelibsnaptrademodelssimple_order_form_time_in_forcerb"></a>
-The Time in Force type for the order. This field indicates how long the order
-will remain active before it is executed or expires. - `GTC` - Good Til
-Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
-Kill. The order must be executed in its entirety immediately or be canceled
-completely. - `IOC` - Immediate Or Cancel. The order must be executed
-immediately. Any portion of the order that cannot be filled immediately will be
-canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
-
-##### amount: `Float`<a id="amount-float"></a>
-The amount of the base currency to buy or sell.
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-##### limit_price: `Float`<a id="limit_price-float"></a>
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
-TAKE_PROFIT_LIMIT.
-
-##### stop_price: `Float`<a id="stop_price-float"></a>
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
-TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-
-##### post_only: `Boolean`<a id="post_only-boolean"></a>
-Valid and required only for order type LIMIT. If true orders that would be
-filled immediately are rejected to avoid incurring TAKER fees.
-
-##### expiration_date: `Time`<a id="expiration_date-time"></a>
-The expiration date of the order. Required if the time_in_force is GTD.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OrderUpdatedResponse](./lib/snaptrade/models/order_updated_response.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/simple` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.preview_simple_order`<a id="snaptradetradingpreview_simple_order"></a>
+### `snaptrade.trading.preview_crypto_order`<a id="snaptradetradingpreview_crypto_order"></a>
 
 Previews an order using the specified account.
 
@@ -2239,10 +2457,10 @@ Previews an order using the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
-result = snaptrade.trading.preview_simple_order(
+result = snaptrade.trading.preview_crypto_order(
   instrument: {
-        "symbol" => "AAPL",
-        "type" => "EQUITY",
+        "symbol" => "BTC",
+        "type" => "CRYPTOCURRENCY",
     },
   side: "BUY",
   type: "MARKET",
@@ -2261,15 +2479,15 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### instrument: [`TradingInstrument`](./lib/snaptrade/models/trading_instrument.rb)<a id="instrument-tradinginstrumentlibsnaptrademodelstrading_instrumentrb"></a>
+##### instrument: [`CryptoTradingInstrument`](./lib/snaptrade/models/crypto_trading_instrument.rb)<a id="instrument-cryptotradinginstrumentlibsnaptrademodelscrypto_trading_instrumentrb"></a>
 ##### side: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="side-actionstrictlibsnaptrademodelsaction_strictrb"></a>
 The action describes the intent or side of a trade. This is either `BUY` or
 `SELL`.
 
-##### type: [`SimpleOrderFormType`](./lib/snaptrade/models/simple_order_form_type.rb)<a id="type-simpleorderformtypelibsnaptrademodelssimple_order_form_typerb"></a>
+##### type: [`CryptoOrderFormType`](./lib/snaptrade/models/crypto_order_form_type.rb)<a id="type-cryptoorderformtypelibsnaptrademodelscrypto_order_form_typerb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderFormTimeInForce`](./lib/snaptrade/models/simple_order_form_time_in_force.rb)<a id="time_in_force-simpleorderformtimeinforcelibsnaptrademodelssimple_order_form_time_in_forcerb"></a>
+##### time_in_force: [`CryptoOrderFormTimeInForce`](./lib/snaptrade/models/crypto_order_form_time_in_force.rb)<a id="time_in_force-cryptoorderformtimeinforcelibsnaptrademodelscrypto_order_form_time_in_forcerb"></a>
 The Time in Force type for the order. This field indicates how long the order
 will remain active before it is executed or expires. - `GTC` - Good Til
 Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
@@ -2301,11 +2519,11 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[SimpleOrderPreview](./lib/snaptrade/models/simple_order_preview.rb)
+[CryptoOrderPreview](./lib/snaptrade/models/crypto_order_preview.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/preview` `POST`
+`/accounts/{accountId}/trading/crypto/preview` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2323,11 +2541,11 @@ returned in the response going forward. Only supported on some brokerages
 
 ```ruby
 result = snaptrade.trading.replace_order(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   action: "BUY",
   order_type: "Market",
   time_in_force: "Day",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   price: 31.33,
@@ -2339,6 +2557,10 @@ p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
 
 ##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
 The action describes the intent or side of a trade. This is either `BUY` or
@@ -2362,9 +2584,6 @@ immediately will be canceled.
 ##### account_id: `String`<a id="account_id-string"></a>
 The ID of the account to execute the trade on.
 
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-The Brokerage Order ID of the order to replace.
-
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### price: `Float`<a id="price-float"></a>
@@ -2383,7 +2602,45 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
+`/accounts/{accountId}/trading/replace` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.search_cryptocurrency_pair_instruments`<a id="snaptradetradingsearch_cryptocurrency_pair_instruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.search_cryptocurrency_pair_instruments(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  base: "BTC",
+  quote: "USD",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### base: `String`<a id="base-string"></a>
+##### quote: `String`<a id="quote-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingSearchCryptocurrencyPairInstruments200Response](./lib/snaptrade/models/trading_search_cryptocurrency_pair_instruments200_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

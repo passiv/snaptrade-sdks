@@ -30,45 +30,45 @@ type TradingApiCancelOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	brokerageOrderId string
+	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
 }
 
-func (r TradingApiCancelOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
+func (r TradingApiCancelOrderRequest) Execute() (*CancelOrderResponse, *http.Response, error) {
 	return r.ApiService.CancelOrderExecute(r)
 }
 
 /*
-CancelOrder Cancel an order.
+CancelOrder Cancel order
 
-Cancels an order in the specified account.
+Cancels an order in the specified account. Accepts order IDs for all asset types.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
  @param accountId
- @param brokerageOrderId
+ @param accountInformationGetUserAccountOrderDetailRequest
  @return TradingApiCancelOrderRequest
 */
-func (a *TradingApiService) CancelOrder(userId string, userSecret string, accountId string, brokerageOrderId string) TradingApiCancelOrderRequest {
+func (a *TradingApiService) CancelOrder(userId string, userSecret string, accountId string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) TradingApiCancelOrderRequest {
 	return TradingApiCancelOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		brokerageOrderId: brokerageOrderId,
+		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
 	}
 }
 
 // Execute executes the request
-//  @return OrderUpdatedResponse
-func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (*OrderUpdatedResponse, *http.Response, error) {
+//  @return CancelOrderResponse
+func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (*CancelOrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrderUpdatedResponse
+		localVarReturnValue  *CancelOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.CancelOrder")
@@ -76,13 +76,12 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel"
+    subpath := "/accounts/{accountId}/trading/cancel"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"brokerageOrderId"+"}", url.PathEscape(parameterToString(r.brokerageOrderId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -91,7 +90,7 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -107,6 +106,10 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
+        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -205,7 +208,7 @@ type TradingApiCancelUserAccountOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest
+	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
 }
 
 func (r TradingApiCancelUserAccountOrderRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
@@ -213,8 +216,9 @@ func (r TradingApiCancelUserAccountOrderRequest) Execute() (*AccountOrderRecord,
 }
 
 /*
-CancelUserAccountOrder Cancel order
+CancelUserAccountOrder Cancel equity order
 
+**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
@@ -222,22 +226,25 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
  @param userId
  @param userSecret
  @param accountId
- @param tradingCancelUserAccountOrderRequest
+ @param accountInformationGetUserAccountOrderDetailRequest
  @return TradingApiCancelUserAccountOrderRequest
+
+Deprecated
 */
-func (a *TradingApiService) CancelUserAccountOrder(userId string, userSecret string, accountId string, tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest) TradingApiCancelUserAccountOrderRequest {
+func (a *TradingApiService) CancelUserAccountOrder(userId string, userSecret string, accountId string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) TradingApiCancelUserAccountOrderRequest {
 	return TradingApiCancelUserAccountOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		tradingCancelUserAccountOrderRequest: tradingCancelUserAccountOrderRequest,
+		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
 	}
 }
 
 // Execute executes the request
 //  @return AccountOrderRecord
+// Deprecated
 func (a *TradingApiService) CancelUserAccountOrderExecute(r TradingApiCancelUserAccountOrderRequest) (*AccountOrderRecord, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -282,8 +289,8 @@ func (a *TradingApiService) CancelUserAccountOrderExecute(r TradingApiCancelUser
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradingCancelUserAccountOrderRequest) {
-        localVarPostBody = r.tradingCancelUserAccountOrderRequest
+    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
+        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
     }
 	if r.ctx != nil {
 		// API Key Authentication
@@ -401,7 +408,7 @@ func (r TradingApiGetCryptocurrencyPairQuoteRequest) Execute() (*CryptocurrencyP
 }
 
 /*
-GetCryptocurrencyPairQuote Get cryptocurrency pair quote
+GetCryptocurrencyPairQuote Get crypto pair quote
 
 Gets a quote for the specified account.
 
@@ -562,6 +569,196 @@ func (a *TradingApiService) GetCryptocurrencyPairQuoteExecute(r TradingApiGetCry
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type TradingApiGetOptionImpactRequest struct {
+	ctx context.Context
+	ApiService *TradingApiService
+	userId string
+	userSecret string
+	accountId string
+	mlegTradeForm MlegTradeForm
+}
+
+func (r TradingApiGetOptionImpactRequest) Execute() (*OptionImpact, *http.Response, error) {
+	return r.ApiService.GetOptionImpactExecute(r)
+}
+
+/*
+GetOptionImpact Get option order impact
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId
+ @param userSecret
+ @param accountId
+ @param mlegTradeForm
+ @return TradingApiGetOptionImpactRequest
+*/
+func (a *TradingApiService) GetOptionImpact(userId string, userSecret string, accountId string, mlegTradeForm MlegTradeForm) TradingApiGetOptionImpactRequest {
+	return TradingApiGetOptionImpactRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		userId: userId,
+		userSecret: userSecret,
+		accountId: accountId,
+		mlegTradeForm: mlegTradeForm,
+	}
+}
+
+// Execute executes the request
+//  @return OptionImpact
+func (a *TradingApiService) GetOptionImpactExecute(r TradingApiGetOptionImpactRequest) (*OptionImpact, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OptionImpact
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.GetOptionImpact")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/trading/options/impact"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+    if !checkNilInterface(r.mlegTradeForm) {
+        localVarPostBody = r.mlegTradeForm
+    }
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Model403FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type TradingApiGetOrderImpactRequest struct {
 	ctx context.Context
 	ApiService *TradingApiService
@@ -575,7 +772,7 @@ func (r TradingApiGetOrderImpactRequest) Execute() (*ManualTradeAndImpact, *http
 }
 
 /*
-GetOrderImpact Check order impact
+GetOrderImpact Check equity order impact
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
@@ -767,9 +964,18 @@ func (r TradingApiGetUserAccountQuotesRequest) Execute() ([]SymbolsQuotesInner, 
 }
 
 /*
-GetUserAccountQuotes Get symbol quotes
+GetUserAccountQuotes Get equity symbol quotes
 
-Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+Returns quotes from the brokerage for the specified symbols and account.
+
+The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
+
+**This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**
+
+This endpoint does not work for options quotes.
+
+This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -943,7 +1149,7 @@ func (r TradingApiPlaceBracketOrderRequest) Execute() (*AccountOrderRecord, *htt
 }
 
 /*
-PlaceBracketOrder Place a Bracket Order
+PlaceBracketOrder Place bracket order
 
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
 use. Only supported on certain brokerages
@@ -1119,6 +1325,185 @@ func (a *TradingApiService) PlaceBracketOrderExecute(r TradingApiPlaceBracketOrd
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type TradingApiPlaceCryptoOrderRequest struct {
+	ctx context.Context
+	ApiService *TradingApiService
+	userId string
+	userSecret string
+	accountId string
+	cryptoOrderForm CryptoOrderForm
+}
+
+func (r TradingApiPlaceCryptoOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
+	return r.ApiService.PlaceCryptoOrderExecute(r)
+}
+
+/*
+PlaceCryptoOrder Place crypto order
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId
+ @param userSecret
+ @param accountId
+ @param cryptoOrderForm
+ @return TradingApiPlaceCryptoOrderRequest
+*/
+func (a *TradingApiService) PlaceCryptoOrder(userId string, userSecret string, accountId string, cryptoOrderForm CryptoOrderForm) TradingApiPlaceCryptoOrderRequest {
+	return TradingApiPlaceCryptoOrderRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		userId: userId,
+		userSecret: userSecret,
+		accountId: accountId,
+		cryptoOrderForm: cryptoOrderForm,
+	}
+}
+
+// Execute executes the request
+//  @return OrderUpdatedResponse
+func (a *TradingApiService) PlaceCryptoOrderExecute(r TradingApiPlaceCryptoOrderRequest) (*OrderUpdatedResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrderUpdatedResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.PlaceCryptoOrder")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/trading/crypto"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+    if !checkNilInterface(r.cryptoOrderForm) {
+        localVarPostBody = r.cryptoOrderForm
+    }
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type TradingApiPlaceForceOrderRequest struct {
 	ctx context.Context
 	ApiService *TradingApiService
@@ -1132,7 +1517,7 @@ func (r TradingApiPlaceForceOrderRequest) Execute() (*AccountOrderRecord, *http.
 }
 
 /*
-PlaceForceOrder Place order
+PlaceForceOrder Place equity order
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
 
@@ -1322,9 +1707,9 @@ func (r TradingApiPlaceMlegOrderRequest) Execute() (*MlegOrderResponse, *http.Re
 }
 
 /*
-PlaceMlegOrder Place multi-leg option order
+PlaceMlegOrder Place option order
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1505,7 +1890,7 @@ func (r TradingApiPlaceOrderRequest) Execute() (*AccountOrderRecord, *http.Respo
 }
 
 /*
-PlaceOrder Place checked order
+PlaceOrder Place checked equity order
 
 Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
@@ -1669,200 +2054,21 @@ func (a *TradingApiService) PlaceOrderExecute(r TradingApiPlaceOrderRequest) (*A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type TradingApiPlaceSimpleOrderRequest struct {
+type TradingApiPreviewCryptoOrderRequest struct {
 	ctx context.Context
 	ApiService *TradingApiService
 	userId string
 	userSecret string
 	accountId string
-	simpleOrderForm SimpleOrderForm
+	cryptoOrderForm CryptoOrderForm
 }
 
-func (r TradingApiPlaceSimpleOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
-	return r.ApiService.PlaceSimpleOrderExecute(r)
-}
-
-/*
-PlaceSimpleOrder Place order
-
-Places an order in the specified account.
-This endpoint does not compute the impact to the account balance from the order before submitting the order.
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param userId
- @param userSecret
- @param accountId
- @param simpleOrderForm
- @return TradingApiPlaceSimpleOrderRequest
-*/
-func (a *TradingApiService) PlaceSimpleOrder(userId string, userSecret string, accountId string, simpleOrderForm SimpleOrderForm) TradingApiPlaceSimpleOrderRequest {
-	return TradingApiPlaceSimpleOrderRequest{
-		ApiService: a,
-		ctx: a.client.cfg.Context,
-		userId: userId,
-		userSecret: userSecret,
-		accountId: accountId,
-		simpleOrderForm: simpleOrderForm,
-	}
-}
-
-// Execute executes the request
-//  @return OrderUpdatedResponse
-func (a *TradingApiService) PlaceSimpleOrderExecute(r TradingApiPlaceSimpleOrderRequest) (*OrderUpdatedResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrderUpdatedResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.PlaceSimpleOrder")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-    subpath := "/accounts/{accountId}/trading/simple"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
-	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-    if !checkNilInterface(r.simpleOrderForm) {
-        localVarPostBody = r.simpleOrderForm
-    }
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["PartnerClientId"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarQueryParams.Add("clientId", key)
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["PartnerSignature"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Signature"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["PartnerTimestamp"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarQueryParams.Add("timestamp", key)
-			}
-		}
-	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400FailedRequestResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type TradingApiPreviewSimpleOrderRequest struct {
-	ctx context.Context
-	ApiService *TradingApiService
-	userId string
-	userSecret string
-	accountId string
-	simpleOrderForm SimpleOrderForm
-}
-
-func (r TradingApiPreviewSimpleOrderRequest) Execute() (*SimpleOrderPreview, *http.Response, error) {
-	return r.ApiService.PreviewSimpleOrderExecute(r)
+func (r TradingApiPreviewCryptoOrderRequest) Execute() (*CryptoOrderPreview, *http.Response, error) {
+	return r.ApiService.PreviewCryptoOrderExecute(r)
 }
 
 /*
-PreviewSimpleOrder Preview order
+PreviewCryptoOrder Preview crypto order
 
 Previews an order using the specified account.
 
@@ -1871,36 +2077,36 @@ Previews an order using the specified account.
  @param userId
  @param userSecret
  @param accountId
- @param simpleOrderForm
- @return TradingApiPreviewSimpleOrderRequest
+ @param cryptoOrderForm
+ @return TradingApiPreviewCryptoOrderRequest
 */
-func (a *TradingApiService) PreviewSimpleOrder(userId string, userSecret string, accountId string, simpleOrderForm SimpleOrderForm) TradingApiPreviewSimpleOrderRequest {
-	return TradingApiPreviewSimpleOrderRequest{
+func (a *TradingApiService) PreviewCryptoOrder(userId string, userSecret string, accountId string, cryptoOrderForm CryptoOrderForm) TradingApiPreviewCryptoOrderRequest {
+	return TradingApiPreviewCryptoOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		simpleOrderForm: simpleOrderForm,
+		cryptoOrderForm: cryptoOrderForm,
 	}
 }
 
 // Execute executes the request
-//  @return SimpleOrderPreview
-func (a *TradingApiService) PreviewSimpleOrderExecute(r TradingApiPreviewSimpleOrderRequest) (*SimpleOrderPreview, *http.Response, error) {
+//  @return CryptoOrderPreview
+func (a *TradingApiService) PreviewCryptoOrderExecute(r TradingApiPreviewCryptoOrderRequest) (*CryptoOrderPreview, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SimpleOrderPreview
+		localVarReturnValue  *CryptoOrderPreview
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.PreviewSimpleOrder")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.PreviewCryptoOrder")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/trading/simple/preview"
+    subpath := "/accounts/{accountId}/trading/crypto/preview"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
@@ -1931,8 +2137,8 @@ func (a *TradingApiService) PreviewSimpleOrderExecute(r TradingApiPreviewSimpleO
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.simpleOrderForm) {
-        localVarPostBody = r.simpleOrderForm
+    if !checkNilInterface(r.cryptoOrderForm) {
+        localVarPostBody = r.cryptoOrderForm
     }
 	if r.ctx != nil {
 		// API Key Authentication
@@ -2030,7 +2236,6 @@ type TradingApiReplaceOrderRequest struct {
 	ctx context.Context
 	ApiService *TradingApiService
 	accountId string
-	brokerageOrderId string
 	userId string
 	userSecret string
 	manualTradeReplaceForm ManualTradeReplaceForm
@@ -2041,7 +2246,7 @@ func (r TradingApiReplaceOrderRequest) Execute() (*AccountOrderRecord, *http.Res
 }
 
 /*
-ReplaceOrder Replaces an order with a new one
+ReplaceOrder Replace order
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
 the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
@@ -2050,18 +2255,16 @@ returned in the response going forward. Only supported on some brokerages
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId The ID of the account to execute the trade on.
- @param brokerageOrderId The Brokerage Order ID of the order to replace.
  @param userId
  @param userSecret
  @param manualTradeReplaceForm
  @return TradingApiReplaceOrderRequest
 */
-func (a *TradingApiService) ReplaceOrder(accountId string, brokerageOrderId string, userId string, userSecret string, manualTradeReplaceForm ManualTradeReplaceForm) TradingApiReplaceOrderRequest {
+func (a *TradingApiService) ReplaceOrder(accountId string, userId string, userSecret string, manualTradeReplaceForm ManualTradeReplaceForm) TradingApiReplaceOrderRequest {
 	return TradingApiReplaceOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		accountId: accountId,
-		brokerageOrderId: brokerageOrderId,
 		userId: userId,
 		userSecret: userSecret,
 		manualTradeReplaceForm: manualTradeReplaceForm,
@@ -2072,7 +2275,7 @@ func (a *TradingApiService) ReplaceOrder(accountId string, brokerageOrderId stri
 //  @return AccountOrderRecord
 func (a *TradingApiService) ReplaceOrderExecute(r TradingApiReplaceOrderRequest) (*AccountOrderRecord, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *AccountOrderRecord
@@ -2083,13 +2286,12 @@ func (a *TradingApiService) ReplaceOrderExecute(r TradingApiReplaceOrderRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace"
+    subpath := "/accounts/{accountId}/trading/replace"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"brokerageOrderId"+"}", url.PathEscape(parameterToString(r.brokerageOrderId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2197,6 +2399,195 @@ func (a *TradingApiService) ReplaceOrderExecute(r TradingApiReplaceOrderRequest)
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Model403FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type TradingApiSearchCryptocurrencyPairInstrumentsRequest struct {
+	ctx context.Context
+	ApiService *TradingApiService
+	userId string
+	userSecret string
+	accountId string
+	base *string
+	quote *string
+}
+
+func (r *TradingApiSearchCryptocurrencyPairInstrumentsRequest) Base(base string) *TradingApiSearchCryptocurrencyPairInstrumentsRequest {
+	r.base = &base
+	return r
+}
+
+func (r *TradingApiSearchCryptocurrencyPairInstrumentsRequest) Quote(quote string) *TradingApiSearchCryptocurrencyPairInstrumentsRequest {
+	r.quote = &quote
+	return r
+}
+
+func (r TradingApiSearchCryptocurrencyPairInstrumentsRequest) Execute() (*TradingSearchCryptocurrencyPairInstruments200Response, *http.Response, error) {
+	return r.ApiService.SearchCryptocurrencyPairInstrumentsExecute(r)
+}
+
+/*
+SearchCryptocurrencyPairInstruments Get crypto pairs
+
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId
+ @param userSecret
+ @param accountId
+ @return TradingApiSearchCryptocurrencyPairInstrumentsRequest
+*/
+func (a *TradingApiService) SearchCryptocurrencyPairInstruments(userId string, userSecret string, accountId string) TradingApiSearchCryptocurrencyPairInstrumentsRequest {
+	return TradingApiSearchCryptocurrencyPairInstrumentsRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		userId: userId,
+		userSecret: userSecret,
+		accountId: accountId,
+	}
+}
+
+// Execute executes the request
+//  @return TradingSearchCryptocurrencyPairInstruments200Response
+func (a *TradingApiService) SearchCryptocurrencyPairInstrumentsExecute(r TradingApiSearchCryptocurrencyPairInstrumentsRequest) (*TradingSearchCryptocurrencyPairInstruments200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TradingSearchCryptocurrencyPairInstruments200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.SearchCryptocurrencyPairInstruments")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	if r.base != nil {
+		localVarQueryParams.Add("base", parameterToString(*r.base, ""))
+	}
+	if r.quote != nil {
+		localVarQueryParams.Add("quote", parameterToString(*r.quote, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

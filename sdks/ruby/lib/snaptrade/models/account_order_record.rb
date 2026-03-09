@@ -16,7 +16,7 @@ module SnapTrade
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
 
-    # Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
+    # Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
     attr_accessor :status
 
     attr_accessor :universal_symbol
@@ -117,10 +117,10 @@ module SnapTrade
         :'quote_universal_symbol' => :'AccountOrderRecordQuoteUniversalSymbol',
         :'quote_currency' => :'AccountOrderRecordQuoteCurrency',
         :'action' => :'String',
-        :'total_quantity' => :'Float',
-        :'open_quantity' => :'Float',
-        :'canceled_quantity' => :'Float',
-        :'filled_quantity' => :'Float',
+        :'total_quantity' => :'String',
+        :'open_quantity' => :'String',
+        :'canceled_quantity' => :'String',
+        :'filled_quantity' => :'String',
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',

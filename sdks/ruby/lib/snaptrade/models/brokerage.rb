@@ -43,6 +43,9 @@ module SnapTrade
     # Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
     attr_accessor :maintenance_mode
 
+    # Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+    attr_accessor :is_degraded
+
     # Whether the brokerage allows trading through SnapTrade.
     attr_accessor :allows_trading
 
@@ -76,6 +79,7 @@ module SnapTrade
         :'url' => :'url',
         :'enabled' => :'enabled',
         :'maintenance_mode' => :'maintenance_mode',
+        :'is_degraded' => :'is_degraded',
         :'allows_trading' => :'allows_trading',
         :'allows_fractional_units' => :'allows_fractional_units',
         :'has_reporting' => :'has_reporting',
@@ -104,6 +108,7 @@ module SnapTrade
         :'url' => :'String',
         :'enabled' => :'Boolean',
         :'maintenance_mode' => :'Boolean',
+        :'is_degraded' => :'Boolean',
         :'allows_trading' => :'Boolean',
         :'allows_fractional_units' => :'Boolean',
         :'has_reporting' => :'Boolean',
@@ -180,6 +185,10 @@ module SnapTrade
         self.maintenance_mode = attributes[:'maintenance_mode']
       end
 
+      if attributes.key?(:'is_degraded')
+        self.is_degraded = attributes[:'is_degraded']
+      end
+
       if attributes.key?(:'allows_trading')
         self.allows_trading = attributes[:'allows_trading']
       end
@@ -239,6 +248,7 @@ module SnapTrade
           url == o.url &&
           enabled == o.enabled &&
           maintenance_mode == o.maintenance_mode &&
+          is_degraded == o.is_degraded &&
           allows_trading == o.allows_trading &&
           allows_fractional_units == o.allows_fractional_units &&
           has_reporting == o.has_reporting &&
@@ -257,7 +267,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, slug, name, display_name, description, aws_s3_logo_url, aws_s3_square_logo_url, url, enabled, maintenance_mode, allows_trading, allows_fractional_units, has_reporting, is_real_time_connection, brokerage_type, exchanges, open_url].hash
+      [id, slug, name, display_name, description, aws_s3_logo_url, aws_s3_square_logo_url, url, enabled, maintenance_mode, is_degraded, allows_trading, allows_fractional_units, has_reporting, is_real_time_connection, brokerage_type, exchanges, open_url].hash
     end
 
     # Builds the object from hash

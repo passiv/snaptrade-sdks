@@ -43,8 +43,20 @@ class RequiredAccount(TypedDict):
 
     balance: AccountBalance
 
+    # Indicates whether the account is a paper (simulated) trading account.
+    is_paper: bool
+
 
 class OptionalAccount(TypedDict, total=False):
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    institution_account_id: typing.Optional[str]
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+    funding_date: typing.Optional[datetime]
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+    opening_date: typing.Optional[datetime]
+
     # The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
     status: typing.Optional[str]
 
@@ -55,7 +67,7 @@ class OptionalAccount(TypedDict, total=False):
     meta: AccountMeta
 
     # WARNING: This property is deprecated
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
     portfolio_group: str
 
     # WARNING: This property is deprecated

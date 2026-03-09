@@ -4,6 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**deleteConnection**](ConnectionsApi.md#deleteConnection) | **DELETE** /connection/{connectionId} | Delete connection |
 | [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get connection detail |
 | [**disableBrokerageAuthorization**](ConnectionsApi.md#disableBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all connections |
@@ -12,6 +13,107 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**returnRates**](ConnectionsApi.md#returnRates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user |
 
+
+<a name="deleteConnection"></a>
+# **deleteConnection**
+> DeleteConnectionConfirmation deleteConnection(connectionId, userId, userSecret).execute();
+
+Delete connection
+
+Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    UUID connectionId = UUID.randomUUID();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    try {
+      DeleteConnectionConfirmation result = client
+              .connections
+              .deleteConnection(connectionId, userId, userSecret)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getDetail());
+      System.out.println(result.getConnectionId());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#deleteConnection");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<DeleteConnectionConfirmation> response = client
+              .connections
+              .deleteConnection(connectionId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#deleteConnection");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **connectionId** | **UUID**|  | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+[**DeleteConnectionConfirmation**](DeleteConnectionConfirmation.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
+| **0** | Unexpected error |  -  |
 
 <a name="detailBrokerageAuthorization"></a>
 # **detailBrokerageAuthorization**
@@ -23,14 +125,14 @@ Returns a single connection for the specified ID.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -130,14 +232,14 @@ Manually force the specified connection to become disabled. This should only be 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -227,14 +329,14 @@ Returns a list of all connections for the specified user. Note that &#x60;Connec
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -318,18 +420,18 @@ public class Example {
 
 Refresh holdings for a connection
 
-Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -415,18 +517,18 @@ public class Example {
 
 Delete connection
 
-Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -512,14 +614,14 @@ Returns a list of rate of return percents for a given connection. Will include t
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -609,14 +711,14 @@ Returns a list of session events associated with a user.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.ConnectionsApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

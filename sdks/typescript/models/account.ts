@@ -46,6 +46,12 @@ export interface Account {
      */
     'number': string;
     /**
+     * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     * @type {string}
+     * @memberof Account
+     */
+    'institution_account_id'?: string | null;
+    /**
      * The name of the brokerage that holds the account.
      * @type {string}
      * @memberof Account
@@ -57,6 +63,18 @@ export interface Account {
      * @memberof Account
      */
     'created_date': string;
+    /**
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+     * @type {string}
+     * @memberof Account
+     */
+    'funding_date'?: string | null;
+    /**
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+     * @type {string}
+     * @memberof Account
+     */
+    'opening_date'?: string | null;
     /**
      * 
      * @type {AccountSyncStatus}
@@ -89,7 +107,7 @@ export interface Account {
      */
     'meta'?: { [key: string]: any; };
     /**
-     * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+     * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
      * @type {string}
      * @memberof Account
      * @deprecated
@@ -102,8 +120,14 @@ export interface Account {
      * @deprecated
      */
     'cash_restrictions'?: Array<string>;
+    /**
+     * Indicates whether the account is a paper (simulated) trading account.
+     * @type {boolean}
+     * @memberof Account
+     */
+    'is_paper': boolean;
 }
 
-type AccountStatusEnum = 'open' | 'closed' | 'archived'
+type AccountStatusEnum = 'open' | 'closed' | 'archived' | 'unavailable'
 
 

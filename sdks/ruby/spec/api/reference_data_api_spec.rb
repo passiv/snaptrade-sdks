@@ -108,6 +108,18 @@ describe 'ReferenceDataApi' do
     end
   end
 
+  # unit tests for list_all_brokerage_instruments
+  # Get brokerage instruments
+  # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+  # @param slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+  # @param [Hash] opts the optional parameters
+  # @return [BrokerageInstrumentsResponse]
+  describe 'list_all_brokerage_instruments test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for list_all_brokerages
   # Get brokerages
   # Returns a list of all defined Brokerage objects.

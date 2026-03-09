@@ -37,9 +37,6 @@ class RequiredManualTradeFormBracket(TypedDict):
 
 
 class OptionalManualTradeFormBracket(TypedDict, total=False):
-    # The security's trading ticker symbol.
-    symbol: str
-
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]
 

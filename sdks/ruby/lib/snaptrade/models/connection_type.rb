@@ -14,9 +14,10 @@ module SnapTrade
   class ConnectionType
     READ = "read".freeze
     TRADE = "trade".freeze
+    TRADE_IF_AVAILABLE = "trade-if-available".freeze
 
     def self.all_vars
-      @all_vars ||= [READ, TRADE].freeze
+      @all_vars ||= [READ, TRADE, TRADE_IF_AVAILABLE].freeze
     end
 
     # Builds the enum from string

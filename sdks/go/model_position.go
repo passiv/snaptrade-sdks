@@ -29,6 +29,11 @@ type Position struct {
 	// Deprecated, use the `units` field for both fractional and integer units going forward
 	// Deprecated
 	FractionalUnits NullableFloat32 `json:"fractional_units,omitempty"`
+	Currency *PositionCurrency `json:"currency,omitempty"`
+	// If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+	CashEquivalent NullableBool `json:"cash_equivalent,omitempty"`
+	// List of tax lots for the given position (disabled by default, contact support if needed)
+	TaxLots []TaxLot `json:"tax_lots,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -296,6 +301,112 @@ func (o *Position) UnsetFractionalUnits() {
 	o.FractionalUnits.Unset()
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *Position) GetCurrency() PositionCurrency {
+	if o == nil || isNil(o.Currency) {
+		var ret PositionCurrency
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Position) GetCurrencyOk() (*PositionCurrency, bool) {
+	if o == nil || isNil(o.Currency) {
+    return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *Position) HasCurrency() bool {
+	if o != nil && !isNil(o.Currency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given PositionCurrency and assigns it to the Currency field.
+func (o *Position) SetCurrency(v PositionCurrency) {
+	o.Currency = &v
+}
+
+// GetCashEquivalent returns the CashEquivalent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Position) GetCashEquivalent() bool {
+	if o == nil || isNil(o.CashEquivalent.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CashEquivalent.Get()
+}
+
+// GetCashEquivalentOk returns a tuple with the CashEquivalent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Position) GetCashEquivalentOk() (*bool, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.CashEquivalent.Get(), o.CashEquivalent.IsSet()
+}
+
+// HasCashEquivalent returns a boolean if a field has been set.
+func (o *Position) HasCashEquivalent() bool {
+	if o != nil && o.CashEquivalent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCashEquivalent gets a reference to the given NullableBool and assigns it to the CashEquivalent field.
+func (o *Position) SetCashEquivalent(v bool) {
+	o.CashEquivalent.Set(&v)
+}
+// SetCashEquivalentNil sets the value for CashEquivalent to be an explicit nil
+func (o *Position) SetCashEquivalentNil() {
+	o.CashEquivalent.Set(nil)
+}
+
+// UnsetCashEquivalent ensures that no value is present for CashEquivalent, not even an explicit nil
+func (o *Position) UnsetCashEquivalent() {
+	o.CashEquivalent.Unset()
+}
+
+// GetTaxLots returns the TaxLots field value if set, zero value otherwise.
+func (o *Position) GetTaxLots() []TaxLot {
+	if o == nil || isNil(o.TaxLots) {
+		var ret []TaxLot
+		return ret
+	}
+	return o.TaxLots
+}
+
+// GetTaxLotsOk returns a tuple with the TaxLots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Position) GetTaxLotsOk() ([]TaxLot, bool) {
+	if o == nil || isNil(o.TaxLots) {
+    return nil, false
+	}
+	return o.TaxLots, true
+}
+
+// HasTaxLots returns a boolean if a field has been set.
+func (o *Position) HasTaxLots() bool {
+	if o != nil && !isNil(o.TaxLots) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxLots gets a reference to the given []TaxLot and assigns it to the TaxLots field.
+func (o *Position) SetTaxLots(v []TaxLot) {
+	o.TaxLots = v
+}
+
 func (o Position) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -315,6 +426,15 @@ func (o Position) MarshalJSON() ([]byte, error) {
 	}
 	if o.FractionalUnits.IsSet() {
 		toSerialize["fractional_units"] = o.FractionalUnits.Get()
+	}
+	if !isNil(o.Currency) {
+		toSerialize["currency"] = o.Currency
+	}
+	if o.CashEquivalent.IsSet() {
+		toSerialize["cash_equivalent"] = o.CashEquivalent.Get()
+	}
+	if !isNil(o.TaxLots) {
+		toSerialize["tax_lots"] = o.TaxLots
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -340,6 +460,9 @@ func (o *Position) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "open_pnl")
 		delete(additionalProperties, "average_purchase_price")
 		delete(additionalProperties, "fractional_units")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "cash_equivalent")
+		delete(additionalProperties, "tax_lots")
 		o.AdditionalProperties = additionalProperties
 	}
 

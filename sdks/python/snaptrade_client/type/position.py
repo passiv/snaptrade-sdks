@@ -15,7 +15,9 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.position_symbol import PositionSymbol
+from snaptrade_client.type.tax_lot import TaxLot
 
 class RequiredPosition(TypedDict):
     pass
@@ -38,6 +40,15 @@ class OptionalPosition(TypedDict, total=False):
     # WARNING: This property is deprecated
     # Deprecated, use the `units` field for both fractional and integer units going forward
     fractional_units: typing.Optional[typing.Union[int, float]]
+
+    # The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position. 
+    currency: Currency
+
+    # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+    cash_equivalent: typing.Optional[bool]
+
+    # List of tax lots for the given position (disabled by default, contact support if needed)
+    tax_lots: typing.List[TaxLot]
 
 class Position(RequiredPosition, OptionalPosition):
     pass

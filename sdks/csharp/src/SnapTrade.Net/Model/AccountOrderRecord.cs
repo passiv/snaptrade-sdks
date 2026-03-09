@@ -63,7 +63,7 @@ namespace SnapTrade.Net.Model
         /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
         /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="childBrokerageOrderIds">childBrokerageOrderIds.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -133,28 +133,28 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "total_quantity", EmitDefaultValue = true)]
-        public double? TotalQuantity { get; set; }
+        public string TotalQuantity { get; set; }
 
         /// <summary>
         /// The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
         /// </summary>
         /// <value>The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "open_quantity", EmitDefaultValue = true)]
-        public double? OpenQuantity { get; set; }
+        public string OpenQuantity { get; set; }
 
         /// <summary>
         /// The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
         /// </summary>
         /// <value>The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "canceled_quantity", EmitDefaultValue = true)]
-        public double? CanceledQuantity { get; set; }
+        public string CanceledQuantity { get; set; }
 
         /// <summary>
         /// The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
         /// </summary>
         /// <value>The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "filled_quantity", EmitDefaultValue = true)]
-        public double? FilledQuantity { get; set; }
+        public string FilledQuantity { get; set; }
 
         /// <summary>
         /// The price at which the order was executed.

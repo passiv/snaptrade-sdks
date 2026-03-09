@@ -21,6 +21,9 @@ from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.units_nullable import UnitsNullable
 
 class RequiredManualTradeReplaceForm(TypedDict):
+    # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    brokerage_order_id: str
+
     action: ActionStrict
 
     order_type: OrderTypeStrict

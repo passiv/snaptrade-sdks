@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **Symbol** | Pointer to [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **Id** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
 **Description** | Pointer to **string** | This field is deprecated and the caller should use the &#x60;symbol&#x60; child property&#39;s &#x60;description&#x60; instead. | [optional] 
-**LocalId** | Pointer to **NullableString** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
-**IsQuotable** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
-**IsTradable** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
+**LocalId** | Pointer to **NullableString** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this. | [optional] 
+**IsQuotable** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this. | [optional] 
+**IsTradable** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this. | [optional] 
 
 ## Methods
 

@@ -21,14 +21,14 @@ Deletes a registered user and all associated data. This action is irreversible. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AuthenticationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AuthenticationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -117,14 +117,14 @@ Returns a list of all registered user IDs. Please note that the response is not 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AuthenticationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AuthenticationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -204,14 +204,14 @@ Authenticates a SnapTrade user and returns the Connection Portal URL used for co
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AuthenticationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AuthenticationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -226,11 +226,13 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+    String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
     Boolean immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-    String connectionType = "read"; // Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+    String connectionType = "read"; // Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
+    Boolean showCloseButton = true; // Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+    Boolean darkMode = true; // Enable dark mode for the connection portal. Defaults to false.
     String connectionPortalVersion = "v4"; // Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     try {
       Object result = client
@@ -241,6 +243,8 @@ public class Example {
               .customRedirect(customRedirect)
               .reconnect(reconnect)
               .connectionType(connectionType)
+              .showCloseButton(showCloseButton)
+              .darkMode(darkMode)
               .connectionPortalVersion(connectionPortalVersion)
               .execute();
     } catch (ApiException e) {
@@ -261,6 +265,8 @@ public class Example {
               .customRedirect(customRedirect)
               .reconnect(reconnect)
               .connectionType(connectionType)
+              .showCloseButton(showCloseButton)
+              .darkMode(darkMode)
               .connectionPortalVersion(connectionPortalVersion)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -317,14 +323,14 @@ Registers a new SnapTrade user under your Client ID. A user secret will be autom
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AuthenticationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AuthenticationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -411,14 +417,14 @@ Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AuthenticationApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AuthenticationApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

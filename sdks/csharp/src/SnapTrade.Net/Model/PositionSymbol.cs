@@ -38,9 +38,9 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">symbol.</param>
         /// <param name="id">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="description">This field is deprecated and the caller should use the &#x60;symbol&#x60; child property&#39;s &#x60;description&#x60; instead..</param>
-        /// <param name="localId">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
-        /// <param name="isQuotable">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
-        /// <param name="isTradable">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
+        /// <param name="localId">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this..</param>
+        /// <param name="isQuotable">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this..</param>
+        /// <param name="isTradable">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this..</param>
         public PositionSymbol(UniversalSymbol symbol = default(UniversalSymbol), string id = default(string), string description = default(string), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
         {
             this.Symbol = symbol;
@@ -75,25 +75,25 @@ namespace SnapTrade.Net.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
         /// </summary>
-        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.</value>
+        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.</value>
         [DataMember(Name = "local_id", EmitDefaultValue = true)]
         [Obsolete]
         public string LocalId { get; set; }
 
         /// <summary>
-        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
         /// </summary>
-        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.</value>
+        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.</value>
         [DataMember(Name = "is_quotable", EmitDefaultValue = true)]
         [Obsolete]
         public bool IsQuotable { get; set; }
 
         /// <summary>
-        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
         /// </summary>
-        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.</value>
+        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.</value>
         [DataMember(Name = "is_tradable", EmitDefaultValue = true)]
         [Obsolete]
         public bool IsTradable { get; set; }

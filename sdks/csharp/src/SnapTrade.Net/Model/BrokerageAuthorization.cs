@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// <param name="disabledDate">Timestamp of when the connection was disabled in SnapTrade..</param>
         /// <param name="meta">Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
         /// <param name="updatedDate">Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field..</param>
-        /// <param name="isEligibleForPayout">Whether the connection is eligible for a payout..</param>
+        /// <param name="isEligibleForPayout">Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team..</param>
         public BrokerageAuthorization(string id = default(string), DateTime createdDate = default(DateTime), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), DateTime? disabledDate = default(DateTime?), Dictionary<string, Object> meta = default(Dictionary<string, Object>), DateTime updatedDate = default(DateTime), bool isEligibleForPayout = default(bool)) : base()
         {
             this.Id = id;
@@ -125,9 +125,9 @@ namespace SnapTrade.Net.Model
         public DateTime UpdatedDate { get; set; }
 
         /// <summary>
-        /// Whether the connection is eligible for a payout.
+        /// Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
         /// </summary>
-        /// <value>Whether the connection is eligible for a payout.</value>
+        /// <value>Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.</value>
         [DataMember(Name = "is_eligible_for_payout", EmitDefaultValue = true)]
         public bool IsEligibleForPayout { get; set; }
 

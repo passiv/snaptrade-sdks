@@ -4,38 +4,40 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel an order. |
-| [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
-| [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote |
-| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check order impact |
-| [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order |
-| [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
-| [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order |
-| [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked order |
-| [**placeSimpleOrder**](TradingApi.md#placeSimpleOrder) | **POST** /accounts/{accountId}/trading/simple | Place order |
-| [**previewSimpleOrder**](TradingApi.md#previewSimpleOrder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview order |
-| [**replaceOrder**](TradingApi.md#replaceOrder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one |
+| [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order |
+| [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
+| [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
+| [**getOptionImpact**](TradingApi.md#getOptionImpact) | **POST** /accounts/{accountId}/trading/options/impact | Get option order impact |
+| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check equity order impact |
+| [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
+| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
+| [**placeCryptoOrder**](TradingApi.md#placeCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
+| [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place equity order |
+| [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place option order |
+| [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked equity order |
+| [**previewCryptoOrder**](TradingApi.md#previewCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order |
+| [**replaceOrder**](TradingApi.md#replaceOrder) | **POST** /accounts/{accountId}/trading/replace | Replace order |
+| [**searchCryptocurrencyPairInstruments**](TradingApi.md#searchCryptocurrencyPairInstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
 
 
 <a name="cancelOrder"></a>
 # **cancelOrder**
-> OrderUpdatedResponse cancelOrder(userId, userSecret, accountId, brokerageOrderId).execute();
+> CancelOrderResponse cancelOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest).execute();
 
-Cancel an order.
+Cancel order
 
-Cancels an order in the specified account. 
+Cancels an order in the specified account. Accepts order IDs for all asset types. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -48,18 +50,18 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example";
     try {
-      OrderUpdatedResponse result = client
+      CancelOrderResponse result = client
               .trading
-              .cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+              .cancelOrder(brokerageOrderId, userId, userSecret, accountId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
-      System.out.println(result.getOrder());
+      System.out.println(result.getRawResponse());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -70,9 +72,9 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<OrderUpdatedResponse> response = client
+      ApiResponse<CancelOrderResponse> response = client
               .trading
-              .cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+              .cancelOrder(brokerageOrderId, userId, userSecret, accountId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -98,11 +100,11 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **brokerageOrderId** | **String**|  | |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md)|  | |
 
 ### Return type
 
-[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
+[**CancelOrderResponse**](CancelOrderResponse.md)
 
 ### Authorization
 
@@ -110,7 +112,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -121,22 +123,22 @@ public class Example {
 
 <a name="cancelUserAccountOrder"></a>
 # **cancelUserAccountOrder**
-> AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
+> AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest).execute();
 
-Cancel order
+Cancel equity order
 
-Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -149,15 +151,14 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     try {
       AccountOrderRecord result = client
               .trading
-              .cancelUserAccountOrder(userId, userSecret, accountId)
-              .brokerageOrderId(brokerageOrderId)
+              .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -194,8 +195,7 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .trading
-              .cancelUserAccountOrder(userId, userSecret, accountId)
-              .brokerageOrderId(brokerageOrderId)
+              .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -221,7 +221,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)|  | |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md)|  | |
 
 ### Return type
 
@@ -245,20 +245,20 @@ public class Example {
 # **getCryptocurrencyPairQuote**
 > CryptocurrencyPairQuote getCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol).execute();
 
-Get cryptocurrency pair quote
+Get crypto pair quote
 
 Gets a quote for the specified account. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -344,24 +344,137 @@ public class Example {
 | **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
+<a name="getOptionImpact"></a>
+# **getOptionImpact**
+> OptionImpact getOptionImpact(userId, userSecret, accountId, mlegTradeForm).execute();
+
+Get option order impact
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    MlegOrderTypeStrict orderType = MlegOrderTypeStrict.fromValue("MARKET");
+    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
+    List<MlegLeg> legs = Arrays.asList();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
+    try {
+      OptionImpact result = client
+              .trading
+              .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getEstimatedCost());
+      System.out.println(result.getEstimatedTransactionFee());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getOptionImpact");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<OptionImpact> response = client
+              .trading
+              .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getOptionImpact");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+| **mlegTradeForm** | [**MlegTradeForm**](MlegTradeForm.md)|  | |
+
+### Return type
+
+[**OptionImpact**](OptionImpact.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Unexpected Error |  -  |
+| **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
+
 <a name="getOrderImpact"></a>
 # **getOrderImpact**
 > ManualTradeAndImpact getOrderImpact(userId, userSecret, manualTradeForm).execute();
 
-Check order impact
+Check equity order impact
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -464,20 +577,20 @@ public class Example {
 # **getUserAccountQuotes**
 > List&lt;SymbolsQuotesInner&gt; getUserAccountQuotes(userId, userSecret, symbols, accountId).useTicker(useTicker).execute();
 
-Get symbol quotes
+Get equity symbol quotes
 
-Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -566,20 +679,20 @@ public class Example {
 # **placeBracketOrder**
 > AccountOrderRecord placeBracketOrder(accountId, userId, userSecret, manualTradeFormBracket).execute();
 
-Place a Bracket Order
+Place bracket order
 
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -601,7 +714,6 @@ public class Example {
     UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String symbol = "symbol_example"; // The security's trading ticker symbol.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
@@ -609,7 +721,6 @@ public class Example {
       AccountOrderRecord result = client
               .trading
               .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -650,7 +761,6 @@ public class Example {
       ApiResponse<AccountOrderRecord> response = client
               .trading
               .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -700,24 +810,141 @@ public class Example {
 | **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
+<a name="placeCryptoOrder"></a>
+# **placeCryptoOrder**
+> OrderUpdatedResponse placeCryptoOrder(userId, userSecret, accountId, cryptoOrderForm).execute();
+
+Place crypto order
+
+Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    CryptoTradingInstrument instrument = new CryptoTradingInstrument();
+    ActionStrict side = ActionStrict.fromValue("BUY");
+    String type = "MARKET"; // The type of order to place.
+    String timeInForce = "GTC"; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+    BigDecimal amount = new BigDecimal(78); // The amount of the base currency to buy or sell.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
+    try {
+      OrderUpdatedResponse result = client
+              .trading
+              .placeCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .postOnly(postOnly)
+              .expirationDate(expirationDate)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+      System.out.println(result.getOrder());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeCryptoOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<OrderUpdatedResponse> response = client
+              .trading
+              .placeCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .postOnly(postOnly)
+              .expirationDate(expirationDate)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeCryptoOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+| **cryptoOrderForm** | [**CryptoOrderForm**](CryptoOrderForm.md)|  | |
+
+### Return type
+
+[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Unexpected Error |  -  |
+
 <a name="placeForceOrder"></a>
 # **placeForceOrder**
 > AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeFormWithOptions).execute();
 
-Place order
+Place equity order
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -737,7 +964,8 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-    String symbol = "symbol_example"; // The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    String symbol = "symbol_example"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    TradingSession tradingSession = TradingSession.fromValue("REGULAR");
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
@@ -748,6 +976,7 @@ public class Example {
               .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
               .universalSymbolId(universalSymbolId)
               .symbol(symbol)
+              .tradingSession(tradingSession)
               .price(price)
               .stop(stop)
               .units(units)
@@ -791,6 +1020,7 @@ public class Example {
               .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
               .universalSymbolId(universalSymbolId)
               .symbol(symbol)
+              .tradingSession(tradingSession)
               .price(price)
               .stop(stop)
               .units(units)
@@ -844,20 +1074,20 @@ public class Example {
 # **placeMlegOrder**
 > MlegOrderResponse placeMlegOrder(userId, userSecret, accountId, mlegTradeForm).execute();
 
-Place multi-leg option order
+Place option order
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -878,7 +1108,7 @@ public class Example {
     UUID accountId = UUID.randomUUID();
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-    String priceEffect = "priceEffect_example"; // The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+    MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
     try {
       MlegOrderResponse result = client
               .trading
@@ -956,20 +1186,20 @@ public class Example {
 # **placeOrder**
 > AccountOrderRecord placeOrder(tradeId, userId, userSecret).validatedTradeBody(validatedTradeBody).execute();
 
-Place checked order
+Place checked equity order
 
 Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -1075,141 +1305,24 @@ public class Example {
 | **200** | Status of order placed |  -  |
 | **500** | Unexpected Error |  -  |
 
-<a name="placeSimpleOrder"></a>
-# **placeSimpleOrder**
-> OrderUpdatedResponse placeSimpleOrder(userId, userSecret, accountId, simpleOrderForm).execute();
+<a name="previewCryptoOrder"></a>
+# **previewCryptoOrder**
+> CryptoOrderPreview previewCryptoOrder(userId, userSecret, accountId, cryptoOrderForm).execute();
 
-Place order
-
-Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-
-### Example
-```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
-    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-    
-    Snaptrade client = new Snaptrade(configuration);
-    TradingInstrument instrument = new TradingInstrument();
-    ActionStrict side = ActionStrict.fromValue("BUY");
-    String type = "MARKET"; // The type of order to place.
-    String timeInForce = "GTC"; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-    BigDecimal amount = new BigDecimal(78); // The amount of the base currency to buy or sell.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-    OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
-    try {
-      OrderUpdatedResponse result = client
-              .trading
-              .placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
-              .limitPrice(limitPrice)
-              .stopPrice(stopPrice)
-              .postOnly(postOnly)
-              .expirationDate(expirationDate)
-              .execute();
-      System.out.println(result);
-      System.out.println(result.getBrokerageOrderId());
-      System.out.println(result.getOrder());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling TradingApi#placeSimpleOrder");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      ApiResponse<OrderUpdatedResponse> response = client
-              .trading
-              .placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
-              .limitPrice(limitPrice)
-              .stopPrice(stopPrice)
-              .postOnly(postOnly)
-              .expirationDate(expirationDate)
-              .executeWithHttpInfo();
-      System.out.println(response.getResponseBody());
-      System.out.println(response.getResponseHeaders());
-      System.out.println(response.getStatusCode());
-      System.out.println(response.getRoundTripTime());
-      System.out.println(response.getRequest());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling TradingApi#placeSimpleOrder");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-| **accountId** | **UUID**|  | |
-| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md)|  | |
-
-### Return type
-
-[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **500** | Unexpected Error |  -  |
-
-<a name="previewSimpleOrder"></a>
-# **previewSimpleOrder**
-> SimpleOrderPreview previewSimpleOrder(userId, userSecret, accountId, simpleOrderForm).execute();
-
-Preview order
+Preview crypto order
 
 Previews an order using the specified account. 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -1222,7 +1335,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    TradingInstrument instrument = new TradingInstrument();
+    CryptoTradingInstrument instrument = new CryptoTradingInstrument();
     ActionStrict side = ActionStrict.fromValue("BUY");
     String type = "MARKET"; // The type of order to place.
     String timeInForce = "GTC"; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
@@ -1235,9 +1348,9 @@ public class Example {
     Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
     try {
-      SimpleOrderPreview result = client
+      CryptoOrderPreview result = client
               .trading
-              .previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+              .previewCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .postOnly(postOnly)
@@ -1246,7 +1359,7 @@ public class Example {
       System.out.println(result);
       System.out.println(result.getEstimatedFee());
     } catch (ApiException e) {
-      System.err.println("Exception when calling TradingApi#previewSimpleOrder");
+      System.err.println("Exception when calling TradingApi#previewCryptoOrder");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1255,9 +1368,9 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<SimpleOrderPreview> response = client
+      ApiResponse<CryptoOrderPreview> response = client
               .trading
-              .previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+              .previewCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .postOnly(postOnly)
@@ -1269,7 +1382,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling TradingApi#previewSimpleOrder");
+      System.err.println("Exception when calling TradingApi#previewCryptoOrder");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -1287,11 +1400,11 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md)|  | |
+| **cryptoOrderForm** | [**CryptoOrderForm**](CryptoOrderForm.md)|  | |
 
 ### Return type
 
-[**SimpleOrderPreview**](SimpleOrderPreview.md)
+[**CryptoOrderPreview**](CryptoOrderPreview.md)
 
 ### Authorization
 
@@ -1310,22 +1423,22 @@ public class Example {
 
 <a name="replaceOrder"></a>
 # **replaceOrder**
-> AccountOrderRecord replaceOrder(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm).execute();
+> AccountOrderRecord replaceOrder(accountId, userId, userSecret, manualTradeReplaceForm).execute();
 
-Replaces an order with a new one
+Replace order
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
 
 ### Example
 ```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.TradingApi;
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -1338,11 +1451,11 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     ActionStrict action = ActionStrict.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
-    String brokerageOrderId = "brokerageOrderId_example"; // The Brokerage Order ID of the order to replace.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
@@ -1352,7 +1465,7 @@ public class Example {
     try {
       AccountOrderRecord result = client
               .trading
-              .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+              .replaceOrder(brokerageOrderId, action, orderType, timeInForce, accountId, userId, userSecret)
               .price(price)
               .symbol(symbol)
               .stop(stop)
@@ -1393,7 +1506,7 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .trading
-              .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+              .replaceOrder(brokerageOrderId, action, orderType, timeInForce, accountId, userId, userSecret)
               .price(price)
               .symbol(symbol)
               .stop(stop)
@@ -1421,7 +1534,6 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **accountId** | **UUID**| The ID of the account to execute the trade on. | |
-| **brokerageOrderId** | **String**| The Brokerage Order ID of the order to replace. | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **manualTradeReplaceForm** | [**ManualTradeReplaceForm**](ManualTradeReplaceForm.md)|  | |
@@ -1437,6 +1549,112 @@ public class Example {
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Unexpected Error |  -  |
+
+<a name="searchCryptocurrencyPairInstruments"></a>
+# **searchCryptocurrencyPairInstruments**
+> TradingSearchCryptocurrencyPairInstruments200Response searchCryptocurrencyPairInstruments(userId, userSecret, accountId).base(base).quote(quote).execute();
+
+Get crypto pairs
+
+Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    String base = "base_example";
+    String quote = "quote_example";
+    try {
+      TradingSearchCryptocurrencyPairInstruments200Response result = client
+              .trading
+              .searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
+              .base(base)
+              .quote(quote)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getItems());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#searchCryptocurrencyPairInstruments");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> response = client
+              .trading
+              .searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
+              .base(base)
+              .quote(quote)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#searchCryptocurrencyPairInstruments");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+| **base** | **String**|  | [optional] |
+| **quote** | **String**|  | [optional] |
+
+### Return type
+
+[**TradingSearchCryptocurrencyPairInstruments200Response**](TradingSearchCryptocurrencyPairInstruments200Response.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details

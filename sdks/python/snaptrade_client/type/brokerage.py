@@ -52,6 +52,9 @@ class OptionalBrokerage(TypedDict, total=False):
     # Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
     maintenance_mode: bool
 
+    # Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+    is_degraded: bool
+
     # Whether the brokerage allows trading through SnapTrade.
     allows_trading: typing.Optional[bool]
 

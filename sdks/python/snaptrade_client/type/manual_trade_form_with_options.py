@@ -19,6 +19,7 @@ from snaptrade_client.type.action_strict_with_options import ActionStrictWithOpt
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.type.trading_session import TradingSession
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
 
 class RequiredManualTradeFormWithOptions(TypedDict):
@@ -36,8 +37,10 @@ class OptionalManualTradeFormWithOptions(TypedDict, total=False):
     # The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
     universal_symbol_id: UniversalSymbolIDNullable
 
-    # The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     symbol: typing.Optional[str]
+
+    trading_session: TradingSession
 
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]

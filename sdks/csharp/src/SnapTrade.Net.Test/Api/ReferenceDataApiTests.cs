@@ -244,6 +244,34 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test ListAllBrokerageInstruments
+        /// </summary>
+        [Fact]
+        public void ListAllBrokerageInstrumentsTest()
+        {
+            var slug = "QUESTRADE"; // A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+            
+            try
+            {
+                // Get brokerage instruments
+                BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(slug);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ReferenceDataApi.ListAllBrokerageInstruments: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test ListAllBrokerages
         /// </summary>
         [Fact]

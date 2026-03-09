@@ -2,7 +2,7 @@
 
 An account represents a unique account at a brokerage, like an individual account, or a 401k retirement account. A connection can have multiple accounts. The same brokerage account can also belong to multiple connections. For example a joint account between two individual account holders are visible under each account holder’s connection. With a connected account, you can call any SnapTrade account data API to get information about the account, its holdings, and its history.
 
-## Account Metadata
+## Account Details
 
 :api[AccountInformation_getUserAccountDetails]
 
@@ -24,6 +24,7 @@ Balances are the current cash holdings and buying power of the account. In some 
 ## Orders
 
 :api[AccountInformation_getUserAccountOrders]
+:api[AccountInformation_getUserAccountRecentOrders]
 
 Orders are how a broker keeps track of trading activity in an account. This differs from account activities in the following ways:
 
@@ -34,7 +35,7 @@ Orders are how a broker keeps track of trading activity in an account. This diff
 
 ## Activities
 
-:api[TransactionsAndReporting_getActivities]
+:api[AccountInformation_getAccountActivities]
 
 Activities record the transaction history for the account. Each activity documents a change in position for the account, including deposits, withdrawals, fees, dividends, buys and sells. This differs from Orders in the following ways:
 
@@ -43,9 +44,11 @@ Activities record the transaction history for the account. Each activity documen
 - Activities only contain transactions that resulted in a change of position to the account, no pending or cancelled orders
 - Often has years of history for the account, sometimes the entire account history since inception
 
-## Caching
+SnapTrade classifies common transactions under the predefined types, with extra focus on what we consider the most important types (buys, sells, contributions, dividends, withdrawals, etc). When we encounter a transaction with a type that doesn't fit into one of our common types, we will return the type that the brokerage uses to identify it. 
+We usually recommend you try not to individually handle every type beyond the most common ones, and instead rely on the other fields: amount, units, price, symbol, option_symbol, etc.
+If amount is positive it represents gaining cash, if amount is negative it represents spending cash. Same with units, so a BUY for instance would have positive units and negative amount, a sell would be negative units positive amount.
 
-Responses to the Account Data APIs are always cached. We have a daily sync process that refreshes all account data for all connections at least once every 24 hours. You can listen to the [`ACCOUNT_HOLDING_UPDATED`](https://www.notion.so/Webhooks-298cb05cc76943ccbb94d21cfb8137b1?pvs=21) webhook if you want to react to SnapTrade having new account data. If you want to refresh accounts on demand, you can call the `manual refresh` endpoint: :api[Connections_refreshBrokerageAuthorization]. Note that this endpoint may incur a cost.
+Check [our API Spec](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities) for some of the most common transaction types.
 
 ---
 

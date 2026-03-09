@@ -20,6 +20,14 @@ order:
       - Trading_placeOrder
       - Trading_placeForceOrder
       - Trading_cancelUserAccountOrder
+      - Trading_placeBracketOrder
+      - Trading_placeMlegOrder
+      - Trading_searchCryptocurrencyPairInstruments
+      - Trading_getCryptocurrencyPairQuote
+      - Trading_previewCryptoOrder
+      - Trading_placeCryptoOrder
+      - Trading_cancelOrder
+      - Trading_replaceOrder
 overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
 portal:
   title: SnapTrade
@@ -46,8 +54,8 @@ portal:
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
-            - id: crypto-trading
-              path: docs/crypto-trading.md
+            - id: realtime-data
+              path: docs/realtime-data.md
             - id: webhooks
               path: docs/webhooks.md
             - id: ratelimiting
@@ -64,6 +72,8 @@ portal:
               path: docs/connections.md
             - id: account-data
               path: docs/account-data.md
+            - id: syncing
+              path: docs/syncing.md
         - label: Troubleshooting
           links:
             - id: request-ids
@@ -80,21 +90,23 @@ portal:
     - id: placing-trades
       path: demos/placing-trades.md
   betaOperations:
-    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
-      get: true
-    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
-      get: true
-    /accounts/{accountId}/trading/simple:
-      post: true
-  hideOperations:
-    /accounts/{accountId}/trading/bracket:
-      post: true
     /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
       patch: true
-    /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
-      post: true
     /accounts/{accountId}/trading/simple/preview:
       post: true
+    /brokerages/{brokerageId}/instruments:
+      get: true
+    /accounts/{accountId}/orders/v2:
+      get: true
+    /accounts/{accountId}/recentOrders/v2:
+      get: true
+    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
+      get: true
+    /accounts/{accountId}/trading/options/impact:
+      post: true
+    /marketData/options/quotes:
+      get: true
+  hideOperations:
     /activities:
       get: true
     /holdings:
@@ -117,7 +129,7 @@ portal:
       get: true
     /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
       post: true
-    /accounts/{accountId}/trading/options:
+    /accounts/{accountId}/orders/cancel:
       post: true
     /brokerageAuthorizationTypes:
       get: true
@@ -132,6 +144,20 @@ portal:
     /accounts/{accountId}/returnRates:
       get: true
     /authorizations/{authorizationId}/returnRates:
+      get: true
+    /accounts/{accountId}/orders/v2:
+      get: true
+    /accounts/{accountId}/recentOrders/v2:
+      get: true
+    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
+      get: true
+    /accounts/{accountId}/trading/options/impact:
+      post: true
+    /marketData/options/quotes:
+      get: true
+    /authorizations/{authorizationId}:
+      delete: true
+    /accounts/{accountId}/balanceHistory:
       get: true
   hideSecurity:
     - name: PartnerSignature
@@ -173,7 +199,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 2.0.111
+    version: 2.0.169
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -187,7 +213,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 1.0.83
+    version: 1.0.141
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -199,7 +225,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 2.0.111
+    version: 2.0.169
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -210,7 +236,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 2.0.110
+    version: 2.0.168
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -222,7 +248,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 5.0.113
+    version: 5.0.171
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -233,7 +259,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 5.0.110
+    version: 5.0.171
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -244,11 +270,11 @@ generators:
       host: github.com
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/java
-    groupId: com.konfigthis
+    groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.110
-    responseTypeVersion: "1"
+    version: 11.0.168
+    responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -265,7 +291,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 9.0.114
+    version: 9.0.172
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

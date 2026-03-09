@@ -8,6 +8,7 @@ Method | Path | Description
 [**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
+[**GetUserAccountOrderDetail**](AccountInformationApi.md#GetUserAccountOrderDetail) | **Post** /accounts/{accountId}/orders/details | Get account order detail
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account orders
 [**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
@@ -210,8 +211,11 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Name`: %v\n", resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.InstitutionName`: %v\n", resp.InstitutionName)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.FundingDate`: %v\n", *resp.FundingDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.OpeningDate`: %v\n", *resp.OpeningDate)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.SyncStatus`: %v\n", resp.SyncStatus)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Status`: %v\n", *resp.Status)
@@ -219,6 +223,80 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.IsPaper`: %v\n", resp.IsPaper)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserAccountOrderDetail
+
+Get account order detail
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    
+    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
+    
+    request := client.AccountInformationApi.GetUserAccountOrderDetail(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+        accountInformationGetUserAccountOrderDetailRequest,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetUserAccountOrderDetail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetUserAccountOrderDetail`: AccountOrderRecord
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrderDetail`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Status`: %v\n", *resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.QuoteUniversalSymbol`: %v\n", *resp.QuoteUniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Action`: %v\n", *resp.Action)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TotalQuantity`: %v\n", *resp.TotalQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OpenQuantity`: %v\n", *resp.OpenQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.FilledQuantity`: %v\n", *resp.FilledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.LimitPrice`: %v\n", *resp.LimitPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.StopPrice`: %v\n", *resp.StopPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OrderType`: %v\n", *resp.OrderType)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimeInForce`: %v\n", *resp.TimeInForce)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimePlaced`: %v\n", *resp.TimePlaced)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimeUpdated`: %v\n", *resp.TimeUpdated)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimeExecuted`: %v\n", *resp.TimeExecuted)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 
@@ -339,6 +417,9 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.OpenPnl`: %v\n", *resp.OpenPnl)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.AveragePurchasePrice`: %v\n", *resp.AveragePurchasePrice)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.FractionalUnits`: %v\n", *resp.FractionalUnits)
+    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Currency`: %v\n", *resp.Currency)
+    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.CashEquivalent`: %v\n", *resp.CashEquivalent)
+    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.TaxLots`: %v\n", *resp.TaxLots)
 }
 ```
 
@@ -531,8 +612,11 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Name`: %v\n", resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.InstitutionName`: %v\n", resp.InstitutionName)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.FundingDate`: %v\n", *resp.FundingDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.SyncStatus`: %v\n", resp.SyncStatus)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Status`: %v\n", *resp.Status)
@@ -540,6 +624,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.IsPaper`: %v\n", resp.IsPaper)
 }
 ```
 
@@ -589,8 +674,11 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Name`: %v\n", resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.InstitutionName`: %v\n", resp.InstitutionName)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.FundingDate`: %v\n", *resp.FundingDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.OpeningDate`: %v\n", *resp.OpeningDate)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.SyncStatus`: %v\n", resp.SyncStatus)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Status`: %v\n", *resp.Status)
@@ -598,6 +686,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.IsPaper`: %v\n", resp.IsPaper)
 }
 ```
 

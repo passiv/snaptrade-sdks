@@ -596,6 +596,91 @@ module SnapTrade
     end
 
 
+    # Get brokerage instruments
+    #
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
+    #
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_all_brokerage_instruments(slug:, extra: {})
+      data, _status_code, _headers = list_all_brokerage_instruments_with_http_info_impl(slug, extra)
+      data
+    end
+
+    # Get brokerage instruments
+    #
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
+    #
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_all_brokerage_instruments_with_http_info(slug:, extra: {})
+      list_all_brokerage_instruments_with_http_info_impl(slug, extra)
+    end
+
+    # Get brokerage instruments
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    # @param [Hash] opts the optional parameters
+    # @return [BrokerageInstrumentsResponse]
+    private def list_all_brokerage_instruments_impl(slug, opts = {})
+      data, _status_code, _headers = list_all_brokerage_instruments_with_http_info(slug, opts)
+      data
+    end
+
+    # Get brokerage instruments
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BrokerageInstrumentsResponse, Integer, Hash)>] BrokerageInstrumentsResponse data, response status code and response headers
+    private def list_all_brokerage_instruments_with_http_info_impl(slug, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ReferenceDataApi.list_all_brokerage_instruments ...'
+      end
+      # verify the required parameter 'slug' is set
+      if @api_client.config.client_side_validation && slug.nil?
+        fail ArgumentError, "Missing the required parameter 'slug' when calling ReferenceDataApi.list_all_brokerage_instruments"
+      end
+      # resource path
+      local_var_path = '/brokerages/{slug}/instruments'.sub('{' + 'slug' + '}', CGI.escape(slug.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BrokerageInstrumentsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ReferenceDataApi.list_all_brokerage_instruments",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ReferenceDataApi#list_all_brokerage_instruments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get brokerages
     #
     # Returns a list of all defined Brokerage objects.

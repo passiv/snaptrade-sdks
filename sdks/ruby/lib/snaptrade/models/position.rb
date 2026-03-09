@@ -30,6 +30,14 @@ module SnapTrade
     # Deprecated, use the `units` field for both fractional and integer units going forward
     attr_accessor :fractional_units
 
+    attr_accessor :currency
+
+    # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+    attr_accessor :cash_equivalent
+
+    # List of tax lots for the given position (disabled by default, contact support if needed)
+    attr_accessor :tax_lots
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +46,10 @@ module SnapTrade
         :'price' => :'price',
         :'open_pnl' => :'open_pnl',
         :'average_purchase_price' => :'average_purchase_price',
-        :'fractional_units' => :'fractional_units'
+        :'fractional_units' => :'fractional_units',
+        :'currency' => :'currency',
+        :'cash_equivalent' => :'cash_equivalent',
+        :'tax_lots' => :'tax_lots'
       }
     end
 
@@ -55,7 +66,10 @@ module SnapTrade
         :'price' => :'Float',
         :'open_pnl' => :'Float',
         :'average_purchase_price' => :'Float',
-        :'fractional_units' => :'Float'
+        :'fractional_units' => :'Float',
+        :'currency' => :'PositionCurrency',
+        :'cash_equivalent' => :'Boolean',
+        :'tax_lots' => :'Array<TaxLot>'
       }
     end
 
@@ -66,7 +80,8 @@ module SnapTrade
         :'price',
         :'open_pnl',
         :'average_purchase_price',
-        :'fractional_units'
+        :'fractional_units',
+        :'cash_equivalent',
       ])
     end
 
@@ -108,6 +123,20 @@ module SnapTrade
       if attributes.key?(:'fractional_units')
         self.fractional_units = attributes[:'fractional_units']
       end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'cash_equivalent')
+        self.cash_equivalent = attributes[:'cash_equivalent']
+      end
+
+      if attributes.key?(:'tax_lots')
+        if (value = attributes[:'tax_lots']).is_a?(Array)
+          self.tax_lots = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -133,7 +162,10 @@ module SnapTrade
           price == o.price &&
           open_pnl == o.open_pnl &&
           average_purchase_price == o.average_purchase_price &&
-          fractional_units == o.fractional_units
+          fractional_units == o.fractional_units &&
+          currency == o.currency &&
+          cash_equivalent == o.cash_equivalent &&
+          tax_lots == o.tax_lots
     end
 
     # @see the `==` method
@@ -145,7 +177,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, units, price, open_pnl, average_purchase_price, fractional_units].hash
+      [symbol, units, price, open_pnl, average_purchase_price, fractional_units, currency, cash_equivalent, tax_lots].hash
     end
 
     # Builds the object from hash

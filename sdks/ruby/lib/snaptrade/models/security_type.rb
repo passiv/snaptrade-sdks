@@ -16,13 +16,13 @@ module SnapTrade
     # Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
     attr_accessor :id
 
-    # A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
+    # A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `pm` - Precious Metals   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
     attr_accessor :code
 
     # A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
     attr_accessor :description
 
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     attr_accessor :is_supported
 
     # Attribute mapping from ruby-style variable name to JSON key.
