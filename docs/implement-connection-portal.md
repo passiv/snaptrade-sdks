@@ -1,8 +1,8 @@
-# SnapTrade Connection Portal
+# Connection Portal
 
 ## Overview
 
-The SnapTrade Connection Portal is the front-end interface your users interact with to link their brokerage accounts to the SnapTrade API.
+The Connection Portal is the front-end interface your users interact with to link their brokerage accounts to the SnapTrade API.
 
 <img src="./assets/portal-overview.png" alt="connection portal overview" width="700"/>
 
