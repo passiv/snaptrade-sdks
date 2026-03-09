@@ -263,6 +263,7 @@ useEffect(() => {
       }
     }
   };
+  window.addEventListener('message', handleMessageEvent, false);
   return () => {
     window.removeEventListener('message', handleMessageEvent, false);
   };
