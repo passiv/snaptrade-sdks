@@ -557,8 +557,6 @@ class MainActivity : AppCompatActivity() {
 
 - What it looks like: Users see a connectivity warning before reaching the login page for a specific brokerage.
 
-<img src="./assets/connectivity-issue.png" alt="connectivity issue screen" width="400"/>
-
 - Why it happens: SnapTrade detects degraded connectivity to that brokerage. Some users may still connect, but analytics show an unhealthy success rate.
 - How to handle:
   - For users: Recommend trying again later if they cannot connect.
