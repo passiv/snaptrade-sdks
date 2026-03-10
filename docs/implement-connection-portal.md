@@ -90,7 +90,7 @@ const ConnectionPortalModal = ({ loginLink }) => (
 ```
 
 - Key Considerations:
-  - Find guidance on how to monitor window messages [here](#window-messages).
+  - Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages).
   - Your application is responsible for closing the iframe modal post connections.
   - If not using `snaptrade-react` SDK, you must handle responsive sizing and closing the modal. The SDK simplifies this.
 
@@ -108,7 +108,7 @@ Opens the portal in a separate browser tab or popup window.
   - To determine the connection state, your application can use one of the following approaches:
     - **Option 1: Window messages**
       - Open the Connection Portal in a new window using `window.open`. This is required to receive client-side window messages.
-      - Refer to the documentation on how to listen for and handle these messages [here](#window-messages).
+      - Refer to the documentation on how to listen for and handle these messages [here](#implement-connection-portal-window-messages).
     - **Option 2: Query parameters in redirect**
       - The portal will redirect back to your URL with query parameters:
         - **SUCCESS:** `{your_redirect_url}?status=SUCCESS&connection_id={connection_id}`
@@ -125,9 +125,9 @@ Use _SFSafariViewController_ on iOS, _Chrome Custom Tabs_ on Android, or the rec
 
 **Implementation guides:**
 
-- [React Native](#react-native-implementation-guide)
-- [iOS](#ios-implementation-guide)
-- [Android](#android-implementation-guide)
+- [React Native](#implement-connection-portal-react-native)
+- [iOS](#implement-connection-portal-native-ios)
+- [Android](#implement-connection-portal-native-android)
 
 ## Window messages
 
@@ -184,7 +184,7 @@ Your app should listen for these messages and respond accordingly, for example b
     }, []);
     ```
 
-## React Native Implementation Guide:
+## React Native
 
 Authentication Flow: `[Your App] → [In-App Browser] → [SnapTrade Auth] → [Redirect] → [Your App]`
 
@@ -214,13 +214,13 @@ export default {
 };
 ```
 
-2. Install Dependencies:
+2. Install Dependencies
 
 ```bash
 npx expo install expo-web-browser expo-linking
 ```
 
-3. Rebuild the app after adding URL schemes:
+3. Rebuild the app after adding URL schemes
 
 ```bash
 npx expo prebuild --clean
@@ -228,7 +228,7 @@ npx expo run:ios
 npx expo run:android
 ```
 
-4. Basic implementation:
+4. Basic implementation
 
 ```tsx
 import * as WebBrowser from "expo-web-browser";
@@ -284,9 +284,9 @@ function SnapTradeConnect() {
 
 1. Configure URL scheme:
 
-- iOS: Add to `Info.plist`:
+- iOS: Add to `Info.plist`
 
-```swift
+```
 <key>CFBundleURLTypes</key>
 <array>
   <dict>
@@ -299,9 +299,9 @@ function SnapTradeConnect() {
 
 ```
 
-- Android: Add to `AndroidManifest.xml`:
+- Android: Add to `AndroidManifest.xml`
 
-```kotlin
+```
 <intent-filter>
   <action android:name="android.intent.action.VIEW" />
   <category android:name="android.intent.category.DEFAULT" />
@@ -310,13 +310,13 @@ function SnapTradeConnect() {
 </intent-filter>
 ```
 
-2. Install Dependencies:
+2. Install Dependencies
 
 ```bash
 npm install react-native-inappbrowser-reborn\
 ```
 
-3. Basic Implementation:
+3. Basic Implementation
 
 ```tsx
 import InAppBrowser from "react-native-inappbrowser-reborn";
@@ -370,7 +370,7 @@ function SnapTradeConnect() {
 }
 ```
 
-## Native iOS Implementation Guide:
+## Native iOS
 
 Authentication Flow: `[Your App] → [In-App Browser] → [SnapTrade Auth] → [Redirect] → [Your App]`
 
@@ -404,7 +404,7 @@ SnapTrade redirects back to your app with these parameters:
 
 ```
 
-2. Basic implementation:
+2. Basic implementation
 
 ```swift
 import SafariServices
@@ -462,7 +462,7 @@ func scene(_ scene: UIScene,
 }
 ```
 
-## Native Android Implementation Guide
+## Native Android
 
 Authentication Flow: `[Your App] → [In-App Browser] → [SnapTrade Auth] → [Redirect] → [Your App]`
 
@@ -494,7 +494,7 @@ SnapTrade redirects back to your app with these parameters:
 </activity>
 ```
 
-2. Basic implementation:
+2. Basic implementation
 
 ```kotlin
 import android.net.Uri
@@ -556,6 +556,8 @@ class MainActivity : AppCompatActivity() {
 ## Brokerage Connectivity Issue Screen
 
 - What it looks like: Users see a connectivity warning before reaching the login page for a specific brokerage.
+
+<img src="./assets/connectivity-issue.png" alt="connectivity issue screen" width="400"/>
 
 - Why it happens: SnapTrade detects degraded connectivity to that brokerage. Some users may still connect, but analytics show an unhealthy success rate.
 - How to handle:
