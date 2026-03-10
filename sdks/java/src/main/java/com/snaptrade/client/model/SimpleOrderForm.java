@@ -353,11 +353,11 @@ public class SimpleOrderForm {
   }
 
    /**
-   * The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+   * The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.
    * @return limitPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "123.45", value = "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.")
+  @ApiModelProperty(example = "123.45", value = "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.")
 
   public BigDecimal getLimitPrice() {
     return limitPrice;
@@ -382,11 +382,11 @@ public class SimpleOrderForm {
   }
 
    /**
-   * The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+   * The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "123.45", value = "The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.")
+  @ApiModelProperty(example = "123.45", value = "The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.")
 
   public BigDecimal getStopPrice() {
     return stopPrice;
@@ -411,11 +411,11 @@ public class SimpleOrderForm {
   }
 
    /**
-   * Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+   * Valid and required only for order type &#x60;LIMIT&#x60;. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
    * @return postOnly
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "false", value = "Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. ")
+  @ApiModelProperty(example = "false", value = "Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. ")
 
   public Boolean getPostOnly() {
     return postOnly;
@@ -440,11 +440,11 @@ public class SimpleOrderForm {
   }
 
    /**
-   * The expiration date of the order. Required if the time_in_force is GTD.
+   * The expiration date of the order. Required if the time_in_force is &#x60;GTD&#x60;.
    * @return expirationDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-01-01T00:00Z", value = "The expiration date of the order. Required if the time_in_force is GTD.")
+  @ApiModelProperty(example = "2024-01-01T00:00Z", value = "The expiration date of the order. Required if the time_in_force is `GTD`.")
 
   public OffsetDateTime getExpirationDate() {
     return expirationDate;

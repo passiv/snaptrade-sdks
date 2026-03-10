@@ -19,53 +19,53 @@ module SnapTrade
 
     # Get option quote
     #
-    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-    # 
-    # OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
     #
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_quote(user_id:, user_secret:, symbol:, extra: {})
-      data, _status_code, _headers = get_option_quote_with_http_info_impl(user_id, user_secret, symbol, extra)
+    def get_option_quote(user_id:, user_secret:, account_id:, symbol:, extra: {})
+      data, _status_code, _headers = get_option_quote_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
       data
     end
 
     # Get option quote
     #
-    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-    # 
-    # OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
     #
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_quote_with_http_info(user_id:, user_secret:, symbol:, extra: {})
-      get_option_quote_with_http_info_impl(user_id, user_secret, symbol, extra)
+    def get_option_quote_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
+      get_option_quote_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
     end
 
     # Get option quote
-    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] opts the optional parameters
     # @return [OptionQuote]
-    private def get_option_quote_impl(user_id, user_secret, symbol, opts = {})
-      data, _status_code, _headers = get_option_quote_with_http_info(user_id, user_secret, symbol, opts)
+    private def get_option_quote_impl(user_id, user_secret, account_id, symbol, opts = {})
+      data, _status_code, _headers = get_option_quote_with_http_info(user_id, user_secret, account_id, symbol, opts)
       data
     end
 
     # Get option quote
-    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] opts the optional parameters
     # @return [Array<(OptionQuote, Integer, Hash)>] OptionQuote data, response status code and response headers
-    private def get_option_quote_with_http_info_impl(user_id, user_secret, symbol, opts = {})
+    private def get_option_quote_with_http_info_impl(user_id, user_secret, account_id, symbol, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OptionsApi.get_option_quote ...'
       end
@@ -77,12 +77,16 @@ module SnapTrade
       if @api_client.config.client_side_validation && user_secret.nil?
         fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_option_quote"
       end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.get_option_quote"
+      end
       # verify the required parameter 'symbol' is set
       if @api_client.config.client_side_validation && symbol.nil?
         fail ArgumentError, "Missing the required parameter 'symbol' when calling OptionsApi.get_option_quote"
       end
       # resource path
-      local_var_path = '/marketData/options/quotes'
+      local_var_path = '/accounts/{accountId}/quotes/options'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}

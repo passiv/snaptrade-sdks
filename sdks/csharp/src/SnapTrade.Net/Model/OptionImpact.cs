@@ -27,36 +27,78 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Estimated cost and fees for an option order before it is placed.
+    /// Estimated cash change and fees for an option order before it is placed.
     /// </summary>
     [DataContract(Name = "OptionImpact")]
     public partial class OptionImpact : IEquatable<OptionImpact>, IValidatableObject
     {
         /// <summary>
+        /// Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
+        /// </summary>
+        /// <value>Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CashChangeDirectionEnum
+        {
+            /// <summary>
+            /// Enum CREDIT for value: CREDIT
+            /// </summary>
+            [EnumMember(Value = "CREDIT")]
+            CREDIT = 1,
+
+            /// <summary>
+            /// Enum DEBIT for value: DEBIT
+            /// </summary>
+            [EnumMember(Value = "DEBIT")]
+            DEBIT = 2,
+
+            /// <summary>
+            /// Enum EVEN for value: EVEN
+            /// </summary>
+            [EnumMember(Value = "EVEN")]
+            EVEN = 3,
+
+            /// <summary>
+            /// Enum UNKNOWN for value: UNKNOWN
+            /// </summary>
+            [EnumMember(Value = "UNKNOWN")]
+            UNKNOWN = 4
+
+        }
+
+
+        /// <summary>
+        /// Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
+        /// </summary>
+        /// <value>Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.</value>
+        [DataMember(Name = "cash_change_direction", EmitDefaultValue = true)]
+        public CashChangeDirectionEnum? CashChangeDirection { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="OptionImpact" /> class.
         /// </summary>
-        /// <param name="estimatedCost">Estimated option premium for the order (before fees)..</param>
-        /// <param name="estimatedTransactionFee">Estimated transaction fees and commissions for the order..</param>
-        public OptionImpact(string estimatedCost = default(string), string estimatedTransactionFee = default(string)) : base()
+        /// <param name="estimatedCashChange">Estimated cash change for the order, before fees..</param>
+        /// <param name="cashChangeDirection">Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request..</param>
+        /// <param name="estimatedFeeTotal">Estimated total transaction fees and commissions for the order..</param>
+        public OptionImpact(string estimatedCashChange = default(string), CashChangeDirectionEnum? cashChangeDirection = default(CashChangeDirectionEnum?), string estimatedFeeTotal = default(string)) : base()
         {
-            this.EstimatedCost = estimatedCost;
-            this.EstimatedTransactionFee = estimatedTransactionFee;
+            this.EstimatedCashChange = estimatedCashChange;
+            this.CashChangeDirection = cashChangeDirection;
+            this.EstimatedFeeTotal = estimatedFeeTotal;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Estimated option premium for the order (before fees).
+        /// Estimated cash change for the order, before fees.
         /// </summary>
-        /// <value>Estimated option premium for the order (before fees).</value>
-        [DataMember(Name = "estimated_cost", EmitDefaultValue = false)]
-        public string EstimatedCost { get; set; }
+        /// <value>Estimated cash change for the order, before fees.</value>
+        [DataMember(Name = "estimated_cash_change", EmitDefaultValue = false)]
+        public string EstimatedCashChange { get; set; }
 
         /// <summary>
-        /// Estimated transaction fees and commissions for the order.
+        /// Estimated total transaction fees and commissions for the order.
         /// </summary>
-        /// <value>Estimated transaction fees and commissions for the order.</value>
-        [DataMember(Name = "estimated_transaction_fee", EmitDefaultValue = false)]
-        public string EstimatedTransactionFee { get; set; }
+        /// <value>Estimated total transaction fees and commissions for the order.</value>
+        [DataMember(Name = "estimated_fee_total", EmitDefaultValue = false)]
+        public string EstimatedFeeTotal { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -73,8 +115,9 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class OptionImpact {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  EstimatedCost: ").Append(EstimatedCost).Append("\n");
-            sb.Append("  EstimatedTransactionFee: ").Append(EstimatedTransactionFee).Append("\n");
+            sb.Append("  EstimatedCashChange: ").Append(EstimatedCashChange).Append("\n");
+            sb.Append("  CashChangeDirection: ").Append(CashChangeDirection).Append("\n");
+            sb.Append("  EstimatedFeeTotal: ").Append(EstimatedFeeTotal).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -112,14 +155,18 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.EstimatedCost == input.EstimatedCost ||
-                    (this.EstimatedCost != null &&
-                    this.EstimatedCost.Equals(input.EstimatedCost))
+                    this.EstimatedCashChange == input.EstimatedCashChange ||
+                    (this.EstimatedCashChange != null &&
+                    this.EstimatedCashChange.Equals(input.EstimatedCashChange))
                 ) && base.Equals(input) && 
                 (
-                    this.EstimatedTransactionFee == input.EstimatedTransactionFee ||
-                    (this.EstimatedTransactionFee != null &&
-                    this.EstimatedTransactionFee.Equals(input.EstimatedTransactionFee))
+                    this.CashChangeDirection == input.CashChangeDirection ||
+                    this.CashChangeDirection.Equals(input.CashChangeDirection)
+                ) && base.Equals(input) && 
+                (
+                    this.EstimatedFeeTotal == input.EstimatedFeeTotal ||
+                    (this.EstimatedFeeTotal != null &&
+                    this.EstimatedFeeTotal.Equals(input.EstimatedFeeTotal))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -133,13 +180,14 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.EstimatedCost != null)
+                if (this.EstimatedCashChange != null)
                 {
-                    hashCode = (hashCode * 59) + this.EstimatedCost.GetHashCode();
+                    hashCode = (hashCode * 59) + this.EstimatedCashChange.GetHashCode();
                 }
-                if (this.EstimatedTransactionFee != null)
+                hashCode = (hashCode * 59) + this.CashChangeDirection.GetHashCode();
+                if (this.EstimatedFeeTotal != null)
                 {
-                    hashCode = (hashCode * 59) + this.EstimatedTransactionFee.GetHashCode();
+                    hashCode = (hashCode * 59) + this.EstimatedFeeTotal.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

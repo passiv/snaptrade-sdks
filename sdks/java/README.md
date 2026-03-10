@@ -1461,9 +1461,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.options.getOptionQuote`<a id="snaptradeoptionsgetoptionquote"></a>
 
-Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-
-OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1471,7 +1469,7 @@ OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spac
 ```java
 OptionQuote result = client
         .options
-        .getOptionQuote(userId, userSecret, symbol)
+        .getOptionQuote(userId, userSecret, accountId, symbol)
         .execute();
 ```
 
@@ -1480,6 +1478,8 @@ OptionQuote result = client
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 ##### symbol: `String`<a id="symbol-string"></a>
 
@@ -1491,7 +1491,7 @@ The OCC-formatted option symbol.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/marketData/options/quotes` `GET`
+`/accounts/{accountId}/quotes/options` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2019,7 +2019,7 @@ CryptocurrencyPairQuote result = client
 ### `snaptrade.trading.getOptionImpact`<a id="snaptradetradinggetoptionimpact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2050,11 +2050,11 @@ OptionImpact result = client
 
 ##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 
 ##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
 ##### price_effect:<a id="price_effect"></a>
 
@@ -2297,19 +2297,19 @@ The amount of the base currency to buy or sell.
 
 ##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
 
 ##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 
 ##### post_only: `Boolean`<a id="post_only-boolean"></a>
 
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
 
-The expiration date of the order. Required if the time_in_force is GTD.
+The expiration date of the order. Required if the time_in_force is `GTD`.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2435,11 +2435,11 @@ MlegOrderResponse result = client
 
 ##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 
 ##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
 ##### price_effect:<a id="price_effect"></a>
 
@@ -2544,19 +2544,19 @@ The amount of the base currency to buy or sell.
 
 ##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
 
 ##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 
 ##### post_only: `Boolean`<a id="post_only-boolean"></a>
 
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
 
-The expiration date of the order. Required if the time_in_force is GTD.
+The expiration date of the order. Required if the time_in_force is `GTD`.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

@@ -19,10 +19,10 @@ module SnapTrade
     # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     attr_accessor :time_in_force
 
-    # The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+    # The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
     attr_accessor :limit_price
 
-    # The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    # The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     attr_accessor :stop_price
 
     attr_accessor :price_effect

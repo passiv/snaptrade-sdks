@@ -1501,6 +1501,71 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details
       x-content-type: application/json
       x-accepts: application/json
+  /accounts/{accountId}/quotes/options:
+    get:
+      description: |
+        Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+      operationId: Options_getOptionQuote
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - description: The OCC-formatted option symbol.
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionQuote'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Option contract not found
+          x-do-not-generate: true
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Rate limit exceeded
+          x-do-not-generate: true
+      summary: Get option quote
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options
+      x-accepts: application/json
   /accounts/{accountId}/options:
     get:
       description: |
@@ -1554,68 +1619,6 @@ paths:
       - Options
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options
-      x-accepts: application/json
-  /marketData/options/quotes:
-    get:
-      description: |
-        Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-
-        OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
-      operationId: Options_getOptionQuote
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The OCC-formatted option symbol.
-        explode: true
-        in: query
-        name: symbol
-        required: true
-        schema:
-          example: AAPL  251219C00150000
-          type: string
-          x-konfig-original-example: AAPL  251219C00150000
-          x-konfig-generated-schema: konfig-generated-schema-paths--marketData-options-quotes-get-parameters-2-schema
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionQuote'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Option contract not found
-          x-do-not-generate: true
-        "429":
-          description: Rate limit exceeded
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Get option quote
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--marketData-options-quotes
       x-accepts: application/json
   /activities:
     get:
@@ -2565,7 +2568,7 @@ paths:
     post:
       description: |
         Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
       operationId: Trading_getOptionImpact
       parameters:
       - explode: true
@@ -2612,8 +2615,6 @@ paths:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
           x-do-not-generate: true
-        "500":
-          description: Unexpected Error
         "501":
           description: Not Implemented - option impact is not supported for this brokerage
       summary: Get option order impact
@@ -7873,23 +7874,36 @@ components:
           nullable: true
     OptionImpact:
       additionalProperties: true
-      description: Estimated cost and fees for an option order before it is placed.
+      description: Estimated cash change and fees for an option order before it is
+        placed.
       example:
-        estimated_transaction_fee: "0.50"
-        estimated_cost: "1.97"
+        estimated_cash_change: "1.97"
+        estimated_fee_total: "0.50"
+        cash_change_direction: CREDIT
       properties:
-        estimated_cost:
-          description: Estimated option premium for the order (before fees).
+        estimated_cash_change:
+          description: "Estimated cash change for the order, before fees."
           example: "1.97"
           type: string
           x-konfig-original-example: "1.97"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_cost
-        estimated_transaction_fee:
-          description: Estimated transaction fees and commissions for the order.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_cash_change
+        cash_change_direction:
+          description: "Direction of the cash change. CREDIT means cash is received,\
+            \ DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN\
+            \ if the direction cannot be determined from the request."
+          enum:
+          - CREDIT
+          - DEBIT
+          - EVEN
+          - UNKNOWN
+          nullable: true
+          type: string
+        estimated_fee_total:
+          description: Estimated total transaction fees and commissions for the order.
           example: "0.50"
           type: string
           x-konfig-original-example: "0.50"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_transaction_fee
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_fee_total
       type: object
       x-konfig-is-used-in-successful-response: true
     MlegTradeForm:
@@ -7917,7 +7931,7 @@ components:
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`."
           example: ""
           format: decimal
           nullable: true
@@ -7925,8 +7939,8 @@ components:
           x-konfig-original-example: ""
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`."
           example: ""
           format: decimal
           nullable: true
@@ -8368,8 +8382,8 @@ components:
       x-konfig-original-example: REGULAR
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradingSession
     MlegPriceEffectStrict:
-      description: "The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.\
-        \ Values are CREDIT, DEBIT, EVEN"
+      description: "The desired price_effect for `LIMIT` and `STOP_LOSS_LIMIT` orders.\
+        \ Values are `CREDIT`, `DEBIT`, `EVEN`"
       enum:
       - CREDIT
       - DEBIT
@@ -9884,16 +9898,16 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`\
+            \ or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
@@ -9901,14 +9915,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
         post_only:
           description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+            Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
         expiration_date:
           description: The expiration date of the order. Required if the time_in_force
-            is GTD.
+            is `GTD`.
           example: 2024-01-01T00:00:00Z
           format: date-time
           type: string
@@ -9970,16 +9984,16 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`\
+            \ or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
@@ -9987,14 +10001,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
         post_only:
           description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+            Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
         expiration_date:
           description: The expiration date of the order. Required if the time_in_force
-            is GTD.
+            is `GTD`.
           example: 2024-01-01T00:00:00Z
           format: date-time
           type: string
@@ -10019,7 +10033,7 @@ components:
       example: "BUY,SELL,DIVIDEND"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-paths--marketData-options-quotes-get-parameters-2-schema:
+    konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
       example: AAPL  251219C00150000
       type: string
       x-do-not-generate: true
@@ -11122,11 +11136,11 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_cost:
+    konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_cash_change:
       example: "1.97"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_transaction_fee:
+    konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_fee_total:
       example: "0.50"
       type: string
       x-do-not-generate: true
@@ -12134,6 +12148,32 @@ components:
       - accountId
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        symbol:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+      required:
+      - accountId
+      - symbol
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - symbol
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
       additionalProperties: true
       properties:
@@ -12153,28 +12193,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--marketData-options-quotes:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        symbol:
-          example: AAPL  251219C00150000
-          type: string
-          x-konfig-original-example: AAPL  251219C00150000
-          x-konfig-generated-schema: konfig-generated-schema-paths--marketData-options-quotes-get-parameters-2-schema
-      required:
-      - symbol
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - symbol
     konfig-generated-schema-single-parameter-schema-get--activities:
       additionalProperties: true
       properties:
@@ -12510,7 +12528,7 @@ components:
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`."
           example: ""
           format: decimal
           nullable: true
@@ -12518,8 +12536,8 @@ components:
           x-konfig-original-example: ""
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`."
           example: ""
           format: decimal
           nullable: true
@@ -12637,16 +12655,16 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`\
+            \ or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
@@ -12654,14 +12672,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
         post_only:
           description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+            Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
         expiration_date:
           description: The expiration date of the order. Required if the time_in_force
-            is GTD.
+            is `GTD`.
           example: 2024-01-01T00:00:00Z
           format: date-time
           type: string
@@ -12726,16 +12744,16 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`\
+            \ or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`."
           example: "123.45"
           format: decimal
           type: string
@@ -12743,14 +12761,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
         post_only:
           description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+            Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
         expiration_date:
           description: The expiration date of the order. Required if the time_in_force
-            is GTD.
+            is `GTD`.
           example: 2024-01-01T00:00:00Z
           format: date-time
           type: string
@@ -12861,7 +12879,7 @@ components:
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`."
           example: ""
           format: decimal
           nullable: true
@@ -12869,8 +12887,8 @@ components:
           x-konfig-original-example: ""
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
         stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT."
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`."
           example: ""
           format: decimal
           nullable: true
@@ -13421,8 +13439,8 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
     NotionalValueNullable: {}
     MlegPriceEffectStrictNullable:
-      description: "The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.\
-        \ Values are CREDIT, DEBIT, EVEN"
+      description: "The desired price_effect for `LIMIT` and `STOP_LOSS_LIMIT` orders.\
+        \ Values are `CREDIT`, `DEBIT`, `EVEN`"
       enum:
       - CREDIT
       - DEBIT

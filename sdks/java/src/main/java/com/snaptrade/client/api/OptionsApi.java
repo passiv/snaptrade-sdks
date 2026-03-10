@@ -15,8 +15,8 @@ public class OptionsApi extends OptionsApiGenerated {
         super(apiClient);
     }
     public class GetOptionQuoteRequestBuilder extends GetOptionQuoteRequestBuilderGenerated {
-        public GetOptionQuoteRequestBuilder(String userId, String userSecret, String symbol) {
-            super(userId, userSecret, symbol);
+        public GetOptionQuoteRequestBuilder(String userId, String userSecret, UUID accountId, String symbol) {
+            super(userId, userSecret, accountId, symbol);
         }
     }
     public class ListOptionHoldingsRequestBuilder extends ListOptionHoldingsRequestBuilderGenerated {

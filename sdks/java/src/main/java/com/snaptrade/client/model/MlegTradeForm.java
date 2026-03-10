@@ -153,11 +153,11 @@ public class MlegTradeForm {
   }
 
    /**
-   * The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+   * The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.
    * @return limitPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "", value = "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.")
+  @ApiModelProperty(example = "", value = "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.")
 
   public BigDecimal getLimitPrice() {
     return limitPrice;
@@ -182,11 +182,11 @@ public class MlegTradeForm {
   }
 
    /**
-   * The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+   * The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "", value = "The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.")
+  @ApiModelProperty(example = "", value = "The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.")
 
   public BigDecimal getStopPrice() {
     return stopPrice;

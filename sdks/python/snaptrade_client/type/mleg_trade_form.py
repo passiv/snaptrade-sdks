@@ -29,10 +29,10 @@ class RequiredMlegTradeForm(TypedDict):
 
 
 class OptionalMlegTradeForm(TypedDict, total=False):
-    # The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+    # The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
     limit_price: typing.Optional[str]
 
-    # The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    # The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     stop_price: typing.Optional[str]
 
     price_effect: typing.Optional[MlegPriceEffectStrictNullable]

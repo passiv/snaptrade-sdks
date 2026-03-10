@@ -146,10 +146,10 @@ namespace SnapTrade.Net.Model
         /// <param name="type">The type of order to place. (required).</param>
         /// <param name="timeInForce">The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.  (required).</param>
         /// <param name="amount">The amount of the base currency to buy or sell. (required).</param>
-        /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT..</param>
-        /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
-        /// <param name="postOnly">Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
-        /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
+        /// <param name="limitPrice">The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;..</param>
+        /// <param name="stopPrice">The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;..</param>
+        /// <param name="postOnly">Valid and required only for order type &#x60;LIMIT&#x60;. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
+        /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is &#x60;GTD&#x60;..</param>
         public SimpleOrderForm(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime)) : base()
         {
             // to ensure "instrument" is required (not null)
@@ -183,30 +183,30 @@ namespace SnapTrade.Net.Model
         public decimal Amount { get; set; }
 
         /// <summary>
-        /// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+        /// The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.
         /// </summary>
-        /// <value>The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.</value>
+        /// <value>The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = false)]
         public decimal LimitPrice { get; set; }
 
         /// <summary>
-        /// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+        /// The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.
         /// </summary>
-        /// <value>The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.</value>
+        /// <value>The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = false)]
         public decimal StopPrice { get; set; }
 
         /// <summary>
-        /// Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+        /// Valid and required only for order type &#x60;LIMIT&#x60;. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
         /// </summary>
-        /// <value>Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. </value>
+        /// <value>Valid and required only for order type &#x60;LIMIT&#x60;. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. </value>
         [DataMember(Name = "post_only", EmitDefaultValue = true)]
         public bool PostOnly { get; set; }
 
         /// <summary>
-        /// The expiration date of the order. Required if the time_in_force is GTD.
+        /// The expiration date of the order. Required if the time_in_force is &#x60;GTD&#x60;.
         /// </summary>
-        /// <value>The expiration date of the order. Required if the time_in_force is GTD.</value>
+        /// <value>The expiration date of the order. Required if the time_in_force is &#x60;GTD&#x60;.</value>
         [DataMember(Name = "expiration_date", EmitDefaultValue = false)]
         public DateTime ExpirationDate { get; set; }
 

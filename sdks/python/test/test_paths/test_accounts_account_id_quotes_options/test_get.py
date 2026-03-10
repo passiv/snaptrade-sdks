@@ -16,15 +16,15 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths.market_data_options_quotes import get
+from snaptrade_client.paths.accounts_account_id_quotes_options import get
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestMarketDataOptionsQuotes(ApiTestMixin, unittest.TestCase):
+class TestAccountsAccountIdQuotesOptions(ApiTestMixin, unittest.TestCase):
     """
-    MarketDataOptionsQuotes unit test stubs
+    AccountsAccountIdQuotesOptions unit test stubs
         Get option quote
     """
 

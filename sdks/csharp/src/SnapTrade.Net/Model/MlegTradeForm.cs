@@ -60,8 +60,8 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
-        /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT..</param>
-        /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT..</param>
+        /// <param name="limitPrice">The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;..</param>
+        /// <param name="stopPrice">The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;..</param>
         /// <param name="priceEffect">priceEffect.</param>
         /// <param name="legs">legs (required).</param>
         public MlegTradeForm(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), MlegPriceEffectStrictNullable? priceEffect = default(MlegPriceEffectStrictNullable?), List<MlegLeg> legs = default(List<MlegLeg>))
@@ -80,16 +80,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+        /// The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.
         /// </summary>
-        /// <value>The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.</value>
+        /// <value>The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
         public decimal? LimitPrice { get; set; }
 
         /// <summary>
-        /// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+        /// The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.
         /// </summary>
-        /// <value>The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.</value>
+        /// <value>The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public decimal? StopPrice { get; set; }
 

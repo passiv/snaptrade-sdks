@@ -19,9 +19,9 @@ import (
 type MlegTradeForm struct {
 	OrderType MlegOrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
-	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+	// The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
-	// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+	// The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
 	PriceEffect NullableMlegPriceEffectStrict `json:"price_effect,omitempty"`
 	Legs []MlegLeg `json:"legs"`

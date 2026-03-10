@@ -1427,9 +1427,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.options.get_option_quote`<a id="snaptradeoptionsget_option_quote"></a>
 
-Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-
-OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1438,6 +1436,7 @@ OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spac
 get_option_quote_response = snaptrade.options.get_option_quote(
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     symbol="AAPL  251219C00150000",
 )
 ```
@@ -1447,6 +1446,8 @@ get_option_quote_response = snaptrade.options.get_option_quote(
 ##### user_id: `str`<a id="user_id-str"></a>
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
 
 ##### symbol: `str`<a id="symbol-str"></a>
 
@@ -1458,7 +1459,7 @@ The OCC-formatted option symbol.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/marketData/options/quotes` `get`
+`/accounts/{accountId}/quotes/options` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1976,7 +1977,7 @@ get_cryptocurrency_pair_quote_response = (
 ### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2020,11 +2021,11 @@ get_option_impact_response = snaptrade.trading.get_option_impact(
 
 ##### limit_price: `Optional[str]`<a id="limit_price-optionalstr"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 
 ##### stop_price: `Optional[str]`<a id="stop_price-optionalstr"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
 ##### price_effect: [`MlegPriceEffectStrictNullable`](./snaptrade_client/type/mleg_price_effect_strict_nullable.py)<a id="price_effect-mlegpriceeffectstrictnullablesnaptrade_clienttypemleg_price_effect_strict_nullablepy"></a>
 
@@ -2305,19 +2306,19 @@ The amount of the base currency to buy or sell.
 
 ##### limit_price: `str`<a id="limit_price-str"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
 
 ##### stop_price: `str`<a id="stop_price-str"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 
 ##### post_only: `bool`<a id="post_only-bool"></a>
 
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
 
-The expiration date of the order. Required if the time_in_force is GTD.
+The expiration date of the order. Required if the time_in_force is `GTD`.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -2464,11 +2465,11 @@ place_mleg_order_response = snaptrade.trading.place_mleg_order(
 
 ##### limit_price: `Optional[str]`<a id="limit_price-optionalstr"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 
 ##### stop_price: `Optional[str]`<a id="stop_price-optionalstr"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
 ##### price_effect: [`MlegPriceEffectStrictNullable`](./snaptrade_client/type/mleg_price_effect_strict_nullable.py)<a id="price_effect-mlegpriceeffectstrictnullablesnaptrade_clienttypemleg_price_effect_strict_nullablepy"></a>
 
@@ -2588,19 +2589,19 @@ The amount of the base currency to buy or sell.
 
 ##### limit_price: `str`<a id="limit_price-str"></a>
 
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
 
 ##### stop_price: `str`<a id="stop_price-str"></a>
 
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 
 ##### post_only: `bool`<a id="post_only-bool"></a>
 
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
 
-The expiration date of the order. Required if the time_in_force is GTD.
+The expiration date of the order. Required if the time_in_force is `GTD`.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

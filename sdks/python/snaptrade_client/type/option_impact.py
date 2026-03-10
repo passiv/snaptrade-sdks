@@ -20,11 +20,14 @@ class RequiredOptionImpact(TypedDict):
     pass
 
 class OptionalOptionImpact(TypedDict, total=False):
-    # Estimated option premium for the order (before fees).
-    estimated_cost: str
+    # Estimated cash change for the order, before fees.
+    estimated_cash_change: str
 
-    # Estimated transaction fees and commissions for the order.
-    estimated_transaction_fee: str
+    # Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
+    cash_change_direction: typing.Optional[str]
+
+    # Estimated total transaction fees and commissions for the order.
+    estimated_fee_total: str
 
 class OptionImpact(RequiredOptionImpact, OptionalOptionImpact):
     pass

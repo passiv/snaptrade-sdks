@@ -27,9 +27,9 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN
+    /// The desired price_effect for &#x60;LIMIT&#x60; and &#x60;STOP_LOSS_LIMIT&#x60; orders. Values are &#x60;CREDIT&#x60;, &#x60;DEBIT&#x60;, &#x60;EVEN&#x60;
     /// </summary>
-    /// <value>The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN</value>
+    /// <value>The desired price_effect for &#x60;LIMIT&#x60; and &#x60;STOP_LOSS_LIMIT&#x60; orders. Values are &#x60;CREDIT&#x60;, &#x60;DEBIT&#x60;, &#x60;EVEN&#x60;</value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum MlegPriceEffectStrict
     {

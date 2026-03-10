@@ -1100,6 +1100,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  "/accounts/{accountId}/quotes/options":
+    get:
+      tags:
+        - Options
+      summary: Get option quote
+      description: |
+        Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+      operationId: Options_getOptionQuote
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          name: symbol
+          required: true
+          description: The OCC-formatted option symbol.
+          schema:
+            type: string
+            example: "AAPL  251219C00150000"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OptionQuote"
+        "404":
+          description: Option contract not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/orders/cancel":
     post:
       deprecated: true
@@ -1229,56 +1279,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OptionsPosition"
-        "500":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
-  "/marketData/options/quotes":
-    get:
-      tags:
-        - Options
-      summary: Get option quote
-      description: |
-        Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-
-        OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
-
-      operationId: Options_getOptionQuote
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: query
-          name: symbol
-          required: true
-          description: The OCC-formatted option symbol.
-          schema:
-            type: string
-            example: "AAPL  251219C00150000"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OptionQuote"
-        "404":
-          description: Option contract not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/404FailedRequestResponse"
-        "429":
-          description: Rate limit exceeded
         "500":
           description: Unexpected error
           content:
@@ -2371,7 +2371,7 @@ paths:
       summary: Get option order impact
       description: |
         Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
       operationId: Trading_getOptionImpact
       parameters:
         - in: query
@@ -2412,8 +2412,7 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "501":
           description: Not Implemented - option impact is not supported for this brokerage
-        "500":
-          description: Unexpected Error
+
 
   /accounts/{accountId}/trading/options:
     post:
@@ -4976,15 +4975,20 @@ components:
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
     OptionImpact:
-      description: Estimated cost and fees for an option order before it is placed.
+      description: Estimated cash change and fees for an option order before it is placed.
       type: object
       properties:
-        estimated_cost:
-          description: Estimated option premium for the order (before fees).
+        estimated_cash_change:
+          description: Estimated cash change for the order, before fees.
           type: string
           example: "1.97"
-        estimated_transaction_fee:
-          description: Estimated transaction fees and commissions for the order.
+        cash_change_direction:
+          description: Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
+          type: string
+          nullable: true
+          enum: [CREDIT, DEBIT, EVEN, UNKNOWN]
+        estimated_fee_total:
+          description: Estimated total transaction fees and commissions for the order.
           type: string
           example: "0.50"
     MlegTradeForm:
@@ -5000,13 +5004,13 @@ components:
         time_in_force:
           $ref: "#/components/schemas/TimeInForceStrict"
         limit_price:
-          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+          description: The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
           type: string
           format: decimal
           example: ""
           nullable: true
         stop_price:
-          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+          description: The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
           type: string
           format: decimal
           example: ""
@@ -5277,7 +5281,7 @@ components:
       default: REGULAR
     MlegPriceEffectStrict:
       type: string
-      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN
+      description: The desired price_effect for `LIMIT` and `STOP_LOSS_LIMIT` orders. Values are `CREDIT`, `DEBIT`, `EVEN`
       enum:
         - CREDIT
         - DEBIT
@@ -6092,12 +6096,12 @@ components:
           format: decimal
           example: "123.45"
         limit_price:
-          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+          description: The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
           type: string
           format: decimal
           example: "123.45"
         stop_price:
-          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+          description: The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
           type: string
           format: decimal
           example: "123.45"
@@ -6105,13 +6109,13 @@ components:
           type: boolean
           example: false
           description: >
-            Valid and required only for order type LIMIT.
+            Valid and required only for order type `LIMIT`.
             If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
         expiration_date:
           type: string
           format: date-time
           example: "2024-01-01T00:00:00Z"
-          description: The expiration date of the order. Required if the time_in_force is GTD.
+          description: The expiration date of the order. Required if the time_in_force is `GTD`.
     CryptoOrderForm:
       type: object
       required:
@@ -6154,12 +6158,12 @@ components:
           format: decimal
           example: "123.45"
         limit_price:
-          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+          description: The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
           type: string
           format: decimal
           example: "123.45"
         stop_price:
-          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+          description: The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
           type: string
           format: decimal
           example: "123.45"
@@ -6167,10 +6171,10 @@ components:
           type: boolean
           example: false
           description: >
-            Valid and required only for order type LIMIT.
+            Valid and required only for order type `LIMIT`.
             If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
         expiration_date:
           type: string
           format: date-time
           example: "2024-01-01T00:00:00Z"
-          description: The expiration date of the order. Required if the time_in_force is GTD.
+          description: The expiration date of the order. Required if the time_in_force is `GTD`.

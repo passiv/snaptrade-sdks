@@ -40,6 +40,8 @@ from snaptrade_client.type.model500_unexpected_exception_response import Model50
 from snaptrade_client.type.option_quote import OptionQuote
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
+from . import path
+
 # Query params
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
@@ -85,6 +87,37 @@ request_query_symbol = api_client.QueryParameter(
     required=True,
     explode=True,
 )
+# Path params
+AccountIdSchema = schemas.UUIDSchema
+RequestRequiredPathParams = typing_extensions.TypedDict(
+    'RequestRequiredPathParams',
+    {
+        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+    }
+)
+RequestOptionalPathParams = typing_extensions.TypedDict(
+    'RequestOptionalPathParams',
+    {
+    },
+    total=False
+)
+
+
+class RequestPathParams(RequestRequiredPathParams, RequestOptionalPathParams):
+    pass
+
+
+request_path_account_id = api_client.PathParameter(
+    name="accountId",
+    style=api_client.ParameterStyle.SIMPLE,
+    schema=AccountIdSchema,
+    required=True,
+)
+_auth = [
+    'PartnerClientId',
+    'PartnerSignature',
+    'PartnerTimestamp',
+]
 SchemaFor200ResponseBodyApplicationJson = OptionQuoteSchema
 
 
@@ -127,43 +160,32 @@ _response_for_404 = api_client.OpenApiResponse(
             schema=SchemaFor404ResponseBodyApplicationJson),
     },
 )
+SchemaFor429ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
 @dataclass
 class ApiResponseFor429(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 @dataclass
 class ApiResponseFor429Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model500UnexpectedExceptionResponse
 
 
 _response_for_429 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor429,
     response_cls_async=ApiResponseFor429Async,
-)
-SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
-
-
-@dataclass
-class ApiResponseFor500(api_client.ApiResponse):
-    body: Model500UnexpectedExceptionResponse
-
-
-@dataclass
-class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: Model500UnexpectedExceptionResponse
-
-
-_response_for_500 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor500,
-    response_cls_async=ApiResponseFor500Async,
     content={
         'application/json': api_client.MediaType(
-            schema=SchemaFor500ResponseBodyApplicationJson),
+            schema=SchemaFor429ResponseBodyApplicationJson),
     },
 )
+_status_code_to_response = {
+    '200': _response_for_200,
+    '404': _response_for_404,
+    '429': _response_for_429,
+}
 _all_accept_content_types = (
     'application/json',
 )
@@ -175,23 +197,30 @@ class BaseApi(api_client.Api):
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
+        _path_params = {}
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
         if symbol is not None:
             _query_params["symbol"] = symbol
+        if account_id is not None:
+            _path_params["accountId"] = account_id
         args.query = query_params if query_params else _query_params
+        args.path = path_params if path_params else _path_params
         return args
 
     async def _aget_option_quote_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -209,7 +238,21 @@ class BaseApi(api_client.Api):
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_account_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
@@ -236,7 +279,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/marketData/options/quotes',
+            path_template='/accounts/{accountId}/quotes/options',
             auth_settings=_auth,
             headers=_headers,
         )
@@ -308,6 +351,7 @@ class BaseApi(api_client.Api):
     def _get_option_quote_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -323,7 +367,21 @@ class BaseApi(api_client.Api):
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_account_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
@@ -350,7 +408,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/marketData/options/quotes',
+            path_template='/accounts/{accountId}/quotes/options',
             auth_settings=_auth,
             headers=_headers,
         )
@@ -395,8 +453,10 @@ class GetOptionQuote(BaseApi):
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -405,12 +465,15 @@ class GetOptionQuote(BaseApi):
     ]:
         args = self._get_option_quote_mapped_args(
             query_params=query_params,
+            path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
+            account_id=account_id,
             symbol=symbol,
         )
         return await self._aget_option_quote_oapg(
             query_params=args.query,
+            path_params=args.path,
             **kwargs,
         )
     
@@ -418,21 +481,26 @@ class GetOptionQuote(BaseApi):
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).  """
+        """ Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)  """
         args = self._get_option_quote_mapped_args(
             query_params=query_params,
+            path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
+            account_id=account_id,
             symbol=symbol,
         )
         return self._get_option_quote_oapg(
             query_params=args.query,
+            path_params=args.path,
         )
 
 class ApiForget(BaseApi):
@@ -442,8 +510,10 @@ class ApiForget(BaseApi):
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -452,12 +522,15 @@ class ApiForget(BaseApi):
     ]:
         args = self._get_option_quote_mapped_args(
             query_params=query_params,
+            path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
+            account_id=account_id,
             symbol=symbol,
         )
         return await self._aget_option_quote_oapg(
             query_params=args.query,
+            path_params=args.path,
             **kwargs,
         )
     
@@ -465,20 +538,25 @@ class ApiForget(BaseApi):
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).  """
+        """ Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)  """
         args = self._get_option_quote_mapped_args(
             query_params=query_params,
+            path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
+            account_id=account_id,
             symbol=symbol,
         )
         return self._get_option_quote_oapg(
             query_params=args.query,
+            path_params=args.path,
         )
 

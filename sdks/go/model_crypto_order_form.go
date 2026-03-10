@@ -26,13 +26,13 @@ type CryptoOrderForm struct {
 	TimeInForce string `json:"time_in_force"`
 	// The amount of the base currency to buy or sell.
 	Amount float64 `json:"amount"`
-	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+	// The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
 	LimitPrice *float64 `json:"limit_price,omitempty"`
-	// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+	// The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 	StopPrice *float64 `json:"stop_price,omitempty"`
-	// Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+	// Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 	PostOnly *bool `json:"post_only,omitempty"`
-	// The expiration date of the order. Required if the time_in_force is GTD.
+	// The expiration date of the order. Required if the time_in_force is `GTD`.
 	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
 }
 

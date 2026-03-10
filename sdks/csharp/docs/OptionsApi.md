@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetOptionQuote**](OptionsApi.md#getoptionquote) | **GET** /marketData/options/quotes | Get option quote |
+| [**GetOptionQuote**](OptionsApi.md#getoptionquote) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | List account option positions |
 
 
@@ -12,7 +12,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 
 
-Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
 
 ### Example
 ```csharp
@@ -36,12 +36,13 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
             var symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
             
             try
             {
                 // Get option quote
-                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, symbol);
+                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -68,7 +69,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get option quote
-    ApiResponse<OptionQuote> response = apiInstance.GetOptionQuoteWithHttpInfo(userId, userSecret, symbol);
+    ApiResponse<OptionQuote> response = apiInstance.GetOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -87,6 +88,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
 | **symbol** | **string** | The OCC-formatted option symbol. |  |
 
 ### Return type
@@ -100,7 +102,6 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **404** | Option contract not found |  -  |
 | **429** | Rate limit exceeded |  -  |
-| **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -854,7 +854,7 @@ public class TradingApiGenerated {
 
         /**
          * Set limitPrice
-         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. (optional)
+         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. (optional)
          * @return TradingApi.GetOptionImpactRequestBuilder
          */
         public TradingApi.GetOptionImpactRequestBuilder limitPrice(BigDecimal limitPrice) {
@@ -864,7 +864,7 @@ public class TradingApiGenerated {
         
         /**
          * Set stopPrice
-         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. (optional)
+         * @param stopPrice The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. (optional)
          * @return TradingApi.GetOptionImpactRequestBuilder
          */
         public TradingApi.GetOptionImpactRequestBuilder stopPrice(BigDecimal stopPrice) {
@@ -891,7 +891,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
             <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
          </table>
          */
@@ -919,7 +918,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
             <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
          </table>
          */
@@ -937,7 +935,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
             <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
          </table>
          */
@@ -955,7 +952,6 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
             <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
          </table>
          */
@@ -967,7 +963,7 @@ public class TradingApiGenerated {
 
     /**
      * Get option order impact
-     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
@@ -977,7 +973,6 @@ public class TradingApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
      </table>
      */
@@ -1921,7 +1916,7 @@ public class TradingApiGenerated {
 
         /**
          * Set limitPrice
-         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. (optional)
+         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;. (optional)
          * @return TradingApi.PlaceCryptoOrderRequestBuilder
          */
         public TradingApi.PlaceCryptoOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
@@ -1931,7 +1926,7 @@ public class TradingApiGenerated {
         
         /**
          * Set stopPrice
-         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. (optional)
+         * @param stopPrice The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;. (optional)
          * @return TradingApi.PlaceCryptoOrderRequestBuilder
          */
         public TradingApi.PlaceCryptoOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
@@ -1941,7 +1936,7 @@ public class TradingApiGenerated {
         
         /**
          * Set postOnly
-         * @param postOnly Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
+         * @param postOnly Valid and required only for order type &#x60;LIMIT&#x60;. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
          * @return TradingApi.PlaceCryptoOrderRequestBuilder
          */
         public TradingApi.PlaceCryptoOrderRequestBuilder postOnly(Boolean postOnly) {
@@ -1951,7 +1946,7 @@ public class TradingApiGenerated {
         
         /**
          * Set expirationDate
-         * @param expirationDate The expiration date of the order. Required if the time_in_force is GTD. (optional)
+         * @param expirationDate The expiration date of the order. Required if the time_in_force is &#x60;GTD&#x60;. (optional)
          * @return TradingApi.PlaceCryptoOrderRequestBuilder
          */
         public TradingApi.PlaceCryptoOrderRequestBuilder expirationDate(OffsetDateTime expirationDate) {
@@ -2516,7 +2511,7 @@ public class TradingApiGenerated {
 
         /**
          * Set limitPrice
-         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. (optional)
+         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. (optional)
          * @return TradingApi.PlaceMlegOrderRequestBuilder
          */
         public TradingApi.PlaceMlegOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
@@ -2526,7 +2521,7 @@ public class TradingApiGenerated {
         
         /**
          * Set stopPrice
-         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. (optional)
+         * @param stopPrice The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. (optional)
          * @return TradingApi.PlaceMlegOrderRequestBuilder
          */
         public TradingApi.PlaceMlegOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
@@ -2987,7 +2982,7 @@ public class TradingApiGenerated {
 
         /**
          * Set limitPrice
-         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. (optional)
+         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;. (optional)
          * @return TradingApi.PreviewCryptoOrderRequestBuilder
          */
         public TradingApi.PreviewCryptoOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
@@ -2997,7 +2992,7 @@ public class TradingApiGenerated {
         
         /**
          * Set stopPrice
-         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. (optional)
+         * @param stopPrice The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;. (optional)
          * @return TradingApi.PreviewCryptoOrderRequestBuilder
          */
         public TradingApi.PreviewCryptoOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
@@ -3007,7 +3002,7 @@ public class TradingApiGenerated {
         
         /**
          * Set postOnly
-         * @param postOnly Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
+         * @param postOnly Valid and required only for order type &#x60;LIMIT&#x60;. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
          * @return TradingApi.PreviewCryptoOrderRequestBuilder
          */
         public TradingApi.PreviewCryptoOrderRequestBuilder postOnly(Boolean postOnly) {
@@ -3017,7 +3012,7 @@ public class TradingApiGenerated {
         
         /**
          * Set expirationDate
-         * @param expirationDate The expiration date of the order. Required if the time_in_force is GTD. (optional)
+         * @param expirationDate The expiration date of the order. Required if the time_in_force is &#x60;GTD&#x60;. (optional)
          * @return TradingApi.PreviewCryptoOrderRequestBuilder
          */
         public TradingApi.PreviewCryptoOrderRequestBuilder expirationDate(OffsetDateTime expirationDate) {

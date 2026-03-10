@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Estimated cost and fees for an option order before it is placed.
+ * Estimated cash change and fees for an option order before it is placed.
  * @export
  * @interface OptionImpact
  */
@@ -20,16 +20,25 @@ export interface OptionImpact {
     [key: string]: any;
 
     /**
-     * Estimated option premium for the order (before fees).
+     * Estimated cash change for the order, before fees.
      * @type {string}
      * @memberof OptionImpact
      */
-    'estimated_cost'?: string;
+    'estimated_cash_change'?: string;
     /**
-     * Estimated transaction fees and commissions for the order.
+     * Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
      * @type {string}
      * @memberof OptionImpact
      */
-    'estimated_transaction_fee'?: string;
+    'cash_change_direction'?: OptionImpactCashChangeDirectionEnum;
+    /**
+     * Estimated total transaction fees and commissions for the order.
+     * @type {string}
+     * @memberof OptionImpact
+     */
+    'estimated_fee_total'?: string;
 }
+
+type OptionImpactCashChangeDirectionEnum = 'CREDIT' | 'DEBIT' | 'EVEN' | 'UNKNOWN'
+
 

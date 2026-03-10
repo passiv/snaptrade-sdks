@@ -54,12 +54,13 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
             var symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
             
             try
             {
                 // Get option quote
-                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, symbol);
+                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

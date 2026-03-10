@@ -29,9 +29,10 @@ describe 'OptionsApi' do
 
   # unit tests for get_option_quote
   # Get option quote
-  # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+  # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
   # @param user_id 
   # @param user_secret 
+  # @param account_id 
   # @param symbol The OCC-formatted option symbol.
   # @param [Hash] opts the optional parameters
   # @return [OptionQuote]

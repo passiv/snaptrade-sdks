@@ -15,12 +15,14 @@ import (
 	"encoding/json"
 )
 
-// OptionImpact Estimated cost and fees for an option order before it is placed.
+// OptionImpact Estimated cash change and fees for an option order before it is placed.
 type OptionImpact struct {
-	// Estimated option premium for the order (before fees).
-	EstimatedCost *string `json:"estimated_cost,omitempty"`
-	// Estimated transaction fees and commissions for the order.
-	EstimatedTransactionFee *string `json:"estimated_transaction_fee,omitempty"`
+	// Estimated cash change for the order, before fees.
+	EstimatedCashChange *string `json:"estimated_cash_change,omitempty"`
+	// Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
+	CashChangeDirection NullableString `json:"cash_change_direction,omitempty"`
+	// Estimated total transaction fees and commissions for the order.
+	EstimatedFeeTotal *string `json:"estimated_fee_total,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,77 +45,122 @@ func NewOptionImpactWithDefaults() *OptionImpact {
 	return &this
 }
 
-// GetEstimatedCost returns the EstimatedCost field value if set, zero value otherwise.
-func (o *OptionImpact) GetEstimatedCost() string {
-	if o == nil || isNil(o.EstimatedCost) {
+// GetEstimatedCashChange returns the EstimatedCashChange field value if set, zero value otherwise.
+func (o *OptionImpact) GetEstimatedCashChange() string {
+	if o == nil || isNil(o.EstimatedCashChange) {
 		var ret string
 		return ret
 	}
-	return *o.EstimatedCost
+	return *o.EstimatedCashChange
 }
 
-// GetEstimatedCostOk returns a tuple with the EstimatedCost field value if set, nil otherwise
+// GetEstimatedCashChangeOk returns a tuple with the EstimatedCashChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OptionImpact) GetEstimatedCostOk() (*string, bool) {
-	if o == nil || isNil(o.EstimatedCost) {
+func (o *OptionImpact) GetEstimatedCashChangeOk() (*string, bool) {
+	if o == nil || isNil(o.EstimatedCashChange) {
     return nil, false
 	}
-	return o.EstimatedCost, true
+	return o.EstimatedCashChange, true
 }
 
-// HasEstimatedCost returns a boolean if a field has been set.
-func (o *OptionImpact) HasEstimatedCost() bool {
-	if o != nil && !isNil(o.EstimatedCost) {
+// HasEstimatedCashChange returns a boolean if a field has been set.
+func (o *OptionImpact) HasEstimatedCashChange() bool {
+	if o != nil && !isNil(o.EstimatedCashChange) {
 		return true
 	}
 
 	return false
 }
 
-// SetEstimatedCost gets a reference to the given string and assigns it to the EstimatedCost field.
-func (o *OptionImpact) SetEstimatedCost(v string) {
-	o.EstimatedCost = &v
+// SetEstimatedCashChange gets a reference to the given string and assigns it to the EstimatedCashChange field.
+func (o *OptionImpact) SetEstimatedCashChange(v string) {
+	o.EstimatedCashChange = &v
 }
 
-// GetEstimatedTransactionFee returns the EstimatedTransactionFee field value if set, zero value otherwise.
-func (o *OptionImpact) GetEstimatedTransactionFee() string {
-	if o == nil || isNil(o.EstimatedTransactionFee) {
+// GetCashChangeDirection returns the CashChangeDirection field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OptionImpact) GetCashChangeDirection() string {
+	if o == nil || isNil(o.CashChangeDirection.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.EstimatedTransactionFee
+	return *o.CashChangeDirection.Get()
 }
 
-// GetEstimatedTransactionFeeOk returns a tuple with the EstimatedTransactionFee field value if set, nil otherwise
+// GetCashChangeDirectionOk returns a tuple with the CashChangeDirection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OptionImpact) GetEstimatedTransactionFeeOk() (*string, bool) {
-	if o == nil || isNil(o.EstimatedTransactionFee) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OptionImpact) GetCashChangeDirectionOk() (*string, bool) {
+	if o == nil {
     return nil, false
 	}
-	return o.EstimatedTransactionFee, true
+	return o.CashChangeDirection.Get(), o.CashChangeDirection.IsSet()
 }
 
-// HasEstimatedTransactionFee returns a boolean if a field has been set.
-func (o *OptionImpact) HasEstimatedTransactionFee() bool {
-	if o != nil && !isNil(o.EstimatedTransactionFee) {
+// HasCashChangeDirection returns a boolean if a field has been set.
+func (o *OptionImpact) HasCashChangeDirection() bool {
+	if o != nil && o.CashChangeDirection.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEstimatedTransactionFee gets a reference to the given string and assigns it to the EstimatedTransactionFee field.
-func (o *OptionImpact) SetEstimatedTransactionFee(v string) {
-	o.EstimatedTransactionFee = &v
+// SetCashChangeDirection gets a reference to the given NullableString and assigns it to the CashChangeDirection field.
+func (o *OptionImpact) SetCashChangeDirection(v string) {
+	o.CashChangeDirection.Set(&v)
+}
+// SetCashChangeDirectionNil sets the value for CashChangeDirection to be an explicit nil
+func (o *OptionImpact) SetCashChangeDirectionNil() {
+	o.CashChangeDirection.Set(nil)
+}
+
+// UnsetCashChangeDirection ensures that no value is present for CashChangeDirection, not even an explicit nil
+func (o *OptionImpact) UnsetCashChangeDirection() {
+	o.CashChangeDirection.Unset()
+}
+
+// GetEstimatedFeeTotal returns the EstimatedFeeTotal field value if set, zero value otherwise.
+func (o *OptionImpact) GetEstimatedFeeTotal() string {
+	if o == nil || isNil(o.EstimatedFeeTotal) {
+		var ret string
+		return ret
+	}
+	return *o.EstimatedFeeTotal
+}
+
+// GetEstimatedFeeTotalOk returns a tuple with the EstimatedFeeTotal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OptionImpact) GetEstimatedFeeTotalOk() (*string, bool) {
+	if o == nil || isNil(o.EstimatedFeeTotal) {
+    return nil, false
+	}
+	return o.EstimatedFeeTotal, true
+}
+
+// HasEstimatedFeeTotal returns a boolean if a field has been set.
+func (o *OptionImpact) HasEstimatedFeeTotal() bool {
+	if o != nil && !isNil(o.EstimatedFeeTotal) {
+		return true
+	}
+
+	return false
+}
+
+// SetEstimatedFeeTotal gets a reference to the given string and assigns it to the EstimatedFeeTotal field.
+func (o *OptionImpact) SetEstimatedFeeTotal(v string) {
+	o.EstimatedFeeTotal = &v
 }
 
 func (o OptionImpact) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.EstimatedCost) {
-		toSerialize["estimated_cost"] = o.EstimatedCost
+	if !isNil(o.EstimatedCashChange) {
+		toSerialize["estimated_cash_change"] = o.EstimatedCashChange
 	}
-	if !isNil(o.EstimatedTransactionFee) {
-		toSerialize["estimated_transaction_fee"] = o.EstimatedTransactionFee
+	if o.CashChangeDirection.IsSet() {
+		toSerialize["cash_change_direction"] = o.CashChangeDirection.Get()
+	}
+	if !isNil(o.EstimatedFeeTotal) {
+		toSerialize["estimated_fee_total"] = o.EstimatedFeeTotal
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -133,8 +180,9 @@ func (o *OptionImpact) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "estimated_cost")
-		delete(additionalProperties, "estimated_transaction_fee")
+		delete(additionalProperties, "estimated_cash_change")
+		delete(additionalProperties, "cash_change_direction")
+		delete(additionalProperties, "estimated_fee_total")
 		o.AdditionalProperties = additionalProperties
 	}
 

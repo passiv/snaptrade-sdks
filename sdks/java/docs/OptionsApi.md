@@ -4,17 +4,17 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getOptionQuote**](OptionsApi.md#getOptionQuote) | **GET** /marketData/options/quotes | Get option quote |
+| [**getOptionQuote**](OptionsApi.md#getOptionQuote) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**listOptionHoldings**](OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | List account option positions |
 
 
 <a name="getOptionQuote"></a>
 # **getOptionQuote**
-> OptionQuote getOptionQuote(userId, userSecret, symbol).execute();
+> OptionQuote getOptionQuote(userId, userSecret, accountId, symbol).execute();
 
 Get option quote
 
-Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
 
 ### Example
 ```java
@@ -40,11 +40,12 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
     String symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
     try {
       OptionQuote result = client
               .options
-              .getOptionQuote(userId, userSecret, symbol)
+              .getOptionQuote(userId, userSecret, accountId, symbol)
               .execute();
       System.out.println(result);
       System.out.println(result.getSymbol());
@@ -71,7 +72,7 @@ public class Example {
     try {
       ApiResponse<OptionQuote> response = client
               .options
-              .getOptionQuote(userId, userSecret, symbol)
+              .getOptionQuote(userId, userSecret, accountId, symbol)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -96,6 +97,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
 | **symbol** | **String**| The OCC-formatted option symbol. | |
 
 ### Return type
@@ -115,7 +117,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **429** | Rate limit exceeded |  -  |
 
 <a name="listOptionHoldings"></a>
 # **listOptionHoldings**
