@@ -247,8 +247,9 @@ func main() {
     }
     // response from `GetOptionImpact`: OptionImpact
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.GetOptionImpact`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedCost`: %v\n", *resp.EstimatedCost)
-    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedTransactionFee`: %v\n", *resp.EstimatedTransactionFee)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedCashChange`: %v\n", *resp.EstimatedCashChange)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.CashChangeDirection`: %v\n", *resp.CashChangeDirection)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedFeeTotal`: %v\n", *resp.EstimatedFeeTotal)
 }
 ```
 

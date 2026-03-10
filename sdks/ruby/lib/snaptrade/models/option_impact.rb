@@ -11,19 +11,23 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Estimated cost and fees for an option order before it is placed.
+  # Estimated cash change and fees for an option order before it is placed.
   class OptionImpact
-    # Estimated option premium for the order (before fees).
-    attr_accessor :estimated_cost
+    # Estimated cash change for the order, before fees.
+    attr_accessor :estimated_cash_change
 
-    # Estimated transaction fees and commissions for the order.
-    attr_accessor :estimated_transaction_fee
+    # Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
+    attr_accessor :cash_change_direction
+
+    # Estimated total transaction fees and commissions for the order.
+    attr_accessor :estimated_fee_total
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'estimated_cost' => :'estimated_cost',
-        :'estimated_transaction_fee' => :'estimated_transaction_fee'
+        :'estimated_cash_change' => :'estimated_cash_change',
+        :'cash_change_direction' => :'cash_change_direction',
+        :'estimated_fee_total' => :'estimated_fee_total'
       }
     end
 
@@ -35,14 +39,16 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'estimated_cost' => :'String',
-        :'estimated_transaction_fee' => :'String'
+        :'estimated_cash_change' => :'String',
+        :'cash_change_direction' => :'CashChangeDirection',
+        :'estimated_fee_total' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'cash_change_direction',
       ])
     end
 
@@ -61,12 +67,16 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'estimated_cost')
-        self.estimated_cost = attributes[:'estimated_cost']
+      if attributes.key?(:'estimated_cash_change')
+        self.estimated_cash_change = attributes[:'estimated_cash_change']
       end
 
-      if attributes.key?(:'estimated_transaction_fee')
-        self.estimated_transaction_fee = attributes[:'estimated_transaction_fee']
+      if attributes.key?(:'cash_change_direction')
+        self.cash_change_direction = attributes[:'cash_change_direction']
+      end
+
+      if attributes.key?(:'estimated_fee_total')
+        self.estimated_fee_total = attributes[:'estimated_fee_total']
       end
     end
 
@@ -88,8 +98,9 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          estimated_cost == o.estimated_cost &&
-          estimated_transaction_fee == o.estimated_transaction_fee
+          estimated_cash_change == o.estimated_cash_change &&
+          cash_change_direction == o.cash_change_direction &&
+          estimated_fee_total == o.estimated_fee_total
     end
 
     # @see the `==` method
@@ -101,7 +112,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [estimated_cost, estimated_transaction_fee].hash
+      [estimated_cash_change, cash_change_direction, estimated_fee_total].hash
     end
 
     # Builds the object from hash

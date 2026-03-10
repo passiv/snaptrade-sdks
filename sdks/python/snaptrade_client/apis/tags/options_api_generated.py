@@ -9,7 +9,7 @@
     Created by: https://snaptrade.com/
 """
 
-from snaptrade_client.paths.market_data_options_quotes.get import GetOptionQuote
+from snaptrade_client.paths.accounts_account_id_quotes_options.get import GetOptionQuote
 from snaptrade_client.paths.accounts_account_id_options.get import ListOptionHoldings
 
 

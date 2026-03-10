@@ -189,22 +189,6 @@ _response_for_403 = api_client.OpenApiResponse(
 
 
 @dataclass
-class ApiResponseFor500(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-@dataclass
-class ApiResponseFor500Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
-
-
-_response_for_500 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor500,
-    response_cls_async=ApiResponseFor500Async,
-)
-
-
-@dataclass
 class ApiResponseFor501(api_client.ApiResponse):
     body: schemas.Unset = schemas.unset
 
@@ -592,7 +576,7 @@ class GetOptionImpact(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.  """
+        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.  """
         args = self._get_option_impact_mapped_args(
             body=body,
             query_params=query_params,
@@ -675,7 +659,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.  """
+        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.  """
         args = self._get_option_impact_mapped_args(
             body=body,
             query_params=query_params,

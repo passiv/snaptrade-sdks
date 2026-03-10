@@ -74,7 +74,7 @@ public class OptionsApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call getOptionQuoteCall(String userId, String userSecret, String symbol, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOptionQuoteCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -91,7 +91,8 @@ public class OptionsApiGenerated {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/marketData/options/quotes";
+        String localVarPath = "/accounts/{accountId}/quotes/options"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -131,7 +132,7 @@ public class OptionsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getOptionQuoteValidateBeforeCall(String userId, String userSecret, String symbol, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getOptionQuoteValidateBeforeCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getOptionQuote(Async)");
@@ -142,25 +143,30 @@ public class OptionsApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling getOptionQuote(Async)");
         }
 
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getOptionQuote(Async)");
+        }
+
         // verify the required parameter 'symbol' is set
         if (symbol == null) {
             throw new ApiException("Missing the required parameter 'symbol' when calling getOptionQuote(Async)");
         }
 
-        return getOptionQuoteCall(userId, userSecret, symbol, _callback);
+        return getOptionQuoteCall(userId, userSecret, accountId, symbol, _callback);
 
     }
 
 
-    private ApiResponse<OptionQuote> getOptionQuoteWithHttpInfo(String userId, String userSecret, String symbol) throws ApiException {
-        okhttp3.Call localVarCall = getOptionQuoteValidateBeforeCall(userId, userSecret, symbol, null);
+    private ApiResponse<OptionQuote> getOptionQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, String symbol) throws ApiException {
+        okhttp3.Call localVarCall = getOptionQuoteValidateBeforeCall(userId, userSecret, accountId, symbol, null);
         Type localVarReturnType = new TypeToken<OptionQuote>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getOptionQuoteAsync(String userId, String userSecret, String symbol, final ApiCallback<OptionQuote> _callback) throws ApiException {
+    private okhttp3.Call getOptionQuoteAsync(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback<OptionQuote> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getOptionQuoteValidateBeforeCall(userId, userSecret, symbol, _callback);
+        okhttp3.Call localVarCall = getOptionQuoteValidateBeforeCall(userId, userSecret, accountId, symbol, _callback);
         Type localVarReturnType = new TypeToken<OptionQuote>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -169,11 +175,13 @@ public class OptionsApiGenerated {
     public abstract class GetOptionQuoteRequestBuilderGenerated {
         final String userId;
         final String userSecret;
+        final UUID accountId;
         final String symbol;
 
-        public GetOptionQuoteRequestBuilderGenerated(String userId, String userSecret, String symbol) {
+        public GetOptionQuoteRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String symbol) {
             this.userId = userId;
             this.userSecret = userSecret;
+            this.accountId = accountId;
             this.symbol = symbol;
         }
 
@@ -186,11 +194,10 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 429 </td><td> Rate limit exceeded </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getOptionQuoteCall(userId, userSecret, symbol, _callback);
+            return getOptionQuoteCall(userId, userSecret, accountId, symbol, _callback);
         }
 
 
@@ -202,11 +209,10 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 429 </td><td> Rate limit exceeded </td><td>  -  </td></tr>
          </table>
          */
         public OptionQuote execute() throws ApiException {
-            ApiResponse<OptionQuote> localVarResp = getOptionQuoteWithHttpInfo(userId, userSecret, symbol);
+            ApiResponse<OptionQuote> localVarResp = getOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
             return localVarResp.getResponseBody();
         }
 
@@ -218,11 +224,10 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 429 </td><td> Rate limit exceeded </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<OptionQuote> executeWithHttpInfo() throws ApiException {
-            return getOptionQuoteWithHttpInfo(userId, userSecret, symbol);
+            return getOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
         }
 
         /**
@@ -234,39 +239,41 @@ public class OptionsApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 429 </td><td> Rate limit exceeded </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<OptionQuote> _callback) throws ApiException {
-            return getOptionQuoteAsync(userId, userSecret, symbol, _callback);
+            return getOptionQuoteAsync(userId, userSecret, accountId, symbol, _callback);
         }
     }
 
     /**
      * Get option quote
-     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
      * @param userId  (required)
      * @param userSecret  (required)
+     * @param accountId  (required)
      * @param symbol The OCC-formatted option symbol. (required)
      * @return GetOptionQuoteRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 429 </td><td> Rate limit exceeded </td><td>  -  </td></tr>
      </table>
      */
-    public OptionsApi.GetOptionQuoteRequestBuilder getOptionQuote(String userId, String userSecret, String symbol) throws IllegalArgumentException {
+    public OptionsApi.GetOptionQuoteRequestBuilder getOptionQuote(String userId, String userSecret, UUID accountId, String symbol) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
         if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
             
 
-        return ((OptionsApi) this).new GetOptionQuoteRequestBuilder(userId, userSecret, symbol);
+        return ((OptionsApi) this).new GetOptionQuoteRequestBuilder(userId, userSecret, accountId, symbol);
     }
     private okhttp3.Call listOptionHoldingsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;

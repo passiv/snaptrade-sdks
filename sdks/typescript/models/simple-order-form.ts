@@ -52,25 +52,25 @@ export interface SimpleOrderForm {
      */
     'amount': string;
     /**
-     * The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+     * The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
      * @type {string}
      * @memberof SimpleOrderForm
      */
     'limit_price'?: string;
     /**
-     * The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+     * The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
      * @type {string}
      * @memberof SimpleOrderForm
      */
     'stop_price'?: string;
     /**
-     * Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+     * Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
      * @type {boolean}
      * @memberof SimpleOrderForm
      */
     'post_only'?: boolean;
     /**
-     * The expiration date of the order. Required if the time_in_force is GTD.
+     * The expiration date of the order. Required if the time_in_force is `GTD`.
      * @type {string}
      * @memberof SimpleOrderForm
      */

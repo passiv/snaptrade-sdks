@@ -350,7 +350,7 @@ public class Example {
 
 Get option order impact
 
-Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint. 
 
 ### Example
 ```java
@@ -380,8 +380,8 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
-    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
     try {
       OptionImpact result = client
@@ -392,8 +392,9 @@ public class Example {
               .priceEffect(priceEffect)
               .execute();
       System.out.println(result);
-      System.out.println(result.getEstimatedCost());
-      System.out.println(result.getEstimatedTransactionFee());
+      System.out.println(result.getEstimatedCashChange());
+      System.out.println(result.getCashChangeDirection());
+      System.out.println(result.getEstimatedFeeTotal());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#getOptionImpact");
       System.err.println("Status code: " + e.getStatusCode());
@@ -454,7 +455,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **500** | Unexpected Error |  -  |
 | **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
 
 <a name="getOrderImpact"></a>
@@ -848,10 +848,10 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-    OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
+    Boolean postOnly = true; // Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is `GTD`.
     try {
       OrderUpdatedResponse result = client
               .trading
@@ -1106,8 +1106,8 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
-    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
     try {
       MlegOrderResponse result = client
@@ -1343,10 +1343,10 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-    OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
+    Boolean postOnly = true; // Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is `GTD`.
     try {
       CryptoOrderPreview result = client
               .trading

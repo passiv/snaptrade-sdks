@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -39,19 +40,27 @@ public class OptionImpactTest {
     }
 
     /**
-     * Test the property 'estimatedCost'
+     * Test the property 'estimatedCashChange'
      */
     @Test
-    public void estimatedCostTest() {
-        // TODO: test estimatedCost
+    public void estimatedCashChangeTest() {
+        // TODO: test estimatedCashChange
     }
 
     /**
-     * Test the property 'estimatedTransactionFee'
+     * Test the property 'cashChangeDirection'
      */
     @Test
-    public void estimatedTransactionFeeTest() {
-        // TODO: test estimatedTransactionFee
+    public void cashChangeDirectionTest() {
+        // TODO: test cashChangeDirection
+    }
+
+    /**
+     * Test the property 'estimatedFeeTotal'
+     */
+    @Test
+    public void estimatedFeeTotalTest() {
+        // TODO: test estimatedFeeTotal
     }
 
 }

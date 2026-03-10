@@ -36,22 +36,26 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const OptionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+         * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
          * @summary Get option quote
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {string} accountId 
          * @param {string} symbol The OCC-formatted option symbol.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOptionQuote: async (userId: string, userSecret: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOptionQuote: async (userId: string, userSecret: string, accountId: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getOptionQuote', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('getOptionQuote', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getOptionQuote', 'accountId', accountId)
             // verify required parameter 'symbol' is not null or undefined
             assertParamExists('getOptionQuote', 'symbol', symbol)
-            const localVarPath = `/marketData/options/quotes`;
+            const localVarPath = `/accounts/{accountId}/quotes/options`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -90,7 +94,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/marketData/options/quotes',
+                pathTemplate: '/accounts/{accountId}/quotes/options',
                 httpMethod: 'GET'
             });
 
@@ -173,14 +177,14 @@ export const OptionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OptionsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+         * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
          * @summary Get option quote
          * @param {OptionsApiGetOptionQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getOptionQuote(requestParameters: OptionsApiGetOptionQuoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionQuote>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionQuote(requestParameters.userId, requestParameters.userSecret, requestParameters.symbol, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionQuote(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.symbol, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -205,7 +209,7 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = OptionsApiFp(configuration)
     return {
         /**
-         * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+         * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
          * @summary Get option quote
          * @param {OptionsApiGetOptionQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -247,6 +251,13 @@ export type OptionsApiGetOptionQuoteRequest = {
     * @memberof OptionsApiGetOptionQuote
     */
     readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionQuote
+    */
+    readonly accountId: string
     
     /**
     * The OCC-formatted option symbol.
@@ -295,7 +306,7 @@ export type OptionsApiListOptionHoldingsRequest = {
  */
 export class OptionsApiGenerated extends BaseAPI {
     /**
-     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
      * @summary Get option quote
      * @param {OptionsApiGetOptionQuoteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

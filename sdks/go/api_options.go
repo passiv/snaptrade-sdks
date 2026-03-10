@@ -29,6 +29,7 @@ type OptionsApiGetOptionQuoteRequest struct {
 	ApiService *OptionsApiService
 	userId string
 	userSecret string
+	accountId string
 	symbol string
 }
 
@@ -39,23 +40,23 @@ func (r OptionsApiGetOptionQuoteRequest) Execute() (*OptionQuote, *http.Response
 /*
 GetOptionQuote Get option quote
 
-Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-
-OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
+ @param accountId
  @param symbol The OCC-formatted option symbol.
  @return OptionsApiGetOptionQuoteRequest
 */
-func (a *OptionsApiService) GetOptionQuote(userId string, userSecret string, symbol string) OptionsApiGetOptionQuoteRequest {
+func (a *OptionsApiService) GetOptionQuote(userId string, userSecret string, accountId string, symbol string) OptionsApiGetOptionQuoteRequest {
 	return OptionsApiGetOptionQuoteRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
+		accountId: accountId,
 		symbol: symbol,
 	}
 }
@@ -75,11 +76,12 @@ func (a *OptionsApiService) GetOptionQuoteExecute(r OptionsApiGetOptionQuoteRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/marketData/options/quotes"
+    subpath := "/accounts/{accountId}/quotes/options"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -182,7 +184,7 @@ func (a *OptionsApiService) GetOptionQuoteExecute(r OptionsApiGetOptionQuoteRequ
             		newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 500 {
+		if localVarHTTPResponse.StatusCode == 429 {
 			var v Model500UnexpectedExceptionResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

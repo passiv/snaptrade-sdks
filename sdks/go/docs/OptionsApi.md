@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**GetOptionQuote**](OptionsApi.md#GetOptionQuote) | **Get** /marketData/options/quotes | Get option quote
+[**GetOptionQuote**](OptionsApi.md#GetOptionQuote) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**ListOptionHoldings**](OptionsApi.md#ListOptionHoldings) | **Get** /accounts/{accountId}/options | List account option positions
 
 
@@ -35,6 +35,7 @@ func main() {
     request := client.OptionsApi.GetOptionQuote(
         "userId_example",
         "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         ""AAPL  251219C00150000"",
     )
     

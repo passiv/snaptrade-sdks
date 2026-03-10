@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EstimatedCost** | Pointer to **string** | Estimated option premium for the order (before fees). | [optional] 
-**EstimatedTransactionFee** | Pointer to **string** | Estimated transaction fees and commissions for the order. | [optional] 
+**EstimatedCashChange** | Pointer to **string** | Estimated cash change for the order, before fees. | [optional] 
+**CashChangeDirection** | Pointer to **NullableString** | Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request. | [optional] 
+**EstimatedFeeTotal** | Pointer to **string** | Estimated total transaction fees and commissions for the order. | [optional] 
 
 ## Methods
 
@@ -26,55 +27,90 @@ NewOptionImpactWithDefaults instantiates a new OptionImpact object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetEstimatedCost
+### GetEstimatedCashChange
 
-`func (o *OptionImpact) GetEstimatedCost() string`
+`func (o *OptionImpact) GetEstimatedCashChange() string`
 
-GetEstimatedCost returns the EstimatedCost field if non-nil, zero value otherwise.
+GetEstimatedCashChange returns the EstimatedCashChange field if non-nil, zero value otherwise.
 
-### GetEstimatedCostOk
+### GetEstimatedCashChangeOk
 
-`func (o *OptionImpact) GetEstimatedCostOk() (*string, bool)`
+`func (o *OptionImpact) GetEstimatedCashChangeOk() (*string, bool)`
 
-GetEstimatedCostOk returns a tuple with the EstimatedCost field if it's non-nil, zero value otherwise
+GetEstimatedCashChangeOk returns a tuple with the EstimatedCashChange field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEstimatedCost
+### SetEstimatedCashChange
 
-`func (o *OptionImpact) SetEstimatedCost(v string)`
+`func (o *OptionImpact) SetEstimatedCashChange(v string)`
 
-SetEstimatedCost sets EstimatedCost field to given value.
+SetEstimatedCashChange sets EstimatedCashChange field to given value.
 
-### HasEstimatedCost
+### HasEstimatedCashChange
 
-`func (o *OptionImpact) HasEstimatedCost() bool`
+`func (o *OptionImpact) HasEstimatedCashChange() bool`
 
-HasEstimatedCost returns a boolean if a field has been set.
+HasEstimatedCashChange returns a boolean if a field has been set.
 
-### GetEstimatedTransactionFee
+### GetCashChangeDirection
 
-`func (o *OptionImpact) GetEstimatedTransactionFee() string`
+`func (o *OptionImpact) GetCashChangeDirection() string`
 
-GetEstimatedTransactionFee returns the EstimatedTransactionFee field if non-nil, zero value otherwise.
+GetCashChangeDirection returns the CashChangeDirection field if non-nil, zero value otherwise.
 
-### GetEstimatedTransactionFeeOk
+### GetCashChangeDirectionOk
 
-`func (o *OptionImpact) GetEstimatedTransactionFeeOk() (*string, bool)`
+`func (o *OptionImpact) GetCashChangeDirectionOk() (*string, bool)`
 
-GetEstimatedTransactionFeeOk returns a tuple with the EstimatedTransactionFee field if it's non-nil, zero value otherwise
+GetCashChangeDirectionOk returns a tuple with the CashChangeDirection field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEstimatedTransactionFee
+### SetCashChangeDirection
 
-`func (o *OptionImpact) SetEstimatedTransactionFee(v string)`
+`func (o *OptionImpact) SetCashChangeDirection(v string)`
 
-SetEstimatedTransactionFee sets EstimatedTransactionFee field to given value.
+SetCashChangeDirection sets CashChangeDirection field to given value.
 
-### HasEstimatedTransactionFee
+### HasCashChangeDirection
 
-`func (o *OptionImpact) HasEstimatedTransactionFee() bool`
+`func (o *OptionImpact) HasCashChangeDirection() bool`
 
-HasEstimatedTransactionFee returns a boolean if a field has been set.
+HasCashChangeDirection returns a boolean if a field has been set.
+
+### SetCashChangeDirectionNil
+
+`func (o *OptionImpact) SetCashChangeDirectionNil(b bool)`
+
+ SetCashChangeDirectionNil sets the value for CashChangeDirection to be an explicit nil
+
+### UnsetCashChangeDirection
+`func (o *OptionImpact) UnsetCashChangeDirection()`
+
+UnsetCashChangeDirection ensures that no value is present for CashChangeDirection, not even an explicit nil
+### GetEstimatedFeeTotal
+
+`func (o *OptionImpact) GetEstimatedFeeTotal() string`
+
+GetEstimatedFeeTotal returns the EstimatedFeeTotal field if non-nil, zero value otherwise.
+
+### GetEstimatedFeeTotalOk
+
+`func (o *OptionImpact) GetEstimatedFeeTotalOk() (*string, bool)`
+
+GetEstimatedFeeTotalOk returns a tuple with the EstimatedFeeTotal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEstimatedFeeTotal
+
+`func (o *OptionImpact) SetEstimatedFeeTotal(v string)`
+
+SetEstimatedFeeTotal sets EstimatedFeeTotal field to given value.
+
+### HasEstimatedFeeTotal
+
+`func (o *OptionImpact) HasEstimatedFeeTotal() bool`
+
+HasEstimatedFeeTotal returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

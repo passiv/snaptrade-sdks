@@ -20,13 +20,19 @@ describe SnapTrade::OptionImpact do
       expect(instance).to be_instance_of(SnapTrade::OptionImpact)
     end
   end
-  describe 'test attribute "estimated_cost"' do
+  describe 'test attribute "estimated_cash_change"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "estimated_transaction_fee"' do
+  describe 'test attribute "cash_change_direction"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "estimated_fee_total"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

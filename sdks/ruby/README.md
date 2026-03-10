@@ -1336,9 +1336,7 @@ false to retrieve non executed orders as well
 
 ### `snaptrade.options.get_option_quote`<a id="snaptradeoptionsget_option_quote"></a>
 
-Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
-
-OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1347,6 +1345,7 @@ OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spac
 result = snaptrade.options.get_option_quote(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   symbol: "AAPL  251219C00150000",
 )
 p result
@@ -1356,6 +1355,7 @@ p result
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
 ##### symbol: `String`<a id="symbol-string"></a>
 The OCC-formatted option symbol.
 
@@ -1365,7 +1365,7 @@ The OCC-formatted option symbol.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/marketData/options/quotes` `GET`
+`/accounts/{accountId}/quotes/options` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1871,7 +1871,7 @@ p result
 ### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
+Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1920,10 +1920,11 @@ immediately will be canceled.
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### limit_price: `Float`<a id="limit_price-float"></a>
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 
 ##### stop_price: `Float`<a id="stop_price-float"></a>
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`,
+`STOP_LOSS_LIMIT`.
 
 ##### price_effect: [`MlegPriceEffectStrict`](./lib/snaptrade/models/mleg_price_effect_strict.rb)<a id="price_effect-mlegpriceeffectstrictlibsnaptrademodelsmleg_price_effect_strictrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2208,19 +2209,19 @@ The amount of the base currency to buy or sell.
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### limit_price: `Float`<a id="limit_price-float"></a>
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
-TAKE_PROFIT_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or
+`TAKE_PROFIT_LIMIT`.
 
 ##### stop_price: `Float`<a id="stop_price-float"></a>
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
-TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`,
+`STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 
 ##### post_only: `Boolean`<a id="post_only-boolean"></a>
-Valid and required only for order type LIMIT. If true orders that would be
+Valid and required only for order type `LIMIT`. If true orders that would be
 filled immediately are rejected to avoid incurring TAKER fees.
 
 ##### expiration_date: `Time`<a id="expiration_date-time"></a>
-The expiration date of the order. Required if the time_in_force is GTD.
+The expiration date of the order. Required if the time_in_force is `GTD`.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2384,10 +2385,11 @@ immediately will be canceled.
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### limit_price: `Float`<a id="limit_price-float"></a>
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
 
 ##### stop_price: `Float`<a id="stop_price-float"></a>
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`,
+`STOP_LOSS_LIMIT`.
 
 ##### price_effect: [`MlegPriceEffectStrict`](./lib/snaptrade/models/mleg_price_effect_strict.rb)<a id="price_effect-mlegpriceeffectstrictlibsnaptrademodelsmleg_price_effect_strictrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2503,19 +2505,19 @@ The amount of the base currency to buy or sell.
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### limit_price: `Float`<a id="limit_price-float"></a>
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
-TAKE_PROFIT_LIMIT.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or
+`TAKE_PROFIT_LIMIT`.
 
 ##### stop_price: `Float`<a id="stop_price-float"></a>
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
-TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+The stop price. Required if the order type is `STOP_LOSS_MARKET`,
+`STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
 
 ##### post_only: `Boolean`<a id="post_only-boolean"></a>
-Valid and required only for order type LIMIT. If true orders that would be
+Valid and required only for order type `LIMIT`. If true orders that would be
 filled immediately are rejected to avoid incurring TAKER fees.
 
 ##### expiration_date: `Time`<a id="expiration_date-time"></a>
-The expiration date of the order. Required if the time_in_force is GTD.
+The expiration date of the order. Required if the time_in_force is `GTD`.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

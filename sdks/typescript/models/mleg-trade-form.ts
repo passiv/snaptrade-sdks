@@ -34,13 +34,13 @@ export interface MlegTradeForm {
      */
     'time_in_force': TimeInForceStrict;
     /**
-     * The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+     * The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
      * @type {string}
      * @memberof MlegTradeForm
      */
     'limit_price'?: string | null;
     /**
-     * The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+     * The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
      * @type {string}
      * @memberof MlegTradeForm
      */

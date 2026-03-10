@@ -58,20 +58,28 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
-        /// Test the property 'EstimatedCost'
+        /// Test the property 'EstimatedCashChange'
         /// </summary>
         [Fact]
-        public void EstimatedCostTest()
+        public void EstimatedCashChangeTest()
         {
-            // TODO unit test for the property 'EstimatedCost'
+            // TODO unit test for the property 'EstimatedCashChange'
         }
         /// <summary>
-        /// Test the property 'EstimatedTransactionFee'
+        /// Test the property 'CashChangeDirection'
         /// </summary>
         [Fact]
-        public void EstimatedTransactionFeeTest()
+        public void CashChangeDirectionTest()
         {
-            // TODO unit test for the property 'EstimatedTransactionFee'
+            // TODO unit test for the property 'CashChangeDirection'
+        }
+        /// <summary>
+        /// Test the property 'EstimatedFeeTotal'
+        /// </summary>
+        [Fact]
+        public void EstimatedFeeTotalTest()
+        {
+            // TODO unit test for the property 'EstimatedFeeTotal'
         }
 
     }
