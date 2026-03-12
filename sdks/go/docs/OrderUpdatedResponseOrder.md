@@ -1,0 +1,722 @@
+# OrderUpdatedResponseOrder
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**BrokerageOrderId** | Pointer to **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
+**Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
+**UniversalSymbol** | Pointer to [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
+**OptionSymbol** | Pointer to [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
+**QuoteUniversalSymbol** | Pointer to [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
+**QuoteCurrency** | Pointer to [**AccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  | [optional] 
+**Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
+**TotalQuantity** | Pointer to **NullableString** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
+**OpenQuantity** | Pointer to **NullableString** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
+**CanceledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. | [optional] 
+**FilledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. | [optional] 
+**ExecutionPrice** | Pointer to **NullableFloat32** | The price at which the order was executed. | [optional] 
+**LimitPrice** | Pointer to **NullableFloat32** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**StopPrice** | Pointer to **NullableFloat32** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**OrderType** | Pointer to **NullableString** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. | [optional] 
+**TimeInForce** | Pointer to **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.  | [optional] 
+**TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
+**TimeUpdated** | Pointer to **NullableTime** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. | [optional] 
+**TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
+**ExpiryDate** | Pointer to **NullableTime** | The time the order expires. This value is not always available from the brokerage. | [optional] 
+**Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
+**ChildBrokerageOrderIds** | Pointer to [**NullableAccountOrderRecordChildBrokerageOrderIds**](AccountOrderRecordChildBrokerageOrderIds.md) |  | [optional] 
+
+## Methods
+
+### NewOrderUpdatedResponseOrder
+
+`func NewOrderUpdatedResponseOrder() *OrderUpdatedResponseOrder`
+
+NewOrderUpdatedResponseOrder instantiates a new OrderUpdatedResponseOrder object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewOrderUpdatedResponseOrderWithDefaults
+
+`func NewOrderUpdatedResponseOrderWithDefaults() *OrderUpdatedResponseOrder`
+
+NewOrderUpdatedResponseOrderWithDefaults instantiates a new OrderUpdatedResponseOrder object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetBrokerageOrderId
+
+`func (o *OrderUpdatedResponseOrder) GetBrokerageOrderId() string`
+
+GetBrokerageOrderId returns the BrokerageOrderId field if non-nil, zero value otherwise.
+
+### GetBrokerageOrderIdOk
+
+`func (o *OrderUpdatedResponseOrder) GetBrokerageOrderIdOk() (*string, bool)`
+
+GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrokerageOrderId
+
+`func (o *OrderUpdatedResponseOrder) SetBrokerageOrderId(v string)`
+
+SetBrokerageOrderId sets BrokerageOrderId field to given value.
+
+### HasBrokerageOrderId
+
+`func (o *OrderUpdatedResponseOrder) HasBrokerageOrderId() bool`
+
+HasBrokerageOrderId returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *OrderUpdatedResponseOrder) GetStatus() AccountOrderRecordStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *OrderUpdatedResponseOrder) GetStatusOk() (*AccountOrderRecordStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *OrderUpdatedResponseOrder) SetStatus(v AccountOrderRecordStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *OrderUpdatedResponseOrder) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetUniversalSymbol
+
+`func (o *OrderUpdatedResponseOrder) GetUniversalSymbol() AccountOrderRecordUniversalSymbol`
+
+GetUniversalSymbol returns the UniversalSymbol field if non-nil, zero value otherwise.
+
+### GetUniversalSymbolOk
+
+`func (o *OrderUpdatedResponseOrder) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool)`
+
+GetUniversalSymbolOk returns a tuple with the UniversalSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniversalSymbol
+
+`func (o *OrderUpdatedResponseOrder) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol)`
+
+SetUniversalSymbol sets UniversalSymbol field to given value.
+
+### HasUniversalSymbol
+
+`func (o *OrderUpdatedResponseOrder) HasUniversalSymbol() bool`
+
+HasUniversalSymbol returns a boolean if a field has been set.
+
+### GetOptionSymbol
+
+`func (o *OrderUpdatedResponseOrder) GetOptionSymbol() AccountOrderRecordOptionSymbol`
+
+GetOptionSymbol returns the OptionSymbol field if non-nil, zero value otherwise.
+
+### GetOptionSymbolOk
+
+`func (o *OrderUpdatedResponseOrder) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool)`
+
+GetOptionSymbolOk returns a tuple with the OptionSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOptionSymbol
+
+`func (o *OrderUpdatedResponseOrder) SetOptionSymbol(v AccountOrderRecordOptionSymbol)`
+
+SetOptionSymbol sets OptionSymbol field to given value.
+
+### HasOptionSymbol
+
+`func (o *OrderUpdatedResponseOrder) HasOptionSymbol() bool`
+
+HasOptionSymbol returns a boolean if a field has been set.
+
+### GetQuoteUniversalSymbol
+
+`func (o *OrderUpdatedResponseOrder) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol`
+
+GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field if non-nil, zero value otherwise.
+
+### GetQuoteUniversalSymbolOk
+
+`func (o *OrderUpdatedResponseOrder) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool)`
+
+GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteUniversalSymbol
+
+`func (o *OrderUpdatedResponseOrder) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol)`
+
+SetQuoteUniversalSymbol sets QuoteUniversalSymbol field to given value.
+
+### HasQuoteUniversalSymbol
+
+`func (o *OrderUpdatedResponseOrder) HasQuoteUniversalSymbol() bool`
+
+HasQuoteUniversalSymbol returns a boolean if a field has been set.
+
+### GetQuoteCurrency
+
+`func (o *OrderUpdatedResponseOrder) GetQuoteCurrency() AccountOrderRecordQuoteCurrency`
+
+GetQuoteCurrency returns the QuoteCurrency field if non-nil, zero value otherwise.
+
+### GetQuoteCurrencyOk
+
+`func (o *OrderUpdatedResponseOrder) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool)`
+
+GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteCurrency
+
+`func (o *OrderUpdatedResponseOrder) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency)`
+
+SetQuoteCurrency sets QuoteCurrency field to given value.
+
+### HasQuoteCurrency
+
+`func (o *OrderUpdatedResponseOrder) HasQuoteCurrency() bool`
+
+HasQuoteCurrency returns a boolean if a field has been set.
+
+### GetAction
+
+`func (o *OrderUpdatedResponseOrder) GetAction() string`
+
+GetAction returns the Action field if non-nil, zero value otherwise.
+
+### GetActionOk
+
+`func (o *OrderUpdatedResponseOrder) GetActionOk() (*string, bool)`
+
+GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAction
+
+`func (o *OrderUpdatedResponseOrder) SetAction(v string)`
+
+SetAction sets Action field to given value.
+
+### HasAction
+
+`func (o *OrderUpdatedResponseOrder) HasAction() bool`
+
+HasAction returns a boolean if a field has been set.
+
+### GetTotalQuantity
+
+`func (o *OrderUpdatedResponseOrder) GetTotalQuantity() string`
+
+GetTotalQuantity returns the TotalQuantity field if non-nil, zero value otherwise.
+
+### GetTotalQuantityOk
+
+`func (o *OrderUpdatedResponseOrder) GetTotalQuantityOk() (*string, bool)`
+
+GetTotalQuantityOk returns a tuple with the TotalQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalQuantity
+
+`func (o *OrderUpdatedResponseOrder) SetTotalQuantity(v string)`
+
+SetTotalQuantity sets TotalQuantity field to given value.
+
+### HasTotalQuantity
+
+`func (o *OrderUpdatedResponseOrder) HasTotalQuantity() bool`
+
+HasTotalQuantity returns a boolean if a field has been set.
+
+### SetTotalQuantityNil
+
+`func (o *OrderUpdatedResponseOrder) SetTotalQuantityNil(b bool)`
+
+ SetTotalQuantityNil sets the value for TotalQuantity to be an explicit nil
+
+### UnsetTotalQuantity
+`func (o *OrderUpdatedResponseOrder) UnsetTotalQuantity()`
+
+UnsetTotalQuantity ensures that no value is present for TotalQuantity, not even an explicit nil
+### GetOpenQuantity
+
+`func (o *OrderUpdatedResponseOrder) GetOpenQuantity() string`
+
+GetOpenQuantity returns the OpenQuantity field if non-nil, zero value otherwise.
+
+### GetOpenQuantityOk
+
+`func (o *OrderUpdatedResponseOrder) GetOpenQuantityOk() (*string, bool)`
+
+GetOpenQuantityOk returns a tuple with the OpenQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenQuantity
+
+`func (o *OrderUpdatedResponseOrder) SetOpenQuantity(v string)`
+
+SetOpenQuantity sets OpenQuantity field to given value.
+
+### HasOpenQuantity
+
+`func (o *OrderUpdatedResponseOrder) HasOpenQuantity() bool`
+
+HasOpenQuantity returns a boolean if a field has been set.
+
+### SetOpenQuantityNil
+
+`func (o *OrderUpdatedResponseOrder) SetOpenQuantityNil(b bool)`
+
+ SetOpenQuantityNil sets the value for OpenQuantity to be an explicit nil
+
+### UnsetOpenQuantity
+`func (o *OrderUpdatedResponseOrder) UnsetOpenQuantity()`
+
+UnsetOpenQuantity ensures that no value is present for OpenQuantity, not even an explicit nil
+### GetCanceledQuantity
+
+`func (o *OrderUpdatedResponseOrder) GetCanceledQuantity() string`
+
+GetCanceledQuantity returns the CanceledQuantity field if non-nil, zero value otherwise.
+
+### GetCanceledQuantityOk
+
+`func (o *OrderUpdatedResponseOrder) GetCanceledQuantityOk() (*string, bool)`
+
+GetCanceledQuantityOk returns a tuple with the CanceledQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanceledQuantity
+
+`func (o *OrderUpdatedResponseOrder) SetCanceledQuantity(v string)`
+
+SetCanceledQuantity sets CanceledQuantity field to given value.
+
+### HasCanceledQuantity
+
+`func (o *OrderUpdatedResponseOrder) HasCanceledQuantity() bool`
+
+HasCanceledQuantity returns a boolean if a field has been set.
+
+### SetCanceledQuantityNil
+
+`func (o *OrderUpdatedResponseOrder) SetCanceledQuantityNil(b bool)`
+
+ SetCanceledQuantityNil sets the value for CanceledQuantity to be an explicit nil
+
+### UnsetCanceledQuantity
+`func (o *OrderUpdatedResponseOrder) UnsetCanceledQuantity()`
+
+UnsetCanceledQuantity ensures that no value is present for CanceledQuantity, not even an explicit nil
+### GetFilledQuantity
+
+`func (o *OrderUpdatedResponseOrder) GetFilledQuantity() string`
+
+GetFilledQuantity returns the FilledQuantity field if non-nil, zero value otherwise.
+
+### GetFilledQuantityOk
+
+`func (o *OrderUpdatedResponseOrder) GetFilledQuantityOk() (*string, bool)`
+
+GetFilledQuantityOk returns a tuple with the FilledQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilledQuantity
+
+`func (o *OrderUpdatedResponseOrder) SetFilledQuantity(v string)`
+
+SetFilledQuantity sets FilledQuantity field to given value.
+
+### HasFilledQuantity
+
+`func (o *OrderUpdatedResponseOrder) HasFilledQuantity() bool`
+
+HasFilledQuantity returns a boolean if a field has been set.
+
+### SetFilledQuantityNil
+
+`func (o *OrderUpdatedResponseOrder) SetFilledQuantityNil(b bool)`
+
+ SetFilledQuantityNil sets the value for FilledQuantity to be an explicit nil
+
+### UnsetFilledQuantity
+`func (o *OrderUpdatedResponseOrder) UnsetFilledQuantity()`
+
+UnsetFilledQuantity ensures that no value is present for FilledQuantity, not even an explicit nil
+### GetExecutionPrice
+
+`func (o *OrderUpdatedResponseOrder) GetExecutionPrice() float32`
+
+GetExecutionPrice returns the ExecutionPrice field if non-nil, zero value otherwise.
+
+### GetExecutionPriceOk
+
+`func (o *OrderUpdatedResponseOrder) GetExecutionPriceOk() (*float32, bool)`
+
+GetExecutionPriceOk returns a tuple with the ExecutionPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionPrice
+
+`func (o *OrderUpdatedResponseOrder) SetExecutionPrice(v float32)`
+
+SetExecutionPrice sets ExecutionPrice field to given value.
+
+### HasExecutionPrice
+
+`func (o *OrderUpdatedResponseOrder) HasExecutionPrice() bool`
+
+HasExecutionPrice returns a boolean if a field has been set.
+
+### SetExecutionPriceNil
+
+`func (o *OrderUpdatedResponseOrder) SetExecutionPriceNil(b bool)`
+
+ SetExecutionPriceNil sets the value for ExecutionPrice to be an explicit nil
+
+### UnsetExecutionPrice
+`func (o *OrderUpdatedResponseOrder) UnsetExecutionPrice()`
+
+UnsetExecutionPrice ensures that no value is present for ExecutionPrice, not even an explicit nil
+### GetLimitPrice
+
+`func (o *OrderUpdatedResponseOrder) GetLimitPrice() float32`
+
+GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
+
+### GetLimitPriceOk
+
+`func (o *OrderUpdatedResponseOrder) GetLimitPriceOk() (*float32, bool)`
+
+GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLimitPrice
+
+`func (o *OrderUpdatedResponseOrder) SetLimitPrice(v float32)`
+
+SetLimitPrice sets LimitPrice field to given value.
+
+### HasLimitPrice
+
+`func (o *OrderUpdatedResponseOrder) HasLimitPrice() bool`
+
+HasLimitPrice returns a boolean if a field has been set.
+
+### SetLimitPriceNil
+
+`func (o *OrderUpdatedResponseOrder) SetLimitPriceNil(b bool)`
+
+ SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
+
+### UnsetLimitPrice
+`func (o *OrderUpdatedResponseOrder) UnsetLimitPrice()`
+
+UnsetLimitPrice ensures that no value is present for LimitPrice, not even an explicit nil
+### GetStopPrice
+
+`func (o *OrderUpdatedResponseOrder) GetStopPrice() float32`
+
+GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
+
+### GetStopPriceOk
+
+`func (o *OrderUpdatedResponseOrder) GetStopPriceOk() (*float32, bool)`
+
+GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopPrice
+
+`func (o *OrderUpdatedResponseOrder) SetStopPrice(v float32)`
+
+SetStopPrice sets StopPrice field to given value.
+
+### HasStopPrice
+
+`func (o *OrderUpdatedResponseOrder) HasStopPrice() bool`
+
+HasStopPrice returns a boolean if a field has been set.
+
+### SetStopPriceNil
+
+`func (o *OrderUpdatedResponseOrder) SetStopPriceNil(b bool)`
+
+ SetStopPriceNil sets the value for StopPrice to be an explicit nil
+
+### UnsetStopPrice
+`func (o *OrderUpdatedResponseOrder) UnsetStopPrice()`
+
+UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
+### GetOrderType
+
+`func (o *OrderUpdatedResponseOrder) GetOrderType() string`
+
+GetOrderType returns the OrderType field if non-nil, zero value otherwise.
+
+### GetOrderTypeOk
+
+`func (o *OrderUpdatedResponseOrder) GetOrderTypeOk() (*string, bool)`
+
+GetOrderTypeOk returns a tuple with the OrderType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderType
+
+`func (o *OrderUpdatedResponseOrder) SetOrderType(v string)`
+
+SetOrderType sets OrderType field to given value.
+
+### HasOrderType
+
+`func (o *OrderUpdatedResponseOrder) HasOrderType() bool`
+
+HasOrderType returns a boolean if a field has been set.
+
+### SetOrderTypeNil
+
+`func (o *OrderUpdatedResponseOrder) SetOrderTypeNil(b bool)`
+
+ SetOrderTypeNil sets the value for OrderType to be an explicit nil
+
+### UnsetOrderType
+`func (o *OrderUpdatedResponseOrder) UnsetOrderType()`
+
+UnsetOrderType ensures that no value is present for OrderType, not even an explicit nil
+### GetTimeInForce
+
+`func (o *OrderUpdatedResponseOrder) GetTimeInForce() string`
+
+GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
+
+### GetTimeInForceOk
+
+`func (o *OrderUpdatedResponseOrder) GetTimeInForceOk() (*string, bool)`
+
+GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeInForce
+
+`func (o *OrderUpdatedResponseOrder) SetTimeInForce(v string)`
+
+SetTimeInForce sets TimeInForce field to given value.
+
+### HasTimeInForce
+
+`func (o *OrderUpdatedResponseOrder) HasTimeInForce() bool`
+
+HasTimeInForce returns a boolean if a field has been set.
+
+### GetTimePlaced
+
+`func (o *OrderUpdatedResponseOrder) GetTimePlaced() time.Time`
+
+GetTimePlaced returns the TimePlaced field if non-nil, zero value otherwise.
+
+### GetTimePlacedOk
+
+`func (o *OrderUpdatedResponseOrder) GetTimePlacedOk() (*time.Time, bool)`
+
+GetTimePlacedOk returns a tuple with the TimePlaced field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimePlaced
+
+`func (o *OrderUpdatedResponseOrder) SetTimePlaced(v time.Time)`
+
+SetTimePlaced sets TimePlaced field to given value.
+
+### HasTimePlaced
+
+`func (o *OrderUpdatedResponseOrder) HasTimePlaced() bool`
+
+HasTimePlaced returns a boolean if a field has been set.
+
+### GetTimeUpdated
+
+`func (o *OrderUpdatedResponseOrder) GetTimeUpdated() time.Time`
+
+GetTimeUpdated returns the TimeUpdated field if non-nil, zero value otherwise.
+
+### GetTimeUpdatedOk
+
+`func (o *OrderUpdatedResponseOrder) GetTimeUpdatedOk() (*time.Time, bool)`
+
+GetTimeUpdatedOk returns a tuple with the TimeUpdated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeUpdated
+
+`func (o *OrderUpdatedResponseOrder) SetTimeUpdated(v time.Time)`
+
+SetTimeUpdated sets TimeUpdated field to given value.
+
+### HasTimeUpdated
+
+`func (o *OrderUpdatedResponseOrder) HasTimeUpdated() bool`
+
+HasTimeUpdated returns a boolean if a field has been set.
+
+### SetTimeUpdatedNil
+
+`func (o *OrderUpdatedResponseOrder) SetTimeUpdatedNil(b bool)`
+
+ SetTimeUpdatedNil sets the value for TimeUpdated to be an explicit nil
+
+### UnsetTimeUpdated
+`func (o *OrderUpdatedResponseOrder) UnsetTimeUpdated()`
+
+UnsetTimeUpdated ensures that no value is present for TimeUpdated, not even an explicit nil
+### GetTimeExecuted
+
+`func (o *OrderUpdatedResponseOrder) GetTimeExecuted() time.Time`
+
+GetTimeExecuted returns the TimeExecuted field if non-nil, zero value otherwise.
+
+### GetTimeExecutedOk
+
+`func (o *OrderUpdatedResponseOrder) GetTimeExecutedOk() (*time.Time, bool)`
+
+GetTimeExecutedOk returns a tuple with the TimeExecuted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeExecuted
+
+`func (o *OrderUpdatedResponseOrder) SetTimeExecuted(v time.Time)`
+
+SetTimeExecuted sets TimeExecuted field to given value.
+
+### HasTimeExecuted
+
+`func (o *OrderUpdatedResponseOrder) HasTimeExecuted() bool`
+
+HasTimeExecuted returns a boolean if a field has been set.
+
+### SetTimeExecutedNil
+
+`func (o *OrderUpdatedResponseOrder) SetTimeExecutedNil(b bool)`
+
+ SetTimeExecutedNil sets the value for TimeExecuted to be an explicit nil
+
+### UnsetTimeExecuted
+`func (o *OrderUpdatedResponseOrder) UnsetTimeExecuted()`
+
+UnsetTimeExecuted ensures that no value is present for TimeExecuted, not even an explicit nil
+### GetExpiryDate
+
+`func (o *OrderUpdatedResponseOrder) GetExpiryDate() time.Time`
+
+GetExpiryDate returns the ExpiryDate field if non-nil, zero value otherwise.
+
+### GetExpiryDateOk
+
+`func (o *OrderUpdatedResponseOrder) GetExpiryDateOk() (*time.Time, bool)`
+
+GetExpiryDateOk returns a tuple with the ExpiryDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryDate
+
+`func (o *OrderUpdatedResponseOrder) SetExpiryDate(v time.Time)`
+
+SetExpiryDate sets ExpiryDate field to given value.
+
+### HasExpiryDate
+
+`func (o *OrderUpdatedResponseOrder) HasExpiryDate() bool`
+
+HasExpiryDate returns a boolean if a field has been set.
+
+### SetExpiryDateNil
+
+`func (o *OrderUpdatedResponseOrder) SetExpiryDateNil(b bool)`
+
+ SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
+
+### UnsetExpiryDate
+`func (o *OrderUpdatedResponseOrder) UnsetExpiryDate()`
+
+UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
+### GetSymbol
+
+`func (o *OrderUpdatedResponseOrder) GetSymbol() string`
+
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
+
+### GetSymbolOk
+
+`func (o *OrderUpdatedResponseOrder) GetSymbolOk() (*string, bool)`
+
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbol
+
+`func (o *OrderUpdatedResponseOrder) SetSymbol(v string)`
+
+SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *OrderUpdatedResponseOrder) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
+
+### GetChildBrokerageOrderIds
+
+`func (o *OrderUpdatedResponseOrder) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds`
+
+GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field if non-nil, zero value otherwise.
+
+### GetChildBrokerageOrderIdsOk
+
+`func (o *OrderUpdatedResponseOrder) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool)`
+
+GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildBrokerageOrderIds
+
+`func (o *OrderUpdatedResponseOrder) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds)`
+
+SetChildBrokerageOrderIds sets ChildBrokerageOrderIds field to given value.
+
+### HasChildBrokerageOrderIds
+
+`func (o *OrderUpdatedResponseOrder) HasChildBrokerageOrderIds() bool`
+
+HasChildBrokerageOrderIds returns a boolean if a field has been set.
+
+### SetChildBrokerageOrderIdsNil
+
+`func (o *OrderUpdatedResponseOrder) SetChildBrokerageOrderIdsNil(b bool)`
+
+ SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
+
+### UnsetChildBrokerageOrderIds
+`func (o *OrderUpdatedResponseOrder) UnsetChildBrokerageOrderIds()`
+
+UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
