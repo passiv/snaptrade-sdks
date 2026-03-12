@@ -103,6 +103,7 @@ export * from './options-position-currency';
 export * from './options-symbol';
 export * from './order-type-strict';
 export * from './order-updated-response';
+export * from './order-updated-response-order';
 export * from './paginated-universal-activity';
 export * from './pagination-details';
 export * from './partner-data';
