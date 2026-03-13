@@ -5482,7 +5482,9 @@ components:
         brokerage_order_id:
           $ref: "#/components/schemas/BrokerageOrderID"
         order:
-          $ref: "#/components/schemas/AccountOrderRecord"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecord"
     CancelOrderResponse:
       type: object
       required:
