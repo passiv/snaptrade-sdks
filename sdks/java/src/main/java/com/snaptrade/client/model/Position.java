@@ -143,11 +143,11 @@ public class Position {
   }
 
    /**
-   * The number of shares of the position. This can be fractional or integer units.
+   * The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
    * @return units
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "40", value = "The number of shares of the position. This can be fractional or integer units.")
+  @ApiModelProperty(example = "40", value = "The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.")
 
   public Double getUnits() {
     return units;

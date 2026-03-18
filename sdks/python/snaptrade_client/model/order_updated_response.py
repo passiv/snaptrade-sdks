@@ -41,8 +41,8 @@ class OrderUpdatedResponse(
             brokerage_order_id = schemas.StrSchema
         
             @staticmethod
-            def order() -> typing.Type['AccountOrderRecord']:
-                return AccountOrderRecord
+            def order() -> typing.Type['AccountOrderRecordNullable']:
+                return AccountOrderRecordNullable
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
                 "order": order,
@@ -55,7 +55,7 @@ class OrderUpdatedResponse(
     def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["order"]) -> 'AccountOrderRecord': ...
+    def __getitem__(self, name: typing_extensions.Literal["order"]) -> 'AccountOrderRecordNullable': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -68,7 +68,7 @@ class OrderUpdatedResponse(
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["order"]) -> typing.Union['AccountOrderRecord', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["order"]) -> typing.Union['AccountOrderRecordNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -80,7 +80,7 @@ class OrderUpdatedResponse(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, ],
-        order: typing.Union['AccountOrderRecord', schemas.Unset] = schemas.unset,
+        order: typing.Union['AccountOrderRecordNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'OrderUpdatedResponse':
@@ -93,4 +93,4 @@ class OrderUpdatedResponse(
             **kwargs,
         )
 
-from snaptrade_client.model.account_order_record import AccountOrderRecord
+from snaptrade_client.model.account_order_record_nullable import AccountOrderRecordNullable

@@ -6023,8 +6023,9 @@ components:
         symbol:
           $ref: '#/components/schemas/PositionSymbol'
         units:
-          description: The number of shares of the position. This can be fractional
-            or integer units.
+          description: "The number of shares of the position. This can be fractional\
+            \ or integer units. A positive number indicates a long position, while\
+            \ a negative number indicates a short position."
           example: 40
           nullable: true
           type: number
@@ -8356,29 +8357,7 @@ components:
       additionalProperties: true
       example:
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-        order:
-          time_executed: 2024-08-05T00:05:57.409Z
-          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
-          time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
-          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-          limit_price: 12.34
-          quote_currency: null
-          time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: "10"
-          time_in_force: time_in_force
-          execution_price: 12.34
-          stop_price: 12.5
-          quote_universal_symbol: null
-          action: action
-          total_quantity: "100"
-          universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
-          open_quantity: "10"
-          status: null
+        order: null
       properties:
         brokerage_order_id:
           description: Order ID returned by brokerage. This is the unique identifier
@@ -8388,7 +8367,7 @@ components:
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
         order:
-          $ref: '#/components/schemas/AccountOrderRecord'
+          $ref: '#/components/schemas/OrderUpdatedResponse_order'
       required:
       - brokerage_order_id
       type: object
@@ -13188,6 +13167,10 @@ components:
       - amount
       - currency
       type: object
+    OrderUpdatedResponse_order:
+      allOf:
+      - $ref: '#/components/schemas/AccountOrderRecord'
+      nullable: true
     AccountUniversalActivity_symbol:
       allOf:
       - $ref: '#/components/schemas/Symbol'
