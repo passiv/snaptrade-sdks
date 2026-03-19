@@ -4114,7 +4114,7 @@ components:
         symbol:
           $ref: "#/components/schemas/PositionSymbol"
         units:
-          description: The number of shares of the position. This can be fractional or integer units.
+          description: The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
           type: number
           example: 40
           nullable: true
@@ -5482,7 +5482,9 @@ components:
         brokerage_order_id:
           $ref: "#/components/schemas/BrokerageOrderID"
         order:
-          $ref: "#/components/schemas/AccountOrderRecord"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecord"
     CancelOrderResponse:
       type: object
       required:
