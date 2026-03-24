@@ -1,4 +1,4 @@
-# Best practices to serve up real-time data
+# Best practices to serve real-time data
 
 SnapTrade offers the ability to get real-time data on both real-time (including Pay as you go) and cached plans. Real-time requests are enabled by default on all non-custom plans. See [our pricing page](https://snaptrade.com/pricing) for more information on plans
 
