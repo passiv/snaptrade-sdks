@@ -4,7 +4,7 @@ SnapTrade offers the ability to get real-time data on both real-time (including 
 
 ### Real-time Plan (Pay as you go)
 
-The best practice for showing users accurate data on a real-time plan is to update your user's state when they log in to your app. You can do this by making API calls to the resources you need, commonly [/positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions), [/options](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings), [/balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance). Repeat this process every 5 minutes while the user remains active in your application
+The best practice for showing users accurate data on a real-time plan is to update your user's state when they log in to your app. You can do this by making API calls to the resources you need, commonly [/positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions), [/options](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings), [/balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance). Repeat this process every 10 minutes while the user remains active in your application
 
 ### Cached Plan
 
@@ -13,7 +13,7 @@ On the cached plan, SnapTrade will update your data once a day. To get real-time
 
 ## Get notified when users place trades at their broker
 
-If you need to know when a trade has been placed by a specific user, the recommendation is to poll the [Recent Orders endpoint](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders), only during market hours. This endpoint defaults to returning the last day of executed orders. Keep a copy of this list on your end, and check if a new order is present in the polling responses. To avoid SnapTrade and institution rate limits, we recommend polling at most once every 60 seconds per account
+If you need to know when a trade has been placed by a specific user, the recommendation is to poll the [Recent Orders endpoint](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders), only during market hours. This endpoint defaults to returning the last day of executed orders. Keep a copy of this list on your end, and check if a new order is present in the polling responses. To avoid SnapTrade and institution rate limits, we recommend polling at most once every 5 minutes per account
 
 
 ## Transactions
