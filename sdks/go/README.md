@@ -235,6 +235,7 @@ Class | Method | HTTP request | Description
  - [OptionsSymbol](docs/OptionsSymbol.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
  - [OrderUpdatedResponse](docs/OrderUpdatedResponse.md)
+ - [OrderUpdatedResponseOrder](docs/OrderUpdatedResponseOrder.md)
  - [PaginatedUniversalActivity](docs/PaginatedUniversalActivity.md)
  - [PaginationDetails](docs/PaginationDetails.md)
  - [PartnerData](docs/PartnerData.md)

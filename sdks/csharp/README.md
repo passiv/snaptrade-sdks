@@ -171,6 +171,7 @@ Class | Method | HTTP request | Description
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordLeg](docs/AccountOrderRecordLeg.md)
  - [AccountOrderRecordLegInstrument](docs/AccountOrderRecordLegInstrument.md)
+ - [AccountOrderRecordNullable](docs/AccountOrderRecordNullable.md)
  - [AccountOrderRecordOptionSymbol](docs/AccountOrderRecordOptionSymbol.md)
  - [AccountOrderRecordQuoteCurrency](docs/AccountOrderRecordQuoteCurrency.md)
  - [AccountOrderRecordQuoteUniversalSymbol](docs/AccountOrderRecordQuoteUniversalSymbol.md)

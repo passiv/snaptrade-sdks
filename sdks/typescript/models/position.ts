@@ -29,7 +29,7 @@ export interface Position {
      */
     'symbol'?: PositionSymbol;
     /**
-     * The number of shares of the position. This can be fractional or integer units.
+     * The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
      * @type {number}
      * @memberof Position
      */
