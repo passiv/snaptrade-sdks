@@ -2371,7 +2371,7 @@ paths:
       summary: Get option order impact
       description: |
         Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
       operationId: Trading_getOptionImpact
       parameters:
         - in: query
@@ -4114,7 +4114,7 @@ components:
         symbol:
           $ref: "#/components/schemas/PositionSymbol"
         units:
-          description: The number of shares of the position. This can be fractional or integer units.
+          description: The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
           type: number
           example: 40
           nullable: true
@@ -5482,7 +5482,9 @@ components:
         brokerage_order_id:
           $ref: "#/components/schemas/BrokerageOrderID"
         order:
-          $ref: "#/components/schemas/AccountOrderRecord"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecord"
     CancelOrderResponse:
       type: object
       required:
