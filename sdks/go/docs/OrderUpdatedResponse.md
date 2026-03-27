@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
-**Order** | Pointer to [**AccountOrderRecord**](AccountOrderRecord.md) |  | [optional] 
+**Order** | Pointer to [**NullableOrderUpdatedResponseOrder**](OrderUpdatedResponseOrder.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetBrokerageOrderId sets BrokerageOrderId field to given value.
 
 ### GetOrder
 
-`func (o *OrderUpdatedResponse) GetOrder() AccountOrderRecord`
+`func (o *OrderUpdatedResponse) GetOrder() OrderUpdatedResponseOrder`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *OrderUpdatedResponse) GetOrderOk() (*AccountOrderRecord, bool)`
+`func (o *OrderUpdatedResponse) GetOrderOk() (*OrderUpdatedResponseOrder, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *OrderUpdatedResponse) SetOrder(v AccountOrderRecord)`
+`func (o *OrderUpdatedResponse) SetOrder(v OrderUpdatedResponseOrder)`
 
 SetOrder sets Order field to given value.
 
@@ -71,6 +71,16 @@ SetOrder sets Order field to given value.
 
 HasOrder returns a boolean if a field has been set.
 
+### SetOrderNil
+
+`func (o *OrderUpdatedResponse) SetOrderNil(b bool)`
+
+ SetOrderNil sets the value for Order to be an explicit nil
+
+### UnsetOrder
+`func (o *OrderUpdatedResponse) UnsetOrder()`
+
+UnsetOrder ensures that no value is present for Order, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

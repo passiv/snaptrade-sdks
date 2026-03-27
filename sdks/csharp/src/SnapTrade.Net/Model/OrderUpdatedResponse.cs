@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. (required).</param>
         /// <param name="order">order.</param>
-        public OrderUpdatedResponse(string brokerageOrderId = default(string), AccountOrderRecord order = default(AccountOrderRecord)) : base()
+        public OrderUpdatedResponse(string brokerageOrderId = default(string), AccountOrderRecordNullable order = default(AccountOrderRecordNullable)) : base()
         {
             // to ensure "brokerageOrderId" is required (not null)
             if (brokerageOrderId == null)
@@ -67,8 +67,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Order
         /// </summary>
-        [DataMember(Name = "order", EmitDefaultValue = false)]
-        public AccountOrderRecord Order { get; set; }
+        [DataMember(Name = "order", EmitDefaultValue = true)]
+        public AccountOrderRecordNullable Order { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

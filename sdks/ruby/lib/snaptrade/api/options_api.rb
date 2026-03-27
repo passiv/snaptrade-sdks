@@ -19,71 +19,73 @@ module SnapTrade
 
     # Get option quote
     #
-    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+    # **Note:** These are derived values and are not suitable for trading purposes.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_quote(user_id:, user_secret:, account_id:, symbol:, extra: {})
-      data, _status_code, _headers = get_option_quote_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
+    def get_user_account_option_quotes(user_id:, user_secret:, account_id:, symbol:, extra: {})
+      data, _status_code, _headers = get_user_account_option_quotes_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
       data
     end
 
     # Get option quote
     #
-    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+    # **Note:** These are derived values and are not suitable for trading purposes.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_quote_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
-      get_option_quote_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
+    def get_user_account_option_quotes_with_http_info(user_id:, user_secret:, account_id:, symbol:, extra: {})
+      get_user_account_option_quotes_with_http_info_impl(user_id, user_secret, account_id, symbol, extra)
     end
 
     # Get option quote
-    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] opts the optional parameters
     # @return [OptionQuote]
-    private def get_option_quote_impl(user_id, user_secret, account_id, symbol, opts = {})
-      data, _status_code, _headers = get_option_quote_with_http_info(user_id, user_secret, account_id, symbol, opts)
+    private def get_user_account_option_quotes_impl(user_id, user_secret, account_id, symbol, opts = {})
+      data, _status_code, _headers = get_user_account_option_quotes_with_http_info(user_id, user_secret, account_id, symbol, opts)
       data
     end
 
     # Get option quote
-    # Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param symbol [String] The OCC-formatted option symbol.
     # @param [Hash] opts the optional parameters
     # @return [Array<(OptionQuote, Integer, Hash)>] OptionQuote data, response status code and response headers
-    private def get_option_quote_with_http_info_impl(user_id, user_secret, account_id, symbol, opts = {})
+    private def get_user_account_option_quotes_with_http_info_impl(user_id, user_secret, account_id, symbol, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: OptionsApi.get_option_quote ...'
+        @api_client.config.logger.debug 'Calling API: OptionsApi.get_user_account_option_quotes ...'
       end
       # verify the required parameter 'user_id' is set
       if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_option_quote"
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_user_account_option_quotes"
       end
       # verify the required parameter 'user_secret' is set
       if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_option_quote"
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_user_account_option_quotes"
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.get_option_quote"
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling OptionsApi.get_user_account_option_quotes"
       end
       # verify the required parameter 'symbol' is set
       if @api_client.config.client_side_validation && symbol.nil?
-        fail ArgumentError, "Missing the required parameter 'symbol' when calling OptionsApi.get_option_quote"
+        fail ArgumentError, "Missing the required parameter 'symbol' when calling OptionsApi.get_user_account_option_quotes"
       end
       # resource path
       local_var_path = '/accounts/{accountId}/quotes/options'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -112,7 +114,7 @@ module SnapTrade
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
 
       new_options = opts.merge(
-        :operation => :"OptionsApi.get_option_quote",
+        :operation => :"OptionsApi.get_user_account_option_quotes",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -123,7 +125,7 @@ module SnapTrade
 
       data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: OptionsApi#get_option_quote\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: OptionsApi#get_user_account_option_quotes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

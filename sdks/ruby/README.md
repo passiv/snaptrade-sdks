@@ -49,7 +49,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
-  * [`snaptrade.options.get_option_quote`](#snaptradeoptionsget_option_quote)
+  * [`snaptrade.options.get_user_account_option_quotes`](#snaptradeoptionsget_user_account_option_quotes)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -1334,15 +1334,16 @@ false to retrieve non executed orders as well
 ---
 
 
-### `snaptrade.options.get_option_quote`<a id="snaptradeoptionsget_option_quote"></a>
+### `snaptrade.options.get_user_account_option_quotes`<a id="snaptradeoptionsget_user_account_option_quotes"></a>
 
-Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+**Note:** These are derived values and are not suitable for trading purposes.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
-result = snaptrade.options.get_option_quote(
+result = snaptrade.options.get_user_account_option_quotes(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -1871,7 +1872,7 @@ p result
 ### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

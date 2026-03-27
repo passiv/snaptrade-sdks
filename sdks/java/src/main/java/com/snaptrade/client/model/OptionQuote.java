@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.OptionQuoteGreeks;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -56,49 +57,21 @@ public class OptionQuote {
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private String symbol;
 
-  public static final String SERIALIZED_NAME_BID_PRICE = "bid_price";
-  @SerializedName(SERIALIZED_NAME_BID_PRICE)
-  private Double bidPrice;
-
-  public static final String SERIALIZED_NAME_BID_SIZE = "bid_size";
-  @SerializedName(SERIALIZED_NAME_BID_SIZE)
-  private Integer bidSize;
-
-  public static final String SERIALIZED_NAME_ASK_PRICE = "ask_price";
-  @SerializedName(SERIALIZED_NAME_ASK_PRICE)
-  private Double askPrice;
-
-  public static final String SERIALIZED_NAME_ASK_SIZE = "ask_size";
-  @SerializedName(SERIALIZED_NAME_ASK_SIZE)
-  private Integer askSize;
-
-  public static final String SERIALIZED_NAME_LAST_PRICE = "last_price";
-  @SerializedName(SERIALIZED_NAME_LAST_PRICE)
-  private Double lastPrice;
-
-  public static final String SERIALIZED_NAME_LAST_SIZE = "last_size";
-  @SerializedName(SERIALIZED_NAME_LAST_SIZE)
-  private Integer lastSize;
-
-  public static final String SERIALIZED_NAME_OPEN_INTEREST = "open_interest";
-  @SerializedName(SERIALIZED_NAME_OPEN_INTEREST)
-  private Integer openInterest;
-
-  public static final String SERIALIZED_NAME_VOLUME = "volume";
-  @SerializedName(SERIALIZED_NAME_VOLUME)
-  private Integer volume;
+  public static final String SERIALIZED_NAME_SYNTHETIC_PRICE = "synthetic_price";
+  @SerializedName(SERIALIZED_NAME_SYNTHETIC_PRICE)
+  private Double syntheticPrice;
 
   public static final String SERIALIZED_NAME_IMPLIED_VOLATILITY = "implied_volatility";
   @SerializedName(SERIALIZED_NAME_IMPLIED_VOLATILITY)
   private Double impliedVolatility;
 
-  public static final String SERIALIZED_NAME_UNDERLYING_PRICE = "underlying_price";
-  @SerializedName(SERIALIZED_NAME_UNDERLYING_PRICE)
-  private Double underlyingPrice;
-
   public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
   @SerializedName(SERIALIZED_NAME_TIMESTAMP)
   private OffsetDateTime timestamp;
+
+  public static final String SERIALIZED_NAME_GREEKS = "greeks";
+  @SerializedName(SERIALIZED_NAME_GREEKS)
+  private OptionQuoteGreeks greeks;
 
   public OptionQuote() {
   }
@@ -132,262 +105,41 @@ public class OptionQuote {
   }
 
 
-  public OptionQuote bidPrice(Double bidPrice) {
+  public OptionQuote syntheticPrice(Double syntheticPrice) {
     
     
     
     
-    this.bidPrice = bidPrice;
+    this.syntheticPrice = syntheticPrice;
     return this;
   }
 
-  public OptionQuote bidPrice(Integer bidPrice) {
+  public OptionQuote syntheticPrice(Integer syntheticPrice) {
     
     
     
     
-    this.bidPrice = bidPrice.doubleValue();
-    return this;
-  }
-
-   /**
-   * The best bid price for the option contract.
-   * @return bidPrice
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "3.5", value = "The best bid price for the option contract.")
-
-  public Double getBidPrice() {
-    return bidPrice;
-  }
-
-
-  public void setBidPrice(Double bidPrice) {
-    
-    
-    
-    this.bidPrice = bidPrice;
-  }
-
-
-  public OptionQuote bidSize(Integer bidSize) {
-    
-    
-    
-    
-    this.bidSize = bidSize;
+    this.syntheticPrice = syntheticPrice.doubleValue();
     return this;
   }
 
    /**
-   * The number of contracts available at the bid price.
-   * @return bidSize
+   * The derived synthetic price of the contract.
+   * @return syntheticPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "10", value = "The number of contracts available at the bid price.")
+  @ApiModelProperty(example = "150.25", value = "The derived synthetic price of the contract.")
 
-  public Integer getBidSize() {
-    return bidSize;
+  public Double getSyntheticPrice() {
+    return syntheticPrice;
   }
 
 
-  public void setBidSize(Integer bidSize) {
+  public void setSyntheticPrice(Double syntheticPrice) {
     
     
     
-    this.bidSize = bidSize;
-  }
-
-
-  public OptionQuote askPrice(Double askPrice) {
-    
-    
-    
-    
-    this.askPrice = askPrice;
-    return this;
-  }
-
-  public OptionQuote askPrice(Integer askPrice) {
-    
-    
-    
-    
-    this.askPrice = askPrice.doubleValue();
-    return this;
-  }
-
-   /**
-   * The best ask price for the option contract.
-   * @return askPrice
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "3.7", value = "The best ask price for the option contract.")
-
-  public Double getAskPrice() {
-    return askPrice;
-  }
-
-
-  public void setAskPrice(Double askPrice) {
-    
-    
-    
-    this.askPrice = askPrice;
-  }
-
-
-  public OptionQuote askSize(Integer askSize) {
-    
-    
-    
-    
-    this.askSize = askSize;
-    return this;
-  }
-
-   /**
-   * The number of contracts available at the ask price.
-   * @return askSize
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "15", value = "The number of contracts available at the ask price.")
-
-  public Integer getAskSize() {
-    return askSize;
-  }
-
-
-  public void setAskSize(Integer askSize) {
-    
-    
-    
-    this.askSize = askSize;
-  }
-
-
-  public OptionQuote lastPrice(Double lastPrice) {
-    
-    
-    
-    
-    this.lastPrice = lastPrice;
-    return this;
-  }
-
-  public OptionQuote lastPrice(Integer lastPrice) {
-    
-    
-    
-    
-    this.lastPrice = lastPrice.doubleValue();
-    return this;
-  }
-
-   /**
-   * The price of the last trade for the option contract.
-   * @return lastPrice
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "3.6", value = "The price of the last trade for the option contract.")
-
-  public Double getLastPrice() {
-    return lastPrice;
-  }
-
-
-  public void setLastPrice(Double lastPrice) {
-    
-    
-    
-    this.lastPrice = lastPrice;
-  }
-
-
-  public OptionQuote lastSize(Integer lastSize) {
-    
-    
-    
-    
-    this.lastSize = lastSize;
-    return this;
-  }
-
-   /**
-   * The number of contracts in the last trade.
-   * @return lastSize
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "5", value = "The number of contracts in the last trade.")
-
-  public Integer getLastSize() {
-    return lastSize;
-  }
-
-
-  public void setLastSize(Integer lastSize) {
-    
-    
-    
-    this.lastSize = lastSize;
-  }
-
-
-  public OptionQuote openInterest(Integer openInterest) {
-    
-    
-    
-    
-    this.openInterest = openInterest;
-    return this;
-  }
-
-   /**
-   * The total number of outstanding contracts.
-   * @return openInterest
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "1200", value = "The total number of outstanding contracts.")
-
-  public Integer getOpenInterest() {
-    return openInterest;
-  }
-
-
-  public void setOpenInterest(Integer openInterest) {
-    
-    
-    
-    this.openInterest = openInterest;
-  }
-
-
-  public OptionQuote volume(Integer volume) {
-    
-    
-    
-    
-    this.volume = volume;
-    return this;
-  }
-
-   /**
-   * The total number of contracts traded during the current session.
-   * @return volume
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "350", value = "The total number of contracts traded during the current session.")
-
-  public Integer getVolume() {
-    return volume;
-  }
-
-
-  public void setVolume(Integer volume) {
-    
-    
-    
-    this.volume = volume;
+    this.syntheticPrice = syntheticPrice;
   }
 
 
@@ -429,44 +181,6 @@ public class OptionQuote {
   }
 
 
-  public OptionQuote underlyingPrice(Double underlyingPrice) {
-    
-    
-    
-    
-    this.underlyingPrice = underlyingPrice;
-    return this;
-  }
-
-  public OptionQuote underlyingPrice(Integer underlyingPrice) {
-    
-    
-    
-    
-    this.underlyingPrice = underlyingPrice.doubleValue();
-    return this;
-  }
-
-   /**
-   * The current price of the underlying security.
-   * @return underlyingPrice
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "150.25", value = "The current price of the underlying security.")
-
-  public Double getUnderlyingPrice() {
-    return underlyingPrice;
-  }
-
-
-  public void setUnderlyingPrice(Double underlyingPrice) {
-    
-    
-    
-    this.underlyingPrice = underlyingPrice;
-  }
-
-
   public OptionQuote timestamp(OffsetDateTime timestamp) {
     
     
@@ -477,11 +191,11 @@ public class OptionQuote {
   }
 
    /**
-   * The timestamp of the quote.
+   * The timestamp of the last update for the option quote.
    * @return timestamp
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2026-01-15T14:30Z", value = "The timestamp of the quote.")
+  @ApiModelProperty(example = "2026-01-15T14:30Z", value = "The timestamp of the last update for the option quote.")
 
   public OffsetDateTime getTimestamp() {
     return timestamp;
@@ -493,6 +207,35 @@ public class OptionQuote {
     
     
     this.timestamp = timestamp;
+  }
+
+
+  public OptionQuote greeks(OptionQuoteGreeks greeks) {
+    
+    
+    
+    
+    this.greeks = greeks;
+    return this;
+  }
+
+   /**
+   * Get greeks
+   * @return greeks
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public OptionQuoteGreeks getGreeks() {
+    return greeks;
+  }
+
+
+  public void setGreeks(OptionQuoteGreeks greeks) {
+    
+    
+    
+    this.greeks = greeks;
   }
 
   /**
@@ -551,17 +294,10 @@ public class OptionQuote {
     }
     OptionQuote optionQuote = (OptionQuote) o;
     return Objects.equals(this.symbol, optionQuote.symbol) &&
-        Objects.equals(this.bidPrice, optionQuote.bidPrice) &&
-        Objects.equals(this.bidSize, optionQuote.bidSize) &&
-        Objects.equals(this.askPrice, optionQuote.askPrice) &&
-        Objects.equals(this.askSize, optionQuote.askSize) &&
-        Objects.equals(this.lastPrice, optionQuote.lastPrice) &&
-        Objects.equals(this.lastSize, optionQuote.lastSize) &&
-        Objects.equals(this.openInterest, optionQuote.openInterest) &&
-        Objects.equals(this.volume, optionQuote.volume) &&
+        Objects.equals(this.syntheticPrice, optionQuote.syntheticPrice) &&
         Objects.equals(this.impliedVolatility, optionQuote.impliedVolatility) &&
-        Objects.equals(this.underlyingPrice, optionQuote.underlyingPrice) &&
-        Objects.equals(this.timestamp, optionQuote.timestamp)&&
+        Objects.equals(this.timestamp, optionQuote.timestamp) &&
+        Objects.equals(this.greeks, optionQuote.greeks)&&
         Objects.equals(this.additionalProperties, optionQuote.additionalProperties);
   }
 
@@ -571,7 +307,7 @@ public class OptionQuote {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, bidPrice, bidSize, askPrice, askSize, lastPrice, lastSize, openInterest, volume, impliedVolatility, underlyingPrice, timestamp, additionalProperties);
+    return Objects.hash(symbol, syntheticPrice, impliedVolatility, timestamp, greeks, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -586,17 +322,10 @@ public class OptionQuote {
     StringBuilder sb = new StringBuilder();
     sb.append("class OptionQuote {\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
-    sb.append("    bidPrice: ").append(toIndentedString(bidPrice)).append("\n");
-    sb.append("    bidSize: ").append(toIndentedString(bidSize)).append("\n");
-    sb.append("    askPrice: ").append(toIndentedString(askPrice)).append("\n");
-    sb.append("    askSize: ").append(toIndentedString(askSize)).append("\n");
-    sb.append("    lastPrice: ").append(toIndentedString(lastPrice)).append("\n");
-    sb.append("    lastSize: ").append(toIndentedString(lastSize)).append("\n");
-    sb.append("    openInterest: ").append(toIndentedString(openInterest)).append("\n");
-    sb.append("    volume: ").append(toIndentedString(volume)).append("\n");
+    sb.append("    syntheticPrice: ").append(toIndentedString(syntheticPrice)).append("\n");
     sb.append("    impliedVolatility: ").append(toIndentedString(impliedVolatility)).append("\n");
-    sb.append("    underlyingPrice: ").append(toIndentedString(underlyingPrice)).append("\n");
     sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    greeks: ").append(toIndentedString(greeks)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -621,17 +350,10 @@ public class OptionQuote {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("symbol");
-    openapiFields.add("bid_price");
-    openapiFields.add("bid_size");
-    openapiFields.add("ask_price");
-    openapiFields.add("ask_size");
-    openapiFields.add("last_price");
-    openapiFields.add("last_size");
-    openapiFields.add("open_interest");
-    openapiFields.add("volume");
+    openapiFields.add("synthetic_price");
     openapiFields.add("implied_volatility");
-    openapiFields.add("underlying_price");
     openapiFields.add("timestamp");
+    openapiFields.add("greeks");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -651,6 +373,10 @@ public class OptionQuote {
       }
       if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
+      }
+      // validate the optional field `greeks`
+      if (jsonObj.get("greeks") != null && !jsonObj.get("greeks").isJsonNull()) {
+        OptionQuoteGreeks.validateJsonObject(jsonObj.getAsJsonObject("greeks"));
       }
   }
 

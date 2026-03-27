@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.account_order_record import AccountOrderRecord
+from snaptrade_client.type.account_order_record_nullable import AccountOrderRecordNullable
 
 class RequiredOrderUpdatedResponse(TypedDict):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
@@ -23,7 +23,7 @@ class RequiredOrderUpdatedResponse(TypedDict):
 
 
 class OptionalOrderUpdatedResponse(TypedDict, total=False):
-    order: AccountOrderRecord
+    order: typing.Optional[AccountOrderRecordNullable]
 
 class OrderUpdatedResponse(RequiredOrderUpdatedResponse, OptionalOrderUpdatedResponse):
     pass

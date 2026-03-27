@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.OptionQuoteGreeks;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -49,67 +50,11 @@ public class OptionQuoteTest {
     }
 
     /**
-     * Test the property 'bidPrice'
+     * Test the property 'syntheticPrice'
      */
     @Test
-    public void bidPriceTest() {
-        // TODO: test bidPrice
-    }
-
-    /**
-     * Test the property 'bidSize'
-     */
-    @Test
-    public void bidSizeTest() {
-        // TODO: test bidSize
-    }
-
-    /**
-     * Test the property 'askPrice'
-     */
-    @Test
-    public void askPriceTest() {
-        // TODO: test askPrice
-    }
-
-    /**
-     * Test the property 'askSize'
-     */
-    @Test
-    public void askSizeTest() {
-        // TODO: test askSize
-    }
-
-    /**
-     * Test the property 'lastPrice'
-     */
-    @Test
-    public void lastPriceTest() {
-        // TODO: test lastPrice
-    }
-
-    /**
-     * Test the property 'lastSize'
-     */
-    @Test
-    public void lastSizeTest() {
-        // TODO: test lastSize
-    }
-
-    /**
-     * Test the property 'openInterest'
-     */
-    @Test
-    public void openInterestTest() {
-        // TODO: test openInterest
-    }
-
-    /**
-     * Test the property 'volume'
-     */
-    @Test
-    public void volumeTest() {
-        // TODO: test volume
+    public void syntheticPriceTest() {
+        // TODO: test syntheticPrice
     }
 
     /**
@@ -121,19 +66,19 @@ public class OptionQuoteTest {
     }
 
     /**
-     * Test the property 'underlyingPrice'
-     */
-    @Test
-    public void underlyingPriceTest() {
-        // TODO: test underlyingPrice
-    }
-
-    /**
      * Test the property 'timestamp'
      */
     @Test
     public void timestampTest() {
         // TODO: test timestamp
+    }
+
+    /**
+     * Test the property 'greeks'
+     */
+    @Test
+    public void greeksTest() {
+        // TODO: test greeks
     }
 
 }

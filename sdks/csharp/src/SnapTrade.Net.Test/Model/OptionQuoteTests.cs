@@ -66,68 +66,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Symbol'
         }
         /// <summary>
-        /// Test the property 'BidPrice'
+        /// Test the property 'SyntheticPrice'
         /// </summary>
         [Fact]
-        public void BidPriceTest()
+        public void SyntheticPriceTest()
         {
-            // TODO unit test for the property 'BidPrice'
-        }
-        /// <summary>
-        /// Test the property 'BidSize'
-        /// </summary>
-        [Fact]
-        public void BidSizeTest()
-        {
-            // TODO unit test for the property 'BidSize'
-        }
-        /// <summary>
-        /// Test the property 'AskPrice'
-        /// </summary>
-        [Fact]
-        public void AskPriceTest()
-        {
-            // TODO unit test for the property 'AskPrice'
-        }
-        /// <summary>
-        /// Test the property 'AskSize'
-        /// </summary>
-        [Fact]
-        public void AskSizeTest()
-        {
-            // TODO unit test for the property 'AskSize'
-        }
-        /// <summary>
-        /// Test the property 'LastPrice'
-        /// </summary>
-        [Fact]
-        public void LastPriceTest()
-        {
-            // TODO unit test for the property 'LastPrice'
-        }
-        /// <summary>
-        /// Test the property 'LastSize'
-        /// </summary>
-        [Fact]
-        public void LastSizeTest()
-        {
-            // TODO unit test for the property 'LastSize'
-        }
-        /// <summary>
-        /// Test the property 'OpenInterest'
-        /// </summary>
-        [Fact]
-        public void OpenInterestTest()
-        {
-            // TODO unit test for the property 'OpenInterest'
-        }
-        /// <summary>
-        /// Test the property 'Volume'
-        /// </summary>
-        [Fact]
-        public void VolumeTest()
-        {
-            // TODO unit test for the property 'Volume'
+            // TODO unit test for the property 'SyntheticPrice'
         }
         /// <summary>
         /// Test the property 'ImpliedVolatility'
@@ -138,20 +82,20 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ImpliedVolatility'
         }
         /// <summary>
-        /// Test the property 'UnderlyingPrice'
-        /// </summary>
-        [Fact]
-        public void UnderlyingPriceTest()
-        {
-            // TODO unit test for the property 'UnderlyingPrice'
-        }
-        /// <summary>
         /// Test the property 'Timestamp'
         /// </summary>
         [Fact]
         public void TimestampTest()
         {
             // TODO unit test for the property 'Timestamp'
+        }
+        /// <summary>
+        /// Test the property 'Greeks'
+        /// </summary>
+        [Fact]
+        public void GreeksTest()
+        {
+            // TODO unit test for the property 'Greeks'
         }
 
     }
