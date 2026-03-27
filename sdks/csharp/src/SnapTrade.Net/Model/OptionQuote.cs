@@ -36,31 +36,17 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="OptionQuote" /> class.
         /// </summary>
         /// <param name="symbol">The OCC-formatted option symbol..</param>
-        /// <param name="bidPrice">The best bid price for the option contract..</param>
-        /// <param name="bidSize">The number of contracts available at the bid price..</param>
-        /// <param name="askPrice">The best ask price for the option contract..</param>
-        /// <param name="askSize">The number of contracts available at the ask price..</param>
-        /// <param name="lastPrice">The price of the last trade for the option contract..</param>
-        /// <param name="lastSize">The number of contracts in the last trade..</param>
-        /// <param name="openInterest">The total number of outstanding contracts..</param>
-        /// <param name="volume">The total number of contracts traded during the current session..</param>
+        /// <param name="syntheticPrice">The derived synthetic price of the contract..</param>
         /// <param name="impliedVolatility">The implied volatility of the option contract..</param>
-        /// <param name="underlyingPrice">The current price of the underlying security..</param>
-        /// <param name="timestamp">The timestamp of the quote..</param>
-        public OptionQuote(string symbol = default(string), double bidPrice = default(double), int bidSize = default(int), double askPrice = default(double), int askSize = default(int), double lastPrice = default(double), int lastSize = default(int), int openInterest = default(int), int volume = default(int), double impliedVolatility = default(double), double underlyingPrice = default(double), DateTime? timestamp = default(DateTime?)) : base()
+        /// <param name="timestamp">The timestamp of the last update for the option quote..</param>
+        /// <param name="greeks">greeks.</param>
+        public OptionQuote(string symbol = default(string), double syntheticPrice = default(double), double impliedVolatility = default(double), DateTime? timestamp = default(DateTime?), OptionQuoteGreeks greeks = default(OptionQuoteGreeks)) : base()
         {
             this.Symbol = symbol;
-            this.BidPrice = bidPrice;
-            this.BidSize = bidSize;
-            this.AskPrice = askPrice;
-            this.AskSize = askSize;
-            this.LastPrice = lastPrice;
-            this.LastSize = lastSize;
-            this.OpenInterest = openInterest;
-            this.Volume = volume;
+            this.SyntheticPrice = syntheticPrice;
             this.ImpliedVolatility = impliedVolatility;
-            this.UnderlyingPrice = underlyingPrice;
             this.Timestamp = timestamp;
+            this.Greeks = greeks;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -72,60 +58,11 @@ namespace SnapTrade.Net.Model
         public string Symbol { get; set; }
 
         /// <summary>
-        /// The best bid price for the option contract.
+        /// The derived synthetic price of the contract.
         /// </summary>
-        /// <value>The best bid price for the option contract.</value>
-        [DataMember(Name = "bid_price", EmitDefaultValue = false)]
-        public double BidPrice { get; set; }
-
-        /// <summary>
-        /// The number of contracts available at the bid price.
-        /// </summary>
-        /// <value>The number of contracts available at the bid price.</value>
-        [DataMember(Name = "bid_size", EmitDefaultValue = false)]
-        public int BidSize { get; set; }
-
-        /// <summary>
-        /// The best ask price for the option contract.
-        /// </summary>
-        /// <value>The best ask price for the option contract.</value>
-        [DataMember(Name = "ask_price", EmitDefaultValue = false)]
-        public double AskPrice { get; set; }
-
-        /// <summary>
-        /// The number of contracts available at the ask price.
-        /// </summary>
-        /// <value>The number of contracts available at the ask price.</value>
-        [DataMember(Name = "ask_size", EmitDefaultValue = false)]
-        public int AskSize { get; set; }
-
-        /// <summary>
-        /// The price of the last trade for the option contract.
-        /// </summary>
-        /// <value>The price of the last trade for the option contract.</value>
-        [DataMember(Name = "last_price", EmitDefaultValue = false)]
-        public double LastPrice { get; set; }
-
-        /// <summary>
-        /// The number of contracts in the last trade.
-        /// </summary>
-        /// <value>The number of contracts in the last trade.</value>
-        [DataMember(Name = "last_size", EmitDefaultValue = false)]
-        public int LastSize { get; set; }
-
-        /// <summary>
-        /// The total number of outstanding contracts.
-        /// </summary>
-        /// <value>The total number of outstanding contracts.</value>
-        [DataMember(Name = "open_interest", EmitDefaultValue = false)]
-        public int OpenInterest { get; set; }
-
-        /// <summary>
-        /// The total number of contracts traded during the current session.
-        /// </summary>
-        /// <value>The total number of contracts traded during the current session.</value>
-        [DataMember(Name = "volume", EmitDefaultValue = false)]
-        public int Volume { get; set; }
+        /// <value>The derived synthetic price of the contract.</value>
+        [DataMember(Name = "synthetic_price", EmitDefaultValue = false)]
+        public double SyntheticPrice { get; set; }
 
         /// <summary>
         /// The implied volatility of the option contract.
@@ -135,18 +72,17 @@ namespace SnapTrade.Net.Model
         public double ImpliedVolatility { get; set; }
 
         /// <summary>
-        /// The current price of the underlying security.
+        /// The timestamp of the last update for the option quote.
         /// </summary>
-        /// <value>The current price of the underlying security.</value>
-        [DataMember(Name = "underlying_price", EmitDefaultValue = false)]
-        public double UnderlyingPrice { get; set; }
-
-        /// <summary>
-        /// The timestamp of the quote.
-        /// </summary>
-        /// <value>The timestamp of the quote.</value>
+        /// <value>The timestamp of the last update for the option quote.</value>
         [DataMember(Name = "timestamp", EmitDefaultValue = true)]
         public DateTime? Timestamp { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Greeks
+        /// </summary>
+        [DataMember(Name = "greeks", EmitDefaultValue = false)]
+        public OptionQuoteGreeks Greeks { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -164,17 +100,10 @@ namespace SnapTrade.Net.Model
             sb.Append("class OptionQuote {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
-            sb.Append("  BidPrice: ").Append(BidPrice).Append("\n");
-            sb.Append("  BidSize: ").Append(BidSize).Append("\n");
-            sb.Append("  AskPrice: ").Append(AskPrice).Append("\n");
-            sb.Append("  AskSize: ").Append(AskSize).Append("\n");
-            sb.Append("  LastPrice: ").Append(LastPrice).Append("\n");
-            sb.Append("  LastSize: ").Append(LastSize).Append("\n");
-            sb.Append("  OpenInterest: ").Append(OpenInterest).Append("\n");
-            sb.Append("  Volume: ").Append(Volume).Append("\n");
+            sb.Append("  SyntheticPrice: ").Append(SyntheticPrice).Append("\n");
             sb.Append("  ImpliedVolatility: ").Append(ImpliedVolatility).Append("\n");
-            sb.Append("  UnderlyingPrice: ").Append(UnderlyingPrice).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+            sb.Append("  Greeks: ").Append(Greeks).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -217,49 +146,22 @@ namespace SnapTrade.Net.Model
                     this.Symbol.Equals(input.Symbol))
                 ) && base.Equals(input) && 
                 (
-                    this.BidPrice == input.BidPrice ||
-                    this.BidPrice.Equals(input.BidPrice)
-                ) && base.Equals(input) && 
-                (
-                    this.BidSize == input.BidSize ||
-                    this.BidSize.Equals(input.BidSize)
-                ) && base.Equals(input) && 
-                (
-                    this.AskPrice == input.AskPrice ||
-                    this.AskPrice.Equals(input.AskPrice)
-                ) && base.Equals(input) && 
-                (
-                    this.AskSize == input.AskSize ||
-                    this.AskSize.Equals(input.AskSize)
-                ) && base.Equals(input) && 
-                (
-                    this.LastPrice == input.LastPrice ||
-                    this.LastPrice.Equals(input.LastPrice)
-                ) && base.Equals(input) && 
-                (
-                    this.LastSize == input.LastSize ||
-                    this.LastSize.Equals(input.LastSize)
-                ) && base.Equals(input) && 
-                (
-                    this.OpenInterest == input.OpenInterest ||
-                    this.OpenInterest.Equals(input.OpenInterest)
-                ) && base.Equals(input) && 
-                (
-                    this.Volume == input.Volume ||
-                    this.Volume.Equals(input.Volume)
+                    this.SyntheticPrice == input.SyntheticPrice ||
+                    this.SyntheticPrice.Equals(input.SyntheticPrice)
                 ) && base.Equals(input) && 
                 (
                     this.ImpliedVolatility == input.ImpliedVolatility ||
                     this.ImpliedVolatility.Equals(input.ImpliedVolatility)
                 ) && base.Equals(input) && 
                 (
-                    this.UnderlyingPrice == input.UnderlyingPrice ||
-                    this.UnderlyingPrice.Equals(input.UnderlyingPrice)
-                ) && base.Equals(input) && 
-                (
                     this.Timestamp == input.Timestamp ||
                     (this.Timestamp != null &&
                     this.Timestamp.Equals(input.Timestamp))
+                ) && base.Equals(input) && 
+                (
+                    this.Greeks == input.Greeks ||
+                    (this.Greeks != null &&
+                    this.Greeks.Equals(input.Greeks))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -277,19 +179,15 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.BidPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.BidSize.GetHashCode();
-                hashCode = (hashCode * 59) + this.AskPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.AskSize.GetHashCode();
-                hashCode = (hashCode * 59) + this.LastPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.LastSize.GetHashCode();
-                hashCode = (hashCode * 59) + this.OpenInterest.GetHashCode();
-                hashCode = (hashCode * 59) + this.Volume.GetHashCode();
+                hashCode = (hashCode * 59) + this.SyntheticPrice.GetHashCode();
                 hashCode = (hashCode * 59) + this.ImpliedVolatility.GetHashCode();
-                hashCode = (hashCode * 59) + this.UnderlyingPrice.GetHashCode();
                 if (this.Timestamp != null)
                 {
                     hashCode = (hashCode * 59) + this.Timestamp.GetHashCode();
+                }
+                if (this.Greeks != null)
+                {
+                    hashCode = (hashCode * 59) + this.Greeks.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

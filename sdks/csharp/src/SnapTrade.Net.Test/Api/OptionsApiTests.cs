@@ -47,10 +47,10 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetOptionQuote
+        /// Test GetUserAccountOptionQuotes
         /// </summary>
         [Fact]
-        public void GetOptionQuoteTest()
+        public void GetUserAccountOptionQuotesTest()
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
@@ -60,12 +60,12 @@ namespace SnapTrade.Net.Test.Api
             try
             {
                 // Get option quote
-                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, accountId, symbol);
+                OptionQuote result = client.Options.GetUserAccountOptionQuotes(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionQuote: " + e.Message);
+                Console.WriteLine("Exception when calling OptionsApi.GetUserAccountOptionQuotes: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

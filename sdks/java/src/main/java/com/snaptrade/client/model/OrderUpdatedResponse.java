@@ -19,10 +19,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.AccountOrderRecord;
+import com.snaptrade.client.model.AccountOrderRecordNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,7 +57,7 @@ public class OrderUpdatedResponse {
 
   public static final String SERIALIZED_NAME_ORDER = "order";
   @SerializedName(SERIALIZED_NAME_ORDER)
-  private AccountOrderRecord order;
+  private AccountOrderRecordNullable order;
 
   public OrderUpdatedResponse() {
   }
@@ -90,7 +91,7 @@ public class OrderUpdatedResponse {
   }
 
 
-  public OrderUpdatedResponse order(AccountOrderRecord order) {
+  public OrderUpdatedResponse order(AccountOrderRecordNullable order) {
     
     
     
@@ -106,12 +107,12 @@ public class OrderUpdatedResponse {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountOrderRecord getOrder() {
+  public AccountOrderRecordNullable getOrder() {
     return order;
   }
 
 
-  public void setOrder(AccountOrderRecord order) {
+  public void setOrder(AccountOrderRecordNullable order) {
     
     
     
@@ -178,9 +179,20 @@ public class OrderUpdatedResponse {
         Objects.equals(this.additionalProperties, orderUpdatedResponse.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(brokerageOrderId, order, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -244,7 +256,7 @@ public class OrderUpdatedResponse {
       }
       // validate the optional field `order`
       if (jsonObj.get("order") != null && !jsonObj.get("order").isJsonNull()) {
-        AccountOrderRecord.validateJsonObject(jsonObj.getAsJsonObject("order"));
+        AccountOrderRecordNullable.validateJsonObject(jsonObj.getAsJsonObject("order"));
       }
   }
 

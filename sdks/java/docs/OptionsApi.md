@@ -4,17 +4,17 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getOptionQuote**](OptionsApi.md#getOptionQuote) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
+| [**getUserAccountOptionQuotes**](OptionsApi.md#getUserAccountOptionQuotes) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**listOptionHoldings**](OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | List account option positions |
 
 
-<a name="getOptionQuote"></a>
-# **getOptionQuote**
-> OptionQuote getOptionQuote(userId, userSecret, accountId, symbol).execute();
+<a name="getUserAccountOptionQuotes"></a>
+# **getUserAccountOptionQuotes**
+> OptionQuote getUserAccountOptionQuotes(userId, userSecret, accountId, symbol).execute();
 
 Get option quote
 
-Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
 
 ### Example
 ```java
@@ -45,23 +45,16 @@ public class Example {
     try {
       OptionQuote result = client
               .options
-              .getOptionQuote(userId, userSecret, accountId, symbol)
+              .getUserAccountOptionQuotes(userId, userSecret, accountId, symbol)
               .execute();
       System.out.println(result);
       System.out.println(result.getSymbol());
-      System.out.println(result.getBidPrice());
-      System.out.println(result.getBidSize());
-      System.out.println(result.getAskPrice());
-      System.out.println(result.getAskSize());
-      System.out.println(result.getLastPrice());
-      System.out.println(result.getLastSize());
-      System.out.println(result.getOpenInterest());
-      System.out.println(result.getVolume());
+      System.out.println(result.getSyntheticPrice());
       System.out.println(result.getImpliedVolatility());
-      System.out.println(result.getUnderlyingPrice());
       System.out.println(result.getTimestamp());
+      System.out.println(result.getGreeks());
     } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#getOptionQuote");
+      System.err.println("Exception when calling OptionsApi#getUserAccountOptionQuotes");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -72,7 +65,7 @@ public class Example {
     try {
       ApiResponse<OptionQuote> response = client
               .options
-              .getOptionQuote(userId, userSecret, accountId, symbol)
+              .getUserAccountOptionQuotes(userId, userSecret, accountId, symbol)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -80,7 +73,7 @@ public class Example {
       System.out.println(response.getRoundTripTime());
       System.out.println(response.getRequest());
     } catch (ApiException e) {
-      System.err.println("Exception when calling OptionsApi#getOptionQuote");
+      System.err.println("Exception when calling OptionsApi#getUserAccountOptionQuotes");
       System.err.println("Status code: " + e.getStatusCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

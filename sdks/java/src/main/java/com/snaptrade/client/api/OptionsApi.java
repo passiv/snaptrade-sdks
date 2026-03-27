@@ -14,8 +14,8 @@ public class OptionsApi extends OptionsApiGenerated {
     public OptionsApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
     }
-    public class GetOptionQuoteRequestBuilder extends GetOptionQuoteRequestBuilderGenerated {
-        public GetOptionQuoteRequestBuilder(String userId, String userSecret, UUID accountId, String symbol) {
+    public class GetUserAccountOptionQuotesRequestBuilder extends GetUserAccountOptionQuotesRequestBuilderGenerated {
+        public GetUserAccountOptionQuotesRequestBuilder(String userId, String userSecret, UUID accountId, String symbol) {
             super(userId, userSecret, accountId, symbol);
         }
     }

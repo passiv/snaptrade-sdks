@@ -38,16 +38,8 @@ class OptionQuote(
         
         class properties:
             symbol = schemas.StrSchema
-            bid_price = schemas.NumberSchema
-            bid_size = schemas.IntSchema
-            ask_price = schemas.NumberSchema
-            ask_size = schemas.IntSchema
-            last_price = schemas.NumberSchema
-            last_size = schemas.IntSchema
-            open_interest = schemas.IntSchema
-            volume = schemas.IntSchema
+            synthetic_price = schemas.NumberSchema
             implied_volatility = schemas.NumberSchema
-            underlying_price = schemas.NumberSchema
             
             
             class timestamp(
@@ -73,19 +65,16 @@ class OptionQuote(
                         *args,
                         _configuration=_configuration,
                     )
+        
+            @staticmethod
+            def greeks() -> typing.Type['OptionQuoteGreeks']:
+                return OptionQuoteGreeks
             __annotations__ = {
                 "symbol": symbol,
-                "bid_price": bid_price,
-                "bid_size": bid_size,
-                "ask_price": ask_price,
-                "ask_size": ask_size,
-                "last_price": last_price,
-                "last_size": last_size,
-                "open_interest": open_interest,
-                "volume": volume,
+                "synthetic_price": synthetic_price,
                 "implied_volatility": implied_volatility,
-                "underlying_price": underlying_price,
                 "timestamp": timestamp,
+                "greeks": greeks,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -93,42 +82,21 @@ class OptionQuote(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["bid_price"]) -> MetaOapg.properties.bid_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["bid_size"]) -> MetaOapg.properties.bid_size: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["ask_price"]) -> MetaOapg.properties.ask_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["ask_size"]) -> MetaOapg.properties.ask_size: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["last_price"]) -> MetaOapg.properties.last_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["last_size"]) -> MetaOapg.properties.last_size: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["open_interest"]) -> MetaOapg.properties.open_interest: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["volume"]) -> MetaOapg.properties.volume: ...
+    def __getitem__(self, name: typing_extensions.Literal["synthetic_price"]) -> MetaOapg.properties.synthetic_price: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["implied_volatility"]) -> MetaOapg.properties.implied_volatility: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["underlying_price"]) -> MetaOapg.properties.underlying_price: ...
+    def __getitem__(self, name: typing_extensions.Literal["timestamp"]) -> MetaOapg.properties.timestamp: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["timestamp"]) -> MetaOapg.properties.timestamp: ...
+    def __getitem__(self, name: typing_extensions.Literal["greeks"]) -> 'OptionQuoteGreeks': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["bid_price"], typing_extensions.Literal["bid_size"], typing_extensions.Literal["ask_price"], typing_extensions.Literal["ask_size"], typing_extensions.Literal["last_price"], typing_extensions.Literal["last_size"], typing_extensions.Literal["open_interest"], typing_extensions.Literal["volume"], typing_extensions.Literal["implied_volatility"], typing_extensions.Literal["underlying_price"], typing_extensions.Literal["timestamp"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["synthetic_price"], typing_extensions.Literal["implied_volatility"], typing_extensions.Literal["timestamp"], typing_extensions.Literal["greeks"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -136,59 +104,31 @@ class OptionQuote(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bid_price"]) -> typing.Union[MetaOapg.properties.bid_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["bid_size"]) -> typing.Union[MetaOapg.properties.bid_size, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["ask_price"]) -> typing.Union[MetaOapg.properties.ask_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["ask_size"]) -> typing.Union[MetaOapg.properties.ask_size, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["last_price"]) -> typing.Union[MetaOapg.properties.last_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["last_size"]) -> typing.Union[MetaOapg.properties.last_size, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["open_interest"]) -> typing.Union[MetaOapg.properties.open_interest, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["volume"]) -> typing.Union[MetaOapg.properties.volume, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["synthetic_price"]) -> typing.Union[MetaOapg.properties.synthetic_price, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["implied_volatility"]) -> typing.Union[MetaOapg.properties.implied_volatility, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["underlying_price"]) -> typing.Union[MetaOapg.properties.underlying_price, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["timestamp"]) -> typing.Union[MetaOapg.properties.timestamp, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["timestamp"]) -> typing.Union[MetaOapg.properties.timestamp, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["greeks"]) -> typing.Union['OptionQuoteGreeks', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["bid_price"], typing_extensions.Literal["bid_size"], typing_extensions.Literal["ask_price"], typing_extensions.Literal["ask_size"], typing_extensions.Literal["last_price"], typing_extensions.Literal["last_size"], typing_extensions.Literal["open_interest"], typing_extensions.Literal["volume"], typing_extensions.Literal["implied_volatility"], typing_extensions.Literal["underlying_price"], typing_extensions.Literal["timestamp"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["synthetic_price"], typing_extensions.Literal["implied_volatility"], typing_extensions.Literal["timestamp"], typing_extensions.Literal["greeks"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
-        bid_price: typing.Union[MetaOapg.properties.bid_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        bid_size: typing.Union[MetaOapg.properties.bid_size, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        ask_price: typing.Union[MetaOapg.properties.ask_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        ask_size: typing.Union[MetaOapg.properties.ask_size, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        last_price: typing.Union[MetaOapg.properties.last_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        last_size: typing.Union[MetaOapg.properties.last_size, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        open_interest: typing.Union[MetaOapg.properties.open_interest, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        volume: typing.Union[MetaOapg.properties.volume, decimal.Decimal, int, schemas.Unset] = schemas.unset,
+        synthetic_price: typing.Union[MetaOapg.properties.synthetic_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         implied_volatility: typing.Union[MetaOapg.properties.implied_volatility, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        underlying_price: typing.Union[MetaOapg.properties.underlying_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         timestamp: typing.Union[MetaOapg.properties.timestamp, None, str, datetime, schemas.Unset] = schemas.unset,
+        greeks: typing.Union['OptionQuoteGreeks', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'OptionQuote':
@@ -196,17 +136,12 @@ class OptionQuote(
             cls,
             *args,
             symbol=symbol,
-            bid_price=bid_price,
-            bid_size=bid_size,
-            ask_price=ask_price,
-            ask_size=ask_size,
-            last_price=last_price,
-            last_size=last_size,
-            open_interest=open_interest,
-            volume=volume,
+            synthetic_price=synthetic_price,
             implied_volatility=implied_volatility,
-            underlying_price=underlying_price,
             timestamp=timestamp,
+            greeks=greeks,
             _configuration=_configuration,
             **kwargs,
         )
+
+from snaptrade_client.model.option_quote_greeks import OptionQuoteGreeks

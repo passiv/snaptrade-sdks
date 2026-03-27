@@ -963,7 +963,7 @@ public class TradingApiGenerated {
 
     /**
      * Get option order impact
-     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint. 
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)

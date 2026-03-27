@@ -22,6 +22,7 @@ from snaptrade_client.model.account_meta import AccountMeta
 from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.model.account_order_record_leg_instrument import AccountOrderRecordLegInstrument
+from snaptrade_client.model.account_order_record_nullable import AccountOrderRecordNullable
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.model.account_order_record_status_v2 import AccountOrderRecordStatusV2
 from snaptrade_client.model.account_order_record_status_v2_nullable import AccountOrderRecordStatusV2Nullable
@@ -130,6 +131,7 @@ from snaptrade_client.model.option_chain_item_chain_per_root_item_chain_per_stri
 from snaptrade_client.model.option_impact import OptionImpact
 from snaptrade_client.model.option_leg import OptionLeg
 from snaptrade_client.model.option_quote import OptionQuote
+from snaptrade_client.model.option_quote_greeks import OptionQuoteGreeks
 from snaptrade_client.model.option_strategy import OptionStrategy
 from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs
 from snaptrade_client.model.option_symbol_id import OptionSymbolID

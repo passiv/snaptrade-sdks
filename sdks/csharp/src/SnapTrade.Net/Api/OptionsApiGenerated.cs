@@ -31,7 +31,7 @@ namespace SnapTrade.Net.Api
         /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -40,13 +40,13 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>OptionQuote</returns>
-        OptionQuote GetOptionQuote(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
+        OptionQuote GetUserAccountOptionQuotes(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
 
         /// <summary>
         /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of OptionQuote</returns>
-        ApiResponse<OptionQuote> GetOptionQuoteWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
+        ApiResponse<OptionQuote> GetUserAccountOptionQuotesWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
         /// <summary>
         /// List account option positions
         /// </summary>
@@ -96,7 +96,7 @@ namespace SnapTrade.Net.Api
         /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -106,13 +106,13 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OptionQuote</returns>
-        System.Threading.Tasks.Task<OptionQuote> GetOptionQuoteAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<OptionQuote> GetUserAccountOptionQuotesAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get option quote
         /// </summary>
         /// <remarks>
-        /// Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -122,7 +122,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OptionQuote)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OptionQuote>> GetOptionQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<OptionQuote>> GetUserAccountOptionQuotesWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account option positions
         /// </summary>
@@ -273,7 +273,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Get option quote Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -282,14 +282,14 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>OptionQuote</returns>
-        public OptionQuote GetOptionQuote(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
+        public OptionQuote GetUserAccountOptionQuotes(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<OptionQuote> localVarResponse = GetOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
+            SnapTrade.Net.Client.ApiResponse<OptionQuote> localVarResponse = GetUserAccountOptionQuotesWithHttpInfo(userId, userSecret, accountId, symbol);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Get option quote Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -298,30 +298,30 @@ namespace SnapTrade.Net.Api
         /// <param name="symbol">The OCC-formatted option symbol.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of OptionQuote</returns>
-        public SnapTrade.Net.Client.ApiResponse<OptionQuote> GetOptionQuoteWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<OptionQuote> GetUserAccountOptionQuotesWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             // verify the required parameter 'symbol' is set
             if (symbol == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -351,7 +351,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
 
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionQuote";
+            localVarRequestOptions.Operation = "OptionsApi.GetUserAccountOptionQuotes";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -374,7 +374,7 @@ namespace SnapTrade.Net.Api
             var localVarResponse = this.Client.Get<OptionQuote>("/accounts/{accountId}/quotes/options", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetOptionQuote", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetUserAccountOptionQuotes", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -385,7 +385,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Get option quote Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -395,14 +395,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OptionQuote</returns>
-        public async System.Threading.Tasks.Task<OptionQuote> GetOptionQuoteAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<OptionQuote> GetUserAccountOptionQuotesAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<OptionQuote> localVarResponse = await GetOptionQuoteWithHttpInfoAsync(userId, userSecret, accountId, symbol, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<OptionQuote> localVarResponse = await GetUserAccountOptionQuotesWithHttpInfoAsync(userId, userSecret, accountId, symbol, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get option quote Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+        /// Get option quote Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -412,30 +412,30 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OptionQuote)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OptionQuote>> GetOptionQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OptionQuote>> GetUserAccountOptionQuotesWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
             // verify the required parameter 'symbol' is set
             if (symbol == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionQuote");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetUserAccountOptionQuotes");
             }
 
 
@@ -466,7 +466,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
 
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionQuote";
+            localVarRequestOptions.Operation = "OptionsApi.GetUserAccountOptionQuotes";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -490,7 +490,7 @@ namespace SnapTrade.Net.Api
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetOptionQuote", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetUserAccountOptionQuotes", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

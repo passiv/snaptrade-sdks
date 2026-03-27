@@ -96,6 +96,7 @@ export * from './option-chain-inner-chain-per-root-inner-chain-per-strike-price-
 export * from './option-impact';
 export * from './option-leg';
 export * from './option-quote';
+export * from './option-quote-greeks';
 export * from './option-strategy';
 export * from './option-strategy-legs-inner';
 export * from './options-position';
@@ -103,6 +104,7 @@ export * from './options-position-currency';
 export * from './options-symbol';
 export * from './order-type-strict';
 export * from './order-updated-response';
+export * from './order-updated-response-order';
 export * from './paginated-universal-activity';
 export * from './pagination-details';
 export * from './partner-data';

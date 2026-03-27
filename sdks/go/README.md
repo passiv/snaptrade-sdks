@@ -97,7 +97,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
-*OptionsApi* | [**GetOptionQuote**](docs/OptionsApi.md#getoptionquote) | **Get** /accounts/{accountId}/quotes/options | Get option quote
+*OptionsApi* | [**GetUserAccountOptionQuotes**](docs/OptionsApi.md#getuseraccountoptionquotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 *OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | List account option positions
 *ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
@@ -228,6 +228,7 @@ Class | Method | HTTP request | Description
  - [OptionImpact](docs/OptionImpact.md)
  - [OptionLeg](docs/OptionLeg.md)
  - [OptionQuote](docs/OptionQuote.md)
+ - [OptionQuoteGreeks](docs/OptionQuoteGreeks.md)
  - [OptionStrategy](docs/OptionStrategy.md)
  - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
  - [OptionsPosition](docs/OptionsPosition.md)
@@ -235,6 +236,7 @@ Class | Method | HTTP request | Description
  - [OptionsSymbol](docs/OptionsSymbol.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
  - [OrderUpdatedResponse](docs/OrderUpdatedResponse.md)
+ - [OrderUpdatedResponseOrder](docs/OrderUpdatedResponseOrder.md)
  - [PaginatedUniversalActivity](docs/PaginatedUniversalActivity.md)
  - [PaginationDetails](docs/PaginationDetails.md)
  - [PartnerData](docs/PartnerData.md)

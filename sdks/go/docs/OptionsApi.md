@@ -4,12 +4,12 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**GetOptionQuote**](OptionsApi.md#GetOptionQuote) | **Get** /accounts/{accountId}/quotes/options | Get option quote
+[**GetUserAccountOptionQuotes**](OptionsApi.md#GetUserAccountOptionQuotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**ListOptionHoldings**](OptionsApi.md#ListOptionHoldings) | **Get** /accounts/{accountId}/options | List account option positions
 
 
 
-## GetOptionQuote
+## GetUserAccountOptionQuotes
 
 Get option quote
 
@@ -32,7 +32,7 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    request := client.OptionsApi.GetOptionQuote(
+    request := client.OptionsApi.GetUserAccountOptionQuotes(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
@@ -42,23 +42,16 @@ func main() {
     resp, httpRes, err := request.Execute()
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OptionsApi.GetOptionQuote``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `OptionsApi.GetUserAccountOptionQuotes``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `GetOptionQuote`: OptionQuote
-    fmt.Fprintf(os.Stdout, "Response from `OptionsApi.GetOptionQuote`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.BidPrice`: %v\n", *resp.BidPrice)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.BidSize`: %v\n", *resp.BidSize)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.AskPrice`: %v\n", *resp.AskPrice)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.AskSize`: %v\n", *resp.AskSize)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.LastPrice`: %v\n", *resp.LastPrice)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.LastSize`: %v\n", *resp.LastSize)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.OpenInterest`: %v\n", *resp.OpenInterest)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.Volume`: %v\n", *resp.Volume)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.ImpliedVolatility`: %v\n", *resp.ImpliedVolatility)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.UnderlyingPrice`: %v\n", *resp.UnderlyingPrice)
-    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetOptionQuote.Timestamp`: %v\n", *resp.Timestamp)
+    // response from `GetUserAccountOptionQuotes`: OptionQuote
+    fmt.Fprintf(os.Stdout, "Response from `OptionsApi.GetUserAccountOptionQuotes`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.SyntheticPrice`: %v\n", *resp.SyntheticPrice)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.ImpliedVolatility`: %v\n", *resp.ImpliedVolatility)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Timestamp`: %v\n", *resp.Timestamp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Greeks`: %v\n", *resp.Greeks)
 }
 ```
 

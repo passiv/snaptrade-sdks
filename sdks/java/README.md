@@ -53,7 +53,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
-  * [`snaptrade.options.getOptionQuote`](#snaptradeoptionsgetoptionquote)
+  * [`snaptrade.options.getUserAccountOptionQuotes`](#snaptradeoptionsgetuseraccountoptionquotes)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -1459,9 +1459,10 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 ---
 
 
-### `snaptrade.options.getOptionQuote`<a id="snaptradeoptionsgetoptionquote"></a>
+### `snaptrade.options.getUserAccountOptionQuotes`<a id="snaptradeoptionsgetuseraccountoptionquotes"></a>
 
-Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+**Note:** These are derived values and are not suitable for trading purposes.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1469,7 +1470,7 @@ Returns a real-time quote for a single option contract. The option contract is s
 ```java
 OptionQuote result = client
         .options
-        .getOptionQuote(userId, userSecret, accountId, symbol)
+        .getUserAccountOptionQuotes(userId, userSecret, accountId, symbol)
         .execute();
 ```
 
@@ -2019,7 +2020,7 @@ CryptocurrencyPairQuote result = client
 ### `snaptrade.trading.getOptionImpact`<a id="snaptradetradinggetoptionimpact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

@@ -74,7 +74,7 @@ public class OptionsApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call getOptionQuoteCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOptionQuotesCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -132,53 +132,53 @@ public class OptionsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getOptionQuoteValidateBeforeCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOptionQuotesValidateBeforeCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling getOptionQuote(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserAccountOptionQuotes(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling getOptionQuote(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getUserAccountOptionQuotes(Async)");
         }
 
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling getOptionQuote(Async)");
+            throw new ApiException("Missing the required parameter 'accountId' when calling getUserAccountOptionQuotes(Async)");
         }
 
         // verify the required parameter 'symbol' is set
         if (symbol == null) {
-            throw new ApiException("Missing the required parameter 'symbol' when calling getOptionQuote(Async)");
+            throw new ApiException("Missing the required parameter 'symbol' when calling getUserAccountOptionQuotes(Async)");
         }
 
-        return getOptionQuoteCall(userId, userSecret, accountId, symbol, _callback);
+        return getUserAccountOptionQuotesCall(userId, userSecret, accountId, symbol, _callback);
 
     }
 
 
-    private ApiResponse<OptionQuote> getOptionQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, String symbol) throws ApiException {
-        okhttp3.Call localVarCall = getOptionQuoteValidateBeforeCall(userId, userSecret, accountId, symbol, null);
+    private ApiResponse<OptionQuote> getUserAccountOptionQuotesWithHttpInfo(String userId, String userSecret, UUID accountId, String symbol) throws ApiException {
+        okhttp3.Call localVarCall = getUserAccountOptionQuotesValidateBeforeCall(userId, userSecret, accountId, symbol, null);
         Type localVarReturnType = new TypeToken<OptionQuote>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getOptionQuoteAsync(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback<OptionQuote> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOptionQuotesAsync(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback<OptionQuote> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getOptionQuoteValidateBeforeCall(userId, userSecret, accountId, symbol, _callback);
+        okhttp3.Call localVarCall = getUserAccountOptionQuotesValidateBeforeCall(userId, userSecret, accountId, symbol, _callback);
         Type localVarReturnType = new TypeToken<OptionQuote>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
-    public abstract class GetOptionQuoteRequestBuilderGenerated {
+    public abstract class GetUserAccountOptionQuotesRequestBuilderGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
         final String symbol;
 
-        public GetOptionQuoteRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String symbol) {
+        public GetUserAccountOptionQuotesRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String symbol) {
             this.userId = userId;
             this.userSecret = userSecret;
             this.accountId = accountId;
@@ -186,7 +186,7 @@ public class OptionsApiGenerated {
         }
 
         /**
-         * Build call for getOptionQuote
+         * Build call for getUserAccountOptionQuotes
          * @param _callback ApiCallback API callback
          * @return Call to execute
          * @throws ApiException If fail to serialize the request body object
@@ -197,12 +197,12 @@ public class OptionsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getOptionQuoteCall(userId, userSecret, accountId, symbol, _callback);
+            return getUserAccountOptionQuotesCall(userId, userSecret, accountId, symbol, _callback);
         }
 
 
         /**
-         * Execute getOptionQuote request
+         * Execute getUserAccountOptionQuotes request
          * @return OptionQuote
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -212,12 +212,12 @@ public class OptionsApiGenerated {
          </table>
          */
         public OptionQuote execute() throws ApiException {
-            ApiResponse<OptionQuote> localVarResp = getOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
+            ApiResponse<OptionQuote> localVarResp = getUserAccountOptionQuotesWithHttpInfo(userId, userSecret, accountId, symbol);
             return localVarResp.getResponseBody();
         }
 
         /**
-         * Execute getOptionQuote request with HTTP info returned
+         * Execute getUserAccountOptionQuotes request with HTTP info returned
          * @return ApiResponse&lt;OptionQuote&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -227,11 +227,11 @@ public class OptionsApiGenerated {
          </table>
          */
         public ApiResponse<OptionQuote> executeWithHttpInfo() throws ApiException {
-            return getOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
+            return getUserAccountOptionQuotesWithHttpInfo(userId, userSecret, accountId, symbol);
         }
 
         /**
-         * Execute getOptionQuote request (asynchronously)
+         * Execute getUserAccountOptionQuotes request (asynchronously)
          * @param _callback The callback to be executed when the API call finishes
          * @return The request call
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -242,25 +242,25 @@ public class OptionsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<OptionQuote> _callback) throws ApiException {
-            return getOptionQuoteAsync(userId, userSecret, accountId, symbol, _callback);
+            return getUserAccountOptionQuotesAsync(userId, userSecret, accountId, symbol, _callback);
         }
     }
 
     /**
      * Get option quote
-     * Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
      * @param symbol The OCC-formatted option symbol. (required)
-     * @return GetOptionQuoteRequestBuilder
+     * @return GetUserAccountOptionQuotesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public OptionsApi.GetOptionQuoteRequestBuilder getOptionQuote(String userId, String userSecret, UUID accountId, String symbol) throws IllegalArgumentException {
+    public OptionsApi.GetUserAccountOptionQuotesRequestBuilder getUserAccountOptionQuotes(String userId, String userSecret, UUID accountId, String symbol) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
@@ -273,7 +273,7 @@ public class OptionsApiGenerated {
         if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
             
 
-        return ((OptionsApi) this).new GetOptionQuoteRequestBuilder(userId, userSecret, accountId, symbol);
+        return ((OptionsApi) this).new GetUserAccountOptionQuotesRequestBuilder(userId, userSecret, accountId, symbol);
     }
     private okhttp3.Call listOptionHoldingsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
