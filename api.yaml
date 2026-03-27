@@ -1106,8 +1106,9 @@ paths:
         - Options
       summary: Get option quote
       description: |
-        Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
-      operationId: Options_getOptionQuote
+        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+        **Note:** These are derived values and are not suitable for trading purposes.
+      operationId: Trading_getUserAccountOptionQuotes
       parameters:
         - in: query
           required: true
@@ -2371,7 +2372,7 @@ paths:
       summary: Get option order impact
       description: |
         Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
       operationId: Trading_getOptionImpact
       parameters:
         - in: query
@@ -3562,7 +3563,6 @@ components:
         - REPLACED
         - REPLACE_PENDING
         - EXPIRED
-
     OptionQuote:
       description: Real-time quote for a single option contract.
       type: object
@@ -3571,52 +3571,40 @@ components:
           type: string
           description: The OCC-formatted option symbol.
           example: "AAPL  251219C00150000"
-        bid_price:
+        synthetic_price:
           type: number
-          description: The best bid price for the option contract.
-          example: 3.50
-        bid_size:
-          type: integer
-          description: The number of contracts available at the bid price.
-          example: 10
-        ask_price:
-          type: number
-          description: The best ask price for the option contract.
-          example: 3.70
-        ask_size:
-          type: integer
-          description: The number of contracts available at the ask price.
-          example: 15
-        last_price:
-          type: number
-          description: The price of the last trade for the option contract.
-          example: 3.60
-        last_size:
-          type: integer
-          description: The number of contracts in the last trade.
-          example: 5
-        open_interest:
-          type: integer
-          description: The total number of outstanding contracts.
-          example: 1200
-        volume:
-          type: integer
-          description: The total number of contracts traded during the current session.
-          example: 350
+          description: The derived synthetic price of the contract.
+          example: 150.25
         implied_volatility:
           type: number
           description: The implied volatility of the option contract.
           example: 0.32145678
-        underlying_price:
-          type: number
-          description: The current price of the underlying security.
-          example: 150.25
         timestamp:
           type: string
           format: date-time
           nullable: true
-          description: The timestamp of the quote.
+          description: The timestamp of the last update for the option quote.
           example: "2026-01-15T14:30:00Z"
+        greeks:
+          type: object
+          description: The Greeks for the option contract.
+          properties:
+            delta:
+              type: number
+              description: Delta represents the rate of change between the option's price and a $1 change in the underlying asset's price.
+              example: 0.5
+            gamma:
+              type: number
+              description: Gamma represents the rate of change between an option's delta and the underlying asset's price.
+              example: 0.1
+            theta:
+              type: number
+              description: Theta represents the rate of change between the option price and time, or time sensitivity - sometimes known as an option's time decay.
+              example: -0.05
+            vega:
+              type: number
+              description: Vega represents the rate of change between an option's value and the underlying asset's implied volatility.
+              example: 0.2
     OptionsPosition:
       description: Describes a single option position in an account.
       type: object
@@ -4114,7 +4102,7 @@ components:
         symbol:
           $ref: "#/components/schemas/PositionSymbol"
         units:
-          description: The number of shares of the position. This can be fractional or integer units.
+          description: The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
           type: number
           example: 40
           nullable: true
@@ -5482,7 +5470,9 @@ components:
         brokerage_order_id:
           $ref: "#/components/schemas/BrokerageOrderID"
         order:
-          $ref: "#/components/schemas/AccountOrderRecord"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecord"
     CancelOrderResponse:
       type: object
       required:
