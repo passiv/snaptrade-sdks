@@ -1871,7 +1871,7 @@ p result
 ### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

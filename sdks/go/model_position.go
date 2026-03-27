@@ -18,7 +18,7 @@ import (
 // Position Describes a single stock/ETF/crypto/mutual fund position in an account.
 type Position struct {
 	Symbol *PositionSymbol `json:"symbol,omitempty"`
-	// The number of shares of the position. This can be fractional or integer units.
+	// The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
 	Units NullableFloat32 `json:"units,omitempty"`
 	// Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
 	Price NullableFloat32 `json:"price,omitempty"`
