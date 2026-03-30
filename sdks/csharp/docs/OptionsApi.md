@@ -4,15 +4,15 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetOptionQuote**](OptionsApi.md#getoptionquote) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
+| [**GetUserAccountOptionQuotes**](OptionsApi.md#getuseraccountoptionquotes) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | List account option positions |
 
 
-# **GetOptionQuote**
+# **GetUserAccountOptionQuotes**
 
 
 
-Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) 
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
 
 ### Example
 ```csharp
@@ -24,7 +24,7 @@ using SnapTrade.Net.Model;
 
 namespace Example
 {
-    public class GetOptionQuoteExample
+    public class GetUserAccountOptionQuotesExample
     {
         public static void Main()
         {
@@ -42,12 +42,12 @@ namespace Example
             try
             {
                 // Get option quote
-                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, accountId, symbol);
+                OptionQuote result = client.Options.GetUserAccountOptionQuotes(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionQuote: " + e.Message);
+                Console.WriteLine("Exception when calling OptionsApi.GetUserAccountOptionQuotes: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -62,21 +62,21 @@ namespace Example
 }
 ```
 
-#### Using the GetOptionQuoteWithHttpInfo variant
+#### Using the GetUserAccountOptionQuotesWithHttpInfo variant
 This returns an ApiResponse object which contains the response data, status code and headers.
 
 ```csharp
 try
 {
     // Get option quote
-    ApiResponse<OptionQuote> response = apiInstance.GetOptionQuoteWithHttpInfo(userId, userSecret, accountId, symbol);
+    ApiResponse<OptionQuote> response = apiInstance.GetUserAccountOptionQuotesWithHttpInfo(userId, userSecret, accountId, symbol);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling OptionsApi.GetOptionQuoteWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling OptionsApi.GetUserAccountOptionQuotesWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }

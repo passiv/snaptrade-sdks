@@ -20,28 +20,13 @@ import (
 type OptionQuote struct {
 	// The OCC-formatted option symbol.
 	Symbol *string `json:"symbol,omitempty"`
-	// The best bid price for the option contract.
-	BidPrice *float32 `json:"bid_price,omitempty"`
-	// The number of contracts available at the bid price.
-	BidSize *int32 `json:"bid_size,omitempty"`
-	// The best ask price for the option contract.
-	AskPrice *float32 `json:"ask_price,omitempty"`
-	// The number of contracts available at the ask price.
-	AskSize *int32 `json:"ask_size,omitempty"`
-	// The price of the last trade for the option contract.
-	LastPrice *float32 `json:"last_price,omitempty"`
-	// The number of contracts in the last trade.
-	LastSize *int32 `json:"last_size,omitempty"`
-	// The total number of outstanding contracts.
-	OpenInterest *int32 `json:"open_interest,omitempty"`
-	// The total number of contracts traded during the current session.
-	Volume *int32 `json:"volume,omitempty"`
+	// The derived synthetic price of the contract.
+	SyntheticPrice *float32 `json:"synthetic_price,omitempty"`
 	// The implied volatility of the option contract.
 	ImpliedVolatility *float32 `json:"implied_volatility,omitempty"`
-	// The current price of the underlying security.
-	UnderlyingPrice *float32 `json:"underlying_price,omitempty"`
-	// The timestamp of the quote.
+	// The timestamp of the last update for the option quote.
 	Timestamp NullableTime `json:"timestamp,omitempty"`
+	Greeks *OptionQuoteGreeks `json:"greeks,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -96,260 +81,36 @@ func (o *OptionQuote) SetSymbol(v string) {
 	o.Symbol = &v
 }
 
-// GetBidPrice returns the BidPrice field value if set, zero value otherwise.
-func (o *OptionQuote) GetBidPrice() float32 {
-	if o == nil || isNil(o.BidPrice) {
+// GetSyntheticPrice returns the SyntheticPrice field value if set, zero value otherwise.
+func (o *OptionQuote) GetSyntheticPrice() float32 {
+	if o == nil || isNil(o.SyntheticPrice) {
 		var ret float32
 		return ret
 	}
-	return *o.BidPrice
+	return *o.SyntheticPrice
 }
 
-// GetBidPriceOk returns a tuple with the BidPrice field value if set, nil otherwise
+// GetSyntheticPriceOk returns a tuple with the SyntheticPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OptionQuote) GetBidPriceOk() (*float32, bool) {
-	if o == nil || isNil(o.BidPrice) {
+func (o *OptionQuote) GetSyntheticPriceOk() (*float32, bool) {
+	if o == nil || isNil(o.SyntheticPrice) {
     return nil, false
 	}
-	return o.BidPrice, true
+	return o.SyntheticPrice, true
 }
 
-// HasBidPrice returns a boolean if a field has been set.
-func (o *OptionQuote) HasBidPrice() bool {
-	if o != nil && !isNil(o.BidPrice) {
+// HasSyntheticPrice returns a boolean if a field has been set.
+func (o *OptionQuote) HasSyntheticPrice() bool {
+	if o != nil && !isNil(o.SyntheticPrice) {
 		return true
 	}
 
 	return false
 }
 
-// SetBidPrice gets a reference to the given float32 and assigns it to the BidPrice field.
-func (o *OptionQuote) SetBidPrice(v float32) {
-	o.BidPrice = &v
-}
-
-// GetBidSize returns the BidSize field value if set, zero value otherwise.
-func (o *OptionQuote) GetBidSize() int32 {
-	if o == nil || isNil(o.BidSize) {
-		var ret int32
-		return ret
-	}
-	return *o.BidSize
-}
-
-// GetBidSizeOk returns a tuple with the BidSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetBidSizeOk() (*int32, bool) {
-	if o == nil || isNil(o.BidSize) {
-    return nil, false
-	}
-	return o.BidSize, true
-}
-
-// HasBidSize returns a boolean if a field has been set.
-func (o *OptionQuote) HasBidSize() bool {
-	if o != nil && !isNil(o.BidSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetBidSize gets a reference to the given int32 and assigns it to the BidSize field.
-func (o *OptionQuote) SetBidSize(v int32) {
-	o.BidSize = &v
-}
-
-// GetAskPrice returns the AskPrice field value if set, zero value otherwise.
-func (o *OptionQuote) GetAskPrice() float32 {
-	if o == nil || isNil(o.AskPrice) {
-		var ret float32
-		return ret
-	}
-	return *o.AskPrice
-}
-
-// GetAskPriceOk returns a tuple with the AskPrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetAskPriceOk() (*float32, bool) {
-	if o == nil || isNil(o.AskPrice) {
-    return nil, false
-	}
-	return o.AskPrice, true
-}
-
-// HasAskPrice returns a boolean if a field has been set.
-func (o *OptionQuote) HasAskPrice() bool {
-	if o != nil && !isNil(o.AskPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetAskPrice gets a reference to the given float32 and assigns it to the AskPrice field.
-func (o *OptionQuote) SetAskPrice(v float32) {
-	o.AskPrice = &v
-}
-
-// GetAskSize returns the AskSize field value if set, zero value otherwise.
-func (o *OptionQuote) GetAskSize() int32 {
-	if o == nil || isNil(o.AskSize) {
-		var ret int32
-		return ret
-	}
-	return *o.AskSize
-}
-
-// GetAskSizeOk returns a tuple with the AskSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetAskSizeOk() (*int32, bool) {
-	if o == nil || isNil(o.AskSize) {
-    return nil, false
-	}
-	return o.AskSize, true
-}
-
-// HasAskSize returns a boolean if a field has been set.
-func (o *OptionQuote) HasAskSize() bool {
-	if o != nil && !isNil(o.AskSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetAskSize gets a reference to the given int32 and assigns it to the AskSize field.
-func (o *OptionQuote) SetAskSize(v int32) {
-	o.AskSize = &v
-}
-
-// GetLastPrice returns the LastPrice field value if set, zero value otherwise.
-func (o *OptionQuote) GetLastPrice() float32 {
-	if o == nil || isNil(o.LastPrice) {
-		var ret float32
-		return ret
-	}
-	return *o.LastPrice
-}
-
-// GetLastPriceOk returns a tuple with the LastPrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetLastPriceOk() (*float32, bool) {
-	if o == nil || isNil(o.LastPrice) {
-    return nil, false
-	}
-	return o.LastPrice, true
-}
-
-// HasLastPrice returns a boolean if a field has been set.
-func (o *OptionQuote) HasLastPrice() bool {
-	if o != nil && !isNil(o.LastPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastPrice gets a reference to the given float32 and assigns it to the LastPrice field.
-func (o *OptionQuote) SetLastPrice(v float32) {
-	o.LastPrice = &v
-}
-
-// GetLastSize returns the LastSize field value if set, zero value otherwise.
-func (o *OptionQuote) GetLastSize() int32 {
-	if o == nil || isNil(o.LastSize) {
-		var ret int32
-		return ret
-	}
-	return *o.LastSize
-}
-
-// GetLastSizeOk returns a tuple with the LastSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetLastSizeOk() (*int32, bool) {
-	if o == nil || isNil(o.LastSize) {
-    return nil, false
-	}
-	return o.LastSize, true
-}
-
-// HasLastSize returns a boolean if a field has been set.
-func (o *OptionQuote) HasLastSize() bool {
-	if o != nil && !isNil(o.LastSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastSize gets a reference to the given int32 and assigns it to the LastSize field.
-func (o *OptionQuote) SetLastSize(v int32) {
-	o.LastSize = &v
-}
-
-// GetOpenInterest returns the OpenInterest field value if set, zero value otherwise.
-func (o *OptionQuote) GetOpenInterest() int32 {
-	if o == nil || isNil(o.OpenInterest) {
-		var ret int32
-		return ret
-	}
-	return *o.OpenInterest
-}
-
-// GetOpenInterestOk returns a tuple with the OpenInterest field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetOpenInterestOk() (*int32, bool) {
-	if o == nil || isNil(o.OpenInterest) {
-    return nil, false
-	}
-	return o.OpenInterest, true
-}
-
-// HasOpenInterest returns a boolean if a field has been set.
-func (o *OptionQuote) HasOpenInterest() bool {
-	if o != nil && !isNil(o.OpenInterest) {
-		return true
-	}
-
-	return false
-}
-
-// SetOpenInterest gets a reference to the given int32 and assigns it to the OpenInterest field.
-func (o *OptionQuote) SetOpenInterest(v int32) {
-	o.OpenInterest = &v
-}
-
-// GetVolume returns the Volume field value if set, zero value otherwise.
-func (o *OptionQuote) GetVolume() int32 {
-	if o == nil || isNil(o.Volume) {
-		var ret int32
-		return ret
-	}
-	return *o.Volume
-}
-
-// GetVolumeOk returns a tuple with the Volume field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetVolumeOk() (*int32, bool) {
-	if o == nil || isNil(o.Volume) {
-    return nil, false
-	}
-	return o.Volume, true
-}
-
-// HasVolume returns a boolean if a field has been set.
-func (o *OptionQuote) HasVolume() bool {
-	if o != nil && !isNil(o.Volume) {
-		return true
-	}
-
-	return false
-}
-
-// SetVolume gets a reference to the given int32 and assigns it to the Volume field.
-func (o *OptionQuote) SetVolume(v int32) {
-	o.Volume = &v
+// SetSyntheticPrice gets a reference to the given float32 and assigns it to the SyntheticPrice field.
+func (o *OptionQuote) SetSyntheticPrice(v float32) {
+	o.SyntheticPrice = &v
 }
 
 // GetImpliedVolatility returns the ImpliedVolatility field value if set, zero value otherwise.
@@ -382,38 +143,6 @@ func (o *OptionQuote) HasImpliedVolatility() bool {
 // SetImpliedVolatility gets a reference to the given float32 and assigns it to the ImpliedVolatility field.
 func (o *OptionQuote) SetImpliedVolatility(v float32) {
 	o.ImpliedVolatility = &v
-}
-
-// GetUnderlyingPrice returns the UnderlyingPrice field value if set, zero value otherwise.
-func (o *OptionQuote) GetUnderlyingPrice() float32 {
-	if o == nil || isNil(o.UnderlyingPrice) {
-		var ret float32
-		return ret
-	}
-	return *o.UnderlyingPrice
-}
-
-// GetUnderlyingPriceOk returns a tuple with the UnderlyingPrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionQuote) GetUnderlyingPriceOk() (*float32, bool) {
-	if o == nil || isNil(o.UnderlyingPrice) {
-    return nil, false
-	}
-	return o.UnderlyingPrice, true
-}
-
-// HasUnderlyingPrice returns a boolean if a field has been set.
-func (o *OptionQuote) HasUnderlyingPrice() bool {
-	if o != nil && !isNil(o.UnderlyingPrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnderlyingPrice gets a reference to the given float32 and assigns it to the UnderlyingPrice field.
-func (o *OptionQuote) SetUnderlyingPrice(v float32) {
-	o.UnderlyingPrice = &v
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -458,43 +187,54 @@ func (o *OptionQuote) UnsetTimestamp() {
 	o.Timestamp.Unset()
 }
 
+// GetGreeks returns the Greeks field value if set, zero value otherwise.
+func (o *OptionQuote) GetGreeks() OptionQuoteGreeks {
+	if o == nil || isNil(o.Greeks) {
+		var ret OptionQuoteGreeks
+		return ret
+	}
+	return *o.Greeks
+}
+
+// GetGreeksOk returns a tuple with the Greeks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OptionQuote) GetGreeksOk() (*OptionQuoteGreeks, bool) {
+	if o == nil || isNil(o.Greeks) {
+    return nil, false
+	}
+	return o.Greeks, true
+}
+
+// HasGreeks returns a boolean if a field has been set.
+func (o *OptionQuote) HasGreeks() bool {
+	if o != nil && !isNil(o.Greeks) {
+		return true
+	}
+
+	return false
+}
+
+// SetGreeks gets a reference to the given OptionQuoteGreeks and assigns it to the Greeks field.
+func (o *OptionQuote) SetGreeks(v OptionQuoteGreeks) {
+	o.Greeks = &v
+}
+
 func (o OptionQuote) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
 	}
-	if !isNil(o.BidPrice) {
-		toSerialize["bid_price"] = o.BidPrice
-	}
-	if !isNil(o.BidSize) {
-		toSerialize["bid_size"] = o.BidSize
-	}
-	if !isNil(o.AskPrice) {
-		toSerialize["ask_price"] = o.AskPrice
-	}
-	if !isNil(o.AskSize) {
-		toSerialize["ask_size"] = o.AskSize
-	}
-	if !isNil(o.LastPrice) {
-		toSerialize["last_price"] = o.LastPrice
-	}
-	if !isNil(o.LastSize) {
-		toSerialize["last_size"] = o.LastSize
-	}
-	if !isNil(o.OpenInterest) {
-		toSerialize["open_interest"] = o.OpenInterest
-	}
-	if !isNil(o.Volume) {
-		toSerialize["volume"] = o.Volume
+	if !isNil(o.SyntheticPrice) {
+		toSerialize["synthetic_price"] = o.SyntheticPrice
 	}
 	if !isNil(o.ImpliedVolatility) {
 		toSerialize["implied_volatility"] = o.ImpliedVolatility
 	}
-	if !isNil(o.UnderlyingPrice) {
-		toSerialize["underlying_price"] = o.UnderlyingPrice
-	}
 	if o.Timestamp.IsSet() {
 		toSerialize["timestamp"] = o.Timestamp.Get()
+	}
+	if !isNil(o.Greeks) {
+		toSerialize["greeks"] = o.Greeks
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -515,17 +255,10 @@ func (o *OptionQuote) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "bid_price")
-		delete(additionalProperties, "bid_size")
-		delete(additionalProperties, "ask_price")
-		delete(additionalProperties, "ask_size")
-		delete(additionalProperties, "last_price")
-		delete(additionalProperties, "last_size")
-		delete(additionalProperties, "open_interest")
-		delete(additionalProperties, "volume")
+		delete(additionalProperties, "synthetic_price")
 		delete(additionalProperties, "implied_volatility")
-		delete(additionalProperties, "underlying_price")
 		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "greeks")
 		o.AdditionalProperties = additionalProperties
 	}
 

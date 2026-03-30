@@ -16,54 +16,25 @@ module SnapTrade
     # The OCC-formatted option symbol.
     attr_accessor :symbol
 
-    # The best bid price for the option contract.
-    attr_accessor :bid_price
-
-    # The number of contracts available at the bid price.
-    attr_accessor :bid_size
-
-    # The best ask price for the option contract.
-    attr_accessor :ask_price
-
-    # The number of contracts available at the ask price.
-    attr_accessor :ask_size
-
-    # The price of the last trade for the option contract.
-    attr_accessor :last_price
-
-    # The number of contracts in the last trade.
-    attr_accessor :last_size
-
-    # The total number of outstanding contracts.
-    attr_accessor :open_interest
-
-    # The total number of contracts traded during the current session.
-    attr_accessor :volume
+    # The derived synthetic price of the contract.
+    attr_accessor :synthetic_price
 
     # The implied volatility of the option contract.
     attr_accessor :implied_volatility
 
-    # The current price of the underlying security.
-    attr_accessor :underlying_price
-
-    # The timestamp of the quote.
+    # The timestamp of the last update for the option quote.
     attr_accessor :timestamp
+
+    attr_accessor :greeks
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'symbol' => :'symbol',
-        :'bid_price' => :'bid_price',
-        :'bid_size' => :'bid_size',
-        :'ask_price' => :'ask_price',
-        :'ask_size' => :'ask_size',
-        :'last_price' => :'last_price',
-        :'last_size' => :'last_size',
-        :'open_interest' => :'open_interest',
-        :'volume' => :'volume',
+        :'synthetic_price' => :'synthetic_price',
         :'implied_volatility' => :'implied_volatility',
-        :'underlying_price' => :'underlying_price',
-        :'timestamp' => :'timestamp'
+        :'timestamp' => :'timestamp',
+        :'greeks' => :'greeks'
       }
     end
 
@@ -76,24 +47,17 @@ module SnapTrade
     def self.openapi_types
       {
         :'symbol' => :'String',
-        :'bid_price' => :'Float',
-        :'bid_size' => :'Integer',
-        :'ask_price' => :'Float',
-        :'ask_size' => :'Integer',
-        :'last_price' => :'Float',
-        :'last_size' => :'Integer',
-        :'open_interest' => :'Integer',
-        :'volume' => :'Integer',
+        :'synthetic_price' => :'Float',
         :'implied_volatility' => :'Float',
-        :'underlying_price' => :'Float',
-        :'timestamp' => :'Time'
+        :'timestamp' => :'Time',
+        :'greeks' => :'OptionQuoteGreeks'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'timestamp'
+        :'timestamp',
       ])
     end
 
@@ -116,48 +80,20 @@ module SnapTrade
         self.symbol = attributes[:'symbol']
       end
 
-      if attributes.key?(:'bid_price')
-        self.bid_price = attributes[:'bid_price']
-      end
-
-      if attributes.key?(:'bid_size')
-        self.bid_size = attributes[:'bid_size']
-      end
-
-      if attributes.key?(:'ask_price')
-        self.ask_price = attributes[:'ask_price']
-      end
-
-      if attributes.key?(:'ask_size')
-        self.ask_size = attributes[:'ask_size']
-      end
-
-      if attributes.key?(:'last_price')
-        self.last_price = attributes[:'last_price']
-      end
-
-      if attributes.key?(:'last_size')
-        self.last_size = attributes[:'last_size']
-      end
-
-      if attributes.key?(:'open_interest')
-        self.open_interest = attributes[:'open_interest']
-      end
-
-      if attributes.key?(:'volume')
-        self.volume = attributes[:'volume']
+      if attributes.key?(:'synthetic_price')
+        self.synthetic_price = attributes[:'synthetic_price']
       end
 
       if attributes.key?(:'implied_volatility')
         self.implied_volatility = attributes[:'implied_volatility']
       end
 
-      if attributes.key?(:'underlying_price')
-        self.underlying_price = attributes[:'underlying_price']
-      end
-
       if attributes.key?(:'timestamp')
         self.timestamp = attributes[:'timestamp']
+      end
+
+      if attributes.key?(:'greeks')
+        self.greeks = attributes[:'greeks']
       end
     end
 
@@ -180,17 +116,10 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           symbol == o.symbol &&
-          bid_price == o.bid_price &&
-          bid_size == o.bid_size &&
-          ask_price == o.ask_price &&
-          ask_size == o.ask_size &&
-          last_price == o.last_price &&
-          last_size == o.last_size &&
-          open_interest == o.open_interest &&
-          volume == o.volume &&
+          synthetic_price == o.synthetic_price &&
           implied_volatility == o.implied_volatility &&
-          underlying_price == o.underlying_price &&
-          timestamp == o.timestamp
+          timestamp == o.timestamp &&
+          greeks == o.greeks
     end
 
     # @see the `==` method
@@ -202,7 +131,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, bid_price, bid_size, ask_price, ask_size, last_price, last_size, open_interest, volume, implied_volatility, underlying_price, timestamp].hash
+      [symbol, synthetic_price, implied_volatility, timestamp, greeks].hash
     end
 
     # Builds the object from hash

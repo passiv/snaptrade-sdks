@@ -9,12 +9,12 @@
     Created by: https://snaptrade.com/
 """
 
-from snaptrade_client.paths.accounts_account_id_quotes_options.get import GetOptionQuote
+from snaptrade_client.paths.accounts_account_id_quotes_options.get import GetUserAccountOptionQuotes
 from snaptrade_client.paths.accounts_account_id_options.get import ListOptionHoldings
 
 
 class OptionsApiGenerated(
-    GetOptionQuote,
+    GetUserAccountOptionQuotes,
     ListOptionHoldings,
 ):
     """NOTE:

@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Position" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>
-        /// <param name="units">The number of shares of the position. This can be fractional or integer units..</param>
+        /// <param name="units">The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position..</param>
         /// <param name="price">Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
         /// <param name="openPnl">The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field..</param>
         /// <param name="averagePurchasePrice">Cost basis _per share_ of this position..</param>
@@ -65,9 +65,9 @@ namespace SnapTrade.Net.Model
         public PositionSymbol Symbol { get; set; }
 
         /// <summary>
-        /// The number of shares of the position. This can be fractional or integer units.
+        /// The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.
         /// </summary>
-        /// <value>The number of shares of the position. This can be fractional or integer units.</value>
+        /// <value>The number of shares of the position. This can be fractional or integer units. A positive number indicates a long position, while a negative number indicates a short position.</value>
         [DataMember(Name = "units", EmitDefaultValue = true)]
         public double? Units { get; set; }
 

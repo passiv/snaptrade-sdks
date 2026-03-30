@@ -24,7 +24,7 @@ import (
 // OptionsApiService OptionsApi service
 type OptionsApiService service
 
-type OptionsApiGetOptionQuoteRequest struct {
+type OptionsApiGetUserAccountOptionQuotesRequest struct {
 	ctx context.Context
 	ApiService *OptionsApiService
 	userId string
@@ -33,14 +33,15 @@ type OptionsApiGetOptionQuoteRequest struct {
 	symbol string
 }
 
-func (r OptionsApiGetOptionQuoteRequest) Execute() (*OptionQuote, *http.Response, error) {
-	return r.ApiService.GetOptionQuoteExecute(r)
+func (r OptionsApiGetUserAccountOptionQuotesRequest) Execute() (*OptionQuote, *http.Response, error) {
+	return r.ApiService.GetUserAccountOptionQuotesExecute(r)
 }
 
 /*
-GetOptionQuote Get option quote
+GetUserAccountOptionQuotes Get option quote
 
-Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+**Note:** These are derived values and are not suitable for trading purposes.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -48,10 +49,10 @@ Returns a real-time quote for a single option contract. The option contract is s
  @param userSecret
  @param accountId
  @param symbol The OCC-formatted option symbol.
- @return OptionsApiGetOptionQuoteRequest
+ @return OptionsApiGetUserAccountOptionQuotesRequest
 */
-func (a *OptionsApiService) GetOptionQuote(userId string, userSecret string, accountId string, symbol string) OptionsApiGetOptionQuoteRequest {
-	return OptionsApiGetOptionQuoteRequest{
+func (a *OptionsApiService) GetUserAccountOptionQuotes(userId string, userSecret string, accountId string, symbol string) OptionsApiGetUserAccountOptionQuotesRequest {
+	return OptionsApiGetUserAccountOptionQuotesRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
@@ -63,7 +64,7 @@ func (a *OptionsApiService) GetOptionQuote(userId string, userSecret string, acc
 
 // Execute executes the request
 //  @return OptionQuote
-func (a *OptionsApiService) GetOptionQuoteExecute(r OptionsApiGetOptionQuoteRequest) (*OptionQuote, *http.Response, error) {
+func (a *OptionsApiService) GetUserAccountOptionQuotesExecute(r OptionsApiGetUserAccountOptionQuotesRequest) (*OptionQuote, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -71,7 +72,7 @@ func (a *OptionsApiService) GetOptionQuoteExecute(r OptionsApiGetOptionQuoteRequ
 		localVarReturnValue  *OptionQuote
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OptionsApiService.GetOptionQuote")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OptionsApiService.GetUserAccountOptionQuotes")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

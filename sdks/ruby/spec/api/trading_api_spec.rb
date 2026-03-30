@@ -74,7 +74,7 @@ describe 'TradingApi' do
 
   # unit tests for get_option_impact
   # Get option order impact
-  # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint. 
+  # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
