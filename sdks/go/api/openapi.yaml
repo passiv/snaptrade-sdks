@@ -1428,8 +1428,9 @@ paths:
   /accounts/{accountId}/quotes/options:
     get:
       description: |
-        Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
-      operationId: Options_getOptionQuote
+        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+        **Note:** These are derived values and are not suitable for trading purposes.
+      operationId: Trading_getUserAccountOptionQuotes
       parameters:
       - explode: true
         in: query
@@ -2442,7 +2443,7 @@ paths:
     post:
       description: |
         Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+        Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
       operationId: Trading_getOptionImpact
       parameters:
       - explode: true
@@ -4876,17 +4877,14 @@ components:
       additionalProperties: true
       description: Real-time quote for a single option contract.
       example:
-        volume: 350
         symbol: AAPL  251219C00150000
-        ask_size: 15
-        underlying_price: 150.25
-        bid_size: 10
-        open_interest: 1200
         implied_volatility: 0.32145678
-        last_size: 5
-        bid_price: 3.5
-        ask_price: 3.7
-        last_price: 3.6
+        synthetic_price: 150.25
+        greeks:
+          delta: 0.5
+          theta: -0.05
+          gamma: 0.1
+          vega: 0.2
         timestamp: 2026-01-15T14:30:00Z
       properties:
         symbol:
@@ -4895,74 +4893,28 @@ components:
           type: string
           x-konfig-original-example: AAPL  251219C00150000
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-symbol
-        bid_price:
-          description: The best bid price for the option contract.
-          example: 3.5
+        synthetic_price:
+          description: The derived synthetic price of the contract.
+          example: 150.25
           type: number
-          x-konfig-original-example: 3.5
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-bid_price
-        bid_size:
-          description: The number of contracts available at the bid price.
-          example: 10
-          type: integer
-          x-konfig-original-example: 10
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-bid_size
-        ask_price:
-          description: The best ask price for the option contract.
-          example: 3.7
-          type: number
-          x-konfig-original-example: 3.7
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-ask_price
-        ask_size:
-          description: The number of contracts available at the ask price.
-          example: 15
-          type: integer
-          x-konfig-original-example: 15
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-ask_size
-        last_price:
-          description: The price of the last trade for the option contract.
-          example: 3.6
-          type: number
-          x-konfig-original-example: 3.6
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-last_price
-        last_size:
-          description: The number of contracts in the last trade.
-          example: 5
-          type: integer
-          x-konfig-original-example: 5
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-last_size
-        open_interest:
-          description: The total number of outstanding contracts.
-          example: 1200
-          type: integer
-          x-konfig-original-example: 1200
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-open_interest
-        volume:
-          description: The total number of contracts traded during the current session.
-          example: 350
-          type: integer
-          x-konfig-original-example: 350
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-volume
+          x-konfig-original-example: 150.25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-synthetic_price
         implied_volatility:
           description: The implied volatility of the option contract.
           example: 0.32145678
           type: number
           x-konfig-original-example: 0.32145678
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-implied_volatility
-        underlying_price:
-          description: The current price of the underlying security.
-          example: 150.25
-          type: number
-          x-konfig-original-example: 150.25
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-underlying_price
         timestamp:
-          description: The timestamp of the quote.
+          description: The timestamp of the last update for the option quote.
           example: 2026-01-15T14:30:00Z
           format: date-time
           nullable: true
           type: string
           x-konfig-original-example: 2026-01-15T14:30:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-timestamp
+        greeks:
+          $ref: '#/components/schemas/OptionQuote_greeks'
       type: object
     OptionsPosition:
       additionalProperties: true
@@ -6023,8 +5975,9 @@ components:
         symbol:
           $ref: '#/components/schemas/PositionSymbol'
         units:
-          description: The number of shares of the position. This can be fractional
-            or integer units.
+          description: "The number of shares of the position. This can be fractional\
+            \ or integer units. A positive number indicates a long position, while\
+            \ a negative number indicates a short position."
           example: 40
           nullable: true
           type: number
@@ -8356,29 +8309,7 @@ components:
       additionalProperties: true
       example:
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-        order:
-          time_executed: 2024-08-05T00:05:57.409Z
-          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
-          time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
-          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-          limit_price: 12.34
-          quote_currency: null
-          time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: "10"
-          time_in_force: time_in_force
-          execution_price: 12.34
-          stop_price: 12.5
-          quote_universal_symbol: null
-          action: action
-          total_quantity: "100"
-          universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
-          open_quantity: "10"
-          status: null
+        order: null
       properties:
         brokerage_order_id:
           description: Order ID returned by brokerage. This is the unique identifier
@@ -8388,7 +8319,7 @@ components:
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
         order:
-          $ref: '#/components/schemas/AccountOrderRecord'
+          $ref: '#/components/schemas/OrderUpdatedResponse_order'
       required:
       - brokerage_order_id
       type: object
@@ -9819,49 +9750,33 @@ components:
       example: AAPL  251219C00150000
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-bid_price:
-      example: 3.5
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-bid_size:
-      example: 10
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-ask_price:
-      example: 3.7
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-ask_size:
-      example: 15
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-last_price:
-      example: 3.6
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-last_size:
-      example: 5
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-open_interest:
-      example: 1200
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-volume:
-      example: 350
+    konfig-generated-schema-components-schemas-OptionQuote-properties-synthetic_price:
+      example: 150.25
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionQuote-properties-implied_volatility:
       example: 0.32145678
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionQuote-properties-underlying_price:
-      example: 150.25
-      type: number
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionQuote-properties-timestamp:
       example: 2026-01-15T14:30:00Z
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-delta:
+      example: 0.5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-gamma:
+      example: 0.1
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-theta:
+      example: -0.05
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-vega:
+      example: 0.2
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-price:
       example: 38.4
@@ -12920,6 +12835,45 @@ components:
       allOf:
       - $ref: '#/components/schemas/ChildBrokerageOrderIDs'
       nullable: true
+    OptionQuote_greeks:
+      additionalProperties: true
+      description: The Greeks for the option contract.
+      example:
+        delta: 0.5
+        theta: -0.05
+        gamma: 0.1
+        vega: 0.2
+      properties:
+        delta:
+          description: Delta represents the rate of change between the option's price
+            and a $1 change in the underlying asset's price.
+          example: 0.5
+          type: number
+          x-konfig-original-example: 0.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-delta
+        gamma:
+          description: Gamma represents the rate of change between an option's delta
+            and the underlying asset's price.
+          example: 0.1
+          type: number
+          x-konfig-original-example: 0.1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-gamma
+        theta:
+          description: "Theta represents the rate of change between the option price\
+            \ and time, or time sensitivity - sometimes known as an option's time\
+            \ decay."
+          example: -0.05
+          type: number
+          x-konfig-original-example: -0.05
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-theta
+        vega:
+          description: Vega represents the rate of change between an option's value
+            and the underlying asset's implied volatility.
+          example: 0.2
+          type: number
+          x-konfig-original-example: 0.2
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-vega
+      type: object
     OptionsPosition_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
@@ -13188,6 +13142,10 @@ components:
       - amount
       - currency
       type: object
+    OrderUpdatedResponse_order:
+      allOf:
+      - $ref: '#/components/schemas/AccountOrderRecord'
+      nullable: true
     AccountUniversalActivity_symbol:
       allOf:
       - $ref: '#/components/schemas/Symbol'

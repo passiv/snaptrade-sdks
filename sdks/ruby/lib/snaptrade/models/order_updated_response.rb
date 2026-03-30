@@ -34,13 +34,14 @@ module SnapTrade
     def self.openapi_types
       {
         :'brokerage_order_id' => :'String',
-        :'order' => :'AccountOrderRecord'
+        :'order' => :'OrderUpdatedResponseOrder'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'order'
       ])
     end
 

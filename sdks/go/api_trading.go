@@ -586,7 +586,7 @@ func (r TradingApiGetOptionImpactRequest) Execute() (*OptionImpact, *http.Respon
 GetOptionImpact Get option order impact
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to the [brokerage trading support page](https://snaptrade.notion.site/brokerages) for more information on which brokerages support this endpoint.
+Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

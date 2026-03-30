@@ -193,7 +193,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _get_option_quote_mapped_args(
+    def _get_user_account_option_quotes_mapped_args(
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -217,7 +217,7 @@ class BaseApi(api_client.Api):
         args.path = path_params if path_params else _path_params
         return args
 
-    async def _aget_option_quote_oapg(
+    async def _aget_user_account_option_quotes_oapg(
         self,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -348,7 +348,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _get_option_quote_oapg(
+    def _get_user_account_option_quotes_oapg(
         self,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -446,10 +446,10 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class GetOptionQuote(BaseApi):
+class GetUserAccountOptionQuotes(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aget_option_quote(
+    async def aget_user_account_option_quotes(
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -463,7 +463,7 @@ class GetOptionQuote(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_option_quote_mapped_args(
+        args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -471,13 +471,13 @@ class GetOptionQuote(BaseApi):
             account_id=account_id,
             symbol=symbol,
         )
-        return await self._aget_option_quote_oapg(
+        return await self._aget_user_account_option_quotes_oapg(
             query_params=args.query,
             path_params=args.path,
             **kwargs,
         )
     
-    def get_option_quote(
+    def get_user_account_option_quotes(
         self,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -489,8 +489,8 @@ class GetOptionQuote(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)  """
-        args = self._get_option_quote_mapped_args(
+        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  """
+        args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -498,7 +498,7 @@ class GetOptionQuote(BaseApi):
             account_id=account_id,
             symbol=symbol,
         )
-        return self._get_option_quote_oapg(
+        return self._get_user_account_option_quotes_oapg(
             query_params=args.query,
             path_params=args.path,
         )
@@ -520,7 +520,7 @@ class ApiForget(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_option_quote_mapped_args(
+        args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -528,7 +528,7 @@ class ApiForget(BaseApi):
             account_id=account_id,
             symbol=symbol,
         )
-        return await self._aget_option_quote_oapg(
+        return await self._aget_user_account_option_quotes_oapg(
             query_params=args.query,
             path_params=args.path,
             **kwargs,
@@ -546,8 +546,8 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a real-time quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)  """
-        args = self._get_option_quote_mapped_args(
+        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  """
+        args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -555,7 +555,7 @@ class ApiForget(BaseApi):
             account_id=account_id,
             symbol=symbol,
         )
-        return self._get_option_quote_oapg(
+        return self._get_user_account_option_quotes_oapg(
             query_params=args.query,
             path_params=args.path,
         )
