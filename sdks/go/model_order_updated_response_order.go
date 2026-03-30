@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // OrderUpdatedResponseOrder struct for OrderUpdatedResponseOrder
