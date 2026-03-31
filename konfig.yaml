@@ -106,7 +106,7 @@ portal:
       get: true
     /accounts/{accountId}/trading/options/impact:
       post: true
-    /marketData/options/quotes:
+    /accounts/{accountId}/quotes/options:
       get: true
   hideOperations:
     /activities:
@@ -152,10 +152,6 @@ portal:
     /accounts/{accountId}/recentOrders/v2:
       get: true
     /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
-      get: true
-    /accounts/{accountId}/trading/options/impact:
-      post: true
-    /accounts/{accountId}/quotes/options:
       get: true
     /authorizations/{authorizationId}:
       delete: true
