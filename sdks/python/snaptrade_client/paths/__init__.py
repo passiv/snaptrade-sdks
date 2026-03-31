@@ -30,7 +30,6 @@ class PathValues(str, enum.Enum):
     ACCOUNTS_ACCOUNT_ID_RETURN_RATES = "/accounts/{accountId}/returnRates"
     ACCOUNTS_ACCOUNT_ID_ACTIVITIES = "/accounts/{accountId}/activities"
     ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS = "/accounts/{accountId}/orders/details"
-    ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS = "/accounts/{accountId}/quotes/options"
     ACCOUNTS_ACCOUNT_ID_OPTIONS = "/accounts/{accountId}/options"
     ACTIVITIES = "/activities"
     PERFORMANCE_CUSTOM = "/performance/custom"
