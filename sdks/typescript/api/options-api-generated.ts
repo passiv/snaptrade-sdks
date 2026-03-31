@@ -19,11 +19,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { Model404FailedRequestResponse } from '../models';
-// @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
-// @ts-ignore
-import { OptionQuote } from '../models';
 // @ts-ignore
 import { OptionsPosition } from '../models';
 import { paginate } from "../pagination/paginate";
@@ -35,75 +31,6 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const OptionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
-         * @summary Get option quote
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId 
-         * @param {string} symbol The OCC-formatted option symbol.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserAccountOptionQuotes: async (userId: string, userSecret: string, accountId: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getUserAccountOptionQuotes', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getUserAccountOptionQuotes', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getUserAccountOptionQuotes', 'accountId', accountId)
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('getUserAccountOptionQuotes', 'symbol', symbol)
-            const localVarPath = `/accounts/{accountId}/quotes/options`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (symbol !== undefined) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/quotes/options',
-                httpMethod: 'GET'
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
          * @summary List account option positions
@@ -177,17 +104,6 @@ export const OptionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OptionsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
-         * @summary Get option quote
-         * @param {OptionsApiGetUserAccountOptionQuotesRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUserAccountOptionQuotes(requestParameters: OptionsApiGetUserAccountOptionQuotesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionQuote>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOptionQuotes(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.symbol, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
          * @summary List account option positions
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
@@ -209,16 +125,6 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = OptionsApiFp(configuration)
     return {
         /**
-         * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
-         * @summary Get option quote
-         * @param {OptionsApiGetUserAccountOptionQuotesRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserAccountOptionQuotes(requestParameters: OptionsApiGetUserAccountOptionQuotesRequest, options?: AxiosRequestConfig): AxiosPromise<OptionQuote> {
-            return localVarFp.getUserAccountOptionQuotes(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
          * @summary List account option positions
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
@@ -230,43 +136,6 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
         },
     };
 };
-
-/**
- * Request parameters for getUserAccountOptionQuotes operation in OptionsApi.
- * @export
- * @interface OptionsApiGetUserAccountOptionQuotesRequest
- */
-export type OptionsApiGetUserAccountOptionQuotesRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof OptionsApiGetUserAccountOptionQuotes
-    */
-    readonly userId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof OptionsApiGetUserAccountOptionQuotes
-    */
-    readonly userSecret: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof OptionsApiGetUserAccountOptionQuotes
-    */
-    readonly accountId: string
-    
-    /**
-    * The OCC-formatted option symbol.
-    * @type {string}
-    * @memberof OptionsApiGetUserAccountOptionQuotes
-    */
-    readonly symbol: string
-    
-}
 
 /**
  * Request parameters for listOptionHoldings operation in OptionsApi.
@@ -305,18 +174,6 @@ export type OptionsApiListOptionHoldingsRequest = {
  * @extends {BaseAPI}
  */
 export class OptionsApiGenerated extends BaseAPI {
-    /**
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
-     * @summary Get option quote
-     * @param {OptionsApiGetUserAccountOptionQuotesRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApiGenerated
-     */
-    public getUserAccountOptionQuotes(requestParameters: OptionsApiGetUserAccountOptionQuotesRequest, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).getUserAccountOptionQuotes(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
      * @summary List account option positions

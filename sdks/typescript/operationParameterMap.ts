@@ -416,22 +416,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/quotes/options-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'symbol'
-            },
-        ]
-    },
     '/accounts/{accountId}/options-GET': {
         parameters: [
             {

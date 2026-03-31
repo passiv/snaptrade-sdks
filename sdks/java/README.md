@@ -53,7 +53,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
-  * [`snaptrade.options.getUserAccountOptionQuotes`](#snaptradeoptionsgetuseraccountoptionquotes)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -1453,46 +1452,6 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.getUserAccountOptionQuotes`<a id="snaptradeoptionsgetuseraccountoptionquotes"></a>
-
-Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
-**Note:** These are derived values and are not suitable for trading purposes.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-OptionQuote result = client
-        .options
-        .getUserAccountOptionQuotes(userId, userSecret, accountId, symbol)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### symbol: `String`<a id="symbol-string"></a>
-
-The OCC-formatted option symbol.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OptionQuote](./src/main/java/com/snaptrade/client/model/OptionQuote.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/quotes/options` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
