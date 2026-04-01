@@ -106,8 +106,6 @@ portal:
       get: true
     /accounts/{accountId}/trading/options/impact:
       post: true
-    /accounts/{accountId}/quotes/options:
-      get: true
   hideOperations:
     /activities:
       get: true
