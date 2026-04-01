@@ -1425,6 +1425,69 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details
+  /accounts/{accountId}/quotes/options:
+    get:
+      description: |
+        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+        **Note:** These are derived values and are not suitable for trading purposes.
+      operationId: Trading_getUserAccountOptionQuotes
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - description: The OCC-formatted option symbol.
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionQuote'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Option contract not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Rate limit exceeded
+      summary: Get option quote
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options
   /accounts/{accountId}/options:
     get:
       description: |
@@ -4813,6 +4876,16 @@ components:
     OptionQuote:
       additionalProperties: true
       description: Real-time quote for a single option contract.
+      example:
+        symbol: AAPL  251219C00150000
+        implied_volatility: 0.32145678
+        synthetic_price: 150.25
+        greeks:
+          delta: 0.5
+          theta: -0.05
+          gamma: 0.1
+          vega: 0.2
+        timestamp: 2026-01-15T14:30:00Z
       properties:
         symbol:
           description: The OCC-formatted option symbol.
@@ -9398,6 +9471,10 @@ components:
       example: "BUY,SELL,DIVIDEND"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
+      example: AAPL  251219C00150000
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--activities-get-parameters-4-schema:
       example: "BUY,SELL,DIVIDEND"
       type: string
@@ -11493,6 +11570,32 @@ components:
       - accountId
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        symbol:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+      required:
+      - accountId
+      - symbol
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - symbol
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
       additionalProperties: true
       properties:
@@ -12735,6 +12838,11 @@ components:
     OptionQuote_greeks:
       additionalProperties: true
       description: The Greeks for the option contract.
+      example:
+        delta: 0.5
+        theta: -0.05
+        gamma: 0.1
+        vega: 0.2
       properties:
         delta:
           description: Delta represents the rate of change between the option's price

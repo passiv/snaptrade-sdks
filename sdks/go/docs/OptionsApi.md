@@ -4,8 +4,60 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
+[**GetUserAccountOptionQuotes**](OptionsApi.md#GetUserAccountOptionQuotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**ListOptionHoldings**](OptionsApi.md#ListOptionHoldings) | **Get** /accounts/{accountId}/options | List account option positions
 
+
+
+## GetUserAccountOptionQuotes
+
+Get option quote
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.OptionsApi.GetUserAccountOptionQuotes(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""AAPL  251219C00150000"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OptionsApi.GetUserAccountOptionQuotes``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetUserAccountOptionQuotes`: OptionQuote
+    fmt.Fprintf(os.Stdout, "Response from `OptionsApi.GetUserAccountOptionQuotes`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.SyntheticPrice`: %v\n", *resp.SyntheticPrice)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.ImpliedVolatility`: %v\n", *resp.ImpliedVolatility)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Timestamp`: %v\n", *resp.Timestamp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Greeks`: %v\n", *resp.Greeks)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## ListOptionHoldings
