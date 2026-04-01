@@ -104,6 +104,8 @@ portal:
       get: true
     /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
       get: true
+    /accounts/{accountId}/trading/options/impact:
+      post: true
   hideOperations:
     /activities:
       get: true
