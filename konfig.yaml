@@ -17,6 +17,8 @@ order:
     operations:
       - Trading_getUserAccountQuotes
       - Trading_getOrderImpact
+      - Trading_getOptionImpact
+      - Trading_getUserAccountOptionQuotes
       - Trading_placeOrder
       - Trading_placeForceOrder
       - Trading_cancelUserAccountOrder
