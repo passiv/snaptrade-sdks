@@ -4558,24 +4558,27 @@ components:
           x-konfig-original-example: "80"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity
         execution_price:
-          description: The price at which the order was executed.
+          description: "The price at which the order was executed. For option orders,\
+            \ this represents the price per share."
           example: 12.34
           nullable: true
           type: number
           x-konfig-original-example: 12.34
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
         limit_price:
-          description: The limit price is maximum price one is willing to pay for
-            a buy order or the minimum price one is willing to accept for a sell order.
-            Should only apply to `Limit` and `StopLimit` orders.
+          description: "The limit price is maximum price one is willing to pay for\
+            \ a buy order or the minimum price one is willing to accept for a sell\
+            \ order. Should only apply to `Limit` and `StopLimit` orders. For option\
+            \ orders, this represents the price per share."
           example: 12.34
           nullable: true
           type: number
           x-konfig-original-example: 12.34
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
         stop_price:
-          description: The stop price is the price at which a stop order is triggered.
-            Should only apply to `Stop` and `StopLimit` orders.
+          description: "The stop price is the price at which a stop order is triggered.\
+            \ Should only apply to `Stop` and `StopLimit` orders. For option orders,\
+            \ this represents the price per share."
           example: 12.5
           nullable: true
           type: number
@@ -8987,7 +8990,8 @@ components:
           $ref: '#/components/schemas/OptionsSymbolNullable'
         price:
           description: "The price of the security for the transaction. This is mostly\
-            \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions."
+            \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option\
+            \ transactions, this represents the price per share of the option contract."
           example: 0.4
           type: number
           x-konfig-original-example: 0.4
@@ -13502,24 +13506,27 @@ components:
           x-konfig-original-example: "80"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity
         execution_price:
-          description: The price at which the order was executed.
+          description: "The price at which the order was executed. For option orders,\
+            \ this represents the price per share."
           example: 12.34
           nullable: true
           type: number
           x-konfig-original-example: 12.34
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
         limit_price:
-          description: The limit price is maximum price one is willing to pay for
-            a buy order or the minimum price one is willing to accept for a sell order.
-            Should only apply to `Limit` and `StopLimit` orders.
+          description: "The limit price is maximum price one is willing to pay for\
+            \ a buy order or the minimum price one is willing to accept for a sell\
+            \ order. Should only apply to `Limit` and `StopLimit` orders. For option\
+            \ orders, this represents the price per share."
           example: 12.34
           nullable: true
           type: number
           x-konfig-original-example: 12.34
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
         stop_price:
-          description: The stop price is the price at which a stop order is triggered.
-            Should only apply to `Stop` and `StopLimit` orders.
+          description: "The stop price is the price at which a stop order is triggered.\
+            \ Should only apply to `Stop` and `StopLimit` orders. For option orders,\
+            \ this represents the price per share."
           example: 12.5
           nullable: true
           type: number

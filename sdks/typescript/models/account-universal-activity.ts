@@ -41,7 +41,7 @@ export interface AccountUniversalActivity {
      */
     'option_symbol'?: AccountUniversalActivityOptionSymbol | null;
     /**
-     * The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+     * The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option transactions, this represents the price per share of the option contract.
      * @type {number}
      * @memberof AccountUniversalActivity
      */

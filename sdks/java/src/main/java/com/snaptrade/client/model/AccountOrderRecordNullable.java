@@ -488,11 +488,11 @@ public class AccountOrderRecordNullable {
   }
 
    /**
-   * The price at which the order was executed.
+   * The price at which the order was executed. For option orders, this represents the price per share.
    * @return executionPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "12.34", value = "The price at which the order was executed.")
+  @ApiModelProperty(example = "12.34", value = "The price at which the order was executed. For option orders, this represents the price per share.")
 
   public Double getExecutionPrice() {
     return executionPrice;
@@ -526,11 +526,11 @@ public class AccountOrderRecordNullable {
   }
 
    /**
-   * The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
+   * The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
    * @return limitPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "12.34", value = "The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.")
+  @ApiModelProperty(example = "12.34", value = "The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.")
 
   public Double getLimitPrice() {
     return limitPrice;
@@ -564,11 +564,11 @@ public class AccountOrderRecordNullable {
   }
 
    /**
-   * The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
+   * The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "12.5", value = "The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.")
+  @ApiModelProperty(example = "12.5", value = "The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.")
 
   public Double getStopPrice() {
     return stopPrice;

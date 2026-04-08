@@ -228,11 +228,11 @@ public class AccountUniversalActivity {
   }
 
    /**
-   * The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions.
+   * The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. For option transactions, this represents the price per share of the option contract.
    * @return price
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "0.4", value = "The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.")
+  @ApiModelProperty(example = "0.4", value = "The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option transactions, this represents the price per share of the option contract.")
 
   public Double getPrice() {
     return price;

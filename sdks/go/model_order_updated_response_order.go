@@ -35,11 +35,11 @@ type OrderUpdatedResponseOrder struct {
 	CanceledQuantity NullableString `json:"canceled_quantity,omitempty"`
 	// The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
 	FilledQuantity NullableString `json:"filled_quantity,omitempty"`
-	// The price at which the order was executed.
+	// The price at which the order was executed. For option orders, this represents the price per share.
 	ExecutionPrice NullableFloat32 `json:"execution_price,omitempty"`
-	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
 	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
-	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
 	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
 	// The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
 	OrderType NullableString `json:"order_type,omitempty"`

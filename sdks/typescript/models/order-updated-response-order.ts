@@ -91,19 +91,19 @@ export interface OrderUpdatedResponseOrder {
      */
     'filled_quantity'?: string | null;
     /**
-     * The price at which the order was executed.
+     * The price at which the order was executed. For option orders, this represents the price per share.
      * @type {number}
      * @memberof OrderUpdatedResponseOrder
      */
     'execution_price'?: number | null;
     /**
-     * The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+     * The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
      * @type {number}
      * @memberof OrderUpdatedResponseOrder
      */
     'limit_price'?: number | null;
     /**
-     * The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+     * The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
      * @type {number}
      * @memberof OrderUpdatedResponseOrder
      */
