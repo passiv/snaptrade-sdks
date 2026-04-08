@@ -5,9 +5,9 @@
 | java | 127410 |
 | ruby | 66466 |
 | python | 144606 |
-| typescript | 35096 |
+| typescript | 35089 |
 | csharp | 87267 |
 | php | 139124 |
 | go | 104262 |
 | php7 | 139359 |
-| **Total** | 843590 |
+| **Total** | 843583 |
