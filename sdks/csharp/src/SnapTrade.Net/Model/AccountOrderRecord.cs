@@ -52,9 +52,9 @@ namespace SnapTrade.Net.Model
         /// <param name="openQuantity">The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares..</param>
         /// <param name="canceledQuantity">The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares..</param>
         /// <param name="filledQuantity">The number of shares or contracts that have been filled. Can be a decimal number for fractional shares..</param>
-        /// <param name="executionPrice">The price at which the order was executed..</param>
-        /// <param name="limitPrice">The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
-        /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="executionPrice">The price at which the order was executed. For option orders, this represents the price per share..</param>
+        /// <param name="limitPrice">The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share..</param>
+        /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share..</param>
         /// <param name="orderType">The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value..</param>
         /// <param name="timeInForce">The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close. .</param>
         /// <param name="timePlaced">The time the order was placed. This is the time the order was submitted to the brokerage..</param>
@@ -157,23 +157,23 @@ namespace SnapTrade.Net.Model
         public string FilledQuantity { get; set; }
 
         /// <summary>
-        /// The price at which the order was executed.
+        /// The price at which the order was executed. For option orders, this represents the price per share.
         /// </summary>
-        /// <value>The price at which the order was executed.</value>
+        /// <value>The price at which the order was executed. For option orders, this represents the price per share.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
         public double? ExecutionPrice { get; set; }
 
         /// <summary>
-        /// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
+        /// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
         /// </summary>
-        /// <value>The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.</value>
+        /// <value>The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
         public double? LimitPrice { get; set; }
 
         /// <summary>
-        /// The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
+        /// The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
         /// </summary>
-        /// <value>The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.</value>
+        /// <value>The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public double? StopPrice { get; set; }
 

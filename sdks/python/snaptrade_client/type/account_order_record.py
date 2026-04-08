@@ -57,13 +57,13 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
     filled_quantity: typing.Optional[str]
 
-    # The price at which the order was executed.
+    # The price at which the order was executed. For option orders, this represents the price per share.
     execution_price: typing.Optional[typing.Union[int, float]]
 
-    # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+    # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
     limit_price: typing.Optional[typing.Union[int, float]]
 
-    # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+    # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
     stop_price: typing.Optional[typing.Union[int, float]]
 
     # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.

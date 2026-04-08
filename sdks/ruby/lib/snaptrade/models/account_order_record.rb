@@ -42,13 +42,13 @@ module SnapTrade
     # The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
     attr_accessor :filled_quantity
 
-    # The price at which the order was executed.
+    # The price at which the order was executed. For option orders, this represents the price per share.
     attr_accessor :execution_price
 
-    # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+    # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
     attr_accessor :limit_price
 
-    # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+    # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
     attr_accessor :stop_price
 
     # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
