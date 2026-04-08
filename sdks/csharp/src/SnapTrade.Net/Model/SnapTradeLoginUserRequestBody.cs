@@ -67,9 +67,9 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
-        /// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+        /// Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4.
         /// </summary>
-        /// <value>Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.</value>
+        /// <value>Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionPortalVersionEnum
         {
@@ -95,9 +95,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+        /// Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4.
         /// </summary>
-        /// <value>Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.</value>
+        /// <value>Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4.</value>
         [DataMember(Name = "connectionPortalVersion", EmitDefaultValue = false)]
         public ConnectionPortalVersionEnum? ConnectionPortalVersion { get; set; }
         /// <summary>
@@ -110,7 +110,7 @@ namespace SnapTrade.Net.Model
         /// <param name="connectionType">Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (default to ConnectionTypeEnum.Read).</param>
         /// <param name="showCloseButton">Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true..</param>
         /// <param name="darkMode">Enable dark mode for the connection portal. Defaults to false..</param>
-        /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
+        /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
         public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, bool showCloseButton = default(bool), bool darkMode = default(bool), ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
         {
             this.Broker = broker;

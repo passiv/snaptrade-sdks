@@ -31,7 +31,7 @@ type SnapTradeLoginUserRequestBody struct {
 	ShowCloseButton *bool `json:"showCloseButton,omitempty"`
 	// Enable dark mode for the connection portal. Defaults to false.
 	DarkMode *bool `json:"darkMode,omitempty"`
-	// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+	// Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 	ConnectionPortalVersion *string `json:"connectionPortalVersion,omitempty"`
 }
 

@@ -101,6 +101,21 @@ describe 'TradingApi' do
     end
   end
 
+  # unit tests for get_user_account_option_quotes
+  # Get option quote
+  # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param symbol The OCC-formatted option symbol.
+  # @param [Hash] opts the optional parameters
+  # @return [OptionQuote]
+  describe 'get_user_account_option_quotes test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_user_account_quotes
   # Get equity symbol quotes
   # Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 

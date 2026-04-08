@@ -34,7 +34,7 @@ module SnapTrade
     # Enable dark mode for the connection portal. Defaults to false.
     attr_accessor :dark_mode
 
-    # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+    # Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     attr_accessor :connection_portal_version
 
     # Attribute mapping from ruby-style variable name to JSON key.

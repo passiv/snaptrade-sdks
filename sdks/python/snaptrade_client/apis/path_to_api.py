@@ -25,12 +25,13 @@ from snaptrade_client.apis.paths.accounts_account_id_recent_orders import Accoun
 from snaptrade_client.apis.paths.accounts_account_id_return_rates import AccountsAccountIdReturnRates
 from snaptrade_client.apis.paths.accounts_account_id_activities import AccountsAccountIdActivities
 from snaptrade_client.apis.paths.accounts_account_id_orders_details import AccountsAccountIdOrdersDetails
-from snaptrade_client.apis.paths.accounts_account_id_quotes_options import AccountsAccountIdQuotesOptions
 from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
 from snaptrade_client.apis.paths.activities import Activities
 from snaptrade_client.apis.paths.performance_custom import PerformanceCustom
 from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccountIdQuotes
 from snaptrade_client.apis.paths.trade_impact import TradeImpact
+from snaptrade_client.apis.paths.accounts_account_id_trading_options_impact import AccountsAccountIdTradingOptionsImpact
+from snaptrade_client.apis.paths.accounts_account_id_quotes_options import AccountsAccountIdQuotesOptions
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
 from snaptrade_client.apis.paths.trade_place import TradePlace
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
@@ -42,7 +43,6 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_preview impo
 from snaptrade_client.apis.paths.accounts_account_id_trading_crypto import AccountsAccountIdTradingCrypto
 from snaptrade_client.apis.paths.accounts_account_id_trading_cancel import AccountsAccountIdTradingCancel
 from snaptrade_client.apis.paths.accounts_account_id_trading_replace import AccountsAccountIdTradingReplace
-from snaptrade_client.apis.paths.accounts_account_id_trading_options_impact import AccountsAccountIdTradingOptionsImpact
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_orders_v2 import AccountsAccountIdOrdersV2
 from snaptrade_client.apis.paths.accounts_account_id_balance_history import AccountsAccountIdBalanceHistory
@@ -87,12 +87,13 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
-        PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS: AccountsAccountIdQuotesOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACTIVITIES: Activities,
         PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.TRADE_IMPACT: TradeImpact,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS_IMPACT: AccountsAccountIdTradingOptionsImpact,
+        PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS: AccountsAccountIdQuotesOptions,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
@@ -104,7 +105,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS_IMPACT: AccountsAccountIdTradingOptionsImpact,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
@@ -150,12 +150,13 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
-        PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS: AccountsAccountIdQuotesOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACTIVITIES: Activities,
         PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.TRADE_IMPACT: TradeImpact,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS_IMPACT: AccountsAccountIdTradingOptionsImpact,
+        PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS: AccountsAccountIdQuotesOptions,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
@@ -167,7 +168,6 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS_IMPACT: AccountsAccountIdTradingOptionsImpact,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,

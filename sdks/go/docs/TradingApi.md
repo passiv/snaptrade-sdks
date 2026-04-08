@@ -9,6 +9,7 @@ Method | Path | Description
 [**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
 [**GetOptionImpact**](TradingApi.md#GetOptionImpact) | **Post** /accounts/{accountId}/trading/options/impact | Get option order impact
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
+[**GetUserAccountOptionQuotes**](TradingApi.md#GetUserAccountOptionQuotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 [**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
 [**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
@@ -313,6 +314,57 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ManualTradeAndImpact.GetOrderImpact.Trade`: %v\n", *resp.Trade)
     fmt.Fprintf(os.Stdout, "Response from `ManualTradeAndImpact.GetOrderImpact.TradeImpacts`: %v\n", *resp.TradeImpacts)
     fmt.Fprintf(os.Stdout, "Response from `ManualTradeAndImpact.GetOrderImpact.CombinedRemainingBalance`: %v\n", *resp.CombinedRemainingBalance)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserAccountOptionQuotes
+
+Get option quote
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.TradingApi.GetUserAccountOptionQuotes(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""AAPL  251219C00150000"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.GetUserAccountOptionQuotes``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetUserAccountOptionQuotes`: OptionQuote
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.GetUserAccountOptionQuotes`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.SyntheticPrice`: %v\n", *resp.SyntheticPrice)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.ImpliedVolatility`: %v\n", *resp.ImpliedVolatility)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Timestamp`: %v\n", *resp.Timestamp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionQuote.GetUserAccountOptionQuotes.Greeks`: %v\n", *resp.Greeks)
 }
 ```
 

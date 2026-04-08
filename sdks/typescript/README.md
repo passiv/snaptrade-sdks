@@ -48,7 +48,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
-  * [`snaptrade.options.getUserAccountOptionQuotes`](#snaptradeoptionsgetuseraccountoptionquotes)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -67,6 +66,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
+  * [`snaptrade.trading.getUserAccountOptionQuotes`](#snaptradetradinggetuseraccountoptionquotes)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeCryptoOrder`](#snaptradetradingplacecryptoorder)
@@ -871,7 +871,7 @@ Enable dark mode for the connection portal. Defaults to false.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 
-Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1430,49 +1430,6 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.getUserAccountOptionQuotes`<a id="snaptradeoptionsgetuseraccountoptionquotes"></a>
-
-Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
-**Note:** These are derived values and are not suitable for trading purposes.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getUserAccountOptionQuotesResponse =
-  await snaptrade.options.getUserAccountOptionQuotes({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    symbol: "AAPL  251219C00150000",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### symbol: `string`<a id="symbol-string"></a>
-
-The OCC-formatted option symbol.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OptionQuote](./models/option-quote.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/quotes/options` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2130,6 +2087,49 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/impact` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.getUserAccountOptionQuotes`<a id="snaptradetradinggetuseraccountoptionquotes"></a>
+
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+**Note:** These are derived values and are not suitable for trading purposes.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getUserAccountOptionQuotesResponse =
+  await snaptrade.trading.getUserAccountOptionQuotes({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol: "AAPL  251219C00150000",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The OCC-formatted option symbol.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionQuote](./models/option-quote.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/quotes/options` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

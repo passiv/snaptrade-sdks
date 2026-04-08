@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
 | [**getOptionImpact**](TradingApi.md#getOptionImpact) | **POST** /accounts/{accountId}/trading/options/impact | Get option order impact |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check equity order impact |
+| [**getUserAccountOptionQuotes**](TradingApi.md#getUserAccountOptionQuotes) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
 | [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
 | [**placeCryptoOrder**](TradingApi.md#placeCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
@@ -572,6 +573,109 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
+
+<a name="getUserAccountOptionQuotes"></a>
+# **getUserAccountOptionQuotes**
+> OptionQuote getUserAccountOptionQuotes(userId, userSecret, accountId, symbol).execute();
+
+Get option quote
+
+Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    String symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
+    try {
+      OptionQuote result = client
+              .trading
+              .getUserAccountOptionQuotes(userId, userSecret, accountId, symbol)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getSymbol());
+      System.out.println(result.getSyntheticPrice());
+      System.out.println(result.getImpliedVolatility());
+      System.out.println(result.getTimestamp());
+      System.out.println(result.getGreeks());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getUserAccountOptionQuotes");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<OptionQuote> response = client
+              .trading
+              .getUserAccountOptionQuotes(userId, userSecret, accountId, symbol)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getUserAccountOptionQuotes");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+| **symbol** | **String**| The OCC-formatted option symbol. | |
+
+### Return type
+
+[**OptionQuote**](OptionQuote.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="getUserAccountQuotes"></a>
 # **getUserAccountQuotes**

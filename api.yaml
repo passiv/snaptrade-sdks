@@ -1103,7 +1103,7 @@ paths:
   "/accounts/{accountId}/quotes/options":
     get:
       tags:
-        - Options
+        - Trading
       summary: Get option quote
       description: |
         Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
@@ -4233,7 +4233,7 @@ components:
             type: boolean
             example: true
         connectionPortalVersion:
-          description: Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+          description: Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
           type: string
           example: v4
           enum:

@@ -14,6 +14,7 @@ from snaptrade_client.paths.accounts_account_id_orders_cancel.post import Cancel
 from snaptrade_client.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote.get import GetCryptocurrencyPairQuote
 from snaptrade_client.paths.accounts_account_id_trading_options_impact.post import GetOptionImpact
 from snaptrade_client.paths.trade_impact.post import GetOrderImpact
+from snaptrade_client.paths.accounts_account_id_quotes_options.get import GetUserAccountOptionQuotes
 from snaptrade_client.paths.accounts_account_id_quotes.get import GetUserAccountQuotes
 from snaptrade_client.paths.accounts_account_id_trading_bracket.post import PlaceBracketOrder
 from snaptrade_client.paths.accounts_account_id_trading_crypto.post import PlaceCryptoOrder
@@ -31,6 +32,7 @@ class TradingApiGenerated(
     GetCryptocurrencyPairQuote,
     GetOptionImpact,
     GetOrderImpact,
+    GetUserAccountOptionQuotes,
     GetUserAccountQuotes,
     PlaceBracketOrder,
     PlaceCryptoOrder,
