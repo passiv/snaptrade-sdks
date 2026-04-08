@@ -21,11 +21,11 @@ See a list of our SDKs below, or visit any of our additional resources to learn 
 
 |Language|Version|Package Manager|README|Source|
 |-|-|-|-|-|
-|Java|5.0.178|[Maven Central](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.178)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java)|
-|Ruby|2.0.176|[RubyGems](https://rubygems.org/gems/snaptrade/versions/2.0.176)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby)|
-|Python|11.0.175|[PyPI](https://pypi.org/project/snaptrade-python-sdk/11.0.175)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python)|
-|TypeScript|9.0.179|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.179)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript)|
-|C#|5.0.178|[NuGet](https://nuget.org/packages/SnapTrade.Net/5.0.178)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/csharp#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/csharp)|
-|PHP (8.0+)|2.0.175|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#2.0.175)|[README](https://github.com/passiv/snaptrade-php-sdk/tree/HEAD#readme)|[Source](https://github.com/passiv/snaptrade-php-sdk/tree/HEAD)|
-|Go|1.0.148|[pkg.go.dev](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/go#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/go)|
-|PHP (7.0+)|2.0.176|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-7-sdk#2.0.176)|[README](https://github.com/passiv/snaptrade-php-7-sdk/tree/HEAD#readme)|[Source](https://github.com/passiv/snaptrade-php-7-sdk/tree/HEAD)|
+|Java|5.0.179|[Maven Central](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.179)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java)|
+|Ruby|2.0.177|[RubyGems](https://rubygems.org/gems/snaptrade/versions/2.0.177)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby)|
+|Python|11.0.176|[PyPI](https://pypi.org/project/snaptrade-python-sdk/11.0.176)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python)|
+|TypeScript|9.0.180|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.180)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript)|
+|C#|5.0.179|[NuGet](https://nuget.org/packages/SnapTrade.Net/5.0.179)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/csharp#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/csharp)|
+|PHP (8.0+)|2.0.176|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-sdk#2.0.176)|[README](https://github.com/passiv/snaptrade-php-sdk/tree/HEAD#readme)|[Source](https://github.com/passiv/snaptrade-php-sdk/tree/HEAD)|
+|Go|1.0.149|[pkg.go.dev](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/go#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/go)|
+|PHP (7.0+)|2.0.177|[Packagist](https://packagist.org/packages/konfig/snaptrade-php-7-sdk#2.0.177)|[README](https://github.com/passiv/snaptrade-php-7-sdk/tree/HEAD#readme)|[Source](https://github.com/passiv/snaptrade-php-7-sdk/tree/HEAD)|
