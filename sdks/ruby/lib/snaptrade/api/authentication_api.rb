@@ -195,7 +195,7 @@ module SnapTrade
     # @param connection_type [ConnectionType] Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     # @param show_close_button [Boolean] Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     # @param dark_mode [Boolean] Enable dark mode for the connection portal. Defaults to false.
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', show_close_button: SENTINEL, dark_mode: SENTINEL, connection_portal_version: 'v4', extra: {})
@@ -228,7 +228,7 @@ module SnapTrade
     # @param connection_type [ConnectionType] Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     # @param show_close_button [Boolean] Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     # @param dark_mode [Boolean] Enable dark mode for the connection portal. Defaults to false.
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', show_close_button: SENTINEL, dark_mode: SENTINEL, connection_portal_version: 'v4', extra: {})

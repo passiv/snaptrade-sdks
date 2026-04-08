@@ -1425,69 +1425,6 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details
-  /accounts/{accountId}/quotes/options:
-    get:
-      description: |
-        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
-        **Note:** These are derived values and are not suitable for trading purposes.
-      operationId: Trading_getUserAccountOptionQuotes
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - description: The OCC-formatted option symbol.
-        explode: true
-        in: query
-        name: symbol
-        required: true
-        schema:
-          example: AAPL  251219C00150000
-          type: string
-          x-konfig-original-example: AAPL  251219C00150000
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionQuote'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Option contract not found
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Rate limit exceeded
-      summary: Get option quote
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options
   /accounts/{accountId}/options:
     get:
       description: |
@@ -1852,6 +1789,125 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-impact
+  /accounts/{accountId}/trading/options/impact:
+    post:
+      description: |
+        Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+        Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
+      operationId: Trading_getOptionImpact
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/MlegOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionImpact'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: Forbidden
+        "501":
+          description: Not Implemented - option impact is not supported for this brokerage
+      summary: Get option order impact
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact
+  /accounts/{accountId}/quotes/options:
+    get:
+      description: |
+        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+        **Note:** These are derived values and are not suitable for trading purposes.
+      operationId: Trading_getUserAccountOptionQuotes
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - description: The OCC-formatted option symbol.
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionQuote'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Option contract not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Rate limit exceeded
+      summary: Get option quote
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options
   /trade/{tradeId}:
     post:
       description: |
@@ -2439,62 +2495,6 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
-  /accounts/{accountId}/trading/options/impact:
-    post:
-      description: |
-        Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint.
-      operationId: Trading_getOptionImpact
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/MlegOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionImpact'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: Forbidden
-        "501":
-          description: Not Implemented - option impact is not supported for this brokerage
-      summary: Get option order impact
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -6198,7 +6198,7 @@ components:
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only
-            v4 is supported and is the default. All other versions are deprecated
+            `v4` is supported and is the default. All other versions are deprecated
             and will automatically be set to v4.
           enum:
           - v4
@@ -9475,10 +9475,6 @@ components:
       example: "BUY,SELL,DIVIDEND"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
-      example: AAPL  251219C00150000
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-paths--activities-get-parameters-4-schema:
       example: "BUY,SELL,DIVIDEND"
       type: string
@@ -9486,6 +9482,10 @@ components:
     konfig-generated-schema-paths--performance-custom-get-parameters-3-schema:
       example: true
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
+      example: AAPL  251219C00150000
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema:
       example: 30
@@ -11112,7 +11112,7 @@ components:
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only
-            v4 is supported and is the default. All other versions are deprecated
+            `v4` is supported and is the default. All other versions are deprecated
             and will automatically be set to v4.
           enum:
           - v4
@@ -11574,32 +11574,6 @@ components:
       - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        symbol:
-          example: AAPL  251219C00150000
-          type: string
-          x-konfig-original-example: AAPL  251219C00150000
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
-      required:
-      - accountId
-      - symbol
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - symbol
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
       additionalProperties: true
       properties:
@@ -11766,6 +11740,85 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        order_type:
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
+            \ `STOP_LOSS_LIMIT`."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        price_effect:
+          allOf:
+          - $ref: '#/components/schemas/MlegPriceEffectStrict'
+          example: DEBIT
+          nullable: true
+          x-konfig-original-example: DEBIT
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
+      required:
+      - accountId
+      - legs
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        symbol:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+      required:
+      - accountId
+      - symbol
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - symbol
     konfig-generated-schema-single-parameter-schema-post--trade-tradeId:
       additionalProperties: true
       properties:
@@ -12299,59 +12352,6 @@ components:
       - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        order_type:
-          $ref: '#/components/schemas/MlegOrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        limit_price:
-          description: "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`."
-          example: ""
-          format: decimal
-          nullable: true
-          type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is `STOP_LOSS_MARKET`,\
-            \ `STOP_LOSS_LIMIT`."
-          example: ""
-          format: decimal
-          nullable: true
-          type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
-        price_effect:
-          allOf:
-          - $ref: '#/components/schemas/MlegPriceEffectStrict'
-          example: DEBIT
-          nullable: true
-          x-konfig-original-example: DEBIT
-        legs:
-          items:
-            $ref: '#/components/schemas/MlegLeg'
-          type: array
-      required:
-      - accountId
-      - legs
-      - order_type
-      - time_in_force
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}

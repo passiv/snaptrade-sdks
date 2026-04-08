@@ -23,6 +23,7 @@ import com.snaptrade.client.model.MlegPriceEffectStrictNullable;
 import com.snaptrade.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.snaptrade.client.model.OptionImpact;
+import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.OrderUpdatedResponse;
 import com.snaptrade.client.model.StopLoss;
@@ -67,6 +68,11 @@ public class TradingApi extends TradingApiGenerated {
     public class GetOrderImpactRequestBuilder extends GetOrderImpactRequestBuilderGenerated {
         public GetOrderImpactRequestBuilder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
             super(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
+        }
+    }
+    public class GetUserAccountOptionQuotesRequestBuilder extends GetUserAccountOptionQuotesRequestBuilderGenerated {
+        public GetUserAccountOptionQuotesRequestBuilder(String userId, String userSecret, UUID accountId, String symbol) {
+            super(userId, userSecret, accountId, symbol);
         }
     }
     public class GetUserAccountQuotesRequestBuilder extends GetUserAccountQuotesRequestBuilderGenerated {

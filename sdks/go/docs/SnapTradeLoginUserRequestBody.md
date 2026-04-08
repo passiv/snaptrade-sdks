@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ConnectionType** | Pointer to **string** | Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  | [optional] [default to "read"]
 **ShowCloseButton** | Pointer to **bool** | Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true. | [optional] 
 **DarkMode** | Pointer to **bool** | Enable dark mode for the connection portal. Defaults to false. | [optional] 
-**ConnectionPortalVersion** | Pointer to **string** | Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. | [optional] [default to "v4"]
+**ConnectionPortalVersion** | Pointer to **string** | Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4. | [optional] [default to "v4"]
 
 ## Methods
 

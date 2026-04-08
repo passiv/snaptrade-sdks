@@ -116,7 +116,7 @@ namespace SnapTrade.Net.Test.Api
             var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
             var showCloseButton = true; // Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
             var darkMode = true; // Enable dark mode for the connection portal. Defaults to false.
-            var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V4; // Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
+            var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V4; // Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
                 broker,
