@@ -3293,6 +3293,11 @@ components:
           nullable: true
           type: number
           example: 12.50
+        trailing_stop:
+          description: For trailing stop orders, contains the trail configuration. Null for all other order types.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/TrailingStop"
         order_type:
           description: The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
           nullable: true
@@ -3435,11 +3440,33 @@ components:
           nullable: true
           type: number
           example: 12.50
+        trailing_stop:
+          description: For trailing stop orders, contains the trail configuration. Null for all other order types.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/TrailingStop"
         legs:
           type: array
           description: List of legs that make up the order.
           items:
             $ref: "#/components/schemas/AccountOrderRecordLeg"
+    TrailingStop:
+      description: Trail configuration for trailing stop orders.
+      type: object
+      required:
+        - amount
+        - type
+      properties:
+        amount:
+          description: The trail amount. Interpreted as dollars if `type` is `DOLLAR`, or a percentage if `type` is `PERCENT`.
+          type: string
+          example: "0.60"
+        type:
+          description: Whether the trail `amount` is a dollar amount (`DOLLAR`) or a percentage (`PERCENT`). For example, if `amount` is "0.60" and `type` is `DOLLAR`, the stop price will trail the market price by $0.60. If `amount` is "5" and `type` is `PERCENT`, the stop price will trail the market price by 5%.
+          type: string
+          enum:
+            - DOLLAR
+            - PERCENT
     AccountOrderRecordLeg:
       description: Describes an individual leg that makes up an order in the V2 format.
       type: object

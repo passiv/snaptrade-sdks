@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **ExecutionPrice** | Pointer to **NullableFloat32** | The price at which the order was executed. For option orders, this represents the price per share. | [optional] 
 **LimitPrice** | Pointer to **NullableFloat32** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. | [optional] 
 **StopPrice** | Pointer to **NullableFloat32** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. | [optional] 
+**TrailingStop** | Pointer to [**NullableAccountOrderRecordTrailingStop**](AccountOrderRecordTrailingStop.md) |  | [optional] 
 **OrderType** | Pointer to **NullableString** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. | [optional] 
 **TimeInForce** | Pointer to **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.  | [optional] 
 **TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
@@ -466,6 +467,41 @@ HasStopPrice returns a boolean if a field has been set.
 `func (o *OrderUpdatedResponseOrder) UnsetStopPrice()`
 
 UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
+### GetTrailingStop
+
+`func (o *OrderUpdatedResponseOrder) GetTrailingStop() AccountOrderRecordTrailingStop`
+
+GetTrailingStop returns the TrailingStop field if non-nil, zero value otherwise.
+
+### GetTrailingStopOk
+
+`func (o *OrderUpdatedResponseOrder) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool)`
+
+GetTrailingStopOk returns a tuple with the TrailingStop field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrailingStop
+
+`func (o *OrderUpdatedResponseOrder) SetTrailingStop(v AccountOrderRecordTrailingStop)`
+
+SetTrailingStop sets TrailingStop field to given value.
+
+### HasTrailingStop
+
+`func (o *OrderUpdatedResponseOrder) HasTrailingStop() bool`
+
+HasTrailingStop returns a boolean if a field has been set.
+
+### SetTrailingStopNil
+
+`func (o *OrderUpdatedResponseOrder) SetTrailingStopNil(b bool)`
+
+ SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
+
+### UnsetTrailingStop
+`func (o *OrderUpdatedResponseOrder) UnsetTrailingStop()`
+
+UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
 ### GetOrderType
 
 `func (o *OrderUpdatedResponseOrder) GetOrderType() string`

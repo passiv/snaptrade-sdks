@@ -37,6 +37,7 @@ type AccountOrderRecordV2 struct {
 	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
 	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
+	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
 	// List of legs that make up the order.
 	Legs []AccountOrderRecordLeg `json:"legs,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -431,6 +432,48 @@ func (o *AccountOrderRecordV2) UnsetStopPrice() {
 	o.StopPrice.Unset()
 }
 
+// GetTrailingStop returns the TrailingStop field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecordV2) GetTrailingStop() AccountOrderRecordTrailingStop {
+	if o == nil || isNil(o.TrailingStop.Get()) {
+		var ret AccountOrderRecordTrailingStop
+		return ret
+	}
+	return *o.TrailingStop.Get()
+}
+
+// GetTrailingStopOk returns a tuple with the TrailingStop field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecordV2) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.TrailingStop.Get(), o.TrailingStop.IsSet()
+}
+
+// HasTrailingStop returns a boolean if a field has been set.
+func (o *AccountOrderRecordV2) HasTrailingStop() bool {
+	if o != nil && o.TrailingStop.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTrailingStop gets a reference to the given NullableAccountOrderRecordTrailingStop and assigns it to the TrailingStop field.
+func (o *AccountOrderRecordV2) SetTrailingStop(v AccountOrderRecordTrailingStop) {
+	o.TrailingStop.Set(&v)
+}
+// SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
+func (o *AccountOrderRecordV2) SetTrailingStopNil() {
+	o.TrailingStop.Set(nil)
+}
+
+// UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
+func (o *AccountOrderRecordV2) UnsetTrailingStop() {
+	o.TrailingStop.Unset()
+}
+
 // GetLegs returns the Legs field value if set, zero value otherwise.
 func (o *AccountOrderRecordV2) GetLegs() []AccountOrderRecordLeg {
 	if o == nil || isNil(o.Legs) {
@@ -495,6 +538,9 @@ func (o AccountOrderRecordV2) MarshalJSON() ([]byte, error) {
 	if o.StopPrice.IsSet() {
 		toSerialize["stop_price"] = o.StopPrice.Get()
 	}
+	if o.TrailingStop.IsSet() {
+		toSerialize["trailing_stop"] = o.TrailingStop.Get()
+	}
 	if !isNil(o.Legs) {
 		toSerialize["legs"] = o.Legs
 	}
@@ -526,6 +572,7 @@ func (o *AccountOrderRecordV2) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "execution_price")
 		delete(additionalProperties, "limit_price")
 		delete(additionalProperties, "stop_price")
+		delete(additionalProperties, "trailing_stop")
 		delete(additionalProperties, "legs")
 		o.AdditionalProperties = additionalProperties
 	}

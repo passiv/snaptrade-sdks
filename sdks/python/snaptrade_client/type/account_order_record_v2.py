@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.type.trailing_stop_nullable import TrailingStopNullable
 
 class RequiredAccountOrderRecordV2(TypedDict):
     pass
@@ -50,6 +51,8 @@ class OptionalAccountOrderRecordV2(TypedDict, total=False):
 
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
     stop_price: typing.Optional[typing.Union[int, float]]
+
+    trailing_stop: typing.Optional[TrailingStopNullable]
 
     # List of legs that make up the order.
     legs: typing.List[AccountOrderRecordLeg]

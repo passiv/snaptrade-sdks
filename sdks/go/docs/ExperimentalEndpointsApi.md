@@ -106,6 +106,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.LimitPrice`: %v\n", *resp.LimitPrice)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.StopPrice`: %v\n", *resp.StopPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.TrailingStop`: %v\n", *resp.TrailingStop)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.Legs`: %v\n", *resp.Legs)
 }
 ```

@@ -43,6 +43,8 @@ module SnapTrade
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
     attr_accessor :stop_price
 
+    attr_accessor :trailing_stop
+
     # List of legs that make up the order.
     attr_accessor :legs
 
@@ -59,6 +61,7 @@ module SnapTrade
         :'execution_price' => :'execution_price',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
+        :'trailing_stop' => :'trailing_stop',
         :'legs' => :'legs'
       }
     end
@@ -81,6 +84,7 @@ module SnapTrade
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
+        :'trailing_stop' => :'AccountOrderRecordTrailingStop',
         :'legs' => :'Array<AccountOrderRecordLeg>'
       }
     end
@@ -93,6 +97,7 @@ module SnapTrade
         :'execution_price',
         :'limit_price',
         :'stop_price',
+        :'trailing_stop',
       ])
     end
 
@@ -151,6 +156,10 @@ module SnapTrade
         self.stop_price = attributes[:'stop_price']
       end
 
+      if attributes.key?(:'trailing_stop')
+        self.trailing_stop = attributes[:'trailing_stop']
+      end
+
       if attributes.key?(:'legs')
         if (value = attributes[:'legs']).is_a?(Array)
           self.legs = value
@@ -186,6 +195,7 @@ module SnapTrade
           execution_price == o.execution_price &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
+          trailing_stop == o.trailing_stop &&
           legs == o.legs
     end
 
@@ -198,7 +208,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, order_type, time_in_force, time_placed, time_executed, quote_currency, execution_price, limit_price, stop_price, legs].hash
+      [brokerage_order_id, status, order_type, time_in_force, time_placed, time_executed, quote_currency, execution_price, limit_price, stop_price, trailing_stop, legs].hash
     end
 
     # Builds the object from hash

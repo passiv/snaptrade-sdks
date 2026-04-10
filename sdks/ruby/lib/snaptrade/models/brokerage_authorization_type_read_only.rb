@@ -39,7 +39,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'type' => :'Type',
+        :'type' => :'BrokerageAuthorizationTypeReadOnlyType',
         :'auth_type' => :'AuthType',
         :'brokerage' => :'BrokerageAuthorizationTypeReadOnlyBrokerage'
       }

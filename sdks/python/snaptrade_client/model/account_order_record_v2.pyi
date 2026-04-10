@@ -150,6 +150,10 @@ class AccountOrderRecordV2(
                         *args,
                         _configuration=_configuration,
                     )
+        
+            @staticmethod
+            def trailing_stop() -> typing.Type['TrailingStopNullable']:
+                return TrailingStopNullable
             
             
             class legs(
@@ -187,6 +191,7 @@ class AccountOrderRecordV2(
                 "execution_price": execution_price,
                 "limit_price": limit_price,
                 "stop_price": stop_price,
+                "trailing_stop": trailing_stop,
                 "legs": legs,
             }
         additional_properties = schemas.AnyTypeSchema
@@ -222,12 +227,15 @@ class AccountOrderRecordV2(
     def __getitem__(self, name: typing_extensions.Literal["stop_price"]) -> MetaOapg.properties.stop_price: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["trailing_stop"]) -> 'TrailingStopNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["legs"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["legs"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -262,12 +270,15 @@ class AccountOrderRecordV2(
     def get_item_oapg(self, name: typing_extensions.Literal["stop_price"]) -> typing.Union[MetaOapg.properties.stop_price, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["trailing_stop"]) -> typing.Union['TrailingStopNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["legs"]) -> typing.Union[MetaOapg.properties.legs, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["legs"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["legs"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -283,6 +294,7 @@ class AccountOrderRecordV2(
         execution_price: typing.Union[MetaOapg.properties.execution_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         limit_price: typing.Union[MetaOapg.properties.limit_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         stop_price: typing.Union[MetaOapg.properties.stop_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        trailing_stop: typing.Union['TrailingStopNullable', schemas.Unset] = schemas.unset,
         legs: typing.Union[MetaOapg.properties.legs, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -300,6 +312,7 @@ class AccountOrderRecordV2(
             execution_price=execution_price,
             limit_price=limit_price,
             stop_price=stop_price,
+            trailing_stop=trailing_stop,
             legs=legs,
             _configuration=_configuration,
             **kwargs,
@@ -307,3 +320,4 @@ class AccountOrderRecordV2(
 
 from snaptrade_client.model.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable

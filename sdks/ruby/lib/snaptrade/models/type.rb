@@ -12,11 +12,11 @@ require 'time'
 
 module SnapTrade
   class Type
-    READ = "read".freeze
-    TRADE = "trade".freeze
+    DOLLAR = "DOLLAR".freeze
+    PERCENT = "PERCENT".freeze
 
     def self.all_vars
-      @all_vars ||= [READ, TRADE].freeze
+      @all_vars ||= [DOLLAR, PERCENT].freeze
     end
 
     # Builds the enum from string

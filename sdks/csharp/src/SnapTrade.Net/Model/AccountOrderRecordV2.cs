@@ -51,8 +51,9 @@ namespace SnapTrade.Net.Model
         /// <param name="executionPrice">The price at which the order was executed..</param>
         /// <param name="limitPrice">The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="trailingStop">trailingStop.</param>
         /// <param name="legs">List of legs that make up the order..</param>
-        public AccountOrderRecordV2(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeExecuted = default(DateTime?), string quoteCurrency = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), List<AccountOrderRecordLeg> legs = default(List<AccountOrderRecordLeg>)) : base()
+        public AccountOrderRecordV2(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeExecuted = default(DateTime?), string quoteCurrency = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), TrailingStopNullable trailingStop = default(TrailingStopNullable), List<AccountOrderRecordLeg> legs = default(List<AccountOrderRecordLeg>)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -64,6 +65,7 @@ namespace SnapTrade.Net.Model
             this.ExecutionPrice = executionPrice;
             this.LimitPrice = limitPrice;
             this.StopPrice = stopPrice;
+            this.TrailingStop = trailingStop;
             this.Legs = legs;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -132,6 +134,12 @@ namespace SnapTrade.Net.Model
         public double? StopPrice { get; set; }
 
         /// <summary>
+        /// Gets or Sets TrailingStop
+        /// </summary>
+        [DataMember(Name = "trailing_stop", EmitDefaultValue = true)]
+        public TrailingStopNullable TrailingStop { get; set; }
+
+        /// <summary>
         /// List of legs that make up the order.
         /// </summary>
         /// <value>List of legs that make up the order.</value>
@@ -163,6 +171,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  ExecutionPrice: ").Append(ExecutionPrice).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
             sb.Append("  StopPrice: ").Append(StopPrice).Append("\n");
+            sb.Append("  TrailingStop: ").Append(TrailingStop).Append("\n");
             sb.Append("  Legs: ").Append(Legs).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -250,6 +259,11 @@ namespace SnapTrade.Net.Model
                     this.StopPrice.Equals(input.StopPrice))
                 ) && base.Equals(input) && 
                 (
+                    this.TrailingStop == input.TrailingStop ||
+                    (this.TrailingStop != null &&
+                    this.TrailingStop.Equals(input.TrailingStop))
+                ) && base.Equals(input) && 
+                (
                     this.Legs == input.Legs ||
                     this.Legs != null &&
                     input.Legs != null &&
@@ -303,6 +317,10 @@ namespace SnapTrade.Net.Model
                 if (this.StopPrice != null)
                 {
                     hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                }
+                if (this.TrailingStop != null)
+                {
+                    hashCode = (hashCode * 59) + this.TrailingStop.GetHashCode();
                 }
                 if (this.Legs != null)
                 {

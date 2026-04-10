@@ -330,6 +330,10 @@ class AccountOrderRecordNullable(
                         *args,
                         _configuration=_configuration,
                     )
+        
+            @staticmethod
+            def trailing_stop() -> typing.Type['TrailingStopNullable']:
+                return TrailingStopNullable
             
             
             class order_type(
@@ -447,6 +451,7 @@ class AccountOrderRecordNullable(
                 "execution_price": execution_price,
                 "limit_price": limit_price,
                 "stop_price": stop_price,
+                "trailing_stop": trailing_stop,
                 "order_type": order_type,
                 "time_in_force": time_in_force,
                 "time_placed": time_placed,
@@ -502,6 +507,9 @@ class AccountOrderRecordNullable(
     def __getitem__(self, name: typing_extensions.Literal["stop_price"]) -> MetaOapg.properties.stop_price: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["trailing_stop"]) -> 'TrailingStopNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> MetaOapg.properties.order_type: ...
     
     @typing.overload
@@ -528,7 +536,7 @@ class AccountOrderRecordNullable(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -575,6 +583,9 @@ class AccountOrderRecordNullable(
     def get_item_oapg(self, name: typing_extensions.Literal["stop_price"]) -> typing.Union[MetaOapg.properties.stop_price, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["trailing_stop"]) -> typing.Union['TrailingStopNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union[MetaOapg.properties.order_type, schemas.Unset]: ...
     
     @typing.overload
@@ -601,7 +612,7 @@ class AccountOrderRecordNullable(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -621,6 +632,7 @@ class AccountOrderRecordNullable(
         execution_price: typing.Union[MetaOapg.properties.execution_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         limit_price: typing.Union[MetaOapg.properties.limit_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         stop_price: typing.Union[MetaOapg.properties.stop_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        trailing_stop: typing.Union['TrailingStopNullable', schemas.Unset] = schemas.unset,
         order_type: typing.Union[MetaOapg.properties.order_type, None, str, schemas.Unset] = schemas.unset,
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, datetime, schemas.Unset] = schemas.unset,
@@ -649,6 +661,7 @@ class AccountOrderRecordNullable(
             execution_price=execution_price,
             limit_price=limit_price,
             stop_price=stop_price,
+            trailing_stop=trailing_stop,
             order_type=order_type,
             time_in_force=time_in_force,
             time_placed=time_placed,
@@ -665,4 +678,5 @@ from snaptrade_client.model.account_order_record_status import AccountOrderRecor
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable
 from snaptrade_client.model.universal_symbol import UniversalSymbol

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ExecutionPrice** | Pointer to **NullableFloat32** | The price at which the order was executed. | [optional] 
 **LimitPrice** | Pointer to **NullableFloat32** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **StopPrice** | Pointer to **NullableFloat32** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**TrailingStop** | Pointer to [**NullableAccountOrderRecordTrailingStop**](AccountOrderRecordTrailingStop.md) |  | [optional] 
 **Legs** | Pointer to [**[]AccountOrderRecordLeg**](AccountOrderRecordLeg.md) | List of legs that make up the order. | [optional] 
 
 ## Methods
@@ -335,6 +336,41 @@ HasStopPrice returns a boolean if a field has been set.
 `func (o *AccountOrderRecordV2) UnsetStopPrice()`
 
 UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
+### GetTrailingStop
+
+`func (o *AccountOrderRecordV2) GetTrailingStop() AccountOrderRecordTrailingStop`
+
+GetTrailingStop returns the TrailingStop field if non-nil, zero value otherwise.
+
+### GetTrailingStopOk
+
+`func (o *AccountOrderRecordV2) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool)`
+
+GetTrailingStopOk returns a tuple with the TrailingStop field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrailingStop
+
+`func (o *AccountOrderRecordV2) SetTrailingStop(v AccountOrderRecordTrailingStop)`
+
+SetTrailingStop sets TrailingStop field to given value.
+
+### HasTrailingStop
+
+`func (o *AccountOrderRecordV2) HasTrailingStop() bool`
+
+HasTrailingStop returns a boolean if a field has been set.
+
+### SetTrailingStopNil
+
+`func (o *AccountOrderRecordV2) SetTrailingStopNil(b bool)`
+
+ SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
+
+### UnsetTrailingStop
+`func (o *AccountOrderRecordV2) UnsetTrailingStop()`
+
+UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
 ### GetLegs
 
 `func (o *AccountOrderRecordV2) GetLegs() []AccountOrderRecordLeg`
