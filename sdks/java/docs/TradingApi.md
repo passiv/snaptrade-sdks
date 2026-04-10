@@ -176,6 +176,7 @@ public class Example {
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
+      System.out.println(result.getTrailingStop());
       System.out.println(result.getOrderType());
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
@@ -844,6 +845,7 @@ public class Example {
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
+      System.out.println(result.getTrailingStop());
       System.out.println(result.getOrderType());
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
@@ -1101,6 +1103,7 @@ public class Example {
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
+      System.out.println(result.getTrailingStop());
       System.out.println(result.getOrderType());
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
@@ -1341,6 +1344,7 @@ public class Example {
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
+      System.out.println(result.getTrailingStop());
       System.out.println(result.getOrderType());
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
@@ -1590,6 +1594,7 @@ public class Example {
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
+      System.out.println(result.getTrailingStop());
       System.out.println(result.getOrderType());
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());

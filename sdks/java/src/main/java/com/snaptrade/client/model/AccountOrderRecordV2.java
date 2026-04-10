@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderRecordLeg;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
+import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -95,6 +96,10 @@ public class AccountOrderRecordV2 {
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
   private Double stopPrice;
+
+  public static final String SERIALIZED_NAME_TRAILING_STOP = "trailing_stop";
+  @SerializedName(SERIALIZED_NAME_TRAILING_STOP)
+  private TrailingStopNullable trailingStop;
 
   public static final String SERIALIZED_NAME_LEGS = "legs";
   @SerializedName(SERIALIZED_NAME_LEGS)
@@ -420,6 +425,35 @@ public class AccountOrderRecordV2 {
   }
 
 
+  public AccountOrderRecordV2 trailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    
+    this.trailingStop = trailingStop;
+    return this;
+  }
+
+   /**
+   * Get trailingStop
+   * @return trailingStop
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public TrailingStopNullable getTrailingStop() {
+    return trailingStop;
+  }
+
+
+  public void setTrailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    this.trailingStop = trailingStop;
+  }
+
+
   public AccountOrderRecordV2 legs(List<AccountOrderRecordLeg> legs) {
     
     
@@ -521,6 +555,7 @@ public class AccountOrderRecordV2 {
         Objects.equals(this.executionPrice, accountOrderRecordV2.executionPrice) &&
         Objects.equals(this.limitPrice, accountOrderRecordV2.limitPrice) &&
         Objects.equals(this.stopPrice, accountOrderRecordV2.stopPrice) &&
+        Objects.equals(this.trailingStop, accountOrderRecordV2.trailingStop) &&
         Objects.equals(this.legs, accountOrderRecordV2.legs)&&
         Objects.equals(this.additionalProperties, accountOrderRecordV2.additionalProperties);
   }
@@ -531,7 +566,7 @@ public class AccountOrderRecordV2 {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, orderType, timeInForce, timePlaced, timeExecuted, quoteCurrency, executionPrice, limitPrice, stopPrice, legs, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, orderType, timeInForce, timePlaced, timeExecuted, quoteCurrency, executionPrice, limitPrice, stopPrice, trailingStop, legs, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -555,6 +590,7 @@ public class AccountOrderRecordV2 {
     sb.append("    executionPrice: ").append(toIndentedString(executionPrice)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");
     sb.append("    stopPrice: ").append(toIndentedString(stopPrice)).append("\n");
+    sb.append("    trailingStop: ").append(toIndentedString(trailingStop)).append("\n");
     sb.append("    legs: ").append(toIndentedString(legs)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -589,6 +625,7 @@ public class AccountOrderRecordV2 {
     openapiFields.add("execution_price");
     openapiFields.add("limit_price");
     openapiFields.add("stop_price");
+    openapiFields.add("trailing_stop");
     openapiFields.add("legs");
 
     // a set of required properties/fields (JSON key names)
@@ -618,6 +655,10 @@ public class AccountOrderRecordV2 {
       }
       if ((jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) && !jsonObj.get("quote_currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `quote_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quote_currency").toString()));
+      }
+      // validate the optional field `trailing_stop`
+      if (jsonObj.get("trailing_stop") != null && !jsonObj.get("trailing_stop").isJsonNull()) {
+        TrailingStopNullable.validateJsonObject(jsonObj.getAsJsonObject("trailing_stop"));
       }
       if (jsonObj.get("legs") != null && !jsonObj.get("legs").isJsonNull()) {
         JsonArray jsonArraylegs = jsonObj.getAsJsonArray("legs");

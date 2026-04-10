@@ -16,6 +16,7 @@ import { AccountOrderRecordOptionSymbol } from './account-order-record-option-sy
 import { AccountOrderRecordQuoteCurrency } from './account-order-record-quote-currency';
 import { AccountOrderRecordQuoteUniversalSymbol } from './account-order-record-quote-universal-symbol';
 import { AccountOrderRecordStatus } from './account-order-record-status';
+import { AccountOrderRecordTrailingStop } from './account-order-record-trailing-stop';
 import { AccountOrderRecordUniversalSymbol } from './account-order-record-universal-symbol';
 
 /**
@@ -108,6 +109,12 @@ export interface OrderUpdatedResponseOrder {
      * @memberof OrderUpdatedResponseOrder
      */
     'stop_price'?: number | null;
+    /**
+     * 
+     * @type {AccountOrderRecordTrailingStop}
+     * @memberof OrderUpdatedResponseOrder
+     */
+    'trailing_stop'?: AccountOrderRecordTrailingStop | null;
     /**
      * The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage\'s order type value.
      * @type {string}

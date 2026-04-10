@@ -25,6 +25,7 @@ import com.snaptrade.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
 import com.snaptrade.client.model.AccountOrderRecordUniversalSymbol;
 import com.snaptrade.client.model.ChildBrokerageOrderIDsNullable;
+import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -114,6 +115,10 @@ public class AccountOrderRecordNullable {
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
   private Double stopPrice;
+
+  public static final String SERIALIZED_NAME_TRAILING_STOP = "trailing_stop";
+  @SerializedName(SERIALIZED_NAME_TRAILING_STOP)
+  private TrailingStopNullable trailingStop;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
@@ -583,6 +588,35 @@ public class AccountOrderRecordNullable {
   }
 
 
+  public AccountOrderRecordNullable trailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    
+    this.trailingStop = trailingStop;
+    return this;
+  }
+
+   /**
+   * Get trailingStop
+   * @return trailingStop
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public TrailingStopNullable getTrailingStop() {
+    return trailingStop;
+  }
+
+
+  public void setTrailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    this.trailingStop = trailingStop;
+  }
+
+
   public AccountOrderRecordNullable orderType(String orderType) {
     
     
@@ -885,6 +919,7 @@ public class AccountOrderRecordNullable {
         Objects.equals(this.executionPrice, accountOrderRecordNullable.executionPrice) &&
         Objects.equals(this.limitPrice, accountOrderRecordNullable.limitPrice) &&
         Objects.equals(this.stopPrice, accountOrderRecordNullable.stopPrice) &&
+        Objects.equals(this.trailingStop, accountOrderRecordNullable.trailingStop) &&
         Objects.equals(this.orderType, accountOrderRecordNullable.orderType) &&
         Objects.equals(this.timeInForce, accountOrderRecordNullable.timeInForce) &&
         Objects.equals(this.timePlaced, accountOrderRecordNullable.timePlaced) &&
@@ -902,7 +937,7 @@ public class AccountOrderRecordNullable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, quoteUniversalSymbol, quoteCurrency, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, quoteUniversalSymbol, quoteCurrency, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, trailingStop, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -930,6 +965,7 @@ public class AccountOrderRecordNullable {
     sb.append("    executionPrice: ").append(toIndentedString(executionPrice)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");
     sb.append("    stopPrice: ").append(toIndentedString(stopPrice)).append("\n");
+    sb.append("    trailingStop: ").append(toIndentedString(trailingStop)).append("\n");
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    timePlaced: ").append(toIndentedString(timePlaced)).append("\n");
@@ -975,6 +1011,7 @@ public class AccountOrderRecordNullable {
     openapiFields.add("execution_price");
     openapiFields.add("limit_price");
     openapiFields.add("stop_price");
+    openapiFields.add("trailing_stop");
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
     openapiFields.add("time_placed");
@@ -1033,6 +1070,10 @@ public class AccountOrderRecordNullable {
       }
       if (!jsonObj.get("filled_quantity").isJsonNull() && (jsonObj.get("filled_quantity") != null && !jsonObj.get("filled_quantity").isJsonNull()) && !jsonObj.get("filled_quantity").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `filled_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("filled_quantity").toString()));
+      }
+      // validate the optional field `trailing_stop`
+      if (jsonObj.get("trailing_stop") != null && !jsonObj.get("trailing_stop").isJsonNull()) {
+        TrailingStopNullable.validateJsonObject(jsonObj.getAsJsonObject("trailing_stop"));
       }
       if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));

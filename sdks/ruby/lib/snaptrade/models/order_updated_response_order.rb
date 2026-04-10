@@ -50,6 +50,8 @@ module SnapTrade
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
     attr_accessor :stop_price
 
+    attr_accessor :trailing_stop
+
     # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
     attr_accessor :order_type
 
@@ -90,6 +92,7 @@ module SnapTrade
         :'execution_price' => :'execution_price',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
+        :'trailing_stop' => :'trailing_stop',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'time_placed' => :'time_placed',
@@ -123,6 +126,7 @@ module SnapTrade
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
+        :'trailing_stop' => :'AccountOrderRecordTrailingStop',
         :'order_type' => :'String',
         :'time_in_force' => :'String',
         :'time_placed' => :'Time',
@@ -144,6 +148,7 @@ module SnapTrade
         :'execution_price',
         :'limit_price',
         :'stop_price',
+        :'trailing_stop',
         :'order_type',
         :'time_updated',
         :'time_executed',
@@ -230,6 +235,10 @@ module SnapTrade
         self.stop_price = attributes[:'stop_price']
       end
 
+      if attributes.key?(:'trailing_stop')
+        self.trailing_stop = attributes[:'trailing_stop']
+      end
+
       if attributes.key?(:'order_type')
         self.order_type = attributes[:'order_type']
       end
@@ -295,6 +304,7 @@ module SnapTrade
           execution_price == o.execution_price &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
+          trailing_stop == o.trailing_stop &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           time_placed == o.time_placed &&
@@ -314,7 +324,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, universal_symbol, option_symbol, quote_universal_symbol, quote_currency, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
+      [brokerage_order_id, status, universal_symbol, option_symbol, quote_universal_symbol, quote_currency, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, trailing_stop, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
     end
 
     # Builds the object from hash

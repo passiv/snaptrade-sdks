@@ -138,6 +138,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'StopPrice'
         }
         /// <summary>
+        /// Test the property 'TrailingStop'
+        /// </summary>
+        [Fact]
+        public void TrailingStopTest()
+        {
+            // TODO unit test for the property 'TrailingStop'
+        }
+        /// <summary>
         /// Test the property 'Legs'
         /// </summary>
         [Fact]

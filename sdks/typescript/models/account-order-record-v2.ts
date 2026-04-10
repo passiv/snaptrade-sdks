@@ -12,6 +12,7 @@ import type * as buffer from "buffer"
 
 import { AccountOrderRecordLeg } from './account-order-record-leg';
 import { AccountOrderRecordStatus } from './account-order-record-status';
+import { AccountOrderRecordTrailingStop } from './account-order-record-trailing-stop';
 
 /**
  * Describes a single order in the standardized V2 format.
@@ -81,6 +82,12 @@ export interface AccountOrderRecordV2 {
      * @memberof AccountOrderRecordV2
      */
     'stop_price'?: number | null;
+    /**
+     * 
+     * @type {AccountOrderRecordTrailingStop}
+     * @memberof AccountOrderRecordV2
+     */
+    'trailing_stop'?: AccountOrderRecordTrailingStop | null;
     /**
      * List of legs that make up the order.
      * @type {Array<AccountOrderRecordLeg>}

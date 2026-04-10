@@ -307,6 +307,8 @@ Class | Method | HTTP request | Description
  - [TradingInstrument](docs/TradingInstrument.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TradingSession](docs/TradingSession.md)
+ - [TrailingStop](docs/TrailingStop.md)
+ - [TrailingStopNullable](docs/TrailingStopNullable.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)

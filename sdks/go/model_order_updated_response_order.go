@@ -41,6 +41,7 @@ type OrderUpdatedResponseOrder struct {
 	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
 	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
+	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
 	// The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
 	OrderType NullableString `json:"order_type,omitempty"`
 	// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.   - `MOO` - Market On Open. The order is to be executed at the day's opening price.   - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close. 
@@ -594,6 +595,48 @@ func (o *OrderUpdatedResponseOrder) UnsetStopPrice() {
 	o.StopPrice.Unset()
 }
 
+// GetTrailingStop returns the TrailingStop field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrderUpdatedResponseOrder) GetTrailingStop() AccountOrderRecordTrailingStop {
+	if o == nil || isNil(o.TrailingStop.Get()) {
+		var ret AccountOrderRecordTrailingStop
+		return ret
+	}
+	return *o.TrailingStop.Get()
+}
+
+// GetTrailingStopOk returns a tuple with the TrailingStop field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrderUpdatedResponseOrder) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.TrailingStop.Get(), o.TrailingStop.IsSet()
+}
+
+// HasTrailingStop returns a boolean if a field has been set.
+func (o *OrderUpdatedResponseOrder) HasTrailingStop() bool {
+	if o != nil && o.TrailingStop.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTrailingStop gets a reference to the given NullableAccountOrderRecordTrailingStop and assigns it to the TrailingStop field.
+func (o *OrderUpdatedResponseOrder) SetTrailingStop(v AccountOrderRecordTrailingStop) {
+	o.TrailingStop.Set(&v)
+}
+// SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
+func (o *OrderUpdatedResponseOrder) SetTrailingStopNil() {
+	o.TrailingStop.Set(nil)
+}
+
+// UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
+func (o *OrderUpdatedResponseOrder) UnsetTrailingStop() {
+	o.TrailingStop.Unset()
+}
+
 // GetOrderType returns the OrderType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrderUpdatedResponseOrder) GetOrderType() string {
 	if o == nil || isNil(o.OrderType.Get()) {
@@ -946,6 +989,9 @@ func (o OrderUpdatedResponseOrder) MarshalJSON() ([]byte, error) {
 	}
 	if o.StopPrice.IsSet() {
 		toSerialize["stop_price"] = o.StopPrice.Get()
+	}
+	if o.TrailingStop.IsSet() {
+		toSerialize["trailing_stop"] = o.TrailingStop.Get()
 	}
 	if o.OrderType.IsSet() {
 		toSerialize["order_type"] = o.OrderType.Get()

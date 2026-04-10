@@ -18,6 +18,7 @@ Describes a single order in the standardized V2 format.
 |**executionPrice** | **Double** | The price at which the order was executed. |  [optional] |
 |**limitPrice** | **Double** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
 |**stopPrice** | **Double** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
+|**trailingStop** | [**TrailingStopNullable**](TrailingStopNullable.md) |  |  [optional] |
 |**legs** | [**List&lt;AccountOrderRecordLeg&gt;**](AccountOrderRecordLeg.md) | List of legs that make up the order. |  [optional] |
 
 

@@ -4042,6 +4042,7 @@ components:
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
+          trailing_stop: null
           action: action
           total_quantity: "100"
           universal_symbol: null
@@ -4064,6 +4065,7 @@ components:
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
+          trailing_stop: null
           action: action
           total_quantity: "100"
           universal_symbol: null
@@ -4157,6 +4159,7 @@ components:
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
+          trailing_stop: null
           action: action
           total_quantity: "100"
           universal_symbol: null
@@ -4179,6 +4182,7 @@ components:
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
+          trailing_stop: null
           action: action
           total_quantity: "100"
           universal_symbol: null
@@ -4267,6 +4271,7 @@ components:
         execution_price: 12.34
         stop_price: 12.5
         quote_universal_symbol: null
+        trailing_stop: null
         action: action
         total_quantity: "100"
         universal_symbol: null
@@ -4365,6 +4370,8 @@ components:
           type: number
           x-konfig-original-example: 12.5
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price
+        trailing_stop:
+          $ref: '#/components/schemas/AccountOrderRecord_trailing_stop'
         order_type:
           description: "The type of order placed. The most common values are `Market`,\
             \ `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order\
@@ -4519,6 +4526,7 @@ components:
             filled_quantity: "9"
             canceled_quantity: "1"
             status: ""
+          trailing_stop: null
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_type: MARKET
           limit_price: 12.34
@@ -4556,6 +4564,7 @@ components:
             filled_quantity: "9"
             canceled_quantity: "1"
             status: ""
+          trailing_stop: null
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_type: MARKET
           limit_price: 12.34
@@ -4606,6 +4615,7 @@ components:
           filled_quantity: "9"
           canceled_quantity: "1"
           status: ""
+        trailing_stop: null
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         order_type: MARKET
         limit_price: 12.34
@@ -4694,11 +4704,38 @@ components:
           type: number
           x-konfig-original-example: 12.5
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price
+        trailing_stop:
+          $ref: '#/components/schemas/AccountOrderRecord_trailing_stop'
         legs:
           description: List of legs that make up the order.
           items:
             $ref: '#/components/schemas/AccountOrderRecordLeg'
           type: array
+      type: object
+    TrailingStop:
+      additionalProperties: true
+      description: Trail configuration for trailing stop orders.
+      properties:
+        amount:
+          description: "The trail amount. Interpreted as dollars if `type` is `DOLLAR`,\
+            \ or a percentage if `type` is `PERCENT`."
+          example: "0.60"
+          type: string
+          x-konfig-original-example: "0.60"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TrailingStop-properties-amount
+        type:
+          description: "Whether the trail `amount` is a dollar amount (`DOLLAR`) or\
+            \ a percentage (`PERCENT`). For example, if `amount` is \"0.60\" and `type`\
+            \ is `DOLLAR`, the stop price will trail the market price by $0.60. If\
+            \ `amount` is \"5\" and `type` is `PERCENT`, the stop price will trail\
+            \ the market price by 5%."
+          enum:
+          - DOLLAR
+          - PERCENT
+          type: string
+      required:
+      - amount
+      - type
       type: object
     AccountOrderRecordLeg:
       additionalProperties: true
@@ -8375,6 +8412,7 @@ components:
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
+          trailing_stop: null
           action: action
           total_quantity: "100"
           universal_symbol: null
@@ -8397,6 +8435,7 @@ components:
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
+          trailing_stop: null
           action: action
           total_quantity: "100"
           universal_symbol: null
@@ -9713,6 +9752,10 @@ components:
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price:
       example: 12.5
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TrailingStop-properties-amount:
+      example: "0.60"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price:
       example: 12.34
@@ -12835,6 +12878,12 @@ components:
       - $ref: '#/components/schemas/Currency'
       description: Quote currency. This field is only present for cryptocurrency pair
         orders with a fiat currency as quote.
+    AccountOrderRecord_trailing_stop:
+      allOf:
+      - $ref: '#/components/schemas/TrailingStop'
+      description: "For trailing stop orders, contains the trail configuration. Null\
+        \ for all other order types."
+      nullable: true
     AccountOrderRecord_child_brokerage_order_ids:
       allOf:
       - $ref: '#/components/schemas/ChildBrokerageOrderIDs'

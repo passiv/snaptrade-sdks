@@ -23,6 +23,7 @@ import com.snaptrade.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
 import com.snaptrade.client.model.AccountOrderRecordUniversalSymbol;
 import com.snaptrade.client.model.ChildBrokerageOrderIDsNullable;
+import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -157,6 +158,14 @@ public class AccountOrderRecordNullableTest {
     @Test
     public void stopPriceTest() {
         // TODO: test stopPrice
+    }
+
+    /**
+     * Test the property 'trailingStop'
+     */
+    @Test
+    public void trailingStopTest() {
+        // TODO: test trailingStop
     }
 
     /**

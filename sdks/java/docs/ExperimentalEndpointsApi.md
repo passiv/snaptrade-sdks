@@ -158,6 +158,7 @@ public class Example {
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
+      System.out.println(result.getTrailingStop());
       System.out.println(result.getLegs());
     } catch (ApiException e) {
       System.err.println("Exception when calling ExperimentalEndpointsApi#getUserAccountOrderDetailV2");
