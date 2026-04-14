@@ -5,13 +5,17 @@ The SnapTrade API uses rate limiting to protect against bursts of incoming traff
 There are two layers of rate limiting that may apply to your requests:
 
 1. **Customer-level rate limiting** -- a global limit across all requests from your `clientId`.
-2. **Account-level rate limiting** -- a per-account limit on specific account data endpoints.
+2. **Account-level rate limiting** -- a [per-account](https://docs.snaptrade.com/docs/account-data) limit on specific account data endpoints.
 
 A request must pass both layers. Even if you have remaining capacity at the customer level, you can still be throttled at the account level, and vice versa.
 
 ## Customer-Level Rate Limiting
 
-Every SnapTrade client is rate limited to **250 requests per minute** by default. This limit applies globally across all API endpoints and all accounts. If you have a large number of users and need a higher limit, please contact your Customer Success Manager.
+Every SnapTrade client is rate limited to **250 requests per minute** by default. This limit applies globally across all API endpoints and all accounts. If you need a higher limit:
+
+- **Free plan users** can upgrade to Pay-as-you-go at [snaptrade.com/pricing](https://snaptrade.com/pricing).
+- **Pay-as-you-go users** can contact [SnapTrade support](https://snaptrade.com/contact) to request a limit increase.
+- **Custom plan customers** can contact their Customer Success Manager.
 
 ### Response Headers
 
@@ -21,6 +25,7 @@ The following headers are returned on every response to help you track your cust
 |---|---|
 | `X-RateLimit-Limit` | The maximum number of requests you can make per minute. |
 | `X-RateLimit-Remaining` | The number of requests remaining in the current rolling window. |
+| `X-RateLimit-Reset` | The number of seconds until the next minutely rate limit resets. |
 
 These are rolling limits that look at the trailing 60 seconds.
 
@@ -32,20 +37,22 @@ Account-level rate limiting is scoped to the combination of your `clientId` and 
 
 - Different accounts have **separate** rate limit buckets. Exhausting the limit on one account does not affect requests to other accounts.
 - Different endpoints for the **same account share** a single bucket. For example, fetching balances and positions for the same account both count toward that account's limit.
-- Different clients (partners) have **separate** buckets, even for the same account ID.
 
 ### Affected Endpoints
 
 Account-level rate limiting applies to the following endpoints:
 
-- Account Holdings
-- Account Detail
-- Account Balances
-- Account Positions
-- Account Orders
-- Recent Orders
-- Account Activities
-- Account Order Detail
+- [Account Holdings](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserHoldings)
+- [Account Detail](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountDetails)
+- [Account Balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance)
+- [Account Positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions)
+- [Option Positions](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings)
+- [Account Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders)
+- [Recent Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders)
+- [Account Activities](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities)
+- [Account Order Detail](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrderDetail)
+
+> **Note:** While the per-account rate limit allows up to 5 requests per minute, these endpoints should not be polled at this frequency. See [API Polling Patterns](https://docs.snaptrade.com/docs/launching-your-application#3-api-polling-patterns) for recommended usage patterns.
 
 ### Response Headers
 
