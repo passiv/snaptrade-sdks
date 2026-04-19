@@ -1069,7 +1069,7 @@ disable_brokerage_authorization_response = (
 
 ### `snaptrade.connections.list_brokerage_authorizations`<a id="snaptradeconnectionslist_brokerage_authorizations"></a>
 
-Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+Returns a list of all connections for the specified user.
 
 A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
 
@@ -1629,7 +1629,7 @@ The ticker or Universal Symbol ID to look up the symbol with.
 
 ### `snaptrade.reference_data.list_all_brokerage_authorization_type`<a id="snaptradereference_datalist_all_brokerage_authorization_type"></a>
 
-Returns a list of all defined Brokerage authorization Type objects.
+Returns a list of all defined connection type objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -2780,7 +2780,7 @@ Optional comma separated list of SnapTrade Account IDs used to filter the reques
 
 ##### brokerage_authorizations: `str`<a id="brokerage_authorizations-str"></a>
 
-Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
+Optional comma separated list of SnapTrade Connection IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
 
 ##### type: `str`<a id="type-str"></a>
 

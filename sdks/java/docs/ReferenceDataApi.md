@@ -10,7 +10,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | Get exchanges |
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search symbols |
 | [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get symbol detail |
-| [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
+| [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all connection types |
 | [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments |
 | [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
 | [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies |
@@ -593,9 +593,9 @@ public class Example {
 # **listAllBrokerageAuthorizationType**
 > List&lt;BrokerageAuthorizationTypeReadOnly&gt; listAllBrokerageAuthorizationType().brokerage(brokerage).execute();
 
-Get all brokerage authorization types
+Get all connection types
 
-Returns a list of all defined Brokerage authorization Type objects.
+Returns a list of all defined connection type objects.
 
 ### Example
 ```java
@@ -681,7 +681,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all defined Brokerage Authorization Type objects. |  -  |
+| **200** | A list of all defined connection type objects. |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="listAllBrokerageInstruments"></a>

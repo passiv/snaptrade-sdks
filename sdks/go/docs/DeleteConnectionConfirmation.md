@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Detail** | Pointer to **string** | Connection queued for deletion; please wait for webhook for confirmation. | [optional] 
-**ConnectionId** | Pointer to **string** | The ID of the connection (brokerage authorization) that was scheduled for deletion. | [optional] 
+**ConnectionId** | Pointer to **string** | The ID of the connection that was scheduled for deletion. | [optional] 
 
 ## Methods
 
