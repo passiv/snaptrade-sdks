@@ -21,7 +21,7 @@ Accessing messages through JavaScript is slightly more complex but still easy to
 ```js
 window.addEventListener(
   "message",
-  (event) => {
+  (e) => {
     if (
       e.data &&
       (e.origin === "https://app.snaptrade.com" ||
@@ -34,7 +34,7 @@ window.addEventListener(
       } else if (data.status === "ERROR") {
         const { errorCode, statusCode, detail } = data;
         // Handle error message
-      } else if (e.data === "CLOSED") {
+      } else if (data === "CLOSED") {
         // Handle closed message
       }
     }
