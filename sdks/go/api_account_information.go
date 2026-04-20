@@ -274,6 +274,8 @@ GetAllUserHoldings List all accounts for the user, plus balances, positions, and
 List all accounts for the user, plus balances, positions, and orders for each
 account.
 
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId

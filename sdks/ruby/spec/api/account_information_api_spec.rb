@@ -48,7 +48,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_all_user_holdings
   # List all accounts for the user, plus balances, positions, and orders for each account.
-  # **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
+  # **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

@@ -273,6 +273,8 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 List all accounts for the user, plus balances, positions, and orders for each
 account.
 
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -2745,6 +2747,8 @@ Returns all historical transactions for the specified user and filtering criteri
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
 The data returned here is always cached and refreshed once a day.
+
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

@@ -80,6 +80,8 @@ There is no guarantee to the ordering of the transactions returned. Please sort 
 
 The data returned here is always cached and refreshed once a day.
 
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
