@@ -733,6 +733,8 @@ paths:
 
         List all accounts for the user, plus balances, positions, and orders for each
         account.
+
+        **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
       operationId: AccountInformation_getAllUserHoldings
       parameters:
       - explode: true
@@ -1488,6 +1490,8 @@ paths:
         There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
         The data returned here is always cached and refreshed once a day.
+
+        **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
       operationId: TransactionsAndReporting_getActivities
       parameters:
       - description: "The start date (inclusive) of the transaction history to retrieve.\
