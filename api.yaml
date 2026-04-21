@@ -2756,6 +2756,23 @@ paths:
           description: Return a 200 status to indicate that the update was successful
         "201":
           description: Return a 201 status to indicate the update was successful
+  /accountBalanceHistoryUpdated:
+    post:
+      tags:
+        - Webhooks
+      operationId: Webhooks_accountBalanceHistoryUpdated
+      description: Notifies when account balance history has been updated for an account.
+      requestBody:
+        description: Information about the account for which account value history has been updated
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookBase"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the update was successful
+        "201":
+          description: Return a 201 status to indicate the update was successful
 components:
   securitySchemes:
     PartnerSignature:
