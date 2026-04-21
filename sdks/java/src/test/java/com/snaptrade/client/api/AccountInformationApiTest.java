@@ -209,7 +209,7 @@ public class AccountInformationApiTest {
     /**
      * List account rate of returns
      *
-     * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * Returns a list of rate of return percents for a given account. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -218,7 +218,9 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
+        String timeframes = null;
         RateOfReturnResponse response = api.getUserAccountReturnRates(userId, userSecret, accountId)
+                .timeframes(timeframes)
                 .execute();
         // TODO: test validations
     }

@@ -280,7 +280,7 @@ paths:
   /authorizations/{authorizationId}/returnRates:
     get:
       description: |
-        Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+        Returns a list of rate of return percents for a given connection.
       operationId: Connections_returnRates
       parameters:
       - explode: true
@@ -304,6 +304,19 @@ paths:
         schema:
           $ref: '#/components/schemas/BrokerageAuthID'
         style: simple
+      - description: "Optional comma separated list of rate-of-return timeframes to\
+          \ return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`.\
+          \ If omitted, SnapTrade returns all six supported timeframes."
+        explode: true
+        in: query
+        name: timeframes
+        required: false
+        schema:
+          example: "ALL,1Y"
+          type: string
+          x-konfig-original-example: "ALL,1Y"
+          x-konfig-generated-schema: konfig-generated-schema-paths--authorizations-authorizationId-returnRates-get-parameters-3-schema
+        style: form
       responses:
         "200":
           content:
@@ -1197,7 +1210,7 @@ paths:
   /accounts/{accountId}/returnRates:
     get:
       description: |
-        Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+        Returns a list of rate of return percents for a given account.
       operationId: AccountInformation_getUserAccountReturnRates
       parameters:
       - explode: true
@@ -1221,6 +1234,19 @@ paths:
         schema:
           $ref: '#/components/schemas/AccountID'
         style: simple
+      - description: "Optional comma separated list of rate-of-return timeframes to\
+          \ return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`.\
+          \ If omitted, SnapTrade returns all six supported timeframes."
+        explode: true
+        in: query
+        name: timeframes
+        required: false
+        schema:
+          example: "ALL,1Y"
+          type: string
+          x-konfig-original-example: "ALL,1Y"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-returnRates-get-parameters-3-schema
+        style: form
       responses:
         "200":
           content:
@@ -4234,9 +4260,10 @@ components:
           enum:
           - ALL
           - 1Y
-          - 6M
-          - 3M
+          - YTD
           - 1M
+          - 1W
+          - 1D
           example: ALL
           type: string
           x-konfig-original-example: ALL
@@ -9507,6 +9534,10 @@ components:
       - time_in_force
       - type
       type: object
+    konfig-generated-schema-paths--authorizations-authorizationId-returnRates-get-parameters-3-schema:
+      example: "ALL,1Y"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--holdings-get-parameters-2-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -9514,6 +9545,10 @@ components:
     konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema:
       example: 30
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-returnRates-get-parameters-3-schema:
+      example: "ALL,1Y"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-5-schema:
       example: "BUY,SELL,DIVIDEND"
@@ -11214,6 +11249,11 @@ components:
           $ref: '#/components/schemas/UserSecret'
         authorizationId:
           $ref: '#/components/schemas/BrokerageAuthID'
+        timeframes:
+          example: "ALL,1Y"
+          type: string
+          x-konfig-original-example: "ALL,1Y"
+          x-konfig-generated-schema: konfig-generated-schema-paths--authorizations-authorizationId-returnRates-get-parameters-3-schema
       required:
       - authorizationId
       - userId
@@ -11224,6 +11264,7 @@ components:
       - userId
       - userSecret
       - authorizationId
+      - timeframes
     konfig-generated-schema-single-parameter-schema-get--authorizations:
       additionalProperties: true
       properties:
@@ -11549,6 +11590,11 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
+        timeframes:
+          example: "ALL,1Y"
+          type: string
+          x-konfig-original-example: "ALL,1Y"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-returnRates-get-parameters-3-schema
       required:
       - accountId
       - userId
@@ -11559,6 +11605,7 @@ components:
       - userId
       - userSecret
       - accountId
+      - timeframes
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-activities:
       additionalProperties: true
       properties:

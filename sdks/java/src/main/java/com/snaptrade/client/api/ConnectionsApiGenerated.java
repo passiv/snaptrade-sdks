@@ -1217,7 +1217,7 @@ public class ConnectionsApiGenerated {
 
         return ((ConnectionsApi) this).new RemoveBrokerageAuthorizationRequestBuilder(authorizationId, userId, userSecret);
     }
-    private okhttp3.Call returnRatesCall(String userId, String userSecret, UUID authorizationId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call returnRatesCall(String userId, String userSecret, UUID authorizationId, String timeframes, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1251,6 +1251,10 @@ public class ConnectionsApiGenerated {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
         }
 
+        if (timeframes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("timeframes", timeframes));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1271,7 +1275,7 @@ public class ConnectionsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call returnRatesValidateBeforeCall(String userId, String userSecret, UUID authorizationId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call returnRatesValidateBeforeCall(String userId, String userSecret, UUID authorizationId, String timeframes, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling returnRates(Async)");
@@ -1287,20 +1291,20 @@ public class ConnectionsApiGenerated {
             throw new ApiException("Missing the required parameter 'authorizationId' when calling returnRates(Async)");
         }
 
-        return returnRatesCall(userId, userSecret, authorizationId, _callback);
+        return returnRatesCall(userId, userSecret, authorizationId, timeframes, _callback);
 
     }
 
 
-    private ApiResponse<RateOfReturnResponse> returnRatesWithHttpInfo(String userId, String userSecret, UUID authorizationId) throws ApiException {
-        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, null);
+    private ApiResponse<RateOfReturnResponse> returnRatesWithHttpInfo(String userId, String userSecret, UUID authorizationId, String timeframes) throws ApiException {
+        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, timeframes, null);
         Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call returnRatesAsync(String userId, String userSecret, UUID authorizationId, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
+    private okhttp3.Call returnRatesAsync(String userId, String userSecret, UUID authorizationId, String timeframes, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, _callback);
+        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, timeframes, _callback);
         Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1310,6 +1314,7 @@ public class ConnectionsApiGenerated {
         final String userId;
         final String userSecret;
         final UUID authorizationId;
+        String timeframes;
 
         public ReturnRatesRequestBuilderGenerated(String userId, String userSecret, UUID authorizationId) {
             this.userId = userId;
@@ -1317,6 +1322,16 @@ public class ConnectionsApiGenerated {
             this.authorizationId = authorizationId;
         }
 
+        /**
+         * Set timeframes
+         * @param timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+         * @return ConnectionsApi.ReturnRatesRequestBuilder
+         */
+        public ConnectionsApi.ReturnRatesRequestBuilder timeframes(String timeframes) {
+            this.timeframes = timeframes;
+            return (ConnectionsApi.ReturnRatesRequestBuilder) this;
+        }
+        
         /**
          * Build call for returnRates
          * @param _callback ApiCallback API callback
@@ -1329,7 +1344,7 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return returnRatesCall(userId, userSecret, authorizationId, _callback);
+            return returnRatesCall(userId, userSecret, authorizationId, timeframes, _callback);
         }
 
 
@@ -1344,7 +1359,7 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public RateOfReturnResponse execute() throws ApiException {
-            ApiResponse<RateOfReturnResponse> localVarResp = returnRatesWithHttpInfo(userId, userSecret, authorizationId);
+            ApiResponse<RateOfReturnResponse> localVarResp = returnRatesWithHttpInfo(userId, userSecret, authorizationId, timeframes);
             return localVarResp.getResponseBody();
         }
 
@@ -1359,7 +1374,7 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public ApiResponse<RateOfReturnResponse> executeWithHttpInfo() throws ApiException {
-            return returnRatesWithHttpInfo(userId, userSecret, authorizationId);
+            return returnRatesWithHttpInfo(userId, userSecret, authorizationId, timeframes);
         }
 
         /**
@@ -1374,13 +1389,13 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
-            return returnRatesAsync(userId, userSecret, authorizationId, _callback);
+            return returnRatesAsync(userId, userSecret, authorizationId, timeframes, _callback);
         }
     }
 
     /**
      * List connection rate of returns
-     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * Returns a list of rate of return percents for a given connection. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param authorizationId  (required)

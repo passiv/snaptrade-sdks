@@ -147,6 +147,9 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'accountId'
             },
+            {
+                name: 'timeframes'
+            },
         ]
     },
     '/accounts/{accountId}/holdings-GET': {
@@ -336,6 +339,9 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'authorizationId'
+            },
+            {
+                name: 'timeframes'
             },
         ]
     },

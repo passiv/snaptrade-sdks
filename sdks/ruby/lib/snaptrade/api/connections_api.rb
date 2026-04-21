@@ -649,35 +649,40 @@ module SnapTrade
 
     # List connection rate of returns
     #
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+    # Returns a list of rate of return percents for a given connection.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
+    # @param timeframes [String] Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def return_rates(user_id:, user_secret:, authorization_id:, extra: {})
+    def return_rates(user_id:, user_secret:, authorization_id:, timeframes: SENTINEL, extra: {})
+      extra[:timeframes] = timeframes if timeframes != SENTINEL
       data, _status_code, _headers = return_rates_with_http_info_impl(user_id, user_secret, authorization_id, extra)
       data
     end
 
     # List connection rate of returns
     #
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+    # Returns a list of rate of return percents for a given connection.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
+    # @param timeframes [String] Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def return_rates_with_http_info(user_id:, user_secret:, authorization_id:, extra: {})
+    def return_rates_with_http_info(user_id:, user_secret:, authorization_id:, timeframes: SENTINEL, extra: {})
+      extra[:timeframes] = timeframes if timeframes != SENTINEL
       return_rates_with_http_info_impl(user_id, user_secret, authorization_id, extra)
     end
 
     # List connection rate of returns
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+    # Returns a list of rate of return percents for a given connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @return [RateOfReturnResponse]
     private def return_rates_impl(user_id, user_secret, authorization_id, opts = {})
       data, _status_code, _headers = return_rates_with_http_info(user_id, user_secret, authorization_id, opts)
@@ -685,11 +690,12 @@ module SnapTrade
     end
 
     # List connection rate of returns
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+    # Returns a list of rate of return percents for a given connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @return [Array<(RateOfReturnResponse, Integer, Hash)>] RateOfReturnResponse data, response status code and response headers
     private def return_rates_with_http_info_impl(user_id, user_secret, authorization_id, opts = {})
       if @api_client.config.debugging
@@ -714,6 +720,7 @@ module SnapTrade
       query_params = opts[:query_params] || {}
       query_params[:'userId'] = user_id
       query_params[:'userSecret'] = user_secret
+      query_params[:'timeframes'] = opts[:'timeframes'] if !opts[:'timeframes'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

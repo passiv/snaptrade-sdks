@@ -267,29 +267,31 @@ namespace SnapTrade.Net.Api
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RateOfReturnResponse</returns>
-        RateOfReturnResponse GetUserAccountReturnRates(string userId, string userSecret, string accountId, int operationIndex = 0);
+        RateOfReturnResponse GetUserAccountReturnRates(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0);
 
         /// <summary>
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RateOfReturnResponse</returns>
-        ApiResponse<RateOfReturnResponse> GetUserAccountReturnRatesWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
+        ApiResponse<RateOfReturnResponse> GetUserAccountReturnRatesWithHttpInfo(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0);
         /// <summary>
         /// List account holdings
         /// </summary>
@@ -634,31 +636,33 @@ namespace SnapTrade.Net.Api
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RateOfReturnResponse</returns>
-        System.Threading.Tasks.Task<RateOfReturnResponse> GetUserAccountReturnRatesAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RateOfReturnResponse> GetUserAccountReturnRatesAsync(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RateOfReturnResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RateOfReturnResponse>> GetUserAccountReturnRatesWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<RateOfReturnResponse>> GetUserAccountReturnRatesWithHttpInfoAsync(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account holdings
         /// </summary>
@@ -2659,30 +2663,32 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// List account rate of returns Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RateOfReturnResponse</returns>
-        public RateOfReturnResponse GetUserAccountReturnRates(string userId, string userSecret, string accountId, int operationIndex = 0)
+        public RateOfReturnResponse GetUserAccountReturnRates(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse> localVarResponse = GetUserAccountReturnRatesWithHttpInfo(userId, userSecret, accountId);
+            SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse> localVarResponse = GetUserAccountReturnRatesWithHttpInfo(userId, userSecret, accountId, timeframes);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// List account rate of returns Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RateOfReturnResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse> GetUserAccountReturnRatesWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse> GetUserAccountReturnRatesWithHttpInfo(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2727,6 +2733,10 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (timeframes != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timeframes", timeframes, ""));
+            }
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountReturnRates";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -2762,32 +2772,34 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// List account rate of returns Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RateOfReturnResponse</returns>
-        public async System.Threading.Tasks.Task<RateOfReturnResponse> GetUserAccountReturnRatesAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<RateOfReturnResponse> GetUserAccountReturnRatesAsync(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse> localVarResponse = await GetUserAccountReturnRatesWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse> localVarResponse = await GetUserAccountReturnRatesWithHttpInfoAsync(userId, userSecret, accountId, timeframes, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+        /// List account rate of returns Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="timeframes">Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RateOfReturnResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse>> GetUserAccountReturnRatesWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<RateOfReturnResponse>> GetUserAccountReturnRatesWithHttpInfoAsync(string userId, string userSecret, string accountId, string timeframes = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2833,6 +2845,10 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (timeframes != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timeframes", timeframes, ""));
+            }
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountReturnRates";
             localVarRequestOptions.OperationIndex = operationIndex;

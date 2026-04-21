@@ -151,7 +151,7 @@ public class ConnectionsApiTest {
     /**
      * List connection rate of returns
      *
-     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * Returns a list of rate of return percents for a given connection. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -160,7 +160,9 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         UUID authorizationId = null;
+        String timeframes = null;
         RateOfReturnResponse response = api.returnRates(userId, userSecret, authorizationId)
+                .timeframes(timeframes)
                 .execute();
         // TODO: test validations
     }

@@ -583,7 +583,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.accountInformation.getUserAccountReturnRates`<a id="snaptradeaccountinformationgetuseraccountreturnrates"></a>
 
-Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -594,6 +594,7 @@ const getUserAccountReturnRatesResponse =
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    timeframes: "ALL,1Y",
   });
 ```
 
@@ -604,6 +605,10 @@ const getUserAccountReturnRatesResponse =
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
+
+##### timeframes: `string`<a id="timeframes-string"></a>
+
+Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1184,7 +1189,7 @@ const removeBrokerageAuthorizationResponse =
 
 ### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
 
-Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1194,6 +1199,7 @@ const returnRatesResponse = await snaptrade.connections.returnRates({
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  timeframes: "ALL,1Y",
 });
 ```
 
@@ -1204,6 +1210,10 @@ const returnRatesResponse = await snaptrade.connections.returnRates({
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
+
+##### timeframes: `string`<a id="timeframes-string"></a>
+
+Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

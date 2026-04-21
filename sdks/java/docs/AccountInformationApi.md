@@ -872,11 +872,11 @@ public class Example {
 
 <a name="getUserAccountReturnRates"></a>
 # **getUserAccountReturnRates**
-> RateOfReturnResponse getUserAccountReturnRates(userId, userSecret, accountId).execute();
+> RateOfReturnResponse getUserAccountReturnRates(userId, userSecret, accountId).timeframes(timeframes).execute();
 
 List account rate of returns
 
-Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+Returns a list of rate of return percents for a given account. 
 
 ### Example
 ```java
@@ -903,10 +903,12 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
+    String timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     try {
       RateOfReturnResponse result = client
               .accountInformation
               .getUserAccountReturnRates(userId, userSecret, accountId)
+              .timeframes(timeframes)
               .execute();
       System.out.println(result);
       System.out.println(result.getData());
@@ -923,6 +925,7 @@ public class Example {
       ApiResponse<RateOfReturnResponse> response = client
               .accountInformation
               .getUserAccountReturnRates(userId, userSecret, accountId)
+              .timeframes(timeframes)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -948,6 +951,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
+| **timeframes** | **String**| Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. | [optional] |
 
 ### Return type
 

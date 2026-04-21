@@ -1069,6 +1069,13 @@ type ConnectionsApiReturnRatesRequest struct {
 	userId string
 	userSecret string
 	authorizationId string
+	timeframes *string
+}
+
+// Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
+func (r *ConnectionsApiReturnRatesRequest) Timeframes(timeframes string) *ConnectionsApiReturnRatesRequest {
+	r.timeframes = &timeframes
+	return r
 }
 
 func (r ConnectionsApiReturnRatesRequest) Execute() (*RateOfReturnResponse, *http.Response, error) {
@@ -1078,7 +1085,7 @@ func (r ConnectionsApiReturnRatesRequest) Execute() (*RateOfReturnResponse, *htt
 /*
 ReturnRates List connection rate of returns
 
-Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given connection.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1125,6 +1132,9 @@ func (a *ConnectionsApiService) ReturnRatesExecute(r ConnectionsApiReturnRatesRe
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	if r.timeframes != nil {
+		localVarQueryParams.Add("timeframes", parameterToString(*r.timeframes, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

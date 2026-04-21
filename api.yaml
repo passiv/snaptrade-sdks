@@ -874,7 +874,7 @@ paths:
       summary: List account rate of returns
       operationId: AccountInformation_getUserAccountReturnRates
       description: |
-        Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+        Returns a list of rate of return percents for a given account.
       parameters:
         - in: query
           required: true
@@ -891,6 +891,13 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: false
+          name: timeframes
+          description: Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
+          schema:
+            type: string
+            example: ALL,1Y
       responses:
         "200":
           description: OK
@@ -1009,7 +1016,7 @@ paths:
       summary: List connection rate of returns
       operationId: Connections_returnRates
       description: |
-        Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+        Returns a list of rate of return percents for a given connection.
       parameters:
         - in: query
           required: true
@@ -1026,6 +1033,13 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/BrokerageAuthID"
+        - in: query
+          required: false
+          name: timeframes
+          description: Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
+          schema:
+            type: string
+            example: ALL,1Y
       responses:
         "200":
           description: OK
@@ -3223,9 +3237,10 @@ components:
           enum:
             - ALL
             - 1Y
-            - 6M
-            - 3M
+            - YTD
             - 1M
+            - 1W
+            - 1D
           description: The timeframe this return percent is reflecting
           example: ALL
         return_percent:

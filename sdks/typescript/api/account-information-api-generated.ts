@@ -610,15 +610,16 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given account. 
          * @summary List account rate of returns
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
+         * @param {string} [timeframes] Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountReturnRates: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountReturnRates: async (userId: string, userSecret: string, accountId: string, timeframes?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getUserAccountReturnRates', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -650,6 +651,10 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
             if (userSecret !== undefined) {
                 localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (timeframes !== undefined) {
+                localVarQueryParameter['timeframes'] = timeframes;
             }
 
 
@@ -956,14 +961,14 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given account. 
          * @summary List account rate of returns
          * @param {AccountInformationApiGetUserAccountReturnRatesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountReturnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountReturnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.timeframes, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1091,7 +1096,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountRecentOrders(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given account. 
          * @summary List account rate of returns
          * @param {AccountInformationApiGetUserAccountReturnRatesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1457,6 +1462,13 @@ export type AccountInformationApiGetUserAccountReturnRatesRequest = {
     */
     readonly accountId: string
     
+    /**
+    * Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountReturnRates
+    */
+    readonly timeframes?: string
+    
 }
 
 /**
@@ -1647,7 +1659,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+     * Returns a list of rate of return percents for a given account. 
      * @summary List account rate of returns
      * @param {AccountInformationApiGetUserAccountReturnRatesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

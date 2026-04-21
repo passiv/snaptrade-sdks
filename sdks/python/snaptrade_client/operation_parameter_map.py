@@ -141,6 +141,9 @@ operation_parameter_map = {
             {
                 'name': 'accountId'
             },
+            {
+                'name': 'timeframes'
+            },
         ]
     },
     '/accounts/{accountId}/holdings-GET': {
@@ -330,6 +333,9 @@ operation_parameter_map = {
             },
             {
                 'name': 'authorizationId'
+            },
+            {
+                'name': 'timeframes'
             },
         ]
     },
