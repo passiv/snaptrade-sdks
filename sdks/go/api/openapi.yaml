@@ -12848,6 +12848,32 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-post--accountBalanceHistoryUpdated:
+      additionalProperties: true
+      properties:
+        webookId:
+          example: 06fe1fd7-fc50-43a7-b564-8a2c5f3bab44
+          type: string
+          x-konfig-original-example: 06fe1fd7-fc50-43a7-b564-8a2c5f3bab44
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-webookId
+        clientId:
+          example: WEALTHYCHIPMUNK
+          type: string
+          x-konfig-original-example: WEALTHYCHIPMUNK
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
+        eventTimestamp:
+          example: 2022-01-21T20:11:19.217Z
+          type: string
+          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
+        userId:
+          example: external_user@test.com
+          type: string
+          x-konfig-original-example: external_user@test.com
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-userId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
     Authentication_loginSnapTradeUser_200_response:
       oneOf:
       - $ref: '#/components/schemas/LoginRedirectURI'
