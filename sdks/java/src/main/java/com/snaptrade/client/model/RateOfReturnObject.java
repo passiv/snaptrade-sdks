@@ -60,11 +60,13 @@ public class RateOfReturnObject {
     
     _1Y("1Y"),
     
-    _6M("6M"),
+    YTD("YTD"),
     
-    _3M("3M"),
+    _1M("1M"),
     
-    _1M("1M");
+    _1W("1W"),
+    
+    _1D("1D");
 
     private String value;
 

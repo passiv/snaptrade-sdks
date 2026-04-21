@@ -592,7 +592,7 @@ void (empty response body)
 
 
 
-Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+Returns a list of rate of return percents for a given connection. 
 
 ### Example
 ```csharp
@@ -617,11 +617,12 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var authorizationId = "authorizationId_example";
+            var timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes. (optional) 
             
             try
             {
                 // List connection rate of returns
-                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId);
+                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId, timeframes);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -648,7 +649,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List connection rate of returns
-    ApiResponse<RateOfReturnResponse> response = apiInstance.ReturnRatesWithHttpInfo(userId, userSecret, authorizationId);
+    ApiResponse<RateOfReturnResponse> response = apiInstance.ReturnRatesWithHttpInfo(userId, userSecret, authorizationId, timeframes);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -668,6 +669,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **authorizationId** | **string** |  |  |
+| **timeframes** | **string** | Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. | [optional]  |
 
 ### Return type
 

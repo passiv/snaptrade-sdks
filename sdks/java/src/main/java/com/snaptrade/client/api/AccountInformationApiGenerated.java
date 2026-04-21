@@ -1751,7 +1751,7 @@ public class AccountInformationApiGenerated {
 
         return ((AccountInformationApi) this).new GetUserAccountRecentOrdersRequestBuilder(userId, userSecret, accountId);
     }
-    private okhttp3.Call getUserAccountReturnRatesCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountReturnRatesCall(String userId, String userSecret, UUID accountId, String timeframes, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1785,6 +1785,10 @@ public class AccountInformationApiGenerated {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
         }
 
+        if (timeframes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("timeframes", timeframes));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1805,7 +1809,7 @@ public class AccountInformationApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getUserAccountReturnRatesValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountReturnRatesValidateBeforeCall(String userId, String userSecret, UUID accountId, String timeframes, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getUserAccountReturnRates(Async)");
@@ -1821,20 +1825,20 @@ public class AccountInformationApiGenerated {
             throw new ApiException("Missing the required parameter 'accountId' when calling getUserAccountReturnRates(Async)");
         }
 
-        return getUserAccountReturnRatesCall(userId, userSecret, accountId, _callback);
+        return getUserAccountReturnRatesCall(userId, userSecret, accountId, timeframes, _callback);
 
     }
 
 
-    private ApiResponse<RateOfReturnResponse> getUserAccountReturnRatesWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
-        okhttp3.Call localVarCall = getUserAccountReturnRatesValidateBeforeCall(userId, userSecret, accountId, null);
+    private ApiResponse<RateOfReturnResponse> getUserAccountReturnRatesWithHttpInfo(String userId, String userSecret, UUID accountId, String timeframes) throws ApiException {
+        okhttp3.Call localVarCall = getUserAccountReturnRatesValidateBeforeCall(userId, userSecret, accountId, timeframes, null);
         Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getUserAccountReturnRatesAsync(String userId, String userSecret, UUID accountId, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountReturnRatesAsync(String userId, String userSecret, UUID accountId, String timeframes, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getUserAccountReturnRatesValidateBeforeCall(userId, userSecret, accountId, _callback);
+        okhttp3.Call localVarCall = getUserAccountReturnRatesValidateBeforeCall(userId, userSecret, accountId, timeframes, _callback);
         Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1844,6 +1848,7 @@ public class AccountInformationApiGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
+        String timeframes;
 
         public GetUserAccountReturnRatesRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
             this.userId = userId;
@@ -1851,6 +1856,16 @@ public class AccountInformationApiGenerated {
             this.accountId = accountId;
         }
 
+        /**
+         * Set timeframes
+         * @param timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+         * @return AccountInformationApi.GetUserAccountReturnRatesRequestBuilder
+         */
+        public AccountInformationApi.GetUserAccountReturnRatesRequestBuilder timeframes(String timeframes) {
+            this.timeframes = timeframes;
+            return (AccountInformationApi.GetUserAccountReturnRatesRequestBuilder) this;
+        }
+        
         /**
          * Build call for getUserAccountReturnRates
          * @param _callback ApiCallback API callback
@@ -1863,7 +1878,7 @@ public class AccountInformationApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getUserAccountReturnRatesCall(userId, userSecret, accountId, _callback);
+            return getUserAccountReturnRatesCall(userId, userSecret, accountId, timeframes, _callback);
         }
 
 
@@ -1878,7 +1893,7 @@ public class AccountInformationApiGenerated {
          </table>
          */
         public RateOfReturnResponse execute() throws ApiException {
-            ApiResponse<RateOfReturnResponse> localVarResp = getUserAccountReturnRatesWithHttpInfo(userId, userSecret, accountId);
+            ApiResponse<RateOfReturnResponse> localVarResp = getUserAccountReturnRatesWithHttpInfo(userId, userSecret, accountId, timeframes);
             return localVarResp.getResponseBody();
         }
 
@@ -1893,7 +1908,7 @@ public class AccountInformationApiGenerated {
          </table>
          */
         public ApiResponse<RateOfReturnResponse> executeWithHttpInfo() throws ApiException {
-            return getUserAccountReturnRatesWithHttpInfo(userId, userSecret, accountId);
+            return getUserAccountReturnRatesWithHttpInfo(userId, userSecret, accountId, timeframes);
         }
 
         /**
@@ -1908,13 +1923,13 @@ public class AccountInformationApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
-            return getUserAccountReturnRatesAsync(userId, userSecret, accountId, _callback);
+            return getUserAccountReturnRatesAsync(userId, userSecret, accountId, timeframes, _callback);
         }
     }
 
     /**
      * List account rate of returns
-     * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * Returns a list of rate of return percents for a given account. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)

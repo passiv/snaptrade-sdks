@@ -175,6 +175,7 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
             "userSecret_example",
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
+        request.Timeframes(""ALL,1Y"")
         
         resp, httpRes, err := request.Execute()
 

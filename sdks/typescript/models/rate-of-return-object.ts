@@ -39,6 +39,6 @@ export interface RateOfReturnObject {
     'created_date'?: string;
 }
 
-type RateOfReturnObjectTimeframeEnum = 'ALL' | '1Y' | '6M' | '3M' | '1M'
+type RateOfReturnObjectTimeframeEnum = 'ALL' | '1Y' | 'YTD' | '1M' | '1W' | '1D'
 
 

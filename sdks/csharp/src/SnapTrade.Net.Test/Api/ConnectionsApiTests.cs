@@ -233,11 +233,12 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var authorizationId = "authorizationId_example";
+            var timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes. (optional) 
             
             try
             {
                 // List connection rate of returns
-                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId);
+                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId, timeframes);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

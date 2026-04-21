@@ -112,11 +112,12 @@ describe 'ConnectionsApi' do
 
   # unit tests for return_rates
   # List connection rate of returns
-  # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+  # Returns a list of rate of return percents for a given connection. 
   # @param user_id 
   # @param user_secret 
   # @param authorization_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [String] :timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
   # @return [RateOfReturnResponse]
   describe 'return_rates test' do
     it 'should work' do

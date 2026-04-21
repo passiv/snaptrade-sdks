@@ -49,9 +49,10 @@ class RateOfReturnObject(
                     enum_value_to_name = {
                         "ALL": "ALL",
                         "1Y": "_1Y",
-                        "6M": "_6M",
-                        "3M": "_3M",
+                        "YTD": "YTD",
                         "1M": "_1M",
+                        "1W": "_1W",
+                        "1D": "_1D",
                     }
                 
                 @schemas.classproperty
@@ -63,16 +64,20 @@ class RateOfReturnObject(
                     return cls("1Y")
                 
                 @schemas.classproperty
-                def _6M(cls):
-                    return cls("6M")
-                
-                @schemas.classproperty
-                def _3M(cls):
-                    return cls("3M")
+                def YTD(cls):
+                    return cls("YTD")
                 
                 @schemas.classproperty
                 def _1M(cls):
                     return cls("1M")
+                
+                @schemas.classproperty
+                def _1W(cls):
+                    return cls("1W")
+                
+                @schemas.classproperty
+                def _1D(cls):
+                    return cls("1D")
             return_percent = schemas.NumberSchema
             created_date = schemas.DateTimeSchema
             __annotations__ = {

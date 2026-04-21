@@ -43,6 +43,7 @@ from snaptrade_client.type.model500_unexpected_exception_response import Model50
 # Query params
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
+TimeframesSchema = schemas.StrSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -53,6 +54,7 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
+        'timeframes': typing.Union[TimeframesSchema, str, ],
     },
     total=False
 )
@@ -74,6 +76,12 @@ request_query_user_secret = api_client.QueryParameter(
     style=api_client.ParameterStyle.FORM,
     schema=UserSecretSchema,
     required=True,
+    explode=True,
+)
+request_query_timeframes = api_client.QueryParameter(
+    name="timeframes",
+    style=api_client.ParameterStyle.FORM,
+    schema=TimeframesSchema,
     explode=True,
 )
 # Path params
@@ -177,6 +185,7 @@ class BaseApi(api_client.Api):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         authorization_id: typing.Optional[str] = None,
+        timeframes: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -187,6 +196,8 @@ class BaseApi(api_client.Api):
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
+        if timeframes is not None:
+            _query_params["timeframes"] = timeframes
         if authorization_id is not None:
             _path_params["authorizationId"] = authorization_id
         args.query = query_params if query_params else _query_params
@@ -234,6 +245,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_user_id,
             request_query_user_secret,
+            request_query_timeframes,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -362,6 +374,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_user_id,
             request_query_user_secret,
+            request_query_timeframes,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -428,6 +441,7 @@ class ReturnRates(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         authorization_id: typing.Optional[str] = None,
+        timeframes: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -442,6 +456,7 @@ class ReturnRates(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             authorization_id=authorization_id,
+            timeframes=timeframes,
         )
         return await self._areturn_rates_oapg(
             query_params=args.query,
@@ -454,19 +469,21 @@ class ReturnRates(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         authorization_id: typing.Optional[str] = None,
+        timeframes: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\"  """
+        """ Returns a list of rate of return percents for a given connection.  """
         args = self._return_rates_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
             authorization_id=authorization_id,
+            timeframes=timeframes,
         )
         return self._return_rates_oapg(
             query_params=args.query,
@@ -481,6 +498,7 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         authorization_id: typing.Optional[str] = None,
+        timeframes: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -495,6 +513,7 @@ class ApiForget(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             authorization_id=authorization_id,
+            timeframes=timeframes,
         )
         return await self._areturn_rates_oapg(
             query_params=args.query,
@@ -507,19 +526,21 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         authorization_id: typing.Optional[str] = None,
+        timeframes: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\"  """
+        """ Returns a list of rate of return percents for a given connection.  """
         args = self._return_rates_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
             authorization_id=authorization_id,
+            timeframes=timeframes,
         )
         return self._return_rates_oapg(
             query_params=args.query,

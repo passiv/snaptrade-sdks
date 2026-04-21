@@ -420,15 +420,16 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} authorizationId 
+         * @param {string} [timeframes] Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        returnRates: async (userId: string, userSecret: string, authorizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        returnRates: async (userId: string, userSecret: string, authorizationId: string, timeframes?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('returnRates', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -460,6 +461,10 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
 
             if (userSecret !== undefined) {
                 localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (timeframes !== undefined) {
+                localVarQueryParameter['timeframes'] = timeframes;
             }
 
 
@@ -619,14 +624,14 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.authorizationId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.authorizationId, requestParameters.timeframes, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -711,7 +716,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.removeBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -934,6 +939,13 @@ export type ConnectionsApiReturnRatesRequest = {
     */
     readonly authorizationId: string
     
+    /**
+    * Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly timeframes?: string
+    
 }
 
 /**
@@ -1046,7 +1058,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+     * Returns a list of rate of return percents for a given connection. 
      * @summary List connection rate of returns
      * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

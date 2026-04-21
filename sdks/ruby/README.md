@@ -515,7 +515,7 @@ false to retrieve non executed orders as well
 
 ### `snaptrade.account_information.get_user_account_return_rates`<a id="snaptradeaccount_informationget_user_account_return_rates"></a>
 
-Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -525,6 +525,7 @@ result = snaptrade.account_information.get_user_account_return_rates(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  timeframes: "ALL,1Y",
 )
 p result
 ```
@@ -534,6 +535,11 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
+##### timeframes: `String`<a id="timeframes-string"></a>
+Optional comma separated list of rate-of-return timeframes to return. Supported
+values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade
+returns all six supported timeframes.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [RateOfReturnResponse](./lib/snaptrade/models/rate_of_return_response.rb)
@@ -1099,7 +1105,7 @@ snaptrade.connections.remove_brokerage_authorization(
 
 ### `snaptrade.connections.return_rates`<a id="snaptradeconnectionsreturn_rates"></a>
 
-Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1109,6 +1115,7 @@ result = snaptrade.connections.return_rates(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  timeframes: "ALL,1Y",
 )
 p result
 ```
@@ -1118,6 +1125,11 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### authorization_id: `String`<a id="authorization_id-string"></a>
+##### timeframes: `String`<a id="timeframes-string"></a>
+Optional comma separated list of rate-of-return timeframes to return. Supported
+values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade
+returns all six supported timeframes.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [RateOfReturnResponse](./lib/snaptrade/models/rate_of_return_response.rb)

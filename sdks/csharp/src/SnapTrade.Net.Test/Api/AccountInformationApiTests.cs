@@ -308,11 +308,12 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
+            var timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes. (optional) 
             
             try
             {
                 // List account rate of returns
-                RateOfReturnResponse result = client.AccountInformation.GetUserAccountReturnRates(userId, userSecret, accountId);
+                RateOfReturnResponse result = client.AccountInformation.GetUserAccountReturnRates(userId, userSecret, accountId, timeframes);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
