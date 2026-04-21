@@ -4,6 +4,8 @@
 
 Welcome to SnapTrade! This is intended to be one of the first documents you read when learning how to use the SnapTrade API and will answer many questions you might have while getting started. This document when read from top-to-bottom is also a guide for making your first connection, and will get you set up to start pulling account data and placing trades.
 
+If you want a quick definitions reference while reading, see [Terminology](https://docs.snaptrade.com/docs/terminology).
+
 Please see the FAQ of each section, as any questions you might have should be answered there.
 
 If after reading this document you still have questions or need help, please do not hesitate to contact us through our [Discord](https://discord.gg/rkYWBxb8Qu).
