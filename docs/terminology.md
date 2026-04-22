@@ -8,9 +8,9 @@ Aliases: client credentials, app credentials
 A user record under your API key that represents one of your end users and authorizes access to that user's SnapTrade data.
 Aliases: connected user record, SnapTrade profile
 
-## Brokerage / Institution
+## Institution
 The financial provider a user connects through SnapTrade, such as a broker or exchange.
-Aliases: broker, institution, provider, integration
+Aliases: broker, brokerage, provider, integration
 
 ## Connection
 An authorized link between a SnapTrade user and one brokerage login that grants data access and optionally trading access.
@@ -44,9 +44,9 @@ Aliases: holding, asset position
 A brokerage instruction to buy or sell an instrument, including open, filled, canceled, and rejected states.
 Aliases: trade order, instruction
 
-<!-- TODO: -->
-<!-- ## Activity -->
-<!-- ## Transaction -->
+## Transaction
+A brokerage-reported account event that records cash or position movement, such as buys, sells, dividends, fees, deposits, or withdrawals.
+Aliases: activity, account activity, ledger entry
 
 ## Periodic Sync
 The process where SnapTrade updates account data from the connected brokerage.
