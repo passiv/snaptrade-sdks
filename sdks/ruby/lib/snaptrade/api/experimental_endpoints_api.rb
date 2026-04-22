@@ -494,6 +494,109 @@ module SnapTrade
       end
       return data, status_code, headers, response
     end
+
+
+    # Sync transactions for a connection
+    #
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def sync_brokerage_authorization_transactions(authorization_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = sync_brokerage_authorization_transactions_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+      data
+    end
+
+    # Sync transactions for a connection
+    #
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def sync_brokerage_authorization_transactions_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
+      sync_brokerage_authorization_transactions_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+    end
+
+    # Sync transactions for a connection
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [BrokerageAuthorizationTransactionsSyncConfirmation]
+    private def sync_brokerage_authorization_transactions_impl(authorization_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = sync_brokerage_authorization_transactions_with_http_info(authorization_id, user_id, user_secret, opts)
+      data
+    end
+
+    # Sync transactions for a connection
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BrokerageAuthorizationTransactionsSyncConfirmation, Integer, Hash)>] BrokerageAuthorizationTransactionsSyncConfirmation data, response status code and response headers
+    private def sync_brokerage_authorization_transactions_with_http_info_impl(authorization_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.sync_brokerage_authorization_transactions ...'
+      end
+      # verify the required parameter 'authorization_id' is set
+      if @api_client.config.client_side_validation && authorization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_id' when calling ExperimentalEndpointsApi.sync_brokerage_authorization_transactions"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.sync_brokerage_authorization_transactions"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.sync_brokerage_authorization_transactions"
+      end
+      # resource path
+      local_var_path = '/authorizations/{authorizationId}/transactions/sync'.sub('{' + 'authorizationId' + '}', CGI.escape(authorization_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BrokerageAuthorizationTransactionsSyncConfirmation'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.sync_brokerage_authorization_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#sync_brokerage_authorization_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
   end
 
   # top-level client access to avoid having the user to insantiate their own API instances

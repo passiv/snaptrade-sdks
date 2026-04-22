@@ -34,6 +34,7 @@ export * from './brokerage';
 export * from './brokerage-authorization';
 export * from './brokerage-authorization-disabled-confirmation';
 export * from './brokerage-authorization-refresh-confirmation';
+export * from './brokerage-authorization-transactions-sync-confirmation';
 export * from './brokerage-authorization-type-read-only';
 export * from './brokerage-authorization-type-read-only-brokerage';
 export * from './brokerage-instrument';

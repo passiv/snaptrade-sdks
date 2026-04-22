@@ -52,6 +52,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.experimental_endpoints.sync_brokerage_authorization_transactions`](#snaptradeexperimental_endpointssync_brokerage_authorization_transactions)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -1433,6 +1434,43 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.sync_brokerage_authorization_transactions`<a id="snaptradeexperimental_endpointssync_brokerage_authorization_transactions"></a>
+
+Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+sync_brokerage_authorization_transactions_response = (
+    snaptrade.experimental_endpoints.sync_brokerage_authorization_transactions(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`BrokerageAuthorizationTransactionsSyncConfirmation`](./snaptrade_client/type/brokerage_authorization_transactions_sync_confirmation.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/transactions/sync` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

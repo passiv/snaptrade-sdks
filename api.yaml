@@ -1495,6 +1495,49 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/404FailedRequestResponse"
+  "/authorizations/{authorizationId}/transactions/sync":
+    post:
+      tags:
+        - Experimental endpoints
+      summary: Sync transactions for a connection
+      description: |
+        Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+      operationId: Connections_syncBrokerageAuthorizationTransactions
+      parameters:
+        - in: path
+          name: authorizationId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BrokerageAuthID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BrokerageAuthorizationTransactionsSyncConfirmation"
+        "401":
+          description: Unauthorized, invalid credentials for this resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "402":
+          description: Unable to sync with brokerage account because the connection is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/402BrokerageAuthDisabledResponse"
   "/authorizations/{authorizationId}/disable":
     post:
       tags:
@@ -2995,7 +3038,7 @@ components:
         Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions:
         1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://support.snaptrade.com/brokerages-table?v=6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage.
         2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage.
-        3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+        3. Manual sync - You can trigger an incremental sync of transactions with the [transactions sync](/reference/Experimental%20endpoints/Connections_syncBrokerageAuthorizationTransactions) endpoint.
       properties:
         initial_sync_completed:
           description: Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
@@ -4563,6 +4606,14 @@ components:
           description: Refresh confirmation details
           type: string
           example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
+    BrokerageAuthorizationTransactionsSyncConfirmation:
+      description: Confirmation that the transaction syncs have been scheduled.
+      type: object
+      properties:
+        detail:
+          description: Transactions sync confirmation details
+          type: string
+          example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for transactions sync
     DeleteConnectionConfirmation:
       description: Confirmation that a task has been scheduled to delete the connection.
       type: object

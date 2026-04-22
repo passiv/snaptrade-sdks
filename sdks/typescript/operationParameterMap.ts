@@ -422,6 +422,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/transactions/sync-POST': {
+        parameters: [
+            {
+                name: 'authorizationId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/accounts/{accountId}/options-GET': {
         parameters: [
             {
