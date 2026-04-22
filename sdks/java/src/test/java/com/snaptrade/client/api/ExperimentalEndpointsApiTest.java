@@ -19,6 +19,7 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -115,6 +116,23 @@ public class ExperimentalEndpointsApiTest {
         Boolean onlyExecuted = null;
         AccountOrdersV2Response response = api.getUserAccountRecentOrdersV2(userId, userSecret, accountId)
                 .onlyExecuted(onlyExecuted)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Sync transactions for a connection
+     *
+     * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void syncBrokerageAuthorizationTransactionsTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        BrokerageAuthorizationTransactionsSyncConfirmation response = api.syncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

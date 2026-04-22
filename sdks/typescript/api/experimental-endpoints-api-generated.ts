@@ -25,6 +25,12 @@ import { AccountOrdersV2Response } from '../models';
 // @ts-ignore
 import { AccountValueHistoryResponse } from '../models';
 // @ts-ignore
+import { BrokerageAuthorizationTransactionsSyncConfirmation } from '../models';
+// @ts-ignore
+import { Model401FailedRequestResponse } from '../models';
+// @ts-ignore
+import { Model402BrokerageAuthDisabledResponse } from '../models';
+// @ts-ignore
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
@@ -306,6 +312,68 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+         * @summary Sync transactions for a connection
+         * @param {string} authorizationId 
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncBrokerageAuthorizationTransactions: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('syncBrokerageAuthorizationTransactions', 'authorizationId', authorizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('syncBrokerageAuthorizationTransactions', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('syncBrokerageAuthorizationTransactions', 'userSecret', userSecret)
+            const localVarPath = `/authorizations/{authorizationId}/transactions/sync`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/transactions/sync',
+                httpMethod: 'POST'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -360,6 +428,17 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrdersV2(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.onlyExecuted, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+         * @summary Sync transactions for a connection
+         * @param {ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async syncBrokerageAuthorizationTransactions(requestParameters: ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.syncBrokerageAuthorizationTransactions(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -409,6 +488,16 @@ export const ExperimentalEndpointsApiFactory = function (configuration?: Configu
          */
         getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request, options?: AxiosRequestConfig): AxiosPromise<AccountOrdersV2Response> {
             return localVarFp.getUserAccountRecentOrdersV2(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+         * @summary Sync transactions for a connection
+         * @param {ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncBrokerageAuthorizationTransactions(requestParameters: ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest, options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation> {
+            return localVarFp.syncBrokerageAuthorizationTransactions(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -562,6 +651,36 @@ export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request = {
 }
 
 /**
+ * Request parameters for syncBrokerageAuthorizationTransactions operation in ExperimentalEndpointsApi.
+ * @export
+ * @interface ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest
+ */
+export type ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactions
+    */
+    readonly authorizationId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactions
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactions
+    */
+    readonly userSecret: string
+    
+}
+
+/**
  * ExperimentalEndpointsApiGenerated - object-oriented interface
  * @export
  * @class ExperimentalEndpointsApiGenerated
@@ -614,5 +733,17 @@ export class ExperimentalEndpointsApiGenerated extends BaseAPI {
      */
     public getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request, options?: AxiosRequestConfig) {
         return ExperimentalEndpointsApiFp(this.configuration).getUserAccountRecentOrdersV2(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+     * @summary Sync transactions for a connection
+     * @param {ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExperimentalEndpointsApiGenerated
+     */
+    public syncBrokerageAuthorizationTransactions(requestParameters: ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsRequest, options?: AxiosRequestConfig) {
+        return ExperimentalEndpointsApiFp(this.configuration).syncBrokerageAuthorizationTransactions(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -8,6 +8,7 @@ Method | Path | Description
 [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
+[**SyncBrokerageAuthorizationTransactions**](ExperimentalEndpointsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 
 
 
@@ -203,6 +204,52 @@ func main() {
     // response from `GetUserAccountRecentOrdersV2`: AccountOrdersV2Response
     fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrdersV2Response.GetUserAccountRecentOrdersV2.Orders`: %v\n", resp.Orders)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SyncBrokerageAuthorizationTransactions
+
+Sync transactions for a connection
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ExperimentalEndpointsApi.SyncBrokerageAuthorizationTransactions(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.SyncBrokerageAuthorizationTransactions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `SyncBrokerageAuthorizationTransactions`: BrokerageAuthorizationTransactionsSyncConfirmation
+    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.SyncBrokerageAuthorizationTransactions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationTransactionsSyncConfirmation.SyncBrokerageAuthorizationTransactions.Detail`: %v\n", *resp.Detail)
 }
 ```
 

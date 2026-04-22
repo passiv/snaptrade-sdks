@@ -53,6 +53,7 @@ class PathValues(str, enum.Enum):
     ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY = "/accounts/{accountId}/balanceHistory"
     ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2 = "/accounts/{accountId}/recentOrders/v2"
     ACCOUNTS_ACCOUNT_ID_SYMBOLS = "/accounts/{accountId}/symbols"
+    AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC = "/authorizations/{authorizationId}/transactions/sync"
     BROKERAGES = "/brokerages"
     BROKERAGES_SLUG_INSTRUMENTS = "/brokerages/{slug}/instruments"
     BROKERAGE_AUTHORIZATION_TYPES = "/brokerageAuthorizationTypes"

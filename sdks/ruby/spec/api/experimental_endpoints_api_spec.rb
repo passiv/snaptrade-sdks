@@ -87,4 +87,18 @@ describe 'ExperimentalEndpointsApi' do
     end
   end
 
+  # unit tests for sync_brokerage_authorization_transactions
+  # Sync transactions for a connection
+  # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+  # @param authorization_id 
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [BrokerageAuthorizationTransactionsSyncConfirmation]
+  describe 'sync_brokerage_authorization_transactions test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

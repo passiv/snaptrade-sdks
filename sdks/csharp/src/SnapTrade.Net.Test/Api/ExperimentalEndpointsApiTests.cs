@@ -169,5 +169,35 @@ namespace SnapTrade.Net.Test.Api
                 Console.WriteLine(e.InnerException);
             }
         }
+
+        /// <summary>
+        /// Test SyncBrokerageAuthorizationTransactions
+        /// </summary>
+        [Fact]
+        public void SyncBrokerageAuthorizationTransactionsTest()
+        {
+            var authorizationId = "authorizationId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // Sync transactions for a connection
+                BrokerageAuthorizationTransactionsSyncConfirmation result = client.ExperimentalEndpoints.SyncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.SyncBrokerageAuthorizationTransactions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
     }
 }

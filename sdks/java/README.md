@@ -53,6 +53,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
+  * [`snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions`](#snaptradeexperimentalendpointssyncbrokerageauthorizationtransactions)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -1466,6 +1467,41 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions`<a id="snaptradeexperimentalendpointssyncbrokerageauthorizationtransactions"></a>
+
+Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+BrokerageAuthorizationTransactionsSyncConfirmation result = client
+        .experimentalEndpoints
+        .syncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationTransactionsSyncConfirmation](./src/main/java/com/snaptrade/client/model/BrokerageAuthorizationTransactionsSyncConfirmation.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/transactions/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
