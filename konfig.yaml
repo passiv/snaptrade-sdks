@@ -108,6 +108,8 @@ portal:
       post: true
     /accounts/{accountId}/quotes/options:
       get: true
+    /authorizations/{authorizationId}/transactions/sync:
+      post: true
   hideOperations:
     /activities:
       get: true
@@ -135,6 +137,8 @@ portal:
       post: true
     /brokerageAuthorizationTypes:
       get: true
+    /authorizations/{authorizationId}/transactions/sync:
+      post: true
     /currencies:
       get: true
     /currencies/rates:
