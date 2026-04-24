@@ -12,23 +12,10 @@ Every account returned by SnapTrade includes an `account_category` field that no
 |---|---|
 | `INVESTMENT` | Brokerage / investment account (equities, options, crypto). |
 | `DEPOSIT` | Bank deposit account (checking, savings). |
-| `LOC` | Line of credit account. |
+| `LOC` | Line of credit account (for example, loans or credit cards). |
 | `null` | Category could not be determined (brokerage did not return a recognizable type). Treat as an investment account so legitimate brokerage accounts are not accidentally hidden from trading and holdings flows. |
 
 The field is returned from both :api[AccountInformation_listUserAccounts] and :api[AccountInformation_getUserAccountDetails].
-
-## Example Response
-
-```json
-{
-  "id": "8f1a...",
-  "name": "Robinhood Individual",
-  "number": "Q6542138443",
-  "institution_name": "Robinhood",
-  "account_category": "INVESTMENT",
-  "raw_type": "INDIVIDUAL"
-}
-```
 
 ## Filtering in Your Code
 
