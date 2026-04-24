@@ -17,6 +17,12 @@ Every account returned by SnapTrade includes an `account_category` field that no
 
 The field is returned from both :api[AccountInformation_listUserAccounts] and :api[AccountInformation_getUserAccountDetails].
 
+## The `raw_type` Field
+
+Alongside `account_category`, every account also includes a `raw_type` field. This is the unnormalized account type string as provided by the brokerage (for example, `Margin`, `INDIVIDUAL`, `ROTH`, `TFSA`). Values differ per brokerage and are not standardized by SnapTrade.
+
+Use `raw_type` when you need finer-grained distinctions than `account_category` provides - for example, separating retirement accounts from taxable brokerage accounts within the `INVESTMENT` category. For high-level filtering between investment and non-investment accounts, prefer `account_category`.
+
 ## Filtering in Your Code
 
 ### Node.js / TypeScript
