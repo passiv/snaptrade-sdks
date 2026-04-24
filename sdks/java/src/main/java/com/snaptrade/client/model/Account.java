@@ -162,6 +162,59 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_RAW_TYPE)
   private String rawType;
 
+  /**
+   * The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account. 
+   */
+  @JsonAdapter(AccountCategoryEnum.Adapter.class)
+ public enum AccountCategoryEnum {
+    INVESTMENT("INVESTMENT"),
+    
+    DEPOSIT("DEPOSIT"),
+    
+    LOC("LOC");
+
+    private String value;
+
+    AccountCategoryEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static AccountCategoryEnum fromValue(String value) {
+      for (AccountCategoryEnum b : AccountCategoryEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<AccountCategoryEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final AccountCategoryEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public AccountCategoryEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return AccountCategoryEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ACCOUNT_CATEGORY = "account_category";
+  @SerializedName(SERIALIZED_NAME_ACCOUNT_CATEGORY)
+  private AccountCategoryEnum accountCategory;
+
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
   private Map<String, Object> meta = null;
@@ -558,6 +611,35 @@ public class Account {
   }
 
 
+  public Account accountCategory(AccountCategoryEnum accountCategory) {
+    
+    
+    
+    
+    this.accountCategory = accountCategory;
+    return this;
+  }
+
+   /**
+   * The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account. 
+   * @return accountCategory
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "INVESTMENT", value = "The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. ")
+
+  public AccountCategoryEnum getAccountCategory() {
+    return accountCategory;
+  }
+
+
+  public void setAccountCategory(AccountCategoryEnum accountCategory) {
+    
+    
+    
+    this.accountCategory = accountCategory;
+  }
+
+
   public Account meta(Map<String, Object> meta) {
     
     
@@ -763,6 +845,7 @@ public class Account {
         Objects.equals(this.balance, account.balance) &&
         Objects.equals(this.status, account.status) &&
         Objects.equals(this.rawType, account.rawType) &&
+        Objects.equals(this.accountCategory, account.accountCategory) &&
         Objects.equals(this.meta, account.meta) &&
         Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
         Objects.equals(this.cashRestrictions, account.cashRestrictions) &&
@@ -776,7 +859,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionAccountId, institutionName, createdDate, fundingDate, openingDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionAccountId, institutionName, createdDate, fundingDate, openingDate, syncStatus, balance, status, rawType, accountCategory, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -803,6 +886,7 @@ public class Account {
     sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
+    sb.append("    accountCategory: ").append(toIndentedString(accountCategory)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
@@ -843,6 +927,7 @@ public class Account {
     openapiFields.add("balance");
     openapiFields.add("status");
     openapiFields.add("raw_type");
+    openapiFields.add("account_category");
     openapiFields.add("meta");
     openapiFields.add("portfolio_group");
     openapiFields.add("cash_restrictions");
@@ -904,6 +989,9 @@ public class Account {
       }
       if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
+      }
+      if (!jsonObj.get("account_category").isJsonNull() && (jsonObj.get("account_category") != null && !jsonObj.get("account_category").isJsonNull()) && !jsonObj.get("account_category").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `account_category` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_category").toString()));
       }
       if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));

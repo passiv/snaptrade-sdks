@@ -385,6 +385,7 @@ public class Example {
       System.out.println(result.getBalance());
       System.out.println(result.getStatus());
       System.out.println(result.getRawType());
+      System.out.println(result.getAccountCategory());
       System.out.println(result.getMeta());
       System.out.println(result.getPortfolioGroup());
       System.out.println(result.getCashRestrictions());

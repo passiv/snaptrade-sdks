@@ -42,6 +42,8 @@ type Account struct {
 	Status NullableString `json:"status,omitempty"`
 	// The account type as provided by the brokerage
 	RawType NullableString `json:"raw_type,omitempty"`
+	// The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
+	AccountCategory NullableString `json:"account_category,omitempty"`
 	// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
 	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
@@ -488,6 +490,48 @@ func (o *Account) UnsetRawType() {
 	o.RawType.Unset()
 }
 
+// GetAccountCategory returns the AccountCategory field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetAccountCategory() string {
+	if o == nil || isNil(o.AccountCategory.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AccountCategory.Get()
+}
+
+// GetAccountCategoryOk returns a tuple with the AccountCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetAccountCategoryOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.AccountCategory.Get(), o.AccountCategory.IsSet()
+}
+
+// HasAccountCategory returns a boolean if a field has been set.
+func (o *Account) HasAccountCategory() bool {
+	if o != nil && o.AccountCategory.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountCategory gets a reference to the given NullableString and assigns it to the AccountCategory field.
+func (o *Account) SetAccountCategory(v string) {
+	o.AccountCategory.Set(&v)
+}
+// SetAccountCategoryNil sets the value for AccountCategory to be an explicit nil
+func (o *Account) SetAccountCategoryNil() {
+	o.AccountCategory.Set(nil)
+}
+
+// UnsetAccountCategory ensures that no value is present for AccountCategory, not even an explicit nil
+func (o *Account) UnsetAccountCategory() {
+	o.AccountCategory.Unset()
+}
+
 // GetMeta returns the Meta field value if set, zero value otherwise.
 // Deprecated
 func (o *Account) GetMeta() map[string]interface{} {
@@ -658,6 +702,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
+	if o.AccountCategory.IsSet() {
+		toSerialize["account_category"] = o.AccountCategory.Get()
+	}
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
@@ -701,6 +748,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "balance")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "raw_type")
+		delete(additionalProperties, "account_category")
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "cash_restrictions")

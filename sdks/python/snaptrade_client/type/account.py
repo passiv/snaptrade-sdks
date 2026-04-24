@@ -63,6 +63,9 @@ class OptionalAccount(TypedDict, total=False):
     # The account type as provided by the brokerage
     raw_type: typing.Optional[str]
 
+    # The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
+    account_category: typing.Optional[str]
+
     # WARNING: This property is deprecated
     meta: AccountMeta
 

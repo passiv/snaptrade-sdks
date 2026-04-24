@@ -50,6 +50,9 @@ module SnapTrade
     # The account type as provided by the brokerage
     attr_accessor :raw_type
 
+    # The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
+    attr_accessor :account_category
+
     # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
     attr_accessor :meta
 
@@ -78,6 +81,7 @@ module SnapTrade
         :'balance' => :'balance',
         :'status' => :'status',
         :'raw_type' => :'raw_type',
+        :'account_category' => :'account_category',
         :'meta' => :'meta',
         :'portfolio_group' => :'portfolio_group',
         :'cash_restrictions' => :'cash_restrictions',
@@ -106,6 +110,7 @@ module SnapTrade
         :'balance' => :'AccountBalance',
         :'status' => :'AccountStatus',
         :'raw_type' => :'String',
+        :'account_category' => :'AccountCategory',
         :'meta' => :'Hash<String, Object>',
         :'portfolio_group' => :'String',
         :'cash_restrictions' => :'Array<String>',
@@ -122,6 +127,7 @@ module SnapTrade
         :'opening_date',
         :'status',
         :'raw_type',
+        :'account_category',
       ])
     end
 
@@ -190,6 +196,10 @@ module SnapTrade
 
       if attributes.key?(:'raw_type')
         self.raw_type = attributes[:'raw_type']
+      end
+
+      if attributes.key?(:'account_category')
+        self.account_category = attributes[:'account_category']
       end
 
       if attributes.key?(:'meta')
@@ -284,6 +294,7 @@ module SnapTrade
           balance == o.balance &&
           status == o.status &&
           raw_type == o.raw_type &&
+          account_category == o.account_category &&
           meta == o.meta &&
           portfolio_group == o.portfolio_group &&
           cash_restrictions == o.cash_restrictions &&
@@ -299,7 +310,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_account_id, institution_name, created_date, funding_date, opening_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
+      [id, brokerage_authorization, name, number, institution_account_id, institution_name, created_date, funding_date, opening_date, sync_status, balance, status, raw_type, account_category, meta, portfolio_group, cash_restrictions, is_paper].hash
     end
 
     # Builds the object from hash
