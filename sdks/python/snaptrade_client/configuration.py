@@ -115,6 +115,7 @@ conf = snaptrade_client.Configuration(
                  disabled_client_side_validations="",
                  server_index=None, server_variables=None,
                  server_operation_index=None, server_operation_variables=None,
+                 verify_ssl=True,
                  ):
         """Constructor
         """
@@ -187,7 +188,7 @@ conf = snaptrade_client.Configuration(
         """Debug switch
         """
 
-        self.verify_ssl = True
+        self.verify_ssl = verify_ssl
         """SSL/TLS verification
            Set this to false to skip verifying SSL certificate when calling API
            from https server.
@@ -448,7 +449,7 @@ conf = snaptrade_client.Configuration(
         """
         return [
             {
-                'url': "https://api.snaptrade.com/api/v1",
+                'url': self._base_path,
                 'description': "SnapTrade Production API",
             }
         ]
@@ -521,5 +522,4 @@ def check_url(url: str) -> str:
     if (url.endswith("/")):
         return url[:-1]
     return url
-
 

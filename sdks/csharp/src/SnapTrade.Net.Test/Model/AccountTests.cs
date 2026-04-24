@@ -162,6 +162,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'RawType'
         }
         /// <summary>
+        /// Test the property 'AccountCategory'
+        /// </summary>
+        [Fact]
+        public void AccountCategoryTest()
+        {
+            // TODO unit test for the property 'AccountCategory'
+        }
+        /// <summary>
         /// Test the property 'Meta'
         /// </summary>
         [Fact]

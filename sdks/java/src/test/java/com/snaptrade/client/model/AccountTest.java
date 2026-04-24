@@ -152,6 +152,14 @@ public class AccountTest {
     }
 
     /**
+     * Test the property 'accountCategory'
+     */
+    @Test
+    public void accountCategoryTest() {
+        // TODO: test accountCategory
+    }
+
+    /**
      * Test the property 'meta'
      */
     @Test

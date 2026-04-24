@@ -21,6 +21,7 @@ A single account at a brokerage.
 |**balance** | [**AccountBalance**](AccountBalance.md) |  |  |
 |**status** | [**StatusEnum**](#StatusEnum) | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage. |  [optional] |
 |**rawType** | **String** | The account type as provided by the brokerage |  [optional] |
+|**accountCategory** | [**AccountCategoryEnum**](#AccountCategoryEnum) | The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account.  |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. |  [optional] |
 |**portfolioGroup** | **UUID** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it. |  [optional] |
 |**cashRestrictions** | **List&lt;String&gt;** | This field is deprecated. |  [optional] |
@@ -36,6 +37,16 @@ A single account at a brokerage.
 | CLOSED | &quot;closed&quot; |
 | ARCHIVED | &quot;archived&quot; |
 | UNAVAILABLE | &quot;unavailable&quot; |
+
+
+
+## Enum: AccountCategoryEnum
+
+| Name | Value |
+|---- | -----|
+| INVESTMENT | &quot;INVESTMENT&quot; |
+| DEPOSIT | &quot;DEPOSIT&quot; |
+| LOC | &quot;LOC&quot; |
 
 
 

@@ -3484,6 +3484,7 @@ components:
       description: A single account at a brokerage.
       example:
         brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
+        account_category: INVESTMENT
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         is_paper: false
         institution_account_id: "54953432"
@@ -3612,6 +3613,22 @@ components:
           type: string
           x-konfig-original-example: Margin
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-raw_type
+        account_category:
+          description: |
+            The category of the account, normalized across institutions.
+            Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information.
+            - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.).
+            - `DEPOSIT`: A bank deposit account (checking, savings).
+            - `LOC`: A line of credit account.
+          enum:
+          - INVESTMENT
+          - DEPOSIT
+          - LOC
+          example: INVESTMENT
+          nullable: true
+          type: string
+          x-konfig-original-example: INVESTMENT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-account_category
         meta:
           additionalProperties: true
           deprecated: true
@@ -4159,6 +4176,7 @@ components:
           status: null
         account:
           brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
+          account_category: INVESTMENT
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           is_paper: false
           institution_account_id: "54953432"
@@ -9696,6 +9714,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-raw_type:
       example: Margin
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-account_category:
+      example: INVESTMENT
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-meta:
