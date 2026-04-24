@@ -56,6 +56,8 @@ portal:
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+            - id: filtering-accounts-by-category
+              path: docs/filtering-accounts-by-category.md
             - id: realtime-data
               path: docs/realtime-data.md
             - id: webhooks
