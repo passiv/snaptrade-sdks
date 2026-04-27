@@ -1951,6 +1951,59 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /accounts/{accountId}/trading/complex:
+    post:
+      tags:
+        - Trading
+      summary: Place complex order
+      description: |
+        Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+        Only supported on certain brokerages.
+
+        - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+        - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+        - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+      operationId: Trading_placeComplexOrder
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account to execute the trade on.
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeFormComplexRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ComplexOrderResponse"
+        "400":
+          description: Trade could not be placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "500":
+          description: Unexpected Error
   /accounts/{accountId}/trading/replace:
     post:
       tags:
@@ -2866,6 +2919,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ManualTradeFormBracket"
+    ManualTradeFormComplexRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeFormComplex"
     ManualTradeReplaceFormRequestBody:
       required: true
       content:
@@ -5221,6 +5280,101 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+    ComplexOrderLeg:
+      description: A single leg within a complex order.
+      type: object
+      required:
+        - order_role
+        - action
+        - instrument
+        - order_type
+        - units
+        - time_in_force
+      properties:
+        order_role:
+          description: The role of this leg within the complex order.
+          type: string
+          enum:
+            - TRIGGER
+            - CONDITIONAL
+            - PEER
+          example: TRIGGER
+        action:
+          $ref: "#/components/schemas/ActionStrict"
+        instrument:
+          $ref: "#/components/schemas/TradingInstrument"
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        units:
+          $ref: "#/components/schemas/Units"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price. Required when `order_type` is `Limit` or `StopLimit`.
+          type: number
+          example: 31.33
+          nullable: true
+        stop:
+          description: The stop trigger price. Required when `order_type` is `Stop` or `StopLimit`.
+          type: number
+          example: 29.50
+          nullable: true
+    ManualTradeFormComplex:
+      description: Request body for placing a complex conditional order (OCO, OTO, or OTOCO).
+      type: object
+      required:
+        - type
+        - orders
+      properties:
+        type:
+          description: |
+            The complex order type.
+            - `OCO`: One Cancels the Other — two peer orders.
+            - `OTO`: One Triggers the Other — a trigger order and a conditional order.
+            - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders.
+          type: string
+          enum:
+            - OCO
+            - OTO
+            - OTOCO
+          example: OTO
+        orders:
+          description: |
+            The orders that make up the complex order. Required counts and roles per type:
+            - `OCO`: exactly 2 orders, both `PEER`
+            - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL`
+            - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
+          type: array
+          items:
+            $ref: "#/components/schemas/ComplexOrderLeg"
+        client_order_id:
+          description: An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+          type: string
+          nullable: true
+          example: "my-order-123"
+    ComplexOrderResponse:
+      description: |
+        Response returned after successfully placing a complex order. AccountOrderRecord rows
+        for the legs are not created synchronously — they're hydrated by the next brokerage sync,
+        and can be queried later using the returned `brokerage_group_order_id`.
+      type: object
+      properties:
+        type:
+          description: The complex order type that was placed.
+          type: string
+          enum:
+            - OCO
+            - OTO
+            - OTOCO
+          example: OTO
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all legs of this complex order together.
+            Each leg will eventually appear as a separate AccountOrderRecord sharing this value.
+            May be null if the brokerage does not return a group identifier.
+          type: string
+          nullable: true
+          example: "1234567890"
     ManualTradeFormBracket:
       description: Inputs for placing an order with the brokerage.
       type: object
