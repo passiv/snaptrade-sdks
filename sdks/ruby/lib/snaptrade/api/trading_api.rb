@@ -1079,6 +1079,148 @@ module SnapTrade
     end
 
 
+    # Place complex order
+    #
+    # Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+    # Only supported on certain brokerages.
+    # 
+    # - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+    # - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+    # - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+    #
+    # @param type [ManualTradeFormComplexType] The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
+    # @param orders [Array<ComplexOrderLeg>] The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param client_order_id [String] An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+    # @param body [ManualTradeFormComplex] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_complex_order(type:, orders:, account_id:, user_id:, user_secret:, client_order_id: SENTINEL, extra: {})
+      _body = {}
+      _body[:type] = type if type != SENTINEL
+      _body[:orders] = orders if orders != SENTINEL
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
+      manual_trade_form_complex = _body
+      data, _status_code, _headers = place_complex_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_complex, extra)
+      data
+    end
+
+    # Place complex order
+    #
+    # Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+    # Only supported on certain brokerages.
+    # 
+    # - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+    # - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+    # - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+    #
+    # @param type [ManualTradeFormComplexType] The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
+    # @param orders [Array<ComplexOrderLeg>] The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param client_order_id [String] An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+    # @param body [ManualTradeFormComplex] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_complex_order_with_http_info(type:, orders:, account_id:, user_id:, user_secret:, client_order_id: SENTINEL, extra: {})
+      _body = {}
+      _body[:type] = type if type != SENTINEL
+      _body[:orders] = orders if orders != SENTINEL
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
+      manual_trade_form_complex = _body
+      place_complex_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_complex, extra)
+    end
+
+    # Place complex order
+    # Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param manual_trade_form_complex [ManualTradeFormComplex] 
+    # @param [Hash] opts the optional parameters
+    # @return [ComplexOrderResponse]
+    private def place_complex_order_impl(account_id, user_id, user_secret, manual_trade_form_complex, opts = {})
+      data, _status_code, _headers = place_complex_order_with_http_info(account_id, user_id, user_secret, manual_trade_form_complex, opts)
+      data
+    end
+
+    # Place complex order
+    # Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param manual_trade_form_complex [ManualTradeFormComplex] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(ComplexOrderResponse, Integer, Hash)>] ComplexOrderResponse data, response status code and response headers
+    private def place_complex_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_complex, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.place_complex_order ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_complex_order"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_complex_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_complex_order"
+      end
+      # verify the required parameter 'manual_trade_form_complex' is set
+      if @api_client.config.client_side_validation && manual_trade_form_complex.nil?
+        fail ArgumentError, "Missing the required parameter 'manual_trade_form_complex' when calling TradingApi.place_complex_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/complex'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(manual_trade_form_complex)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ComplexOrderResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.place_complex_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#place_complex_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Place crypto order
     #
     # Places an order in the specified account.

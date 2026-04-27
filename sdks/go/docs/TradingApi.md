@@ -12,6 +12,7 @@ Method | Path | Description
 [**GetUserAccountOptionQuotes**](TradingApi.md#GetUserAccountOptionQuotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 [**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
+[**PlaceComplexOrder**](TradingApi.md#PlaceComplexOrder) | **Post** /accounts/{accountId}/trading/complex | Place complex order
 [**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
 [**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
@@ -504,6 +505,61 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PlaceComplexOrder
+
+Place complex order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    
+    manualTradeFormComplex := *snaptrade.NewManualTradeFormComplex(
+        "OTO",
+        null,
+    )
+    manualTradeFormComplex.SetClientOrderId("my-order-123")
+    
+    request := client.TradingApi.PlaceComplexOrder(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+        manualTradeFormComplex,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceComplexOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `PlaceComplexOrder`: ComplexOrderResponse
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceComplexOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ComplexOrderResponse.PlaceComplexOrder.Type`: %v\n", *resp.Type)
+    fmt.Fprintf(os.Stdout, "Response from `ComplexOrderResponse.PlaceComplexOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
 }
 ```
 

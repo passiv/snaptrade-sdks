@@ -75,6 +75,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getUserAccountOptionQuotes`](#snaptradetradinggetuseraccountoptionquotes)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
+  * [`snaptrade.trading.placeComplexOrder`](#snaptradetradingplacecomplexorder)
   * [`snaptrade.trading.placeCryptoOrder`](#snaptradetradingplacecryptoorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
@@ -2296,6 +2297,61 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/bracket` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.placeComplexOrder`<a id="snaptradetradingplacecomplexorder"></a>
+
+Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+Only supported on certain brokerages.
+
+- **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+- **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+- **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+ComplexOrderResponse result = client
+        .trading
+        .placeComplexOrder(type, orders, accountId, userId, userSecret)
+        .clientOrderId(clientOrderId)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: `String`<a id="type-string"></a>
+
+The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
+
+##### orders: List<[`ComplexOrderLeg`](./src/main/java/com/snaptrade/client/model/ComplexOrderLeg.java)><a id="orders-list"></a>
+
+The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+The ID of the account to execute the trade on.
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### client_order_id: `String`<a id="client_order_id-string"></a>
+
+An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ComplexOrderResponse](./src/main/java/com/snaptrade/client/model/ComplexOrderResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/complex` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

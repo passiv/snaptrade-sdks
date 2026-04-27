@@ -71,6 +71,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.get_user_account_option_quotes`](#snaptradetradingget_user_account_option_quotes)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
+  * [`snaptrade.trading.place_complex_order`](#snaptradetradingplace_complex_order)
   * [`snaptrade.trading.place_crypto_order`](#snaptradetradingplace_crypto_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
@@ -2199,6 +2200,79 @@ Must be `null` if `notional_value` is provided.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/bracket` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.place_complex_order`<a id="snaptradetradingplace_complex_order"></a>
+
+Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+Only supported on certain brokerages.
+
+- **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+- **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+- **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.place_complex_order(
+  type: "OTO",
+  orders: [
+        {
+            "order_role" => "TRIGGER",
+            "action" => "BUY",
+            "instrument" => {
+                "symbol" => "AAPL",
+                "type" => "EQUITY",
+            },
+            "order_type" => "Market",
+            "units" => 10.5,
+            "time_in_force" => "Day",
+            "price" => 31.33,
+            "stop" => 29.5,
+        }
+    ],
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  client_order_id: "my-order-123",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: [`ManualTradeFormComplexType`](./lib/snaptrade/models/manual_trade_form_complex_type.rb)<a id="type-manualtradeformcomplextypelibsnaptrademodelsmanual_trade_form_complex_typerb"></a>
+The complex order type. - `OCO`: One Cancels the Other — two peer orders. -
+`OTO`: One Triggers the Other — a trigger order and a conditional order. -
+`OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer
+orders.
+
+##### orders: Array<[`ComplexOrderLeg`](./lib/snaptrade/models/complex_order_leg.rb)><a id="orders-array"></a>
+The orders that make up the complex order. Required counts and roles per type: -
+`OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER`
+and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
+
+##### account_id: `String`<a id="account_id-string"></a>
+The ID of the account to execute the trade on.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### client_order_id: `String`<a id="client_order_id-string"></a>
+An optional client-provided identifier for this complex order. Passed through to
+the brokerage and returned in the response.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ComplexOrderResponse](./lib/snaptrade/models/complex_order_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/complex` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

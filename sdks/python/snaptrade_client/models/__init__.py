@@ -60,6 +60,8 @@ from snaptrade_client.model.cancel_order_response_raw_response import CancelOrde
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
+from snaptrade_client.model.complex_order_leg import ComplexOrderLeg
+from snaptrade_client.model.complex_order_response import ComplexOrderResponse
 from snaptrade_client.model.crypto_order_form import CryptoOrderForm
 from snaptrade_client.model.crypto_order_preview import CryptoOrderPreview
 from snaptrade_client.model.crypto_order_preview_estimated_fee import CryptoOrderPreviewEstimatedFee
@@ -95,6 +97,7 @@ from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.model.manual_trade_balance import ManualTradeBalance
 from snaptrade_client.model.manual_trade_form import ManualTradeForm
 from snaptrade_client.model.manual_trade_form_bracket import ManualTradeFormBracket
+from snaptrade_client.model.manual_trade_form_complex import ManualTradeFormComplex
 from snaptrade_client.model.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
 from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm

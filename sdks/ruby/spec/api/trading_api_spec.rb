@@ -147,6 +147,21 @@ describe 'TradingApi' do
     end
   end
 
+  # unit tests for place_complex_order
+  # Place complex order
+  # Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+  # @param account_id The ID of the account to execute the trade on.
+  # @param user_id 
+  # @param user_secret 
+  # @param manual_trade_form_complex 
+  # @param [Hash] opts the optional parameters
+  # @return [ComplexOrderResponse]
+  describe 'place_complex_order test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for place_crypto_order
   # Place crypto order
   # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
