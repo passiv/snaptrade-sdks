@@ -2656,6 +2656,71 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
       x-content-type: application/json
       x-accepts: application/json
+  /accounts/{accountId}/trading/complex:
+    post:
+      description: |
+        Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+        Only supported on certain brokerages.
+
+        - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+        - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+        - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+      operationId: Trading_placeComplexOrder
+      parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormComplexRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplexOrderResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place complex order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex
+      x-content-type: application/json
+      x-accepts: application/json
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -3377,6 +3442,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ManualTradeFormBracket'
+      required: true
+    ManualTradeFormComplexRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ManualTradeFormComplex'
       required: true
     ManualTradeReplaceFormRequestBody:
       content:
@@ -8249,6 +8320,164 @@ components:
             \ represents the number of contracts to buy or sell. (e.g., 1 contract\
             \ = 100 shares)."
           nullable: true
+    ComplexOrderLeg:
+      additionalProperties: true
+      description: A single leg within a complex order.
+      example:
+        order_role: TRIGGER
+        time_in_force: Day
+        stop: 29.5
+        price: 31.33
+        action: null
+        instrument:
+          symbol: AAPL
+          type: EQUITY
+        units: 10.5
+        order_type: Market
+      properties:
+        order_role:
+          description: The role of this leg within the complex order.
+          enum:
+          - TRIGGER
+          - CONDITIONAL
+          - PEER
+          example: TRIGGER
+          type: string
+          x-konfig-original-example: TRIGGER
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-order_role
+        action:
+          $ref: '#/components/schemas/ActionStrict'
+        instrument:
+          $ref: '#/components/schemas/TradingInstrument'
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        units:
+          description: Number of shares for the order. This can be a decimal for fractional
+            orders. Must be `null` if `notional_value` is provided.
+          example: 10.5
+          type: number
+          x-konfig-original-example: 10.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price. Required when `order_type` is `Limit` or `StopLimit`.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-price
+        stop:
+          description: The stop trigger price. Required when `order_type` is `Stop`
+            or `StopLimit`.
+          example: 29.5
+          nullable: true
+          type: number
+          x-konfig-original-example: 29.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-stop
+      required:
+      - action
+      - instrument
+      - order_role
+      - order_type
+      - time_in_force
+      - units
+      type: object
+    ManualTradeFormComplex:
+      description: "Request body for placing a complex conditional order (OCO, OTO,\
+        \ or OTOCO)."
+      example:
+        client_order_id: my-order-123
+        orders:
+        - order_role: TRIGGER
+          time_in_force: Day
+          stop: 29.5
+          price: 31.33
+          action: null
+          instrument:
+            symbol: AAPL
+            type: EQUITY
+          units: 10.5
+          order_type: Market
+        - order_role: TRIGGER
+          time_in_force: Day
+          stop: 29.5
+          price: 31.33
+          action: null
+          instrument:
+            symbol: AAPL
+            type: EQUITY
+          units: 10.5
+          order_type: Market
+        type: OTO
+      properties:
+        type:
+          description: |
+            The complex order type.
+            - `OCO`: One Cancels the Other — two peer orders.
+            - `OTO`: One Triggers the Other — a trigger order and a conditional order.
+            - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders.
+          enum:
+          - OCO
+          - OTO
+          - OTOCO
+          example: OTO
+          type: string
+          x-konfig-original-example: OTO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-type
+        orders:
+          description: |
+            The orders that make up the complex order. Required counts and roles per type:
+            - `OCO`: exactly 2 orders, both `PEER`
+            - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL`
+            - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
+          items:
+            $ref: '#/components/schemas/ComplexOrderLeg'
+          type: array
+        client_order_id:
+          description: An optional client-provided identifier for this complex order.
+            Passed through to the brokerage and returned in the response.
+          example: my-order-123
+          nullable: true
+          type: string
+          x-konfig-original-example: my-order-123
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-client_order_id
+      required:
+      - orders
+      - type
+      type: object
+    ComplexOrderResponse:
+      additionalProperties: true
+      description: |
+        Response returned after successfully placing a complex order. AccountOrderRecord rows
+        for the legs are not created synchronously — they're hydrated by the next brokerage sync,
+        and can be queried later using the returned `brokerage_group_order_id`.
+      example:
+        brokerage_group_order_id: "1234567890"
+        type: OTO
+      properties:
+        type:
+          description: The complex order type that was placed.
+          enum:
+          - OCO
+          - OTO
+          - OTOCO
+          example: OTO
+          type: string
+          x-konfig-original-example: OTO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderResponse-properties-type
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all legs of this complex order together.
+            Each leg will eventually appear as a separate AccountOrderRecord sharing this value.
+            May be null if the brokerage does not return a group identifier.
+          example: "1234567890"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1234567890"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderResponse-properties-brokerage_group_order_id
+      type: object
+      x-konfig-is-used-in-successful-response: true
     ManualTradeFormBracket:
       description: Inputs for placing an order with the brokerage.
       example:
@@ -11329,6 +11558,34 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-order_role:
+      example: TRIGGER
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-price:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-stop:
+      example: 29.5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-type:
+      example: OTO
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-client_order_id:
+      example: my-order-123
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ComplexOrderResponse-properties-type:
+      example: OTO
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ComplexOrderResponse-properties-brokerage_group_order_id:
+      example: "1234567890"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price:
       example: 31.33
       type: number
@@ -13071,6 +13328,58 @@ components:
       - brokerage_order_id
       - order_type
       - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        type:
+          description: |
+            The complex order type.
+            - `OCO`: One Cancels the Other — two peer orders.
+            - `OTO`: One Triggers the Other — a trigger order and a conditional order.
+            - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders.
+          enum:
+          - OCO
+          - OTO
+          - OTOCO
+          example: OTO
+          type: string
+          x-konfig-original-example: OTO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-type
+        orders:
+          description: |
+            The orders that make up the complex order. Required counts and roles per type:
+            - `OCO`: exactly 2 orders, both `PEER`
+            - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL`
+            - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
+          items:
+            $ref: '#/components/schemas/ComplexOrderLeg'
+          type: array
+        client_order_id:
+          description: An optional client-provided identifier for this complex order.
+            Passed through to the brokerage and returned in the response.
+          example: my-order-123
+          nullable: true
+          type: string
+          x-konfig-original-example: my-order-123
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-client_order_id
+      required:
+      - accountId
+      - orders
+      - type
       - userId
       - userSecret
       type: object

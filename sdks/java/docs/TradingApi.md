@@ -12,6 +12,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getUserAccountOptionQuotes**](TradingApi.md#getUserAccountOptionQuotes) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
 | [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
+| [**placeComplexOrder**](TradingApi.md#placeComplexOrder) | **POST** /accounts/{accountId}/trading/complex | Place complex order |
 | [**placeCryptoOrder**](TradingApi.md#placeCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place equity order |
 | [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place option order |
@@ -900,6 +901,111 @@ public class Example {
 ### Return type
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Unexpected Error |  -  |
+
+<a name="placeComplexOrder"></a>
+# **placeComplexOrder**
+> ComplexOrderResponse placeComplexOrder(accountId, userId, userSecret, manualTradeFormComplex).execute();
+
+Place complex order
+
+Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String type = "OCO"; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
+    List<ComplexOrderLeg> orders = Arrays.asList(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
+    UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    String clientOrderId = "clientOrderId_example"; // An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+    try {
+      ComplexOrderResponse result = client
+              .trading
+              .placeComplexOrder(type, orders, accountId, userId, userSecret)
+              .clientOrderId(clientOrderId)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getType());
+      System.out.println(result.getBrokerageGroupOrderId());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeComplexOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<ComplexOrderResponse> response = client
+              .trading
+              .placeComplexOrder(type, orders, accountId, userId, userSecret)
+              .clientOrderId(clientOrderId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeComplexOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**| The ID of the account to execute the trade on. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **manualTradeFormComplex** | [**ManualTradeFormComplex**](ManualTradeFormComplex.md)|  | |
+
+### Return type
+
+[**ComplexOrderResponse**](ComplexOrderResponse.md)
 
 ### Authorization
 

@@ -29,6 +29,10 @@ import { ActionStrictWithOptions } from '../models';
 // @ts-ignore
 import { CancelOrderResponse } from '../models';
 // @ts-ignore
+import { ComplexOrderLeg } from '../models';
+// @ts-ignore
+import { ComplexOrderResponse } from '../models';
+// @ts-ignore
 import { CryptoOrderForm } from '../models';
 // @ts-ignore
 import { CryptoOrderPreview } from '../models';
@@ -42,6 +46,8 @@ import { ManualTradeAndImpact } from '../models';
 import { ManualTradeForm } from '../models';
 // @ts-ignore
 import { ManualTradeFormBracket } from '../models';
+// @ts-ignore
+import { ManualTradeFormComplex } from '../models';
 // @ts-ignore
 import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
@@ -648,6 +654,76 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormBracket, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * @summary Place complex order
+         * @param {string} accountId The ID of the account to execute the trade on.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeFormComplex} manualTradeFormComplex 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeComplexOrder: async (accountId: string, userId: string, userSecret: string, manualTradeFormComplex: ManualTradeFormComplex, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('placeComplexOrder', 'accountId', accountId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('placeComplexOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('placeComplexOrder', 'userSecret', userSecret)
+            // verify required parameter 'manualTradeFormComplex' is not null or undefined
+            assertParamExists('placeComplexOrder', 'manualTradeFormComplex', manualTradeFormComplex)
+            const localVarPath = `/accounts/{accountId}/trading/complex`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: manualTradeFormComplex,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/complex',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormComplex, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1277,6 +1353,22 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * @summary Place complex order
+         * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ComplexOrderResponse>> {
+            const manualTradeFormComplex: ManualTradeFormComplex = {
+                type: requestParameters.type,
+                orders: requestParameters.orders,
+                client_order_id: requestParameters.client_order_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeComplexOrder(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, manualTradeFormComplex, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
          * @summary Place crypto order
          * @param {TradingApiPlaceCryptoOrderRequest} requestParameters Request parameters.
@@ -1499,6 +1591,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.placeBracketOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * @summary Place complex order
+         * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest, options?: AxiosRequestConfig): AxiosPromise<ComplexOrderResponse> {
+            return localVarFp.placeComplexOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -1835,6 +1937,36 @@ export type TradingApiPlaceBracketOrderRequest = {
 } & ManualTradeFormBracket
 
 /**
+ * Request parameters for placeComplexOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiPlaceComplexOrderRequest
+ */
+export type TradingApiPlaceComplexOrderRequest = {
+    
+    /**
+    * The ID of the account to execute the trade on.
+    * @type {string}
+    * @memberof TradingApiPlaceComplexOrder
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceComplexOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceComplexOrder
+    */
+    readonly userSecret: string
+    
+} & ManualTradeFormComplex
+
+/**
  * Request parameters for placeCryptoOrder operation in TradingApi.
  * @export
  * @interface TradingApiPlaceCryptoOrderRequest
@@ -2153,6 +2285,18 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).placeBracketOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+     * @summary Place complex order
+     * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeComplexOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

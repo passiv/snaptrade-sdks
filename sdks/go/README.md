@@ -119,6 +119,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**GetUserAccountOptionQuotes**](docs/TradingApi.md#getuseraccountoptionquotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 *TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
+*TradingApi* | [**PlaceComplexOrder**](docs/TradingApi.md#placecomplexorder) | **Post** /accounts/{accountId}/trading/complex | Place complex order
 *TradingApi* | [**PlaceCryptoOrder**](docs/TradingApi.md#placecryptoorder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place equity order
 *TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **Post** /accounts/{accountId}/trading/options | Place option order
@@ -176,6 +177,8 @@ Class | Method | HTTP request | Description
  - [BrokerageType](docs/BrokerageType.md)
  - [CancelOrderResponse](docs/CancelOrderResponse.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
+ - [ComplexOrderLeg](docs/ComplexOrderLeg.md)
+ - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
  - [CryptoOrderForm](docs/CryptoOrderForm.md)
  - [CryptoOrderPreview](docs/CryptoOrderPreview.md)
  - [CryptoOrderPreviewEstimatedFee](docs/CryptoOrderPreviewEstimatedFee.md)
@@ -198,6 +201,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeBalance](docs/ManualTradeBalance.md)
  - [ManualTradeForm](docs/ManualTradeForm.md)
  - [ManualTradeFormBracket](docs/ManualTradeFormBracket.md)
+ - [ManualTradeFormComplex](docs/ManualTradeFormComplex.md)
  - [ManualTradeFormNotionalValue](docs/ManualTradeFormNotionalValue.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)

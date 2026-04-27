@@ -22,6 +22,8 @@ import com.snaptrade.client.model.ActionStrict;
 import com.snaptrade.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
 import com.snaptrade.client.model.CancelOrderResponse;
+import com.snaptrade.client.model.ComplexOrderLeg;
+import com.snaptrade.client.model.ComplexOrderResponse;
 import com.snaptrade.client.model.CryptoOrderForm;
 import com.snaptrade.client.model.CryptoOrderPreview;
 import com.snaptrade.client.model.CryptoTradingInstrument;
@@ -29,6 +31,7 @@ import com.snaptrade.client.model.CryptocurrencyPairQuote;
 import com.snaptrade.client.model.ManualTradeAndImpact;
 import com.snaptrade.client.model.ManualTradeForm;
 import com.snaptrade.client.model.ManualTradeFormBracket;
+import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
 import com.snaptrade.client.model.ManualTradeReplaceForm;
 import com.snaptrade.client.model.MlegLeg;
@@ -246,6 +249,27 @@ public class TradingApiTest {
                 .price(price)
                 .stop(stop)
                 .units(units)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Place complex order
+     *
+     * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeComplexOrderTest() throws ApiException {
+        String type = null;
+        List<ComplexOrderLeg> orders = null;
+        UUID accountId = null;
+        String userId = null;
+        String userSecret = null;
+        String clientOrderId = null;
+        ComplexOrderResponse response = api.placeComplexOrder(type, orders, accountId, userId, userSecret)
+                .clientOrderId(clientOrderId)
                 .execute();
         // TODO: test validations
     }

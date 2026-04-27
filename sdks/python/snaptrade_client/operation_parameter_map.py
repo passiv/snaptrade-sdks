@@ -708,6 +708,28 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/complex-POST': {
+        'parameters': [
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'orders'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'client_order_id'
+            },
+        ]
+    },
     '/accounts/{accountId}/trading/crypto-POST': {
         'parameters': [
             {
