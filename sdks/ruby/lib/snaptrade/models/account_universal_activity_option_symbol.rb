@@ -56,7 +56,7 @@ module SnapTrade
       {
         :'id' => :'String',
         :'ticker' => :'String',
-        :'option_type' => :'OptionType',
+        :'option_type' => :'OptionsSymbolOptionType',
         :'strike_price' => :'Float',
         :'expiration_date' => :'Date',
         :'is_mini_option' => :'Boolean',

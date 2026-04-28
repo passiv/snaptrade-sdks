@@ -30,7 +30,7 @@ type AccountUniversalActivitySymbol struct {
 	Type *SecurityType `json:"type,omitempty"`
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
-	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
+	FigiInstrument NullableStockInstrumentFigiInstrument `json:"figi_instrument,omitempty"`
 }
 
 // NewAccountUniversalActivitySymbol instantiates a new AccountUniversalActivitySymbol object
@@ -327,9 +327,9 @@ func (o *AccountUniversalActivitySymbol) UnsetFigiCode() {
 }
 
 // GetFigiInstrument returns the FigiInstrument field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountUniversalActivitySymbol) GetFigiInstrument() SymbolFigiInstrument {
+func (o *AccountUniversalActivitySymbol) GetFigiInstrument() StockInstrumentFigiInstrument {
 	if o == nil || isNil(o.FigiInstrument.Get()) {
-		var ret SymbolFigiInstrument
+		var ret StockInstrumentFigiInstrument
 		return ret
 	}
 	return *o.FigiInstrument.Get()
@@ -338,7 +338,7 @@ func (o *AccountUniversalActivitySymbol) GetFigiInstrument() SymbolFigiInstrumen
 // GetFigiInstrumentOk returns a tuple with the FigiInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountUniversalActivitySymbol) GetFigiInstrumentOk() (*SymbolFigiInstrument, bool) {
+func (o *AccountUniversalActivitySymbol) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -354,8 +354,8 @@ func (o *AccountUniversalActivitySymbol) HasFigiInstrument() bool {
 	return false
 }
 
-// SetFigiInstrument gets a reference to the given NullableSymbolFigiInstrument and assigns it to the FigiInstrument field.
-func (o *AccountUniversalActivitySymbol) SetFigiInstrument(v SymbolFigiInstrument) {
+// SetFigiInstrument gets a reference to the given NullableStockInstrumentFigiInstrument and assigns it to the FigiInstrument field.
+func (o *AccountUniversalActivitySymbol) SetFigiInstrument(v StockInstrumentFigiInstrument) {
 	o.FigiInstrument.Set(&v)
 }
 // SetFigiInstrumentNil sets the value for FigiInstrument to be an explicit nil

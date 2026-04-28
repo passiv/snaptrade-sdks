@@ -45,6 +45,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.experimentalEndpoints.getAccountBalanceHistory`](#snaptradeexperimentalendpointsgetaccountbalancehistory)
+  * [`snaptrade.experimentalEndpoints.getAllAccountPositions`](#snaptradeexperimentalendpointsgetallaccountpositions)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
@@ -1302,6 +1303,59 @@ const getAccountBalanceHistoryResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balanceHistory` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.getAllAccountPositions`<a id="snaptradeexperimentalendpointsgetallaccountpositions"></a>
+
+Returns a paginated list of all positions in the specified account.
+
+The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getAllAccountPositionsResponse =
+  await snaptrade.experimentalEndpoints.getAllAccountPositions({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    page: 1,
+    pageSize: 100,
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### page: `number`<a id="page-number"></a>
+
+The page number to return. Defaults to 1.
+
+##### pageSize: `number`<a id="pagesize-number"></a>
+
+The number of positions to return per page. Defaults to 100 with a maximum of 1000.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountPositionsResponse](./models/all-account-positions-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/positions/all` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

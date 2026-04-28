@@ -365,6 +365,25 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/positions/all-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'page'
+            },
+            {
+                'name': 'page_size'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         'parameters': [
             {

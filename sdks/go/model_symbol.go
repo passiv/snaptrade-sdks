@@ -30,7 +30,7 @@ type Symbol struct {
 	Type *SecurityType `json:"type,omitempty"`
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
-	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
+	FigiInstrument NullableStockInstrumentFigiInstrument `json:"figi_instrument,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -330,9 +330,9 @@ func (o *Symbol) UnsetFigiCode() {
 }
 
 // GetFigiInstrument returns the FigiInstrument field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Symbol) GetFigiInstrument() SymbolFigiInstrument {
+func (o *Symbol) GetFigiInstrument() StockInstrumentFigiInstrument {
 	if o == nil || isNil(o.FigiInstrument.Get()) {
-		var ret SymbolFigiInstrument
+		var ret StockInstrumentFigiInstrument
 		return ret
 	}
 	return *o.FigiInstrument.Get()
@@ -341,7 +341,7 @@ func (o *Symbol) GetFigiInstrument() SymbolFigiInstrument {
 // GetFigiInstrumentOk returns a tuple with the FigiInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Symbol) GetFigiInstrumentOk() (*SymbolFigiInstrument, bool) {
+func (o *Symbol) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -357,8 +357,8 @@ func (o *Symbol) HasFigiInstrument() bool {
 	return false
 }
 
-// SetFigiInstrument gets a reference to the given NullableSymbolFigiInstrument and assigns it to the FigiInstrument field.
-func (o *Symbol) SetFigiInstrument(v SymbolFigiInstrument) {
+// SetFigiInstrument gets a reference to the given NullableStockInstrumentFigiInstrument and assigns it to the FigiInstrument field.
+func (o *Symbol) SetFigiInstrument(v StockInstrumentFigiInstrument) {
 	o.FigiInstrument.Set(&v)
 }
 // SetFigiInstrumentNil sets the value for FigiInstrument to be an explicit nil

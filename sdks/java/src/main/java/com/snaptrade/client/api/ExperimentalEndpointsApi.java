@@ -4,6 +4,7 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -18,6 +19,11 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
     }
     public class GetAccountBalanceHistoryRequestBuilder extends GetAccountBalanceHistoryRequestBuilderGenerated {
         public GetAccountBalanceHistoryRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
+    public class GetAllAccountPositionsRequestBuilder extends GetAllAccountPositionsRequestBuilderGenerated {
+        public GetAllAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
         }
     }

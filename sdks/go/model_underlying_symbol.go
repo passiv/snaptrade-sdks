@@ -30,7 +30,7 @@ type UnderlyingSymbol struct {
 	Type *UnderlyingSymbolType `json:"type,omitempty"`
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
-	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
+	FigiInstrument NullableStockInstrumentFigiInstrument `json:"figi_instrument,omitempty"`
 	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
 	// Deprecated
 	Currencies []Currency `json:"currencies,omitempty"`
@@ -333,9 +333,9 @@ func (o *UnderlyingSymbol) UnsetFigiCode() {
 }
 
 // GetFigiInstrument returns the FigiInstrument field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UnderlyingSymbol) GetFigiInstrument() SymbolFigiInstrument {
+func (o *UnderlyingSymbol) GetFigiInstrument() StockInstrumentFigiInstrument {
 	if o == nil || isNil(o.FigiInstrument.Get()) {
-		var ret SymbolFigiInstrument
+		var ret StockInstrumentFigiInstrument
 		return ret
 	}
 	return *o.FigiInstrument.Get()
@@ -344,7 +344,7 @@ func (o *UnderlyingSymbol) GetFigiInstrument() SymbolFigiInstrument {
 // GetFigiInstrumentOk returns a tuple with the FigiInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UnderlyingSymbol) GetFigiInstrumentOk() (*SymbolFigiInstrument, bool) {
+func (o *UnderlyingSymbol) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -360,8 +360,8 @@ func (o *UnderlyingSymbol) HasFigiInstrument() bool {
 	return false
 }
 
-// SetFigiInstrument gets a reference to the given NullableSymbolFigiInstrument and assigns it to the FigiInstrument field.
-func (o *UnderlyingSymbol) SetFigiInstrument(v SymbolFigiInstrument) {
+// SetFigiInstrument gets a reference to the given NullableStockInstrumentFigiInstrument and assigns it to the FigiInstrument field.
+func (o *UnderlyingSymbol) SetFigiInstrument(v StockInstrumentFigiInstrument) {
 	o.FigiInstrument.Set(&v)
 }
 // SetFigiInstrumentNil sets the value for FigiInstrument to be an explicit nil

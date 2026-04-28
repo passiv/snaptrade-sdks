@@ -120,6 +120,147 @@ module SnapTrade
     end
 
 
+    # List all account positions
+    #
+    # Returns a paginated list of all positions in the specified account.
+    # 
+    # The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+    # 
+    # Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+    # 
+    # If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param page [Integer] The page number to return. Defaults to 1.
+    # @param page_size [Integer] The number of positions to return per page. Defaults to 100 with a maximum of 1000.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_all_account_positions(user_id:, user_secret:, account_id:, page: SENTINEL, page_size: SENTINEL, extra: {})
+      extra[:page] = page if page != SENTINEL
+      extra[:page_size] = page_size if page_size != SENTINEL
+      data, _status_code, _headers = get_all_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
+      data
+    end
+
+    # List all account positions
+    #
+    # Returns a paginated list of all positions in the specified account.
+    # 
+    # The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+    # 
+    # Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+    # 
+    # If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param page [Integer] The page number to return. Defaults to 1.
+    # @param page_size [Integer] The number of positions to return per page. Defaults to 100 with a maximum of 1000.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_all_account_positions_with_http_info(user_id:, user_secret:, account_id:, page: SENTINEL, page_size: SENTINEL, extra: {})
+      extra[:page] = page if page != SENTINEL
+      extra[:page_size] = page_size if page_size != SENTINEL
+      get_all_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
+    end
+
+    # List all account positions
+    # Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page The page number to return. Defaults to 1.
+    # @option opts [Integer] :page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000.
+    # @return [AllAccountPositionsResponse]
+    private def get_all_account_positions_impl(user_id, user_secret, account_id, opts = {})
+      data, _status_code, _headers = get_all_account_positions_with_http_info(user_id, user_secret, account_id, opts)
+      data
+    end
+
+    # List all account positions
+    # Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :page The page number to return. Defaults to 1.
+    # @option opts [Integer] :page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000.
+    # @return [Array<(AllAccountPositionsResponse, Integer, Hash)>] AllAccountPositionsResponse data, response status code and response headers
+    private def get_all_account_positions_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.get_all_account_positions ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.get_all_account_positions"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.get_all_account_positions"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ExperimentalEndpointsApi.get_all_account_positions"
+      end
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ExperimentalEndpointsApi.get_all_account_positions, must be greater than or equal to 1.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ExperimentalEndpointsApi.get_all_account_positions, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page_size'].nil? && opts[:'page_size'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page_size"]" when calling ExperimentalEndpointsApi.get_all_account_positions, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/accounts/{accountId}/positions/all'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'page_size'] = opts[:'page_size'] if !opts[:'page_size'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AllAccountPositionsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.get_all_account_positions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#get_all_account_positions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get account order detail (V2)
     #
     # Returns the detail of a single order using the brokerage order ID provided as a path parameter.
