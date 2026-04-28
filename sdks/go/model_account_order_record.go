@@ -20,6 +20,10 @@ import (
 type AccountOrderRecord struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
+	// The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+	BrokerageGroupOrderId NullableString `json:"brokerage_group_order_id,omitempty"`
+	// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+	OrderRole NullableString `json:"order_role,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
 	UniversalSymbol *AccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
 	OptionSymbol *AccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
@@ -110,6 +114,90 @@ func (o *AccountOrderRecord) HasBrokerageOrderId() bool {
 // SetBrokerageOrderId gets a reference to the given string and assigns it to the BrokerageOrderId field.
 func (o *AccountOrderRecord) SetBrokerageOrderId(v string) {
 	o.BrokerageOrderId = &v
+}
+
+// GetBrokerageGroupOrderId returns the BrokerageGroupOrderId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecord) GetBrokerageGroupOrderId() string {
+	if o == nil || isNil(o.BrokerageGroupOrderId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BrokerageGroupOrderId.Get()
+}
+
+// GetBrokerageGroupOrderIdOk returns a tuple with the BrokerageGroupOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecord) GetBrokerageGroupOrderIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.BrokerageGroupOrderId.Get(), o.BrokerageGroupOrderId.IsSet()
+}
+
+// HasBrokerageGroupOrderId returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasBrokerageGroupOrderId() bool {
+	if o != nil && o.BrokerageGroupOrderId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBrokerageGroupOrderId gets a reference to the given NullableString and assigns it to the BrokerageGroupOrderId field.
+func (o *AccountOrderRecord) SetBrokerageGroupOrderId(v string) {
+	o.BrokerageGroupOrderId.Set(&v)
+}
+// SetBrokerageGroupOrderIdNil sets the value for BrokerageGroupOrderId to be an explicit nil
+func (o *AccountOrderRecord) SetBrokerageGroupOrderIdNil() {
+	o.BrokerageGroupOrderId.Set(nil)
+}
+
+// UnsetBrokerageGroupOrderId ensures that no value is present for BrokerageGroupOrderId, not even an explicit nil
+func (o *AccountOrderRecord) UnsetBrokerageGroupOrderId() {
+	o.BrokerageGroupOrderId.Unset()
+}
+
+// GetOrderRole returns the OrderRole field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecord) GetOrderRole() string {
+	if o == nil || isNil(o.OrderRole.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OrderRole.Get()
+}
+
+// GetOrderRoleOk returns a tuple with the OrderRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecord) GetOrderRoleOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.OrderRole.Get(), o.OrderRole.IsSet()
+}
+
+// HasOrderRole returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasOrderRole() bool {
+	if o != nil && o.OrderRole.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderRole gets a reference to the given NullableString and assigns it to the OrderRole field.
+func (o *AccountOrderRecord) SetOrderRole(v string) {
+	o.OrderRole.Set(&v)
+}
+// SetOrderRoleNil sets the value for OrderRole to be an explicit nil
+func (o *AccountOrderRecord) SetOrderRoleNil() {
+	o.OrderRole.Set(nil)
+}
+
+// UnsetOrderRole ensures that no value is present for OrderRole, not even an explicit nil
+func (o *AccountOrderRecord) UnsetOrderRole() {
+	o.OrderRole.Unset()
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -954,6 +1042,12 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if !isNil(o.BrokerageOrderId) {
 		toSerialize["brokerage_order_id"] = o.BrokerageOrderId
 	}
+	if o.BrokerageGroupOrderId.IsSet() {
+		toSerialize["brokerage_group_order_id"] = o.BrokerageGroupOrderId.Get()
+	}
+	if o.OrderRole.IsSet() {
+		toSerialize["order_role"] = o.OrderRole.Get()
+	}
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
@@ -1039,6 +1133,8 @@ func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "brokerage_order_id")
+		delete(additionalProperties, "brokerage_group_order_id")
+		delete(additionalProperties, "order_role")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "universal_symbol")
 		delete(additionalProperties, "option_symbol")

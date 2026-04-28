@@ -21,7 +21,7 @@ class RequiredRateOfReturnObject(TypedDict):
 
 class OptionalRateOfReturnObject(TypedDict, total=False):
     # The timeframe this return percent is reflecting
-    timeframe: str
+    timeframe: Literal["ALL", "1Y", "YTD", "1M", "1W", "1D"]
 
     # The percent return of the portfolio, directly from the brokerage. 5.97 indicates a 5.97% return over the timeframe
     return_percent: typing.Union[int, float]

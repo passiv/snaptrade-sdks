@@ -29,6 +29,18 @@ export interface AccountOrderRecordV2 {
      */
     'brokerage_order_id'?: string;
     /**
+     * The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+     * @type {string}
+     * @memberof AccountOrderRecordV2
+     */
+    'brokerage_group_order_id'?: string | null;
+    /**
+     * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+     * @type {string}
+     * @memberof AccountOrderRecordV2
+     */
+    'order_role'?: AccountOrderRecordV2OrderRoleEnum;
+    /**
      * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
      * @type {AccountOrderRecordStatus}
      * @memberof AccountOrderRecordV2
@@ -95,4 +107,7 @@ export interface AccountOrderRecordV2 {
      */
     'legs'?: Array<AccountOrderRecordLeg>;
 }
+
+type AccountOrderRecordV2OrderRoleEnum = 'TRIGGER' | 'CONDITIONAL' | 'PEER'
+
 

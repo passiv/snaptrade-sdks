@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | Pointer to **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
+**BrokerageGroupOrderId** | Pointer to **NullableString** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  | [optional] 
+**OrderRole** | Pointer to **NullableString** | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  | [optional] 
 **Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
 **UniversalSymbol** | Pointer to [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | Pointer to [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
@@ -72,6 +74,76 @@ SetBrokerageOrderId sets BrokerageOrderId field to given value.
 
 HasBrokerageOrderId returns a boolean if a field has been set.
 
+### GetBrokerageGroupOrderId
+
+`func (o *AccountOrderRecord) GetBrokerageGroupOrderId() string`
+
+GetBrokerageGroupOrderId returns the BrokerageGroupOrderId field if non-nil, zero value otherwise.
+
+### GetBrokerageGroupOrderIdOk
+
+`func (o *AccountOrderRecord) GetBrokerageGroupOrderIdOk() (*string, bool)`
+
+GetBrokerageGroupOrderIdOk returns a tuple with the BrokerageGroupOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrokerageGroupOrderId
+
+`func (o *AccountOrderRecord) SetBrokerageGroupOrderId(v string)`
+
+SetBrokerageGroupOrderId sets BrokerageGroupOrderId field to given value.
+
+### HasBrokerageGroupOrderId
+
+`func (o *AccountOrderRecord) HasBrokerageGroupOrderId() bool`
+
+HasBrokerageGroupOrderId returns a boolean if a field has been set.
+
+### SetBrokerageGroupOrderIdNil
+
+`func (o *AccountOrderRecord) SetBrokerageGroupOrderIdNil(b bool)`
+
+ SetBrokerageGroupOrderIdNil sets the value for BrokerageGroupOrderId to be an explicit nil
+
+### UnsetBrokerageGroupOrderId
+`func (o *AccountOrderRecord) UnsetBrokerageGroupOrderId()`
+
+UnsetBrokerageGroupOrderId ensures that no value is present for BrokerageGroupOrderId, not even an explicit nil
+### GetOrderRole
+
+`func (o *AccountOrderRecord) GetOrderRole() string`
+
+GetOrderRole returns the OrderRole field if non-nil, zero value otherwise.
+
+### GetOrderRoleOk
+
+`func (o *AccountOrderRecord) GetOrderRoleOk() (*string, bool)`
+
+GetOrderRoleOk returns a tuple with the OrderRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderRole
+
+`func (o *AccountOrderRecord) SetOrderRole(v string)`
+
+SetOrderRole sets OrderRole field to given value.
+
+### HasOrderRole
+
+`func (o *AccountOrderRecord) HasOrderRole() bool`
+
+HasOrderRole returns a boolean if a field has been set.
+
+### SetOrderRoleNil
+
+`func (o *AccountOrderRecord) SetOrderRoleNil(b bool)`
+
+ SetOrderRoleNil sets the value for OrderRole to be an explicit nil
+
+### UnsetOrderRole
+`func (o *AccountOrderRecord) UnsetOrderRole()`
+
+UnsetOrderRole ensures that no value is present for OrderRole, not even an explicit nil
 ### GetStatus
 
 `func (o *AccountOrderRecord) GetStatus() AccountOrderRecordStatus`

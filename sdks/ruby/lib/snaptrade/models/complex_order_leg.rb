@@ -58,7 +58,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'order_role' => :'OrderRole',
+        :'order_role' => :'ComplexOrderLegOrderRole',
         :'action' => :'ActionStrict',
         :'instrument' => :'TradingInstrument',
         :'order_type' => :'OrderTypeStrict',

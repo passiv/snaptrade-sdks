@@ -32,6 +32,40 @@ namespace SnapTrade.Net.Model
     [DataContract(Name = "AccountOrderRecord")]
     public partial class AccountOrderRecord : IEquatable<AccountOrderRecord>, IValidatableObject
     {
+        /// <summary>
+        /// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+        /// </summary>
+        /// <value>The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OrderRoleEnum
+        {
+            /// <summary>
+            /// Enum TRIGGER for value: TRIGGER
+            /// </summary>
+            [EnumMember(Value = "TRIGGER")]
+            TRIGGER = 1,
+
+            /// <summary>
+            /// Enum CONDITIONAL for value: CONDITIONAL
+            /// </summary>
+            [EnumMember(Value = "CONDITIONAL")]
+            CONDITIONAL = 2,
+
+            /// <summary>
+            /// Enum PEER for value: PEER
+            /// </summary>
+            [EnumMember(Value = "PEER")]
+            PEER = 3
+
+        }
+
+
+        /// <summary>
+        /// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+        /// </summary>
+        /// <value>The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. </value>
+        [DataMember(Name = "order_role", EmitDefaultValue = true)]
+        public OrderRoleEnum? OrderRole { get; set; }
 
         /// <summary>
         /// Gets or Sets Status
@@ -42,6 +76,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>
         /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system..</param>
+        /// <param name="brokerageGroupOrderId">The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. .</param>
+        /// <param name="orderRole">The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. .</param>
         /// <param name="status">status.</param>
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
@@ -64,9 +100,11 @@ namespace SnapTrade.Net.Model
         /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
         /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="childBrokerageOrderIds">childBrokerageOrderIds.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), TrailingStopNullable trailingStop = default(TrailingStopNullable), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), TrailingStopNullable trailingStop = default(TrailingStopNullable), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
+            this.BrokerageGroupOrderId = brokerageGroupOrderId;
+            this.OrderRole = orderRole;
             this.Status = status;
             this.UniversalSymbol = universalSymbol;
             this.OptionSymbol = optionSymbol;
@@ -98,6 +136,13 @@ namespace SnapTrade.Net.Model
         /// <value>Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.</value>
         [DataMember(Name = "brokerage_order_id", EmitDefaultValue = false)]
         public string BrokerageOrderId { get; set; }
+
+        /// <summary>
+        /// The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+        /// </summary>
+        /// <value>The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. </value>
+        [DataMember(Name = "brokerage_group_order_id", EmitDefaultValue = true)]
+        public string BrokerageGroupOrderId { get; set; }
 
         /// <summary>
         /// Gets or Sets UniversalSymbol
@@ -257,6 +302,8 @@ namespace SnapTrade.Net.Model
             sb.Append("class AccountOrderRecord {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  BrokerageOrderId: ").Append(BrokerageOrderId).Append("\n");
+            sb.Append("  BrokerageGroupOrderId: ").Append(BrokerageGroupOrderId).Append("\n");
+            sb.Append("  OrderRole: ").Append(OrderRole).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  UniversalSymbol: ").Append(UniversalSymbol).Append("\n");
             sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
@@ -319,6 +366,15 @@ namespace SnapTrade.Net.Model
                     this.BrokerageOrderId == input.BrokerageOrderId ||
                     (this.BrokerageOrderId != null &&
                     this.BrokerageOrderId.Equals(input.BrokerageOrderId))
+                ) && base.Equals(input) && 
+                (
+                    this.BrokerageGroupOrderId == input.BrokerageGroupOrderId ||
+                    (this.BrokerageGroupOrderId != null &&
+                    this.BrokerageGroupOrderId.Equals(input.BrokerageGroupOrderId))
+                ) && base.Equals(input) && 
+                (
+                    this.OrderRole == input.OrderRole ||
+                    this.OrderRole.Equals(input.OrderRole)
                 ) && base.Equals(input) && 
                 (
                     this.Status == input.Status ||
@@ -445,6 +501,11 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.BrokerageOrderId.GetHashCode();
                 }
+                if (this.BrokerageGroupOrderId != null)
+                {
+                    hashCode = (hashCode * 59) + this.BrokerageGroupOrderId.GetHashCode();
+                }
+                hashCode = (hashCode * 59) + this.OrderRole.GetHashCode();
                 hashCode = (hashCode * 59) + this.Status.GetHashCode();
                 if (this.UniversalSymbol != null)
                 {

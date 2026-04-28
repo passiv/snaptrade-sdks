@@ -24,7 +24,7 @@ class OptionalOptionImpact(TypedDict, total=False):
     estimated_cash_change: str
 
     # Direction of the cash change. CREDIT means cash is received, DEBIT means cash is paid out, EVEN means no cash changes hands. UNKNOWN if the direction cannot be determined from the request.
-    cash_change_direction: typing.Optional[str]
+    cash_change_direction: typing.Optional[Literal["CREDIT", "DEBIT", "EVEN", "UNKNOWN"]]
 
     # Estimated total transaction fees and commissions for the order.
     estimated_fee_total: str

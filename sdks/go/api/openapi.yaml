@@ -4272,48 +4272,52 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_role: TRIGGER
+          stop_price: 12.5
+          trailing_stop: null
+          action: action
+          total_quantity: "100"
+          filled_quantity: "80"
+          option_symbol: null
+          order_type: Market
+          brokerage_group_order_id: "1234567890"
+          child_brokerage_order_ids: null
+          expiry_date: 2024-08-05T00:05:57.409Z
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
-          stop_price: 12.5
           quote_universal_symbol: null
-          trailing_stop: null
-          action: action
-          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
           open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_role: TRIGGER
+          stop_price: 12.5
+          trailing_stop: null
+          action: action
+          total_quantity: "100"
+          filled_quantity: "80"
+          option_symbol: null
+          order_type: Market
+          brokerage_group_order_id: "1234567890"
+          child_brokerage_order_ids: null
+          expiry_date: 2024-08-05T00:05:57.409Z
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
-          stop_price: 12.5
           quote_universal_symbol: null
-          trailing_stop: null
-          action: action
-          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
           open_quantity: "10"
           status: null
         account:
@@ -4390,48 +4394,52 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_role: TRIGGER
+          stop_price: 12.5
+          trailing_stop: null
+          action: action
+          total_quantity: "100"
+          filled_quantity: "80"
+          option_symbol: null
+          order_type: Market
+          brokerage_group_order_id: "1234567890"
+          child_brokerage_order_ids: null
+          expiry_date: 2024-08-05T00:05:57.409Z
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
-          stop_price: 12.5
           quote_universal_symbol: null
-          trailing_stop: null
-          action: action
-          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
           open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_role: TRIGGER
+          stop_price: 12.5
+          trailing_stop: null
+          action: action
+          total_quantity: "100"
+          filled_quantity: "80"
+          option_symbol: null
+          order_type: Market
+          brokerage_group_order_id: "1234567890"
+          child_brokerage_order_ids: null
+          expiry_date: 2024-08-05T00:05:57.409Z
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
-          stop_price: 12.5
           quote_universal_symbol: null
-          trailing_stop: null
-          action: action
-          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
           open_quantity: "10"
           status: null
       properties:
@@ -4503,25 +4511,27 @@ components:
       example:
         time_executed: 2024-08-05T00:05:57.409Z
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        child_brokerage_order_ids: null
         time_placed: 2024-07-30T22:51:49.746Z
-        expiry_date: 2024-08-05T00:05:57.409Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        order_role: TRIGGER
+        stop_price: 12.5
+        trailing_stop: null
+        action: action
+        total_quantity: "100"
+        filled_quantity: "80"
+        option_symbol: null
+        order_type: Market
+        brokerage_group_order_id: "1234567890"
+        child_brokerage_order_ids: null
+        expiry_date: 2024-08-05T00:05:57.409Z
         limit_price: 12.34
         quote_currency: null
         time_updated: 2024-08-05T00:05:57.409Z
         canceled_quantity: "10"
         time_in_force: time_in_force
         execution_price: 12.34
-        stop_price: 12.5
         quote_universal_symbol: null
-        trailing_stop: null
-        action: action
-        total_quantity: "100"
         universal_symbol: null
-        filled_quantity: "80"
-        option_symbol: null
-        order_type: Market
         open_quantity: "10"
         status: null
       properties:
@@ -4532,6 +4542,27 @@ components:
           type: string
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together.
+            Null for non-complex orders or when the brokerage does not return a group identifier.
+          example: "1234567890"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1234567890"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-brokerage_group_order_id
+        order_role:
+          description: |
+            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+          enum:
+          - TRIGGER
+          - CONDITIONAL
+          - PEER
+          example: TRIGGER
+          nullable: true
+          type: string
+          x-konfig-original-example: TRIGGER
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_role
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
         universal_symbol:
@@ -4738,11 +4769,16 @@ components:
       description: Contains a standardized list of account orders in the V2 format.
       example:
         orders:
-        - time_executed: 2024-08-05T00:05:57.409Z
+        - brokerage_group_order_id: "1234567890"
+          time_executed: 2024-08-05T00:05:57.409Z
+          time_placed: 2024-07-30T22:51:49.746Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          quote_currency: USD
+          order_role: TRIGGER
           time_in_force: DAY
           execution_price: 12.34
           stop_price: 12.5
-          time_placed: 2024-07-30T22:51:49.746Z
           legs:
           - execution_price: 12.34
             leg_id: leg_id
@@ -4771,16 +4807,18 @@ components:
             canceled_quantity: "1"
             status: ""
           trailing_stop: null
-          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_type: MARKET
-          limit_price: 12.34
-          quote_currency: USD
           status: null
-        - time_executed: 2024-08-05T00:05:57.409Z
+        - brokerage_group_order_id: "1234567890"
+          time_executed: 2024-08-05T00:05:57.409Z
+          time_placed: 2024-07-30T22:51:49.746Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          quote_currency: USD
+          order_role: TRIGGER
           time_in_force: DAY
           execution_price: 12.34
           stop_price: 12.5
-          time_placed: 2024-07-30T22:51:49.746Z
           legs:
           - execution_price: 12.34
             leg_id: leg_id
@@ -4809,10 +4847,7 @@ components:
             canceled_quantity: "1"
             status: ""
           trailing_stop: null
-          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_type: MARKET
-          limit_price: 12.34
-          quote_currency: USD
           status: null
       properties:
         orders:
@@ -4827,11 +4862,16 @@ components:
       additionalProperties: true
       description: Describes a single order in the standardized V2 format.
       example:
+        brokerage_group_order_id: "1234567890"
         time_executed: 2024-08-05T00:05:57.409Z
+        time_placed: 2024-07-30T22:51:49.746Z
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        limit_price: 12.34
+        quote_currency: USD
+        order_role: TRIGGER
         time_in_force: DAY
         execution_price: 12.34
         stop_price: 12.5
-        time_placed: 2024-07-30T22:51:49.746Z
         legs:
         - execution_price: 12.34
           leg_id: leg_id
@@ -4860,10 +4900,7 @@ components:
           canceled_quantity: "1"
           status: ""
         trailing_stop: null
-        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         order_type: MARKET
-        limit_price: 12.34
-        quote_currency: USD
         status: null
       properties:
         brokerage_order_id:
@@ -4873,6 +4910,27 @@ components:
           type: string
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together.
+            Null for non-complex orders or when the brokerage does not return a group identifier.
+          example: "1234567890"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1234567890"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-brokerage_group_order_id
+        order_role:
+          description: |
+            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+          enum:
+          - TRIGGER
+          - CONDITIONAL
+          - PEER
+          example: TRIGGER
+          nullable: true
+          type: string
+          x-konfig-original-example: TRIGGER
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_role
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
         order_type:
@@ -9387,48 +9445,52 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_role: TRIGGER
+          stop_price: 12.5
+          trailing_stop: null
+          action: action
+          total_quantity: "100"
+          filled_quantity: "80"
+          option_symbol: null
+          order_type: Market
+          brokerage_group_order_id: "1234567890"
+          child_brokerage_order_ids: null
+          expiry_date: 2024-08-05T00:05:57.409Z
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
-          stop_price: 12.5
           quote_universal_symbol: null
-          trailing_stop: null
-          action: action
-          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
           open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
-          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_role: TRIGGER
+          stop_price: 12.5
+          trailing_stop: null
+          action: action
+          total_quantity: "100"
+          filled_quantity: "80"
+          option_symbol: null
+          order_type: Market
+          brokerage_group_order_id: "1234567890"
+          child_brokerage_order_ids: null
+          expiry_date: 2024-08-05T00:05:57.409Z
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
-          stop_price: 12.5
           quote_universal_symbol: null
-          trailing_stop: null
-          action: action
-          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: "80"
-          option_symbol: null
-          order_type: Market
           open_quantity: "10"
           status: null
       properties:
@@ -10668,6 +10730,14 @@ components:
       example: 2024-07-30T22:51:49.746Z
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-brokerage_group_order_id:
+      example: "1234567890"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_role:
+      example: TRIGGER
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity:
       example: "100"
       type: string
@@ -10726,6 +10796,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountValueHistoryItem-properties-total_value:
       example: "15363.23"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-brokerage_group_order_id:
+      example: "1234567890"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_role:
+      example: TRIGGER
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_type:

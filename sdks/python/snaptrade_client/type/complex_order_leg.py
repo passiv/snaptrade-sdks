@@ -22,7 +22,7 @@ from snaptrade_client.type.trading_instrument import TradingInstrument
 
 class RequiredComplexOrderLeg(TypedDict):
     # The role of this leg within the complex order.
-    order_role: str
+    order_role: Literal["TRIGGER", "CONDITIONAL", "PEER"]
 
     action: ActionStrict
 
