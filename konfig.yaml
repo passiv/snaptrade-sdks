@@ -112,6 +112,8 @@ portal:
       get: true
     /authorizations/{authorizationId}/transactions/sync:
       post: true
+    /accounts/{accountId}/positions/all:
+      get: true
   hideOperations:
     /activities:
       get: true
@@ -162,6 +164,8 @@ portal:
     /authorizations/{authorizationId}:
       delete: true
     /accounts/{accountId}/balanceHistory:
+      get: true
+    /accounts/{accountId}/positions/all:
       get: true
   hideSecurity:
     - name: PartnerSignature
