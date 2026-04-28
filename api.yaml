@@ -607,6 +607,64 @@ paths:
                   $ref: "#/components/schemas/Position"
         default:
           description: Unexpected error
+  /accounts/{accountId}/positions/all:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List all account positions
+      operationId: AccountInformation_getAllAccountPositions
+      description: |
+        Returns a paginated list of all positions in the specified account.
+
+        The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+        Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          name: page
+          required: false
+          description: The page number to return. Defaults to 1.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 1
+        - in: query
+          name: page_size
+          required: false
+          description: The number of positions to return per page. Defaults to 100 with a maximum of 1000.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 1000
+            example: 100
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllAccountPositionsResponse"
+        default:
+          description: Unexpected error
   /accounts/{accountId}/orders:
     get:
       tags:
@@ -4361,6 +4419,399 @@ components:
           type: string
           description: The unique id for this specific tax lot
           example: "12345678"
+    AllAccountPositionsResponse:
+      description: A paginated list of all account positions.
+      type: object
+      properties:
+        count:
+          type: integer
+          description: The total number of positions available across all pages.
+          example: 2
+        next:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL for the next page of results, or `null` if there is no next page.
+          example: https://api.snaptrade.com/api/v1/accounts/917c8734-8470-4a3e-a18f-57c3f2ee6631/positions/all?page=2
+        previous:
+          type: string
+          format: uri
+          nullable: true
+          description: The URL for the previous page of results, or `null` if there is no previous page.
+        results:
+          type: array
+          description: Positions returned for the current page.
+          items:
+            $ref: "#/components/schemas/AccountPosition"
+      required:
+        - count
+        - next
+        - previous
+        - results
+    AccountPosition:
+      description: Describes a single position.
+      type: object
+      properties:
+        instrument:
+          $ref: "#/components/schemas/Instrument"
+        units:
+          type: string
+          format: decimal
+          nullable: true
+          description: The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions.
+          example: "10.5"
+        price:
+          type: string
+          format: decimal
+          nullable: true
+          description: Last known market price for the position.
+          example: "123.45"
+        cost_basis:
+          type: string
+          format: decimal
+          nullable: true
+          description: Book price or average purchase price for the position.
+          example: "118.2"
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the position `price` and `cost_basis`.
+          example: USD
+        cash_equivalent:
+          type: boolean
+          description: Present for stock positions that are also counted in cash balance or buying power.
+          example: false
+        tax_lots:
+          type: array
+          description: Present for stock positions when tax lot data is enabled for the account.
+          items:
+            $ref: "#/components/schemas/TaxLot"
+      required:
+        - instrument
+    Instrument:
+      description: Instrument metadata for a V2 position. Use `kind` to determine which schema is present.
+      oneOf:
+        - $ref: "#/components/schemas/StockInstrument"
+        - $ref: "#/components/schemas/EtfInstrument"
+        - $ref: "#/components/schemas/CryptoInstrument"
+        - $ref: "#/components/schemas/OtherInstrument"
+        - $ref: "#/components/schemas/FutureInstrument"
+        - $ref: "#/components/schemas/OptionInstrument"
+      discriminator:
+        propertyName: kind
+        mapping:
+          stock: "#/components/schemas/StockInstrument"
+          etf: "#/components/schemas/EtfInstrument"
+          crypto: "#/components/schemas/CryptoInstrument"
+          other: "#/components/schemas/OtherInstrument"
+          future: "#/components/schemas/FutureInstrument"
+          option: "#/components/schemas/OptionInstrument"
+    UnderlyingOptionInstrument:
+      description: The underlying instrument for an option.
+      oneOf:
+        - $ref: "#/components/schemas/StockInstrument"
+        - $ref: "#/components/schemas/EtfInstrument"
+        - $ref: "#/components/schemas/CryptoInstrument"
+        - $ref: "#/components/schemas/OtherInstrument"
+      discriminator:
+        propertyName: kind
+        mapping:
+          stock: "#/components/schemas/StockInstrument"
+          etf: "#/components/schemas/EtfInstrument"
+          crypto: "#/components/schemas/CryptoInstrument"
+          other: "#/components/schemas/OtherInstrument"
+    StockInstrument:
+      description: Security instrument metadata for stock positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - stock
+          example: stock
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: AAPL
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Apple Inc.
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+    EtfInstrument:
+      description: Security instrument metadata for ETF positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - etf
+          example: etf
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: AAPL
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Apple Inc.
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+    CryptoInstrument:
+      description: Security instrument metadata for crypto positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - crypto
+          example: crypto
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: AAPL
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Apple Inc.
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+    OtherInstrument:
+      description: Security instrument metadata for other mapped security positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - other
+          example: other
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: AAPL
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Apple Inc.
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+    FutureInstrument:
+      description: Future instrument metadata for a V2 position.
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - future
+          example: future
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the future instrument.
+          example: 2fef6a3c-4d3f-4a0a-b1fe-8c45a9c7da7f
+        symbol:
+          type: string
+          description: Display symbol for the future contract.
+          example: ESM26
+        root_symbol:
+          type: string
+          description: Root symbol for the future contract.
+          example: ES
+        expiration_code:
+          type: string
+          description: Exchange expiration code for the contract.
+          example: M26
+        expiration_date:
+          type: string
+          format: date
+          nullable: true
+          description: Expiration date of the contract.
+          example: "2024-09-20"
+        multiplier:
+          type: string
+          format: decimal
+          nullable: true
+          description: Multiplier for the future contract.
+          example: "50"
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the contract.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the contract.
+          example: XCME
+      required:
+        - kind
+        - id
+        - symbol
+        - root_symbol
+        - expiration_code
+    OptionInstrument:
+      description: Option instrument metadata for a V2 position.
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - option
+          example: option
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the option instrument.
+          example: 899e2697-1d38-4c07-91ee-c16a2b1ce5c9
+        symbol:
+          type: string
+          description: OCC symbol for the option contract.
+          example: AAPL  261218C00240000
+        option_type:
+          type: string
+          description: Whether the contract is a call or put.
+          enum:
+            - CALL
+            - PUT
+          example: CALL
+        strike_price:
+          type: string
+          format: decimal
+          description: Strike price for the option contract.
+          example: "240"
+        expiration_date:
+          type: string
+          format: date
+          description: Expiration date of the option contract.
+          example: "2026-12-18"
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the option contract.
+          example: AAPL Dec 18 2026 240 CALL
+        underlying:
+          $ref: "#/components/schemas/UnderlyingOptionInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - option_type
+        - strike_price
+        - expiration_date
+        - underlying
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object
