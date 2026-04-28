@@ -64,6 +64,10 @@ Your backend can now fetch and store the connection details and use them to make
 
 You can display the Connection Portal in your application using one of the following methods. Pick one method depending on platform and UX needs.
 
+:::info
+For React applications, we recommend using our `snaptrade-react` SDK which offers a seamless integration process. For installation and setup instructions, refer to [SnapTrade React SDK on npm](https://www.npmjs.com/package/snaptrade-react). The SDK provides built-in callbacks that allow you to use client-side window messages for monitoring successful connections or failures, ensuring a smoother user experience.
+:::
+
 ### Embedded iframe (recommended for web apps)
 
 Displays the portal within your application using an iframe.
@@ -93,10 +97,6 @@ const ConnectionPortalModal = ({ loginLink }) => (
   - Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages).
   - Your application is responsible for closing the iframe modal post connections.
   - If not using `snaptrade-react` SDK, you must handle responsive sizing and closing the modal. The SDK simplifies this.
-
-:::info
-For React applications, we recommend using our `snaptrade-react` SDK which offers a seamless integration process. For installation and setup instructions, refer to [SnapTrade React SDK on npm](https://www.npmjs.com/package/snaptrade-react). The SDK provides built-in callbacks that allow you to use client-side window messages for monitoring successful connections or failures, ensuring a smoother user experience.
-:::
 
 ### New Browser Tab
 
