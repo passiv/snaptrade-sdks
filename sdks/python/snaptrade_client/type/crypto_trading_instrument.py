@@ -21,7 +21,7 @@ class RequiredCryptoTradingInstrument(TypedDict):
     symbol: str
 
     # The instrument's type
-    type: str
+    type: Literal["CRYPTOCURRENCY", "CRYPTOCURRENCY_PAIR"]
 
 class OptionalCryptoTradingInstrument(TypedDict, total=False):
     pass

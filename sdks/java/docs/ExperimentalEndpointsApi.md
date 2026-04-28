@@ -260,6 +260,8 @@ public class Example {
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
+      System.out.println(result.getBrokerageGroupOrderId());
+      System.out.println(result.getOrderRole());
       System.out.println(result.getStatus());
       System.out.println(result.getOrderType());
       System.out.println(result.getTimeInForce());

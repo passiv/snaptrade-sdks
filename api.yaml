@@ -3446,6 +3446,23 @@ components:
       properties:
         brokerage_order_id:
           $ref: "#/components/schemas/BrokerageOrderID"
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together.
+            Null for non-complex orders or when the brokerage does not return a group identifier.
+          nullable: true
+          type: string
+          example: "1234567890"
+        order_role:
+          description: |
+            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+          nullable: true
+          type: string
+          enum:
+            - TRIGGER
+            - CONDITIONAL
+            - PEER
+          example: TRIGGER
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
         universal_symbol:
@@ -3594,6 +3611,23 @@ components:
       properties:
         brokerage_order_id:
           $ref: "#/components/schemas/BrokerageOrderID"
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together.
+            Null for non-complex orders or when the brokerage does not return a group identifier.
+          nullable: true
+          type: string
+          example: "1234567890"
+        order_role:
+          description: |
+            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+          nullable: true
+          type: string
+          enum:
+            - TRIGGER
+            - CONDITIONAL
+            - PEER
+          example: TRIGGER
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
         order_type:

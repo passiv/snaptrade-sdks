@@ -18,7 +18,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from snaptrade_client.type.underlying_option_instrument import UnderlyingOptionInstrument
 
 class RequiredOptionInstrument(TypedDict):
-    kind: str
+    kind: Literal["option"]
 
     # Unique identifier for the option instrument.
     id: str
@@ -27,7 +27,7 @@ class RequiredOptionInstrument(TypedDict):
     symbol: str
 
     # Whether the contract is a call or put.
-    option_type: str
+    option_type: Literal["CALL", "PUT"]
 
     # Strike price for the option contract.
     strike_price: str

@@ -150,6 +150,8 @@ func main() {
     // response from `GetUserAccountOrderDetailV2`: AccountOrderRecordV2
     fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetUserAccountOrderDetailV2`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.OrderType`: %v\n", *resp.OrderType)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.TimeInForce`: %v\n", *resp.TimeInForce)

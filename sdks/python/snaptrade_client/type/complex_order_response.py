@@ -21,7 +21,7 @@ class RequiredComplexOrderResponse(TypedDict):
 
 class OptionalComplexOrderResponse(TypedDict, total=False):
     # The complex order type that was placed.
-    type: str
+    type: Literal["OCO", "OTO", "OTOCO"]
 
     # The brokerage-assigned identifier that links all legs of this complex order together. Each leg will eventually appear as a separate AccountOrderRecord sharing this value. May be null if the brokerage does not return a group identifier. 
     brokerage_group_order_id: typing.Optional[str]

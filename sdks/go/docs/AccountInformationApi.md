@@ -277,6 +277,8 @@ func main() {
     // response from `GetUserAccountOrderDetail`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrderDetail`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -347,6 +349,8 @@ func main() {
     // response from `GetUserAccountOrders`: []AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrders`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OptionSymbol`: %v\n", *resp.OptionSymbol)

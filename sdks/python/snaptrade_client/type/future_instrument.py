@@ -17,7 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredFutureInstrument(TypedDict):
-    kind: str
+    kind: Literal["future"]
 
     # Unique identifier for the future instrument.
     id: str

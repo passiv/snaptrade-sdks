@@ -58,13 +58,13 @@ class OptionalAccount(TypedDict, total=False):
     opening_date: typing.Optional[datetime]
 
     # The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
-    status: typing.Optional[str]
+    status: typing.Optional[Literal["open", "closed", "archived", "unavailable"]]
 
     # The account type as provided by the brokerage
     raw_type: typing.Optional[str]
 
     # The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
-    account_category: typing.Optional[str]
+    account_category: typing.Optional[Literal["INVESTMENT", "DEPOSIT", "LOC"]]
 
     # WARNING: This property is deprecated
     meta: AccountMeta

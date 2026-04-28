@@ -6,6 +6,8 @@ Describes a single recent order in an account. Each record here represents a sin
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
+**BrokerageGroupOrderId** | **string** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  | [optional] 
+**OrderRole** | **string** | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  | [optional] 
 **Status** | **AccountOrderRecordStatus** |  | [optional] 
 **UniversalSymbol** | [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 

@@ -57,6 +57,22 @@ public class AccountOrderRecordNullableTest {
     }
 
     /**
+     * Test the property 'brokerageGroupOrderId'
+     */
+    @Test
+    public void brokerageGroupOrderIdTest() {
+        // TODO: test brokerageGroupOrderId
+    }
+
+    /**
+     * Test the property 'orderRole'
+     */
+    @Test
+    public void orderRoleTest() {
+        // TODO: test orderRole
+    }
+
+    /**
      * Test the property 'status'
      */
     @Test

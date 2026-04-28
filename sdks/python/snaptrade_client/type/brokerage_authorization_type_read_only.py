@@ -23,9 +23,9 @@ class RequiredBrokerageAuthorizationTypeReadOnly(TypedDict):
 class OptionalBrokerageAuthorizationTypeReadOnly(TypedDict, total=False):
     id: str
 
-    type: str
+    type: Literal["read", "trade"]
 
-    auth_type: str
+    auth_type: Literal["OAUTH", "SCRAPE", "UNOFFICIAL_API", "TOKEN"]
 
     brokerage: BrokerageAuthorizationTypeReadOnlyBrokerage
 

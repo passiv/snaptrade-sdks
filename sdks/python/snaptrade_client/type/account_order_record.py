@@ -29,6 +29,12 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     brokerage_order_id: str
 
+    # The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+    brokerage_group_order_id: typing.Optional[str]
+
+    # The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+    order_role: typing.Optional[Literal["TRIGGER", "CONDITIONAL", "PEER"]]
+
     status: AccountOrderRecordStatus
 
     # Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.

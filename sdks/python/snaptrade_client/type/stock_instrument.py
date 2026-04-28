@@ -19,7 +19,7 @@ from snaptrade_client.type.figi_instrument_nullable import FigiInstrumentNullabl
 
 class RequiredStockInstrument(TypedDict):
     # Type of security instrument.
-    kind: str
+    kind: Literal["stock"]
 
     # Unique identifier for the instrument.
     id: str
