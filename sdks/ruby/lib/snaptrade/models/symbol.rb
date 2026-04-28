@@ -67,7 +67,7 @@ module SnapTrade
         :'exchange' => :'SymbolExchange',
         :'type' => :'SecurityType',
         :'figi_code' => :'String',
-        :'figi_instrument' => :'SymbolFigiInstrument'
+        :'figi_instrument' => :'StockInstrumentFigiInstrument'
       }
     end
 

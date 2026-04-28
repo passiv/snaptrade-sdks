@@ -11,18 +11,42 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  class SymbolFigiInstrument
-    # This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
-    attr_accessor :figi_code
+  # Security instrument metadata for crypto positions.
+  class CryptoInstrument
+    # Type of security instrument.
+    attr_accessor :kind
 
-    # This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, `AAPL` has a different FIGI for each exchange/trading venue it is traded on. The `figi_share_class` is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
-    attr_accessor :figi_share_class
+    # Unique identifier for the instrument.
+    attr_accessor :id
+
+    # The formatted trading symbol for the security.
+    attr_accessor :symbol
+
+    # The raw symbol without any exchange suffix.
+    attr_accessor :raw_symbol
+
+    # Human-readable description of the security.
+    attr_accessor :description
+
+    # ISO-4217 currency code for the security listing.
+    attr_accessor :currency
+
+    # Exchange MIC code or exchange code for the security.
+    attr_accessor :exchange
+
+    attr_accessor :figi_instrument
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'figi_code' => :'figi_code',
-        :'figi_share_class' => :'figi_share_class'
+        :'kind' => :'kind',
+        :'id' => :'id',
+        :'symbol' => :'symbol',
+        :'raw_symbol' => :'raw_symbol',
+        :'description' => :'description',
+        :'currency' => :'currency',
+        :'exchange' => :'exchange',
+        :'figi_instrument' => :'figi_instrument'
       }
     end
 
@@ -34,47 +58,72 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'figi_code' => :'String',
-        :'figi_share_class' => :'String'
+        :'kind' => :'CryptoInstrumentKind',
+        :'id' => :'String',
+        :'symbol' => :'String',
+        :'raw_symbol' => :'String',
+        :'description' => :'String',
+        :'currency' => :'String',
+        :'exchange' => :'String',
+        :'figi_instrument' => :'StockInstrumentFigiInstrument'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'figi_code',
-        :'figi_share_class'
+        :'description',
+        :'currency',
+        :'exchange',
+        :'figi_instrument'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'FigiInstrument'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::SymbolFigiInstrument` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::CryptoInstrument` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::SymbolFigiInstrument`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::CryptoInstrument`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'figi_code')
-        self.figi_code = attributes[:'figi_code']
+      if attributes.key?(:'kind')
+        self.kind = attributes[:'kind']
       end
 
-      if attributes.key?(:'figi_share_class')
-        self.figi_share_class = attributes[:'figi_share_class']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.key?(:'raw_symbol')
+        self.raw_symbol = attributes[:'raw_symbol']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'exchange')
+        self.exchange = attributes[:'exchange']
+      end
+
+      if attributes.key?(:'figi_instrument')
+        self.figi_instrument = attributes[:'figi_instrument']
       end
     end
 
@@ -82,12 +131,32 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @kind.nil?
+        invalid_properties.push('invalid value for "kind", kind cannot be nil.')
+      end
+
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @symbol.nil?
+        invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
+      end
+
+      if @raw_symbol.nil?
+        invalid_properties.push('invalid value for "raw_symbol", raw_symbol cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @kind.nil?
+      return false if @id.nil?
+      return false if @symbol.nil?
+      return false if @raw_symbol.nil?
       true
     end
 
@@ -96,8 +165,14 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          figi_code == o.figi_code &&
-          figi_share_class == o.figi_share_class
+          kind == o.kind &&
+          id == o.id &&
+          symbol == o.symbol &&
+          raw_symbol == o.raw_symbol &&
+          description == o.description &&
+          currency == o.currency &&
+          exchange == o.exchange &&
+          figi_instrument == o.figi_instrument
     end
 
     # @see the `==` method
@@ -109,7 +184,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [figi_code, figi_share_class].hash
+      [kind, id, symbol, raw_symbol, description, currency, exchange, figi_instrument].hash
     end
 
     # Builds the object from hash

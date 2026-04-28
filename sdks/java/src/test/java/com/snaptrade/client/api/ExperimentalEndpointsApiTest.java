@@ -19,6 +19,7 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -58,6 +59,27 @@ public class ExperimentalEndpointsApiTest {
         String userSecret = null;
         UUID accountId = null;
         AccountValueHistoryResponse response = api.getAccountBalanceHistory(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List all account positions
+     *
+     * Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAllAccountPositionsTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        Integer page = null;
+        Integer pageSize = null;
+        AllAccountPositionsResponse response = api.getAllAccountPositions(userId, userSecret, accountId)
+                .page(page)
+                .pageSize(pageSize)
                 .execute();
         // TODO: test validations
     }

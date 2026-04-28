@@ -2625,6 +2625,81 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-partners
+  /accounts/{accountId}/positions/all:
+    get:
+      description: |
+        Returns a paginated list of all positions in the specified account.
+
+        The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+        Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      operationId: AccountInformation_getAllAccountPositions
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - description: The page number to return. Defaults to 1.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 1
+          format: int32
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-all-get-parameters-3-schema
+        style: form
+      - description: The number of positions to return per page. Defaults to 100 with
+          a maximum of 1000.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          example: 100
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 100
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-all-get-parameters-4-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllAccountPositionsResponse'
+          description: OK
+        default:
+          description: Unexpected error
+      summary: List all account positions
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-positions-all
   /accounts/{accountId}/orders/v2:
     get:
       description: |
@@ -6310,6 +6385,576 @@ components:
           x-konfig-original-example: "12345678"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-lot_id
       type: object
+    AllAccountPositionsResponse:
+      additionalProperties: true
+      description: A paginated list of all account positions.
+      example:
+        next: https://api.snaptrade.com/api/v1/accounts/917c8734-8470-4a3e-a18f-57c3f2ee6631/positions/all?page=2
+        previous: https://openapi-generator.tech
+        count: 2
+        results:
+        - cost_basis: "118.2"
+          tax_lots:
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            lot_id: "12345678"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            lot_id: "12345678"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          cash_equivalent: false
+          price: "123.45"
+          instrument: null
+          currency: USD
+          units: "10.5"
+        - cost_basis: "118.2"
+          tax_lots:
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            lot_id: "12345678"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            lot_id: "12345678"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          cash_equivalent: false
+          price: "123.45"
+          instrument: null
+          currency: USD
+          units: "10.5"
+      properties:
+        count:
+          description: The total number of positions available across all pages.
+          example: 2
+          type: integer
+          x-konfig-original-example: 2
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-count
+        next:
+          description: "The URL for the next page of results, or `null` if there is\
+            \ no next page."
+          example: https://api.snaptrade.com/api/v1/accounts/917c8734-8470-4a3e-a18f-57c3f2ee6631/positions/all?page=2
+          format: uri
+          nullable: true
+          type: string
+          x-konfig-original-example: https://api.snaptrade.com/api/v1/accounts/917c8734-8470-4a3e-a18f-57c3f2ee6631/positions/all?page=2
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-next
+        previous:
+          description: "The URL for the previous page of results, or `null` if there\
+            \ is no previous page."
+          format: uri
+          nullable: true
+          type: string
+        results:
+          description: Positions returned for the current page.
+          items:
+            $ref: '#/components/schemas/AccountPosition'
+          type: array
+      required:
+      - count
+      - next
+      - previous
+      - results
+      type: object
+    AccountPosition:
+      additionalProperties: true
+      description: Describes a single position.
+      example:
+        cost_basis: "118.2"
+        tax_lots:
+        - original_purchase_date: 2022-01-15T10:30:00Z
+          cost_basis: "1005.00"
+          quantity: "10"
+          lot_id: "12345678"
+          position_type: LONG
+          purchased_price: "100.50"
+          current_value: "1200.00"
+        - original_purchase_date: 2022-01-15T10:30:00Z
+          cost_basis: "1005.00"
+          quantity: "10"
+          lot_id: "12345678"
+          position_type: LONG
+          purchased_price: "100.50"
+          current_value: "1200.00"
+        cash_equivalent: false
+        price: "123.45"
+        instrument: null
+        currency: USD
+        units: "10.5"
+      properties:
+        instrument:
+          $ref: '#/components/schemas/Instrument'
+        units:
+          description: The number of units held in the position. Positive numbers
+            indicate long positions and negative numbers indicate short positions.
+          example: "10.5"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "10.5"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-units
+        price:
+          description: Last known market price for the position.
+          example: "123.45"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-price
+        cost_basis:
+          description: Book price or average purchase price for the position.
+          example: "118.2"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "118.2"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-cost_basis
+        currency:
+          description: ISO-4217 currency code for the position `price` and `cost_basis`.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-currency
+        cash_equivalent:
+          description: Present for stock positions that are also counted in cash balance
+            or buying power.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-cash_equivalent
+        tax_lots:
+          description: Present for stock positions when tax lot data is enabled for
+            the account.
+          items:
+            $ref: '#/components/schemas/TaxLot'
+          type: array
+      required:
+      - instrument
+      type: object
+    Instrument:
+      description: Instrument metadata for a V2 position. Use `kind` to determine
+        which schema is present.
+      discriminator:
+        mapping:
+          stock: '#/components/schemas/StockInstrument'
+          etf: '#/components/schemas/EtfInstrument'
+          crypto: '#/components/schemas/CryptoInstrument'
+          other: '#/components/schemas/OtherInstrument'
+          future: '#/components/schemas/FutureInstrument'
+          option: '#/components/schemas/OptionInstrument'
+        propertyName: kind
+      oneOf:
+      - $ref: '#/components/schemas/StockInstrument'
+      - $ref: '#/components/schemas/EtfInstrument'
+      - $ref: '#/components/schemas/CryptoInstrument'
+      - $ref: '#/components/schemas/OtherInstrument'
+      - $ref: '#/components/schemas/FutureInstrument'
+      - $ref: '#/components/schemas/OptionInstrument'
+    UnderlyingOptionInstrument:
+      description: The underlying instrument for an option.
+      discriminator:
+        mapping:
+          stock: '#/components/schemas/StockInstrument'
+          etf: '#/components/schemas/EtfInstrument'
+          crypto: '#/components/schemas/CryptoInstrument'
+          other: '#/components/schemas/OtherInstrument'
+        propertyName: kind
+      oneOf:
+      - $ref: '#/components/schemas/StockInstrument'
+      - $ref: '#/components/schemas/EtfInstrument'
+      - $ref: '#/components/schemas/CryptoInstrument'
+      - $ref: '#/components/schemas/OtherInstrument'
+    StockInstrument:
+      additionalProperties: true
+      description: Security instrument metadata for stock positions.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - stock
+          example: stock
+          type: string
+          x-konfig-original-example: stock
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-kind
+        id:
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-id
+        symbol:
+          description: The formatted trading symbol for the security.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-symbol
+        raw_symbol:
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-raw_symbol
+        description:
+          description: Human-readable description of the security.
+          example: Apple Inc.
+          nullable: true
+          type: string
+          x-konfig-original-example: Apple Inc.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+          nullable: true
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StockInstrument-properties-exchange
+        figi_instrument:
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
+      required:
+      - id
+      - kind
+      - raw_symbol
+      - symbol
+      type: object
+    EtfInstrument:
+      additionalProperties: true
+      description: Security instrument metadata for ETF positions.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - etf
+          example: etf
+          type: string
+          x-konfig-original-example: etf
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-kind
+        id:
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-id
+        symbol:
+          description: The formatted trading symbol for the security.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-symbol
+        raw_symbol:
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-raw_symbol
+        description:
+          description: Human-readable description of the security.
+          example: Apple Inc.
+          nullable: true
+          type: string
+          x-konfig-original-example: Apple Inc.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+          nullable: true
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-EtfInstrument-properties-exchange
+        figi_instrument:
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
+      required:
+      - id
+      - kind
+      - raw_symbol
+      - symbol
+      type: object
+    CryptoInstrument:
+      additionalProperties: true
+      description: Security instrument metadata for crypto positions.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - crypto
+          example: crypto
+          type: string
+          x-konfig-original-example: crypto
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-kind
+        id:
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-id
+        symbol:
+          description: The formatted trading symbol for the security.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-symbol
+        raw_symbol:
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-raw_symbol
+        description:
+          description: Human-readable description of the security.
+          example: Apple Inc.
+          nullable: true
+          type: string
+          x-konfig-original-example: Apple Inc.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+          nullable: true
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoInstrument-properties-exchange
+        figi_instrument:
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
+      required:
+      - id
+      - kind
+      - raw_symbol
+      - symbol
+      type: object
+    OtherInstrument:
+      additionalProperties: true
+      description: Security instrument metadata for other mapped security positions.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - other
+          example: other
+          type: string
+          x-konfig-original-example: other
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-kind
+        id:
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-id
+        symbol:
+          description: The formatted trading symbol for the security.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-symbol
+        raw_symbol:
+          description: The raw symbol without any exchange suffix.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-raw_symbol
+        description:
+          description: Human-readable description of the security.
+          example: Apple Inc.
+          nullable: true
+          type: string
+          x-konfig-original-example: Apple Inc.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+          nullable: true
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OtherInstrument-properties-exchange
+        figi_instrument:
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
+      required:
+      - id
+      - kind
+      - raw_symbol
+      - symbol
+      type: object
+    FutureInstrument:
+      additionalProperties: true
+      description: Future instrument metadata for a V2 position.
+      properties:
+        kind:
+          enum:
+          - future
+          example: future
+          type: string
+          x-konfig-original-example: future
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-kind
+        id:
+          description: Unique identifier for the future instrument.
+          example: 2fef6a3c-4d3f-4a0a-b1fe-8c45a9c7da7f
+          format: uuid
+          type: string
+          x-konfig-original-example: 2fef6a3c-4d3f-4a0a-b1fe-8c45a9c7da7f
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-id
+        symbol:
+          description: Display symbol for the future contract.
+          example: ESM26
+          type: string
+          x-konfig-original-example: ESM26
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-symbol
+        root_symbol:
+          description: Root symbol for the future contract.
+          example: ES
+          type: string
+          x-konfig-original-example: ES
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-root_symbol
+        expiration_code:
+          description: Exchange expiration code for the contract.
+          example: M26
+          type: string
+          x-konfig-original-example: M26
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-expiration_code
+        expiration_date:
+          description: Expiration date of the contract.
+          example: 2024-09-20
+          format: date
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-09-20
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-expiration_date
+        multiplier:
+          description: Multiplier for the future contract.
+          example: "50"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "50"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-multiplier
+        currency:
+          description: ISO-4217 currency code for the contract.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the contract.
+          example: XCME
+          nullable: true
+          type: string
+          x-konfig-original-example: XCME
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureInstrument-properties-exchange
+      required:
+      - expiration_code
+      - id
+      - kind
+      - root_symbol
+      - symbol
+      type: object
+    OptionInstrument:
+      additionalProperties: true
+      description: Option instrument metadata for a V2 position.
+      properties:
+        kind:
+          enum:
+          - option
+          example: option
+          type: string
+          x-konfig-original-example: option
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-kind
+        id:
+          description: Unique identifier for the option instrument.
+          example: 899e2697-1d38-4c07-91ee-c16a2b1ce5c9
+          format: uuid
+          type: string
+          x-konfig-original-example: 899e2697-1d38-4c07-91ee-c16a2b1ce5c9
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-id
+        symbol:
+          description: OCC symbol for the option contract.
+          example: AAPL  261218C00240000
+          type: string
+          x-konfig-original-example: AAPL  261218C00240000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-symbol
+        option_type:
+          description: Whether the contract is a call or put.
+          enum:
+          - CALL
+          - PUT
+          example: CALL
+          type: string
+          x-konfig-original-example: CALL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-option_type
+        strike_price:
+          description: Strike price for the option contract.
+          example: "240"
+          format: decimal
+          type: string
+          x-konfig-original-example: "240"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-strike_price
+        expiration_date:
+          description: Expiration date of the option contract.
+          example: 2026-12-18
+          format: date
+          type: string
+          x-konfig-original-example: 2026-12-18
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-expiration_date
+        description:
+          description: Human-readable description of the option contract.
+          example: AAPL Dec 18 2026 240 CALL
+          nullable: true
+          type: string
+          x-konfig-original-example: AAPL Dec 18 2026 240 CALL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-description
+        underlying:
+          $ref: '#/components/schemas/UnderlyingOptionInstrument'
+      required:
+      - expiration_date
+      - id
+      - kind
+      - option_type
+      - strike_price
+      - symbol
+      - underlying
+      type: object
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       example:
@@ -6472,7 +7117,7 @@ components:
           x-konfig-original-example: BBG000B9XRY4
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-figi_code
         figi_instrument:
-          $ref: '#/components/schemas/Symbol_figi_instrument'
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
       type: object
     UserIDandSecret:
       example:
@@ -9317,7 +9962,7 @@ components:
           x-konfig-original-example: BBG000B9XRY4
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-figi_code
         figi_instrument:
-          $ref: '#/components/schemas/Symbol_figi_instrument'
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
         currencies:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
@@ -9406,7 +10051,7 @@ components:
           x-konfig-original-example: BBG000B9XRY4
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-figi_code
         figi_instrument:
-          $ref: '#/components/schemas/Symbol_figi_instrument'
+          $ref: '#/components/schemas/StockInstrument_figi_instrument'
         currencies:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
@@ -9875,6 +10520,14 @@ components:
     konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
       example: AAPL  251219C00150000
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-positions-all-get-parameters-3-schema:
+      example: 1
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-positions-all-get-parameters-4-schema:
+      example: 100
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema:
       example: 30
@@ -10539,6 +11192,210 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TaxLot-properties-lot_id:
       example: "12345678"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-count:
+      example: 2
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-next:
+      example: https://api.snaptrade.com/api/v1/accounts/917c8734-8470-4a3e-a18f-57c3f2ee6631/positions/all?page=2
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountPosition-properties-units:
+      example: "10.5"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountPosition-properties-price:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountPosition-properties-cost_basis:
+      example: "118.2"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountPosition-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountPosition-properties-cash_equivalent:
+      example: false
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-kind:
+      example: stock
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-raw_symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-description:
+      example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StockInstrument-properties-exchange:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-kind:
+      example: etf
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-raw_symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-description:
+      example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-EtfInstrument-properties-exchange:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-kind:
+      example: crypto
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-raw_symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-description:
+      example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoInstrument-properties-exchange:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-kind:
+      example: other
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-raw_symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-description:
+      example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OtherInstrument-properties-exchange:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-kind:
+      example: future
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-id:
+      example: 2fef6a3c-4d3f-4a0a-b1fe-8c45a9c7da7f
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-symbol:
+      example: ESM26
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-root_symbol:
+      example: ES
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-expiration_code:
+      example: M26
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-expiration_date:
+      example: 2024-09-20
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-multiplier:
+      example: "50"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureInstrument-properties-exchange:
+      example: XCME
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-kind:
+      example: option
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-id:
+      example: 899e2697-1d38-4c07-91ee-c16a2b1ce5c9
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-symbol:
+      example: AAPL  261218C00240000
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-option_type:
+      example: CALL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-strike_price:
+      example: "240"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-expiration_date:
+      example: 2026-12-18
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-description:
+      example: AAPL Dec 18 2026 240 CALL
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker:
@@ -12852,6 +13709,42 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-positions-all:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        page:
+          example: 1
+          format: int32
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-all-get-parameters-3-schema
+        page_size:
+          example: 100
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 100
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-all-get-parameters-4-schema
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - page
+      - page_size
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2:
       additionalProperties: true
       properties:
@@ -13491,6 +14384,10 @@ components:
       - $ref: '#/components/schemas/Currency'
       description: |
         The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
+    StockInstrument_figi_instrument:
+      allOf:
+      - $ref: '#/components/schemas/FigiInstrument'
+      nullable: true
     Symbol_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
@@ -13499,10 +14396,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/Exchange'
       description: The exchange on which the security is listed and traded.
-    Symbol_figi_instrument:
-      allOf:
-      - $ref: '#/components/schemas/FigiInstrument'
-      nullable: true
     BrokerageAuthorizationTypeReadOnly_brokerage:
       additionalProperties: true
       example:

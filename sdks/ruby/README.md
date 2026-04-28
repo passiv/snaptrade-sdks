@@ -46,6 +46,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
   * [`snaptrade.experimental_endpoints.get_account_balance_history`](#snaptradeexperimental_endpointsget_account_balance_history)
+  * [`snaptrade.experimental_endpoints.get_all_account_positions`](#snaptradeexperimental_endpointsget_all_account_positions)
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
@@ -1212,6 +1213,55 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balanceHistory` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimental_endpoints.get_all_account_positions`<a id="snaptradeexperimental_endpointsget_all_account_positions"></a>
+
+Returns a paginated list of all positions in the specified account.
+
+The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.experimental_endpoints.get_all_account_positions(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  page: 1,
+  page_size: 100,
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### page: `Integer`<a id="page-integer"></a>
+The page number to return. Defaults to 1.
+
+##### page_size: `Integer`<a id="page_size-integer"></a>
+The number of positions to return per page. Defaults to 100 with a maximum of
+1000.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountPositionsResponse](./lib/snaptrade/models/all_account_positions_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/positions/all` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

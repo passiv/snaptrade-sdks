@@ -11,13 +11,13 @@ require 'spec_helper'
 require 'json'
 require 'date'
 
-# Unit tests for SnapTrade::SymbolFigiInstrument
-describe SnapTrade::SymbolFigiInstrument do
-  let(:instance) { SnapTrade::SymbolFigiInstrument.new }
+# Unit tests for SnapTrade::StockInstrumentFigiInstrument
+describe SnapTrade::StockInstrumentFigiInstrument do
+  let(:instance) { SnapTrade::StockInstrumentFigiInstrument.new }
 
-  describe 'test an instance of SymbolFigiInstrument' do
-    it 'should create an instance of SymbolFigiInstrument' do
-      expect(instance).to be_instance_of(SnapTrade::SymbolFigiInstrument)
+  describe 'test an instance of StockInstrumentFigiInstrument' do
+    it 'should create an instance of StockInstrumentFigiInstrument' do
+      expect(instance).to be_instance_of(SnapTrade::StockInstrumentFigiInstrument)
     end
   end
   describe 'test attribute "figi_code"' do

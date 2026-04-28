@@ -45,6 +45,7 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_cancel import Accou
 from snaptrade_client.apis.paths.accounts_account_id_trading_replace import AccountsAccountIdTradingReplace
 from snaptrade_client.apis.paths.accounts_account_id_trading_complex import AccountsAccountIdTradingComplex
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
+from snaptrade_client.apis.paths.accounts_account_id_positions_all import AccountsAccountIdPositionsAll
 from snaptrade_client.apis.paths.accounts_account_id_orders_v2 import AccountsAccountIdOrdersV2
 from snaptrade_client.apis.paths.accounts_account_id_balance_history import AccountsAccountIdBalanceHistory
 from snaptrade_client.apis.paths.accounts_account_id_recent_orders_v2 import AccountsAccountIdRecentOrdersV2
@@ -109,6 +110,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_COMPLEX: AccountsAccountIdTradingComplex,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
+        PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS_ALL: AccountsAccountIdPositionsAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
@@ -174,6 +176,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_COMPLEX: AccountsAccountIdTradingComplex,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
+        PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS_ALL: AccountsAccountIdPositionsAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,

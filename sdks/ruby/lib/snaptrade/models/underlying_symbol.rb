@@ -71,7 +71,7 @@ module SnapTrade
         :'exchange' => :'UnderlyingSymbolExchange',
         :'type' => :'UnderlyingSymbolType',
         :'figi_code' => :'String',
-        :'figi_instrument' => :'SymbolFigiInstrument',
+        :'figi_instrument' => :'StockInstrumentFigiInstrument',
         :'currencies' => :'Array<Currency>'
       }
     end
