@@ -114,6 +114,8 @@ portal:
       post: true
     /accounts/{accountId}/positions/all:
       get: true
+    /accounts/{accountId}/balanceHistory:
+      get: true
   hideOperations:
     /activities:
       get: true
@@ -163,8 +165,6 @@ portal:
       get: true
     /authorizations/{authorizationId}:
       delete: true
-    /accounts/{accountId}/balanceHistory:
-      get: true
     /accounts/{accountId}/positions/all:
       get: true
   hideSecurity:
