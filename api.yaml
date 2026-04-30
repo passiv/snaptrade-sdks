@@ -614,9 +614,9 @@ paths:
       summary: List all account positions
       operationId: AccountInformation_getAllAccountPositions
       description: |
-        Returns a paginated list of all positions in the specified account.
+        Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
 
@@ -637,25 +637,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/AccountID"
-        - in: query
-          name: page
-          required: false
-          description: The page number to return. Defaults to 1.
-          schema:
-            type: integer
-            format: int32
-            minimum: 1
-            example: 1
-        - in: query
-          name: page_size
-          required: false
-          description: The number of positions to return per page. Defaults to 100 with a maximum of 1000.
-          schema:
-            type: integer
-            format: int32
-            minimum: 1
-            maximum: 1000
-            example: 100
       responses:
         "200":
           description: OK
@@ -788,11 +769,11 @@ paths:
   /accounts/{accountId}/balanceHistory:
     get:
       tags:
-        - Experimental endpoints
+        - Account Information
       summary: List historical account total value
       operationId: AccountInformation_getAccountBalanceHistory
       description: |
-        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
       parameters:
         - in: query
           required: true
@@ -4454,33 +4435,15 @@ components:
           description: The unique id for this specific tax lot
           example: "12345678"
     AllAccountPositionsResponse:
-      description: A paginated list of all account positions.
+      description: Information about all account positions.
       type: object
       properties:
-        count:
-          type: integer
-          description: The total number of positions available across all pages.
-          example: 2
-        next:
-          type: string
-          format: uri
-          nullable: true
-          description: The URL for the next page of results, or `null` if there is no next page.
-          example: https://api.snaptrade.com/api/v1/accounts/917c8734-8470-4a3e-a18f-57c3f2ee6631/positions/all?page=2
-        previous:
-          type: string
-          format: uri
-          nullable: true
-          description: The URL for the previous page of results, or `null` if there is no previous page.
         results:
           type: array
-          description: Positions returned for the current page.
+          description: Positions returned for the request.
           items:
             $ref: "#/components/schemas/AccountPosition"
       required:
-        - count
-        - next
-        - previous
         - results
     AccountPosition:
       description: Describes a single position.
@@ -4526,7 +4489,10 @@ components:
       description: Instrument metadata for a V2 position. Use `kind` to determine which schema is present.
       oneOf:
         - $ref: "#/components/schemas/StockInstrument"
+        - $ref: "#/components/schemas/AdrInstrument"
         - $ref: "#/components/schemas/EtfInstrument"
+        - $ref: "#/components/schemas/MutualFundInstrument"
+        - $ref: "#/components/schemas/CefInstrument"
         - $ref: "#/components/schemas/CryptoInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
         - $ref: "#/components/schemas/FutureInstrument"
@@ -4535,7 +4501,10 @@ components:
         propertyName: kind
         mapping:
           stock: "#/components/schemas/StockInstrument"
+          adr: "#/components/schemas/AdrInstrument"
           etf: "#/components/schemas/EtfInstrument"
+          mutualfund: "#/components/schemas/MutualFundInstrument"
+          cef: "#/components/schemas/CefInstrument"
           crypto: "#/components/schemas/CryptoInstrument"
           other: "#/components/schemas/OtherInstrument"
           future: "#/components/schemas/FutureInstrument"
@@ -4544,14 +4513,20 @@ components:
       description: The underlying instrument for an option.
       oneOf:
         - $ref: "#/components/schemas/StockInstrument"
+        - $ref: "#/components/schemas/AdrInstrument"
         - $ref: "#/components/schemas/EtfInstrument"
+        - $ref: "#/components/schemas/MutualFundInstrument"
+        - $ref: "#/components/schemas/CefInstrument"
         - $ref: "#/components/schemas/CryptoInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
       discriminator:
         propertyName: kind
         mapping:
           stock: "#/components/schemas/StockInstrument"
+          adr: "#/components/schemas/AdrInstrument"
           etf: "#/components/schemas/EtfInstrument"
+          mutualfund: "#/components/schemas/MutualFundInstrument"
+          cef: "#/components/schemas/CefInstrument"
           crypto: "#/components/schemas/CryptoInstrument"
           other: "#/components/schemas/OtherInstrument"
     StockInstrument:
@@ -4601,6 +4576,53 @@ components:
         - id
         - symbol
         - raw_symbol
+    AdrInstrument:
+      description: Security instrument metadata for ADR positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - adr
+          example: adr
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: BABA
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: BABA
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Alibaba Group Holding Ltd ADR
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNYS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
     EtfInstrument:
       description: Security instrument metadata for ETF positions.
       type: object
@@ -4639,6 +4661,100 @@ components:
           nullable: true
           description: Exchange MIC code or exchange code for the security.
           example: XNAS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+    MutualFundInstrument:
+      description: Security instrument metadata for mutual fund positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - mutualfund
+          example: mutualfund
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: VFIAX
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: VFIAX
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Vanguard 500 Index Fund Admiral Shares
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNAS
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+    CefInstrument:
+      description: Security instrument metadata for closed-end fund positions.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - cef
+          example: cef
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: BST
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: BST
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: BlackRock Science and Technology Trust
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XNYS
         figi_instrument:
           nullable: true
           allOf:
