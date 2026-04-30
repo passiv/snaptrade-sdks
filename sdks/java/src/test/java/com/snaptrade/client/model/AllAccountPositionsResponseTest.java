@@ -21,7 +21,6 @@ import com.snaptrade.client.model.AccountPosition;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Disabled;
@@ -40,30 +39,6 @@ public class AllAccountPositionsResponseTest {
     @Test
     public void testAllAccountPositionsResponse() {
         // TODO: test AllAccountPositionsResponse
-    }
-
-    /**
-     * Test the property 'count'
-     */
-    @Test
-    public void countTest() {
-        // TODO: test count
-    }
-
-    /**
-     * Test the property 'next'
-     */
-    @Test
-    public void nextTest() {
-        // TODO: test next
-    }
-
-    /**
-     * Test the property 'previous'
-     */
-    @Test
-    public void previousTest() {
-        // TODO: test previous
     }
 
     /**

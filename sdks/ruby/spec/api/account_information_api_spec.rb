@@ -46,6 +46,20 @@ describe 'AccountInformationApi' do
     end
   end
 
+  # unit tests for get_account_balance_history
+  # List historical account total value
+  # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [AccountValueHistoryResponse]
+  describe 'get_account_balance_history test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_all_user_holdings
   # List all accounts for the user, plus balances, positions, and orders for each account.
   # **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 

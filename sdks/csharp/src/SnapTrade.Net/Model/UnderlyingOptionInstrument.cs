@@ -49,10 +49,46 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderlyingOptionInstrument" /> class
+        /// with the <see cref="AdrInstrument" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of AdrInstrument.</param>
+        public UnderlyingOptionInstrument(AdrInstrument actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnderlyingOptionInstrument" /> class
         /// with the <see cref="EtfInstrument" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of EtfInstrument.</param>
         public UnderlyingOptionInstrument(EtfInstrument actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnderlyingOptionInstrument" /> class
+        /// with the <see cref="MutualFundInstrument" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of MutualFundInstrument.</param>
+        public UnderlyingOptionInstrument(MutualFundInstrument actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnderlyingOptionInstrument" /> class
+        /// with the <see cref="CefInstrument" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of CefInstrument.</param>
+        public UnderlyingOptionInstrument(CefInstrument actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -97,11 +133,23 @@ namespace SnapTrade.Net.Model
             }
             set
             {
-                if (value.GetType() == typeof(CryptoInstrument))
+                if (value.GetType() == typeof(AdrInstrument))
+                {
+                    this._actualInstance = value;
+                }
+                else if (value.GetType() == typeof(CefInstrument))
+                {
+                    this._actualInstance = value;
+                }
+                else if (value.GetType() == typeof(CryptoInstrument))
                 {
                     this._actualInstance = value;
                 }
                 else if (value.GetType() == typeof(EtfInstrument))
+                {
+                    this._actualInstance = value;
+                }
+                else if (value.GetType() == typeof(MutualFundInstrument))
                 {
                     this._actualInstance = value;
                 }
@@ -115,7 +163,7 @@ namespace SnapTrade.Net.Model
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid instance found. Must be the following types: CryptoInstrument, EtfInstrument, OtherInstrument, StockInstrument");
+                    throw new ArgumentException("Invalid instance found. Must be the following types: AdrInstrument, CefInstrument, CryptoInstrument, EtfInstrument, MutualFundInstrument, OtherInstrument, StockInstrument");
                 }
             }
         }
@@ -131,6 +179,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
+        /// Get the actual instance of `AdrInstrument`. If the actual instance is not `AdrInstrument`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of AdrInstrument</returns>
+        public AdrInstrument GetAdrInstrument()
+        {
+            return (AdrInstrument)this.ActualInstance;
+        }
+
+        /// <summary>
         /// Get the actual instance of `EtfInstrument`. If the actual instance is not `EtfInstrument`,
         /// the InvalidClassException will be thrown
         /// </summary>
@@ -138,6 +196,26 @@ namespace SnapTrade.Net.Model
         public EtfInstrument GetEtfInstrument()
         {
             return (EtfInstrument)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `MutualFundInstrument`. If the actual instance is not `MutualFundInstrument`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of MutualFundInstrument</returns>
+        public MutualFundInstrument GetMutualFundInstrument()
+        {
+            return (MutualFundInstrument)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `CefInstrument`. If the actual instance is not `CefInstrument`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of CefInstrument</returns>
+        public CefInstrument GetCefInstrument()
+        {
+            return (CefInstrument)this.ActualInstance;
         }
 
         /// <summary>
@@ -201,6 +279,46 @@ namespace SnapTrade.Net.Model
             try
             {
                 // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(AdrInstrument).GetProperty("AdditionalProperties") == null)
+                {
+                    newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<AdrInstrument>(jsonString, UnderlyingOptionInstrument.SerializerSettings));
+                }
+                else
+                {
+                    newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<AdrInstrument>(jsonString, UnderlyingOptionInstrument.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("AdrInstrument");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AdrInstrument: {1}", jsonString, exception.ToString()));
+            }
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(CefInstrument).GetProperty("AdditionalProperties") == null)
+                {
+                    newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<CefInstrument>(jsonString, UnderlyingOptionInstrument.SerializerSettings));
+                }
+                else
+                {
+                    newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<CefInstrument>(jsonString, UnderlyingOptionInstrument.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("CefInstrument");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into CefInstrument: {1}", jsonString, exception.ToString()));
+            }
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
                 if (typeof(CryptoInstrument).GetProperty("AdditionalProperties") == null)
                 {
                     newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<CryptoInstrument>(jsonString, UnderlyingOptionInstrument.SerializerSettings));
@@ -236,6 +354,26 @@ namespace SnapTrade.Net.Model
             {
                 // deserialization failed, try the next one
                 System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into EtfInstrument: {1}", jsonString, exception.ToString()));
+            }
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(MutualFundInstrument).GetProperty("AdditionalProperties") == null)
+                {
+                    newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<MutualFundInstrument>(jsonString, UnderlyingOptionInstrument.SerializerSettings));
+                }
+                else
+                {
+                    newUnderlyingOptionInstrument = new UnderlyingOptionInstrument(JsonConvert.DeserializeObject<MutualFundInstrument>(jsonString, UnderlyingOptionInstrument.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("MutualFundInstrument");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into MutualFundInstrument: {1}", jsonString, exception.ToString()));
             }
 
             try

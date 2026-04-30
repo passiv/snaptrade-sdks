@@ -47,36 +47,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetAccountBalanceHistory
-        /// </summary>
-        [Fact]
-        public void GetAccountBalanceHistoryTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
-            
-            try
-            {
-                // List historical account total value
-                AccountValueHistoryResponse result = client.ExperimentalEndpoints.GetAccountBalanceHistory(userId, userSecret, accountId);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAccountBalanceHistory: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test GetAllAccountPositions
         /// </summary>
         [Fact]
@@ -85,13 +55,11 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var page = 1; // The page number to return. Defaults to 1. (optional) 
-            var pageSize = 100; // The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional) 
             
             try
             {
                 // List all account positions
-                AllAccountPositionsResponse result = client.ExperimentalEndpoints.GetAllAccountPositions(userId, userSecret, accountId, page, pageSize);
+                AllAccountPositionsResponse result = client.ExperimentalEndpoints.GetAllAccountPositions(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

@@ -18,10 +18,27 @@ import (
 
 // UnderlyingOptionInstrument - The underlying instrument for an option.
 type UnderlyingOptionInstrument struct {
+	AdrInstrument *AdrInstrument
+	CefInstrument *CefInstrument
 	CryptoInstrument *CryptoInstrument
 	EtfInstrument *EtfInstrument
+	MutualFundInstrument *MutualFundInstrument
 	OtherInstrument *OtherInstrument
 	StockInstrument *StockInstrument
+}
+
+// AdrInstrumentAsUnderlyingOptionInstrument is a convenience function that returns AdrInstrument wrapped in UnderlyingOptionInstrument
+func AdrInstrumentAsUnderlyingOptionInstrument(v *AdrInstrument) UnderlyingOptionInstrument {
+	return UnderlyingOptionInstrument{
+		AdrInstrument: v,
+	}
+}
+
+// CefInstrumentAsUnderlyingOptionInstrument is a convenience function that returns CefInstrument wrapped in UnderlyingOptionInstrument
+func CefInstrumentAsUnderlyingOptionInstrument(v *CefInstrument) UnderlyingOptionInstrument {
+	return UnderlyingOptionInstrument{
+		CefInstrument: v,
+	}
 }
 
 // CryptoInstrumentAsUnderlyingOptionInstrument is a convenience function that returns CryptoInstrument wrapped in UnderlyingOptionInstrument
@@ -35,6 +52,13 @@ func CryptoInstrumentAsUnderlyingOptionInstrument(v *CryptoInstrument) Underlyin
 func EtfInstrumentAsUnderlyingOptionInstrument(v *EtfInstrument) UnderlyingOptionInstrument {
 	return UnderlyingOptionInstrument{
 		EtfInstrument: v,
+	}
+}
+
+// MutualFundInstrumentAsUnderlyingOptionInstrument is a convenience function that returns MutualFundInstrument wrapped in UnderlyingOptionInstrument
+func MutualFundInstrumentAsUnderlyingOptionInstrument(v *MutualFundInstrument) UnderlyingOptionInstrument {
+	return UnderlyingOptionInstrument{
+		MutualFundInstrument: v,
 	}
 }
 
@@ -57,6 +81,32 @@ func StockInstrumentAsUnderlyingOptionInstrument(v *StockInstrument) UnderlyingO
 func (dst *UnderlyingOptionInstrument) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into AdrInstrument
+	err = newStrictDecoder(data).Decode(&dst.AdrInstrument)
+	if err == nil {
+		jsonAdrInstrument, _ := json.Marshal(dst.AdrInstrument)
+		if string(jsonAdrInstrument) == "{}" { // empty struct
+			dst.AdrInstrument = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.AdrInstrument = nil
+	}
+
+	// try to unmarshal data into CefInstrument
+	err = newStrictDecoder(data).Decode(&dst.CefInstrument)
+	if err == nil {
+		jsonCefInstrument, _ := json.Marshal(dst.CefInstrument)
+		if string(jsonCefInstrument) == "{}" { // empty struct
+			dst.CefInstrument = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CefInstrument = nil
+	}
+
 	// try to unmarshal data into CryptoInstrument
 	err = newStrictDecoder(data).Decode(&dst.CryptoInstrument)
 	if err == nil {
@@ -81,6 +131,19 @@ func (dst *UnderlyingOptionInstrument) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.EtfInstrument = nil
+	}
+
+	// try to unmarshal data into MutualFundInstrument
+	err = newStrictDecoder(data).Decode(&dst.MutualFundInstrument)
+	if err == nil {
+		jsonMutualFundInstrument, _ := json.Marshal(dst.MutualFundInstrument)
+		if string(jsonMutualFundInstrument) == "{}" { // empty struct
+			dst.MutualFundInstrument = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.MutualFundInstrument = nil
 	}
 
 	// try to unmarshal data into OtherInstrument
@@ -111,8 +174,11 @@ func (dst *UnderlyingOptionInstrument) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.AdrInstrument = nil
+		dst.CefInstrument = nil
 		dst.CryptoInstrument = nil
 		dst.EtfInstrument = nil
+		dst.MutualFundInstrument = nil
 		dst.OtherInstrument = nil
 		dst.StockInstrument = nil
 
@@ -126,12 +192,24 @@ func (dst *UnderlyingOptionInstrument) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src UnderlyingOptionInstrument) MarshalJSON() ([]byte, error) {
+	if src.AdrInstrument != nil {
+		return json.Marshal(&src.AdrInstrument)
+	}
+
+	if src.CefInstrument != nil {
+		return json.Marshal(&src.CefInstrument)
+	}
+
 	if src.CryptoInstrument != nil {
 		return json.Marshal(&src.CryptoInstrument)
 	}
 
 	if src.EtfInstrument != nil {
 		return json.Marshal(&src.EtfInstrument)
+	}
+
+	if src.MutualFundInstrument != nil {
+		return json.Marshal(&src.MutualFundInstrument)
 	}
 
 	if src.OtherInstrument != nil {
@@ -150,12 +228,24 @@ func (obj *UnderlyingOptionInstrument) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.AdrInstrument != nil {
+		return obj.AdrInstrument
+	}
+
+	if obj.CefInstrument != nil {
+		return obj.CefInstrument
+	}
+
 	if obj.CryptoInstrument != nil {
 		return obj.CryptoInstrument
 	}
 
 	if obj.EtfInstrument != nil {
 		return obj.EtfInstrument
+	}
+
+	if obj.MutualFundInstrument != nil {
+		return obj.MutualFundInstrument
 	}
 
 	if obj.OtherInstrument != nil {

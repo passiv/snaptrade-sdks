@@ -27,29 +27,13 @@ describe 'ExperimentalEndpointsApi' do
     end
   end
 
-  # unit tests for get_account_balance_history
-  # List historical account total value
-  # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-  # @param user_id 
-  # @param user_secret 
-  # @param account_id 
-  # @param [Hash] opts the optional parameters
-  # @return [AccountValueHistoryResponse]
-  describe 'get_account_balance_history test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_all_account_positions
   # List all account positions
-  # Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+  # Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Integer] :page The page number to return. Defaults to 1.
-  # @option opts [Integer] :page_size The number of positions to return per page. Defaults to 100 with a maximum of 1000.
   # @return [AllAccountPositionsResponse]
   describe 'get_all_account_positions test' do
     it 'should work' do

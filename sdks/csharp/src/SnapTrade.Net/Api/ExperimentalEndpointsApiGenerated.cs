@@ -28,63 +28,32 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// List historical account total value
-        /// </summary>
-        /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountValueHistoryResponse</returns>
-        AccountValueHistoryResponse GetAccountBalanceHistory(string userId, string userSecret, string accountId, int operationIndex = 0);
-
-        /// <summary>
-        /// List historical account total value
-        /// </summary>
-        /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountValueHistoryResponse</returns>
-        ApiResponse<AccountValueHistoryResponse> GetAccountBalanceHistoryWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
-        /// <summary>
         /// List all account positions
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AllAccountPositionsResponse</returns>
-        AllAccountPositionsResponse GetAllAccountPositions(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0);
+        AllAccountPositionsResponse GetAllAccountPositions(string userId, string userSecret, string accountId, int operationIndex = 0);
 
         /// <summary>
         /// List all account positions
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AllAccountPositionsResponse</returns>
-        ApiResponse<AllAccountPositionsResponse> GetAllAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0);
+        ApiResponse<AllAccountPositionsResponse> GetAllAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
@@ -211,67 +180,34 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// List historical account total value
-        /// </summary>
-        /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountValueHistoryResponse</returns>
-        System.Threading.Tasks.Task<AccountValueHistoryResponse> GetAccountBalanceHistoryAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// List historical account total value
-        /// </summary>
-        /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountValueHistoryResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountValueHistoryResponse>> GetAccountBalanceHistoryWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
         /// List all account positions
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AllAccountPositionsResponse</returns>
-        System.Threading.Tasks.Task<AllAccountPositionsResponse> GetAllAccountPositionsAsync(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AllAccountPositionsResponse> GetAllAccountPositionsAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List all account positions
         /// </summary>
         /// <remarks>
-        /// Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AllAccountPositionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AllAccountPositionsResponse>> GetAllAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AllAccountPositionsResponse>> GetAllAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
@@ -517,244 +453,30 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// List all account positions Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountValueHistoryResponse</returns>
-        public AccountValueHistoryResponse GetAccountBalanceHistory(string userId, string userSecret, string accountId, int operationIndex = 0)
-        {
-            SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse> localVarResponse = GetAccountBalanceHistoryWithHttpInfo(userId, userSecret, accountId);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountValueHistoryResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse> GetAccountBalanceHistoryWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
-            }
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-
-            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetAccountBalanceHistory";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Get<AccountValueHistoryResponse>("/accounts/{accountId}/balanceHistory", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetAccountBalanceHistory", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountValueHistoryResponse</returns>
-        public async System.Threading.Tasks.Task<AccountValueHistoryResponse> GetAccountBalanceHistoryAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse> localVarResponse = await GetAccountBalanceHistoryWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountValueHistoryResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse>> GetAccountBalanceHistoryWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
-            }
-
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-
-            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetAccountBalanceHistory";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<AccountValueHistoryResponse>("/accounts/{accountId}/balanceHistory", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetAccountBalanceHistory", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// List all account positions Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AllAccountPositionsResponse</returns>
-        public AllAccountPositionsResponse GetAllAccountPositions(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0)
+        public AllAccountPositionsResponse GetAllAccountPositions(string userId, string userSecret, string accountId, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse> localVarResponse = GetAllAccountPositionsWithHttpInfo(userId, userSecret, accountId, page, pageSize);
+            SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse> localVarResponse = GetAllAccountPositionsWithHttpInfo(userId, userSecret, accountId);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List all account positions Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List all account positions Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AllAccountPositionsResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse> GetAllAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse> GetAllAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -799,14 +521,6 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            if (page != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "page", page, "int32"));
-            }
-            if (pageSize != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "page_size", pageSize, "int32"));
-            }
 
             localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetAllAccountPositions";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -842,36 +556,32 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all account positions Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List all account positions Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AllAccountPositionsResponse</returns>
-        public async System.Threading.Tasks.Task<AllAccountPositionsResponse> GetAllAccountPositionsAsync(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AllAccountPositionsResponse> GetAllAccountPositionsAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse> localVarResponse = await GetAllAccountPositionsWithHttpInfoAsync(userId, userSecret, accountId, page, pageSize, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse> localVarResponse = await GetAllAccountPositionsWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List all account positions Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List all account positions Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="page">The page number to return. Defaults to 1. (optional)</param>
-        /// <param name="pageSize">The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AllAccountPositionsResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse>> GetAllAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int? page = default(int?), int? pageSize = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AllAccountPositionsResponse>> GetAllAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -917,14 +627,6 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            if (page != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "page", page, "int32"));
-            }
-            if (pageSize != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "page_size", pageSize, "int32"));
-            }
 
             localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetAllAccountPositions";
             localVarRequestOptions.OperationIndex = operationIndex;

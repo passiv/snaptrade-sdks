@@ -5,6 +5,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 Method | Path | Description
 ------------- | ------------- | -------------
 [**GetAccountActivities**](AccountInformationApi.md#GetAccountActivities) | **Get** /accounts/{accountId}/activities | List account activities
+[**GetAccountBalanceHistory**](AccountInformationApi.md#GetAccountBalanceHistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
 [**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
@@ -64,6 +65,53 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountActivities`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Data`: %v\n", *resp.Data)
     fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Pagination`: %v\n", *resp.Pagination)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAccountBalanceHistory
+
+List historical account total value
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAccountBalanceHistory(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountBalanceHistory``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAccountBalanceHistory`: AccountValueHistoryResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountBalanceHistory`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountValueHistoryResponse.GetAccountBalanceHistory.History`: %v\n", *resp.History)
+    fmt.Fprintf(os.Stdout, "Response from `AccountValueHistoryResponse.GetAccountBalanceHistory.Currency`: %v\n", *resp.Currency)
 }
 ```
 

@@ -38,6 +38,7 @@ from snaptrade_client.model.action import Action
 from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.action_strict_v2 import ActionStrictV2
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
+from snaptrade_client.model.adr_instrument import AdrInstrument
 from snaptrade_client.model.all_account_positions_response import AllAccountPositionsResponse
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
@@ -59,6 +60,7 @@ from snaptrade_client.model.brokerage_symbol_id import BrokerageSymbolID
 from snaptrade_client.model.brokerage_type import BrokerageType
 from snaptrade_client.model.cancel_order_response import CancelOrderResponse
 from snaptrade_client.model.cancel_order_response_raw_response import CancelOrderResponseRawResponse
+from snaptrade_client.model.cef_instrument import CefInstrument
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
@@ -127,6 +129,7 @@ from snaptrade_client.model.model404_failed_request_response import Model404Fail
 from snaptrade_client.model.model425_failed_request_response import Model425FailedRequestResponse
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.model.monthly_dividends import MonthlyDividends
+from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
 from snaptrade_client.model.notional_value import NotionalValue

@@ -41,27 +41,6 @@ from . import path
 # Query params
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
-
-
-class PageSchema(
-    schemas.Int32Schema
-):
-
-
-    class MetaOapg:
-        format = 'int32'
-        inclusive_minimum = 1
-
-
-class PageSizeSchema(
-    schemas.Int32Schema
-):
-
-
-    class MetaOapg:
-        format = 'int32'
-        inclusive_maximum = 1000
-        inclusive_minimum = 1
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -72,8 +51,6 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
-        'page': typing.Union[PageSchema, decimal.Decimal, int, ],
-        'page_size': typing.Union[PageSizeSchema, decimal.Decimal, int, ],
     },
     total=False
 )
@@ -95,18 +72,6 @@ request_query_user_secret = api_client.QueryParameter(
     style=api_client.ParameterStyle.FORM,
     schema=UserSecretSchema,
     required=True,
-    explode=True,
-)
-request_query_page = api_client.QueryParameter(
-    name="page",
-    style=api_client.ParameterStyle.FORM,
-    schema=PageSchema,
-    explode=True,
-)
-request_query_page_size = api_client.QueryParameter(
-    name="page_size",
-    style=api_client.ParameterStyle.FORM,
-    schema=PageSizeSchema,
     explode=True,
 )
 # Path params
@@ -192,8 +157,6 @@ class BaseApi(api_client.Api):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        page_size: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -204,10 +167,6 @@ class BaseApi(api_client.Api):
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
-        if page is not None:
-            _query_params["page"] = page
-        if page_size is not None:
-            _query_params["page_size"] = page_size
         if account_id is not None:
             _path_params["accountId"] = account_id
         args.query = query_params if query_params else _query_params
@@ -256,8 +215,6 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_user_id,
             request_query_user_secret,
-            request_query_page,
-            request_query_page_size,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -392,8 +349,6 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_user_id,
             request_query_user_secret,
-            request_query_page,
-            request_query_page_size,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -465,8 +420,6 @@ class GetAllAccountPositions(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        page_size: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -482,8 +435,6 @@ class GetAllAccountPositions(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            page=page,
-            page_size=page_size,
         )
         return await self._aget_all_account_positions_oapg(
             query_params=args.query,
@@ -496,8 +447,6 @@ class GetAllAccountPositions(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        page_size: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -505,15 +454,13 @@ class GetAllAccountPositions(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
+        """ Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
         args = self._get_all_account_positions_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            page=page,
-            page_size=page_size,
         )
         return self._get_all_account_positions_oapg(
             query_params=args.query,
@@ -528,8 +475,6 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        page_size: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -545,8 +490,6 @@ class ApiForget(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            page=page,
-            page_size=page_size,
         )
         return await self._aget_all_account_positions_oapg(
             query_params=args.query,
@@ -559,8 +502,6 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        page: typing.Optional[int] = None,
-        page_size: typing.Optional[int] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -568,15 +509,13 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
+        """ Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
         args = self._get_all_account_positions_mapped_args(
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
-            page=page,
-            page_size=page_size,
         )
         return self._get_all_account_positions_oapg(
             query_params=args.query,

@@ -58,30 +58,6 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
-        /// Test the property 'Count'
-        /// </summary>
-        [Fact]
-        public void CountTest()
-        {
-            // TODO unit test for the property 'Count'
-        }
-        /// <summary>
-        /// Test the property 'Next'
-        /// </summary>
-        [Fact]
-        public void NextTest()
-        {
-            // TODO unit test for the property 'Next'
-        }
-        /// <summary>
-        /// Test the property 'Previous'
-        /// </summary>
-        [Fact]
-        public void PreviousTest()
-        {
-            // TODO unit test for the property 'Previous'
-        }
-        /// <summary>
         /// Test the property 'Results'
         /// </summary>
         [Fact]

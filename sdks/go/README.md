@@ -68,6 +68,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountInformationApi* | [**GetAccountActivities**](docs/AccountInformationApi.md#getaccountactivities) | **Get** /accounts/{accountId}/activities | List account activities
+*AccountInformationApi* | [**GetAccountBalanceHistory**](docs/AccountInformationApi.md#getaccountbalancehistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
 *AccountInformationApi* | [**GetAllUserHoldings**](docs/AccountInformationApi.md#getalluserholdings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **Get** /accounts/{accountId}/balances | List account balances
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **Get** /accounts/{accountId} | Get account detail
@@ -93,7 +94,6 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
-*ExperimentalEndpointsApi* | [**GetAccountBalanceHistory**](docs/ExperimentalEndpointsApi.md#getaccountbalancehistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
 *ExperimentalEndpointsApi* | [**GetAllAccountPositions**](docs/ExperimentalEndpointsApi.md#getallaccountpositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
@@ -164,6 +164,7 @@ Class | Method | HTTP request | Description
  - [AccountValueHistoryResponse](docs/AccountValueHistoryResponse.md)
  - [ActionStrict](docs/ActionStrict.md)
  - [ActionStrictWithOptions](docs/ActionStrictWithOptions.md)
+ - [AdrInstrument](docs/AdrInstrument.md)
  - [AllAccountPositionsResponse](docs/AllAccountPositionsResponse.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
@@ -179,6 +180,7 @@ Class | Method | HTTP request | Description
  - [BrokerageInstrumentsResponse](docs/BrokerageInstrumentsResponse.md)
  - [BrokerageType](docs/BrokerageType.md)
  - [CancelOrderResponse](docs/CancelOrderResponse.md)
+ - [CefInstrument](docs/CefInstrument.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
  - [ComplexOrderLeg](docs/ComplexOrderLeg.md)
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
@@ -232,6 +234,7 @@ Class | Method | HTTP request | Description
  - [Model425FailedRequestResponse](docs/Model425FailedRequestResponse.md)
  - [Model500UnexpectedExceptionResponse](docs/Model500UnexpectedExceptionResponse.md)
  - [MonthlyDividends](docs/MonthlyDividends.md)
+ - [MutualFundInstrument](docs/MutualFundInstrument.md)
  - [NetContributions](docs/NetContributions.md)
  - [NetDividend](docs/NetDividend.md)
  - [NotionalValue](docs/NotionalValue.md)

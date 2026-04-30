@@ -29,6 +29,8 @@ import { AccountInformationGetUserAccountOrderDetailRequest } from '../models';
 // @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
+import { AccountValueHistoryResponse } from '../models';
+// @ts-ignore
 import { Balance } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
@@ -141,6 +143,68 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/activities',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+         * @summary List historical account total value
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountBalanceHistory: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getAccountBalanceHistory', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getAccountBalanceHistory', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAccountBalanceHistory', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/balanceHistory`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/balanceHistory',
                 httpMethod: 'GET'
             });
 
@@ -880,6 +944,17 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+         * @summary List historical account total value
+         * @param {AccountInformationApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountBalanceHistory(requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountValueHistoryResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountBalanceHistory(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
@@ -1023,6 +1098,16 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          */
         getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): AxiosPromise<PaginatedUniversalActivity> {
             return localVarFp.getAccountActivities(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+         * @summary List historical account total value
+         * @param {AccountInformationApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountBalanceHistory(requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig): AxiosPromise<AccountValueHistoryResponse> {
+            return localVarFp.getAccountBalanceHistory(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
@@ -1200,6 +1285,36 @@ export type AccountInformationApiGetAccountActivitiesRequest = {
     * @memberof AccountInformationApiGetAccountActivities
     */
     readonly type?: string
+    
+}
+
+/**
+ * Request parameters for getAccountBalanceHistory operation in AccountInformationApi.
+ * @export
+ * @interface AccountInformationApiGetAccountBalanceHistoryRequest
+ */
+export type AccountInformationApiGetAccountBalanceHistoryRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountBalanceHistory
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountBalanceHistory
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountBalanceHistory
+    */
+    readonly accountId: string
     
 }
 
@@ -1571,6 +1686,18 @@ export class AccountInformationApiGenerated extends BaseAPI {
      */
     public getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig) {
         return AccountInformationApiFp(this.configuration).getAccountActivities(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+     * @summary List historical account total value
+     * @param {AccountInformationApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAccountBalanceHistory(requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getAccountBalanceHistory(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

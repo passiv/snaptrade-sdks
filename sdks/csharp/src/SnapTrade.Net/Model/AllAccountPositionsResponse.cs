@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A paginated list of all account positions.
+    /// Information about all account positions.
     /// </summary>
     [DataContract(Name = "AllAccountPositionsResponse")]
     public partial class AllAccountPositionsResponse : IEquatable<AllAccountPositionsResponse>, IValidatableObject
@@ -43,25 +43,9 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AllAccountPositionsResponse" /> class.
         /// </summary>
-        /// <param name="count">The total number of positions available across all pages. (required).</param>
-        /// <param name="next">The URL for the next page of results, or &#x60;null&#x60; if there is no next page. (required).</param>
-        /// <param name="previous">The URL for the previous page of results, or &#x60;null&#x60; if there is no previous page. (required).</param>
-        /// <param name="results">Positions returned for the current page. (required).</param>
-        public AllAccountPositionsResponse(int count = default(int), string next = default(string), string previous = default(string), List<AccountPosition> results = default(List<AccountPosition>)) : base()
+        /// <param name="results">Positions returned for the request. (required).</param>
+        public AllAccountPositionsResponse(List<AccountPosition> results = default(List<AccountPosition>)) : base()
         {
-            this.Count = count;
-            // to ensure "next" is required (not null)
-            if (next == null)
-            {
-                throw new ArgumentNullException("next is a required property for AllAccountPositionsResponse and cannot be null");
-            }
-            this.Next = next;
-            // to ensure "previous" is required (not null)
-            if (previous == null)
-            {
-                throw new ArgumentNullException("previous is a required property for AllAccountPositionsResponse and cannot be null");
-            }
-            this.Previous = previous;
             // to ensure "results" is required (not null)
             if (results == null)
             {
@@ -72,30 +56,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// The total number of positions available across all pages.
+        /// Positions returned for the request.
         /// </summary>
-        /// <value>The total number of positions available across all pages.</value>
-        [DataMember(Name = "count", IsRequired = true, EmitDefaultValue = true)]
-        public int Count { get; set; }
-
-        /// <summary>
-        /// The URL for the next page of results, or &#x60;null&#x60; if there is no next page.
-        /// </summary>
-        /// <value>The URL for the next page of results, or &#x60;null&#x60; if there is no next page.</value>
-        [DataMember(Name = "next", IsRequired = true, EmitDefaultValue = true)]
-        public string Next { get; set; }
-
-        /// <summary>
-        /// The URL for the previous page of results, or &#x60;null&#x60; if there is no previous page.
-        /// </summary>
-        /// <value>The URL for the previous page of results, or &#x60;null&#x60; if there is no previous page.</value>
-        [DataMember(Name = "previous", IsRequired = true, EmitDefaultValue = true)]
-        public string Previous { get; set; }
-
-        /// <summary>
-        /// Positions returned for the current page.
-        /// </summary>
-        /// <value>Positions returned for the current page.</value>
+        /// <value>Positions returned for the request.</value>
         [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = true)]
         public List<AccountPosition> Results { get; set; }
 
@@ -114,9 +77,6 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AllAccountPositionsResponse {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Count: ").Append(Count).Append("\n");
-            sb.Append("  Next: ").Append(Next).Append("\n");
-            sb.Append("  Previous: ").Append(Previous).Append("\n");
             sb.Append("  Results: ").Append(Results).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -155,20 +115,6 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Count == input.Count ||
-                    this.Count.Equals(input.Count)
-                ) && base.Equals(input) && 
-                (
-                    this.Next == input.Next ||
-                    (this.Next != null &&
-                    this.Next.Equals(input.Next))
-                ) && base.Equals(input) && 
-                (
-                    this.Previous == input.Previous ||
-                    (this.Previous != null &&
-                    this.Previous.Equals(input.Previous))
-                ) && base.Equals(input) && 
-                (
                     this.Results == input.Results ||
                     this.Results != null &&
                     input.Results != null &&
@@ -186,15 +132,6 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                hashCode = (hashCode * 59) + this.Count.GetHashCode();
-                if (this.Next != null)
-                {
-                    hashCode = (hashCode * 59) + this.Next.GetHashCode();
-                }
-                if (this.Previous != null)
-                {
-                    hashCode = (hashCode * 59) + this.Previous.GetHashCode();
-                }
                 if (this.Results != null)
                 {
                     hashCode = (hashCode * 59) + this.Results.GetHashCode();

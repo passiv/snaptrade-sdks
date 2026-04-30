@@ -11,26 +11,14 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A paginated list of all account positions.
+  # Information about all account positions.
   class AllAccountPositionsResponse
-    # The total number of positions available across all pages.
-    attr_accessor :count
-
-    # The URL for the next page of results, or `null` if there is no next page.
-    attr_accessor :_next
-
-    # The URL for the previous page of results, or `null` if there is no previous page.
-    attr_accessor :previous
-
-    # Positions returned for the current page.
+    # Positions returned for the request.
     attr_accessor :results
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'count' => :'count',
-        :'_next' => :'next',
-        :'previous' => :'previous',
         :'results' => :'results'
       }
     end
@@ -43,9 +31,6 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'count' => :'Integer',
-        :'_next' => :'String',
-        :'previous' => :'String',
         :'results' => :'Array<AccountPosition>'
       }
     end
@@ -53,8 +38,6 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'_next',
-        :'previous',
       ])
     end
 
@@ -73,18 +56,6 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
-      end
-
-      if attributes.key?(:'_next')
-        self._next = attributes[:'_next']
-      end
-
-      if attributes.key?(:'previous')
-        self.previous = attributes[:'previous']
-      end
-
       if attributes.key?(:'results')
         if (value = attributes[:'results']).is_a?(Array)
           self.results = value
@@ -96,10 +67,6 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @count.nil?
-        invalid_properties.push('invalid value for "count", count cannot be nil.')
-      end
-
       if @results.nil?
         invalid_properties.push('invalid value for "results", results cannot be nil.')
       end
@@ -110,7 +77,6 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @count.nil?
       return false if @results.nil?
       true
     end
@@ -120,9 +86,6 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          count == o.count &&
-          _next == o._next &&
-          previous == o.previous &&
           results == o.results
     end
 
@@ -135,7 +98,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [count, _next, previous, results].hash
+      [results].hash
     end
 
     # Builds the object from hash

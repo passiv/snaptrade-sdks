@@ -21,6 +21,7 @@ from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
 from snaptrade_client.apis.paths.accounts_account_id_positions import AccountsAccountIdPositions
 from snaptrade_client.apis.paths.accounts_account_id_orders import AccountsAccountIdOrders
+from snaptrade_client.apis.paths.accounts_account_id_balance_history import AccountsAccountIdBalanceHistory
 from snaptrade_client.apis.paths.accounts_account_id_recent_orders import AccountsAccountIdRecentOrders
 from snaptrade_client.apis.paths.accounts_account_id_return_rates import AccountsAccountIdReturnRates
 from snaptrade_client.apis.paths.accounts_account_id_activities import AccountsAccountIdActivities
@@ -47,7 +48,6 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_complex import Acco
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_positions_all import AccountsAccountIdPositionsAll
 from snaptrade_client.apis.paths.accounts_account_id_orders_v2 import AccountsAccountIdOrdersV2
-from snaptrade_client.apis.paths.accounts_account_id_balance_history import AccountsAccountIdBalanceHistory
 from snaptrade_client.apis.paths.accounts_account_id_recent_orders_v2 import AccountsAccountIdRecentOrdersV2
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.authorizations_authorization_id_transactions_sync import AuthorizationsAuthorizationIdTransactionsSync
@@ -86,6 +86,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS: AccountsAccountIdRecentOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
@@ -112,7 +113,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS_ALL: AccountsAccountIdPositionsAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
-        PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC: AuthorizationsAuthorizationIdTransactionsSync,
@@ -152,6 +152,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS: AccountsAccountIdRecentOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
@@ -178,7 +179,6 @@ path_to_api = PathToApi(
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS_ALL: AccountsAccountIdPositionsAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
-        PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC: AuthorizationsAuthorizationIdTransactionsSync,
