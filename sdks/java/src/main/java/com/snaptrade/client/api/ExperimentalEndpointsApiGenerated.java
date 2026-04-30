@@ -28,7 +28,6 @@ import java.io.IOException;
 
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
-import com.snaptrade.client.model.AccountValueHistoryResponse;
 import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import java.util.UUID;
@@ -77,193 +76,7 @@ public class ExperimentalEndpointsApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call getAccountBalanceHistoryCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/accounts/{accountId}/balanceHistory"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAccountBalanceHistoryValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling getAccountBalanceHistory(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling getAccountBalanceHistory(Async)");
-        }
-
-        // verify the required parameter 'accountId' is set
-        if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling getAccountBalanceHistory(Async)");
-        }
-
-        return getAccountBalanceHistoryCall(userId, userSecret, accountId, _callback);
-
-    }
-
-
-    private ApiResponse<AccountValueHistoryResponse> getAccountBalanceHistoryWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
-        okhttp3.Call localVarCall = getAccountBalanceHistoryValidateBeforeCall(userId, userSecret, accountId, null);
-        Type localVarReturnType = new TypeToken<AccountValueHistoryResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    private okhttp3.Call getAccountBalanceHistoryAsync(String userId, String userSecret, UUID accountId, final ApiCallback<AccountValueHistoryResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = getAccountBalanceHistoryValidateBeforeCall(userId, userSecret, accountId, _callback);
-        Type localVarReturnType = new TypeToken<AccountValueHistoryResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-
-    public abstract class GetAccountBalanceHistoryRequestBuilderGenerated {
-        final String userId;
-        final String userSecret;
-        final UUID accountId;
-
-        public GetAccountBalanceHistoryRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
-            this.userId = userId;
-            this.userSecret = userSecret;
-            this.accountId = accountId;
-        }
-
-        /**
-         * Build call for getAccountBalanceHistory
-         * @param _callback ApiCallback API callback
-         * @return Call to execute
-         * @throws ApiException If fail to serialize the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-         </table>
-         */
-        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getAccountBalanceHistoryCall(userId, userSecret, accountId, _callback);
-        }
-
-
-        /**
-         * Execute getAccountBalanceHistory request
-         * @return AccountValueHistoryResponse
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-         </table>
-         */
-        public AccountValueHistoryResponse execute() throws ApiException {
-            ApiResponse<AccountValueHistoryResponse> localVarResp = getAccountBalanceHistoryWithHttpInfo(userId, userSecret, accountId);
-            return localVarResp.getResponseBody();
-        }
-
-        /**
-         * Execute getAccountBalanceHistory request with HTTP info returned
-         * @return ApiResponse&lt;AccountValueHistoryResponse&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-         </table>
-         */
-        public ApiResponse<AccountValueHistoryResponse> executeWithHttpInfo() throws ApiException {
-            return getAccountBalanceHistoryWithHttpInfo(userId, userSecret, accountId);
-        }
-
-        /**
-         * Execute getAccountBalanceHistory request (asynchronously)
-         * @param _callback The callback to be executed when the API call finishes
-         * @return The request call
-         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-         </table>
-         */
-        public okhttp3.Call executeAsync(final ApiCallback<AccountValueHistoryResponse> _callback) throws ApiException {
-            return getAccountBalanceHistoryAsync(userId, userSecret, accountId, _callback);
-        }
-    }
-
-    /**
-     * List historical account total value
-     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId  (required)
-     * @return GetAccountBalanceHistoryRequestBuilder
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-     </table>
-     */
-    public ExperimentalEndpointsApi.GetAccountBalanceHistoryRequestBuilder getAccountBalanceHistory(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
-        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
-            
-
-        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
-            
-
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
-        return ((ExperimentalEndpointsApi) this).new GetAccountBalanceHistoryRequestBuilder(userId, userSecret, accountId);
-    }
-    private okhttp3.Call getAllAccountPositionsCall(String userId, String userSecret, UUID accountId, Integer page, Integer pageSize, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getAllAccountPositionsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -297,14 +110,6 @@ public class ExperimentalEndpointsApiGenerated {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
         }
 
-        if (page != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page", page));
-        }
-
-        if (pageSize != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("page_size", pageSize));
-        }
-
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -325,7 +130,7 @@ public class ExperimentalEndpointsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAllAccountPositionsValidateBeforeCall(String userId, String userSecret, UUID accountId, Integer page, Integer pageSize, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getAllAccountPositionsValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling getAllAccountPositions(Async)");
@@ -341,20 +146,20 @@ public class ExperimentalEndpointsApiGenerated {
             throw new ApiException("Missing the required parameter 'accountId' when calling getAllAccountPositions(Async)");
         }
 
-        return getAllAccountPositionsCall(userId, userSecret, accountId, page, pageSize, _callback);
+        return getAllAccountPositionsCall(userId, userSecret, accountId, _callback);
 
     }
 
 
-    private ApiResponse<AllAccountPositionsResponse> getAllAccountPositionsWithHttpInfo(String userId, String userSecret, UUID accountId, Integer page, Integer pageSize) throws ApiException {
-        okhttp3.Call localVarCall = getAllAccountPositionsValidateBeforeCall(userId, userSecret, accountId, page, pageSize, null);
+    private ApiResponse<AllAccountPositionsResponse> getAllAccountPositionsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+        okhttp3.Call localVarCall = getAllAccountPositionsValidateBeforeCall(userId, userSecret, accountId, null);
         Type localVarReturnType = new TypeToken<AllAccountPositionsResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getAllAccountPositionsAsync(String userId, String userSecret, UUID accountId, Integer page, Integer pageSize, final ApiCallback<AllAccountPositionsResponse> _callback) throws ApiException {
+    private okhttp3.Call getAllAccountPositionsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<AllAccountPositionsResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getAllAccountPositionsValidateBeforeCall(userId, userSecret, accountId, page, pageSize, _callback);
+        okhttp3.Call localVarCall = getAllAccountPositionsValidateBeforeCall(userId, userSecret, accountId, _callback);
         Type localVarReturnType = new TypeToken<AllAccountPositionsResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -364,8 +169,6 @@ public class ExperimentalEndpointsApiGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
-        Integer page;
-        Integer pageSize;
 
         public GetAllAccountPositionsRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
             this.userId = userId;
@@ -373,26 +176,6 @@ public class ExperimentalEndpointsApiGenerated {
             this.accountId = accountId;
         }
 
-        /**
-         * Set page
-         * @param page The page number to return. Defaults to 1. (optional)
-         * @return ExperimentalEndpointsApi.GetAllAccountPositionsRequestBuilder
-         */
-        public ExperimentalEndpointsApi.GetAllAccountPositionsRequestBuilder page(Integer page) {
-            this.page = page;
-            return (ExperimentalEndpointsApi.GetAllAccountPositionsRequestBuilder) this;
-        }
-        
-        /**
-         * Set pageSize
-         * @param pageSize The number of positions to return per page. Defaults to 100 with a maximum of 1000. (optional)
-         * @return ExperimentalEndpointsApi.GetAllAccountPositionsRequestBuilder
-         */
-        public ExperimentalEndpointsApi.GetAllAccountPositionsRequestBuilder pageSize(Integer pageSize) {
-            this.pageSize = pageSize;
-            return (ExperimentalEndpointsApi.GetAllAccountPositionsRequestBuilder) this;
-        }
-        
         /**
          * Build call for getAllAccountPositions
          * @param _callback ApiCallback API callback
@@ -406,7 +189,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getAllAccountPositionsCall(userId, userSecret, accountId, page, pageSize, _callback);
+            return getAllAccountPositionsCall(userId, userSecret, accountId, _callback);
         }
 
 
@@ -422,7 +205,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public AllAccountPositionsResponse execute() throws ApiException {
-            ApiResponse<AllAccountPositionsResponse> localVarResp = getAllAccountPositionsWithHttpInfo(userId, userSecret, accountId, page, pageSize);
+            ApiResponse<AllAccountPositionsResponse> localVarResp = getAllAccountPositionsWithHttpInfo(userId, userSecret, accountId);
             return localVarResp.getResponseBody();
         }
 
@@ -438,7 +221,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public ApiResponse<AllAccountPositionsResponse> executeWithHttpInfo() throws ApiException {
-            return getAllAccountPositionsWithHttpInfo(userId, userSecret, accountId, page, pageSize);
+            return getAllAccountPositionsWithHttpInfo(userId, userSecret, accountId);
         }
 
         /**
@@ -454,13 +237,13 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<AllAccountPositionsResponse> _callback) throws ApiException {
-            return getAllAccountPositionsAsync(userId, userSecret, accountId, page, pageSize, _callback);
+            return getAllAccountPositionsAsync(userId, userSecret, accountId, _callback);
         }
     }
 
     /**
      * List all account positions
-     * Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)

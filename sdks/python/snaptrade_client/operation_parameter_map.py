@@ -27,6 +27,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/balanceHistory-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/holdings-GET': {
         'parameters': [
             {
@@ -352,19 +365,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/balanceHistory-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-        ]
-    },
     '/accounts/{accountId}/positions/all-GET': {
         'parameters': [
             {
@@ -375,12 +375,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'accountId'
-            },
-            {
-                'name': 'page'
-            },
-            {
-                'name': 'page_size'
             },
         ]
     },

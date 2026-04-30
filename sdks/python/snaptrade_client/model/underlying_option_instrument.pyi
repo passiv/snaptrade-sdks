@@ -40,12 +40,18 @@ class UnderlyingOptionInstrument(
         def discriminator():
             return {
                 'kind': {
+                    'AdrInstrument': AdrInstrument,
+                    'CefInstrument': CefInstrument,
                     'CryptoInstrument': CryptoInstrument,
                     'EtfInstrument': EtfInstrument,
+                    'MutualFundInstrument': MutualFundInstrument,
                     'OtherInstrument': OtherInstrument,
                     'StockInstrument': StockInstrument,
+                    'adr': AdrInstrument,
+                    'cef': CefInstrument,
                     'crypto': CryptoInstrument,
                     'etf': EtfInstrument,
+                    'mutualfund': MutualFundInstrument,
                     'other': OtherInstrument,
                     'stock': StockInstrument,
                 }
@@ -63,7 +69,10 @@ class UnderlyingOptionInstrument(
             # loading
             return [
                 StockInstrument,
+                AdrInstrument,
                 EtfInstrument,
+                MutualFundInstrument,
+                CefInstrument,
                 CryptoInstrument,
                 OtherInstrument,
             ]
@@ -82,7 +91,10 @@ class UnderlyingOptionInstrument(
             **kwargs,
         )
 
+from snaptrade_client.model.adr_instrument import AdrInstrument
+from snaptrade_client.model.cef_instrument import CefInstrument
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.etf_instrument import EtfInstrument
+from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.other_instrument import OtherInstrument
 from snaptrade_client.model.stock_instrument import StockInstrument

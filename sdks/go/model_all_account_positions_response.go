@@ -15,15 +15,9 @@ import (
 	"encoding/json"
 )
 
-// AllAccountPositionsResponse A paginated list of all account positions.
+// AllAccountPositionsResponse Information about all account positions.
 type AllAccountPositionsResponse struct {
-	// The total number of positions available across all pages.
-	Count int32 `json:"count"`
-	// The URL for the next page of results, or `null` if there is no next page.
-	Next NullableString `json:"next"`
-	// The URL for the previous page of results, or `null` if there is no previous page.
-	Previous NullableString `json:"previous"`
-	// Positions returned for the current page.
+	// Positions returned for the request.
 	Results []AccountPosition `json:"results"`
 	AdditionalProperties map[string]interface{}
 }
@@ -34,11 +28,8 @@ type _AllAccountPositionsResponse AllAccountPositionsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAllAccountPositionsResponse(count int32, next NullableString, previous NullableString, results []AccountPosition) *AllAccountPositionsResponse {
+func NewAllAccountPositionsResponse(results []AccountPosition) *AllAccountPositionsResponse {
 	this := AllAccountPositionsResponse{}
-	this.Count = count
-	this.Next = next
-	this.Previous = previous
 	this.Results = results
 	return &this
 }
@@ -49,82 +40,6 @@ func NewAllAccountPositionsResponse(count int32, next NullableString, previous N
 func NewAllAccountPositionsResponseWithDefaults() *AllAccountPositionsResponse {
 	this := AllAccountPositionsResponse{}
 	return &this
-}
-
-// GetCount returns the Count field value
-func (o *AllAccountPositionsResponse) GetCount() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Count
-}
-
-// GetCountOk returns a tuple with the Count field value
-// and a boolean to check if the value has been set.
-func (o *AllAccountPositionsResponse) GetCountOk() (*int32, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return &o.Count, true
-}
-
-// SetCount sets field value
-func (o *AllAccountPositionsResponse) SetCount(v int32) {
-	o.Count = v
-}
-
-// GetNext returns the Next field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *AllAccountPositionsResponse) GetNext() string {
-	if o == nil || o.Next.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Next.Get()
-}
-
-// GetNextOk returns a tuple with the Next field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AllAccountPositionsResponse) GetNextOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.Next.Get(), o.Next.IsSet()
-}
-
-// SetNext sets field value
-func (o *AllAccountPositionsResponse) SetNext(v string) {
-	o.Next.Set(&v)
-}
-
-// GetPrevious returns the Previous field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *AllAccountPositionsResponse) GetPrevious() string {
-	if o == nil || o.Previous.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Previous.Get()
-}
-
-// GetPreviousOk returns a tuple with the Previous field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AllAccountPositionsResponse) GetPreviousOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.Previous.Get(), o.Previous.IsSet()
-}
-
-// SetPrevious sets field value
-func (o *AllAccountPositionsResponse) SetPrevious(v string) {
-	o.Previous.Set(&v)
 }
 
 // GetResults returns the Results field value
@@ -154,15 +69,6 @@ func (o *AllAccountPositionsResponse) SetResults(v []AccountPosition) {
 func (o AllAccountPositionsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["count"] = o.Count
-	}
-	if true {
-		toSerialize["next"] = o.Next.Get()
-	}
-	if true {
-		toSerialize["previous"] = o.Previous.Get()
-	}
-	if true {
 		toSerialize["results"] = o.Results
 	}
 
@@ -183,9 +89,6 @@ func (o *AllAccountPositionsResponse) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "count")
-		delete(additionalProperties, "next")
-		delete(additionalProperties, "previous")
 		delete(additionalProperties, "results")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -24,6 +24,7 @@ Connect brokerage accounts to your app for live positions and trading
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
+  * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
@@ -49,7 +50,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.experimentalEndpoints.getAccountBalanceHistory`](#snaptradeexperimentalendpointsgetaccountbalancehistory)
   * [`snaptrade.experimentalEndpoints.getAllAccountPositions`](#snaptradeexperimentalendpointsgetallaccountpositions)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
@@ -321,6 +321,41 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/activities` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAccountBalanceHistory`<a id="snaptradeaccountinformationgetaccountbalancehistory"></a>
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AccountValueHistoryResponse result = client
+        .accountInformation
+        .getAccountBalanceHistory(userId, userSecret, accountId)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountValueHistoryResponse](./src/main/java/com/snaptrade/client/model/AccountValueHistoryResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/balanceHistory` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1303,46 +1338,11 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.experimentalEndpoints.getAccountBalanceHistory`<a id="snaptradeexperimentalendpointsgetaccountbalancehistory"></a>
-
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountValueHistoryResponse result = client
-        .experimentalEndpoints
-        .getAccountBalanceHistory(userId, userSecret, accountId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountValueHistoryResponse](./src/main/java/com/snaptrade/client/model/AccountValueHistoryResponse.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/balanceHistory` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.experimentalEndpoints.getAllAccountPositions`<a id="snaptradeexperimentalendpointsgetallaccountpositions"></a>
 
-Returns a paginated list of all positions in the specified account.
+Returns a list of all positions in the specified account.
 
-The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
 Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
 
@@ -1355,8 +1355,6 @@ If the connection has become disabled, it can no longer access the latest data f
 AllAccountPositionsResponse result = client
         .experimentalEndpoints
         .getAllAccountPositions(userId, userSecret, accountId)
-        .page(page)
-        .pageSize(pageSize)
         .execute();
 ```
 
@@ -1367,14 +1365,6 @@ AllAccountPositionsResponse result = client
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### page: `Integer`<a id="page-integer"></a>
-
-The page number to return. Defaults to 1.
-
-##### pageSize: `Integer`<a id="pagesize-integer"></a>
-
-The number of positions to return per page. Defaults to 100 with a maximum of 1000.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

@@ -4,7 +4,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getAccountBalanceHistory**](ExperimentalEndpointsApi.md#getAccountBalanceHistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
 | [**getAllAccountPositions**](ExperimentalEndpointsApi.md#getAllAccountPositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
 | [**getUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getUserAccountOrderDetailV2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**getUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountOrdersV2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
@@ -12,111 +11,13 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**syncBrokerageAuthorizationTransactions**](ExperimentalEndpointsApi.md#syncBrokerageAuthorizationTransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection |
 
 
-<a name="getAccountBalanceHistory"></a>
-# **getAccountBalanceHistory**
-> AccountValueHistoryResponse getAccountBalanceHistory(userId, userSecret, accountId).execute();
-
-List historical account total value
-
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-
-### Example
-```java
-import com.snaptrade.client.ApiClient;
-import com.snaptrade.client.ApiException;
-import com.snaptrade.client.ApiResponse;
-import com.snaptrade.client.Snaptrade;
-import com.snaptrade.client.Configuration;
-import com.snaptrade.client.auth.*;
-import com.snaptrade.client.model.*;
-import com.snaptrade.client.api.ExperimentalEndpointsApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
-    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-    
-    Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    try {
-      AccountValueHistoryResponse result = client
-              .experimentalEndpoints
-              .getAccountBalanceHistory(userId, userSecret, accountId)
-              .execute();
-      System.out.println(result);
-      System.out.println(result.getHistory());
-      System.out.println(result.getCurrency());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountBalanceHistory");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      ApiResponse<AccountValueHistoryResponse> response = client
-              .experimentalEndpoints
-              .getAccountBalanceHistory(userId, userSecret, accountId)
-              .executeWithHttpInfo();
-      System.out.println(response.getResponseBody());
-      System.out.println(response.getResponseHeaders());
-      System.out.println(response.getStatusCode());
-      System.out.println(response.getRoundTripTime());
-      System.out.println(response.getRequest());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountBalanceHistory");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-| **accountId** | **UUID**|  | |
-
-### Return type
-
-[**AccountValueHistoryResponse**](AccountValueHistoryResponse.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-
 <a name="getAllAccountPositions"></a>
 # **getAllAccountPositions**
-> AllAccountPositionsResponse getAllAccountPositions(userId, userSecret, accountId).page(page).pageSize(pageSize).execute();
+> AllAccountPositionsResponse getAllAccountPositions(userId, userSecret, accountId).execute();
 
 List all account positions
 
-Returns a paginated list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  Stock positions may also include &#x60;cash_equivalent&#x60;, and may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
 
 ### Example
 ```java
@@ -143,19 +44,12 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    Integer page = 1; // The page number to return. Defaults to 1.
-    Integer pageSize = 100; // The number of positions to return per page. Defaults to 100 with a maximum of 1000.
     try {
       AllAccountPositionsResponse result = client
               .experimentalEndpoints
               .getAllAccountPositions(userId, userSecret, accountId)
-              .page(page)
-              .pageSize(pageSize)
               .execute();
       System.out.println(result);
-      System.out.println(result.getCount());
-      System.out.println(result.getNext());
-      System.out.println(result.getPrevious());
       System.out.println(result.getResults());
     } catch (ApiException e) {
       System.err.println("Exception when calling ExperimentalEndpointsApi#getAllAccountPositions");
@@ -170,8 +64,6 @@ public class Example {
       ApiResponse<AllAccountPositionsResponse> response = client
               .experimentalEndpoints
               .getAllAccountPositions(userId, userSecret, accountId)
-              .page(page)
-              .pageSize(pageSize)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -197,8 +89,6 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **page** | **Integer**| The page number to return. Defaults to 1. | [optional] |
-| **pageSize** | **Integer**| The number of positions to return per page. Defaults to 100 with a maximum of 1000. | [optional] |
 
 ### Return type
 

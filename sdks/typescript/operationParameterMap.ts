@@ -33,6 +33,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/balanceHistory-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/holdings-GET': {
         parameters: [
             {
@@ -358,19 +371,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/balanceHistory-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-        ]
-    },
     '/accounts/{accountId}/positions/all-GET': {
         parameters: [
             {
@@ -381,12 +381,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'accountId'
-            },
-            {
-                name: 'page'
-            },
-            {
-                name: 'page_size'
             },
         ]
     },

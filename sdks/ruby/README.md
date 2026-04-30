@@ -20,6 +20,7 @@ Connect brokerage accounts to your app for live positions and trading
 - [Raw HTTP Response](#raw-http-response)
 - [Reference](#reference)
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
+  * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
@@ -45,7 +46,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.experimental_endpoints.get_account_balance_history`](#snaptradeexperimental_endpointsget_account_balance_history)
   * [`snaptrade.experimental_endpoints.get_all_account_positions`](#snaptradeexperimental_endpointsget_all_account_positions)
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
@@ -211,6 +211,40 @@ Transfer of assets from one account to another. - `SPLIT` - A stock share split.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/activities` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.account_information.get_account_balance_history`<a id="snaptradeaccount_informationget_account_balance_history"></a>
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_account_balance_history(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountValueHistoryResponse](./lib/snaptrade/models/account_value_history_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/balanceHistory` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1185,45 +1219,11 @@ specific users
 ---
 
 
-### `snaptrade.experimental_endpoints.get_account_balance_history`<a id="snaptradeexperimental_endpointsget_account_balance_history"></a>
-
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.experimental_endpoints.get_account_balance_history(
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountValueHistoryResponse](./lib/snaptrade/models/account_value_history_response.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/balanceHistory` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.experimental_endpoints.get_all_account_positions`<a id="snaptradeexperimental_endpointsget_all_account_positions"></a>
 
-Returns a paginated list of all positions in the specified account.
+Returns a list of all positions in the specified account.
 
-The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
 Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
 
@@ -1237,8 +1237,6 @@ result = snaptrade.experimental_endpoints.get_all_account_positions(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  page: 1,
-  page_size: 100,
 )
 p result
 ```
@@ -1248,13 +1246,6 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### page: `Integer`<a id="page-integer"></a>
-The page number to return. Defaults to 1.
-
-##### page_size: `Integer`<a id="page_size-integer"></a>
-The number of positions to return per page. Defaults to 100 with a maximum of
-1000.
-
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AllAccountPositionsResponse](./lib/snaptrade/models/all_account_positions_response.rb)

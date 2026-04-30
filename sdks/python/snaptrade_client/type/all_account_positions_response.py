@@ -18,16 +18,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from snaptrade_client.type.account_position import AccountPosition
 
 class RequiredAllAccountPositionsResponse(TypedDict):
-    # The total number of positions available across all pages.
-    count: int
-
-    # The URL for the next page of results, or `null` if there is no next page.
-    next: typing.Optional[str]
-
-    # The URL for the previous page of results, or `null` if there is no previous page.
-    previous: typing.Optional[str]
-
-    # Positions returned for the current page.
+    # Positions returned for the request.
     results: typing.List[AccountPosition]
 
 class OptionalAllAccountPositionsResponse(TypedDict, total=False):

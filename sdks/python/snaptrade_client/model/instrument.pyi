@@ -40,15 +40,21 @@ class Instrument(
         def discriminator():
             return {
                 'kind': {
+                    'AdrInstrument': AdrInstrument,
+                    'CefInstrument': CefInstrument,
                     'CryptoInstrument': CryptoInstrument,
                     'EtfInstrument': EtfInstrument,
                     'FutureInstrument': FutureInstrument,
+                    'MutualFundInstrument': MutualFundInstrument,
                     'OptionInstrument': OptionInstrument,
                     'OtherInstrument': OtherInstrument,
                     'StockInstrument': StockInstrument,
+                    'adr': AdrInstrument,
+                    'cef': CefInstrument,
                     'crypto': CryptoInstrument,
                     'etf': EtfInstrument,
                     'future': FutureInstrument,
+                    'mutualfund': MutualFundInstrument,
                     'option': OptionInstrument,
                     'other': OtherInstrument,
                     'stock': StockInstrument,
@@ -67,7 +73,10 @@ class Instrument(
             # loading
             return [
                 StockInstrument,
+                AdrInstrument,
                 EtfInstrument,
+                MutualFundInstrument,
+                CefInstrument,
                 CryptoInstrument,
                 OtherInstrument,
                 FutureInstrument,
@@ -88,9 +97,12 @@ class Instrument(
             **kwargs,
         )
 
+from snaptrade_client.model.adr_instrument import AdrInstrument
+from snaptrade_client.model.cef_instrument import CefInstrument
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.etf_instrument import EtfInstrument
 from snaptrade_client.model.future_instrument import FutureInstrument
+from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.option_instrument import OptionInstrument
 from snaptrade_client.model.other_instrument import OtherInstrument
 from snaptrade_client.model.stock_instrument import StockInstrument

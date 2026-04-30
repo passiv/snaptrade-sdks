@@ -136,7 +136,7 @@ namespace SnapTrade.Net.Client
             };
 
             // Setting Timeout has side effects (forces ApiClient creation).
-            Timeout = 100000;
+            Timeout = 120000;
         }
 
         /// <summary>

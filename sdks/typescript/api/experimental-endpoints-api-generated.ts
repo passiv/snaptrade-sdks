@@ -23,8 +23,6 @@ import { AccountOrderRecordV2 } from '../models';
 // @ts-ignore
 import { AccountOrdersV2Response } from '../models';
 // @ts-ignore
-import { AccountValueHistoryResponse } from '../models';
-// @ts-ignore
 import { AllAccountPositionsResponse } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationTransactionsSyncConfirmation } from '../models';
@@ -48,79 +46,15 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-         * @summary List historical account total value
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountBalanceHistory: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getAccountBalanceHistory', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getAccountBalanceHistory', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getAccountBalanceHistory', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/balanceHistory`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/balanceHistory',
-                httpMethod: 'GET'
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account positions
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {number} [page] The page number to return. Defaults to 1.
-         * @param {number} [pageSize] The number of positions to return per page. Defaults to 100 with a maximum of 1000.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAccountPositions: async (userId: string, userSecret: string, accountId: string, page?: number, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllAccountPositions: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getAllAccountPositions', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -152,14 +86,6 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
 
             if (userSecret !== undefined) {
                 localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
-            }
-
-            if (pageSize !== undefined) {
-                localVarQueryParameter['page_size'] = pageSize;
             }
 
 
@@ -459,25 +385,14 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
     const localVarAxiosParamCreator = ExperimentalEndpointsApiAxiosParamCreator(configuration)
     return {
         /**
-         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-         * @summary List historical account total value
-         * @param {ExperimentalEndpointsApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountBalanceHistory(requestParameters: ExperimentalEndpointsApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountValueHistoryResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountBalanceHistory(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account positions
          * @param {ExperimentalEndpointsApiGetAllAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getAllAccountPositions(requestParameters: ExperimentalEndpointsApiGetAllAccountPositionsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllAccountPositionsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountPositions(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.page, requestParameters.pageSize, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountPositions(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -535,17 +450,7 @@ export const ExperimentalEndpointsApiFactory = function (configuration?: Configu
     const localVarFp = ExperimentalEndpointsApiFp(configuration)
     return {
         /**
-         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-         * @summary List historical account total value
-         * @param {ExperimentalEndpointsApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountBalanceHistory(requestParameters: ExperimentalEndpointsApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig): AxiosPromise<AccountValueHistoryResponse> {
-            return localVarFp.getAccountBalanceHistory(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account positions
          * @param {ExperimentalEndpointsApiGetAllAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -598,36 +503,6 @@ export const ExperimentalEndpointsApiFactory = function (configuration?: Configu
 };
 
 /**
- * Request parameters for getAccountBalanceHistory operation in ExperimentalEndpointsApi.
- * @export
- * @interface ExperimentalEndpointsApiGetAccountBalanceHistoryRequest
- */
-export type ExperimentalEndpointsApiGetAccountBalanceHistoryRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountBalanceHistory
-    */
-    readonly userId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountBalanceHistory
-    */
-    readonly userSecret: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountBalanceHistory
-    */
-    readonly accountId: string
-    
-}
-
-/**
  * Request parameters for getAllAccountPositions operation in ExperimentalEndpointsApi.
  * @export
  * @interface ExperimentalEndpointsApiGetAllAccountPositionsRequest
@@ -654,20 +529,6 @@ export type ExperimentalEndpointsApiGetAllAccountPositionsRequest = {
     * @memberof ExperimentalEndpointsApiGetAllAccountPositions
     */
     readonly accountId: string
-    
-    /**
-    * The page number to return. Defaults to 1.
-    * @type {number}
-    * @memberof ExperimentalEndpointsApiGetAllAccountPositions
-    */
-    readonly page?: number
-    
-    /**
-    * The number of positions to return per page. Defaults to 100 with a maximum of 1000.
-    * @type {number}
-    * @memberof ExperimentalEndpointsApiGetAllAccountPositions
-    */
-    readonly pageSize?: number
     
 }
 
@@ -827,19 +688,7 @@ export type ExperimentalEndpointsApiSyncBrokerageAuthorizationTransactionsReques
  */
 export class ExperimentalEndpointsApiGenerated extends BaseAPI {
     /**
-     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-     * @summary List historical account total value
-     * @param {ExperimentalEndpointsApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ExperimentalEndpointsApiGenerated
-     */
-    public getAccountBalanceHistory(requestParameters: ExperimentalEndpointsApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).getAccountBalanceHistory(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a paginated list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response page, including stocks, ETFs, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @summary List all account positions
      * @param {ExperimentalEndpointsApiGetAllAccountPositionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

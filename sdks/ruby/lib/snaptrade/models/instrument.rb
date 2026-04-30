@@ -17,9 +17,12 @@ module SnapTrade
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of
         [
+          :'AdrInstrument',
+          :'CefInstrument',
           :'CryptoInstrument',
           :'EtfInstrument',
           :'FutureInstrument',
+          :'MutualFundInstrument',
           :'OptionInstrument',
           :'OtherInstrument',
           :'StockInstrument'
@@ -34,9 +37,12 @@ module SnapTrade
       # Discriminator's mapping (OpenAPI v3)
       def openapi_discriminator_mapping
         {
+          :'adr' => :'AdrInstrument',
+          :'cef' => :'CefInstrument',
           :'crypto' => :'CryptoInstrument',
           :'etf' => :'EtfInstrument',
           :'future' => :'FutureInstrument',
+          :'mutualfund' => :'MutualFundInstrument',
           :'option' => :'OptionInstrument',
           :'other' => :'OtherInstrument',
           :'stock' => :'StockInstrument'

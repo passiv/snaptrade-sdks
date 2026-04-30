@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { AccountPosition } from './account-position';
 
 /**
- * A paginated list of all account positions.
+ * Information about all account positions.
  * @export
  * @interface AllAccountPositionsResponse
  */
@@ -21,25 +21,7 @@ export interface AllAccountPositionsResponse {
     [key: string]: any;
 
     /**
-     * The total number of positions available across all pages.
-     * @type {number}
-     * @memberof AllAccountPositionsResponse
-     */
-    'count': number;
-    /**
-     * The URL for the next page of results, or `null` if there is no next page.
-     * @type {string}
-     * @memberof AllAccountPositionsResponse
-     */
-    'next': string | null;
-    /**
-     * The URL for the previous page of results, or `null` if there is no previous page.
-     * @type {string}
-     * @memberof AllAccountPositionsResponse
-     */
-    'previous': string | null;
-    /**
-     * Positions returned for the current page.
+     * Positions returned for the request.
      * @type {Array<AccountPosition>}
      * @memberof AllAccountPositionsResponse
      */
