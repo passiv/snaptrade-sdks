@@ -1,5 +1,7 @@
 # Frequently Asked Questions
 
+Need a quick definition while reading? See [Terminology](https://docs.snaptrade.com/docs/terminology).
+
 ## API Keys
 
 ### I have lost the consumerKey to my API Key. What should I do?

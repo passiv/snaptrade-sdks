@@ -13,6 +13,7 @@ See a list of our SDKs below, or visit any of our additional resources to learn 
 
 - [Homepage](https://www.snaptrade.com/) – learn more about SnapTrade and why we're a great fit for you
 - [Getting started and tutorials](https://docs.snaptrade.com/docs) – guides and tutorials so you can get up and running quickly
+- [Terminology](https://docs.snaptrade.com/docs/terminology) – definitions for commonly used SnapTrade terms
 - [Full API Reference](https://docs.snaptrade.com/reference) – in depth reference to take full advantage of our API
 - [Test keys](mailto:api@snaptrade.com?subject=Test%20key%20request&body=Name%20of%20company:%0DUse%20case:%20trading%20or%20read-only%0DPhone%20number:) – request your own test keys once you're ready to give us a try
 - [Demo](https://docs.snaptrade.com/demo/getting-started) – useful to quickly take our API for a spin once you have access keys
