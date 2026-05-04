@@ -2,3 +2,9 @@ index.test.ts
 requestAfterHook.ts
 requestBeforeHook.ts
 mock.test.ts
+package.json
+tsconfig.json
+webpack.config.js
+tsdown.config.ts
+.npmignore
+scripts/sync-version.mjs

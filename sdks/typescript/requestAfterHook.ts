@@ -16,7 +16,6 @@ async function computeHmacSha256(
 ): Promise<string> {
   if (isNodeEnvironment()) {
     // Node.js environment
-    const crypto = require("crypto");
     const hmac = crypto.createHmac("sha256", key);
     hmac.update(message);
     return hmac.digest("base64"); // or return Buffer if you want raw bytes
