@@ -520,7 +520,7 @@ defaults value is set to \"all\"
 
 ##### days: `number`<a id="days-number"></a>
 
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1478,7 +1478,7 @@ defaults value is set to \"all\"
 
 ##### days: `number`<a id="days-number"></a>
 
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

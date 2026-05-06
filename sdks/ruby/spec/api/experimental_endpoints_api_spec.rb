@@ -64,7 +64,7 @@ describe 'ExperimentalEndpointsApi' do
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :state defaults value is set to \&quot;all\&quot;
-  # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+  # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
   # @return [AccountOrdersV2Response]
   describe 'get_user_account_orders_v2 test' do
     it 'should work' do

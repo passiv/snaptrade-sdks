@@ -681,11 +681,12 @@ paths:
               - executed
         - in: query
           name: days
-          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
           schema:
             type: integer
             format: int32
             minimum: 1
+            maximum: 90
             example: 30
         - in: path
           name: accountId
@@ -741,11 +742,12 @@ paths:
               - executed
         - in: query
           name: days
-          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
           schema:
             type: integer
             format: int32
             minimum: 1
+            maximum: 90
             example: 30
         - in: path
           name: accountId

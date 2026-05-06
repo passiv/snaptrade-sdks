@@ -214,7 +214,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountOrderRecord&gt;</returns>
         List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
@@ -230,7 +230,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
         ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
@@ -608,7 +608,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;AccountOrderRecord&gt;</returns>
@@ -625,7 +625,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;AccountOrderRecord&gt;)</returns>
@@ -2274,7 +2274,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountOrderRecord&gt;</returns>
         public List<AccountOrderRecord> GetUserAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
@@ -2291,7 +2291,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountOrderRecord&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<AccountOrderRecord>> GetUserAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
@@ -2389,7 +2389,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;AccountOrderRecord&gt;</returns>
@@ -2407,7 +2407,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
         /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;AccountOrderRecord&gt;)</returns>
