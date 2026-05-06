@@ -306,6 +306,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/accounts-GET': {
+        parameters: [
+            {
+                name: 'authorizationId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/authorizations-GET': {
         parameters: [
             {

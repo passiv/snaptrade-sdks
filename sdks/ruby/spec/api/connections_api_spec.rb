@@ -69,6 +69,20 @@ describe 'ConnectionsApi' do
     end
   end
 
+  # unit tests for list_brokerage_authorization_accounts
+  # List accounts for a connection
+  # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+  # @param authorization_id 
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [Array<Account>]
+  describe 'list_brokerage_authorization_accounts test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for list_brokerage_authorizations
   # List all connections
   # Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 

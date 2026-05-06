@@ -2382,6 +2382,7 @@ public class AccountInformationApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call listUserAccountsValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -2433,7 +2434,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return listUserAccountsCall(userId, userSecret, _callback);
         }
@@ -2449,7 +2452,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public List<Account> execute() throws ApiException {
             ApiResponse<List<Account>> localVarResp = listUserAccountsWithHttpInfo(userId, userSecret);
             return localVarResp.getResponseBody();
@@ -2465,7 +2470,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
             return listUserAccountsWithHttpInfo(userId, userSecret);
         }
@@ -2481,7 +2488,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
             return listUserAccountsAsync(userId, userSecret, _callback);
         }
@@ -2489,7 +2498,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List accounts
-     * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  Please note that this data is cached and only refreshed once a day.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).   - If you don&#39;t, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+     * **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This data is cached and only refreshed once a day, regardless of the customer&#39;s plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return ListUserAccountsRequestBuilder
@@ -2499,7 +2508,9 @@ public class AccountInformationApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public AccountInformationApi.ListUserAccountsRequestBuilder listUserAccounts(String userId, String userSecret) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             

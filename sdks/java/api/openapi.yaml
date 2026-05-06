@@ -690,6 +690,70 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-disable
       x-accepts: application/json
+  /authorizations/{authorizationId}/accounts:
+    get:
+      description: "Returns all brokerage accounts that belong to the specified connection\
+        \ for the authenticated user.\n\nOn real-time plans, this endpoint refreshes\
+        \ each account's opening date, funding date, and total value live from the\
+        \ brokerage on each call. \n\nOn delayed plans, this endpoint returns cached\
+        \ data that is refreshed once a day. To force a refresh, use the [manual refresh\
+        \ endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).\n\
+        \nCheck your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)\
+        \ to see whether your plan includes real-time data.\n"
+      operationId: Connections_listBrokerageAuthorizationAccounts
+      parameters:
+      - explode: false
+        in: path
+        name: authorizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: List of brokerage accounts under the specified connection.
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Unauthorized, invalid credentials for this resource"
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: The requested resource does not exist.
+          x-do-not-generate: true
+      summary: List accounts for a connection
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId-accounts
+      x-accepts: application/json
   /sessionEvents:
     get:
       description: Returns a list of session events associated with a user.
@@ -740,14 +804,13 @@ paths:
       x-accepts: application/json
   /accounts:
     get:
+      deprecated: true
       description: |
+        **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
+
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-        Please note that this data is cached and only refreshed once a day.
-
-        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-          - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-          - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+        This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
       operationId: AccountInformation_listUserAccounts
       parameters:
       - explode: true
@@ -13357,6 +13420,25 @@ components:
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-disable:
+      additionalProperties: true
+      properties:
+        authorizationId:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - authorizationId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId-accounts:
       additionalProperties: true
       properties:
         authorizationId:

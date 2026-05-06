@@ -16,6 +16,7 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
+import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
@@ -94,6 +95,23 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         BrokerageAuthorizationDisabledConfirmation response = api.disableBrokerageAuthorization(authorizationId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List accounts for a connection
+     *
+     * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listBrokerageAuthorizationAccountsTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        List<Account> response = api.listBrokerageAuthorizationAccounts(authorizationId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

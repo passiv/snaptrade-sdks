@@ -300,6 +300,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/accounts-GET': {
+        'parameters': [
+            {
+                'name': 'authorizationId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
     '/authorizations-GET': {
         'parameters': [
             {

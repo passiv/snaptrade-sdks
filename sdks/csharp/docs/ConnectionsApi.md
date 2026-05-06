@@ -7,6 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**DeleteConnection**](ConnectionsApi.md#deleteconnection) | **DELETE** /connection/{connectionId} | Delete connection |
 | [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get connection detail |
 | [**DisableBrokerageAuthorization**](ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
+| [**ListBrokerageAuthorizationAccounts**](ConnectionsApi.md#listbrokerageauthorizationaccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection |
 | [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections |
 | [**RefreshBrokerageAuthorization**](ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
@@ -299,6 +300,102 @@ catch (ApiException e)
 | **401** | Unauthorized, invalid credentials for this resource |  -  |
 | **402** | Unable to sync with brokerage account because the connection is disabled. |  -  |
 | **403** | Customer or user does not have access to this feature |  -  |
+| **404** | The requested resource does not exist. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **ListBrokerageAuthorizationAccounts**
+
+
+
+Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class ListBrokerageAuthorizationAccountsExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var authorizationId = "authorizationId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // List accounts for a connection
+                List<Account> result = client.Connections.ListBrokerageAuthorizationAccounts(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.ListBrokerageAuthorizationAccounts: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the ListBrokerageAuthorizationAccountsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List accounts for a connection
+    ApiResponse<List<Account>> response = apiInstance.ListBrokerageAuthorizationAccountsWithHttpInfo(authorizationId, userId, userSecret);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ConnectionsApi.ListBrokerageAuthorizationAccountsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **authorizationId** | **string** |  |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+
+### Return type
+
+[**List&lt;Account&gt;**](Account.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized, invalid credentials for this resource |  -  |
 | **404** | The requested resource does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

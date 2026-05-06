@@ -120,6 +120,7 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**DeleteConnection**](docs/ConnectionsApi.md#deleteconnection) | **DELETE** /connection/{connectionId} | Delete connection
 *ConnectionsApi* | [**DetailBrokerageAuthorization**](docs/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get connection detail
 *ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection
+*ConnectionsApi* | [**ListBrokerageAuthorizationAccounts**](docs/ConnectionsApi.md#listbrokerageauthorizationaccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections
 *ConnectionsApi* | [**RefreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection

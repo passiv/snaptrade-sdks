@@ -1355,13 +1355,11 @@ module SnapTrade
 
     # List accounts
     #
+    # **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
+    # 
     # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
     # 
-    # Please note that this data is cached and only refreshed once a day.
-    # 
-    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-    #   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-    #   - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1373,13 +1371,11 @@ module SnapTrade
 
     # List accounts
     #
+    # **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
+    # 
     # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
     # 
-    # Please note that this data is cached and only refreshed once a day.
-    # 
-    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-    #   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-    #   - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1389,7 +1385,7 @@ module SnapTrade
     end
 
     # List accounts
-    # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  Please note that this data is cached and only refreshed once a day.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).   - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+    # **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -1400,7 +1396,7 @@ module SnapTrade
     end
 
     # List accounts
-    # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  Please note that this data is cached and only refreshed once a day.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).   - If you don&#39;t, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+    # **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This data is cached and only refreshed once a day, regardless of the customer&#39;s plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

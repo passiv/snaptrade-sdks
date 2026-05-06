@@ -332,6 +332,121 @@ module SnapTrade
     end
 
 
+    # List accounts for a connection
+    #
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
+    # 
+    # On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call. 
+    # 
+    # On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_brokerage_authorization_accounts(authorization_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = list_brokerage_authorization_accounts_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+      data
+    end
+
+    # List accounts for a connection
+    #
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
+    # 
+    # On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call. 
+    # 
+    # On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_brokerage_authorization_accounts_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
+      list_brokerage_authorization_accounts_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+    end
+
+    # List accounts for a connection
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<Account>]
+    private def list_brokerage_authorization_accounts_impl(authorization_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = list_brokerage_authorization_accounts_with_http_info(authorization_id, user_id, user_secret, opts)
+      data
+    end
+
+    # List accounts for a connection
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
+    private def list_brokerage_authorization_accounts_with_http_info_impl(authorization_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectionsApi.list_brokerage_authorization_accounts ...'
+      end
+      # verify the required parameter 'authorization_id' is set
+      if @api_client.config.client_side_validation && authorization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_id' when calling ConnectionsApi.list_brokerage_authorization_accounts"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ConnectionsApi.list_brokerage_authorization_accounts"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ConnectionsApi.list_brokerage_authorization_accounts"
+      end
+      # resource path
+      local_var_path = '/authorizations/{authorizationId}/accounts'.sub('{' + 'authorizationId' + '}', CGI.escape(authorization_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<Account>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ConnectionsApi.list_brokerage_authorization_accounts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectionsApi#list_brokerage_authorization_accounts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List all connections
     #
     # Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
