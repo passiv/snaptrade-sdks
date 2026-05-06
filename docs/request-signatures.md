@@ -107,31 +107,43 @@ const sigContent = JSONstringifyOrder(sigObject);
 const signature = computeHmacSha256(sigContent, consumerKey);
 ```
 
-#### Java 
+#### Java
 
-```java 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
+```java
+import com.google.gson.Gson;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+import java.util.TreeMap;
 
-import org.apache.commons.codec.binary.Base64;
-
-public class main {
-	public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException {
-		System.out.println("Hello, World!");
-        final String data = "{\"content\":{\"userId\":\"new_user_123\"},\"path\":\"/api/v1/snapTrade/registerUser\",\"query\":\"clientId=PASSIVTEST&timestamp=1635790389\"}";
-
-        final String key = "YOUR_CONSUMER_KEY";
-        final String algorithm = "HmacSHA256";
-        final SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), algorithm);
-        final Mac mac = Mac.getInstance(algorithm);
+public class Example {
+    private static byte[] calculateHmacSha256(String message, String key)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        Mac mac = Mac.getInstance("HmacSHA256");
         mac.init(secretKeySpec);
-        System.out.println(data);
-        final String base64 = new String(Base64.encodeBase64(mac.doFinal(data.getBytes())));
-        System.out.println(base64);
-	}
+        return mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static String encodeBase64(byte[] bytes) {
+        return Base64.getEncoder().encodeToString(bytes);
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException {
+        Gson gson = new Gson();
+        String payload = "{\"userId\":\"new_user_123\"}";
+        String path = "/snapTrade/registerUser";
+        String queryString = "clientId=PASSIVTEST&timestamp=1635790389";
+        Object map = gson.fromJson(payload, TreeMap.class);
+        String sortedJson = map == null ? "\"\"" : gson.toJson(map);
+        String data = String.format("{\"content\":%s,\"path\":\"/api/v1%s\",\"query\":\"%s\"}",
+                payload == null || payload.equals("") || payload.equals("{}") ? "null" : sortedJson, path,
+                queryString);
+        String signature = encodeBase64(calculateHmacSha256(data, "YOUR_CONSUMER_KEY"));
+    }
 }
 ```
 
@@ -141,82 +153,48 @@ public class main {
 package main
 
 import (
-	"io/ioutil"
-	"net/http"
 	"bytes"
-	"fmt"
 	"crypto/hmac"
 	"crypto/sha256"
-	"encoding/json"
 	"encoding/base64"
-	"time"
-	"strconv"
- )
- type QueryParams struct {
-    ClientId string	    `json:"clientId"`
-	Timestamp int64 	`json:"timestamp"`
-	UserId string		`json:"userId"`
-	UserSecret string 	`json:"userSecret"`
-}
- type Signature struct {
-    Content map[string]interface{}	`json:"content"`
-	Path string						`json:"path"`
-	Query string 					`json:"query"`
+	"encoding/json"
+	"sort"
+	"strings"
+)
+
+func computeHmacSha256(message string, key string) string {
+	h := hmac.New(sha256.New, []byte(key))
+	h.Write([]byte(message))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
 func main() {
-	var sig_content = new(Signature)
-	var timestamp = time.Now().Unix()
+	requestData := map[string]interface{}{"userId": "new_user_123"}
+	requestPath := "/api/v1/snapTrade/registerUser"
+	requestQuery := "clientId=PASSIVTEST&timestamp=1635790389"
 
-	var client_id = "YOUR_CLIENT_ID"
-	var user_id = "USER_ID"
-	//var user_secret = "USER_SECRET"   Needed for user based requests but not registerUser
-	var consumer_key = "YOUR_CONSUMER_KEY"
-	var url = "https://api.snaptrade.com/api/v1/snapTrade/registerUser"
+	sigObject := map[string]interface{}{
+		"content": requestData,
+		"path":    requestPath,
+		"query":   requestQuery,
+	}
 
-	sig_content.Content = make(map[string]interface{})
-	sig_content.Content["userId"] = user_id
-	sig_content.Path = "/api/v1/snapTrade/registerUser"
-	sig_content.Query = "clientId=" + client_id + "&timestamp="+ strconv.FormatInt(timestamp,10)
-	
-	sig_json, _ := JSONMarshal(sig_content)
+	sortedSigObject := make(map[string]interface{})
+	keys := make([]string, 0, len(sigObject))
+	for k := range sigObject {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		sortedSigObject[k] = sigObject[k]
+	}
 
-	var signature = ComputeHmac256(string(sig_json), consumer_key)
-	
-	r, _ := json.Marshal(sig_content.Content)
+	var sigContent bytes.Buffer
+	encoder := json.NewEncoder(&sigContent)
+	encoder.SetEscapeHTML(false)
+	encoder.Encode(sortedSigObject)
 
-	reqBody := bytes.NewBuffer(r)
-
-	req, _ := http.NewRequest("POST", url, reqBody)
-	req.URL.RawQuery = sig_content.Query
-
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("content-type", "application/json")
-	req.Header.Add("Signature", signature)
-
-	res, _ := http.DefaultClient.Do(req)
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
-
-	fmt.Println(res)
-	fmt.Println(string(body))
-}
-
-func ComputeHmac256(message string, secret string) string {
-    key := []byte(secret)
-    h := hmac.New(sha256.New, key)
-    h.Write([]byte(message))
-    return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}
-
-func JSONMarshal(t interface{}) ([]byte, error) {
-    buffer := &bytes.Buffer{}
-    encoder := json.NewEncoder(buffer)
-    encoder.SetEscapeHTML(false)
-    err := encoder.Encode(t)
-	json := buffer.Bytes()
-	json = bytes.TrimRight(json, "\n")
-    return json, err
+	signature := computeHmacSha256(strings.TrimSuffix(sigContent.String(), "\n"), "YOUR_CONSUMER_KEY")
+	_ = signature
 }
 ```
