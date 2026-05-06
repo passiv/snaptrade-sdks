@@ -61,14 +61,16 @@ sig_digest = hmac.new(consumer_key, sig_content.encode(), sha256).digest()
 signature = b64encode(sig_digest).decode()
 ```
 
-#### JavaScript
+#### TypeScript (Node.js)
 
-```javascript
-const crypto = require("crypto");
+This mirrors the SnapTrade TypeScript SDK signing helpers in [`requestAfterHook.ts`](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript/requestAfterHook.ts): canonical JSON via `JSONstringifyOrder`, consumer key passed through `encodeURI`, then HMAC-SHA256 with the digest encoded as Base64.
 
-const JSONstringifyOrder = (obj) => {
-  var allKeys = [];
-  var seen = {};
+```typescript
+import * as crypto from "crypto";
+
+function JSONstringifyOrder(obj: Record<string, unknown>): string {
+  const allKeys: string[] = [];
+  const seen: Record<string, null> = {};
   JSON.stringify(obj, function (key, value) {
     if (!(key in seen)) {
       allKeys.push(key);
@@ -78,20 +80,28 @@ const JSONstringifyOrder = (obj) => {
   });
   allKeys.sort();
   return JSON.stringify(obj, allKeys);
+}
+
+function computeHmacSha256(message: string, key: string): string {
+  const hmac = crypto.createHmac("sha256", key);
+  hmac.update(message);
+  return hmac.digest("base64");
+}
+
+const consumerKey = encodeURI("YOUR_CONSUMER_KEY");
+
+const requestData = { userId: "new_user_123" };
+const requestPath = "/api/v1/snapTrade/registerUser";
+const requestQuery = "clientId=PASSIVTEST&timestamp=1635790389";
+
+const sigObject = {
+  content: requestData,
+  path: requestPath,
+  query: requestQuery,
 };
 
-const consumerKey = encodeURI('YOUR_CONSUMER_KEY');
-
-const requestData = {'userId': 'new_user_123'}
-const requestPath = "/api/v1/snapTrade/registerUser"
-const requestQuery = "clientId=PASSIVTEST&timestamp=1635790389"
-
-const sigObject = {"content": requestData, "path": requestPath, "query": requestQuery}
-
-const sigContent = JSONstringifyOrder(sigObject)
-
-const hmac = crypto.createHmac("sha256", consumerKey);
-const signature = hmac.update(sigContent).digest('base64');
+const sigContent = JSONstringifyOrder(sigObject);
+const signature = computeHmacSha256(sigContent, consumerKey);
 ```
 
 #### Java 
