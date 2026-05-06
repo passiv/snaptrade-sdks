@@ -167,8 +167,6 @@ portal:
       get: true
     /authorizations/{authorizationId}:
       delete: true
-    /accounts/{accountId}/positions/all:
-      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
