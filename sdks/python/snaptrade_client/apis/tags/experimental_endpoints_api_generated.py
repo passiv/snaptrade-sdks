@@ -9,7 +9,6 @@
     Created by: https://snaptrade.com/
 """
 
-from snaptrade_client.paths.accounts_account_id_positions_all.get import GetAllAccountPositions
 from snaptrade_client.paths.accounts_account_id_orders_details_v2_brokerage_order_id.get import GetUserAccountOrderDetailV2
 from snaptrade_client.paths.accounts_account_id_orders_v2.get import GetUserAccountOrdersV2
 from snaptrade_client.paths.accounts_account_id_recent_orders_v2.get import GetUserAccountRecentOrdersV2
@@ -17,7 +16,6 @@ from snaptrade_client.paths.authorizations_authorization_id_transactions_sync.po
 
 
 class ExperimentalEndpointsApiGenerated(
-    GetAllAccountPositions,
     GetUserAccountOrderDetailV2,
     GetUserAccountOrdersV2,
     GetUserAccountRecentOrdersV2,

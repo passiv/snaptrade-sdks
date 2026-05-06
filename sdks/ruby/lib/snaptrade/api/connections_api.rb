@@ -336,7 +336,7 @@ module SnapTrade
     #
     # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
     # 
-    # On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call. 
+    # On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
     # 
     # On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
     # 
@@ -355,7 +355,7 @@ module SnapTrade
     #
     # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
     # 
-    # On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call. 
+    # On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
     # 
     # On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
     # 
@@ -370,7 +370,7 @@ module SnapTrade
     end
 
     # List accounts for a connection
-    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.  On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -382,7 +382,7 @@ module SnapTrade
     end
 
     # List accounts for a connection
-    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.   On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On real-time plans, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 

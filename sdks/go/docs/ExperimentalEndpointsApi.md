@@ -4,58 +4,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**GetAllAccountPositions**](ExperimentalEndpointsApi.md#GetAllAccountPositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
 [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 [**SyncBrokerageAuthorizationTransactions**](ExperimentalEndpointsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 
-
-
-## GetAllAccountPositions
-
-List all account positions
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ExperimentalEndpointsApi.GetAllAccountPositions(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.GetAllAccountPositions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetAllAccountPositions`: AllAccountPositionsResponse
-    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetAllAccountPositions`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.Results`: %v\n", resp.Results)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GetUserAccountOrderDetailV2

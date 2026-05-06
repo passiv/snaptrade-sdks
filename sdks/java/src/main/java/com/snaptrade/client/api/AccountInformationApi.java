@@ -7,6 +7,7 @@ import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.Balance;
 import java.time.LocalDate;
 import com.snaptrade.client.model.PaginatedUniversalActivity;
@@ -31,6 +32,11 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     }
     public class GetAccountBalanceHistoryRequestBuilder extends GetAccountBalanceHistoryRequestBuilderGenerated {
         public GetAccountBalanceHistoryRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
+    public class GetAllAccountPositionsRequestBuilder extends GetAllAccountPositionsRequestBuilderGenerated {
+        public GetAllAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
         }
     }
