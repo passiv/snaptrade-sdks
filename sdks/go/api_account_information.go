@@ -2125,19 +2125,19 @@ func (r AccountInformationApiListUserAccountsRequest) Execute() ([]Account, *htt
 /*
 ListUserAccounts List accounts
 
+**Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
+
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-Please note that this data is cached and only refreshed once a day.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
  @return AccountInformationApiListUserAccountsRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) ListUserAccounts(userId string, userSecret string) AccountInformationApiListUserAccountsRequest {
 	return AccountInformationApiListUserAccountsRequest{
@@ -2150,6 +2150,7 @@ func (a *AccountInformationApiService) ListUserAccounts(userId string, userSecre
 
 // Execute executes the request
 //  @return []Account
+// Deprecated
 func (a *AccountInformationApiService) ListUserAccountsExecute(r AccountInformationApiListUserAccountsRequest) ([]Account, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

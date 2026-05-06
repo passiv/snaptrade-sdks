@@ -137,6 +137,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test ListBrokerageAuthorizationAccounts
+        /// </summary>
+        [Fact]
+        public void ListBrokerageAuthorizationAccountsTest()
+        {
+            var authorizationId = "authorizationId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // List accounts for a connection
+                List<Account> result = client.Connections.ListBrokerageAuthorizationAccounts(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.ListBrokerageAuthorizationAccounts: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test ListBrokerageAuthorizations
         /// </summary>
         [Fact]

@@ -629,6 +629,7 @@ func main() {
 
 
 ## ListUserAccounts
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List accounts
 

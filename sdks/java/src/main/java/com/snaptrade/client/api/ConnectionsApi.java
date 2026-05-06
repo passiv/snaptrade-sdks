@@ -1,6 +1,7 @@
 package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
@@ -30,6 +31,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
     }
     public class DisableBrokerageAuthorizationRequestBuilder extends DisableBrokerageAuthorizationRequestBuilderGenerated {
         public DisableBrokerageAuthorizationRequestBuilder(UUID authorizationId, String userId, String userSecret) {
+            super(authorizationId, userId, userSecret);
+        }
+    }
+    public class ListBrokerageAuthorizationAccountsRequestBuilder extends ListBrokerageAuthorizationAccountsRequestBuilderGenerated {
+        public ListBrokerageAuthorizationAccountsRequestBuilder(UUID authorizationId, String userId, String userSecret) {
             super(authorizationId, userId, userSecret);
         }
     }
