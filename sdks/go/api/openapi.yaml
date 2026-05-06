@@ -1163,7 +1163,8 @@ paths:
           type: string
         style: form
       - description: Number of days in the past to fetch the most recent orders. Defaults
-          to the last 30 days if no value is passed in.
+          to the last 30 days if no value is passed in. Values greater than 90 will
+          be capped at 90.
         explode: true
         in: query
         name: days
@@ -1171,6 +1172,7 @@ paths:
         schema:
           example: 30
           format: int32
+          maximum: 90
           minimum: 1
           type: integer
           x-konfig-original-example: 30
@@ -2813,7 +2815,8 @@ paths:
           type: string
         style: form
       - description: Number of days in the past to fetch the most recent orders. Defaults
-          to the last 30 days if no value is passed in.
+          to the last 30 days if no value is passed in. Values greater than 90 will
+          be capped at 90.
         explode: true
         in: query
         name: days
@@ -2821,6 +2824,7 @@ paths:
         schema:
           example: 30
           format: int32
+          maximum: 90
           minimum: 1
           type: integer
           x-konfig-original-example: 30
@@ -13106,6 +13110,7 @@ components:
         days:
           example: 30
           format: int32
+          maximum: 90
           minimum: 1
           type: integer
           x-konfig-original-example: 30
@@ -14124,6 +14129,7 @@ components:
         days:
           example: 30
           format: int32
+          maximum: 90
           minimum: 1
           type: integer
           x-konfig-original-example: 30

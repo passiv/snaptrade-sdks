@@ -398,7 +398,7 @@ func (r *ExperimentalEndpointsApiGetUserAccountOrdersV2Request) State(state stri
 	return r
 }
 
-// Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+// Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
 func (r *ExperimentalEndpointsApiGetUserAccountOrdersV2Request) Days(days int32) *ExperimentalEndpointsApiGetUserAccountOrdersV2Request {
 	r.days = &days
 	return r
@@ -461,6 +461,9 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrdersV2Execute(r Experi
 	localVarFormParams := url.Values{}
 	if r.days != nil && *r.days < 1 {
 		return localVarReturnValue, nil, reportError("days must be greater than 1")
+	}
+	if r.days != nil && *r.days > 90 {
+		return localVarReturnValue, nil, reportError("days must be less than 90")
 	}
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))

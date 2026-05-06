@@ -269,7 +269,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param state [String] defaults value is set to \"all\"
-    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders_v2(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
       extra[:state] = state if state != SENTINEL
@@ -290,7 +290,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param state [String] defaults value is set to \"all\"
-    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders_v2_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
       extra[:state] = state if state != SENTINEL
@@ -305,7 +305,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \"all\"
-    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @return [AccountOrdersV2Response]
     private def get_user_account_orders_v2_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_orders_v2_with_http_info(user_id, user_secret, account_id, opts)
@@ -319,7 +319,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \"all\"
-    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @return [Array<(AccountOrdersV2Response, Integer, Hash)>] AccountOrdersV2Response data, response status code and response headers
     private def get_user_account_orders_v2_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
@@ -341,6 +341,10 @@ module SnapTrade
       if @api_client.config.client_side_validation && opts[:'state'] && !allowable_values.include?(opts[:'state'])
         fail ArgumentError, "invalid value for \"state\", must be one of #{allowable_values}"
       end
+      if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] > 90
+        fail ArgumentError, 'invalid value for "opts[:"days"]" when calling ExperimentalEndpointsApi.get_user_account_orders_v2, must be smaller than or equal to 90.'
+      end
+
       if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] < 1
         fail ArgumentError, 'invalid value for "opts[:"days"]" when calling ExperimentalEndpointsApi.get_user_account_orders_v2, must be greater than or equal to 1.'
       end

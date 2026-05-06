@@ -587,7 +587,7 @@ public class ExperimentalEndpointsApiGenerated {
         
         /**
          * Set days
-         * @param days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
+         * @param days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)
          * @return ExperimentalEndpointsApi.GetUserAccountOrdersV2RequestBuilder
          */
         public ExperimentalEndpointsApi.GetUserAccountOrdersV2RequestBuilder days(Integer days) {
