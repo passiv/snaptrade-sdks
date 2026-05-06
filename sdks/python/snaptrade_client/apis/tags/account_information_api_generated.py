@@ -11,6 +11,7 @@
 
 from snaptrade_client.paths.accounts_account_id_activities.get import GetAccountActivities
 from snaptrade_client.paths.accounts_account_id_balance_history.get import GetAccountBalanceHistory
+from snaptrade_client.paths.accounts_account_id_positions_all.get import GetAllAccountPositions
 from snaptrade_client.paths.holdings.get import GetAllUserHoldings
 from snaptrade_client.paths.accounts_account_id_balances.get import GetUserAccountBalance
 from snaptrade_client.paths.accounts_account_id.get import GetUserAccountDetails
@@ -27,6 +28,7 @@ from snaptrade_client.paths.accounts_account_id.put import UpdateUserAccount
 class AccountInformationApiGenerated(
     GetAccountActivities,
     GetAccountBalanceHistory,
+    GetAllAccountPositions,
     GetAllUserHoldings,
     GetUserAccountBalance,
     GetUserAccountDetails,

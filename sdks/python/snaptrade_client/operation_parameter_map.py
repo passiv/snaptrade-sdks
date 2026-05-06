@@ -40,6 +40,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/positions/all-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/holdings-GET': {
         'parameters': [
             {
@@ -375,19 +388,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'sessionId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/positions/all-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
             },
         ]
     },

@@ -3,7 +3,6 @@ package com.snaptrade.client.api;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
-import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -15,11 +14,6 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
 
     public ExperimentalEndpointsApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
-    }
-    public class GetAllAccountPositionsRequestBuilder extends GetAllAccountPositionsRequestBuilderGenerated {
-        public GetAllAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
-        }
     }
     public class GetUserAccountOrderDetailV2RequestBuilder extends GetUserAccountOrderDetailV2RequestBuilderGenerated {
         public GetUserAccountOrderDetailV2RequestBuilder(UUID accountId, String brokerageOrderId, String userId, String userSecret) {

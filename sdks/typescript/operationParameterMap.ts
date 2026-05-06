@@ -46,6 +46,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/positions/all-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/holdings-GET': {
         parameters: [
             {
@@ -381,19 +394,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'sessionId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/positions/all-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
             },
         ]
     },

@@ -565,7 +565,7 @@ ListBrokerageAuthorizationAccounts List accounts for a connection
 
 Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 
-On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call. 
+On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
 
 On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
