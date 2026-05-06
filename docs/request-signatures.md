@@ -41,29 +41,32 @@ As a result, we need to be very specific about how to render the signature conte
 #### Python
 
 ```python
+from base64 import b64encode
+import hashlib
 import hmac
 import json
-from base64 import b64encode
-from hashlib import sha256
-from urllib.parse import urlencode
+import typing
 
-consumer_key = "YOUR_CONSUMER_KEY".encode()
 
-request_data = {'userId': 'new_user_123'}
-request_path = "/api/v1/snapTrade/registerUser"
-request_query = "clientId=PASSIVTEST&timestamp=1635790389"
+def compute_request_signature(path: str, consumer_key: str, body: typing.Any) -> str:
+    subpath, query = path.split("?")
+    sig_object = {
+        "content": None if body is None or body == {} else body,
+        "path": "/api/v1%s" % subpath,
+        "query": query,
+    }
+    sig_content = json.dumps(sig_object, separators=(",", ":"), sort_keys=True)
+    sig_digest = hmac.new(consumer_key.encode(), sig_content.encode(), hashlib.sha256).digest()
+    return b64encode(sig_digest).decode()
 
-sig_object = {"content": request_data, "path": request_path, "query": request_query}
 
-sig_content = json.dumps(sig_object, separators=(",", ":"), sort_keys=True)
-sig_digest = hmac.new(consumer_key, sig_content.encode(), sha256).digest()
+resource_path = "/snapTrade/registerUser?clientId=PASSIVTEST&timestamp=1635790389"
+request_body = {"userId": "new_user_123"}
 
-signature = b64encode(sig_digest).decode()
+signature = compute_request_signature(resource_path, "YOUR_CONSUMER_KEY", request_body)
 ```
 
-#### TypeScript (Node.js)
-
-This mirrors the SnapTrade TypeScript SDK signing helpers in [`requestAfterHook.ts`](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript/requestAfterHook.ts): canonical JSON via `JSONstringifyOrder`, consumer key passed through `encodeURI`, then HMAC-SHA256 with the digest encoded as Base64.
+#### TypeScript
 
 ```typescript
 import * as crypto from "crypto";
