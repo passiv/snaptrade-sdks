@@ -26,17 +26,17 @@ The signature payload is a JSON object with exactly three fields:
 
 Example request:
 
-~~~http
+```http
 POST /api/v1/snapTrade/registerUser?clientId=PASSIVTEST&timestamp=1635790389
 Signature: <generated_signature>
 Content-Type: application/json
 
 {"userId":"new_user_123"}
-~~~
+```
 
 The signature payload for this request is:
 
-~~~json
+```json
 {
   "content": {
     "userId": "new_user_123"
@@ -44,7 +44,7 @@ The signature payload for this request is:
   "path": "/api/v1/snapTrade/registerUser",
   "query": "clientId=PASSIVTEST&timestamp=1635790389"
 }
-~~~
+```
 
 ## Canonical JSON Rules
 
@@ -59,15 +59,15 @@ Use these rules:
 
 The canonical signature string for the example above is:
 
-~~~json
+```json
 {"content":{"userId":"new_user_123"},"path":"/api/v1/snapTrade/registerUser","query":"clientId=PASSIVTEST&timestamp=1635790389"}
-~~~
+```
 
 The following string represents the same JSON object, but it is not valid for signing because it contains extra whitespace:
 
-~~~json
+```json
 {"content": {"userId": "new_user_123"}, "path": "/api/v1/snapTrade/registerUser", "query": "clientId=PASSIVTEST&timestamp=1635790389"}
-~~~
+```
 
 Cryptographic signatures are generated from the exact bytes of the string. Even small formatting differences will produce a different signature.
 
@@ -77,15 +77,15 @@ The `query` value is the exact query string sent in the request URL, excluding t
 
 Example:
 
-~~~text
+```text
 /api/v1/snapTrade/registerUser?clientId=PASSIVTEST&timestamp=1635790389
-~~~
+```
 
 Use:
 
-~~~text
+```text
 clientId=PASSIVTEST&timestamp=1635790389
-~~~
+```
 
 Do not sort, decode, re-encode, or otherwise modify query parameters before signing.
 
