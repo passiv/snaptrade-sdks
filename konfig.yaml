@@ -118,6 +118,8 @@ portal:
       get: true
     /accounts/{accountId}/balanceHistory:
       get: true
+    /authorizations/{authorizationId}/accounts:
+      get: true
   hideOperations:
     /activities:
       get: true
