@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "9.0.194",
+  "version": "9.0.195",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
