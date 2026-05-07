@@ -2154,7 +2154,7 @@ The OCC-formatted option symbol.
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns quotes from the brokerage for the specified symbols and account.
+Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.
 
 The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
 
@@ -2184,7 +2184,7 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### symbols: `String`<a id="symbols-string"></a>
 List of Universal Symbol IDs or tickers to get quotes for. When providing
-multiple values, use a comma as separator
+multiple values, use a comma as separator. Maximum of 10 values allowed
 
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### use_ticker: `Boolean`<a id="use_ticker-boolean"></a>

@@ -788,7 +788,7 @@ module SnapTrade
 
     # Get equity symbol quotes
     #
-    # Returns quotes from the brokerage for the specified symbols and account.
+    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.
     # 
     # The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
     # 
@@ -800,7 +800,7 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
     # @param account_id [String] 
     # @param use_ticker [Boolean] Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -812,7 +812,7 @@ module SnapTrade
 
     # Get equity symbol quotes
     #
-    # Returns quotes from the brokerage for the specified symbols and account.
+    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.
     # 
     # The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
     # 
@@ -824,7 +824,7 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
     # @param account_id [String] 
     # @param use_ticker [Boolean] Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -834,10 +834,10 @@ module SnapTrade
     end
 
     # Get equity symbol quotes
-    # Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
@@ -848,10 +848,10 @@ module SnapTrade
     end
 
     # Get equity symbol quotes
-    # Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
