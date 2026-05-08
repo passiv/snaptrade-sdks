@@ -72,6 +72,8 @@ portal:
               path: docs/terminology.md
             - id: requests
               path: docs/requests.md
+            - id: request-signatures
+              path: docs/request-signatures.md
             - id: integrations
               path: docs/integrations.md
             - id: connections
