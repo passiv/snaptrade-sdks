@@ -87,7 +87,7 @@ Some brokerages have data retention limits—for example, Schwab only provides u
 
 ### When does account data get synced daily?
 
-It is not consistent at the same time every day, but guarunteed once per day.
+Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
 
 ### My account data is stale, why is my account not syncing every day?
 
