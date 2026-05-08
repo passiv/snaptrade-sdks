@@ -173,6 +173,8 @@ portal:
       delete: true
     /accounts/{accountId}/holdings:
       get: true
+    /accounts:
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
