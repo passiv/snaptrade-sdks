@@ -363,7 +363,7 @@ Example payload is below:
 
 ## TRADE_DETECTION
 
-Gets sent seconds after a trade has been executed in a specific account. Requires an account specific subscription. Please contact support@passiv.com for more information about pricing and setting up subscriptions. Only available on certain brokerages.
+Gets sent seconds after a trade has been executed in a specific account. Requires an account specific subscription. Please contact support@snaptrade.com for more information about pricing and setting up subscriptions. Only available on certain brokerages.
 
 Returns a list of orders placed
 
