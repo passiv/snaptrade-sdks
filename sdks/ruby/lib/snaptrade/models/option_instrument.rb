@@ -13,6 +13,7 @@ require 'time'
 module SnapTrade
   # Option instrument metadata for a V2 position.
   class OptionInstrument
+    # Type of security instrument.
     attr_accessor :kind
 
     # Unique identifier for the option instrument.

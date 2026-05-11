@@ -23,4 +23,4 @@ from snaptrade_client.type.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.type.other_instrument import OtherInstrument
 from snaptrade_client.type.stock_instrument import StockInstrument
 
-UnderlyingOptionInstrument = typing.Union[StockInstrument,AdrInstrument,EtfInstrument,MutualFundInstrument,CefInstrument,CryptoInstrument,OtherInstrument]
+UnderlyingOptionInstrument = typing.Union[StockInstrument,CryptoInstrument,EtfInstrument,MutualFundInstrument,CefInstrument,AdrInstrument,OtherInstrument]

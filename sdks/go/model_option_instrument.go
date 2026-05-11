@@ -17,6 +17,7 @@ import (
 
 // OptionInstrument Option instrument metadata for a V2 position.
 type OptionInstrument struct {
+	// Type of security instrument.
 	Kind string `json:"kind"`
 	// Unique identifier for the option instrument.
 	Id string `json:"id"`

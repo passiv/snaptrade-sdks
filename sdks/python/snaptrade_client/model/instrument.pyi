@@ -73,14 +73,14 @@ class Instrument(
             # loading
             return [
                 StockInstrument,
-                AdrInstrument,
+                OptionInstrument,
+                CryptoInstrument,
+                FutureInstrument,
                 EtfInstrument,
                 MutualFundInstrument,
                 CefInstrument,
-                CryptoInstrument,
+                AdrInstrument,
                 OtherInstrument,
-                FutureInstrument,
-                OptionInstrument,
             ]
 
 

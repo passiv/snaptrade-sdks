@@ -69,11 +69,11 @@ class UnderlyingOptionInstrument(
             # loading
             return [
                 StockInstrument,
-                AdrInstrument,
+                CryptoInstrument,
                 EtfInstrument,
                 MutualFundInstrument,
                 CefInstrument,
-                CryptoInstrument,
+                AdrInstrument,
                 OtherInstrument,
             ]
 

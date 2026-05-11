@@ -25,4 +25,4 @@ from snaptrade_client.type.option_instrument import OptionInstrument
 from snaptrade_client.type.other_instrument import OtherInstrument
 from snaptrade_client.type.stock_instrument import StockInstrument
 
-Instrument = typing.Union[StockInstrument,AdrInstrument,EtfInstrument,MutualFundInstrument,CefInstrument,CryptoInstrument,OtherInstrument,FutureInstrument,OptionInstrument]
+Instrument = typing.Union[StockInstrument,OptionInstrument,CryptoInstrument,FutureInstrument,EtfInstrument,MutualFundInstrument,CefInstrument,AdrInstrument,OtherInstrument]

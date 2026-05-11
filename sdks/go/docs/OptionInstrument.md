@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Type of security instrument. | 
 **Id** | **string** | Unique identifier for the option instrument. | 
 **Symbol** | **string** | OCC symbol for the option contract. | 
 **OptionType** | **string** | Whether the contract is a call or put. | 

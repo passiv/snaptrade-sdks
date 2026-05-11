@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | **string** | Type of security instrument. | 
 **Id** | **string** | Unique identifier for the future instrument. | 
 **Symbol** | **string** | Display symbol for the future contract. | 
 **RootSymbol** | **string** | Root symbol for the future contract. | 

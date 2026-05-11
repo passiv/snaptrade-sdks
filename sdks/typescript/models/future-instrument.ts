@@ -20,7 +20,7 @@ export interface FutureInstrument {
     [key: string]: any;
 
     /**
-     * 
+     * Type of security instrument.
      * @type {string}
      * @memberof FutureInstrument
      */

@@ -13,6 +13,7 @@ require 'time'
 module SnapTrade
   # Future instrument metadata for a V2 position.
   class FutureInstrument
+    # Type of security instrument.
     attr_accessor :kind
 
     # Unique identifier for the future instrument.

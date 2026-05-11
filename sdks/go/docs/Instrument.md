@@ -4,27 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
-**Id** | **string** | Unique identifier for the option instrument. | 
-**Symbol** | **string** | OCC symbol for the option contract. | 
+**Kind** | **string** | Type of security instrument. | 
+**Id** | **string** | Unique identifier for the instrument. | 
+**Symbol** | **string** | The formatted trading symbol for the security. | 
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
-**Description** | Pointer to **NullableString** | Human-readable description of the option contract. | [optional] 
-**Currency** | Pointer to **NullableString** | ISO-4217 currency code for the contract. | [optional] 
-**Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the contract. | [optional] 
+**Description** | Pointer to **NullableString** | Human-readable description of the security. | [optional] 
+**Currency** | Pointer to **NullableString** | ISO-4217 currency code for the security listing. | [optional] 
+**Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the security. | [optional] 
 **FigiInstrument** | Pointer to [**NullableStockInstrumentFigiInstrument**](StockInstrumentFigiInstrument.md) |  | [optional] 
-**RootSymbol** | **string** | Root symbol for the future contract. | 
-**ExpirationCode** | **string** | Exchange expiration code for the contract. | 
-**ExpirationDate** | **string** | Expiration date of the option contract. | 
-**Multiplier** | Pointer to **NullableFloat64** | Multiplier for the future contract. | [optional] 
 **OptionType** | **string** | Whether the contract is a call or put. | 
 **StrikePrice** | **float64** | Strike price for the option contract. | 
+**ExpirationDate** | **NullableString** | Expiration date of the contract. | 
 **Underlying** | [**UnderlyingOptionInstrument**](UnderlyingOptionInstrument.md) |  | 
+**RootSymbol** | **string** | Root symbol for the future contract. | 
+**ExpirationCode** | **string** | Exchange expiration code for the contract. | 
+**Multiplier** | Pointer to **NullableFloat64** | Multiplier for the future contract. | [optional] 
 
 ## Methods
 
 ### NewInstrument
 
-`func NewInstrument(kind string, id string, symbol string, rawSymbol string, rootSymbol string, expirationCode string, expirationDate string, optionType string, strikePrice float64, underlying UnderlyingOptionInstrument, ) *Instrument`
+`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate NullableString, underlying UnderlyingOptionInstrument, rootSymbol string, expirationCode string, ) *Instrument`
 
 NewInstrument instantiates a new Instrument object
 This constructor will assign default values to properties that have it defined,
@@ -259,101 +259,6 @@ HasFigiInstrument returns a boolean if a field has been set.
 `func (o *Instrument) UnsetFigiInstrument()`
 
 UnsetFigiInstrument ensures that no value is present for FigiInstrument, not even an explicit nil
-### GetRootSymbol
-
-`func (o *Instrument) GetRootSymbol() string`
-
-GetRootSymbol returns the RootSymbol field if non-nil, zero value otherwise.
-
-### GetRootSymbolOk
-
-`func (o *Instrument) GetRootSymbolOk() (*string, bool)`
-
-GetRootSymbolOk returns a tuple with the RootSymbol field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRootSymbol
-
-`func (o *Instrument) SetRootSymbol(v string)`
-
-SetRootSymbol sets RootSymbol field to given value.
-
-
-### GetExpirationCode
-
-`func (o *Instrument) GetExpirationCode() string`
-
-GetExpirationCode returns the ExpirationCode field if non-nil, zero value otherwise.
-
-### GetExpirationCodeOk
-
-`func (o *Instrument) GetExpirationCodeOk() (*string, bool)`
-
-GetExpirationCodeOk returns a tuple with the ExpirationCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExpirationCode
-
-`func (o *Instrument) SetExpirationCode(v string)`
-
-SetExpirationCode sets ExpirationCode field to given value.
-
-
-### GetExpirationDate
-
-`func (o *Instrument) GetExpirationDate() string`
-
-GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
-
-### GetExpirationDateOk
-
-`func (o *Instrument) GetExpirationDateOk() (*string, bool)`
-
-GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExpirationDate
-
-`func (o *Instrument) SetExpirationDate(v string)`
-
-SetExpirationDate sets ExpirationDate field to given value.
-
-
-### GetMultiplier
-
-`func (o *Instrument) GetMultiplier() float64`
-
-GetMultiplier returns the Multiplier field if non-nil, zero value otherwise.
-
-### GetMultiplierOk
-
-`func (o *Instrument) GetMultiplierOk() (*float64, bool)`
-
-GetMultiplierOk returns a tuple with the Multiplier field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMultiplier
-
-`func (o *Instrument) SetMultiplier(v float64)`
-
-SetMultiplier sets Multiplier field to given value.
-
-### HasMultiplier
-
-`func (o *Instrument) HasMultiplier() bool`
-
-HasMultiplier returns a boolean if a field has been set.
-
-### SetMultiplierNil
-
-`func (o *Instrument) SetMultiplierNil(b bool)`
-
- SetMultiplierNil sets the value for Multiplier to be an explicit nil
-
-### UnsetMultiplier
-`func (o *Instrument) UnsetMultiplier()`
-
-UnsetMultiplier ensures that no value is present for Multiplier, not even an explicit nil
 ### GetOptionType
 
 `func (o *Instrument) GetOptionType() string`
@@ -394,6 +299,36 @@ and a boolean to check if the value has been set.
 SetStrikePrice sets StrikePrice field to given value.
 
 
+### GetExpirationDate
+
+`func (o *Instrument) GetExpirationDate() string`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *Instrument) GetExpirationDateOk() (*string, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *Instrument) SetExpirationDate(v string)`
+
+SetExpirationDate sets ExpirationDate field to given value.
+
+
+### SetExpirationDateNil
+
+`func (o *Instrument) SetExpirationDateNil(b bool)`
+
+ SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+
+### UnsetExpirationDate
+`func (o *Instrument) UnsetExpirationDate()`
+
+UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetUnderlying
 
 `func (o *Instrument) GetUnderlying() UnderlyingOptionInstrument`
@@ -414,6 +349,81 @@ and a boolean to check if the value has been set.
 SetUnderlying sets Underlying field to given value.
 
 
+### GetRootSymbol
+
+`func (o *Instrument) GetRootSymbol() string`
+
+GetRootSymbol returns the RootSymbol field if non-nil, zero value otherwise.
+
+### GetRootSymbolOk
+
+`func (o *Instrument) GetRootSymbolOk() (*string, bool)`
+
+GetRootSymbolOk returns a tuple with the RootSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootSymbol
+
+`func (o *Instrument) SetRootSymbol(v string)`
+
+SetRootSymbol sets RootSymbol field to given value.
+
+
+### GetExpirationCode
+
+`func (o *Instrument) GetExpirationCode() string`
+
+GetExpirationCode returns the ExpirationCode field if non-nil, zero value otherwise.
+
+### GetExpirationCodeOk
+
+`func (o *Instrument) GetExpirationCodeOk() (*string, bool)`
+
+GetExpirationCodeOk returns a tuple with the ExpirationCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationCode
+
+`func (o *Instrument) SetExpirationCode(v string)`
+
+SetExpirationCode sets ExpirationCode field to given value.
+
+
+### GetMultiplier
+
+`func (o *Instrument) GetMultiplier() float64`
+
+GetMultiplier returns the Multiplier field if non-nil, zero value otherwise.
+
+### GetMultiplierOk
+
+`func (o *Instrument) GetMultiplierOk() (*float64, bool)`
+
+GetMultiplierOk returns a tuple with the Multiplier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMultiplier
+
+`func (o *Instrument) SetMultiplier(v float64)`
+
+SetMultiplier sets Multiplier field to given value.
+
+### HasMultiplier
+
+`func (o *Instrument) HasMultiplier() bool`
+
+HasMultiplier returns a boolean if a field has been set.
+
+### SetMultiplierNil
+
+`func (o *Instrument) SetMultiplierNil(b bool)`
+
+ SetMultiplierNil sets the value for Multiplier to be an explicit nil
+
+### UnsetMultiplier
+`func (o *Instrument) UnsetMultiplier()`
+
+UnsetMultiplier ensures that no value is present for Multiplier, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

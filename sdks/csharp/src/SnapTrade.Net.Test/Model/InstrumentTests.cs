@@ -122,38 +122,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'FigiInstrument'
         }
         /// <summary>
-        /// Test the property 'RootSymbol'
-        /// </summary>
-        [Fact]
-        public void RootSymbolTest()
-        {
-            // TODO unit test for the property 'RootSymbol'
-        }
-        /// <summary>
-        /// Test the property 'ExpirationCode'
-        /// </summary>
-        [Fact]
-        public void ExpirationCodeTest()
-        {
-            // TODO unit test for the property 'ExpirationCode'
-        }
-        /// <summary>
-        /// Test the property 'ExpirationDate'
-        /// </summary>
-        [Fact]
-        public void ExpirationDateTest()
-        {
-            // TODO unit test for the property 'ExpirationDate'
-        }
-        /// <summary>
-        /// Test the property 'Multiplier'
-        /// </summary>
-        [Fact]
-        public void MultiplierTest()
-        {
-            // TODO unit test for the property 'Multiplier'
-        }
-        /// <summary>
         /// Test the property 'OptionType'
         /// </summary>
         [Fact]
@@ -170,12 +138,44 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'StrikePrice'
         }
         /// <summary>
+        /// Test the property 'ExpirationDate'
+        /// </summary>
+        [Fact]
+        public void ExpirationDateTest()
+        {
+            // TODO unit test for the property 'ExpirationDate'
+        }
+        /// <summary>
         /// Test the property 'Underlying'
         /// </summary>
         [Fact]
         public void UnderlyingTest()
         {
             // TODO unit test for the property 'Underlying'
+        }
+        /// <summary>
+        /// Test the property 'RootSymbol'
+        /// </summary>
+        [Fact]
+        public void RootSymbolTest()
+        {
+            // TODO unit test for the property 'RootSymbol'
+        }
+        /// <summary>
+        /// Test the property 'ExpirationCode'
+        /// </summary>
+        [Fact]
+        public void ExpirationCodeTest()
+        {
+            // TODO unit test for the property 'ExpirationCode'
+        }
+        /// <summary>
+        /// Test the property 'Multiplier'
+        /// </summary>
+        [Fact]
+        public void MultiplierTest()
+        {
+            // TODO unit test for the property 'Multiplier'
         }
 
     }

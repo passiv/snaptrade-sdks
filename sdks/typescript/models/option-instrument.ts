@@ -21,7 +21,7 @@ export interface OptionInstrument {
     [key: string]: any;
 
     /**
-     * 
+     * Type of security instrument.
      * @type {string}
      * @memberof OptionInstrument
      */

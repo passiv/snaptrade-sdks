@@ -8,7 +8,7 @@ Future instrument metadata for a V2 position.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**kind** | [**KindEnum**](#KindEnum) |  |  |
+|**kind** | [**KindEnum**](#KindEnum) | Type of security instrument. |  |
 |**id** | **UUID** | Unique identifier for the future instrument. |  |
 |**symbol** | **String** | Display symbol for the future contract. |  |
 |**rootSymbol** | **String** | Root symbol for the future contract. |  |
