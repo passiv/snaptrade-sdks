@@ -17,6 +17,7 @@ import (
 
 // FutureInstrument Future instrument metadata for a V2 position.
 type FutureInstrument struct {
+	// Type of security instrument.
 	Kind string `json:"kind"`
 	// Unique identifier for the future instrument.
 	Id string `json:"id"`

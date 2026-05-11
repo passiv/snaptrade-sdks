@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Price** | **decimal?** | Last known market price for the position. | [optional] 
 **CostBasis** | **decimal?** | Book price or average purchase price for the position. | [optional] 
 **Currency** | **string** | ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;. | [optional] 
-**CashEquivalent** | **bool** | Present for stock positions that are also counted in cash balance or buying power. | [optional] 
+**CashEquivalent** | **bool** | Present for mutual fund positions that are also counted in cash balance or buying power. | [optional] 
 **TaxLots** | [**List&lt;TaxLot&gt;**](TaxLot.md) | Present for stock positions when tax lot data is enabled for the account. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

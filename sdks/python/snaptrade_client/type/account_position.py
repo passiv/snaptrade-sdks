@@ -35,7 +35,7 @@ class OptionalAccountPosition(TypedDict, total=False):
     # ISO-4217 currency code for the position `price` and `cost_basis`.
     currency: typing.Optional[str]
 
-    # Present for stock positions that are also counted in cash balance or buying power.
+    # Present for mutual fund positions that are also counted in cash balance or buying power.
     cash_equivalent: bool
 
     # Present for stock positions when tax lot data is enabled for the account.

@@ -18,6 +18,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from snaptrade_client.type.underlying_option_instrument import UnderlyingOptionInstrument
 
 class RequiredOptionInstrument(TypedDict):
+    # Type of security instrument.
     kind: Literal["option"]
 
     # Unique identifier for the option instrument.

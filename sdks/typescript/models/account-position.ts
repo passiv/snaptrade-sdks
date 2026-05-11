@@ -52,7 +52,7 @@ export interface AccountPosition {
      */
     'currency'?: string | null;
     /**
-     * Present for stock positions that are also counted in cash balance or buying power.
+     * Present for mutual fund positions that are also counted in cash balance or buying power.
      * @type {boolean}
      * @memberof AccountPosition
      */

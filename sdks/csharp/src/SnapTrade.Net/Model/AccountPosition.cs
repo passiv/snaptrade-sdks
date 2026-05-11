@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Model
         /// <param name="price">Last known market price for the position..</param>
         /// <param name="costBasis">Book price or average purchase price for the position..</param>
         /// <param name="currency">ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;..</param>
-        /// <param name="cashEquivalent">Present for stock positions that are also counted in cash balance or buying power..</param>
+        /// <param name="cashEquivalent">Present for mutual fund positions that are also counted in cash balance or buying power..</param>
         /// <param name="taxLots">Present for stock positions when tax lot data is enabled for the account..</param>
         public AccountPosition(Instrument instrument = default(Instrument), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? costBasis = default(decimal?), string currency = default(string), bool cashEquivalent = default(bool), List<TaxLot> taxLots = default(List<TaxLot>)) : base()
         {
@@ -102,9 +102,9 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Present for stock positions that are also counted in cash balance or buying power.
+        /// Present for mutual fund positions that are also counted in cash balance or buying power.
         /// </summary>
-        /// <value>Present for stock positions that are also counted in cash balance or buying power.</value>
+        /// <value>Present for mutual fund positions that are also counted in cash balance or buying power.</value>
         [DataMember(Name = "cash_equivalent", EmitDefaultValue = true)]
         public bool CashEquivalent { get; set; }
 

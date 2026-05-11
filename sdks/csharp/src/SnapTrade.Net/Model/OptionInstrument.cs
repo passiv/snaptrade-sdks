@@ -33,8 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class OptionInstrument : IEquatable<OptionInstrument>, IValidatableObject
     {
         /// <summary>
-        /// Defines Kind
+        /// Type of security instrument.
         /// </summary>
+        /// <value>Type of security instrument.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum KindEnum
         {
@@ -48,8 +49,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Kind
+        /// Type of security instrument.
         /// </summary>
+        /// <value>Type of security instrument.</value>
         [DataMember(Name = "kind", IsRequired = true, EmitDefaultValue = true)]
         public KindEnum Kind { get; set; }
         /// <summary>
@@ -91,7 +93,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionInstrument" /> class.
         /// </summary>
-        /// <param name="kind">kind (required).</param>
+        /// <param name="kind">Type of security instrument. (required).</param>
         /// <param name="id">Unique identifier for the option instrument. (required).</param>
         /// <param name="symbol">OCC symbol for the option contract. (required).</param>
         /// <param name="optionType">Whether the contract is a call or put. (required).</param>

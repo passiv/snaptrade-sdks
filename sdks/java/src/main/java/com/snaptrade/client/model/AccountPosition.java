@@ -241,11 +241,11 @@ public class AccountPosition {
   }
 
    /**
-   * Present for stock positions that are also counted in cash balance or buying power.
+   * Present for mutual fund positions that are also counted in cash balance or buying power.
    * @return cashEquivalent
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "false", value = "Present for stock positions that are also counted in cash balance or buying power.")
+  @ApiModelProperty(example = "false", value = "Present for mutual fund positions that are also counted in cash balance or buying power.")
 
   public Boolean getCashEquivalent() {
     return cashEquivalent;

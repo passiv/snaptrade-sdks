@@ -49,10 +49,10 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderlyingOptionInstrument" /> class
-        /// with the <see cref="AdrInstrument" /> class
+        /// with the <see cref="CryptoInstrument" /> class
         /// </summary>
-        /// <param name="actualInstance">An instance of AdrInstrument.</param>
-        public UnderlyingOptionInstrument(AdrInstrument actualInstance)
+        /// <param name="actualInstance">An instance of CryptoInstrument.</param>
+        public UnderlyingOptionInstrument(CryptoInstrument actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -97,10 +97,10 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderlyingOptionInstrument" /> class
-        /// with the <see cref="CryptoInstrument" /> class
+        /// with the <see cref="AdrInstrument" /> class
         /// </summary>
-        /// <param name="actualInstance">An instance of CryptoInstrument.</param>
-        public UnderlyingOptionInstrument(CryptoInstrument actualInstance)
+        /// <param name="actualInstance">An instance of AdrInstrument.</param>
+        public UnderlyingOptionInstrument(AdrInstrument actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -179,13 +179,13 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Get the actual instance of `AdrInstrument`. If the actual instance is not `AdrInstrument`,
+        /// Get the actual instance of `CryptoInstrument`. If the actual instance is not `CryptoInstrument`,
         /// the InvalidClassException will be thrown
         /// </summary>
-        /// <returns>An instance of AdrInstrument</returns>
-        public AdrInstrument GetAdrInstrument()
+        /// <returns>An instance of CryptoInstrument</returns>
+        public CryptoInstrument GetCryptoInstrument()
         {
-            return (AdrInstrument)this.ActualInstance;
+            return (CryptoInstrument)this.ActualInstance;
         }
 
         /// <summary>
@@ -219,13 +219,13 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Get the actual instance of `CryptoInstrument`. If the actual instance is not `CryptoInstrument`,
+        /// Get the actual instance of `AdrInstrument`. If the actual instance is not `AdrInstrument`,
         /// the InvalidClassException will be thrown
         /// </summary>
-        /// <returns>An instance of CryptoInstrument</returns>
-        public CryptoInstrument GetCryptoInstrument()
+        /// <returns>An instance of AdrInstrument</returns>
+        public AdrInstrument GetAdrInstrument()
         {
-            return (CryptoInstrument)this.ActualInstance;
+            return (AdrInstrument)this.ActualInstance;
         }
 
         /// <summary>

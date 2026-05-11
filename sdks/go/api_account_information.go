@@ -437,7 +437,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-Stock positions may also include `cash_equivalent`, and may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -2098,7 +2098,8 @@ func (r AccountInformationApiGetUserHoldingsRequest) Execute() (*AccountHoldings
 /*
 GetUserHoldings List account holdings
 
-Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
@@ -2112,6 +2113,8 @@ If the connection has become disabled, it can no longer access the latest data f
  @param userId
  @param userSecret
  @return AccountInformationApiGetUserHoldingsRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) GetUserHoldings(accountId string, userId string, userSecret string) AccountInformationApiGetUserHoldingsRequest {
 	return AccountInformationApiGetUserHoldingsRequest{
@@ -2125,6 +2128,7 @@ func (a *AccountInformationApiService) GetUserHoldings(accountId string, userId 
 
 // Execute executes the request
 //  @return AccountHoldingsAccount
+// Deprecated
 func (a *AccountInformationApiService) GetUserHoldingsExecute(r AccountInformationApiGetUserHoldingsRequest) (*AccountHoldingsAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
