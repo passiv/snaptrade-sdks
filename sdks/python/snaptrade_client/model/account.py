@@ -299,7 +299,10 @@ class Account(
             @staticmethod
             def meta() -> typing.Type['AccountMeta']:
                 return AccountMeta
-            portfolio_group = schemas.UUIDSchema
+        
+            @staticmethod
+            def portfolio_group() -> typing.Type['PortfolioGroupID']:
+                return PortfolioGroupID
         
             @staticmethod
             def cash_restrictions() -> typing.Type['AccountCashRestrictions']:
@@ -385,7 +388,7 @@ class Account(
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'AccountMeta': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["portfolio_group"]) -> MetaOapg.properties.portfolio_group: ...
+    def __getitem__(self, name: typing_extensions.Literal["portfolio_group"]) -> 'PortfolioGroupID': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> 'AccountCashRestrictions': ...
@@ -446,7 +449,7 @@ class Account(
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['AccountMeta', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["portfolio_group"]) -> typing.Union[MetaOapg.properties.portfolio_group, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["portfolio_group"]) -> typing.Union['PortfolioGroupID', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union['AccountCashRestrictions', schemas.Unset]: ...
@@ -476,7 +479,7 @@ class Account(
         raw_type: typing.Union[MetaOapg.properties.raw_type, None, str, schemas.Unset] = schemas.unset,
         account_category: typing.Union[MetaOapg.properties.account_category, None, str, schemas.Unset] = schemas.unset,
         meta: typing.Union['AccountMeta', schemas.Unset] = schemas.unset,
-        portfolio_group: typing.Union[MetaOapg.properties.portfolio_group, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        portfolio_group: typing.Union['PortfolioGroupID', schemas.Unset] = schemas.unset,
         cash_restrictions: typing.Union['AccountCashRestrictions', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -510,3 +513,4 @@ from snaptrade_client.model.account_balance import AccountBalance
 from snaptrade_client.model.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.model.account_meta import AccountMeta
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
+from snaptrade_client.model.portfolio_group_id import PortfolioGroupID

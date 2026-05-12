@@ -19,6 +19,7 @@ from snaptrade_client.type.account_balance import AccountBalance
 from snaptrade_client.type.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.type.account_meta import AccountMeta
 from snaptrade_client.type.account_sync_status import AccountSyncStatus
+from snaptrade_client.type.portfolio_group_id import PortfolioGroupID
 
 class RequiredAccount(TypedDict):
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
@@ -70,8 +71,7 @@ class OptionalAccount(TypedDict, total=False):
     meta: AccountMeta
 
     # WARNING: This property is deprecated
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
-    portfolio_group: str
+    portfolio_group: PortfolioGroupID
 
     # WARNING: This property is deprecated
     cash_restrictions: AccountCashRestrictions

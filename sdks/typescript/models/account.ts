@@ -118,7 +118,7 @@ export interface Account {
      * @memberof Account
      * @deprecated
      */
-    'portfolio_group'?: string;
+    'portfolio_group'?: string | null;
     /**
      * This field is deprecated.
      * @type {Array<string>}

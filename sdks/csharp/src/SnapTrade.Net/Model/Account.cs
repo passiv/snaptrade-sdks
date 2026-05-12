@@ -287,7 +287,7 @@ namespace SnapTrade.Net.Model
         /// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
         /// </summary>
         /// <value>Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.</value>
-        [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
+        [DataMember(Name = "portfolio_group", EmitDefaultValue = true)]
         [Obsolete]
         public string PortfolioGroup { get; set; }
 

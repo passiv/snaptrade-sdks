@@ -993,7 +993,7 @@ public class Account {
       if (!jsonObj.get("account_category").isJsonNull() && (jsonObj.get("account_category") != null && !jsonObj.get("account_category").isJsonNull()) && !jsonObj.get("account_category").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `account_category` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_category").toString()));
       }
-      if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
+      if (!jsonObj.get("portfolio_group").isJsonNull() && (jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));
       }
       // ensure the optional json data is an array if present
