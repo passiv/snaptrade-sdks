@@ -363,7 +363,7 @@ Example payload is below:
 
 ## TRADE_DETECTION
 
-Gets sent seconds after a trade has been executed in a specific account. Requires an account specific subscription. Please contact support@snaptrade.com for more information about pricing and setting up subscriptions. Only available on certain brokerages.
+Gets sent seconds after a trade has been executed in a specific account. Requires an account specific subscription. Please contact support@snaptrade.com (or reach out on discord/slack) for more information about pricing and setting up subscriptions. Only available on certain brokerages.
 
 Returns a list of orders placed
 
@@ -412,6 +412,65 @@ Example payload is below:
     "webookId": "6963bc1c-8bca-4896-8faa-e84b82f8f7b2",
     "accountId": "ad4202bb-eaf7-4c7c-a176-e8406612b1ca",
     "eventType": "TRADE_DETECTION",
+    "webhookId": "763bc1cd-8aca-4896-8faa-e84b82f8f7b2",
+    "brokerageId": "02952334-1d52-436f-ba74-f3e9a98ea635",
+    "webhookSecret": "yfqvPlWrTFILBcjCERPh",
+    "eventTimestamp": "2026-05-08T18:52:08.123974+00:00",
+    "brokerageAuthorizationId": "6bb1ahb1-b8c8-4b59-8bf9-7841d7a89c63"
+}
+```
+
+## TRADE_UPDATE
+
+Beta webhook that gets sent when the status of trade placed through SnapTrade changes. For example, will be sent if a trade gets cancelled, executed, partitally filled, etc. Please contact support@snaptrade.com (or reach out on discord/slack) to try out this experimental webhook. Only trades placed through SnapTrade will be monitored for status updates.
+
+Returns a the current order detail in the webhook body
+
+Example payload is below:
+```json
+{
+    "userId": "60b9ad5f-8e78-43b2-af5a-8ce8412b1cd6",
+    "details": {
+        "orders": [
+            {
+                "legs": [
+                    {
+                        "action": "BUY_TO_OPEN",
+                        "leg_id": null,
+                        "status": "EXECUTED",
+                        "instrument": {
+                            "symbol": "AAPL  261218C00240000",
+                            "figi_code": null,
+                            "asset_type": "OPTION",
+                            "description": "AAPL CALL 7/17 240",
+                            "exchange_mic_code": "OPRA"
+                        },
+                        "total_quantity": "1.000000000",
+                        "execution_price": "19.2000000000",
+                        "filled_quantity": "1.000000000",
+                        "canceled_quantity": null
+                    }
+                ],
+                "status": "EXECUTED",
+                "order_role": null,
+                "order_type": "LIMIT",
+                "stop_price": "0.0000000000",
+                "limit_price": "19.2000000000",
+                "time_placed": "2026-05-08T18:52:02.810000Z",
+                "time_executed": "2026-05-08T18:52:02.848000Z",
+                "time_in_force": "DAY",
+                "trailing_stop": null,
+                "price_currency": "USD",
+                "execution_price": "19.2000000000",
+                "brokerage_order_id": "124912433123",
+                "brokerage_group_order_id": null
+            }
+        ]
+    },
+    "clientId": "PARTNERAPP",
+    "webookId": "6963bc1c-8bca-4896-8faa-e84b82f8f7b2",
+    "accountId": "ad4202bb-eaf7-4c7c-a176-e8406612b1ca",
+    "eventType": "TRADE_UPDATE",
     "webhookId": "763bc1cd-8aca-4896-8faa-e84b82f8f7b2",
     "brokerageId": "02952334-1d52-436f-ba74-f3e9a98ea635",
     "webhookSecret": "yfqvPlWrTFILBcjCERPh",
