@@ -1,0 +1,39 @@
+name: Slack CI failure alert
+
+on:
+  workflow_run:
+    workflows:
+      - Release
+      - Regenerate SDKs on OAS Change
+      - konfig-lint-openapi-spec
+      - konfig-revalidate-portal
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  notify-slack:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Skip Slack notification without webhook
+        if: ${{ env.SLACK_WEBHOOK_URL == '' }}
+        run: echo "SLACK_WEBHOOK_URL is not configured; skipping Slack notification."
+
+      - name: Notify Slack
+        if: ${{ env.SLACK_WEBHOOK_URL != '' }}
+        uses: slackapi/slack-github-action@v3.0.3
+        with:
+          webhook: ${{ env.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: ":x: `${{ github.event.workflow_run.name }}` failed in `${{ github.repository }}` on `${{ github.event.workflow_run.head_branch }}`."
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "*GitHub Actions failure*\n*Workflow:* `${{ github.event.workflow_run.name }}`\n*Branch:* `${{ github.event.workflow_run.head_branch }}`\n*Event:* `${{ github.event.workflow_run.event }}`\n*Actor:* `${{ github.event.workflow_run.actor.login }}`\n<${{ github.event.workflow_run.html_url }}|Open failed run>"
