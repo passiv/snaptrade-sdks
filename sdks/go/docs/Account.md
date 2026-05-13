@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **RawType** | Pointer to **NullableString** | The account type as provided by the brokerage | [optional] 
 **AccountCategory** | Pointer to **NullableString** | The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account.  | [optional] 
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
-**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it. | [optional] 
+**PortfolioGroup** | Pointer to **NullableString** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it. | [optional] 
 **CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 
@@ -472,6 +472,16 @@ SetPortfolioGroup sets PortfolioGroup field to given value.
 
 HasPortfolioGroup returns a boolean if a field has been set.
 
+### SetPortfolioGroupNil
+
+`func (o *Account) SetPortfolioGroupNil(b bool)`
+
+ SetPortfolioGroupNil sets the value for PortfolioGroup to be an explicit nil
+
+### UnsetPortfolioGroup
+`func (o *Account) UnsetPortfolioGroup()`
+
+UnsetPortfolioGroup ensures that no value is present for PortfolioGroup, not even an explicit nil
 ### GetCashRestrictions
 
 `func (o *Account) GetCashRestrictions() []string`

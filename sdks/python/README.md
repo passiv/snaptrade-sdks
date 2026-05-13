@@ -209,7 +209,7 @@ This endpoint is paginated with a default page size of 1000. The endpoint will r
 
 Transaction are returned in reverse chronological order, using the `trade_date` field.
 
-The data returned here is always cached and refreshed once a day.
+This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -398,7 +398,7 @@ Returns a list of balances for the account. Each element of the list has a disti
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -441,7 +441,7 @@ Returns account detail known to SnapTrade for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -535,7 +535,7 @@ Returns a list of recent orders in the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -590,7 +590,7 @@ Consider using the newer [unified positions endpoint](/reference/Account%20Infor
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -722,7 +722,7 @@ Returns a list of balances, positions, and recent orders for the specified accou
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -764,7 +764,7 @@ get_user_holdings_response = snaptrade.account_information.get_user_holdings(
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-This data is cached and only refreshed once a day, regardless of the customer's plan. To get real-time data on a real-time plan, use the connection-scoped endpoint linked above. Customers on delayed plans can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1165,9 +1165,9 @@ disable_brokerage_authorization_response = (
 
 Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 
-On real-time plans, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
 
-On delayed plans, this endpoint returns cached data that is refreshed once a day. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
 
@@ -1248,7 +1248,7 @@ Trigger a holdings update for all accounts under this connection. Updates will b
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
 **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-**Please note this endpoint is disabled for real-time plans (ex: PayGo). Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+**Please note this endpoint is disabled for Pay as you Go / Real-time plans. Pay as you Go / Real-time plans do not benefit from this feature since data is refreshed when calls are made**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1576,7 +1576,7 @@ Consider using the newer [unified positions endpoint](/reference/Account%20Infor
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2962,7 +2962,7 @@ Returns all historical transactions for the specified user and filtering criteri
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day.
+This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
 
 **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 

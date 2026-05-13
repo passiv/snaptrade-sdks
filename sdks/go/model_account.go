@@ -49,7 +49,7 @@ type Account struct {
 	Meta map[string]interface{} `json:"meta,omitempty"`
 	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
 	// Deprecated
-	PortfolioGroup *string `json:"portfolio_group,omitempty"`
+	PortfolioGroup NullableString `json:"portfolio_group,omitempty"`
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
@@ -567,39 +567,49 @@ func (o *Account) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }
 
-// GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise.
+// GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 // Deprecated
 func (o *Account) GetPortfolioGroup() string {
-	if o == nil || isNil(o.PortfolioGroup) {
+	if o == nil || isNil(o.PortfolioGroup.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PortfolioGroup
+	return *o.PortfolioGroup.Get()
 }
 
 // GetPortfolioGroupOk returns a tuple with the PortfolioGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
 func (o *Account) GetPortfolioGroupOk() (*string, bool) {
-	if o == nil || isNil(o.PortfolioGroup) {
+	if o == nil {
     return nil, false
 	}
-	return o.PortfolioGroup, true
+	return o.PortfolioGroup.Get(), o.PortfolioGroup.IsSet()
 }
 
 // HasPortfolioGroup returns a boolean if a field has been set.
 func (o *Account) HasPortfolioGroup() bool {
-	if o != nil && !isNil(o.PortfolioGroup) {
+	if o != nil && o.PortfolioGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPortfolioGroup gets a reference to the given string and assigns it to the PortfolioGroup field.
+// SetPortfolioGroup gets a reference to the given NullableString and assigns it to the PortfolioGroup field.
 // Deprecated
 func (o *Account) SetPortfolioGroup(v string) {
-	o.PortfolioGroup = &v
+	o.PortfolioGroup.Set(&v)
+}
+// SetPortfolioGroupNil sets the value for PortfolioGroup to be an explicit nil
+func (o *Account) SetPortfolioGroupNil() {
+	o.PortfolioGroup.Set(nil)
+}
+
+// UnsetPortfolioGroup ensures that no value is present for PortfolioGroup, not even an explicit nil
+func (o *Account) UnsetPortfolioGroup() {
+	o.PortfolioGroup.Unset()
 }
 
 // GetCashRestrictions returns the CashRestrictions field value if set, zero value otherwise.
@@ -708,8 +718,8 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if !isNil(o.PortfolioGroup) {
-		toSerialize["portfolio_group"] = o.PortfolioGroup
+	if o.PortfolioGroup.IsSet() {
+		toSerialize["portfolio_group"] = o.PortfolioGroup.Get()
 	}
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions

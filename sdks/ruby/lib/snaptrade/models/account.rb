@@ -128,6 +128,7 @@ module SnapTrade
         :'status',
         :'raw_type',
         :'account_category',
+        :'portfolio_group',
       ])
     end
 
