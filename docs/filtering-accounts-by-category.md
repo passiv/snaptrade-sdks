@@ -43,6 +43,20 @@ const { data: accounts } = await snaptrade.connections.listBrokerageAuthorizatio
   userSecret,
 });
 
+const accounts = (
+  await Promise.all(
+    connections
+      .filter((connection) => connection.id)
+      .map((connection) =>
+        snaptrade.connections.listBrokerageAuthorizationAccounts({
+          authorizationId: connection.id!,
+          userId,
+          userSecret,
+        })
+      )
+  )
+).flatMap((response) => response.data);
+
 const investmentAccounts = accounts.filter(
   (a) => a.account_category === "INVESTMENT" || a.account_category === null
 );
@@ -63,6 +77,16 @@ accounts = snaptrade.connections.list_brokerage_authorization_accounts(
     user_id=user_id,
     user_secret=user_secret,
 ).body
+
+accounts = []
+for connection in connections:
+    accounts.extend(
+        snaptrade.connections.list_brokerage_authorization_accounts(
+            authorization_id=connection["id"],
+            user_id=user_id,
+            user_secret=user_secret,
+        ).body
+    )
 
 investment_accounts = [
     a for a in accounts
