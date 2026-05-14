@@ -25,10 +25,20 @@ Use `raw_type` when you need finer-grained distinctions than `account_category` 
 
 ## Filtering in Your Code
 
+The examples below select a single connection for brevity. If a user has multiple connections, choose the connection whose accounts you want to filter before listing accounts for that connection.
+
 ### Node.js / TypeScript
 
 ```ts
 const { data: connections } = await snaptrade.connections.listBrokerageAuthorizations({
+  userId,
+  userSecret,
+});
+
+// Select the connection whose accounts you want to filter.
+const connection = connections[0];
+const { data: accounts } = await snaptrade.connections.listBrokerageAuthorizationAccounts({
+  authorizationId: connection.id!,
   userId,
   userSecret,
 });
@@ -56,6 +66,14 @@ const investmentAccounts = accounts.filter(
 
 ```python
 connections = snaptrade.connections.list_brokerage_authorizations(
+    user_id=user_id,
+    user_secret=user_secret,
+).body
+
+# Select the connection whose accounts you want to filter.
+connection = connections[0]
+accounts = snaptrade.connections.list_brokerage_authorization_accounts(
+    authorization_id=connection["id"],
     user_id=user_id,
     user_secret=user_secret,
 ).body
