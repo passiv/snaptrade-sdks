@@ -8,6 +8,12 @@ The MCP server is available at `https://mcp.snaptrade.com/mcp`.
 The MCP server is **read-only**. It can retrieve account data and generate a link to connect a new brokerage, but it cannot place trades, move money, or change account settings. For programmatic access to the full SnapTrade API, including trading, see [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started).
 :::
 
+## Before you begin
+
+The SnapTrade MCP server is for **SnapTrade Personal** users — individuals who connect and manage their own brokerage accounts with SnapTrade. It is not used with SnapTrade developer (partner) API keys.
+
+To use the connector, you'll need a free SnapTrade Personal account. If you don't have one yet, sign up at [SnapTrade Personal](https://www.mysnaptrade.com) and link at least one brokerage account before adding the connector to your AI assistant.
+
 ## What you can do with it
 
 With the SnapTrade connector enabled, an AI assistant can:
@@ -62,6 +68,8 @@ For details on what data the connector accesses and how it is handled, see the [
 4. Set the authentication method to **OAuth** and confirm you trust the application.
 5. Click **Create**, then complete the OAuth login flow with SnapTrade and approve **read** access.
 6. After you approve, the SnapTrade tools become available in your chats.
+
+> Note: ChatGPT Developer mode and custom connectors are available on ChatGPT for web, not the desktop app — complete this setup at [chatgpt.com](https://chatgpt.com).
 
 > Note: Once the SnapTrade app is approved in the ChatGPT app directory, users can add it directly from the directory without enabling Developer mode.
 
