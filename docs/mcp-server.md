@@ -84,7 +84,7 @@ Once the connector is enabled, a user can ask their assistant questions like:
 
 ## Available tools
 
-The connector exposes 21 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
+The connector exposes 18 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
 
 **Connections**
 
@@ -97,10 +97,8 @@ The connector exposes 21 tools. All are read-only except `request_connection_lin
 - `AccountInformation_getUserAccountBalance` — cash balances and buying power
 - `AccountInformation_getAllAccountPositions` — positions and holdings for an account
 - `AccountInformation_getAccountBalanceHistory` — historical account balances
-- `AccountInformation_getUserAccountOrders` — orders for an account
-- `AccountInformation_getUserAccountOrdersV2` — orders for an account (v2)
-- `AccountInformation_getUserAccountRecentOrders` — recent orders for an account
-- `AccountInformation_getUserAccountRecentOrdersV2` — recent orders for an account (v2)
+- `AccountInformation_getUserAccountOrdersV2` — orders for an account
+- `AccountInformation_getUserAccountRecentOrdersV2` — recent orders for an account
 - `AccountInformation_getUserAccountOrderDetailV2` — details for a single order
 - `AccountInformation_getAccountActivities` — historical account activity such as deposits, dividends, and fees
 
@@ -111,7 +109,6 @@ The connector exposes 21 tools. All are read-only except `request_connection_lin
 - `ReferenceData_getCurrencyExchangeRatePair` — exchange rate for a specific currency pair
 - `ReferenceData_getSecurityTypes` — supported security types
 - `ReferenceData_getStockExchanges` — supported stock exchanges
-- `ReferenceData_getSymbolsByTicker` — look up a symbol by ticker
 - `ReferenceData_getPartnerInfo` — brokerages and data access available to the connector
 
 **Connection helpers**

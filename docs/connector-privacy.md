@@ -14,7 +14,7 @@ When your AI assistant calls a connector tool in response to your prompt, the co
 - **Positions and holdings** — the securities held in your accounts, with quantities and market values.
 - **Orders** — open, filled, cancelled, and pending orders, including order history and individual order details.
 - **Account activity** — historical transactions such as deposits, withdrawals, dividends, fees, buys, and sells.
-- **Reference data** — currencies, exchange rates, stock exchanges, security types, and symbol lookups. This data is not specific to you.
+- **Reference data** — currencies, exchange rates, stock exchanges, and security types. This data is not specific to you.
 
 The connector accesses this data **on demand**, only in direct response to a prompt you make through your AI assistant. It does not collect or retrieve data proactively.
 
