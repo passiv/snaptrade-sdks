@@ -12,7 +12,7 @@ The MCP server is **read-only**. It can retrieve account data and generate a lin
 
 The SnapTrade MCP server is for **SnapTrade Personal** users — individuals who connect and manage their own brokerage accounts with SnapTrade. It is not used with SnapTrade developer (partner) API keys.
 
-To use the connector, you'll need a free SnapTrade Personal account. If you don't have one yet, sign up at [SnapTrade Personal](https://www.mysnaptrade.com) and link at least one brokerage account before adding the connector to your AI assistant.
+To use the connector, you'll need a free SnapTrade Personal account. If you don't have one yet, sign up at the [SnapTrade Dashboard](https://dashboard.snaptrade.com/signup) and link at least one brokerage account before adding the connector to your AI assistant.
 
 ## What you can do with it
 
