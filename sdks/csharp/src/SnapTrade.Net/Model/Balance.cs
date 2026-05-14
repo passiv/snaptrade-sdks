@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Balance" /> class.
         /// </summary>
         /// <param name="currency">currency.</param>
-        /// <param name="cash">The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field..</param>
+        /// <param name="cash">The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with &#x60;cash_equivalent&#x60; &#x3D; true.</param>
         /// <param name="buyingPower">Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages..</param>
         public Balance(BalanceCurrency currency = default(BalanceCurrency), double? cash = default(double?), double? buyingPower = default(double?)) : base()
         {
@@ -53,9 +53,9 @@ namespace SnapTrade.Net.Model
         public BalanceCurrency Currency { get; set; }
 
         /// <summary>
-        /// The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field.
+        /// The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with &#x60;cash_equivalent&#x60; &#x3D; true
         /// </summary>
-        /// <value>The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field.</value>
+        /// <value>The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with &#x60;cash_equivalent&#x60; &#x3D; true</value>
         [DataMember(Name = "cash", EmitDefaultValue = true)]
         public double? Cash { get; set; }
 
