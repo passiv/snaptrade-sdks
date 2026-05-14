@@ -25,6 +25,8 @@ Use `raw_type` when you need finer-grained distinctions than `account_category` 
 
 ## Filtering in Your Code
 
+The examples below select a single connection for brevity. If a user has multiple connections, choose the connection whose accounts you want to filter before listing accounts for that connection.
+
 ### Node.js / TypeScript
 
 ```ts
