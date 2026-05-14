@@ -27,7 +27,7 @@ export interface Balance {
      */
     'currency'?: BalanceCurrency;
     /**
-     * The amount of available cash in the account denominated in the currency of the `currency` field.
+     * The amount of available cash in the account denominated in the currency of the `currency` field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with `cash_equivalent` = true
      * @type {number}
      * @memberof Balance
      */

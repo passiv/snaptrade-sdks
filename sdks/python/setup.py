@@ -31,7 +31,7 @@ REQUIRES = [
     "python-dateutil ~= 2.8.2",
     "typing_extensions >= 4.13.2,<5",
     "urllib3 ~= 1.26.18, ~= 2.0.0",
-    "cryptography ~= 43.0.3",
+    "cryptography >= 43.0.3",
     "frozendict ~= 2.3.4",
     "aiohttp ~= 3.10.11"
 ]
