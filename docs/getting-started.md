@@ -122,7 +122,7 @@ Once you have a connected `account`, you are ready to move on to pulling account
 
 When you have at least one connected `account` and want to start making use of the `positions`, you will first need to get the `accountId`.
 
-1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, use the :api[AccountInformation_listUserAccounts] endpoint to get the `accountId` of the account you wish to pull `positions` for.
+1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, call :api[Connections_listBrokerageAuthorizations] to list the user's connections, then call :api[Connections_listBrokerageAuthorizationAccounts] for the relevant connection to get the `accountId` of the account you wish to pull `positions` for.
 2. With the `accountId`, call :api[AccountInformation_getUserAccountPositions]. This will return a list of positions in the specified account.
 
 Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in. Other core endpoints for retrieving account information include :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].

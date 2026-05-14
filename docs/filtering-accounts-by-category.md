@@ -15,7 +15,7 @@ Every account returned by SnapTrade includes an `account_category` field that no
 | `LOC` | Line of credit account (for example, loans or credit cards). |
 | `null` | Category could not be determined (brokerage did not return a recognizable type). Treat as an investment account so legitimate brokerage accounts are not accidentally hidden from trading and holdings flows. |
 
-The field is returned from both :api[AccountInformation_listUserAccounts] and :api[AccountInformation_getUserAccountDetails].
+The field is returned from both :api[Connections_listBrokerageAuthorizationAccounts] and :api[AccountInformation_getUserAccountDetails]. If a user has multiple connections, call :api[Connections_listBrokerageAuthorizations] first, then call :api[Connections_listBrokerageAuthorizationAccounts] for each connection.
 
 ## The `raw_type` Field
 
@@ -28,7 +28,15 @@ Use `raw_type` when you need finer-grained distinctions than `account_category` 
 ### Node.js / TypeScript
 
 ```ts
-const { data: accounts } = await snaptrade.accountInformation.listUserAccounts({
+const { data: connections } = await snaptrade.connections.listBrokerageAuthorizations({
+  userId,
+  userSecret,
+});
+
+// Select the connection whose accounts you want to filter.
+const connection = connections[0];
+const { data: accounts } = await snaptrade.connections.listBrokerageAuthorizationAccounts({
+  authorizationId: connection.id!,
   userId,
   userSecret,
 });
@@ -41,7 +49,15 @@ const investmentAccounts = accounts.filter(
 ### Python
 
 ```python
-accounts = snaptrade.account_information.list_user_accounts(
+connections = snaptrade.connections.list_brokerage_authorizations(
+    user_id=user_id,
+    user_secret=user_secret,
+).body
+
+# Select the connection whose accounts you want to filter.
+connection = connections[0]
+accounts = snaptrade.connections.list_brokerage_authorization_accounts(
+    authorization_id=connection["id"],
     user_id=user_id,
     user_secret=user_secret,
 ).body
@@ -55,7 +71,8 @@ investment_accounts = [
 ### cURL
 
 ```bash
-curl 'https://api.snaptrade.com/api/v1/accounts?userId=...&userSecret=...' \
+# Replace <authorizationId> with an id returned by /authorizations.
+curl 'https://api.snaptrade.com/api/v1/authorizations/<authorizationId>/accounts?userId=...&userSecret=...' \
   | jq '[.[] | select(.account_category == "INVESTMENT" or .account_category == null)]'
 ```
 

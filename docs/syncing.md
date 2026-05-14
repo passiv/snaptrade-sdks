@@ -16,7 +16,7 @@ Webhooks:
 - [ACCOUNT_HOLDINGS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once per day when holdings are updated (regardless of if data changes or not). This is only really helpful for Daily data since Pay as you Go / Real-time plans will update brokerage data with each request.
 
 API Account Status:
-- [List accounts endpoint](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listUserAccounts) will return a `sync_status` object which will tell you when the daily sync last ran for holdings, as well as the last day that transactions **have been fully synced** (transactions have been pulled from 00:00 to 23:59)
+- [List accounts for a connection endpoint](https://docs.snaptrade.com/reference/Connections/Connections_listBrokerageAuthorizationAccounts) will return a `sync_status` object for each account in the connection. This tells you when the daily sync last ran for holdings, as well as the last day that transactions **have been fully synced** (transactions have been pulled from 00:00 to 23:59). If a user has multiple connections, first call :api[Connections_listBrokerageAuthorizations], then call :api[Connections_listBrokerageAuthorizationAccounts] for each connection.
   ```
   "sync_status": {
       "transactions": {
