@@ -11,7 +11,7 @@ The public key for your SnapTrade API key. In direct API requests, it is sent as
 
 ## Consumer Key
 The secret key for your SnapTrade API key. Use the consumer key when generating request signatures or validating webhook signatures.
-Aliases: Client Secret
+Aliases: client secret
 
 ## SnapTrade User 
 A user record under your API key that represents one of your end users and authorizes access to that user's SnapTrade data.
