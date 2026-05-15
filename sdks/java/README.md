@@ -52,10 +52,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
-  * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
-  * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
-  * [`snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions`](#snaptradeexperimentalendpointssyncbrokerageauthorizationtransactions)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -186,72 +182,71 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.model.*;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.model.*;
 import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Example {
 
-        public static void main(String[] args) {
-                // 1) Initialize default client with clientID and consumerKey
+        public static void main(String[] args) throws ApiException {
+                // 1) Initialize a client with your clientID and consumerKey.
                 Configuration configuration = new Configuration();
                 configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
                 configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
                 Snaptrade snaptrade = new Snaptrade(configuration);
 
-                // 2) Check that the client is able to make a request to the API server
+                // 2) Check that the client is able to make a request to the API server.
                 Status status = snaptrade.apiStatus.check().execute();
-                System.out.printf("SnapTrade is online: %s\n", status.getOnline());
+                System.out.println(status);
 
                 // 3) Create a new user on SnapTrade
-                // The userId should be provided by you and refer to permanent value such as a
-                // database row ID
-                UUID userId = UUID.randomUUID();
-                UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
-                                .userId(userId.toString()).execute();
+                String userId = UUID.randomUUID().toString();
+                UserIDandSecret registerResponse = snaptrade.authentication
+                                .registerSnapTradeUser(userId)
+                                .execute();
+                System.out.println(registerResponse);
 
-                new SnapTradeRegisterUserRequestBody().userId(userId.toString());
                 // Note: A user secret is only generated once. It's required to access resources
-                // for certain endpoints
-                System.out.printf("userID: %s, userSecret: %s\n", userIDandSecret.getUserId(),
-                                userIDandSecret.getUserSecret());
+                // for certain endpoints.
+                String userSecret = registerResponse.getUserSecret();
 
                 // 4) Get a redirect URI. Users will need this to connect their brokerage to the
-                // SnapTrade server
-                Map response = (Map) snaptrade.authentication
-                                .loginSnapTradeUser(userIDandSecret.getUserId(),
-                                                userIDandSecret.getUserSecret())
+                // SnapTrade server.
+                Object redirectUri = snaptrade.authentication
+                                .loginSnapTradeUser(userId, userSecret)
                                 .execute();
-                System.out.println(response.get("redirectURI"));
+                System.out.println(redirectUri);
 
-                // 5) Make a portfolio group and query
-                List<PortfolioGroup> portfolioGroupsFromPost = snaptrade.portfolioManagement.create(
-                                userIDandSecret.getUserId(), userIDandSecret.getUserSecret()).id(UUID.randomUUID())
-                                .name("MyPortfolio").execute();
-                System.out.println(portfolioGroupsFromPost);
-                List<PortfolioGroup> portfolioGroups = snaptrade.portfolioManagement.list(userIDandSecret.getUserId(),
-                                userIDandSecret.getUserSecret()).execute();
-                System.out.println(portfolioGroups);
+                System.out.print("Open the link in your browser. When done logging in, press Enter to continue...");
+                new Scanner(System.in).nextLine();
 
-                // 7) Query holdings and available brokerages
-                List<AccountHoldings> holdings = snaptrade.accountInformation
-                                .getAllUserHoldings(userIDandSecret.getUserId(),
-                                                userIDandSecret.getUserSecret())
+                // 5) Get a list of connections
+                List<BrokerageAuthorization> connections = snaptrade.connections
+                                .listBrokerageAuthorizations(userId, userSecret)
                                 .execute();
-                System.out.println(holdings);
-                List<Account> accounts = snaptrade.accountInformation.listUserAccounts(userIDandSecret.getUserId(),
-                                userIDandSecret.getUserSecret()).execute();
-                System.out.println(accounts);
-                List<Brokerage> brokerages = snaptrade.referenceData.listAllBrokerages().execute();
-                System.out.println(brokerages);
+                System.out.println(connections);
 
-                // 8) Deleting a user
+                // 6) Get a list of accounts for the first connection, if available
+                if (connections.isEmpty()) {
+                        System.out.println("No brokerage connections found for the user.");
+                } else {
+                        List<Account> accounts = snaptrade.connections
+                                        .listBrokerageAuthorizationAccounts(
+                                                        connections.get(0).getId(),
+                                                        userId,
+                                                        userSecret)
+                                        .execute();
+                        System.out.println(accounts);
+                }
+
+                // 6) Deleting a user
                 DeleteUserResponse deleteUserResponse = snaptrade.authentication
-                                .deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
+                                .deleteSnapTradeUser(userId)
+                                .execute();
                 System.out.println(deleteUserResponse);
         }
 }
@@ -1418,178 +1413,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`<a id="snaptradeexperimentalendpointsgetuseraccountorderdetailv2"></a>
-
-Returns the detail of a single order using the brokerage order ID provided as a path parameter.
-
-The V2 order response format includes all legs of the order in the `legs` list field.
-If the order is single legged, `legs` will be a list of one leg.
-
-This endpoint is always realtime and does not rely on cached data.
-
-This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountOrderRecordV2 result = client
-        .experimentalEndpoints
-        .getUserAccountOrderDetailV2(accountId, brokerageOrderId, userId, userSecret)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecordV2](./src/main/java/com/snaptrade/client/model/AccountOrderRecordV2.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getUserAccountOrdersV2`<a id="snaptradeexperimentalendpointsgetuseraccountordersv2"></a>
-
-Returns a list of recent orders in the specified account.
-
-The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountOrdersV2Response result = client
-        .experimentalEndpoints
-        .getUserAccountOrdersV2(userId, userSecret, accountId)
-        .state(state)
-        .days(days)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### state: `String`<a id="state-string"></a>
-
-defaults value is set to \"all\"
-
-##### days: `Integer`<a id="days-integer"></a>
-
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrdersV2Response](./src/main/java/com/snaptrade/client/model/AccountOrdersV2Response.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`<a id="snaptradeexperimentalendpointsgetuseraccountrecentordersv2"></a>
-
-A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
-By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountOrdersV2Response result = client
-        .experimentalEndpoints
-        .getUserAccountRecentOrdersV2(userId, userSecret, accountId)
-        .onlyExecuted(onlyExecuted)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### onlyExecuted: `Boolean`<a id="onlyexecuted-boolean"></a>
-
-Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrdersV2Response](./src/main/java/com/snaptrade/client/model/AccountOrdersV2Response.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/recentOrders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions`<a id="snaptradeexperimentalendpointssyncbrokerageauthorizationtransactions"></a>
-
-Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-BrokerageAuthorizationTransactionsSyncConfirmation result = client
-        .experimentalEndpoints
-        .syncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[BrokerageAuthorizationTransactionsSyncConfirmation](./src/main/java/com/snaptrade/client/model/BrokerageAuthorizationTransactionsSyncConfirmation.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorizations/{authorizationId}/transactions/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
