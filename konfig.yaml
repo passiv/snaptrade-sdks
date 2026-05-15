@@ -154,8 +154,6 @@ portal:
       post: true
     /brokerageAuthorizationTypes:
       get: true
-    /authorizations/{authorizationId}/transactions/sync:
-      post: true
     /currencies:
       get: true
     /currencies/rates:
@@ -168,12 +166,6 @@ portal:
       get: true
     /authorizations/{authorizationId}/returnRates:
       get: true
-    /accounts/{accountId}/orders/v2:
-      get: true
-    /accounts/{accountId}/recentOrders/v2:
-      get: true
-    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
-      get: true
     /authorizations/{authorizationId}:
       delete: true
     /accounts/{accountId}/holdings:
@@ -185,6 +177,7 @@ portal:
     - name: PartnerTimestamp
 filterTags:
   - Webhooks
+  - Experimental endpoints
 filterModels:
   - SnapTradePartnerAPICredential
   - WebhookBase
