@@ -155,6 +155,8 @@ export * from './symbols-quotes-inner';
 export * from './take-profit';
 export * from './tax-lot';
 export * from './time-in-force-strict';
+export * from './trade-detection-cancel-subscription-response';
+export * from './trade-detection-subscription';
 export * from './trading-instrument';
 export * from './trading-search-cryptocurrency-pair-instruments200-response';
 export * from './trading-session';

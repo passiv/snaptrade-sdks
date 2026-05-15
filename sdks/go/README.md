@@ -25,6 +25,8 @@ go get github.com/passiv/snaptrade-sdks/sdks/go
 package main
 
 import (
+	"bufio"
+	"crypto/rand"
 	"fmt"
 	"os"
 
@@ -32,31 +34,68 @@ import (
 )
 
 func main() {
+	// 1) Initialize a client with your clientID and consumerKey.
 	configuration := snaptrade.NewConfiguration()
 	configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
 	configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
 	client := snaptrade.NewAPIClient(configuration)
 
-	// 1) Create a new user
-	requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
-	userId := "USER_ID_FROM_YOU"
-	requestBody.SetUserId(userId)
+	// 2) Check that the client is able to make a request to the API server.
+	apiResponse, _, _ := client.APIStatusApi.Check().Execute()
+	fmt.Println(apiResponse)
+
+	// 3) Create a new user on SnapTrade
+	userId := generateUUID()
+	requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody(userId)
 	request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
-	resp, _, _ := request.Execute()
+	registerResponse, _, _ := request.Execute()
+	fmt.Println(registerResponse)
 
-	// 2) Get user secret
-	userSecret := resp.UserSecret
+	// Note: A user secret is only generated once. It's required to access
+	// resources for certain endpoints.
+	userSecret := registerResponse.GetUserSecret()
 
-	// 3) Get redirect URI
-	loginResp, _, _ := client.AuthenticationApi.LoginSnapTradeUser(userId, *userSecret).Execute()
-	fmt.Println("Login redirect URI:", loginResp.LoginRedirectURI)
+	// 4) Get a redirect URI. Users will need this to connect
+	// their brokerage to the SnapTrade server.
+	redirectURI, _, _ := client.AuthenticationApi.LoginSnapTradeUser(userId, userSecret).Execute()
+	if redirectURI.LoginRedirectURI != nil {
+		fmt.Println(redirectURI.LoginRedirectURI.GetRedirectURI())
+	} else {
+		fmt.Println(redirectURI)
+	}
 
-	// 4) Obtain account holdings data
-	holdingsResp, _, _ := client.AccountInformationApi.GetAllUserHoldings(userId, *userSecret).Execute()
-	fmt.Println("Account holdings:", holdingsResp)
-	// 5) Delete the user
+	fmt.Print("Open the link in your browser. When done logging in, press Enter to continue...")
+	_, _ = bufio.NewReader(os.Stdin).ReadString('\n')
+
+	// 5) Get a list of connections
+	connections, _, _ := client.ConnectionsApi.ListBrokerageAuthorizations(userId, userSecret).Execute()
+	fmt.Println(connections)
+
+	// 6) Get a list of accounts for the first connection, if available
+	if len(connections) == 0 {
+		fmt.Println("No brokerage connections found for the user.")
+	} else {
+		accounts, _, _ := client.ConnectionsApi.ListBrokerageAuthorizationAccounts(
+			connections[0].GetId(),
+			userId,
+			userSecret,
+		).Execute()
+		fmt.Println(accounts)
+	}
+
+	// 6) Deleting a user
 	deleteResp, _, _ := client.AuthenticationApi.DeleteSnapTradeUser(userId).Execute()
-	fmt.Println("User deletion response:", deleteResp)
+	fmt.Println(deleteResp)
+}
+
+func generateUUID() string {
+	bytes := make([]byte, 16)
+	if _, err := rand.Read(bytes); err != nil {
+		panic(err)
+	}
+	bytes[6] = (bytes[6] & 0x0f) | 0x40
+	bytes[8] = (bytes[8] & 0x3f) | 0x80
+	return fmt.Sprintf("%x-%x-%x-%x-%x", bytes[0:4], bytes[4:6], bytes[6:8], bytes[8:10], bytes[10:])
 }
 
 ```
@@ -96,10 +135,6 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
-*ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
-*ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
-*ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
-*ExperimentalEndpointsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ExperimentalEndpointsApi.md#syncbrokerageauthorizationtransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 *OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | List account option positions
 *ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
@@ -291,6 +326,8 @@ Class | Method | HTTP request | Description
  - [TakeProfit](docs/TakeProfit.md)
  - [TaxLot](docs/TaxLot.md)
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
+ - [TradeDetectionCancelSubscriptionResponse](docs/TradeDetectionCancelSubscriptionResponse.md)
+ - [TradeDetectionSubscription](docs/TradeDetectionSubscription.md)
  - [TradingInstrument](docs/TradingInstrument.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TradingSession](docs/TradingSession.md)

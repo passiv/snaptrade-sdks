@@ -198,6 +198,8 @@ from snaptrade_client.model.tax_lot import TaxLot
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.model.trade_detection_cancel_subscription_response import TradeDetectionCancelSubscriptionResponse
+from snaptrade_client.model.trade_detection_subscription import TradeDetectionSubscription
 from snaptrade_client.model.trade_id import TradeID
 from snaptrade_client.model.trading_instrument import TradingInstrument
 from snaptrade_client.model.trading_session import TradingSession

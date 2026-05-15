@@ -47,10 +47,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
-  * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
-  * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
-  * [`snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions`](#snaptradeexperimentalendpointssyncbrokerageauthorizationtransactions)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -122,6 +118,8 @@ yarn add snaptrade-typescript-sdk
 
 ```typescript
 const { Snaptrade } = require("snaptrade-typescript-sdk");
+const { randomUUID } = require("crypto");
+const readline = require("readline");
 
 async function main() {
   // 1) Initialize a client with your clientID and consumerKey.
@@ -135,32 +133,51 @@ async function main() {
   console.log("status:", status.data);
 
   // 3) Create a new user on SnapTrade
-  const userId = uuid();
-  const { userSecret } = (
+  const userId = randomUUID();
+  const registerResponse = (
     await snaptrade.authentication.registerSnapTradeUser({
       userId,
     })
   ).data;
+  console.log("registerResponse:", registerResponse);
 
   // Note: A user secret is only generated once. It's required to access
   // resources for certain endpoints.
-  console.log("userSecret:", userSecret);
+  const userSecret = registerResponse.userSecret;
 
   // 4) Get a redirect URI. Users will need this to connect
-  const data = (
+  // their brokerage to the SnapTrade server.
+  const redirectURI = (
     await snaptrade.authentication.loginSnapTradeUser({ userId, userSecret })
   ).data;
-  if (!("redirectURI" in data)) throw Error("Should have gotten redirect URI");
-  console.log("redirectURI:", data.redirectURI);
+  console.log("redirectURI:", redirectURI);
 
-  // 5) Obtaining account holdings data
-  const holdings = (
-    await snaptrade.accountInformation.getAllUserHoldings({
+  await waitForEnter(
+    "Open the link in your browser. When done logging in, press Enter to continue..."
+  );
+
+  // 5) Get a list of connections
+  const connections = (
+    await snaptrade.connections.listBrokerageAuthorizations({
       userId,
       userSecret,
     })
   ).data;
-  console.log("holdings:", holdings);
+  console.log("connections:", connections);
+
+  // 6) Get a list of accounts for the first connection, if available
+  if (!Array.isArray(connections) || connections.length === 0) {
+    console.log("No brokerage connections found for the user.");
+  } else {
+    const accounts = (
+      await snaptrade.connections.listBrokerageAuthorizationAccounts({
+        authorizationId: connections[0].id,
+        userId,
+        userSecret,
+      })
+    ).data;
+    console.log("accounts:", accounts);
+  }
 
   // 6) Deleting a user
   const deleteResponse = (
@@ -169,26 +186,17 @@ async function main() {
   console.log("deleteResponse:", deleteResponse);
 }
 
-// Should be replaced with function to get user ID
-function getUserId() {
-  var d = new Date().getTime(); //Timestamp
-  var d2 =
-    (typeof performance !== "undefined" &&
-      performance.now &&
-      performance.now() * 1000) ||
-    0; //Time in microseconds since page-load or 0 if unsupported
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16; //random number between 0 and 16
-    if (d > 0) {
-      //Use timestamp until depleted
-      r = (d + r) % 16 | 0;
-      d = Math.floor(d / 16);
-    } else {
-      //Use microseconds since page-load if supported
-      r = (d2 + r) % 16 | 0;
-      d2 = Math.floor(d2 / 16);
-    }
-    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+function waitForEnter(prompt) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) => {
+    rl.question(prompt, () => {
+      rl.close();
+      resolve();
+    });
   });
 }
 
@@ -1393,186 +1401,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`<a id="snaptradeexperimentalendpointsgetuseraccountorderdetailv2"></a>
-
-Returns the detail of a single order using the brokerage order ID provided as a path parameter.
-
-The V2 order response format includes all legs of the order in the `legs` list field.
-If the order is single legged, `legs` will be a list of one leg.
-
-This endpoint is always realtime and does not rely on cached data.
-
-This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getUserAccountOrderDetailV2Response =
-  await snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecordV2](./models/account-order-record-v2.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getUserAccountOrdersV2`<a id="snaptradeexperimentalendpointsgetuseraccountordersv2"></a>
-
-Returns a list of recent orders in the specified account.
-
-The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getUserAccountOrdersV2Response =
-  await snaptrade.experimentalEndpoints.getUserAccountOrdersV2({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    state: "all",
-    days: 30,
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### state: `'all' | 'open' | 'executed'`<a id="state-all--open--executed"></a>
-
-defaults value is set to \"all\"
-
-##### days: `number`<a id="days-number"></a>
-
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrdersV2Response](./models/account-orders-v2-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`<a id="snaptradeexperimentalendpointsgetuseraccountrecentordersv2"></a>
-
-A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
-By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getUserAccountRecentOrdersV2Response =
-  await snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### onlyExecuted: `boolean`<a id="onlyexecuted-boolean"></a>
-
-Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrdersV2Response](./models/account-orders-v2-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/recentOrders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions`<a id="snaptradeexperimentalendpointssyncbrokerageauthorizationtransactions"></a>
-
-Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const syncBrokerageAuthorizationTransactionsResponse =
-  await snaptrade.experimentalEndpoints.syncBrokerageAuthorizationTransactions({
-    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[BrokerageAuthorizationTransactionsSyncConfirmation](./models/brokerage-authorization-transactions-sync-confirmation.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorizations/{authorizationId}/transactions/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

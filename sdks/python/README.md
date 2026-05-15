@@ -51,10 +51,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
-  * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
-  * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
-  * [`snaptrade.experimental_endpoints.sync_brokerage_authorization_transactions`](#snaptradeexperimental_endpointssync_brokerage_authorization_transactions)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -105,6 +101,8 @@ pip install snaptrade-python-sdk==11.0.194
 import os
 import uuid
 from pprint import pprint
+from typing import List
+
 from snaptrade_client import SnapTrade
 
 # 1) Initialize a client with your clientID and consumerKey.
@@ -135,11 +133,24 @@ redirect_uri = snaptrade.authentication.login_snap_trade_user(
 )
 print(redirect_uri.body)
 
-# 5) Obtaining account holdings data
-holdings = snaptrade.account_information.get_all_user_holdings(
+input("Open the link in your browser. When done logging in, press Enter to continue...")
+
+# 5) Get a list of connections
+connections = snaptrade.connections.list(
     query_params={"userId": user_id, "userSecret": user_secret}
 )
-pprint(holdings.body)
+pprint(connections.body)
+
+# 6) Get a list of accounts for the first connection, if available
+if not isinstance(connections.body, List) or len(connections.body) == 0:
+    print("No brokerage connections found for the user.")
+else:
+    accounts = snaptrade.connections.list_brokerage_authorization_accounts(
+        authorization_id=connections.body[0]["id"],
+        user_id=user_id,
+        user_secret=user_secret,
+    )
+    pprint(accounts.body)
 
 # 6) Deleting a user
 deleted_response = snaptrade.authentication.delete_snap_trade_user(
@@ -1382,187 +1393,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
-
-Returns the detail of a single order using the brokerage order ID provided as a path parameter.
-
-The V2 order response format includes all legs of the order in the `legs` list field.
-If the order is single legged, `legs` will be a list of one leg.
-
-This endpoint is always realtime and does not rely on cached data.
-
-This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_user_account_order_detail_v2_response = (
-    snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AccountOrderRecordV2`](./snaptrade_client/type/account_order_record_v2.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.get_user_account_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_orders_v2"></a>
-
-Returns a list of recent orders in the specified account.
-
-The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_user_account_orders_v2_response = (
-    snaptrade.experimental_endpoints.get_user_account_orders_v2(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### state: `str`<a id="state-str"></a>
-
-defaults value is set to \"all\"
-
-##### days: `int`<a id="days-int"></a>
-
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AccountOrdersV2Response`](./snaptrade_client/type/account_orders_v2_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/v2` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_recent_orders_v2"></a>
-
-A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
-By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_user_account_recent_orders_v2_response = (
-    snaptrade.experimental_endpoints.get_user_account_recent_orders_v2(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### only_executed: `bool`<a id="only_executed-bool"></a>
-
-Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AccountOrdersV2Response`](./snaptrade_client/type/account_orders_v2_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/recentOrders/v2` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.sync_brokerage_authorization_transactions`<a id="snaptradeexperimental_endpointssync_brokerage_authorization_transactions"></a>
-
-Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-sync_brokerage_authorization_transactions_response = (
-    snaptrade.experimental_endpoints.sync_brokerage_authorization_transactions(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### authorization_id: `str`<a id="authorization_id-str"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`BrokerageAuthorizationTransactionsSyncConfirmation`](./snaptrade_client/type/brokerage_authorization_transactions_sync_confirmation.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorizations/{authorizationId}/transactions/sync` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
