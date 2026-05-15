@@ -1,6 +1,8 @@
 import os
 import uuid
 from pprint import pprint
+from typing import List
+
 from snaptrade_client import SnapTrade
 
 # 1) Initialize a client with your clientID and consumerKey.
@@ -31,11 +33,24 @@ redirect_uri = snaptrade.authentication.login_snap_trade_user(
 )
 print(redirect_uri.body)
 
-# 5) Obtaining account holdings data
-holdings = snaptrade.account_information.get_all_user_holdings(
+input("Open the link in your browser. When done logging in, press Enter to continue...")
+
+# 5) Get a list of connections
+connections = snaptrade.connections.list(
     query_params={"userId": user_id, "userSecret": user_secret}
 )
-pprint(holdings.body)
+pprint(connections.body)
+
+# 6) Get a list of accounts for the first connection, if available
+if not isinstance(connections.body, List) or len(connections.body) == 0:
+    print("No brokerage connections found for the user.")
+else:
+    accounts = snaptrade.connections.list_brokerage_authorization_accounts(
+        authorization_id=connections.body[0]["id"],
+        user_id=user_id,
+        user_secret=user_secret,
+    )
+    pprint(accounts.body)
 
 # 6) Deleting a user
 deleted_response = snaptrade.authentication.delete_snap_trade_user(
