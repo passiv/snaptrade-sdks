@@ -147,3 +147,4 @@ The order will now show over the :api[AccountInformation_getUserAccountOrders] e
 
 - To get started with Webhooks, see [Webhooks](https://docs.snaptrade.com/docs/webhooks)
 - To get started with implementing the SnapTrade Connection Portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal)
+- To let your users access their data through AI assistants like Claude and ChatGPT, see [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)

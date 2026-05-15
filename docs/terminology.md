@@ -83,3 +83,9 @@ An explicit API-triggered sync request for a connection outside the periodic syn
 Aliases: forced sync, on-demand refresh
 
 Learn more: [Syncing and Data Freshness](https://docs.snaptrade.com/docs/syncing)
+
+## MCP Server
+SnapTrade's hosted Model Context Protocol server that lets AI assistants securely read a user's connected brokerage data.
+Aliases: AI connector, Claude connector, ChatGPT app
+
+Learn more: [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)

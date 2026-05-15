@@ -65,6 +65,12 @@ portal:
               path: docs/ratelimiting.md
             - id: launch-guide
               path: docs/launching-your-application.md
+        - label: AI & MCP
+          links:
+            - id: mcp-server
+              path: docs/mcp-server.md
+            - id: connector-privacy
+              path: docs/connector-privacy.md
         - label: Core Concepts
           links:
             - id: terminology
