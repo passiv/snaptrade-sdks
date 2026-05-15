@@ -1,22 +1,17 @@
 # Terminology
 
-## API Key
-The app-level credential pair used to authenticate your integration with the SnapTrade API. An API key consists of a client ID (`clientId`) and a consumer key (`consumerKey`).
+## API Keys
+API Keys consist of a client ID (`clientId`) and a consumer key (`consumerKey`).
 Aliases: app credentials, integration credentials
 
 Learn more: [Getting Started: API Keys](https://docs.snaptrade.com/docs/getting-started#getting-started-api-keys), [FAQ: API Keys](https://docs.snaptrade.com/docs/faq#faq-api-keys)
 
 ## Client ID
-The public identifier for your SnapTrade API key. In direct API requests, it is sent as the `clientId` query parameter.
-Aliases: `clientId`
-
-Learn more: [Request Signatures](https://docs.snaptrade.com/docs/request-signatures)
+The public key for your SnapTrade API key. In direct API requests, it is sent as the `clientId` query parameter.
 
 ## Consumer Key
-The sensitive signing key for your SnapTrade API key. Use the consumer key when generating request signatures or validating webhook signatures.
-Aliases: `consumerKey`
-
-Learn more: [Request Signatures](https://docs.snaptrade.com/docs/request-signatures), [Webhooks](https://docs.snaptrade.com/docs/webhooks#verifying-webhook-authenticity)
+The secret key for your SnapTrade API key. Use the consumer key when generating request signatures or validating webhook signatures.
+Aliases: Client Secret
 
 ## SnapTrade User 
 A user record under your API key that represents one of your end users and authorizes access to that user's SnapTrade data.
