@@ -8,9 +8,9 @@ To get started with webhooks, visit the webhook tab of the SnapTrade Dashboard t
 
 > Note: Webhook secrets are deprecated.
 
-You can verify the authenticity of any SnapTrade webhook by using the `Signature` header contained in the webhook headers, and comparing that to the expected signature generated using your **client secret**. Note that the client secret is different from the webhook secret that is being deprecated.
+You can verify the authenticity of any SnapTrade webhook by using the `Signature` header contained in the webhook headers, and comparing that to the expected signature generated using your **consumer key**. Note that the consumer key is different from the webhook secret that is being deprecated.
 
-The `Signature` header contains an HMAC SHA256 hash of the request body, using your client secret as the key.
+The `Signature` header contains an HMAC SHA256 hash of the request body, using your consumer key as the key.
 
 Here's an example implementation of a Flask webhook handler that verifies the authenticity of incoming webhooks:
 
@@ -25,7 +25,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-SECRET = os.getenv("SNAPTRADE_CLIENT_SECRET")
+CONSUMER_KEY = os.getenv("SNAPTRADE_CONSUMER_KEY")
 
 @app.route('/', methods=['POST'])
 def webhook_listener():
@@ -37,7 +37,7 @@ def webhook_listener():
 
     # Verify the signature
     sig_content = json.dumps(payload, separators=(",", ":"), sort_keys=True)
-    sig_digest = hmac.new(SECRET.encode(), sig_content.encode(), sha256).digest()
+    sig_digest = hmac.new(CONSUMER_KEY.encode(), sig_content.encode(), sha256).digest()
     calculated_signature = b64encode(sig_digest).decode()
 
     if calculated_signature != signature:
