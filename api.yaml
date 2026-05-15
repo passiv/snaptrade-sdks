@@ -288,6 +288,152 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /snapTrade/tradeDetection/subscriptions:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List active Trade Detection subscriptions
+      description: Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+      operationId: TradeDetection_listSubscriptions
+      responses:
+        "200":
+          description: Active Trade Detection subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TradeDetectionSubscription"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "403":
+          description: Feature not enabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+    post:
+      tags:
+        - Experimental endpoints
+      summary: Add a Trade Detection subscription
+      description: |
+        Adds or restores a Trade Detection subscription for a connected brokerage account.
+        This endpoint requires `userId` and `userSecret` in addition to the partner signature.
+      operationId: TradeDetection_addSubscription
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/TradeDetectionSubscriptionRequestBody"
+      responses:
+        "200":
+          description: Restored an existing cancelled Trade Detection subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradeDetectionSubscription"
+        "201":
+          description: Created a new Trade Detection subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradeDetectionSubscription"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "403":
+          description: Feature not enabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /snapTrade/tradeDetection/subscriptions/cancel:
+    post:
+      tags:
+        - Experimental endpoints
+      summary: Cancel a Trade Detection subscription
+      description: |
+        Cancels a Trade Detection subscription for a connected brokerage account.
+        This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
+      operationId: TradeDetection_cancelSubscription
+      requestBody:
+        $ref: "#/components/requestBodies/TradeDetectionSubscriptionRequestBody"
+      responses:
+        "200":
+          description: Cancelled the Trade Detection subscription, or it was already cancelled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TradeDetectionCancelSubscriptionResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "403":
+          description: Feature not enabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected Error
   /holdings:
     get:
       deprecated: true
@@ -2994,6 +3140,16 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/UserIDandSecret"
+    TradeDetectionSubscriptionRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["account_id"]
+            properties:
+              account_id:
+                $ref: "#/components/schemas/AccountID"
     SnapTradeLoginUserRequestBody:
       content:
         application/json:
@@ -3374,6 +3530,32 @@ components:
       description: Comma separated list of account IDs
       type: string
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
+    TradeDetectionSubscription:
+      description: An active Trade Detection subscription for a brokerage account.
+      type: object
+      required:
+        - account_id
+        - cost
+        - check_interval_seconds
+      properties:
+        account_id:
+          $ref: "#/components/schemas/AccountID"
+        cost:
+          type: string
+          description: Monthly subscription cost as a decimal string.
+          example: "100.00"
+        check_interval_seconds:
+          type: integer
+          description: How often the subscribed account is checked for new trades.
+          example: 300
+    TradeDetectionCancelSubscriptionResponse:
+      type: object
+      required:
+        - success
+      properties:
+        success:
+          type: boolean
+          example: true
     BrokerageID:
       description: Unique identifier for the brokerage.
       type: string
