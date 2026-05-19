@@ -2148,10 +2148,12 @@ paths:
           description: Unexpected Error
   /accounts/{accountId}/trading/bracket:
     post:
+      deprecated: true
       tags:
         - Trading
       summary: Place bracket order
       description: |
+        **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
         Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
         use. Only supported on certain brokerages
       operationId: Trading_placeBracketOrder
