@@ -1765,6 +1765,7 @@ public class TradingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call placeBracketOrderValidateBeforeCall(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accountId' is set
@@ -1895,7 +1896,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             return placeBracketOrderCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
@@ -1925,7 +1928,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public AccountOrderRecord execute() throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             ApiResponse<AccountOrderRecord> localVarResp = placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
@@ -1942,7 +1947,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             return placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
@@ -1959,7 +1966,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             return placeBracketOrderAsync(accountId, userId, userSecret, manualTradeFormBracket, _callback);
@@ -1968,7 +1977,7 @@ public class TradingApiGenerated {
 
     /**
      * Place bracket order
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
      * @param accountId The ID of the account to execute the trade on. (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1980,7 +1989,9 @@ public class TradingApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public TradingApi.PlaceBracketOrderRequestBuilder placeBracketOrder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
         if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
         if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");

@@ -543,6 +543,7 @@ class BaseApi(api_client.Api):
 class PlaceBracketOrder(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def aplace_bracket_order(
         self,
         body: typing.Optional[ManualTradeFormBracket] = None,
@@ -590,6 +591,7 @@ class PlaceBracketOrder(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def place_bracket_order(
         self,
         body: typing.Optional[ManualTradeFormBracket] = None,
@@ -611,7 +613,7 @@ class PlaceBracketOrder(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages  """
+        """ **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages  """
         args = self._place_bracket_order_mapped_args(
             body=body,
             query_params=query_params,
@@ -638,6 +640,7 @@ class PlaceBracketOrder(BaseApi):
 class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def apost(
         self,
         body: typing.Optional[ManualTradeFormBracket] = None,
@@ -685,6 +688,7 @@ class ApiForpost(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def post(
         self,
         body: typing.Optional[ManualTradeFormBracket] = None,
@@ -706,7 +710,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages  """
+        """ **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages  """
         args = self._place_bracket_order_mapped_args(
             body=body,
             query_params=query_params,

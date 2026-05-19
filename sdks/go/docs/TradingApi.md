@@ -431,6 +431,7 @@ func main() {
 
 
 ## PlaceBracketOrder
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Place bracket order
 

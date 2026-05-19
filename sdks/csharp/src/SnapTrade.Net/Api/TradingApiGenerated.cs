@@ -236,7 +236,7 @@ namespace SnapTrade.Net.Api
         /// Place bracket order
         /// </summary>
         /// <remarks>
-        /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -245,13 +245,14 @@ namespace SnapTrade.Net.Api
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
+        [Obsolete]
         AccountOrderRecord PlaceBracketOrder(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
 
         /// <summary>
         /// Place bracket order
         /// </summary>
         /// <remarks>
-        /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -260,6 +261,7 @@ namespace SnapTrade.Net.Api
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
+        [Obsolete]
         ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
         /// <summary>
         /// Place complex order
@@ -725,7 +727,7 @@ namespace SnapTrade.Net.Api
         /// Place bracket order
         /// </summary>
         /// <remarks>
-        /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -735,13 +737,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place bracket order
         /// </summary>
         /// <remarks>
-        /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -751,6 +754,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Place complex order
@@ -2723,7 +2727,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2732,6 +2736,7 @@ namespace SnapTrade.Net.Api
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
+        [Obsolete]
         public AccountOrderRecord PlaceBracketOrder(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
@@ -2739,7 +2744,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2748,6 +2753,7 @@ namespace SnapTrade.Net.Api
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
+        [Obsolete]
         public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0)
         {
             // verify the required parameter 'accountId' is set
@@ -2836,7 +2842,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2846,6 +2852,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceBracketOrderWithHttpInfoAsync(accountId, userId, userSecret, manualTradeFormBracket, operationIndex, cancellationToken).ConfigureAwait(false);
@@ -2853,7 +2860,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2863,6 +2870,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
+        [Obsolete]
         public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'accountId' is set

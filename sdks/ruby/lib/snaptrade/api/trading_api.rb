@@ -923,6 +923,7 @@ module SnapTrade
 
     # Place bracket order
     #
+    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
     #
@@ -958,6 +959,7 @@ module SnapTrade
 
     # Place bracket order
     #
+    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
     #
@@ -991,7 +993,7 @@ module SnapTrade
     end
 
     # Place bracket order
-    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1004,7 +1006,7 @@ module SnapTrade
     end
 
     # Place bracket order
-    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
