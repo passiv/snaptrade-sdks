@@ -1337,6 +1337,7 @@ func (r TradingApiPlaceBracketOrderRequest) Execute() (*AccountOrderRecord, *htt
 /*
 PlaceBracketOrder Place bracket order
 
+**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
 use. Only supported on certain brokerages
 
@@ -1347,6 +1348,8 @@ use. Only supported on certain brokerages
  @param userSecret
  @param manualTradeFormBracket
  @return TradingApiPlaceBracketOrderRequest
+
+Deprecated
 */
 func (a *TradingApiService) PlaceBracketOrder(accountId string, userId string, userSecret string, manualTradeFormBracket ManualTradeFormBracket) TradingApiPlaceBracketOrderRequest {
 	return TradingApiPlaceBracketOrderRequest{
@@ -1361,6 +1364,7 @@ func (a *TradingApiService) PlaceBracketOrder(accountId string, userId string, u
 
 // Execute executes the request
 //  @return AccountOrderRecord
+// Deprecated
 func (a *TradingApiService) PlaceBracketOrderExecute(r TradingApiPlaceBracketOrderRequest) (*AccountOrderRecord, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
