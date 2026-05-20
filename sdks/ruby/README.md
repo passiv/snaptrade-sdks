@@ -486,7 +486,7 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### state: `String`<a id="state-string"></a>
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `Integer`<a id="days-integer"></a>
 Number of days in the past to fetch the most recent orders. Defaults to the last

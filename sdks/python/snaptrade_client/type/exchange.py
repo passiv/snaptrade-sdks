@@ -23,7 +23,7 @@ class OptionalExchange(TypedDict, total=False):
     # Unique ID for the exchange in SnapTrade.
     id: str
 
-    # A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+    # A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
     code: str
 
     # The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.

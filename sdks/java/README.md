@@ -602,7 +602,7 @@ List<AccountOrderRecord> result = client
 
 ##### state: `String`<a id="state-string"></a>
 
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `Integer`<a id="days-integer"></a>
 

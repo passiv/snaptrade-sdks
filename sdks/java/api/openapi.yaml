@@ -1264,7 +1264,7 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: defaults value is set to "all"
+      - description: defaults to "all"
         explode: true
         in: query
         name: state
@@ -4821,7 +4821,7 @@ components:
       x-konfig-is-used-in-successful-response: true
     AccountValueHistoryItem:
       additionalProperties: true
-      description: The estimeated account value at a specific point in time.
+      description: The estimated account value at a specific point in time.
       example:
         date: 2026-01-01T00:00:00.000+00:00
         total_value: "15363.23"
@@ -5638,7 +5638,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ExchangeID
         code:
           description: "A short name for the exchange. For standardized exchange code,\
-            \ please us the `mic_code` field."
+            \ please use the `mic_code` field."
           example: TSX
           type: string
           x-konfig-original-example: TSX
@@ -5922,7 +5922,7 @@ components:
             $ref: '#/components/schemas/PastValue'
           type: array
         contributionStreak:
-          description: Current streak of cosecutive months where contributions were
+          description: Current streak of consecutive months where contributions were
             made
           example: 5
           nullable: true

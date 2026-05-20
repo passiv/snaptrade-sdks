@@ -23,7 +23,7 @@ module SnapTrade
 
     attr_accessor :withdrawal_timeframe
 
-    # Current streak of cosecutive months where contributions were made
+    # Current streak of consecutive months where contributions were made
     attr_accessor :contribution_streak
 
     # Number of months in the timeframe with contributions

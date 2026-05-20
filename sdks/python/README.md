@@ -575,7 +575,7 @@ get_user_account_orders_response = (
 
 ##### state: `str`<a id="state-str"></a>
 
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `int`<a id="days-int"></a>
 

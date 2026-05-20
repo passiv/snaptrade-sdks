@@ -13,7 +13,7 @@ Performance Custom Response Object
 |**contributionTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  |  [optional] |
 |**contributionTimeframeCumulative** | [**List&lt;PastValue&gt;**](PastValue.md) |  |  [optional] |
 |**withdrawalTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  |  [optional] |
-|**contributionStreak** | **Double** | Current streak of cosecutive months where contributions were made |  [optional] |
+|**contributionStreak** | **Double** | Current streak of consecutive months where contributions were made |  [optional] |
 |**contributionMonthsContributed** | **Double** | Number of months in the timeframe with contributions |  [optional] |
 |**contributionTotalMonths** | **Double** | Total months in timeframe |  [optional] |
 |**dividends** | [**List&lt;NetDividend&gt;**](NetDividend.md) |  |  [optional] |

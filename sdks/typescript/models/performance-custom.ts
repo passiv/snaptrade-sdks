@@ -55,7 +55,7 @@ export interface PerformanceCustom {
      */
     'withdrawalTimeframe'?: Array<PastValue>;
     /**
-     * Current streak of cosecutive months where contributions were made
+     * Current streak of consecutive months where contributions were made
      * @type {number}
      * @memberof PerformanceCustom
      */

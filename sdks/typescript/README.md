@@ -567,7 +567,7 @@ const getUserAccountOrdersResponse =
 
 ##### state: `'all' | 'open' | 'executed'`<a id="state-all--open--executed"></a>
 
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `number`<a id="days-number"></a>
 

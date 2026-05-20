@@ -888,7 +888,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param state [String] defaults value is set to \"all\"
+    # @param state [String] defaults to \"all\"
     # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
@@ -911,7 +911,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param state [String] defaults value is set to \"all\"
+    # @param state [String] defaults to \"all\"
     # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
@@ -926,7 +926,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :state defaults value is set to \"all\"
+    # @option opts [String] :state defaults to \"all\"
     # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @return [Array<AccountOrderRecord>]
     private def get_user_account_orders_impl(user_id, user_secret, account_id, opts = {})
@@ -940,7 +940,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :state defaults value is set to \"all\"
+    # @option opts [String] :state defaults to \"all\"
     # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     # @return [Array<(Array<AccountOrderRecord>, Integer, Hash)>] Array<AccountOrderRecord> data, response status code and response headers
     private def get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, opts = {})
