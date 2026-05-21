@@ -822,7 +822,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
         - in: query
           name: state
-          description: defaults value is set to "all"
+          description: defaults to "all"
           schema:
             type: string
             enum:
@@ -883,7 +883,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
         - in: query
           name: state
-          description: defaults value is set to "all"
+          description: defaults to "all"
           schema:
             type: string
             enum:
@@ -3806,7 +3806,7 @@ components:
           description: The ISO-4217 currency code for the account values.
           example: "USD"
     AccountValueHistoryItem:
-      description: The estimeated account value at a specific point in time.
+      description: The estimated account value at a specific point in time.
       type: object
       properties:
         date:
@@ -4326,7 +4326,7 @@ components:
         id:
           $ref: "#/components/schemas/ExchangeID"
         code:
-          description: A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+          description: A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
           type: string
           example: TSX
         mic_code:
@@ -4435,7 +4435,7 @@ components:
         contributionStreak:
           type: number
           example: 5
-          description: Current streak of cosecutive months where contributions were made
+          description: Current streak of consecutive months where contributions were made
           nullable: true
         contributionMonthsContributed:
           type: number
