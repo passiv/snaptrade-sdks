@@ -1,22 +1,19 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "target": "ES2015",
-    "module": "commonjs",
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2021", "DOM"],
     "strict": true,
+    "useUnknownInCatchVariables": false,
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "outDir": "dist",
     "rootDir": ".",
-    "lib": [
-      "es2021",
-      "dom"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": [
-    "dist",
-    "index.test.ts",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules", "**/*.test.ts", "scripts"]
 }
