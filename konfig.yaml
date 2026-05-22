@@ -172,6 +172,12 @@ portal:
       get: true
     /accounts:
       get: true
+    /snapTrade/tradeDetection/subscriptions:
+      get: true
+      post: true
+    /snapTrade/tradeDetection/subscriptions/cancel:
+      post: true
+    
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
