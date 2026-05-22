@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ContributionTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 
 **ContributionTimeframeCumulative** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 
 **WithdrawalTimeframe** | [**List&lt;PastValue&gt;**](PastValue.md) |  | [optional] 
-**ContributionStreak** | **double?** | Current streak of cosecutive months where contributions were made | [optional] 
+**ContributionStreak** | **double?** | Current streak of consecutive months where contributions were made | [optional] 
 **ContributionMonthsContributed** | **double?** | Number of months in the timeframe with contributions | [optional] 
 **ContributionTotalMonths** | **double?** | Total months in timeframe | [optional] 
 **Dividends** | [**List&lt;NetDividend&gt;**](NetDividend.md) |  | [optional] 

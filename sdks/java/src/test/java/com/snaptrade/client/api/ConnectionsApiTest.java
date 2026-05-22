@@ -20,6 +20,7 @@ import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
@@ -200,6 +201,23 @@ public class ConnectionsApiTest {
         List<SessionEvent> response = api.sessionEvents(partnerClientId)
                 .userId(userId)
                 .sessionId(sessionId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Sync transactions for a connection
+     *
+     * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void syncBrokerageAuthorizationTransactionsTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        BrokerageAuthorizationTransactionsSyncConfirmation response = api.syncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

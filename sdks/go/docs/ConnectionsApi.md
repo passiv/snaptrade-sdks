@@ -13,6 +13,7 @@ Method | Path | Description
 [**RemoveBrokerageAuthorization**](ConnectionsApi.md#RemoveBrokerageAuthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 [**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 [**SessionEvents**](ConnectionsApi.md#SessionEvents) | **Get** /sessionEvents | Get all session events for a user
+[**SyncBrokerageAuthorizationTransactions**](ConnectionsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 
 
 
@@ -461,6 +462,52 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.CreatedDate`: %v\n", *resp.CreatedDate)
     fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.BrokerageStatusCode`: %v\n", *resp.BrokerageStatusCode)
     fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.BrokerageAuthorizationId`: %v\n", *resp.BrokerageAuthorizationId)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SyncBrokerageAuthorizationTransactions
+
+Sync transactions for a connection
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ConnectionsApi.SyncBrokerageAuthorizationTransactions(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.SyncBrokerageAuthorizationTransactions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `SyncBrokerageAuthorizationTransactions`: BrokerageAuthorizationTransactionsSyncConfirmation
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.SyncBrokerageAuthorizationTransactions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationTransactionsSyncConfirmation.SyncBrokerageAuthorizationTransactions.Detail`: %v\n", *resp.Detail)
 }
 ```
 

@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * The estimeated account value at a specific point in time.
+ * The estimated account value at a specific point in time.
  * @export
  * @interface AccountValueHistoryItem
  */

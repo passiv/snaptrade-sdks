@@ -542,7 +542,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
+         * @param {'all' | 'open' | 'executed'} [state] defaults to \&quot;all\&quot;
          * @param {number} [days] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1588,7 +1588,7 @@ export type AccountInformationApiGetUserAccountOrdersRequest = {
     readonly accountId: string
     
     /**
-    * defaults value is set to \"all\"
+    * defaults to \"all\"
     * @type {'all' | 'open' | 'executed'}
     * @memberof AccountInformationApiGetUserAccountOrders
     */

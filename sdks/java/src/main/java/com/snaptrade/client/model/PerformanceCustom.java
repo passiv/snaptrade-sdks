@@ -333,11 +333,11 @@ public class PerformanceCustom {
   }
 
    /**
-   * Current streak of cosecutive months where contributions were made
+   * Current streak of consecutive months where contributions were made
    * @return contributionStreak
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "5", value = "Current streak of cosecutive months where contributions were made")
+  @ApiModelProperty(example = "5", value = "Current streak of consecutive months where contributions were made")
 
   public Double getContributionStreak() {
     return contributionStreak;

@@ -1338,7 +1338,7 @@ type AccountInformationApiGetUserAccountOrdersRequest struct {
 	days *int32
 }
 
-// defaults value is set to \&quot;all\&quot;
+// defaults to \&quot;all\&quot;
 func (r *AccountInformationApiGetUserAccountOrdersRequest) State(state string) *AccountInformationApiGetUserAccountOrdersRequest {
 	r.state = &state
 	return r

@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// AccountValueHistoryItem The estimeated account value at a specific point in time.
+// AccountValueHistoryItem The estimated account value at a specific point in time.
 type AccountValueHistoryItem struct {
 	// The date of the estimated account value
 	Date *string `json:"date,omitempty"`

@@ -802,7 +802,7 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    String state = "all"; // defaults value is set to \"all\"
+    String state = "all"; // defaults to \"all\"
     Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     try {
       List<AccountOrderRecord> result = client
@@ -852,7 +852,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **state** | **String**| defaults value is set to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
+| **state** | **String**| defaults to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
 | **days** | **Integer**| Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. | [optional] |
 
 ### Return type
