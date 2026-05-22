@@ -1634,7 +1634,7 @@ public class AccountInformationApiGenerated {
 
         /**
          * Set state
-         * @param state defaults value is set to \&quot;all\&quot; (optional)
+         * @param state defaults to \&quot;all\&quot; (optional)
          * @return AccountInformationApi.GetUserAccountOrdersRequestBuilder
          */
         public AccountInformationApi.GetUserAccountOrdersRequestBuilder state(String state) {

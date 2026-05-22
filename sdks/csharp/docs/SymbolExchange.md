@@ -6,7 +6,7 @@ The exchange on which the security is listed and traded.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Unique ID for the exchange in SnapTrade. | [optional] 
-**Code** | **string** | A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field. | [optional] 
+**Code** | **string** | A short name for the exchange. For standardized exchange code, please use the &#x60;mic_code&#x60; field. | [optional] 
 **MicCode** | **string** | The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange. | [optional] 
 **Name** | **string** | The full name of the exchange. | [optional] 
 **Timezone** | **string** | The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange. | [optional] 

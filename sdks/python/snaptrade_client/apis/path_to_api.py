@@ -12,6 +12,7 @@ from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
 from snaptrade_client.apis.paths.connection_connection_id import ConnectionConnectionId
 from snaptrade_client.apis.paths.authorizations_authorization_id_refresh import AuthorizationsAuthorizationIdRefresh
+from snaptrade_client.apis.paths.authorizations_authorization_id_transactions_sync import AuthorizationsAuthorizationIdTransactionsSync
 from snaptrade_client.apis.paths.authorizations_authorization_id_disable import AuthorizationsAuthorizationIdDisable
 from snaptrade_client.apis.paths.authorizations_authorization_id_accounts import AuthorizationsAuthorizationIdAccounts
 from snaptrade_client.apis.paths.session_events import SessionEvents
@@ -74,6 +75,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
         PathValues.CONNECTION_CONNECTION_ID: ConnectionConnectionId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC: AuthorizationsAuthorizationIdTransactionsSync,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
         PathValues.SESSION_EVENTS: SessionEvents,
@@ -137,6 +139,7 @@ path_to_api = PathToApi(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
         PathValues.CONNECTION_CONNECTION_ID: ConnectionConnectionId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC: AuthorizationsAuthorizationIdTransactionsSync,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
         PathValues.SESSION_EVENTS: SessionEvents,

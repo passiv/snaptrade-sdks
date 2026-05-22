@@ -16,7 +16,7 @@ module SnapTrade
     # Unique ID for the exchange in SnapTrade.
     attr_accessor :id
 
-    # A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+    # A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
     attr_accessor :code
 
     # The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.

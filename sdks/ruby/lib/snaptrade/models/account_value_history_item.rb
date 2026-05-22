@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # The estimeated account value at a specific point in time.
+  # The estimated account value at a specific point in time.
   class AccountValueHistoryItem
     # The date of the estimated account value
     attr_accessor :date

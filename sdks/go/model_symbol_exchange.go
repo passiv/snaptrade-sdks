@@ -19,7 +19,7 @@ import (
 type SymbolExchange struct {
 	// Unique ID for the exchange in SnapTrade.
 	Id *string `json:"id,omitempty"`
-	// A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+	// A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
 	Code *string `json:"code,omitempty"`
 	// The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
 	MicCode *string `json:"mic_code,omitempty"`

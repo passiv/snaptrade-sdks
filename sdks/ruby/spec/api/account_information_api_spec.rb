@@ -138,7 +138,7 @@ describe 'AccountInformationApi' do
   # @param user_secret 
   # @param account_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :state defaults value is set to \&quot;all\&quot;
+  # @option opts [String] :state defaults to \&quot;all\&quot;
   # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
   # @return [Array<AccountOrderRecord>]
   describe 'get_user_account_orders test' do

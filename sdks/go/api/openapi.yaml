@@ -579,6 +579,58 @@ paths:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-refresh
+  /authorizations/{authorizationId}/transactions/sync:
+    post:
+      description: |
+        Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+      operationId: Connections_syncBrokerageAuthorizationTransactions
+      parameters:
+      - explode: false
+        in: path
+        name: authorizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerageAuthorizationTransactionsSyncConfirmation'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Unauthorized, invalid credentials for this resource"
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402BrokerageAuthDisabledResponse'
+          description: Unable to sync with brokerage account because the connection
+            is disabled.
+      summary: Sync transactions for a connection
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-transactions-sync
   /authorizations/{authorizationId}/disable:
     post:
       description: |
@@ -1198,7 +1250,7 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: defaults value is set to "all"
+      - description: defaults to "all"
         explode: true
         in: query
         name: state
@@ -4580,7 +4632,7 @@ components:
       type: object
     AccountValueHistoryItem:
       additionalProperties: true
-      description: The estimeated account value at a specific point in time.
+      description: The estimated account value at a specific point in time.
       example:
         date: 2026-01-01T00:00:00.000+00:00
         total_value: "15363.23"
@@ -5381,7 +5433,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ExchangeID
         code:
           description: "A short name for the exchange. For standardized exchange code,\
-            \ please us the `mic_code` field."
+            \ please use the `mic_code` field."
           example: TSX
           type: string
           x-konfig-original-example: TSX
@@ -5661,7 +5713,7 @@ components:
             $ref: '#/components/schemas/PastValue'
           type: array
         contributionStreak:
-          description: Current streak of cosecutive months where contributions were
+          description: Current streak of consecutive months where contributions were
             made
           example: 5
           nullable: true
@@ -7444,6 +7496,9 @@ components:
     BrokerageAuthorizationTransactionsSyncConfirmation:
       additionalProperties: true
       description: Confirmation that the transaction syncs have been scheduled.
+      example:
+        detail: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for transactions
+          sync
       properties:
         detail:
           description: Transactions sync confirmation details
@@ -12579,6 +12634,25 @@ components:
       - authorizationId
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-transactions-sync:
+      additionalProperties: true
+      properties:
+        authorizationId:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - authorizationId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-disable:
       additionalProperties: true
       properties:
@@ -13902,25 +13976,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-transactions-sync:
-      additionalProperties: true
-      properties:
-        authorizationId:
-          $ref: '#/components/schemas/BrokerageAuthID'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - authorizationId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - authorizationId
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-get--brokerages:
       additionalProperties: true
       properties: {}

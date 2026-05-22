@@ -48,6 +48,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
+  * [`snaptrade.connections.sync_brokerage_authorization_transactions`](#snaptradeconnectionssync_brokerage_authorization_transactions)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -486,7 +487,7 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### state: `String`<a id="state-string"></a>
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `Integer`<a id="days-integer"></a>
 Number of days in the past to fetch the most recent orders. Defaults to the last
@@ -1293,6 +1294,40 @@ specific users
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.sync_brokerage_authorization_transactions`<a id="snaptradeconnectionssync_brokerage_authorization_transactions"></a>
+
+Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.connections.sync_brokerage_authorization_transactions(
+  authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `String`<a id="authorization_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationTransactionsSyncConfirmation](./lib/snaptrade/models/brokerage_authorization_transactions_sync_confirmation.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/transactions/sync` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
