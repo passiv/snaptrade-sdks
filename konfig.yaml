@@ -177,6 +177,7 @@ portal:
     - name: PartnerTimestamp
 filterTags:
   - Webhooks
+hideTags:
   - Experimental endpoints
 filterModels:
   - SnapTradePartnerAPICredential
