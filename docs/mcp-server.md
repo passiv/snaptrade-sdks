@@ -53,8 +53,8 @@ For details on what data the connector accesses and how it is handled, see the [
 
 ## Set up the connector in Claude
 
-1. In Claude, go to **Settings → Connectors**.
-2. Click **Add custom connector**.
+1. In Claude, go to **Customize → Connectors**.
+2. Click **+**, then **Add custom connector**.
 3. Enter the MCP server URL: `https://mcp.snaptrade.com/mcp`.
 4. Claude redirects you to SnapTrade. Log in and approve **read** access to your account data.
 5. Review the consent screen, which lists the read-only scope being granted.
