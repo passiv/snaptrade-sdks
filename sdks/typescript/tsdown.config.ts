@@ -9,7 +9,7 @@ import { resolve } from "node:path";
 
 const shared = {
   entry: ["./index.ts"],
-  sourcemap: true,
+  sourcemap: false,
   target: "node18",
   outDir: "dist",
   treeshake: true,
