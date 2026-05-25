@@ -4,12 +4,13 @@ on:
   push:
     branches:
       - master
+      
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   release:
-    permissions:
-      id-token: write
-      contents: read
     uses: passiv/konfig-workflows/.github/workflows/release.yaml@main
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
