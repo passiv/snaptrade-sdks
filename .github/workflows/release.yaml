@@ -23,7 +23,7 @@ permissions:
   security-events: write
   statuses: write
   vulnerability-alerts: read
-  id-token: write
+  id-token: write # npm OIDC
 
 jobs:
   release:
