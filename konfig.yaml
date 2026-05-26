@@ -121,8 +121,6 @@ portal:
       get: true
     /authorizations/{authorizationId}/transactions/sync:
       post: true
-    /accounts/{accountId}/positions/all:
-      get: true
     /accounts/{accountId}/balanceHistory:
       get: true
     /authorizations/{authorizationId}/accounts:
