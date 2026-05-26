@@ -5,6 +5,7 @@ on:
     branches:
       - master
 
+
 jobs:
   release:
     uses: passiv/konfig-workflows/.github/workflows/release.yaml@main
