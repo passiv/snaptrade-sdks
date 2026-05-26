@@ -8,7 +8,7 @@ jobs:
   konfig-lint-openapi-spec: # make sure spec passes konfig lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Install Konfig CLI
         uses: passiv/konfig-workflows/.github/actions/install-cli@main
