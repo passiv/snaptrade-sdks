@@ -4,26 +4,6 @@ on:
   push:
     branches:
       - master
-      
-permissions:
-  actions: write
-  artifact-metadata: write
-  attestations: write
-  checks: write
-  code-quality: write
-  contents: write
-  deployments: write
-  discussions: write
-  issues: write
-  models: read
-  packages: write
-  pages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
-  vulnerability-alerts: read
-  id-token: write # npm OIDC
 
 jobs:
   release:
