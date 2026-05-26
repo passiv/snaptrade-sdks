@@ -75,6 +75,8 @@ portal:
           links:
             - id: terminology
               path: docs/terminology.md
+            - id: symbology
+              path: docs/symbology.md
             - id: requests
               path: docs/requests.md
             - id: request-signatures
