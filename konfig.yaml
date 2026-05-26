@@ -177,14 +177,13 @@ portal:
       post: true
     /snapTrade/tradeDetection/subscriptions/cancel:
       post: true
-    
+  hideTags:
+    - Experimental endpoints  
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
 filterTags:
   - Webhooks
-hideTags:
-  - Experimental endpoints
 filterModels:
   - SnapTradePartnerAPICredential
   - WebhookBase
