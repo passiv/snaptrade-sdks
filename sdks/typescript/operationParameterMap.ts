@@ -410,6 +410,81 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/snapTrade/tradeDetection/subscriptions-POST': {
+        parameters: [
+            {
+                name: 'account_id'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions/cancel-POST': {
+        parameters: [
+            {
+                name: 'account_id'
+            },
+        ]
+    },
+    '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
+        parameters: [
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'brokerageOrderId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
+    '/accounts/{accountId}/orders/v2-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'state'
+            },
+            {
+                name: 'days'
+            },
+        ]
+    },
+    '/accounts/{accountId}/recentOrders/v2-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'only_executed'
+            },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions-GET': {
+        parameters: [
+        ]
+    },
     '/accounts/{accountId}/options-GET': {
         parameters: [
             {
