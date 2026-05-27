@@ -1791,6 +1791,7 @@ public class AccountInformationApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getUserAccountPositionsValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -1849,7 +1850,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getUserAccountPositionsCall(userId, userSecret, accountId, _callback);
         }
@@ -1865,7 +1868,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public List<Position> execute() throws ApiException {
             ApiResponse<List<Position>> localVarResp = getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
             return localVarResp.getResponseBody();
@@ -1881,7 +1886,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<List<Position>> executeWithHttpInfo() throws ApiException {
             return getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
         }
@@ -1897,7 +1904,9 @@ public class AccountInformationApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<List<Position>> _callback) throws ApiException {
             return getUserAccountPositionsAsync(userId, userSecret, accountId, _callback);
         }
@@ -1905,7 +1914,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account positions
-     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
@@ -1916,7 +1925,9 @@ public class AccountInformationApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public AccountInformationApi.GetUserAccountPositionsRequestBuilder getUserAccountPositions(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             

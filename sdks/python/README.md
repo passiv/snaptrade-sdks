@@ -52,6 +52,12 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
   * [`snaptrade.connections.sync_brokerage_authorization_transactions`](#snaptradeconnectionssync_brokerage_authorization_transactions)
+  * [`snaptrade.experimental_endpoints.add_subscription`](#snaptradeexperimental_endpointsadd_subscription)
+  * [`snaptrade.experimental_endpoints.cancel_subscription`](#snaptradeexperimental_endpointscancel_subscription)
+  * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
+  * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
+  * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -595,10 +601,11 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ---
 
 ### `snaptrade.account_information.get_user_account_positions`<a id="snaptradeaccount_informationget_user_account_positions"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
-Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
@@ -1436,11 +1443,254 @@ sync_brokerage_authorization_transactions_response = (
 
 ---
 
+### `snaptrade.experimental_endpoints.add_subscription`<a id="snaptradeexperimental_endpointsadd_subscription"></a>
+
+Adds or restores a Trade Detection subscription for a connected brokerage account.
+This endpoint requires `userId` and `userSecret` in addition to the partner signature.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+add_subscription_response = snaptrade.experimental_endpoints.add_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`TradeDetectionSubscription`](./snaptrade_client/type/trade_detection_subscription.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/snapTrade/tradeDetection/subscriptions` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.cancel_subscription`<a id="snaptradeexperimental_endpointscancel_subscription"></a>
+
+Cancels a Trade Detection subscription for a connected brokerage account.
+This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+cancel_subscription_response = snaptrade.experimental_endpoints.cancel_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`TradeDetectionCancelSubscriptionResponse`](./snaptrade_client/type/trade_detection_cancel_subscription_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/snapTrade/tradeDetection/subscriptions/cancel` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
+
+Returns the detail of a single order using the brokerage order ID provided as a path parameter.
+
+The V2 order response format includes all legs of the order in the `legs` list field.
+If the order is single legged, `legs` will be a list of one leg.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_account_order_detail_v2_response = (
+    snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecordV2`](./snaptrade_client/type/account_order_record_v2.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.get_user_account_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_orders_v2"></a>
+
+Returns a list of recent orders in the specified account.
+
+The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_account_orders_v2_response = (
+    snaptrade.experimental_endpoints.get_user_account_orders_v2(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        state="all",
+        days=30,
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### state: `str`<a id="state-str"></a>
+
+defaults to \"all\"
+
+##### days: `int`<a id="days-int"></a>
+
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrdersV2Response`](./snaptrade_client/type/account_orders_v2_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/v2` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_recent_orders_v2"></a>
+
+A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
+By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_account_recent_orders_v2_response = (
+    snaptrade.experimental_endpoints.get_user_account_recent_orders_v2(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### only_executed: `bool`<a id="only_executed-bool"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrdersV2Response`](./snaptrade_client/type/account_orders_v2_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders/v2` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.list_subscriptions`<a id="snaptradeexperimental_endpointslist_subscriptions"></a>
+
+Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+list_subscriptions_response = snaptrade.experimental_endpoints.list_subscriptions()
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`TradeDetectionSubscription`](./snaptrade_client/type/trade_detection_subscription.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/snapTrade/tradeDetection/subscriptions` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.

@@ -205,6 +205,7 @@ require 'snaptrade/models/take_profit'
 require 'snaptrade/models/tax_lot'
 require 'snaptrade/models/time_in_force_strict'
 require 'snaptrade/models/timeframe'
+require 'snaptrade/models/trade_detection_add_subscription_request'
 require 'snaptrade/models/trade_detection_cancel_subscription_response'
 require 'snaptrade/models/trade_detection_subscription'
 require 'snaptrade/models/trading_instrument'
@@ -229,6 +230,7 @@ require 'snaptrade/api/account_information_api'
 require 'snaptrade/api/api_status_api'
 require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
+require 'snaptrade/api/experimental_endpoints_api'
 require 'snaptrade/api/options_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
@@ -302,6 +304,7 @@ module SnapTrade
     attr_reader :api_status
     attr_reader :authentication
     attr_reader :connections
+    attr_reader :experimental_endpoints
     attr_reader :options
     attr_reader :reference_data
     attr_reader :trading
@@ -313,6 +316,7 @@ module SnapTrade
       @api_status = SnapTrade::APIStatusApi.new(@api_client)
       @authentication = SnapTrade::AuthenticationApi.new(@api_client)
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
+      @experimental_endpoints = SnapTrade::ExperimentalEndpointsApi.new(@api_client)
       @options = SnapTrade::OptionsApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)

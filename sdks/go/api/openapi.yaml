@@ -39,6 +39,9 @@ tags:
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
+- description: Endpoints that are experimental and may have breaking changes in the
+    future. Use with caution.
+  name: Experimental endpoints
 paths:
   /:
     get:
@@ -1128,10 +1131,11 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balances
   /accounts/{accountId}/positions:
     get:
+      deprecated: true
       description: |
         Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
-        Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+        This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
@@ -1662,10 +1666,11 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details
   /accounts/{accountId}/options:
     get:
+      deprecated: true
       description: |
         Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-        Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+        This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
@@ -2836,6 +2841,305 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-partners
+  /snapTrade/tradeDetection/subscriptions:
+    get:
+      description: Returns active Trade Detection subscriptions for your Client ID.
+        Cancelled subscriptions are not returned.
+      operationId: TradeDetection_listSubscriptions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TradeDetectionSubscription'
+                type: array
+          description: Active Trade Detection subscriptions
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Feature not enabled
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "500":
+          description: Unexpected Error
+      summary: List active Trade Detection subscriptions
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-tradeDetection-subscriptions
+    post:
+      description: |
+        Adds or restores a Trade Detection subscription for a connected brokerage account.
+        This endpoint requires `userId` and `userSecret` in addition to the partner signature.
+      operationId: TradeDetection_addSubscription
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/TradeDetectionSubscriptionRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeDetectionSubscription'
+          description: Restored an existing cancelled Trade Detection subscription
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeDetectionSubscription'
+          description: Created a new Trade Detection subscription
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Feature not enabled
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "500":
+          description: Unexpected Error
+      summary: Add a Trade Detection subscription
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-tradeDetection-subscriptions
+  /snapTrade/tradeDetection/subscriptions/cancel:
+    post:
+      description: |
+        Cancels a Trade Detection subscription for a connected brokerage account.
+        This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
+      operationId: TradeDetection_cancelSubscription
+      requestBody:
+        $ref: '#/components/requestBodies/TradeDetectionSubscriptionRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeDetectionCancelSubscriptionResponse'
+          description: "Cancelled the Trade Detection subscription, or it was already\
+            \ cancelled"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Feature not enabled
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "500":
+          description: Unexpected Error
+      summary: Cancel a Trade Detection subscription
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-tradeDetection-subscriptions-cancel
+  /accounts/{accountId}/orders/v2:
+    get:
+      description: |
+        Returns a list of recent orders in the specified account.
+
+        The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      operationId: AccountInformation_getUserAccountOrdersV2
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: defaults to "all"
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          enum:
+          - all
+          - open
+          - executed
+          type: string
+        style: form
+      - description: Number of days in the past to fetch the most recent orders. Defaults
+          to the last 30 days if no value is passed in. Values greater than 90 will
+          be capped at 90.
+        explode: true
+        in: query
+        name: days
+        required: false
+        schema:
+          example: 30
+          format: int32
+          maximum: 90
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrdersV2Response'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: List account orders v2
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2
+  /accounts/{accountId}/recentOrders/v2:
+    get:
+      description: |
+        A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+        Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
+        By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+      operationId: AccountInformation_getUserAccountRecentOrdersV2
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: Defaults to true. Indicates if request should fetch only executed
+          orders. Set to false to retrieve non executed orders as well
+        explode: true
+        in: query
+        name: only_executed
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrdersV2Response'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: "List account recent orders (V2, last 24 hours only)"
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders-v2
   /accounts/{accountId}/symbols:
     post:
       description: |
@@ -3143,6 +3447,71 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
+  /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
+    get:
+      description: |
+        Returns the detail of a single order using the brokerage order ID provided as a path parameter.
+
+        The V2 order response format includes all legs of the order in the `legs` list field.
+        If the order is single legged, `legs` will be a list of one leg.
+
+        This endpoint is always realtime and does not rely on cached data.
+
+        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+      operationId: AccountInformation_getUserAccountOrderDetailV2
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: false
+        in: path
+        name: brokerageOrderId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecordV2'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: Get account order detail (V2)
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-details-v2-brokerageOrderId
 components:
   requestBodies:
     RegisterUserRequestBody:
@@ -3161,13 +3530,7 @@ components:
       content:
         application/json:
           schema:
-            additionalProperties: true
-            properties:
-              account_id:
-                $ref: '#/components/schemas/AccountID'
-            required:
-            - account_id
-            type: object
+            $ref: '#/components/schemas/TradeDetection_addSubscription_request'
       required: true
     SnapTradeLoginUserRequestBody:
       content:
@@ -3741,6 +4104,10 @@ components:
     TradeDetectionSubscription:
       additionalProperties: true
       description: An active Trade Detection subscription for a brokerage account.
+      example:
+        check_interval_seconds: 300
+        account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        cost: "100.00"
       properties:
         account_id:
           description: Unique identifier for the connected brokerage account. This
@@ -3769,6 +4136,8 @@ components:
       type: object
     TradeDetectionCancelSubscriptionResponse:
       additionalProperties: true
+      example:
+        success: true
       properties:
         success:
           example: true
@@ -4655,6 +5024,88 @@ components:
     AccountOrdersV2Response:
       additionalProperties: true
       description: Contains a standardized list of account orders in the V2 format.
+      example:
+        orders:
+        - brokerage_group_order_id: "1234567890"
+          time_executed: 2024-08-05T00:05:57.409Z
+          time_placed: 2024-07-30T22:51:49.746Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          quote_currency: USD
+          order_role: TRIGGER
+          time_in_force: DAY
+          execution_price: 12.34
+          stop_price: 12.5
+          legs:
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: ""
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: ""
+          trailing_stop: null
+          order_type: MARKET
+          status: null
+        - brokerage_group_order_id: "1234567890"
+          time_executed: 2024-08-05T00:05:57.409Z
+          time_placed: 2024-07-30T22:51:49.746Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          quote_currency: USD
+          order_role: TRIGGER
+          time_in_force: DAY
+          execution_price: 12.34
+          stop_price: 12.5
+          legs:
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: ""
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: ""
+          trailing_stop: null
+          order_type: MARKET
+          status: null
       properties:
         orders:
           description: List of orders returned by the endpoint.
@@ -4667,6 +5118,47 @@ components:
     AccountOrderRecordV2:
       additionalProperties: true
       description: Describes a single order in the standardized V2 format.
+      example:
+        brokerage_group_order_id: "1234567890"
+        time_executed: 2024-08-05T00:05:57.409Z
+        time_placed: 2024-07-30T22:51:49.746Z
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        limit_price: 12.34
+        quote_currency: USD
+        order_role: TRIGGER
+        time_in_force: DAY
+        execution_price: 12.34
+        stop_price: 12.5
+        legs:
+        - execution_price: 12.34
+          leg_id: leg_id
+          action: action
+          total_quantity: "10"
+          instrument:
+            figi_code: BBG000B9XRY4
+            symbol: AAPL
+            asset_type: EQUITY
+            description: Apple Inc.
+            exchange_mic_code: XNAS
+          filled_quantity: "9"
+          canceled_quantity: "1"
+          status: ""
+        - execution_price: 12.34
+          leg_id: leg_id
+          action: action
+          total_quantity: "10"
+          instrument:
+            figi_code: BBG000B9XRY4
+            symbol: AAPL
+            asset_type: EQUITY
+            description: Apple Inc.
+            exchange_mic_code: XNAS
+          filled_quantity: "9"
+          canceled_quantity: "1"
+          status: ""
+        trailing_stop: null
+        order_type: MARKET
+        status: null
       properties:
         brokerage_order_id:
           description: Order ID returned by brokerage. This is the unique identifier
@@ -4807,6 +5299,20 @@ components:
     AccountOrderRecordLeg:
       additionalProperties: true
       description: Describes an individual leg that makes up an order in the V2 format.
+      example:
+        execution_price: 12.34
+        leg_id: leg_id
+        action: action
+        total_quantity: "10"
+        instrument:
+          figi_code: BBG000B9XRY4
+          symbol: AAPL
+          asset_type: EQUITY
+          description: Apple Inc.
+          exchange_mic_code: XNAS
+        filled_quantity: "9"
+        canceled_quantity: "1"
+        status: ""
       properties:
         leg_id:
           description: "Brokerage order identifier for this leg, if available."
@@ -4865,6 +5371,12 @@ components:
     AccountOrderRecordLegInstrument:
       additionalProperties: true
       description: Instrument metadata for an order leg.
+      example:
+        figi_code: BBG000B9XRY4
+        symbol: AAPL
+        asset_type: EQUITY
+        description: Apple Inc.
+        exchange_mic_code: XNAS
       properties:
         symbol:
           description: The symbol or ticker for the security.
@@ -14333,6 +14845,19 @@ components:
           type: array
       required:
       - items
+      type: object
+    TradeDetection_addSubscription_request:
+      properties:
+        account_id:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+      required:
+      - account_id
       type: object
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\

@@ -477,6 +477,7 @@ func main() {
 
 
 ## GetUserAccountPositions
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List account positions
 

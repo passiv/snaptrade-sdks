@@ -41,7 +41,7 @@ ListOptionHoldings List account option positions
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
@@ -53,6 +53,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
  @param userSecret
  @param accountId
  @return OptionsApiListOptionHoldingsRequest
+
+Deprecated
 */
 func (a *OptionsApiService) ListOptionHoldings(userId string, userSecret string, accountId string) OptionsApiListOptionHoldingsRequest {
 	return OptionsApiListOptionHoldingsRequest{
@@ -66,6 +68,7 @@ func (a *OptionsApiService) ListOptionHoldings(userId string, userSecret string,
 
 // Execute executes the request
 //  @return []OptionsPosition
+// Deprecated
 func (a *OptionsApiService) ListOptionHoldingsExecute(r OptionsApiListOptionHoldingsRequest) ([]OptionsPosition, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
