@@ -1266,7 +1266,7 @@ Trigger a holdings update for all accounts under this connection. Updates will b
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
 **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-**Please note this endpoint is disabled for Pay as you Go / Real-time plans. Pay as you Go / Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+**Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
