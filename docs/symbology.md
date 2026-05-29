@@ -63,7 +63,7 @@ For cryptocurrencies, `symbol` is not normalized between brokerages. While most 
 
 ### Option symbol
 
-An `option_symbol` is SnapTrade’s normalized representation of a specific option contract in legacy/current option-related responses. While the new :api[AccountInformation_getAllAccountPositions] endpoint returns a discriminated union as described in [#instrument](Instrument), all other endpoints currently return an option symbol. We’re gradually replacing this legacy construct with the newer discriminated union model.
+An `option_symbol` is SnapTrade’s normalized representation of a specific option contract in legacy/current option-related responses. While the new :api[AccountInformation_getAllAccountPositions] endpoint returns a discriminated union as described in the "Instrument" section, all other endpoints currently return an option symbol. We’re gradually replacing this legacy construct with the newer discriminated union model.
 
 Common `option_symbol` fields include:
 
