@@ -306,7 +306,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 10.0.3
+    version: 10.0.4
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
