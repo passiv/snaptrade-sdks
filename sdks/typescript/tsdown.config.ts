@@ -1,36 +1,65 @@
 import { defineConfig } from "tsdown";
-import { writeFileSync } from "node:fs";
+import { copyFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 // CJS dts generation has a known bug in tsdown's dual-format pass.
 // Workaround: build ESM with dts (which produces .d.mts), build CJS
-// without dts, then write .d.cts / .d.ts re-export stubs by hand so
-// consumers get types under every resolution mode.
+// without dts, then copy the generated declaration bundle to .d.cts / .d.ts so
+// consumers get value exports under every resolution mode.
 
 const shared = {
-  entry: ["./index.ts"],
   sourcemap: false,
-  target: "node18",
   outDir: "dist",
   treeshake: true,
 };
 
+const nodeShared = {
+  ...shared,
+  entry: ["./index.ts"],
+  target: "node18",
+};
+
+const browserShared = {
+  ...shared,
+  entry: {
+    "index.browser": "./index.ts",
+  },
+  target: "es2020",
+  platform: "browser",
+  dts: false,
+  deps: {
+    // The browser-only bundle must be self-contained because browsers cannot
+    // resolve bare package specifiers without an import map. tsdown externalizes
+    // package.json dependencies by default, so opt every runtime dependency back
+    // into this browser artifact only.
+    alwaysBundle: [/.*/],
+    // Suppress tsdown's warning about the intentionally bundled dependency graph
+    // instead of maintaining a fragile allow-list of direct and transitive
+    // browser dependencies.
+    onlyBundle: false,
+  },
+};
+
 export default defineConfig([
   {
-    ...shared,
+    ...nodeShared,
     format: "esm",
     dts: true,
     clean: true,
     onSuccess: async () => {
-      const stub = "export type * from './index.d.mts';\n";
-      writeFileSync(resolve("dist/index.d.cts"), stub);
-      writeFileSync(resolve("dist/index.d.ts"), stub);
+      copyFileSync(resolve("dist/index.d.mts"), resolve("dist/index.d.cts"));
+      copyFileSync(resolve("dist/index.d.mts"), resolve("dist/index.d.ts"));
     },
   },
   {
-    ...shared,
+    ...nodeShared,
     format: "cjs",
     dts: false,
+    clean: false,
+  },
+  {
+    ...browserShared,
+    format: "esm",
     clean: false,
   },
 ]);

@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "10.0.3",
+  "version": "10.0.4",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
@@ -22,9 +22,14 @@
   "sideEffects": false,
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
+  "browser": "./dist/index.browser.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "browser": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.browser.mjs"
+      },
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
