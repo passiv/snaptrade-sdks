@@ -17,11 +17,7 @@ When you exceed a rate limit, the API returns an HTTP status code `429` with a r
 
 ## Customer-Level Rate Limiting
 
-Every SnapTrade client is rate limited to **250 requests per minute** by default. This limit applies globally across all API endpoints and all accounts. If you need a higher limit:
-
-- **Free plan users** can upgrade to Pay-as-you-Go through the Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
-- **Pay-as-you-go users** can contact [SnapTrade support](mailto:support@snaptrade.com) to request a limit increase.
-- **Custom plan customers** can contact their Customer Success Manager.
+Every SnapTrade client is rate limited to **250 requests per minute** by default. This limit applies globally across all API endpoints and all accounts. If you need a higher limit, paid customers can [SnapTrade support](mailto:support@snaptrade.com) to request a limit increase.
 
 ### Response Headers
 
