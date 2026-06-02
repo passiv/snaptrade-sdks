@@ -33,7 +33,7 @@ These are rolling limits that look at the trailing 60 seconds.
 
 ## Account-Level Rate Limiting
 
-In addition to the customer-level limit, the SnapTrade API enforces a **per-account** rate limit on endpoints that fetch account data. This limit is **5 requests per minute per account** by default.
+In addition to the customer-level limit, the SnapTrade API enforces a **per-account** rate limit on endpoints that fetch account data. This limit is **10 requests per minute per account** by default.
 
 Account-level rate limiting is scoped to the combination of your `clientId` and the `accountId` in the request URL. This means:
 
@@ -54,7 +54,7 @@ Account-level rate limiting applies to the following endpoints:
 - :api[AccountInformation_getAccountActivities]
 - :api[AccountInformation_getUserAccountOrderDetail]
 
-> **Note:** While the per-account rate limit allows up to 5 requests per minute, these endpoints should not be polled at this frequency. See [API Polling Patterns](https://docs.snaptrade.com/docs/launching-your-application#3-api-polling-patterns) for recommended usage patterns.
+> **Note:** While the per-account rate limit allows up to 10 requests per minute, these endpoints should not be polled at this frequency. See [API Polling Patterns](https://docs.snaptrade.com/docs/launching-your-application#3-api-polling-patterns) for recommended usage patterns.
 
 ### Response Headers
 
