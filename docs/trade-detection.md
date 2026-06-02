@@ -3,8 +3,7 @@
 > **Summary**: Important behavior and integration details for SnapTrade `TRADE_DETECTION` webhook subscriptions.
 > **Related docs**: [Best practices to serve real-time data](./realtime-data), [TRADE_DETECTION webhook](./webhooks#webhooks-trade_detection)
 
-
-`TRADE_DETECTION` notifies partners when SnapTrade detects an executed order in a subscribed account. This feature is intended for accounts where the brokerage supports realtime order updates.
+`TRADE_DETECTION` notifies partners when SnapTrade detects an executed order in a subscribed account. This feature is only supported for accounts where the brokerage supports realtime order updates. You can manage your subscriptions when logged in to the SnapTrade Dashboard at https://dashboard.snaptrade.com/webhooks
 
 ## Eligibility
 
@@ -16,7 +15,7 @@ Trade detection runs only when all of the following are true:
 
 Because disabled or broken connections cannot return new data, partners should also listen for `CONNECTION_BROKEN` webhooks. When a connection breaks, prompt the user to fix it as soon as possible using the public reconnection guidance: [Fix Broken Connections](https://docs.snaptrade.com/docs/fix-broken-connections).
 
-Brokerage availability can change as brokerage capabilities change. Do not assume every brokerage supports `TRADE_DETECTION`, and do not hard-code support from a static list.
+Brokerage availability can change as brokerage capabilities change. Do not assume every brokerage supports `TRADE_DETECTION`, and feel free to ask about specific brokerage support.
 
 ## Scheduling
 
