@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="SymbolExchange" /> class.
         /// </summary>
         /// <param name="id">Unique ID for the exchange in SnapTrade..</param>
-        /// <param name="code">A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field..</param>
+        /// <param name="code">A short name for the exchange. For standardized exchange code, please use the &#x60;mic_code&#x60; field..</param>
         /// <param name="micCode">The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange..</param>
         /// <param name="name">The full name of the exchange..</param>
         /// <param name="timezone">The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange..</param>
@@ -63,9 +63,9 @@ namespace SnapTrade.Net.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field.
+        /// A short name for the exchange. For standardized exchange code, please use the &#x60;mic_code&#x60; field.
         /// </summary>
-        /// <value>A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field.</value>
+        /// <value>A short name for the exchange. For standardized exchange code, please use the &#x60;mic_code&#x60; field.</value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public string Code { get; set; }
 

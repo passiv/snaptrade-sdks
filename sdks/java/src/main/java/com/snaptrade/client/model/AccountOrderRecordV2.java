@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderRecordLeg;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
+import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -60,6 +61,63 @@ public class AccountOrderRecordV2 {
   @SerializedName(SERIALIZED_NAME_BROKERAGE_ORDER_ID)
   private String brokerageOrderId;
 
+  public static final String SERIALIZED_NAME_BROKERAGE_GROUP_ORDER_ID = "brokerage_group_order_id";
+  @SerializedName(SERIALIZED_NAME_BROKERAGE_GROUP_ORDER_ID)
+  private String brokerageGroupOrderId;
+
+  /**
+   * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+   */
+  @JsonAdapter(OrderRoleEnum.Adapter.class)
+ public enum OrderRoleEnum {
+    TRIGGER("TRIGGER"),
+    
+    CONDITIONAL("CONDITIONAL"),
+    
+    PEER("PEER");
+
+    private String value;
+
+    OrderRoleEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OrderRoleEnum fromValue(String value) {
+      for (OrderRoleEnum b : OrderRoleEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<OrderRoleEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OrderRoleEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OrderRoleEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OrderRoleEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ORDER_ROLE = "order_role";
+  @SerializedName(SERIALIZED_NAME_ORDER_ROLE)
+  private OrderRoleEnum orderRole;
+
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   private AccountOrderRecordStatus status;
@@ -96,6 +154,10 @@ public class AccountOrderRecordV2 {
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
   private Double stopPrice;
 
+  public static final String SERIALIZED_NAME_TRAILING_STOP = "trailing_stop";
+  @SerializedName(SERIALIZED_NAME_TRAILING_STOP)
+  private TrailingStopNullable trailingStop;
+
   public static final String SERIALIZED_NAME_LEGS = "legs";
   @SerializedName(SERIALIZED_NAME_LEGS)
   private List<AccountOrderRecordLeg> legs = null;
@@ -129,6 +191,64 @@ public class AccountOrderRecordV2 {
     
     
     this.brokerageOrderId = brokerageOrderId;
+  }
+
+
+  public AccountOrderRecordV2 brokerageGroupOrderId(String brokerageGroupOrderId) {
+    
+    
+    
+    
+    this.brokerageGroupOrderId = brokerageGroupOrderId;
+    return this;
+  }
+
+   /**
+   * The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+   * @return brokerageGroupOrderId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1234567890", value = "The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. ")
+
+  public String getBrokerageGroupOrderId() {
+    return brokerageGroupOrderId;
+  }
+
+
+  public void setBrokerageGroupOrderId(String brokerageGroupOrderId) {
+    
+    
+    
+    this.brokerageGroupOrderId = brokerageGroupOrderId;
+  }
+
+
+  public AccountOrderRecordV2 orderRole(OrderRoleEnum orderRole) {
+    
+    
+    
+    
+    this.orderRole = orderRole;
+    return this;
+  }
+
+   /**
+   * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+   * @return orderRole
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "TRIGGER", value = "The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. ")
+
+  public OrderRoleEnum getOrderRole() {
+    return orderRole;
+  }
+
+
+  public void setOrderRole(OrderRoleEnum orderRole) {
+    
+    
+    
+    this.orderRole = orderRole;
   }
 
 
@@ -420,6 +540,35 @@ public class AccountOrderRecordV2 {
   }
 
 
+  public AccountOrderRecordV2 trailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    
+    this.trailingStop = trailingStop;
+    return this;
+  }
+
+   /**
+   * Get trailingStop
+   * @return trailingStop
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public TrailingStopNullable getTrailingStop() {
+    return trailingStop;
+  }
+
+
+  public void setTrailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    this.trailingStop = trailingStop;
+  }
+
+
   public AccountOrderRecordV2 legs(List<AccountOrderRecordLeg> legs) {
     
     
@@ -512,6 +661,8 @@ public class AccountOrderRecordV2 {
     }
     AccountOrderRecordV2 accountOrderRecordV2 = (AccountOrderRecordV2) o;
     return Objects.equals(this.brokerageOrderId, accountOrderRecordV2.brokerageOrderId) &&
+        Objects.equals(this.brokerageGroupOrderId, accountOrderRecordV2.brokerageGroupOrderId) &&
+        Objects.equals(this.orderRole, accountOrderRecordV2.orderRole) &&
         Objects.equals(this.status, accountOrderRecordV2.status) &&
         Objects.equals(this.orderType, accountOrderRecordV2.orderType) &&
         Objects.equals(this.timeInForce, accountOrderRecordV2.timeInForce) &&
@@ -521,6 +672,7 @@ public class AccountOrderRecordV2 {
         Objects.equals(this.executionPrice, accountOrderRecordV2.executionPrice) &&
         Objects.equals(this.limitPrice, accountOrderRecordV2.limitPrice) &&
         Objects.equals(this.stopPrice, accountOrderRecordV2.stopPrice) &&
+        Objects.equals(this.trailingStop, accountOrderRecordV2.trailingStop) &&
         Objects.equals(this.legs, accountOrderRecordV2.legs)&&
         Objects.equals(this.additionalProperties, accountOrderRecordV2.additionalProperties);
   }
@@ -531,7 +683,7 @@ public class AccountOrderRecordV2 {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, orderType, timeInForce, timePlaced, timeExecuted, quoteCurrency, executionPrice, limitPrice, stopPrice, legs, additionalProperties);
+    return Objects.hash(brokerageOrderId, brokerageGroupOrderId, orderRole, status, orderType, timeInForce, timePlaced, timeExecuted, quoteCurrency, executionPrice, limitPrice, stopPrice, trailingStop, legs, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -546,6 +698,8 @@ public class AccountOrderRecordV2 {
     StringBuilder sb = new StringBuilder();
     sb.append("class AccountOrderRecordV2 {\n");
     sb.append("    brokerageOrderId: ").append(toIndentedString(brokerageOrderId)).append("\n");
+    sb.append("    brokerageGroupOrderId: ").append(toIndentedString(brokerageGroupOrderId)).append("\n");
+    sb.append("    orderRole: ").append(toIndentedString(orderRole)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
@@ -555,6 +709,7 @@ public class AccountOrderRecordV2 {
     sb.append("    executionPrice: ").append(toIndentedString(executionPrice)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");
     sb.append("    stopPrice: ").append(toIndentedString(stopPrice)).append("\n");
+    sb.append("    trailingStop: ").append(toIndentedString(trailingStop)).append("\n");
     sb.append("    legs: ").append(toIndentedString(legs)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -580,6 +735,8 @@ public class AccountOrderRecordV2 {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("brokerage_order_id");
+    openapiFields.add("brokerage_group_order_id");
+    openapiFields.add("order_role");
     openapiFields.add("status");
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
@@ -589,6 +746,7 @@ public class AccountOrderRecordV2 {
     openapiFields.add("execution_price");
     openapiFields.add("limit_price");
     openapiFields.add("stop_price");
+    openapiFields.add("trailing_stop");
     openapiFields.add("legs");
 
     // a set of required properties/fields (JSON key names)
@@ -610,6 +768,12 @@ public class AccountOrderRecordV2 {
       if ((jsonObj.get("brokerage_order_id") != null && !jsonObj.get("brokerage_order_id").isJsonNull()) && !jsonObj.get("brokerage_order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_order_id").toString()));
       }
+      if (!jsonObj.get("brokerage_group_order_id").isJsonNull() && (jsonObj.get("brokerage_group_order_id") != null && !jsonObj.get("brokerage_group_order_id").isJsonNull()) && !jsonObj.get("brokerage_group_order_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `brokerage_group_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_group_order_id").toString()));
+      }
+      if (!jsonObj.get("order_role").isJsonNull() && (jsonObj.get("order_role") != null && !jsonObj.get("order_role").isJsonNull()) && !jsonObj.get("order_role").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `order_role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_role").toString()));
+      }
       if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));
       }
@@ -618,6 +782,10 @@ public class AccountOrderRecordV2 {
       }
       if ((jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) && !jsonObj.get("quote_currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `quote_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quote_currency").toString()));
+      }
+      // validate the optional field `trailing_stop`
+      if (jsonObj.get("trailing_stop") != null && !jsonObj.get("trailing_stop").isJsonNull()) {
+        TrailingStopNullable.validateJsonObject(jsonObj.getAsJsonObject("trailing_stop"));
       }
       if (jsonObj.get("legs") != null && !jsonObj.get("legs").isJsonNull()) {
         JsonArray jsonArraylegs = jsonObj.getAsJsonArray("legs");

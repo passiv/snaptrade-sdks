@@ -27,15 +27,27 @@ describe 'ExperimentalEndpointsApi' do
     end
   end
 
-  # unit tests for get_account_balance_history
-  # List historical account total value
-  # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+  # unit tests for add_subscription
+  # Add a Trade Detection subscription
+  # Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
   # @param user_id 
   # @param user_secret 
-  # @param account_id 
+  # @param trade_detection_add_subscription_request 
   # @param [Hash] opts the optional parameters
-  # @return [AccountValueHistoryResponse]
-  describe 'get_account_balance_history test' do
+  # @return [TradeDetectionSubscription]
+  describe 'add_subscription test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for cancel_subscription
+  # Cancel a Trade Detection subscription
+  # Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+  # @param trade_detection_add_subscription_request 
+  # @param [Hash] opts the optional parameters
+  # @return [TradeDetectionCancelSubscriptionResponse]
+  describe 'cancel_subscription test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -63,8 +75,8 @@ describe 'ExperimentalEndpointsApi' do
   # @param user_secret 
   # @param account_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :state defaults value is set to \&quot;all\&quot;
-  # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+  # @option opts [String] :state defaults to \&quot;all\&quot;
+  # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
   # @return [AccountOrdersV2Response]
   describe 'get_user_account_orders_v2 test' do
     it 'should work' do
@@ -82,6 +94,17 @@ describe 'ExperimentalEndpointsApi' do
   # @option opts [Boolean] :only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
   # @return [AccountOrdersV2Response]
   describe 'get_user_account_recent_orders_v2 test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for list_subscriptions
+  # List active Trade Detection subscriptions
+  # Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+  # @param [Hash] opts the optional parameters
+  # @return [Array<TradeDetectionSubscription>]
+  describe 'list_subscriptions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

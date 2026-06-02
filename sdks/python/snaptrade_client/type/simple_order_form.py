@@ -24,10 +24,10 @@ class RequiredSimpleOrderForm(TypedDict):
     side: ActionStrict
 
     # The type of order to place.
-    type: str
+    type: Literal["MARKET", "LIMIT", "STOP_LOSS_MARKET", "STOP_LOSS_LIMIT", "TAKE_PROFIT_MARKET", "TAKE_PROFIT_LIMIT"]
 
     # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-    time_in_force: str
+    time_in_force: Literal["GTC", "FOK", "IOC", "GTD"]
 
     # The amount of the base currency to buy or sell.
     amount: str

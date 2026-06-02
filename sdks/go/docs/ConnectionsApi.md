@@ -7,11 +7,13 @@ Method | Path | Description
 [**DeleteConnection**](ConnectionsApi.md#DeleteConnection) | **Delete** /connection/{connectionId} | Delete connection
 [**DetailBrokerageAuthorization**](ConnectionsApi.md#DetailBrokerageAuthorization) | **Get** /authorizations/{authorizationId} | Get connection detail
 [**DisableBrokerageAuthorization**](ConnectionsApi.md#DisableBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/disable | Force disable connection
+[**ListBrokerageAuthorizationAccounts**](ConnectionsApi.md#ListBrokerageAuthorizationAccounts) | **Get** /authorizations/{authorizationId}/accounts | List accounts for a connection
 [**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
 [**RefreshBrokerageAuthorization**](ConnectionsApi.md#RefreshBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 [**RemoveBrokerageAuthorization**](ConnectionsApi.md#RemoveBrokerageAuthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 [**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 [**SessionEvents**](ConnectionsApi.md#SessionEvents) | **Get** /sessionEvents | Get all session events for a user
+[**SyncBrokerageAuthorizationTransactions**](ConnectionsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 
 
 
@@ -155,6 +157,69 @@ func main() {
     // response from `DisableBrokerageAuthorization`: BrokerageAuthorizationDisabledConfirmation
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.DisableBrokerageAuthorization`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationDisabledConfirmation.DisableBrokerageAuthorization.Detail`: %v\n", *resp.Detail)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListBrokerageAuthorizationAccounts
+
+List accounts for a connection
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ConnectionsApi.ListBrokerageAuthorizationAccounts(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.ListBrokerageAuthorizationAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ListBrokerageAuthorizationAccounts`: []Account
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ListBrokerageAuthorizationAccounts`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.Id`: %v\n", resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.Name`: %v\n", resp.Name)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.InstitutionName`: %v\n", resp.InstitutionName)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.FundingDate`: %v\n", *resp.FundingDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.SyncStatus`: %v\n", resp.SyncStatus)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.Balance`: %v\n", resp.Balance)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.Status`: %v\n", *resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.RawType`: %v\n", *resp.RawType)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.AccountCategory`: %v\n", *resp.AccountCategory)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListBrokerageAuthorizationAccounts.IsPaper`: %v\n", resp.IsPaper)
 }
 ```
 
@@ -334,6 +399,7 @@ func main() {
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
     )
+    request.Timeframes(""ALL,1Y"")
     
     resp, httpRes, err := request.Execute()
 
@@ -396,6 +462,52 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.CreatedDate`: %v\n", *resp.CreatedDate)
     fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.BrokerageStatusCode`: %v\n", *resp.BrokerageStatusCode)
     fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.BrokerageAuthorizationId`: %v\n", *resp.BrokerageAuthorizationId)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SyncBrokerageAuthorizationTransactions
+
+Sync transactions for a connection
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ConnectionsApi.SyncBrokerageAuthorizationTransactions(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.SyncBrokerageAuthorizationTransactions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `SyncBrokerageAuthorizationTransactions`: BrokerageAuthorizationTransactionsSyncConfirmation
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.SyncBrokerageAuthorizationTransactions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationTransactionsSyncConfirmation.SyncBrokerageAuthorizationTransactions.Detail`: %v\n", *resp.Detail)
 }
 ```
 

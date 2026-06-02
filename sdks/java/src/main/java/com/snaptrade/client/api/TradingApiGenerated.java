@@ -32,6 +32,8 @@ import com.snaptrade.client.model.ActionStrict;
 import com.snaptrade.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
 import com.snaptrade.client.model.CancelOrderResponse;
+import com.snaptrade.client.model.ComplexOrderLeg;
+import com.snaptrade.client.model.ComplexOrderResponse;
 import com.snaptrade.client.model.CryptoOrderForm;
 import com.snaptrade.client.model.CryptoOrderPreview;
 import com.snaptrade.client.model.CryptoTradingInstrument;
@@ -39,6 +41,7 @@ import com.snaptrade.client.model.CryptocurrencyPairQuote;
 import com.snaptrade.client.model.ManualTradeAndImpact;
 import com.snaptrade.client.model.ManualTradeForm;
 import com.snaptrade.client.model.ManualTradeFormBracket;
+import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
 import com.snaptrade.client.model.ManualTradeReplaceForm;
 import com.snaptrade.client.model.MlegLeg;
@@ -1681,10 +1684,10 @@ public class TradingApiGenerated {
 
     /**
      * Get equity symbol quotes
-     * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+     * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
+     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed (required)
      * @param accountId  (required)
      * @return GetUserAccountQuotesRequestBuilder
      * @http.response.details
@@ -1762,6 +1765,7 @@ public class TradingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call placeBracketOrderValidateBeforeCall(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accountId' is set
@@ -1892,7 +1896,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             return placeBracketOrderCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
@@ -1922,7 +1928,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public AccountOrderRecord execute() throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             ApiResponse<AccountOrderRecord> localVarResp = placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
@@ -1939,7 +1947,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             return placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
@@ -1956,7 +1966,9 @@ public class TradingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
             return placeBracketOrderAsync(accountId, userId, userSecret, manualTradeFormBracket, _callback);
@@ -1965,7 +1977,7 @@ public class TradingApiGenerated {
 
     /**
      * Place bracket order
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
      * @param accountId The ID of the account to execute the trade on. (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1977,7 +1989,9 @@ public class TradingApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public TradingApi.PlaceBracketOrderRequestBuilder placeBracketOrder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
         if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
         if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
@@ -1995,6 +2009,235 @@ public class TradingApiGenerated {
             
 
         return ((TradingApi) this).new PlaceBracketOrderRequestBuilder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
+    }
+    private okhttp3.Call placeComplexOrderCall(UUID accountId, String userId, String userSecret, ManualTradeFormComplex manualTradeFormComplex, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manualTradeFormComplex;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/complex"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeComplexOrderValidateBeforeCall(UUID accountId, String userId, String userSecret, ManualTradeFormComplex manualTradeFormComplex, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeComplexOrder(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeComplexOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeComplexOrder(Async)");
+        }
+
+        // verify the required parameter 'manualTradeFormComplex' is set
+        if (manualTradeFormComplex == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeFormComplex' when calling placeComplexOrder(Async)");
+        }
+
+        return placeComplexOrderCall(accountId, userId, userSecret, manualTradeFormComplex, _callback);
+
+    }
+
+
+    private ApiResponse<ComplexOrderResponse> placeComplexOrderWithHttpInfo(UUID accountId, String userId, String userSecret, ManualTradeFormComplex manualTradeFormComplex) throws ApiException {
+        okhttp3.Call localVarCall = placeComplexOrderValidateBeforeCall(accountId, userId, userSecret, manualTradeFormComplex, null);
+        Type localVarReturnType = new TypeToken<ComplexOrderResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call placeComplexOrderAsync(UUID accountId, String userId, String userSecret, ManualTradeFormComplex manualTradeFormComplex, final ApiCallback<ComplexOrderResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeComplexOrderValidateBeforeCall(accountId, userId, userSecret, manualTradeFormComplex, _callback);
+        Type localVarReturnType = new TypeToken<ComplexOrderResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PlaceComplexOrderRequestBuilderGenerated {
+        final String type;
+        final List<ComplexOrderLeg> orders;
+        final UUID accountId;
+        final String userId;
+        final String userSecret;
+        String clientOrderId;
+
+        public PlaceComplexOrderRequestBuilderGenerated(String type, List<ComplexOrderLeg> orders, UUID accountId, String userId, String userSecret) {
+            this.type = type;
+            this.orders = orders;
+            this.accountId = accountId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set clientOrderId
+         * @param clientOrderId An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response. (optional)
+         * @return TradingApi.PlaceComplexOrderRequestBuilder
+         */
+        public TradingApi.PlaceComplexOrderRequestBuilder clientOrderId(String clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return (TradingApi.PlaceComplexOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for placeComplexOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            ManualTradeFormComplex manualTradeFormComplex = buildBodyParams();
+            return placeComplexOrderCall(accountId, userId, userSecret, manualTradeFormComplex, _callback);
+        }
+
+        private ManualTradeFormComplex buildBodyParams() {
+            ManualTradeFormComplex manualTradeFormComplex = new ManualTradeFormComplex();
+            if (this.type != null)
+            manualTradeFormComplex.type(ManualTradeFormComplex.TypeEnum.fromValue(this.type));
+            manualTradeFormComplex.orders(this.orders);
+            manualTradeFormComplex.clientOrderId(this.clientOrderId);
+            return manualTradeFormComplex;
+        }
+
+        /**
+         * Execute placeComplexOrder request
+         * @return ComplexOrderResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ComplexOrderResponse execute() throws ApiException {
+            ManualTradeFormComplex manualTradeFormComplex = buildBodyParams();
+            ApiResponse<ComplexOrderResponse> localVarResp = placeComplexOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormComplex);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeComplexOrder request with HTTP info returned
+         * @return ApiResponse&lt;ComplexOrderResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ComplexOrderResponse> executeWithHttpInfo() throws ApiException {
+            ManualTradeFormComplex manualTradeFormComplex = buildBodyParams();
+            return placeComplexOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormComplex);
+        }
+
+        /**
+         * Execute placeComplexOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ComplexOrderResponse> _callback) throws ApiException {
+            ManualTradeFormComplex manualTradeFormComplex = buildBodyParams();
+            return placeComplexOrderAsync(accountId, userId, userSecret, manualTradeFormComplex, _callback);
+        }
+    }
+
+    /**
+     * Place complex order
+     * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+     * @param accountId The ID of the account to execute the trade on. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeFormComplex  (required)
+     * @return PlaceComplexOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.PlaceComplexOrderRequestBuilder placeComplexOrder(String type, List<ComplexOrderLeg> orders, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
+            
+
+        if (orders == null) throw new IllegalArgumentException("\"orders\" is required but got null");
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((TradingApi) this).new PlaceComplexOrderRequestBuilder(type, orders, accountId, userId, userSecret);
     }
     private okhttp3.Call placeCryptoOrderCall(String userId, String userSecret, UUID accountId, CryptoOrderForm cryptoOrderForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;

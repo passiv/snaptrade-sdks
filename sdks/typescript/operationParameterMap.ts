@@ -33,6 +33,32 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/balanceHistory-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/positions/all-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/holdings-GET': {
         parameters: [
             {
@@ -146,6 +172,9 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'accountId'
+            },
+            {
+                name: 'timeframes'
             },
         ]
     },
@@ -290,6 +319,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/accounts-GET': {
+        parameters: [
+            {
+                name: 'authorizationId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/authorizations-GET': {
         parameters: [
             {
@@ -337,6 +379,9 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'authorizationId'
             },
+            {
+                name: 'timeframes'
+            },
         ]
     },
     '/sessionEvents-GET': {
@@ -352,16 +397,36 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/balanceHistory-GET': {
+    '/authorizations/{authorizationId}/transactions/sync-POST': {
         parameters: [
+            {
+                name: 'authorizationId'
+            },
             {
                 name: 'userId'
             },
             {
                 name: 'userSecret'
             },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions-POST': {
+        parameters: [
             {
-                name: 'accountId'
+                name: 'account_id'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions/cancel-POST': {
+        parameters: [
+            {
+                name: 'account_id'
             },
         ]
     },
@@ -414,6 +479,10 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'only_executed'
             },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions-GET': {
+        parameters: [
         ]
     },
     '/accounts/{accountId}/options-GET': {
@@ -692,6 +761,28 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'units'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/complex-POST': {
+        parameters: [
+            {
+                name: 'type'
+            },
+            {
+                name: 'orders'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'client_order_id'
             },
         ]
     },

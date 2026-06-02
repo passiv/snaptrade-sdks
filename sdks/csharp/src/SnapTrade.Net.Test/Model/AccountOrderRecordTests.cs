@@ -66,6 +66,22 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'BrokerageOrderId'
         }
         /// <summary>
+        /// Test the property 'BrokerageGroupOrderId'
+        /// </summary>
+        [Fact]
+        public void BrokerageGroupOrderIdTest()
+        {
+            // TODO unit test for the property 'BrokerageGroupOrderId'
+        }
+        /// <summary>
+        /// Test the property 'OrderRole'
+        /// </summary>
+        [Fact]
+        public void OrderRoleTest()
+        {
+            // TODO unit test for the property 'OrderRole'
+        }
+        /// <summary>
         /// Test the property 'Status'
         /// </summary>
         [Fact]
@@ -168,6 +184,14 @@ namespace SnapTrade.Net.Test.Model
         public void StopPriceTest()
         {
             // TODO unit test for the property 'StopPrice'
+        }
+        /// <summary>
+        /// Test the property 'TrailingStop'
+        /// </summary>
+        [Fact]
+        public void TrailingStopTest()
+        {
+            // TODO unit test for the property 'TrailingStop'
         }
         /// <summary>
         /// Test the property 'OrderType'

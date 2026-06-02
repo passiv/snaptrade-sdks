@@ -80,7 +80,7 @@ This endpoint is paginated with a default page size of 1000. The endpoint will r
 
 Transaction are returned in reverse chronological order, using the `trade_date` field.
 
-The data returned here is always cached and refreshed once a day.
+This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -248,6 +248,342 @@ func (a *AccountInformationApiService) GetAccountActivitiesExecute(r AccountInfo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type AccountInformationApiGetAccountBalanceHistoryRequest struct {
+	ctx context.Context
+	ApiService *AccountInformationApiService
+	userId string
+	userSecret string
+	accountId string
+}
+
+func (r AccountInformationApiGetAccountBalanceHistoryRequest) Execute() (*AccountValueHistoryResponse, *http.Response, error) {
+	return r.ApiService.GetAccountBalanceHistoryExecute(r)
+}
+
+/*
+GetAccountBalanceHistory List historical account total value
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId
+ @param userSecret
+ @param accountId
+ @return AccountInformationApiGetAccountBalanceHistoryRequest
+*/
+func (a *AccountInformationApiService) GetAccountBalanceHistory(userId string, userSecret string, accountId string) AccountInformationApiGetAccountBalanceHistoryRequest {
+	return AccountInformationApiGetAccountBalanceHistoryRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		userId: userId,
+		userSecret: userSecret,
+		accountId: accountId,
+	}
+}
+
+// Execute executes the request
+//  @return AccountValueHistoryResponse
+func (a *AccountInformationApiService) GetAccountBalanceHistoryExecute(r AccountInformationApiGetAccountBalanceHistoryRequest) (*AccountValueHistoryResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccountValueHistoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountInformationApiService.GetAccountBalanceHistory")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/balanceHistory"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Model403FeatureNotEnabledResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AccountInformationApiGetAllAccountPositionsRequest struct {
+	ctx context.Context
+	ApiService *AccountInformationApiService
+	userId string
+	userSecret string
+	accountId string
+}
+
+func (r AccountInformationApiGetAllAccountPositionsRequest) Execute() (*AllAccountPositionsResponse, *http.Response, error) {
+	return r.ApiService.GetAllAccountPositionsExecute(r)
+}
+
+/*
+GetAllAccountPositions List all account positions
+
+Returns a list of all positions in the specified account.
+
+The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId
+ @param userSecret
+ @param accountId
+ @return AccountInformationApiGetAllAccountPositionsRequest
+*/
+func (a *AccountInformationApiService) GetAllAccountPositions(userId string, userSecret string, accountId string) AccountInformationApiGetAllAccountPositionsRequest {
+	return AccountInformationApiGetAllAccountPositionsRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		userId: userId,
+		userSecret: userSecret,
+		accountId: accountId,
+	}
+}
+
+// Execute executes the request
+//  @return AllAccountPositionsResponse
+func (a *AccountInformationApiService) GetAllAccountPositionsExecute(r AccountInformationApiGetAllAccountPositionsRequest) (*AllAccountPositionsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AllAccountPositionsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountInformationApiService.GetAllAccountPositions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/positions/all"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type AccountInformationApiGetAllUserHoldingsRequest struct {
 	ctx context.Context
 	ApiService *AccountInformationApiService
@@ -273,6 +609,8 @@ GetAllUserHoldings List all accounts for the user, plus balances, positions, and
 
 List all accounts for the user, plus balances, positions, and orders for each
 account.
+
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -472,7 +810,7 @@ Returns a list of balances for the account. Each element of the list has a disti
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -638,7 +976,7 @@ Returns account detail known to SnapTrade for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -1000,13 +1338,13 @@ type AccountInformationApiGetUserAccountOrdersRequest struct {
 	days *int32
 }
 
-// defaults value is set to \&quot;all\&quot;
+// defaults to \&quot;all\&quot;
 func (r *AccountInformationApiGetUserAccountOrdersRequest) State(state string) *AccountInformationApiGetUserAccountOrdersRequest {
 	r.state = &state
 	return r
 }
 
-// Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+// Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
 func (r *AccountInformationApiGetUserAccountOrdersRequest) Days(days int32) *AccountInformationApiGetUserAccountOrdersRequest {
 	r.days = &days
 	return r
@@ -1023,7 +1361,7 @@ Returns a list of recent orders in the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -1071,6 +1409,9 @@ func (a *AccountInformationApiService) GetUserAccountOrdersExecute(r AccountInfo
 	localVarFormParams := url.Values{}
 	if r.days != nil && *r.days < 1 {
 		return localVarReturnValue, nil, reportError("days must be greater than 1")
+	}
+	if r.days != nil && *r.days > 90 {
+		return localVarReturnValue, nil, reportError("days must be less than 90")
 	}
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
@@ -1206,9 +1547,11 @@ GetUserAccountPositions List account positions
 
 Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
+This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -1218,6 +1561,8 @@ If the connection has become disabled, it can no longer access the latest data f
  @param userSecret
  @param accountId
  @return AccountInformationApiGetUserAccountPositionsRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) GetUserAccountPositions(userId string, userSecret string, accountId string) AccountInformationApiGetUserAccountPositionsRequest {
 	return AccountInformationApiGetUserAccountPositionsRequest{
@@ -1231,6 +1576,7 @@ func (a *AccountInformationApiService) GetUserAccountPositions(userId string, us
 
 // Execute executes the request
 //  @return []Position
+// Deprecated
 func (a *AccountInformationApiService) GetUserAccountPositionsExecute(r AccountInformationApiGetUserAccountPositionsRequest) ([]Position, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1555,6 +1901,13 @@ type AccountInformationApiGetUserAccountReturnRatesRequest struct {
 	userId string
 	userSecret string
 	accountId string
+	timeframes *string
+}
+
+// Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
+func (r *AccountInformationApiGetUserAccountReturnRatesRequest) Timeframes(timeframes string) *AccountInformationApiGetUserAccountReturnRatesRequest {
+	r.timeframes = &timeframes
+	return r
 }
 
 func (r AccountInformationApiGetUserAccountReturnRatesRequest) Execute() (*RateOfReturnResponse, *http.Response, error) {
@@ -1564,7 +1917,7 @@ func (r AccountInformationApiGetUserAccountReturnRatesRequest) Execute() (*RateO
 /*
 GetUserAccountReturnRates List account rate of returns
 
-Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1611,6 +1964,9 @@ func (a *AccountInformationApiService) GetUserAccountReturnRatesExecute(r Accoun
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	if r.timeframes != nil {
+		localVarQueryParams.Add("timeframes", parameterToString(*r.timeframes, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1745,11 +2101,12 @@ func (r AccountInformationApiGetUserHoldingsRequest) Execute() (*AccountHoldings
 /*
 GetUserHoldings List account holdings
 
-Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -1759,6 +2116,8 @@ If the connection has become disabled, it can no longer access the latest data f
  @param userId
  @param userSecret
  @return AccountInformationApiGetUserHoldingsRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) GetUserHoldings(accountId string, userId string, userSecret string) AccountInformationApiGetUserHoldingsRequest {
 	return AccountInformationApiGetUserHoldingsRequest{
@@ -1772,6 +2131,7 @@ func (a *AccountInformationApiService) GetUserHoldings(accountId string, userId 
 
 // Execute executes the request
 //  @return AccountHoldingsAccount
+// Deprecated
 func (a *AccountInformationApiService) GetUserHoldingsExecute(r AccountInformationApiGetUserHoldingsRequest) (*AccountHoldingsAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -1943,19 +2303,19 @@ func (r AccountInformationApiListUserAccountsRequest) Execute() ([]Account, *htt
 /*
 ListUserAccounts List accounts
 
+**Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
+
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-Please note that this data is cached and only refreshed once a day.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
  @return AccountInformationApiListUserAccountsRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) ListUserAccounts(userId string, userSecret string) AccountInformationApiListUserAccountsRequest {
 	return AccountInformationApiListUserAccountsRequest{
@@ -1968,6 +2328,7 @@ func (a *AccountInformationApiService) ListUserAccounts(userId string, userSecre
 
 // Execute executes the request
 //  @return []Account
+// Deprecated
 func (a *AccountInformationApiService) ListUserAccountsExecute(r AccountInformationApiListUserAccountsRequest) ([]Account, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

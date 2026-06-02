@@ -29,6 +29,10 @@ import { ActionStrictWithOptions } from '../models';
 // @ts-ignore
 import { CancelOrderResponse } from '../models';
 // @ts-ignore
+import { ComplexOrderLeg } from '../models';
+// @ts-ignore
+import { ComplexOrderResponse } from '../models';
+// @ts-ignore
 import { CryptoOrderForm } from '../models';
 // @ts-ignore
 import { CryptoOrderPreview } from '../models';
@@ -42,6 +46,8 @@ import { ManualTradeAndImpact } from '../models';
 import { ManualTradeForm } from '../models';
 // @ts-ignore
 import { ManualTradeFormBracket } from '../models';
+// @ts-ignore
+import { ManualTradeFormComplex } from '../models';
 // @ts-ignore
 import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
@@ -512,11 +518,11 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
          * @summary Get equity symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+         * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
          * @param {string} accountId 
          * @param {boolean} [useTicker] Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.
          * @param {*} [options] Override http request option.
@@ -586,13 +592,14 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place bracket order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeFormBracket} manualTradeFormBracket 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         placeBracketOrder: async (accountId: string, userId: string, userSecret: string, manualTradeFormBracket: ManualTradeFormBracket, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -648,6 +655,76 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormBracket, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * @summary Place complex order
+         * @param {string} accountId The ID of the account to execute the trade on.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeFormComplex} manualTradeFormComplex 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeComplexOrder: async (accountId: string, userId: string, userSecret: string, manualTradeFormComplex: ManualTradeFormComplex, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('placeComplexOrder', 'accountId', accountId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('placeComplexOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('placeComplexOrder', 'userSecret', userSecret)
+            // verify required parameter 'manualTradeFormComplex' is not null or undefined
+            assertParamExists('placeComplexOrder', 'manualTradeFormComplex', manualTradeFormComplex)
+            const localVarPath = `/accounts/{accountId}/trading/complex`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: manualTradeFormComplex,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/complex',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormComplex, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1244,7 +1321,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
          * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1255,10 +1332,11 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place bracket order
          * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
@@ -1274,6 +1352,22 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 take_profit: requestParameters.take_profit
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeBracketOrder(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, manualTradeFormBracket, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * @summary Place complex order
+         * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ComplexOrderResponse>> {
+            const manualTradeFormComplex: ManualTradeFormComplex = {
+                type: requestParameters.type,
+                orders: requestParameters.orders,
+                client_order_id: requestParameters.client_order_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeComplexOrder(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, manualTradeFormComplex, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1481,7 +1575,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getUserAccountOptionQuotes(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
          * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1491,14 +1585,25 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getUserAccountQuotes(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place bracket order
          * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.placeBracketOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * @summary Place complex order
+         * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest, options?: AxiosRequestConfig): AxiosPromise<ComplexOrderResponse> {
+            return localVarFp.placeComplexOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -1782,7 +1887,7 @@ export type TradingApiGetUserAccountQuotesRequest = {
     readonly userSecret: string
     
     /**
-    * List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+    * List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
     * @type {string}
     * @memberof TradingApiGetUserAccountQuotes
     */
@@ -1833,6 +1938,36 @@ export type TradingApiPlaceBracketOrderRequest = {
     readonly userSecret: string
     
 } & ManualTradeFormBracket
+
+/**
+ * Request parameters for placeComplexOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiPlaceComplexOrderRequest
+ */
+export type TradingApiPlaceComplexOrderRequest = {
+    
+    /**
+    * The ID of the account to execute the trade on.
+    * @type {string}
+    * @memberof TradingApiPlaceComplexOrder
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceComplexOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceComplexOrder
+    */
+    readonly userSecret: string
+    
+} & ManualTradeFormComplex
 
 /**
  * Request parameters for placeCryptoOrder operation in TradingApi.
@@ -2132,7 +2267,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+     * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
      * @summary Get equity symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2144,15 +2279,28 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
      * @summary Place bracket order
      * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
     public placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).placeBracketOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+     * @summary Place complex order
+     * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeComplexOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

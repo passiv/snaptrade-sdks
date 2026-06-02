@@ -12,6 +12,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetUserAccountOptionQuotes**](TradingApi.md#getuseraccountoptionquotes) | **GET** /accounts/{accountId}/quotes/options | Get option quote |
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
 | [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
+| [**PlaceComplexOrder**](TradingApi.md#placecomplexorder) | **POST** /accounts/{accountId}/trading/complex | Place complex order |
 | [**PlaceCryptoOrder**](TradingApi.md#placecryptoorder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
 | [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order |
 | [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order |
@@ -655,7 +656,7 @@ catch (ApiException e)
 
 
 
-Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
 
 ### Example
 ```csharp
@@ -679,7 +680,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+            var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
             var accountId = "accountId_example";
             var useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided. (optional) 
             
@@ -732,7 +733,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **symbols** | **string** | List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator |  |
+| **symbols** | **string** | List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed |  |
 | **accountId** | **string** |  |  |
 | **useTicker** | **bool?** | Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. | [optional]  |
 
@@ -754,7 +755,7 @@ catch (ApiException e)
 
 
 
-Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
 
 ### Example
 ```csharp
@@ -856,6 +857,113 @@ catch (ApiException e)
 ### Return type
 
 [**AccountOrderRecord**](AccountOrderRecord.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Trade could not be placed |  -  |
+| **403** | User does not have permissions to place trades |  -  |
+| **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **PlaceComplexOrder**
+
+
+
+Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class PlaceComplexOrderExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var type = ManualTradeFormComplex.TypeEnum.OTO; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
+            var orders = new List<ComplexOrderLeg>(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
+            var clientOrderId = "my-order-123"; // An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+            
+            var manualTradeFormComplex = new ManualTradeFormComplex(
+                type,
+                orders,
+                clientOrderId
+            );
+            
+            try
+            {
+                // Place complex order
+                ComplexOrderResponse result = client.Trading.PlaceComplexOrder(accountId, userId, userSecret, manualTradeFormComplex);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PlaceComplexOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the PlaceComplexOrderWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Place complex order
+    ApiResponse<ComplexOrderResponse> response = apiInstance.PlaceComplexOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormComplex);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TradingApi.PlaceComplexOrderWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **accountId** | **string** | The ID of the account to execute the trade on. |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **manualTradeFormComplex** | [**ManualTradeFormComplex**](ManualTradeFormComplex.md) |  |  |
+
+### Return type
+
+[**ComplexOrderResponse**](ComplexOrderResponse.md)
 
 
 ### HTTP response details

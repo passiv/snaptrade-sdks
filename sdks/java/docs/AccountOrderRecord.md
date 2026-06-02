@@ -9,6 +9,8 @@ Describes a single recent order in an account. Each record here represents a sin
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**brokerageOrderId** | **String** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. |  [optional] |
+|**brokerageGroupOrderId** | **String** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  |  [optional] |
+|**orderRole** | [**OrderRoleEnum**](#OrderRoleEnum) | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  |  [optional] |
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
 |**universalSymbol** | [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  |  [optional] |
 |**optionSymbol** | [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  |  [optional] |
@@ -22,6 +24,7 @@ Describes a single recent order in an account. Each record here represents a sin
 |**executionPrice** | **Double** | The price at which the order was executed. For option orders, this represents the price per share. |  [optional] |
 |**limitPrice** | **Double** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. |  [optional] |
 |**stopPrice** | **Double** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. |  [optional] |
+|**trailingStop** | [**TrailingStopNullable**](TrailingStopNullable.md) |  |  [optional] |
 |**orderType** | **String** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. |  [optional] |
 |**timeInForce** | **String** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.  |  [optional] |
 |**timePlaced** | **OffsetDateTime** | The time the order was placed. This is the time the order was submitted to the brokerage. |  [optional] |
@@ -30,6 +33,16 @@ Describes a single recent order in an account. Each record here represents a sin
 |**expiryDate** | **OffsetDateTime** | The time the order expires. This value is not always available from the brokerage. |  [optional] |
 |**symbol** | **UUID** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. |  [optional] |
 |**childBrokerageOrderIds** | [**ChildBrokerageOrderIDsNullable**](ChildBrokerageOrderIDsNullable.md) |  |  [optional] |
+
+
+
+## Enum: OrderRoleEnum
+
+| Name | Value |
+|---- | -----|
+| TRIGGER | &quot;TRIGGER&quot; |
+| CONDITIONAL | &quot;CONDITIONAL&quot; |
+| PEER | &quot;PEER&quot; |
 
 
 

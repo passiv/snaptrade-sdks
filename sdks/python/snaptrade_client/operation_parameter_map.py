@@ -27,6 +27,32 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/balanceHistory-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/positions/all-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/holdings-GET': {
         'parameters': [
             {
@@ -140,6 +166,9 @@ operation_parameter_map = {
             },
             {
                 'name': 'accountId'
+            },
+            {
+                'name': 'timeframes'
             },
         ]
     },
@@ -284,6 +313,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/accounts-GET': {
+        'parameters': [
+            {
+                'name': 'authorizationId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
     '/authorizations-GET': {
         'parameters': [
             {
@@ -331,6 +373,9 @@ operation_parameter_map = {
             {
                 'name': 'authorizationId'
             },
+            {
+                'name': 'timeframes'
+            },
         ]
     },
     '/sessionEvents-GET': {
@@ -346,16 +391,36 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/balanceHistory-GET': {
+    '/authorizations/{authorizationId}/transactions/sync-POST': {
         'parameters': [
+            {
+                'name': 'authorizationId'
+            },
             {
                 'name': 'userId'
             },
             {
                 'name': 'userSecret'
             },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions-POST': {
+        'parameters': [
             {
-                'name': 'accountId'
+                'name': 'account_id'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions/cancel-POST': {
+        'parameters': [
+            {
+                'name': 'account_id'
             },
         ]
     },
@@ -408,6 +473,10 @@ operation_parameter_map = {
             {
                 'name': 'only_executed'
             },
+        ]
+    },
+    '/snapTrade/tradeDetection/subscriptions-GET': {
+        'parameters': [
         ]
     },
     '/accounts/{accountId}/options-GET': {
@@ -686,6 +755,28 @@ operation_parameter_map = {
             },
             {
                 'name': 'units'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/complex-POST': {
+        'parameters': [
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'orders'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'client_order_id'
             },
         ]
     },

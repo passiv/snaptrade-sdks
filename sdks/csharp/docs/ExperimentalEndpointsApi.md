@@ -4,17 +4,19 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetAccountBalanceHistory**](ExperimentalEndpointsApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
+| [**AddSubscription**](ExperimentalEndpointsApi.md#addsubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription |
+| [**CancelSubscription**](ExperimentalEndpointsApi.md#cancelsubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription |
 | [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
+| [**ListSubscriptions**](ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
 
 
-# **GetAccountBalanceHistory**
+# **AddSubscription**
 
 
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires `userId` and `userSecret` in addition to the partner signature. 
 
 ### Example
 ```csharp
@@ -26,7 +28,7 @@ using SnapTrade.Net.Model;
 
 namespace Example
 {
-    public class GetAccountBalanceHistoryExample
+    public class AddSubscriptionExample
     {
         public static void Main()
         {
@@ -38,17 +40,21 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+            
+            var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
+                accountId
+            );
             
             try
             {
-                // List historical account total value
-                AccountValueHistoryResponse result = client.ExperimentalEndpoints.GetAccountBalanceHistory(userId, userSecret, accountId);
+                // Add a Trade Detection subscription
+                TradeDetectionSubscription result = client.ExperimentalEndpoints.AddSubscription(userId, userSecret, tradeDetectionAddSubscriptionRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAccountBalanceHistory: " + e.Message);
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.AddSubscription: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -63,21 +69,21 @@ namespace Example
 }
 ```
 
-#### Using the GetAccountBalanceHistoryWithHttpInfo variant
+#### Using the AddSubscriptionWithHttpInfo variant
 This returns an ApiResponse object which contains the response data, status code and headers.
 
 ```csharp
 try
 {
-    // List historical account total value
-    ApiResponse<AccountValueHistoryResponse> response = apiInstance.GetAccountBalanceHistoryWithHttpInfo(userId, userSecret, accountId);
+    // Add a Trade Detection subscription
+    ApiResponse<TradeDetectionSubscription> response = apiInstance.AddSubscriptionWithHttpInfo(userId, userSecret, tradeDetectionAddSubscriptionRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
-    Debug.Print("Exception when calling ExperimentalEndpointsApi.GetAccountBalanceHistoryWithHttpInfo: " + e.Message);
+    Debug.Print("Exception when calling ExperimentalEndpointsApi.AddSubscriptionWithHttpInfo: " + e.Message);
     Debug.Print("Status Code: " + e.ErrorCode);
     Debug.Print(e.StackTrace);
 }
@@ -89,18 +95,122 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** |  |  |
+| **tradeDetectionAddSubscriptionRequest** | [**TradeDetectionAddSubscriptionRequest**](TradeDetectionAddSubscriptionRequest.md) |  |  |
 
 ### Return type
 
-[**AccountValueHistoryResponse**](AccountValueHistoryResponse.md)
+[**TradeDetectionSubscription**](TradeDetectionSubscription.md)
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **403** | Forbidden |  -  |
+| **200** | Restored an existing cancelled Trade Detection subscription |  -  |
+| **201** | Created a new Trade Detection subscription |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Feature not enabled |  -  |
+| **404** | Not Found |  -  |
+| **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **CancelSubscription**
+
+
+
+Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class CancelSubscriptionExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+            
+            var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
+                accountId
+            );
+            
+            try
+            {
+                // Cancel a Trade Detection subscription
+                TradeDetectionCancelSubscriptionResponse result = client.ExperimentalEndpoints.CancelSubscription(tradeDetectionAddSubscriptionRequest);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.CancelSubscription: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the CancelSubscriptionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Cancel a Trade Detection subscription
+    ApiResponse<TradeDetectionCancelSubscriptionResponse> response = apiInstance.CancelSubscriptionWithHttpInfo(tradeDetectionAddSubscriptionRequest);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ExperimentalEndpointsApi.CancelSubscriptionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **tradeDetectionAddSubscriptionRequest** | [**TradeDetectionAddSubscriptionRequest**](TradeDetectionAddSubscriptionRequest.md) |  |  |
+
+### Return type
+
+[**TradeDetectionCancelSubscriptionResponse**](TradeDetectionCancelSubscriptionResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Cancelled the Trade Detection subscription, or it was already cancelled |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Feature not enabled |  -  |
+| **404** | Not Found |  -  |
+| **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -232,8 +342,8 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var state = "all"; // defaults value is set to \"all\" (optional) 
-            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional) 
+            var state = "all"; // defaults to \"all\" (optional) 
+            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional) 
             
             try
             {
@@ -285,8 +395,8 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **state** | **string** | defaults value is set to \&quot;all\&quot; | [optional]  |
-| **days** | **int?** | Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. | [optional]  |
+| **state** | **string** | defaults to \&quot;all\&quot; | [optional]  |
+| **days** | **int?** | Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. | [optional]  |
 
 ### Return type
 
@@ -396,6 +506,96 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **ListSubscriptions**
+
+
+
+Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class ListSubscriptionsExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            
+            try
+            {
+                // List active Trade Detection subscriptions
+                List<TradeDetectionSubscription> result = client.ExperimentalEndpoints.ListSubscriptions();
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.ListSubscriptions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the ListSubscriptionsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List active Trade Detection subscriptions
+    ApiResponse<List<TradeDetectionSubscription>> response = apiInstance.ListSubscriptionsWithHttpInfo();
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ExperimentalEndpointsApi.ListSubscriptionsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+[**List&lt;TradeDetectionSubscription&gt;**](TradeDetectionSubscription.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Active Trade Detection subscriptions |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Feature not enabled |  -  |
+| **404** | Not Found |  -  |
+| **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

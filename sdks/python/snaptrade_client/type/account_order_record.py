@@ -19,6 +19,7 @@ from snaptrade_client.type.account_order_record_status import AccountOrderRecord
 from snaptrade_client.type.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.options_symbol import OptionsSymbol
+from snaptrade_client.type.trailing_stop_nullable import TrailingStopNullable
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredAccountOrderRecord(TypedDict):
@@ -27,6 +28,12 @@ class RequiredAccountOrderRecord(TypedDict):
 class OptionalAccountOrderRecord(TypedDict, total=False):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     brokerage_order_id: str
+
+    # The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+    brokerage_group_order_id: typing.Optional[str]
+
+    # The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+    order_role: typing.Optional[Literal["TRIGGER", "CONDITIONAL", "PEER"]]
 
     status: AccountOrderRecordStatus
 
@@ -65,6 +72,8 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
     stop_price: typing.Optional[typing.Union[int, float]]
+
+    trailing_stop: typing.Optional[TrailingStopNullable]
 
     # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
     order_type: typing.Optional[str]

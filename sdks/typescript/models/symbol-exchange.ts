@@ -25,7 +25,7 @@ export interface SymbolExchange {
      */
     'id'?: string;
     /**
-     * A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
+     * A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
      * @type {string}
      * @memberof SymbolExchange
      */

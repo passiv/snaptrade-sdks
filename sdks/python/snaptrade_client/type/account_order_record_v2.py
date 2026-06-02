@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.type.trailing_stop_nullable import TrailingStopNullable
 
 class RequiredAccountOrderRecordV2(TypedDict):
     pass
@@ -24,6 +25,12 @@ class RequiredAccountOrderRecordV2(TypedDict):
 class OptionalAccountOrderRecordV2(TypedDict, total=False):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     brokerage_order_id: str
+
+    # The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+    brokerage_group_order_id: typing.Optional[str]
+
+    # The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+    order_role: typing.Optional[Literal["TRIGGER", "CONDITIONAL", "PEER"]]
 
     status: AccountOrderRecordStatus
 
@@ -50,6 +57,8 @@ class OptionalAccountOrderRecordV2(TypedDict, total=False):
 
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
     stop_price: typing.Optional[typing.Union[int, float]]
+
+    trailing_stop: typing.Optional[TrailingStopNullable]
 
     # List of legs that make up the order.
     legs: typing.List[AccountOrderRecordLeg]

@@ -20,9 +20,10 @@ Individual rate of return object with return percent and timeframe
 |---- | -----|
 | ALL | &quot;ALL&quot; |
 | _1Y | &quot;1Y&quot; |
-| _6M | &quot;6M&quot; |
-| _3M | &quot;3M&quot; |
+| YTD | &quot;YTD&quot; |
 | _1M | &quot;1M&quot; |
+| _1W | &quot;1W&quot; |
+| _1D | &quot;1D&quot; |
 
 
 

@@ -15,6 +15,12 @@ module SnapTrade
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
 
+    # The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+    attr_accessor :brokerage_group_order_id
+
+    # The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+    attr_accessor :order_role
+
     # Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
     attr_accessor :status
 
@@ -50,6 +56,8 @@ module SnapTrade
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
     attr_accessor :stop_price
 
+    attr_accessor :trailing_stop
+
     # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
     attr_accessor :order_type
 
@@ -77,6 +85,8 @@ module SnapTrade
     def self.attribute_map
       {
         :'brokerage_order_id' => :'brokerage_order_id',
+        :'brokerage_group_order_id' => :'brokerage_group_order_id',
+        :'order_role' => :'order_role',
         :'status' => :'status',
         :'universal_symbol' => :'universal_symbol',
         :'option_symbol' => :'option_symbol',
@@ -90,6 +100,7 @@ module SnapTrade
         :'execution_price' => :'execution_price',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
+        :'trailing_stop' => :'trailing_stop',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'time_placed' => :'time_placed',
@@ -110,6 +121,8 @@ module SnapTrade
     def self.openapi_types
       {
         :'brokerage_order_id' => :'String',
+        :'brokerage_group_order_id' => :'String',
+        :'order_role' => :'OrderRole',
         :'status' => :'AccountOrderRecordStatus',
         :'universal_symbol' => :'AccountOrderRecordUniversalSymbol',
         :'option_symbol' => :'AccountOrderRecordOptionSymbol',
@@ -123,6 +136,7 @@ module SnapTrade
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
+        :'trailing_stop' => :'AccountOrderRecordTrailingStop',
         :'order_type' => :'String',
         :'time_in_force' => :'String',
         :'time_placed' => :'Time',
@@ -137,6 +151,8 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'brokerage_group_order_id',
+        :'order_role',
         :'total_quantity',
         :'open_quantity',
         :'canceled_quantity',
@@ -144,6 +160,7 @@ module SnapTrade
         :'execution_price',
         :'limit_price',
         :'stop_price',
+        :'trailing_stop',
         :'order_type',
         :'time_updated',
         :'time_executed',
@@ -176,6 +193,14 @@ module SnapTrade
 
       if attributes.key?(:'brokerage_order_id')
         self.brokerage_order_id = attributes[:'brokerage_order_id']
+      end
+
+      if attributes.key?(:'brokerage_group_order_id')
+        self.brokerage_group_order_id = attributes[:'brokerage_group_order_id']
+      end
+
+      if attributes.key?(:'order_role')
+        self.order_role = attributes[:'order_role']
       end
 
       if attributes.key?(:'status')
@@ -230,6 +255,10 @@ module SnapTrade
         self.stop_price = attributes[:'stop_price']
       end
 
+      if attributes.key?(:'trailing_stop')
+        self.trailing_stop = attributes[:'trailing_stop']
+      end
+
       if attributes.key?(:'order_type')
         self.order_type = attributes[:'order_type']
       end
@@ -282,6 +311,8 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           brokerage_order_id == o.brokerage_order_id &&
+          brokerage_group_order_id == o.brokerage_group_order_id &&
+          order_role == o.order_role &&
           status == o.status &&
           universal_symbol == o.universal_symbol &&
           option_symbol == o.option_symbol &&
@@ -295,6 +326,7 @@ module SnapTrade
           execution_price == o.execution_price &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
+          trailing_stop == o.trailing_stop &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           time_placed == o.time_placed &&
@@ -314,7 +346,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, universal_symbol, option_symbol, quote_universal_symbol, quote_currency, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
+      [brokerage_order_id, brokerage_group_order_id, order_role, status, universal_symbol, option_symbol, quote_universal_symbol, quote_currency, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, trailing_stop, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
     end
 
     # Builds the object from hash

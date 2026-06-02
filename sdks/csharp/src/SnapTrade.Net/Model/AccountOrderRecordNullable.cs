@@ -32,6 +32,40 @@ namespace SnapTrade.Net.Model
     [DataContract(Name = "AccountOrderRecordNullable")]
     public partial class AccountOrderRecordNullable : IEquatable<AccountOrderRecordNullable>, IValidatableObject
     {
+        /// <summary>
+        /// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+        /// </summary>
+        /// <value>The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. </value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OrderRoleEnum
+        {
+            /// <summary>
+            /// Enum TRIGGER for value: TRIGGER
+            /// </summary>
+            [EnumMember(Value = "TRIGGER")]
+            TRIGGER = 1,
+
+            /// <summary>
+            /// Enum CONDITIONAL for value: CONDITIONAL
+            /// </summary>
+            [EnumMember(Value = "CONDITIONAL")]
+            CONDITIONAL = 2,
+
+            /// <summary>
+            /// Enum PEER for value: PEER
+            /// </summary>
+            [EnumMember(Value = "PEER")]
+            PEER = 3
+
+        }
+
+
+        /// <summary>
+        /// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+        /// </summary>
+        /// <value>The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. </value>
+        [DataMember(Name = "order_role", EmitDefaultValue = true)]
+        public OrderRoleEnum? OrderRole { get; set; }
 
         /// <summary>
         /// Gets or Sets Status
@@ -42,6 +76,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountOrderRecordNullable" /> class.
         /// </summary>
         /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system..</param>
+        /// <param name="brokerageGroupOrderId">The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. .</param>
+        /// <param name="orderRole">The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. .</param>
         /// <param name="status">status.</param>
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
@@ -55,6 +91,7 @@ namespace SnapTrade.Net.Model
         /// <param name="executionPrice">The price at which the order was executed. For option orders, this represents the price per share..</param>
         /// <param name="limitPrice">The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share..</param>
         /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share..</param>
+        /// <param name="trailingStop">trailingStop.</param>
         /// <param name="orderType">The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value..</param>
         /// <param name="timeInForce">The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close. .</param>
         /// <param name="timePlaced">The time the order was placed. This is the time the order was submitted to the brokerage..</param>
@@ -63,9 +100,11 @@ namespace SnapTrade.Net.Model
         /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
         /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="childBrokerageOrderIds">childBrokerageOrderIds.</param>
-        public AccountOrderRecordNullable(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
+        public AccountOrderRecordNullable(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), TrailingStopNullable trailingStop = default(TrailingStopNullable), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
+            this.BrokerageGroupOrderId = brokerageGroupOrderId;
+            this.OrderRole = orderRole;
             this.Status = status;
             this.UniversalSymbol = universalSymbol;
             this.OptionSymbol = optionSymbol;
@@ -79,6 +118,7 @@ namespace SnapTrade.Net.Model
             this.ExecutionPrice = executionPrice;
             this.LimitPrice = limitPrice;
             this.StopPrice = stopPrice;
+            this.TrailingStop = trailingStop;
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
             this.TimePlaced = timePlaced;
@@ -96,6 +136,13 @@ namespace SnapTrade.Net.Model
         /// <value>Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.</value>
         [DataMember(Name = "brokerage_order_id", EmitDefaultValue = false)]
         public string BrokerageOrderId { get; set; }
+
+        /// <summary>
+        /// The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+        /// </summary>
+        /// <value>The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. </value>
+        [DataMember(Name = "brokerage_group_order_id", EmitDefaultValue = true)]
+        public string BrokerageGroupOrderId { get; set; }
 
         /// <summary>
         /// Gets or Sets UniversalSymbol
@@ -178,6 +225,12 @@ namespace SnapTrade.Net.Model
         public double? StopPrice { get; set; }
 
         /// <summary>
+        /// Gets or Sets TrailingStop
+        /// </summary>
+        [DataMember(Name = "trailing_stop", EmitDefaultValue = true)]
+        public TrailingStopNullable TrailingStop { get; set; }
+
+        /// <summary>
         /// The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value.
         /// </summary>
         /// <value>The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value.</value>
@@ -249,6 +302,8 @@ namespace SnapTrade.Net.Model
             sb.Append("class AccountOrderRecordNullable {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  BrokerageOrderId: ").Append(BrokerageOrderId).Append("\n");
+            sb.Append("  BrokerageGroupOrderId: ").Append(BrokerageGroupOrderId).Append("\n");
+            sb.Append("  OrderRole: ").Append(OrderRole).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  UniversalSymbol: ").Append(UniversalSymbol).Append("\n");
             sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
@@ -262,6 +317,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  ExecutionPrice: ").Append(ExecutionPrice).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
             sb.Append("  StopPrice: ").Append(StopPrice).Append("\n");
+            sb.Append("  TrailingStop: ").Append(TrailingStop).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  TimePlaced: ").Append(TimePlaced).Append("\n");
@@ -310,6 +366,15 @@ namespace SnapTrade.Net.Model
                     this.BrokerageOrderId == input.BrokerageOrderId ||
                     (this.BrokerageOrderId != null &&
                     this.BrokerageOrderId.Equals(input.BrokerageOrderId))
+                ) && base.Equals(input) && 
+                (
+                    this.BrokerageGroupOrderId == input.BrokerageGroupOrderId ||
+                    (this.BrokerageGroupOrderId != null &&
+                    this.BrokerageGroupOrderId.Equals(input.BrokerageGroupOrderId))
+                ) && base.Equals(input) && 
+                (
+                    this.OrderRole == input.OrderRole ||
+                    this.OrderRole.Equals(input.OrderRole)
                 ) && base.Equals(input) && 
                 (
                     this.Status == input.Status ||
@@ -376,6 +441,11 @@ namespace SnapTrade.Net.Model
                     this.StopPrice.Equals(input.StopPrice))
                 ) && base.Equals(input) && 
                 (
+                    this.TrailingStop == input.TrailingStop ||
+                    (this.TrailingStop != null &&
+                    this.TrailingStop.Equals(input.TrailingStop))
+                ) && base.Equals(input) && 
+                (
                     this.OrderType == input.OrderType ||
                     (this.OrderType != null &&
                     this.OrderType.Equals(input.OrderType))
@@ -431,6 +501,11 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.BrokerageOrderId.GetHashCode();
                 }
+                if (this.BrokerageGroupOrderId != null)
+                {
+                    hashCode = (hashCode * 59) + this.BrokerageGroupOrderId.GetHashCode();
+                }
+                hashCode = (hashCode * 59) + this.OrderRole.GetHashCode();
                 hashCode = (hashCode * 59) + this.Status.GetHashCode();
                 if (this.UniversalSymbol != null)
                 {
@@ -479,6 +554,10 @@ namespace SnapTrade.Net.Model
                 if (this.StopPrice != null)
                 {
                     hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                }
+                if (this.TrailingStop != null)
+                {
+                    hashCode = (hashCode * 59) + this.TrailingStop.GetHashCode();
                 }
                 if (this.OrderType != null)
                 {

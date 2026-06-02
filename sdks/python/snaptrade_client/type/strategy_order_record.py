@@ -25,7 +25,7 @@ class RequiredStrategyOrderRecord(TypedDict):
 class OptionalStrategyOrderRecord(TypedDict, total=False):
     strategy: OptionStrategy
 
-    status: str
+    status: Literal["PENDING", "ACCEPTED", "FAILED", "REJECTED", "CANCELED", "PARTIAL_CANCELED", "CANCEL_PENDING", "EXECUTED", "PARTIAL", "REPLACE_PENDING", "REPLACED", "STOPPED", "SUSPENDED", "EXPIRED", "QUEUED", "TRIGGERED", "ACTIVATED", "PENDING_RISK_REVIEW", "CONTINGENT_ORDER"]
 
     filled_quantity: typing.Union[int, float]
 

@@ -18,7 +18,7 @@ import (
 // Balance Holds balance information for a single currency in an account.
 type Balance struct {
 	Currency *BalanceCurrency `json:"currency,omitempty"`
-	// The amount of available cash in the account denominated in the currency of the `currency` field.
+	// The amount of available cash in the account denominated in the currency of the `currency` field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with `cash_equivalent` = true
 	Cash NullableFloat32 `json:"cash,omitempty"`
 	// Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
 	BuyingPower NullableFloat32 `json:"buying_power,omitempty"`

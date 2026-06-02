@@ -20,6 +20,10 @@ import (
 type AccountOrderRecordV2 struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
+	// The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+	BrokerageGroupOrderId NullableString `json:"brokerage_group_order_id,omitempty"`
+	// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+	OrderRole NullableString `json:"order_role,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
 	// The type of order placed.   - `MARKET`   - `LIMIT`   - `STOP`   - `STOP_LIMIT` 
 	OrderType NullableString `json:"order_type,omitempty"`
@@ -37,6 +41,7 @@ type AccountOrderRecordV2 struct {
 	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
 	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
+	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
 	// List of legs that make up the order.
 	Legs []AccountOrderRecordLeg `json:"legs,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -91,6 +96,90 @@ func (o *AccountOrderRecordV2) HasBrokerageOrderId() bool {
 // SetBrokerageOrderId gets a reference to the given string and assigns it to the BrokerageOrderId field.
 func (o *AccountOrderRecordV2) SetBrokerageOrderId(v string) {
 	o.BrokerageOrderId = &v
+}
+
+// GetBrokerageGroupOrderId returns the BrokerageGroupOrderId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecordV2) GetBrokerageGroupOrderId() string {
+	if o == nil || isNil(o.BrokerageGroupOrderId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BrokerageGroupOrderId.Get()
+}
+
+// GetBrokerageGroupOrderIdOk returns a tuple with the BrokerageGroupOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecordV2) GetBrokerageGroupOrderIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.BrokerageGroupOrderId.Get(), o.BrokerageGroupOrderId.IsSet()
+}
+
+// HasBrokerageGroupOrderId returns a boolean if a field has been set.
+func (o *AccountOrderRecordV2) HasBrokerageGroupOrderId() bool {
+	if o != nil && o.BrokerageGroupOrderId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBrokerageGroupOrderId gets a reference to the given NullableString and assigns it to the BrokerageGroupOrderId field.
+func (o *AccountOrderRecordV2) SetBrokerageGroupOrderId(v string) {
+	o.BrokerageGroupOrderId.Set(&v)
+}
+// SetBrokerageGroupOrderIdNil sets the value for BrokerageGroupOrderId to be an explicit nil
+func (o *AccountOrderRecordV2) SetBrokerageGroupOrderIdNil() {
+	o.BrokerageGroupOrderId.Set(nil)
+}
+
+// UnsetBrokerageGroupOrderId ensures that no value is present for BrokerageGroupOrderId, not even an explicit nil
+func (o *AccountOrderRecordV2) UnsetBrokerageGroupOrderId() {
+	o.BrokerageGroupOrderId.Unset()
+}
+
+// GetOrderRole returns the OrderRole field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecordV2) GetOrderRole() string {
+	if o == nil || isNil(o.OrderRole.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OrderRole.Get()
+}
+
+// GetOrderRoleOk returns a tuple with the OrderRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecordV2) GetOrderRoleOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.OrderRole.Get(), o.OrderRole.IsSet()
+}
+
+// HasOrderRole returns a boolean if a field has been set.
+func (o *AccountOrderRecordV2) HasOrderRole() bool {
+	if o != nil && o.OrderRole.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderRole gets a reference to the given NullableString and assigns it to the OrderRole field.
+func (o *AccountOrderRecordV2) SetOrderRole(v string) {
+	o.OrderRole.Set(&v)
+}
+// SetOrderRoleNil sets the value for OrderRole to be an explicit nil
+func (o *AccountOrderRecordV2) SetOrderRoleNil() {
+	o.OrderRole.Set(nil)
+}
+
+// UnsetOrderRole ensures that no value is present for OrderRole, not even an explicit nil
+func (o *AccountOrderRecordV2) UnsetOrderRole() {
+	o.OrderRole.Unset()
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -431,6 +520,48 @@ func (o *AccountOrderRecordV2) UnsetStopPrice() {
 	o.StopPrice.Unset()
 }
 
+// GetTrailingStop returns the TrailingStop field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecordV2) GetTrailingStop() AccountOrderRecordTrailingStop {
+	if o == nil || isNil(o.TrailingStop.Get()) {
+		var ret AccountOrderRecordTrailingStop
+		return ret
+	}
+	return *o.TrailingStop.Get()
+}
+
+// GetTrailingStopOk returns a tuple with the TrailingStop field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecordV2) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.TrailingStop.Get(), o.TrailingStop.IsSet()
+}
+
+// HasTrailingStop returns a boolean if a field has been set.
+func (o *AccountOrderRecordV2) HasTrailingStop() bool {
+	if o != nil && o.TrailingStop.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTrailingStop gets a reference to the given NullableAccountOrderRecordTrailingStop and assigns it to the TrailingStop field.
+func (o *AccountOrderRecordV2) SetTrailingStop(v AccountOrderRecordTrailingStop) {
+	o.TrailingStop.Set(&v)
+}
+// SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
+func (o *AccountOrderRecordV2) SetTrailingStopNil() {
+	o.TrailingStop.Set(nil)
+}
+
+// UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
+func (o *AccountOrderRecordV2) UnsetTrailingStop() {
+	o.TrailingStop.Unset()
+}
+
 // GetLegs returns the Legs field value if set, zero value otherwise.
 func (o *AccountOrderRecordV2) GetLegs() []AccountOrderRecordLeg {
 	if o == nil || isNil(o.Legs) {
@@ -468,6 +599,12 @@ func (o AccountOrderRecordV2) MarshalJSON() ([]byte, error) {
 	if !isNil(o.BrokerageOrderId) {
 		toSerialize["brokerage_order_id"] = o.BrokerageOrderId
 	}
+	if o.BrokerageGroupOrderId.IsSet() {
+		toSerialize["brokerage_group_order_id"] = o.BrokerageGroupOrderId.Get()
+	}
+	if o.OrderRole.IsSet() {
+		toSerialize["order_role"] = o.OrderRole.Get()
+	}
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
@@ -495,6 +632,9 @@ func (o AccountOrderRecordV2) MarshalJSON() ([]byte, error) {
 	if o.StopPrice.IsSet() {
 		toSerialize["stop_price"] = o.StopPrice.Get()
 	}
+	if o.TrailingStop.IsSet() {
+		toSerialize["trailing_stop"] = o.TrailingStop.Get()
+	}
 	if !isNil(o.Legs) {
 		toSerialize["legs"] = o.Legs
 	}
@@ -517,6 +657,8 @@ func (o *AccountOrderRecordV2) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "brokerage_order_id")
+		delete(additionalProperties, "brokerage_group_order_id")
+		delete(additionalProperties, "order_role")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "order_type")
 		delete(additionalProperties, "time_in_force")
@@ -526,6 +668,7 @@ func (o *AccountOrderRecordV2) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "execution_price")
 		delete(additionalProperties, "limit_price")
 		delete(additionalProperties, "stop_price")
+		delete(additionalProperties, "trailing_stop")
 		delete(additionalProperties, "legs")
 		o.AdditionalProperties = additionalProperties
 	}

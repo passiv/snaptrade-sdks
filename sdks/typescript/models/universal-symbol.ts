@@ -12,9 +12,9 @@ import type * as buffer from "buffer"
 
 import { Currency } from './currency';
 import { SecurityType } from './security-type';
+import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrument';
 import { SymbolCurrency } from './symbol-currency';
 import { SymbolExchange } from './symbol-exchange';
-import { SymbolFigiInstrument } from './symbol-figi-instrument';
 
 /**
  * Uniquely describes a single security + exchange combination across all brokerages.
@@ -74,10 +74,10 @@ export interface UniversalSymbol {
     'figi_code'?: string | null;
     /**
      * 
-     * @type {SymbolFigiInstrument}
+     * @type {StockInstrumentFigiInstrument}
      * @memberof UniversalSymbol
      */
-    'figi_instrument'?: SymbolFigiInstrument | null;
+    'figi_instrument'?: StockInstrumentFigiInstrument | null;
     /**
      * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      * @type {Array<Currency>}

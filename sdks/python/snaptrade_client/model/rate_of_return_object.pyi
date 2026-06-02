@@ -53,16 +53,20 @@ class RateOfReturnObject(
                     return cls("1Y")
                 
                 @schemas.classproperty
-                def _6M(cls):
-                    return cls("6M")
-                
-                @schemas.classproperty
-                def _3M(cls):
-                    return cls("3M")
+                def YTD(cls):
+                    return cls("YTD")
                 
                 @schemas.classproperty
                 def _1M(cls):
                     return cls("1M")
+                
+                @schemas.classproperty
+                def _1W(cls):
+                    return cls("1W")
+                
+                @schemas.classproperty
+                def _1D(cls):
+                    return cls("1D")
             return_percent = schemas.NumberSchema
             created_date = schemas.DateTimeSchema
             __annotations__ = {

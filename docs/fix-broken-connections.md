@@ -6,11 +6,11 @@ A SnapTrade connection provides direct access to a user's trading account. When 
 
 It is important that users are directed to _fix connections_ rather than they create new ones. This allows you to provide a better experience to the user, minimize the number of disabled connections you are managing, and retain historical session data. Using the Connection Portal in the normal manner will create new connections, which will have a different connection id and different account ids if successful, as well as will leave the disabled connection to remain.
 
-It is a requirement to implement the ability to reconnect so that connections can be fixed. There are mechanisms available to be notified when connections break, either through a) [webhooks](/docs/webhooks) as described below, or b) by polling the brokerage authorizations endpoint (:api[Connections_listBrokerageAuthorizations]) for each user and checking the `disabled` status. When `disabled == true`, the connection is disabled and the user must take an action to fix it.
+It is a requirement to implement the ability to reconnect so that connections can be fixed. There are mechanisms available to be notified when connections break, either through a) [webhooks](/docs/webhooks) as described below, or b) by polling the connections endpoint (:api[Connections_listBrokerageAuthorizations]) for each user and checking the `disabled` status. When `disabled == true`, the connection is disabled and the user must take an action to fix it.
 
 # How to fix a disabled connection
 
-SnapTrade's Connection Portal has a special mode that's designed for fixing connections, rather than creating new ones. To use the reconnect mode, you simply pass along the connection id (also known as brokerage authorization id) in the `reconnect` field as part of the request to generate a login link. See :api[Authentication_loginSnapTradeUser].
+SnapTrade's Connection Portal has a special mode that's designed for fixing connections, rather than creating new ones. To use the reconnect mode, you simply pass along the connection id in the `reconnect` field as part of the request to generate a login link. See :api[Authentication_loginSnapTradeUser].
 
 When the Connection Portal is accessed with the `reconnect` parameter, it will immediately take the user into the appropriate reconnection flow for that connection. When successful, the disabled connection will be updated with a new access token and start working again.
 

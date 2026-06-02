@@ -1,9 +1,11 @@
 package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
@@ -33,6 +35,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
             super(authorizationId, userId, userSecret);
         }
     }
+    public class ListBrokerageAuthorizationAccountsRequestBuilder extends ListBrokerageAuthorizationAccountsRequestBuilderGenerated {
+        public ListBrokerageAuthorizationAccountsRequestBuilder(UUID authorizationId, String userId, String userSecret) {
+            super(authorizationId, userId, userSecret);
+        }
+    }
     public class ListBrokerageAuthorizationsRequestBuilder extends ListBrokerageAuthorizationsRequestBuilderGenerated {
         public ListBrokerageAuthorizationsRequestBuilder(String userId, String userSecret) {
             super(userId, userSecret);
@@ -56,6 +63,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
     public class SessionEventsRequestBuilder extends SessionEventsRequestBuilderGenerated {
         public SessionEventsRequestBuilder(String partnerClientId) {
             super(partnerClientId);
+        }
+    }
+    public class SyncBrokerageAuthorizationTransactionsRequestBuilder extends SyncBrokerageAuthorizationTransactionsRequestBuilderGenerated {
+        public SyncBrokerageAuthorizationTransactionsRequestBuilder(UUID authorizationId, String userId, String userSecret) {
+            super(authorizationId, userId, userSecret);
         }
     }
 }

@@ -16,6 +16,7 @@ import { AccountOrderRecordOptionSymbol } from './account-order-record-option-sy
 import { AccountOrderRecordQuoteCurrency } from './account-order-record-quote-currency';
 import { AccountOrderRecordQuoteUniversalSymbol } from './account-order-record-quote-universal-symbol';
 import { AccountOrderRecordStatus } from './account-order-record-status';
+import { AccountOrderRecordTrailingStop } from './account-order-record-trailing-stop';
 import { AccountOrderRecordUniversalSymbol } from './account-order-record-universal-symbol';
 
 /**
@@ -30,6 +31,18 @@ export interface OrderUpdatedResponseOrder {
      * @memberof OrderUpdatedResponseOrder
      */
     'brokerage_order_id'?: string;
+    /**
+     * The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+     * @type {string}
+     * @memberof OrderUpdatedResponseOrder
+     */
+    'brokerage_group_order_id'?: string | null;
+    /**
+     * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+     * @type {string}
+     * @memberof OrderUpdatedResponseOrder
+     */
+    'order_role'?: OrderUpdatedResponseOrderOrderRoleEnum;
     /**
      * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
      * @type {AccountOrderRecordStatus}
@@ -109,6 +122,12 @@ export interface OrderUpdatedResponseOrder {
      */
     'stop_price'?: number | null;
     /**
+     * 
+     * @type {AccountOrderRecordTrailingStop}
+     * @memberof OrderUpdatedResponseOrder
+     */
+    'trailing_stop'?: AccountOrderRecordTrailingStop | null;
+    /**
      * The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage\'s order type value.
      * @type {string}
      * @memberof OrderUpdatedResponseOrder
@@ -158,4 +177,7 @@ export interface OrderUpdatedResponseOrder {
      */
     'child_brokerage_order_ids'?: AccountOrderRecordChildBrokerageOrderIds | null;
 }
+
+type OrderUpdatedResponseOrderOrderRoleEnum = 'TRIGGER' | 'CONDITIONAL' | 'PEER'
+
 

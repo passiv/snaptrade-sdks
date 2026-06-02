@@ -16,6 +16,12 @@ module SnapTrade
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
 
+    # The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+    attr_accessor :brokerage_group_order_id
+
+    # The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+    attr_accessor :order_role
+
     # Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
     attr_accessor :status
 
@@ -43,13 +49,39 @@ module SnapTrade
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
     attr_accessor :stop_price
 
+    attr_accessor :trailing_stop
+
     # List of legs that make up the order.
     attr_accessor :legs
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'brokerage_order_id' => :'brokerage_order_id',
+        :'brokerage_group_order_id' => :'brokerage_group_order_id',
+        :'order_role' => :'order_role',
         :'status' => :'status',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
@@ -59,6 +91,7 @@ module SnapTrade
         :'execution_price' => :'execution_price',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
+        :'trailing_stop' => :'trailing_stop',
         :'legs' => :'legs'
       }
     end
@@ -72,6 +105,8 @@ module SnapTrade
     def self.openapi_types
       {
         :'brokerage_order_id' => :'String',
+        :'brokerage_group_order_id' => :'String',
+        :'order_role' => :'String',
         :'status' => :'AccountOrderRecordStatus',
         :'order_type' => :'String',
         :'time_in_force' => :'String',
@@ -81,6 +116,7 @@ module SnapTrade
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
+        :'trailing_stop' => :'AccountOrderRecordTrailingStop',
         :'legs' => :'Array<AccountOrderRecordLeg>'
       }
     end
@@ -88,11 +124,14 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'brokerage_group_order_id',
+        :'order_role',
         :'order_type',
         :'time_executed',
         :'execution_price',
         :'limit_price',
         :'stop_price',
+        :'trailing_stop',
       ])
     end
 
@@ -113,6 +152,14 @@ module SnapTrade
 
       if attributes.key?(:'brokerage_order_id')
         self.brokerage_order_id = attributes[:'brokerage_order_id']
+      end
+
+      if attributes.key?(:'brokerage_group_order_id')
+        self.brokerage_group_order_id = attributes[:'brokerage_group_order_id']
+      end
+
+      if attributes.key?(:'order_role')
+        self.order_role = attributes[:'order_role']
       end
 
       if attributes.key?(:'status')
@@ -151,6 +198,10 @@ module SnapTrade
         self.stop_price = attributes[:'stop_price']
       end
 
+      if attributes.key?(:'trailing_stop')
+        self.trailing_stop = attributes[:'trailing_stop']
+      end
+
       if attributes.key?(:'legs')
         if (value = attributes[:'legs']).is_a?(Array)
           self.legs = value
@@ -168,7 +219,19 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      order_role_validator = EnumAttributeValidator.new('String', ["TRIGGER", "CONDITIONAL", "PEER"])
+      return false unless order_role_validator.valid?(@order_role)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] order_role Object to be assigned
+    def order_role=(order_role)
+      validator = EnumAttributeValidator.new('String', ["TRIGGER", "CONDITIONAL", "PEER"])
+      unless validator.valid?(order_role)
+        fail ArgumentError, "invalid value for \"order_role\", must be one of #{validator.allowable_values}."
+      end
+      @order_role = order_role
     end
 
     # Checks equality by comparing each attribute.
@@ -177,6 +240,8 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           brokerage_order_id == o.brokerage_order_id &&
+          brokerage_group_order_id == o.brokerage_group_order_id &&
+          order_role == o.order_role &&
           status == o.status &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
@@ -186,6 +251,7 @@ module SnapTrade
           execution_price == o.execution_price &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
+          trailing_stop == o.trailing_stop &&
           legs == o.legs
     end
 
@@ -198,7 +264,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, order_type, time_in_force, time_placed, time_executed, quote_currency, execution_price, limit_price, stop_price, legs].hash
+      [brokerage_order_id, brokerage_group_order_id, order_role, status, order_type, time_in_force, time_placed, time_executed, quote_currency, execution_price, limit_price, stop_price, trailing_stop, legs].hash
     end
 
     # Builds the object from hash

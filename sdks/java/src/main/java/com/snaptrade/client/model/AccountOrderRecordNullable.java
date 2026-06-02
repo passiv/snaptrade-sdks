@@ -25,6 +25,7 @@ import com.snaptrade.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
 import com.snaptrade.client.model.AccountOrderRecordUniversalSymbol;
 import com.snaptrade.client.model.ChildBrokerageOrderIDsNullable;
+import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -62,6 +63,63 @@ public class AccountOrderRecordNullable {
   public static final String SERIALIZED_NAME_BROKERAGE_ORDER_ID = "brokerage_order_id";
   @SerializedName(SERIALIZED_NAME_BROKERAGE_ORDER_ID)
   private String brokerageOrderId;
+
+  public static final String SERIALIZED_NAME_BROKERAGE_GROUP_ORDER_ID = "brokerage_group_order_id";
+  @SerializedName(SERIALIZED_NAME_BROKERAGE_GROUP_ORDER_ID)
+  private String brokerageGroupOrderId;
+
+  /**
+   * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+   */
+  @JsonAdapter(OrderRoleEnum.Adapter.class)
+ public enum OrderRoleEnum {
+    TRIGGER("TRIGGER"),
+    
+    CONDITIONAL("CONDITIONAL"),
+    
+    PEER("PEER");
+
+    private String value;
+
+    OrderRoleEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OrderRoleEnum fromValue(String value) {
+      for (OrderRoleEnum b : OrderRoleEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<OrderRoleEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OrderRoleEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OrderRoleEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OrderRoleEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ORDER_ROLE = "order_role";
+  @SerializedName(SERIALIZED_NAME_ORDER_ROLE)
+  private OrderRoleEnum orderRole;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
@@ -114,6 +172,10 @@ public class AccountOrderRecordNullable {
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
   private Double stopPrice;
+
+  public static final String SERIALIZED_NAME_TRAILING_STOP = "trailing_stop";
+  @SerializedName(SERIALIZED_NAME_TRAILING_STOP)
+  private TrailingStopNullable trailingStop;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
@@ -176,6 +238,64 @@ public class AccountOrderRecordNullable {
     
     
     this.brokerageOrderId = brokerageOrderId;
+  }
+
+
+  public AccountOrderRecordNullable brokerageGroupOrderId(String brokerageGroupOrderId) {
+    
+    
+    
+    
+    this.brokerageGroupOrderId = brokerageGroupOrderId;
+    return this;
+  }
+
+   /**
+   * The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
+   * @return brokerageGroupOrderId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1234567890", value = "The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. ")
+
+  public String getBrokerageGroupOrderId() {
+    return brokerageGroupOrderId;
+  }
+
+
+  public void setBrokerageGroupOrderId(String brokerageGroupOrderId) {
+    
+    
+    
+    this.brokerageGroupOrderId = brokerageGroupOrderId;
+  }
+
+
+  public AccountOrderRecordNullable orderRole(OrderRoleEnum orderRole) {
+    
+    
+    
+    
+    this.orderRole = orderRole;
+    return this;
+  }
+
+   /**
+   * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+   * @return orderRole
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "TRIGGER", value = "The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. ")
+
+  public OrderRoleEnum getOrderRole() {
+    return orderRole;
+  }
+
+
+  public void setOrderRole(OrderRoleEnum orderRole) {
+    
+    
+    
+    this.orderRole = orderRole;
   }
 
 
@@ -583,6 +703,35 @@ public class AccountOrderRecordNullable {
   }
 
 
+  public AccountOrderRecordNullable trailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    
+    this.trailingStop = trailingStop;
+    return this;
+  }
+
+   /**
+   * Get trailingStop
+   * @return trailingStop
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public TrailingStopNullable getTrailingStop() {
+    return trailingStop;
+  }
+
+
+  public void setTrailingStop(TrailingStopNullable trailingStop) {
+    
+    
+    
+    this.trailingStop = trailingStop;
+  }
+
+
   public AccountOrderRecordNullable orderType(String orderType) {
     
     
@@ -872,6 +1021,8 @@ public class AccountOrderRecordNullable {
     }
     AccountOrderRecordNullable accountOrderRecordNullable = (AccountOrderRecordNullable) o;
     return Objects.equals(this.brokerageOrderId, accountOrderRecordNullable.brokerageOrderId) &&
+        Objects.equals(this.brokerageGroupOrderId, accountOrderRecordNullable.brokerageGroupOrderId) &&
+        Objects.equals(this.orderRole, accountOrderRecordNullable.orderRole) &&
         Objects.equals(this.status, accountOrderRecordNullable.status) &&
         Objects.equals(this.universalSymbol, accountOrderRecordNullable.universalSymbol) &&
         Objects.equals(this.optionSymbol, accountOrderRecordNullable.optionSymbol) &&
@@ -885,6 +1036,7 @@ public class AccountOrderRecordNullable {
         Objects.equals(this.executionPrice, accountOrderRecordNullable.executionPrice) &&
         Objects.equals(this.limitPrice, accountOrderRecordNullable.limitPrice) &&
         Objects.equals(this.stopPrice, accountOrderRecordNullable.stopPrice) &&
+        Objects.equals(this.trailingStop, accountOrderRecordNullable.trailingStop) &&
         Objects.equals(this.orderType, accountOrderRecordNullable.orderType) &&
         Objects.equals(this.timeInForce, accountOrderRecordNullable.timeInForce) &&
         Objects.equals(this.timePlaced, accountOrderRecordNullable.timePlaced) &&
@@ -902,7 +1054,7 @@ public class AccountOrderRecordNullable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, quoteUniversalSymbol, quoteCurrency, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
+    return Objects.hash(brokerageOrderId, brokerageGroupOrderId, orderRole, status, universalSymbol, optionSymbol, quoteUniversalSymbol, quoteCurrency, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, trailingStop, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -917,6 +1069,8 @@ public class AccountOrderRecordNullable {
     StringBuilder sb = new StringBuilder();
     sb.append("class AccountOrderRecordNullable {\n");
     sb.append("    brokerageOrderId: ").append(toIndentedString(brokerageOrderId)).append("\n");
+    sb.append("    brokerageGroupOrderId: ").append(toIndentedString(brokerageGroupOrderId)).append("\n");
+    sb.append("    orderRole: ").append(toIndentedString(orderRole)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    universalSymbol: ").append(toIndentedString(universalSymbol)).append("\n");
     sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
@@ -930,6 +1084,7 @@ public class AccountOrderRecordNullable {
     sb.append("    executionPrice: ").append(toIndentedString(executionPrice)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");
     sb.append("    stopPrice: ").append(toIndentedString(stopPrice)).append("\n");
+    sb.append("    trailingStop: ").append(toIndentedString(trailingStop)).append("\n");
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    timePlaced: ").append(toIndentedString(timePlaced)).append("\n");
@@ -962,6 +1117,8 @@ public class AccountOrderRecordNullable {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("brokerage_order_id");
+    openapiFields.add("brokerage_group_order_id");
+    openapiFields.add("order_role");
     openapiFields.add("status");
     openapiFields.add("universal_symbol");
     openapiFields.add("option_symbol");
@@ -975,6 +1132,7 @@ public class AccountOrderRecordNullable {
     openapiFields.add("execution_price");
     openapiFields.add("limit_price");
     openapiFields.add("stop_price");
+    openapiFields.add("trailing_stop");
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
     openapiFields.add("time_placed");
@@ -1002,6 +1160,12 @@ public class AccountOrderRecordNullable {
       }
       if ((jsonObj.get("brokerage_order_id") != null && !jsonObj.get("brokerage_order_id").isJsonNull()) && !jsonObj.get("brokerage_order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_order_id").toString()));
+      }
+      if (!jsonObj.get("brokerage_group_order_id").isJsonNull() && (jsonObj.get("brokerage_group_order_id") != null && !jsonObj.get("brokerage_group_order_id").isJsonNull()) && !jsonObj.get("brokerage_group_order_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `brokerage_group_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_group_order_id").toString()));
+      }
+      if (!jsonObj.get("order_role").isJsonNull() && (jsonObj.get("order_role") != null && !jsonObj.get("order_role").isJsonNull()) && !jsonObj.get("order_role").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `order_role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_role").toString()));
       }
       // validate the optional field `universal_symbol`
       if (jsonObj.get("universal_symbol") != null && !jsonObj.get("universal_symbol").isJsonNull()) {
@@ -1033,6 +1197,10 @@ public class AccountOrderRecordNullable {
       }
       if (!jsonObj.get("filled_quantity").isJsonNull() && (jsonObj.get("filled_quantity") != null && !jsonObj.get("filled_quantity").isJsonNull()) && !jsonObj.get("filled_quantity").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `filled_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("filled_quantity").toString()));
+      }
+      // validate the optional field `trailing_stop`
+      if (jsonObj.get("trailing_stop") != null && !jsonObj.get("trailing_stop").isJsonNull()) {
+        TrailingStopNullable.validateJsonObject(jsonObj.getAsJsonObject("trailing_stop"));
       }
       if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));

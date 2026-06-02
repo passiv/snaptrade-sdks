@@ -26,6 +26,22 @@ describe SnapTrade::AccountOrderRecordV2 do
     end
   end
 
+  describe 'test attribute "brokerage_group_order_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "order_role"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["TRIGGER", "CONDITIONAL", "PEER"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.order_role = value }.not_to raise_error
+      # end
+    end
+  end
+
   describe 'test attribute "status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -75,6 +91,12 @@ describe SnapTrade::AccountOrderRecordV2 do
   end
 
   describe 'test attribute "stop_price"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "trailing_stop"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

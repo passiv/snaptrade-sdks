@@ -78,6 +78,7 @@ class DaysSchema(
 
     class MetaOapg:
         format = 'int32'
+        inclusive_maximum = 90
         inclusive_minimum = 1
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',

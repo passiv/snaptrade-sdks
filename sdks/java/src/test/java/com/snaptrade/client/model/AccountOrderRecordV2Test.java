@@ -19,6 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderRecordLeg;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
+import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -50,6 +51,22 @@ public class AccountOrderRecordV2Test {
     @Test
     public void brokerageOrderIdTest() {
         // TODO: test brokerageOrderId
+    }
+
+    /**
+     * Test the property 'brokerageGroupOrderId'
+     */
+    @Test
+    public void brokerageGroupOrderIdTest() {
+        // TODO: test brokerageGroupOrderId
+    }
+
+    /**
+     * Test the property 'orderRole'
+     */
+    @Test
+    public void orderRoleTest() {
+        // TODO: test orderRole
     }
 
     /**
@@ -122,6 +139,14 @@ public class AccountOrderRecordV2Test {
     @Test
     public void stopPriceTest() {
         // TODO: test stopPrice
+    }
+
+    /**
+     * Test the property 'trailingStop'
+     */
+    @Test
+    public void trailingStopTest() {
+        // TODO: test trailingStop
     }
 
     /**

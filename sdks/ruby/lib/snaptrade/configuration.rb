@@ -160,7 +160,7 @@ module SnapTrade
       @ssl_client_cert = nil
       @ssl_client_key = nil
       @middlewares = Hash.new { |h, k| h[k] = [] }
-      @timeout = 60
+      @timeout = 120
       # return data as binary instead of file
       @return_binary_data = false
       @params_encoder = nil

@@ -254,11 +254,55 @@ class Account(
                         *args,
                         _configuration=_configuration,
                     )
+            
+            
+            class account_category(
+                schemas.EnumBase,
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    enum_value_to_name = {
+                        "INVESTMENT": "INVESTMENT",
+                        "DEPOSIT": "DEPOSIT",
+                        "LOC": "LOC",
+                    }
+                
+                @schemas.classproperty
+                def INVESTMENT(cls):
+                    return cls("INVESTMENT")
+                
+                @schemas.classproperty
+                def DEPOSIT(cls):
+                    return cls("DEPOSIT")
+                
+                @schemas.classproperty
+                def LOC(cls):
+                    return cls("LOC")
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'account_category':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
         
             @staticmethod
             def meta() -> typing.Type['AccountMeta']:
                 return AccountMeta
-            portfolio_group = schemas.UUIDSchema
+        
+            @staticmethod
+            def portfolio_group() -> typing.Type['PortfolioGroupID']:
+                return PortfolioGroupID
         
             @staticmethod
             def cash_restrictions() -> typing.Type['AccountCashRestrictions']:
@@ -278,6 +322,7 @@ class Account(
                 "opening_date": opening_date,
                 "status": status,
                 "raw_type": raw_type,
+                "account_category": account_category,
                 "meta": meta,
                 "portfolio_group": portfolio_group,
                 "cash_restrictions": cash_restrictions,
@@ -337,10 +382,13 @@ class Account(
     def __getitem__(self, name: typing_extensions.Literal["raw_type"]) -> MetaOapg.properties.raw_type: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["account_category"]) -> MetaOapg.properties.account_category: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'AccountMeta': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["portfolio_group"]) -> MetaOapg.properties.portfolio_group: ...
+    def __getitem__(self, name: typing_extensions.Literal["portfolio_group"]) -> 'PortfolioGroupID': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> 'AccountCashRestrictions': ...
@@ -348,7 +396,7 @@ class Account(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["is_paper"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["funding_date"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["status"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["is_paper"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["funding_date"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["status"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["account_category"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -395,10 +443,13 @@ class Account(
     def get_item_oapg(self, name: typing_extensions.Literal["raw_type"]) -> typing.Union[MetaOapg.properties.raw_type, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["account_category"]) -> typing.Union[MetaOapg.properties.account_category, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['AccountMeta', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["portfolio_group"]) -> typing.Union[MetaOapg.properties.portfolio_group, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["portfolio_group"]) -> typing.Union['PortfolioGroupID', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union['AccountCashRestrictions', schemas.Unset]: ...
@@ -406,7 +457,7 @@ class Account(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["is_paper"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["funding_date"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["status"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["is_paper"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["funding_date"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["status"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["account_category"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -426,8 +477,9 @@ class Account(
         opening_date: typing.Union[MetaOapg.properties.opening_date, None, str, datetime, schemas.Unset] = schemas.unset,
         status: typing.Union[MetaOapg.properties.status, None, str, schemas.Unset] = schemas.unset,
         raw_type: typing.Union[MetaOapg.properties.raw_type, None, str, schemas.Unset] = schemas.unset,
+        account_category: typing.Union[MetaOapg.properties.account_category, None, str, schemas.Unset] = schemas.unset,
         meta: typing.Union['AccountMeta', schemas.Unset] = schemas.unset,
-        portfolio_group: typing.Union[MetaOapg.properties.portfolio_group, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        portfolio_group: typing.Union['PortfolioGroupID', schemas.Unset] = schemas.unset,
         cash_restrictions: typing.Union['AccountCashRestrictions', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -449,6 +501,7 @@ class Account(
             opening_date=opening_date,
             status=status,
             raw_type=raw_type,
+            account_category=account_category,
             meta=meta,
             portfolio_group=portfolio_group,
             cash_restrictions=cash_restrictions,
@@ -460,3 +513,4 @@ from snaptrade_client.model.account_balance import AccountBalance
 from snaptrade_client.model.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.model.account_meta import AccountMeta
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
+from snaptrade_client.model.portfolio_group_id import PortfolioGroupID

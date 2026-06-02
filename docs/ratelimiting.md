@@ -9,6 +9,12 @@ There are two layers of rate limiting that may apply to your requests:
 
 A request must pass both layers. Even if you have remaining capacity at the customer level, you can still be throttled at the account level, and vice versa.
 
+When you exceed a rate limit, the API returns an HTTP status code `429` with a response body indicating how long to wait before retrying:
+
+```json
+{"detail":"Request was throttled. Expected available in 7 seconds.","status_code":429,"code":"0000"}
+```
+
 ## Customer-Level Rate Limiting
 
 Every SnapTrade client is rate limited to **250 requests per minute** by default. This limit applies globally across all API endpoints and all accounts. If you need a higher limit:

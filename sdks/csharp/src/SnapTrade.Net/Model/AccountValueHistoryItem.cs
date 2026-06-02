@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The estimeated account value at a specific point in time.
+    /// The estimated account value at a specific point in time.
     /// </summary>
     [DataContract(Name = "AccountValueHistoryItem")]
     public partial class AccountValueHistoryItem : IEquatable<AccountValueHistoryItem>, IValidatableObject

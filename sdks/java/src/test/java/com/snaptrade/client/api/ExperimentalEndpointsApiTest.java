@@ -18,7 +18,9 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
-import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
+import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
+import com.snaptrade.client.model.TradeDetectionSubscription;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -45,18 +47,33 @@ public class ExperimentalEndpointsApiTest {
     }
 
     /**
-     * List historical account total value
+     * Add a Trade Detection subscription
      *
-     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+     * Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void getAccountBalanceHistoryTest() throws ApiException {
+    public void addSubscriptionTest() throws ApiException {
+        UUID accountId = null;
         String userId = null;
         String userSecret = null;
+        TradeDetectionSubscription response = api.addSubscription(accountId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Cancel a Trade Detection subscription
+     *
+     * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void cancelSubscriptionTest() throws ApiException {
         UUID accountId = null;
-        AccountValueHistoryResponse response = api.getAccountBalanceHistory(userId, userSecret, accountId)
+        TradeDetectionCancelSubscriptionResponse response = api.cancelSubscription(accountId)
                 .execute();
         // TODO: test validations
     }
@@ -115,6 +132,20 @@ public class ExperimentalEndpointsApiTest {
         Boolean onlyExecuted = null;
         AccountOrdersV2Response response = api.getUserAccountRecentOrdersV2(userId, userSecret, accountId)
                 .onlyExecuted(onlyExecuted)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List active Trade Detection subscriptions
+     *
+     * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listSubscriptionsTest() throws ApiException {
+        List<TradeDetectionSubscription> response = api.listSubscriptions()
                 .execute();
         // TODO: test validations
     }
