@@ -13,8 +13,8 @@ A request must pass both layers. Even if you have remaining capacity at the cust
 
 Every SnapTrade client is rate limited to **250 requests per minute** by default. This limit applies globally across all API endpoints and all accounts. If you need a higher limit:
 
-- **Free plan users** can upgrade to Pay-as-you-go at [snaptrade.com/pricing](https://snaptrade.com/pricing).
-- **Pay-as-you-go users** can contact [SnapTrade support](https://snaptrade.com/contact) to request a limit increase.
+- **Free plan users** can upgrade to Pay-as-you-Go through the Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
+- **Pay-as-you-go users** can contact [SnapTrade support](mailto:support@snaptrade.com) to request a limit increase.
 - **Custom plan customers** can contact their Customer Success Manager.
 
 ### Response Headers
@@ -42,15 +42,15 @@ Account-level rate limiting is scoped to the combination of your `clientId` and 
 
 Account-level rate limiting applies to the following endpoints:
 
-- [Account Holdings](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserHoldings)
-- [Account Detail](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountDetails)
-- [Account Balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance)
-- [Account Positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions)
-- [Option Positions](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings)
-- [Account Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders)
-- [Recent Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders)
-- [Account Activities](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities)
-- [Account Order Detail](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrderDetail)
+- :api[AccountInformation_getUserHoldings]
+- :api[AccountInformation_getUserAccountDetails]
+- :api[AccountInformation_getUserAccountBalance]
+- :api[AccountInformation_getUserAccountPositions]
+- :api[Options_listOptionHoldings]
+- :api[AccountInformation_getUserAccountOrders]
+- :api[AccountInformation_getUserAccountRecentOrders]
+- :api[AccountInformation_getAccountActivities]
+- :api[AccountInformation_getUserAccountOrderDetail]
 
 > **Note:** While the per-account rate limit allows up to 5 requests per minute, these endpoints should not be polled at this frequency. See [API Polling Patterns](https://docs.snaptrade.com/docs/launching-your-application#3-api-polling-patterns) for recommended usage patterns.
 
@@ -89,7 +89,7 @@ When you receive a `429`, check both sets of response headers to determine which
 
 You should add logic to your integration to watch for `429` responses from the API and handle them with a retry mechanism.
 
-- **Check the `Reset` header**: Use `X-RateLimit-Account-Reset` or wait for `X-RateLimit-Remaining` to replenish before retrying. This tells you exactly how long to wait.
+- **Check the `Reset` header**: Use `X-RateLimit-Reset` (customer-level) or `X-RateLimit-Account-Reset` (account-level), depending on which limit you hit, to determine exactly how long to wait before retrying.
 - **Use exponential backoff**: If headers are unavailable or you prefer a general approach, retry with exponential backoff.
 - **Add jitter**: Introduce randomness into your retry timing to prevent [thundering herd problems](https://en.wikipedia.org/wiki/Thundering_herd_problem).
 - **Spread requests across accounts**: If you need to sync multiple accounts, round-robin across them rather than exhausting one account's limit before moving to the next.
