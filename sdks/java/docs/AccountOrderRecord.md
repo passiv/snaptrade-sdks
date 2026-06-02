@@ -9,6 +9,8 @@ Describes a single recent order in an account. Each record here represents a sin
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**brokerageOrderId** | **String** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. |  [optional] |
+|**brokerageGroupOrderId** | **String** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  |  [optional] |
+|**orderRole** | [**OrderRoleEnum**](#OrderRoleEnum) | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  |  [optional] |
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
 |**universalSymbol** | [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  |  [optional] |
 |**optionSymbol** | [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  |  [optional] |
@@ -31,6 +33,16 @@ Describes a single recent order in an account. Each record here represents a sin
 |**expiryDate** | **OffsetDateTime** | The time the order expires. This value is not always available from the brokerage. |  [optional] |
 |**symbol** | **UUID** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. |  [optional] |
 |**childBrokerageOrderIds** | [**ChildBrokerageOrderIDsNullable**](ChildBrokerageOrderIDsNullable.md) |  |  [optional] |
+
+
+
+## Enum: OrderRoleEnum
+
+| Name | Value |
+|---- | -----|
+| TRIGGER | &quot;TRIGGER&quot; |
+| CONDITIONAL | &quot;CONDITIONAL&quot; |
+| PEER | &quot;PEER&quot; |
 
 
 

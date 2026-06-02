@@ -20,7 +20,7 @@ class RequiredOptionLeg(TypedDict):
     pass
 
 class OptionalOptionLeg(TypedDict, total=False):
-    action: str
+    action: Literal["BUY_TO_OPEN", "BUY_TO_CLOSE", "SELL_TO_OPEN", "SELL_TO_CLOSE"]
 
     # Obtained from calling options chain endpoint (option_id)
     option_symbol_id: str

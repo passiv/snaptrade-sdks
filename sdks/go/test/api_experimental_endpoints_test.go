@@ -26,12 +26,36 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     client := snaptrade.NewAPIClient(configuration)
     */
 
-    t.Run("Test ExperimentalEndpointsApiService GetAccountBalanceHistory", func(t *testing.T) {
+    t.Run("Test ExperimentalEndpointsApiService AddSubscription", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ExperimentalEndpointsApi.GetAccountBalanceHistory(
+        
+        tradeDetectionAddSubscriptionRequest := *snaptrade.NewTradeDetectionAddSubscriptionRequest(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        )
+        
+        request := client.ExperimentalEndpointsApi.AddSubscription(
             "userId_example",
             "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            tradeDetectionAddSubscriptionRequest,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test ExperimentalEndpointsApiService CancelSubscription", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        
+        tradeDetectionAddSubscriptionRequest := *snaptrade.NewTradeDetectionAddSubscriptionRequest(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        )
+        
+        request := client.ExperimentalEndpointsApi.CancelSubscription(
+            tradeDetectionAddSubscriptionRequest,
         )
         
         resp, httpRes, err := request.Execute()
@@ -85,6 +109,19 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.OnlyExecuted(true)
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test ExperimentalEndpointsApiService ListSubscriptions", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.ExperimentalEndpointsApi.ListSubscriptions(
+        )
         
         resp, httpRes, err := request.Execute()
 

@@ -52,22 +52,28 @@ namespace SnapTrade.Net.Model
             _1Y = 2,
 
             /// <summary>
-            /// Enum _6M for value: 6M
+            /// Enum YTD for value: YTD
             /// </summary>
-            [EnumMember(Value = "6M")]
-            _6M = 3,
-
-            /// <summary>
-            /// Enum _3M for value: 3M
-            /// </summary>
-            [EnumMember(Value = "3M")]
-            _3M = 4,
+            [EnumMember(Value = "YTD")]
+            YTD = 3,
 
             /// <summary>
             /// Enum _1M for value: 1M
             /// </summary>
             [EnumMember(Value = "1M")]
-            _1M = 5
+            _1M = 4,
+
+            /// <summary>
+            /// Enum _1W for value: 1W
+            /// </summary>
+            [EnumMember(Value = "1W")]
+            _1W = 5,
+
+            /// <summary>
+            /// Enum _1D for value: 1D
+            /// </summary>
+            [EnumMember(Value = "1D")]
+            _1D = 6
 
         }
 

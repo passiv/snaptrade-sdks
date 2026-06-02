@@ -118,10 +118,10 @@ describe 'TradingApi' do
 
   # unit tests for get_user_account_quotes
   # Get equity symbol quotes
-  # Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+  # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
   # @param user_id 
   # @param user_secret 
-  # @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
+  # @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.
@@ -134,7 +134,7 @@ describe 'TradingApi' do
 
   # unit tests for place_bracket_order
   # Place bracket order
-  # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+  # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
   # @param account_id The ID of the account to execute the trade on.
   # @param user_id 
   # @param user_secret 
@@ -142,6 +142,21 @@ describe 'TradingApi' do
   # @param [Hash] opts the optional parameters
   # @return [AccountOrderRecord]
   describe 'place_bracket_order test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for place_complex_order
+  # Place complex order
+  # Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+  # @param account_id The ID of the account to execute the trade on.
+  # @param user_id 
+  # @param user_secret 
+  # @param manual_trade_form_complex 
+  # @param [Hash] opts the optional parameters
+  # @return [ComplexOrderResponse]
+  describe 'place_complex_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

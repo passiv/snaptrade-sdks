@@ -332,6 +332,121 @@ module SnapTrade
     end
 
 
+    # List accounts for a connection
+    #
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
+    # 
+    # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
+    # 
+    # On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_brokerage_authorization_accounts(authorization_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = list_brokerage_authorization_accounts_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+      data
+    end
+
+    # List accounts for a connection
+    #
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
+    # 
+    # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
+    # 
+    # On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_brokerage_authorization_accounts_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
+      list_brokerage_authorization_accounts_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+    end
+
+    # List accounts for a connection
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<Account>]
+    private def list_brokerage_authorization_accounts_impl(authorization_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = list_brokerage_authorization_accounts_with_http_info(authorization_id, user_id, user_secret, opts)
+      data
+    end
+
+    # List accounts for a connection
+    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<Account>, Integer, Hash)>] Array<Account> data, response status code and response headers
+    private def list_brokerage_authorization_accounts_with_http_info_impl(authorization_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectionsApi.list_brokerage_authorization_accounts ...'
+      end
+      # verify the required parameter 'authorization_id' is set
+      if @api_client.config.client_side_validation && authorization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_id' when calling ConnectionsApi.list_brokerage_authorization_accounts"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ConnectionsApi.list_brokerage_authorization_accounts"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ConnectionsApi.list_brokerage_authorization_accounts"
+      end
+      # resource path
+      local_var_path = '/authorizations/{authorizationId}/accounts'.sub('{' + 'authorizationId' + '}', CGI.escape(authorization_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<Account>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ConnectionsApi.list_brokerage_authorization_accounts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectionsApi#list_brokerage_authorization_accounts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List all connections
     #
     # Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
@@ -441,6 +556,7 @@ module SnapTrade
     # This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
     # 
     # **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+    # **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
     #
     # @param authorization_id [String] 
     # @param user_id [String] 
@@ -457,6 +573,7 @@ module SnapTrade
     # This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
     # 
     # **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+    # **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
     #
     # @param authorization_id [String] 
     # @param user_id [String] 
@@ -467,7 +584,7 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -479,7 +596,7 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -647,35 +764,40 @@ module SnapTrade
 
     # List connection rate of returns
     #
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+    # Returns a list of rate of return percents for a given connection.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
+    # @param timeframes [String] Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def return_rates(user_id:, user_secret:, authorization_id:, extra: {})
+    def return_rates(user_id:, user_secret:, authorization_id:, timeframes: SENTINEL, extra: {})
+      extra[:timeframes] = timeframes if timeframes != SENTINEL
       data, _status_code, _headers = return_rates_with_http_info_impl(user_id, user_secret, authorization_id, extra)
       data
     end
 
     # List connection rate of returns
     #
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+    # Returns a list of rate of return percents for a given connection.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
+    # @param timeframes [String] Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def return_rates_with_http_info(user_id:, user_secret:, authorization_id:, extra: {})
+    def return_rates_with_http_info(user_id:, user_secret:, authorization_id:, timeframes: SENTINEL, extra: {})
+      extra[:timeframes] = timeframes if timeframes != SENTINEL
       return_rates_with_http_info_impl(user_id, user_secret, authorization_id, extra)
     end
 
     # List connection rate of returns
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+    # Returns a list of rate of return percents for a given connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @return [RateOfReturnResponse]
     private def return_rates_impl(user_id, user_secret, authorization_id, opts = {})
       data, _status_code, _headers = return_rates_with_http_info(user_id, user_secret, authorization_id, opts)
@@ -683,11 +805,12 @@ module SnapTrade
     end
 
     # List connection rate of returns
-    # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+    # Returns a list of rate of return percents for a given connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     # @return [Array<(RateOfReturnResponse, Integer, Hash)>] RateOfReturnResponse data, response status code and response headers
     private def return_rates_with_http_info_impl(user_id, user_secret, authorization_id, opts = {})
       if @api_client.config.debugging
@@ -712,6 +835,7 @@ module SnapTrade
       query_params = opts[:query_params] || {}
       query_params[:'userId'] = user_id
       query_params[:'userSecret'] = user_secret
+      query_params[:'timeframes'] = opts[:'timeframes'] if !opts[:'timeframes'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -843,6 +967,109 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: ConnectionsApi#session_events\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
+    # Sync transactions for a connection
+    #
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def sync_brokerage_authorization_transactions(authorization_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = sync_brokerage_authorization_transactions_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+      data
+    end
+
+    # Sync transactions for a connection
+    #
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def sync_brokerage_authorization_transactions_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
+      sync_brokerage_authorization_transactions_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+    end
+
+    # Sync transactions for a connection
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [BrokerageAuthorizationTransactionsSyncConfirmation]
+    private def sync_brokerage_authorization_transactions_impl(authorization_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = sync_brokerage_authorization_transactions_with_http_info(authorization_id, user_id, user_secret, opts)
+      data
+    end
+
+    # Sync transactions for a connection
+    # Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BrokerageAuthorizationTransactionsSyncConfirmation, Integer, Hash)>] BrokerageAuthorizationTransactionsSyncConfirmation data, response status code and response headers
+    private def sync_brokerage_authorization_transactions_with_http_info_impl(authorization_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectionsApi.sync_brokerage_authorization_transactions ...'
+      end
+      # verify the required parameter 'authorization_id' is set
+      if @api_client.config.client_side_validation && authorization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_id' when calling ConnectionsApi.sync_brokerage_authorization_transactions"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ConnectionsApi.sync_brokerage_authorization_transactions"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ConnectionsApi.sync_brokerage_authorization_transactions"
+      end
+      # resource path
+      local_var_path = '/authorizations/{authorizationId}/transactions/sync'.sub('{' + 'authorizationId' + '}', CGI.escape(authorization_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BrokerageAuthorizationTransactionsSyncConfirmation'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ConnectionsApi.sync_brokerage_authorization_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectionsApi#sync_brokerage_authorization_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

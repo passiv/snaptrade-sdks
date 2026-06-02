@@ -4,6 +4,8 @@
 
 Welcome to SnapTrade! This is intended to be one of the first documents you read when learning how to use the SnapTrade API and will answer many questions you might have while getting started. This document when read from top-to-bottom is also a guide for making your first connection, and will get you set up to start pulling account data and placing trades.
 
+If you want a quick definitions reference while reading, see [Terminology](https://docs.snaptrade.com/docs/terminology).
+
 Please see the FAQ of each section, as any questions you might have should be answered there.
 
 If after reading this document you still have questions or need help, please do not hesitate to contact us through our [Discord](https://discord.gg/rkYWBxb8Qu).
@@ -46,7 +48,7 @@ When you have an `API Key` and want to start using the SnapTrade API, you will n
 
 In the box below the ‘request’ you should receive a response from the SnapTrade API. The :api[ApiStatus_check] endpoint is the most basic request you can make to the SnapTrade API.
 
-You can also make this request with any of the SnapTrade SDKs. While we don’t officially support custom setups without an SDK, you can copy the signature generation logic from any of our SDKs if you want to go that route.
+You can also make this request with any of the SnapTrade SDKs. While we recommend using an SDK, custom direct API integrations can generate signatures by following [Request Signatures](https://docs.snaptrade.com/docs/request-signatures).
 
 ### SnapTrade SDKs
 
@@ -92,7 +94,7 @@ You can list your created users by using the :api[Authentication_listSnapTradeUs
 Each `user` under your SnapTrade API key will be used to create and manage `connections` associated with that user. Each connection is associated one-to-one with a set of credentials to an institution.
 
 :::info
-The terms `Connections` and `Brokerage Authorizations` are interchangeable. In most documents, the term `connection` is used.
+Throughout these docs, the term `connection` is used to refer to a linked brokerage account.
 :::
 
 ### How to: Create a new connection for a user
@@ -120,7 +122,7 @@ Once you have a connected `account`, you are ready to move on to pulling account
 
 When you have at least one connected `account` and want to start making use of the `positions`, you will first need to get the `accountId`.
 
-1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, use the :api[AccountInformation_listUserAccounts] endpoint to get the `accountId` of the account you wish to pull `positions` for.
+1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, call :api[Connections_listBrokerageAuthorizations] to list the user's connections, then call :api[Connections_listBrokerageAuthorizationAccounts] for the relevant connection to get the `accountId` of the account you wish to pull `positions` for.
 2. With the `accountId`, call :api[AccountInformation_getUserAccountPositions]. This will return a list of positions in the specified account.
 
 Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in. Other core endpoints for retrieving account information include :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
@@ -145,3 +147,4 @@ The order will now show over the :api[AccountInformation_getUserAccountOrders] e
 
 - To get started with Webhooks, see [Webhooks](https://docs.snaptrade.com/docs/webhooks)
 - To get started with implementing the SnapTrade Connection Portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal)
+- To let your users access their data through AI assistants like Claude and ChatGPT, see [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)

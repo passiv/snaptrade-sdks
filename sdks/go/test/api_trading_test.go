@@ -214,6 +214,30 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test TradingApiService PlaceComplexOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        
+        manualTradeFormComplex := *snaptrade.NewManualTradeFormComplex(
+            "OTO",
+            null,
+        )
+        manualTradeFormComplex.SetClientOrderId("my-order-123")
+        
+        request := client.TradingApi.PlaceComplexOrder(
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "userId_example",
+            "userSecret_example",
+            manualTradeFormComplex,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test TradingApiService PlaceCryptoOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         instrument := *snaptrade.NewCryptoTradingInstrument()

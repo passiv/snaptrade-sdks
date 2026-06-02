@@ -42,12 +42,14 @@ type Account struct {
 	Status NullableString `json:"status,omitempty"`
 	// The account type as provided by the brokerage
 	RawType NullableString `json:"raw_type,omitempty"`
+	// The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
+	AccountCategory NullableString `json:"account_category,omitempty"`
 	// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
 	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
 	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
 	// Deprecated
-	PortfolioGroup *string `json:"portfolio_group,omitempty"`
+	PortfolioGroup NullableString `json:"portfolio_group,omitempty"`
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
@@ -488,6 +490,48 @@ func (o *Account) UnsetRawType() {
 	o.RawType.Unset()
 }
 
+// GetAccountCategory returns the AccountCategory field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetAccountCategory() string {
+	if o == nil || isNil(o.AccountCategory.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.AccountCategory.Get()
+}
+
+// GetAccountCategoryOk returns a tuple with the AccountCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetAccountCategoryOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.AccountCategory.Get(), o.AccountCategory.IsSet()
+}
+
+// HasAccountCategory returns a boolean if a field has been set.
+func (o *Account) HasAccountCategory() bool {
+	if o != nil && o.AccountCategory.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountCategory gets a reference to the given NullableString and assigns it to the AccountCategory field.
+func (o *Account) SetAccountCategory(v string) {
+	o.AccountCategory.Set(&v)
+}
+// SetAccountCategoryNil sets the value for AccountCategory to be an explicit nil
+func (o *Account) SetAccountCategoryNil() {
+	o.AccountCategory.Set(nil)
+}
+
+// UnsetAccountCategory ensures that no value is present for AccountCategory, not even an explicit nil
+func (o *Account) UnsetAccountCategory() {
+	o.AccountCategory.Unset()
+}
+
 // GetMeta returns the Meta field value if set, zero value otherwise.
 // Deprecated
 func (o *Account) GetMeta() map[string]interface{} {
@@ -523,39 +567,49 @@ func (o *Account) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }
 
-// GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise.
+// GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise (both if not set or set to explicit null).
 // Deprecated
 func (o *Account) GetPortfolioGroup() string {
-	if o == nil || isNil(o.PortfolioGroup) {
+	if o == nil || isNil(o.PortfolioGroup.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PortfolioGroup
+	return *o.PortfolioGroup.Get()
 }
 
 // GetPortfolioGroupOk returns a tuple with the PortfolioGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 // Deprecated
 func (o *Account) GetPortfolioGroupOk() (*string, bool) {
-	if o == nil || isNil(o.PortfolioGroup) {
+	if o == nil {
     return nil, false
 	}
-	return o.PortfolioGroup, true
+	return o.PortfolioGroup.Get(), o.PortfolioGroup.IsSet()
 }
 
 // HasPortfolioGroup returns a boolean if a field has been set.
 func (o *Account) HasPortfolioGroup() bool {
-	if o != nil && !isNil(o.PortfolioGroup) {
+	if o != nil && o.PortfolioGroup.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPortfolioGroup gets a reference to the given string and assigns it to the PortfolioGroup field.
+// SetPortfolioGroup gets a reference to the given NullableString and assigns it to the PortfolioGroup field.
 // Deprecated
 func (o *Account) SetPortfolioGroup(v string) {
-	o.PortfolioGroup = &v
+	o.PortfolioGroup.Set(&v)
+}
+// SetPortfolioGroupNil sets the value for PortfolioGroup to be an explicit nil
+func (o *Account) SetPortfolioGroupNil() {
+	o.PortfolioGroup.Set(nil)
+}
+
+// UnsetPortfolioGroup ensures that no value is present for PortfolioGroup, not even an explicit nil
+func (o *Account) UnsetPortfolioGroup() {
+	o.PortfolioGroup.Unset()
 }
 
 // GetCashRestrictions returns the CashRestrictions field value if set, zero value otherwise.
@@ -658,11 +712,14 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
+	if o.AccountCategory.IsSet() {
+		toSerialize["account_category"] = o.AccountCategory.Get()
+	}
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if !isNil(o.PortfolioGroup) {
-		toSerialize["portfolio_group"] = o.PortfolioGroup
+	if o.PortfolioGroup.IsSet() {
+		toSerialize["portfolio_group"] = o.PortfolioGroup.Get()
 	}
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions
@@ -701,6 +758,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "balance")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "raw_type")
+		delete(additionalProperties, "account_category")
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "cash_restrictions")

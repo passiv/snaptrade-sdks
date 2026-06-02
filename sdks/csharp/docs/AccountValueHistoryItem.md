@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.AccountValueHistoryItem
-The estimeated account value at a specific point in time.
+The estimated account value at a specific point in time.
 
 ## Properties
 

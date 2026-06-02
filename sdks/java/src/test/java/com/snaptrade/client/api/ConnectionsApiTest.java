@@ -16,9 +16,11 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
+import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
@@ -99,6 +101,23 @@ public class ConnectionsApiTest {
     }
 
     /**
+     * List accounts for a connection
+     *
+     * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listBrokerageAuthorizationAccountsTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        List<Account> response = api.listBrokerageAuthorizationAccounts(authorizationId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * List all connections
      *
      * Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
@@ -117,7 +136,7 @@ public class ConnectionsApiTest {
     /**
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
      *
      * @throws ApiException if the Api call fails
      */
@@ -151,7 +170,7 @@ public class ConnectionsApiTest {
     /**
      * List connection rate of returns
      *
-     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * Returns a list of rate of return percents for a given connection. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -160,7 +179,9 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         UUID authorizationId = null;
+        String timeframes = null;
         RateOfReturnResponse response = api.returnRates(userId, userSecret, authorizationId)
+                .timeframes(timeframes)
                 .execute();
         // TODO: test validations
     }
@@ -180,6 +201,23 @@ public class ConnectionsApiTest {
         List<SessionEvent> response = api.sessionEvents(partnerClientId)
                 .userId(userId)
                 .sessionId(sessionId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Sync transactions for a connection
+     *
+     * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void syncBrokerageAuthorizationTransactionsTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        BrokerageAuthorizationTransactionsSyncConfirmation response = api.syncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

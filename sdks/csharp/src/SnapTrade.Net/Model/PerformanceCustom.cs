@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="contributionTimeframe">contributionTimeframe.</param>
         /// <param name="contributionTimeframeCumulative">contributionTimeframeCumulative.</param>
         /// <param name="withdrawalTimeframe">withdrawalTimeframe.</param>
-        /// <param name="contributionStreak">Current streak of cosecutive months where contributions were made.</param>
+        /// <param name="contributionStreak">Current streak of consecutive months where contributions were made.</param>
         /// <param name="contributionMonthsContributed">Number of months in the timeframe with contributions.</param>
         /// <param name="contributionTotalMonths">Total months in timeframe.</param>
         /// <param name="dividends">dividends.</param>
@@ -109,9 +109,9 @@ namespace SnapTrade.Net.Model
         public List<PastValue> WithdrawalTimeframe { get; set; }
 
         /// <summary>
-        /// Current streak of cosecutive months where contributions were made
+        /// Current streak of consecutive months where contributions were made
         /// </summary>
-        /// <value>Current streak of cosecutive months where contributions were made</value>
+        /// <value>Current streak of consecutive months where contributions were made</value>
         [DataMember(Name = "contributionStreak", EmitDefaultValue = true)]
         public double? ContributionStreak { get; set; }
 

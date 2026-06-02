@@ -42,7 +42,6 @@ portal:
   logo:
     light: portal-logo-light.svg
     dark: portal-logo-dark.svg
-  customSnippet: docs/script.html
   socials:
     website: https://snaptrade.com
   documentation:
@@ -56,6 +55,8 @@ portal:
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+            - id: filtering-accounts-by-category
+              path: docs/filtering-accounts-by-category.md
             - id: realtime-data
               path: docs/realtime-data.md
             - id: webhooks
@@ -68,10 +69,22 @@ portal:
           links:
             - id: billing
               path: docs/billing.md
+        - label: AI & MCP
+          links:
+            - id: mcp-server
+              path: docs/mcp-server.md
+            - id: connector-privacy
+              path: docs/connector-privacy.md
         - label: Core Concepts
           links:
+            - id: terminology
+              path: docs/terminology.md
+            - id: symbology
+              path: docs/symbology.md
             - id: requests
               path: docs/requests.md
+            - id: request-signatures
+              path: docs/request-signatures.md
             - id: integrations
               path: docs/integrations.md
             - id: connections
@@ -112,6 +125,12 @@ portal:
       post: true
     /accounts/{accountId}/quotes/options:
       get: true
+    /authorizations/{authorizationId}/transactions/sync:
+      post: true
+    /accounts/{accountId}/balanceHistory:
+      get: true
+    /authorizations/{authorizationId}/accounts:
+      get: true
   hideOperations:
     /activities:
       get: true
@@ -151,16 +170,14 @@ portal:
       get: true
     /authorizations/{authorizationId}/returnRates:
       get: true
-    /accounts/{accountId}/orders/v2:
-      get: true
-    /accounts/{accountId}/recentOrders/v2:
-      get: true
-    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
-      get: true
     /authorizations/{authorizationId}:
       delete: true
-    /accounts/{accountId}/balanceHistory:
+    /accounts/{accountId}/holdings:
       get: true
+    /accounts:
+      get: true
+  hideTags:
+    - Experimental endpoints
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
@@ -201,7 +218,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 2.0.178
+    version: 2.0.200
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -215,7 +232,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 1.0.150
+    version: 1.0.172
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -227,7 +244,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 2.0.178
+    version: 2.0.200
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -238,7 +255,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 2.0.177
+    version: 2.0.199
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -250,7 +267,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 5.0.180
+    version: 5.0.202
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -261,7 +278,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 5.0.180
+    version: 5.0.202
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -275,7 +292,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.177
+    version: 11.0.199
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -293,7 +310,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 9.0.181
+    version: 10.0.4
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

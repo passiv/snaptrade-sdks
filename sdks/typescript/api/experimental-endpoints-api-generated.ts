@@ -23,13 +23,21 @@ import { AccountOrderRecordV2 } from '../models';
 // @ts-ignore
 import { AccountOrdersV2Response } from '../models';
 // @ts-ignore
-import { AccountValueHistoryResponse } from '../models';
+import { Model400FailedRequestResponse } from '../models';
+// @ts-ignore
+import { Model401FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
+import { TradeDetectionAddSubscriptionRequest } from '../models';
+// @ts-ignore
+import { TradeDetectionCancelSubscriptionResponse } from '../models';
+// @ts-ignore
+import { TradeDetectionSubscription } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -40,23 +48,22 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-         * @summary List historical account total value
+         * Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires `userId` and `userSecret` in addition to the partner signature. 
+         * @summary Add a Trade Detection subscription
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId 
+         * @param {TradeDetectionAddSubscriptionRequest} tradeDetectionAddSubscriptionRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountBalanceHistory: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addSubscription: async (userId: string, userSecret: string, tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getAccountBalanceHistory', 'userId', userId)
+            assertParamExists('addSubscription', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getAccountBalanceHistory', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getAccountBalanceHistory', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/balanceHistory`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            assertParamExists('addSubscription', 'userSecret', userSecret)
+            // verify required parameter 'tradeDetectionAddSubscriptionRequest' is not null or undefined
+            assertParamExists('addSubscription', 'tradeDetectionAddSubscriptionRequest', tradeDetectionAddSubscriptionRequest)
+            const localVarPath = `/snapTrade/tradeDetection/subscriptions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -64,7 +71,7 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -84,16 +91,73 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
+                requestBody: tradeDetectionAddSubscriptionRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/accounts/{accountId}/balanceHistory',
-                httpMethod: 'GET'
+                pathTemplate: '/snapTrade/tradeDetection/subscriptions',
+                httpMethod: 'POST'
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradeDetectionAddSubscriptionRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
+         * @summary Cancel a Trade Detection subscription
+         * @param {TradeDetectionAddSubscriptionRequest} tradeDetectionAddSubscriptionRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelSubscription: async (tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tradeDetectionAddSubscriptionRequest' is not null or undefined
+            assertParamExists('cancelSubscription', 'tradeDetectionAddSubscriptionRequest', tradeDetectionAddSubscriptionRequest)
+            const localVarPath = `/snapTrade/tradeDetection/subscriptions/cancel`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: tradeDetectionAddSubscriptionRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/snapTrade/tradeDetection/subscriptions/cancel',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradeDetectionAddSubscriptionRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -173,8 +237,8 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {'all' | 'open' | 'executed'} [state] defaults value is set to \&quot;all\&quot;
-         * @param {number} [days] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+         * @param {'all' | 'open' | 'executed'} [state] defaults to \&quot;all\&quot;
+         * @param {number} [days] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -306,6 +370,50 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+         * @summary List active Trade Detection subscriptions
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSubscriptions: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/snapTrade/tradeDetection/subscriptions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/snapTrade/tradeDetection/subscriptions',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -317,14 +425,31 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
     const localVarAxiosParamCreator = ExperimentalEndpointsApiAxiosParamCreator(configuration)
     return {
         /**
-         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-         * @summary List historical account total value
-         * @param {ExperimentalEndpointsApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
+         * Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires `userId` and `userSecret` in addition to the partner signature. 
+         * @summary Add a Trade Detection subscription
+         * @param {ExperimentalEndpointsApiAddSubscriptionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccountBalanceHistory(requestParameters: ExperimentalEndpointsApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountValueHistoryResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountBalanceHistory(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
+        async addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionSubscription>> {
+            const tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest = {
+                account_id: requestParameters.account_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addSubscription(requestParameters.userId, requestParameters.userSecret, tradeDetectionAddSubscriptionRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
+         * @summary Cancel a Trade Detection subscription
+         * @param {ExperimentalEndpointsApiCancelSubscriptionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionCancelSubscriptionResponse>> {
+            const tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest = {
+                account_id: requestParameters.account_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelSubscription(tradeDetectionAddSubscriptionRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -360,6 +485,16 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrdersV2(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.onlyExecuted, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+         * @summary List active Trade Detection subscriptions
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSubscriptions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TradeDetectionSubscription>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSubscriptions(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -371,14 +506,24 @@ export const ExperimentalEndpointsApiFactory = function (configuration?: Configu
     const localVarFp = ExperimentalEndpointsApiFp(configuration)
     return {
         /**
-         * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-         * @summary List historical account total value
-         * @param {ExperimentalEndpointsApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
+         * Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires `userId` and `userSecret` in addition to the partner signature. 
+         * @summary Add a Trade Detection subscription
+         * @param {ExperimentalEndpointsApiAddSubscriptionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountBalanceHistory(requestParameters: ExperimentalEndpointsApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig): AxiosPromise<AccountValueHistoryResponse> {
-            return localVarFp.getAccountBalanceHistory(requestParameters, options).then((request) => request(axios, basePath));
+        addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<TradeDetectionSubscription> {
+            return localVarFp.addSubscription(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
+         * @summary Cancel a Trade Detection subscription
+         * @param {ExperimentalEndpointsApiCancelSubscriptionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<TradeDetectionCancelSubscriptionResponse> {
+            return localVarFp.cancelSubscription(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
@@ -410,38 +555,49 @@ export const ExperimentalEndpointsApiFactory = function (configuration?: Configu
         getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request, options?: AxiosRequestConfig): AxiosPromise<AccountOrdersV2Response> {
             return localVarFp.getUserAccountRecentOrdersV2(requestParameters, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+         * @summary List active Trade Detection subscriptions
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSubscriptions(options?: AxiosRequestConfig): AxiosPromise<Array<TradeDetectionSubscription>> {
+            return localVarFp.listSubscriptions(options).then((request) => request(axios, basePath));
+        },
     };
 };
 
 /**
- * Request parameters for getAccountBalanceHistory operation in ExperimentalEndpointsApi.
+ * Request parameters for addSubscription operation in ExperimentalEndpointsApi.
  * @export
- * @interface ExperimentalEndpointsApiGetAccountBalanceHistoryRequest
+ * @interface ExperimentalEndpointsApiAddSubscriptionRequest
  */
-export type ExperimentalEndpointsApiGetAccountBalanceHistoryRequest = {
+export type ExperimentalEndpointsApiAddSubscriptionRequest = {
     
     /**
     * 
     * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountBalanceHistory
+    * @memberof ExperimentalEndpointsApiAddSubscription
     */
     readonly userId: string
     
     /**
     * 
     * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountBalanceHistory
+    * @memberof ExperimentalEndpointsApiAddSubscription
     */
     readonly userSecret: string
     
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountBalanceHistory
-    */
-    readonly accountId: string
+} & TradeDetectionAddSubscriptionRequest
+
+/**
+ * Request parameters for cancelSubscription operation in ExperimentalEndpointsApi.
+ * @export
+ * @interface ExperimentalEndpointsApiCancelSubscriptionRequest
+ */
+export type ExperimentalEndpointsApiCancelSubscriptionRequest = {
     
-}
+} & TradeDetectionAddSubscriptionRequest
 
 /**
  * Request parameters for getUserAccountOrderDetailV2 operation in ExperimentalEndpointsApi.
@@ -509,14 +665,14 @@ export type ExperimentalEndpointsApiGetUserAccountOrdersV2Request = {
     readonly accountId: string
     
     /**
-    * defaults value is set to \"all\"
+    * defaults to \"all\"
     * @type {'all' | 'open' | 'executed'}
     * @memberof ExperimentalEndpointsApiGetUserAccountOrdersV2
     */
     readonly state?: 'all' | 'open' | 'executed'
     
     /**
-    * Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+    * Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     * @type {number}
     * @memberof ExperimentalEndpointsApiGetUserAccountOrdersV2
     */
@@ -569,15 +725,27 @@ export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request = {
  */
 export class ExperimentalEndpointsApiGenerated extends BaseAPI {
     /**
-     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
-     * @summary List historical account total value
-     * @param {ExperimentalEndpointsApiGetAccountBalanceHistoryRequest} requestParameters Request parameters.
+     * Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires `userId` and `userSecret` in addition to the partner signature. 
+     * @summary Add a Trade Detection subscription
+     * @param {ExperimentalEndpointsApiAddSubscriptionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public getAccountBalanceHistory(requestParameters: ExperimentalEndpointsApiGetAccountBalanceHistoryRequest, options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).getAccountBalanceHistory(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest, options?: AxiosRequestConfig) {
+        return ExperimentalEndpointsApiFp(this.configuration).addSubscription(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
+     * @summary Cancel a Trade Detection subscription
+     * @param {ExperimentalEndpointsApiCancelSubscriptionRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExperimentalEndpointsApiGenerated
+     */
+    public cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest, options?: AxiosRequestConfig) {
+        return ExperimentalEndpointsApiFp(this.configuration).cancelSubscription(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -614,5 +782,16 @@ export class ExperimentalEndpointsApiGenerated extends BaseAPI {
      */
     public getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request, options?: AxiosRequestConfig) {
         return ExperimentalEndpointsApiFp(this.configuration).getUserAccountRecentOrdersV2(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+     * @summary List active Trade Detection subscriptions
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExperimentalEndpointsApiGenerated
+     */
+    public listSubscriptions(options?: AxiosRequestConfig) {
+        return ExperimentalEndpointsApiFp(this.configuration).listSubscriptions(options).then((request) => request(this.axios, this.basePath));
     }
 }

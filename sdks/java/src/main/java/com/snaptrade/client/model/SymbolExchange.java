@@ -126,11 +126,11 @@ public class SymbolExchange {
   }
 
    /**
-   * A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field.
+   * A short name for the exchange. For standardized exchange code, please use the &#x60;mic_code&#x60; field.
    * @return code
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "TSX", value = "A short name for the exchange. For standardized exchange code, please us the `mic_code` field.")
+  @ApiModelProperty(example = "TSX", value = "A short name for the exchange. For standardized exchange code, please use the `mic_code` field.")
 
   public String getCode() {
     return code;

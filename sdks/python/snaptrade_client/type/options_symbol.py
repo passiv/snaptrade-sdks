@@ -25,7 +25,7 @@ class RequiredOptionsSymbol(TypedDict):
     ticker: str
 
     # The type of option. Either \"CALL\" or \"PUT\".
-    option_type: str
+    option_type: Literal["CALL", "PUT"]
 
     # The option strike price.
     strike_price: typing.Union[int, float]

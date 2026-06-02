@@ -33,7 +33,7 @@ class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
     reconnect: str
 
     # Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
-    connectionType: str
+    connectionType: Literal["read", "trade", "trade-if-available"]
 
     # Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     showCloseButton: bool
@@ -42,7 +42,7 @@ class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
     darkMode: bool
 
     # Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
-    connectionPortalVersion: str
+    connectionPortalVersion: Literal["v4", "v3", "v2"]
 
 class SnapTradeLoginUserRequestBody(RequiredSnapTradeLoginUserRequestBody, OptionalSnapTradeLoginUserRequestBody):
     pass

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Exchange** | Pointer to [**SymbolExchange**](SymbolExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | 
 **FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
-**FigiInstrument** | Pointer to [**NullableSymbolFigiInstrument**](SymbolFigiInstrument.md) |  | [optional] 
+**FigiInstrument** | Pointer to [**NullableStockInstrumentFigiInstrument**](StockInstrumentFigiInstrument.md) |  | [optional] 
 **Currencies** | [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this. | 
 
 ## Methods
@@ -231,20 +231,20 @@ HasFigiCode returns a boolean if a field has been set.
 UnsetFigiCode ensures that no value is present for FigiCode, not even an explicit nil
 ### GetFigiInstrument
 
-`func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrument() SymbolFigiInstrument`
+`func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrument() StockInstrumentFigiInstrument`
 
 GetFigiInstrument returns the FigiInstrument field if non-nil, zero value otherwise.
 
 ### GetFigiInstrumentOk
 
-`func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrumentOk() (*SymbolFigiInstrument, bool)`
+`func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool)`
 
 GetFigiInstrumentOk returns a tuple with the FigiInstrument field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFigiInstrument
 
-`func (o *AccountOrderRecordUniversalSymbol) SetFigiInstrument(v SymbolFigiInstrument)`
+`func (o *AccountOrderRecordUniversalSymbol) SetFigiInstrument(v StockInstrumentFigiInstrument)`
 
 SetFigiInstrument sets FigiInstrument field to given value.
 

@@ -9,6 +9,7 @@ Method | Path | Description
 
 
 ## ListOptionHoldings
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List account option positions
 

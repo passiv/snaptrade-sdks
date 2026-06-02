@@ -137,6 +137,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test ListBrokerageAuthorizationAccounts
+        /// </summary>
+        [Fact]
+        public void ListBrokerageAuthorizationAccountsTest()
+        {
+            var authorizationId = "authorizationId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // List accounts for a connection
+                List<Account> result = client.Connections.ListBrokerageAuthorizationAccounts(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.ListBrokerageAuthorizationAccounts: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test ListBrokerageAuthorizations
         /// </summary>
         [Fact]
@@ -233,11 +263,12 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var authorizationId = "authorizationId_example";
+            var timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes. (optional) 
             
             try
             {
                 // List connection rate of returns
-                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId);
+                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId, timeframes);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -273,6 +304,36 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ConnectionsApi.SessionEvents: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test SyncBrokerageAuthorizationTransactions
+        /// </summary>
+        [Fact]
+        public void SyncBrokerageAuthorizationTransactionsTest()
+        {
+            var authorizationId = "authorizationId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // Sync transactions for a connection
+                BrokerageAuthorizationTransactionsSyncConfirmation result = client.Connections.SyncBrokerageAuthorizationTransactions(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.SyncBrokerageAuthorizationTransactions: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

@@ -19,11 +19,15 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { Account } from '../models';
+// @ts-ignore
 import { BrokerageAuthorization } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationDisabledConfirmation } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationRefreshConfirmation } from '../models';
+// @ts-ignore
+import { BrokerageAuthorizationTransactionsSyncConfirmation } from '../models';
 // @ts-ignore
 import { ConnectionsSessionEvents200ResponseInner } from '../models';
 // @ts-ignore
@@ -238,6 +242,68 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts for a connection
+         * @param {string} authorizationId 
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listBrokerageAuthorizationAccounts: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('listBrokerageAuthorizationAccounts', 'authorizationId', authorizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('listBrokerageAuthorizationAccounts', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('listBrokerageAuthorizationAccounts', 'userSecret', userSecret)
+            const localVarPath = `/authorizations/{authorizationId}/accounts`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/accounts',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
          * @summary List all connections
          * @param {string} userId 
@@ -296,7 +362,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
          * @summary Refresh holdings for a connection
          * @param {string} authorizationId 
          * @param {string} userId 
@@ -420,15 +486,16 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} authorizationId 
+         * @param {string} [timeframes] Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        returnRates: async (userId: string, userSecret: string, authorizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        returnRates: async (userId: string, userSecret: string, authorizationId: string, timeframes?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('returnRates', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -460,6 +527,10 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
 
             if (userSecret !== undefined) {
                 localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (timeframes !== undefined) {
+                localVarQueryParameter['timeframes'] = timeframes;
             }
 
 
@@ -542,6 +613,68 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+         * @summary Sync transactions for a connection
+         * @param {string} authorizationId 
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncBrokerageAuthorizationTransactions: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('syncBrokerageAuthorizationTransactions', 'authorizationId', authorizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('syncBrokerageAuthorizationTransactions', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('syncBrokerageAuthorizationTransactions', 'userSecret', userSecret)
+            const localVarPath = `/authorizations/{authorizationId}/transactions/sync`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/transactions/sync',
+                httpMethod: 'POST'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -586,6 +719,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts for a connection
+         * @param {ConnectionsApiListBrokerageAuthorizationAccountsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listBrokerageAuthorizationAccounts(requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listBrokerageAuthorizationAccounts(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
          * @summary List all connections
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
@@ -597,7 +741,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -619,14 +763,14 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.authorizationId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.authorizationId, requestParameters.timeframes, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -638,6 +782,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
          */
         async sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sessionEvents(requestParameters.partnerClientId, requestParameters.userId, requestParameters.sessionId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+         * @summary Sync transactions for a connection
+         * @param {ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async syncBrokerageAuthorizationTransactions(requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.syncBrokerageAuthorizationTransactions(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -681,6 +836,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.disableBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts for a connection
+         * @param {ConnectionsApiListBrokerageAuthorizationAccountsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listBrokerageAuthorizationAccounts(requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
+            return localVarFp.listBrokerageAuthorizationAccounts(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
          * @summary List all connections
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
@@ -691,7 +856,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.listBrokerageAuthorizations(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -711,7 +876,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.removeBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -729,6 +894,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          */
         sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>> {
             return localVarFp.sessionEvents(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+         * @summary Sync transactions for a connection
+         * @param {ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        syncBrokerageAuthorizationTransactions(requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest, options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation> {
+            return localVarFp.syncBrokerageAuthorizationTransactions(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -818,6 +993,36 @@ export type ConnectionsApiDisableBrokerageAuthorizationRequest = {
     * 
     * @type {string}
     * @memberof ConnectionsApiDisableBrokerageAuthorization
+    */
+    readonly userSecret: string
+    
+}
+
+/**
+ * Request parameters for listBrokerageAuthorizationAccounts operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiListBrokerageAuthorizationAccountsRequest
+ */
+export type ConnectionsApiListBrokerageAuthorizationAccountsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiListBrokerageAuthorizationAccounts
+    */
+    readonly authorizationId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiListBrokerageAuthorizationAccounts
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiListBrokerageAuthorizationAccounts
     */
     readonly userSecret: string
     
@@ -934,6 +1139,13 @@ export type ConnectionsApiReturnRatesRequest = {
     */
     readonly authorizationId: string
     
+    /**
+    * Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly timeframes?: string
+    
 }
 
 /**
@@ -963,6 +1175,36 @@ export type ConnectionsApiSessionEventsRequest = {
     * @memberof ConnectionsApiSessionEvents
     */
     readonly sessionId?: string
+    
+}
+
+/**
+ * Request parameters for syncBrokerageAuthorizationTransactions operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest
+ */
+export type ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiSyncBrokerageAuthorizationTransactions
+    */
+    readonly authorizationId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiSyncBrokerageAuthorizationTransactions
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiSyncBrokerageAuthorizationTransactions
+    */
+    readonly userSecret: string
     
 }
 
@@ -1010,6 +1252,18 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
+     * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * @summary List accounts for a connection
+     * @param {ConnectionsApiListBrokerageAuthorizationAccountsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public listBrokerageAuthorizationAccounts(requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).listBrokerageAuthorizationAccounts(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
      * @summary List all connections
      * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
@@ -1022,7 +1276,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
      * @summary Refresh holdings for a connection
      * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1046,7 +1300,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+     * Returns a list of rate of return percents for a given connection. 
      * @summary List connection rate of returns
      * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1067,5 +1321,17 @@ export class ConnectionsApiGenerated extends BaseAPI {
      */
     public sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest, options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).sessionEvents(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+     * @summary Sync transactions for a connection
+     * @param {ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public syncBrokerageAuthorizationTransactions(requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).syncBrokerageAuthorizationTransactions(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

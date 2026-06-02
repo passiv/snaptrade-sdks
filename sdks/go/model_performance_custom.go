@@ -22,7 +22,7 @@ type PerformanceCustom struct {
 	ContributionTimeframe []PastValue `json:"contributionTimeframe,omitempty"`
 	ContributionTimeframeCumulative []PastValue `json:"contributionTimeframeCumulative,omitempty"`
 	WithdrawalTimeframe []PastValue `json:"withdrawalTimeframe,omitempty"`
-	// Current streak of cosecutive months where contributions were made
+	// Current streak of consecutive months where contributions were made
 	ContributionStreak NullableFloat32 `json:"contributionStreak,omitempty"`
 	// Number of months in the timeframe with contributions
 	ContributionMonthsContributed NullableFloat32 `json:"contributionMonthsContributed,omitempty"`

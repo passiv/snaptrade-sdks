@@ -115,11 +115,11 @@ public class Balance {
   }
 
    /**
-   * The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field.
+   * The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with &#x60;cash_equivalent&#x60; &#x3D; true
    * @return cash
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "300.71", value = "The amount of available cash in the account denominated in the currency of the `currency` field.")
+  @ApiModelProperty(example = "300.71", value = "The amount of available cash in the account denominated in the currency of the `currency` field. This value can be negative in a margin account with a margin balance. Money market funds will be included in this field, and also returned in positions endpoints with `cash_equivalent` = true")
 
   public Double getCash() {
     return cash;

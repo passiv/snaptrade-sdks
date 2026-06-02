@@ -7,6 +7,8 @@ import com.snaptrade.client.model.ActionStrict;
 import com.snaptrade.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
 import com.snaptrade.client.model.CancelOrderResponse;
+import com.snaptrade.client.model.ComplexOrderLeg;
+import com.snaptrade.client.model.ComplexOrderResponse;
 import com.snaptrade.client.model.CryptoOrderForm;
 import com.snaptrade.client.model.CryptoOrderPreview;
 import com.snaptrade.client.model.CryptoTradingInstrument;
@@ -14,6 +16,7 @@ import com.snaptrade.client.model.CryptocurrencyPairQuote;
 import com.snaptrade.client.model.ManualTradeAndImpact;
 import com.snaptrade.client.model.ManualTradeForm;
 import com.snaptrade.client.model.ManualTradeFormBracket;
+import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
 import com.snaptrade.client.model.ManualTradeReplaceForm;
 import com.snaptrade.client.model.MlegLeg;
@@ -83,6 +86,11 @@ public class TradingApi extends TradingApiGenerated {
     public class PlaceBracketOrderRequestBuilder extends PlaceBracketOrderRequestBuilderGenerated {
         public PlaceBracketOrderRequestBuilder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) {
             super(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
+        }
+    }
+    public class PlaceComplexOrderRequestBuilder extends PlaceComplexOrderRequestBuilderGenerated {
+        public PlaceComplexOrderRequestBuilder(String type, List<ComplexOrderLeg> orders, UUID accountId, String userId, String userSecret) {
+            super(type, orders, accountId, userId, userSecret);
         }
     }
     public class PlaceCryptoOrderRequestBuilder extends PlaceCryptoOrderRequestBuilderGenerated {

@@ -24,61 +24,61 @@ import (
 // ExperimentalEndpointsApiService ExperimentalEndpointsApi service
 type ExperimentalEndpointsApiService service
 
-type ExperimentalEndpointsApiGetAccountBalanceHistoryRequest struct {
+type ExperimentalEndpointsApiAddSubscriptionRequest struct {
 	ctx context.Context
 	ApiService *ExperimentalEndpointsApiService
 	userId string
 	userSecret string
-	accountId string
+	tradeDetectionAddSubscriptionRequest TradeDetectionAddSubscriptionRequest
 }
 
-func (r ExperimentalEndpointsApiGetAccountBalanceHistoryRequest) Execute() (*AccountValueHistoryResponse, *http.Response, error) {
-	return r.ApiService.GetAccountBalanceHistoryExecute(r)
+func (r ExperimentalEndpointsApiAddSubscriptionRequest) Execute() (*TradeDetectionSubscription, *http.Response, error) {
+	return r.ApiService.AddSubscriptionExecute(r)
 }
 
 /*
-GetAccountBalanceHistory List historical account total value
+AddSubscription Add a Trade Detection subscription
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+Adds or restores a Trade Detection subscription for a connected brokerage account.
+This endpoint requires `userId` and `userSecret` in addition to the partner signature.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param accountId
- @return ExperimentalEndpointsApiGetAccountBalanceHistoryRequest
+ @param tradeDetectionAddSubscriptionRequest
+ @return ExperimentalEndpointsApiAddSubscriptionRequest
 */
-func (a *ExperimentalEndpointsApiService) GetAccountBalanceHistory(userId string, userSecret string, accountId string) ExperimentalEndpointsApiGetAccountBalanceHistoryRequest {
-	return ExperimentalEndpointsApiGetAccountBalanceHistoryRequest{
+func (a *ExperimentalEndpointsApiService) AddSubscription(userId string, userSecret string, tradeDetectionAddSubscriptionRequest TradeDetectionAddSubscriptionRequest) ExperimentalEndpointsApiAddSubscriptionRequest {
+	return ExperimentalEndpointsApiAddSubscriptionRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
-		accountId: accountId,
+		tradeDetectionAddSubscriptionRequest: tradeDetectionAddSubscriptionRequest,
 	}
 }
 
 // Execute executes the request
-//  @return AccountValueHistoryResponse
-func (a *ExperimentalEndpointsApiService) GetAccountBalanceHistoryExecute(r ExperimentalEndpointsApiGetAccountBalanceHistoryRequest) (*AccountValueHistoryResponse, *http.Response, error) {
+//  @return TradeDetectionSubscription
+func (a *ExperimentalEndpointsApiService) AddSubscriptionExecute(r ExperimentalEndpointsApiAddSubscriptionRequest) (*TradeDetectionSubscription, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AccountValueHistoryResponse
+		localVarReturnValue  *TradeDetectionSubscription
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExperimentalEndpointsApiService.GetAccountBalanceHistory")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExperimentalEndpointsApiService.AddSubscription")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/balanceHistory"
+    subpath := "/snapTrade/tradeDetection/subscriptions"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -87,7 +87,7 @@ func (a *ExperimentalEndpointsApiService) GetAccountBalanceHistoryExecute(r Expe
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -103,6 +103,10 @@ func (a *ExperimentalEndpointsApiService) GetAccountBalanceHistoryExecute(r Expe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+    if !checkNilInterface(r.tradeDetectionAddSubscriptionRequest) {
+        localVarPostBody = r.tradeDetectionAddSubscriptionRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -169,6 +173,28 @@ func (a *ExperimentalEndpointsApiService) GetAccountBalanceHistoryExecute(r Expe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Model401FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Model403FeatureNotEnabledResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -178,6 +204,218 @@ func (a *ExperimentalEndpointsApiService) GetAccountBalanceHistoryExecute(r Expe
 			}
             		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ExperimentalEndpointsApiCancelSubscriptionRequest struct {
+	ctx context.Context
+	ApiService *ExperimentalEndpointsApiService
+	tradeDetectionAddSubscriptionRequest TradeDetectionAddSubscriptionRequest
+}
+
+func (r ExperimentalEndpointsApiCancelSubscriptionRequest) Execute() (*TradeDetectionCancelSubscriptionResponse, *http.Response, error) {
+	return r.ApiService.CancelSubscriptionExecute(r)
+}
+
+/*
+CancelSubscription Cancel a Trade Detection subscription
+
+Cancels a Trade Detection subscription for a connected brokerage account.
+This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param tradeDetectionAddSubscriptionRequest
+ @return ExperimentalEndpointsApiCancelSubscriptionRequest
+*/
+func (a *ExperimentalEndpointsApiService) CancelSubscription(tradeDetectionAddSubscriptionRequest TradeDetectionAddSubscriptionRequest) ExperimentalEndpointsApiCancelSubscriptionRequest {
+	return ExperimentalEndpointsApiCancelSubscriptionRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		tradeDetectionAddSubscriptionRequest: tradeDetectionAddSubscriptionRequest,
+	}
+}
+
+// Execute executes the request
+//  @return TradeDetectionCancelSubscriptionResponse
+func (a *ExperimentalEndpointsApiService) CancelSubscriptionExecute(r ExperimentalEndpointsApiCancelSubscriptionRequest) (*TradeDetectionCancelSubscriptionResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TradeDetectionCancelSubscriptionResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExperimentalEndpointsApiService.CancelSubscription")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/snapTrade/tradeDetection/subscriptions/cancel"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+    if !checkNilInterface(r.tradeDetectionAddSubscriptionRequest) {
+        localVarPostBody = r.tradeDetectionAddSubscriptionRequest
+    }
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Model401FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Model403FeatureNotEnabledResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -396,13 +634,13 @@ type ExperimentalEndpointsApiGetUserAccountOrdersV2Request struct {
 	days *int32
 }
 
-// defaults value is set to \&quot;all\&quot;
+// defaults to \&quot;all\&quot;
 func (r *ExperimentalEndpointsApiGetUserAccountOrdersV2Request) State(state string) *ExperimentalEndpointsApiGetUserAccountOrdersV2Request {
 	r.state = &state
 	return r
 }
 
-// Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+// Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
 func (r *ExperimentalEndpointsApiGetUserAccountOrdersV2Request) Days(days int32) *ExperimentalEndpointsApiGetUserAccountOrdersV2Request {
 	r.days = &days
 	return r
@@ -465,6 +703,9 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrdersV2Execute(r Experi
 	localVarFormParams := url.Values{}
 	if r.days != nil && *r.days < 1 {
 		return localVarReturnValue, nil, reportError("days must be greater than 1")
+	}
+	if r.days != nil && *r.days > 90 {
+		return localVarReturnValue, nil, reportError("days must be less than 90")
 	}
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
@@ -762,6 +1003,197 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountRecentOrdersV2Execute(r 
 			}
             		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
             		newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ExperimentalEndpointsApiListSubscriptionsRequest struct {
+	ctx context.Context
+	ApiService *ExperimentalEndpointsApiService
+}
+
+func (r ExperimentalEndpointsApiListSubscriptionsRequest) Execute() ([]TradeDetectionSubscription, *http.Response, error) {
+	return r.ApiService.ListSubscriptionsExecute(r)
+}
+
+/*
+ListSubscriptions List active Trade Detection subscriptions
+
+Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ExperimentalEndpointsApiListSubscriptionsRequest
+*/
+func (a *ExperimentalEndpointsApiService) ListSubscriptions() ExperimentalEndpointsApiListSubscriptionsRequest {
+	return ExperimentalEndpointsApiListSubscriptionsRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+	}
+}
+
+// Execute executes the request
+//  @return []TradeDetectionSubscription
+func (a *ExperimentalEndpointsApiService) ListSubscriptionsExecute(r ExperimentalEndpointsApiListSubscriptionsRequest) ([]TradeDetectionSubscription, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []TradeDetectionSubscription
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExperimentalEndpointsApiService.ListSubscriptions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/snapTrade/tradeDetection/subscriptions"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Model401FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Model403FeatureNotEnabledResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

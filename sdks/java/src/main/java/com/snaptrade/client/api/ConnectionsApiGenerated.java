@@ -26,9 +26,11 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
@@ -656,6 +658,192 @@ public class ConnectionsApiGenerated {
 
         return ((ConnectionsApi) this).new DisableBrokerageAuthorizationRequestBuilder(authorizationId, userId, userSecret);
     }
+    private okhttp3.Call listBrokerageAuthorizationAccountsCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/authorizations/{authorizationId}/accounts"
+            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listBrokerageAuthorizationAccountsValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'authorizationId' is set
+        if (authorizationId == null) {
+            throw new ApiException("Missing the required parameter 'authorizationId' when calling listBrokerageAuthorizationAccounts(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling listBrokerageAuthorizationAccounts(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling listBrokerageAuthorizationAccounts(Async)");
+        }
+
+        return listBrokerageAuthorizationAccountsCall(authorizationId, userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<List<Account>> listBrokerageAuthorizationAccountsWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listBrokerageAuthorizationAccountsValidateBeforeCall(authorizationId, userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call listBrokerageAuthorizationAccountsAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<List<Account>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listBrokerageAuthorizationAccountsValidateBeforeCall(authorizationId, userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<List<Account>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ListBrokerageAuthorizationAccountsRequestBuilderGenerated {
+        final UUID authorizationId;
+        final String userId;
+        final String userSecret;
+
+        public ListBrokerageAuthorizationAccountsRequestBuilderGenerated(UUID authorizationId, String userId, String userSecret) {
+            this.authorizationId = authorizationId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for listBrokerageAuthorizationAccounts
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listBrokerageAuthorizationAccountsCall(authorizationId, userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute listBrokerageAuthorizationAccounts request
+         * @return List&lt;Account&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Account> execute() throws ApiException {
+            ApiResponse<List<Account>> localVarResp = listBrokerageAuthorizationAccountsWithHttpInfo(authorizationId, userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listBrokerageAuthorizationAccounts request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Account&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
+            return listBrokerageAuthorizationAccountsWithHttpInfo(authorizationId, userId, userSecret);
+        }
+
+        /**
+         * Execute listBrokerageAuthorizationAccounts request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
+            return listBrokerageAuthorizationAccountsAsync(authorizationId, userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * List accounts for a connection
+     * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * @param authorizationId  (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return ListBrokerageAuthorizationAccountsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ConnectionsApi.ListBrokerageAuthorizationAccountsRequestBuilder listBrokerageAuthorizationAccounts(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
+        if (authorizationId == null) throw new IllegalArgumentException("\"authorizationId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ConnectionsApi) this).new ListBrokerageAuthorizationAccountsRequestBuilder(authorizationId, userId, userSecret);
+    }
     private okhttp3.Call listBrokerageAuthorizationsCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -998,7 +1186,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * Refresh holdings for a connection
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
      * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1217,7 +1405,7 @@ public class ConnectionsApiGenerated {
 
         return ((ConnectionsApi) this).new RemoveBrokerageAuthorizationRequestBuilder(authorizationId, userId, userSecret);
     }
-    private okhttp3.Call returnRatesCall(String userId, String userSecret, UUID authorizationId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call returnRatesCall(String userId, String userSecret, UUID authorizationId, String timeframes, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1251,6 +1439,10 @@ public class ConnectionsApiGenerated {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
         }
 
+        if (timeframes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("timeframes", timeframes));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1271,7 +1463,7 @@ public class ConnectionsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call returnRatesValidateBeforeCall(String userId, String userSecret, UUID authorizationId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call returnRatesValidateBeforeCall(String userId, String userSecret, UUID authorizationId, String timeframes, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling returnRates(Async)");
@@ -1287,20 +1479,20 @@ public class ConnectionsApiGenerated {
             throw new ApiException("Missing the required parameter 'authorizationId' when calling returnRates(Async)");
         }
 
-        return returnRatesCall(userId, userSecret, authorizationId, _callback);
+        return returnRatesCall(userId, userSecret, authorizationId, timeframes, _callback);
 
     }
 
 
-    private ApiResponse<RateOfReturnResponse> returnRatesWithHttpInfo(String userId, String userSecret, UUID authorizationId) throws ApiException {
-        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, null);
+    private ApiResponse<RateOfReturnResponse> returnRatesWithHttpInfo(String userId, String userSecret, UUID authorizationId, String timeframes) throws ApiException {
+        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, timeframes, null);
         Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call returnRatesAsync(String userId, String userSecret, UUID authorizationId, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
+    private okhttp3.Call returnRatesAsync(String userId, String userSecret, UUID authorizationId, String timeframes, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, _callback);
+        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, timeframes, _callback);
         Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1310,6 +1502,7 @@ public class ConnectionsApiGenerated {
         final String userId;
         final String userSecret;
         final UUID authorizationId;
+        String timeframes;
 
         public ReturnRatesRequestBuilderGenerated(String userId, String userSecret, UUID authorizationId) {
             this.userId = userId;
@@ -1317,6 +1510,16 @@ public class ConnectionsApiGenerated {
             this.authorizationId = authorizationId;
         }
 
+        /**
+         * Set timeframes
+         * @param timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes. (optional)
+         * @return ConnectionsApi.ReturnRatesRequestBuilder
+         */
+        public ConnectionsApi.ReturnRatesRequestBuilder timeframes(String timeframes) {
+            this.timeframes = timeframes;
+            return (ConnectionsApi.ReturnRatesRequestBuilder) this;
+        }
+        
         /**
          * Build call for returnRates
          * @param _callback ApiCallback API callback
@@ -1329,7 +1532,7 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return returnRatesCall(userId, userSecret, authorizationId, _callback);
+            return returnRatesCall(userId, userSecret, authorizationId, timeframes, _callback);
         }
 
 
@@ -1344,7 +1547,7 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public RateOfReturnResponse execute() throws ApiException {
-            ApiResponse<RateOfReturnResponse> localVarResp = returnRatesWithHttpInfo(userId, userSecret, authorizationId);
+            ApiResponse<RateOfReturnResponse> localVarResp = returnRatesWithHttpInfo(userId, userSecret, authorizationId, timeframes);
             return localVarResp.getResponseBody();
         }
 
@@ -1359,7 +1562,7 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public ApiResponse<RateOfReturnResponse> executeWithHttpInfo() throws ApiException {
-            return returnRatesWithHttpInfo(userId, userSecret, authorizationId);
+            return returnRatesWithHttpInfo(userId, userSecret, authorizationId, timeframes);
         }
 
         /**
@@ -1374,13 +1577,13 @@ public class ConnectionsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
-            return returnRatesAsync(userId, userSecret, authorizationId, _callback);
+            return returnRatesAsync(userId, userSecret, authorizationId, timeframes, _callback);
         }
     }
 
     /**
      * List connection rate of returns
-     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * Returns a list of rate of return percents for a given connection. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param authorizationId  (required)
@@ -1596,5 +1799,191 @@ public class ConnectionsApiGenerated {
             
 
         return ((ConnectionsApi) this).new SessionEventsRequestBuilder(partnerClientId);
+    }
+    private okhttp3.Call syncBrokerageAuthorizationTransactionsCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/authorizations/{authorizationId}/transactions/sync"
+            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call syncBrokerageAuthorizationTransactionsValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'authorizationId' is set
+        if (authorizationId == null) {
+            throw new ApiException("Missing the required parameter 'authorizationId' when calling syncBrokerageAuthorizationTransactions(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling syncBrokerageAuthorizationTransactions(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling syncBrokerageAuthorizationTransactions(Async)");
+        }
+
+        return syncBrokerageAuthorizationTransactionsCall(authorizationId, userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<BrokerageAuthorizationTransactionsSyncConfirmation> syncBrokerageAuthorizationTransactionsWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = syncBrokerageAuthorizationTransactionsValidateBeforeCall(authorizationId, userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<BrokerageAuthorizationTransactionsSyncConfirmation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call syncBrokerageAuthorizationTransactionsAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<BrokerageAuthorizationTransactionsSyncConfirmation> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = syncBrokerageAuthorizationTransactionsValidateBeforeCall(authorizationId, userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<BrokerageAuthorizationTransactionsSyncConfirmation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class SyncBrokerageAuthorizationTransactionsRequestBuilderGenerated {
+        final UUID authorizationId;
+        final String userId;
+        final String userSecret;
+
+        public SyncBrokerageAuthorizationTransactionsRequestBuilderGenerated(UUID authorizationId, String userId, String userSecret) {
+            this.authorizationId = authorizationId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for syncBrokerageAuthorizationTransactions
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return syncBrokerageAuthorizationTransactionsCall(authorizationId, userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute syncBrokerageAuthorizationTransactions request
+         * @return BrokerageAuthorizationTransactionsSyncConfirmation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public BrokerageAuthorizationTransactionsSyncConfirmation execute() throws ApiException {
+            ApiResponse<BrokerageAuthorizationTransactionsSyncConfirmation> localVarResp = syncBrokerageAuthorizationTransactionsWithHttpInfo(authorizationId, userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute syncBrokerageAuthorizationTransactions request with HTTP info returned
+         * @return ApiResponse&lt;BrokerageAuthorizationTransactionsSyncConfirmation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BrokerageAuthorizationTransactionsSyncConfirmation> executeWithHttpInfo() throws ApiException {
+            return syncBrokerageAuthorizationTransactionsWithHttpInfo(authorizationId, userId, userSecret);
+        }
+
+        /**
+         * Execute syncBrokerageAuthorizationTransactions request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<BrokerageAuthorizationTransactionsSyncConfirmation> _callback) throws ApiException {
+            return syncBrokerageAuthorizationTransactionsAsync(authorizationId, userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * Sync transactions for a connection
+     * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day&#39;s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
+     * @param authorizationId  (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return SyncBrokerageAuthorizationTransactionsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ConnectionsApi.SyncBrokerageAuthorizationTransactionsRequestBuilder syncBrokerageAuthorizationTransactions(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
+        if (authorizationId == null) throw new IllegalArgumentException("\"authorizationId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ConnectionsApi) this).new SyncBrokerageAuthorizationTransactionsRequestBuilder(authorizationId, userId, userSecret);
     }
 }

@@ -41,6 +41,67 @@ class AccountOrderRecordNullable(
         
         class properties:
             brokerage_order_id = schemas.StrSchema
+            
+            
+            class brokerage_group_order_id(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'brokerage_group_order_id':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            
+            
+            class order_role(
+                schemas.EnumBase,
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    enum_value_to_name = {
+                        "TRIGGER": "TRIGGER",
+                        "CONDITIONAL": "CONDITIONAL",
+                        "PEER": "PEER",
+                    }
+                
+                @schemas.classproperty
+                def TRIGGER(cls):
+                    return cls("TRIGGER")
+                
+                @schemas.classproperty
+                def CONDITIONAL(cls):
+                    return cls("CONDITIONAL")
+                
+                @schemas.classproperty
+                def PEER(cls):
+                    return cls("PEER")
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'order_role':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
         
             @staticmethod
             def status() -> typing.Type['AccountOrderRecordStatus']:
@@ -438,6 +499,8 @@ class AccountOrderRecordNullable(
                 return ChildBrokerageOrderIDsNullable
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
+                "brokerage_group_order_id": brokerage_group_order_id,
+                "order_role": order_role,
                 "status": status,
                 "universal_symbol": universal_symbol,
                 "option_symbol": option_symbol,
@@ -466,6 +529,12 @@ class AccountOrderRecordNullable(
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_group_order_id"]) -> MetaOapg.properties.brokerage_group_order_id: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["order_role"]) -> MetaOapg.properties.order_role: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["status"]) -> 'AccountOrderRecordStatus': ...
@@ -536,12 +605,18 @@ class AccountOrderRecordNullable(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["brokerage_group_order_id"], typing_extensions.Literal["order_role"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_order_id, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_group_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_group_order_id, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["order_role"]) -> typing.Union[MetaOapg.properties.order_role, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union['AccountOrderRecordStatus', schemas.Unset]: ...
@@ -612,13 +687,15 @@ class AccountOrderRecordNullable(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["brokerage_group_order_id"], typing_extensions.Literal["order_role"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, None, ],
         brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, schemas.Unset] = schemas.unset,
+        brokerage_group_order_id: typing.Union[MetaOapg.properties.brokerage_group_order_id, None, str, schemas.Unset] = schemas.unset,
+        order_role: typing.Union[MetaOapg.properties.order_role, None, str, schemas.Unset] = schemas.unset,
         status: typing.Union['AccountOrderRecordStatus', schemas.Unset] = schemas.unset,
         universal_symbol: typing.Union[MetaOapg.properties.universal_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         option_symbol: typing.Union[MetaOapg.properties.option_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
@@ -648,6 +725,8 @@ class AccountOrderRecordNullable(
             cls,
             *args,
             brokerage_order_id=brokerage_order_id,
+            brokerage_group_order_id=brokerage_group_order_id,
+            order_role=order_role,
             status=status,
             universal_symbol=universal_symbol,
             option_symbol=option_symbol,

@@ -19,6 +19,7 @@ from snaptrade_client.type.account_balance import AccountBalance
 from snaptrade_client.type.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.type.account_meta import AccountMeta
 from snaptrade_client.type.account_sync_status import AccountSyncStatus
+from snaptrade_client.type.portfolio_group_id import PortfolioGroupID
 
 class RequiredAccount(TypedDict):
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
@@ -58,17 +59,19 @@ class OptionalAccount(TypedDict, total=False):
     opening_date: typing.Optional[datetime]
 
     # The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
-    status: typing.Optional[str]
+    status: typing.Optional[Literal["open", "closed", "archived", "unavailable"]]
 
     # The account type as provided by the brokerage
     raw_type: typing.Optional[str]
+
+    # The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
+    account_category: typing.Optional[Literal["INVESTMENT", "DEPOSIT", "LOC"]]
 
     # WARNING: This property is deprecated
     meta: AccountMeta
 
     # WARNING: This property is deprecated
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
-    portfolio_group: str
+    portfolio_group: PortfolioGroupID
 
     # WARNING: This property is deprecated
     cash_restrictions: AccountCashRestrictions

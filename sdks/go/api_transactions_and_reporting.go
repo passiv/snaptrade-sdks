@@ -78,7 +78,9 @@ Returns all historical transactions for the specified user and filtering criteri
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day.
+This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
+
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

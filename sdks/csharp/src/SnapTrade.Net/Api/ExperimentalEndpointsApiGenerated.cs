@@ -28,32 +28,55 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// List historical account total value
+        /// Add a Trade Detection subscription
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountValueHistoryResponse</returns>
-        AccountValueHistoryResponse GetAccountBalanceHistory(string userId, string userSecret, string accountId, int operationIndex = 0);
+        /// <returns>TradeDetectionSubscription</returns>
+        TradeDetectionSubscription AddSubscription(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0);
 
         /// <summary>
-        /// List historical account total value
+        /// Add a Trade Detection subscription
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountValueHistoryResponse</returns>
-        ApiResponse<AccountValueHistoryResponse> GetAccountBalanceHistoryWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
+        /// <returns>ApiResponse of TradeDetectionSubscription</returns>
+        ApiResponse<TradeDetectionSubscription> AddSubscriptionWithHttpInfo(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0);
+        /// <summary>
+        /// Cancel a Trade Detection subscription
+        /// </summary>
+        /// <remarks>
+        /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>TradeDetectionCancelSubscriptionResponse</returns>
+        TradeDetectionCancelSubscriptionResponse CancelSubscription(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0);
+
+        /// <summary>
+        /// Cancel a Trade Detection subscription
+        /// </summary>
+        /// <remarks>
+        /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of TradeDetectionCancelSubscriptionResponse</returns>
+        ApiResponse<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0);
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
@@ -93,8 +116,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrdersV2Response</returns>
         AccountOrdersV2Response GetUserAccountOrdersV2(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
@@ -109,8 +132,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
         ApiResponse<AccountOrdersV2Response> GetUserAccountOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
@@ -143,6 +166,27 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
         ApiResponse<AccountOrdersV2Response> GetUserAccountRecentOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
+        /// <summary>
+        /// List active Trade Detection subscriptions
+        /// </summary>
+        /// <remarks>
+        /// Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>List&lt;TradeDetectionSubscription&gt;</returns>
+        List<TradeDetectionSubscription> ListSubscriptions(int operationIndex = 0);
+
+        /// <summary>
+        /// List active Trade Detection subscriptions
+        /// </summary>
+        /// <remarks>
+        /// Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of List&lt;TradeDetectionSubscription&gt;</returns>
+        ApiResponse<List<TradeDetectionSubscription>> ListSubscriptionsWithHttpInfo(int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -153,34 +197,59 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// List historical account total value
+        /// Add a Trade Detection subscription
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountValueHistoryResponse</returns>
-        System.Threading.Tasks.Task<AccountValueHistoryResponse> GetAccountBalanceHistoryAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of TradeDetectionSubscription</returns>
+        System.Threading.Tasks.Task<TradeDetectionSubscription> AddSubscriptionAsync(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List historical account total value
+        /// Add a Trade Detection subscription
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountValueHistoryResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountValueHistoryResponse>> GetAccountBalanceHistoryWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (TradeDetectionSubscription)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TradeDetectionSubscription>> AddSubscriptionWithHttpInfoAsync(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Cancel a Trade Detection subscription
+        /// </summary>
+        /// <remarks>
+        /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of TradeDetectionCancelSubscriptionResponse</returns>
+        System.Threading.Tasks.Task<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Cancel a Trade Detection subscription
+        /// </summary>
+        /// <remarks>
+        /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (TradeDetectionCancelSubscriptionResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TradeDetectionCancelSubscriptionResponse>> CancelSubscriptionWithHttpInfoAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
@@ -222,8 +291,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrdersV2Response</returns>
@@ -239,8 +308,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
@@ -276,6 +345,29 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrdersV2Response>> GetUserAccountRecentOrdersV2WithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// List active Trade Detection subscriptions
+        /// </summary>
+        /// <remarks>
+        /// Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;TradeDetectionSubscription&gt;</returns>
+        System.Threading.Tasks.Task<List<TradeDetectionSubscription>> ListSubscriptionsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// List active Trade Detection subscriptions
+        /// </summary>
+        /// <remarks>
+        /// Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;TradeDetectionSubscription&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<TradeDetectionSubscription>>> ListSubscriptionsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -397,52 +489,53 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Add a Trade Detection subscription Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountValueHistoryResponse</returns>
-        public AccountValueHistoryResponse GetAccountBalanceHistory(string userId, string userSecret, string accountId, int operationIndex = 0)
+        /// <returns>TradeDetectionSubscription</returns>
+        public TradeDetectionSubscription AddSubscription(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse> localVarResponse = GetAccountBalanceHistoryWithHttpInfo(userId, userSecret, accountId);
+            SnapTrade.Net.Client.ApiResponse<TradeDetectionSubscription> localVarResponse = AddSubscriptionWithHttpInfo(userId, userSecret, tradeDetectionAddSubscriptionRequest);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Add a Trade Detection subscription Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountValueHistoryResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse> GetAccountBalanceHistoryWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
+        /// <returns>ApiResponse of TradeDetectionSubscription</returns>
+        public SnapTrade.Net.Client.ApiResponse<TradeDetectionSubscription> AddSubscriptionWithHttpInfo(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->AddSubscription");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->AddSubscription");
             }
 
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
+            // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
+            if (tradeDetectionAddSubscriptionRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionAddSubscriptionRequest' when calling ExperimentalEndpointsApi->AddSubscription");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -462,11 +555,11 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = tradeDetectionAddSubscriptionRequest;
 
-            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetAccountBalanceHistory";
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.AddSubscription";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -486,10 +579,10 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<AccountValueHistoryResponse>("/accounts/{accountId}/balanceHistory", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<TradeDetectionSubscription>("/snapTrade/tradeDetection/subscriptions", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetAccountBalanceHistory", localVarResponse);
+                Exception _exception = this.ExceptionFactory("AddSubscription", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -500,55 +593,56 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Add a Trade Detection subscription Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountValueHistoryResponse</returns>
-        public async System.Threading.Tasks.Task<AccountValueHistoryResponse> GetAccountBalanceHistoryAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of TradeDetectionSubscription</returns>
+        public async System.Threading.Tasks.Task<TradeDetectionSubscription> AddSubscriptionAsync(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse> localVarResponse = await GetAccountBalanceHistoryWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<TradeDetectionSubscription> localVarResponse = await AddSubscriptionWithHttpInfoAsync(userId, userSecret, tradeDetectionAddSubscriptionRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+        /// Add a Trade Detection subscription Adds or restores a Trade Detection subscription for a connected brokerage account. This endpoint requires &#x60;userId&#x60; and &#x60;userSecret&#x60; in addition to the partner signature. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountValueHistoryResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountValueHistoryResponse>> GetAccountBalanceHistoryWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (TradeDetectionSubscription)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<TradeDetectionSubscription>> AddSubscriptionWithHttpInfoAsync(string userId, string userSecret, TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->AddSubscription");
             }
 
             // verify the required parameter 'userSecret' is set
             if (userSecret == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->AddSubscription");
             }
 
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
+            // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
+            if (tradeDetectionAddSubscriptionRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->GetAccountBalanceHistory");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionAddSubscriptionRequest' when calling ExperimentalEndpointsApi->AddSubscription");
             }
 
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -568,11 +662,11 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = tradeDetectionAddSubscriptionRequest;
 
-            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetAccountBalanceHistory";
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.AddSubscription";
             localVarRequestOptions.OperationIndex = operationIndex;
 
             // authentication (PartnerClientId) required
@@ -592,11 +686,187 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<AccountValueHistoryResponse>("/accounts/{accountId}/balanceHistory", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<TradeDetectionSubscription>("/snapTrade/tradeDetection/subscriptions", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetAccountBalanceHistory", localVarResponse);
+                Exception _exception = this.ExceptionFactory("AddSubscription", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>TradeDetectionCancelSubscriptionResponse</returns>
+        public TradeDetectionCancelSubscriptionResponse CancelSubscription(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResponse = CancelSubscriptionWithHttpInfo(tradeDetectionAddSubscriptionRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of TradeDetectionCancelSubscriptionResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0)
+        {
+            // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
+            if (tradeDetectionAddSubscriptionRequest == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionAddSubscriptionRequest' when calling ExperimentalEndpointsApi->CancelSubscription");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = tradeDetectionAddSubscriptionRequest;
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.CancelSubscription";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<TradeDetectionCancelSubscriptionResponse>("/snapTrade/tradeDetection/subscriptions/cancel", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CancelSubscription", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of TradeDetectionCancelSubscriptionResponse</returns>
+        public async System.Threading.Tasks.Task<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResponse = await CancelSubscriptionWithHttpInfoAsync(tradeDetectionAddSubscriptionRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (TradeDetectionCancelSubscriptionResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse>> CancelSubscriptionWithHttpInfoAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
+            if (tradeDetectionAddSubscriptionRequest == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionAddSubscriptionRequest' when calling ExperimentalEndpointsApi->CancelSubscription");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.Data = tradeDetectionAddSubscriptionRequest;
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.CancelSubscription";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<TradeDetectionCancelSubscriptionResponse>("/snapTrade/tradeDetection/subscriptions/cancel", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("CancelSubscription", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -841,8 +1111,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrdersV2Response</returns>
         public AccountOrdersV2Response GetUserAccountOrdersV2(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
@@ -858,8 +1128,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
         public SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> GetUserAccountOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
@@ -956,8 +1226,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrdersV2Response</returns>
@@ -974,8 +1244,8 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="state">defaults value is set to \&quot;all\&quot; (optional)</param>
-        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)</param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
@@ -1281,6 +1551,162 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountRecentOrdersV2", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List active Trade Detection subscriptions Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>List&lt;TradeDetectionSubscription&gt;</returns>
+        public List<TradeDetectionSubscription> ListSubscriptions(int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<List<TradeDetectionSubscription>> localVarResponse = ListSubscriptionsWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List active Trade Detection subscriptions Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of List&lt;TradeDetectionSubscription&gt;</returns>
+        public SnapTrade.Net.Client.ApiResponse<List<TradeDetectionSubscription>> ListSubscriptionsWithHttpInfo(int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.ListSubscriptions";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<List<TradeDetectionSubscription>>("/snapTrade/tradeDetection/subscriptions", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ListSubscriptions", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List active Trade Detection subscriptions Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;TradeDetectionSubscription&gt;</returns>
+        public async System.Threading.Tasks.Task<List<TradeDetectionSubscription>> ListSubscriptionsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<List<TradeDetectionSubscription>> localVarResponse = await ListSubscriptionsWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List active Trade Detection subscriptions Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;TradeDetectionSubscription&gt;)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<TradeDetectionSubscription>>> ListSubscriptionsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.ListSubscriptions";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<TradeDetectionSubscription>>("/snapTrade/tradeDetection/subscriptions", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ListSubscriptions", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

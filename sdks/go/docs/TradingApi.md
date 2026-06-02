@@ -12,6 +12,7 @@ Method | Path | Description
 [**GetUserAccountOptionQuotes**](TradingApi.md#GetUserAccountOptionQuotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 [**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
+[**PlaceComplexOrder**](TradingApi.md#PlaceComplexOrder) | **Post** /accounts/{accountId}/trading/complex | Place complex order
 [**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
 [**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
@@ -120,6 +121,8 @@ func main() {
     // response from `CancelUserAccountOrder`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelUserAccountOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -428,6 +431,7 @@ func main() {
 
 
 ## PlaceBracketOrder
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Place bracket order
 
@@ -482,6 +486,8 @@ func main() {
     // response from `PlaceBracketOrder`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceBracketOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -504,6 +510,61 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PlaceComplexOrder
+
+Place complex order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    
+    manualTradeFormComplex := *snaptrade.NewManualTradeFormComplex(
+        "OTO",
+        null,
+    )
+    manualTradeFormComplex.SetClientOrderId("my-order-123")
+    
+    request := client.TradingApi.PlaceComplexOrder(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+        manualTradeFormComplex,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceComplexOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `PlaceComplexOrder`: ComplexOrderResponse
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceComplexOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ComplexOrderResponse.PlaceComplexOrder.Type`: %v\n", *resp.Type)
+    fmt.Fprintf(os.Stdout, "Response from `ComplexOrderResponse.PlaceComplexOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
 }
 ```
 
@@ -630,6 +691,8 @@ func main() {
     // response from `PlaceForceOrder`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceForceOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -762,6 +825,8 @@ func main() {
     // response from `PlaceOrder`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -905,6 +970,8 @@ func main() {
     // response from `ReplaceOrder`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.ReplaceOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)

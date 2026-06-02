@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.178-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.178)
+[![npm](https://img.shields.io/badge/gem-v2.0.200-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.200)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -20,6 +20,8 @@ Connect brokerage accounts to your app for live positions and trading
 - [Raw HTTP Response](#raw-http-response)
 - [Reference](#reference)
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
+  * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
+  * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
@@ -40,15 +42,19 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.delete_connection`](#snaptradeconnectionsdelete_connection)
   * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
   * [`snaptrade.connections.disable_brokerage_authorization`](#snaptradeconnectionsdisable_brokerage_authorization)
+  * [`snaptrade.connections.list_brokerage_authorization_accounts`](#snaptradeconnectionslist_brokerage_authorization_accounts)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
   * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.experimental_endpoints.get_account_balance_history`](#snaptradeexperimental_endpointsget_account_balance_history)
+  * [`snaptrade.connections.sync_brokerage_authorization_transactions`](#snaptradeconnectionssync_brokerage_authorization_transactions)
+  * [`snaptrade.experimental_endpoints.add_subscription`](#snaptradeexperimental_endpointsadd_subscription)
+  * [`snaptrade.experimental_endpoints.cancel_subscription`](#snaptradeexperimental_endpointscancel_subscription)
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -70,6 +76,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.get_user_account_option_quotes`](#snaptradetradingget_user_account_option_quotes)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
+  * [`snaptrade.trading.place_complex_order`](#snaptradetradingplace_complex_order)
   * [`snaptrade.trading.place_crypto_order`](#snaptradetradingplace_crypto_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
@@ -87,7 +94,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.178'
+gem 'snaptrade', '~> 2.0.200'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -144,7 +151,7 @@ This endpoint is paginated with a default page size of 1000. The endpoint will r
 
 Transaction are returned in reverse chronological order, using the `trade_date` field.
 
-The data returned here is always cached and refreshed once a day.
+This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -214,6 +221,80 @@ Transfer of assets from one account to another. - `SPLIT` - A stock share split.
 ---
 
 
+### `snaptrade.account_information.get_account_balance_history`<a id="snaptradeaccount_informationget_account_balance_history"></a>
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_account_balance_history(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountValueHistoryResponse](./lib/snaptrade/models/account_value_history_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/balanceHistory` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.account_information.get_all_account_positions`<a id="snaptradeaccount_informationget_all_account_positions"></a>
+
+Returns a list of all positions in the specified account.
+
+The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_all_account_positions(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountPositionsResponse](./lib/snaptrade/models/all_account_positions_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/positions/all` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
@@ -221,6 +302,8 @@ Transfer of assets from one account to another. - `SPLIT` - A stock share split.
 
 List all accounts for the user, plus balances, positions, and orders for each
 account.
+
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -261,7 +344,7 @@ Returns a list of balances for the account. Each element of the list has a disti
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -301,7 +384,7 @@ Returns account detail known to SnapTrade for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -386,7 +469,7 @@ Returns a list of recent orders in the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -410,11 +493,11 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### state: `String`<a id="state-string"></a>
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `Integer`<a id="days-integer"></a>
 Number of days in the past to fetch the most recent orders. Defaults to the last
-30 days if no value is passed in.
+30 days if no value is passed in. Values greater than 90 will be capped at 90.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -430,12 +513,15 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 
 ### `snaptrade.account_information.get_user_account_positions`<a id="snaptradeaccount_informationget_user_account_positions"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
+This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -513,7 +599,7 @@ false to retrieve non executed orders as well
 
 ### `snaptrade.account_information.get_user_account_return_rates`<a id="snaptradeaccount_informationget_user_account_return_rates"></a>
 
-Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -523,6 +609,7 @@ result = snaptrade.account_information.get_user_account_return_rates(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  timeframes: "ALL,1Y",
 )
 p result
 ```
@@ -532,6 +619,11 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
+##### timeframes: `String`<a id="timeframes-string"></a>
+Optional comma separated list of rate-of-return timeframes to return. Supported
+values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade
+returns all six supported timeframes.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [RateOfReturnResponse](./lib/snaptrade/models/rate_of_return_response.rb)
@@ -546,12 +638,14 @@ p result
 
 
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -586,14 +680,13 @@ p result
 
 
 ### `snaptrade.account_information.list_user_accounts`<a id="snaptradeaccount_informationlist_user_accounts"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-Please note that this data is cached and only refreshed once a day.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
-  - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -993,6 +1086,46 @@ p result
 ---
 
 
+### `snaptrade.connections.list_brokerage_authorization_accounts`<a id="snaptradeconnectionslist_brokerage_authorization_accounts"></a>
+
+Returns all brokerage accounts that belong to the specified connection for the authenticated user.
+
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.connections.list_brokerage_authorization_accounts(
+  authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `String`<a id="authorization_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[Account](./lib/snaptrade/models/account.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/accounts` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.connections.list_brokerage_authorizations`<a id="snaptradeconnectionslist_brokerage_authorizations"></a>
 
 Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
@@ -1035,6 +1168,7 @@ Trigger a holdings update for all accounts under this connection. Updates will b
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
 **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+**Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1096,7 +1230,7 @@ snaptrade.connections.remove_brokerage_authorization(
 
 ### `snaptrade.connections.return_rates`<a id="snaptradeconnectionsreturn_rates"></a>
 
-Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+Returns a list of rate of return percents for a given connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1106,6 +1240,7 @@ result = snaptrade.connections.return_rates(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  timeframes: "ALL,1Y",
 )
 p result
 ```
@@ -1115,6 +1250,11 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### authorization_id: `String`<a id="authorization_id-string"></a>
+##### timeframes: `String`<a id="timeframes-string"></a>
+Optional comma separated list of rate-of-return timeframes to return. Supported
+values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade
+returns all six supported timeframes.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [RateOfReturnResponse](./lib/snaptrade/models/rate_of_return_response.rb)
@@ -1167,17 +1307,88 @@ specific users
 ---
 
 
-### `snaptrade.experimental_endpoints.get_account_balance_history`<a id="snaptradeexperimental_endpointsget_account_balance_history"></a>
+### `snaptrade.connections.sync_brokerage_authorization_transactions`<a id="snaptradeconnectionssync_brokerage_authorization_transactions"></a>
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
-result = snaptrade.experimental_endpoints.get_account_balance_history(
+result = snaptrade.connections.sync_brokerage_authorization_transactions(
+  authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `String`<a id="authorization_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationTransactionsSyncConfirmation](./lib/snaptrade/models/brokerage_authorization_transactions_sync_confirmation.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/transactions/sync` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimental_endpoints.add_subscription`<a id="snaptradeexperimental_endpointsadd_subscription"></a>
+
+Adds or restores a Trade Detection subscription for a connected brokerage account.
+This endpoint requires `userId` and `userSecret` in addition to the partner signature.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.experimental_endpoints.add_subscription(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `String`<a id="account_id-string"></a>
+Unique identifier for the connected brokerage account. This is the UUID used to
+reference the account in SnapTrade.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradeDetectionSubscription](./lib/snaptrade/models/trade_detection_subscription.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/snapTrade/tradeDetection/subscriptions` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimental_endpoints.cancel_subscription`<a id="snaptradeexperimental_endpointscancel_subscription"></a>
+
+Cancels a Trade Detection subscription for a connected brokerage account.
+This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.experimental_endpoints.cancel_subscription(
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -1185,16 +1396,17 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
+Unique identifier for the connected brokerage account. This is the UUID used to
+reference the account in SnapTrade.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountValueHistoryResponse](./lib/snaptrade/models/account_value_history_response.rb)
+[TradeDetectionCancelSubscriptionResponse](./lib/snaptrade/models/trade_detection_cancel_subscription_response.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/balanceHistory` `GET`
+`/snapTrade/tradeDetection/subscriptions/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1272,11 +1484,11 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### state: `String`<a id="state-string"></a>
-defaults value is set to \"all\"
+defaults to \"all\"
 
 ##### days: `Integer`<a id="days-integer"></a>
 Number of days in the past to fetch the most recent orders. Defaults to the last
-30 days if no value is passed in.
+30 days if no value is passed in. Values greater than 90 will be capped at 90.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1334,13 +1546,40 @@ false to retrieve non executed orders as well
 ---
 
 
+### `snaptrade.experimental_endpoints.list_subscriptions`<a id="snaptradeexperimental_endpointslist_subscriptions"></a>
+
+Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.experimental_endpoints.list_subscriptions
+p result
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradeDetectionSubscription](./lib/snaptrade/models/trade_detection_subscription.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/snapTrade/tradeDetection/subscriptions` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
+This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2018,7 +2257,7 @@ The OCC-formatted option symbol.
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns quotes from the brokerage for the specified symbols and account.
+Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.
 
 The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
 
@@ -2048,7 +2287,7 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### symbols: `String`<a id="symbols-string"></a>
 List of Universal Symbol IDs or tickers to get quotes for. When providing
-multiple values, use a comma as separator
+multiple values, use a comma as separator. Maximum of 10 values allowed
 
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### use_ticker: `Boolean`<a id="use_ticker-boolean"></a>
@@ -2069,7 +2308,9 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to
 
 
 ### `snaptrade.trading.place_bracket_order`<a id="snaptradetradingplace_bracket_order"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
+**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
 use. Only supported on certain brokerages
 
@@ -2149,6 +2390,79 @@ Must be `null` if `notional_value` is provided.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/bracket` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.place_complex_order`<a id="snaptradetradingplace_complex_order"></a>
+
+Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+Only supported on certain brokerages.
+
+- **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+- **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+- **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.place_complex_order(
+  type: "OTO",
+  orders: [
+        {
+            "order_role" => "TRIGGER",
+            "action" => "BUY",
+            "instrument" => {
+                "symbol" => "AAPL",
+                "type" => "EQUITY",
+            },
+            "order_type" => "Market",
+            "units" => 10.5,
+            "time_in_force" => "Day",
+            "price" => 31.33,
+            "stop" => 29.5,
+        }
+    ],
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  client_order_id: "my-order-123",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: [`ManualTradeFormComplexType`](./lib/snaptrade/models/manual_trade_form_complex_type.rb)<a id="type-manualtradeformcomplextypelibsnaptrademodelsmanual_trade_form_complex_typerb"></a>
+The complex order type. - `OCO`: One Cancels the Other — two peer orders. -
+`OTO`: One Triggers the Other — a trigger order and a conditional order. -
+`OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer
+orders.
+
+##### orders: Array<[`ComplexOrderLeg`](./lib/snaptrade/models/complex_order_leg.rb)><a id="orders-array"></a>
+The orders that make up the complex order. Required counts and roles per type: -
+`OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER`
+and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
+
+##### account_id: `String`<a id="account_id-string"></a>
+The ID of the account to execute the trade on.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### client_order_id: `String`<a id="client_order_id-string"></a>
+An optional client-provided identifier for this complex order. Passed through to
+the brokerage and returned in the response.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ComplexOrderResponse](./lib/snaptrade/models/complex_order_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/complex` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2659,7 +2973,9 @@ Returns all historical transactions for the specified user and filtering criteri
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day.
+This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
+
+**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

@@ -47,24 +47,60 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetAccountBalanceHistory
+        /// Test AddSubscription
         /// </summary>
         [Fact]
-        public void GetAccountBalanceHistoryTest()
+        public void AddSubscriptionTest()
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+            
+            var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
+                accountId
+            );
             
             try
             {
-                // List historical account total value
-                AccountValueHistoryResponse result = client.ExperimentalEndpoints.GetAccountBalanceHistory(userId, userSecret, accountId);
+                // Add a Trade Detection subscription
+                TradeDetectionSubscription result = client.ExperimentalEndpoints.AddSubscription(userId, userSecret, tradeDetectionAddSubscriptionRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAccountBalanceHistory: " + e.Message);
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.AddSubscription: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test CancelSubscription
+        /// </summary>
+        [Fact]
+        public void CancelSubscriptionTest()
+        {
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+            
+            var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
+                accountId
+            );
+            
+            try
+            {
+                // Cancel a Trade Detection subscription
+                TradeDetectionCancelSubscriptionResponse result = client.ExperimentalEndpoints.CancelSubscription(tradeDetectionAddSubscriptionRequest);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.CancelSubscription: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -116,8 +152,8 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var state = "all"; // defaults value is set to \"all\" (optional) 
-            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional) 
+            var state = "all"; // defaults to \"all\" (optional) 
+            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional) 
             
             try
             {
@@ -159,6 +195,33 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test ListSubscriptions
+        /// </summary>
+        [Fact]
+        public void ListSubscriptionsTest()
+        {
+            
+            try
+            {
+                // List active Trade Detection subscriptions
+                List<TradeDetectionSubscription> result = client.ExperimentalEndpoints.ListSubscriptions();
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.ListSubscriptions: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ContributionTimeframe** | Pointer to [**[]PastValue**](PastValue.md) |  | [optional] 
 **ContributionTimeframeCumulative** | Pointer to [**[]PastValue**](PastValue.md) |  | [optional] 
 **WithdrawalTimeframe** | Pointer to [**[]PastValue**](PastValue.md) |  | [optional] 
-**ContributionStreak** | Pointer to **NullableFloat32** | Current streak of cosecutive months where contributions were made | [optional] 
+**ContributionStreak** | Pointer to **NullableFloat32** | Current streak of consecutive months where contributions were made | [optional] 
 **ContributionMonthsContributed** | Pointer to **NullableFloat32** | Number of months in the timeframe with contributions | [optional] 
 **ContributionTotalMonths** | Pointer to **NullableFloat32** | Total months in timeframe | [optional] 
 **Dividends** | Pointer to [**[]NetDividend**](NetDividend.md) |  | [optional] 

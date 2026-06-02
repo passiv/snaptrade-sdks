@@ -36,7 +36,7 @@ class OptionalPerformanceCustom(TypedDict, total=False):
 
     withdrawalTimeframe: typing.List[PastValue]
 
-    # Current streak of cosecutive months where contributions were made
+    # Current streak of consecutive months where contributions were made
     contributionStreak: typing.Optional[typing.Union[int, float]]
 
     # Number of months in the timeframe with contributions

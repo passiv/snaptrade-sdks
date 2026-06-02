@@ -14,12 +14,13 @@ module SnapTrade
   class Timeframe
     ALL = "ALL".freeze
     N1_Y = "1Y".freeze
-    N6_M = "6M".freeze
-    N3_M = "3M".freeze
+    YTD = "YTD".freeze
     N1_M = "1M".freeze
+    N1_W = "1W".freeze
+    N1_D = "1D".freeze
 
     def self.all_vars
-      @all_vars ||= [ALL, N1_Y, N6_M, N3_M, N1_M].freeze
+      @all_vars ||= [ALL, N1_Y, YTD, N1_M, N1_W, N1_D].freeze
     end
 
     # Builds the enum from string

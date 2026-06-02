@@ -5,6 +5,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 Method | Path | Description
 ------------- | ------------- | -------------
 [**GetAccountActivities**](AccountInformationApi.md#GetAccountActivities) | **Get** /accounts/{accountId}/activities | List account activities
+[**GetAccountBalanceHistory**](AccountInformationApi.md#GetAccountBalanceHistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
+[**GetAllAccountPositions**](AccountInformationApi.md#GetAllAccountPositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
 [**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
@@ -64,6 +66,99 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountActivities`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Data`: %v\n", *resp.Data)
     fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Pagination`: %v\n", *resp.Pagination)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAccountBalanceHistory
+
+List historical account total value
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAccountBalanceHistory(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountBalanceHistory``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAccountBalanceHistory`: AccountValueHistoryResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountBalanceHistory`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountValueHistoryResponse.GetAccountBalanceHistory.History`: %v\n", *resp.History)
+    fmt.Fprintf(os.Stdout, "Response from `AccountValueHistoryResponse.GetAccountBalanceHistory.Currency`: %v\n", *resp.Currency)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllAccountPositions
+
+List all account positions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAllAccountPositions(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAllAccountPositions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAllAccountPositions`: AllAccountPositionsResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllAccountPositions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.Results`: %v\n", resp.Results)
 }
 ```
 
@@ -220,6 +315,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.RawType`: %v\n", *resp.RawType)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.AccountCategory`: %v\n", *resp.AccountCategory)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CashRestrictions`: %v\n", *resp.CashRestrictions)
@@ -276,6 +372,8 @@ func main() {
     // response from `GetUserAccountOrderDetail`: AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrderDetail`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -346,6 +444,8 @@ func main() {
     // response from `GetUserAccountOrders`: []AccountOrderRecord
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrders`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OrderRole`: %v\n", *resp.OrderRole)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OptionSymbol`: %v\n", *resp.OptionSymbol)
@@ -377,6 +477,7 @@ func main() {
 
 
 ## GetUserAccountPositions
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List account positions
 
@@ -505,6 +606,7 @@ func main() {
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
     )
+    request.Timeframes(""ALL,1Y"")
     
     resp, httpRes, err := request.Execute()
 
@@ -524,6 +626,7 @@ func main() {
 
 
 ## GetUserHoldings
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List account holdings
 
@@ -575,6 +678,7 @@ func main() {
 
 
 ## ListUserAccounts
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List accounts
 
@@ -623,6 +727,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.RawType`: %v\n", *resp.RawType)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.AccountCategory`: %v\n", *resp.AccountCategory)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CashRestrictions`: %v\n", *resp.CashRestrictions)
@@ -685,6 +790,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.RawType`: %v\n", *resp.RawType)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.AccountCategory`: %v\n", *resp.AccountCategory)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CashRestrictions`: %v\n", *resp.CashRestrictions)
