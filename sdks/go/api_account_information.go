@@ -2303,19 +2303,15 @@ func (r AccountInformationApiListUserAccountsRequest) Execute() ([]Account, *htt
 /*
 ListUserAccounts List accounts
 
-**Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
-
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
  @return AccountInformationApiListUserAccountsRequest
-
-Deprecated
 */
 func (a *AccountInformationApiService) ListUserAccounts(userId string, userSecret string) AccountInformationApiListUserAccountsRequest {
 	return AccountInformationApiListUserAccountsRequest{
@@ -2328,7 +2324,6 @@ func (a *AccountInformationApiService) ListUserAccounts(userId string, userSecre
 
 // Execute executes the request
 //  @return []Account
-// Deprecated
 func (a *AccountInformationApiService) ListUserAccountsExecute(r AccountInformationApiListUserAccountsRequest) ([]Account, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

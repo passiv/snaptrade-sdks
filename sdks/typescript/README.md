@@ -771,13 +771,10 @@ const getUserHoldingsResponse =
 
 
 ### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2542,6 +2539,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
 Only supported on certain brokerages.
+Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
 
 - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
 - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.

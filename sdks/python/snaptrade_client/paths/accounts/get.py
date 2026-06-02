@@ -378,7 +378,6 @@ class BaseApi(api_client.Api):
 class ListUserAccounts(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    @api_client.DeprecationWarningOnce(prefix="account_information")
     async def alist_user_accounts(
         self,
         user_id: typing.Optional[str] = None,
@@ -401,7 +400,6 @@ class ListUserAccounts(BaseApi):
             **kwargs,
         )
     
-    @api_client.DeprecationWarningOnce(prefix="account_information")
     def list_user_accounts(
         self,
         user_id: typing.Optional[str] = None,
@@ -412,7 +410,7 @@ class ListUserAccounts(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  """
+        """ Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  """
         args = self._list_user_accounts_mapped_args(
             query_params=query_params,
             user_id=user_id,
@@ -425,7 +423,6 @@ class ListUserAccounts(BaseApi):
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    @api_client.DeprecationWarningOnce(prefix="account_information")
     async def aget(
         self,
         user_id: typing.Optional[str] = None,
@@ -448,7 +445,6 @@ class ApiForget(BaseApi):
             **kwargs,
         )
     
-    @api_client.DeprecationWarningOnce(prefix="account_information")
     def get(
         self,
         user_id: typing.Optional[str] = None,
@@ -459,7 +455,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ **Deprecated, please use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts) instead.**  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the connection-scoped endpoint linked above. Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  """
+        """ Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  """
         args = self._list_user_accounts_mapped_args(
             query_params=query_params,
             user_id=user_id,

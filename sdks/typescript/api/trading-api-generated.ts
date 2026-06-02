@@ -663,7 +663,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
          * @summary Place complex order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} userId 
@@ -1355,7 +1355,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
          * @summary Place complex order
          * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1596,7 +1596,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.placeBracketOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+         * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
          * @summary Place complex order
          * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2292,7 +2292,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+     * Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable. Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
      * @summary Place complex order
      * @param {TradingApiPlaceComplexOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
