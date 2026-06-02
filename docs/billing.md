@@ -16,7 +16,7 @@ Your monthly invoice can include up to four types of charges:
 
 ### 1. Connected Users (Tiered Pricing)
 
-The primary component of your bill is based on the number of **unique users** who had an active brokerage connection during the billing period. A "user" is identified by the `external_user_identifier` you assign when creating SnapTrade users in your application.
+The primary component of your bill is based on the number of **unique users** who had an active or inactive brokerage connection during the billing period. A "user" is identified by the `user_id` assigned when creating users in your application. For more details on user creation, see the [SnapTrade user creation documentation](https://docs.snaptrade.com/docs/getting-started#getting-started-users).
 
 By default, all customers start with a single flat rate of **$2.00 per connected user per month**. As your business scales, you can negotiate volume-based tiered pricing where additional users above certain thresholds are charged at progressively lower rates. Contact support if you're interested in negotiating bulk tiered pricing.
 
@@ -24,24 +24,22 @@ By default, all customers start with a single flat rate of **$2.00 per connected
 
 | Tier | User Range | Per-User Fee |
 |------|-----------|--------------|
-| 1    | 0 - 100   | $3.00        |
-| 2    | 101 - 500 | $2.50        |
-| 3    | 501+      | $2.00        |
+| 1    | 0 - 100   | $2.00        |
+| 2    | 101 - 500 | $1.75        |
+| 3    | 501+      | $1.50        |
 
 With 250 connected users in this example, your bill would be:
-- 100 users x $3.00 = $300.00
-- 150 users x $2.50 = $375.00
-- **Total: $675.00**
+- 100 users x $2.00 = $200.00
+- 150 users x $1.75 = $262.50
+- **Total: $462.50**
 
-**What counts as a billable user:** A user is counted if they had at least one completed brokerage connection or periodic sync event during the billing period. Incomplete connections are not billed. Interactive Brokers (IBKR) connections are excluded from billing.
+**What counts as a billable user:** A user is counted if they had at least one completed brokerage connection or [periodic sync event](https://docs.snaptrade.com/docs/syncing) during the billing period. Incomplete connections are not billed.
 
 ### 2. Manual Refreshes
 
 If your agreement with SnapTrade contains pricing for manual refreshes, they will be charged according to the following details.
 
-When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per customer based on their agreement with SnapTrade.
-
-Pay as You Go customers have this feature included at no extra charge although this feature may be subject to rate limits at higher volumes.
+When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per customer based on their agreement with SnapTrade. This feature is disabled for Pay as you Go and free plans.
 
 ### 3. Recent Orders API Calls
 
@@ -52,8 +50,6 @@ Pay as You Go customers have this feature included at no extra charge although t
 ### 4. Platform Fee / Monthly Minimum
 
 Custom plans may include a fixed **platform fee** that is charged every month regardless of usage. This fee is independent of your user count or API call volume. On custom plans it is possible to bundle in a certain number of connected users with the Platform Fee.
-
-### Monthly Minimum
 
 Custom plans may include a **monthly minimum fee**. If your usage-based charges (connected users + manual refreshes + recent orders calls) fall below this minimum, you will be charged the monthly minimum instead. The platform fee, if applicable, is added on top of the monthly minimum.
 
@@ -72,7 +68,7 @@ Your invoice total is calculated as:
 + Platform fee (if applicable)
 ─────────────────────────────────────────
 = Subtotal
-+ HST (if applicable)
++ Sales Tax (if applicable)
 ─────────────────────────────────────────
 = Invoice total
 ```
