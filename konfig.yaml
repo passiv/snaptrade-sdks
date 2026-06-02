@@ -65,6 +65,8 @@ portal:
               path: docs/ratelimiting.md
             - id: launch-guide
               path: docs/launching-your-application.md
+            - id: trade-detection
+              path: docs/trade-detection.md
         - label: AI & MCP
           links:
             - id: mcp-server
