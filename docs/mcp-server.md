@@ -14,6 +14,8 @@ The SnapTrade MCP server is for **SnapTrade Personal** users — individuals who
 
 To use the connector, you'll need a free SnapTrade Personal account. If you don't have one yet, sign up at the [SnapTrade Dashboard](https://dashboard.snaptrade.com/signup) and link at least one brokerage account before adding the connector to your AI assistant.
 
+For a broader comparison of Personal and Commercial customer experiences, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
+
 ## What you can do with it
 
 With the SnapTrade connector enabled, an AI assistant can:

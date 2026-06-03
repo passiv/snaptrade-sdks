@@ -1,24 +1,26 @@
 # How We Bill at SnapTrade
 
-This document explains every component of SnapTrade's billing process so you know exactly what you're paying for, when you'll be invoiced, and how payments work.
+This document explains every component of SnapTrade's Commercial billing process so you know exactly what you're paying for, when you'll be invoiced, and how payments work.
+
+Personal users are currently completely free. Commercial customers may be billed based on connected users, API usage, platform fees, or monthly minimums depending on their agreement. If you are deciding which customer model applies to your integration, start with [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
 ---
 
 ## Billing Cycle
 
-SnapTrade bills on a **monthly** cycle. Each invoice covers usage from the 1st through the last day of the previous calendar month. Invoices are generated on the **1st of each month**.
+SnapTrade bills Commercial customers on a **monthly** cycle. Each invoice covers usage from the 1st through the last day of the previous calendar month. Invoices are generated on the **1st of each month**.
 
 ---
 
 ## What We Charge For
 
-Your monthly invoice can include up to four types of charges:
+A Commercial monthly invoice can include up to four types of charges:
 
 ### 1. Connected Users (Tiered Pricing)
 
-The primary component of your bill is based on the number of **unique users** who had an active or inactive brokerage connection during the billing period. A "user" is identified by the `user_id` assigned when creating users in your application. For more details on user creation, see the [SnapTrade user creation documentation](https://docs.snaptrade.com/docs/getting-started#getting-started-users).
+The primary component of a Commercial bill is based on the number of **unique users** who had an active or inactive brokerage connection during the billing period. A "user" is identified by the `user_id` assigned when creating users in your application. For more details on user creation, see the [SnapTrade user creation documentation](https://docs.snaptrade.com/docs/getting-started#getting-started-users).
 
-By default, all customers start with a single flat rate of **$2.00 per connected user per month**. As your business scales, you can negotiate volume-based tiered pricing where additional users above certain thresholds are charged at progressively lower rates. Contact support if you're interested in negotiating bulk tiered pricing.
+By default, Commercial customers start with a single flat rate of **$2.00 per connected user per month**. As your business scales, you can negotiate volume-based tiered pricing where additional users above certain thresholds are charged at progressively lower rates. Contact support if you're interested in negotiating bulk tiered pricing.
 
 **Example of tiered pricing:**
 
@@ -28,7 +30,7 @@ By default, all customers start with a single flat rate of **$2.00 per connected
 | 2    | 101 - 500 | $1.75        |
 | 3    | 501+      | $1.50        |
 
-With 250 connected users in this example, your bill would be:
+With 250 connected users in this example, the Commercial bill would be:
 - 100 users x $2.00 = $200.00
 - 150 users x $1.75 = $262.50
 - **Total: $462.50**
@@ -37,13 +39,13 @@ With 250 connected users in this example, your bill would be:
 
 ### 2. Manual Refreshes
 
-If your agreement with SnapTrade contains pricing for manual refreshes, they will be charged according to the following details.
+If your Commercial agreement with SnapTrade contains pricing for manual refreshes, they will be charged according to the following details.
 
-When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per customer based on their agreement with SnapTrade. This feature is disabled for Pay as you Go and free plans.
+When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per Commercial customer based on their agreement with SnapTrade. This feature is disabled for Pay as you Go and free plans.
 
 ### 3. Recent Orders API Calls
 
-If your plan includes provisions for the `/recentOrders` endpoint, each API call to this endpoint is billed at a per-call rate defined in your agreement.
+If your Commercial plan includes provisions for the `/recentOrders` endpoint, each API call to this endpoint is billed at a per-call rate defined in your agreement.
 
 Pay as You Go customers have this feature included at no extra charge although this feature may be subject to rate limits at higher volumes.
 
@@ -57,7 +59,7 @@ Custom plans may include a **monthly minimum fee**. If your usage-based charges 
 
 ## Invoice Total
 
-Your invoice total is calculated as:
+A Commercial invoice total is calculated as:
 
 ```
   Connected users charge (accounting for tiered pricing if applicable)
@@ -77,7 +79,7 @@ Your invoice total is calculated as:
 
 ## What Happens If an Invoice Goes Unpaid
 
-SnapTrade takes the following steps for overdue invoices:
+SnapTrade takes the following steps for overdue Commercial invoices:
 
 1. **Reminder emails** are sent on the 1st of each month to customers with any invoices past their due date. The email includes the total outstanding amount, your production API key slug, and the date your keys will be disabled if payment is not received.
 
@@ -94,10 +96,10 @@ SnapTrade takes the following steps for overdue invoices:
 
 ## Viewing Your Billing Details
 
-Use the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing) to view invoices, download PDFs, and manage payment methods.
+Commercial customers can use the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing) to view invoices, download PDFs, and manage payment methods.
 
 ---
 
 ## Questions?
 
-If you have questions about your bill or need to discuss your pricing, reach out to your SnapTrade account contact or email the billing address provided in your invoice communications.
+If you have questions about your Commercial bill or need to discuss your pricing, reach out to your SnapTrade account contact or email the billing address provided in your invoice communications.
