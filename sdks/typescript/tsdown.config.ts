@@ -21,12 +21,10 @@ const nodeShared = {
 
 const browserShared = {
   ...shared,
-  entry: {
-    "index.browser": "./index.ts",
-  },
   target: "es2020",
   platform: "browser",
   dts: false,
+  minify: true,
   deps: {
     // The browser-only bundle must be self-contained because browsers cannot
     // resolve bare package specifiers without an import map. tsdown externalizes
@@ -59,7 +57,11 @@ export default defineConfig([
   },
   {
     ...browserShared,
-    format: "esm",
+    entry: {
+      browser: "./index.ts",
+    },
+    format: "umd",
+    globalName: "client",
     clean: false,
   },
 ]);
