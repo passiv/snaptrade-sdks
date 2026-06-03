@@ -26,17 +26,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for AccountOrderRecordQuoteCurrency
+ * Model tests for OptionsPositionCurrency
  */
-public class AccountOrderRecordQuoteCurrencyTest {
-    private final AccountOrderRecordQuoteCurrency model = new AccountOrderRecordQuoteCurrency();
+public class OptionsPositionCurrencyTest {
+    private final OptionsPositionCurrency model = new OptionsPositionCurrency();
 
     /**
-     * Model tests for AccountOrderRecordQuoteCurrency
+     * Model tests for OptionsPositionCurrency
      */
     @Test
-    public void testAccountOrderRecordQuoteCurrency() {
-        // TODO: test AccountOrderRecordQuoteCurrency
+    public void testOptionsPositionCurrency() {
+        // TODO: test OptionsPositionCurrency
     }
 
     /**

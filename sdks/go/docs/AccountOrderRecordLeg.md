@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **LegId** | Pointer to **NullableString** | Brokerage order identifier for this leg, if available. | [optional] 
 **Instrument** | Pointer to [**AccountOrderRecordLegInstrument**](AccountOrderRecordLegInstrument.md) |  | [optional] 
 **Action** | Pointer to **string** | The action describes the intent or side of a trade.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_TO_OPEN   - BUY_TO_CLOSE   - SELL_TO_OPEN   - SELL_TO_CLOSE  | [optional] 
-**ExecutionPrice** | Pointer to **NullableFloat32** | Execution price for this leg, if available. | [optional] 
+**ExecutionPrice** | Pointer to **NullableFloat64** | Execution price for this leg, if available. | [optional] 
 **TotalQuantity** | Pointer to **NullableString** | The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares. | [optional] 
 **CanceledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been canceled for this leg. | [optional] 
 **FilledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been filled for this leg. | [optional] 
@@ -119,20 +119,20 @@ HasAction returns a boolean if a field has been set.
 
 ### GetExecutionPrice
 
-`func (o *AccountOrderRecordLeg) GetExecutionPrice() float32`
+`func (o *AccountOrderRecordLeg) GetExecutionPrice() float64`
 
 GetExecutionPrice returns the ExecutionPrice field if non-nil, zero value otherwise.
 
 ### GetExecutionPriceOk
 
-`func (o *AccountOrderRecordLeg) GetExecutionPriceOk() (*float32, bool)`
+`func (o *AccountOrderRecordLeg) GetExecutionPriceOk() (*float64, bool)`
 
 GetExecutionPriceOk returns a tuple with the ExecutionPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExecutionPrice
 
-`func (o *AccountOrderRecordLeg) SetExecutionPrice(v float32)`
+`func (o *AccountOrderRecordLeg) SetExecutionPrice(v float64)`
 
 SetExecutionPrice sets ExecutionPrice field to given value.
 

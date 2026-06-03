@@ -55,25 +55,25 @@ export interface AccountOrderRecord {
      * @type {AccountOrderRecordUniversalSymbol}
      * @memberof AccountOrderRecord
      */
-    'universal_symbol'?: AccountOrderRecordUniversalSymbol;
+    'universal_symbol'?: AccountOrderRecordUniversalSymbol | null;
     /**
      * 
      * @type {AccountOrderRecordOptionSymbol}
      * @memberof AccountOrderRecord
      */
-    'option_symbol'?: AccountOrderRecordOptionSymbol;
+    'option_symbol'?: AccountOrderRecordOptionSymbol | null;
     /**
      * 
      * @type {AccountOrderRecordQuoteUniversalSymbol}
      * @memberof AccountOrderRecord
      */
-    'quote_universal_symbol'?: AccountOrderRecordQuoteUniversalSymbol;
+    'quote_universal_symbol'?: AccountOrderRecordQuoteUniversalSymbol | null;
     /**
      * 
      * @type {AccountOrderRecordQuoteCurrency}
      * @memberof AccountOrderRecord
      */
-    'quote_currency'?: AccountOrderRecordQuoteCurrency;
+    'quote_currency'?: AccountOrderRecordQuoteCurrency | null;
     /**
      * The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
      * @type {string}
@@ -106,22 +106,22 @@ export interface AccountOrderRecord {
     'filled_quantity'?: string | null;
     /**
      * The price at which the order was executed. For option orders, this represents the price per share.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'execution_price'?: number | null;
+    'execution_price'?: string | null;
     /**
      * The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'limit_price'?: number | null;
+    'limit_price'?: string | null;
     /**
      * The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'stop_price'?: number | null;
+    'stop_price'?: string | null;
     /**
      * 
      * @type {AccountOrderRecordTrailingStop}

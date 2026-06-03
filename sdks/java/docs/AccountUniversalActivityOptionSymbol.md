@@ -1,8 +1,8 @@
 
 
-# AccountOrderRecordOptionSymbol
+# AccountUniversalActivityOptionSymbol
 
-Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
+The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
 
 ## Properties
 

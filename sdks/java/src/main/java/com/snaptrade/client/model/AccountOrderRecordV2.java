@@ -25,6 +25,7 @@ import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,15 +145,15 @@ public class AccountOrderRecordV2 {
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
-  private Double executionPrice;
+  private BigDecimal executionPrice;
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
-  private Double limitPrice;
+  private BigDecimal limitPrice;
 
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
-  private Double stopPrice;
+  private BigDecimal stopPrice;
 
   public static final String SERIALIZED_NAME_TRAILING_STOP = "trailing_stop";
   @SerializedName(SERIALIZED_NAME_TRAILING_STOP)
@@ -426,21 +427,12 @@ public class AccountOrderRecordV2 {
   }
 
 
-  public AccountOrderRecordV2 executionPrice(Double executionPrice) {
+  public AccountOrderRecordV2 executionPrice(BigDecimal executionPrice) {
     
     
     
     
     this.executionPrice = executionPrice;
-    return this;
-  }
-
-  public AccountOrderRecordV2 executionPrice(Integer executionPrice) {
-    
-    
-    
-    
-    this.executionPrice = executionPrice.doubleValue();
     return this;
   }
 
@@ -451,12 +443,12 @@ public class AccountOrderRecordV2 {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "12.34", value = "The price at which the order was executed.")
 
-  public Double getExecutionPrice() {
+  public BigDecimal getExecutionPrice() {
     return executionPrice;
   }
 
 
-  public void setExecutionPrice(Double executionPrice) {
+  public void setExecutionPrice(BigDecimal executionPrice) {
     
     
     
@@ -464,21 +456,12 @@ public class AccountOrderRecordV2 {
   }
 
 
-  public AccountOrderRecordV2 limitPrice(Double limitPrice) {
+  public AccountOrderRecordV2 limitPrice(BigDecimal limitPrice) {
     
     
     
     
     this.limitPrice = limitPrice;
-    return this;
-  }
-
-  public AccountOrderRecordV2 limitPrice(Integer limitPrice) {
-    
-    
-    
-    
-    this.limitPrice = limitPrice.doubleValue();
     return this;
   }
 
@@ -489,12 +472,12 @@ public class AccountOrderRecordV2 {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "12.34", value = "The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.")
 
-  public Double getLimitPrice() {
+  public BigDecimal getLimitPrice() {
     return limitPrice;
   }
 
 
-  public void setLimitPrice(Double limitPrice) {
+  public void setLimitPrice(BigDecimal limitPrice) {
     
     
     
@@ -502,7 +485,7 @@ public class AccountOrderRecordV2 {
   }
 
 
-  public AccountOrderRecordV2 stopPrice(Double stopPrice) {
+  public AccountOrderRecordV2 stopPrice(BigDecimal stopPrice) {
     
     
     
@@ -511,28 +494,19 @@ public class AccountOrderRecordV2 {
     return this;
   }
 
-  public AccountOrderRecordV2 stopPrice(Integer stopPrice) {
-    
-    
-    
-    
-    this.stopPrice = stopPrice.doubleValue();
-    return this;
-  }
-
    /**
    * The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "12.5", value = "The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.")
+  @ApiModelProperty(example = "12.50", value = "The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.")
 
-  public Double getStopPrice() {
+  public BigDecimal getStopPrice() {
     return stopPrice;
   }
 
 
-  public void setStopPrice(Double stopPrice) {
+  public void setStopPrice(BigDecimal stopPrice) {
     
     
     
@@ -782,6 +756,15 @@ public class AccountOrderRecordV2 {
       }
       if ((jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) && !jsonObj.get("quote_currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `quote_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quote_currency").toString()));
+      }
+      if (!jsonObj.get("execution_price").isJsonNull() && (jsonObj.get("execution_price") != null && !jsonObj.get("execution_price").isJsonNull()) && !jsonObj.get("execution_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `execution_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("execution_price").toString()));
+      }
+      if (!jsonObj.get("limit_price").isJsonNull() && (jsonObj.get("limit_price") != null && !jsonObj.get("limit_price").isJsonNull()) && !jsonObj.get("limit_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `limit_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("limit_price").toString()));
+      }
+      if (!jsonObj.get("stop_price").isJsonNull() && (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) && !jsonObj.get("stop_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `stop_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_price").toString()));
       }
       // validate the optional field `trailing_stop`
       if (jsonObj.get("trailing_stop") != null && !jsonObj.get("trailing_stop").isJsonNull()) {

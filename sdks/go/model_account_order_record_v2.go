@@ -36,11 +36,11 @@ type AccountOrderRecordV2 struct {
 	// Quote currency code for the order.
 	QuoteCurrency *string `json:"quote_currency,omitempty"`
 	// The price at which the order was executed.
-	ExecutionPrice NullableFloat32 `json:"execution_price,omitempty"`
+	ExecutionPrice NullableFloat64 `json:"execution_price,omitempty"`
 	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
-	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
+	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
-	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
+	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
 	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
 	// List of legs that make up the order.
 	Legs []AccountOrderRecordLeg `json:"legs,omitempty"`
@@ -395,9 +395,9 @@ func (o *AccountOrderRecordV2) SetQuoteCurrency(v string) {
 }
 
 // GetExecutionPrice returns the ExecutionPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordV2) GetExecutionPrice() float32 {
+func (o *AccountOrderRecordV2) GetExecutionPrice() float64 {
 	if o == nil || isNil(o.ExecutionPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.ExecutionPrice.Get()
@@ -406,7 +406,7 @@ func (o *AccountOrderRecordV2) GetExecutionPrice() float32 {
 // GetExecutionPriceOk returns a tuple with the ExecutionPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordV2) GetExecutionPriceOk() (*float32, bool) {
+func (o *AccountOrderRecordV2) GetExecutionPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -422,8 +422,8 @@ func (o *AccountOrderRecordV2) HasExecutionPrice() bool {
 	return false
 }
 
-// SetExecutionPrice gets a reference to the given NullableFloat32 and assigns it to the ExecutionPrice field.
-func (o *AccountOrderRecordV2) SetExecutionPrice(v float32) {
+// SetExecutionPrice gets a reference to the given NullableFloat64 and assigns it to the ExecutionPrice field.
+func (o *AccountOrderRecordV2) SetExecutionPrice(v float64) {
 	o.ExecutionPrice.Set(&v)
 }
 // SetExecutionPriceNil sets the value for ExecutionPrice to be an explicit nil
@@ -437,9 +437,9 @@ func (o *AccountOrderRecordV2) UnsetExecutionPrice() {
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordV2) GetLimitPrice() float32 {
+func (o *AccountOrderRecordV2) GetLimitPrice() float64 {
 	if o == nil || isNil(o.LimitPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.LimitPrice.Get()
@@ -448,7 +448,7 @@ func (o *AccountOrderRecordV2) GetLimitPrice() float32 {
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordV2) GetLimitPriceOk() (*float32, bool) {
+func (o *AccountOrderRecordV2) GetLimitPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -464,8 +464,8 @@ func (o *AccountOrderRecordV2) HasLimitPrice() bool {
 	return false
 }
 
-// SetLimitPrice gets a reference to the given NullableFloat32 and assigns it to the LimitPrice field.
-func (o *AccountOrderRecordV2) SetLimitPrice(v float32) {
+// SetLimitPrice gets a reference to the given NullableFloat64 and assigns it to the LimitPrice field.
+func (o *AccountOrderRecordV2) SetLimitPrice(v float64) {
 	o.LimitPrice.Set(&v)
 }
 // SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
@@ -479,9 +479,9 @@ func (o *AccountOrderRecordV2) UnsetLimitPrice() {
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordV2) GetStopPrice() float32 {
+func (o *AccountOrderRecordV2) GetStopPrice() float64 {
 	if o == nil || isNil(o.StopPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.StopPrice.Get()
@@ -490,7 +490,7 @@ func (o *AccountOrderRecordV2) GetStopPrice() float32 {
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordV2) GetStopPriceOk() (*float32, bool) {
+func (o *AccountOrderRecordV2) GetStopPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -506,8 +506,8 @@ func (o *AccountOrderRecordV2) HasStopPrice() bool {
 	return false
 }
 
-// SetStopPrice gets a reference to the given NullableFloat32 and assigns it to the StopPrice field.
-func (o *AccountOrderRecordV2) SetStopPrice(v float32) {
+// SetStopPrice gets a reference to the given NullableFloat64 and assigns it to the StopPrice field.
+func (o *AccountOrderRecordV2) SetStopPrice(v float64) {
 	o.StopPrice.Set(&v)
 }
 // SetStopPriceNil sets the value for StopPrice to be an explicit nil

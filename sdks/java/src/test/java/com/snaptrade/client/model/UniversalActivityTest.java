@@ -19,7 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountSimple;
 import com.snaptrade.client.model.AccountUniversalActivityCurrency;
-import com.snaptrade.client.model.OptionsSymbolNullable;
+import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

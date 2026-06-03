@@ -154,6 +154,10 @@ module SnapTrade
       Set.new([
         :'brokerage_group_order_id',
         :'order_role',
+        :'universal_symbol',
+        :'option_symbol',
+        :'quote_universal_symbol',
+        :'quote_currency',
         :'total_quantity',
         :'open_quantity',
         :'canceled_quantity',

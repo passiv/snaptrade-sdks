@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountSimple;
 import com.snaptrade.client.model.AccountUniversalActivityCurrency;
-import com.snaptrade.client.model.OptionsSymbolNullable;
+import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -70,7 +70,7 @@ public class UniversalActivity {
 
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
-  private OptionsSymbolNullable optionSymbol;
+  private AccountUniversalActivityOptionSymbol optionSymbol;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -214,7 +214,7 @@ public class UniversalActivity {
   }
 
 
-  public UniversalActivity optionSymbol(OptionsSymbolNullable optionSymbol) {
+  public UniversalActivity optionSymbol(AccountUniversalActivityOptionSymbol optionSymbol) {
     
     
     
@@ -230,12 +230,12 @@ public class UniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public OptionsSymbolNullable getOptionSymbol() {
+  public AccountUniversalActivityOptionSymbol getOptionSymbol() {
     return optionSymbol;
   }
 
 
-  public void setOptionSymbol(OptionsSymbolNullable optionSymbol) {
+  public void setOptionSymbol(AccountUniversalActivityOptionSymbol optionSymbol) {
     
     
     
@@ -846,7 +846,7 @@ public class UniversalActivity {
       }
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
-        OptionsSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+        AccountUniversalActivityOptionSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {

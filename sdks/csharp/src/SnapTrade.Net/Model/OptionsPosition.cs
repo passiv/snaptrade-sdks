@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position..</param>
         /// <param name="averagePurchasePrice">Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100)..</param>
         /// <param name="currency">currency.</param>
-        public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), double? averagePurchasePrice = default(double?), CurrencyNullable currency = default(CurrencyNullable)) : base()
+        public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), double? averagePurchasePrice = default(double?), OptionsPositionCurrency currency = default(OptionsPositionCurrency)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
@@ -81,7 +81,8 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = true)]
-        public CurrencyNullable Currency { get; set; }
+        [Obsolete]
+        public OptionsPositionCurrency Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

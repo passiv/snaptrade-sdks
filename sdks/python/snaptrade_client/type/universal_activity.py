@@ -17,7 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_simple import AccountSimple
 from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.options_symbol_nullable import OptionsSymbolNullable
+from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.symbol_nullable import SymbolNullable
 
 class RequiredUniversalActivity(TypedDict):
@@ -31,7 +31,8 @@ class OptionalUniversalActivity(TypedDict, total=False):
 
     symbol: typing.Optional[SymbolNullable]
 
-    option_symbol: typing.Optional[OptionsSymbolNullable]
+    # The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
+    option_symbol: OptionsSymbol
 
     # The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
     price: typing.Union[int, float]

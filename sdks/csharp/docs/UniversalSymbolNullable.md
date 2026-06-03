@@ -1,5 +1,5 @@
-# SnapTrade.Net.Model.AccountOrderRecordUniversalSymbol
-Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
+# SnapTrade.Net.Model.UniversalSymbolNullable
+Uniquely describes a single security + exchange combination across all brokerages.
 
 ## Properties
 

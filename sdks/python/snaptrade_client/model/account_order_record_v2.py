@@ -154,16 +154,20 @@ class AccountOrderRecordV2(
             
             
             class execution_price(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
+            
+            
+                class MetaOapg:
+                    format = 'decimal'
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'execution_price':
                     return super().__new__(
@@ -174,16 +178,20 @@ class AccountOrderRecordV2(
             
             
             class limit_price(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
+            
+            
+                class MetaOapg:
+                    format = 'decimal'
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'limit_price':
                     return super().__new__(
@@ -194,16 +202,20 @@ class AccountOrderRecordV2(
             
             
             class stop_price(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
+            
+            
+                class MetaOapg:
+                    format = 'decimal'
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'stop_price':
                     return super().__new__(
@@ -368,9 +380,9 @@ class AccountOrderRecordV2(
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, datetime, schemas.Unset] = schemas.unset,
         time_executed: typing.Union[MetaOapg.properties.time_executed, None, str, datetime, schemas.Unset] = schemas.unset,
         quote_currency: typing.Union[MetaOapg.properties.quote_currency, str, schemas.Unset] = schemas.unset,
-        execution_price: typing.Union[MetaOapg.properties.execution_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        limit_price: typing.Union[MetaOapg.properties.limit_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        stop_price: typing.Union[MetaOapg.properties.stop_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        execution_price: typing.Union[MetaOapg.properties.execution_price, None, str, schemas.Unset] = schemas.unset,
+        limit_price: typing.Union[MetaOapg.properties.limit_price, None, str, schemas.Unset] = schemas.unset,
+        stop_price: typing.Union[MetaOapg.properties.stop_price, None, str, schemas.Unset] = schemas.unset,
         trailing_stop: typing.Union['TrailingStopNullable', schemas.Unset] = schemas.unset,
         legs: typing.Union[MetaOapg.properties.legs, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,

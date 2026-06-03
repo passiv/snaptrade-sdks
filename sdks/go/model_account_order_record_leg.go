@@ -23,7 +23,7 @@ type AccountOrderRecordLeg struct {
 	// The action describes the intent or side of a trade.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_TO_OPEN   - BUY_TO_CLOSE   - SELL_TO_OPEN   - SELL_TO_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// Execution price for this leg, if available.
-	ExecutionPrice NullableFloat32 `json:"execution_price,omitempty"`
+	ExecutionPrice NullableFloat64 `json:"execution_price,omitempty"`
 	// The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares.
 	TotalQuantity NullableString `json:"total_quantity,omitempty"`
 	// The number of shares or contracts that have been canceled for this leg.
@@ -160,9 +160,9 @@ func (o *AccountOrderRecordLeg) SetAction(v string) {
 }
 
 // GetExecutionPrice returns the ExecutionPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordLeg) GetExecutionPrice() float32 {
+func (o *AccountOrderRecordLeg) GetExecutionPrice() float64 {
 	if o == nil || isNil(o.ExecutionPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.ExecutionPrice.Get()
@@ -171,7 +171,7 @@ func (o *AccountOrderRecordLeg) GetExecutionPrice() float32 {
 // GetExecutionPriceOk returns a tuple with the ExecutionPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordLeg) GetExecutionPriceOk() (*float32, bool) {
+func (o *AccountOrderRecordLeg) GetExecutionPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -187,8 +187,8 @@ func (o *AccountOrderRecordLeg) HasExecutionPrice() bool {
 	return false
 }
 
-// SetExecutionPrice gets a reference to the given NullableFloat32 and assigns it to the ExecutionPrice field.
-func (o *AccountOrderRecordLeg) SetExecutionPrice(v float32) {
+// SetExecutionPrice gets a reference to the given NullableFloat64 and assigns it to the ExecutionPrice field.
+func (o *AccountOrderRecordLeg) SetExecutionPrice(v float64) {
 	o.ExecutionPrice.Set(&v)
 }
 // SetExecutionPriceNil sets the value for ExecutionPrice to be an explicit nil

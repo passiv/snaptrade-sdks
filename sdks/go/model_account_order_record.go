@@ -25,10 +25,10 @@ type AccountOrderRecord struct {
 	// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
 	OrderRole NullableString `json:"order_role,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
-	UniversalSymbol *AccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
-	OptionSymbol *AccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
-	QuoteUniversalSymbol *AccountOrderRecordQuoteUniversalSymbol `json:"quote_universal_symbol,omitempty"`
-	QuoteCurrency *AccountOrderRecordQuoteCurrency `json:"quote_currency,omitempty"`
+	UniversalSymbol NullableAccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
+	OptionSymbol NullableAccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
+	QuoteUniversalSymbol NullableAccountOrderRecordQuoteUniversalSymbol `json:"quote_universal_symbol,omitempty"`
+	QuoteCurrency NullableAccountOrderRecordQuoteCurrency `json:"quote_currency,omitempty"`
 	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
@@ -40,11 +40,11 @@ type AccountOrderRecord struct {
 	// The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
 	FilledQuantity NullableString `json:"filled_quantity,omitempty"`
 	// The price at which the order was executed. For option orders, this represents the price per share.
-	ExecutionPrice NullableFloat32 `json:"execution_price,omitempty"`
+	ExecutionPrice NullableFloat64 `json:"execution_price,omitempty"`
 	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
-	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
+	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
-	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
+	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
 	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
 	// The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
 	OrderType NullableString `json:"order_type,omitempty"`
@@ -232,132 +232,172 @@ func (o *AccountOrderRecord) SetStatus(v AccountOrderRecordStatus) {
 	o.Status = &v
 }
 
-// GetUniversalSymbol returns the UniversalSymbol field value if set, zero value otherwise.
+// GetUniversalSymbol returns the UniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol {
-	if o == nil || isNil(o.UniversalSymbol) {
+	if o == nil || isNil(o.UniversalSymbol.Get()) {
 		var ret AccountOrderRecordUniversalSymbol
 		return ret
 	}
-	return *o.UniversalSymbol
+	return *o.UniversalSymbol.Get()
 }
 
 // GetUniversalSymbolOk returns a tuple with the UniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccountOrderRecord) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool) {
-	if o == nil || isNil(o.UniversalSymbol) {
+	if o == nil {
     return nil, false
 	}
-	return o.UniversalSymbol, true
+	return o.UniversalSymbol.Get(), o.UniversalSymbol.IsSet()
 }
 
 // HasUniversalSymbol returns a boolean if a field has been set.
 func (o *AccountOrderRecord) HasUniversalSymbol() bool {
-	if o != nil && !isNil(o.UniversalSymbol) {
+	if o != nil && o.UniversalSymbol.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUniversalSymbol gets a reference to the given AccountOrderRecordUniversalSymbol and assigns it to the UniversalSymbol field.
+// SetUniversalSymbol gets a reference to the given NullableAccountOrderRecordUniversalSymbol and assigns it to the UniversalSymbol field.
 func (o *AccountOrderRecord) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol) {
-	o.UniversalSymbol = &v
+	o.UniversalSymbol.Set(&v)
+}
+// SetUniversalSymbolNil sets the value for UniversalSymbol to be an explicit nil
+func (o *AccountOrderRecord) SetUniversalSymbolNil() {
+	o.UniversalSymbol.Set(nil)
 }
 
-// GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise.
+// UnsetUniversalSymbol ensures that no value is present for UniversalSymbol, not even an explicit nil
+func (o *AccountOrderRecord) UnsetUniversalSymbol() {
+	o.UniversalSymbol.Unset()
+}
+
+// GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccountOrderRecord) GetOptionSymbol() AccountOrderRecordOptionSymbol {
-	if o == nil || isNil(o.OptionSymbol) {
+	if o == nil || isNil(o.OptionSymbol.Get()) {
 		var ret AccountOrderRecordOptionSymbol
 		return ret
 	}
-	return *o.OptionSymbol
+	return *o.OptionSymbol.Get()
 }
 
 // GetOptionSymbolOk returns a tuple with the OptionSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccountOrderRecord) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool) {
-	if o == nil || isNil(o.OptionSymbol) {
+	if o == nil {
     return nil, false
 	}
-	return o.OptionSymbol, true
+	return o.OptionSymbol.Get(), o.OptionSymbol.IsSet()
 }
 
 // HasOptionSymbol returns a boolean if a field has been set.
 func (o *AccountOrderRecord) HasOptionSymbol() bool {
-	if o != nil && !isNil(o.OptionSymbol) {
+	if o != nil && o.OptionSymbol.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetOptionSymbol gets a reference to the given AccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
+// SetOptionSymbol gets a reference to the given NullableAccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
 func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol) {
-	o.OptionSymbol = &v
+	o.OptionSymbol.Set(&v)
+}
+// SetOptionSymbolNil sets the value for OptionSymbol to be an explicit nil
+func (o *AccountOrderRecord) SetOptionSymbolNil() {
+	o.OptionSymbol.Set(nil)
 }
 
-// GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field value if set, zero value otherwise.
+// UnsetOptionSymbol ensures that no value is present for OptionSymbol, not even an explicit nil
+func (o *AccountOrderRecord) UnsetOptionSymbol() {
+	o.OptionSymbol.Unset()
+}
+
+// GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol {
-	if o == nil || isNil(o.QuoteUniversalSymbol) {
+	if o == nil || isNil(o.QuoteUniversalSymbol.Get()) {
 		var ret AccountOrderRecordQuoteUniversalSymbol
 		return ret
 	}
-	return *o.QuoteUniversalSymbol
+	return *o.QuoteUniversalSymbol.Get()
 }
 
 // GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool) {
-	if o == nil || isNil(o.QuoteUniversalSymbol) {
+	if o == nil {
     return nil, false
 	}
-	return o.QuoteUniversalSymbol, true
+	return o.QuoteUniversalSymbol.Get(), o.QuoteUniversalSymbol.IsSet()
 }
 
 // HasQuoteUniversalSymbol returns a boolean if a field has been set.
 func (o *AccountOrderRecord) HasQuoteUniversalSymbol() bool {
-	if o != nil && !isNil(o.QuoteUniversalSymbol) {
+	if o != nil && o.QuoteUniversalSymbol.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQuoteUniversalSymbol gets a reference to the given AccountOrderRecordQuoteUniversalSymbol and assigns it to the QuoteUniversalSymbol field.
+// SetQuoteUniversalSymbol gets a reference to the given NullableAccountOrderRecordQuoteUniversalSymbol and assigns it to the QuoteUniversalSymbol field.
 func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol) {
-	o.QuoteUniversalSymbol = &v
+	o.QuoteUniversalSymbol.Set(&v)
+}
+// SetQuoteUniversalSymbolNil sets the value for QuoteUniversalSymbol to be an explicit nil
+func (o *AccountOrderRecord) SetQuoteUniversalSymbolNil() {
+	o.QuoteUniversalSymbol.Set(nil)
 }
 
-// GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise.
+// UnsetQuoteUniversalSymbol ensures that no value is present for QuoteUniversalSymbol, not even an explicit nil
+func (o *AccountOrderRecord) UnsetQuoteUniversalSymbol() {
+	o.QuoteUniversalSymbol.Unset()
+}
+
+// GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency {
-	if o == nil || isNil(o.QuoteCurrency) {
+	if o == nil || isNil(o.QuoteCurrency.Get()) {
 		var ret AccountOrderRecordQuoteCurrency
 		return ret
 	}
-	return *o.QuoteCurrency
+	return *o.QuoteCurrency.Get()
 }
 
 // GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool) {
-	if o == nil || isNil(o.QuoteCurrency) {
+	if o == nil {
     return nil, false
 	}
-	return o.QuoteCurrency, true
+	return o.QuoteCurrency.Get(), o.QuoteCurrency.IsSet()
 }
 
 // HasQuoteCurrency returns a boolean if a field has been set.
 func (o *AccountOrderRecord) HasQuoteCurrency() bool {
-	if o != nil && !isNil(o.QuoteCurrency) {
+	if o != nil && o.QuoteCurrency.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetQuoteCurrency gets a reference to the given AccountOrderRecordQuoteCurrency and assigns it to the QuoteCurrency field.
+// SetQuoteCurrency gets a reference to the given NullableAccountOrderRecordQuoteCurrency and assigns it to the QuoteCurrency field.
 func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency) {
-	o.QuoteCurrency = &v
+	o.QuoteCurrency.Set(&v)
+}
+// SetQuoteCurrencyNil sets the value for QuoteCurrency to be an explicit nil
+func (o *AccountOrderRecord) SetQuoteCurrencyNil() {
+	o.QuoteCurrency.Set(nil)
+}
+
+// UnsetQuoteCurrency ensures that no value is present for QuoteCurrency, not even an explicit nil
+func (o *AccountOrderRecord) UnsetQuoteCurrency() {
+	o.QuoteCurrency.Unset()
 }
 
 // GetAction returns the Action field value if set, zero value otherwise.
@@ -561,9 +601,9 @@ func (o *AccountOrderRecord) UnsetFilledQuantity() {
 }
 
 // GetExecutionPrice returns the ExecutionPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetExecutionPrice() float32 {
+func (o *AccountOrderRecord) GetExecutionPrice() float64 {
 	if o == nil || isNil(o.ExecutionPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.ExecutionPrice.Get()
@@ -572,7 +612,7 @@ func (o *AccountOrderRecord) GetExecutionPrice() float32 {
 // GetExecutionPriceOk returns a tuple with the ExecutionPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetExecutionPriceOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetExecutionPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -588,8 +628,8 @@ func (o *AccountOrderRecord) HasExecutionPrice() bool {
 	return false
 }
 
-// SetExecutionPrice gets a reference to the given NullableFloat32 and assigns it to the ExecutionPrice field.
-func (o *AccountOrderRecord) SetExecutionPrice(v float32) {
+// SetExecutionPrice gets a reference to the given NullableFloat64 and assigns it to the ExecutionPrice field.
+func (o *AccountOrderRecord) SetExecutionPrice(v float64) {
 	o.ExecutionPrice.Set(&v)
 }
 // SetExecutionPriceNil sets the value for ExecutionPrice to be an explicit nil
@@ -603,9 +643,9 @@ func (o *AccountOrderRecord) UnsetExecutionPrice() {
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetLimitPrice() float32 {
+func (o *AccountOrderRecord) GetLimitPrice() float64 {
 	if o == nil || isNil(o.LimitPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.LimitPrice.Get()
@@ -614,7 +654,7 @@ func (o *AccountOrderRecord) GetLimitPrice() float32 {
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetLimitPriceOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetLimitPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -630,8 +670,8 @@ func (o *AccountOrderRecord) HasLimitPrice() bool {
 	return false
 }
 
-// SetLimitPrice gets a reference to the given NullableFloat32 and assigns it to the LimitPrice field.
-func (o *AccountOrderRecord) SetLimitPrice(v float32) {
+// SetLimitPrice gets a reference to the given NullableFloat64 and assigns it to the LimitPrice field.
+func (o *AccountOrderRecord) SetLimitPrice(v float64) {
 	o.LimitPrice.Set(&v)
 }
 // SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
@@ -645,9 +685,9 @@ func (o *AccountOrderRecord) UnsetLimitPrice() {
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetStopPrice() float32 {
+func (o *AccountOrderRecord) GetStopPrice() float64 {
 	if o == nil || isNil(o.StopPrice.Get()) {
-		var ret float32
+		var ret float64
 		return ret
 	}
 	return *o.StopPrice.Get()
@@ -656,7 +696,7 @@ func (o *AccountOrderRecord) GetStopPrice() float32 {
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetStopPriceOk() (*float32, bool) {
+func (o *AccountOrderRecord) GetStopPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -672,8 +712,8 @@ func (o *AccountOrderRecord) HasStopPrice() bool {
 	return false
 }
 
-// SetStopPrice gets a reference to the given NullableFloat32 and assigns it to the StopPrice field.
-func (o *AccountOrderRecord) SetStopPrice(v float32) {
+// SetStopPrice gets a reference to the given NullableFloat64 and assigns it to the StopPrice field.
+func (o *AccountOrderRecord) SetStopPrice(v float64) {
 	o.StopPrice.Set(&v)
 }
 // SetStopPriceNil sets the value for StopPrice to be an explicit nil
@@ -1051,17 +1091,17 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !isNil(o.UniversalSymbol) {
-		toSerialize["universal_symbol"] = o.UniversalSymbol
+	if o.UniversalSymbol.IsSet() {
+		toSerialize["universal_symbol"] = o.UniversalSymbol.Get()
 	}
-	if !isNil(o.OptionSymbol) {
-		toSerialize["option_symbol"] = o.OptionSymbol
+	if o.OptionSymbol.IsSet() {
+		toSerialize["option_symbol"] = o.OptionSymbol.Get()
 	}
-	if !isNil(o.QuoteUniversalSymbol) {
-		toSerialize["quote_universal_symbol"] = o.QuoteUniversalSymbol
+	if o.QuoteUniversalSymbol.IsSet() {
+		toSerialize["quote_universal_symbol"] = o.QuoteUniversalSymbol.Get()
 	}
-	if !isNil(o.QuoteCurrency) {
-		toSerialize["quote_currency"] = o.QuoteCurrency
+	if o.QuoteCurrency.IsSet() {
+		toSerialize["quote_currency"] = o.QuoteCurrency.Get()
 	}
 	if !isNil(o.Action) {
 		toSerialize["action"] = o.Action

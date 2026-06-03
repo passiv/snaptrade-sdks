@@ -50,13 +50,13 @@ class OptionalAccountOrderRecordV2(TypedDict, total=False):
     quote_currency: str
 
     # The price at which the order was executed.
-    execution_price: typing.Optional[typing.Union[int, float]]
+    execution_price: typing.Optional[str]
 
     # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
-    limit_price: typing.Optional[typing.Union[int, float]]
+    limit_price: typing.Optional[str]
 
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
-    stop_price: typing.Optional[typing.Union[int, float]]
+    stop_price: typing.Optional[str]
 
     trailing_stop: typing.Optional[TrailingStopNullable]
 

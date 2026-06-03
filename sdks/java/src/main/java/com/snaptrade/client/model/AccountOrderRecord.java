@@ -19,16 +19,17 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.AccountOrderRecordOptionSymbol;
-import com.snaptrade.client.model.AccountOrderRecordQuoteCurrency;
 import com.snaptrade.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
-import com.snaptrade.client.model.AccountOrderRecordUniversalSymbol;
 import com.snaptrade.client.model.ChildBrokerageOrderIDsNullable;
+import com.snaptrade.client.model.CurrencyNullable;
+import com.snaptrade.client.model.OptionsSymbolNullable;
 import com.snaptrade.client.model.TrailingStopNullable;
+import com.snaptrade.client.model.UniversalSymbolNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -127,11 +128,11 @@ public class AccountOrderRecord {
 
   public static final String SERIALIZED_NAME_UNIVERSAL_SYMBOL = "universal_symbol";
   @SerializedName(SERIALIZED_NAME_UNIVERSAL_SYMBOL)
-  private AccountOrderRecordUniversalSymbol universalSymbol;
+  private UniversalSymbolNullable universalSymbol;
 
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
-  private AccountOrderRecordOptionSymbol optionSymbol;
+  private OptionsSymbolNullable optionSymbol;
 
   public static final String SERIALIZED_NAME_QUOTE_UNIVERSAL_SYMBOL = "quote_universal_symbol";
   @SerializedName(SERIALIZED_NAME_QUOTE_UNIVERSAL_SYMBOL)
@@ -139,7 +140,7 @@ public class AccountOrderRecord {
 
   public static final String SERIALIZED_NAME_QUOTE_CURRENCY = "quote_currency";
   @SerializedName(SERIALIZED_NAME_QUOTE_CURRENCY)
-  private AccountOrderRecordQuoteCurrency quoteCurrency;
+  private CurrencyNullable quoteCurrency;
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
@@ -163,15 +164,15 @@ public class AccountOrderRecord {
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
-  private Double executionPrice;
+  private BigDecimal executionPrice;
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
-  private Double limitPrice;
+  private BigDecimal limitPrice;
 
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
-  private Double stopPrice;
+  private BigDecimal stopPrice;
 
   public static final String SERIALIZED_NAME_TRAILING_STOP = "trailing_stop";
   @SerializedName(SERIALIZED_NAME_TRAILING_STOP)
@@ -328,7 +329,7 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord universalSymbol(AccountOrderRecordUniversalSymbol universalSymbol) {
+  public AccountOrderRecord universalSymbol(UniversalSymbolNullable universalSymbol) {
     
     
     
@@ -344,12 +345,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountOrderRecordUniversalSymbol getUniversalSymbol() {
+  public UniversalSymbolNullable getUniversalSymbol() {
     return universalSymbol;
   }
 
 
-  public void setUniversalSymbol(AccountOrderRecordUniversalSymbol universalSymbol) {
+  public void setUniversalSymbol(UniversalSymbolNullable universalSymbol) {
     
     
     
@@ -357,7 +358,7 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord optionSymbol(AccountOrderRecordOptionSymbol optionSymbol) {
+  public AccountOrderRecord optionSymbol(OptionsSymbolNullable optionSymbol) {
     
     
     
@@ -373,12 +374,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountOrderRecordOptionSymbol getOptionSymbol() {
+  public OptionsSymbolNullable getOptionSymbol() {
     return optionSymbol;
   }
 
 
-  public void setOptionSymbol(AccountOrderRecordOptionSymbol optionSymbol) {
+  public void setOptionSymbol(OptionsSymbolNullable optionSymbol) {
     
     
     
@@ -415,7 +416,7 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord quoteCurrency(AccountOrderRecordQuoteCurrency quoteCurrency) {
+  public AccountOrderRecord quoteCurrency(CurrencyNullable quoteCurrency) {
     
     
     
@@ -431,12 +432,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountOrderRecordQuoteCurrency getQuoteCurrency() {
+  public CurrencyNullable getQuoteCurrency() {
     return quoteCurrency;
   }
 
 
-  public void setQuoteCurrency(AccountOrderRecordQuoteCurrency quoteCurrency) {
+  public void setQuoteCurrency(CurrencyNullable quoteCurrency) {
     
     
     
@@ -589,21 +590,12 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord executionPrice(Double executionPrice) {
+  public AccountOrderRecord executionPrice(BigDecimal executionPrice) {
     
     
     
     
     this.executionPrice = executionPrice;
-    return this;
-  }
-
-  public AccountOrderRecord executionPrice(Integer executionPrice) {
-    
-    
-    
-    
-    this.executionPrice = executionPrice.doubleValue();
     return this;
   }
 
@@ -614,12 +606,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "12.34", value = "The price at which the order was executed. For option orders, this represents the price per share.")
 
-  public Double getExecutionPrice() {
+  public BigDecimal getExecutionPrice() {
     return executionPrice;
   }
 
 
-  public void setExecutionPrice(Double executionPrice) {
+  public void setExecutionPrice(BigDecimal executionPrice) {
     
     
     
@@ -627,21 +619,12 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord limitPrice(Double limitPrice) {
+  public AccountOrderRecord limitPrice(BigDecimal limitPrice) {
     
     
     
     
     this.limitPrice = limitPrice;
-    return this;
-  }
-
-  public AccountOrderRecord limitPrice(Integer limitPrice) {
-    
-    
-    
-    
-    this.limitPrice = limitPrice.doubleValue();
     return this;
   }
 
@@ -652,12 +635,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "12.34", value = "The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.")
 
-  public Double getLimitPrice() {
+  public BigDecimal getLimitPrice() {
     return limitPrice;
   }
 
 
-  public void setLimitPrice(Double limitPrice) {
+  public void setLimitPrice(BigDecimal limitPrice) {
     
     
     
@@ -665,7 +648,7 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord stopPrice(Double stopPrice) {
+  public AccountOrderRecord stopPrice(BigDecimal stopPrice) {
     
     
     
@@ -674,28 +657,19 @@ public class AccountOrderRecord {
     return this;
   }
 
-  public AccountOrderRecord stopPrice(Integer stopPrice) {
-    
-    
-    
-    
-    this.stopPrice = stopPrice.doubleValue();
-    return this;
-  }
-
    /**
    * The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "12.5", value = "The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.")
+  @ApiModelProperty(example = "12.50", value = "The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.")
 
-  public Double getStopPrice() {
+  public BigDecimal getStopPrice() {
     return stopPrice;
   }
 
 
-  public void setStopPrice(Double stopPrice) {
+  public void setStopPrice(BigDecimal stopPrice) {
     
     
     
@@ -1169,11 +1143,11 @@ public class AccountOrderRecord {
       }
       // validate the optional field `universal_symbol`
       if (jsonObj.get("universal_symbol") != null && !jsonObj.get("universal_symbol").isJsonNull()) {
-        AccountOrderRecordUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("universal_symbol"));
+        UniversalSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("universal_symbol"));
       }
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
-        AccountOrderRecordOptionSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+        OptionsSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
       }
       // validate the optional field `quote_universal_symbol`
       if (jsonObj.get("quote_universal_symbol") != null && !jsonObj.get("quote_universal_symbol").isJsonNull()) {
@@ -1181,7 +1155,7 @@ public class AccountOrderRecord {
       }
       // validate the optional field `quote_currency`
       if (jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) {
-        AccountOrderRecordQuoteCurrency.validateJsonObject(jsonObj.getAsJsonObject("quote_currency"));
+        CurrencyNullable.validateJsonObject(jsonObj.getAsJsonObject("quote_currency"));
       }
       if ((jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) && !jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
@@ -1197,6 +1171,15 @@ public class AccountOrderRecord {
       }
       if (!jsonObj.get("filled_quantity").isJsonNull() && (jsonObj.get("filled_quantity") != null && !jsonObj.get("filled_quantity").isJsonNull()) && !jsonObj.get("filled_quantity").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `filled_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("filled_quantity").toString()));
+      }
+      if (!jsonObj.get("execution_price").isJsonNull() && (jsonObj.get("execution_price") != null && !jsonObj.get("execution_price").isJsonNull()) && !jsonObj.get("execution_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `execution_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("execution_price").toString()));
+      }
+      if (!jsonObj.get("limit_price").isJsonNull() && (jsonObj.get("limit_price") != null && !jsonObj.get("limit_price").isJsonNull()) && !jsonObj.get("limit_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `limit_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("limit_price").toString()));
+      }
+      if (!jsonObj.get("stop_price").isJsonNull() && (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) && !jsonObj.get("stop_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `stop_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_price").toString()));
       }
       // validate the optional field `trailing_stop`
       if (jsonObj.get("trailing_stop") != null && !jsonObj.get("trailing_stop").isJsonNull()) {

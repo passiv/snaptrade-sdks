@@ -27,10 +27,10 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the &#x60;universal_symbol&#x60; field will be populated.
+    /// The option security for the transaction. The field is &#x60;null&#x60; if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage&#39;s option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to &#x60;null&#x60;.
     /// </summary>
-    [DataContract(Name = "AccountOrderRecord_option_symbol")]
-    public partial class AccountOrderRecordOptionSymbol : IEquatable<AccountOrderRecordOptionSymbol>, IValidatableObject
+    [DataContract(Name = "AccountUniversalActivity_option_symbol")]
+    public partial class AccountUniversalActivityOptionSymbol : IEquatable<AccountUniversalActivityOptionSymbol>, IValidatableObject
     {
         /// <summary>
         /// The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;.
@@ -61,12 +61,12 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "option_type", IsRequired = true, EmitDefaultValue = true)]
         public OptionTypeEnum OptionType { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountOrderRecordOptionSymbol" /> class.
+        /// Initializes a new instance of the <see cref="AccountUniversalActivityOptionSymbol" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AccountOrderRecordOptionSymbol() { }
+        protected AccountUniversalActivityOptionSymbol() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountOrderRecordOptionSymbol" /> class.
+        /// Initializes a new instance of the <see cref="AccountUniversalActivityOptionSymbol" /> class.
         /// </summary>
         /// <param name="id">Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. (required).</param>
         /// <param name="ticker">The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option. (required).</param>
@@ -75,18 +75,18 @@ namespace SnapTrade.Net.Model
         /// <param name="expirationDate">The option expiration date. (required).</param>
         /// <param name="isMiniOption">Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100..</param>
         /// <param name="underlyingSymbol">underlyingSymbol (required).</param>
-        public AccountOrderRecordOptionSymbol(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), DateTime expirationDate = default(DateTime), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol))
+        public AccountUniversalActivityOptionSymbol(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), DateTime expirationDate = default(DateTime), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol))
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
-                throw new ArgumentNullException("id is a required property for AccountOrderRecordOptionSymbol and cannot be null");
+                throw new ArgumentNullException("id is a required property for AccountUniversalActivityOptionSymbol and cannot be null");
             }
             this.Id = id;
             // to ensure "ticker" is required (not null)
             if (ticker == null)
             {
-                throw new ArgumentNullException("ticker is a required property for AccountOrderRecordOptionSymbol and cannot be null");
+                throw new ArgumentNullException("ticker is a required property for AccountUniversalActivityOptionSymbol and cannot be null");
             }
             this.Ticker = ticker;
             this.OptionType = optionType;
@@ -95,7 +95,7 @@ namespace SnapTrade.Net.Model
             // to ensure "underlyingSymbol" is required (not null)
             if (underlyingSymbol == null)
             {
-                throw new ArgumentNullException("underlyingSymbol is a required property for AccountOrderRecordOptionSymbol and cannot be null");
+                throw new ArgumentNullException("underlyingSymbol is a required property for AccountUniversalActivityOptionSymbol and cannot be null");
             }
             this.UnderlyingSymbol = underlyingSymbol;
             this.IsMiniOption = isMiniOption;
@@ -150,7 +150,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AccountOrderRecordOptionSymbol {\n");
+            sb.Append("class AccountUniversalActivityOptionSymbol {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Ticker: ").Append(Ticker).Append("\n");
             sb.Append("  OptionType: ").Append(OptionType).Append("\n");
@@ -178,15 +178,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AccountOrderRecordOptionSymbol);
+            return this.Equals(input as AccountUniversalActivityOptionSymbol);
         }
 
         /// <summary>
-        /// Returns true if AccountOrderRecordOptionSymbol instances are equal
+        /// Returns true if AccountUniversalActivityOptionSymbol instances are equal
         /// </summary>
-        /// <param name="input">Instance of AccountOrderRecordOptionSymbol to be compared</param>
+        /// <param name="input">Instance of AccountUniversalActivityOptionSymbol to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(AccountOrderRecordOptionSymbol input)
+        public bool Equals(AccountUniversalActivityOptionSymbol input)
         {
             if (input == null)
             {
