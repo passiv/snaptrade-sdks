@@ -6,6 +6,16 @@ Aliases: app credentials, integration credentials
 
 Learn more: [Getting Started: API Keys](https://docs.snaptrade.com/docs/getting-started#getting-started-api-keys), [FAQ: API Keys](https://docs.snaptrade.com/docs/faq#faq-api-keys)
 
+## Personal Customer
+A free SnapTrade customer experience for individuals who connect and manage their own brokerage accounts. Personal users can use SnapTrade OAuth or a Personal client ID and consumer key.
+
+Learn more: [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial)
+
+## Commercial Customer
+A SnapTrade customer experience for companies and developers building apps for their own end users. Commercial integrations use a client ID and consumer key, create SnapTrade users for app users, and manage connections under those users.
+
+Learn more: [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial)
+
 ## Client ID
 The public key for your SnapTrade API key. In direct API requests, it is sent as the `clientId` query parameter.
 

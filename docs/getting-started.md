@@ -6,6 +6,8 @@ Welcome to SnapTrade! This is intended to be one of the first documents you read
 
 If you want a quick definitions reference while reading, see [Terminology](https://docs.snaptrade.com/docs/terminology).
 
+If you are unsure whether to build as an individual user or as an app with many end users, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
+
 Please see the FAQ of each section, as any questions you might have should be answered there.
 
 If after reading this document you still have questions or need help, please do not hesitate to contact us through our [Discord](https://discord.gg/rkYWBxb8Qu).
