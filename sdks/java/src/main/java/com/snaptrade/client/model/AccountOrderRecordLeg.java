@@ -24,6 +24,7 @@ import com.snaptrade.client.model.AccountOrderRecordStatusV2Nullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -67,7 +68,7 @@ public class AccountOrderRecordLeg {
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
-  private Double executionPrice;
+  private BigDecimal executionPrice;
 
   public static final String SERIALIZED_NAME_TOTAL_QUANTITY = "total_quantity";
   @SerializedName(SERIALIZED_NAME_TOTAL_QUANTITY)
@@ -175,21 +176,12 @@ public class AccountOrderRecordLeg {
   }
 
 
-  public AccountOrderRecordLeg executionPrice(Double executionPrice) {
+  public AccountOrderRecordLeg executionPrice(BigDecimal executionPrice) {
     
     
     
     
     this.executionPrice = executionPrice;
-    return this;
-  }
-
-  public AccountOrderRecordLeg executionPrice(Integer executionPrice) {
-    
-    
-    
-    
-    this.executionPrice = executionPrice.doubleValue();
     return this;
   }
 
@@ -200,12 +192,12 @@ public class AccountOrderRecordLeg {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "12.34", value = "Execution price for this leg, if available.")
 
-  public Double getExecutionPrice() {
+  public BigDecimal getExecutionPrice() {
     return executionPrice;
   }
 
 
-  public void setExecutionPrice(Double executionPrice) {
+  public void setExecutionPrice(BigDecimal executionPrice) {
     
     
     
@@ -479,6 +471,9 @@ public class AccountOrderRecordLeg {
       }
       if ((jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) && !jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
+      }
+      if (!jsonObj.get("execution_price").isJsonNull() && (jsonObj.get("execution_price") != null && !jsonObj.get("execution_price").isJsonNull()) && !jsonObj.get("execution_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `execution_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("execution_price").toString()));
       }
       if (!jsonObj.get("total_quantity").isJsonNull() && (jsonObj.get("total_quantity") != null && !jsonObj.get("total_quantity").isJsonNull()) && !jsonObj.get("total_quantity").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `total_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_quantity").toString()));

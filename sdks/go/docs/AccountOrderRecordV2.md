@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
 **TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **QuoteCurrency** | Pointer to **string** | Quote currency code for the order. | [optional] 
-**ExecutionPrice** | Pointer to **NullableFloat32** | The price at which the order was executed. | [optional] 
-**LimitPrice** | Pointer to **NullableFloat32** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
-**StopPrice** | Pointer to **NullableFloat32** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**ExecutionPrice** | Pointer to **NullableFloat64** | The price at which the order was executed. | [optional] 
+**LimitPrice** | Pointer to **NullableFloat64** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**StopPrice** | Pointer to **NullableFloat64** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **TrailingStop** | Pointer to [**NullableAccountOrderRecordTrailingStop**](AccountOrderRecordTrailingStop.md) |  | [optional] 
 **Legs** | Pointer to [**[]AccountOrderRecordLeg**](AccountOrderRecordLeg.md) | List of legs that make up the order. | [optional] 
 
@@ -305,20 +305,20 @@ HasQuoteCurrency returns a boolean if a field has been set.
 
 ### GetExecutionPrice
 
-`func (o *AccountOrderRecordV2) GetExecutionPrice() float32`
+`func (o *AccountOrderRecordV2) GetExecutionPrice() float64`
 
 GetExecutionPrice returns the ExecutionPrice field if non-nil, zero value otherwise.
 
 ### GetExecutionPriceOk
 
-`func (o *AccountOrderRecordV2) GetExecutionPriceOk() (*float32, bool)`
+`func (o *AccountOrderRecordV2) GetExecutionPriceOk() (*float64, bool)`
 
 GetExecutionPriceOk returns a tuple with the ExecutionPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExecutionPrice
 
-`func (o *AccountOrderRecordV2) SetExecutionPrice(v float32)`
+`func (o *AccountOrderRecordV2) SetExecutionPrice(v float64)`
 
 SetExecutionPrice sets ExecutionPrice field to given value.
 
@@ -340,20 +340,20 @@ HasExecutionPrice returns a boolean if a field has been set.
 UnsetExecutionPrice ensures that no value is present for ExecutionPrice, not even an explicit nil
 ### GetLimitPrice
 
-`func (o *AccountOrderRecordV2) GetLimitPrice() float32`
+`func (o *AccountOrderRecordV2) GetLimitPrice() float64`
 
 GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
 
 ### GetLimitPriceOk
 
-`func (o *AccountOrderRecordV2) GetLimitPriceOk() (*float32, bool)`
+`func (o *AccountOrderRecordV2) GetLimitPriceOk() (*float64, bool)`
 
 GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitPrice
 
-`func (o *AccountOrderRecordV2) SetLimitPrice(v float32)`
+`func (o *AccountOrderRecordV2) SetLimitPrice(v float64)`
 
 SetLimitPrice sets LimitPrice field to given value.
 
@@ -375,20 +375,20 @@ HasLimitPrice returns a boolean if a field has been set.
 UnsetLimitPrice ensures that no value is present for LimitPrice, not even an explicit nil
 ### GetStopPrice
 
-`func (o *AccountOrderRecordV2) GetStopPrice() float32`
+`func (o *AccountOrderRecordV2) GetStopPrice() float64`
 
 GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
 
 ### GetStopPriceOk
 
-`func (o *AccountOrderRecordV2) GetStopPriceOk() (*float32, bool)`
+`func (o *AccountOrderRecordV2) GetStopPriceOk() (*float64, bool)`
 
 GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopPrice
 
-`func (o *AccountOrderRecordV2) SetStopPrice(v float32)`
+`func (o *AccountOrderRecordV2) SetStopPrice(v float64)`
 
 SetStopPrice sets StopPrice field to given value.
 

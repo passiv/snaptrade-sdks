@@ -4617,10 +4617,7 @@ components:
               expiration_date: 2026-12-18T00:00:00.000+00:00
               strike_price: 240
           price: 38.4
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          currency: null
           units: -50
           average_purchase_price: 4126
         - symbol:
@@ -4653,10 +4650,7 @@ components:
               expiration_date: 2026-12-18T00:00:00.000+00:00
               strike_price: 240
           price: 38.4
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          currency: null
           units: -50
           average_purchase_price: 4126
         positions:
@@ -4768,28 +4762,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
@@ -4797,28 +4841,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
         account:
@@ -4899,28 +4993,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
@@ -4928,28 +5072,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
       properties:
@@ -5026,28 +5220,78 @@ components:
         time_placed: 2024-07-30T22:51:49.746Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         order_role: TRIGGER
-        stop_price: 12.5
+        stop_price: "12.50"
         trailing_stop:
           amount: "0.60"
           type: DOLLAR
         action: action
         total_quantity: "100"
         filled_quantity: "80"
-        option_symbol: null
+        option_symbol:
+          ticker: AAPL  261218C00240000
+          is_mini_option: false
+          option_type: CALL
+          underlying_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: SPY
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: SPDR S&P 500 ETF Trust
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          expiration_date: 2026-12-18T00:00:00.000+00:00
+          strike_price: 240
         order_type: Market
         brokerage_group_order_id: "1234567890"
         child_brokerage_order_ids:
           stop_loss_order_id: "12345678"
           take_profit_order_id: "12345678"
         expiry_date: 2024-08-05T00:05:57.409Z
-        limit_price: 12.34
-        quote_currency: null
+        limit_price: "12.34"
+        quote_currency:
+          code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
         time_updated: 2024-08-05T00:05:57.409Z
         canceled_quantity: "10"
         time_in_force: time_in_force
-        execution_price: 12.34
+        execution_price: "12.34"
         quote_universal_symbol: null
-        universal_symbol: null
+        universal_symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          currencies:
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
         open_quantity: "10"
         status: null
       properties:
@@ -5082,13 +5326,13 @@ components:
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
         universal_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_universal_symbol'
+          $ref: '#/components/schemas/UniversalSymbolNullable'
         option_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_option_symbol'
+          $ref: '#/components/schemas/OptionsSymbolNullable'
         quote_universal_symbol:
           $ref: '#/components/schemas/AccountOrderRecord_quote_universal_symbol'
         quote_currency:
-          $ref: '#/components/schemas/AccountOrderRecord_quote_currency'
+          $ref: '#/components/schemas/CurrencyNullable'
         action:
           description: |
             The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
@@ -5137,29 +5381,32 @@ components:
         execution_price:
           description: "The price at which the order was executed. For option orders,\
             \ this represents the price per share."
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
         limit_price:
           description: "The limit price is maximum price one is willing to pay for\
             \ a buy order or the minimum price one is willing to accept for a sell\
             \ order. Should only apply to `Limit` and `StopLimit` orders. For option\
             \ orders, this represents the price per share."
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
         stop_price:
           description: "The stop price is the price at which a stop order is triggered.\
             \ Should only apply to `Stop` and `StopLimit` orders. For option orders,\
             \ this represents the price per share."
-          example: 12.5
+          example: "12.50"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.5
+          type: string
+          x-konfig-original-example: "12.50"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price
         trailing_stop:
           $ref: '#/components/schemas/TrailingStopNullable'
@@ -5235,6 +5482,26 @@ components:
       type: object
       x-konfig-is-used-in-successful-response: true
       x-konfig-properties:
+        universal_symbol:
+          description: "Contains information about the security that the order is\
+            \ for. This field is only present for stock/ETF/crypto/mutual fund orders.\
+            \ For option orders, this field will be null and the `option_symbol` field\
+            \ will be populated."
+          nullable: true
+        option_symbol:
+          description: "Contains information about the option contract that the order\
+            \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
+            \ fund orders, this field will be null and the `universal_symbol` field\
+            \ will be populated."
+          nullable: true
+        quote_universal_symbol:
+          description: Quote cryptocurrency. This field is only present for cryptocurrency
+            pair orders with a cryptocurrency as quote.
+          nullable: true
+        quote_currency:
+          description: Quote currency. This field is only present for cryptocurrency
+            pair orders with a fiat currency as quote.
+          nullable: true
         trailing_stop:
           description: "For trailing stop orders, contains the trail configuration.\
             \ Null for all other order types."
@@ -5298,14 +5565,14 @@ components:
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: USD
           order_role: TRIGGER
           time_in_force: DAY
-          execution_price: 12.34
-          stop_price: 12.5
+          execution_price: "12.34"
+          stop_price: "12.50"
           legs:
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5318,7 +5585,7 @@ components:
             filled_quantity: "9"
             canceled_quantity: "1"
             status: null
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5340,14 +5607,14 @@ components:
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: USD
           order_role: TRIGGER
           time_in_force: DAY
-          execution_price: 12.34
-          stop_price: 12.5
+          execution_price: "12.34"
+          stop_price: "12.50"
           legs:
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5360,7 +5627,7 @@ components:
             filled_quantity: "9"
             canceled_quantity: "1"
             status: null
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5396,14 +5663,14 @@ components:
         time_executed: 2024-08-05T00:05:57.409Z
         time_placed: 2024-07-30T22:51:49.746Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-        limit_price: 12.34
+        limit_price: "12.34"
         quote_currency: USD
         order_role: TRIGGER
         time_in_force: DAY
-        execution_price: 12.34
-        stop_price: 12.5
+        execution_price: "12.34"
+        stop_price: "12.50"
         legs:
-        - execution_price: 12.34
+        - execution_price: "12.34"
           leg_id: leg_id
           action: action
           total_quantity: "10"
@@ -5416,7 +5683,7 @@ components:
           filled_quantity: "9"
           canceled_quantity: "1"
           status: null
-        - execution_price: 12.34
+        - execution_price: "12.34"
           leg_id: leg_id
           action: action
           total_quantity: "10"
@@ -5516,27 +5783,30 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-quote_currency
         execution_price:
           description: The price at which the order was executed.
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-execution_price
         limit_price:
           description: The limit price is maximum price one is willing to pay for
             a buy order or the minimum price one is willing to accept for a sell order.
             Should only apply to `Limit` and `StopLimit` orders.
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-limit_price
         stop_price:
           description: The stop price is the price at which a stop order is triggered.
             Should only apply to `Stop` and `StopLimit` orders.
-          example: 12.5
+          example: "12.50"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.5
+          type: string
+          x-konfig-original-example: "12.50"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price
         trailing_stop:
           $ref: '#/components/schemas/TrailingStopNullable'
@@ -5576,7 +5846,7 @@ components:
       additionalProperties: true
       description: Describes an individual leg that makes up an order in the V2 format.
       example:
-        execution_price: 12.34
+        execution_price: "12.34"
         leg_id: leg_id
         action: action
         total_quantity: "10"
@@ -5610,10 +5880,11 @@ components:
           type: string
         execution_price:
           description: "Execution price for this leg, if available."
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price
         total_quantity:
           description: The total number of shares or contracts associated with this
@@ -5827,10 +6098,7 @@ components:
             expiration_date: 2026-12-18T00:00:00.000+00:00
             strike_price: 240
         price: 38.4
-        currency:
-          code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
+        currency: null
         units: -50
         average_purchase_price: 4126
       properties:
@@ -5865,7 +6133,7 @@ components:
           x-konfig-original-example: 4126
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
         currency:
-          $ref: '#/components/schemas/CurrencyNullable'
+          $ref: '#/components/schemas/OptionsPosition_currency'
       type: object
       x-konfig-properties:
         currency:
@@ -10137,28 +10405,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
       properties:
@@ -10219,28 +10537,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
@@ -10248,28 +10616,78 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop:
             amount: "0.60"
             type: DOLLAR
           action: action
           total_quantity: "100"
           filled_quantity: "80"
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
           order_type: Market
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids:
             stop_loss_order_id: "12345678"
             take_profit_order_id: "12345678"
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
-          quote_currency: null
+          limit_price: "12.34"
+          quote_currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
-          universal_symbol: null
+          universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           open_quantity: "10"
           status: null
       properties:
@@ -10356,32 +10774,7 @@ components:
           currency: null
           id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           fx_rate: 1.032
-          option_symbol:
-            ticker: AAPL  261218C00240000
-            is_mini_option: false
-            option_type: CALL
-            underlying_symbol:
-              figi_code: BBG000B9XRY4
-              symbol: SPY
-              figi_instrument:
-                figi_code: BBG000B9Y5X2
-                figi_share_class: BBG001S5N8V8
-              raw_symbol: VAB
-              description: SPDR S&P 500 ETF Trust
-              currency: null
-              exchange: null
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type: null
-              currencies:
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2026-12-18T00:00:00.000+00:00
-            strike_price: 240
+          option_symbol: null
         - symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -10412,32 +10805,7 @@ components:
           currency: null
           id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           fx_rate: 1.032
-          option_symbol:
-            ticker: AAPL  261218C00240000
-            is_mini_option: false
-            option_type: CALL
-            underlying_symbol:
-              figi_code: BBG000B9XRY4
-              symbol: SPY
-              figi_instrument:
-                figi_code: BBG000B9Y5X2
-                figi_share_class: BBG001S5N8V8
-              raw_symbol: VAB
-              description: SPDR S&P 500 ETF Trust
-              currency: null
-              exchange: null
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type: null
-              currencies:
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2026-12-18T00:00:00.000+00:00
-            strike_price: 240
+          option_symbol: null
       properties:
         data:
           items:
@@ -10481,32 +10849,7 @@ components:
         currency: null
         id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         fx_rate: 1.032
-        option_symbol:
-          ticker: AAPL  261218C00240000
-          is_mini_option: false
-          option_type: CALL
-          underlying_symbol:
-            figi_code: BBG000B9XRY4
-            symbol: SPY
-            figi_instrument:
-              figi_code: BBG000B9Y5X2
-              figi_share_class: BBG001S5N8V8
-            raw_symbol: VAB
-            description: SPDR S&P 500 ETF Trust
-            currency: null
-            exchange: null
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: null
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          expiration_date: 2026-12-18T00:00:00.000+00:00
-          strike_price: 240
+        option_symbol: null
       properties:
         id:
           description: |
@@ -10520,7 +10863,7 @@ components:
         symbol:
           $ref: '#/components/schemas/SymbolNullable'
         option_symbol:
-          $ref: '#/components/schemas/OptionsSymbolNullable'
+          $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
         price:
           description: "The price of the security for the transaction. This is mostly\
             \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option\
@@ -10699,32 +11042,7 @@ components:
         currency: null
         id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         fx_rate: 1.032
-        option_symbol:
-          ticker: AAPL  261218C00240000
-          is_mini_option: false
-          option_type: CALL
-          underlying_symbol:
-            figi_code: BBG000B9XRY4
-            symbol: SPY
-            figi_instrument:
-              figi_code: BBG000B9Y5X2
-              figi_share_class: BBG001S5N8V8
-            raw_symbol: VAB
-            description: SPDR S&P 500 ETF Trust
-            currency: null
-            exchange: null
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: null
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          expiration_date: 2026-12-18T00:00:00.000+00:00
-          strike_price: 240
+        option_symbol: null
         account:
           number: Q6542138443
           name: Robinhood Individual
@@ -10753,7 +11071,7 @@ components:
         symbol:
           $ref: '#/components/schemas/SymbolNullable'
         option_symbol:
-          $ref: '#/components/schemas/OptionsSymbolNullable'
+          $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
         price:
           description: "The price of the security for the transaction. This is mostly\
             \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions."
@@ -10875,6 +11193,14 @@ components:
           x-konfig-original-example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-external_reference_id
       type: object
+      x-konfig-properties:
+        option_symbol:
+          description: "The option security for the transaction. The field is `null`\
+            \ if the transaction is not related to an option security (like a deposit,\
+            \ withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's\
+            \ option symbol. In cases where the brokerage option symbol is not recognized,\
+            \ the field will be set to `null`."
+          nullable: true
     FigiInstrument:
       additionalProperties: true
       description: "Financial Instrument Global Identifier (FIGI) information for\
@@ -11722,16 +12048,16 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price:
-      example: 12.5
-      type: number
+      example: "12.50"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_type:
       example: Market
@@ -11794,24 +12120,24 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-execution_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-limit_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price:
-      example: 12.5
-      type: number
+      example: "12.50"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TrailingStop-properties-amount:
       example: "0.60"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-total_quantity:
       example: "10"
@@ -15347,400 +15673,7 @@ components:
       type: string
       x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
-    TrailingStopNullable:
-      additionalProperties: true
-      description: Trail configuration for trailing stop orders.
-      example:
-        amount: "0.60"
-        type: DOLLAR
-      nullable: true
-      properties:
-        amount:
-          description: "The trail amount. Interpreted as dollars if `type` is `DOLLAR`,\
-            \ or a percentage if `type` is `PERCENT`."
-          example: "0.60"
-          type: string
-          x-konfig-original-example: "0.60"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TrailingStop-properties-amount
-        type:
-          description: "Whether the trail `amount` is a dollar amount (`DOLLAR`) or\
-            \ a percentage (`PERCENT`). For example, if `amount` is \"0.60\" and `type`\
-            \ is `DOLLAR`, the stop price will trail the market price by $0.60. If\
-            \ `amount` is \"5\" and `type` is `PERCENT`, the stop price will trail\
-            \ the market price by 5%."
-          enum:
-          - DOLLAR
-          - PERCENT
-          type: string
-      required:
-      - amount
-      - type
-      type: object
-    ChildBrokerageOrderIDsNullable:
-      additionalProperties: true
-      example:
-        stop_loss_order_id: "12345678"
-        take_profit_order_id: "12345678"
-      nullable: true
-      properties:
-        take_profit_order_id:
-          description: The brokerage order ID for the take profit leg of the bracket
-            order
-          example: "12345678"
-          type: string
-          x-konfig-original-example: "12345678"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id
-        stop_loss_order_id:
-          description: The brokerage order ID for the stop loss leg of the bracket
-            order
-          example: "12345678"
-          type: string
-          x-konfig-original-example: "12345678"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
-      type: object
-    AccountOrderRecordStatusV2Nullable:
-      description: Indicates the status of an order. SnapTrade does a best effort
-        to map brokerage statuses to statuses in this enum.
-      enum:
-      - PENDING
-      - REJECTED
-      - CANCELED
-      - CANCEL_PENDING
-      - PARTIAL_CANCELED
-      - EXECUTED
-      - PARTIALLY_EXECUTED
-      - REPLACED
-      - REPLACE_PENDING
-      - EXPIRED
-      nullable: true
-      type: string
-    CurrencyNullable:
-      additionalProperties: true
-      description: Describes a currency object.
-      example:
-        code: USD
-        name: US Dollar
-        id: 87b24961-b51e-4db8-9226-f198f6518a89
-      nullable: true
-      properties:
-        id:
-          description: Unique identifier for the currency. This is the UUID used to
-            reference the currency in SnapTrade.
-          example: 87b24961-b51e-4db8-9226-f198f6518a89
-          format: uuid
-          type: string
-          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CurrencyID
-        code:
-          description: The ISO-4217 currency code for the currency.
-          example: USD
-          type: string
-          x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-code
-        name:
-          description: A human-friendly name of the currency.
-          example: US Dollar
-          type: string
-          x-konfig-original-example: US Dollar
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-name
-      type: object
-    FigiInstrumentNullable:
-      additionalProperties: true
-      description: "Financial Instrument Global Identifier (FIGI) information for\
-        \ the security. See [OpenFIGI](https://www.openfigi.com/) for more information."
-      example:
-        figi_code: BBG000B9Y5X2
-        figi_share_class: BBG001S5N8V8
-      nullable: true
-      properties:
-        figi_code:
-          description: "This identifier is unique per security per trading venue.\
-            \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
-            \ for more information."
-          example: BBG000B9Y5X2
-          nullable: true
-          type: string
-          x-konfig-original-example: BBG000B9Y5X2
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FigiInstrument-properties-figi_code
-        figi_share_class:
-          description: "This enables users to link multiple FIGIs for the same security\
-            \ in order to obtain an aggregated view across all countries and all exchanges.\
-            \ For example, `AAPL` has a different FIGI for each exchange/trading venue\
-            \ it is traded on. The `figi_share_class` is the same for all of these\
-            \ FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
-            \ for more information."
-          example: BBG001S5N8V8
-          nullable: true
-          type: string
-          x-konfig-original-example: BBG001S5N8V8
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FigiInstrument-properties-figi_share_class
-      type: object
-    UnitsNullable:
-      description: Number of shares for the order. This can be a decimal for fractional
-        orders. Must be `null` if `notional_value` is provided.
-      example: 10.5
-      nullable: true
-      type: number
-      x-konfig-original-example: 10.5
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
-    NotionalValueNullable: {}
-    MlegPriceEffectStrictNullable:
-      description: "The desired price_effect for `LIMIT` and `STOP_LOSS_LIMIT` orders.\
-        \ Values are `CREDIT`, `DEBIT`, `EVEN`"
-      enum:
-      - CREDIT
-      - DEBIT
-      - EVEN
-      example: DEBIT
-      nullable: true
-      type: string
-      x-konfig-original-example: DEBIT
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
-    UniversalSymbolIDNullable:
-      description: Unique identifier for the symbol within SnapTrade. This is the
-        ID used to reference the symbol in SnapTrade API calls.
-      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-      format: uuid
-      nullable: true
-      type: string
-      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
-    CryptocurrencyIncrementNullable:
-      description: |
-        The precision or smallest price incremental step available for this cryptocurrency pair
-      example: "0.001"
-      nullable: true
-      type: string
-      x-konfig-original-example: "0.001"
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyIncrement
-    AccountOrderRecordNullable:
-      additionalProperties: true
-      description: "Describes a single recent order in an account. Each record here\
-        \ represents a single order leg. For multi-leg orders, there will be multiple\
-        \ records."
-      example:
-        time_executed: 2024-08-05T00:05:57.409Z
-        symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        time_placed: 2024-07-30T22:51:49.746Z
-        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-        order_role: TRIGGER
-        stop_price: 12.5
-        trailing_stop:
-          amount: "0.60"
-          type: DOLLAR
-        action: action
-        total_quantity: "100"
-        filled_quantity: "80"
-        option_symbol: null
-        order_type: Market
-        brokerage_group_order_id: "1234567890"
-        child_brokerage_order_ids:
-          stop_loss_order_id: "12345678"
-          take_profit_order_id: "12345678"
-        expiry_date: 2024-08-05T00:05:57.409Z
-        limit_price: 12.34
-        quote_currency: null
-        time_updated: 2024-08-05T00:05:57.409Z
-        canceled_quantity: "10"
-        time_in_force: time_in_force
-        execution_price: 12.34
-        quote_universal_symbol: null
-        universal_symbol: null
-        open_quantity: "10"
-        status: null
-      nullable: true
-      properties:
-        brokerage_order_id:
-          description: Order ID returned by brokerage. This is the unique identifier
-            for the order in the brokerage system.
-          example: 66a033fa-da74-4fcf-b527-feefdec9257e
-          type: string
-          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
-        brokerage_group_order_id:
-          description: |
-            The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together.
-            Null for non-complex orders or when the brokerage does not return a group identifier.
-          example: "1234567890"
-          nullable: true
-          type: string
-          x-konfig-original-example: "1234567890"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-brokerage_group_order_id
-        order_role:
-          description: |
-            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
-          enum:
-          - TRIGGER
-          - CONDITIONAL
-          - PEER
-          example: TRIGGER
-          nullable: true
-          type: string
-          x-konfig-original-example: TRIGGER
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_role
-        status:
-          $ref: '#/components/schemas/AccountOrderRecordStatus'
-        universal_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_universal_symbol'
-        option_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_option_symbol'
-        quote_universal_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_quote_universal_symbol'
-        quote_currency:
-          $ref: '#/components/schemas/AccountOrderRecord_quote_currency'
-        action:
-          description: |
-            The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
-              - BUY
-              - SELL
-              - BUY_COVER
-              - SELL_SHORT
-              - BUY_OPEN
-              - BUY_CLOSE
-              - SELL_OPEN
-              - SELL_CLOSE
-          type: string
-        total_quantity:
-          description: "The total number of shares or contracts of the order. This\
-            \ should be the sum of the filled, canceled, and open quantities. Can\
-            \ be a decimal number for fractional shares."
-          example: "100"
-          nullable: true
-          type: string
-          x-konfig-original-example: "100"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity
-        open_quantity:
-          description: The number of shares or contracts that are still open (waiting
-            for execution). Can be a decimal number for fractional shares.
-          example: "10"
-          nullable: true
-          type: string
-          x-konfig-original-example: "10"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-open_quantity
-        canceled_quantity:
-          description: The number of shares or contracts that have been canceled.
-            Can be a decimal number for fractional shares.
-          example: "10"
-          nullable: true
-          type: string
-          x-konfig-original-example: "10"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-canceled_quantity
-        filled_quantity:
-          description: The number of shares or contracts that have been filled. Can
-            be a decimal number for fractional shares.
-          example: "80"
-          nullable: true
-          type: string
-          x-konfig-original-example: "80"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity
-        execution_price:
-          description: "The price at which the order was executed. For option orders,\
-            \ this represents the price per share."
-          example: 12.34
-          nullable: true
-          type: number
-          x-konfig-original-example: 12.34
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
-        limit_price:
-          description: "The limit price is maximum price one is willing to pay for\
-            \ a buy order or the minimum price one is willing to accept for a sell\
-            \ order. Should only apply to `Limit` and `StopLimit` orders. For option\
-            \ orders, this represents the price per share."
-          example: 12.34
-          nullable: true
-          type: number
-          x-konfig-original-example: 12.34
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
-        stop_price:
-          description: "The stop price is the price at which a stop order is triggered.\
-            \ Should only apply to `Stop` and `StopLimit` orders. For option orders,\
-            \ this represents the price per share."
-          example: 12.5
-          nullable: true
-          type: number
-          x-konfig-original-example: 12.5
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price
-        trailing_stop:
-          $ref: '#/components/schemas/TrailingStopNullable'
-        order_type:
-          description: "The type of order placed. The most common values are `Market`,\
-            \ `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order\
-            \ types to these values. When mapping fails, we will return the brokerage's\
-            \ order type value."
-          example: Market
-          nullable: true
-          type: string
-          x-konfig-original-example: Market
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_type
-        time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
-              - `Day` - Day. The order is valid only for the trading day on which it is placed.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-              - `MOO` - Market On Open. The order is to be executed at the day's opening price.
-              - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.
-          type: string
-        time_placed:
-          description: The time the order was placed. This is the time the order was
-            submitted to the brokerage.
-          example: 2024-07-30T22:51:49.746Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-07-30T22:51:49.746Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed
-        time_updated:
-          description: The time the order was last updated in the brokerage system.
-            This value is not always available from the brokerage.
-          example: 2024-08-05T00:05:57.409Z
-          format: date-time
-          nullable: true
-          type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated
-        time_executed:
-          description: The time the order was executed in the brokerage system. This
-            value is not always available from the brokerage.
-          example: 2024-08-05T00:05:57.409Z
-          format: date-time
-          nullable: true
-          type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed
-        expiry_date:
-          description: The time the order expires. This value is not always available
-            from the brokerage.
-          example: 2024-08-05T00:05:57.409Z
-          format: date-time
-          nullable: true
-          type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date
-        symbol:
-          deprecated: true
-          description: "A unique ID for the security within SnapTrade, scoped to the\
-            \ brokerage account that the security belongs to. This is a legacy field\
-            \ and should not be used. Do not rely on this being a stable ID as it\
-            \ can change."
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
-        child_brokerage_order_ids:
-          $ref: '#/components/schemas/ChildBrokerageOrderIDsNullable'
-      type: object
-      x-konfig-is-used-in-successful-response: true
-      x-konfig-properties:
-        trailing_stop:
-          description: "For trailing stop orders, contains the trail configuration.\
-            \ Null for all other order types."
-          nullable: true
-        child_brokerage_order_ids:
-          nullable: true
-    SymbolNullable:
+    UniversalSymbolNullable:
       additionalProperties: true
       description: Uniquely describes a single security + exchange combination across
         all brokerages.
@@ -15760,6 +15693,13 @@ components:
           code: cs
           description: Common Stock
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        currencies:
+        - code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
+        - code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
       nullable: true
       properties:
         id:
@@ -15780,7 +15720,7 @@ components:
           example: VAB.TO
           type: string
           x-konfig-original-example: VAB.TO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-symbol
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-symbol
         raw_symbol:
           description: "The raw symbol is `symbol` with the exchange suffix removed.\
             \ For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\"\
@@ -15788,7 +15728,7 @@ components:
           example: VAB
           type: string
           x-konfig-original-example: VAB
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-raw_symbol
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-raw_symbol
         description:
           description: A human-readable description of the security. This is usually
             the company name or ETF name.
@@ -15796,7 +15736,7 @@ components:
           nullable: true
           type: string
           x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-description
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-description
         currency:
           $ref: '#/components/schemas/Symbol_currency'
         exchange:
@@ -15812,10 +15752,25 @@ components:
           nullable: true
           type: string
           x-konfig-original-example: BBG000B9XRY4
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-figi_code
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-figi_code
         figi_instrument:
           $ref: '#/components/schemas/FigiInstrumentNullable'
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid use case for this.
+          items:
+            $ref: '#/components/schemas/Currency'
+          type: array
+      required:
+      - currencies
+      - currency
+      - id
+      - raw_symbol
+      - symbol
+      - type
       type: object
+      x-konfig-is-used-in-successful-response: true
     OptionsSymbolNullable:
       additionalProperties: true
       description: Uniquely describes an option security + exchange combination across
@@ -15902,6 +15857,548 @@ components:
       - ticker
       - underlying_symbol
       type: object
+    CurrencyNullable:
+      additionalProperties: true
+      description: Describes a currency object.
+      example:
+        code: USD
+        name: US Dollar
+        id: 87b24961-b51e-4db8-9226-f198f6518a89
+      nullable: true
+      properties:
+        id:
+          description: Unique identifier for the currency. This is the UUID used to
+            reference the currency in SnapTrade.
+          example: 87b24961-b51e-4db8-9226-f198f6518a89
+          format: uuid
+          type: string
+          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CurrencyID
+        code:
+          description: The ISO-4217 currency code for the currency.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-code
+        name:
+          description: A human-friendly name of the currency.
+          example: US Dollar
+          type: string
+          x-konfig-original-example: US Dollar
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-name
+      type: object
+    TrailingStopNullable:
+      additionalProperties: true
+      description: Trail configuration for trailing stop orders.
+      example:
+        amount: "0.60"
+        type: DOLLAR
+      nullable: true
+      properties:
+        amount:
+          description: "The trail amount. Interpreted as dollars if `type` is `DOLLAR`,\
+            \ or a percentage if `type` is `PERCENT`."
+          example: "0.60"
+          type: string
+          x-konfig-original-example: "0.60"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TrailingStop-properties-amount
+        type:
+          description: "Whether the trail `amount` is a dollar amount (`DOLLAR`) or\
+            \ a percentage (`PERCENT`). For example, if `amount` is \"0.60\" and `type`\
+            \ is `DOLLAR`, the stop price will trail the market price by $0.60. If\
+            \ `amount` is \"5\" and `type` is `PERCENT`, the stop price will trail\
+            \ the market price by 5%."
+          enum:
+          - DOLLAR
+          - PERCENT
+          type: string
+      required:
+      - amount
+      - type
+      type: object
+    ChildBrokerageOrderIDsNullable:
+      additionalProperties: true
+      example:
+        stop_loss_order_id: "12345678"
+        take_profit_order_id: "12345678"
+      nullable: true
+      properties:
+        take_profit_order_id:
+          description: The brokerage order ID for the take profit leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id
+        stop_loss_order_id:
+          description: The brokerage order ID for the stop loss leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
+      type: object
+    AccountOrderRecordStatusV2Nullable:
+      description: Indicates the status of an order. SnapTrade does a best effort
+        to map brokerage statuses to statuses in this enum.
+      enum:
+      - PENDING
+      - REJECTED
+      - CANCELED
+      - CANCEL_PENDING
+      - PARTIAL_CANCELED
+      - EXECUTED
+      - PARTIALLY_EXECUTED
+      - REPLACED
+      - REPLACE_PENDING
+      - EXPIRED
+      nullable: true
+      type: string
+    FigiInstrumentNullable:
+      additionalProperties: true
+      description: "Financial Instrument Global Identifier (FIGI) information for\
+        \ the security. See [OpenFIGI](https://www.openfigi.com/) for more information."
+      example:
+        figi_code: BBG000B9Y5X2
+        figi_share_class: BBG001S5N8V8
+      nullable: true
+      properties:
+        figi_code:
+          description: "This identifier is unique per security per trading venue.\
+            \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information."
+          example: BBG000B9Y5X2
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9Y5X2
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FigiInstrument-properties-figi_code
+        figi_share_class:
+          description: "This enables users to link multiple FIGIs for the same security\
+            \ in order to obtain an aggregated view across all countries and all exchanges.\
+            \ For example, `AAPL` has a different FIGI for each exchange/trading venue\
+            \ it is traded on. The `figi_share_class` is the same for all of these\
+            \ FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information."
+          example: BBG001S5N8V8
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG001S5N8V8
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FigiInstrument-properties-figi_share_class
+      type: object
+    UnitsNullable:
+      description: Number of shares for the order. This can be a decimal for fractional
+        orders. Must be `null` if `notional_value` is provided.
+      example: 10.5
+      nullable: true
+      type: number
+      x-konfig-original-example: 10.5
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
+    NotionalValueNullable: {}
+    MlegPriceEffectStrictNullable:
+      description: "The desired price_effect for `LIMIT` and `STOP_LOSS_LIMIT` orders.\
+        \ Values are `CREDIT`, `DEBIT`, `EVEN`"
+      enum:
+      - CREDIT
+      - DEBIT
+      - EVEN
+      example: DEBIT
+      nullable: true
+      type: string
+      x-konfig-original-example: DEBIT
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
+    UniversalSymbolIDNullable:
+      description: Unique identifier for the symbol within SnapTrade. This is the
+        ID used to reference the symbol in SnapTrade API calls.
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      nullable: true
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
+    CryptocurrencyIncrementNullable:
+      description: |
+        The precision or smallest price incremental step available for this cryptocurrency pair
+      example: "0.001"
+      nullable: true
+      type: string
+      x-konfig-original-example: "0.001"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyIncrement
+    AccountOrderRecordNullable:
+      additionalProperties: true
+      description: "Describes a single recent order in an account. Each record here\
+        \ represents a single order leg. For multi-leg orders, there will be multiple\
+        \ records."
+      example:
+        time_executed: 2024-08-05T00:05:57.409Z
+        symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        time_placed: 2024-07-30T22:51:49.746Z
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        order_role: TRIGGER
+        stop_price: "12.50"
+        trailing_stop:
+          amount: "0.60"
+          type: DOLLAR
+        action: action
+        total_quantity: "100"
+        filled_quantity: "80"
+        option_symbol:
+          ticker: AAPL  261218C00240000
+          is_mini_option: false
+          option_type: CALL
+          underlying_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: SPY
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: SPDR S&P 500 ETF Trust
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          expiration_date: 2026-12-18T00:00:00.000+00:00
+          strike_price: 240
+        order_type: Market
+        brokerage_group_order_id: "1234567890"
+        child_brokerage_order_ids:
+          stop_loss_order_id: "12345678"
+          take_profit_order_id: "12345678"
+        expiry_date: 2024-08-05T00:05:57.409Z
+        limit_price: "12.34"
+        quote_currency:
+          code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
+        time_updated: 2024-08-05T00:05:57.409Z
+        canceled_quantity: "10"
+        time_in_force: time_in_force
+        execution_price: "12.34"
+        quote_universal_symbol: null
+        universal_symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          currencies:
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+        open_quantity: "10"
+        status: null
+      nullable: true
+      properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        brokerage_group_order_id:
+          description: |
+            The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together.
+            Null for non-complex orders or when the brokerage does not return a group identifier.
+          example: "1234567890"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1234567890"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-brokerage_group_order_id
+        order_role:
+          description: |
+            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+          enum:
+          - TRIGGER
+          - CONDITIONAL
+          - PEER
+          example: TRIGGER
+          nullable: true
+          type: string
+          x-konfig-original-example: TRIGGER
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_role
+        status:
+          $ref: '#/components/schemas/AccountOrderRecordStatus'
+        universal_symbol:
+          $ref: '#/components/schemas/UniversalSymbolNullable'
+        option_symbol:
+          $ref: '#/components/schemas/OptionsSymbolNullable'
+        quote_universal_symbol:
+          $ref: '#/components/schemas/AccountOrderRecord_quote_universal_symbol'
+        quote_currency:
+          $ref: '#/components/schemas/CurrencyNullable'
+        action:
+          description: |
+            The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
+              - BUY
+              - SELL
+              - BUY_COVER
+              - SELL_SHORT
+              - BUY_OPEN
+              - BUY_CLOSE
+              - SELL_OPEN
+              - SELL_CLOSE
+          type: string
+        total_quantity:
+          description: "The total number of shares or contracts of the order. This\
+            \ should be the sum of the filled, canceled, and open quantities. Can\
+            \ be a decimal number for fractional shares."
+          example: "100"
+          nullable: true
+          type: string
+          x-konfig-original-example: "100"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity
+        open_quantity:
+          description: The number of shares or contracts that are still open (waiting
+            for execution). Can be a decimal number for fractional shares.
+          example: "10"
+          nullable: true
+          type: string
+          x-konfig-original-example: "10"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-open_quantity
+        canceled_quantity:
+          description: The number of shares or contracts that have been canceled.
+            Can be a decimal number for fractional shares.
+          example: "10"
+          nullable: true
+          type: string
+          x-konfig-original-example: "10"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-canceled_quantity
+        filled_quantity:
+          description: The number of shares or contracts that have been filled. Can
+            be a decimal number for fractional shares.
+          example: "80"
+          nullable: true
+          type: string
+          x-konfig-original-example: "80"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity
+        execution_price:
+          description: "The price at which the order was executed. For option orders,\
+            \ this represents the price per share."
+          example: "12.34"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "12.34"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
+        limit_price:
+          description: "The limit price is maximum price one is willing to pay for\
+            \ a buy order or the minimum price one is willing to accept for a sell\
+            \ order. Should only apply to `Limit` and `StopLimit` orders. For option\
+            \ orders, this represents the price per share."
+          example: "12.34"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "12.34"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
+        stop_price:
+          description: "The stop price is the price at which a stop order is triggered.\
+            \ Should only apply to `Stop` and `StopLimit` orders. For option orders,\
+            \ this represents the price per share."
+          example: "12.50"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "12.50"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price
+        trailing_stop:
+          $ref: '#/components/schemas/TrailingStopNullable'
+        order_type:
+          description: "The type of order placed. The most common values are `Market`,\
+            \ `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order\
+            \ types to these values. When mapping fails, we will return the brokerage's\
+            \ order type value."
+          example: Market
+          nullable: true
+          type: string
+          x-konfig-original-example: Market
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_type
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
+              - `Day` - Day. The order is valid only for the trading day on which it is placed.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+              - `MOO` - Market On Open. The order is to be executed at the day's opening price.
+              - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.
+          type: string
+        time_placed:
+          description: The time the order was placed. This is the time the order was
+            submitted to the brokerage.
+          example: 2024-07-30T22:51:49.746Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed
+        time_updated:
+          description: The time the order was last updated in the brokerage system.
+            This value is not always available from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated
+        time_executed:
+          description: The time the order was executed in the brokerage system. This
+            value is not always available from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed
+        expiry_date:
+          description: The time the order expires. This value is not always available
+            from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date
+        symbol:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+        child_brokerage_order_ids:
+          $ref: '#/components/schemas/ChildBrokerageOrderIDsNullable'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+      x-konfig-properties:
+        universal_symbol:
+          description: "Contains information about the security that the order is\
+            \ for. This field is only present for stock/ETF/crypto/mutual fund orders.\
+            \ For option orders, this field will be null and the `option_symbol` field\
+            \ will be populated."
+          nullable: true
+        option_symbol:
+          description: "Contains information about the option contract that the order\
+            \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
+            \ fund orders, this field will be null and the `universal_symbol` field\
+            \ will be populated."
+          nullable: true
+        quote_universal_symbol:
+          description: Quote cryptocurrency. This field is only present for cryptocurrency
+            pair orders with a cryptocurrency as quote.
+          nullable: true
+        quote_currency:
+          description: Quote currency. This field is only present for cryptocurrency
+            pair orders with a fiat currency as quote.
+          nullable: true
+        trailing_stop:
+          description: "For trailing stop orders, contains the trail configuration.\
+            \ Null for all other order types."
+          nullable: true
+        child_brokerage_order_ids:
+          nullable: true
+    SymbolNullable:
+      additionalProperties: true
+      description: Uniquely describes a single security + exchange combination across
+        all brokerages.
+      example:
+        figi_code: BBG000B9XRY4
+        symbol: VAB.TO
+        figi_instrument:
+          figi_code: BBG000B9Y5X2
+          figi_share_class: BBG001S5N8V8
+        raw_symbol: VAB
+        description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+        currency: null
+        exchange: null
+        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        type:
+          is_supported: true
+          code: cs
+          description: Common Stock
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      nullable: true
+      properties:
+        id:
+          description: Unique identifier for the symbol within SnapTrade. This is
+            the ID used to reference the symbol in SnapTrade API calls.
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
+        symbol:
+          description: "The security's trading ticker symbol. For example \"AAPL\"\
+            \ for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click\
+            \ on \"Yahoo Finance Market Coverage and Data Delays\"). For example,\
+            \ for securities traded on the Toronto Stock Exchange, the symbol has\
+            \ a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol\
+            \ does not have a suffix."
+          example: VAB.TO
+          type: string
+          x-konfig-original-example: VAB.TO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-symbol
+        raw_symbol:
+          description: "The raw symbol is `symbol` with the exchange suffix removed.\
+            \ For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\"\
+            ."
+          example: VAB
+          type: string
+          x-konfig-original-example: VAB
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-raw_symbol
+        description:
+          description: A human-readable description of the security. This is usually
+            the company name or ETF name.
+          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          nullable: true
+          type: string
+          x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-description
+        currency:
+          $ref: '#/components/schemas/Symbol_currency'
+        exchange:
+          $ref: '#/components/schemas/Symbol_exchange'
+        type:
+          $ref: '#/components/schemas/SecurityType'
+        figi_code:
+          description: "This identifier is unique per security per trading venue.\
+            \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information. This value should be the same as the `figi_code`\
+            \ in the `figi_instrument` child property."
+          example: BBG000B9XRY4
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9XRY4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Symbol-properties-figi_code
+        figi_instrument:
+          $ref: '#/components/schemas/FigiInstrumentNullable'
+      type: object
     AccountInformation_getUserAccountOrderDetail_request:
       properties:
         brokerage_order_id:
@@ -15970,30 +16467,12 @@ components:
           type: string
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-currency
-    AccountOrderRecord_universal_symbol:
-      allOf:
-      - $ref: '#/components/schemas/UniversalSymbol'
-      description: "Contains information about the security that the order is for.\
-        \ This field is only present for stock/ETF/crypto/mutual fund orders. For\
-        \ option orders, this field will be null and the `option_symbol` field will\
-        \ be populated."
-    AccountOrderRecord_option_symbol:
-      allOf:
-      - $ref: '#/components/schemas/OptionsSymbol'
-      description: "Contains information about the option contract that the order\
-        \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
-        \ fund orders, this field will be null and the `universal_symbol` field will\
-        \ be populated."
     AccountOrderRecord_quote_universal_symbol:
       allOf:
       - $ref: '#/components/schemas/UniversalSymbol'
       description: Quote cryptocurrency. This field is only present for cryptocurrency
         pair orders with a cryptocurrency as quote.
-    AccountOrderRecord_quote_currency:
-      allOf:
-      - $ref: '#/components/schemas/Currency'
-      description: Quote currency. This field is only present for cryptocurrency pair
-        orders with a fiat currency as quote.
+      nullable: true
     OptionQuote_greeks:
       additionalProperties: true
       description: The Greeks for the option contract.
@@ -16033,6 +16512,14 @@ components:
           x-konfig-original-example: 0.2
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-vega
       type: object
+    OptionsPosition_currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency'
+      deprecated: true
+      description: The currency of the price. This field is deprecated and will be
+        removed in a future version. The currency of the price is determined by the
+        currency of the underlying security.
+      nullable: true
     OptionStrategy_legs_inner:
       properties:
         option_symbol_id:
@@ -16287,6 +16774,15 @@ components:
       - amount
       - currency
       type: object
+    AccountUniversalActivity_option_symbol:
+      allOf:
+      - $ref: '#/components/schemas/OptionsSymbol'
+      description: "The option security for the transaction. The field is `null` if\
+        \ the transaction is not related to an option security (like a deposit, withdrawal,\
+        \ fee, etc). SnapTrade does a best effort to map the brokerage's option symbol.\
+        \ In cases where the brokerage option symbol is not recognized, the field\
+        \ will be set to `null`."
+      nullable: true
     AccountUniversalActivity_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

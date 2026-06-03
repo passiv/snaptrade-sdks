@@ -4530,7 +4530,7 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop: null
           action: action
           total_quantity: "100"
@@ -4540,12 +4540,12 @@ components:
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids: null
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
           universal_symbol: null
           open_quantity: "10"
@@ -4555,7 +4555,7 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop: null
           action: action
           total_quantity: "100"
@@ -4565,12 +4565,12 @@ components:
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids: null
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
           universal_symbol: null
           open_quantity: "10"
@@ -4652,7 +4652,7 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop: null
           action: action
           total_quantity: "100"
@@ -4662,12 +4662,12 @@ components:
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids: null
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
           universal_symbol: null
           open_quantity: "10"
@@ -4677,7 +4677,7 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop: null
           action: action
           total_quantity: "100"
@@ -4687,12 +4687,12 @@ components:
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids: null
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
           universal_symbol: null
           open_quantity: "10"
@@ -4769,7 +4769,7 @@ components:
         time_placed: 2024-07-30T22:51:49.746Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         order_role: TRIGGER
-        stop_price: 12.5
+        stop_price: "12.50"
         trailing_stop: null
         action: action
         total_quantity: "100"
@@ -4779,12 +4779,12 @@ components:
         brokerage_group_order_id: "1234567890"
         child_brokerage_order_ids: null
         expiry_date: 2024-08-05T00:05:57.409Z
-        limit_price: 12.34
+        limit_price: "12.34"
         quote_currency: null
         time_updated: 2024-08-05T00:05:57.409Z
         canceled_quantity: "10"
         time_in_force: time_in_force
-        execution_price: 12.34
+        execution_price: "12.34"
         quote_universal_symbol: null
         universal_symbol: null
         open_quantity: "10"
@@ -4876,29 +4876,32 @@ components:
         execution_price:
           description: "The price at which the order was executed. For option orders,\
             \ this represents the price per share."
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
         limit_price:
           description: "The limit price is maximum price one is willing to pay for\
             \ a buy order or the minimum price one is willing to accept for a sell\
             \ order. Should only apply to `Limit` and `StopLimit` orders. For option\
             \ orders, this represents the price per share."
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
         stop_price:
           description: "The stop price is the price at which a stop order is triggered.\
             \ Should only apply to `Stop` and `StopLimit` orders. For option orders,\
             \ this represents the price per share."
-          example: 12.5
+          example: "12.50"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.5
+          type: string
+          x-konfig-original-example: "12.50"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price
         trailing_stop:
           $ref: '#/components/schemas/AccountOrderRecord_trailing_stop'
@@ -5028,14 +5031,14 @@ components:
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: USD
           order_role: TRIGGER
           time_in_force: DAY
-          execution_price: 12.34
-          stop_price: 12.5
+          execution_price: "12.34"
+          stop_price: "12.50"
           legs:
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5048,7 +5051,7 @@ components:
             filled_quantity: "9"
             canceled_quantity: "1"
             status: ""
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5068,14 +5071,14 @@ components:
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: USD
           order_role: TRIGGER
           time_in_force: DAY
-          execution_price: 12.34
-          stop_price: 12.5
+          execution_price: "12.34"
+          stop_price: "12.50"
           legs:
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5088,7 +5091,7 @@ components:
             filled_quantity: "9"
             canceled_quantity: "1"
             status: ""
-          - execution_price: 12.34
+          - execution_price: "12.34"
             leg_id: leg_id
             action: action
             total_quantity: "10"
@@ -5121,14 +5124,14 @@ components:
         time_executed: 2024-08-05T00:05:57.409Z
         time_placed: 2024-07-30T22:51:49.746Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
-        limit_price: 12.34
+        limit_price: "12.34"
         quote_currency: USD
         order_role: TRIGGER
         time_in_force: DAY
-        execution_price: 12.34
-        stop_price: 12.5
+        execution_price: "12.34"
+        stop_price: "12.50"
         legs:
-        - execution_price: 12.34
+        - execution_price: "12.34"
           leg_id: leg_id
           action: action
           total_quantity: "10"
@@ -5141,7 +5144,7 @@ components:
           filled_quantity: "9"
           canceled_quantity: "1"
           status: ""
-        - execution_price: 12.34
+        - execution_price: "12.34"
           leg_id: leg_id
           action: action
           total_quantity: "10"
@@ -5239,27 +5242,30 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-quote_currency
         execution_price:
           description: The price at which the order was executed.
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-execution_price
         limit_price:
           description: The limit price is maximum price one is willing to pay for
             a buy order or the minimum price one is willing to accept for a sell order.
             Should only apply to `Limit` and `StopLimit` orders.
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-limit_price
         stop_price:
           description: The stop price is the price at which a stop order is triggered.
             Should only apply to `Stop` and `StopLimit` orders.
-          example: 12.5
+          example: "12.50"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.5
+          type: string
+          x-konfig-original-example: "12.50"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price
         trailing_stop:
           $ref: '#/components/schemas/AccountOrderRecord_trailing_stop'
@@ -5298,7 +5304,7 @@ components:
       additionalProperties: true
       description: Describes an individual leg that makes up an order in the V2 format.
       example:
-        execution_price: 12.34
+        execution_price: "12.34"
         leg_id: leg_id
         action: action
         total_quantity: "10"
@@ -5332,10 +5338,11 @@ components:
           type: string
         execution_price:
           description: "Execution price for this leg, if available."
-          example: 12.34
+          example: "12.34"
+          format: decimal
           nullable: true
-          type: number
-          x-konfig-original-example: 12.34
+          type: string
+          x-konfig-original-example: "12.34"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price
         total_quantity:
           description: The total number of shares or contracts associated with this
@@ -9874,7 +9881,7 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop: null
           action: action
           total_quantity: "100"
@@ -9884,12 +9891,12 @@ components:
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids: null
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
           universal_symbol: null
           open_quantity: "10"
@@ -9899,7 +9906,7 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
-          stop_price: 12.5
+          stop_price: "12.50"
           trailing_stop: null
           action: action
           total_quantity: "100"
@@ -9909,12 +9916,12 @@ components:
           brokerage_group_order_id: "1234567890"
           child_brokerage_order_ids: null
           expiry_date: 2024-08-05T00:05:57.409Z
-          limit_price: 12.34
+          limit_price: "12.34"
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: "10"
           time_in_force: time_in_force
-          execution_price: 12.34
+          execution_price: "12.34"
           quote_universal_symbol: null
           universal_symbol: null
           open_quantity: "10"
@@ -11185,16 +11192,16 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price:
-      example: 12.5
-      type: number
+      example: "12.50"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_type:
       example: Market
@@ -11257,24 +11264,24 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-execution_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-limit_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price:
-      example: 12.5
-      type: number
+      example: "12.50"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TrailingStop-properties-amount:
       example: "0.60"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price:
-      example: 12.34
-      type: number
+      example: "12.34"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-total_quantity:
       example: "10"
@@ -14885,6 +14892,7 @@ components:
         \ This field is only present for stock/ETF/crypto/mutual fund orders. For\
         \ option orders, this field will be null and the `option_symbol` field will\
         \ be populated."
+      nullable: true
     AccountOrderRecord_option_symbol:
       allOf:
       - $ref: '#/components/schemas/OptionsSymbol'
@@ -14892,16 +14900,19 @@ components:
         \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
         \ fund orders, this field will be null and the `universal_symbol` field will\
         \ be populated."
+      nullable: true
     AccountOrderRecord_quote_universal_symbol:
       allOf:
       - $ref: '#/components/schemas/UniversalSymbol'
       description: Quote cryptocurrency. This field is only present for cryptocurrency
         pair orders with a cryptocurrency as quote.
+      nullable: true
     AccountOrderRecord_quote_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
       description: Quote currency. This field is only present for cryptocurrency pair
         orders with a fiat currency as quote.
+      nullable: true
     AccountOrderRecord_trailing_stop:
       allOf:
       - $ref: '#/components/schemas/TrailingStop'

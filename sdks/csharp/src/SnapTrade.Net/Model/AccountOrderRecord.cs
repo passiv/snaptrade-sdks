@@ -100,7 +100,7 @@ namespace SnapTrade.Net.Model
         /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
         /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="childBrokerageOrderIds">childBrokerageOrderIds.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), TrailingStopNullable trailingStop = default(TrailingStopNullable), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), UniversalSymbolNullable universalSymbol = default(UniversalSymbolNullable), OptionsSymbolNullable optionSymbol = default(OptionsSymbolNullable), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), CurrencyNullable quoteCurrency = default(CurrencyNullable), string action = default(string), string totalQuantity = default(string), string openQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), TrailingStopNullable trailingStop = default(TrailingStopNullable), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.BrokerageGroupOrderId = brokerageGroupOrderId;
@@ -147,26 +147,26 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets UniversalSymbol
         /// </summary>
-        [DataMember(Name = "universal_symbol", EmitDefaultValue = false)]
-        public AccountOrderRecordUniversalSymbol UniversalSymbol { get; set; }
+        [DataMember(Name = "universal_symbol", EmitDefaultValue = true)]
+        public UniversalSymbolNullable UniversalSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets OptionSymbol
         /// </summary>
-        [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
-        public AccountOrderRecordOptionSymbol OptionSymbol { get; set; }
+        [DataMember(Name = "option_symbol", EmitDefaultValue = true)]
+        public OptionsSymbolNullable OptionSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets QuoteUniversalSymbol
         /// </summary>
-        [DataMember(Name = "quote_universal_symbol", EmitDefaultValue = false)]
+        [DataMember(Name = "quote_universal_symbol", EmitDefaultValue = true)]
         public AccountOrderRecordQuoteUniversalSymbol QuoteUniversalSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets QuoteCurrency
         /// </summary>
-        [DataMember(Name = "quote_currency", EmitDefaultValue = false)]
-        public AccountOrderRecordQuoteCurrency QuoteCurrency { get; set; }
+        [DataMember(Name = "quote_currency", EmitDefaultValue = true)]
+        public CurrencyNullable QuoteCurrency { get; set; }
 
         /// <summary>
         /// The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
@@ -208,21 +208,21 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The price at which the order was executed. For option orders, this represents the price per share.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
-        public double? ExecutionPrice { get; set; }
+        public decimal? ExecutionPrice { get; set; }
 
         /// <summary>
         /// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
         /// </summary>
         /// <value>The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
-        public double? LimitPrice { get; set; }
+        public decimal? LimitPrice { get; set; }
 
         /// <summary>
         /// The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.
         /// </summary>
         /// <value>The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
-        public double? StopPrice { get; set; }
+        public decimal? StopPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets TrailingStop

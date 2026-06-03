@@ -27,18 +27,18 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
+    /// The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
     /// </summary>
-    [DataContract(Name = "AccountOrderRecord_quote_currency")]
-    public partial class AccountOrderRecordQuoteCurrency : IEquatable<AccountOrderRecordQuoteCurrency>, IValidatableObject
+    [DataContract(Name = "OptionsPosition_currency")]
+    public partial class OptionsPositionCurrency : IEquatable<OptionsPositionCurrency>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountOrderRecordQuoteCurrency" /> class.
+        /// Initializes a new instance of the <see cref="OptionsPositionCurrency" /> class.
         /// </summary>
         /// <param name="id">Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade..</param>
         /// <param name="code">The ISO-4217 currency code for the currency..</param>
         /// <param name="name">A human-friendly name of the currency..</param>
-        public AccountOrderRecordQuoteCurrency(string id = default(string), string code = default(string), string name = default(string))
+        public OptionsPositionCurrency(string id = default(string), string code = default(string), string name = default(string))
         {
             this.Id = id;
             this.Code = code;
@@ -73,7 +73,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AccountOrderRecordQuoteCurrency {\n");
+            sb.Append("class OptionsPositionCurrency {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -97,15 +97,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AccountOrderRecordQuoteCurrency);
+            return this.Equals(input as OptionsPositionCurrency);
         }
 
         /// <summary>
-        /// Returns true if AccountOrderRecordQuoteCurrency instances are equal
+        /// Returns true if OptionsPositionCurrency instances are equal
         /// </summary>
-        /// <param name="input">Instance of AccountOrderRecordQuoteCurrency to be compared</param>
+        /// <param name="input">Instance of OptionsPositionCurrency to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(AccountOrderRecordQuoteCurrency input)
+        public bool Equals(OptionsPositionCurrency input)
         {
             if (input == null)
             {

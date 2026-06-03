@@ -31,7 +31,7 @@ class OptionalAccountOrderRecordLeg(TypedDict, total=False):
     action: str
 
     # Execution price for this leg, if available.
-    execution_price: typing.Optional[typing.Union[int, float]]
+    execution_price: typing.Optional[str]
 
     # The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares.
     total_quantity: typing.Optional[str]

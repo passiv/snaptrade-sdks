@@ -17,10 +17,11 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.type.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
-from snaptrade_client.type.currency import Currency
-from snaptrade_client.type.options_symbol import OptionsSymbol
+from snaptrade_client.type.currency_nullable import CurrencyNullable
+from snaptrade_client.type.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.type.trailing_stop_nullable import TrailingStopNullable
 from snaptrade_client.type.universal_symbol import UniversalSymbol
+from snaptrade_client.type.universal_symbol_nullable import UniversalSymbolNullable
 
 class RequiredAccountOrderRecord(TypedDict):
     pass
@@ -37,17 +38,14 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     status: AccountOrderRecordStatus
 
-    # Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
-    universal_symbol: UniversalSymbol
+    universal_symbol: typing.Optional[UniversalSymbolNullable]
 
-    # Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
-    option_symbol: OptionsSymbol
+    option_symbol: typing.Optional[OptionsSymbolNullable]
 
     # Quote cryptocurrency. This field is only present for cryptocurrency pair orders with a cryptocurrency as quote.
     quote_universal_symbol: UniversalSymbol
 
-    # Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
-    quote_currency: Currency
+    quote_currency: typing.Optional[CurrencyNullable]
 
     # The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
     action: str
@@ -65,13 +63,13 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     filled_quantity: typing.Optional[str]
 
     # The price at which the order was executed. For option orders, this represents the price per share.
-    execution_price: typing.Optional[typing.Union[int, float]]
+    execution_price: typing.Optional[str]
 
     # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders. For option orders, this represents the price per share.
-    limit_price: typing.Optional[typing.Union[int, float]]
+    limit_price: typing.Optional[str]
 
     # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
-    stop_price: typing.Optional[typing.Union[int, float]]
+    stop_price: typing.Optional[str]
 
     trailing_stop: typing.Optional[TrailingStopNullable]
 

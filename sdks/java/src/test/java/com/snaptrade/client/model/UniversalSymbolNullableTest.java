@@ -34,17 +34,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for AccountOrderRecordUniversalSymbol
+ * Model tests for UniversalSymbolNullable
  */
-public class AccountOrderRecordUniversalSymbolTest {
-    private final AccountOrderRecordUniversalSymbol model = new AccountOrderRecordUniversalSymbol();
+public class UniversalSymbolNullableTest {
+    private final UniversalSymbolNullable model = new UniversalSymbolNullable();
 
     /**
-     * Model tests for AccountOrderRecordUniversalSymbol
+     * Model tests for UniversalSymbolNullable
      */
     @Test
-    public void testAccountOrderRecordUniversalSymbol() {
-        // TODO: test AccountOrderRecordUniversalSymbol
+    public void testUniversalSymbolNullable() {
+        // TODO: test UniversalSymbolNullable
     }
 
     /**

@@ -89,7 +89,7 @@ namespace SnapTrade.Net.Model
         /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="trailingStop">trailingStop.</param>
         /// <param name="legs">List of legs that make up the order..</param>
-        public AccountOrderRecordV2(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeExecuted = default(DateTime?), string quoteCurrency = default(string), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), TrailingStopNullable trailingStop = default(TrailingStopNullable), List<AccountOrderRecordLeg> legs = default(List<AccountOrderRecordLeg>)) : base()
+        public AccountOrderRecordV2(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeExecuted = default(DateTime?), string quoteCurrency = default(string), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), TrailingStopNullable trailingStop = default(TrailingStopNullable), List<AccountOrderRecordLeg> legs = default(List<AccountOrderRecordLeg>)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.BrokerageGroupOrderId = brokerageGroupOrderId;
@@ -162,21 +162,21 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The price at which the order was executed.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
-        public double? ExecutionPrice { get; set; }
+        public decimal? ExecutionPrice { get; set; }
 
         /// <summary>
         /// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
         /// </summary>
         /// <value>The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
-        public double? LimitPrice { get; set; }
+        public decimal? LimitPrice { get; set; }
 
         /// <summary>
         /// The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
         /// </summary>
         /// <value>The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
-        public double? StopPrice { get; set; }
+        public decimal? StopPrice { get; set; }
 
         /// <summary>
         /// Gets or Sets TrailingStop

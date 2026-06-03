@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **TimePlaced** | **DateTime** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
 **TimeExecuted** | **DateTime?** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **QuoteCurrency** | **string** | Quote currency code for the order. | [optional] 
-**ExecutionPrice** | **double?** | The price at which the order was executed. | [optional] 
-**LimitPrice** | **double?** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
-**StopPrice** | **double?** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**ExecutionPrice** | **decimal?** | The price at which the order was executed. | [optional] 
+**LimitPrice** | **decimal?** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**StopPrice** | **decimal?** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **TrailingStop** | [**TrailingStopNullable**](TrailingStopNullable.md) |  | [optional] 
 **Legs** | [**List&lt;AccountOrderRecordLeg&gt;**](AccountOrderRecordLeg.md) | List of legs that make up the order. | [optional] 
 

@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Model
         /// <param name="canceledQuantity">The number of shares or contracts that have been canceled for this leg..</param>
         /// <param name="filledQuantity">The number of shares or contracts that have been filled for this leg..</param>
         /// <param name="status">status.</param>
-        public AccountOrderRecordLeg(string legId = default(string), AccountOrderRecordLegInstrument instrument = default(AccountOrderRecordLegInstrument), string action = default(string), double? executionPrice = default(double?), string totalQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), AccountOrderRecordStatusV2Nullable? status = default(AccountOrderRecordStatusV2Nullable?)) : base()
+        public AccountOrderRecordLeg(string legId = default(string), AccountOrderRecordLegInstrument instrument = default(AccountOrderRecordLegInstrument), string action = default(string), decimal? executionPrice = default(decimal?), string totalQuantity = default(string), string canceledQuantity = default(string), string filledQuantity = default(string), AccountOrderRecordStatusV2Nullable? status = default(AccountOrderRecordStatusV2Nullable?)) : base()
         {
             this.LegId = legId;
             this.Instrument = instrument;
@@ -87,7 +87,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Execution price for this leg, if available.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
-        public double? ExecutionPrice { get; set; }
+        public decimal? ExecutionPrice { get; set; }
 
         /// <summary>
         /// The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares.

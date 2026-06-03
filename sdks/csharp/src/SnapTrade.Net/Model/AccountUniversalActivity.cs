@@ -51,7 +51,7 @@ namespace SnapTrade.Net.Model
         /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency).</param>
         /// <param name="institution">The institution that the transaction is associated with. This is usually the brokerage name..</param>
         /// <param name="externalReferenceId">Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;.</param>
-        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), OptionsSymbolNullable optionSymbol = default(OptionsSymbolNullable), double price = default(double), double units = default(double), double? amount = default(double?), AccountUniversalActivityCurrency currency = default(AccountUniversalActivityCurrency), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
+        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), AccountUniversalActivityOptionSymbol optionSymbol = default(AccountUniversalActivityOptionSymbol), double price = default(double), double units = default(double), double? amount = default(double?), AccountUniversalActivityCurrency currency = default(AccountUniversalActivityCurrency), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -89,7 +89,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets OptionSymbol
         /// </summary>
         [DataMember(Name = "option_symbol", EmitDefaultValue = true)]
-        public OptionsSymbolNullable OptionSymbol { get; set; }
+        public AccountUniversalActivityOptionSymbol OptionSymbol { get; set; }
 
         /// <summary>
         /// The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. For option transactions, this represents the price per share of the option contract.

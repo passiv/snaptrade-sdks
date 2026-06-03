@@ -78,22 +78,22 @@ export interface AccountOrderRecordV2 {
     'quote_currency'?: string;
     /**
      * The price at which the order was executed.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecordV2
      */
-    'execution_price'?: number | null;
+    'execution_price'?: string | null;
     /**
      * The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecordV2
      */
-    'limit_price'?: number | null;
+    'limit_price'?: string | null;
     /**
      * The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecordV2
      */
-    'stop_price'?: number | null;
+    'stop_price'?: string | null;
     /**
      * 
      * @type {AccountOrderRecordTrailingStop}

@@ -28,17 +28,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for AccountOrderRecordOptionSymbol
+ * Model tests for AccountUniversalActivityOptionSymbol
  */
-public class AccountOrderRecordOptionSymbolTest {
-    private final AccountOrderRecordOptionSymbol model = new AccountOrderRecordOptionSymbol();
+public class AccountUniversalActivityOptionSymbolTest {
+    private final AccountUniversalActivityOptionSymbol model = new AccountUniversalActivityOptionSymbol();
 
     /**
-     * Model tests for AccountOrderRecordOptionSymbol
+     * Model tests for AccountUniversalActivityOptionSymbol
      */
     @Test
-    public void testAccountOrderRecordOptionSymbol() {
-        // TODO: test AccountOrderRecordOptionSymbol
+    public void testAccountUniversalActivityOptionSymbol() {
+        // TODO: test AccountUniversalActivityOptionSymbol
     }
 
     /**

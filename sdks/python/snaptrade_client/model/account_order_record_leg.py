@@ -65,16 +65,20 @@ class AccountOrderRecordLeg(
             
             
             class execution_price(
-                schemas.NumberBase,
+                schemas.StrBase,
                 schemas.NoneBase,
                 schemas.Schema,
-                schemas.NoneDecimalMixin
+                schemas.NoneStrMixin
             ):
+            
+            
+                class MetaOapg:
+                    format = 'decimal'
             
             
                 def __new__(
                     cls,
-                    *args: typing.Union[None, decimal.Decimal, int, float, ],
+                    *args: typing.Union[None, str, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
                 ) -> 'execution_price':
                     return super().__new__(
@@ -225,7 +229,7 @@ class AccountOrderRecordLeg(
         leg_id: typing.Union[MetaOapg.properties.leg_id, None, str, schemas.Unset] = schemas.unset,
         instrument: typing.Union['AccountOrderRecordLegInstrument', schemas.Unset] = schemas.unset,
         action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
-        execution_price: typing.Union[MetaOapg.properties.execution_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        execution_price: typing.Union[MetaOapg.properties.execution_price, None, str, schemas.Unset] = schemas.unset,
         total_quantity: typing.Union[MetaOapg.properties.total_quantity, None, str, schemas.Unset] = schemas.unset,
         canceled_quantity: typing.Union[MetaOapg.properties.canceled_quantity, None, str, schemas.Unset] = schemas.unset,
         filled_quantity: typing.Union[MetaOapg.properties.filled_quantity, None, str, schemas.Unset] = schemas.unset,

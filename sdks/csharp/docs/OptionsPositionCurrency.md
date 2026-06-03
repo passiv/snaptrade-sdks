@@ -1,5 +1,5 @@
-# SnapTrade.Net.Model.AccountOrderRecordQuoteCurrency
-Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
+# SnapTrade.Net.Model.OptionsPositionCurrency
+The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
 
 ## Properties
 

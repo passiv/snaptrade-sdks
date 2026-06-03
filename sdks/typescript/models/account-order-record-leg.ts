@@ -41,10 +41,10 @@ export interface AccountOrderRecordLeg {
     'action'?: string;
     /**
      * Execution price for this leg, if available.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecordLeg
      */
-    'execution_price'?: number | null;
+    'execution_price'?: string | null;
     /**
      * The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares.
      * @type {string}
