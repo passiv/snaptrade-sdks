@@ -88,7 +88,6 @@ const ConnectionPortalModal = ({ loginLink }) => (
       src={loginLink}
       title="SnapTrade Connection Portal"
       style={{ width: "100%", height: "70vh", border: 0 }}
-      sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
       referrerPolicy="no-referrer"
       allow="clipboard-read; clipboard-write"
       aria-label="SnapTrade connection portal"
