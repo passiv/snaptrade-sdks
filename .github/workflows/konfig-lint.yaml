@@ -1,9 +1,15 @@
 name: konfig-lint-openapi-spec
-on: # rebuild any PRs and main branch changes
+on: # rebuild PRs and main branch changes when spec inputs change
   pull_request:
+    paths:
+      - api.yaml
+      - konfig.yaml
   push:
     branches:
       - master
+    paths:
+      - api.yaml
+      - konfig.yaml
 jobs:
   konfig-lint-openapi-spec: # make sure spec passes konfig lint
     runs-on: ubuntu-latest
