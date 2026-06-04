@@ -35,10 +35,10 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 
 - Accounts, balances (cash + buying power), and positions across a handful of well-known tickers
 - Orders spanning every status — executed, partially filled, accepted, canceled, rejected
-- Transactions of type `BUY`, `SELL`, `DIVIDEND`, `CONTRIBUTION`, `WITHDRAWAL`, `INTEREST`
+- Transactions covering **trades** (`BUY`, `SELL`), **cash & fees** (`CONTRIBUTION`, `WITHDRAWAL`, `INTEREST`, `FEE`, `TAX`, `REBATE`), **dividends & income** (`DIVIDEND`, `REI`, `STOCK_DIVIDEND`, `RETURN_OF_CAPITAL`, `DISTRIBUTION`), **corporate actions** (`SPLIT`, `REVERSE_SPLIT`, `SPINOFF`, `STOCK_MERGER`, `ADJUSTMENT`), and **transfers** (`TRANSFER`, `EXTERNAL_ASSET_TRANSFER_IN`/`_OUT`, `INTERNAL_CASH_TRANSFER_IN`/`_OUT`, `INTERNAL_ASSET_TRANSFER_IN`/`_OUT`)
+- In the default **Self-directed** scenario these are **spread across the two accounts** (e.g. splits & dividends on one, transfers & mergers on the other) — iterate **all** accounts to see the full set
 
 ## Limitations
 
 - **Read-only** — placing/canceling trades isn't supported, and Sandbox won't appear in **trade-only** connection sessions
 - Data is **static and simulated** (timestamps are relative to the current time)
-- Activity types are limited to the six listed above
