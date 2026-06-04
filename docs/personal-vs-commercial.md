@@ -5,7 +5,7 @@ SnapTrade supports two primary customer experiences: **Personal** and **Commerci
 Use this guide to choose the right integration model before building authentication, user registration, connection management, billing, and support flows.
 
 :::info
-Personal and Commercial are customer experiences, not billing plan names. Billing plans such as Free, Pay-as-you-go, and Enterprise control limits, pricing, and feature availability. A customer's Personal or Commercial experience controls how SnapTrade users, credentials, OAuth, and Connection Portal flows behave.
+Personal and Commercial are customer experiences, not billing plan names. Billing plans such as Free, Pay-as-you-go, and Custom control limits, pricing, and feature availability. A customer's Personal or Commercial experience controls how SnapTrade users, credentials, OAuth, and Connection Portal flows behave.
 :::
 
 ## Quick Comparison
