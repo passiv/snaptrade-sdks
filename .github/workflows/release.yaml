@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - master
+    paths:
+      - api.yaml
+      - konfig.yaml
+      - .konfig/**
+      - sdks/**
+      - snippets/**
+      - templates/**
+      - flows/**
 
 
 jobs:
