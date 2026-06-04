@@ -7,13 +7,13 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 - The sandbox feature is currently only available for users with **Commercial Test Keys**
 - Sandbox is **off by default** — it won't appear for your users until it's enabled for your account.
 - Request it from **support@snaptrade.com** with your **Client ID**.
-- Once enabled, **Sandbox** shows at the **top** of the connection portal's institution list, flagged **⚠️ For testing only**.
+- Once enabled, **Sandbox** shows at the **top** of the connection portal's institution list, flagged **For testing only**.
 
 ![Sandbox pinned to the top of the connection portal, flagged "For testing only"](./assets/sandbox-portal.png)
 
 ## Connecting
 
-1. Generate a Connection Portal URL as usual (`loginSnapTradeUser`) — use a **read** connection type, and optionally pass `broker=SANDBOX` to jump straight past the institution list.
+1. Generate a Connection Portal URL as usual (`loginSnapTradeUser`) and use a **read** connection type. Optionally pass `broker=SANDBOX` to jump straight past the institution list, skipping step 2.
 2. Select **Sandbox**.
 3. Pick a **scenario** to simulate → **Connect**.
 
