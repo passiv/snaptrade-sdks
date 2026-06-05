@@ -4,6 +4,7 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
+import com.snaptrade.client.model.TradeDetectionCancelSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
 import com.snaptrade.client.model.TradeDetectionSubscription;
 import java.util.UUID;
@@ -18,8 +19,8 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
         super(apiClient);
     }
     public class AddSubscriptionRequestBuilder extends AddSubscriptionRequestBuilderGenerated {
-        public AddSubscriptionRequestBuilder(UUID accountId, String userId, String userSecret) {
-            super(accountId, userId, userSecret);
+        public AddSubscriptionRequestBuilder(UUID accountId, Integer checkIntervalSeconds, String userId, String userSecret) {
+            super(accountId, checkIntervalSeconds, userId, userSecret);
         }
     }
     public class CancelSubscriptionRequestBuilder extends CancelSubscriptionRequestBuilderGenerated {

@@ -15,10 +15,14 @@ module SnapTrade
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :account_id
 
+    # How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+    attr_accessor :check_interval_seconds
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'account_id'
+        :'account_id' => :'account_id',
+        :'check_interval_seconds' => :'check_interval_seconds'
       }
     end
 
@@ -30,7 +34,8 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String'
+        :'account_id' => :'String',
+        :'check_interval_seconds' => :'Integer'
       }
     end
 
@@ -58,6 +63,10 @@ module SnapTrade
       if attributes.key?(:'account_id')
         self.account_id = attributes[:'account_id']
       end
+
+      if attributes.key?(:'check_interval_seconds')
+        self.check_interval_seconds = attributes[:'check_interval_seconds']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -68,6 +77,14 @@ module SnapTrade
         invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
       end
 
+      if @check_interval_seconds.nil?
+        invalid_properties.push('invalid value for "check_interval_seconds", check_interval_seconds cannot be nil.')
+      end
+
+      if @check_interval_seconds < 1
+        invalid_properties.push('invalid value for "check_interval_seconds", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -75,7 +92,23 @@ module SnapTrade
     # @return true if the model is valid
     def valid?
       return false if @account_id.nil?
+      return false if @check_interval_seconds.nil?
+      return false if @check_interval_seconds < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] check_interval_seconds Value to be assigned
+    def check_interval_seconds=(check_interval_seconds)
+      if check_interval_seconds.nil?
+        fail ArgumentError, 'check_interval_seconds cannot be nil'
+      end
+
+      if check_interval_seconds < 1
+        fail ArgumentError, 'invalid value for "check_interval_seconds", must be greater than or equal to 1.'
+      end
+
+      @check_interval_seconds = check_interval_seconds
     end
 
     # Checks equality by comparing each attribute.
@@ -83,7 +116,8 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id
+          account_id == o.account_id &&
+          check_interval_seconds == o.check_interval_seconds
     end
 
     # @see the `==` method
@@ -95,7 +129,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id].hash
+      [account_id, check_interval_seconds].hash
     end
 
     # Builds the object from hash

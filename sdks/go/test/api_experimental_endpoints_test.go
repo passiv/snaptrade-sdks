@@ -31,6 +31,7 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
         
         tradeDetectionAddSubscriptionRequest := *snaptrade.NewTradeDetectionAddSubscriptionRequest(
             "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            300,
         )
         
         request := client.ExperimentalEndpointsApi.AddSubscription(
@@ -50,12 +51,12 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     t.Run("Test ExperimentalEndpointsApiService CancelSubscription", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
-        tradeDetectionAddSubscriptionRequest := *snaptrade.NewTradeDetectionAddSubscriptionRequest(
+        tradeDetectionCancelSubscriptionRequest := *snaptrade.NewTradeDetectionCancelSubscriptionRequest(
             "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
         
         request := client.ExperimentalEndpointsApi.CancelSubscription(
-            tradeDetectionAddSubscriptionRequest,
+            tradeDetectionCancelSubscriptionRequest,
         )
         
         resp, httpRes, err := request.Execute()

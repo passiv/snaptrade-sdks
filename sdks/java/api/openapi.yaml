@@ -3059,7 +3059,7 @@ paths:
           $ref: '#/components/schemas/UserSecret'
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/TradeDetectionSubscriptionRequestBody'
+        $ref: '#/components/requestBodies/CreateTradeDetectionSubscriptionRequestBody'
       responses:
         "200":
           content:
@@ -3117,7 +3117,7 @@ paths:
         This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
       operationId: TradeDetection_cancelSubscription
       requestBody:
-        $ref: '#/components/requestBodies/TradeDetectionSubscriptionRequestBody'
+        $ref: '#/components/requestBodies/CancelTradeDetectionSubscriptionRequestBody'
       responses:
         "200":
           content:
@@ -3720,11 +3720,17 @@ components:
           schema:
             $ref: '#/components/schemas/UserIDandSecret'
       required: true
-    TradeDetectionSubscriptionRequestBody:
+    CreateTradeDetectionSubscriptionRequestBody:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/TradeDetection_addSubscription_request'
+      required: true
+    CancelTradeDetectionSubscriptionRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TradeDetection_cancelSubscription_request'
       required: true
     SnapTradeLoginUserRequestBody:
       content:
@@ -7273,6 +7279,8 @@ components:
       additionalProperties: true
       description: Information about all account positions.
       example:
+        data_freshness:
+          as_of: 2026-06-02T14:30:00Z
         results:
         - cost_basis: "118.2"
           tax_lots:
@@ -7322,7 +7330,10 @@ components:
           items:
             $ref: '#/components/schemas/AccountPosition'
           type: array
+        data_freshness:
+          $ref: '#/components/schemas/AllAccountPositionsResponse_data_freshness'
       required:
+      - data_freshness
       - results
       type: object
       x-konfig-is-used-in-successful-response: true
@@ -11884,6 +11895,10 @@ components:
       example: "QUESTRADE,ALPACA"
       type: string
       x-do-not-generate: true
+    ? konfig-generated-schema-components-requestBodies-CreateTradeDetectionSubscriptionRequestBody-content-application-json-schema-properties-check_interval_seconds
+    : example: 300
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
       example: true
       type: boolean
@@ -12563,6 +12578,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TaxLot-properties-lot_id:
       example: "12345678"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-data_freshness-properties-as_of:
+      example: 2026-06-02T14:30:00.000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountPosition-properties-units:
@@ -15236,8 +15255,17 @@ components:
           $ref: '#/components/schemas/UserSecret'
         account_id:
           $ref: '#/components/schemas/AccountID'
+        check_interval_seconds:
+          description: How often the subscribed account should be checked for new
+            trades. Must match an active Trade Detection plan.
+          example: 300
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 300
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CreateTradeDetectionSubscriptionRequestBody-content-application-json-schema-properties-check_interval_seconds
       required:
       - account_id
+      - check_interval_seconds
       - userId
       - userSecret
       type: object
@@ -16443,6 +16471,28 @@ components:
           type: string
           x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+        check_interval_seconds:
+          description: How often the subscribed account should be checked for new
+            trades. Must match an active Trade Detection plan.
+          example: 300
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 300
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CreateTradeDetectionSubscriptionRequestBody-content-application-json-schema-properties-check_interval_seconds
+      required:
+      - account_id
+      - check_interval_seconds
+      type: object
+    TradeDetection_cancelSubscription_request:
+      properties:
+        account_id:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
       required:
       - account_id
       type: object
@@ -16580,6 +16630,22 @@ components:
       - $ref: '#/components/schemas/Currency'
       description: |
         The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
+    AllAccountPositionsResponse_data_freshness:
+      additionalProperties: true
+      description: Metadata describing freshness of the returned positions data.
+      example:
+        as_of: 2026-06-02T14:30:00Z
+      properties:
+        as_of:
+          description: The time the returned positions data was fetched from the brokerage.
+          example: 2026-06-02T14:30:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2026-06-02T14:30:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-data_freshness-properties-as_of
+      required:
+      - as_of
+      type: object
     Symbol_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

@@ -41,9 +41,11 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+            var checkIntervalSeconds = 300; // How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
             
             var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
-                accountId
+                accountId,
+                checkIntervalSeconds
             );
             
             try
@@ -144,14 +146,14 @@ namespace Example
 
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             
-            var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
+            var tradeDetectionCancelSubscriptionRequest = new TradeDetectionCancelSubscriptionRequest(
                 accountId
             );
             
             try
             {
                 // Cancel a Trade Detection subscription
-                TradeDetectionCancelSubscriptionResponse result = client.ExperimentalEndpoints.CancelSubscription(tradeDetectionAddSubscriptionRequest);
+                TradeDetectionCancelSubscriptionResponse result = client.ExperimentalEndpoints.CancelSubscription(tradeDetectionCancelSubscriptionRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -178,7 +180,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Cancel a Trade Detection subscription
-    ApiResponse<TradeDetectionCancelSubscriptionResponse> response = apiInstance.CancelSubscriptionWithHttpInfo(tradeDetectionAddSubscriptionRequest);
+    ApiResponse<TradeDetectionCancelSubscriptionResponse> response = apiInstance.CancelSubscriptionWithHttpInfo(tradeDetectionCancelSubscriptionRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -195,7 +197,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **tradeDetectionAddSubscriptionRequest** | [**TradeDetectionAddSubscriptionRequest**](TradeDetectionAddSubscriptionRequest.md) |  |  |
+| **tradeDetectionCancelSubscriptionRequest** | [**TradeDetectionCancelSubscriptionRequest**](TradeDetectionCancelSubscriptionRequest.md) |  |  |
 
 ### Return type
 

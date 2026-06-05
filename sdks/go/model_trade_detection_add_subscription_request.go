@@ -19,15 +19,18 @@ import (
 type TradeDetectionAddSubscriptionRequest struct {
 	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 	AccountId string `json:"account_id"`
+	// How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+	CheckIntervalSeconds int32 `json:"check_interval_seconds"`
 }
 
 // NewTradeDetectionAddSubscriptionRequest instantiates a new TradeDetectionAddSubscriptionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradeDetectionAddSubscriptionRequest(accountId string) *TradeDetectionAddSubscriptionRequest {
+func NewTradeDetectionAddSubscriptionRequest(accountId string, checkIntervalSeconds int32) *TradeDetectionAddSubscriptionRequest {
 	this := TradeDetectionAddSubscriptionRequest{}
 	this.AccountId = accountId
+	this.CheckIntervalSeconds = checkIntervalSeconds
 	return &this
 }
 
@@ -63,10 +66,37 @@ func (o *TradeDetectionAddSubscriptionRequest) SetAccountId(v string) {
 	o.AccountId = v
 }
 
+// GetCheckIntervalSeconds returns the CheckIntervalSeconds field value
+func (o *TradeDetectionAddSubscriptionRequest) GetCheckIntervalSeconds() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.CheckIntervalSeconds
+}
+
+// GetCheckIntervalSecondsOk returns a tuple with the CheckIntervalSeconds field value
+// and a boolean to check if the value has been set.
+func (o *TradeDetectionAddSubscriptionRequest) GetCheckIntervalSecondsOk() (*int32, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.CheckIntervalSeconds, true
+}
+
+// SetCheckIntervalSeconds sets field value
+func (o *TradeDetectionAddSubscriptionRequest) SetCheckIntervalSeconds(v int32) {
+	o.CheckIntervalSeconds = v
+}
+
 func (o TradeDetectionAddSubscriptionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["account_id"] = o.AccountId
+	}
+	if true {
+		toSerialize["check_interval_seconds"] = o.CheckIntervalSeconds
 	}
 	return json.Marshal(toSerialize)
 }

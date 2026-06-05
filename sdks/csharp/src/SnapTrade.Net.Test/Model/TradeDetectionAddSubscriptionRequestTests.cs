@@ -65,6 +65,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'AccountId'
         }
+        /// <summary>
+        /// Test the property 'CheckIntervalSeconds'
+        /// </summary>
+        [Fact]
+        public void CheckIntervalSecondsTest()
+        {
+            // TODO unit test for the property 'CheckIntervalSeconds'
+        }
 
     }
 

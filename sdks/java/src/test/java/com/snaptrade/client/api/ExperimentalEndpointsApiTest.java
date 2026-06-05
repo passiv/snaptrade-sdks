@@ -19,6 +19,7 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
+import com.snaptrade.client.model.TradeDetectionCancelSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
 import com.snaptrade.client.model.TradeDetectionSubscription;
 import java.util.UUID;
@@ -56,9 +57,10 @@ public class ExperimentalEndpointsApiTest {
     @Test
     public void addSubscriptionTest() throws ApiException {
         UUID accountId = null;
+        Integer checkIntervalSeconds = null;
         String userId = null;
         String userSecret = null;
-        TradeDetectionSubscription response = api.addSubscription(accountId, userId, userSecret)
+        TradeDetectionSubscription response = api.addSubscription(accountId, checkIntervalSeconds, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

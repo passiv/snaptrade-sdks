@@ -61,10 +61,10 @@ namespace SnapTrade.Net.Api
         /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>TradeDetectionCancelSubscriptionResponse</returns>
-        TradeDetectionCancelSubscriptionResponse CancelSubscription(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0);
+        TradeDetectionCancelSubscriptionResponse CancelSubscription(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0);
 
         /// <summary>
         /// Cancel a Trade Detection subscription
@@ -73,10 +73,10 @@ namespace SnapTrade.Net.Api
         /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of TradeDetectionCancelSubscriptionResponse</returns>
-        ApiResponse<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0);
+        ApiResponse<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0);
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
@@ -232,11 +232,11 @@ namespace SnapTrade.Net.Api
         /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of TradeDetectionCancelSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionAsync(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Cancel a Trade Detection subscription
@@ -245,11 +245,11 @@ namespace SnapTrade.Net.Api
         /// Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (TradeDetectionCancelSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TradeDetectionCancelSubscriptionResponse>> CancelSubscriptionWithHttpInfoAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<TradeDetectionCancelSubscriptionResponse>> CancelSubscriptionWithHttpInfoAsync(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
@@ -704,12 +704,12 @@ namespace SnapTrade.Net.Api
         /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>TradeDetectionCancelSubscriptionResponse</returns>
-        public TradeDetectionCancelSubscriptionResponse CancelSubscription(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0)
+        public TradeDetectionCancelSubscriptionResponse CancelSubscription(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResponse = CancelSubscriptionWithHttpInfo(tradeDetectionAddSubscriptionRequest);
+            SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResponse = CancelSubscriptionWithHttpInfo(tradeDetectionCancelSubscriptionRequest);
             return localVarResponse.Data;
         }
 
@@ -717,15 +717,15 @@ namespace SnapTrade.Net.Api
         /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of TradeDetectionCancelSubscriptionResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0)
         {
-            // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
-            if (tradeDetectionAddSubscriptionRequest == null)
+            // verify the required parameter 'tradeDetectionCancelSubscriptionRequest' is set
+            if (tradeDetectionCancelSubscriptionRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionAddSubscriptionRequest' when calling ExperimentalEndpointsApi->CancelSubscription");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionCancelSubscriptionRequest' when calling ExperimentalEndpointsApi->CancelSubscription");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -751,7 +751,7 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.Data = tradeDetectionAddSubscriptionRequest;
+            localVarRequestOptions.Data = tradeDetectionCancelSubscriptionRequest;
 
             localVarRequestOptions.Operation = "ExperimentalEndpointsApi.CancelSubscription";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -790,13 +790,13 @@ namespace SnapTrade.Net.Api
         /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of TradeDetectionCancelSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<TradeDetectionCancelSubscriptionResponse> CancelSubscriptionAsync(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResponse = await CancelSubscriptionWithHttpInfoAsync(tradeDetectionAddSubscriptionRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResponse = await CancelSubscriptionWithHttpInfoAsync(tradeDetectionCancelSubscriptionRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -804,16 +804,16 @@ namespace SnapTrade.Net.Api
         /// Cancel a Trade Detection subscription Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeDetectionAddSubscriptionRequest"></param>
+        /// <param name="tradeDetectionCancelSubscriptionRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (TradeDetectionCancelSubscriptionResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse>> CancelSubscriptionWithHttpInfoAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<TradeDetectionCancelSubscriptionResponse>> CancelSubscriptionWithHttpInfoAsync(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
-            if (tradeDetectionAddSubscriptionRequest == null)
+            // verify the required parameter 'tradeDetectionCancelSubscriptionRequest' is set
+            if (tradeDetectionCancelSubscriptionRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionAddSubscriptionRequest' when calling ExperimentalEndpointsApi->CancelSubscription");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradeDetectionCancelSubscriptionRequest' when calling ExperimentalEndpointsApi->CancelSubscription");
             }
 
 
@@ -840,7 +840,7 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.Data = tradeDetectionAddSubscriptionRequest;
+            localVarRequestOptions.Data = tradeDetectionCancelSubscriptionRequest;
 
             localVarRequestOptions.Operation = "ExperimentalEndpointsApi.CancelSubscription";
             localVarRequestOptions.OperationIndex = operationIndex;

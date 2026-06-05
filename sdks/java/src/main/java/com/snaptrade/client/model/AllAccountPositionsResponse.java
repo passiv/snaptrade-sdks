@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountPosition;
+import com.snaptrade.client.model.AllAccountPositionsResponseDataFreshness;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -57,6 +58,10 @@ public class AllAccountPositionsResponse {
   @SerializedName(SERIALIZED_NAME_RESULTS)
   private List<AccountPosition> results = new ArrayList<>();
 
+  public static final String SERIALIZED_NAME_DATA_FRESHNESS = "data_freshness";
+  @SerializedName(SERIALIZED_NAME_DATA_FRESHNESS)
+  private AllAccountPositionsResponseDataFreshness dataFreshness;
+
   public AllAccountPositionsResponse() {
   }
 
@@ -91,6 +96,35 @@ public class AllAccountPositionsResponse {
     
     
     this.results = results;
+  }
+
+
+  public AllAccountPositionsResponse dataFreshness(AllAccountPositionsResponseDataFreshness dataFreshness) {
+    
+    
+    
+    
+    this.dataFreshness = dataFreshness;
+    return this;
+  }
+
+   /**
+   * Get dataFreshness
+   * @return dataFreshness
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
+
+  public AllAccountPositionsResponseDataFreshness getDataFreshness() {
+    return dataFreshness;
+  }
+
+
+  public void setDataFreshness(AllAccountPositionsResponseDataFreshness dataFreshness) {
+    
+    
+    
+    this.dataFreshness = dataFreshness;
   }
 
   /**
@@ -148,13 +182,14 @@ public class AllAccountPositionsResponse {
       return false;
     }
     AllAccountPositionsResponse allAccountPositionsResponse = (AllAccountPositionsResponse) o;
-    return Objects.equals(this.results, allAccountPositionsResponse.results)&&
+    return Objects.equals(this.results, allAccountPositionsResponse.results) &&
+        Objects.equals(this.dataFreshness, allAccountPositionsResponse.dataFreshness)&&
         Objects.equals(this.additionalProperties, allAccountPositionsResponse.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(results, additionalProperties);
+    return Objects.hash(results, dataFreshness, additionalProperties);
   }
 
   @Override
@@ -162,6 +197,7 @@ public class AllAccountPositionsResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class AllAccountPositionsResponse {\n");
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    dataFreshness: ").append(toIndentedString(dataFreshness)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -186,10 +222,12 @@ public class AllAccountPositionsResponse {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("results");
+    openapiFields.add("data_freshness");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("results");
+    openapiRequiredFields.add("data_freshness");
   }
 
  /**
@@ -221,6 +259,8 @@ public class AllAccountPositionsResponse {
       for (int i = 0; i < jsonArrayresults.size(); i++) {
         AccountPosition.validateJsonObject(jsonArrayresults.get(i).getAsJsonObject());
       };
+      // validate the required field `data_freshness`
+      AllAccountPositionsResponseDataFreshness.validateJsonObject(jsonObj.getAsJsonObject("data_freshness"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

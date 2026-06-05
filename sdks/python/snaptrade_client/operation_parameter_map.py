@@ -410,6 +410,9 @@ operation_parameter_map = {
                 'name': 'account_id'
             },
             {
+                'name': 'check_interval_seconds'
+            },
+            {
                 'name': 'userId'
             },
             {

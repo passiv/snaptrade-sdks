@@ -39,6 +39,7 @@ func main() {
     
     tradeDetectionAddSubscriptionRequest := *snaptrade.NewTradeDetectionAddSubscriptionRequest(
         "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        300,
     )
     
     request := client.ExperimentalEndpointsApi.AddSubscription(
@@ -90,12 +91,12 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    tradeDetectionAddSubscriptionRequest := *snaptrade.NewTradeDetectionAddSubscriptionRequest(
+    tradeDetectionCancelSubscriptionRequest := *snaptrade.NewTradeDetectionCancelSubscriptionRequest(
         "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     
     request := client.ExperimentalEndpointsApi.CancelSubscription(
-        tradeDetectionAddSubscriptionRequest,
+        tradeDetectionCancelSubscriptionRequest,
     )
     
     resp, httpRes, err := request.Execute()

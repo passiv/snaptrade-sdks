@@ -23,13 +23,15 @@ module SnapTrade
     # This endpoint requires `userId` and `userSecret` in addition to the partner signature.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param check_interval_seconds [Integer] How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param body [TradeDetectionAddSubscriptionRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def add_subscription(account_id:, user_id:, user_secret:, extra: {})
+    def add_subscription(account_id:, check_interval_seconds:, user_id:, user_secret:, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:check_interval_seconds] = check_interval_seconds if check_interval_seconds != SENTINEL
       trade_detection_add_subscription_request = _body
       data, _status_code, _headers = add_subscription_with_http_info_impl(user_id, user_secret, trade_detection_add_subscription_request, extra)
       data
@@ -41,13 +43,15 @@ module SnapTrade
     # This endpoint requires `userId` and `userSecret` in addition to the partner signature.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param check_interval_seconds [Integer] How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param body [TradeDetectionAddSubscriptionRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def add_subscription_with_http_info(account_id:, user_id:, user_secret:, extra: {})
+    def add_subscription_with_http_info(account_id:, check_interval_seconds:, user_id:, user_secret:, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:check_interval_seconds] = check_interval_seconds if check_interval_seconds != SENTINEL
       trade_detection_add_subscription_request = _body
       add_subscription_with_http_info_impl(user_id, user_secret, trade_detection_add_subscription_request, extra)
     end
@@ -141,13 +145,13 @@ module SnapTrade
     # This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    # @param body [TradeDetectionAddSubscriptionRequest] 
+    # @param body [TradeDetectionCancelSubscriptionRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_subscription(account_id:, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
-      trade_detection_add_subscription_request = _body
-      data, _status_code, _headers = cancel_subscription_with_http_info_impl(trade_detection_add_subscription_request, extra)
+      trade_detection_cancel_subscription_request = _body
+      data, _status_code, _headers = cancel_subscription_with_http_info_impl(trade_detection_cancel_subscription_request, extra)
       data
     end
 
@@ -157,37 +161,37 @@ module SnapTrade
     # This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    # @param body [TradeDetectionAddSubscriptionRequest] 
+    # @param body [TradeDetectionCancelSubscriptionRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_subscription_with_http_info(account_id:, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
-      trade_detection_add_subscription_request = _body
-      cancel_subscription_with_http_info_impl(trade_detection_add_subscription_request, extra)
+      trade_detection_cancel_subscription_request = _body
+      cancel_subscription_with_http_info_impl(trade_detection_cancel_subscription_request, extra)
     end
 
     # Cancel a Trade Detection subscription
     # Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
-    # @param trade_detection_add_subscription_request [TradeDetectionAddSubscriptionRequest] 
+    # @param trade_detection_cancel_subscription_request [TradeDetectionCancelSubscriptionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [TradeDetectionCancelSubscriptionResponse]
-    private def cancel_subscription_impl(trade_detection_add_subscription_request, opts = {})
-      data, _status_code, _headers = cancel_subscription_with_http_info(trade_detection_add_subscription_request, opts)
+    private def cancel_subscription_impl(trade_detection_cancel_subscription_request, opts = {})
+      data, _status_code, _headers = cancel_subscription_with_http_info(trade_detection_cancel_subscription_request, opts)
       data
     end
 
     # Cancel a Trade Detection subscription
     # Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
-    # @param trade_detection_add_subscription_request [TradeDetectionAddSubscriptionRequest] 
+    # @param trade_detection_cancel_subscription_request [TradeDetectionCancelSubscriptionRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(TradeDetectionCancelSubscriptionResponse, Integer, Hash)>] TradeDetectionCancelSubscriptionResponse data, response status code and response headers
-    private def cancel_subscription_with_http_info_impl(trade_detection_add_subscription_request, opts = {})
+    private def cancel_subscription_with_http_info_impl(trade_detection_cancel_subscription_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.cancel_subscription ...'
       end
-      # verify the required parameter 'trade_detection_add_subscription_request' is set
-      if @api_client.config.client_side_validation && trade_detection_add_subscription_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trade_detection_add_subscription_request' when calling ExperimentalEndpointsApi.cancel_subscription"
+      # verify the required parameter 'trade_detection_cancel_subscription_request' is set
+      if @api_client.config.client_side_validation && trade_detection_cancel_subscription_request.nil?
+        fail ArgumentError, "Missing the required parameter 'trade_detection_cancel_subscription_request' when calling ExperimentalEndpointsApi.cancel_subscription"
       end
       # resource path
       local_var_path = '/snapTrade/tradeDetection/subscriptions/cancel'
@@ -209,7 +213,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trade_detection_add_subscription_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(trade_detection_cancel_subscription_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'TradeDetectionCancelSubscriptionResponse'

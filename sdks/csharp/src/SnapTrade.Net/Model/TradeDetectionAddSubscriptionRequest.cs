@@ -41,7 +41,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="TradeDetectionAddSubscriptionRequest" /> class.
         /// </summary>
         /// <param name="accountId">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
-        public TradeDetectionAddSubscriptionRequest(string accountId = default(string))
+        /// <param name="checkIntervalSeconds">How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan. (required).</param>
+        public TradeDetectionAddSubscriptionRequest(string accountId = default(string), int checkIntervalSeconds = default(int))
         {
             // to ensure "accountId" is required (not null)
             if (accountId == null)
@@ -49,6 +50,7 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("accountId is a required property for TradeDetectionAddSubscriptionRequest and cannot be null");
             }
             this.AccountId = accountId;
+            this.CheckIntervalSeconds = checkIntervalSeconds;
         }
 
         /// <summary>
@@ -59,6 +61,13 @@ namespace SnapTrade.Net.Model
         public string AccountId { get; set; }
 
         /// <summary>
+        /// How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+        /// </summary>
+        /// <value>How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.</value>
+        [DataMember(Name = "check_interval_seconds", IsRequired = true, EmitDefaultValue = true)]
+        public int CheckIntervalSeconds { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -67,6 +76,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class TradeDetectionAddSubscriptionRequest {\n");
             sb.Append("  AccountId: ").Append(AccountId).Append("\n");
+            sb.Append("  CheckIntervalSeconds: ").Append(CheckIntervalSeconds).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -106,6 +116,10 @@ namespace SnapTrade.Net.Model
                     this.AccountId == input.AccountId ||
                     (this.AccountId != null &&
                     this.AccountId.Equals(input.AccountId))
+                ) && 
+                (
+                    this.CheckIntervalSeconds == input.CheckIntervalSeconds ||
+                    this.CheckIntervalSeconds.Equals(input.CheckIntervalSeconds)
                 );
         }
 
@@ -122,6 +136,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.AccountId.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.CheckIntervalSeconds.GetHashCode();
                 return hashCode;
             }
         }
@@ -133,6 +148,12 @@ namespace SnapTrade.Net.Model
         /// <returns>Validation Result</returns>
         public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
         {
+            // CheckIntervalSeconds (int) minimum
+            if (this.CheckIntervalSeconds < (int)1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for CheckIntervalSeconds, must be a value greater than or equal to 1.", new [] { "CheckIntervalSeconds" });
+            }
+
             yield break;
         }
     }

@@ -55,9 +55,11 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+            var checkIntervalSeconds = 300; // How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
             
             var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
-                accountId
+                accountId,
+                checkIntervalSeconds
             );
             
             try
@@ -88,14 +90,14 @@ namespace SnapTrade.Net.Test.Api
         {
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             
-            var tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest(
+            var tradeDetectionCancelSubscriptionRequest = new TradeDetectionCancelSubscriptionRequest(
                 accountId
             );
             
             try
             {
                 // Cancel a Trade Detection subscription
-                TradeDetectionCancelSubscriptionResponse result = client.ExperimentalEndpoints.CancelSubscription(tradeDetectionAddSubscriptionRequest);
+                TradeDetectionCancelSubscriptionResponse result = client.ExperimentalEndpoints.CancelSubscription(tradeDetectionCancelSubscriptionRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

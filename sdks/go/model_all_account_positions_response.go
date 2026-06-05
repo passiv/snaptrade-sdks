@@ -19,6 +19,7 @@ import (
 type AllAccountPositionsResponse struct {
 	// Positions returned for the request.
 	Results []AccountPosition `json:"results"`
+	DataFreshness AllAccountPositionsResponseDataFreshness `json:"data_freshness"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -28,9 +29,10 @@ type _AllAccountPositionsResponse AllAccountPositionsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAllAccountPositionsResponse(results []AccountPosition) *AllAccountPositionsResponse {
+func NewAllAccountPositionsResponse(results []AccountPosition, dataFreshness AllAccountPositionsResponseDataFreshness) *AllAccountPositionsResponse {
 	this := AllAccountPositionsResponse{}
 	this.Results = results
+	this.DataFreshness = dataFreshness
 	return &this
 }
 
@@ -66,10 +68,37 @@ func (o *AllAccountPositionsResponse) SetResults(v []AccountPosition) {
 	o.Results = v
 }
 
+// GetDataFreshness returns the DataFreshness field value
+func (o *AllAccountPositionsResponse) GetDataFreshness() AllAccountPositionsResponseDataFreshness {
+	if o == nil {
+		var ret AllAccountPositionsResponseDataFreshness
+		return ret
+	}
+
+	return o.DataFreshness
+}
+
+// GetDataFreshnessOk returns a tuple with the DataFreshness field value
+// and a boolean to check if the value has been set.
+func (o *AllAccountPositionsResponse) GetDataFreshnessOk() (*AllAccountPositionsResponseDataFreshness, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.DataFreshness, true
+}
+
+// SetDataFreshness sets field value
+func (o *AllAccountPositionsResponse) SetDataFreshness(v AllAccountPositionsResponseDataFreshness) {
+	o.DataFreshness = v
+}
+
 func (o AllAccountPositionsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["results"] = o.Results
+	}
+	if true {
+		toSerialize["data_freshness"] = o.DataFreshness
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -90,6 +119,7 @@ func (o *AllAccountPositionsResponse) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "results")
+		delete(additionalProperties, "data_freshness")
 		o.AdditionalProperties = additionalProperties
 	}
 

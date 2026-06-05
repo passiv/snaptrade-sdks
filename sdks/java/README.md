@@ -1470,7 +1470,7 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 ```java
 TradeDetectionSubscription result = client
         .experimentalEndpoints
-        .addSubscription(accountId, userId, userSecret)
+        .addSubscription(accountId, checkIntervalSeconds, userId, userSecret)
         .execute();
 ```
 
@@ -1479,6 +1479,10 @@ TradeDetectionSubscription result = client
 ##### account_id: `UUID`<a id="account_id-uuid"></a>
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### check_interval_seconds: `Integer`<a id="check_interval_seconds-integer"></a>
+
+How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
 
 ##### userId: `String`<a id="userid-string"></a>
 
