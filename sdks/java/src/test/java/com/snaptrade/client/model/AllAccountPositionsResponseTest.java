@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountPosition;
+import com.snaptrade.client.model.AllAccountPositionsResponseDataFreshness;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -47,6 +48,14 @@ public class AllAccountPositionsResponseTest {
     @Test
     public void resultsTest() {
         // TODO: test results
+    }
+
+    /**
+     * Test the property 'dataFreshness'
+     */
+    @Test
+    public void dataFreshnessTest() {
+        // TODO: test dataFreshness
     }
 
 }

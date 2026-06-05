@@ -16,10 +16,13 @@ module SnapTrade
     # Positions returned for the request.
     attr_accessor :results
 
+    attr_accessor :data_freshness
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'results' => :'results'
+        :'results' => :'results',
+        :'data_freshness' => :'data_freshness'
       }
     end
 
@@ -31,7 +34,8 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'results' => :'Array<AccountPosition>'
+        :'results' => :'Array<AccountPosition>',
+        :'data_freshness' => :'AllAccountPositionsResponseDataFreshness'
       }
     end
 
@@ -61,6 +65,10 @@ module SnapTrade
           self.results = value
         end
       end
+
+      if attributes.key?(:'data_freshness')
+        self.data_freshness = attributes[:'data_freshness']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -71,6 +79,10 @@ module SnapTrade
         invalid_properties.push('invalid value for "results", results cannot be nil.')
       end
 
+      if @data_freshness.nil?
+        invalid_properties.push('invalid value for "data_freshness", data_freshness cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -78,6 +90,7 @@ module SnapTrade
     # @return true if the model is valid
     def valid?
       return false if @results.nil?
+      return false if @data_freshness.nil?
       true
     end
 
@@ -86,7 +99,8 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          results == o.results
+          results == o.results &&
+          data_freshness == o.data_freshness
     end
 
     # @see the `==` method
@@ -98,7 +112,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [results].hash
+      [results, data_freshness].hash
     end
 
     # Builds the object from hash

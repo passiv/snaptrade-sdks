@@ -54,6 +54,10 @@ public class TradeDetectionAddSubscriptionRequest {
   @SerializedName(SERIALIZED_NAME_ACCOUNT_ID)
   private UUID accountId;
 
+  public static final String SERIALIZED_NAME_CHECK_INTERVAL_SECONDS = "check_interval_seconds";
+  @SerializedName(SERIALIZED_NAME_CHECK_INTERVAL_SECONDS)
+  private Integer checkIntervalSeconds;
+
   public TradeDetectionAddSubscriptionRequest() {
   }
 
@@ -83,6 +87,40 @@ public class TradeDetectionAddSubscriptionRequest {
     
     
     this.accountId = accountId;
+  }
+
+
+  public TradeDetectionAddSubscriptionRequest checkIntervalSeconds(Integer checkIntervalSeconds) {
+    if (checkIntervalSeconds != null && checkIntervalSeconds < 1) {
+      throw new IllegalArgumentException("Invalid value for checkIntervalSeconds. Must be greater than or equal to 1.");
+    }
+    
+    
+    
+    this.checkIntervalSeconds = checkIntervalSeconds;
+    return this;
+  }
+
+   /**
+   * How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+   * minimum: 1
+   * @return checkIntervalSeconds
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "300", required = true, value = "How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.")
+
+  public Integer getCheckIntervalSeconds() {
+    return checkIntervalSeconds;
+  }
+
+
+  public void setCheckIntervalSeconds(Integer checkIntervalSeconds) {
+    if (checkIntervalSeconds != null && checkIntervalSeconds < 1) {
+      throw new IllegalArgumentException("Invalid value for checkIntervalSeconds. Must be greater than or equal to 1.");
+    }
+    
+    
+    this.checkIntervalSeconds = checkIntervalSeconds;
   }
 
   /**
@@ -140,13 +178,14 @@ public class TradeDetectionAddSubscriptionRequest {
       return false;
     }
     TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = (TradeDetectionAddSubscriptionRequest) o;
-    return Objects.equals(this.accountId, tradeDetectionAddSubscriptionRequest.accountId)&&
+    return Objects.equals(this.accountId, tradeDetectionAddSubscriptionRequest.accountId) &&
+        Objects.equals(this.checkIntervalSeconds, tradeDetectionAddSubscriptionRequest.checkIntervalSeconds)&&
         Objects.equals(this.additionalProperties, tradeDetectionAddSubscriptionRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, additionalProperties);
+    return Objects.hash(accountId, checkIntervalSeconds, additionalProperties);
   }
 
   @Override
@@ -154,6 +193,7 @@ public class TradeDetectionAddSubscriptionRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class TradeDetectionAddSubscriptionRequest {\n");
     sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
+    sb.append("    checkIntervalSeconds: ").append(toIndentedString(checkIntervalSeconds)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -178,10 +218,12 @@ public class TradeDetectionAddSubscriptionRequest {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("account_id");
+    openapiFields.add("check_interval_seconds");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("account_id");
+    openapiRequiredFields.add("check_interval_seconds");
   }
 
  /**

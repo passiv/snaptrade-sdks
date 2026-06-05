@@ -44,7 +44,7 @@ describe 'ExperimentalEndpointsApi' do
   # unit tests for cancel_subscription
   # Cancel a Trade Detection subscription
   # Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
-  # @param trade_detection_add_subscription_request 
+  # @param trade_detection_cancel_subscription_request 
   # @param [Hash] opts the optional parameters
   # @return [TradeDetectionCancelSubscriptionResponse]
   describe 'cancel_subscription test' do

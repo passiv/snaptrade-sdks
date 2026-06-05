@@ -29,6 +29,7 @@ import java.io.IOException;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
+import com.snaptrade.client.model.TradeDetectionCancelSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
 import com.snaptrade.client.model.TradeDetectionSubscription;
 import java.util.UUID;
@@ -168,11 +169,13 @@ public class ExperimentalEndpointsApiGenerated {
 
     public abstract class AddSubscriptionRequestBuilderGenerated {
         final UUID accountId;
+        final Integer checkIntervalSeconds;
         final String userId;
         final String userSecret;
 
-        public AddSubscriptionRequestBuilderGenerated(UUID accountId, String userId, String userSecret) {
+        public AddSubscriptionRequestBuilderGenerated(UUID accountId, Integer checkIntervalSeconds, String userId, String userSecret) {
             this.accountId = accountId;
+            this.checkIntervalSeconds = checkIntervalSeconds;
             this.userId = userId;
             this.userSecret = userSecret;
         }
@@ -198,6 +201,7 @@ public class ExperimentalEndpointsApiGenerated {
         private TradeDetectionAddSubscriptionRequest buildBodyParams() {
             TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest();
             tradeDetectionAddSubscriptionRequest.accountId(this.accountId);
+            tradeDetectionAddSubscriptionRequest.checkIntervalSeconds(this.checkIntervalSeconds);
             return tradeDetectionAddSubscriptionRequest;
         }
 
@@ -270,19 +274,20 @@ public class ExperimentalEndpointsApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public ExperimentalEndpointsApi.AddSubscriptionRequestBuilder addSubscription(UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+    public ExperimentalEndpointsApi.AddSubscriptionRequestBuilder addSubscription(UUID accountId, Integer checkIntervalSeconds, String userId, String userSecret) throws IllegalArgumentException {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 
+        if (checkIntervalSeconds == null) throw new IllegalArgumentException("\"checkIntervalSeconds\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((ExperimentalEndpointsApi) this).new AddSubscriptionRequestBuilder(accountId, userId, userSecret);
+        return ((ExperimentalEndpointsApi) this).new AddSubscriptionRequestBuilder(accountId, checkIntervalSeconds, userId, userSecret);
     }
-    private okhttp3.Call cancelSubscriptionCall(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cancelSubscriptionCall(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -296,7 +301,7 @@ public class ExperimentalEndpointsApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradeDetectionAddSubscriptionRequest;
+        Object localVarPostBody = tradeDetectionCancelSubscriptionRequest;
 
         // create path and map variables
         String localVarPath = "/snapTrade/tradeDetection/subscriptions/cancel";
@@ -328,26 +333,26 @@ public class ExperimentalEndpointsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cancelSubscriptionValidateBeforeCall(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'tradeDetectionAddSubscriptionRequest' is set
-        if (tradeDetectionAddSubscriptionRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradeDetectionAddSubscriptionRequest' when calling cancelSubscription(Async)");
+    private okhttp3.Call cancelSubscriptionValidateBeforeCall(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'tradeDetectionCancelSubscriptionRequest' is set
+        if (tradeDetectionCancelSubscriptionRequest == null) {
+            throw new ApiException("Missing the required parameter 'tradeDetectionCancelSubscriptionRequest' when calling cancelSubscription(Async)");
         }
 
-        return cancelSubscriptionCall(tradeDetectionAddSubscriptionRequest, _callback);
+        return cancelSubscriptionCall(tradeDetectionCancelSubscriptionRequest, _callback);
 
     }
 
 
-    private ApiResponse<TradeDetectionCancelSubscriptionResponse> cancelSubscriptionWithHttpInfo(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest) throws ApiException {
-        okhttp3.Call localVarCall = cancelSubscriptionValidateBeforeCall(tradeDetectionAddSubscriptionRequest, null);
+    private ApiResponse<TradeDetectionCancelSubscriptionResponse> cancelSubscriptionWithHttpInfo(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest) throws ApiException {
+        okhttp3.Call localVarCall = cancelSubscriptionValidateBeforeCall(tradeDetectionCancelSubscriptionRequest, null);
         Type localVarReturnType = new TypeToken<TradeDetectionCancelSubscriptionResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cancelSubscriptionAsync(TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest, final ApiCallback<TradeDetectionCancelSubscriptionResponse> _callback) throws ApiException {
+    private okhttp3.Call cancelSubscriptionAsync(TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest, final ApiCallback<TradeDetectionCancelSubscriptionResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cancelSubscriptionValidateBeforeCall(tradeDetectionAddSubscriptionRequest, _callback);
+        okhttp3.Call localVarCall = cancelSubscriptionValidateBeforeCall(tradeDetectionCancelSubscriptionRequest, _callback);
         Type localVarReturnType = new TypeToken<TradeDetectionCancelSubscriptionResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -373,14 +378,14 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = buildBodyParams();
-            return cancelSubscriptionCall(tradeDetectionAddSubscriptionRequest, _callback);
+            TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest = buildBodyParams();
+            return cancelSubscriptionCall(tradeDetectionCancelSubscriptionRequest, _callback);
         }
 
-        private TradeDetectionAddSubscriptionRequest buildBodyParams() {
-            TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = new TradeDetectionAddSubscriptionRequest();
-            tradeDetectionAddSubscriptionRequest.accountId(this.accountId);
-            return tradeDetectionAddSubscriptionRequest;
+        private TradeDetectionCancelSubscriptionRequest buildBodyParams() {
+            TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest = new TradeDetectionCancelSubscriptionRequest();
+            tradeDetectionCancelSubscriptionRequest.accountId(this.accountId);
+            return tradeDetectionCancelSubscriptionRequest;
         }
 
         /**
@@ -395,8 +400,8 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public TradeDetectionCancelSubscriptionResponse execute() throws ApiException {
-            TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = buildBodyParams();
-            ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResp = cancelSubscriptionWithHttpInfo(tradeDetectionAddSubscriptionRequest);
+            TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest = buildBodyParams();
+            ApiResponse<TradeDetectionCancelSubscriptionResponse> localVarResp = cancelSubscriptionWithHttpInfo(tradeDetectionCancelSubscriptionRequest);
             return localVarResp.getResponseBody();
         }
 
@@ -412,8 +417,8 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public ApiResponse<TradeDetectionCancelSubscriptionResponse> executeWithHttpInfo() throws ApiException {
-            TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = buildBodyParams();
-            return cancelSubscriptionWithHttpInfo(tradeDetectionAddSubscriptionRequest);
+            TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest = buildBodyParams();
+            return cancelSubscriptionWithHttpInfo(tradeDetectionCancelSubscriptionRequest);
         }
 
         /**
@@ -429,15 +434,15 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<TradeDetectionCancelSubscriptionResponse> _callback) throws ApiException {
-            TradeDetectionAddSubscriptionRequest tradeDetectionAddSubscriptionRequest = buildBodyParams();
-            return cancelSubscriptionAsync(tradeDetectionAddSubscriptionRequest, _callback);
+            TradeDetectionCancelSubscriptionRequest tradeDetectionCancelSubscriptionRequest = buildBodyParams();
+            return cancelSubscriptionAsync(tradeDetectionCancelSubscriptionRequest, _callback);
         }
     }
 
     /**
      * Cancel a Trade Detection subscription
      * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require &#x60;userId&#x60; or &#x60;userSecret&#x60;. 
-     * @param tradeDetectionAddSubscriptionRequest  (required)
+     * @param tradeDetectionCancelSubscriptionRequest  (required)
      * @return CancelSubscriptionRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">

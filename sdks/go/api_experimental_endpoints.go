@@ -235,7 +235,7 @@ func (a *ExperimentalEndpointsApiService) AddSubscriptionExecute(r ExperimentalE
 type ExperimentalEndpointsApiCancelSubscriptionRequest struct {
 	ctx context.Context
 	ApiService *ExperimentalEndpointsApiService
-	tradeDetectionAddSubscriptionRequest TradeDetectionAddSubscriptionRequest
+	tradeDetectionCancelSubscriptionRequest TradeDetectionCancelSubscriptionRequest
 }
 
 func (r ExperimentalEndpointsApiCancelSubscriptionRequest) Execute() (*TradeDetectionCancelSubscriptionResponse, *http.Response, error) {
@@ -250,14 +250,14 @@ This endpoint requires partner signature authentication only and does not requir
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param tradeDetectionAddSubscriptionRequest
+ @param tradeDetectionCancelSubscriptionRequest
  @return ExperimentalEndpointsApiCancelSubscriptionRequest
 */
-func (a *ExperimentalEndpointsApiService) CancelSubscription(tradeDetectionAddSubscriptionRequest TradeDetectionAddSubscriptionRequest) ExperimentalEndpointsApiCancelSubscriptionRequest {
+func (a *ExperimentalEndpointsApiService) CancelSubscription(tradeDetectionCancelSubscriptionRequest TradeDetectionCancelSubscriptionRequest) ExperimentalEndpointsApiCancelSubscriptionRequest {
 	return ExperimentalEndpointsApiCancelSubscriptionRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
-		tradeDetectionAddSubscriptionRequest: tradeDetectionAddSubscriptionRequest,
+		tradeDetectionCancelSubscriptionRequest: tradeDetectionCancelSubscriptionRequest,
 	}
 }
 
@@ -304,8 +304,8 @@ func (a *ExperimentalEndpointsApiService) CancelSubscriptionExecute(r Experiment
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradeDetectionAddSubscriptionRequest) {
-        localVarPostBody = r.tradeDetectionAddSubscriptionRequest
+    if !checkNilInterface(r.tradeDetectionCancelSubscriptionRequest) {
+        localVarPostBody = r.tradeDetectionCancelSubscriptionRequest
     }
 	if r.ctx != nil {
 		// API Key Authentication

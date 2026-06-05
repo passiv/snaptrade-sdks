@@ -23,5 +23,11 @@ export interface TradeDetectionAddSubscriptionRequest {
      * @memberof TradeDetectionAddSubscriptionRequest
      */
     'account_id': string;
+    /**
+     * How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+     * @type {number}
+     * @memberof TradeDetectionAddSubscriptionRequest
+     */
+    'check_interval_seconds': number;
 }
 

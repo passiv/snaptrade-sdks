@@ -44,7 +44,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AllAccountPositionsResponse" /> class.
         /// </summary>
         /// <param name="results">Positions returned for the request. (required).</param>
-        public AllAccountPositionsResponse(List<AccountPosition> results = default(List<AccountPosition>)) : base()
+        /// <param name="dataFreshness">dataFreshness (required).</param>
+        public AllAccountPositionsResponse(List<AccountPosition> results = default(List<AccountPosition>), AllAccountPositionsResponseDataFreshness dataFreshness = default(AllAccountPositionsResponseDataFreshness)) : base()
         {
             // to ensure "results" is required (not null)
             if (results == null)
@@ -52,6 +53,12 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("results is a required property for AllAccountPositionsResponse and cannot be null");
             }
             this.Results = results;
+            // to ensure "dataFreshness" is required (not null)
+            if (dataFreshness == null)
+            {
+                throw new ArgumentNullException("dataFreshness is a required property for AllAccountPositionsResponse and cannot be null");
+            }
+            this.DataFreshness = dataFreshness;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -61,6 +68,12 @@ namespace SnapTrade.Net.Model
         /// <value>Positions returned for the request.</value>
         [DataMember(Name = "results", IsRequired = true, EmitDefaultValue = true)]
         public List<AccountPosition> Results { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DataFreshness
+        /// </summary>
+        [DataMember(Name = "data_freshness", IsRequired = true, EmitDefaultValue = true)]
+        public AllAccountPositionsResponseDataFreshness DataFreshness { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -78,6 +91,7 @@ namespace SnapTrade.Net.Model
             sb.Append("class AllAccountPositionsResponse {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Results: ").Append(Results).Append("\n");
+            sb.Append("  DataFreshness: ").Append(DataFreshness).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -119,6 +133,11 @@ namespace SnapTrade.Net.Model
                     this.Results != null &&
                     input.Results != null &&
                     this.Results.SequenceEqual(input.Results)
+                ) && base.Equals(input) && 
+                (
+                    this.DataFreshness == input.DataFreshness ||
+                    (this.DataFreshness != null &&
+                    this.DataFreshness.Equals(input.DataFreshness))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -135,6 +154,10 @@ namespace SnapTrade.Net.Model
                 if (this.Results != null)
                 {
                     hashCode = (hashCode * 59) + this.Results.GetHashCode();
+                }
+                if (this.DataFreshness != null)
+                {
+                    hashCode = (hashCode * 59) + this.DataFreshness.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

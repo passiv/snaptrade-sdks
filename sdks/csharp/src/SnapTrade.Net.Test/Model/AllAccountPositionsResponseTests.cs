@@ -65,6 +65,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'Results'
         }
+        /// <summary>
+        /// Test the property 'DataFreshness'
+        /// </summary>
+        [Fact]
+        public void DataFreshnessTest()
+        {
+            // TODO unit test for the property 'DataFreshness'
+        }
 
     }
 

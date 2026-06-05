@@ -16,10 +16,13 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_position import AccountPosition
+from snaptrade_client.type.all_account_positions_response_data_freshness import AllAccountPositionsResponseDataFreshness
 
 class RequiredAllAccountPositionsResponse(TypedDict):
     # Positions returned for the request.
     results: typing.List[AccountPosition]
+
+    data_freshness: AllAccountPositionsResponseDataFreshness
 
 class OptionalAllAccountPositionsResponse(TypedDict, total=False):
     pass

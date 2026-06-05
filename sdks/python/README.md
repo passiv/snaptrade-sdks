@@ -1451,6 +1451,7 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 ```python
 add_subscription_response = snaptrade.experimental_endpoints.add_subscription(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    check_interval_seconds=300,
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
@@ -1461,6 +1462,10 @@ add_subscription_response = snaptrade.experimental_endpoints.add_subscription(
 ##### account_id: `str`<a id="account_id-str"></a>
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### check_interval_seconds: `int`<a id="check_interval_seconds-int"></a>
+
+How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 

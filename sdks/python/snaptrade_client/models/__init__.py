@@ -40,6 +40,7 @@ from snaptrade_client.model.action_strict_v2 import ActionStrictV2
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.model.adr_instrument import AdrInstrument
 from snaptrade_client.model.all_account_positions_response import AllAccountPositionsResponse
+from snaptrade_client.model.all_account_positions_response_data_freshness import AllAccountPositionsResponseDataFreshness
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_auth_id import BrokerageAuthID

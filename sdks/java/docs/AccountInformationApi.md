@@ -277,6 +277,7 @@ public class Example {
               .execute();
       System.out.println(result);
       System.out.println(result.getResults());
+      System.out.println(result.getDataFreshness());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getAllAccountPositions");
       System.err.println("Status code: " + e.getStatusCode());

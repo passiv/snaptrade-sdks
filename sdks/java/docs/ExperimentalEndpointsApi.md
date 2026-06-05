@@ -43,12 +43,13 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    Integer checkIntervalSeconds = 56; // How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
       TradeDetectionSubscription result = client
               .experimentalEndpoints
-              .addSubscription(accountId, userId, userSecret)
+              .addSubscription(accountId, checkIntervalSeconds, userId, userSecret)
               .execute();
       System.out.println(result);
       System.out.println(result.getAccountId());
@@ -66,7 +67,7 @@ public class Example {
     try {
       ApiResponse<TradeDetectionSubscription> response = client
               .experimentalEndpoints
-              .addSubscription(accountId, userId, userSecret)
+              .addSubscription(accountId, checkIntervalSeconds, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -115,7 +116,7 @@ public class Example {
 
 <a name="cancelSubscription"></a>
 # **cancelSubscription**
-> TradeDetectionCancelSubscriptionResponse cancelSubscription(tradeDetectionAddSubscriptionRequest).execute();
+> TradeDetectionCancelSubscriptionResponse cancelSubscription(tradeDetectionCancelSubscriptionRequest).execute();
 
 Cancel a Trade Detection subscription
 
@@ -186,7 +187,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **tradeDetectionAddSubscriptionRequest** | [**TradeDetectionAddSubscriptionRequest**](TradeDetectionAddSubscriptionRequest.md)|  | |
+| **tradeDetectionCancelSubscriptionRequest** | [**TradeDetectionCancelSubscriptionRequest**](TradeDetectionCancelSubscriptionRequest.md)|  | |
 
 ### Return type
 

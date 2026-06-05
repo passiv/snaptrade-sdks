@@ -159,6 +159,7 @@ func main() {
     // response from `GetAllAccountPositions`: AllAccountPositionsResponse
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllAccountPositions`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.Results`: %v\n", resp.Results)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.DataFreshness`: %v\n", resp.DataFreshness)
 }
 ```
 

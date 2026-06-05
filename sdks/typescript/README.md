@@ -1463,6 +1463,7 @@ const addSubscriptionResponse =
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    check_interval_seconds: 300,
   });
 ```
 
@@ -1471,6 +1472,10 @@ const addSubscriptionResponse =
 ##### account_id: `string`<a id="account_id-string"></a>
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### check_interval_seconds: `number`<a id="check_interval_seconds-number"></a>
+
+How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
 
 ##### userId: `string`<a id="userid-string"></a>
 

@@ -350,7 +350,7 @@ paths:
           schema:
             $ref: "#/components/schemas/UserSecret"
       requestBody:
-        $ref: "#/components/requestBodies/TradeDetectionSubscriptionRequestBody"
+        $ref: "#/components/requestBodies/CreateTradeDetectionSubscriptionRequestBody"
       responses:
         "200":
           description: Restored an existing cancelled Trade Detection subscription
@@ -400,7 +400,7 @@ paths:
         This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`.
       operationId: TradeDetection_cancelSubscription
       requestBody:
-        $ref: "#/components/requestBodies/TradeDetectionSubscriptionRequestBody"
+        $ref: "#/components/requestBodies/CancelTradeDetectionSubscriptionRequestBody"
       responses:
         "200":
           description: Cancelled the Trade Detection subscription, or it was already cancelled
@@ -3142,7 +3142,22 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/UserIDandSecret"
-    TradeDetectionSubscriptionRequestBody:
+    CreateTradeDetectionSubscriptionRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["account_id", "check_interval_seconds"]
+            properties:
+              account_id:
+                $ref: "#/components/schemas/AccountID"
+              check_interval_seconds:
+                type: integer
+                minimum: 1
+                description: How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+                example: 300
+    CancelTradeDetectionSubscriptionRequestBody:
       required: true
       content:
         application/json:
@@ -4697,8 +4712,20 @@ components:
           description: Positions returned for the request.
           items:
             $ref: "#/components/schemas/AccountPosition"
+        data_freshness:
+          type: object
+          description: Metadata describing freshness of the returned positions data.
+          properties:
+            as_of:
+              type: string
+              format: date-time
+              description: The time the returned positions data was fetched from the brokerage.
+              example: 2026-06-02T14:30:00Z
+          required:
+            - as_of
       required:
         - results
+        - data_freshness
     AccountPosition:
       description: Describes a single position.
       type: object

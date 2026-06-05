@@ -35,6 +35,8 @@ import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { TradeDetectionAddSubscriptionRequest } from '../models';
 // @ts-ignore
+import { TradeDetectionCancelSubscriptionRequest } from '../models';
+// @ts-ignore
 import { TradeDetectionCancelSubscriptionResponse } from '../models';
 // @ts-ignore
 import { TradeDetectionSubscription } from '../models';
@@ -116,13 +118,13 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
         /**
          * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
          * @summary Cancel a Trade Detection subscription
-         * @param {TradeDetectionAddSubscriptionRequest} tradeDetectionAddSubscriptionRequest 
+         * @param {TradeDetectionCancelSubscriptionRequest} tradeDetectionCancelSubscriptionRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelSubscription: async (tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'tradeDetectionAddSubscriptionRequest' is not null or undefined
-            assertParamExists('cancelSubscription', 'tradeDetectionAddSubscriptionRequest', tradeDetectionAddSubscriptionRequest)
+        cancelSubscription: async (tradeDetectionCancelSubscriptionRequest: TradeDetectionCancelSubscriptionRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'tradeDetectionCancelSubscriptionRequest' is not null or undefined
+            assertParamExists('cancelSubscription', 'tradeDetectionCancelSubscriptionRequest', tradeDetectionCancelSubscriptionRequest)
             const localVarPath = `/snapTrade/tradeDetection/subscriptions/cancel`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -149,7 +151,7 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: tradeDetectionAddSubscriptionRequest,
+                requestBody: tradeDetectionCancelSubscriptionRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
@@ -157,7 +159,7 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 pathTemplate: '/snapTrade/tradeDetection/subscriptions/cancel',
                 httpMethod: 'POST'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradeDetectionAddSubscriptionRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tradeDetectionCancelSubscriptionRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -433,7 +435,8 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
          */
         async addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionSubscription>> {
             const tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest = {
-                account_id: requestParameters.account_id
+                account_id: requestParameters.account_id,
+                check_interval_seconds: requestParameters.check_interval_seconds
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.addSubscription(requestParameters.userId, requestParameters.userSecret, tradeDetectionAddSubscriptionRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -446,10 +449,10 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
          * @throws {RequiredError}
          */
         async cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionCancelSubscriptionResponse>> {
-            const tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest = {
+            const tradeDetectionCancelSubscriptionRequest: TradeDetectionCancelSubscriptionRequest = {
                 account_id: requestParameters.account_id
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelSubscription(tradeDetectionAddSubscriptionRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelSubscription(tradeDetectionCancelSubscriptionRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -597,7 +600,7 @@ export type ExperimentalEndpointsApiAddSubscriptionRequest = {
  */
 export type ExperimentalEndpointsApiCancelSubscriptionRequest = {
     
-} & TradeDetectionAddSubscriptionRequest
+} & TradeDetectionCancelSubscriptionRequest
 
 /**
  * Request parameters for getUserAccountOrderDetailV2 operation in ExperimentalEndpointsApi.

@@ -416,6 +416,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'account_id'
             },
             {
+                name: 'check_interval_seconds'
+            },
+            {
                 name: 'userId'
             },
             {

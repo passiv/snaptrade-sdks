@@ -92,24 +92,39 @@ class SchemaForRequestBodyApplicationJson(
 
     class MetaOapg:
         required = {
+            "check_interval_seconds",
             "account_id",
         }
         
         class properties:
             account_id = schemas.UUIDSchema
+            
+            
+            class check_interval_seconds(
+                schemas.IntSchema
+            ):
+            
+            
+                class MetaOapg:
+                    inclusive_minimum = 1
             __annotations__ = {
                 "account_id": account_id,
+                "check_interval_seconds": check_interval_seconds,
             }
     
+    check_interval_seconds: MetaOapg.properties.check_interval_seconds
     account_id: MetaOapg.properties.account_id
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["account_id"]) -> MetaOapg.properties.account_id: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["check_interval_seconds"]) -> MetaOapg.properties.check_interval_seconds: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "check_interval_seconds", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -118,15 +133,19 @@ class SchemaForRequestBodyApplicationJson(
     def get_item_oapg(self, name: typing_extensions.Literal["account_id"]) -> MetaOapg.properties.account_id: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["check_interval_seconds"]) -> MetaOapg.properties.check_interval_seconds: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "check_interval_seconds", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        check_interval_seconds: typing.Union[MetaOapg.properties.check_interval_seconds, decimal.Decimal, int, ],
         account_id: typing.Union[MetaOapg.properties.account_id, str, uuid.UUID, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -134,6 +153,7 @@ class SchemaForRequestBodyApplicationJson(
         return super().__new__(
             cls,
             *args,
+            check_interval_seconds=check_interval_seconds,
             account_id=account_id,
             _configuration=_configuration,
             **kwargs,
@@ -314,6 +334,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        check_interval_seconds: typing.Optional[int] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -323,6 +344,8 @@ class BaseApi(api_client.Api):
         _body = {}
         if account_id is not None:
             _body["account_id"] = account_id
+        if check_interval_seconds is not None:
+            _body["check_interval_seconds"] = check_interval_seconds
         args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
@@ -573,6 +596,7 @@ class AddSubscription(BaseApi):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        check_interval_seconds: typing.Optional[int] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -587,6 +611,7 @@ class AddSubscription(BaseApi):
             body=body,
             query_params=query_params,
             account_id=account_id,
+            check_interval_seconds=check_interval_seconds,
             user_id=user_id,
             user_secret=user_secret,
         )
@@ -600,6 +625,7 @@ class AddSubscription(BaseApi):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        check_interval_seconds: typing.Optional[int] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -613,6 +639,7 @@ class AddSubscription(BaseApi):
             body=body,
             query_params=query_params,
             account_id=account_id,
+            check_interval_seconds=check_interval_seconds,
             user_id=user_id,
             user_secret=user_secret,
         )
@@ -628,6 +655,7 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        check_interval_seconds: typing.Optional[int] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -642,6 +670,7 @@ class ApiForpost(BaseApi):
             body=body,
             query_params=query_params,
             account_id=account_id,
+            check_interval_seconds=check_interval_seconds,
             user_id=user_id,
             user_secret=user_secret,
         )
@@ -655,6 +684,7 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        check_interval_seconds: typing.Optional[int] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -668,6 +698,7 @@ class ApiForpost(BaseApi):
             body=body,
             query_params=query_params,
             account_id=account_id,
+            check_interval_seconds=check_interval_seconds,
             user_id=user_id,
             user_secret=user_secret,
         )

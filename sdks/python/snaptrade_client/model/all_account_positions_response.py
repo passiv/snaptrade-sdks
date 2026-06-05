@@ -36,6 +36,7 @@ class AllAccountPositionsResponse(
 
     class MetaOapg:
         required = {
+            "data_freshness",
             "results",
         }
         
@@ -66,12 +67,21 @@ class AllAccountPositionsResponse(
             
                 def __getitem__(self, i: int) -> 'AccountPosition':
                     return super().__getitem__(i)
+        
+            @staticmethod
+            def data_freshness() -> typing.Type['AllAccountPositionsResponseDataFreshness']:
+                return AllAccountPositionsResponseDataFreshness
             __annotations__ = {
                 "results": results,
+                "data_freshness": data_freshness,
             }
         additional_properties = schemas.AnyTypeSchema
     
+    data_freshness: 'AllAccountPositionsResponseDataFreshness'
     results: MetaOapg.properties.results
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["data_freshness"]) -> 'AllAccountPositionsResponseDataFreshness': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["results"]) -> MetaOapg.properties.results: ...
@@ -79,9 +89,12 @@ class AllAccountPositionsResponse(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["results"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["data_freshness"], typing_extensions.Literal["results"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["data_freshness"]) -> 'AllAccountPositionsResponseDataFreshness': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["results"]) -> MetaOapg.properties.results: ...
@@ -89,12 +102,13 @@ class AllAccountPositionsResponse(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["results"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["data_freshness"], typing_extensions.Literal["results"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        data_freshness: 'AllAccountPositionsResponseDataFreshness',
         results: typing.Union[MetaOapg.properties.results, list, tuple, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -102,9 +116,11 @@ class AllAccountPositionsResponse(
         return super().__new__(
             cls,
             *args,
+            data_freshness=data_freshness,
             results=results,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.account_position import AccountPosition
+from snaptrade_client.model.all_account_positions_response_data_freshness import AllAccountPositionsResponseDataFreshness

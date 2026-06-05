@@ -47,4 +47,12 @@ public class TradeDetectionAddSubscriptionRequestTest {
         // TODO: test accountId
     }
 
+    /**
+     * Test the property 'checkIntervalSeconds'
+     */
+    @Test
+    public void checkIntervalSecondsTest() {
+        // TODO: test checkIntervalSeconds
+    }
+
 }
