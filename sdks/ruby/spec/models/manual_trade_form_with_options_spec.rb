@@ -62,6 +62,12 @@ describe SnapTrade::ManualTradeFormWithOptions do
     end
   end
 
+  describe 'test attribute "expiry_date"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "price"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

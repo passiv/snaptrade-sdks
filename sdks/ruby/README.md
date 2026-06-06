@@ -2576,6 +2576,7 @@ result = snaptrade.trading.place_force_order(
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   symbol: "AAPL",
   trading_session: "REGULAR",
+  expiry_date: "2026-08-21T23:27:55.027Z",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -2600,7 +2601,7 @@ The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
 field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
 required.
 
-##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
+##### time_in_force: [`ManualTradePlaceTimeInForceStrict`](./lib/snaptrade/models/manual_trade_place_time_in_force_strict.rb)<a id="time_in_force-manualtradeplacetimeinforcestrictlibsnaptrademodelsmanual_trade_place_time_in_force_strictrb"></a>
 The Time in Force type for the order. This field indicates how long the order
 will remain active before it is executed or expires. Here are the supported
 values: - `Day` - Day. The order is valid only for the trading day on which it
@@ -2608,7 +2609,10 @@ is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
 or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
 immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
 must be executed immediately. Any portion of the order that cannot be filled
-immediately will be canceled.
+immediately will be canceled. - `GTD` - Good Til Date. The order is valid until
+`expiry_date`, which is required. Not available for market orders. GTD orders
+are only available on certain brokerages. Visit
+https://support.snaptrade.com/brokerages for brokerage support.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
@@ -2625,6 +2629,13 @@ The trading session for the order. This field indicates which market session the
 order will be placed in. This is only available for certain brokerages. Defaults
 to REGULAR. Here are the supported values: - `REGULAR` - Regular trading hours.
 - `EXTENDED` - Extended trading hours.
+
+##### expiry_date: `Time`<a id="expiry_date-time"></a>
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+indicating when the order expires. Required when `time_in_force` is `GTD`.
+Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is
+assumed. GTD orders are only available on certain brokerages. Visit
+https://support.snaptrade.com/brokerages for brokerage support.
 
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.

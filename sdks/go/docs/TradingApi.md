@@ -671,6 +671,7 @@ func main() {
     manualTradeFormWithOptions.SetUniversalSymbolId(universalSymbolId)
     manualTradeFormWithOptions.SetSymbol("AAPL")
     manualTradeFormWithOptions.SetTradingSession(null)
+    manualTradeFormWithOptions.SetExpiryDate(2026-08-21T23:27:55.027Z)
     manualTradeFormWithOptions.SetPrice(31.33)
     manualTradeFormWithOptions.SetStop(31.33)
     manualTradeFormWithOptions.SetUnits(units)

@@ -258,6 +258,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeFormNotionalValue](docs/ManualTradeFormNotionalValue.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
+ - [ManualTradePlaceTimeInForceStrict](docs/ManualTradePlaceTimeInForceStrict.md)
  - [ManualTradeReplaceForm](docs/ManualTradeReplaceForm.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
  - [MlegActionStrict](docs/MlegActionStrict.md)

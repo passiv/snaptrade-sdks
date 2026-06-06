@@ -853,6 +853,9 @@ operation_parameter_map = {
                 'name': 'trading_session'
             },
             {
+                'name': 'expiry_date'
+            },
+            {
                 'name': 'price'
             },
             {

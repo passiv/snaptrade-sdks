@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // ManualTradeFormWithOptions Inputs for placing an order with the brokerage.
@@ -25,8 +26,10 @@ type ManualTradeFormWithOptions struct {
 	// The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 	Symbol NullableString `json:"symbol,omitempty"`
 	OrderType OrderTypeStrict `json:"order_type"`
-	TimeInForce TimeInForceStrict `json:"time_in_force"`
+	TimeInForce ManualTradePlaceTimeInForceStrict `json:"time_in_force"`
 	TradingSession *TradingSession `json:"trading_session,omitempty"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+	ExpiryDate NullableTime `json:"expiry_date,omitempty"`
 	// The limit price for `Limit` and `StopLimit` orders.
 	Price NullableFloat32 `json:"price,omitempty"`
 	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
@@ -40,7 +43,7 @@ type ManualTradeFormWithOptions struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManualTradeFormWithOptions(accountId string, action ActionStrictWithOptions, orderType OrderTypeStrict, timeInForce TimeInForceStrict) *ManualTradeFormWithOptions {
+func NewManualTradeFormWithOptions(accountId string, action ActionStrictWithOptions, orderType OrderTypeStrict, timeInForce ManualTradePlaceTimeInForceStrict) *ManualTradeFormWithOptions {
 	this := ManualTradeFormWithOptions{}
 	this.AccountId = accountId
 	this.Action = action
@@ -218,9 +221,9 @@ func (o *ManualTradeFormWithOptions) SetOrderType(v OrderTypeStrict) {
 }
 
 // GetTimeInForce returns the TimeInForce field value
-func (o *ManualTradeFormWithOptions) GetTimeInForce() TimeInForceStrict {
+func (o *ManualTradeFormWithOptions) GetTimeInForce() ManualTradePlaceTimeInForceStrict {
 	if o == nil {
-		var ret TimeInForceStrict
+		var ret ManualTradePlaceTimeInForceStrict
 		return ret
 	}
 
@@ -229,7 +232,7 @@ func (o *ManualTradeFormWithOptions) GetTimeInForce() TimeInForceStrict {
 
 // GetTimeInForceOk returns a tuple with the TimeInForce field value
 // and a boolean to check if the value has been set.
-func (o *ManualTradeFormWithOptions) GetTimeInForceOk() (*TimeInForceStrict, bool) {
+func (o *ManualTradeFormWithOptions) GetTimeInForceOk() (*ManualTradePlaceTimeInForceStrict, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -237,7 +240,7 @@ func (o *ManualTradeFormWithOptions) GetTimeInForceOk() (*TimeInForceStrict, boo
 }
 
 // SetTimeInForce sets field value
-func (o *ManualTradeFormWithOptions) SetTimeInForce(v TimeInForceStrict) {
+func (o *ManualTradeFormWithOptions) SetTimeInForce(v ManualTradePlaceTimeInForceStrict) {
 	o.TimeInForce = v
 }
 
@@ -271,6 +274,48 @@ func (o *ManualTradeFormWithOptions) HasTradingSession() bool {
 // SetTradingSession gets a reference to the given TradingSession and assigns it to the TradingSession field.
 func (o *ManualTradeFormWithOptions) SetTradingSession(v TradingSession) {
 	o.TradingSession = &v
+}
+
+// GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ManualTradeFormWithOptions) GetExpiryDate() time.Time {
+	if o == nil || isNil(o.ExpiryDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpiryDate.Get()
+}
+
+// GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ManualTradeFormWithOptions) GetExpiryDateOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.ExpiryDate.Get(), o.ExpiryDate.IsSet()
+}
+
+// HasExpiryDate returns a boolean if a field has been set.
+func (o *ManualTradeFormWithOptions) HasExpiryDate() bool {
+	if o != nil && o.ExpiryDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryDate gets a reference to the given NullableTime and assigns it to the ExpiryDate field.
+func (o *ManualTradeFormWithOptions) SetExpiryDate(v time.Time) {
+	o.ExpiryDate.Set(&v)
+}
+// SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
+func (o *ManualTradeFormWithOptions) SetExpiryDateNil() {
+	o.ExpiryDate.Set(nil)
+}
+
+// UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
+func (o *ManualTradeFormWithOptions) UnsetExpiryDate() {
+	o.ExpiryDate.Unset()
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -463,6 +508,9 @@ func (o ManualTradeFormWithOptions) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.TradingSession) {
 		toSerialize["trading_session"] = o.TradingSession
+	}
+	if o.ExpiryDate.IsSet() {
+		toSerialize["expiry_date"] = o.ExpiryDate.Get()
 	}
 	if o.Price.IsSet() {
 		toSerialize["price"] = o.Price.Get()

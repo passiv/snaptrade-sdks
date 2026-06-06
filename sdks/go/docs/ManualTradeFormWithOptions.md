@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **UniversalSymbolId** | Pointer to **NullableString** | The universal symbol ID of the security to trade. Must be &#39;null&#39; if &#x60;symbol&#x60; is provided, otherwise must be provided. | [optional] 
 **Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
-**TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
+**TimeInForce** | [**ManualTradePlaceTimeInForceStrict**](ManualTradePlaceTimeInForceStrict.md) |  | 
 **TradingSession** | Pointer to [**TradingSession**](TradingSession.md) |  | [optional] [default to TRADINGSESSION_REGULAR]
+**ExpiryDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. | [optional] 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). | [optional] 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewManualTradeFormWithOptions
 
-`func NewManualTradeFormWithOptions(accountId string, action ActionStrictWithOptions, orderType OrderTypeStrict, timeInForce TimeInForceStrict, ) *ManualTradeFormWithOptions`
+`func NewManualTradeFormWithOptions(accountId string, action ActionStrictWithOptions, orderType OrderTypeStrict, timeInForce ManualTradePlaceTimeInForceStrict, ) *ManualTradeFormWithOptions`
 
 NewManualTradeFormWithOptions instantiates a new ManualTradeFormWithOptions object
 This constructor will assign default values to properties that have it defined,
@@ -167,20 +168,20 @@ SetOrderType sets OrderType field to given value.
 
 ### GetTimeInForce
 
-`func (o *ManualTradeFormWithOptions) GetTimeInForce() TimeInForceStrict`
+`func (o *ManualTradeFormWithOptions) GetTimeInForce() ManualTradePlaceTimeInForceStrict`
 
 GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
 
 ### GetTimeInForceOk
 
-`func (o *ManualTradeFormWithOptions) GetTimeInForceOk() (*TimeInForceStrict, bool)`
+`func (o *ManualTradeFormWithOptions) GetTimeInForceOk() (*ManualTradePlaceTimeInForceStrict, bool)`
 
 GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeInForce
 
-`func (o *ManualTradeFormWithOptions) SetTimeInForce(v TimeInForceStrict)`
+`func (o *ManualTradeFormWithOptions) SetTimeInForce(v ManualTradePlaceTimeInForceStrict)`
 
 SetTimeInForce sets TimeInForce field to given value.
 
@@ -210,6 +211,41 @@ SetTradingSession sets TradingSession field to given value.
 
 HasTradingSession returns a boolean if a field has been set.
 
+### GetExpiryDate
+
+`func (o *ManualTradeFormWithOptions) GetExpiryDate() time.Time`
+
+GetExpiryDate returns the ExpiryDate field if non-nil, zero value otherwise.
+
+### GetExpiryDateOk
+
+`func (o *ManualTradeFormWithOptions) GetExpiryDateOk() (*time.Time, bool)`
+
+GetExpiryDateOk returns a tuple with the ExpiryDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryDate
+
+`func (o *ManualTradeFormWithOptions) SetExpiryDate(v time.Time)`
+
+SetExpiryDate sets ExpiryDate field to given value.
+
+### HasExpiryDate
+
+`func (o *ManualTradeFormWithOptions) HasExpiryDate() bool`
+
+HasExpiryDate returns a boolean if a field has been set.
+
+### SetExpiryDateNil
+
+`func (o *ManualTradeFormWithOptions) SetExpiryDateNil(b bool)`
+
+ SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
+
+### UnsetExpiryDate
+`func (o *ManualTradeFormWithOptions) UnsetExpiryDate()`
+
+UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
 ### GetPrice
 
 `func (o *ManualTradeFormWithOptions) GetPrice() float32`

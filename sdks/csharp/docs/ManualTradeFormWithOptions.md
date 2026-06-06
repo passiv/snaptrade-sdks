@@ -10,8 +10,9 @@ Name | Type | Description | Notes
 **UniversalSymbolId** | **string** | Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | [optional] 
 **Symbol** | **string** | The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
 **OrderType** | **OrderTypeStrict** |  | 
-**TimeInForce** | **TimeInForceStrict** |  | 
+**TimeInForce** | **ManualTradePlaceTimeInForceStrict** |  | 
 **TradingSession** | **TradingSession** |  | [optional] 
+**ExpiryDate** | **DateTime?** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. | [optional] 
 **Price** | **double?** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Stop** | **double?** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | **double?** | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). | [optional] 

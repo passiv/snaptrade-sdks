@@ -53,6 +53,8 @@ import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
 import { ManualTradeFormWithOptions } from '../models';
 // @ts-ignore
+import { ManualTradePlaceTimeInForceStrict } from '../models';
+// @ts-ignore
 import { ManualTradeReplaceForm } from '../models';
 // @ts-ignore
 import { MlegLeg } from '../models';
@@ -1408,6 +1410,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 trading_session: requestParameters.trading_session,
+                expiry_date: requestParameters.expiry_date,
                 price: requestParameters.price,
                 stop: requestParameters.stop,
                 units: requestParameters.units,

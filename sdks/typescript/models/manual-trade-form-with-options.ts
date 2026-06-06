@@ -12,8 +12,8 @@ import type * as buffer from "buffer"
 
 import { ActionStrictWithOptions } from './action-strict-with-options';
 import { ManualTradeFormNotionalValue } from './manual-trade-form-notional-value';
+import { ManualTradePlaceTimeInForceStrict } from './manual-trade-place-time-in-force-strict';
 import { OrderTypeStrict } from './order-type-strict';
-import { TimeInForceStrict } from './time-in-force-strict';
 import { TradingSession } from './trading-session';
 
 /**
@@ -53,17 +53,23 @@ export interface ManualTradeFormWithOptions {
      */
     'order_type': OrderTypeStrict;
     /**
-     * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-     * @type {TimeInForceStrict}
+     * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. 
+     * @type {ManualTradePlaceTimeInForceStrict}
      * @memberof ManualTradeFormWithOptions
      */
-    'time_in_force': TimeInForceStrict;
+    'time_in_force': ManualTradePlaceTimeInForceStrict;
     /**
      * The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:   - `REGULAR` - Regular trading hours.   - `EXTENDED` - Extended trading hours. 
      * @type {TradingSession}
      * @memberof ManualTradeFormWithOptions
      */
     'trading_session'?: TradingSession;
+    /**
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+     * @type {string}
+     * @memberof ManualTradeFormWithOptions
+     */
+    'expiry_date'?: string | null;
     /**
      * The limit price for `Limit` and `StopLimit` orders.
      * @type {number}

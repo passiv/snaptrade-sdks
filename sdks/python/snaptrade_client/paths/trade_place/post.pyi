@@ -32,6 +32,7 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict as ManualTradePlaceTimeInForceStrictSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
 from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable as UniversalSymbolIDNullableSchema
@@ -39,14 +40,13 @@ from snaptrade_client.model.account_order_record import AccountOrderRecord as Ac
 from snaptrade_client.model.trading_session import TradingSession as TradingSessionSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions as ActionStrictWithOptionsSchema
-from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
 from snaptrade_client.model.manual_trade_form_with_options import ManualTradeFormWithOptions as ManualTradeFormWithOptionsSchema
 from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
+from snaptrade_client.type.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
-from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
 from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
@@ -193,12 +193,13 @@ class BaseApi(api_client.Api):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        time_in_force: typing.Optional[ManualTradePlaceTimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
         trading_session: typing.Optional[TradingSession] = None,
+        expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -222,6 +223,8 @@ class BaseApi(api_client.Api):
             _body["time_in_force"] = time_in_force
         if trading_session is not None:
             _body["trading_session"] = trading_session
+        if expiry_date is not None:
+            _body["expiry_date"] = expiry_date
         if price is not None:
             _body["price"] = price
         if stop is not None:
@@ -480,12 +483,13 @@ class PlaceForceOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        time_in_force: typing.Optional[ManualTradePlaceTimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
         trading_session: typing.Optional[TradingSession] = None,
+        expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -509,6 +513,7 @@ class PlaceForceOrder(BaseApi):
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
             trading_session=trading_session,
+            expiry_date=expiry_date,
             price=price,
             stop=stop,
             units=units,
@@ -526,12 +531,13 @@ class PlaceForceOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        time_in_force: typing.Optional[ManualTradePlaceTimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
         trading_session: typing.Optional[TradingSession] = None,
+        expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -554,6 +560,7 @@ class PlaceForceOrder(BaseApi):
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
             trading_session=trading_session,
+            expiry_date=expiry_date,
             price=price,
             stop=stop,
             units=units,
@@ -573,12 +580,13 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        time_in_force: typing.Optional[ManualTradePlaceTimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
         trading_session: typing.Optional[TradingSession] = None,
+        expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -602,6 +610,7 @@ class ApiForpost(BaseApi):
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
             trading_session=trading_session,
+            expiry_date=expiry_date,
             price=price,
             stop=stop,
             units=units,
@@ -619,12 +628,13 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        time_in_force: typing.Optional[ManualTradePlaceTimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
         trading_session: typing.Optional[TradingSession] = None,
+        expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -647,6 +657,7 @@ class ApiForpost(BaseApi):
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
             trading_session=trading_session,
+            expiry_date=expiry_date,
             price=price,
             stop=stop,
             units=units,

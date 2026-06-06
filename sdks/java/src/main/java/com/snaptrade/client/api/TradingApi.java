@@ -18,6 +18,7 @@ import com.snaptrade.client.model.ManualTradeForm;
 import com.snaptrade.client.model.ManualTradeFormBracket;
 import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
+import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
 import com.snaptrade.client.model.ManualTradeReplaceForm;
 import com.snaptrade.client.model.MlegLeg;
 import com.snaptrade.client.model.MlegOrderResponse;
@@ -99,7 +100,7 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PlaceForceOrderRequestBuilder extends PlaceForceOrderRequestBuilderGenerated {
-        public PlaceForceOrderRequestBuilder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+        public PlaceForceOrderRequestBuilder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, ManualTradePlaceTimeInForceStrict timeInForce, String userId, String userSecret) {
             super(accountId, action, orderType, timeInForce, userId, userSecret);
         }
     }

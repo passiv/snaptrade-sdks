@@ -2702,6 +2702,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     symbol="AAPL",
     trading_session="REGULAR",
+    expiry_date="2026-08-21T23:27:55.027Z",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -2719,7 +2720,7 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
-##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+##### time_in_force: [`ManualTradePlaceTimeInForceStrict`](./snaptrade_client/type/manual_trade_place_time_in_force_strict.py)<a id="time_in_force-manualtradeplacetimeinforcestrictsnaptrade_clienttypemanual_trade_place_time_in_force_strictpy"></a>
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -2734,6 +2735,10 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### trading_session: [`TradingSession`](./snaptrade_client/type/trading_session.py)<a id="trading_session-tradingsessionsnaptrade_clienttypetrading_sessionpy"></a>
+
+##### expiry_date: `Optional[datetime]`<a id="expiry_date-optionaldatetime"></a>
+
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 

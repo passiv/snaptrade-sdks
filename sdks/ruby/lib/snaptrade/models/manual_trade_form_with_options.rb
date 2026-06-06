@@ -28,11 +28,14 @@ module SnapTrade
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     attr_accessor :order_type
 
-    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. 
     attr_accessor :time_in_force
 
     # The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:   - `REGULAR` - Regular trading hours.   - `EXTENDED` - Extended trading hours. 
     attr_accessor :trading_session
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+    attr_accessor :expiry_date
 
     # The limit price for `Limit` and `StopLimit` orders.
     attr_accessor :price
@@ -55,6 +58,7 @@ module SnapTrade
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'trading_session' => :'trading_session',
+        :'expiry_date' => :'expiry_date',
         :'price' => :'price',
         :'stop' => :'stop',
         :'units' => :'units',
@@ -75,8 +79,9 @@ module SnapTrade
         :'universal_symbol_id' => :'String',
         :'symbol' => :'String',
         :'order_type' => :'OrderTypeStrict',
-        :'time_in_force' => :'TimeInForceStrict',
+        :'time_in_force' => :'ManualTradePlaceTimeInForceStrict',
         :'trading_session' => :'TradingSession',
+        :'expiry_date' => :'Time',
         :'price' => :'Float',
         :'stop' => :'Float',
         :'units' => :'Float',
@@ -89,6 +94,7 @@ module SnapTrade
       Set.new([
         :'universal_symbol_id',
         :'symbol',
+        :'expiry_date',
         :'price',
         :'stop',
         :'units',
@@ -139,6 +145,10 @@ module SnapTrade
         self.trading_session = attributes[:'trading_session']
       else
         self.trading_session = 'REGULAR'
+      end
+
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
       end
 
       if attributes.key?(:'price')
@@ -203,6 +213,7 @@ module SnapTrade
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           trading_session == o.trading_session &&
+          expiry_date == o.expiry_date &&
           price == o.price &&
           stop == o.stop &&
           units == o.units &&
@@ -218,7 +229,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, action, universal_symbol_id, symbol, order_type, time_in_force, trading_session, price, stop, units, notional_value].hash
+      [account_id, action, universal_symbol_id, symbol, order_type, time_in_force, trading_session, expiry_date, price, stop, units, notional_value].hash
     end
 
     # Builds the object from hash

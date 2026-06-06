@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets TimeInForce
         /// </summary>
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
-        public TimeInForceStrict TimeInForce { get; set; }
+        public ManualTradePlaceTimeInForceStrict TimeInForce { get; set; }
 
         /// <summary>
         /// Gets or Sets TradingSession
@@ -71,11 +71,12 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="tradingSession">tradingSession.</param>
+        /// <param name="expiryDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support..</param>
         /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares)..</param>
         /// <param name="notionalValue">notionalValue.</param>
-        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), TradingSession? tradingSession = default(TradingSession?), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
+        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), ManualTradePlaceTimeInForceStrict timeInForce = default(ManualTradePlaceTimeInForceStrict), TradingSession? tradingSession = default(TradingSession?), DateTime? expiryDate = default(DateTime?), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
         {
             // to ensure "accountId" is required (not null)
             if (accountId == null)
@@ -89,6 +90,7 @@ namespace SnapTrade.Net.Model
             this.UniversalSymbolId = universalSymbolId;
             this.Symbol = symbol;
             this.TradingSession = tradingSession;
+            this.ExpiryDate = expiryDate;
             this.Price = price;
             this.Stop = stop;
             this.Units = units;
@@ -115,6 +117,13 @@ namespace SnapTrade.Net.Model
         /// <value>The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;.</value>
         [DataMember(Name = "symbol", EmitDefaultValue = true)]
         public string Symbol { get; set; }
+
+        /// <summary>
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+        /// </summary>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.</value>
+        [DataMember(Name = "expiry_date", EmitDefaultValue = true)]
+        public DateTime? ExpiryDate { get; set; }
 
         /// <summary>
         /// The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
@@ -158,6 +167,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  TradingSession: ").Append(TradingSession).Append("\n");
+            sb.Append("  ExpiryDate: ").Append(ExpiryDate).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Stop: ").Append(Stop).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
@@ -229,6 +239,11 @@ namespace SnapTrade.Net.Model
                     this.TradingSession.Equals(input.TradingSession)
                 ) && 
                 (
+                    this.ExpiryDate == input.ExpiryDate ||
+                    (this.ExpiryDate != null &&
+                    this.ExpiryDate.Equals(input.ExpiryDate))
+                ) && 
+                (
                     this.Price == input.Price ||
                     (this.Price != null &&
                     this.Price.Equals(input.Price))
@@ -275,6 +290,10 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 hashCode = (hashCode * 59) + this.TradingSession.GetHashCode();
+                if (this.ExpiryDate != null)
+                {
+                    hashCode = (hashCode * 59) + this.ExpiryDate.GetHashCode();
+                }
                 if (this.Price != null)
                 {
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();

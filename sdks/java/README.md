@@ -2643,6 +2643,7 @@ AccountOrderRecord result = client
         .universalSymbolId(universalSymbolId)
         .symbol(symbol)
         .tradingSession(tradingSession)
+        .expiryDate(expiryDate)
         .price(price)
         .stop(stop)
         .units(units)
@@ -2675,6 +2676,10 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### trading_session:<a id="trading_session"></a>
+
+##### expiry_date: `OffsetDateTime`<a id="expiry_date-offsetdatetime"></a>
+
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
 
 ##### price: `Double`<a id="price-double"></a>
 

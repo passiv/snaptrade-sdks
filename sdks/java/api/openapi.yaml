@@ -9629,6 +9629,7 @@ components:
         trading_session: REGULAR
         price: 31.33
         notional_value: ""
+        expiry_date: 2026-08-21T23:27:55.027Z
         action: null
         units: ""
         order_type: Market
@@ -9663,9 +9664,21 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
+          $ref: '#/components/schemas/ManualTradePlaceTimeInForceStrict'
         trading_session:
           $ref: '#/components/schemas/TradingSession'
+        expiry_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the order expires. Required when `time_in_force`\
+            \ is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is\
+            \ provided, UTC is assumed. GTD orders are only available on certain brokerages.\
+            \ Visit https://support.snaptrade.com/brokerages for brokerage support."
+          example: 2026-08-21T23:27:55.027Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-08-21T23:27:55.027Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-expiry_date
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           example: 31.33
@@ -10121,6 +10134,24 @@ components:
       type: string
       x-konfig-original-example: Day
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
+    ManualTradePlaceTimeInForceStrict:
+      description: |
+        The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:
+          - `Day` - Day. The order is valid only for the trading day on which it is placed.
+          - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+          - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+          - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+      enum:
+      - FOK
+      - Day
+      - GTC
+      - IOC
+      - GTD
+      example: Day
+      type: string
+      x-konfig-original-example: Day
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradePlaceTimeInForceStrict
     TradingSession:
       default: REGULAR
       description: |
@@ -13319,6 +13350,10 @@ components:
       example: AAPL
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-expiry_date:
+      example: 2026-08-21T23:27:55.027Z
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-price:
       example: 31.33
       type: number
@@ -13404,6 +13439,10 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TimeInForceStrict:
+      example: Day
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradePlaceTimeInForceStrict:
       example: Day
       type: string
       x-do-not-generate: true
@@ -14706,9 +14745,21 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
+          $ref: '#/components/schemas/ManualTradePlaceTimeInForceStrict'
         trading_session:
           $ref: '#/components/schemas/TradingSession'
+        expiry_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the order expires. Required when `time_in_force`\
+            \ is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is\
+            \ provided, UTC is assumed. GTD orders are only available on certain brokerages.\
+            \ Visit https://support.snaptrade.com/brokerages for brokerage support."
+          example: 2026-08-21T23:27:55.027Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-08-21T23:27:55.027Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-expiry_date
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           example: 31.33

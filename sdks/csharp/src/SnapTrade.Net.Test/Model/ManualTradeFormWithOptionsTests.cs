@@ -114,6 +114,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'TradingSession'
         }
         /// <summary>
+        /// Test the property 'ExpiryDate'
+        /// </summary>
+        [Fact]
+        public void ExpiryDateTest()
+        {
+            // TODO unit test for the property 'ExpiryDate'
+        }
+        /// <summary>
         /// Test the property 'Price'
         /// </summary>
         [Fact]
