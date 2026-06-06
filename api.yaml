@@ -6143,9 +6143,15 @@ components:
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
         time_in_force:
-          $ref: "#/components/schemas/TimeInForceStrict"
+          $ref: "#/components/schemas/ManualTradePlaceTimeInForceStrict"
         trading_session:
           $ref: "#/components/schemas/TradingSession"
+        expiry_date:
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+          type: string
+          format: date-time
+          example: 2026-08-21T23:27:55.027Z
+          nullable: true
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           type: number
@@ -6420,6 +6426,22 @@ components:
         - Day
         - GTC
         - IOC
+      example: Day
+    ManualTradePlaceTimeInForceStrict:
+      description: >
+        The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:
+          - `Day` - Day. The order is valid only for the trading day on which it is placed.
+          - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+          - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+          - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+      type: string
+      enum:
+        - FOK
+        - Day
+        - GTC
+        - IOC
+        - GTD
       example: Day
     TradingSession:
       description: >
