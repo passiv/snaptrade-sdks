@@ -47,6 +47,41 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test CancelOrder
+        /// </summary>
+        [Fact]
+        public void CancelOrderTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
+                brokerageOrderId
+            );
+            
+            try
+            {
+                // Cancel order
+                CancelOrderResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.CancelOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test CancelUserAccountOrder
         /// </summary>
         [Fact]
@@ -57,19 +92,95 @@ namespace SnapTrade.Net.Test.Api
             var accountId = "accountId_example";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            var tradingCancelUserAccountOrderRequest = new AccountInformationGetUserAccountOrderDetailRequest(
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 brokerageOrderId
             );
             
             try
             {
-                // Cancel order
-                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+                // Cancel equity order
+                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling TradingApi.CancelUserAccountOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test GetCryptocurrencyPairQuote
+        /// </summary>
+        [Fact]
+        public void GetCryptocurrencyPairQuoteTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var instrumentSymbol = "instrumentSymbol_example";
+            
+            try
+            {
+                // Get crypto pair quote
+                CryptocurrencyPairQuote result = client.Trading.GetCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.GetCryptocurrencyPairQuote: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test GetOptionImpact
+        /// </summary>
+        [Fact]
+        public void GetOptionImpactTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var orderType = MlegOrderTypeStrict.MARKET;
+            var timeInForce = TimeInForceStrict.FOK;
+            var limitPrice = ""; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+            var stopPrice = ""; // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
+            var priceEffect = MlegPriceEffectStrictNullable.CREDIT;
+            var legs = new List<MlegLeg>();
+            
+            var mlegTradeForm = new MlegTradeForm(
+                orderType,
+                timeInForce,
+                limitPrice,
+                stopPrice,
+                priceEffect,
+                legs
+            );
+            
+            try
+            {
+                // Get option order impact
+                OptionImpact result = client.Trading.GetOptionImpact(userId, userSecret, accountId, mlegTradeForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.GetOptionImpact: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -113,13 +224,44 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Check order impact
+                // Check equity order impact
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling TradingApi.GetOrderImpact: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test GetUserAccountOptionQuotes
+        /// </summary>
+        [Fact]
+        public void GetUserAccountOptionQuotesTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
+            
+            try
+            {
+                // Get option quote
+                OptionQuote result = client.Trading.GetUserAccountOptionQuotes(userId, userSecret, accountId, symbol);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.GetUserAccountOptionQuotes: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -139,19 +281,160 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for.
+            var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
             var accountId = "accountId_example";
             var useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided. (optional) 
             
             try
             {
-                // Get symbol quotes
+                // Get equity symbol quotes
                 List<SymbolsQuotesInner> result = client.Trading.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling TradingApi.GetUserAccountQuotes: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test PlaceBracketOrder
+        /// </summary>
+        [Fact]
+        public void PlaceBracketOrderTest()
+        {
+            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var action = ActionStrictWithOptions.BUY;
+            var instrument = new TradingInstrument();
+            var orderType = OrderTypeStrict.Limit;
+            var timeInForce = TimeInForceStrict.FOK;
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+            var stopLoss = new StopLoss();
+            var takeProfit = new TakeProfit();
+            
+            var manualTradeFormBracket = new ManualTradeFormBracket(
+                action,
+                instrument,
+                orderType,
+                timeInForce,
+                price,
+                stop,
+                units,
+                stopLoss,
+                takeProfit
+            );
+            
+            try
+            {
+                // Place bracket order
+                AccountOrderRecord result = client.Trading.PlaceBracketOrder(accountId, userId, userSecret, manualTradeFormBracket);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PlaceBracketOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test PlaceComplexOrder
+        /// </summary>
+        [Fact]
+        public void PlaceComplexOrderTest()
+        {
+            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var type = ManualTradeFormComplex.TypeEnum.OTO; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
+            var orders = new List<ComplexOrderLeg>(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
+            var clientOrderId = "my-order-123"; // An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+            
+            var manualTradeFormComplex = new ManualTradeFormComplex(
+                type,
+                orders,
+                clientOrderId
+            );
+            
+            try
+            {
+                // Place complex order
+                ComplexOrderResponse result = client.Trading.PlaceComplexOrder(accountId, userId, userSecret, manualTradeFormComplex);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PlaceComplexOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test PlaceCryptoOrder
+        /// </summary>
+        [Fact]
+        public void PlaceCryptoOrderTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var instrument = new CryptoTradingInstrument();
+            var side = ActionStrict.BUY;
+            var type = CryptoOrderForm.TypeEnum.MARKET; // The type of order to place.
+            var timeInForce = CryptoOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+            var amount = "123.45"; // The amount of the base currency to buy or sell.
+            var limitPrice = "123.45"; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
+            var stopPrice = "123.45"; // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
+            var postOnly = false; // Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+            var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is `GTD`.
+            
+            var cryptoOrderForm = new CryptoOrderForm(
+                instrument,
+                side,
+                type,
+                timeInForce,
+                amount,
+                limitPrice,
+                stopPrice,
+                postOnly,
+                expirationDate
+            );
+            
+            try
+            {
+                // Place crypto order
+                OrderUpdatedResponse result = client.Trading.PlaceCryptoOrder(userId, userSecret, accountId, cryptoOrderForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PlaceCryptoOrder: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -174,13 +457,14 @@ namespace SnapTrade.Net.Test.Api
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrictWithOptions.BUY;
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-            var symbol = "AAPL  131124C00240000"; // The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+            var symbol = "AAPL"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
             var orderType = OrderTypeStrict.Limit;
-            var timeInForce = TimeInForceStrict.FOK;
+            var timeInForce = ManualTradePlaceTimeInForceStrict.FOK;
             var tradingSession = TradingSession.REGULAR;
+            var expiryDate = DateTime.Now; // Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-            var units = 31.33; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+            var units = "units_example"; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
             var notionalValue = new NotionalValueNullable(100);
             
             var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
@@ -191,6 +475,7 @@ namespace SnapTrade.Net.Test.Api
                 orderType,
                 timeInForce,
                 tradingSession,
+                expiryDate,
                 price,
                 stop,
                 units,
@@ -199,13 +484,58 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Place order
+                // Place equity order
                 AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeFormWithOptions);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling TradingApi.PlaceForceOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test PlaceMlegOrder
+        /// </summary>
+        [Fact]
+        public void PlaceMlegOrderTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var orderType = MlegOrderTypeStrict.MARKET;
+            var timeInForce = TimeInForceStrict.FOK;
+            var limitPrice = ""; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+            var stopPrice = ""; // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
+            var priceEffect = MlegPriceEffectStrictNullable.CREDIT;
+            var legs = new List<MlegLeg>();
+            
+            var mlegTradeForm = new MlegTradeForm(
+                orderType,
+                timeInForce,
+                limitPrice,
+                stopPrice,
+                priceEffect,
+                legs
+            );
+            
+            try
+            {
+                // Place option order
+                MlegOrderResponse result = client.Trading.PlaceMlegOrder(userId, userSecret, accountId, mlegTradeForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PlaceMlegOrder: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -234,13 +564,145 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Place checked order
+                // Place checked equity order
                 AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling TradingApi.PlaceOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test PreviewCryptoOrder
+        /// </summary>
+        [Fact]
+        public void PreviewCryptoOrderTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var instrument = new CryptoTradingInstrument();
+            var side = ActionStrict.BUY;
+            var type = CryptoOrderForm.TypeEnum.MARKET; // The type of order to place.
+            var timeInForce = CryptoOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+            var amount = "123.45"; // The amount of the base currency to buy or sell.
+            var limitPrice = "123.45"; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
+            var stopPrice = "123.45"; // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
+            var postOnly = false; // Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+            var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is `GTD`.
+            
+            var cryptoOrderForm = new CryptoOrderForm(
+                instrument,
+                side,
+                type,
+                timeInForce,
+                amount,
+                limitPrice,
+                stopPrice,
+                postOnly,
+                expirationDate
+            );
+            
+            try
+            {
+                // Preview crypto order
+                CryptoOrderPreview result = client.Trading.PreviewCryptoOrder(userId, userSecret, accountId, cryptoOrderForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.PreviewCryptoOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test ReplaceOrder
+        /// </summary>
+        [Fact]
+        public void ReplaceOrderTest()
+        {
+            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            var action = ActionStrict.BUY;
+            var orderType = OrderTypeStrict.Limit;
+            var timeInForce = TimeInForceStrict.FOK;
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var symbol = "AAPL"; // The security's trading ticker symbol
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+            
+            var manualTradeReplaceForm = new ManualTradeReplaceForm(
+                brokerageOrderId,
+                action,
+                orderType,
+                timeInForce,
+                price,
+                symbol,
+                stop,
+                units
+            );
+            
+            try
+            {
+                // Replace order
+                AccountOrderRecord result = client.Trading.ReplaceOrder(accountId, userId, userSecret, manualTradeReplaceForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.ReplaceOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test SearchCryptocurrencyPairInstruments
+        /// </summary>
+        [Fact]
+        public void SearchCryptocurrencyPairInstrumentsTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var _base = "_base_example";
+            var quote = "quote_example";
+            
+            try
+            {
+                // Get crypto pairs
+                TradingSearchCryptocurrencyPairInstruments200Response result = client.Trading.SearchCryptocurrencyPairInstruments(userId, userSecret, accountId, _base, quote);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.SearchCryptocurrencyPairInstruments: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
