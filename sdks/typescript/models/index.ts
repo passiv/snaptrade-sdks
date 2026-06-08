@@ -80,6 +80,7 @@ export * from './manual-trade-form-complex';
 export * from './manual-trade-form-notional-value';
 export * from './manual-trade-form-with-options';
 export * from './manual-trade-impact';
+export * from './manual-trade-place-time-in-force-strict';
 export * from './manual-trade-replace-form';
 export * from './manual-trade-symbol';
 export * from './mleg-action-strict';

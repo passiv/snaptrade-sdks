@@ -43,6 +43,7 @@ import com.snaptrade.client.model.ManualTradeForm;
 import com.snaptrade.client.model.ManualTradeFormBracket;
 import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
+import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
 import com.snaptrade.client.model.ManualTradeReplaceForm;
 import com.snaptrade.client.model.MlegLeg;
 import com.snaptrade.client.model.MlegOrderResponse;
@@ -2111,7 +2112,7 @@ public class TradingApiGenerated {
         final UUID accountId;
         final String userId;
         final String userSecret;
-        String clientOrderId;
+        UUID clientOrderId;
 
         public PlaceComplexOrderRequestBuilderGenerated(String type, List<ComplexOrderLeg> orders, UUID accountId, String userId, String userSecret) {
             this.type = type;
@@ -2123,10 +2124,10 @@ public class TradingApiGenerated {
 
         /**
          * Set clientOrderId
-         * @param clientOrderId An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response. (optional)
+         * @param clientOrderId Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission.  (optional)
          * @return TradingApi.PlaceComplexOrderRequestBuilder
          */
-        public TradingApi.PlaceComplexOrderRequestBuilder clientOrderId(String clientOrderId) {
+        public TradingApi.PlaceComplexOrderRequestBuilder clientOrderId(UUID clientOrderId) {
             this.clientOrderId = clientOrderId;
             return (TradingApi.PlaceComplexOrderRequestBuilder) this;
         }
@@ -2614,18 +2615,20 @@ public class TradingApiGenerated {
         final UUID accountId;
         final ActionStrictWithOptions action;
         final OrderTypeStrict orderType;
-        final TimeInForceStrict timeInForce;
+        final ManualTradePlaceTimeInForceStrict timeInForce;
         final String userId;
         final String userSecret;
         UUID universalSymbolId;
         String symbol;
         TradingSession tradingSession;
+        OffsetDateTime expiryDate;
         Double price;
         Double stop;
         Double units;
         Object notionalValue;
+        UUID clientOrderId;
 
-        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, ManualTradePlaceTimeInForceStrict timeInForce, String userId, String userSecret) {
             this.accountId = accountId;
             this.action = action;
             this.orderType = orderType;
@@ -2661,6 +2664,16 @@ public class TradingApiGenerated {
          */
         public TradingApi.PlaceForceOrderRequestBuilder tradingSession(TradingSession tradingSession) {
             this.tradingSession = tradingSession;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set expiryDate
+         * @param expiryDate Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder expiryDate(OffsetDateTime expiryDate) {
+            this.expiryDate = expiryDate;
             return (TradingApi.PlaceForceOrderRequestBuilder) this;
         }
         
@@ -2727,6 +2740,16 @@ public class TradingApiGenerated {
         }
         
         /**
+         * Set clientOrderId
+         * @param clientOrderId Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission.  (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder clientOrderId(UUID clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
          * Build call for placeForceOrder
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -2752,10 +2775,12 @@ public class TradingApiGenerated {
             manualTradeFormWithOptions.orderType(this.orderType);
             manualTradeFormWithOptions.timeInForce(this.timeInForce);
             manualTradeFormWithOptions.tradingSession(this.tradingSession);
+            manualTradeFormWithOptions.expiryDate(this.expiryDate);
             manualTradeFormWithOptions.price(this.price);
             manualTradeFormWithOptions.stop(this.stop);
             manualTradeFormWithOptions.units(this.units);
             manualTradeFormWithOptions.notionalValue(this.notionalValue);
+            manualTradeFormWithOptions.clientOrderId(this.clientOrderId);
             return manualTradeFormWithOptions;
         }
 
@@ -2824,7 +2849,7 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
+    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, ManualTradePlaceTimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 

@@ -956,7 +956,7 @@ public class Example {
     UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String clientOrderId = "clientOrderId_example"; // An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+    UUID clientOrderId = UUID.randomUUID(); // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
     try {
       ComplexOrderResponse result = client
               .trading
@@ -1176,16 +1176,18 @@ public class Example {
     UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
-    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
+    ManualTradePlaceTimeInForceStrict timeInForce = ManualTradePlaceTimeInForceStrict.fromValue("FOK");
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     String symbol = "symbol_example"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     TradingSession tradingSession = TradingSession.fromValue("REGULAR");
+    OffsetDateTime expiryDate = OffsetDateTime.now(); // Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     Object notionalValue = null;
+    UUID clientOrderId = UUID.randomUUID(); // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
     try {
       AccountOrderRecord result = client
               .trading
@@ -1193,10 +1195,12 @@ public class Example {
               .universalSymbolId(universalSymbolId)
               .symbol(symbol)
               .tradingSession(tradingSession)
+              .expiryDate(expiryDate)
               .price(price)
               .stop(stop)
               .units(units)
               .notionalValue(notionalValue)
+              .clientOrderId(clientOrderId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -1240,10 +1244,12 @@ public class Example {
               .universalSymbolId(universalSymbolId)
               .symbol(symbol)
               .tradingSession(tradingSession)
+              .expiryDate(expiryDate)
               .price(price)
               .stop(stop)
               .units(units)
               .notionalValue(notionalValue)
+              .clientOrderId(clientOrderId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

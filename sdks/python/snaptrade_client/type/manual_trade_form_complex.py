@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.client_order_id_nullable import ClientOrderIDNullable
 from snaptrade_client.type.complex_order_leg import ComplexOrderLeg
 
 class RequiredManualTradeFormComplex(TypedDict):
@@ -26,8 +27,7 @@ class RequiredManualTradeFormComplex(TypedDict):
 
 
 class OptionalManualTradeFormComplex(TypedDict, total=False):
-    # An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
-    client_order_id: typing.Optional[str]
+    client_order_id: ClientOrderIDNullable
 
 class ManualTradeFormComplex(RequiredManualTradeFormComplex, OptionalManualTradeFormComplex):
     pass

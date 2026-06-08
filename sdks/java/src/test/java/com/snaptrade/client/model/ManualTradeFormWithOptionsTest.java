@@ -18,12 +18,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.ActionStrictWithOptions;
+import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
 import com.snaptrade.client.model.OrderTypeStrict;
-import com.snaptrade.client.model.TimeInForceStrict;
 import com.snaptrade.client.model.TradingSession;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
@@ -101,6 +102,14 @@ public class ManualTradeFormWithOptionsTest {
     }
 
     /**
+     * Test the property 'expiryDate'
+     */
+    @Test
+    public void expiryDateTest() {
+        // TODO: test expiryDate
+    }
+
+    /**
      * Test the property 'price'
      */
     @Test
@@ -130,6 +139,14 @@ public class ManualTradeFormWithOptionsTest {
     @Test
     public void notionalValueTest() {
         // TODO: test notionalValue
+    }
+
+    /**
+     * Test the property 'clientOrderId'
+     */
+    @Test
+    public void clientOrderIdTest() {
+        // TODO: test clientOrderId
     }
 
 }

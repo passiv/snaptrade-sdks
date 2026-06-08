@@ -31,7 +31,7 @@ export interface ManualTradeFormComplex {
      */
     'orders': Array<ComplexOrderLeg>;
     /**
-     * An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+     * 
      * @type {string}
      * @memberof ManualTradeFormComplex
      */

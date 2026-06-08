@@ -901,7 +901,7 @@ namespace Example
             var userSecret = "userSecret_example";
             var type = ManualTradeFormComplex.TypeEnum.OTO; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
             var orders = new List<ComplexOrderLeg>(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
-            var clientOrderId = "my-order-123"; // An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
             
             var manualTradeFormComplex = new ManualTradeFormComplex(
                 type,
@@ -1128,12 +1128,14 @@ namespace Example
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
             var symbol = "AAPL"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
             var orderType = OrderTypeStrict.Limit;
-            var timeInForce = TimeInForceStrict.FOK;
+            var timeInForce = ManualTradePlaceTimeInForceStrict.FOK;
             var tradingSession = TradingSession.REGULAR;
+            var expiryDate = DateTime.Now; // Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = "units_example"; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
             var notionalValue = new NotionalValueNullable(100);
+            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
             
             var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
                 accountId,
@@ -1143,10 +1145,12 @@ namespace Example
                 orderType,
                 timeInForce,
                 tradingSession,
+                expiryDate,
                 price,
                 stop,
                 units,
-                notionalValue
+                notionalValue,
+                clientOrderId
             );
             
             try
