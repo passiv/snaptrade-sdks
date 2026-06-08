@@ -6143,9 +6143,15 @@ components:
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
         time_in_force:
-          $ref: "#/components/schemas/TimeInForceStrict"
+          $ref: "#/components/schemas/ManualTradePlaceTimeInForceStrict"
         trading_session:
           $ref: "#/components/schemas/TradingSession"
+        expiry_date:
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+          type: string
+          format: date-time
+          example: 2026-08-21T23:27:55.027Z
+          nullable: true
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           type: number
@@ -6165,6 +6171,10 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+        client_order_id:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ClientOrderID"
     ComplexOrderLeg:
       description: A single leg within a complex order.
       type: object
@@ -6233,10 +6243,9 @@ components:
           items:
             $ref: "#/components/schemas/ComplexOrderLeg"
         client_order_id:
-          description: An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
-          type: string
           nullable: true
-          example: "my-order-123"
+          allOf:
+            - $ref: "#/components/schemas/ClientOrderID"
     ComplexOrderResponse:
       description: |
         Response returned after successfully placing a complex order. AccountOrderRecord rows
@@ -6421,6 +6430,22 @@ components:
         - GTC
         - IOC
       example: Day
+    ManualTradePlaceTimeInForceStrict:
+      description: >
+        The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:
+          - `Day` - Day. The order is valid only for the trading day on which it is placed.
+          - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+          - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+          - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+      type: string
+      enum:
+        - FOK
+        - Day
+        - GTC
+        - IOC
+        - GTD
+      example: Day
     TradingSession:
       description: >
         The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:
@@ -6547,7 +6572,17 @@ components:
         limit_price:
           type: string
           example: "49.95"
-
+    ClientOrderID:
+      description: |
+        Optional caller-supplied identifier passed through to the brokerage for idempotent
+        order placement. Must be a canonical 36-character UUID.
+        Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to
+        the broker but does not enforce uniqueness server-side. Refer to per-brokerage
+        documentation for behavior on duplicate submission.
+      nullable: true
+      type: string
+      format: uuid
+      example: "550e8400-e29b-41d4-a716-446655440000"
     CryptocurrencySymbol:
       description: Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
       type: string
