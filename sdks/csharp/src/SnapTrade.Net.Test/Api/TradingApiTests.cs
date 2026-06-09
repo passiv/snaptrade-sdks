@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
             var tradingCancelUserAccountOrderRequest = new AccountInformationGetUserAccountOrderDetailRequest(
@@ -140,7 +140,7 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for.
-            var accountId = "accountId_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided. (optional) 
             
             try
