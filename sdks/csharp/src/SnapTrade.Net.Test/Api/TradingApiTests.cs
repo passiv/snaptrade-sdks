@@ -176,8 +176,9 @@ namespace SnapTrade.Net.Test.Api
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
             var symbol = "AAPL  131124C00240000"; // The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
             var orderType = OrderTypeStrict.Limit;
-            var timeInForce = TimeInForceStrict.FOK;
+            var timeInForce = ManualTradePlaceTimeInForceStrict.FOK;
             var tradingSession = TradingSession.REGULAR;
+            var expiryDate = DateTime.Now; // Timestamp in ISO 8601 format indicating when the order expires. Required when `time_in_force` is `GTD`.
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = 31.33; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
@@ -191,6 +192,7 @@ namespace SnapTrade.Net.Test.Api
                 orderType,
                 timeInForce,
                 tradingSession,
+                expiryDate,
                 price,
                 stop,
                 units,
