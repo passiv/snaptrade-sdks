@@ -16,9 +16,10 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
+from snaptrade_client.type.client_order_id_nullable import ClientOrderIDNullable
+from snaptrade_client.type.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
-from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.trading_session import TradingSession
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
 
@@ -30,7 +31,7 @@ class RequiredManualTradeFormWithOptions(TypedDict):
 
     order_type: OrderTypeStrict
 
-    time_in_force: TimeInForceStrict
+    time_in_force: ManualTradePlaceTimeInForceStrict
 
 
 class OptionalManualTradeFormWithOptions(TypedDict, total=False):
@@ -42,6 +43,9 @@ class OptionalManualTradeFormWithOptions(TypedDict, total=False):
 
     trading_session: TradingSession
 
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+    expiry_date: typing.Optional[datetime]
+
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]
 
@@ -52,6 +56,8 @@ class OptionalManualTradeFormWithOptions(TypedDict, total=False):
     units: float
 
     notional_value: typing.Optional[NotionalValueNullable]
+
+    client_order_id: ClientOrderIDNullable
 
 class ManualTradeFormWithOptions(RequiredManualTradeFormWithOptions, OptionalManualTradeFormWithOptions):
     pass

@@ -65,6 +65,8 @@ from snaptrade_client.model.cef_instrument import CefInstrument
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
+from snaptrade_client.model.client_order_id import ClientOrderID
+from snaptrade_client.model.client_order_id_nullable import ClientOrderIDNullable
 from snaptrade_client.model.complex_order_leg import ComplexOrderLeg
 from snaptrade_client.model.complex_order_response import ComplexOrderResponse
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
@@ -109,6 +111,7 @@ from snaptrade_client.model.manual_trade_form_bracket import ManualTradeFormBrac
 from snaptrade_client.model.manual_trade_form_complex import ManualTradeFormComplex
 from snaptrade_client.model.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
+from snaptrade_client.model.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict
 from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.mleg_action_strict import MlegActionStrict

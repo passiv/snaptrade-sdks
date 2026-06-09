@@ -216,12 +216,13 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
 
     t.Run("Test TradingApiService PlaceComplexOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        clientOrderId := *snaptrade.Newstring()
         
         manualTradeFormComplex := *snaptrade.NewManualTradeFormComplex(
             "OTO",
             null,
         )
-        manualTradeFormComplex.SetClientOrderId("my-order-123")
+        manualTradeFormComplex.SetClientOrderId(clientOrderId)
         
         request := client.TradingApi.PlaceComplexOrder(
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
@@ -274,6 +275,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         universalSymbolId := *snaptrade.Newstring()
         units := *snaptrade.Newfloat32()
         notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
+        clientOrderId := *snaptrade.Newstring()
         
         manualTradeFormWithOptions := *snaptrade.NewManualTradeFormWithOptions(
             "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -284,10 +286,12 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeFormWithOptions.SetUniversalSymbolId(universalSymbolId)
         manualTradeFormWithOptions.SetSymbol("AAPL")
         manualTradeFormWithOptions.SetTradingSession(null)
+        manualTradeFormWithOptions.SetExpiryDate(2026-08-21T23:27:55.027Z)
         manualTradeFormWithOptions.SetPrice(31.33)
         manualTradeFormWithOptions.SetStop(31.33)
         manualTradeFormWithOptions.SetUnits(units)
         manualTradeFormWithOptions.SetNotionalValue(notionalValue)
+        manualTradeFormWithOptions.SetClientOrderId(clientOrderId)
         
         request := client.TradingApi.PlaceForceOrder(
             "userId_example",

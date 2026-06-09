@@ -19,7 +19,6 @@ module SnapTrade
     # The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
     attr_accessor :orders
 
-    # An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
     attr_accessor :client_order_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

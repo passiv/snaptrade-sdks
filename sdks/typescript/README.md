@@ -2574,7 +2574,7 @@ const placeComplexOrderResponse = await snaptrade.trading.placeComplexOrder({
       stop: 29.5,
     },
   ],
-  client_order_id: "my-order-123",
+  client_order_id: "550e8400-e29b-41d4-a716-446655440000",
 });
 ```
 
@@ -2596,9 +2596,7 @@ The ID of the account to execute the trade on.
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### client_order_id: `string`<a id="client_order_id-string"></a>
-
-An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2718,9 +2716,11 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   order_type: "Market",
   time_in_force: "Day",
   trading_session: "REGULAR",
+  expiry_date: "2026-08-21T23:27:55.027Z",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
+  client_order_id: "550e8400-e29b-41d4-a716-446655440000",
 });
 ```
 
@@ -2738,9 +2738,9 @@ The action describes the intent or side of a trade. This is either `BUY` or `SEL
 
 The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
 
-##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+##### time_in_force: [`ManualTradePlaceTimeInForceStrict`](./models/manual-trade-place-time-in-force-strict.ts)<a id="time_in_force-manualtradeplacetimeinforcestrictmodelsmanual-trade-place-time-in-force-strictts"></a>
 
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. 
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -2758,6 +2758,10 @@ The security\\\'s trading ticker symbol. If \\\'symbol\\\' is provided, then \\\
 
 The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:   - `REGULAR` - Regular trading hours.   - `EXTENDED` - Extended trading hours. 
 
+##### expiry_date: `string`<a id="expiry_date-string"></a>
+
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+
 ##### price: `number`<a id="price-number"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
@@ -2771,6 +2775,8 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
+
+##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

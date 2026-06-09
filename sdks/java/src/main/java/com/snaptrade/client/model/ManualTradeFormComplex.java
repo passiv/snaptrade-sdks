@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -113,7 +114,7 @@ public class ManualTradeFormComplex {
 
   public static final String SERIALIZED_NAME_CLIENT_ORDER_ID = "client_order_id";
   @SerializedName(SERIALIZED_NAME_CLIENT_ORDER_ID)
-  private String clientOrderId;
+  private UUID clientOrderId;
 
   public ManualTradeFormComplex() {
   }
@@ -181,7 +182,7 @@ public class ManualTradeFormComplex {
   }
 
 
-  public ManualTradeFormComplex clientOrderId(String clientOrderId) {
+  public ManualTradeFormComplex clientOrderId(UUID clientOrderId) {
     
     
     
@@ -191,18 +192,18 @@ public class ManualTradeFormComplex {
   }
 
    /**
-   * An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+   * Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
    * @return clientOrderId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "my-order-123", value = "An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.")
+  @ApiModelProperty(example = "550e8400-e29b-41d4-a716-446655440000", value = "Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. ")
 
-  public String getClientOrderId() {
+  public UUID getClientOrderId() {
     return clientOrderId;
   }
 
 
-  public void setClientOrderId(String clientOrderId) {
+  public void setClientOrderId(UUID clientOrderId) {
     
     
     

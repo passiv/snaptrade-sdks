@@ -853,6 +853,9 @@ operation_parameter_map = {
                 'name': 'trading_session'
             },
             {
+                'name': 'expiry_date'
+            },
+            {
                 'name': 'price'
             },
             {
@@ -863,6 +866,9 @@ operation_parameter_map = {
             },
             {
                 'name': 'notional_value'
+            },
+            {
+                'name': 'client_order_id'
             },
         ]
     },

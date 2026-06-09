@@ -249,6 +249,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeFormComplex](docs/ManualTradeFormComplex.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
+ - [ManualTradePlaceTimeInForceStrict](docs/ManualTradePlaceTimeInForceStrict.md)
  - [ManualTradeReplaceForm](docs/ManualTradeReplaceForm.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
  - [MlegActionStrict](docs/MlegActionStrict.md)

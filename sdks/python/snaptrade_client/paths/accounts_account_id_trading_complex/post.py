@@ -36,6 +36,7 @@ from snaptrade_client.model.model400_failed_request_response import Model400Fail
 from snaptrade_client.model.complex_order_leg import ComplexOrderLeg as ComplexOrderLegSchema
 from snaptrade_client.model.complex_order_response import ComplexOrderResponse as ComplexOrderResponseSchema
 from snaptrade_client.model.manual_trade_form_complex import ManualTradeFormComplex as ManualTradeFormComplexSchema
+from snaptrade_client.model.client_order_id_nullable import ClientOrderIDNullable as ClientOrderIDNullableSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 
 from snaptrade_client.type.complex_order_leg import ComplexOrderLeg
@@ -43,6 +44,7 @@ from snaptrade_client.type.manual_trade_form_complex import ManualTradeFormCompl
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.complex_order_response import ComplexOrderResponse
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
+from snaptrade_client.type.client_order_id_nullable import ClientOrderIDNullable
 
 from . import path
 
@@ -224,7 +226,7 @@ class BaseApi(api_client.Api):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        client_order_id: typing.Optional[typing.Optional[str]] = None,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -523,7 +525,7 @@ class PlaceComplexOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        client_order_id: typing.Optional[typing.Optional[str]] = None,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -558,7 +560,7 @@ class PlaceComplexOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        client_order_id: typing.Optional[typing.Optional[str]] = None,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -594,7 +596,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        client_order_id: typing.Optional[typing.Optional[str]] = None,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -629,7 +631,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        client_order_id: typing.Optional[typing.Optional[str]] = None,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[

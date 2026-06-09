@@ -114,6 +114,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'TradingSession'
         }
         /// <summary>
+        /// Test the property 'ExpiryDate'
+        /// </summary>
+        [Fact]
+        public void ExpiryDateTest()
+        {
+            // TODO unit test for the property 'ExpiryDate'
+        }
+        /// <summary>
         /// Test the property 'Price'
         /// </summary>
         [Fact]
@@ -144,6 +152,14 @@ namespace SnapTrade.Net.Test.Model
         public void NotionalValueTest()
         {
             // TODO unit test for the property 'NotionalValue'
+        }
+        /// <summary>
+        /// Test the property 'ClientOrderId'
+        /// </summary>
+        [Fact]
+        public void ClientOrderIdTest()
+        {
+            // TODO unit test for the property 'ClientOrderId'
         }
 
     }
