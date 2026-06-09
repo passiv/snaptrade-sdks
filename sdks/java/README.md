@@ -2536,9 +2536,9 @@ The ID of the account to execute the trade on.
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### client_order_id: `String`<a id="client_order_id-string"></a>
+##### client_order_id: `UUID`<a id="client_order_id-uuid"></a>
 
-An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
+Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2643,10 +2643,12 @@ AccountOrderRecord result = client
         .universalSymbolId(universalSymbolId)
         .symbol(symbol)
         .tradingSession(tradingSession)
+        .expiryDate(expiryDate)
         .price(price)
         .stop(stop)
         .units(units)
         .notionalValue(notionalValue)
+        .clientOrderId(clientOrderId)
         .execute();
 ```
 
@@ -2676,6 +2678,10 @@ The security's trading ticker symbol. If 'symbol' is provided, then 'universal_s
 
 ##### trading_session:<a id="trading_session"></a>
 
+##### expiry_date: `OffsetDateTime`<a id="expiry_date-offsetdatetime"></a>
+
+Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+
 ##### price: `Double`<a id="price-double"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
@@ -2689,6 +2695,10 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `Object`<a id="notional_value-object"></a>
+
+##### client_order_id: `UUID`<a id="client_order_id-uuid"></a>
+
+Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 

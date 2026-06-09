@@ -9066,14 +9066,16 @@ components:
       example:
         universal_symbol_id: ""
         symbol: AAPL
+        client_order_id: ""
+        trading_session: REGULAR
+        expiry_date: 2026-08-21T23:27:55.027Z
+        units: ""
         time_in_force: Day
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         stop: 31.33
-        trading_session: REGULAR
         price: 31.33
         notional_value: null
         action: null
-        units: ""
         order_type: Market
       properties:
         account_id:
@@ -9103,9 +9105,21 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
+          $ref: '#/components/schemas/ManualTradePlaceTimeInForceStrict'
         trading_session:
           $ref: '#/components/schemas/TradingSession'
+        expiry_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the order expires. Required when `time_in_force`\
+            \ is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is\
+            \ provided, UTC is assumed. GTD orders are only available on certain brokerages.\
+            \ Visit https://support.snaptrade.com/brokerages for brokerage support."
+          example: 2026-08-21T23:27:55.027Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-08-21T23:27:55.027Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-expiry_date
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           example: 31.33
@@ -9132,6 +9146,10 @@ components:
           nullable: true
         notional_value:
           $ref: '#/components/schemas/ManualTradeForm_notional_value'
+        client_order_id:
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
+          nullable: true
       required:
       - account_id
       - action
@@ -9205,7 +9223,7 @@ components:
       description: "Request body for placing a complex conditional order (OCO, OTO,\
         \ or OTOCO)."
       example:
-        client_order_id: my-order-123
+        client_order_id: ""
         orders:
         - order_role: TRIGGER
           time_in_force: Day
@@ -9253,13 +9271,9 @@ components:
             $ref: '#/components/schemas/ComplexOrderLeg'
           type: array
         client_order_id:
-          description: An optional client-provided identifier for this complex order.
-            Passed through to the brokerage and returned in the response.
-          example: my-order-123
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
           nullable: true
-          type: string
-          x-konfig-original-example: my-order-123
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-client_order_id
       required:
       - orders
       - type
@@ -9548,6 +9562,24 @@ components:
       type: string
       x-konfig-original-example: Day
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
+    ManualTradePlaceTimeInForceStrict:
+      description: |
+        The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:
+          - `Day` - Day. The order is valid only for the trading day on which it is placed.
+          - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+          - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+          - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+      enum:
+      - FOK
+      - Day
+      - GTC
+      - IOC
+      - GTD
+      example: Day
+      type: string
+      x-konfig-original-example: Day
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradePlaceTimeInForceStrict
     TradingSession:
       default: REGULAR
       description: |
@@ -9712,6 +9744,19 @@ components:
           x-konfig-original-example: "49.95"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price
       type: object
+    ClientOrderID:
+      description: |
+        Optional caller-supplied identifier passed through to the brokerage for idempotent
+        order placement. Must be a canonical 36-character UUID.
+        Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to
+        the broker but does not enforce uniqueness server-side. Refer to per-brokerage
+        documentation for behavior on duplicate submission.
+      example: 550e8400-e29b-41d4-a716-446655440000
+      format: uuid
+      nullable: true
+      type: string
+      x-konfig-original-example: 550e8400-e29b-41d4-a716-446655440000
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ClientOrderID
     CryptocurrencySymbol:
       description: Symbol to identify a cryptocurrency or fiat currency on a crypto
         exchange. Fiat currencies symbols are ISO-4217 codes.
@@ -12463,6 +12508,10 @@ components:
       example: AAPL
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-expiry_date:
+      example: 2026-08-21T23:27:55.027Z
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-price:
       example: 31.33
       type: number
@@ -12485,10 +12534,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-type:
       example: OTO
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-client_order_id:
-      example: my-order-123
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ComplexOrderResponse-properties-type:
@@ -12551,6 +12596,10 @@ components:
       example: Day
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradePlaceTimeInForceStrict:
+      example: Day
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-TradingSession:
       example: REGULAR
       type: string
@@ -12585,6 +12634,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price:
       example: "49.95"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ClientOrderID:
+      example: 550e8400-e29b-41d4-a716-446655440000
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CryptocurrencySymbol:
@@ -13862,9 +13915,21 @@ components:
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
+          $ref: '#/components/schemas/ManualTradePlaceTimeInForceStrict'
         trading_session:
           $ref: '#/components/schemas/TradingSession'
+        expiry_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the order expires. Required when `time_in_force`\
+            \ is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is\
+            \ provided, UTC is assumed. GTD orders are only available on certain brokerages.\
+            \ Visit https://support.snaptrade.com/brokerages for brokerage support."
+          example: 2026-08-21T23:27:55.027Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-08-21T23:27:55.027Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-expiry_date
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           example: 31.33
@@ -13892,6 +13957,10 @@ components:
         notional_value:
           allOf:
           - $ref: '#/components/schemas/NotionalValue'
+          nullable: true
+        client_order_id:
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
           nullable: true
       required:
       - account_id
@@ -14371,13 +14440,9 @@ components:
             $ref: '#/components/schemas/ComplexOrderLeg'
           type: array
         client_order_id:
-          description: An optional client-provided identifier for this complex order.
-            Passed through to the brokerage and returned in the response.
-          example: my-order-123
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
           nullable: true
-          type: string
-          x-konfig-original-example: my-order-123
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-client_order_id
       required:
       - accountId
       - orders

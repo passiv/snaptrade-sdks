@@ -21,7 +21,6 @@ type ManualTradeFormComplex struct {
 	Type string `json:"type"`
 	// The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
 	Orders []ComplexOrderLeg `json:"orders"`
-	// An optional client-provided identifier for this complex order. Passed through to the brokerage and returned in the response.
 	ClientOrderId NullableString `json:"client_order_id,omitempty"`
 }
 

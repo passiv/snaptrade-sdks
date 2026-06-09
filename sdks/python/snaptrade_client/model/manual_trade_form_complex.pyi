@@ -85,26 +85,10 @@ class ManualTradeFormComplex(
             
                 def __getitem__(self, i: int) -> 'ComplexOrderLeg':
                     return super().__getitem__(i)
-            
-            
-            class client_order_id(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'client_order_id':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
+        
+            @staticmethod
+            def client_order_id() -> typing.Type['ClientOrderIDNullable']:
+                return ClientOrderIDNullable
             __annotations__ = {
                 "type": type,
                 "orders": orders,
@@ -121,7 +105,7 @@ class ManualTradeFormComplex(
     def __getitem__(self, name: typing_extensions.Literal["orders"]) -> MetaOapg.properties.orders: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["client_order_id"]) -> MetaOapg.properties.client_order_id: ...
+    def __getitem__(self, name: typing_extensions.Literal["client_order_id"]) -> 'ClientOrderIDNullable': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -138,7 +122,7 @@ class ManualTradeFormComplex(
     def get_item_oapg(self, name: typing_extensions.Literal["orders"]) -> MetaOapg.properties.orders: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["client_order_id"]) -> typing.Union[MetaOapg.properties.client_order_id, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["client_order_id"]) -> typing.Union['ClientOrderIDNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -152,7 +136,7 @@ class ManualTradeFormComplex(
         *args: typing.Union[dict, frozendict.frozendict, ],
         orders: typing.Union[MetaOapg.properties.orders, list, tuple, ],
         type: typing.Union[MetaOapg.properties.type, str, ],
-        client_order_id: typing.Union[MetaOapg.properties.client_order_id, None, str, schemas.Unset] = schemas.unset,
+        client_order_id: typing.Union['ClientOrderIDNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ManualTradeFormComplex':
@@ -166,4 +150,5 @@ class ManualTradeFormComplex(
             **kwargs,
         )
 
+from snaptrade_client.model.client_order_id_nullable import ClientOrderIDNullable
 from snaptrade_client.model.complex_order_leg import ComplexOrderLeg

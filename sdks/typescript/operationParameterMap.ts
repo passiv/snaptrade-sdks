@@ -859,6 +859,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'trading_session'
             },
             {
+                name: 'expiry_date'
+            },
+            {
                 name: 'price'
             },
             {
@@ -869,6 +872,9 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'notional_value'
+            },
+            {
+                name: 'client_order_id'
             },
         ]
     },

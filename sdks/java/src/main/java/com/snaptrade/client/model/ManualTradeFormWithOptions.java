@@ -20,12 +20,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.ActionStrictWithOptions;
+import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
 import com.snaptrade.client.model.OrderTypeStrict;
-import com.snaptrade.client.model.TimeInForceStrict;
 import com.snaptrade.client.model.TradingSession;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 
@@ -78,11 +79,15 @@ public class ManualTradeFormWithOptions {
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
-  private TimeInForceStrict timeInForce;
+  private ManualTradePlaceTimeInForceStrict timeInForce;
 
   public static final String SERIALIZED_NAME_TRADING_SESSION = "trading_session";
   @SerializedName(SERIALIZED_NAME_TRADING_SESSION)
   private TradingSession tradingSession = TradingSession.REGULAR;
+
+  public static final String SERIALIZED_NAME_EXPIRY_DATE = "expiry_date";
+  @SerializedName(SERIALIZED_NAME_EXPIRY_DATE)
+  private OffsetDateTime expiryDate;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -99,6 +104,10 @@ public class ManualTradeFormWithOptions {
   public static final String SERIALIZED_NAME_NOTIONAL_VALUE = "notional_value";
   @SerializedName(SERIALIZED_NAME_NOTIONAL_VALUE)
   private Object notionalValue = null;
+
+  public static final String SERIALIZED_NAME_CLIENT_ORDER_ID = "client_order_id";
+  @SerializedName(SERIALIZED_NAME_CLIENT_ORDER_ID)
+  private UUID clientOrderId;
 
   public ManualTradeFormWithOptions() {
   }
@@ -248,7 +257,7 @@ public class ManualTradeFormWithOptions {
   }
 
 
-  public ManualTradeFormWithOptions timeInForce(TimeInForceStrict timeInForce) {
+  public ManualTradeFormWithOptions timeInForce(ManualTradePlaceTimeInForceStrict timeInForce) {
     
     
     
@@ -264,12 +273,12 @@ public class ManualTradeFormWithOptions {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public TimeInForceStrict getTimeInForce() {
+  public ManualTradePlaceTimeInForceStrict getTimeInForce() {
     return timeInForce;
   }
 
 
-  public void setTimeInForce(TimeInForceStrict timeInForce) {
+  public void setTimeInForce(ManualTradePlaceTimeInForceStrict timeInForce) {
     
     
     
@@ -303,6 +312,35 @@ public class ManualTradeFormWithOptions {
     
     
     this.tradingSession = tradingSession;
+  }
+
+
+  public ManualTradeFormWithOptions expiryDate(OffsetDateTime expiryDate) {
+    
+    
+    
+    
+    this.expiryDate = expiryDate;
+    return this;
+  }
+
+   /**
+   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
+   * @return expiryDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2026-08-21T23:27:55.027Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.")
+
+  public OffsetDateTime getExpiryDate() {
+    return expiryDate;
+  }
+
+
+  public void setExpiryDate(OffsetDateTime expiryDate) {
+    
+    
+    
+    this.expiryDate = expiryDate;
   }
 
 
@@ -439,6 +477,35 @@ public class ManualTradeFormWithOptions {
     this.notionalValue = notionalValue;
   }
 
+
+  public ManualTradeFormWithOptions clientOrderId(UUID clientOrderId) {
+    
+    
+    
+    
+    this.clientOrderId = clientOrderId;
+    return this;
+  }
+
+   /**
+   * Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+   * @return clientOrderId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "550e8400-e29b-41d4-a716-446655440000", value = "Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. ")
+
+  public UUID getClientOrderId() {
+    return clientOrderId;
+  }
+
+
+  public void setClientOrderId(UUID clientOrderId) {
+    
+    
+    
+    this.clientOrderId = clientOrderId;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -501,10 +568,12 @@ public class ManualTradeFormWithOptions {
         Objects.equals(this.orderType, manualTradeFormWithOptions.orderType) &&
         Objects.equals(this.timeInForce, manualTradeFormWithOptions.timeInForce) &&
         Objects.equals(this.tradingSession, manualTradeFormWithOptions.tradingSession) &&
+        Objects.equals(this.expiryDate, manualTradeFormWithOptions.expiryDate) &&
         Objects.equals(this.price, manualTradeFormWithOptions.price) &&
         Objects.equals(this.stop, manualTradeFormWithOptions.stop) &&
         Objects.equals(this.units, manualTradeFormWithOptions.units) &&
-        Objects.equals(this.notionalValue, manualTradeFormWithOptions.notionalValue)&&
+        Objects.equals(this.notionalValue, manualTradeFormWithOptions.notionalValue) &&
+        Objects.equals(this.clientOrderId, manualTradeFormWithOptions.clientOrderId)&&
         Objects.equals(this.additionalProperties, manualTradeFormWithOptions.additionalProperties);
   }
 
@@ -514,7 +583,7 @@ public class ManualTradeFormWithOptions {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, action, universalSymbolId, symbol, orderType, timeInForce, tradingSession, price, stop, units, notionalValue, additionalProperties);
+    return Objects.hash(accountId, action, universalSymbolId, symbol, orderType, timeInForce, tradingSession, expiryDate, price, stop, units, notionalValue, clientOrderId, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -535,10 +604,12 @@ public class ManualTradeFormWithOptions {
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    tradingSession: ").append(toIndentedString(tradingSession)).append("\n");
+    sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    stop: ").append(toIndentedString(stop)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    notionalValue: ").append(toIndentedString(notionalValue)).append("\n");
+    sb.append("    clientOrderId: ").append(toIndentedString(clientOrderId)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -569,10 +640,12 @@ public class ManualTradeFormWithOptions {
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
     openapiFields.add("trading_session");
+    openapiFields.add("expiry_date");
     openapiFields.add("price");
     openapiFields.add("stop");
     openapiFields.add("units");
     openapiFields.add("notional_value");
+    openapiFields.add("client_order_id");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -609,6 +682,9 @@ public class ManualTradeFormWithOptions {
       }
       if (!jsonObj.get("symbol").isJsonNull() && (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
+      }
+      if (!jsonObj.get("client_order_id").isJsonNull() && (jsonObj.get("client_order_id") != null && !jsonObj.get("client_order_id").isJsonNull()) && !jsonObj.get("client_order_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `client_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("client_order_id").toString()));
       }
   }
 

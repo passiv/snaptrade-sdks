@@ -33,6 +33,7 @@ import com.snaptrade.client.model.ManualTradeForm;
 import com.snaptrade.client.model.ManualTradeFormBracket;
 import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
+import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
 import com.snaptrade.client.model.ManualTradeReplaceForm;
 import com.snaptrade.client.model.MlegLeg;
 import com.snaptrade.client.model.MlegOrderResponse;
@@ -267,7 +268,7 @@ public class TradingApiTest {
         UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        String clientOrderId = null;
+        UUID clientOrderId = null;
         ComplexOrderResponse response = api.placeComplexOrder(type, orders, accountId, userId, userSecret)
                 .clientOrderId(clientOrderId)
                 .execute();
@@ -316,24 +317,28 @@ public class TradingApiTest {
         UUID accountId = null;
         ActionStrictWithOptions action = null;
         OrderTypeStrict orderType = null;
-        TimeInForceStrict timeInForce = null;
+        ManualTradePlaceTimeInForceStrict timeInForce = null;
         String userId = null;
         String userSecret = null;
         UUID universalSymbolId = null;
         String symbol = null;
         TradingSession tradingSession = null;
+        OffsetDateTime expiryDate = null;
         Double price = null;
         Double stop = null;
         Double units = null;
         Object notionalValue = null;
+        UUID clientOrderId = null;
         AccountOrderRecord response = api.placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
                 .universalSymbolId(universalSymbolId)
                 .symbol(symbol)
                 .tradingSession(tradingSession)
+                .expiryDate(expiryDate)
                 .price(price)
                 .stop(stop)
                 .units(units)
                 .notionalValue(notionalValue)
+                .clientOrderId(clientOrderId)
                 .execute();
         // TODO: test validations
     }
