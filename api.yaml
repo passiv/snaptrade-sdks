@@ -1,4 +1,7 @@
 openapi: 3.0.0
+
+# test: trigger SDKs regeneration
+
 info:
   description: Connect brokerage accounts to your app for live positions and trading
   version: 1.0.0
