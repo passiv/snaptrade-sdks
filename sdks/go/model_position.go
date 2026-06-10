@@ -32,7 +32,7 @@ type Position struct {
 	Currency *PositionCurrency `json:"currency,omitempty"`
 	// If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
 	CashEquivalent NullableBool `json:"cash_equivalent,omitempty"`
-	// List of tax lots for the given position (disabled by default, contact support if needed)
+	// List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
 	TaxLots []TaxLot `json:"tax_lots,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

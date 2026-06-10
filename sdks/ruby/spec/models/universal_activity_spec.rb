@@ -38,6 +38,12 @@ describe SnapTrade::UniversalActivity do
     end
   end
 
+  describe 'test attribute "currency_universal_symbol"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "option_symbol"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

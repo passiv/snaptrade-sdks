@@ -45,7 +45,8 @@ namespace SnapTrade.Net.Model
         /// <param name="meta">Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
         /// <param name="updatedDate">Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field..</param>
         /// <param name="isEligibleForPayout">Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team..</param>
-        public BrokerageAuthorization(string id = default(string), DateTime createdDate = default(DateTime), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), DateTime? disabledDate = default(DateTime?), Dictionary<string, Object> meta = default(Dictionary<string, Object>), DateTime updatedDate = default(DateTime), bool isEligibleForPayout = default(bool)) : base()
+        /// <param name="dataFreshnessMode">Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. .</param>
+        public BrokerageAuthorization(string id = default(string), DateTime createdDate = default(DateTime), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), DateTime? disabledDate = default(DateTime?), Dictionary<string, Object> meta = default(Dictionary<string, Object>), DateTime updatedDate = default(DateTime), bool isEligibleForPayout = default(bool), string dataFreshnessMode = default(string)) : base()
         {
             this.Id = id;
             this.CreatedDate = createdDate;
@@ -57,6 +58,7 @@ namespace SnapTrade.Net.Model
             this.Meta = meta;
             this.UpdatedDate = updatedDate;
             this.IsEligibleForPayout = isEligibleForPayout;
+            this.DataFreshnessMode = dataFreshnessMode;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -132,6 +134,13 @@ namespace SnapTrade.Net.Model
         public bool IsEligibleForPayout { get; set; }
 
         /// <summary>
+        /// Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. 
+        /// </summary>
+        /// <value>Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. </value>
+        [DataMember(Name = "data_freshness_mode", EmitDefaultValue = false)]
+        public string DataFreshnessMode { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -156,6 +165,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  UpdatedDate: ").Append(UpdatedDate).Append("\n");
             sb.Append("  IsEligibleForPayout: ").Append(IsEligibleForPayout).Append("\n");
+            sb.Append("  DataFreshnessMode: ").Append(DataFreshnessMode).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -240,6 +250,11 @@ namespace SnapTrade.Net.Model
                 (
                     this.IsEligibleForPayout == input.IsEligibleForPayout ||
                     this.IsEligibleForPayout.Equals(input.IsEligibleForPayout)
+                ) && base.Equals(input) && 
+                (
+                    this.DataFreshnessMode == input.DataFreshnessMode ||
+                    (this.DataFreshnessMode != null &&
+                    this.DataFreshnessMode.Equals(input.DataFreshnessMode))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -287,6 +302,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.UpdatedDate.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.IsEligibleForPayout.GetHashCode();
+                if (this.DataFreshnessMode != null)
+                {
+                    hashCode = (hashCode * 59) + this.DataFreshnessMode.GetHashCode();
+                }
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

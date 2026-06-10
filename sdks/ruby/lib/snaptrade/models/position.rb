@@ -35,7 +35,7 @@ module SnapTrade
     # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
     attr_accessor :cash_equivalent
 
-    # List of tax lots for the given position (disabled by default, contact support if needed)
+    # List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
     attr_accessor :tax_lots
 
     # Attribute mapping from ruby-style variable name to JSON key.

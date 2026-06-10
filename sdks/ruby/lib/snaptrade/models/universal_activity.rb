@@ -20,6 +20,8 @@ module SnapTrade
 
     attr_accessor :symbol
 
+    attr_accessor :currency_universal_symbol
+
     attr_accessor :option_symbol
 
     # The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
@@ -66,6 +68,7 @@ module SnapTrade
         :'id' => :'id',
         :'account' => :'account',
         :'symbol' => :'symbol',
+        :'currency_universal_symbol' => :'currency_universal_symbol',
         :'option_symbol' => :'option_symbol',
         :'price' => :'price',
         :'units' => :'units',
@@ -94,6 +97,7 @@ module SnapTrade
         :'id' => :'String',
         :'account' => :'AccountSimple',
         :'symbol' => :'AccountUniversalActivitySymbol',
+        :'currency_universal_symbol' => :'AccountUniversalActivityCurrencyUniversalSymbol',
         :'option_symbol' => :'AccountUniversalActivityOptionSymbol',
         :'price' => :'Float',
         :'units' => :'Float',
@@ -115,8 +119,10 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'symbol',
+        :'currency_universal_symbol',
         :'option_symbol',
         :'amount',
+        :'currency',
         :'trade_date',
         :'fx_rate',
         :'external_reference_id'
@@ -148,6 +154,10 @@ module SnapTrade
 
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.key?(:'currency_universal_symbol')
+        self.currency_universal_symbol = attributes[:'currency_universal_symbol']
       end
 
       if attributes.key?(:'option_symbol')
@@ -228,6 +238,7 @@ module SnapTrade
           id == o.id &&
           account == o.account &&
           symbol == o.symbol &&
+          currency_universal_symbol == o.currency_universal_symbol &&
           option_symbol == o.option_symbol &&
           price == o.price &&
           units == o.units &&
@@ -253,7 +264,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account, symbol, option_symbol, price, units, amount, currency, type, option_type, description, trade_date, settlement_date, fee, fx_rate, institution, external_reference_id].hash
+      [id, account, symbol, currency_universal_symbol, option_symbol, price, units, amount, currency, type, option_type, description, trade_date, settlement_date, fee, fx_rate, institution, external_reference_id].hash
     end
 
     # Builds the object from hash

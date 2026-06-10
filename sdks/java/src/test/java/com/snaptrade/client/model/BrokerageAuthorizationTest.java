@@ -124,4 +124,12 @@ public class BrokerageAuthorizationTest {
         // TODO: test isEligibleForPayout
     }
 
+    /**
+     * Test the property 'dataFreshnessMode'
+     */
+    @Test
+    public void dataFreshnessModeTest() {
+        // TODO: test dataFreshnessMode
+    }
+
 }

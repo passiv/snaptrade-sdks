@@ -1264,7 +1264,7 @@ Trigger a holdings update for all accounts under this connection. Updates will b
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
 **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-**Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+**Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2523,7 +2523,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 ### `snaptrade.trading.place_complex_order`<a id="snaptradetradingplace_complex_order"></a>
 
-Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+Places a complex conditional order (OCO, OTO, or OTOCO).
 Only supported on certain brokerages.
 Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
 

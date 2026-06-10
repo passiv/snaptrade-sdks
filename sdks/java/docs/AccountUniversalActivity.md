@@ -10,6 +10,7 @@ A transaction or activity from an institution
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.  |  [optional] |
 |**symbol** | [**SymbolNullable**](SymbolNullable.md) |  |  [optional] |
+|**currencyUniversalSymbol** | [**AccountUniversalActivityCurrencyUniversalSymbol**](AccountUniversalActivityCurrencyUniversalSymbol.md) |  |  [optional] |
 |**optionSymbol** | [**AccountUniversalActivityOptionSymbol**](AccountUniversalActivityOptionSymbol.md) |  |  [optional] |
 |**price** | **Double** | The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. For option transactions, this represents the price per share of the option contract. |  [optional] |
 |**units** | **Double** | The number of units of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. |  [optional] |

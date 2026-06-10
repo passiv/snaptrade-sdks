@@ -35,11 +35,13 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.model402_brokerage_auth_disabled_response import Model402BrokerageAuthDisabledResponse as Model402BrokerageAuthDisabledResponseSchema
 from snaptrade_client.model.model401_failed_request_response import Model401FailedRequestResponse as Model401FailedRequestResponseSchema
 from snaptrade_client.model.brokerage_authorization_refresh_confirmation import BrokerageAuthorizationRefreshConfirmation as BrokerageAuthorizationRefreshConfirmationSchema
+from snaptrade_client.model.model429_too_many_requests_response import Model429TooManyRequestsResponse as Model429TooManyRequestsResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 from snaptrade_client.model.model403_feature_not_enabled_response import Model403FeatureNotEnabledResponse as Model403FeatureNotEnabledResponseSchema
 
 from snaptrade_client.type.model402_brokerage_auth_disabled_response import Model402BrokerageAuthDisabledResponse
 from snaptrade_client.type.brokerage_authorization_refresh_confirmation import BrokerageAuthorizationRefreshConfirmation
+from snaptrade_client.type.model429_too_many_requests_response import Model429TooManyRequestsResponse
 from snaptrade_client.type.model401_failed_request_response import Model401FailedRequestResponse
 from snaptrade_client.type.model403_feature_not_enabled_response import Model403FeatureNotEnabledResponse
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
@@ -218,12 +220,34 @@ _response_for_404 = api_client.OpenApiResponse(
             schema=SchemaFor404ResponseBodyApplicationJson),
     },
 )
+SchemaFor429ResponseBodyApplicationJson = Model429TooManyRequestsResponseSchema
+
+
+@dataclass
+class ApiResponseFor429(api_client.ApiResponse):
+    body: Model429TooManyRequestsResponse
+
+
+@dataclass
+class ApiResponseFor429Async(api_client.AsyncApiResponse):
+    body: Model429TooManyRequestsResponse
+
+
+_response_for_429 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor429,
+    response_cls_async=ApiResponseFor429Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor429ResponseBodyApplicationJson),
+    },
+)
 _status_code_to_response = {
     '200': _response_for_200,
     '401': _response_for_401,
     '402': _response_for_402,
     '403': _response_for_403,
     '404': _response_for_404,
+    '429': _response_for_429,
 }
 _all_accept_content_types = (
     'application/json',
@@ -520,7 +544,7 @@ class RefreshBrokerageAuthorization(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**  """
+        """ Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**  """
         args = self._refresh_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -573,7 +597,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**  """
+        """ Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**  """
         args = self._refresh_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,

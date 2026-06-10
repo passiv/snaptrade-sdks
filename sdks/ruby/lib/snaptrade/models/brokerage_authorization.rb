@@ -42,6 +42,9 @@ module SnapTrade
     # Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
     attr_accessor :is_eligible_for_payout
 
+    # Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. 
+    attr_accessor :data_freshness_mode
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -54,7 +57,8 @@ module SnapTrade
         :'disabled_date' => :'disabled_date',
         :'meta' => :'meta',
         :'updated_date' => :'updated_date',
-        :'is_eligible_for_payout' => :'is_eligible_for_payout'
+        :'is_eligible_for_payout' => :'is_eligible_for_payout',
+        :'data_freshness_mode' => :'data_freshness_mode'
       }
     end
 
@@ -75,7 +79,8 @@ module SnapTrade
         :'disabled_date' => :'Time',
         :'meta' => :'Hash<String, Object>',
         :'updated_date' => :'Time',
-        :'is_eligible_for_payout' => :'Boolean'
+        :'is_eligible_for_payout' => :'Boolean',
+        :'data_freshness_mode' => :'String'
       }
     end
 
@@ -142,6 +147,10 @@ module SnapTrade
       if attributes.key?(:'is_eligible_for_payout')
         self.is_eligible_for_payout = attributes[:'is_eligible_for_payout']
       end
+
+      if attributes.key?(:'data_freshness_mode')
+        self.data_freshness_mode = attributes[:'data_freshness_mode']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -171,7 +180,8 @@ module SnapTrade
           disabled_date == o.disabled_date &&
           meta == o.meta &&
           updated_date == o.updated_date &&
-          is_eligible_for_payout == o.is_eligible_for_payout
+          is_eligible_for_payout == o.is_eligible_for_payout &&
+          data_freshness_mode == o.data_freshness_mode
     end
 
     # @see the `==` method
@@ -183,7 +193,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_date, brokerage, name, type, disabled, disabled_date, meta, updated_date, is_eligible_for_payout].hash
+      [id, created_date, brokerage, name, type, disabled, disabled_date, meta, updated_date, is_eligible_for_payout, data_freshness_mode].hash
     end
 
     # Builds the object from hash

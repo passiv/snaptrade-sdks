@@ -74,6 +74,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Symbol'
         }
         /// <summary>
+        /// Test the property 'CurrencyUniversalSymbol'
+        /// </summary>
+        [Fact]
+        public void CurrencyUniversalSymbolTest()
+        {
+            // TODO unit test for the property 'CurrencyUniversalSymbol'
+        }
+        /// <summary>
         /// Test the property 'OptionSymbol'
         /// </summary>
         [Fact]

@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Model
         /// <param name="costBasis">Book price or average purchase price for the position..</param>
         /// <param name="currency">ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;..</param>
         /// <param name="cashEquivalent">Present for mutual fund positions that are also counted in cash balance or buying power..</param>
-        /// <param name="taxLots">Present for stock positions when tax lot data is enabled for the account..</param>
+        /// <param name="taxLots">List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed).</param>
         public AccountPosition(Instrument instrument = default(Instrument), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? costBasis = default(decimal?), string currency = default(string), bool cashEquivalent = default(bool), List<TaxLot> taxLots = default(List<TaxLot>)) : base()
         {
             // to ensure "instrument" is required (not null)
@@ -109,9 +109,9 @@ namespace SnapTrade.Net.Model
         public bool CashEquivalent { get; set; }
 
         /// <summary>
-        /// Present for stock positions when tax lot data is enabled for the account.
+        /// List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
         /// </summary>
-        /// <value>Present for stock positions when tax lot data is enabled for the account.</value>
+        /// <value>List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)</value>
         [DataMember(Name = "tax_lots", EmitDefaultValue = false)]
         public List<TaxLot> TaxLots { get; set; }
 

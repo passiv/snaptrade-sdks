@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountSimple;
 import com.snaptrade.client.model.AccountUniversalActivityCurrency;
+import com.snaptrade.client.model.AccountUniversalActivityCurrencyUniversalSymbol;
 import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
@@ -67,6 +68,10 @@ public class UniversalActivity {
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private SymbolNullable symbol;
+
+  public static final String SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL = "currency_universal_symbol";
+  @SerializedName(SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL)
+  private AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol;
 
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
@@ -211,6 +216,35 @@ public class UniversalActivity {
     
     
     this.symbol = symbol;
+  }
+
+
+  public UniversalActivity currencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+    
+    
+    
+    
+    this.currencyUniversalSymbol = currencyUniversalSymbol;
+    return this;
+  }
+
+   /**
+   * Get currencyUniversalSymbol
+   * @return currencyUniversalSymbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountUniversalActivityCurrencyUniversalSymbol getCurrencyUniversalSymbol() {
+    return currencyUniversalSymbol;
+  }
+
+
+  public void setCurrencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+    
+    
+    
+    this.currencyUniversalSymbol = currencyUniversalSymbol;
   }
 
 
@@ -722,6 +756,7 @@ public class UniversalActivity {
     return Objects.equals(this.id, universalActivity.id) &&
         Objects.equals(this.account, universalActivity.account) &&
         Objects.equals(this.symbol, universalActivity.symbol) &&
+        Objects.equals(this.currencyUniversalSymbol, universalActivity.currencyUniversalSymbol) &&
         Objects.equals(this.optionSymbol, universalActivity.optionSymbol) &&
         Objects.equals(this.price, universalActivity.price) &&
         Objects.equals(this.units, universalActivity.units) &&
@@ -745,7 +780,7 @@ public class UniversalActivity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, account, symbol, optionSymbol, price, units, amount, currency, type, optionType, description, tradeDate, settlementDate, fee, fxRate, institution, externalReferenceId, additionalProperties);
+    return Objects.hash(id, account, symbol, currencyUniversalSymbol, optionSymbol, price, units, amount, currency, type, optionType, description, tradeDate, settlementDate, fee, fxRate, institution, externalReferenceId, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -762,6 +797,7 @@ public class UniversalActivity {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    account: ").append(toIndentedString(account)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
+    sb.append("    currencyUniversalSymbol: ").append(toIndentedString(currencyUniversalSymbol)).append("\n");
     sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
@@ -802,6 +838,7 @@ public class UniversalActivity {
     openapiFields.add("id");
     openapiFields.add("account");
     openapiFields.add("symbol");
+    openapiFields.add("currency_universal_symbol");
     openapiFields.add("option_symbol");
     openapiFields.add("price");
     openapiFields.add("units");
@@ -843,6 +880,10 @@ public class UniversalActivity {
       // validate the optional field `symbol`
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
         SymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `currency_universal_symbol`
+      if (jsonObj.get("currency_universal_symbol") != null && !jsonObj.get("currency_universal_symbol").isJsonNull()) {
+        AccountUniversalActivityCurrencyUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("currency_universal_symbol"));
       }
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {

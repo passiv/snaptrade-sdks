@@ -521,7 +521,7 @@ paths:
         This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
         **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-        **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+        **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
       - explode: false
@@ -577,6 +577,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/404FailedRequestResponse'
           description: The requested resource does not exist.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429TooManyRequestsResponse'
+          description: The connection was refreshed too recently. Please wait before
+            calling this endpoint again.
       summary: Refresh holdings for a connection
       tags:
       - Connections
@@ -2742,7 +2749,7 @@ paths:
   /accounts/{accountId}/trading/complex:
     post:
       description: |
-        Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+        Places a complex conditional order (OCO, OTO, or OTOCO).
         Only supported on certain brokerages.
         Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
 
@@ -3740,6 +3747,21 @@ components:
           example: 3012
           x-konfig-original-example: 3012
       type: object
+    "429TooManyRequestsResponse":
+      additionalProperties: true
+      description: Example for a rate-limited request response
+      properties:
+        detail:
+          example: Connection refreshed too recently. Please try again later.
+          x-konfig-original-example: Connection refreshed too recently. Please try
+            again later.
+        status_code:
+          example: 429
+          x-konfig-original-example: 429
+        code:
+          example: throttled
+          x-konfig-original-example: throttled
+      type: object
     "500UnexpectedExceptionResponse":
       additionalProperties: true
       description: Example for a response that failed for unexpected reasons
@@ -4315,6 +4337,7 @@ components:
             disabled_date: 2022-01-21T20:11:19.217Z
             meta:
               identifier: 123456
+            data_freshness_mode: realtime
             name: Connection-1
             disabled: false
             id: 87b24961-b51e-4db8-9226-f198f6518a89
@@ -5771,6 +5794,7 @@ components:
           disabled_date: 2022-01-21T20:11:19.217Z
           meta:
             identifier: 123456
+          data_freshness_mode: realtime
           name: Connection-1
           disabled: false
           id: 87b24961-b51e-4db8-9226-f198f6518a89
@@ -6645,7 +6669,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-cash_equivalent
         tax_lots:
           description: "List of tax lots for the given position (disabled by default,\
-            \ contact support if needed)"
+            \ only available on paid plans, contact support if needed)"
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
@@ -6843,8 +6867,8 @@ components:
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-cash_equivalent
         tax_lots:
-          description: Present for stock positions when tax lot data is enabled for
-            the account.
+          description: "List of tax lots for the given position (disabled by default,\
+            \ only available on paid plans, contact support if needed)"
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
@@ -7916,6 +7940,7 @@ components:
         disabled_date: 2022-01-21T20:11:19.217Z
         meta:
           identifier: 123456
+        data_freshness_mode: realtime
         name: Connection-1
         disabled: false
         id: 87b24961-b51e-4db8-9226-f198f6518a89
@@ -8006,6 +8031,16 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-is_eligible_for_payout
+        data_freshness_mode:
+          description: |
+            Possible values include:
+            - realtime
+            - delayed
+            Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls.
+          example: realtime
+          type: string
+          x-konfig-original-example: realtime
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-data_freshness_mode
       type: object
     BrokerageAuthorizationRefreshConfirmation:
       additionalProperties: true
@@ -10038,6 +10073,7 @@ components:
         - symbol: null
           amount: 263.82
           settlement_date: 2024-03-26T00:00:00Z
+          currency_universal_symbol: null
           option_type: BUY_TO_OPEN
           fee: 0
           description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10054,6 +10090,7 @@ components:
         - symbol: null
           amount: 263.82
           settlement_date: 2024-03-26T00:00:00Z
+          currency_universal_symbol: null
           option_type: BUY_TO_OPEN
           fee: 0
           description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10082,6 +10119,7 @@ components:
         symbol: null
         amount: 263.82
         settlement_date: 2024-03-26T00:00:00Z
+        currency_universal_symbol: null
         option_type: BUY_TO_OPEN
         fee: 0
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10107,6 +10145,8 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-id
         symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_symbol'
+        currency_universal_symbol:
+          $ref: '#/components/schemas/AccountUniversalActivity_currency_universal_symbol'
         option_symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
         price:
@@ -10245,6 +10285,7 @@ components:
         symbol: null
         amount: 263.82
         settlement_date: 2024-03-26T00:00:00Z
+        currency_universal_symbol: null
         option_type: BUY_TO_OPEN
         fee: 0
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10285,6 +10326,8 @@ components:
           $ref: '#/components/schemas/AccountSimple'
         symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_symbol'
+        currency_universal_symbol:
+          $ref: '#/components/schemas/AccountUniversalActivity_currency_universal_symbol'
         option_symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
         price:
@@ -12234,6 +12277,10 @@ components:
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-is_eligible_for_payout:
       example: true
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-data_freshness_mode:
+      example: realtime
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail:
       example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
@@ -15373,6 +15420,14 @@ components:
         \ does a best effort to map the brokerage's symbol. In cases where the brokerage\
         \ symbol is not recognized, the field will be set to `null`."
       nullable: true
+    AccountUniversalActivity_currency_universal_symbol:
+      allOf:
+      - $ref: '#/components/schemas/Symbol'
+      description: "The quote security for the transaction when `price`, `amount`,\
+        \ and `fee` are denominated in a security instead of a fiat currency. This\
+        \ is most common for cryptocurrency trades. The field is `null` when the transaction\
+        \ is denominated in `currency`."
+      nullable: true
     AccountUniversalActivity_option_symbol:
       allOf:
       - $ref: '#/components/schemas/OptionsSymbol'
@@ -15385,7 +15440,9 @@ components:
     AccountUniversalActivity_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
-      description: The currency in which the transaction `price` and `amount` is denominated.
+      description: "The currency in which the transaction `price`, `amount`, and `fee`\
+        \ are denominated. This is `null` when those values are denominated in `currency_universal_symbol`."
+      nullable: true
     UnderlyingSymbol_exchange:
       allOf:
       - $ref: '#/components/schemas/USExchange'

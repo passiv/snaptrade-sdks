@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # The currency in which the transaction `price` and `amount` is denominated.
+  # The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
   class AccountUniversalActivityCurrency
     # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
     attr_accessor :id

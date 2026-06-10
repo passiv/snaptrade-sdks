@@ -55,6 +55,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Id`: %v\n", *resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Account`: %v\n", *resp.Account)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.CurrencyUniversalSymbol`: %v\n", *resp.CurrencyUniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.OptionSymbol`: %v\n", *resp.OptionSymbol)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Price`: %v\n", *resp.Price)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Units`: %v\n", *resp.Units)
