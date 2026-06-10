@@ -1637,7 +1637,7 @@ paths:
         This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
         **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-        **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+        **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
         - in: path
@@ -1686,6 +1686,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/404FailedRequestResponse"
+        "429":
+          description: The connection was refreshed too recently. Please wait before calling this endpoint again.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/429TooManyRequestsResponse"
   "/authorizations/{authorizationId}/transactions/sync":
     post:
       tags:
@@ -2202,7 +2208,7 @@ paths:
         - Trading
       summary: Place complex order
       description: |
-        Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+        Places a complex conditional order (OCO, OTO, or OTOCO).
         Only supported on certain brokerages.
         Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
 
@@ -3346,6 +3352,16 @@ components:
           example: The resource is currently being populated. Please try again later.
         code:
           example: 3012
+    429TooManyRequestsResponse:
+      description: Example for a rate-limited request response
+      type: object
+      properties:
+        detail:
+          example: Connection refreshed too recently. Please try again later.
+        status_code:
+          example: 429
+        code:
+          example: throttled
     500UnexpectedExceptionResponse:
       description: Example for a response that failed for unexpected reasons
       type: object
@@ -4660,7 +4676,7 @@ components:
           description: If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
         tax_lots:
           type: array
-          description: List of tax lots for the given position (disabled by default, contact support if needed)
+          description: List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
           items:
             $ref: "#/components/schemas/TaxLot"
     TaxLot:
@@ -4761,7 +4777,7 @@ components:
           example: false
         tax_lots:
           type: array
-          description: Present for stock positions when tax lot data is enabled for the account.
+          description: List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
           items:
             $ref: "#/components/schemas/TaxLot"
       required:
@@ -5552,6 +5568,14 @@ components:
           description: Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
           type: boolean
           example: true
+        data_freshness_mode:
+          description: |
+            Possible values include:
+            - realtime
+            - delayed
+            Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls.
+          type: string
+          example: realtime
     BrokerageAuthorizationRefreshConfirmation:
       description: Confirmation that the syncs have been scheduled.
       type: object
@@ -6743,6 +6767,11 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Symbol"
+        currency_universal_symbol:
+          description: The quote security for the transaction when `price`, `amount`, and `fee` are denominated in a security instead of a fiat currency. This is most common for cryptocurrency trades. The field is `null` when the transaction is denominated in `currency`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Symbol"
         option_symbol:
           description: The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
           nullable: true
@@ -6762,7 +6791,8 @@ components:
           example: 263.82
           nullable: true
         currency:
-          description: The currency in which the transaction `price` and `amount` is denominated.
+          description: The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/Currency"
         type:
@@ -6848,6 +6878,11 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Symbol"
+        currency_universal_symbol:
+          description: The quote security for the transaction when `price`, `amount`, and `fee` are denominated in a security instead of a fiat currency. This is most common for cryptocurrency trades. The field is `null` when the transaction is denominated in `currency`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Symbol"
         option_symbol:
           description: The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
           nullable: true
@@ -6867,7 +6902,8 @@ components:
           example: 263.82
           nullable: true
         currency:
-          description: The currency in which the transaction `price` and `amount` is denominated.
+          description: The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/Currency"
         type:
