@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The currency in which the transaction &#x60;price&#x60; and &#x60;amount&#x60; is denominated.
+    /// The currency in which the transaction &#x60;price&#x60;, &#x60;amount&#x60;, and &#x60;fee&#x60; are denominated. This is &#x60;null&#x60; when those values are denominated in &#x60;currency_universal_symbol&#x60;.
     /// </summary>
     [DataContract(Name = "AccountUniversalActivity_currency")]
     public partial class AccountUniversalActivityCurrency : IEquatable<AccountUniversalActivityCurrency>, IValidatableObject

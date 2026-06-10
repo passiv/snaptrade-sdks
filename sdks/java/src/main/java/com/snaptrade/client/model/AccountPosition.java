@@ -278,11 +278,11 @@ public class AccountPosition {
   }
 
    /**
-   * Present for stock positions when tax lot data is enabled for the account.
+   * List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
    * @return taxLots
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Present for stock positions when tax lot data is enabled for the account.")
+  @ApiModelProperty(value = "List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)")
 
   public List<TaxLot> getTaxLots() {
     return taxLots;

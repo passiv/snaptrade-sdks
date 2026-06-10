@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.AccountUniversalActivityCurrency
-The currency in which the transaction `price` and `amount` is denominated.
+The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
 
 ## Properties
 

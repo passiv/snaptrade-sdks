@@ -38,7 +38,7 @@ class OptionalAccountPosition(TypedDict, total=False):
     # Present for mutual fund positions that are also counted in cash balance or buying power.
     cash_equivalent: bool
 
-    # Present for stock positions when tax lot data is enabled for the account.
+    # List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
     tax_lots: typing.List[TaxLot]
 
 class AccountPosition(RequiredAccountPosition, OptionalAccountPosition):

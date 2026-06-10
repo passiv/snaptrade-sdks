@@ -499,7 +499,7 @@ catch (ApiException e)
 
 
 
-Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made** 
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.** 
 
 ### Example
 ```csharp
@@ -589,6 +589,7 @@ catch (ApiException e)
 | **402** | Unable to sync with brokerage account because the connection is disabled. |  -  |
 | **403** | Customer or user does not have access to this feature |  -  |
 | **404** | The requested resource does not exist. |  -  |
+| **429** | The connection was refreshed too recently. Please wait before calling this endpoint again. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

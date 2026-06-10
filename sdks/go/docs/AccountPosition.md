@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **CostBasis** | Pointer to **NullableFloat64** | Book price or average purchase price for the position. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;. | [optional] 
 **CashEquivalent** | Pointer to **bool** | Present for mutual fund positions that are also counted in cash balance or buying power. | [optional] 
-**TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | Present for stock positions when tax lot data is enabled for the account. | [optional] 
+**TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed) | [optional] 
 
 ## Methods
 

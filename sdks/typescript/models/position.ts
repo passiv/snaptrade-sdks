@@ -72,7 +72,7 @@ export interface Position {
      */
     'cash_equivalent'?: boolean | null;
     /**
-     * List of tax lots for the given position (disabled by default, contact support if needed)
+     * List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
      * @type {Array<TaxLot>}
      * @memberof Position
      */

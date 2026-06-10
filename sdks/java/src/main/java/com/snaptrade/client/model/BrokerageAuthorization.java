@@ -96,6 +96,10 @@ public class BrokerageAuthorization {
   @SerializedName(SERIALIZED_NAME_IS_ELIGIBLE_FOR_PAYOUT)
   private Boolean isEligibleForPayout;
 
+  public static final String SERIALIZED_NAME_DATA_FRESHNESS_MODE = "data_freshness_mode";
+  @SerializedName(SERIALIZED_NAME_DATA_FRESHNESS_MODE)
+  private String dataFreshnessMode;
+
   public BrokerageAuthorization() {
   }
 
@@ -400,6 +404,35 @@ public class BrokerageAuthorization {
     this.isEligibleForPayout = isEligibleForPayout;
   }
 
+
+  public BrokerageAuthorization dataFreshnessMode(String dataFreshnessMode) {
+    
+    
+    
+    
+    this.dataFreshnessMode = dataFreshnessMode;
+    return this;
+  }
+
+   /**
+   * Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. 
+   * @return dataFreshnessMode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "realtime", value = "Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. ")
+
+  public String getDataFreshnessMode() {
+    return dataFreshnessMode;
+  }
+
+
+  public void setDataFreshnessMode(String dataFreshnessMode) {
+    
+    
+    
+    this.dataFreshnessMode = dataFreshnessMode;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -464,7 +497,8 @@ public class BrokerageAuthorization {
         Objects.equals(this.disabledDate, brokerageAuthorization.disabledDate) &&
         Objects.equals(this.meta, brokerageAuthorization.meta) &&
         Objects.equals(this.updatedDate, brokerageAuthorization.updatedDate) &&
-        Objects.equals(this.isEligibleForPayout, brokerageAuthorization.isEligibleForPayout)&&
+        Objects.equals(this.isEligibleForPayout, brokerageAuthorization.isEligibleForPayout) &&
+        Objects.equals(this.dataFreshnessMode, brokerageAuthorization.dataFreshnessMode)&&
         Objects.equals(this.additionalProperties, brokerageAuthorization.additionalProperties);
   }
 
@@ -474,7 +508,7 @@ public class BrokerageAuthorization {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdDate, brokerage, name, type, disabled, disabledDate, meta, updatedDate, isEligibleForPayout, additionalProperties);
+    return Objects.hash(id, createdDate, brokerage, name, type, disabled, disabledDate, meta, updatedDate, isEligibleForPayout, dataFreshnessMode, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -498,6 +532,7 @@ public class BrokerageAuthorization {
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    updatedDate: ").append(toIndentedString(updatedDate)).append("\n");
     sb.append("    isEligibleForPayout: ").append(toIndentedString(isEligibleForPayout)).append("\n");
+    sb.append("    dataFreshnessMode: ").append(toIndentedString(dataFreshnessMode)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -531,6 +566,7 @@ public class BrokerageAuthorization {
     openapiFields.add("meta");
     openapiFields.add("updated_date");
     openapiFields.add("is_eligible_for_payout");
+    openapiFields.add("data_freshness_mode");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -560,6 +596,9 @@ public class BrokerageAuthorization {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
+      }
+      if ((jsonObj.get("data_freshness_mode") != null && !jsonObj.get("data_freshness_mode").isJsonNull()) && !jsonObj.get("data_freshness_mode").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `data_freshness_mode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("data_freshness_mode").toString()));
       }
   }
 

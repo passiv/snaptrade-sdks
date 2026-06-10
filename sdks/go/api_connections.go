@@ -914,7 +914,7 @@ Trigger a holdings update for all accounts under this connection. Updates will b
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
 **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-**Please note this endpoint is disabled for Personal and Pay as you Go Real-time plans. Real-time plans do not benefit from this feature since data is refreshed when calls are made**
+**Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1079,6 +1079,17 @@ func (a *ConnectionsApiService) RefreshBrokerageAuthorizationExecute(r Connectio
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v Model429TooManyRequestsResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

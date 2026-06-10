@@ -137,6 +137,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'IsEligibleForPayout'
         }
+        /// <summary>
+        /// Test the property 'DataFreshnessMode'
+        /// </summary>
+        [Fact]
+        public void DataFreshnessModeTest()
+        {
+            // TODO unit test for the property 'DataFreshnessMode'
+        }
 
     }
 

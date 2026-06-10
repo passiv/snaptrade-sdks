@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountUniversalActivityCurrency;
+import com.snaptrade.client.model.AccountUniversalActivityCurrencyUniversalSymbol;
 import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
@@ -57,6 +58,14 @@ public class AccountUniversalActivityTest {
     @Test
     public void symbolTest() {
         // TODO: test symbol
+    }
+
+    /**
+     * Test the property 'currencyUniversalSymbol'
+     */
+    @Test
+    public void currencyUniversalSymbolTest() {
+        // TODO: test currencyUniversalSymbol
     }
 
     /**

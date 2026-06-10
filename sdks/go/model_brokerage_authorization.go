@@ -39,6 +39,8 @@ type BrokerageAuthorization struct {
 	UpdatedDate *time.Time `json:"updated_date,omitempty"`
 	// Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
 	IsEligibleForPayout *bool `json:"is_eligible_for_payout,omitempty"`
+	// Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. 
+	DataFreshnessMode *string `json:"data_freshness_mode,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -397,6 +399,38 @@ func (o *BrokerageAuthorization) SetIsEligibleForPayout(v bool) {
 	o.IsEligibleForPayout = &v
 }
 
+// GetDataFreshnessMode returns the DataFreshnessMode field value if set, zero value otherwise.
+func (o *BrokerageAuthorization) GetDataFreshnessMode() string {
+	if o == nil || isNil(o.DataFreshnessMode) {
+		var ret string
+		return ret
+	}
+	return *o.DataFreshnessMode
+}
+
+// GetDataFreshnessModeOk returns a tuple with the DataFreshnessMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BrokerageAuthorization) GetDataFreshnessModeOk() (*string, bool) {
+	if o == nil || isNil(o.DataFreshnessMode) {
+    return nil, false
+	}
+	return o.DataFreshnessMode, true
+}
+
+// HasDataFreshnessMode returns a boolean if a field has been set.
+func (o *BrokerageAuthorization) HasDataFreshnessMode() bool {
+	if o != nil && !isNil(o.DataFreshnessMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataFreshnessMode gets a reference to the given string and assigns it to the DataFreshnessMode field.
+func (o *BrokerageAuthorization) SetDataFreshnessMode(v string) {
+	o.DataFreshnessMode = &v
+}
+
 func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
@@ -429,6 +463,9 @@ func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	if !isNil(o.IsEligibleForPayout) {
 		toSerialize["is_eligible_for_payout"] = o.IsEligibleForPayout
 	}
+	if !isNil(o.DataFreshnessMode) {
+		toSerialize["data_freshness_mode"] = o.DataFreshnessMode
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -457,6 +494,7 @@ func (o *BrokerageAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "updated_date")
 		delete(additionalProperties, "is_eligible_for_payout")
+		delete(additionalProperties, "data_freshness_mode")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <param name="fractionalUnits">Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward.</param>
         /// <param name="currency">currency.</param>
         /// <param name="cashEquivalent">If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power.</param>
-        /// <param name="taxLots">List of tax lots for the given position (disabled by default, contact support if needed).</param>
+        /// <param name="taxLots">List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed).</param>
         public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? averagePurchasePrice = default(double?), double? fractionalUnits = default(double?), PositionCurrency currency = default(PositionCurrency), bool? cashEquivalent = default(bool?), List<TaxLot> taxLots = default(List<TaxLot>)) : base()
         {
             this.Symbol = symbol;
@@ -114,9 +114,9 @@ namespace SnapTrade.Net.Model
         public bool? CashEquivalent { get; set; }
 
         /// <summary>
-        /// List of tax lots for the given position (disabled by default, contact support if needed)
+        /// List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
         /// </summary>
-        /// <value>List of tax lots for the given position (disabled by default, contact support if needed)</value>
+        /// <value>List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)</value>
         [DataMember(Name = "tax_lots", EmitDefaultValue = false)]
         public List<TaxLot> TaxLots { get; set; }
 

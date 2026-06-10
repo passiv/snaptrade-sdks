@@ -28,7 +28,7 @@ type AccountPosition struct {
 	Currency NullableString `json:"currency,omitempty"`
 	// Present for mutual fund positions that are also counted in cash balance or buying power.
 	CashEquivalent *bool `json:"cash_equivalent,omitempty"`
-	// Present for stock positions when tax lot data is enabled for the account.
+	// List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
 	TaxLots []TaxLot `json:"tax_lots,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

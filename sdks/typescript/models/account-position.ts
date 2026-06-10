@@ -58,7 +58,7 @@ export interface AccountPosition {
      */
     'cash_equivalent'?: boolean;
     /**
-     * Present for stock positions when tax lot data is enabled for the account.
+     * List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
      * @type {Array<TaxLot>}
      * @memberof AccountPosition
      */

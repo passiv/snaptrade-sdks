@@ -82,5 +82,11 @@ export interface BrokerageAuthorization {
      * @memberof BrokerageAuthorization
      */
     'is_eligible_for_payout'?: boolean;
+    /**
+     * Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer\'s plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. 
+     * @type {string}
+     * @memberof BrokerageAuthorization
+     */
+    'data_freshness_mode'?: string;
 }
 

@@ -21,6 +21,7 @@ type AccountUniversalActivity struct {
 	// Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
 	Id *string `json:"id,omitempty"`
 	Symbol NullableAccountUniversalActivitySymbol `json:"symbol,omitempty"`
+	CurrencyUniversalSymbol NullableAccountUniversalActivityCurrencyUniversalSymbol `json:"currency_universal_symbol,omitempty"`
 	OptionSymbol NullableAccountUniversalActivityOptionSymbol `json:"option_symbol,omitempty"`
 	// The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option transactions, this represents the price per share of the option contract.
 	Price *float32 `json:"price,omitempty"`
@@ -28,7 +29,7 @@ type AccountUniversalActivity struct {
 	Units *float32 `json:"units,omitempty"`
 	// The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
 	Amount NullableFloat32 `json:"amount,omitempty"`
-	Currency *AccountUniversalActivityCurrency `json:"currency,omitempty"`
+	Currency NullableAccountUniversalActivityCurrency `json:"currency,omitempty"`
 	// A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of asset(s) from one account to another.   - `EXTERNAL_ASSET_TRANSFER_IN` - Incoming transfer of an asset from an external account to this account.   - `EXTERNAL_ASSET_TRANSFER_OUT` - Outgoing transfer of an asset from this account to an external account.   - `SPLIT` - A stock share split.   - `ADJUSTMENT` - A one time adjustment of the account's cash balance or shares of an asset 
 	Type *string `json:"type,omitempty"`
 	// If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE 
@@ -141,6 +142,48 @@ func (o *AccountUniversalActivity) SetSymbolNil() {
 // UnsetSymbol ensures that no value is present for Symbol, not even an explicit nil
 func (o *AccountUniversalActivity) UnsetSymbol() {
 	o.Symbol.Unset()
+}
+
+// GetCurrencyUniversalSymbol returns the CurrencyUniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountUniversalActivity) GetCurrencyUniversalSymbol() AccountUniversalActivityCurrencyUniversalSymbol {
+	if o == nil || isNil(o.CurrencyUniversalSymbol.Get()) {
+		var ret AccountUniversalActivityCurrencyUniversalSymbol
+		return ret
+	}
+	return *o.CurrencyUniversalSymbol.Get()
+}
+
+// GetCurrencyUniversalSymbolOk returns a tuple with the CurrencyUniversalSymbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountUniversalActivity) GetCurrencyUniversalSymbolOk() (*AccountUniversalActivityCurrencyUniversalSymbol, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.CurrencyUniversalSymbol.Get(), o.CurrencyUniversalSymbol.IsSet()
+}
+
+// HasCurrencyUniversalSymbol returns a boolean if a field has been set.
+func (o *AccountUniversalActivity) HasCurrencyUniversalSymbol() bool {
+	if o != nil && o.CurrencyUniversalSymbol.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrencyUniversalSymbol gets a reference to the given NullableAccountUniversalActivityCurrencyUniversalSymbol and assigns it to the CurrencyUniversalSymbol field.
+func (o *AccountUniversalActivity) SetCurrencyUniversalSymbol(v AccountUniversalActivityCurrencyUniversalSymbol) {
+	o.CurrencyUniversalSymbol.Set(&v)
+}
+// SetCurrencyUniversalSymbolNil sets the value for CurrencyUniversalSymbol to be an explicit nil
+func (o *AccountUniversalActivity) SetCurrencyUniversalSymbolNil() {
+	o.CurrencyUniversalSymbol.Set(nil)
+}
+
+// UnsetCurrencyUniversalSymbol ensures that no value is present for CurrencyUniversalSymbol, not even an explicit nil
+func (o *AccountUniversalActivity) UnsetCurrencyUniversalSymbol() {
+	o.CurrencyUniversalSymbol.Unset()
 }
 
 // GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -291,36 +334,46 @@ func (o *AccountUniversalActivity) UnsetAmount() {
 	o.Amount.Unset()
 }
 
-// GetCurrency returns the Currency field value if set, zero value otherwise.
+// GetCurrency returns the Currency field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccountUniversalActivity) GetCurrency() AccountUniversalActivityCurrency {
-	if o == nil || isNil(o.Currency) {
+	if o == nil || isNil(o.Currency.Get()) {
 		var ret AccountUniversalActivityCurrency
 		return ret
 	}
-	return *o.Currency
+	return *o.Currency.Get()
 }
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AccountUniversalActivity) GetCurrencyOk() (*AccountUniversalActivityCurrency, bool) {
-	if o == nil || isNil(o.Currency) {
+	if o == nil {
     return nil, false
 	}
-	return o.Currency, true
+	return o.Currency.Get(), o.Currency.IsSet()
 }
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *AccountUniversalActivity) HasCurrency() bool {
-	if o != nil && !isNil(o.Currency) {
+	if o != nil && o.Currency.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCurrency gets a reference to the given AccountUniversalActivityCurrency and assigns it to the Currency field.
+// SetCurrency gets a reference to the given NullableAccountUniversalActivityCurrency and assigns it to the Currency field.
 func (o *AccountUniversalActivity) SetCurrency(v AccountUniversalActivityCurrency) {
-	o.Currency = &v
+	o.Currency.Set(&v)
+}
+// SetCurrencyNil sets the value for Currency to be an explicit nil
+func (o *AccountUniversalActivity) SetCurrencyNil() {
+	o.Currency.Set(nil)
+}
+
+// UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
+func (o *AccountUniversalActivity) UnsetCurrency() {
+	o.Currency.Unset()
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -649,6 +702,9 @@ func (o AccountUniversalActivity) MarshalJSON() ([]byte, error) {
 	if o.Symbol.IsSet() {
 		toSerialize["symbol"] = o.Symbol.Get()
 	}
+	if o.CurrencyUniversalSymbol.IsSet() {
+		toSerialize["currency_universal_symbol"] = o.CurrencyUniversalSymbol.Get()
+	}
 	if o.OptionSymbol.IsSet() {
 		toSerialize["option_symbol"] = o.OptionSymbol.Get()
 	}
@@ -661,8 +717,8 @@ func (o AccountUniversalActivity) MarshalJSON() ([]byte, error) {
 	if o.Amount.IsSet() {
 		toSerialize["amount"] = o.Amount.Get()
 	}
-	if !isNil(o.Currency) {
-		toSerialize["currency"] = o.Currency
+	if o.Currency.IsSet() {
+		toSerialize["currency"] = o.Currency.Get()
 	}
 	if !isNil(o.Type) {
 		toSerialize["type"] = o.Type
@@ -711,6 +767,7 @@ func (o *AccountUniversalActivity) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "currency_universal_symbol")
 		delete(additionalProperties, "option_symbol")
 		delete(additionalProperties, "price")
 		delete(additionalProperties, "units")

@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { Currency } from './currency';
 
 /**
- * The currency in which the transaction `price` and `amount` is denominated.
+ * The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
  * @export
  * @interface AccountUniversalActivityCurrency
  */

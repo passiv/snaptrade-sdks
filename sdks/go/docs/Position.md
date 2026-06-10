@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
 **Currency** | Pointer to [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
 **CashEquivalent** | Pointer to **NullableBool** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power | [optional] 
-**TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | List of tax lots for the given position (disabled by default, contact support if needed) | [optional] 
+**TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed) | [optional] 
 
 ## Methods
 

@@ -30,7 +30,7 @@ module SnapTrade
     # Present for mutual fund positions that are also counted in cash balance or buying power.
     attr_accessor :cash_equivalent
 
-    # Present for stock positions when tax lot data is enabled for the account.
+    # List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
     attr_accessor :tax_lots
 
     # Attribute mapping from ruby-style variable name to JSON key.

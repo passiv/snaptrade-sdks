@@ -1531,7 +1531,7 @@ func (r TradingApiPlaceComplexOrderRequest) Execute() (*ComplexOrderResponse, *h
 /*
 PlaceComplexOrder Place complex order
 
-Places a complex conditional order (OCO, OTO, or OTOCO). Disabled by default — contact support to enable.
+Places a complex conditional order (OCO, OTO, or OTOCO).
 Only supported on certain brokerages.
 Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
 
