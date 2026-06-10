@@ -6743,6 +6743,11 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Symbol"
+        currency_universal_symbol:
+          description: The quote security for the transaction when `price`, `amount`, and `fee` are denominated in a security instead of a fiat currency. This is most common for cryptocurrency trades. The field is `null` when the transaction is denominated in `currency`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Symbol"
         option_symbol:
           description: The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
           nullable: true
@@ -6762,7 +6767,8 @@ components:
           example: 263.82
           nullable: true
         currency:
-          description: The currency in which the transaction `price` and `amount` is denominated.
+          description: The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/Currency"
         type:
@@ -6848,6 +6854,11 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Symbol"
+        currency_universal_symbol:
+          description: The quote security for the transaction when `price`, `amount`, and `fee` are denominated in a security instead of a fiat currency. This is most common for cryptocurrency trades. The field is `null` when the transaction is denominated in `currency`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Symbol"
         option_symbol:
           description: The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
           nullable: true
@@ -6867,7 +6878,8 @@ components:
           example: 263.82
           nullable: true
         currency:
-          description: The currency in which the transaction `price` and `amount` is denominated.
+          description: The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/Currency"
         type:
