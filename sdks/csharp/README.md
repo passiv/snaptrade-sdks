@@ -190,6 +190,7 @@ Class | Method | HTTP request | Description
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [AccountUniversalActivity](docs/AccountUniversalActivity.md)
  - [AccountUniversalActivityCurrency](docs/AccountUniversalActivityCurrency.md)
+ - [AccountUniversalActivityCurrencyUniversalSymbol](docs/AccountUniversalActivityCurrencyUniversalSymbol.md)
  - [AccountUniversalActivityOptionSymbol](docs/AccountUniversalActivityOptionSymbol.md)
  - [AccountValueHistoryItem](docs/AccountValueHistoryItem.md)
  - [AccountValueHistoryResponse](docs/AccountValueHistoryResponse.md)

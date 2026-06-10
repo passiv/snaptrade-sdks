@@ -22,6 +22,7 @@ export * from './account-simple';
 export * from './account-sync-status';
 export * from './account-universal-activity';
 export * from './account-universal-activity-currency';
+export * from './account-universal-activity-currency-universal-symbol';
 export * from './account-universal-activity-option-symbol';
 export * from './account-universal-activity-symbol';
 export * from './account-value-history-item';

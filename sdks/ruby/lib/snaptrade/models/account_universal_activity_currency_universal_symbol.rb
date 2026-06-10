@@ -11,23 +11,43 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
-  class AccountUniversalActivityCurrency
-    # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
+  # The quote security for the transaction when `price`, `amount`, and `fee` are denominated in a security instead of a fiat currency. This is most common for cryptocurrency trades. The field is `null` when the transaction is denominated in `currency`.
+  class AccountUniversalActivityCurrencyUniversalSymbol
+    # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     attr_accessor :id
 
-    # The ISO-4217 currency code for the currency.
-    attr_accessor :code
+    # The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
+    attr_accessor :symbol
 
-    # A human-friendly name of the currency.
-    attr_accessor :name
+    # The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
+    attr_accessor :raw_symbol
+
+    # A human-readable description of the security. This is usually the company name or ETF name.
+    attr_accessor :description
+
+    attr_accessor :currency
+
+    attr_accessor :exchange
+
+    attr_accessor :type
+
+    # This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
+    attr_accessor :figi_code
+
+    attr_accessor :figi_instrument
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'code' => :'code',
-        :'name' => :'name'
+        :'symbol' => :'symbol',
+        :'raw_symbol' => :'raw_symbol',
+        :'description' => :'description',
+        :'currency' => :'currency',
+        :'exchange' => :'exchange',
+        :'type' => :'type',
+        :'figi_code' => :'figi_code',
+        :'figi_instrument' => :'figi_instrument'
       }
     end
 
@@ -40,21 +60,30 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
-        :'code' => :'String',
-        :'name' => :'String'
+        :'symbol' => :'String',
+        :'raw_symbol' => :'String',
+        :'description' => :'String',
+        :'currency' => :'SymbolCurrency',
+        :'exchange' => :'SymbolExchange',
+        :'type' => :'SecurityType',
+        :'figi_code' => :'String',
+        :'figi_instrument' => :'StockInstrumentFigiInstrument'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'description',
+        :'figi_code',
+        :'figi_instrument'
       ])
     end
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'Currency'
+      :'Symbol'
       ]
     end
 
@@ -62,13 +91,13 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::AccountUniversalActivityCurrency` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::AccountUniversalActivityCurrencyUniversalSymbol` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::AccountUniversalActivityCurrency`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::AccountUniversalActivityCurrencyUniversalSymbol`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -77,12 +106,36 @@ module SnapTrade
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'raw_symbol')
+        self.raw_symbol = attributes[:'raw_symbol']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
+      end
+
+      if attributes.key?(:'exchange')
+        self.exchange = attributes[:'exchange']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'figi_code')
+        self.figi_code = attributes[:'figi_code']
+      end
+
+      if attributes.key?(:'figi_instrument')
+        self.figi_instrument = attributes[:'figi_instrument']
       end
     end
 
@@ -105,8 +158,14 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          code == o.code &&
-          name == o.name
+          symbol == o.symbol &&
+          raw_symbol == o.raw_symbol &&
+          description == o.description &&
+          currency == o.currency &&
+          exchange == o.exchange &&
+          type == o.type &&
+          figi_code == o.figi_code &&
+          figi_instrument == o.figi_instrument
     end
 
     # @see the `==` method
@@ -118,7 +177,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, code, name].hash
+      [id, symbol, raw_symbol, description, currency, exchange, type, figi_code, figi_instrument].hash
     end
 
     # Builds the object from hash

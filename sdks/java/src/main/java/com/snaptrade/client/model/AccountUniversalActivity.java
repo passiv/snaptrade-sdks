@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountUniversalActivityCurrency;
+import com.snaptrade.client.model.AccountUniversalActivityCurrencyUniversalSymbol;
 import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
@@ -62,6 +63,10 @@ public class AccountUniversalActivity {
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private SymbolNullable symbol;
+
+  public static final String SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL = "currency_universal_symbol";
+  @SerializedName(SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL)
+  private AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol;
 
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
@@ -177,6 +182,35 @@ public class AccountUniversalActivity {
     
     
     this.symbol = symbol;
+  }
+
+
+  public AccountUniversalActivity currencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+    
+    
+    
+    
+    this.currencyUniversalSymbol = currencyUniversalSymbol;
+    return this;
+  }
+
+   /**
+   * Get currencyUniversalSymbol
+   * @return currencyUniversalSymbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountUniversalActivityCurrencyUniversalSymbol getCurrencyUniversalSymbol() {
+    return currencyUniversalSymbol;
+  }
+
+
+  public void setCurrencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+    
+    
+    
+    this.currencyUniversalSymbol = currencyUniversalSymbol;
   }
 
 
@@ -687,6 +721,7 @@ public class AccountUniversalActivity {
     AccountUniversalActivity accountUniversalActivity = (AccountUniversalActivity) o;
     return Objects.equals(this.id, accountUniversalActivity.id) &&
         Objects.equals(this.symbol, accountUniversalActivity.symbol) &&
+        Objects.equals(this.currencyUniversalSymbol, accountUniversalActivity.currencyUniversalSymbol) &&
         Objects.equals(this.optionSymbol, accountUniversalActivity.optionSymbol) &&
         Objects.equals(this.price, accountUniversalActivity.price) &&
         Objects.equals(this.units, accountUniversalActivity.units) &&
@@ -710,7 +745,7 @@ public class AccountUniversalActivity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, optionSymbol, price, units, amount, currency, type, optionType, description, tradeDate, settlementDate, fee, fxRate, institution, externalReferenceId, additionalProperties);
+    return Objects.hash(id, symbol, currencyUniversalSymbol, optionSymbol, price, units, amount, currency, type, optionType, description, tradeDate, settlementDate, fee, fxRate, institution, externalReferenceId, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -726,6 +761,7 @@ public class AccountUniversalActivity {
     sb.append("class AccountUniversalActivity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
+    sb.append("    currencyUniversalSymbol: ").append(toIndentedString(currencyUniversalSymbol)).append("\n");
     sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
@@ -765,6 +801,7 @@ public class AccountUniversalActivity {
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
     openapiFields.add("symbol");
+    openapiFields.add("currency_universal_symbol");
     openapiFields.add("option_symbol");
     openapiFields.add("price");
     openapiFields.add("units");
@@ -802,6 +839,10 @@ public class AccountUniversalActivity {
       // validate the optional field `symbol`
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
         SymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `currency_universal_symbol`
+      if (jsonObj.get("currency_universal_symbol") != null && !jsonObj.get("currency_universal_symbol").isJsonNull()) {
+        AccountUniversalActivityCurrencyUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("currency_universal_symbol"));
       }
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {

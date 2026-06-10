@@ -10038,6 +10038,7 @@ components:
         - symbol: null
           amount: 263.82
           settlement_date: 2024-03-26T00:00:00Z
+          currency_universal_symbol: null
           option_type: BUY_TO_OPEN
           fee: 0
           description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10054,6 +10055,7 @@ components:
         - symbol: null
           amount: 263.82
           settlement_date: 2024-03-26T00:00:00Z
+          currency_universal_symbol: null
           option_type: BUY_TO_OPEN
           fee: 0
           description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10082,6 +10084,7 @@ components:
         symbol: null
         amount: 263.82
         settlement_date: 2024-03-26T00:00:00Z
+        currency_universal_symbol: null
         option_type: BUY_TO_OPEN
         fee: 0
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10107,6 +10110,8 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-id
         symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_symbol'
+        currency_universal_symbol:
+          $ref: '#/components/schemas/AccountUniversalActivity_currency_universal_symbol'
         option_symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
         price:
@@ -10245,6 +10250,7 @@ components:
         symbol: null
         amount: 263.82
         settlement_date: 2024-03-26T00:00:00Z
+        currency_universal_symbol: null
         option_type: BUY_TO_OPEN
         fee: 0
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -10285,6 +10291,8 @@ components:
           $ref: '#/components/schemas/AccountSimple'
         symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_symbol'
+        currency_universal_symbol:
+          $ref: '#/components/schemas/AccountUniversalActivity_currency_universal_symbol'
         option_symbol:
           $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
         price:
@@ -15373,6 +15381,14 @@ components:
         \ does a best effort to map the brokerage's symbol. In cases where the brokerage\
         \ symbol is not recognized, the field will be set to `null`."
       nullable: true
+    AccountUniversalActivity_currency_universal_symbol:
+      allOf:
+      - $ref: '#/components/schemas/Symbol'
+      description: "The quote security for the transaction when `price`, `amount`,\
+        \ and `fee` are denominated in a security instead of a fiat currency. This\
+        \ is most common for cryptocurrency trades. The field is `null` when the transaction\
+        \ is denominated in `currency`."
+      nullable: true
     AccountUniversalActivity_option_symbol:
       allOf:
       - $ref: '#/components/schemas/OptionsSymbol'
@@ -15385,7 +15401,9 @@ components:
     AccountUniversalActivity_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
-      description: The currency in which the transaction `price` and `amount` is denominated.
+      description: "The currency in which the transaction `price`, `amount`, and `fee`\
+        \ are denominated. This is `null` when those values are denominated in `currency_universal_symbol`."
+      nullable: true
     UnderlyingSymbol_exchange:
       allOf:
       - $ref: '#/components/schemas/USExchange'

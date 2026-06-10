@@ -37,6 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="id">Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. .</param>
         /// <param name="symbol">symbol.</param>
+        /// <param name="currencyUniversalSymbol">currencyUniversalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="price">The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. For option transactions, this represents the price per share of the option contract..</param>
         /// <param name="units">The number of units of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions..</param>
@@ -51,10 +52,11 @@ namespace SnapTrade.Net.Model
         /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency).</param>
         /// <param name="institution">The institution that the transaction is associated with. This is usually the brokerage name..</param>
         /// <param name="externalReferenceId">Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;.</param>
-        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), AccountUniversalActivityOptionSymbol optionSymbol = default(AccountUniversalActivityOptionSymbol), double price = default(double), double units = default(double), double? amount = default(double?), AccountUniversalActivityCurrency currency = default(AccountUniversalActivityCurrency), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
+        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol = default(AccountUniversalActivityCurrencyUniversalSymbol), AccountUniversalActivityOptionSymbol optionSymbol = default(AccountUniversalActivityOptionSymbol), double price = default(double), double units = default(double), double? amount = default(double?), AccountUniversalActivityCurrency currency = default(AccountUniversalActivityCurrency), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
+            this.CurrencyUniversalSymbol = currencyUniversalSymbol;
             this.OptionSymbol = optionSymbol;
             this.Price = price;
             this.Units = units;
@@ -86,6 +88,12 @@ namespace SnapTrade.Net.Model
         public SymbolNullable Symbol { get; set; }
 
         /// <summary>
+        /// Gets or Sets CurrencyUniversalSymbol
+        /// </summary>
+        [DataMember(Name = "currency_universal_symbol", EmitDefaultValue = true)]
+        public AccountUniversalActivityCurrencyUniversalSymbol CurrencyUniversalSymbol { get; set; }
+
+        /// <summary>
         /// Gets or Sets OptionSymbol
         /// </summary>
         [DataMember(Name = "option_symbol", EmitDefaultValue = true)]
@@ -115,7 +123,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
-        [DataMember(Name = "currency", EmitDefaultValue = false)]
+        [DataMember(Name = "currency", EmitDefaultValue = true)]
         public AccountUniversalActivityCurrency Currency { get; set; }
 
         /// <summary>
@@ -198,6 +206,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  CurrencyUniversalSymbol: ").Append(CurrencyUniversalSymbol).Append("\n");
             sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
@@ -257,6 +266,11 @@ namespace SnapTrade.Net.Model
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
+                ) && base.Equals(input) && 
+                (
+                    this.CurrencyUniversalSymbol == input.CurrencyUniversalSymbol ||
+                    (this.CurrencyUniversalSymbol != null &&
+                    this.CurrencyUniversalSymbol.Equals(input.CurrencyUniversalSymbol))
                 ) && base.Equals(input) && 
                 (
                     this.OptionSymbol == input.OptionSymbol ||
@@ -344,6 +358,10 @@ namespace SnapTrade.Net.Model
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
+                if (this.CurrencyUniversalSymbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.CurrencyUniversalSymbol.GetHashCode();
                 }
                 if (this.OptionSymbol != null)
                 {

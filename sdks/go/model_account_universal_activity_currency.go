@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// AccountUniversalActivityCurrency The currency in which the transaction `price` and `amount` is denominated.
+// AccountUniversalActivityCurrency The currency in which the transaction `price`, `amount`, and `fee` are denominated. This is `null` when those values are denominated in `currency_universal_symbol`.
 type AccountUniversalActivityCurrency struct {
 	// Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
 	Id *string `json:"id,omitempty"`
