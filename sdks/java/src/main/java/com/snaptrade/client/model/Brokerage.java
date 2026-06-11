@@ -343,11 +343,11 @@ public class Brokerage {
   }
 
    /**
-   * URL to the brokerage&#39;s website.
+   * URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record.
    * @return url
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://robinhood.com", value = "URL to the brokerage's website.")
+  @ApiModelProperty(example = "https://robinhood.com", value = "URL to the brokerage's website. Returns null if the brokerage has no website on record.")
 
   public String getUrl() {
     return url;
@@ -862,7 +862,7 @@ public class Brokerage {
       if (!jsonObj.get("aws_s3_square_logo_url").isJsonNull() && (jsonObj.get("aws_s3_square_logo_url") != null && !jsonObj.get("aws_s3_square_logo_url").isJsonNull()) && !jsonObj.get("aws_s3_square_logo_url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `aws_s3_square_logo_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("aws_s3_square_logo_url").toString()));
       }
-      if ((jsonObj.get("url") != null && !jsonObj.get("url").isJsonNull()) && !jsonObj.get("url").isJsonPrimitive()) {
+      if (!jsonObj.get("url").isJsonNull() && (jsonObj.get("url") != null && !jsonObj.get("url").isJsonNull()) && !jsonObj.get("url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("url").toString()));
       }
       // validate the optional field `brokerage_type`

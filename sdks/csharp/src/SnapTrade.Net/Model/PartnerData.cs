@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="slug">A short, unique identifier for your company or product..</param>
         /// <param name="name">Your company or product name..</param>
-        /// <param name="logoUrl">URL to your company or product logo..</param>
+        /// <param name="logoUrl">URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients)..</param>
         /// <param name="allowedBrokerages">Brokerages that can be accessed by your Client ID..</param>
         /// <param name="canAccessTrades">Whether trading is enabled for your SnapTrade Client ID..</param>
         /// <param name="canAccessHoldings">Whether holdings data is enabled for your SnapTrade Client ID..</param>
@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// <param name="canAccessReferenceData">Whether reference data is enabled for your SnapTrade Client ID..</param>
         /// <param name="canAccessPortfolioManagement">Whether portfolio management is enabled for your SnapTrade Client ID..</param>
         /// <param name="canAccessOrders">Whether recent order history is enabled for your SnapTrade Client ID..</param>
-        /// <param name="redirectUri">URI to redirect user back to after user is done adding brokerage connections..</param>
+        /// <param name="redirectUri">URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients)..</param>
         /// <param name="pinRequired">Shows if pin is required by users to access connection page. This field has been deprecated..</param>
         public PartnerData(string slug = default(string), string name = default(string), string logoUrl = default(string), List<Brokerage> allowedBrokerages = default(List<Brokerage>), bool canAccessTrades = default(bool), bool canAccessHoldings = default(bool), bool canAccessAccountHistory = default(bool), bool canAccessReferenceData = default(bool), bool canAccessPortfolioManagement = default(bool), bool canAccessOrders = default(bool), string redirectUri = default(string), bool pinRequired = default(bool)) : base()
         {
@@ -79,10 +79,10 @@ namespace SnapTrade.Net.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// URL to your company or product logo.
+        /// URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
         /// </summary>
-        /// <value>URL to your company or product logo.</value>
-        [DataMember(Name = "logo_url", EmitDefaultValue = false)]
+        /// <value>URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).</value>
+        [DataMember(Name = "logo_url", EmitDefaultValue = true)]
         public string LogoUrl { get; set; }
 
         /// <summary>
@@ -135,10 +135,10 @@ namespace SnapTrade.Net.Model
         public bool CanAccessOrders { get; set; }
 
         /// <summary>
-        /// URI to redirect user back to after user is done adding brokerage connections.
+        /// URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
         /// </summary>
-        /// <value>URI to redirect user back to after user is done adding brokerage connections.</value>
-        [DataMember(Name = "redirect_uri", EmitDefaultValue = false)]
+        /// <value>URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).</value>
+        [DataMember(Name = "redirect_uri", EmitDefaultValue = true)]
         public string RedirectUri { get; set; }
 
         /// <summary>

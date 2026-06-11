@@ -39,7 +39,26 @@ class PartnerData(
         class properties:
             slug = schemas.StrSchema
             name = schemas.StrSchema
-            logo_url = schemas.StrSchema
+            
+            
+            class logo_url(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'logo_url':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             
             
             class allowed_brokerages(
@@ -72,7 +91,26 @@ class PartnerData(
             can_access_reference_data = schemas.BoolSchema
             can_access_portfolio_management = schemas.BoolSchema
             can_access_orders = schemas.BoolSchema
-            redirect_uri = schemas.StrSchema
+            
+            
+            class redirect_uri(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'redirect_uri':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             pin_required = schemas.BoolSchema
             __annotations__ = {
                 "slug": slug,
@@ -180,7 +218,7 @@ class PartnerData(
         *args: typing.Union[dict, frozendict.frozendict, ],
         slug: typing.Union[MetaOapg.properties.slug, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
-        logo_url: typing.Union[MetaOapg.properties.logo_url, str, schemas.Unset] = schemas.unset,
+        logo_url: typing.Union[MetaOapg.properties.logo_url, None, str, schemas.Unset] = schemas.unset,
         allowed_brokerages: typing.Union[MetaOapg.properties.allowed_brokerages, list, tuple, schemas.Unset] = schemas.unset,
         can_access_trades: typing.Union[MetaOapg.properties.can_access_trades, bool, schemas.Unset] = schemas.unset,
         can_access_holdings: typing.Union[MetaOapg.properties.can_access_holdings, bool, schemas.Unset] = schemas.unset,
@@ -188,7 +226,7 @@ class PartnerData(
         can_access_reference_data: typing.Union[MetaOapg.properties.can_access_reference_data, bool, schemas.Unset] = schemas.unset,
         can_access_portfolio_management: typing.Union[MetaOapg.properties.can_access_portfolio_management, bool, schemas.Unset] = schemas.unset,
         can_access_orders: typing.Union[MetaOapg.properties.can_access_orders, bool, schemas.Unset] = schemas.unset,
-        redirect_uri: typing.Union[MetaOapg.properties.redirect_uri, str, schemas.Unset] = schemas.unset,
+        redirect_uri: typing.Union[MetaOapg.properties.redirect_uri, None, str, schemas.Unset] = schemas.unset,
         pin_required: typing.Union[MetaOapg.properties.pin_required, bool, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],

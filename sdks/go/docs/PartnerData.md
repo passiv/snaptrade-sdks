@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Slug** | Pointer to **string** | A short, unique identifier for your company or product. | [optional] 
 **Name** | Pointer to **string** | Your company or product name. | [optional] 
-**LogoUrl** | Pointer to **string** | URL to your company or product logo. | [optional] 
+**LogoUrl** | Pointer to **NullableString** | URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients). | [optional] 
 **AllowedBrokerages** | Pointer to [**[]Brokerage**](Brokerage.md) | Brokerages that can be accessed by your Client ID. | [optional] 
 **CanAccessTrades** | Pointer to **bool** | Whether trading is enabled for your SnapTrade Client ID. | [optional] 
 **CanAccessHoldings** | Pointer to **bool** | Whether holdings data is enabled for your SnapTrade Client ID. | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **CanAccessReferenceData** | Pointer to **bool** | Whether reference data is enabled for your SnapTrade Client ID. | [optional] 
 **CanAccessPortfolioManagement** | Pointer to **bool** | Whether portfolio management is enabled for your SnapTrade Client ID. | [optional] 
 **CanAccessOrders** | Pointer to **bool** | Whether recent order history is enabled for your SnapTrade Client ID. | [optional] 
-**RedirectUri** | Pointer to **string** | URI to redirect user back to after user is done adding brokerage connections. | [optional] 
+**RedirectUri** | Pointer to **NullableString** | URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients). | [optional] 
 **PinRequired** | Pointer to **bool** | Shows if pin is required by users to access connection page. This field has been deprecated. | [optional] 
 
 ## Methods
@@ -111,6 +111,16 @@ SetLogoUrl sets LogoUrl field to given value.
 
 HasLogoUrl returns a boolean if a field has been set.
 
+### SetLogoUrlNil
+
+`func (o *PartnerData) SetLogoUrlNil(b bool)`
+
+ SetLogoUrlNil sets the value for LogoUrl to be an explicit nil
+
+### UnsetLogoUrl
+`func (o *PartnerData) UnsetLogoUrl()`
+
+UnsetLogoUrl ensures that no value is present for LogoUrl, not even an explicit nil
 ### GetAllowedBrokerages
 
 `func (o *PartnerData) GetAllowedBrokerages() []Brokerage`
@@ -311,6 +321,16 @@ SetRedirectUri sets RedirectUri field to given value.
 
 HasRedirectUri returns a boolean if a field has been set.
 
+### SetRedirectUriNil
+
+`func (o *PartnerData) SetRedirectUriNil(b bool)`
+
+ SetRedirectUriNil sets the value for RedirectUri to be an explicit nil
+
+### UnsetRedirectUri
+`func (o *PartnerData) UnsetRedirectUri()`
+
+UnsetRedirectUri ensures that no value is present for RedirectUri, not even an explicit nil
 ### GetPinRequired
 
 `func (o *PartnerData) GetPinRequired() bool`

@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -172,11 +173,11 @@ public class PartnerData {
   }
 
    /**
-   * URL to your company or product logo.
+   * URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
    * @return logoUrl
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://example.com/logo.png", value = "URL to your company or product logo.")
+  @ApiModelProperty(example = "https://example.com/logo.png", value = "URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).")
 
   public String getLogoUrl() {
     return logoUrl;
@@ -412,11 +413,11 @@ public class PartnerData {
   }
 
    /**
-   * URI to redirect user back to after user is done adding brokerage connections.
+   * URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
    * @return redirectUri
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://example.com/oauth/snaptrade", value = "URI to redirect user back to after user is done adding brokerage connections.")
+  @ApiModelProperty(example = "https://example.com/oauth/snaptrade", value = "URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).")
 
   public String getRedirectUri() {
     return redirectUri;
@@ -531,9 +532,20 @@ public class PartnerData {
         Objects.equals(this.additionalProperties, partnerData.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(slug, name, logoUrl, allowedBrokerages, canAccessTrades, canAccessHoldings, canAccessAccountHistory, canAccessReferenceData, canAccessPortfolioManagement, canAccessOrders, redirectUri, pinRequired, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -610,7 +622,7 @@ public class PartnerData {
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
-      if ((jsonObj.get("logo_url") != null && !jsonObj.get("logo_url").isJsonNull()) && !jsonObj.get("logo_url").isJsonPrimitive()) {
+      if (!jsonObj.get("logo_url").isJsonNull() && (jsonObj.get("logo_url") != null && !jsonObj.get("logo_url").isJsonNull()) && !jsonObj.get("logo_url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `logo_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("logo_url").toString()));
       }
       if (jsonObj.get("allowed_brokerages") != null && !jsonObj.get("allowed_brokerages").isJsonNull()) {
@@ -627,7 +639,7 @@ public class PartnerData {
           };
         }
       }
-      if ((jsonObj.get("redirect_uri") != null && !jsonObj.get("redirect_uri").isJsonNull()) && !jsonObj.get("redirect_uri").isJsonPrimitive()) {
+      if (!jsonObj.get("redirect_uri").isJsonNull() && (jsonObj.get("redirect_uri") != null && !jsonObj.get("redirect_uri").isJsonNull()) && !jsonObj.get("redirect_uri").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `redirect_uri` to be a primitive type in the JSON string but got `%s`", jsonObj.get("redirect_uri").toString()));
       }
   }

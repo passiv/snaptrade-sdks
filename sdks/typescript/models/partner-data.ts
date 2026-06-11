@@ -33,11 +33,11 @@ export interface PartnerData {
      */
     'name'?: string;
     /**
-     * URL to your company or product logo.
+     * URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
      * @type {string}
      * @memberof PartnerData
      */
-    'logo_url'?: string;
+    'logo_url'?: string | null;
     /**
      * Brokerages that can be accessed by your Client ID.
      * @type {Array<Brokerage>}
@@ -81,11 +81,11 @@ export interface PartnerData {
      */
     'can_access_orders'?: boolean;
     /**
-     * URI to redirect user back to after user is done adding brokerage connections.
+     * URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
      * @type {string}
      * @memberof PartnerData
      */
-    'redirect_uri'?: string;
+    'redirect_uri'?: string | null;
     /**
      * Shows if pin is required by users to access connection page. This field has been deprecated.
      * @type {boolean}

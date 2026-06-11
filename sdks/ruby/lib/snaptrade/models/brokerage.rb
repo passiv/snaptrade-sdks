@@ -34,7 +34,7 @@ module SnapTrade
     # URL to the brokerage's logo in square format.
     attr_accessor :aws_s3_square_logo_url
 
-    # URL to the brokerage's website.
+    # URL to the brokerage's website. Returns null if the brokerage has no website on record.
     attr_accessor :url
 
     # Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
@@ -123,6 +123,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'aws_s3_square_logo_url',
+        :'url',
         :'allows_trading',
         :'allows_fractional_units',
         :'has_reporting',
