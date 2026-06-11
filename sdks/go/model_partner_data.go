@@ -21,8 +21,8 @@ type PartnerData struct {
 	Slug *string `json:"slug,omitempty"`
 	// Your company or product name.
 	Name *string `json:"name,omitempty"`
-	// URL to your company or product logo.
-	LogoUrl *string `json:"logo_url,omitempty"`
+	// URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
+	LogoUrl NullableString `json:"logo_url,omitempty"`
 	// Brokerages that can be accessed by your Client ID.
 	AllowedBrokerages []Brokerage `json:"allowed_brokerages,omitempty"`
 	// Whether trading is enabled for your SnapTrade Client ID.
@@ -37,8 +37,8 @@ type PartnerData struct {
 	CanAccessPortfolioManagement *bool `json:"can_access_portfolio_management,omitempty"`
 	// Whether recent order history is enabled for your SnapTrade Client ID.
 	CanAccessOrders *bool `json:"can_access_orders,omitempty"`
-	// URI to redirect user back to after user is done adding brokerage connections.
-	RedirectUri *string `json:"redirect_uri,omitempty"`
+	// URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
+	RedirectUri NullableString `json:"redirect_uri,omitempty"`
 	// Shows if pin is required by users to access connection page. This field has been deprecated.
 	// Deprecated
 	PinRequired *bool `json:"pin_required,omitempty"`
@@ -128,36 +128,46 @@ func (o *PartnerData) SetName(v string) {
 	o.Name = &v
 }
 
-// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
+// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PartnerData) GetLogoUrl() string {
-	if o == nil || isNil(o.LogoUrl) {
+	if o == nil || isNil(o.LogoUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LogoUrl
+	return *o.LogoUrl.Get()
 }
 
 // GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerData) GetLogoUrlOk() (*string, bool) {
-	if o == nil || isNil(o.LogoUrl) {
+	if o == nil {
     return nil, false
 	}
-	return o.LogoUrl, true
+	return o.LogoUrl.Get(), o.LogoUrl.IsSet()
 }
 
 // HasLogoUrl returns a boolean if a field has been set.
 func (o *PartnerData) HasLogoUrl() bool {
-	if o != nil && !isNil(o.LogoUrl) {
+	if o != nil && o.LogoUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLogoUrl gets a reference to the given string and assigns it to the LogoUrl field.
+// SetLogoUrl gets a reference to the given NullableString and assigns it to the LogoUrl field.
 func (o *PartnerData) SetLogoUrl(v string) {
-	o.LogoUrl = &v
+	o.LogoUrl.Set(&v)
+}
+// SetLogoUrlNil sets the value for LogoUrl to be an explicit nil
+func (o *PartnerData) SetLogoUrlNil() {
+	o.LogoUrl.Set(nil)
+}
+
+// UnsetLogoUrl ensures that no value is present for LogoUrl, not even an explicit nil
+func (o *PartnerData) UnsetLogoUrl() {
+	o.LogoUrl.Unset()
 }
 
 // GetAllowedBrokerages returns the AllowedBrokerages field value if set, zero value otherwise.
@@ -384,36 +394,46 @@ func (o *PartnerData) SetCanAccessOrders(v bool) {
 	o.CanAccessOrders = &v
 }
 
-// GetRedirectUri returns the RedirectUri field value if set, zero value otherwise.
+// GetRedirectUri returns the RedirectUri field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PartnerData) GetRedirectUri() string {
-	if o == nil || isNil(o.RedirectUri) {
+	if o == nil || isNil(o.RedirectUri.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.RedirectUri
+	return *o.RedirectUri.Get()
 }
 
 // GetRedirectUriOk returns a tuple with the RedirectUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PartnerData) GetRedirectUriOk() (*string, bool) {
-	if o == nil || isNil(o.RedirectUri) {
+	if o == nil {
     return nil, false
 	}
-	return o.RedirectUri, true
+	return o.RedirectUri.Get(), o.RedirectUri.IsSet()
 }
 
 // HasRedirectUri returns a boolean if a field has been set.
 func (o *PartnerData) HasRedirectUri() bool {
-	if o != nil && !isNil(o.RedirectUri) {
+	if o != nil && o.RedirectUri.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRedirectUri gets a reference to the given string and assigns it to the RedirectUri field.
+// SetRedirectUri gets a reference to the given NullableString and assigns it to the RedirectUri field.
 func (o *PartnerData) SetRedirectUri(v string) {
-	o.RedirectUri = &v
+	o.RedirectUri.Set(&v)
+}
+// SetRedirectUriNil sets the value for RedirectUri to be an explicit nil
+func (o *PartnerData) SetRedirectUriNil() {
+	o.RedirectUri.Set(nil)
+}
+
+// UnsetRedirectUri ensures that no value is present for RedirectUri, not even an explicit nil
+func (o *PartnerData) UnsetRedirectUri() {
+	o.RedirectUri.Unset()
 }
 
 // GetPinRequired returns the PinRequired field value if set, zero value otherwise.
@@ -459,8 +479,8 @@ func (o PartnerData) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.LogoUrl) {
-		toSerialize["logo_url"] = o.LogoUrl
+	if o.LogoUrl.IsSet() {
+		toSerialize["logo_url"] = o.LogoUrl.Get()
 	}
 	if !isNil(o.AllowedBrokerages) {
 		toSerialize["allowed_brokerages"] = o.AllowedBrokerages
@@ -483,8 +503,8 @@ func (o PartnerData) MarshalJSON() ([]byte, error) {
 	if !isNil(o.CanAccessOrders) {
 		toSerialize["can_access_orders"] = o.CanAccessOrders
 	}
-	if !isNil(o.RedirectUri) {
-		toSerialize["redirect_uri"] = o.RedirectUri
+	if o.RedirectUri.IsSet() {
+		toSerialize["redirect_uri"] = o.RedirectUri.Get()
 	}
 	if !isNil(o.PinRequired) {
 		toSerialize["pin_required"] = o.PinRequired

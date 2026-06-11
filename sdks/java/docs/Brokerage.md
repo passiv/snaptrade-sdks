@@ -15,7 +15,7 @@ Describes a brokerage that SnapTrade supports.
 |**description** | **String** | A brief description of the brokerage. |  [optional] |
 |**awsS3LogoUrl** | **String** | URL to the brokerage&#39;s logo. |  [optional] |
 |**awsS3SquareLogoUrl** | **String** | URL to the brokerage&#39;s logo in square format. |  [optional] |
-|**url** | **String** | URL to the brokerage&#39;s website. |  [optional] |
+|**url** | **String** | URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record. |  [optional] |
 |**enabled** | **Boolean** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. |  [optional] |
 |**maintenanceMode** | **Boolean** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. |  [optional] |
 |**isDegraded** | **Boolean** | Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues. |  [optional] |

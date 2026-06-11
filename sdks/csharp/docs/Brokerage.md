@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Description** | **string** | A brief description of the brokerage. | [optional] 
 **AwsS3LogoUrl** | **string** | URL to the brokerage&#39;s logo. | [optional] 
 **AwsS3SquareLogoUrl** | **string** | URL to the brokerage&#39;s logo in square format. | [optional] 
-**Url** | **string** | URL to the brokerage&#39;s website. | [optional] 
+**Url** | **string** | URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record. | [optional] 
 **Enabled** | **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
 **MaintenanceMode** | **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
 **IsDegraded** | **bool** | Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues. | [optional] 

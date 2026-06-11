@@ -42,7 +42,7 @@ namespace SnapTrade.Net.Model
         /// <param name="description">A brief description of the brokerage..</param>
         /// <param name="awsS3LogoUrl">URL to the brokerage&#39;s logo..</param>
         /// <param name="awsS3SquareLogoUrl">URL to the brokerage&#39;s logo in square format..</param>
-        /// <param name="url">URL to the brokerage&#39;s website..</param>
+        /// <param name="url">URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record..</param>
         /// <param name="enabled">Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections..</param>
         /// <param name="maintenanceMode">Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections..</param>
         /// <param name="isDegraded">Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues..</param>
@@ -126,10 +126,10 @@ namespace SnapTrade.Net.Model
         public string AwsS3SquareLogoUrl { get; set; }
 
         /// <summary>
-        /// URL to the brokerage&#39;s website.
+        /// URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record.
         /// </summary>
-        /// <value>URL to the brokerage&#39;s website.</value>
-        [DataMember(Name = "url", EmitDefaultValue = false)]
+        /// <value>URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record.</value>
+        [DataMember(Name = "url", EmitDefaultValue = true)]
         public string Url { get; set; }
 
         /// <summary>

@@ -19,7 +19,7 @@ module SnapTrade
     # Your company or product name.
     attr_accessor :name
 
-    # URL to your company or product logo.
+    # URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
     attr_accessor :logo_url
 
     # Brokerages that can be accessed by your Client ID.
@@ -43,7 +43,7 @@ module SnapTrade
     # Whether recent order history is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_orders
 
-    # URI to redirect user back to after user is done adding brokerage connections.
+    # URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
     attr_accessor :redirect_uri
 
     # Shows if pin is required by users to access connection page. This field has been deprecated.
@@ -93,6 +93,8 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'logo_url',
+        :'redirect_uri',
       ])
     end
 

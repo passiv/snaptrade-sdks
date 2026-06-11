@@ -43,8 +43,8 @@ class OptionalBrokerage(TypedDict, total=False):
     # URL to the brokerage's logo in square format.
     aws_s3_square_logo_url: typing.Optional[str]
 
-    # URL to the brokerage's website.
-    url: str
+    # URL to the brokerage's website. Returns null if the brokerage has no website on record.
+    url: typing.Optional[str]
 
     # Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
     enabled: bool

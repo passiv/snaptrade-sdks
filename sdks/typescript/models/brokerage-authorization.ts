@@ -83,7 +83,7 @@ export interface BrokerageAuthorization {
      */
     'is_eligible_for_payout'?: boolean;
     /**
-     * Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer\'s plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Cache Expiry of Holdings\" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val 
+     * Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer\'s plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Cache Expiry of Holdings\" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val 
      * @type {string}
      * @memberof BrokerageAuthorization
      */

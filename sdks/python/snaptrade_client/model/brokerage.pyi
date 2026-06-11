@@ -67,7 +67,30 @@ class Brokerage(
                         *args,
                         _configuration=_configuration,
                     )
-            url = schemas.StrSchema
+            
+            
+            class url(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    format = 'url'
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'url':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             enabled = schemas.BoolSchema
             maintenance_mode = schemas.BoolSchema
             is_degraded = schemas.BoolSchema
@@ -317,7 +340,7 @@ class Brokerage(
         description: typing.Union[MetaOapg.properties.description, str, schemas.Unset] = schemas.unset,
         aws_s3_logo_url: typing.Union[MetaOapg.properties.aws_s3_logo_url, str, schemas.Unset] = schemas.unset,
         aws_s3_square_logo_url: typing.Union[MetaOapg.properties.aws_s3_square_logo_url, None, str, schemas.Unset] = schemas.unset,
-        url: typing.Union[MetaOapg.properties.url, str, schemas.Unset] = schemas.unset,
+        url: typing.Union[MetaOapg.properties.url, None, str, schemas.Unset] = schemas.unset,
         enabled: typing.Union[MetaOapg.properties.enabled, bool, schemas.Unset] = schemas.unset,
         maintenance_mode: typing.Union[MetaOapg.properties.maintenance_mode, bool, schemas.Unset] = schemas.unset,
         is_degraded: typing.Union[MetaOapg.properties.is_degraded, bool, schemas.Unset] = schemas.unset,

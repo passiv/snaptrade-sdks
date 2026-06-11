@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A brief description of the brokerage. | [optional] 
 **AwsS3LogoUrl** | Pointer to **string** | URL to the brokerage&#39;s logo. | [optional] 
 **AwsS3SquareLogoUrl** | Pointer to **NullableString** | URL to the brokerage&#39;s logo in square format. | [optional] 
-**Url** | Pointer to **string** | URL to the brokerage&#39;s website. | [optional] 
+**Url** | Pointer to **NullableString** | URL to the brokerage&#39;s website. Returns null if the brokerage has no website on record. | [optional] 
 **Enabled** | Pointer to **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
 **MaintenanceMode** | Pointer to **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
 **IsDegraded** | Pointer to **bool** | Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues. | [optional] 
@@ -252,6 +252,16 @@ SetUrl sets Url field to given value.
 
 HasUrl returns a boolean if a field has been set.
 
+### SetUrlNil
+
+`func (o *Brokerage) SetUrlNil(b bool)`
+
+ SetUrlNil sets the value for Url to be an explicit nil
+
+### UnsetUrl
+`func (o *Brokerage) UnsetUrl()`
+
+UnsetUrl ensures that no value is present for Url, not even an explicit nil
 ### GetEnabled
 
 `func (o *Brokerage) GetEnabled() bool`

@@ -6487,8 +6487,10 @@ components:
           x-konfig-original-example: Wealthly
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-name
         logo_url:
-          description: URL to your company or product logo.
+          description: URL to your company or product logo. Returns null if no logo
+            has been configured (always the case for personal access clients).
           example: https://example.com/logo.png
+          nullable: true
           type: string
           x-konfig-original-example: https://example.com/logo.png
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-logo_url
@@ -6540,8 +6542,10 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_orders
         redirect_uri:
           description: URI to redirect user back to after user is done adding brokerage
-            connections.
+            connections. Returns null if no redirect URI has been configured (always
+            the case for personal access clients).
           example: https://example.com/oauth/snaptrade
+          nullable: true
           type: string
           x-konfig-original-example: https://example.com/oauth/snaptrade
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-redirect_uri
@@ -7822,9 +7826,11 @@ components:
           x-konfig-original-example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url
         url:
-          description: URL to the brokerage's website.
+          description: URL to the brokerage's website. Returns null if the brokerage
+            has no website on record.
           example: https://robinhood.com
           format: url
+          nullable: true
           type: string
           x-konfig-original-example: https://robinhood.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-url
@@ -8036,6 +8042,7 @@ components:
             Possible values include:
             - realtime
             - delayed
+
             Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the "Cache Expiry of Holdings" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val
           example: realtime
           type: string

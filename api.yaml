@@ -4590,8 +4590,9 @@ components:
           example: Wealthly
         logo_url:
           type: string
-          description: URL to your company or product logo.
+          description: URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
           example: https://example.com/logo.png
+          nullable: true
         allowed_brokerages:
           type: array
           description: Brokerages that can be accessed by your Client ID.
@@ -4623,8 +4624,9 @@ components:
           example: true
         redirect_uri:
           type: string
-          description: URI to redirect user back to after user is done adding brokerage connections.
+          description: URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
           example: https://example.com/oauth/snaptrade
+          nullable: true
         pin_required:
           deprecated: true
           type: boolean
@@ -5455,10 +5457,11 @@ components:
           example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           nullable: true
         url:
-          description: URL to the brokerage's website.
+          description: URL to the brokerage's website. Returns null if the brokerage has no website on record.
           type: string
           format: url
           example: https://robinhood.com
+          nullable: true
         enabled:
           description: Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
           type: boolean
@@ -5573,6 +5576,7 @@ components:
             Possible values include:
             - realtime
             - delayed
+
             Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the "Cache Expiry of Holdings" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val
           type: string
           example: realtime

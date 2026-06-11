@@ -39,7 +39,7 @@ type BrokerageAuthorization struct {
 	UpdatedDate *time.Time `json:"updated_date,omitempty"`
 	// Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
 	IsEligibleForPayout *bool `json:"is_eligible_for_payout,omitempty"`
-	// Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Cache Expiry of Holdings\" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val 
+	// Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Cache Expiry of Holdings\" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val 
 	DataFreshnessMode *string `json:"data_freshness_mode,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -31,8 +31,8 @@ type Brokerage struct {
 	AwsS3LogoUrl *string `json:"aws_s3_logo_url,omitempty"`
 	// URL to the brokerage's logo in square format.
 	AwsS3SquareLogoUrl NullableString `json:"aws_s3_square_logo_url,omitempty"`
-	// URL to the brokerage's website.
-	Url *string `json:"url,omitempty"`
+	// URL to the brokerage's website. Returns null if the brokerage has no website on record.
+	Url NullableString `json:"url,omitempty"`
 	// Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
@@ -313,36 +313,46 @@ func (o *Brokerage) UnsetAwsS3SquareLogoUrl() {
 	o.AwsS3SquareLogoUrl.Unset()
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Brokerage) GetUrl() string {
-	if o == nil || isNil(o.Url) {
+	if o == nil || isNil(o.Url.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Url
+	return *o.Url.Get()
 }
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Brokerage) GetUrlOk() (*string, bool) {
-	if o == nil || isNil(o.Url) {
+	if o == nil {
     return nil, false
 	}
-	return o.Url, true
+	return o.Url.Get(), o.Url.IsSet()
 }
 
 // HasUrl returns a boolean if a field has been set.
 func (o *Brokerage) HasUrl() bool {
-	if o != nil && !isNil(o.Url) {
+	if o != nil && o.Url.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl gets a reference to the given NullableString and assigns it to the Url field.
 func (o *Brokerage) SetUrl(v string) {
-	o.Url = &v
+	o.Url.Set(&v)
+}
+// SetUrlNil sets the value for Url to be an explicit nil
+func (o *Brokerage) SetUrlNil() {
+	o.Url.Set(nil)
+}
+
+// UnsetUrl ensures that no value is present for Url, not even an explicit nil
+func (o *Brokerage) UnsetUrl() {
+	o.Url.Unset()
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -743,8 +753,8 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	if o.AwsS3SquareLogoUrl.IsSet() {
 		toSerialize["aws_s3_square_logo_url"] = o.AwsS3SquareLogoUrl.Get()
 	}
-	if !isNil(o.Url) {
-		toSerialize["url"] = o.Url
+	if o.Url.IsSet() {
+		toSerialize["url"] = o.Url.Get()
 	}
 	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled

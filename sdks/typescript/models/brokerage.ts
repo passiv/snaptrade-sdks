@@ -63,11 +63,11 @@ export interface Brokerage {
      */
     'aws_s3_square_logo_url'?: string | null;
     /**
-     * URL to the brokerage\'s website.
+     * URL to the brokerage\'s website. Returns null if the brokerage has no website on record.
      * @type {string}
      * @memberof Brokerage
      */
-    'url'?: string;
+    'url'?: string | null;
     /**
      * Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
      * @type {boolean}

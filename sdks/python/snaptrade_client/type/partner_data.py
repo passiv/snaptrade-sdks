@@ -27,8 +27,8 @@ class OptionalPartnerData(TypedDict, total=False):
     # Your company or product name.
     name: str
 
-    # URL to your company or product logo.
-    logo_url: str
+    # URL to your company or product logo. Returns null if no logo has been configured (always the case for personal access clients).
+    logo_url: typing.Optional[str]
 
     # Brokerages that can be accessed by your Client ID.
     allowed_brokerages: typing.List[Brokerage]
@@ -51,8 +51,8 @@ class OptionalPartnerData(TypedDict, total=False):
     # Whether recent order history is enabled for your SnapTrade Client ID.
     can_access_orders: bool
 
-    # URI to redirect user back to after user is done adding brokerage connections.
-    redirect_uri: str
+    # URI to redirect user back to after user is done adding brokerage connections. Returns null if no redirect URI has been configured (always the case for personal access clients).
+    redirect_uri: typing.Optional[str]
 
     # WARNING: This property is deprecated
     # Shows if pin is required by users to access connection page. This field has been deprecated.
