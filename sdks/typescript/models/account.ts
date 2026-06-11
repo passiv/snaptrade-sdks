@@ -28,7 +28,7 @@ export interface Account {
      */
     'id': string;
     /**
-     * Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+     * Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
      * @type {string}
      * @memberof Account
      */

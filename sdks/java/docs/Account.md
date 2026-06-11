@@ -9,7 +9,7 @@ A single account at a brokerage.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | [**UUID**](UUID.md) | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. |  |
-|**brokerageAuthorization** | **UUID** | Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. |  |
+|**brokerageAuthorization** | **UUID** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. |  |
 |**name** | **String** | A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. |  |
 |**number** | **String** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. |  |
 |**institutionAccountId** | **String** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. |  [optional] |

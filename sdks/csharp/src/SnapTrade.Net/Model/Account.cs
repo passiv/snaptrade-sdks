@@ -118,7 +118,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. (required).</param>
-        /// <param name="brokerageAuthorization">Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. (required).</param>
+        /// <param name="brokerageAuthorization">Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. (required).</param>
         /// <param name="name">A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. (required).</param>
         /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. (required).</param>
         /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections..</param>
@@ -201,9 +201,9 @@ namespace SnapTrade.Net.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+        /// Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
         /// </summary>
-        /// <value>Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.</value>
+        /// <value>Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.</value>
         [DataMember(Name = "brokerage_authorization", IsRequired = true, EmitDefaultValue = true)]
         public string BrokerageAuthorization { get; set; }
 

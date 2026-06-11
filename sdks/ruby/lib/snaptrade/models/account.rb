@@ -16,7 +16,7 @@ module SnapTrade
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
     attr_accessor :id
 
-    # Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+    # Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :brokerage_authorization
 
     # A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
