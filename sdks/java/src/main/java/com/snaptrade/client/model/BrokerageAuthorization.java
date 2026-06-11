@@ -113,11 +113,11 @@ public class BrokerageAuthorization {
   }
 
    /**
-   * Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+   * Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
    * @return id
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", value = "Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.")
+  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", value = "Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.")
 
   public UUID getId() {
     return id;
@@ -415,11 +415,11 @@ public class BrokerageAuthorization {
   }
 
    /**
-   * Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. 
+   * Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. See the \&quot;Cache Expiry of Holdings\&quot; column on the Holdings tab at https://support.snaptrade.com/brokerages for which val 
    * @return dataFreshnessMode
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "realtime", value = "Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. ")
+  @ApiModelProperty(example = "realtime", value = "Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Cache Expiry of Holdings\" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val ")
 
   public String getDataFreshnessMode() {
     return dataFreshnessMode;

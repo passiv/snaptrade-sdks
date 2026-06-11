@@ -5,7 +5,7 @@ A single connection with a brokerage. Note that `Connection` and `Brokerage Auth
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. | [optional] 
+**Id** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | [optional] 
 **CreatedDate** | **DateTime** | Timestamp of when the connection was established in SnapTrade. | [optional] 
 **Brokerage** | [**Brokerage**](Brokerage.md) |  | [optional] 
 **Name** | **string** | A short, human-readable name for the connection. | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Meta** | **Dictionary&lt;string, Object&gt;** | Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **UpdatedDate** | **DateTime** | Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field. | [optional] 
 **IsEligibleForPayout** | **bool** | Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team. | [optional] 
-**DataFreshnessMode** | **string** | Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls.  | [optional] 
+**DataFreshnessMode** | **string** | Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. See the \&quot;Cache Expiry of Holdings\&quot; column on the Holdings tab at https://support.snaptrade.com/brokerages for which val  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

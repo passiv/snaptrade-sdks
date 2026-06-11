@@ -273,11 +273,11 @@ public class Account {
   }
 
    /**
-   * Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+   * Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
    * @return brokerageAuthorization
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", required = true, value = "Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.")
+  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", required = true, value = "Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.")
 
   public UUID getBrokerageAuthorization() {
     return brokerageAuthorization;

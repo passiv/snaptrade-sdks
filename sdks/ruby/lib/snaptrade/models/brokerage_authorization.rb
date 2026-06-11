@@ -13,7 +13,7 @@ require 'time'
 module SnapTrade
   # A single connection with a brokerage. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
   class BrokerageAuthorization
-    # Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
+    # Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :id
 
     # Timestamp of when the connection was established in SnapTrade.
@@ -42,7 +42,7 @@ module SnapTrade
     # Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
     attr_accessor :is_eligible_for_payout
 
-    # Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. 
+    # Possible values include: - realtime - delayed Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Cache Expiry of Holdings\" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val 
     attr_accessor :data_freshness_mode
 
     # Attribute mapping from ruby-style variable name to JSON key.
