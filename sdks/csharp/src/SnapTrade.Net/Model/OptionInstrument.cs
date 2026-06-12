@@ -148,6 +148,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Strike price for the option contract.</value>
         [DataMember(Name = "strike_price", IsRequired = true, EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal StrikePrice { get; set; }
 
         /// <summary>
