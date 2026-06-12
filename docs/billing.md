@@ -41,7 +41,7 @@ With 250 connected users in this example, the Commercial bill would be:
 
 If your Commercial agreement with SnapTrade contains pricing for manual refreshes, they will be charged according to the following details.
 
-When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per Commercial customer based on their agreement with SnapTrade. This feature is disabled for Pay as you Go and free plans.
+When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per Commercial customer based on their agreement with SnapTrade. Manual Sync is available for Pay-as-you-go Daily plans at **$0.05 per account**. This feature remains disabled for free plans.
 
 ### 3. Recent Orders API Calls
 
