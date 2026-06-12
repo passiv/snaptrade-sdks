@@ -55,6 +55,8 @@ portal:
               path: docs/personal-vs-commercial.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
+            - id: sandbox
+              path: docs/sandbox.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
             - id: filtering-accounts-by-category
