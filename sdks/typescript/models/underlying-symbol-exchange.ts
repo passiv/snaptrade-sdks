@@ -35,7 +35,7 @@ export interface UnderlyingSymbolExchange {
      * @type {string}
      * @memberof UnderlyingSymbolExchange
      */
-    'mic_code'?: string;
+    'mic_code'?: string | null;
     /**
      * 
      * @type {string}

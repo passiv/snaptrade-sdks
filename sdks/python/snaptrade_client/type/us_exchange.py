@@ -24,7 +24,7 @@ class OptionalUSExchange(TypedDict, total=False):
 
     code: str
 
-    mic_code: str
+    mic_code: typing.Optional[str]
 
     name: str
 

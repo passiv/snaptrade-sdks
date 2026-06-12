@@ -68,6 +68,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Amount
         /// </summary>
         [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Amount { get; set; }
 
         /// <summary>

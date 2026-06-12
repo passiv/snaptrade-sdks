@@ -22,7 +22,7 @@ type Exchange struct {
 	// A short name for the exchange. For standardized exchange code, please use the `mic_code` field.
 	Code *string `json:"code,omitempty"`
 	// The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
-	MicCode *string `json:"mic_code,omitempty"`
+	MicCode NullableString `json:"mic_code,omitempty"`
 	// The full name of the exchange.
 	Name *string `json:"name,omitempty"`
 	// The timezone for the trading hours (`start_time` and `close_time`) of the exchange.
@@ -119,36 +119,46 @@ func (o *Exchange) SetCode(v string) {
 	o.Code = &v
 }
 
-// GetMicCode returns the MicCode field value if set, zero value otherwise.
+// GetMicCode returns the MicCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Exchange) GetMicCode() string {
-	if o == nil || isNil(o.MicCode) {
+	if o == nil || isNil(o.MicCode.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.MicCode
+	return *o.MicCode.Get()
 }
 
 // GetMicCodeOk returns a tuple with the MicCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Exchange) GetMicCodeOk() (*string, bool) {
-	if o == nil || isNil(o.MicCode) {
+	if o == nil {
     return nil, false
 	}
-	return o.MicCode, true
+	return o.MicCode.Get(), o.MicCode.IsSet()
 }
 
 // HasMicCode returns a boolean if a field has been set.
 func (o *Exchange) HasMicCode() bool {
-	if o != nil && !isNil(o.MicCode) {
+	if o != nil && o.MicCode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMicCode gets a reference to the given string and assigns it to the MicCode field.
+// SetMicCode gets a reference to the given NullableString and assigns it to the MicCode field.
 func (o *Exchange) SetMicCode(v string) {
-	o.MicCode = &v
+	o.MicCode.Set(&v)
+}
+// SetMicCodeNil sets the value for MicCode to be an explicit nil
+func (o *Exchange) SetMicCodeNil() {
+	o.MicCode.Set(nil)
+}
+
+// UnsetMicCode ensures that no value is present for MicCode, not even an explicit nil
+func (o *Exchange) UnsetMicCode() {
+	o.MicCode.Unset()
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -329,8 +339,8 @@ func (o Exchange) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
-	if !isNil(o.MicCode) {
-		toSerialize["mic_code"] = o.MicCode
+	if o.MicCode.IsSet() {
+		toSerialize["mic_code"] = o.MicCode.Get()
 	}
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name

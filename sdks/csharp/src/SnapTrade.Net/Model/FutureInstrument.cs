@@ -149,6 +149,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Multiplier for the future contract.</value>
         [DataMember(Name = "multiplier", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? Multiplier { get; set; }
 
         /// <summary>

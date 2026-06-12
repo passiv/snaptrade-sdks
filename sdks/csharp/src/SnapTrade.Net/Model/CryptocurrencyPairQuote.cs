@@ -61,6 +61,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The highest price a buyer is willing to pay.</value>
         [DataMember(Name = "bid", IsRequired = true, EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Bid { get; set; }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The lowest price a seller is willing to accept.</value>
         [DataMember(Name = "ask", IsRequired = true, EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Ask { get; set; }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The market mid price.</value>
         [DataMember(Name = "mid", EmitDefaultValue = false)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Mid { get; set; }
 
         /// <summary>

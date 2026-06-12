@@ -176,6 +176,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The amount of the base currency to buy or sell.</value>
         [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Amount { get; set; }
 
         /// <summary>
@@ -183,6 +184,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = false)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal LimitPrice { get; set; }
 
         /// <summary>
@@ -190,6 +192,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, &#x60;TAKE_PROFIT_MARKET&#x60; or &#x60;TAKE_PROFIT_LIMIT&#x60;.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = false)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal StopPrice { get; set; }
 
         /// <summary>

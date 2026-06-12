@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** |  | [optional] 
 **Code** | Pointer to **string** |  | [optional] 
-**MicCode** | Pointer to **string** |  | [optional] 
+**MicCode** | Pointer to **NullableString** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Timezone** | Pointer to **string** |  | [optional] 
 **StartTime** | Pointer to **string** |  | [optional] 
@@ -108,6 +108,16 @@ SetMicCode sets MicCode field to given value.
 
 HasMicCode returns a boolean if a field has been set.
 
+### SetMicCodeNil
+
+`func (o *UnderlyingSymbolExchange) SetMicCodeNil(b bool)`
+
+ SetMicCodeNil sets the value for MicCode to be an explicit nil
+
+### UnsetMicCode
+`func (o *UnderlyingSymbolExchange) UnsetMicCode()`
+
+UnsetMicCode ensures that no value is present for MicCode, not even an explicit nil
 ### GetName
 
 `func (o *UnderlyingSymbolExchange) GetName() string`
