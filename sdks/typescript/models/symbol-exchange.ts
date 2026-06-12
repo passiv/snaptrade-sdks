@@ -35,7 +35,7 @@ export interface SymbolExchange {
      * @type {string}
      * @memberof SymbolExchange
      */
-    'mic_code'?: string;
+    'mic_code'?: string | null;
     /**
      * The full name of the exchange.
      * @type {string}

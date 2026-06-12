@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Unique ID for the exchange in SnapTrade. | [optional] 
 **Code** | Pointer to **string** | A short name for the exchange. For standardized exchange code, please use the &#x60;mic_code&#x60; field. | [optional] 
-**MicCode** | Pointer to **string** | The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange. | [optional] 
+**MicCode** | Pointer to **NullableString** | The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange. | [optional] 
 **Name** | Pointer to **string** | The full name of the exchange. | [optional] 
 **Timezone** | Pointer to **string** | The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange. | [optional] 
 **StartTime** | Pointer to **string** | The time when the exchange opens for trading. | [optional] 
@@ -107,6 +107,16 @@ SetMicCode sets MicCode field to given value.
 
 HasMicCode returns a boolean if a field has been set.
 
+### SetMicCodeNil
+
+`func (o *SymbolExchange) SetMicCodeNil(b bool)`
+
+ SetMicCodeNil sets the value for MicCode to be an explicit nil
+
+### UnsetMicCode
+`func (o *SymbolExchange) UnsetMicCode()`
+
+UnsetMicCode ensures that no value is present for MicCode, not even an explicit nil
 ### GetName
 
 `func (o *SymbolExchange) GetName() string`

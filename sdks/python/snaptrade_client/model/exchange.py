@@ -39,7 +39,26 @@ class Exchange(
         class properties:
             id = schemas.UUIDSchema
             code = schemas.StrSchema
-            mic_code = schemas.StrSchema
+            
+            
+            class mic_code(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'mic_code':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             name = schemas.StrSchema
             timezone = schemas.StrSchema
             start_time = schemas.StrSchema
@@ -142,7 +161,7 @@ class Exchange(
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         code: typing.Union[MetaOapg.properties.code, str, schemas.Unset] = schemas.unset,
-        mic_code: typing.Union[MetaOapg.properties.mic_code, str, schemas.Unset] = schemas.unset,
+        mic_code: typing.Union[MetaOapg.properties.mic_code, None, str, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         timezone: typing.Union[MetaOapg.properties.timezone, str, schemas.Unset] = schemas.unset,
         start_time: typing.Union[MetaOapg.properties.start_time, str, schemas.Unset] = schemas.unset,

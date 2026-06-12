@@ -502,7 +502,7 @@ public class USExchange {
       if ((jsonObj.get("code") != null && !jsonObj.get("code").isJsonNull()) && !jsonObj.get("code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("code").toString()));
       }
-      if ((jsonObj.get("mic_code") != null && !jsonObj.get("mic_code").isJsonNull()) && !jsonObj.get("mic_code").isJsonPrimitive()) {
+      if (!jsonObj.get("mic_code").isJsonNull() && (jsonObj.get("mic_code") != null && !jsonObj.get("mic_code").isJsonNull()) && !jsonObj.get("mic_code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `mic_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mic_code").toString()));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {

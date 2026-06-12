@@ -87,6 +87,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Execution price for this leg, if available.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? ExecutionPrice { get; set; }
 
         /// <summary>

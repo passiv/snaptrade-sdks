@@ -36,7 +36,7 @@ export interface USExchange {
      * @type {string}
      * @memberof USExchange
      */
-    'mic_code'?: string;
+    'mic_code'?: string | null;
     /**
      * 
      * @type {string}

@@ -162,6 +162,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The price at which the order was executed.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? ExecutionPrice { get; set; }
 
         /// <summary>
@@ -169,6 +170,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? LimitPrice { get; set; }
 
         /// <summary>
@@ -176,6 +178,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? StopPrice { get; set; }
 
         /// <summary>
