@@ -1137,6 +1137,30 @@ class DateTimeBase:
         return super()._validate_oapg(arg, validation_metadata=validation_metadata)
 
 
+class ComposedPrimitiveBase(ValidatorBase):
+    @classmethod
+    def _validate_oapg(
+        cls,
+        arg,
+        validation_metadata: ValidationMetadata,
+    ):
+        """
+        ComposedPrimitiveBase _validate_oapg
+        Applies scalar wrapper constraints for broad composed schemas without
+        routing every composed value through primitive semantic validators.
+        Child allOf/oneOf/anyOf schemas remain responsible for primitive type
+        validation such as integer-vs-number checks.
+        """
+        if hasattr(cls, 'MetaOapg'):
+            if isinstance(arg, str):
+                StrBase.__dict__['_StrBase__check_str_validations'].__func__(
+                    cls, arg, validation_metadata)
+            elif isinstance(arg, decimal.Decimal):
+                NumberBase.__dict__['_NumberBase__check_numeric_validations'].__func__(
+                    cls, arg, validation_metadata)
+        return super()._validate_oapg(arg, validation_metadata=validation_metadata)
+
+
 class DecimalBase:
     """
     A class for storing decimals that are sent over the wire as strings
@@ -2021,18 +2045,18 @@ class ComposedBase(Discriminable):
         return path_to_schemas
 
 
-# DictBase, ListBase, NumberBase, StrBase, BoolBase, NoneBase
+# Broad composed-schema wrapper: admit JSON-ish values, apply explicit
+# scalar wrapper constraints, then let ComposedBase route to allOf/oneOf/anyOf
+# child schemas for primitive type validation. DictBase/ListBase preserve
+# wrapper object/array validation without scalar primitive validator sweeps.
 class ComposedSchema(
     ComposedBase,
     DictBase,
     ListBase,
-    IntBase,
-    NumberBase,
-    StrBase,
-    BoolBase,
+    ComposedPrimitiveBase,
     NoneBase,
     Schema,
-    NoneFrozenDictTupleStrDecimalBoolMixin
+    NoneFrozenDictTupleStrIntDecimalBoolFileBytesMixin
 ):
     @classmethod
     def from_openapi_data_oapg(cls, *args: typing.Any, _configuration: typing.Optional[Configuration] = None, **kwargs):

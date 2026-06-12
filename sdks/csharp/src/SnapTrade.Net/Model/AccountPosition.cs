@@ -78,6 +78,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions.</value>
         [DataMember(Name = "units", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? Units { get; set; }
 
         /// <summary>
@@ -85,6 +86,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Last known market price for the position.</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? Price { get; set; }
 
         /// <summary>
@@ -92,6 +94,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Book price or average purchase price for the position.</value>
         [DataMember(Name = "cost_basis", EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? CostBasis { get; set; }
 
         /// <summary>
