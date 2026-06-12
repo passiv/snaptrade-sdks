@@ -27,7 +27,7 @@ class OptionalExchange(TypedDict, total=False):
     code: str
 
     # The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
-    mic_code: str
+    mic_code: typing.Optional[str]
 
     # The full name of the exchange.
     name: str

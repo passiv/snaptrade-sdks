@@ -72,7 +72,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets MicCode
         /// </summary>
-        [DataMember(Name = "mic_code", EmitDefaultValue = false)]
+        [DataMember(Name = "mic_code", EmitDefaultValue = true)]
         public string MicCode { get; set; }
 
         /// <summary>

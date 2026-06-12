@@ -36,7 +36,7 @@ export interface Exchange {
      * @type {string}
      * @memberof Exchange
      */
-    'mic_code'?: string;
+    'mic_code'?: string | null;
     /**
      * The full name of the exchange.
      * @type {string}

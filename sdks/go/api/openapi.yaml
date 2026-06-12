@@ -5989,6 +5989,7 @@ components:
           description: "The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code)\
             \ (MIC) for the exchange."
           example: XTSE
+          nullable: true
           type: string
           x-konfig-original-example: XTSE
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-mic_code
@@ -6045,6 +6046,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-USExchange-properties-code
         mic_code:
           example: ARCA
+          nullable: true
           type: string
           x-konfig-original-example: ARCA
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-USExchange-properties-mic_code

@@ -73,7 +73,7 @@ namespace SnapTrade.Net.Model
         /// The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
         /// </summary>
         /// <value>The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.</value>
-        [DataMember(Name = "mic_code", EmitDefaultValue = false)]
+        [DataMember(Name = "mic_code", EmitDefaultValue = true)]
         public string MicCode { get; set; }
 
         /// <summary>

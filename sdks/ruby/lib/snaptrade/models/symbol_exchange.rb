@@ -73,6 +73,7 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'mic_code',
         :'suffix'
       ])
     end
