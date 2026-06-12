@@ -4375,6 +4375,7 @@ components:
           description: The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
           type: string
           example: XTSE
+          nullable: true
         name:
           description: The full name of the exchange.
           type: string
@@ -4409,6 +4410,7 @@ components:
         mic_code:
           type: string
           example: ARCA
+          nullable: true
         name:
           type: string
           example: NYSE ARCA
