@@ -48,7 +48,44 @@ SnapTrade classifies common transactions under the predefined types, with extra 
 We usually recommend you try not to individually handle every type beyond the most common ones, and instead rely on the other fields: amount, units, price, symbol, option_symbol, etc.
 If amount is positive it represents gaining cash, if amount is negative it represents spending cash. Same with units, so a BUY for instance would have positive units and negative amount, a sell would be negative units positive amount.
 
-Check [our API Spec](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities) for some of the most common transaction types.
+### Transaction types
+
+The normalized types SnapTrade maps transactions to are listed below. This set is **not exhaustive** — when a brokerage transaction doesn't map to one of these, SnapTrade returns the raw type the brokerage uses. Treat `type` as open-ended and, where you can, drive your logic off `amount`, `units`, `price`, and `symbol` rather than the type string alone.
+
+<!-- TODO(review): descriptions for the newer types (REBATE, RETURN_OF_CAPITAL, DISTRIBUTION, REVERSE_SPLIT, SPINOFF, STOCK_MERGER, and the INTERNAL_* transfers) are inferred from naming and the Sandbox dataset — confirm against the backend type-mapping enum before publishing. -->
+
+| Category | Type | Description |
+| --- | --- | --- |
+| Trades | `BUY` | Asset bought. |
+| Trades | `SELL` | Asset sold. |
+| Cash & fees | `CONTRIBUTION` | Cash contribution (deposit) into the account. |
+| Cash & fees | `WITHDRAWAL` | Cash withdrawal from the account. |
+| Cash & fees | `INTEREST` | Interest deposited into the account. |
+| Cash & fees | `FEE` | Fee withdrawn from the account. |
+| Cash & fees | `TAX` | A tax-related fee. |
+| Cash & fees | `REBATE` | A rebate credited to the account. |
+| Dividends & income | `DIVIDEND` | Dividend payout. |
+| Dividends & income | `REI` | Dividend reinvestment. |
+| Dividends & income | `STOCK_DIVIDEND` | Dividend distributed as shares instead of cash. |
+| Dividends & income | `RETURN_OF_CAPITAL` | Return of capital distribution. |
+| Dividends & income | `DISTRIBUTION` | A distribution paid into the account. |
+| Options | `OPTIONEXPIRATION` | Option expiration event. |
+| Options | `OPTIONASSIGNMENT` | Option assignment event. |
+| Options | `OPTIONEXERCISE` | Option exercise event. |
+| Corporate actions | `SPLIT` | A stock share split. |
+| Corporate actions | `REVERSE_SPLIT` | A reverse stock share split. |
+| Corporate actions | `SPINOFF` | Shares received from a corporate spinoff. |
+| Corporate actions | `STOCK_MERGER` | Shares resulting from a merger. |
+| Corporate actions | `ADJUSTMENT` | A one-time adjustment of the account's cash balance or shares of an asset. |
+| Transfers | `TRANSFER` | Transfer of asset(s) from one account to another. |
+| Transfers | `EXTERNAL_ASSET_TRANSFER_IN` | Incoming transfer of an asset from an external account. |
+| Transfers | `EXTERNAL_ASSET_TRANSFER_OUT` | Outgoing transfer of an asset to an external account. |
+| Transfers | `INTERNAL_CASH_TRANSFER_IN` | Incoming cash transfer between your own accounts. |
+| Transfers | `INTERNAL_CASH_TRANSFER_OUT` | Outgoing cash transfer between your own accounts. |
+| Transfers | `INTERNAL_ASSET_TRANSFER_IN` | Incoming asset transfer between your own accounts. |
+| Transfers | `INTERNAL_ASSET_TRANSFER_OUT` | Outgoing asset transfer between your own accounts. |
+
+These types are also described in [our API Spec](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities).
 
 ---
 

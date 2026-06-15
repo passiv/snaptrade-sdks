@@ -67,8 +67,6 @@ portal:
               path: docs/launching-your-application.md
             - id: trade-detection
               path: docs/trade-detection.md
-            - id: sandbox
-              path: docs/sandbox.md
         - label: Billing
           links:
             - id: billing
@@ -105,6 +103,8 @@ portal:
               path: docs/fix-broken-connections.md
             - id: faq
               path: docs/faq.md
+            - id: sandbox
+              path: docs/sandbox.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
