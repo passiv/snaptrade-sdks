@@ -53,8 +53,6 @@ portal:
               path: docs/getting-started.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
-            - id: sandbox
-              path: docs/sandbox.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
             - id: filtering-accounts-by-category
@@ -69,6 +67,8 @@ portal:
               path: docs/launching-your-application.md
             - id: trade-detection
               path: docs/trade-detection.md
+            - id: sandbox
+              path: docs/sandbox.md
         - label: Billing
           links:
             - id: billing
