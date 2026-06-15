@@ -35,8 +35,46 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 
 - Accounts, balances (cash + buying power), and positions across a handful of well-known tickers
 - Orders spanning every status — executed, partially filled, accepted, canceled, rejected
-- Transactions covering **trades** (`BUY`, `SELL`), **cash & fees** (`CONTRIBUTION`, `WITHDRAWAL`, `INTEREST`, `FEE`, `TAX`, `REBATE`), **dividends & income** (`DIVIDEND`, `REI`, `STOCK_DIVIDEND`, `RETURN_OF_CAPITAL`, `DISTRIBUTION`), **corporate actions** (`SPLIT`, `REVERSE_SPLIT`, `SPINOFF`, `STOCK_MERGER`, `ADJUSTMENT`), and **transfers** (`TRANSFER`, `EXTERNAL_ASSET_TRANSFER_IN`/`_OUT`, `INTERNAL_CASH_TRANSFER_IN`/`_OUT`, `INTERNAL_ASSET_TRANSFER_IN`/`_OUT`)
+- Transactions spanning **trades**, **cash & fees**, **dividends & income**, **corporate actions**, and **transfers** (see the full list of types below)
 - In the default **Self-directed** scenario these are **spread across the two accounts** (e.g. splits & dividends on one, transfers & mergers on the other) — iterate **all** accounts to see the full set
+
+<details>
+<summary><b>All transaction types</b></summary>
+
+These are the normalized `type` values the Sandbox emits — the same set SnapTrade maps real brokerage transactions to. The list is **not exhaustive**: when a brokerage transaction doesn't map to one of these, SnapTrade returns the raw type the brokerage uses, so treat `type` as open-ended and lean on `amount`, `units`, `price`, and `symbol` where you can.
+
+| Category | Type | Description |
+| --- | --- | --- |
+| Trades | `BUY` | Asset bought. |
+| Trades | `SELL` | Asset sold. |
+| Cash & fees | `CONTRIBUTION` | Cash contribution (deposit) into the account. |
+| Cash & fees | `WITHDRAWAL` | Cash withdrawal from the account. |
+| Cash & fees | `INTEREST` | Interest deposited into the account. |
+| Cash & fees | `FEE` | Fee withdrawn from the account. |
+| Cash & fees | `TAX` | A tax-related fee. |
+| Cash & fees | `REBATE` | A rebate credited to the account. |
+| Dividends & income | `DIVIDEND` | Dividend payout. |
+| Dividends & income | `REI` | Dividend reinvestment. |
+| Dividends & income | `STOCK_DIVIDEND` | Dividend distributed as shares instead of cash. |
+| Dividends & income | `RETURN_OF_CAPITAL` | Return of capital distribution. |
+| Dividends & income | `DISTRIBUTION` | A distribution paid into the account. |
+| Options | `OPTIONEXPIRATION` | Option expiration event. |
+| Options | `OPTIONASSIGNMENT` | Option assignment event. |
+| Options | `OPTIONEXERCISE` | Option exercise event. |
+| Corporate actions | `SPLIT` | A stock share split. |
+| Corporate actions | `REVERSE_SPLIT` | A reverse stock share split. |
+| Corporate actions | `SPINOFF` | Shares received from a corporate spinoff. |
+| Corporate actions | `STOCK_MERGER` | Shares resulting from a merger. |
+| Corporate actions | `ADJUSTMENT` | A one-time adjustment of the account's cash balance or shares of an asset. |
+| Transfers | `TRANSFER` | Transfer of asset(s) from one account to another. |
+| Transfers | `EXTERNAL_ASSET_TRANSFER_IN` | Incoming transfer of an asset from an external account. |
+| Transfers | `EXTERNAL_ASSET_TRANSFER_OUT` | Outgoing transfer of an asset to an external account. |
+| Transfers | `INTERNAL_CASH_TRANSFER_IN` | Incoming cash transfer between your own accounts. |
+| Transfers | `INTERNAL_CASH_TRANSFER_OUT` | Outgoing cash transfer between your own accounts. |
+| Transfers | `INTERNAL_ASSET_TRANSFER_IN` | Incoming asset transfer between your own accounts. |
+| Transfers | `INTERNAL_ASSET_TRANSFER_OUT` | Outgoing asset transfer between your own accounts. |
+
+</details>
 
 ## Limitations
 
