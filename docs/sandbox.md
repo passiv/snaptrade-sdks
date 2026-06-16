@@ -4,9 +4,8 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 
 ## Getting access
 
-- Sandbox is available on **non-production** keys — both **personal keys** and **commercial test keys** — and is **enabled by default**, so no request to support is needed.
+- Sandbox is available on **non-production** keys — both **personal keys** and **commercial test keys** — and is **enabled by default**, so there's nothing to request.
 - It is **not available on commercial production keys**, and can't be enabled on them.
-- Commercial clients can toggle Sandbox per key from the SnapTrade dashboard's brokerage settings (production keys excepted).
 - In the connection portal it's flagged **For testing only** — pinned to the **top** of the institution list on commercial test keys, and shown at the **bottom** on personal keys.
 
 ![Sandbox in the connection portal, flagged "For testing only"](./assets/sandbox-portal.png)
