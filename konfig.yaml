@@ -105,6 +105,8 @@ portal:
               path: docs/fix-broken-connections.md
             - id: faq
               path: docs/faq.md
+            - id: sandbox
+              path: docs/sandbox.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
