@@ -4,12 +4,12 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 
 ## Getting access
 
-- The sandbox feature is currently only available for users with **Commercial Test Keys**
-- Sandbox is **off by default** — it won't appear for your users until it's enabled for your account.
-- Request it from **support@snaptrade.com** with your **Client ID**.
-- Once enabled, **Sandbox** shows at the **top** of the connection portal's institution list, flagged **For testing only**.
+- Sandbox is available on **non-production** keys — both **personal keys** and **commercial test keys** — and is **enabled by default**, so no request to support is needed.
+- It is **not available on commercial production keys**, and can't be enabled on them.
+- Commercial clients can toggle Sandbox per key from the SnapTrade dashboard's brokerage settings (production keys excepted).
+- In the connection portal it's flagged **For testing only** — pinned to the **top** of the institution list on commercial test keys, and shown at the **bottom** on personal keys.
 
-![Sandbox pinned to the top of the connection portal, flagged "For testing only"](./assets/sandbox-portal.png)
+![Sandbox in the connection portal, flagged "For testing only"](./assets/sandbox-portal.png)
 
 ## Connecting
 
@@ -29,6 +29,7 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 **Errors — connection fails:**
 
 - **Invalid credentials** → invalid-credentials error
+- **Account locked** → account-locked error
 - **Rate limited** → rate-limit error
 
 ## What the data covers (data scenarios)
@@ -41,7 +42,7 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 <details>
 <summary><b>All transaction types</b></summary>
 
-These are the normalized `type` values the Sandbox emits — the same set SnapTrade maps real brokerage transactions to. The list is **not exhaustive**: when a brokerage transaction doesn't map to one of these, SnapTrade returns the raw type the brokerage uses, so treat `type` as open-ended and lean on `amount`, `units`, `price`, and `symbol` where you can.
+These are the normalized `type` values SnapTrade maps real brokerage transactions to (the Sandbox exercises most of them across its data scenarios). The list is **not exhaustive**: when a brokerage transaction doesn't map to one of these, SnapTrade returns the raw type the brokerage uses, so treat `type` as open-ended and lean on `amount`, `units`, `price`, and `symbol` where you can.
 
 | Category | Type | Description |
 | --- | --- | --- |
