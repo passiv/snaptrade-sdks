@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Client
             {
                 resourceUrl = resourceUrl.Replace("{" + parameter.Name + "}", parameter.Value.ToString());
             }
-            string path = "/api/v1" + resourceUrl;
+            string path = resourceUrl;
 
             var json = new
             {
