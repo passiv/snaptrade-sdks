@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "snaptrade-python-sdk"
-VERSION = "11.0.207"
+VERSION = "11.0.208"
 # To install the library, run the following
 #
 # python setup.py install
