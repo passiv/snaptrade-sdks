@@ -16,7 +16,7 @@ module SnapTrade
   class ApiClientCustom
     def self.request_hook(request, configuration)
       request.params[:timestamp] = Time.now.to_i
-      path = request.path[request.path.index('/api/v1/')..-1]
+      path = request.path
       query = Faraday::Utils.build_query(request.params)
       sig_object = {
         "content" => request.body.nil? || request.body.empty? ? nil : Hash[JSON.parse(request.body).sort],
