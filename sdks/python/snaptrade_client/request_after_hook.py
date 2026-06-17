@@ -12,7 +12,7 @@ def compute_request_signature(path: str, consumer_key: str, body: typing.Any):
     subpath, query = path.split("?")
     sig_object = {
         "content": None if body is schemas.unset or body == {} else body,
-        "path": "/api/v1%s" % subpath,
+        "path": subpath,
         "query": query
     }
     sig_content = json.dumps(sig_object, separators=(",", ":"), sort_keys=True)

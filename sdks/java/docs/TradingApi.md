@@ -1,6 +1,6 @@
 # TradingApi
 
-All URIs are relative to *https://api.snaptrade.com/api/v1*
+All URIs are relative to *https://api.snaptrade.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
@@ -47,7 +47,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -148,7 +148,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -271,7 +271,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -374,7 +374,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -487,7 +487,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -603,7 +603,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -706,7 +706,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -808,7 +808,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -946,7 +946,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1051,7 +1051,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1168,7 +1168,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1320,7 +1320,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1432,7 +1432,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1558,7 +1558,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1674,7 +1674,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
@@ -1813,7 +1813,7 @@ import java.util.UUID;
 public class Example {
   public static void main(String[] args) {
     Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.host = "https://api.snaptrade.com";
     configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     

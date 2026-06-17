@@ -146,7 +146,7 @@ module SnapTrade
     def initialize
       @scheme = 'https'
       @host = 'api.snaptrade.com'
-      @base_path = '/api/v1'
+      @base_path = ''
       @server_index = 0
       @server_operation_index = {}
       @server_variables = {}
@@ -260,7 +260,7 @@ module SnapTrade
     def server_settings
       [
         {
-          url: "https://api.snaptrade.com/api/v1",
+          url: "https://api.snaptrade.com",
           description: "SnapTrade Production API",
         }
       ]

@@ -72,14 +72,13 @@ export async function requestAfterHook(request: {
     axiosArgs.options.data === undefined || axiosArgs.options.data === "{}"
       ? null
       : JSON.parse(axiosArgs.options.data);
-  const path =
+  const requestPath =
     axiosArgs.url.indexOf("?") === -1
       ? `${axiosArgs.url}`
       : `${axiosArgs.url.split("?")[0]}`;
-  const requestPath = `/api/v1${path}`;
   const requestQuery = url
     .replace(basePath, "")
-    .replace(path, "")
+    .replace(requestPath, "")
     .replace("?", "");
   const sigObject = {
     content: requestData,

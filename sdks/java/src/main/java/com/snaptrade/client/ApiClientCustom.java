@@ -32,7 +32,7 @@ public class ApiClientCustom {
         Object map = body instanceof List ? body : gson.fromJson(payload, TreeMap.class);
         String sortedJson = map == null ? "\"\"" : gson.toJson(map);
         String queryString = url.split("\\?")[1];
-        String data = String.format("{\"content\":%s,\"path\":\"/api/v1%s\",\"query\":\"%s\"}",
+        String data = String.format("{\"content\":%s,\"path\":\"%s\",\"query\":\"%s\"}",
                 payload == null || payload.equals("") || payload.equals("{}") ? "null" : sortedJson, path, queryString);
         byte[] hmacSha256Bytes;
         try {

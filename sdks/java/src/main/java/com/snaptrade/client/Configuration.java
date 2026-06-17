@@ -16,7 +16,7 @@ package com.snaptrade.client;
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
     public boolean verifyingSsl = true;
-    public String host = "https://api.snaptrade.com/api/v1";
+    public String host = "https://api.snaptrade.com";
     public String clientId;
     public String Signature;
     public String timestamp;

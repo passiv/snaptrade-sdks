@@ -119,7 +119,7 @@ conf = snaptrade_client.Configuration(
                  ):
         """Constructor
         """
-        self.host = "https://api.snaptrade.com/api/v1" if host is None else host
+        self.host = "https://api.snaptrade.com" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
