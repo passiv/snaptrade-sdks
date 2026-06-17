@@ -117,7 +117,7 @@ namespace SnapTrade.Net.Client
         {
             Proxy = null;
             UserAgent = "Konfig/5.0.210/csharp";
-            BasePath = "https://api.snaptrade.com/api/v1";
+            BasePath = "https://api.snaptrade.com";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
@@ -126,7 +126,7 @@ namespace SnapTrade.Net.Client
             {
                 {
                     new Dictionary<string, object> {
-                        {"url", "https://api.snaptrade.com/api/v1"},
+                        {"url", "https://api.snaptrade.com"},
                         {"description", "SnapTrade Production API"},
                     }
                 }
@@ -147,7 +147,7 @@ namespace SnapTrade.Net.Client
             IDictionary<string, string> defaultHeaders,
             IDictionary<string, string> apiKey,
             IDictionary<string, string> apiKeyPrefix,
-            string basePath = "https://api.snaptrade.com/api/v1") : this()
+            string basePath = "https://api.snaptrade.com") : this()
         {
             if (string.IsNullOrWhiteSpace(basePath))
                 throw new ArgumentException("The provided basePath is invalid.", "basePath");

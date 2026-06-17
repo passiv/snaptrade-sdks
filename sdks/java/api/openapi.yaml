@@ -14,7 +14,7 @@ info:
     explorer-enabled: false
 servers:
 - description: SnapTrade Production API
-  url: https://api.snaptrade.com/api/v1
+  url: https://api.snaptrade.com
 security:
 - PartnerSignature: []
   PartnerClientId: []

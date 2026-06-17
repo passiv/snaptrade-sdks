@@ -1,6 +1,6 @@
 # APIClient.ConnectionsApi
 
-All URIs are relative to *https://api.snaptrade.com/api/v1*
+All URIs are relative to *https://api.snaptrade.com*
 
 Method | Path | Description
 ------------- | ------------- | -------------

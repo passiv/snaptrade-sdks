@@ -111,7 +111,7 @@ func NewConfiguration() *Configuration {
         Context: context.Background(),
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://api.snaptrade.com/api/v1",
+				URL: "https://api.snaptrade.com",
 				Description: "SnapTrade Production API",
 			},
 		},
