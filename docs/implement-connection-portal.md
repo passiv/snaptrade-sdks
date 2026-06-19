@@ -115,7 +115,7 @@ Opens the portal in a separate browser tab or popup window.
     - **Option 2: Query parameters in redirect**
       - The portal will redirect back to your URL with query parameters:
         - **SUCCESS:** `{your_redirect_url}?status=SUCCESS&connection_id={connection_id}`
-        - **ERROR:** `{your_redirect_url}?status=ERROR&status_code={status_code}&error_code={error_code}`
+        - **ERROR:** `{your_redirect_url}?status=ERROR&status_code={status_code}&error_code={error_code}` (see [Common Error Codes](#common-error-codes))
         - **ABANDONED:** `{your_redirect_url}?status=ABANDONED`
   - You can provide a custom redirect to navigate the user back to a specific page in your app post-connection.
   - Set `immediateRedirect` to true in the login link to skip the connection portal’s internal finish screens and redirect immediately.
@@ -145,7 +145,7 @@ Your app should listen for these messages and respond accordingly, for example b
   {status: 'SUCCESS', authorizationId: 'AUTHORIZATION_ID'}
   ```
 
-  - **ERROR:** Sent when a connection error occurs, including an error code, status code and description.
+  - **ERROR:** Sent when a connection error occurs, including an error code, status code and description. See [Common Error Codes](#common-error-codes) for what the codes mean.
 
   ```
   {status: 'ERROR', errorCode: 'ERROR_CODE', statusCode: 'STATUS_CODE', detail: 'DETAIL_OF_THE_ERROR'}
@@ -201,7 +201,7 @@ SnapTrade redirects back to your app with these parameters:
 
 - **Error:**
   - `status=ERROR`
-  - `error_code=<string>` - Error code describing what went wrong
+  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#common-error-codes))
   - `status_code=<number>` - HTTP status code
 
 ### Expo
@@ -387,7 +387,7 @@ SnapTrade redirects back to your app with these parameters:
 
 - **Error:**
   - `status=ERROR`
-  - `error_code=<string>` - Error code describing what went wrong
+  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#common-error-codes))
   - `status_code=<number>` - HTTP status code
 
 ### Implementation
@@ -479,7 +479,7 @@ SnapTrade redirects back to your app with these parameters:
 
 - **Error:**
   - `status=ERROR`
-  - `error_code=<string>` - Error code describing what went wrong
+  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#common-error-codes))
   - `status_code=<number>` - HTTP status code
 
 ### Implementation
@@ -578,3 +578,18 @@ class MainActivity : AppCompatActivity() {
 - How to handle:
   - For users: Recommend trying again later when the maintenance window is over.
   - For developers: No code changes required. SnapTrade automatically re-enables connections when the brokerage or our service recovers.
+
+## Common Error Codes
+
+When a connection attempt fails, the portal surfaces an `error_code` and `status_code` — through [window messages](#window-messages) (`errorCode` / `statusCode`) or as [redirect query parameters](#new-browser-tab) (`error_code` / `status_code`). The table below lists the codes you are most likely to encounter and how to handle them.
+
+| Error Code | HTTP Status | Meaning | How to handle |
+| --- | --- | --- | --- |
+| `1066` | `403` | Authentication failed — the credentials, API key, or query token sent to the brokerage were not valid (e.g. _"Invalid credentials provided, please try again"_, _"API key is not valid"_, _"Query ID or Token is not valid"_). | Ask the user to re-enter their brokerage credentials and try again. |
+| `3000` | `500` | Failed to connect to the brokerage. SnapTrade could not reach or complete the handshake with the brokerage. | Transient — prompt the user to try again later. No code changes required. |
+| `1006` | `400` | A brokerage authorization is not in progress and therefore cannot be completed. | Usually means the session expired or the flow was completed/abandoned already. Restart the connection flow with a fresh login link. |
+| `1012` | `400` | Invalid input. | Check the parameters used to generate the login link (e.g. `connectionType`, `broker` slug, `reconnect` UUID). |
+| `1023` | `400` | Cannot change the linked brokerage account under an existing connection. | Delete the existing connection and create a new one instead of reconnecting to a different account. |
+| `1140` | `403` | The user-supplied API key does not have permission to retrieve account data (e.g. summary or balances). | Verify that the necessary permissions are granted on the API key. |
+| `1086` | `400` | Invalid 2FA / MFA code provided. | Prompt the user to re-enter the correct multi-factor authentication code. |
+| `0000` | `401` | User not found. | Verify the SnapTrade `userId` and `userSecret` used to generate the login link are correct. |
