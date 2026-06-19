@@ -115,7 +115,7 @@ Opens the portal in a separate browser tab or popup window.
     - **Option 2: Query parameters in redirect**
       - The portal will redirect back to your URL with query parameters:
         - **SUCCESS:** `{your_redirect_url}?status=SUCCESS&connection_id={connection_id}`
-        - **ERROR:** `{your_redirect_url}?status=ERROR&status_code={status_code}&error_code={error_code}` (see [Common Error Codes](#common-error-codes))
+        - **ERROR:** `{your_redirect_url}?status=ERROR&status_code={status_code}&error_code={error_code}` (see [Common Error Codes](#implement-connection-portal-common-error-codes))
         - **ABANDONED:** `{your_redirect_url}?status=ABANDONED`
   - You can provide a custom redirect to navigate the user back to a specific page in your app post-connection.
   - Set `immediateRedirect` to true in the login link to skip the connection portal’s internal finish screens and redirect immediately.
@@ -145,7 +145,7 @@ Your app should listen for these messages and respond accordingly, for example b
   {status: 'SUCCESS', authorizationId: 'AUTHORIZATION_ID'}
   ```
 
-  - **ERROR:** Sent when a connection error occurs, including an error code, status code and description. See [Common Error Codes](#common-error-codes) for what the codes mean.
+  - **ERROR:** Sent when a connection error occurs, including an error code, status code and description. See [Common Error Codes](#implement-connection-portal-common-error-codes) for what the codes mean.
 
   ```
   {status: 'ERROR', errorCode: 'ERROR_CODE', statusCode: 'STATUS_CODE', detail: 'DETAIL_OF_THE_ERROR'}
@@ -201,7 +201,7 @@ SnapTrade redirects back to your app with these parameters:
 
 - **Error:**
   - `status=ERROR`
-  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#common-error-codes))
+  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#implement-connection-portal-common-error-codes))
   - `status_code=<number>` - HTTP status code
 
 ### Expo
@@ -387,7 +387,7 @@ SnapTrade redirects back to your app with these parameters:
 
 - **Error:**
   - `status=ERROR`
-  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#common-error-codes))
+  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#implement-connection-portal-common-error-codes))
   - `status_code=<number>` - HTTP status code
 
 ### Implementation
@@ -479,7 +479,7 @@ SnapTrade redirects back to your app with these parameters:
 
 - **Error:**
   - `status=ERROR`
-  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#common-error-codes))
+  - `error_code=<string>` - Error code describing what went wrong (see [Common Error Codes](#implement-connection-portal-common-error-codes))
   - `status_code=<number>` - HTTP status code
 
 ### Implementation
