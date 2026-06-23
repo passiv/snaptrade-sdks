@@ -2,6 +2,8 @@
 
 The SnapTrade API uses rate limiting to protect against bursts of incoming traffic and help maximize stability. Sending too many requests in quick succession will trigger error responses with HTTP status code `429`.
 
+> **Note:** Rate limiting is only enforced for **Personal** users. Commercial users are not subject to the limits described on this page. For more on the difference, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
+
 There are two layers of rate limiting that may apply to your requests:
 
 1. **Customer-level rate limiting** -- a global limit across all requests from your `clientId`.
@@ -47,8 +49,7 @@ Account-level rate limiting applies to the following endpoints:
 - :api[AccountInformation_getUserHoldings]
 - :api[AccountInformation_getUserAccountDetails]
 - :api[AccountInformation_getUserAccountBalance]
-- :api[AccountInformation_getUserAccountPositions]
-- :api[Options_listOptionHoldings]
+- :api[AccountInformation_getAllAccountPositions]
 - :api[AccountInformation_getUserAccountOrders]
 - :api[AccountInformation_getUserAccountRecentOrders]
 - :api[AccountInformation_getAccountActivities]
