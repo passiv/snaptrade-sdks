@@ -138,6 +138,10 @@ portal:
     /authorizations/{authorizationId}/accounts:
       get: true
   hideOperations:
+    /accounts/{accountId}/positions:
+      get: true
+    /accounts/{accountId}/options:
+      get: true
     /activities:
       get: true
     /holdings:
