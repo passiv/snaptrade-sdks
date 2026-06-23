@@ -83,6 +83,8 @@ portal:
           links:
             - id: terminology
               path: docs/terminology.md
+            - id: authentication-methods
+              path: docs/authentication-methods.md
             - id: symbology
               path: docs/symbology.md
             - id: requests
