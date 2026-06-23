@@ -42,6 +42,7 @@ class Instrument(
                 'kind': {
                     'AdrInstrument': AdrInstrument,
                     'CefInstrument': CefInstrument,
+                    'CfdInstrument': CfdInstrument,
                     'CryptoInstrument': CryptoInstrument,
                     'EtfInstrument': EtfInstrument,
                     'FutureInstrument': FutureInstrument,
@@ -51,6 +52,7 @@ class Instrument(
                     'StockInstrument': StockInstrument,
                     'adr': AdrInstrument,
                     'cef': CefInstrument,
+                    'cfd': CfdInstrument,
                     'crypto': CryptoInstrument,
                     'etf': EtfInstrument,
                     'future': FutureInstrument,
@@ -80,6 +82,7 @@ class Instrument(
                 MutualFundInstrument,
                 CefInstrument,
                 AdrInstrument,
+                CfdInstrument,
                 OtherInstrument,
             ]
 
@@ -99,6 +102,7 @@ class Instrument(
 
 from snaptrade_client.model.adr_instrument import AdrInstrument
 from snaptrade_client.model.cef_instrument import CefInstrument
+from snaptrade_client.model.cfd_instrument import CfdInstrument
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.etf_instrument import EtfInstrument
 from snaptrade_client.model.future_instrument import FutureInstrument

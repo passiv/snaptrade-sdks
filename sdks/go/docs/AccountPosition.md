@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Instrument** | [**Instrument**](Instrument.md) |  | 
 **Units** | Pointer to **NullableFloat64** | The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions. | [optional] 
-**Price** | Pointer to **NullableFloat64** | Last known market price for the position. | [optional] 
-**CostBasis** | Pointer to **NullableFloat64** | Book price or average purchase price for the position. | [optional] 
+**Price** | Pointer to **NullableFloat64** | Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices. | [optional] 
+**CostBasis** | Pointer to **NullableFloat64** | Book price or average purchase price for the position. For options, this is per-contract. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;. | [optional] 
 **CashEquivalent** | Pointer to **bool** | Present for mutual fund positions that are also counted in cash balance or buying power. | [optional] 
 **TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed) | [optional] 

@@ -62,6 +62,7 @@ from snaptrade_client.model.brokerage_type import BrokerageType
 from snaptrade_client.model.cancel_order_response import CancelOrderResponse
 from snaptrade_client.model.cancel_order_response_raw_response import CancelOrderResponseRawResponse
 from snaptrade_client.model.cef_instrument import CefInstrument
+from snaptrade_client.model.cfd_instrument import CfdInstrument
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
@@ -212,6 +213,7 @@ from snaptrade_client.model.trailing_stop import TrailingStop
 from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
+from snaptrade_client.model.underlying_cfd_instrument import UnderlyingCfdInstrument
 from snaptrade_client.model.underlying_option_instrument import UnderlyingOptionInstrument
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.model.units import Units
