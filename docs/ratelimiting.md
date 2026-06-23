@@ -2,8 +2,6 @@
 
 The SnapTrade API uses rate limiting to protect against bursts of incoming traffic and help maximize stability. Sending too many requests in quick succession will trigger error responses with HTTP status code `429`.
 
-> **Note:** Rate limiting is only enforced for **Personal** users. Commercial users are not subject to the limits described on this page. For more on the difference, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
-
 There are two layers of rate limiting that may apply to your requests:
 
 1. **Customer-level rate limiting** -- a global limit across all requests from your `clientId`.
@@ -36,6 +34,8 @@ These are rolling limits that look at the trailing 60 seconds.
 ## Account-Level Rate Limiting
 
 In addition to the customer-level limit, the SnapTrade API enforces a **per-account** rate limit on endpoints that fetch account data. This limit is **10 requests per minute per account** by default.
+
+> **Note:** Account-level rate limiting is only enforced for **Personal** users. Commercial users are subject to the customer-level limit only. For more on the difference, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
 Account-level rate limiting is scoped to the combination of your `clientId` and the `accountId` in the request URL. This means:
 
