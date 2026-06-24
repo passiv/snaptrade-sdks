@@ -29,6 +29,8 @@ type OptionInstrument struct {
 	StrikePrice float64 `json:"strike_price"`
 	// Expiration date of the option contract.
 	ExpirationDate string `json:"expiration_date"`
+	// Number of underlying shares per contract. Standard options are 100, mini options are 10.
+	Multiplier float64 `json:"multiplier"`
 	// Human-readable description of the option contract.
 	Description NullableString `json:"description,omitempty"`
 	Underlying UnderlyingOptionInstrument `json:"underlying"`
@@ -41,7 +43,7 @@ type _OptionInstrument OptionInstrument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOptionInstrument(kind string, id string, symbol string, optionType string, strikePrice float64, expirationDate string, underlying UnderlyingOptionInstrument) *OptionInstrument {
+func NewOptionInstrument(kind string, id string, symbol string, optionType string, strikePrice float64, expirationDate string, multiplier float64, underlying UnderlyingOptionInstrument) *OptionInstrument {
 	this := OptionInstrument{}
 	this.Kind = kind
 	this.Id = id
@@ -49,6 +51,7 @@ func NewOptionInstrument(kind string, id string, symbol string, optionType strin
 	this.OptionType = optionType
 	this.StrikePrice = strikePrice
 	this.ExpirationDate = expirationDate
+	this.Multiplier = multiplier
 	this.Underlying = underlying
 	return &this
 }
@@ -205,6 +208,30 @@ func (o *OptionInstrument) SetExpirationDate(v string) {
 	o.ExpirationDate = v
 }
 
+// GetMultiplier returns the Multiplier field value
+func (o *OptionInstrument) GetMultiplier() float64 {
+	if o == nil {
+		var ret float64
+		return ret
+	}
+
+	return o.Multiplier
+}
+
+// GetMultiplierOk returns a tuple with the Multiplier field value
+// and a boolean to check if the value has been set.
+func (o *OptionInstrument) GetMultiplierOk() (*float64, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.Multiplier, true
+}
+
+// SetMultiplier sets field value
+func (o *OptionInstrument) SetMultiplier(v float64) {
+	o.Multiplier = v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OptionInstrument) GetDescription() string {
 	if o == nil || isNil(o.Description.Get()) {
@@ -291,6 +318,9 @@ func (o OptionInstrument) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
+	if true {
+		toSerialize["multiplier"] = o.Multiplier
+	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
@@ -321,6 +351,7 @@ func (o *OptionInstrument) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "option_type")
 		delete(additionalProperties, "strike_price")
 		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "multiplier")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "underlying")
 		o.AdditionalProperties = additionalProperties

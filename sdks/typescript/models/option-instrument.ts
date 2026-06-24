@@ -57,6 +57,12 @@ export interface OptionInstrument {
      */
     'expiration_date': string;
     /**
+     * Number of underlying shares per contract. Standard options are 100, mini options are 10.
+     * @type {string}
+     * @memberof OptionInstrument
+     */
+    'multiplier': string;
+    /**
      * Human-readable description of the option contract.
      * @type {string}
      * @memberof OptionInstrument

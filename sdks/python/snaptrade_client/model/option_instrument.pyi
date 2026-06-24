@@ -38,6 +38,7 @@ class OptionInstrument(
         required = {
             "symbol",
             "kind",
+            "multiplier",
             "option_type",
             "id",
             "underlying",
@@ -74,6 +75,7 @@ class OptionInstrument(
                     return cls("PUT")
             strike_price = schemas.StrSchema
             expiration_date = schemas.DateSchema
+            multiplier = schemas.StrSchema
         
             @staticmethod
             def underlying() -> typing.Type['UnderlyingOptionInstrument']:
@@ -105,6 +107,7 @@ class OptionInstrument(
                 "option_type": option_type,
                 "strike_price": strike_price,
                 "expiration_date": expiration_date,
+                "multiplier": multiplier,
                 "underlying": underlying,
                 "description": description,
             }
@@ -112,6 +115,7 @@ class OptionInstrument(
     
     symbol: MetaOapg.properties.symbol
     kind: MetaOapg.properties.kind
+    multiplier: MetaOapg.properties.multiplier
     option_type: MetaOapg.properties.option_type
     id: MetaOapg.properties.id
     underlying: 'UnderlyingOptionInstrument'
@@ -123,6 +127,9 @@ class OptionInstrument(
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["kind"]) -> MetaOapg.properties.kind: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["multiplier"]) -> MetaOapg.properties.multiplier: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["option_type"]) -> MetaOapg.properties.option_type: ...
@@ -145,7 +152,7 @@ class OptionInstrument(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["kind"], typing_extensions.Literal["option_type"], typing_extensions.Literal["id"], typing_extensions.Literal["underlying"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["description"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["kind"], typing_extensions.Literal["multiplier"], typing_extensions.Literal["option_type"], typing_extensions.Literal["id"], typing_extensions.Literal["underlying"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["description"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -154,6 +161,9 @@ class OptionInstrument(
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["kind"]) -> MetaOapg.properties.kind: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["multiplier"]) -> MetaOapg.properties.multiplier: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["option_type"]) -> MetaOapg.properties.option_type: ...
@@ -176,7 +186,7 @@ class OptionInstrument(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["kind"], typing_extensions.Literal["option_type"], typing_extensions.Literal["id"], typing_extensions.Literal["underlying"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["description"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["kind"], typing_extensions.Literal["multiplier"], typing_extensions.Literal["option_type"], typing_extensions.Literal["id"], typing_extensions.Literal["underlying"], typing_extensions.Literal["expiration_date"], typing_extensions.Literal["strike_price"], typing_extensions.Literal["description"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -184,6 +194,7 @@ class OptionInstrument(
         *args: typing.Union[dict, frozendict.frozendict, ],
         symbol: typing.Union[MetaOapg.properties.symbol, str, ],
         kind: typing.Union[MetaOapg.properties.kind, str, ],
+        multiplier: typing.Union[MetaOapg.properties.multiplier, str, ],
         option_type: typing.Union[MetaOapg.properties.option_type, str, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, ],
         underlying: 'UnderlyingOptionInstrument',
@@ -198,6 +209,7 @@ class OptionInstrument(
             *args,
             symbol=symbol,
             kind=kind,
+            multiplier=multiplier,
             option_type=option_type,
             id=id,
             underlying=underlying,

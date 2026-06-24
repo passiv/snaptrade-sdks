@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **OptionType** | **string** | Whether the contract is a call or put. | 
 **StrikePrice** | **decimal** | Strike price for the option contract. | 
 **ExpirationDate** | **DateTime** | Expiration date of the option contract. | 
+**Multiplier** | **decimal** | Number of underlying shares per contract. Standard options are 100, mini options are 10. | 
 **Description** | **string** | Human-readable description of the option contract. | [optional] 
 **Underlying** | [**UnderlyingOptionInstrument**](UnderlyingOptionInstrument.md) |  | 
 

@@ -14,6 +14,7 @@ Option instrument metadata for a V2 position.
 |**optionType** | [**OptionTypeEnum**](#OptionTypeEnum) | Whether the contract is a call or put. |  |
 |**strikePrice** | **BigDecimal** | Strike price for the option contract. |  |
 |**expirationDate** | **LocalDate** | Expiration date of the option contract. |  |
+|**multiplier** | **BigDecimal** | Number of underlying shares per contract. Standard options are 100, mini options are 10. |  |
 |**description** | **String** | Human-readable description of the option contract. |  [optional] |
 |**underlying** | **Object** |  |  |
 

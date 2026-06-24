@@ -106,6 +106,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ExpirationDate'
         }
         /// <summary>
+        /// Test the property 'Multiplier'
+        /// </summary>
+        [Fact]
+        public void MultiplierTest()
+        {
+            // TODO unit test for the property 'Multiplier'
+        }
+        /// <summary>
         /// Test the property 'Description'
         /// </summary>
         [Fact]

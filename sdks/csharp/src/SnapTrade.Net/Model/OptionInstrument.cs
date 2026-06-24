@@ -99,9 +99,10 @@ namespace SnapTrade.Net.Model
         /// <param name="optionType">Whether the contract is a call or put. (required).</param>
         /// <param name="strikePrice">Strike price for the option contract. (required).</param>
         /// <param name="expirationDate">Expiration date of the option contract. (required).</param>
+        /// <param name="multiplier">Number of underlying shares per contract. Standard options are 100, mini options are 10. (required).</param>
         /// <param name="description">Human-readable description of the option contract..</param>
         /// <param name="underlying">underlying (required).</param>
-        public OptionInstrument(KindEnum kind = default(KindEnum), string id = default(string), string symbol = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), decimal strikePrice = default(decimal), DateTime expirationDate = default(DateTime), string description = default(string), UnderlyingOptionInstrument underlying = default(UnderlyingOptionInstrument)) : base()
+        public OptionInstrument(KindEnum kind = default(KindEnum), string id = default(string), string symbol = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), decimal strikePrice = default(decimal), DateTime expirationDate = default(DateTime), decimal multiplier = default(decimal), string description = default(string), UnderlyingOptionInstrument underlying = default(UnderlyingOptionInstrument)) : base()
         {
             this.Kind = kind;
             // to ensure "id" is required (not null)
@@ -119,6 +120,7 @@ namespace SnapTrade.Net.Model
             this.OptionType = optionType;
             this.StrikePrice = strikePrice;
             this.ExpirationDate = expirationDate;
+            this.Multiplier = multiplier;
             // to ensure "underlying" is required (not null)
             if (underlying == null)
             {
@@ -160,6 +162,14 @@ namespace SnapTrade.Net.Model
         public DateTime ExpirationDate { get; set; }
 
         /// <summary>
+        /// Number of underlying shares per contract. Standard options are 100, mini options are 10.
+        /// </summary>
+        /// <value>Number of underlying shares per contract. Standard options are 100, mini options are 10.</value>
+        [DataMember(Name = "multiplier", IsRequired = true, EmitDefaultValue = true)]
+        [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
+        public decimal Multiplier { get; set; }
+
+        /// <summary>
         /// Human-readable description of the option contract.
         /// </summary>
         /// <value>Human-readable description of the option contract.</value>
@@ -193,6 +203,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OptionType: ").Append(OptionType).Append("\n");
             sb.Append("  StrikePrice: ").Append(StrikePrice).Append("\n");
             sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
+            sb.Append("  Multiplier: ").Append(Multiplier).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Underlying: ").Append(Underlying).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -259,6 +270,10 @@ namespace SnapTrade.Net.Model
                     this.ExpirationDate.Equals(input.ExpirationDate))
                 ) && base.Equals(input) && 
                 (
+                    this.Multiplier == input.Multiplier ||
+                    this.Multiplier.Equals(input.Multiplier)
+                ) && base.Equals(input) && 
+                (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
@@ -295,6 +310,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.ExpirationDate.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.Multiplier.GetHashCode();
                 if (this.Description != null)
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();

@@ -7610,6 +7610,14 @@ components:
           type: string
           x-konfig-original-example: 2026-12-18
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-expiration_date
+        multiplier:
+          description: "Number of underlying shares per contract. Standard options\
+            \ are 100, mini options are 10."
+          example: "100"
+          format: decimal
+          type: string
+          x-konfig-original-example: "100"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionInstrument-properties-multiplier
         description:
           description: Human-readable description of the option contract.
           example: AAPL Dec 18 2026 240 CALL
@@ -7623,6 +7631,7 @@ components:
       - expiration_date
       - id
       - kind
+      - multiplier
       - option_type
       - strike_price
       - symbol
@@ -12269,6 +12278,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionInstrument-properties-expiration_date:
       example: 2026-12-18
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionInstrument-properties-multiplier:
+      example: "100"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionInstrument-properties-description:

@@ -31,6 +31,9 @@ module SnapTrade
     # Expiration date of the option contract.
     attr_accessor :expiration_date
 
+    # Number of underlying shares per contract. Standard options are 100, mini options are 10.
+    attr_accessor :multiplier
+
     # Human-readable description of the option contract.
     attr_accessor :description
 
@@ -45,6 +48,7 @@ module SnapTrade
         :'option_type' => :'option_type',
         :'strike_price' => :'strike_price',
         :'expiration_date' => :'expiration_date',
+        :'multiplier' => :'multiplier',
         :'description' => :'description',
         :'underlying' => :'underlying'
       }
@@ -64,6 +68,7 @@ module SnapTrade
         :'option_type' => :'OptionType',
         :'strike_price' => :'Float',
         :'expiration_date' => :'Date',
+        :'multiplier' => :'Float',
         :'description' => :'String',
         :'underlying' => :'UnderlyingOptionInstrument'
       }
@@ -115,6 +120,10 @@ module SnapTrade
         self.expiration_date = attributes[:'expiration_date']
       end
 
+      if attributes.key?(:'multiplier')
+        self.multiplier = attributes[:'multiplier']
+      end
+
       if attributes.key?(:'description')
         self.description = attributes[:'description']
       end
@@ -152,6 +161,10 @@ module SnapTrade
         invalid_properties.push('invalid value for "expiration_date", expiration_date cannot be nil.')
       end
 
+      if @multiplier.nil?
+        invalid_properties.push('invalid value for "multiplier", multiplier cannot be nil.')
+      end
+
       if @underlying.nil?
         invalid_properties.push('invalid value for "underlying", underlying cannot be nil.')
       end
@@ -168,6 +181,7 @@ module SnapTrade
       return false if @option_type.nil?
       return false if @strike_price.nil?
       return false if @expiration_date.nil?
+      return false if @multiplier.nil?
       return false if @underlying.nil?
       true
     end
@@ -183,6 +197,7 @@ module SnapTrade
           option_type == o.option_type &&
           strike_price == o.strike_price &&
           expiration_date == o.expiration_date &&
+          multiplier == o.multiplier &&
           description == o.description &&
           underlying == o.underlying
     end
@@ -196,7 +211,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, symbol, option_type, strike_price, expiration_date, description, underlying].hash
+      [kind, id, symbol, option_type, strike_price, expiration_date, multiplier, description, underlying].hash
     end
 
     # Builds the object from hash

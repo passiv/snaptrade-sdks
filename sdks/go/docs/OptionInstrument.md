@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **OptionType** | **string** | Whether the contract is a call or put. | 
 **StrikePrice** | **float64** | Strike price for the option contract. | 
 **ExpirationDate** | **string** | Expiration date of the option contract. | 
+**Multiplier** | **float64** | Number of underlying shares per contract. Standard options are 100, mini options are 10. | 
 **Description** | Pointer to **NullableString** | Human-readable description of the option contract. | [optional] 
 **Underlying** | [**UnderlyingOptionInstrument**](UnderlyingOptionInstrument.md) |  | 
 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewOptionInstrument
 
-`func NewOptionInstrument(kind string, id string, symbol string, optionType string, strikePrice float64, expirationDate string, underlying UnderlyingOptionInstrument, ) *OptionInstrument`
+`func NewOptionInstrument(kind string, id string, symbol string, optionType string, strikePrice float64, expirationDate string, multiplier float64, underlying UnderlyingOptionInstrument, ) *OptionInstrument`
 
 NewOptionInstrument instantiates a new OptionInstrument object
 This constructor will assign default values to properties that have it defined,
@@ -150,6 +151,26 @@ and a boolean to check if the value has been set.
 `func (o *OptionInstrument) SetExpirationDate(v string)`
 
 SetExpirationDate sets ExpirationDate field to given value.
+
+
+### GetMultiplier
+
+`func (o *OptionInstrument) GetMultiplier() float64`
+
+GetMultiplier returns the Multiplier field if non-nil, zero value otherwise.
+
+### GetMultiplierOk
+
+`func (o *OptionInstrument) GetMultiplierOk() (*float64, bool)`
+
+GetMultiplierOk returns a tuple with the Multiplier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMultiplier
+
+`func (o *OptionInstrument) SetMultiplier(v float64)`
+
+SetMultiplier sets Multiplier field to given value.
 
 
 ### GetDescription

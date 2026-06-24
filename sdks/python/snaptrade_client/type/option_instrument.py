@@ -36,6 +36,9 @@ class RequiredOptionInstrument(TypedDict):
     # Expiration date of the option contract.
     expiration_date: date
 
+    # Number of underlying shares per contract. Standard options are 100, mini options are 10.
+    multiplier: str
+
     underlying: UnderlyingOptionInstrument
 
 
