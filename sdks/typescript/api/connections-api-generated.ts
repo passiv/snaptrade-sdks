@@ -47,6 +47,8 @@ import { Model429TooManyRequestsResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
+import { Model503BrokerageRequestResponse } from '../models';
+// @ts-ignore
 import { RateOfReturnResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
