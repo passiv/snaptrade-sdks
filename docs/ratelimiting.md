@@ -35,6 +35,8 @@ These are rolling limits that look at the trailing 60 seconds.
 
 In addition to the customer-level limit, the SnapTrade API enforces a **per-account** rate limit on endpoints that fetch account data. This limit is **10 requests per minute per account** by default.
 
+> **Note:** Account-level rate limiting is only enforced for **Personal** users. Commercial users are subject to the customer-level limit only. For more on the difference, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
+
 Account-level rate limiting is scoped to the combination of your `clientId` and the `accountId` in the request URL. This means:
 
 - Different accounts have **separate** rate limit buckets. Exhausting the limit on one account does not affect requests to other accounts.
@@ -47,8 +49,7 @@ Account-level rate limiting applies to the following endpoints:
 - :api[AccountInformation_getUserHoldings]
 - :api[AccountInformation_getUserAccountDetails]
 - :api[AccountInformation_getUserAccountBalance]
-- :api[AccountInformation_getUserAccountPositions]
-- :api[Options_listOptionHoldings]
+- :api[AccountInformation_getAllAccountPositions]
 - :api[AccountInformation_getUserAccountOrders]
 - :api[AccountInformation_getUserAccountRecentOrders]
 - :api[AccountInformation_getAccountActivities]
