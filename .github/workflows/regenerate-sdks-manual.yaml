@@ -1,0 +1,149 @@
+name: Regenerate SDKs Manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      changeset_type:
+        description: Semver bump to use for the generated SDK changeset
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  regenerate-sdks:
+    name: Regenerate SDKs
+    runs-on: ubuntu-latest
+    outputs:
+      sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+          submodules: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install Konfig CLI
+        uses: passiv/konfig-workflows/.github/actions/install-cli@main
+
+      - name: Fix OAS
+        run: konfig fix --ci
+
+      - name: Check if linting is disabled
+        id: check-linter-disabled
+        uses: mikefarah/yq@v4.35.2
+        with:
+          cmd: yq '.disableAutomationLinter' konfig.yaml
+
+      - name: Lint OAS
+        if: steps.check-linter-disabled.outputs.result != 'true'
+        run: konfig lint
+
+      - name: Regenerate SDKs
+        run: konfig generate
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+
+      - name: Bump SDK versions
+        run: konfig bump --${{ inputs.changeset_type }}
+
+      - name: Create changeset file
+        run: konfig changeset -a -m "Regenerate SDKs"
+
+      - name: Set git config
+        run: |
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+
+      - name: Detect SDK submodules
+        id: sdk-submodules
+        uses: passiv/konfig-workflows/.github/actions/private/detect-sdk-submodules@main
+        with:
+          konfig_yaml_dir: ./
+
+      - name: Push SDK submodules
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: passiv/konfig-workflows/.github/actions/private/push-submodules-to-pr@main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        with:
+          konfig_yaml_dir: ./
+          sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+          submodule_deploy_keys: |
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PYTHON }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_TYPESCRIPT }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_JAVA }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_CSHARP }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_GO }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_RUBY }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_SWIFT }}
+          head: ${{ github.ref_name }}
+          commit_msg: "Regenerate SDKs"
+          pr_title: "Regenerate SDKs"
+          pr_body: "Manually triggered SDK regeneration from ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."
+
+      - name: Commit and push top-level repo
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No top-level SDK regeneration changes to commit."
+            exit 0
+          fi
+          git commit -m "Regenerate SDKs"
+          git push origin HEAD:${{ github.ref_name }}
+
+  test:
+    name: Test ${{ matrix.language }} SDK
+    runs-on: ubuntu-latest
+    needs: regenerate-sdks
+    strategy:
+      matrix:
+        language: [typescript, python, go, ruby, php, php7, csharp, java]
+    container:
+      image: konfigdev/test-and-publish:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+          submodules: true
+
+      - name: Install Konfig CLI
+        uses: passiv/konfig-workflows/.github/actions/install-cli@main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Setup test env vars
+        uses: passiv/konfig-workflows/.github/actions/private/inject-testing-env-vars@main
+        with:
+          TEST_ENV: ${{ secrets.TEST_ENV }}
+
+      - name: Run tests
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_on: error
+          command: konfig test --filter ${{ matrix.language }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
