@@ -4977,8 +4977,7 @@ components:
           description: Exchange MIC code or exchange code for the instrument underlying the CFD wrapper.
           example: XNAS
         underlying_instrument:
-          allOf:
-            - $ref: "#/components/schemas/UnderlyingCfdInstrument"
+          $ref: "#/components/schemas/UnderlyingCfdInstrument"
       required:
         - kind
         - id
