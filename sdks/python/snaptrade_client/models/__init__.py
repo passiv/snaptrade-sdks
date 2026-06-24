@@ -62,6 +62,7 @@ from snaptrade_client.model.brokerage_type import BrokerageType
 from snaptrade_client.model.cancel_order_response import CancelOrderResponse
 from snaptrade_client.model.cancel_order_response_raw_response import CancelOrderResponseRawResponse
 from snaptrade_client.model.cef_instrument import CefInstrument
+from snaptrade_client.model.cfd_instrument import CfdInstrument
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
@@ -133,6 +134,8 @@ from snaptrade_client.model.model404_failed_request_response import Model404Fail
 from snaptrade_client.model.model425_failed_request_response import Model425FailedRequestResponse
 from snaptrade_client.model.model429_too_many_requests_response import Model429TooManyRequestsResponse
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
+from snaptrade_client.model.model501_not_implemented_response import Model501NotImplementedResponse
+from snaptrade_client.model.model503_brokerage_request_response import Model503BrokerageRequestResponse
 from snaptrade_client.model.monthly_dividends import MonthlyDividends
 from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.net_contributions import NetContributions
@@ -212,6 +215,7 @@ from snaptrade_client.model.trailing_stop import TrailingStop
 from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
+from snaptrade_client.model.underlying_cfd_instrument import UnderlyingCfdInstrument
 from snaptrade_client.model.underlying_option_instrument import UnderlyingOptionInstrument
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.model.units import Units

@@ -154,11 +154,11 @@ public class AccountPosition {
   }
 
    /**
-   * Last known market price for the position.
+   * Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
    * @return price
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "123.45", value = "Last known market price for the position.")
+  @ApiModelProperty(example = "123.45", value = "Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.")
 
   public BigDecimal getPrice() {
     return price;
@@ -183,11 +183,11 @@ public class AccountPosition {
   }
 
    /**
-   * Book price or average purchase price for the position.
+   * Book price or average purchase price for the position. For options, this is per-contract.
    * @return costBasis
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "118.2", value = "Book price or average purchase price for the position.")
+  @ApiModelProperty(example = "118.2", value = "Book price or average purchase price for the position. For options, this is per-contract.")
 
   public BigDecimal getCostBasis() {
     return costBasis;

@@ -336,6 +336,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Brokerage API failure
       summary: List connection rate of returns
       tags:
       - Connections
@@ -1190,7 +1196,7 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         `mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
 
@@ -1308,6 +1314,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501NotImplementedResponse'
+          description: Not Implemented - orders are not supported for this brokerage
       summary: List account orders
       tags:
       - Account Information
@@ -1416,6 +1428,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501NotImplementedResponse'
+          description: Not Implemented - recent orders are not supported for this
+            brokerage
       summary: List account recent orders (last 24 hours only)
       tags:
       - Account Information
@@ -1480,6 +1499,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Brokerage API failure
       summary: List account rate of returns
       tags:
       - Account Information
@@ -3775,6 +3800,33 @@ components:
         code:
           example: 1000
           x-konfig-original-example: 1000
+      type: object
+    "501NotImplementedResponse":
+      additionalProperties: true
+      description: Example for a response where the endpoint is not implemented for
+        the brokerage
+      properties:
+        error:
+          example: The orders endpoint is not yet implemented for brokerage some-brokerage
+          x-konfig-original-example: The orders endpoint is not yet implemented for
+            brokerage some-brokerage
+      type: object
+    "503BrokerageRequestResponse":
+      additionalProperties: true
+      description: Example for a response that failed because of an upstream brokerage
+        API failure
+      properties:
+        detail:
+          example: Unable to sync with brokerage account. Invalid response from Brokerage
+            API.
+          x-konfig-original-example: Unable to sync with brokerage account. Invalid
+            response from Brokerage API.
+        status_code:
+          example: 503
+          x-konfig-original-example: 503
+        code:
+          example: 3002
+          x-konfig-original-example: 3002
       type: object
     AccountSyncStatus:
       description: Contains status update for the account sync process between SnapTrade
@@ -6843,7 +6895,10 @@ components:
           x-konfig-original-example: "10.5"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-units
         price:
-          description: Last known market price for the position.
+          description: "Last known market price _per share_. The freshness of this\
+            \ price depends on the brokerage. Some brokerages provide real-time prices,\
+            \ while others provide delayed prices. It is recommended that you rely\
+            \ on your own third-party market data provider for most up to date prices."
           example: "123.45"
           format: decimal
           nullable: true
@@ -6851,7 +6906,8 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-price
         cost_basis:
-          description: Book price or average purchase price for the position.
+          description: "Book price or average purchase price for the position. For\
+            \ options, this is per-contract."
           example: "118.2"
           format: decimal
           nullable: true
@@ -6894,6 +6950,7 @@ components:
           mutualfund: '#/components/schemas/MutualFundInstrument'
           cef: '#/components/schemas/CefInstrument'
           adr: '#/components/schemas/AdrInstrument'
+          cfd: '#/components/schemas/CfdInstrument'
           other: '#/components/schemas/OtherInstrument'
         propertyName: kind
       oneOf:
@@ -6905,9 +6962,30 @@ components:
       - $ref: '#/components/schemas/MutualFundInstrument'
       - $ref: '#/components/schemas/CefInstrument'
       - $ref: '#/components/schemas/AdrInstrument'
+      - $ref: '#/components/schemas/CfdInstrument'
       - $ref: '#/components/schemas/OtherInstrument'
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
+      discriminator:
+        mapping:
+          stock: '#/components/schemas/StockInstrument'
+          crypto: '#/components/schemas/CryptoInstrument'
+          etf: '#/components/schemas/EtfInstrument'
+          mutualfund: '#/components/schemas/MutualFundInstrument'
+          cef: '#/components/schemas/CefInstrument'
+          adr: '#/components/schemas/AdrInstrument'
+          other: '#/components/schemas/OtherInstrument'
+        propertyName: kind
+      oneOf:
+      - $ref: '#/components/schemas/StockInstrument'
+      - $ref: '#/components/schemas/CryptoInstrument'
+      - $ref: '#/components/schemas/EtfInstrument'
+      - $ref: '#/components/schemas/MutualFundInstrument'
+      - $ref: '#/components/schemas/CefInstrument'
+      - $ref: '#/components/schemas/AdrInstrument'
+      - $ref: '#/components/schemas/OtherInstrument'
+    UnderlyingCfdInstrument:
+      description: The underlying instrument referenced by a CFD contract.
       discriminator:
         mapping:
           stock: '#/components/schemas/StockInstrument'
@@ -6985,6 +7063,70 @@ components:
       - kind
       - raw_symbol
       - symbol
+      type: object
+    CfdInstrument:
+      additionalProperties: true
+      description: Canonical CFD wrapper instrument metadata for a V2 position.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - cfd
+          example: cfd
+          type: string
+          x-konfig-original-example: cfd
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-kind
+        id:
+          description: Unique identifier for the canonical CFD instrument wrapper.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-id
+        symbol:
+          description: Formatted symbol of the instrument underlying the CFD wrapper.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-symbol
+        raw_symbol:
+          description: Raw symbol of the instrument underlying the CFD wrapper.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-raw_symbol
+        description:
+          description: Human-readable description of the instrument underlying the
+            CFD wrapper.
+          example: Apple Inc.
+          nullable: true
+          type: string
+          x-konfig-original-example: Apple Inc.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the instrument underlying the CFD
+            wrapper.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the instrument underlying
+            the CFD wrapper.
+          example: XNAS
+          nullable: true
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-exchange
+        underlying_instrument:
+          $ref: '#/components/schemas/UnderlyingCfdInstrument'
+      required:
+      - id
+      - kind
+      - raw_symbol
+      - symbol
+      - underlying_instrument
       type: object
     AdrInstrument:
       additionalProperties: true
@@ -11870,6 +12012,34 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-StockInstrument-properties-exchange:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-kind:
+      example: cfd
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-raw_symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-description:
+      example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CfdInstrument-properties-exchange:
       example: XNAS
       type: string
       x-do-not-generate: true

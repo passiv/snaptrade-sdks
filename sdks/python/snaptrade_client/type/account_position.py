@@ -26,10 +26,10 @@ class OptionalAccountPosition(TypedDict, total=False):
     # The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions.
     units: typing.Optional[str]
 
-    # Last known market price for the position.
+    # Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
     price: typing.Optional[str]
 
-    # Book price or average purchase price for the position.
+    # Book price or average purchase price for the position. For options, this is per-contract.
     cost_basis: typing.Optional[str]
 
     # ISO-4217 currency code for the position `price` and `cost_basis`.

@@ -19,6 +19,7 @@ module SnapTrade
         [
           :'AdrInstrument',
           :'CefInstrument',
+          :'CfdInstrument',
           :'CryptoInstrument',
           :'EtfInstrument',
           :'FutureInstrument',
@@ -39,6 +40,7 @@ module SnapTrade
         {
           :'adr' => :'AdrInstrument',
           :'cef' => :'CefInstrument',
+          :'cfd' => :'CfdInstrument',
           :'crypto' => :'CryptoInstrument',
           :'etf' => :'EtfInstrument',
           :'future' => :'FutureInstrument',

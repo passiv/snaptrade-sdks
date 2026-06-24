@@ -19,12 +19,13 @@ Name | Type | Description | Notes
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
 **Multiplier** | Pointer to **NullableFloat64** | Multiplier for the future contract. | [optional] 
+**UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
 
 ## Methods
 
 ### NewInstrument
 
-`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate NullableString, underlying UnderlyingOptionInstrument, rootSymbol string, expirationCode string, ) *Instrument`
+`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate NullableString, underlying UnderlyingOptionInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingCfdInstrument, ) *Instrument`
 
 NewInstrument instantiates a new Instrument object
 This constructor will assign default values to properties that have it defined,
@@ -424,6 +425,26 @@ HasMultiplier returns a boolean if a field has been set.
 `func (o *Instrument) UnsetMultiplier()`
 
 UnsetMultiplier ensures that no value is present for Multiplier, not even an explicit nil
+### GetUnderlyingInstrument
+
+`func (o *Instrument) GetUnderlyingInstrument() UnderlyingCfdInstrument`
+
+GetUnderlyingInstrument returns the UnderlyingInstrument field if non-nil, zero value otherwise.
+
+### GetUnderlyingInstrumentOk
+
+`func (o *Instrument) GetUnderlyingInstrumentOk() (*UnderlyingCfdInstrument, bool)`
+
+GetUnderlyingInstrumentOk returns a tuple with the UnderlyingInstrument field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnderlyingInstrument
+
+`func (o *Instrument) SetUnderlyingInstrument(v UnderlyingCfdInstrument)`
+
+SetUnderlyingInstrument sets UnderlyingInstrument field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -12,6 +12,7 @@ import type * as buffer from "buffer"
 
 import { AdrInstrument } from './adr-instrument';
 import { CefInstrument } from './cef-instrument';
+import { CfdInstrument } from './cfd-instrument';
 import { CryptoInstrument } from './crypto-instrument';
 import { EtfInstrument } from './etf-instrument';
 import { FutureInstrument } from './future-instrument';
@@ -20,6 +21,7 @@ import { OptionInstrument } from './option-instrument';
 import { OtherInstrument } from './other-instrument';
 import { StockInstrument } from './stock-instrument';
 import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrument';
+import { UnderlyingCfdInstrument } from './underlying-cfd-instrument';
 import { UnderlyingOptionInstrument } from './underlying-option-instrument';
 
 /**
@@ -27,6 +29,6 @@ import { UnderlyingOptionInstrument } from './underlying-option-instrument';
  * Instrument metadata for a V2 position. Use `kind` to determine which schema is present.
  * @export
  */
-export type Instrument = { kind: 'adr' } & AdrInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'future' } & FutureInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'option' } & OptionInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
+export type Instrument = { kind: 'adr' } & AdrInstrument | { kind: 'cef' } & CefInstrument | { kind: 'cfd' } & CfdInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'future' } & FutureInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'option' } & OptionInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
 
 

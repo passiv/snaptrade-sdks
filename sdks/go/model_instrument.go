@@ -20,6 +20,7 @@ import (
 type Instrument struct {
 	AdrInstrument *AdrInstrument
 	CefInstrument *CefInstrument
+	CfdInstrument *CfdInstrument
 	CryptoInstrument *CryptoInstrument
 	EtfInstrument *EtfInstrument
 	FutureInstrument *FutureInstrument
@@ -40,6 +41,13 @@ func AdrInstrumentAsInstrument(v *AdrInstrument) Instrument {
 func CefInstrumentAsInstrument(v *CefInstrument) Instrument {
 	return Instrument{
 		CefInstrument: v,
+	}
+}
+
+// CfdInstrumentAsInstrument is a convenience function that returns CfdInstrument wrapped in Instrument
+func CfdInstrumentAsInstrument(v *CfdInstrument) Instrument {
+	return Instrument{
+		CfdInstrument: v,
 	}
 }
 
@@ -121,6 +129,19 @@ func (dst *Instrument) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.CefInstrument = nil
+	}
+
+	// try to unmarshal data into CfdInstrument
+	err = newStrictDecoder(data).Decode(&dst.CfdInstrument)
+	if err == nil {
+		jsonCfdInstrument, _ := json.Marshal(dst.CfdInstrument)
+		if string(jsonCfdInstrument) == "{}" { // empty struct
+			dst.CfdInstrument = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.CfdInstrument = nil
 	}
 
 	// try to unmarshal data into CryptoInstrument
@@ -218,6 +239,7 @@ func (dst *Instrument) UnmarshalJSON(data []byte) error {
 		// reset to nil
 		dst.AdrInstrument = nil
 		dst.CefInstrument = nil
+		dst.CfdInstrument = nil
 		dst.CryptoInstrument = nil
 		dst.EtfInstrument = nil
 		dst.FutureInstrument = nil
@@ -242,6 +264,10 @@ func (src Instrument) MarshalJSON() ([]byte, error) {
 
 	if src.CefInstrument != nil {
 		return json.Marshal(&src.CefInstrument)
+	}
+
+	if src.CfdInstrument != nil {
+		return json.Marshal(&src.CfdInstrument)
 	}
 
 	if src.CryptoInstrument != nil {
@@ -286,6 +312,10 @@ func (obj *Instrument) GetActualInstance() (interface{}) {
 
 	if obj.CefInstrument != nil {
 		return obj.CefInstrument
+	}
+
+	if obj.CfdInstrument != nil {
+		return obj.CfdInstrument
 	}
 
 	if obj.CryptoInstrument != nil {

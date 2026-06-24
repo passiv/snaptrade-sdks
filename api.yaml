@@ -763,7 +763,7 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, and option positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         `mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
 
@@ -856,6 +856,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "501":
+          description: Not Implemented - orders are not supported for this brokerage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/501NotImplementedResponse"
   /accounts/{accountId}/orders/v2:
     get:
       tags:
@@ -1003,6 +1009,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "501":
+          description: Not Implemented - recent orders are not supported for this brokerage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/501NotImplementedResponse"
   /accounts/{accountId}/recentOrders/v2:
     get:
       tags:
@@ -1105,6 +1117,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Brokerage API failure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/activities:
     get:
       tags:
@@ -1247,6 +1265,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Brokerage API failure
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   "/accounts/{accountId}/quotes":
     get:
       tags:
@@ -2779,7 +2803,6 @@ paths:
         "501":
           description: Not Implemented - option impact is not supported for this brokerage
 
-
   /accounts/{accountId}/trading/options:
     post:
       tags:
@@ -3372,6 +3395,22 @@ components:
           example: 500
         code:
           example: 1000
+    501NotImplementedResponse:
+      description: Example for a response where the endpoint is not implemented for the brokerage
+      type: object
+      properties:
+        error:
+          example: The orders endpoint is not yet implemented for brokerage some-brokerage
+    503BrokerageRequestResponse:
+      description: Example for a response that failed because of an upstream brokerage API failure
+      type: object
+      properties:
+        detail:
+          example: Unable to sync with brokerage account. Invalid response from Brokerage API.
+        status_code:
+          example: 503
+        code:
+          example: 3002
     AccountSyncStatus:
       description: Contains status update for the account sync process between SnapTrade and the brokerage.
       properties:
@@ -4762,13 +4801,13 @@ components:
           type: string
           format: decimal
           nullable: true
-          description: Last known market price for the position.
+          description: Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
           example: "123.45"
         cost_basis:
           type: string
           format: decimal
           nullable: true
-          description: Book price or average purchase price for the position.
+          description: Book price or average purchase price for the position. For options, this is per-contract.
           example: "118.2"
         currency:
           type: string
@@ -4797,6 +4836,7 @@ components:
         - $ref: "#/components/schemas/MutualFundInstrument"
         - $ref: "#/components/schemas/CefInstrument"
         - $ref: "#/components/schemas/AdrInstrument"
+        - $ref: "#/components/schemas/CfdInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
       discriminator:
         propertyName: kind
@@ -4809,9 +4849,30 @@ components:
           mutualfund: "#/components/schemas/MutualFundInstrument"
           cef: "#/components/schemas/CefInstrument"
           adr: "#/components/schemas/AdrInstrument"
+          cfd: "#/components/schemas/CfdInstrument"
           other: "#/components/schemas/OtherInstrument"
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
+      oneOf:
+        - $ref: "#/components/schemas/StockInstrument"
+        - $ref: "#/components/schemas/CryptoInstrument"
+        - $ref: "#/components/schemas/EtfInstrument"
+        - $ref: "#/components/schemas/MutualFundInstrument"
+        - $ref: "#/components/schemas/CefInstrument"
+        - $ref: "#/components/schemas/AdrInstrument"
+        - $ref: "#/components/schemas/OtherInstrument"
+      discriminator:
+        propertyName: kind
+        mapping:
+          stock: "#/components/schemas/StockInstrument"
+          crypto: "#/components/schemas/CryptoInstrument"
+          etf: "#/components/schemas/EtfInstrument"
+          mutualfund: "#/components/schemas/MutualFundInstrument"
+          cef: "#/components/schemas/CefInstrument"
+          adr: "#/components/schemas/AdrInstrument"
+          other: "#/components/schemas/OtherInstrument"
+    UnderlyingCfdInstrument:
+      description: The underlying instrument referenced by a CFD contract.
       oneOf:
         - $ref: "#/components/schemas/StockInstrument"
         - $ref: "#/components/schemas/CryptoInstrument"
@@ -4877,6 +4938,52 @@ components:
         - id
         - symbol
         - raw_symbol
+    CfdInstrument:
+      description: Canonical CFD wrapper instrument metadata for a V2 position.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - cfd
+          example: cfd
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the canonical CFD instrument wrapper.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: Formatted symbol of the instrument underlying the CFD wrapper.
+          example: AAPL
+        raw_symbol:
+          type: string
+          description: Raw symbol of the instrument underlying the CFD wrapper.
+          example: AAPL
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the instrument underlying the CFD wrapper.
+          example: Apple Inc.
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the instrument underlying the CFD wrapper.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the instrument underlying the CFD wrapper.
+          example: XNAS
+        underlying_instrument:
+          $ref: "#/components/schemas/UnderlyingCfdInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
+        - underlying_instrument
     AdrInstrument:
       description: Security instrument metadata for ADR positions.
       type: object

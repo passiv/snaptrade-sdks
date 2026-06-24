@@ -177,6 +177,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'Multiplier'
         }
+        /// <summary>
+        /// Test the property 'UnderlyingInstrument'
+        /// </summary>
+        [Fact]
+        public void UnderlyingInstrumentTest()
+        {
+            // TODO unit test for the property 'UnderlyingInstrument'
+        }
 
     }
 
