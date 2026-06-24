@@ -51,6 +51,8 @@ portal:
           links:
             - id: getting-started
               path: docs/getting-started.md
+            - id: authentication-methods
+              path: docs/authentication-methods.md
             - id: personal-vs-commercial
               path: docs/personal-vs-commercial.md
             - id: implement-connection-portal

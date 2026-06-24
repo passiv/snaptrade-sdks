@@ -165,6 +165,7 @@ If the user owns the SnapTrade account, use the Personal model. If your app owns
 ## Related
 
 - [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
+- [Authentication Methods](https://docs.snaptrade.com/docs/authentication-methods)
 - [Terminology](https://docs.snaptrade.com/docs/terminology)
 - [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)
 - [Billing](https://docs.snaptrade.com/docs/billing)
