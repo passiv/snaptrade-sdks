@@ -170,6 +170,10 @@ public class OptionInstrument {
   @SerializedName(SERIALIZED_NAME_EXPIRATION_DATE)
   private LocalDate expirationDate;
 
+  public static final String SERIALIZED_NAME_MULTIPLIER = "multiplier";
+  @SerializedName(SERIALIZED_NAME_MULTIPLIER)
+  private BigDecimal multiplier;
+
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
@@ -355,6 +359,35 @@ public class OptionInstrument {
   }
 
 
+  public OptionInstrument multiplier(BigDecimal multiplier) {
+    
+    
+    
+    
+    this.multiplier = multiplier;
+    return this;
+  }
+
+   /**
+   * Number of underlying shares per contract. Standard options are 100, mini options are 10.
+   * @return multiplier
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "100", required = true, value = "Number of underlying shares per contract. Standard options are 100, mini options are 10.")
+
+  public BigDecimal getMultiplier() {
+    return multiplier;
+  }
+
+
+  public void setMultiplier(BigDecimal multiplier) {
+    
+    
+    
+    this.multiplier = multiplier;
+  }
+
+
   public OptionInstrument description(String description) {
     
     
@@ -473,6 +506,7 @@ public class OptionInstrument {
         Objects.equals(this.optionType, optionInstrument.optionType) &&
         Objects.equals(this.strikePrice, optionInstrument.strikePrice) &&
         Objects.equals(this.expirationDate, optionInstrument.expirationDate) &&
+        Objects.equals(this.multiplier, optionInstrument.multiplier) &&
         Objects.equals(this.description, optionInstrument.description) &&
         Objects.equals(this.underlying, optionInstrument.underlying)&&
         Objects.equals(this.additionalProperties, optionInstrument.additionalProperties);
@@ -484,7 +518,7 @@ public class OptionInstrument {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, symbol, optionType, strikePrice, expirationDate, description, underlying, additionalProperties);
+    return Objects.hash(kind, id, symbol, optionType, strikePrice, expirationDate, multiplier, description, underlying, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -504,6 +538,7 @@ public class OptionInstrument {
     sb.append("    optionType: ").append(toIndentedString(optionType)).append("\n");
     sb.append("    strikePrice: ").append(toIndentedString(strikePrice)).append("\n");
     sb.append("    expirationDate: ").append(toIndentedString(expirationDate)).append("\n");
+    sb.append("    multiplier: ").append(toIndentedString(multiplier)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    underlying: ").append(toIndentedString(underlying)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -535,6 +570,7 @@ public class OptionInstrument {
     openapiFields.add("option_type");
     openapiFields.add("strike_price");
     openapiFields.add("expiration_date");
+    openapiFields.add("multiplier");
     openapiFields.add("description");
     openapiFields.add("underlying");
 
@@ -546,6 +582,7 @@ public class OptionInstrument {
     openapiRequiredFields.add("option_type");
     openapiRequiredFields.add("strike_price");
     openapiRequiredFields.add("expiration_date");
+    openapiRequiredFields.add("multiplier");
     openapiRequiredFields.add("underlying");
   }
 
@@ -582,6 +619,9 @@ public class OptionInstrument {
       }
       if (!jsonObj.get("strike_price").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `strike_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("strike_price").toString()));
+      }
+      if (!jsonObj.get("multiplier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `multiplier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("multiplier").toString()));
       }
       if (!jsonObj.get("description").isJsonNull() && (jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));

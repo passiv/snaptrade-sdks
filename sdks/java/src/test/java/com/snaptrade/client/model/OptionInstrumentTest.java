@@ -91,6 +91,14 @@ public class OptionInstrumentTest {
     }
 
     /**
+     * Test the property 'multiplier'
+     */
+    @Test
+    public void multiplierTest() {
+        // TODO: test multiplier
+    }
+
+    /**
      * Test the property 'description'
      */
     @Test

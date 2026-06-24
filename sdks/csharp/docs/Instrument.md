@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 **OptionType** | **string** | Whether the contract is a call or put. | 
 **StrikePrice** | **decimal** | Strike price for the option contract. | 
 **ExpirationDate** | **DateTime?** | Expiration date of the contract. | 
+**Multiplier** | **decimal?** | Multiplier for the future contract. | 
 **Underlying** | [**UnderlyingOptionInstrument**](UnderlyingOptionInstrument.md) |  | 
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
-**Multiplier** | **decimal?** | Multiplier for the future contract. | [optional] 
 **UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
