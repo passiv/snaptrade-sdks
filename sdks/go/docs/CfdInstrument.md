@@ -11,13 +11,13 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** | Human-readable description of the instrument underlying the CFD wrapper. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the instrument underlying the CFD wrapper. | [optional] 
 **Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the instrument underlying the CFD wrapper. | [optional] 
-**UnderlyingInstrument** | [**CfdInstrumentUnderlyingInstrument**](CfdInstrumentUnderlyingInstrument.md) |  | 
+**UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
 
 ## Methods
 
 ### NewCfdInstrument
 
-`func NewCfdInstrument(kind string, id string, symbol string, rawSymbol string, underlyingInstrument CfdInstrumentUnderlyingInstrument, ) *CfdInstrument`
+`func NewCfdInstrument(kind string, id string, symbol string, rawSymbol string, underlyingInstrument UnderlyingCfdInstrument, ) *CfdInstrument`
 
 NewCfdInstrument instantiates a new CfdInstrument object
 This constructor will assign default values to properties that have it defined,
@@ -219,20 +219,20 @@ HasExchange returns a boolean if a field has been set.
 UnsetExchange ensures that no value is present for Exchange, not even an explicit nil
 ### GetUnderlyingInstrument
 
-`func (o *CfdInstrument) GetUnderlyingInstrument() CfdInstrumentUnderlyingInstrument`
+`func (o *CfdInstrument) GetUnderlyingInstrument() UnderlyingCfdInstrument`
 
 GetUnderlyingInstrument returns the UnderlyingInstrument field if non-nil, zero value otherwise.
 
 ### GetUnderlyingInstrumentOk
 
-`func (o *CfdInstrument) GetUnderlyingInstrumentOk() (*CfdInstrumentUnderlyingInstrument, bool)`
+`func (o *CfdInstrument) GetUnderlyingInstrumentOk() (*UnderlyingCfdInstrument, bool)`
 
 GetUnderlyingInstrumentOk returns a tuple with the UnderlyingInstrument field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnderlyingInstrument
 
-`func (o *CfdInstrument) SetUnderlyingInstrument(v CfdInstrumentUnderlyingInstrument)`
+`func (o *CfdInstrument) SetUnderlyingInstrument(v UnderlyingCfdInstrument)`
 
 SetUnderlyingInstrument sets UnderlyingInstrument field to given value.
 

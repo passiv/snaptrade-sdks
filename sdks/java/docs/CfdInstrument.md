@@ -15,7 +15,7 @@ Canonical CFD wrapper instrument metadata for a V2 position.
 |**description** | **String** | Human-readable description of the instrument underlying the CFD wrapper. |  [optional] |
 |**currency** | **String** | ISO-4217 currency code for the instrument underlying the CFD wrapper. |  [optional] |
 |**exchange** | **String** | Exchange MIC code or exchange code for the instrument underlying the CFD wrapper. |  [optional] |
-|**underlyingInstrument** | [**Object**](Object.md) |  |  |
+|**underlyingInstrument** | **Object** |  |  |
 
 
 

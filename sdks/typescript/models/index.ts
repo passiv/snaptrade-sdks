@@ -48,7 +48,6 @@ export * from './brokerage-type';
 export * from './cancel-order-response';
 export * from './cef-instrument';
 export * from './cfd-instrument';
-export * from './cfd-instrument-underlying-instrument';
 export * from './child-brokerage-order-ids';
 export * from './complex-order-leg';
 export * from './complex-order-response';

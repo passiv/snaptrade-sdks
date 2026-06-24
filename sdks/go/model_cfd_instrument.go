@@ -31,7 +31,7 @@ type CfdInstrument struct {
 	Currency NullableString `json:"currency,omitempty"`
 	// Exchange MIC code or exchange code for the instrument underlying the CFD wrapper.
 	Exchange NullableString `json:"exchange,omitempty"`
-	UnderlyingInstrument CfdInstrumentUnderlyingInstrument `json:"underlying_instrument"`
+	UnderlyingInstrument UnderlyingCfdInstrument `json:"underlying_instrument"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,7 +41,7 @@ type _CfdInstrument CfdInstrument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCfdInstrument(kind string, id string, symbol string, rawSymbol string, underlyingInstrument CfdInstrumentUnderlyingInstrument) *CfdInstrument {
+func NewCfdInstrument(kind string, id string, symbol string, rawSymbol string, underlyingInstrument UnderlyingCfdInstrument) *CfdInstrument {
 	this := CfdInstrument{}
 	this.Kind = kind
 	this.Id = id
@@ -282,9 +282,9 @@ func (o *CfdInstrument) UnsetExchange() {
 }
 
 // GetUnderlyingInstrument returns the UnderlyingInstrument field value
-func (o *CfdInstrument) GetUnderlyingInstrument() CfdInstrumentUnderlyingInstrument {
+func (o *CfdInstrument) GetUnderlyingInstrument() UnderlyingCfdInstrument {
 	if o == nil {
-		var ret CfdInstrumentUnderlyingInstrument
+		var ret UnderlyingCfdInstrument
 		return ret
 	}
 
@@ -293,7 +293,7 @@ func (o *CfdInstrument) GetUnderlyingInstrument() CfdInstrumentUnderlyingInstrum
 
 // GetUnderlyingInstrumentOk returns a tuple with the UnderlyingInstrument field value
 // and a boolean to check if the value has been set.
-func (o *CfdInstrument) GetUnderlyingInstrumentOk() (*CfdInstrumentUnderlyingInstrument, bool) {
+func (o *CfdInstrument) GetUnderlyingInstrumentOk() (*UnderlyingCfdInstrument, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -301,7 +301,7 @@ func (o *CfdInstrument) GetUnderlyingInstrumentOk() (*CfdInstrumentUnderlyingIns
 }
 
 // SetUnderlyingInstrument sets field value
-func (o *CfdInstrument) SetUnderlyingInstrument(v CfdInstrumentUnderlyingInstrument) {
+func (o *CfdInstrument) SetUnderlyingInstrument(v UnderlyingCfdInstrument) {
 	o.UnderlyingInstrument = v
 }
 

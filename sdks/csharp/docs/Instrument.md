@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
 **Multiplier** | **decimal?** | Multiplier for the future contract. | [optional] 
-**UnderlyingInstrument** | [**CfdInstrumentUnderlyingInstrument**](CfdInstrumentUnderlyingInstrument.md) |  | 
+**UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

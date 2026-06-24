@@ -234,7 +234,6 @@ require 'snaptrade/models/universal_activity'
 require 'snaptrade/models/universal_symbol'
 require 'snaptrade/models/user_i_dand_secret'
 require 'snaptrade/models/validated_trade_body'
-require 'snaptrade/models/cfd_instrument_underlying_instrument'
 
 # APIs
 require 'snaptrade/api/account_information_api'

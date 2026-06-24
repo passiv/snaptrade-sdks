@@ -7630,9 +7630,7 @@ components:
           type: string
           x-konfig-original-example: XNAS
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-exchange
-        underlying_instrument:
-          allOf:
-          - $ref: '#/components/schemas/UnderlyingCfdInstrument'
+        underlying_instrument: {}
       required:
       - id
       - kind

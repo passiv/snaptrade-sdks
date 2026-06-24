@@ -7120,7 +7120,7 @@ components:
           x-konfig-original-example: XNAS
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-exchange
         underlying_instrument:
-          $ref: '#/components/schemas/CfdInstrument_underlying_instrument'
+          $ref: '#/components/schemas/UnderlyingCfdInstrument'
       required:
       - id
       - kind
@@ -15391,9 +15391,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/FigiInstrument'
       nullable: true
-    CfdInstrument_underlying_instrument:
-      allOf:
-      - $ref: '#/components/schemas/UnderlyingCfdInstrument'
     Symbol_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

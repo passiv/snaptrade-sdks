@@ -63,42 +63,10 @@ class CfdInstrument(
             id = schemas.UUIDSchema
             symbol = schemas.StrSchema
             raw_symbol = schemas.StrSchema
-            
-            
-            class underlying_instrument(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            UnderlyingCfdInstrument,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'underlying_instrument':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def underlying_instrument() -> typing.Type['UnderlyingCfdInstrument']:
+                return UnderlyingCfdInstrument
             
             
             class description(
@@ -172,7 +140,7 @@ class CfdInstrument(
         additional_properties = schemas.AnyTypeSchema
     
     symbol: MetaOapg.properties.symbol
-    underlying_instrument: MetaOapg.properties.underlying_instrument
+    underlying_instrument: 'UnderlyingCfdInstrument'
     kind: MetaOapg.properties.kind
     raw_symbol: MetaOapg.properties.raw_symbol
     id: MetaOapg.properties.id
@@ -181,7 +149,7 @@ class CfdInstrument(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["underlying_instrument"]) -> MetaOapg.properties.underlying_instrument: ...
+    def __getitem__(self, name: typing_extensions.Literal["underlying_instrument"]) -> 'UnderlyingCfdInstrument': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["kind"]) -> MetaOapg.properties.kind: ...
@@ -212,7 +180,7 @@ class CfdInstrument(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["underlying_instrument"]) -> MetaOapg.properties.underlying_instrument: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["underlying_instrument"]) -> 'UnderlyingCfdInstrument': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["kind"]) -> MetaOapg.properties.kind: ...
@@ -242,7 +210,7 @@ class CfdInstrument(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         symbol: typing.Union[MetaOapg.properties.symbol, str, ],
-        underlying_instrument: typing.Union[MetaOapg.properties.underlying_instrument, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+        underlying_instrument: 'UnderlyingCfdInstrument',
         kind: typing.Union[MetaOapg.properties.kind, str, ],
         raw_symbol: typing.Union[MetaOapg.properties.raw_symbol, str, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, ],

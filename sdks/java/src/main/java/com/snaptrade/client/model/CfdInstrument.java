@@ -127,7 +127,7 @@ public class CfdInstrument {
 
   public static final String SERIALIZED_NAME_UNDERLYING_INSTRUMENT = "underlying_instrument";
   @SerializedName(SERIALIZED_NAME_UNDERLYING_INSTRUMENT)
-  private Object underlyingInstrument;
+  private Object underlyingInstrument = null;
 
   public CfdInstrument() {
   }
@@ -348,7 +348,7 @@ public class CfdInstrument {
    * Get underlyingInstrument
    * @return underlyingInstrument
   **/
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   @ApiModelProperty(required = true, value = "")
 
   public Object getUnderlyingInstrument() {

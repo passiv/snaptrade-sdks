@@ -56,15 +56,6 @@ namespace SnapTrade.Net.Test.Model
             //Assert.IsType<UnderlyingCfdInstrument>(instance);
         }
 
-        /// <summary>
-        /// Test deserialize a CfdInstrumentUnderlyingInstrument from type UnderlyingCfdInstrument
-        /// </summary>
-        [Fact]
-        public void CfdInstrumentUnderlyingInstrumentDeserializeFromUnderlyingCfdInstrumentTest()
-        {
-            // TODO uncomment below to test deserialize a CfdInstrumentUnderlyingInstrument from type UnderlyingCfdInstrument
-            //Assert.IsType<UnderlyingCfdInstrument>(JsonConvert.DeserializeObject<UnderlyingCfdInstrument>(new CfdInstrumentUnderlyingInstrument().ToJson()));
-        }
 
         /// <summary>
         /// Test the property 'Kind'

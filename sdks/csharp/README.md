@@ -215,7 +215,6 @@ Class | Method | HTTP request | Description
  - [CancelOrderResponse](docs/CancelOrderResponse.md)
  - [CefInstrument](docs/CefInstrument.md)
  - [CfdInstrument](docs/CfdInstrument.md)
- - [CfdInstrumentUnderlyingInstrument](docs/CfdInstrumentUnderlyingInstrument.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
  - [ChildBrokerageOrderIDsNullable](docs/ChildBrokerageOrderIDsNullable.md)
  - [ComplexOrderLeg](docs/ComplexOrderLeg.md)

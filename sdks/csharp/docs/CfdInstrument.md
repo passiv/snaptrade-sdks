@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Description** | **string** | Human-readable description of the instrument underlying the CFD wrapper. | [optional] 
 **Currency** | **string** | ISO-4217 currency code for the instrument underlying the CFD wrapper. | [optional] 
 **Exchange** | **string** | Exchange MIC code or exchange code for the instrument underlying the CFD wrapper. | [optional] 
-**UnderlyingInstrument** | [**CfdInstrumentUnderlyingInstrument**](CfdInstrumentUnderlyingInstrument.md) |  | 
+**UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

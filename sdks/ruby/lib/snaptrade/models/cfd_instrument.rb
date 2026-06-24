@@ -65,7 +65,7 @@ module SnapTrade
         :'description' => :'String',
         :'currency' => :'String',
         :'exchange' => :'String',
-        :'underlying_instrument' => :'CfdInstrumentUnderlyingInstrument'
+        :'underlying_instrument' => :'UnderlyingCfdInstrument'
       }
     end
 

@@ -57,6 +57,9 @@ export default defineConfig([
   },
   {
     ...browserShared,
+    // Keep emitting dist/browser.umd.js for direct script-tag consumers, e.g.
+    // docs pages that load the SDK from unpkg. This artifact is intentionally
+    // not advertised in package.json's public resolver fields.
     entry: {
       browser: "./index.ts",
     },
