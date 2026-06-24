@@ -5357,6 +5357,11 @@ components:
           format: date
           description: Expiration date of the option contract.
           example: "2026-12-18"
+        multiplier:
+          type: string
+          format: decimal
+          description: Number of underlying shares per contract. Standard options are 100, mini options are 10.
+          example: "100"
         description:
           type: string
           nullable: true
@@ -5371,6 +5376,7 @@ components:
         - option_type
         - strike_price
         - expiration_date
+        - multiplier
         - underlying
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
