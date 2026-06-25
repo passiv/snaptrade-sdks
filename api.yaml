@@ -560,6 +560,12 @@ paths:
                 $ref: "#/components/schemas/425FailedRequestResponse"
         "500":
           description: Unexpected Error
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts:
     get:
       tags:
@@ -710,6 +716,12 @@ paths:
                   $ref: "#/components/schemas/Balance"
         default:
           description: Unexpected error
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/positions:
     get:
       deprecated: true
@@ -754,6 +766,12 @@ paths:
                   $ref: "#/components/schemas/Position"
         default:
           description: Unexpected error
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/positions/all:
     get:
       tags:
@@ -793,6 +811,12 @@ paths:
                 $ref: "#/components/schemas/AllAccountPositionsResponse"
         default:
           description: Unexpected error
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/orders:
     get:
       tags:
@@ -862,6 +886,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/501NotImplementedResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/orders/v2:
     get:
       tags:
@@ -921,6 +951,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/balanceHistory:
     get:
       tags:
@@ -1015,6 +1051,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/501NotImplementedResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/recentOrders/v2:
     get:
       tags:
@@ -1067,6 +1109,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/returnRates:
     get:
       tags:
@@ -2472,6 +2520,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
   /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
     get:
       tags:
@@ -2527,6 +2581,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
 
   /accounts/{accountId}/trading/crypto:
     post:
