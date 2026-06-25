@@ -19,11 +19,23 @@ on:
 
 jobs:
   regenerate-sdks-manual:
+    permissions:
+      contents: write
+      pull-requests: write
     uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
     with:
       konfig_yaml_dir: ./
       changeset_type: ${{ inputs.changeset_type }}
       changeset_message: ${{ inputs.changeset_message }}
+      base_branch: master
+      head_branch: sdk-regeneration/manual-${{ github.run_id }}
+      create_pull_request: true
+      pull_request_title: Regenerate SDKs
+      pull_request_body: |
+        Manually triggered SDK regeneration from ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}.
+
+        Changeset type: ${{ inputs.changeset_type }}
+        Changeset message: ${{ inputs.changeset_message }}
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
