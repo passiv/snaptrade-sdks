@@ -12,6 +12,7 @@ on:
           - patch
           - minor
           - major
+          - prerelease
       changeset_message:
         description: Description to use for the generated SDK changeset
         required: true
