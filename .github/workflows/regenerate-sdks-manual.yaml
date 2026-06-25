@@ -12,6 +12,10 @@ on:
           - patch
           - minor
           - major
+      changeset_message:
+        description: Description to use for the generated SDK changeset
+        required: true
+        type: string
 
 jobs:
   regenerate-sdks-manual:
@@ -19,6 +23,7 @@ jobs:
     with:
       konfig_yaml_dir: ./
       changeset_type: ${{ inputs.changeset_type }}
+      changeset_message: ${{ inputs.changeset_message }}
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
