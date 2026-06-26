@@ -34,10 +34,12 @@ from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.model425_failed_request_response import Model425FailedRequestResponse as Model425FailedRequestResponseSchema
+from snaptrade_client.model.model503_brokerage_request_response import Model503BrokerageRequestResponse as Model503BrokerageRequestResponseSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount as AccountHoldingsAccountSchema
 
 from snaptrade_client.type.model425_failed_request_response import Model425FailedRequestResponse
+from snaptrade_client.type.model503_brokerage_request_response import Model503BrokerageRequestResponse
 from snaptrade_client.type.account_holdings_account import AccountHoldingsAccount
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
@@ -203,6 +205,27 @@ class ApiResponseFor500Async(api_client.AsyncApiResponse):
 _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
+)
+SchemaFor503ResponseBodyApplicationJson = Model503BrokerageRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor503(api_client.ApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+@dataclass
+class ApiResponseFor503Async(api_client.AsyncApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+_response_for_503 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor503,
+    response_cls_async=ApiResponseFor503Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor503ResponseBodyApplicationJson),
+    },
 )
 _all_accept_content_types = (
     'application/json',

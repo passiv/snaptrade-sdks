@@ -33,9 +33,11 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
+from snaptrade_client.model.model503_brokerage_request_response import Model503BrokerageRequestResponse as Model503BrokerageRequestResponseSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.model501_not_implemented_response import Model501NotImplementedResponse as Model501NotImplementedResponseSchema
 
+from snaptrade_client.type.model503_brokerage_request_response import Model503BrokerageRequestResponse
 from snaptrade_client.type.model501_not_implemented_response import Model501NotImplementedResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
@@ -226,6 +228,27 @@ _response_for_501 = api_client.OpenApiResponse(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaFor501ResponseBodyApplicationJson),
+    },
+)
+SchemaFor503ResponseBodyApplicationJson = Model503BrokerageRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor503(api_client.ApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+@dataclass
+class ApiResponseFor503Async(api_client.AsyncApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+_response_for_503 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor503,
+    response_cls_async=ApiResponseFor503Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor503ResponseBodyApplicationJson),
     },
 )
 _all_accept_content_types = (
