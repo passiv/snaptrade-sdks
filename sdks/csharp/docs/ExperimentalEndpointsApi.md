@@ -311,6 +311,7 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **404** | Not Found |  -  |
 | **500** | Unexpected error |  -  |
+| **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -410,6 +411,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **500** | Unexpected error |  -  |
+| **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -508,6 +510,7 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Unexpected error |  -  |
+| **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

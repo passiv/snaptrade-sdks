@@ -1057,6 +1057,15 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
+          x-do-not-generate: true
       summary: List account holdings
       tags:
       - Account Information
@@ -1199,6 +1208,15 @@ paths:
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
+          x-do-not-generate: true
         default:
           description: Unexpected error
       summary: List account balances
@@ -1253,6 +1271,15 @@ paths:
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
+          x-do-not-generate: true
         default:
           description: Unexpected error
       summary: List account positions
@@ -1301,6 +1328,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/AllAccountPositionsResponse'
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
+          x-do-not-generate: true
         default:
           description: Unexpected error
       summary: List all account positions
@@ -1393,6 +1429,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/501NotImplementedResponse'
           description: Not Implemented - orders are not supported for this brokerage
+          x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
           x-do-not-generate: true
       summary: List account orders
       tags:
@@ -1514,6 +1559,15 @@ paths:
                 $ref: '#/components/schemas/501NotImplementedResponse'
           description: Not Implemented - recent orders are not supported for this
             brokerage
+          x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
           x-do-not-generate: true
       summary: List account recent orders (last 24 hours only)
       tags:
@@ -1776,6 +1830,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
           x-do-not-generate: true
       summary: Get account order detail
       tags:
@@ -3273,6 +3336,15 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
+          x-do-not-generate: true
       summary: List account orders v2
       tags:
       - Experimental endpoints
@@ -3339,6 +3411,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
           x-do-not-generate: true
       summary: "List account recent orders (V2, last 24 hours only)"
       tags:
@@ -3736,6 +3817,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+          x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
           x-do-not-generate: true
       summary: Get account order detail (V2)
       tags:
