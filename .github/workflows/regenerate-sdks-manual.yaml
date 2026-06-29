@@ -17,9 +17,67 @@ on:
         description: Description to use for the generated SDK changeset
         required: true
         type: string
+      create_pull_request:
+        description: Create a pull request for the generated SDK changes
+        required: true
+        default: true
+        type: boolean
+      base_branch:
+        description: Branch to create the SDK regeneration branch from
+        required: true
+        default: master
+        type: string
+      head_branch:
+        description: Branch to run SDK regeneration on. Defaults to sdk-regeneration/manual-<run id> when creating a PR.
+        required: false
+        default: ''
+        type: string
 
 jobs:
+  create-pull-request:
+    name: Create pull request
+    if: inputs.create_pull_request
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      HEAD_BRANCH: ${{ inputs.head_branch || format('sdk-regeneration/manual-{0}', github.run_id) }}
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.base_branch }}
+
+      - name: Create regeneration branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$HEAD_BRANCH"
+          git commit --allow-empty -m "chore: prepare manual SDK regeneration"
+          git push --set-upstream origin "$HEAD_BRANCH"
+
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > pr-body.md <<'PR_BODY'
+          Manually triggered SDK regeneration from ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}.
+
+          Changeset type: ${{ inputs.changeset_type }}
+          Changeset message: ${{ inputs.changeset_message }}
+          PR_BODY
+
+          gh pr create \
+            --base "${{ inputs.base_branch }}" \
+            --head "$HEAD_BRANCH" \
+            --title "Regenerate SDKs" \
+            --body-file pr-body.md
+
   regenerate-sdks-manual:
+    name: Regenerate SDKs
+    needs: create-pull-request
+    if: always() && (needs.create-pull-request.result == 'success' || needs.create-pull-request.result == 'skipped')
     permissions:
       contents: write
       pull-requests: write
@@ -28,15 +86,8 @@ jobs:
       konfig_yaml_dir: ./
       changeset_type: ${{ inputs.changeset_type }}
       changeset_message: ${{ inputs.changeset_message }}
-      base_branch: master
-      head_branch: sdk-regeneration/manual-${{ github.run_id }}
-      create_pull_request: true
-      pull_request_title: Regenerate SDKs
-      pull_request_body: |
-        Manually triggered SDK regeneration from ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}.
-
-        Changeset type: ${{ inputs.changeset_type }}
-        Changeset message: ${{ inputs.changeset_message }}
+      base_branch: ${{ inputs.base_branch }}
+      head_branch: ${{ inputs.create_pull_request && (inputs.head_branch || format('sdk-regeneration/manual-{0}', github.run_id)) || inputs.base_branch }}
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
