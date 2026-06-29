@@ -33,7 +33,9 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.all_account_positions_response import AllAccountPositionsResponse as AllAccountPositionsResponseSchema
+from snaptrade_client.model.model503_brokerage_request_response import Model503BrokerageRequestResponse as Model503BrokerageRequestResponseSchema
 
+from snaptrade_client.type.model503_brokerage_request_response import Model503BrokerageRequestResponse
 from snaptrade_client.type.all_account_positions_response import AllAccountPositionsResponse
 
 # Query params
@@ -117,6 +119,27 @@ _response_for_200 = api_client.OpenApiResponse(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaFor200ResponseBodyApplicationJson),
+    },
+)
+SchemaFor503ResponseBodyApplicationJson = Model503BrokerageRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor503(api_client.ApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+@dataclass
+class ApiResponseFor503Async(api_client.AsyncApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+_response_for_503 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor503,
+    response_cls_async=ApiResponseFor503Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor503ResponseBodyApplicationJson),
     },
 )
 

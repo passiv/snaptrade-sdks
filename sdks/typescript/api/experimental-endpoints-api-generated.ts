@@ -33,6 +33,8 @@ import { Model404FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
+import { Model503BrokerageRequestResponse } from '../models';
+// @ts-ignore
 import { TradeDetectionAddSubscriptionRequest } from '../models';
 // @ts-ignore
 import { TradeDetectionCancelSubscriptionRequest } from '../models';

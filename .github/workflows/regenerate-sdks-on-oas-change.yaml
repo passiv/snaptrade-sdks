@@ -17,6 +17,8 @@ jobs:
     if: github.event.pull_request.draft == false
     with:
       konfig_yaml_dir: ./
+      base_branch: ${{ github.base_ref }}
+      head_branch: ${{ github.head_ref }}
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}

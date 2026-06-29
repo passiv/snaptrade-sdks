@@ -995,6 +995,14 @@ paths:
           description: Too Early
         "500":
           description: Unexpected Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
       summary: List account holdings
       tags:
       - Account Information
@@ -1132,6 +1140,14 @@ paths:
                   $ref: '#/components/schemas/Balance'
                 type: array
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
         default:
           description: Unexpected error
       summary: List account balances
@@ -1184,6 +1200,14 @@ paths:
                   $ref: '#/components/schemas/Position'
                 type: array
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
         default:
           description: Unexpected error
       summary: List account positions
@@ -1231,6 +1255,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/AllAccountPositionsResponse'
           description: OK
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: "Service Unavailable - the brokerage connection is busy syncing\
+            \ (sync lock held) or the brokerage API is temporarily unavailable, and\
+            \ no cached fallback was available. Safe to retry."
         default:
           description: Unexpected error
       summary: List all account positions
@@ -1320,6 +1352,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/501NotImplementedResponse'
           description: Not Implemented - orders are not supported for this brokerage
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
       summary: List account orders
       tags:
       - Account Information
@@ -1435,6 +1475,14 @@ paths:
                 $ref: '#/components/schemas/501NotImplementedResponse'
           description: Not Implemented - recent orders are not supported for this
             brokerage
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
       summary: List account recent orders (last 24 hours only)
       tags:
       - Account Information
@@ -1688,6 +1736,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
       summary: Get account order detail
       tags:
       - Account Information
@@ -3101,6 +3157,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
       summary: List account orders v2
       tags:
       - Experimental endpoints
@@ -3165,6 +3229,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
       summary: "List account recent orders (V2, last 24 hours only)"
       tags:
       - Experimental endpoints
@@ -3537,6 +3609,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
       summary: Get account order detail (V2)
       tags:
       - Experimental endpoints
