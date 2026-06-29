@@ -73,9 +73,6 @@ jobs:
     name: Regenerate SDKs
     needs: create-pull-request
     if: always() && (needs.create-pull-request.result == 'success' || needs.create-pull-request.result == 'skipped')
-    permissions:
-      contents: write
-      pull-requests: write
     uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
     with:
       konfig_yaml_dir: ./
