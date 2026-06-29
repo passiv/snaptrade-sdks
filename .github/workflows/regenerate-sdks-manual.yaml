@@ -22,11 +22,6 @@ on:
         required: true
         default: true
         type: boolean
-      base_branch:
-        description: Branch to create the SDK regeneration branch from
-        required: true
-        default: master
-        type: string
       head_branch:
         description: Branch to run SDK regeneration on. Defaults to sdk-regeneration/manual-<run id> when creating a PR.
         required: false
@@ -47,7 +42,7 @@ jobs:
       - name: Checkout base branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.base_branch }}
+          ref: ${{ github.ref_name }}
 
       - name: Create regeneration branch
         run: |
@@ -69,7 +64,7 @@ jobs:
           PR_BODY
 
           gh pr create \
-            --base "${{ inputs.base_branch }}" \
+            --base "${{ github.ref_name }}" \
             --head "$HEAD_BRANCH" \
             --title "Regenerate SDKs" \
             --body-file pr-body.md
@@ -86,8 +81,8 @@ jobs:
       konfig_yaml_dir: ./
       changeset_type: ${{ inputs.changeset_type }}
       changeset_message: ${{ inputs.changeset_message }}
-      base_branch: ${{ inputs.base_branch }}
-      head_branch: ${{ inputs.create_pull_request && (inputs.head_branch || format('sdk-regeneration/manual-{0}', github.run_id)) || inputs.base_branch }}
+      base_branch: ${{ github.ref_name }}
+      head_branch: ${{ inputs.create_pull_request && (inputs.head_branch || format('sdk-regeneration/manual-{0}', github.run_id)) || github.ref_name }}
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
