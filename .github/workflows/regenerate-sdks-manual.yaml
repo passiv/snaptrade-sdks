@@ -88,7 +88,6 @@ jobs:
       changeset_message: ${{ inputs.changeset_message }}
       base_branch: ${{ inputs.base_branch }}
       head_branch: ${{ inputs.create_pull_request && (inputs.head_branch || format('sdk-regeneration/manual-{0}', github.run_id)) || inputs.base_branch }}
-      create_pull_request: false
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
