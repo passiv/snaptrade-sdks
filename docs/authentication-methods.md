@@ -33,12 +33,14 @@ The Commercial workflow is:
 import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
+  // Commercial auth is for apps managing many SnapTrade users.
   auth: SnaptradeAuth.commercialApiKey({
     clientId: process.env.SNAPTRADE_CLIENT_ID!,
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
   }),
 });
 
+// This user is one of your app's end users.
 const userId = "snaptrade-user-123";
 
 const registeredUser = await snaptrade.authentication.registerSnapTradeUser({
@@ -55,14 +57,13 @@ const login = await snaptrade.authentication.loginSnapTradeUser({
 console.log("Send this Connection Portal URL to your user:", login.data.redirectURI);
 
 const accounts = await snaptrade.accountInformation.listUserAccounts({
+  // Commercial account-data calls include the user's credentials.
   userId,
   userSecret,
 });
 
-const firstAccount = accounts.data[0];
-
 const activities = await snaptrade.accountInformation.getAccountActivities({
-  accountId: firstAccount.id!,
+  accountId: accounts.data[0].id!,
   userId,
   userSecret,
   startDate: "2026-01-01",
@@ -80,12 +81,14 @@ import os
 from snaptrade_client import SnapTrade, SnapTradeAuth
 
 snaptrade = SnapTrade(
+    # Commercial auth is for apps managing many SnapTrade users.
     auth=SnapTradeAuth.commercial_api_key(
         client_id=os.environ["SNAPTRADE_CLIENT_ID"],
         consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
     )
 )
 
+# This user is one of your app's end users.
 user_id = "snaptrade-user-123"
 
 registered_user = snaptrade.authentication.register_snap_trade_user(
@@ -102,14 +105,13 @@ login = snaptrade.authentication.login_snap_trade_user(
 print("Send this Connection Portal URL to your user:", login.body["redirectURI"])
 
 accounts = snaptrade.account_information.list_user_accounts(
+    # Commercial account-data calls include the user's credentials.
     user_id=user_id,
     user_secret=user_secret,
 )
 
-first_account = accounts.body[0]
-
 activities = snaptrade.account_information.get_account_activities(
-    account_id=first_account["id"],
+    account_id=accounts.body[0]["id"],
     user_id=user_id,
     user_secret=user_secret,
     start_date="2026-01-01",
@@ -139,6 +141,7 @@ The Personal `clientId` and `consumerKey` identify the account owner. There is n
 import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
+  // Personal auth means the API key is the user context.
   auth: SnaptradeAuth.personalApiKey({
     clientId: process.env.SNAPTRADE_CLIENT_ID!,
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
@@ -147,10 +150,9 @@ const snaptrade = new Snaptrade({
 
 const accounts = await snaptrade.accountInformation.listUserAccounts();
 
-const firstAccount = accounts.data[0];
-
 const activities = await snaptrade.accountInformation.getAccountActivities({
-  accountId: firstAccount.id!,
+  // No userId or userSecret for Personal account-data calls.
+  accountId: accounts.data[0].id!,
   startDate: "2026-01-01",
   endDate: "2026-01-31",
   limit: 100,
@@ -166,6 +168,7 @@ import os
 from snaptrade_client import SnapTrade, SnapTradeAuth
 
 snaptrade = SnapTrade(
+    # Personal auth means the API key is the user context.
     auth=SnapTradeAuth.personal_api_key(
         client_id=os.environ["SNAPTRADE_CLIENT_ID"],
         consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
@@ -174,10 +177,9 @@ snaptrade = SnapTrade(
 
 accounts = snaptrade.account_information.list_user_accounts()
 
-first_account = accounts.body[0]
-
 activities = snaptrade.account_information.get_account_activities(
-    account_id=first_account["id"],
+    # No user_id or user_secret for Personal account-data calls.
+    account_id=accounts.body[0]["id"],
     start_date="2026-01-01",
     end_date="2026-01-31",
     limit=100,
@@ -216,6 +218,7 @@ Prefer the SDKs unless you need to debug a raw request.
 Commercial API key requests include `clientId`, `timestamp`, a `Signature` header, and user credentials for user-scoped endpoints:
 
 ```http
+# Commercial signed requests include the SnapTrade user's credentials.
 GET /api/v1/accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_timestamp>&userId=<user_id>&userSecret=<user_secret>
 Signature: <signature>
 ```
@@ -223,6 +226,7 @@ Signature: <signature>
 Personal API key requests include `clientId`, `timestamp`, and a `Signature` header, but omit user credentials:
 
 ```http
+# Personal signed requests omit user credentials.
 GET /api/v1/accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_timestamp>
 Signature: <signature>
 ```
