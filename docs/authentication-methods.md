@@ -4,7 +4,7 @@ SnapTrade supports two SDK authentication modes for API key integrations: Commer
 
 Commercial apps own many SnapTrade users. They register or authenticate a SnapTrade user, then fetch account data by passing that user's `userId` and `userSecret`.
 
-Personal API keys identify the Personal account owner directly. Account data is fetched without `userId` or `userSecret`.
+Your Personal API key identifies your SnapTrade account directly. Account data is fetched without `userId` or `userSecret`.
 
 In both modes, generate a Connection Portal URL and connect a brokerage account before calling account-data APIs.
 
@@ -13,7 +13,7 @@ In both modes, generate a Connection Portal URL and connect a brokerage account 
 | Method | Best for | SDK auth setup | Account-data operation credentials |
 | --- | --- | --- | --- |
 | Commercial API key | Apps managing many end users | `SnaptradeAuth.commercialApiKey(...)` / `SnapTradeAuth.commercial_api_key(...)` | Pass `userId` and `userSecret` |
-| Personal API key | Personal users calling SnapTrade with their own API key | `SnaptradeAuth.personalApiKey(...)` / `SnapTradeAuth.personal_api_key(...)` | Omit `userId` and `userSecret` |
+| Personal API key | You, when calling SnapTrade with your own API key | `SnaptradeAuth.personalApiKey(...)` / `SnapTradeAuth.personal_api_key(...)` | Omit `userId` and `userSecret` |
 
 For a broader product-model comparison, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
@@ -137,9 +137,9 @@ Rules:
 
 ## Personal API Key Authentication
 
-Use Personal API key authentication when a SnapTrade Personal user calls SnapTrade with their own Personal API key.
+Use Personal API key authentication when you call SnapTrade with your own Personal API key.
 
-The Personal `clientId` and `consumerKey` identify the account owner. There is no separate SnapTrade end-user record to register or pass on account-data calls. Generate a Connection Portal URL, connect the Personal user's brokerage account, then fetch account data directly.
+Your Personal `clientId` and `consumerKey` identify your SnapTrade account. There is no separate SnapTrade end-user record to register or pass on account-data calls. Generate a Connection Portal URL, connect your brokerage account, then fetch account data directly.
 
 ### TypeScript
 
@@ -147,7 +147,7 @@ The Personal `clientId` and `consumerKey` identify the account owner. There is n
 import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
 
 const snaptrade = new Snaptrade({
-  // Personal auth means the API key is the user context.
+  // Personal auth means your API key is the user context.
   auth: SnaptradeAuth.personalApiKey({
     clientId: process.env.SNAPTRADE_CLIENT_ID!,
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
@@ -159,7 +159,7 @@ const login = await snaptrade.authentication.loginSnapTradeUser();
 
 console.log("Open this Connection Portal URL:", login.data.redirectURI);
 
-// After the Personal user connects an account, fetch data directly.
+// After you connect your account, fetch data directly.
 const accounts = await snaptrade.accountInformation.listUserAccounts();
 
 const activities = await snaptrade.accountInformation.getAccountActivities({
@@ -180,7 +180,7 @@ import os
 from snaptrade_client import SnapTrade, SnapTradeAuth
 
 snaptrade = SnapTrade(
-    # Personal auth means the API key is the user context.
+    # Personal auth means your API key is the user context.
     auth=SnapTradeAuth.personal_api_key(
         client_id=os.environ["SNAPTRADE_CLIENT_ID"],
         consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
@@ -192,7 +192,7 @@ login = snaptrade.authentication.login_snap_trade_user()
 
 print("Open this Connection Portal URL:", login.body["redirectURI"])
 
-# After the Personal user connects an account, fetch data directly.
+# After you connect your account, fetch data directly.
 accounts = snaptrade.account_information.list_user_accounts()
 
 activities = snaptrade.account_information.get_account_activities(
@@ -209,8 +209,8 @@ print(activities.body)
 Rules:
 
 - Use `SnaptradeAuth.personalApiKey` in TypeScript or `SnapTradeAuth.personal_api_key` in Python.
-- Generate a Connection Portal URL and connect the Personal user's brokerage account before fetching account data.
-- Fetch account data directly after connection. The Personal API key identifies the Personal account owner.
+- Generate a Connection Portal URL and connect your brokerage account before fetching account data.
+- Fetch account data directly after connection. Your Personal API key identifies your SnapTrade account.
 - Omit `userId` and `userSecret` on account-data operations.
 - Do not call :api[Authentication_registerSnapTradeUser]. User registration is for Commercial apps managing SnapTrade users for their own end users.
 
@@ -226,7 +226,7 @@ Commercial API key:
 Personal API key:
 
 - SDK initialization uses Personal `clientId` and `consumerKey` through the Personal API key auth helper.
-- The Personal API key identifies the account owner.
+- Your Personal API key identifies your SnapTrade account.
 - Connection Portal login uses the Personal API key context and does not require `userId` or `userSecret`.
 - Account-data calls omit `userId` and `userSecret`.
 - Direct HTTP requests are signed with the Personal `consumerKey`.
@@ -256,11 +256,11 @@ For signature details, see [Request Signatures](https://docs.snaptrade.com/docs/
 ## Common Mistakes
 
 - Initializing the upcoming SDKs with old constructor fields such as `new Snaptrade({ clientId, consumerKey })` or `SnapTrade(client_id=..., consumer_key=...)`. Use the `auth` helpers instead.
-- Passing `userId` or `userSecret` with Personal API key auth. The Personal API key already identifies the Personal account owner.
+- Passing `userId` or `userSecret` with Personal API key auth. Your Personal API key already identifies your SnapTrade account.
 - Omitting `userId` or `userSecret` with Commercial API key auth on user-scoped account-data calls.
 - Calling :api[Authentication_registerSnapTradeUser] for Personal API key integrations. User registration is a Commercial workflow.
-- Fetching account data before the user has connected a brokerage account through the Connection Portal.
-- Listing SnapTrade users from a Personal integration. Personal API key calls already resolve to the authenticated Personal user.
+- Fetching account data before the brokerage account has been connected through the Connection Portal.
+- Listing SnapTrade users with Personal API key auth. Personal API key calls already resolve to you.
 - Exposing `consumerKey` or `userSecret` in browser or mobile clients. Keep signed-request credentials on a secure backend.
 - Treating `userId` as the brokerage account ID. `userId` identifies a SnapTrade user under a Commercial app; account-data methods return brokerage account IDs separately.
 
