@@ -1559,6 +1559,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OptionsPosition"
+        "400":
+          description: Invalid request, or option positions are not supported for this brokerage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected error
           content:
@@ -2849,7 +2855,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/OptionImpact"
         "400":
-          description: Invalid request
+          description: Invalid request, or option impact is not supported for this brokerage
           content:
             application/json:
               schema:
@@ -2861,7 +2867,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "501":
-          description: Not Implemented - option impact is not supported for this brokerage
+          # Deprecated: unsupported brokerages now return 400 (see the 400 response above).
+          # Retained for backward compatibility — removing a documented response code is a
+          # breaking change to the public API contract (konfig detect-breaking-change).
+          description: Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400.
 
   /accounts/{accountId}/trading/options:
     post:
