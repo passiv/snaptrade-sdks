@@ -19,6 +19,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { Model400FailedRequestResponse } from '../models';
+// @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { OptionsPosition } from '../models';

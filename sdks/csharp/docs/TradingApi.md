@@ -430,9 +430,9 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **400** | Invalid request |  -  |
+| **400** | Invalid request, or option impact is not supported for this brokerage |  -  |
 | **403** | Forbidden |  -  |
-| **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
+| **501** | Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

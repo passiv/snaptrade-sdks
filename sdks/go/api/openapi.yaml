@@ -1792,6 +1792,13 @@ paths:
                   $ref: '#/components/schemas/OptionsPosition'
                 type: array
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: "Invalid request, or option positions are not supported for\
+            \ this brokerage"
         "500":
           content:
             application/json:
@@ -2161,7 +2168,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
+          description: "Invalid request, or option impact is not supported for this\
+            \ brokerage"
         "403":
           content:
             application/json:
@@ -2169,7 +2177,8 @@ paths:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
         "501":
-          description: Not Implemented - option impact is not supported for this brokerage
+          description: Deprecated. Previously returned when option impact was not
+            supported for this brokerage; such requests now return 400.
       summary: Get option order impact
       tags:
       - Trading
