@@ -186,6 +186,8 @@ portal:
       delete: true
     /accounts/{accountId}/holdings:
       get: true
+    /accounts/{accountId}/trading/bracket:
+      post: true
   hideTags:
     - Experimental endpoints
   hideSecurity:
