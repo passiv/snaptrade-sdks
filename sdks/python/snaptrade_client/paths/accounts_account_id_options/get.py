@@ -32,10 +32,12 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.options_position import OptionsPosition as OptionsPositionSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 
 from snaptrade_client.type.options_position import OptionsPosition
+from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 
 from . import path
@@ -153,6 +155,27 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
+SchemaFor400ResponseBodyApplicationJson = Model400FailedRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor400(api_client.ApiResponse):
+    body: Model400FailedRequestResponse
+
+
+@dataclass
+class ApiResponseFor400Async(api_client.AsyncApiResponse):
+    body: Model400FailedRequestResponse
+
+
+_response_for_400 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor400,
+    response_cls_async=ApiResponseFor400Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor400ResponseBodyApplicationJson),
+    },
+)
 SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
@@ -176,6 +199,7 @@ _response_for_500 = api_client.OpenApiResponse(
 )
 _status_code_to_response = {
     '200': _response_for_200,
+    '400': _response_for_400,
     '500': _response_for_500,
 }
 _all_accept_content_types = (

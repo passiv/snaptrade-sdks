@@ -896,7 +896,7 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -923,7 +923,7 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. </td><td>  -  </td></tr>
          </table>
          */
         public OptionImpact execute() throws ApiException {
@@ -940,7 +940,7 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<OptionImpact> executeWithHttpInfo() throws ApiException {
@@ -957,7 +957,7 @@ public class TradingApiGenerated {
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<OptionImpact> _callback) throws ApiException {
@@ -978,7 +978,7 @@ public class TradingApiGenerated {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. </td><td>  -  </td></tr>
      </table>
      */
     public TradingApi.GetOptionImpactRequestBuilder getOptionImpact(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
