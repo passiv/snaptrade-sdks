@@ -28,16 +28,21 @@ The signature payload is a JSON object with exactly three fields:
 Example request:
 
 ```http
-GET /api/v1/accounts?clientId=YOUR_CLIENT_ID&timestamp=1715123456
+POST /api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
 Signature: <generated_signature>
+Content-Type: application/json
+
+{"substring":"AAPL"}
 ```
 
 The signature payload for this request is:
 
 ```json
 {
-  "content": null,
-  "path": "/api/v1/accounts",
+  "content": {
+    "substring": "AAPL"
+  },
+  "path": "/api/v1/symbols",
   "query": "clientId=YOUR_CLIENT_ID&timestamp=1715123456"
 }
 ```
@@ -56,13 +61,13 @@ Use these rules:
 The canonical signature string for the example above is:
 
 ```json
-{"content":null,"path":"/api/v1/accounts","query":"clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
+{"content":{"substring":"AAPL"},"path":"/api/v1/symbols","query":"clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
 ```
 
 The following string represents the same JSON object, but it is not valid for signing because it contains extra whitespace:
 
 ```json
-{"content": null, "path": "/api/v1/accounts", "query": "clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
+{"content": {"substring": "AAPL"}, "path": "/api/v1/symbols", "query": "clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
 ```
 
 Cryptographic signatures are generated from the exact bytes of the string. Even small formatting differences will produce a different signature.
@@ -74,7 +79,7 @@ The `query` value is the exact query string sent in the request URL, excluding t
 Example:
 
 ```text
-/api/v1/accounts?clientId=YOUR_CLIENT_ID&timestamp=1715123456
+/api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
 ```
 
 Use:
@@ -85,15 +90,18 @@ clientId=YOUR_CLIENT_ID&timestamp=1715123456
 
 Do not sort, decode, re-encode, or otherwise modify query parameters before signing.
 
-For requests without body, set `content` to `null`. This includes GET requests, bodyless DELETE/POST requests, and requests where the body would otherwise be `{}`.
+For requests without a body, set `content` to `null`. This includes GET requests, bodyless DELETE/POST requests, and requests where the body would otherwise be `{}`.
 
 ## End-to-End Example
 
-This example signs a direct API request for the account list endpoint. Replace `YOUR_CLIENT_ID` and `YOUR_CONSUMER_KEY` with your API key values. If your request includes additional query parameters, include those exact parameters in the URL and in the signature payload's `query` value.
+This example signs a direct API request for the symbol search endpoint. Replace `YOUR_CLIENT_ID` and `YOUR_CONSUMER_KEY` with your API key values. If your request includes additional query parameters, include those exact parameters in the URL and in the signature payload's `query` value.
 
 ```http
-GET /api/v1/accounts?clientId=YOUR_CLIENT_ID&timestamp=1715123456
+POST /api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
 Signature: <generated_signature>
+Content-Type: application/json
+
+{"substring":"AAPL"}
 ```
 
 ### Python Example
@@ -121,8 +129,9 @@ def compute_request_signature(path: str, consumer_key: str, body: typing.Any = N
 
 
 query = urlencode({"clientId": "YOUR_CLIENT_ID", "timestamp": int(time.time())})
-resource_path = f"/accounts?{query}"
-signature = compute_request_signature(resource_path, "YOUR_CONSUMER_KEY")
+resource_path = f"/symbols?{query}"
+request_body = {"substring": "AAPL"}
+signature = compute_request_signature(resource_path, "YOUR_CONSUMER_KEY", request_body)
 ```
 
 ### TypeScript Example (Node.js)
@@ -154,14 +163,16 @@ const clientId = "YOUR_CLIENT_ID";
 const consumerKey = "YOUR_CONSUMER_KEY";
 const timestamp = Math.floor(Date.now() / 1000);
 
-const requestPath = "/api/v1/accounts";
+const requestPath = "/api/v1/symbols";
 const requestQuery = new URLSearchParams({
   clientId,
   timestamp: timestamp.toString(),
 }).toString();
 
+const requestData = { substring: "AAPL" };
+
 const sigObject = {
-  content: null,
+  content: requestData,
   path: requestPath,
   query: requestQuery,
 };
@@ -198,9 +209,10 @@ public class Example {
         String consumerKey = "YOUR_CONSUMER_KEY";
         long timestamp = System.currentTimeMillis() / 1000L;
 
-        String path = "/api/v1/accounts";
+        String path = "/api/v1/symbols";
         String queryString = "clientId=" + clientId + "&timestamp=" + timestamp;
-        String data = String.format("{\"content\":null,\"path\":\"%s\",\"query\":\"%s\"}", path, queryString);
+        String requestBody = "{\"substring\":\"AAPL\"}";
+        String data = String.format("{\"content\":%s,\"path\":\"%s\",\"query\":\"%s\"}", requestBody, path, queryString);
         String signature = encodeBase64(calculateHmacSha256(data, consumerKey));
     }
 }
@@ -235,14 +247,16 @@ func main() {
 	consumerKey := "YOUR_CONSUMER_KEY"
 	timestamp := time.Now().Unix()
 
-	requestPath := "/api/v1/accounts"
+	requestPath := "/api/v1/symbols"
 	query := url.Values{}
 	query.Set("clientId", clientId)
 	query.Set("timestamp", fmt.Sprintf("%d", timestamp))
 	requestQuery := query.Encode()
 
+	requestData := map[string]interface{}{"substring": "AAPL"}
+
 	sigObject := map[string]interface{}{
-		"content": nil,
+		"content": requestData,
 		"path":    requestPath,
 		"query":   requestQuery,
 	}
@@ -272,6 +286,9 @@ func main() {
 The same signing rules apply to every authentication mode that uses `clientId`, `timestamp`, and `Signature`. Sign the exact query string you send. For example, a request with additional query parameters signs those parameters as part of `query`:
 
 ```http
-GET /api/v1/accounts?clientId=YOUR_CLIENT_ID&timestamp=1715123456&userId=YOUR_USER_ID&userSecret=YOUR_USER_SECRET
+POST /api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456&userId=YOUR_USER_ID&userSecret=YOUR_USER_SECRET
 Signature: <generated_signature>
+Content-Type: application/json
+
+{"substring":"AAPL"}
 ```
