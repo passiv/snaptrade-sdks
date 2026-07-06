@@ -1,6 +1,6 @@
 # Authentication Methods
 
-We currently support three authentication methods. Choose the method based on whether the caller is a Commercial app acting for its own end users, or a Personal user managing their own brokerage accounts through their SnapTrade account.
+We currently support two signed-request authentication methods. Choose the method based on whether the caller is a Commercial app acting for its own end users, or a Personal user managing their own brokerage accounts through their SnapTrade account.
 
 :::info
 The current SDKs and parts of the API reference still describe **Commercial** authentication. Updates to the API reference and SDKs will follow shortly. Until then, use the rules below as the source of truth for which credentials to send.
@@ -14,7 +14,6 @@ If you'd like to try early SDK support, you can use the TypeScript SDK `11.0.0-c
 | --- | --- | --- | --- |
 | Commercial app authentication | Apps managing many end users | `clientId`, `consumerKey`, `userId`, `userSecret` | The `userId` and `userSecret` identify one SnapTrade user under the Commercial app |
 | Personal API key authentication | SnapTrade Personal accounts using signed API requests for connected brokerage accounts | `clientId`, `consumerKey` | The Personal API key identifies the account owner |
-| Personal OAuth authentication | Apps or connectors where the account owner signs in with their SnapTrade Personal account | OAuth access token | The Bearer token identifies the account owner |
 
 For a broader product-model comparison, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
@@ -76,47 +75,14 @@ Do not call :api[Authentication_registerSnapTradeUser] for Personal API key auth
 
 For more context on Personal API keys, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). For signing direct API requests, see [Request Signatures](https://docs.snaptrade.com/docs/request-signatures).
 
-## Personal OAuth Authentication
-
-Use Personal OAuth authentication when the account owner signs in with their SnapTrade Personal account and grants your app access to their brokerage accounts with an OAuth access token.
-
-With this method, API requests use the OAuth access token as a Bearer token. Do not send `clientId`, `consumerKey`, `userId`, or `userSecret` in the API request.
-
-Direct API requests using this method include:
-
-- `Authorization: Bearer <access_token>` as a request header.
-- No `clientId`.
-- No `consumerKey`.
-- No `userId`.
-- No `userSecret`.
-- No request `Signature` header.
-
-Example request shape:
-
-```http
-GET /api/v1/accounts
-Authorization: Bearer <access_token>
-```
-
-:::info
-The API reference may still show API key fields, `userId`, or `userSecret` for endpoints that support Personal OAuth. For Bearer token requests, omit those fields and send only the OAuth access token in the `Authorization` header.
-:::
-
-The Bearer token identifies the account owner and scopes what the caller can do. Store access tokens securely and treat them as sensitive credentials.
-
-Personal OAuth follows the OAuth 2.0 authorization code flow with PKCE. OAuth clients can discover our current OAuth metadata at `https://api.snaptrade.com/.well-known/oauth-authorization-server`, including the authorization, token, introspection, revocation, and client registration endpoints.
-
 ## Choosing a Method
 
 Use Commercial app authentication if your backend owns the integration and maps many app users to SnapTrade users. This is the only method that requires your app to manage `userId` and `userSecret`.
 
 Use Personal API key authentication if you are using a SnapTrade Personal account and are comfortable with signed API requests.
 
-Use Personal OAuth authentication if the caller should never handle a `consumerKey`, `userId`, or `userSecret`, or if the access should be delegated through user consent.
-
 ## Related
 
 - [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial)
 - [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
 - [Request Signatures](https://docs.snaptrade.com/docs/request-signatures)
-- [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)
