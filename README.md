@@ -3,7 +3,7 @@
   <img alt="SnapTrade Logo" src="https://github.com/user-attachments/assets/a8835735-c8df-40de-92e9-4daa645e542d">
 </picture>
 
-SnapTrade is a financial technology platform that provides a unified API to connect your app with retail brokerage accounts. This allows your users to manage their investment portfolios from multiple brokerage platforms directly through your app. SnapTrade connects your app to 400M+ retail investor accounts across 30+ brokerages, enabling functionalities like real-time data aggregation, trading execution, portfolio tracking, and more.
+SnapTrade is a financial technology platform that provides a unified API to connect your app with retail brokerage accounts. This supports both Commercial apps whose end users manage investment portfolios through the app and Personal users managing their own brokerage accounts. SnapTrade connects your app to 400M+ retail investor accounts across 30+ brokerages, enabling functionalities like real-time data aggregation, trading execution, portfolio tracking, and more.
 
 Our comprehensive API documentation, support, ease of integration and robust functionality has made us a valuable partner for numerous financial apps and services, helping to drive innovation in the fintech space.
 

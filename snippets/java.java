@@ -1,3 +1,4 @@
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.Snaptrade;

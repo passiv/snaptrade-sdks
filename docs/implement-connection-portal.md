@@ -2,13 +2,13 @@
 
 ## Overview
 
-The Connection Portal is the front-end interface your users interact with to link their brokerage accounts to the SnapTrade API.
+The Connection Portal is the front-end interface users interact with to link brokerage accounts to the SnapTrade API.
 
 <img src="./assets/portal-overview.png" alt="connection portal overview" width="700"/>
 
 ### Introduction
 
-The Connection Portal is a drop-in UI that lets your users link brokerage accounts to the SnapTrade API. It handles credential entry, MFA, reconnects, and redirects, so your app only needs to open a connection portal link and and process the connection result when users are returned to your app.
+The Connection Portal is a drop-in UI that lets users link brokerage accounts to the SnapTrade API. It handles credential entry, MFA, reconnects, and redirects, so your app only needs to open a connection portal link and and process the connection result when users are returned to your app.
 
 SnapTrade’s connection portal is built to run smoothly on all modern browsers and platforms, including:
 
@@ -19,7 +19,7 @@ SnapTrade’s connection portal is built to run smoothly on all modern browsers 
 
 ### Initializing
 
-The SnapTrade connection flow begins when your user shows intent to connect their brokerage account to your app.
+The SnapTrade connection flow begins when the account owner shows intent to connect their brokerage account.
 
 1
 
@@ -592,4 +592,4 @@ When a connection attempt fails, the portal surfaces an `error_code` and `status
 | `1023` | `400` | Cannot change the linked brokerage account under an existing connection. | Delete the existing connection and create a new one instead of reconnecting to a different account. |
 | `1140` | `403` | The user-supplied API key does not have permission to retrieve account data (e.g. summary or balances). | Verify that the necessary permissions are granted on the API key. |
 | `1086` | `400` | Invalid 2FA / MFA code provided. | Prompt the user to re-enter the correct multi-factor authentication code. |
-| `0000` | `401` | User not found. | Verify the SnapTrade `userId` and `userSecret` used to generate the login link are correct. |
+| `0000` | `401` | User not found. | For Commercial API keys, verify the SnapTrade `userId` and `userSecret` used to generate the login link are correct. For Personal API keys, verify the Personal key is active and omit user credentials. |

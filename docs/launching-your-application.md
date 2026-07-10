@@ -27,7 +27,7 @@ If your app uses webhooks, you poll the API correctly (using the proper endpoint
 
 ### 3. User Onboarding
 
-You should have a user onboarding flow that handles registering a SnapTrade user and storing the generated user secret.
+For Commercial API key integrations, you should have a user onboarding flow that handles registering a SnapTrade user and storing the generated user secret. Personal API key integrations should not register users or store `userSecret` values.
 
 SnapTrade allows read-only access or trading access for brokerage connections. Making the user explicitly decide as part of the authentication flow helps them understand the nature of the connection they're creating, and ensures a good user experience.
 
