@@ -17,35 +17,21 @@ SnapTrade’s connection portal is built to run smoothly on all modern browsers 
 - Native Android
 - React Native
 
-### Initializing
+### Initialising
 
 The SnapTrade connection flow begins when your user shows intent to connect their brokerage account to your app.
 
-1
+1. User taps _Connect Account_ in your app.
 
-User taps _Connect Account_ in your app.
+   Your app calls your backend to generate a SnapTrade connection portal login link and returns it to the client.
 
-Your app calls your backend to generate a SnapTrade connection portal login link and returns it to the client.
+2. Your app opens the SnapTrade connection portal login link for the user (see [Integration Methods for platform-specific best practices](#integration-methods)).
 
----
+   They select their brokerage and go through the login flow.
 
-2
+3. After successfully connecting, SnapTrade redirects the user back to your app.
 
-Your app opens the SnapTrade connection portal login link for the user (see [Integration Methods for platform-specific best practices](#integration-methods)).
-
-They select their brokerage and go through the login flow.
-
----
-
-3
-
-After successfully connecting, SnapTrade redirects the user back to your app.
-
----
-
-4
-
-Your backend can now fetch and store the connection details and use them to make necessary API requests for the user.
+4. Your backend can now fetch and store the connection details and use them to make necessary API requests for the user.
 
 ### Login Link Parameters
 
