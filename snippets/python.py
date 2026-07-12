@@ -1,3 +1,4 @@
+# Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 import os
 import uuid
 from pprint import pprint

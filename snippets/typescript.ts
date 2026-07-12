@@ -1,3 +1,4 @@
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 const { Snaptrade } = require("snaptrade-typescript-sdk");
 const { randomUUID } = require("crypto");
 const readline = require("readline");
