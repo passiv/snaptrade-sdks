@@ -105,6 +105,7 @@ pip install snaptrade-python-sdk==11.0.212
 ## Getting Started<a id="getting-started"></a>
 
 ```python
+# Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 import os
 import uuid
 from pprint import pprint

@@ -22,6 +22,7 @@ go get github.com/passiv/snaptrade-sdks/sdks/go
 ## Getting Started
 
 ```golang
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 package main
 
 import (
