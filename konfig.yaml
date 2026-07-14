@@ -55,6 +55,9 @@ portal:
               path: docs/authentication-methods.md
             - id: personal-vs-commercial
               path: docs/personal-vs-commercial.md
+            - id: oauth-apps
+              path: docs/oauth-apps.md
+              hidden: true
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade

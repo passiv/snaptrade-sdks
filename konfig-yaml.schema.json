@@ -97,6 +97,10 @@
                                     },
                                     "path": {
                                       "type": "string"
+                                    },
+                                    "hidden": {
+                                      "type": "boolean",
+                                      "description": "Keep the document available at its direct URL while omitting it from navigation, search, AI indexes, and the sitemap."
                                     }
                                   },
                                   "required": [
