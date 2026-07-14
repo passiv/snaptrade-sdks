@@ -4,7 +4,7 @@ SnapTrade OAuth lets your app request access to brokerage accounts that a user a
 
 OAuth is a good fit for read-oriented consumer apps such as portfolio dashboards, analytics tools, tax tools, AI assistants, and personal finance apps.
 
-:::info Limited-time free preview
+:::info{title="Limited-time free preview"}
 OAuth app access is free for a limited time while we work with developers to test and improve the platform. There is no per-user OAuth fee during the preview, so this is a good time to build an integration, test it with real SnapTrade Personal users, and help shape the product before paid pricing is introduced.
 
 We expect the free preview to run for a few months while we learn from early integrations. Future pricing and timing will be announced separately.
@@ -66,7 +66,7 @@ Accept: application/json
 
 The metadata includes the authorization, token, revocation, and registration endpoints, supported grant types, and supported token authentication methods.
 
-```ts
+```typescript
 const metadata = await fetch(
   'https://api.snaptrade.com/.well-known/oauth-authorization-server',
 ).then((response) => response.json());
@@ -80,7 +80,7 @@ const revocationEndpoint = metadata.revocation_endpoint;
 
 Generate a new high-entropy `state` and PKCE `code_verifier` for every authorization attempt. Store them in the user's server-side login session. Derive the `code_challenge` using SHA-256 and base64url encoding without padding.
 
-```ts
+```typescript
 import crypto from 'node:crypto';
 
 const base64url = (value: Buffer) => value.toString('base64url');
@@ -130,7 +130,7 @@ Before exchanging the code:
 
 Exchange the one-time code from your backend. Authenticate the OAuth client with HTTP Basic and send the body as `application/x-www-form-urlencoded`.
 
-```ts
+```typescript
 const clientId = process.env.SNAPTRADE_OAUTH_CLIENT_ID!;
 const clientSecret = process.env.SNAPTRADE_OAUTH_CLIENT_SECRET!;
 
@@ -184,7 +184,7 @@ The API reference may still show Commercial authentication fields as required. O
 
 Refresh shortly before the access token expires. Use the same client authentication as the initial token exchange:
 
-```ts
+```typescript
 const response = await fetch(tokenEndpoint, {
   method: 'POST',
   headers: {
@@ -207,7 +207,7 @@ SnapTrade rotates refresh tokens. Replace the stored refresh token atomically wh
 
 Let users disconnect SnapTrade from inside your app. Revoke the refresh token from your backend, then delete all locally stored SnapTrade tokens:
 
-```ts
+```typescript
 await fetch(revocationEndpoint, {
   method: 'POST',
   headers: {
