@@ -142,6 +142,8 @@ portal:
       get: true
     /authorizations/{authorizationId}/accounts:
       get: true
+    /accounts/{accountId}/trading/complex:
+      post: true
   hideOperations:
     /accounts/{accountId}/positions:
       get: true
