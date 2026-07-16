@@ -53,27 +53,23 @@ Clients can discover the connector's OAuth configuration at these endpoints:
 
 For details on what data the connector accesses and how it is handled, see the [SnapTrade Connector Privacy Notice](https://docs.snaptrade.com/docs/connector-privacy). For SnapTrade's overall security posture, see [snaptrade.com/security](https://snaptrade.com/security).
 
-## Set up the connector in Claude
+## Set up the SnapTrade connector in Claude
 
-1. In Claude, go to **Customize → Connectors**.
-2. Click **+**, then **Add custom connector**.
-3. Enter the MCP server URL: `https://mcp.snaptrade.com/mcp`.
-4. Claude redirects you to SnapTrade. Log in and approve **read** access to your account data.
-5. Review the consent screen, which lists the read-only scope being granted.
-6. After you approve, you are returned to Claude and the SnapTrade tools become available.
-
-## Set up the connector in ChatGPT
-
-1. In ChatGPT, go to **Settings → Apps & Connectors → Advanced settings** and turn on **Developer mode**.
-2. Go to **Settings → Connectors** and click **Create**.
+1. In Claude, go to **Settings → Connectors**.
+2. Click **Add**, then **Add custom connector**.
 3. Enter a name (for example, `SnapTrade`) and the MCP server URL: `https://mcp.snaptrade.com/mcp`.
-4. Set the authentication method to **OAuth** and confirm you trust the application.
-5. Click **Create**, then complete the OAuth login flow with SnapTrade and approve **read** access.
-6. After you approve, the SnapTrade tools become available in your chats.
+4. Click **Add**, then **Connect**.
+5. Complete the SnapTrade login flow if prompted and approve **read** access.
+6. After you approve, the SnapTrade tools become available in Claude.
 
-> Note: ChatGPT Developer mode and custom connectors are available on ChatGPT for web, not the desktop app — complete this setup at [chatgpt.com](https://chatgpt.com).
+## Set up the SnapTrade app in ChatGPT
 
-> Note: Once the SnapTrade app is approved in the ChatGPT app directory, users can add it directly from the directory without enabling Developer mode.
+1. In ChatGPT, go to **Settings → Security and login → Developer mode** and turn on **Developer mode**.
+2. Go to **Settings → Plugins → Browse plugins** and click **+** to create a developer-mode app.
+3. Enter a name (for example, `SnapTrade`) and the MCP server URL: `https://mcp.snaptrade.com/mcp`.
+4. Set authentication to **OAuth**, then create the app.
+5. Complete the SnapTrade login flow if prompted and approve **read** access.
+6. In a new chat, mention SnapTrade or tag **@SnapTrade** to access your SnapTrade data through MCP.
 
 ## Example prompts
 
