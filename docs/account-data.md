@@ -10,8 +10,7 @@ The account object contains information such as the institution name, the sync s
 
 ## Positions
 
-:api[AccountInformation_getUserAccountPositions]
-:api[Options_listOptionHoldings]
+:api[AccountInformation_getAllAccountPositions]
 
 Positions are the current holdings of the account excluding cash. This includes many asset classes such as stocks, ETFs, and fixed income.
 
