@@ -53,18 +53,14 @@ Clients can discover the connector's OAuth configuration at these endpoints:
 
 For details on what data the connector accesses and how it is handled, see the [SnapTrade Connector Privacy Notice](https://docs.snaptrade.com/docs/connector-privacy). For SnapTrade's overall security posture, see [snaptrade.com/security](https://snaptrade.com/security).
 
-## Set up the connector in Claude
+## Set up the SnapTrade connector in Claude
 
-1. In Claude, open **Settings**.
-2. Go to **Connectors**.
-3. Click **Add**.
-4. Click **Add custom connector**.
-5. Enter a name (for example, `SnapTrade`).
-6. Enter the MCP server URL: `https://mcp.snaptrade.com/mcp`.
-7. Click **Add**.
-8. Click **Connect**.
-9. Claude redirects you to SnapTrade. If prompted, log in, then click **Allow access** to approve **read** access to your account data.
-10. After you approve, you are returned to Claude and the SnapTrade tools become available.
+1. In Claude, go to **Settings → Connectors**.
+2. Click **Add**, then **Add custom connector**.
+3. Enter a name (for example, `SnapTrade`) and the MCP server URL: `https://mcp.snaptrade.com/mcp`.
+4. Click **Add**, then **Connect**.
+5. Complete the SnapTrade login flow if prompted and approve **read** access.
+6. After you approve, the SnapTrade tools become available in Claude.
 
 ## Set up the SnapTrade app in ChatGPT
 
@@ -72,7 +68,7 @@ For details on what data the connector accesses and how it is handled, see the [
 2. Go to **Settings → Plugins → Browse plugins** and click **+** to create a developer-mode app.
 3. Enter a name (for example, `SnapTrade`) and the MCP server URL: `https://mcp.snaptrade.com/mcp`.
 4. Set authentication to **OAuth**, then create the app.
-5. Complete the SnapTrade login flow and approve **read** access.
+5. Complete the SnapTrade login flow if prompted and approve **read** access.
 6. In a new chat, mention SnapTrade or tag **@SnapTrade** to access your SnapTrade data through MCP.
 
 ## Example prompts
