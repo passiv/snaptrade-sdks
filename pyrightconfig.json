@@ -1,0 +1,14 @@
+{
+  "venvPath": "sdks/python",
+  "venv": ".venv",
+  "include": [
+    "typecheck",
+    "sdks/python/test/test_auth_modes.py",
+    "sdks/python/test/test_signing.py"
+  ],
+  "extraPaths": [
+    "sdks/python"
+  ],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic"
+}

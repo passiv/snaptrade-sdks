@@ -1,4 +1,10 @@
-import { Snaptrade } from "./index";
+import { Snaptrade, SnaptradeAuth } from "./index";
+
+const commercialAuth = () =>
+  SnaptradeAuth.commercialApiKey({
+    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY as string,
+    clientId: process.env.SNAPTRADE_CLIENT_ID as string,
+  });
 
 function uuid() {
   var d = new Date().getTime(); //Timestamp
@@ -25,8 +31,7 @@ function uuid() {
 it("getting started", async () => {
   // 1) Initialize a client with your clientID and consumerKey.
   const snaptrade = new Snaptrade({
-    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-    clientId: process.env.SNAPTRADE_CLIENT_ID,
+    auth: commercialAuth(),
   });
 
   // 2) Check that the client is able to make a request to the API server.
@@ -70,8 +75,7 @@ it("getting started", async () => {
 
 it("getUserAccountBalance", async () => {
   const snaptrade = new Snaptrade({
-    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-    clientId: process.env.SNAPTRADE_CLIENT_ID,
+    auth: commercialAuth(),
   });
   const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
   const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
@@ -90,8 +94,7 @@ it("getUserAccountBalance", async () => {
 
 it("getActivities", async () => {
   const snaptrade = new Snaptrade({
-    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-    clientId: process.env.SNAPTRADE_CLIENT_ID,
+    auth: commercialAuth(),
   });
   const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
   const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
@@ -129,8 +132,7 @@ it("getActivities", async () => {
 
 it("getUserHoldings", async () => {
   const snaptrade = new Snaptrade({
-    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-    clientId: process.env.SNAPTRADE_CLIENT_ID,
+    auth: commercialAuth(),
   });
   const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
   const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;

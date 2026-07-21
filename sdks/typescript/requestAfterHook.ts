@@ -1,47 +1,41 @@
 import * as crypto from "crypto";
 import { RequestArgs } from "./base";
-import { Configuration } from "./configuration";
+import { AuthMode, Configuration } from "./configuration";
 
-// Function to check if the code is running in a Node.js environment
 function isNodeEnvironment() {
   return (
     typeof process !== "undefined" && process.versions && process.versions.node
   );
 }
 
-// Compute HMAC SHA256
 async function computeHmacSha256(
   message: string,
   key: string
 ): Promise<string> {
   if (isNodeEnvironment()) {
-    // Node.js environment
     const crypto = require("crypto");
     const hmac = crypto.createHmac("sha256", key);
     hmac.update(message);
-    return hmac.digest("base64"); // or return Buffer if you want raw bytes
-  } else {
-    // Browser environment
-    const encoder = new TextEncoder();
-    const keyBuffer = encoder.encode(key);
-    const msgBuffer = encoder.encode(message);
-    const cryptoKey = await globalThis.crypto.subtle.importKey(
-      "raw",
-      keyBuffer,
-      { name: "HMAC", hash: "SHA-256" },
-      false,
-      ["sign"]
-    );
-    const signature = await globalThis.crypto.subtle.sign(
-      "HMAC",
-      cryptoKey,
-      msgBuffer
-    );
-    const byteArray = Array.from(new Uint8Array(signature));
-    // Convert byte array to base64
-    const base64 = btoa(String.fromCharCode.apply(null, byteArray));
-    return base64;
+    return hmac.digest("base64");
   }
+
+  const encoder = new TextEncoder();
+  const keyBuffer = encoder.encode(key);
+  const msgBuffer = encoder.encode(message);
+  const cryptoKey = await window.crypto.subtle.importKey(
+    "raw",
+    keyBuffer,
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const signature = await window.crypto.subtle.sign(
+    "HMAC",
+    cryptoKey,
+    msgBuffer
+  );
+  const byteArray = Array.from(new Uint8Array(signature));
+  return btoa(String.fromCharCode.apply(null, byteArray));
 }
 
 const JSONstringifyOrder = (obj: any) => {
@@ -62,23 +56,42 @@ export async function requestAfterHook(request: {
   axiosArgs: RequestArgs;
   basePath: string;
   url: string;
-  configuration?: Configuration;
+  configuration?: Configuration<AuthMode>;
+  operationAuth?: {
+    selectedAuthMode?: string;
+    authModes?: string[];
+    requestSigningByAuthMode?: Record<string, {
+      secretParameter: string;
+      signedSecuritySchemes: string[];
+    }>;
+  };
 }): Promise<void> {
-  const { configuration, basePath, axiosArgs, url } = request;
-  if (configuration?.consumerKey === undefined)
-    throw Error("Consumer key is required");
-  const consumerKey = encodeURI(configuration.consumerKey);
+  const { configuration, basePath, axiosArgs, url, operationAuth } = request;
+  const selectedAuthMode = operationAuth?.selectedAuthMode;
+  const requestSigning = selectedAuthMode === undefined
+    ? undefined
+    : operationAuth?.requestSigningByAuthMode?.[selectedAuthMode];
+  if (requestSigning === undefined) return;
+  const signatureScheme = requestSigning.signedSecuritySchemes.find(
+    (scheme) => scheme.toLowerCase().endsWith("signature")
+  );
+  if (signatureScheme === undefined) return;
+  const signingSecret = configuration?.[requestSigning.secretParameter as keyof Configuration<AuthMode>];
+  if (typeof signingSecret !== "string")
+    throw Error(`${requestSigning.secretParameter} is required`);
+  const encodedSigningSecret = encodeURI(signingSecret);
   const requestData =
     axiosArgs.options.data === undefined || axiosArgs.options.data === "{}"
       ? null
       : JSON.parse(axiosArgs.options.data);
-  const requestPath =
+  const path =
     axiosArgs.url.indexOf("?") === -1
       ? `${axiosArgs.url}`
       : `${axiosArgs.url.split("?")[0]}`;
+  const requestPath = path;
   const requestQuery = url
     .replace(basePath, "")
-    .replace(requestPath, "")
+    .replace(path, "")
     .replace("?", "");
   const sigObject = {
     content: requestData,
@@ -86,7 +99,7 @@ export async function requestAfterHook(request: {
     query: requestQuery,
   };
   const sigContent = JSONstringifyOrder(sigObject);
-  const signature = await computeHmacSha256(sigContent, consumerKey);
+  const signature = await computeHmacSha256(sigContent, encodedSigningSecret);
 
   if (axiosArgs.options.headers)
     axiosArgs.options.headers["Signature"] = signature;

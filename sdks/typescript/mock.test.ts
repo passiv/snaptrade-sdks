@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Snaptrade } from "./index";
+import { Snaptrade, SnaptradeAuth } from "./index";
 
 describe("trailing slash is stripped", () => {
   it("should make a GET request to the correct URL", async () => {
@@ -8,8 +8,10 @@ describe("trailing slash is stripped", () => {
 
     // Call your function
     await new Snaptrade({
-      consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-      clientId: process.env.SNAPTRADE_CLIENT_ID,
+      auth: SnaptradeAuth.commercialApiKey({
+        consumerKey: process.env.SNAPTRADE_CONSUMER_KEY as string,
+        clientId: process.env.SNAPTRADE_CLIENT_ID as string,
+      }),
       basePath: "http://localhost:3000/api/proxy",
     }).apiStatus.check();
 
