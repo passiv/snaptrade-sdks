@@ -15,10 +15,10 @@ describe("trailing slash is stripped", () => {
       basePath: "http://localhost:3000/api/proxy",
     }).apiStatus.check();
 
-    // Assert that axios.get was called with the correct URL
+    // The root operation must not leave a trailing slash or an empty query.
     expect(axios.request).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: expect.stringContaining("http://localhost:3000/api/proxy?"),
+        url: "http://localhost:3000/api/proxy",
       })
     );
   });
