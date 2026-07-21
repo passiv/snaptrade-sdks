@@ -336,6 +336,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501NotImplementedResponse'
+          description: Not Implemented - return rates are not supported for this brokerage
         "503":
           content:
             application/json:
@@ -1547,6 +1553,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501NotImplementedResponse'
+          description: Not Implemented - return rates are not supported for this brokerage
         "503":
           content:
             application/json:
@@ -1755,7 +1767,7 @@ paths:
       description: |
         Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-        This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+        This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
