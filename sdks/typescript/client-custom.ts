@@ -1,5 +1,5 @@
-import { ConfigurationParameters } from "./configuration";
+import { AuthMode, ConfigurationParameters } from "./configuration";
 
-export class SnaptradeCustom {
-    constructor(configurationParameters: ConfigurationParameters) {}
+export class SnaptradeCustom<TAuth extends AuthMode> {
+    constructor(configurationParameters: ConfigurationParameters<TAuth>) {}
 }

@@ -1,8 +1,8 @@
 import { RequestArgs } from "./base";
-import { Configuration } from "./configuration";
+import { AuthMode, Configuration } from "./configuration";
 
 export function requestBeforeUrlHook(request: {
   axiosArgs: RequestArgs;
   basePath: string;
-  configuration?: Configuration;
+  configuration?: Configuration<AuthMode>;
 }): void {}
