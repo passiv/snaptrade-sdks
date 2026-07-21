@@ -35,11 +35,13 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.rate_of_return_response import RateOfReturnResponse as RateOfReturnResponseSchema
 from snaptrade_client.model.model503_brokerage_request_response import Model503BrokerageRequestResponse as Model503BrokerageRequestResponseSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
+from snaptrade_client.model.model501_not_implemented_response import Model501NotImplementedResponse as Model501NotImplementedResponseSchema
 from snaptrade_client.model.model403_feature_not_enabled_response import Model403FeatureNotEnabledResponse as Model403FeatureNotEnabledResponseSchema
 
 from snaptrade_client.type.model503_brokerage_request_response import Model503BrokerageRequestResponse
 from snaptrade_client.type.rate_of_return_response import RateOfReturnResponse
 from snaptrade_client.type.model403_feature_not_enabled_response import Model403FeatureNotEnabledResponse
+from snaptrade_client.type.model501_not_implemented_response import Model501NotImplementedResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 
 from . import path
@@ -182,6 +184,27 @@ _response_for_500 = api_client.OpenApiResponse(
             schema=SchemaFor500ResponseBodyApplicationJson),
     },
 )
+SchemaFor501ResponseBodyApplicationJson = Model501NotImplementedResponseSchema
+
+
+@dataclass
+class ApiResponseFor501(api_client.ApiResponse):
+    body: Model501NotImplementedResponse
+
+
+@dataclass
+class ApiResponseFor501Async(api_client.AsyncApiResponse):
+    body: Model501NotImplementedResponse
+
+
+_response_for_501 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor501,
+    response_cls_async=ApiResponseFor501Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor501ResponseBodyApplicationJson),
+    },
+)
 SchemaFor503ResponseBodyApplicationJson = Model503BrokerageRequestResponseSchema
 
 
@@ -207,6 +230,7 @@ _status_code_to_response = {
     '200': _response_for_200,
     '403': _response_for_403,
     '500': _response_for_500,
+    '501': _response_for_501,
     '503': _response_for_503,
 }
 _all_accept_content_types = (
