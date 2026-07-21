@@ -8808,7 +8808,7 @@ components:
             - realtime
             - delayed
 
-            Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the "Cache Expiry of Holdings" column on the Holdings tab at https://support.snaptrade.com/brokerages for which val
+            Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the "Data freshness" column on the "Positions & recent orders" tab at https://support.snaptrade.com/brokerages.
           example: realtime
           type: string
           x-konfig-original-example: realtime
