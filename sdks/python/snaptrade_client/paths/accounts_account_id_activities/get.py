@@ -79,6 +79,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
         'offset': typing.Union[OffsetSchema, decimal.Decimal, int, ],
         'limit': typing.Union[LimitSchema, decimal.Decimal, int, ],
         'type': typing.Union[TypeSchema, str, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

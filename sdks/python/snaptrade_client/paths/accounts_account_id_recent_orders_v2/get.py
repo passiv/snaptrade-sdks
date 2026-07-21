@@ -59,6 +59,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'only_executed': typing.Union[OnlyExecutedSchema, bool, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

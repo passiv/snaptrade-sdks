@@ -57,6 +57,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'use_ticker': typing.Union[UseTickerSchema, bool, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

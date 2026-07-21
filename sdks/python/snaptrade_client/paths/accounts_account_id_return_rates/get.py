@@ -61,6 +61,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
         'timeframes': typing.Union[TimeframesSchema, str, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

@@ -94,6 +94,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'state': typing.Union[StateSchema, str, ],
         'days': typing.Union[DaysSchema, decimal.Decimal, int, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

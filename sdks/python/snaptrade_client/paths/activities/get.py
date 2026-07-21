@@ -61,6 +61,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
         'accounts': typing.Union[AccountsSchema, str, ],
         'brokerageAuthorizations': typing.Union[BrokerageAuthorizationsSchema, str, ],
         'type': typing.Union[TypeSchema, str, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

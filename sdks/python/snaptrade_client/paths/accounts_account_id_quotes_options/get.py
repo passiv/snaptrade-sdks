@@ -57,6 +57,8 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )

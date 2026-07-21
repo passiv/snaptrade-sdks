@@ -57,6 +57,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'base': typing.Union[BaseSchema, str, ],
         'quote': typing.Union[QuoteSchema, str, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )
