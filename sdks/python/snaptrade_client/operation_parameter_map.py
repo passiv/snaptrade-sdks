@@ -5,12 +5,6 @@ operation_parameter_map = {
                 'name': 'accountId'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'startDate'
             },
             {
@@ -30,24 +24,12 @@ operation_parameter_map = {
     '/accounts/{accountId}/balanceHistory-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
         ]
     },
     '/accounts/{accountId}/positions/all-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -56,12 +38,6 @@ operation_parameter_map = {
     '/holdings-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'brokerage_authorizations'
             },
         ]
@@ -69,24 +45,12 @@ operation_parameter_map = {
     '/accounts/{accountId}/balances-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
         ]
     },
     '/accounts/{accountId}-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -100,22 +64,10 @@ operation_parameter_map = {
             {
                 'name': 'accountId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/accounts/{accountId}/orders-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -130,24 +82,12 @@ operation_parameter_map = {
     '/accounts/{accountId}/positions-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
         ]
     },
     '/accounts/{accountId}/recentOrders-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -158,12 +98,6 @@ operation_parameter_map = {
     },
     '/accounts/{accountId}/returnRates-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -177,32 +111,14 @@ operation_parameter_map = {
             {
                 'name': 'accountId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/accounts-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/accounts/{accountId}-PUT': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -214,9 +130,6 @@ operation_parameter_map = {
     },
     '/snapTrade/deleteUser-DELETE': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
         ]
     },
     '/snapTrade/listUsers-GET': {
@@ -225,12 +138,6 @@ operation_parameter_map = {
     },
     '/snapTrade/login-POST': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'broker'
             },
@@ -279,24 +186,12 @@ operation_parameter_map = {
             {
                 'name': 'connectionId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}-GET': {
         'parameters': [
             {
                 'name': 'authorizationId'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
         ]
     },
@@ -305,12 +200,6 @@ operation_parameter_map = {
             {
                 'name': 'authorizationId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}/accounts-GET': {
@@ -318,34 +207,16 @@ operation_parameter_map = {
             {
                 'name': 'authorizationId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/authorizations-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}/refresh-POST': {
         'parameters': [
             {
                 'name': 'authorizationId'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
         ]
     },
@@ -354,22 +225,10 @@ operation_parameter_map = {
             {
                 'name': 'authorizationId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}/returnRates-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'authorizationId'
             },
@@ -396,12 +255,6 @@ operation_parameter_map = {
             {
                 'name': 'authorizationId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/snapTrade/tradeDetection/subscriptions-POST': {
@@ -411,12 +264,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'check_interval_seconds'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
         ]
     },
@@ -435,22 +282,10 @@ operation_parameter_map = {
             {
                 'name': 'brokerageOrderId'
             },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
         ]
     },
     '/accounts/{accountId}/orders/v2-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -465,12 +300,6 @@ operation_parameter_map = {
     '/accounts/{accountId}/recentOrders/v2-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
             {
@@ -484,12 +313,6 @@ operation_parameter_map = {
     },
     '/accounts/{accountId}/options-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -557,12 +380,6 @@ operation_parameter_map = {
     '/accounts/{accountId}/symbols-POST': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
             {
@@ -576,12 +393,6 @@ operation_parameter_map = {
                 'name': 'brokerage_order_id'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
         ]
@@ -592,24 +403,12 @@ operation_parameter_map = {
                 'name': 'brokerage_order_id'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
         ]
     },
     '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'accountId'
             },
@@ -628,12 +427,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'legs'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
             {
                 'name': 'accountId'
@@ -667,12 +460,6 @@ operation_parameter_map = {
                 'name': 'time_in_force'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'price'
             },
             {
@@ -689,12 +476,6 @@ operation_parameter_map = {
     '/accounts/{accountId}/quotes/options-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
             {
@@ -704,12 +485,6 @@ operation_parameter_map = {
     },
     '/accounts/{accountId}/quotes-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'symbols'
             },
@@ -745,12 +520,6 @@ operation_parameter_map = {
                 'name': 'accountId'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'price'
             },
             {
@@ -773,12 +542,6 @@ operation_parameter_map = {
                 'name': 'accountId'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'client_order_id'
             },
         ]
@@ -799,12 +562,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'amount'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
             {
                 'name': 'accountId'
@@ -836,12 +593,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'time_in_force'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
             {
                 'name': 'universal_symbol_id'
@@ -884,12 +635,6 @@ operation_parameter_map = {
                 'name': 'legs'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
             {
@@ -907,12 +652,6 @@ operation_parameter_map = {
         'parameters': [
             {
                 'name': 'tradeId'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
             {
                 'name': 'wait_to_confirm'
@@ -935,12 +674,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'amount'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
             {
                 'name': 'accountId'
@@ -977,12 +710,6 @@ operation_parameter_map = {
                 'name': 'accountId'
             },
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'price'
             },
             {
@@ -999,12 +726,6 @@ operation_parameter_map = {
     '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'accountId'
             },
             {
@@ -1017,12 +738,6 @@ operation_parameter_map = {
     },
     '/activities-GET': {
         'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
             {
                 'name': 'startDate'
             },
@@ -1047,12 +762,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'endDate'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
             },
             {
                 'name': 'accounts'

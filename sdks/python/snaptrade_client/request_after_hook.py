@@ -28,13 +28,40 @@ def request_after_hook(
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
 ):
     if headers is None:
         return
     if auth_settings is None:
         return
+    request_signing = _request_signing_for_selected_auth_mode(
+        configuration=configuration,
+        operation_auth_context=operation_auth_context,
+    )
+    if request_signing is None:
+        return
+    secret_parameter = request_signing.get("secret_parameter")
+    consumer_key = getattr(configuration, secret_parameter, None)
+    if not isinstance(consumer_key, str):
+        raise ValueError("%s is required" % secret_parameter)
     headers['Signature'] = compute_request_signature(
         path=resource_path,
-        consumer_key=configuration.consumer_key,
+        consumer_key=consumer_key,
         body=body
     )
+
+
+def _request_signing_for_selected_auth_mode(
+        configuration: Configuration,
+        operation_auth_context: typing.Optional[dict],
+):
+    if operation_auth_context is None:
+        return None
+    selected_auth_mode = getattr(configuration, "auth_mode", None)
+    if selected_auth_mode is None:
+        return None
+    request_signing_by_auth_mode = operation_auth_context.get(
+        "request_signing_by_auth_mode",
+        {},
+    )
+    return request_signing_by_auth_mode.get(selected_auth_mode)

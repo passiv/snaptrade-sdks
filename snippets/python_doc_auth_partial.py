@@ -1,2 +1,4 @@
-    consumer_key="YOUR_CONSUMER_KEY",
-    client_id="YOUR_CLIENT_ID",
+    auth=SnapTradeAuth.commercial_api_key(
+        consumer_key="YOUR_CONSUMER_KEY",
+        client_id="YOUR_CLIENT_ID",
+    ),

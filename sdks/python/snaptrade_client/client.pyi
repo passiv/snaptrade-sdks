@@ -10,12 +10,10 @@
 """
 
 import typing
-import inspect
-from datetime import date, datetime
-from snaptrade_client.client_custom import ClientCustom
+from snaptrade_client.auth import AuthMode
+from snaptrade_client.auth import CommercialApiKeyAuth
+from snaptrade_client.auth import PersonalApiKeyAuth
 from snaptrade_client.configuration import Configuration
-from snaptrade_client.api_client import ApiClient
-from snaptrade_client.type_util import copy_signature
 from snaptrade_client.apis.tags.account_information_api import AccountInformationApi
 from snaptrade_client.apis.tags.api_status_api import APIStatusApi
 from snaptrade_client.apis.tags.authentication_api import AuthenticationApi
@@ -25,24 +23,26 @@ from snaptrade_client.apis.tags.options_api import OptionsApi
 from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
 from snaptrade_client.apis.tags.transactions_and_reporting_api import TransactionsAndReportingApi
+from snaptrade_client.client_custom import ClientCustom
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
 
-
-class SnapTrade(ClientCustom):
-
-    def __init__(self, configuration: typing.Union[Configuration, None] = None, **kwargs):
-        super().__init__(configuration, **kwargs)
-        if (len(kwargs) > 0):
-            configuration = Configuration(**kwargs)
-        if (configuration is None):
-            raise Exception("configuration is required")
-        api_client = ApiClient(configuration)
-        self.account_information: AccountInformationApi = AccountInformationApi(api_client)
-        self.api_status: APIStatusApi = APIStatusApi(api_client)
-        self.authentication: AuthenticationApi = AuthenticationApi(api_client)
-        self.connections: ConnectionsApi = ConnectionsApi(api_client)
-        self.experimental_endpoints: ExperimentalEndpointsApi = ExperimentalEndpointsApi(api_client)
-        self.options: OptionsApi = OptionsApi(api_client)
-        self.reference_data: ReferenceDataApi = ReferenceDataApi(api_client)
-        self.trading: TradingApi = TradingApi(api_client)
-        self.transactions_and_reporting: TransactionsAndReportingApi = TransactionsAndReportingApi(api_client)
+class SnapTrade(ClientCustom, typing.Generic[TAuth]):
+    @typing.overload
+    def __init__(self: "SnapTrade[CommercialApiKeyAuth]", configuration: None = None, *, auth: CommercialApiKeyAuth, **kwargs: typing.Any) -> None: ...
+    @typing.overload
+    def __init__(self: "SnapTrade[PersonalApiKeyAuth]", configuration: None = None, *, auth: PersonalApiKeyAuth, **kwargs: typing.Any) -> None: ...
+    @typing.overload
+    def __init__(self: "SnapTrade[TAuth]", configuration: typing.Optional[Configuration[TAuth]] = None, **kwargs: typing.Any) -> None: ...
+    def __init__(self, configuration: typing.Optional[Configuration[TAuth]] = None, **kwargs: typing.Any) -> None:
+        ...
+    account_information: AccountInformationApi[TAuth]
+    api_status: APIStatusApi[TAuth]
+    authentication: AuthenticationApi[TAuth]
+    connections: ConnectionsApi[TAuth]
+    experimental_endpoints: ExperimentalEndpointsApi[TAuth]
+    options: OptionsApi[TAuth]
+    reference_data: ReferenceDataApi[TAuth]
+    trading: TradingApi[TAuth]
+    transactions_and_reporting: TransactionsAndReportingApi[TAuth]
