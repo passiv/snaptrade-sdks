@@ -146,6 +146,41 @@ it("adds timestamp and signature for Personal API-key requests", async () => {
   expect(axiosArgs.options.headers).toHaveProperty("Signature");
 });
 
+it("signs requests in Web Worker-like runtimes without window", async () => {
+  const configuration = new Configuration({
+    auth: SnaptradeAuth.personalApiKey({
+      clientId: "client_id",
+      consumerKey: "consumer_key",
+    }),
+  });
+  const axiosArgs: RequestArgs = {
+    url: "/accounts?timestamp=1700000000",
+    options: { method: "GET", headers: {} },
+  };
+  const originalNodeVersion = process.versions.node;
+  Object.defineProperty(process.versions, "node", {
+    configurable: true,
+    value: undefined,
+  });
+
+  try {
+    await requestAfterHook({
+      axiosArgs,
+      basePath: "https://api.snaptrade.com",
+      url: "https://api.snaptrade.com/accounts?timestamp=1700000000",
+      configuration,
+      operationAuth: personalSigningOperationAuth,
+    });
+  } finally {
+    Object.defineProperty(process.versions, "node", {
+      configurable: true,
+      value: originalNodeVersion,
+    });
+  }
+
+  expect(axiosArgs.options.headers).toHaveProperty("Signature");
+});
+
 it("signs Commercial API-key requests for operations that inherit global security", async () => {
   const mockRequest = jest.fn().mockResolvedValueOnce({ data: [] });
   (axios.request as jest.Mock) = mockRequest;
