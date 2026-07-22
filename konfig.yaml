@@ -307,7 +307,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.213
+    version: 12.0.0
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -325,7 +325,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 10.0.19
+    version: 11.0.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
