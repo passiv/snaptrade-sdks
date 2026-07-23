@@ -20,7 +20,7 @@ Personal and Commercial are customer experiences, not billing plan names. Billin
 | User registration | Do not call :api[Authentication_registerSnapTradeUser] for Personal API key authentication | Call :api[Authentication_registerSnapTradeUser] before creating connections |
 | Connection Portal | Opens for the Personal user's own brokerage connections | Opens for a specific SnapTrade user managed by your app |
 | Trading | Supported for the Personal user's own accounts where enabled | Supported for app users where enabled |
-| Webhooks | Not currently available | Available |
+| Webhooks | Available | Available |
 | MCP server | Supported; the MCP server is designed for SnapTrade Personal users | Not used with Commercial developer API keys |
 | Key lifecycle | Personal customers can create one Personal client ID and consumer key in the dashboard | Commercial customers start with a test key and can create production keys after KYC approval |
 | Billing | Free | Connected users and usage under the Commercial customer agreement |
@@ -54,7 +54,7 @@ Common Commercial use cases include:
 - A fintech app that lets many app users connect their brokerages.
 - A portfolio management, tax, financial planning, trading, or analytics product.
 - A backend service that needs to create, track, and support many SnapTrade users.
-- Production integrations that need webhooks, billing, compliance review, and higher limits.
+- Production integrations that need billing, compliance review, and higher limits.
 
 Commercial integrations use a SnapTrade client ID and consumer key. Your backend signs requests with the consumer key and keeps that key secret.
 
@@ -123,7 +123,7 @@ For Commercial integrations, trading requires:
 - A connection created with the appropriate connection type.
 - Your application's own user confirmation and compliance flow before submitting orders.
 
-Webhooks are currently available only for Commercial integrations. Personal API keys do not receive webhooks.
+Both Personal and Commercial API keys can receive webhooks after a webhook listener URL is configured in the SnapTrade Dashboard.
 
 ## Billing And Limits
 

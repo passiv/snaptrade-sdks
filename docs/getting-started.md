@@ -20,7 +20,7 @@ Both authentication modes use an API key consisting of a `clientId` and `consume
 | User identity | The API key identifies the signed-in SnapTrade user | Each app user has a SnapTrade `userId` and `userSecret` |
 | User registration | Not required | Required before connecting a brokerage |
 | Trading | Available for your own accounts where enabled | Available for app users where enabled |
-| Webhooks | Not currently available | Available |
+| Webhooks | Available | Available |
 
 - [Follow the Personal quickstart](#personal-quickstart)
 - [Follow the Commercial quickstart](#commercial-quickstart)
@@ -95,11 +95,8 @@ Use **Personal API Key** authentication throughout and continue to omit `userId`
 
 - Learn more about retrieving [Account Data](https://docs.snaptrade.com/docs/account-data).
 - Learn how to manage and repair [Connections](https://docs.snaptrade.com/docs/connections).
+- Configure [Webhooks](https://docs.snaptrade.com/docs/webhooks).
 - Access your data through AI assistants with the [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server).
-
-:::info
-Webhooks are not currently available for Personal users.
-:::
 
 [Back to authentication modes](#getting-started-api-keys)
 
