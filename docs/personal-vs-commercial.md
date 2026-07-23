@@ -19,6 +19,8 @@ Personal and Commercial are customer experiences, not billing plan names. Billin
 | API authorization | Signed requests with a Personal consumer key | Signed requests using the Commercial consumer key |
 | User registration | Do not call :api[Authentication_registerSnapTradeUser] for Personal API key authentication | Call :api[Authentication_registerSnapTradeUser] before creating connections |
 | Connection Portal | Opens for the Personal user's own brokerage connections | Opens for a specific SnapTrade user managed by your app |
+| Trading | Supported for the Personal user's own accounts where enabled | Supported for app users where enabled |
+| Webhooks | Not currently available | Available |
 | MCP server | Supported; the MCP server is designed for SnapTrade Personal users | Not used with Commercial developer API keys |
 | Key lifecycle | Personal customers can create one Personal client ID and consumer key in the dashboard | Commercial customers start with a test key and can create production keys after KYC approval |
 | Billing | Free | Connected users and usage under the Commercial customer agreement |
@@ -120,6 +122,8 @@ For Commercial integrations, trading requires:
 - A brokerage and account that support trading.
 - A connection created with the appropriate connection type.
 - Your application's own user confirmation and compliance flow before submitting orders.
+
+Webhooks are currently available only for Commercial integrations. Personal API keys do not receive webhooks.
 
 ## Billing And Limits
 
