@@ -65,8 +65,9 @@ Your Personal API key represents you. Do not register a separate SnapTrade user,
 
 1. Open :api[Authentication_loginSnapTradeUser] and select **Personal API Key** authentication.
 2. Enter your Personal `clientId` and `consumerKey`. Leave `userId` and `userSecret` unset.
-3. Send the request and open the returned Connection Portal URL.
-4. Complete the Connection Portal flow for your brokerage.
+3. If you intend to trade, set `connectionType` to `trade-if-available`. The default `read` connection type supports data access only.
+4. Send the request and open the returned Connection Portal URL.
+5. Complete the Connection Portal flow for your brokerage.
 
 A `connection` represents a linked set of brokerage credentials. Completing the portal flow makes the brokerage accounts under that connection available through SnapTrade.
 
@@ -84,7 +85,7 @@ You can also retrieve balances with :api[AccountInformation_getUserAccountBalanc
 
 ### 4. Place a Checked Trade
 
-Personal users can trade their own accounts when trading is enabled for the API key, brokerage, and account.
+Personal users can trade their own accounts when trading is enabled for the API key, brokerage, connection, and account.
 
 1. Call :api[Trading_getUserAccountQuotes] to find the `universalSymbolId` for the instrument.
 2. Call :api[Trading_getOrderImpact] to validate the order and save the returned `tradeId`.
@@ -137,7 +138,8 @@ The `userId` and `userSecret` identify this app user in subsequent user-scoped r
 
 1. Call :api[Authentication_loginSnapTradeUser] using **Commercial API Key** authentication.
 2. Provide the app user's `userId` and `userSecret`.
-3. Open the returned Connection Portal URL and send the end user through the portal flow.
+3. If the user intends to trade, set `connectionType` to `trade-if-available`. The default `read` connection type supports data access only.
+4. Open the returned Connection Portal URL and send the end user through the portal flow.
 
 After the user completes the flow, the connection and its brokerage accounts are available through SnapTrade.
 
