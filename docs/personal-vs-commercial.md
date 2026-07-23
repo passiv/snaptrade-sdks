@@ -86,7 +86,7 @@ Both experiences can involve a SnapTrade client ID and consumer key, but they ar
 - Must be stored only on a backend or other secure server-side environment.
 - Are used to generate request signatures and validate webhook signatures.
 
-In the SnapTrade Dashboard, Commercial customers typically create a test key first. Production key creation requires KYC approval and a payment method. Personal customers are limited to one free Personal client ID and consumer key, which they can use for their own production use cases.
+In the SnapTrade Dashboard, Commercial customers typically create a test key first. Production key creation requires KYC approval and a payment method. Personal customers are limited to one free Personal client ID and consumer key for their own brokerage accounts.
 
 ## Users And Connections
 

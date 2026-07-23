@@ -53,8 +53,9 @@ Use this path when you are connecting and managing your own brokerage accounts.
 
 1. Create a Personal account in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
 2. Verify your email.
-3. Create your Personal API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
-4. Store the `clientId` and `consumerKey` securely.
+3. Enable two-factor authentication.
+4. Create your Personal API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
+5. Store the `clientId` and `consumerKey` securely.
 
 Your Personal API key represents you. Do not register a separate SnapTrade user, and do not send a `userId` or `userSecret` in Personal API requests.
 
@@ -114,9 +115,10 @@ Use this path when you are building an application that manages brokerage connec
 
 1. Create a Commercial account in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
 2. Verify your email.
-3. Create a test API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
-4. When you are ready for production, complete the required approval and billing steps in the Dashboard and create a production key.
-5. Store the `clientId` and `consumerKey` on a secure backend.
+3. Enable two-factor authentication.
+4. Create a test API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
+5. When you are ready for production, complete the required approval and billing steps in the Dashboard and create a production key.
+6. Store the `clientId` and `consumerKey` on a secure backend.
 
 For plan limits and production requirements, see [Billing](https://docs.snaptrade.com/docs/billing).
 
