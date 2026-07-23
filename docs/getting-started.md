@@ -87,7 +87,7 @@ You can also retrieve balances with :api[AccountInformation_getUserAccountBalanc
 
 Personal users can trade their own accounts when trading is enabled for the API key, brokerage, connection, and account.
 
-1. Call :api[Trading_getUserAccountQuotes] to find the `universalSymbolId` for the instrument.
+1. Call :api[ReferenceData_symbolSearchUserAccount] with the account ID and a ticker or instrument name to find the `universalSymbolId`.
 2. Call :api[Trading_getOrderImpact] to validate the order and save the returned `tradeId`.
 3. Confirm the order details, then call :api[Trading_placeOrder] with the `tradeId` before it expires.
 
@@ -157,7 +157,7 @@ You can also retrieve balances with :api[AccountInformation_getUserAccountBalanc
 
 Commercial integrations can trade when trading is enabled for the API key, brokerage, connection, and account.
 
-1. Call :api[Trading_getUserAccountQuotes] to find the `universalSymbolId` for the instrument.
+1. Call :api[ReferenceData_symbolSearchUserAccount] with the account ID and a ticker or instrument name to find the `universalSymbolId`.
 2. Call :api[Trading_getOrderImpact] to validate the order and save the returned `tradeId`.
 3. Have the end user confirm the order details, then call :api[Trading_placeOrder] with the `tradeId` before it expires.
 
