@@ -15,8 +15,8 @@ Personal and Commercial are customer experiences, not billing plan names. Billin
 | Intended user | An individual using SnapTrade for their own brokerage accounts | A company building an app for its own end users |
 | SnapTrade account owner | The individual investor | The developer, company, or partner |
 | End-user model | The signed-in Personal user is the SnapTrade user | Your app creates one SnapTrade `userId` and `userSecret` per end user |
-| Authentication options | Personal client ID and consumer key | Commercial client ID and consumer key |
-| API authorization | Signed requests with a Personal consumer key | Signed requests using the Commercial consumer key |
+| Authentication options | OAuth for sharing connected account data, or a Personal client ID and consumer key for direct access | Commercial client ID and consumer key |
+| API authorization | OAuth bearer tokens for apps, or signed requests with a Personal consumer key | Signed requests using the Commercial consumer key |
 | User registration | Do not call :api[Authentication_registerSnapTradeUser] for Personal API key authentication | Call :api[Authentication_registerSnapTradeUser] before creating connections |
 | Connection Portal | Opens for the Personal user's own brokerage connections | Opens for a specific SnapTrade user managed by your app |
 | Trading | Supported for the Personal user's own accounts where enabled | Supported for app users where enabled |
@@ -36,7 +36,9 @@ Common Personal use cases include:
 - Portfolio analysis and trading for the user's own accounts.
 - Connection management for the user's own brokerages.
 
-Personal client ID and consumer key authentication is available for Personal users who need signed-request workflows, including trading with their own accounts where enabled. The Personal user represents themselves. Unlike a Commercial integration, your app should not create a separate SnapTrade user for them.
+Most Personal users connect their brokerage accounts in the SnapTrade Dashboard and authorize OAuth-enabled apps or AI assistants to read their data. OAuth apps receive scoped tokens rather than the user's API credentials.
+
+Personal client ID and consumer key authentication is available for Personal users who need direct signed-request workflows, including trading with their own accounts where enabled. The Personal user represents themselves. Unlike a Commercial integration, your app should not create a separate SnapTrade user for them.
 
 For Personal API key authentication:
 
