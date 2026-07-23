@@ -103,15 +103,17 @@ For more ways to open and configure the portal, see [Methods to Integrate the Co
 
 You can also retrieve balances with :api[AccountInformation_getUserAccountBalance] and orders with :api[AccountInformation_getUserAccountOrders].
 
-### 5. Place a Checked Trade
+### 5. Place an Equity Trade
 
 Personal users can trade their own accounts when trading is enabled for the API key, brokerage, connection, and account.
 
-1. Call :api[ReferenceData_symbolSearchUserAccount] with the account ID and a ticker or instrument name to find the `universalSymbolId`.
-2. Call :api[Trading_getOrderImpact] to validate the order and save the returned `tradeId`.
-3. Confirm the order details, then call :api[Trading_placeOrder] with the `tradeId` before it expires.
+1. Build the order using the account ID and the brokerage ticker in the `symbol` field.
+2. Validate the order details and confirm them before submission.
+3. Call :api[Trading_placeForceOrder] to submit the order to the brokerage.
 
 Use **Personal API Key** authentication throughout and continue to omit `userId` and `userSecret`.
+
+For order types, brokerage support, and other asset classes, see [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
 
 ### Personal Next Steps
 
@@ -173,15 +175,17 @@ For more ways to open and configure the portal, see [Methods to Integrate the Co
 
 You can also retrieve balances with :api[AccountInformation_getUserAccountBalance] and orders with :api[AccountInformation_getUserAccountOrders].
 
-### 5. Place a Checked Trade
+### 5. Place an Equity Trade
 
 Commercial integrations can trade when trading is enabled for the API key, brokerage, connection, and account.
 
-1. Call :api[ReferenceData_symbolSearchUserAccount] with the account ID and a ticker or instrument name to find the `universalSymbolId`.
-2. Call :api[Trading_getOrderImpact] to validate the order and save the returned `tradeId`.
-3. Have the end user confirm the order details, then call :api[Trading_placeOrder] with the `tradeId` before it expires.
+1. Build the order using the account ID and the brokerage ticker in the `symbol` field.
+2. Validate the order details in your application and have the end user confirm them.
+3. Call :api[Trading_placeForceOrder] to submit the order to the brokerage.
 
 Include the user's `userId` and `userSecret` in each user-scoped request.
+
+For order types, brokerage support, and other asset classes, see [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
 
 ### Commercial Next Steps
 
