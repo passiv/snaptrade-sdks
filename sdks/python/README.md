@@ -353,12 +353,12 @@ get_all_account_positions_response = (
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**Deprecated, please use the account-specific holdings endpoint instead.**
+**Deprecated.** Use the account-specific holdings endpoint instead.
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 List all accounts for the user, plus balances, positions, and orders for each
 account.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -556,9 +556,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ### `snaptrade.account_information.get_user_account_positions`<a id="snaptradeaccount_informationget_user_account_positions"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+**Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
-This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
@@ -672,6 +672,9 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
+
 Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1511,9 +1514,9 @@ list_subscriptions_response = snaptrade.experimental_endpoints.list_subscription
 ### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
+**Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
-This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
@@ -1920,7 +1923,8 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
+**Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.
+
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
@@ -2164,8 +2168,6 @@ The quotes returned can be delayed depending on the brokerage the account belong
 
 This endpoint does not work for options quotes.
 
-This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -2204,7 +2206,8 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 ### `snaptrade.trading.place_bracket_order`<a id="snaptradetradingplace_bracket_order"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
+**Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.
+
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
 use. Only supported on certain brokerages
 
@@ -2798,15 +2801,15 @@ search_cryptocurrency_pair_instruments_response = (
 ### `snaptrade.transactions_and_reporting.get_activities`<a id="snaptradetransactions_and_reportingget_activities"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
+**Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
 This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2858,7 +2861,8 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 ### `snaptrade.transactions_and_reporting.get_reporting_custom_range`<a id="snaptradetransactions_and_reportingget_reporting_custom_range"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+**Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
