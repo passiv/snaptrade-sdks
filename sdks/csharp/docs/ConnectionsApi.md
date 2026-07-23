@@ -781,6 +781,7 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **403** | Forbidden |  -  |
 | **500** | Unexpected error |  -  |
+| **501** | Not Implemented - return rates are not supported for this brokerage |  -  |
 | **503** | Brokerage API failure |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

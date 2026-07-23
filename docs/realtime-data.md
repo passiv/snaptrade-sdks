@@ -1,34 +1,38 @@
-# Best practices to serve real-time data
+# Real-time vs Daily plans
 
-SnapTrade offers the ability to get real-time data on both Pay as you Go / Real-time and Pay as you Go / Daily plans. Real-time requests are enabled by default on all non-custom plans. See [our pricing page](https://snaptrade.com/pricing) for more information on plans
+SnapTrade offers two data freshness options for holdings data: **Real-time** and **Daily**. These names describe how data is refreshed; they are separate from your billing model. You can confirm which option your API key uses on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing).
 
-### Pay as you Go / Real-time
+| Behavior | Real-time | Daily |
+| --- | --- | --- |
+| Data returned | Supported holdings endpoints fetch the latest data from the brokerage when called. | Holdings data is cached and refreshed once per day. Exact refresh timing may vary by brokerage. |
+| Intraday updates | Call the holdings endpoints again to fetch updated brokerage data. | Call the [Refresh connection endpoint](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization) to start an asynchronous update. Additional charges may apply. |
+| Completion signal | The API response contains the refreshed data. | Wait for an [ACCOUNT_HOLDINGS_UPDATED webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) for each account before requesting the updated holdings. |
 
-The best practice for showing users accurate data on Pay as you Go / Real-time is to update your user's state when they log in to your app. You can do this by making API calls to the resources you need, commonly [/positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions), [/options](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings), [/balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance). Repeat this process every 10 minutes while the user remains active in your application
+Holdings data includes positions, balances, orders, and account details. Data availability and freshness still depend on what each brokerage makes available.
 
-### Pay as you Go / Daily
+## Recommended application flow
 
-On Pay as you Go / Daily, SnapTrade returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To get real-time data we recommend calling [the manual refresh endpoint](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization) to update the data. SnapTrade will begin a sync and notify you via [ACCOUNT_HOLDINGS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) webhooks when each account has finished syncing, at which point you can call [/positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions), [/options](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings), [/balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance) for each account. If you expect your users to want intraday updates, it is a good idea to give the option of a refresh button that lets the user refresh their data in the same way. Note that calls to the Refresh endpoint will incur additional charges according to your plan
+### Real-time
 
+When a user logs in to your application, request the holdings data needed for their current view. Common endpoints include [List all account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountPositions) and [List account balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance).
 
-## Get notified when users place trades at their broker
+While the user remains active, request the data again as needed. To avoid SnapTrade and brokerage rate limits, we recommend polling no more often than once every 10 minutes per account.
 
-If you need to know when a trade has been placed by a specific user, the recommendation is to poll the [Recent Orders endpoint](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders), only during market hours. This endpoint defaults to returning the last day of executed orders. Keep a copy of this list on your end, and check if a new order is present in the polling responses. To avoid SnapTrade and institution rate limits, we recommend polling at most once every 5 minutes per account. If faster trade detection is needed, please check out https://docs.snaptrade.com/docs/webhooks#webhooks-trade_detection and contact support@snaptrade.com if you wish to purchase a subscription (or reach out on discord/slack).
+### Daily
 
+Use the cached daily data for normal application loads. If users need an intraday update, consider providing a refresh button that calls the [Refresh connection endpoint](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+A refresh runs asynchronously. After starting it, wait for an [ACCOUNT_HOLDINGS_UPDATED webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) for each account, then request the updated positions, balances, and other holdings data. Each refresh call may incur an additional charge according to your plan.
 
 ## Transactions
-Please see [our guide on Syncing and Data Freshness](https://docs.snaptrade.com/docs/syncing) for more information about transactions
 
-## Relevant Endpoints 
+Transactions are cached, updated once per day, and delayed by one day on both Real-time and Daily plans. If you need intraday trade activity, use orders instead. See [Syncing and Data Freshness](https://docs.snaptrade.com/docs/syncing) and [Orders compared with activities](https://docs.snaptrade.com/docs/account-data#account-data-orders) for details.
 
-[List account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions)
+## Relevant endpoints
 
-[List account option positions](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings)
-
-[List account balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance)
-
-[List account orders (all)](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders)
-
-[List account recent orders (for polling)](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders)
-
-[Get account detail (total account value)](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountDetails)
+- [List all account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountPositions)
+- [List account balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance)
+- [List account orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders)
+- [List recent account orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders)
+- [Get account details](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountDetails)
+- [Refresh a connection](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization)

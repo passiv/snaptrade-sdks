@@ -12,13 +12,14 @@
     Created by: https://snaptrade.com/
 """
 
-__version__ = "11.0.210"
+__version__ = "12.0.0"
 
 # import ApiClient
 from snaptrade_client.api_client import ApiClient
 
 # import Configuration
 from snaptrade_client.configuration import Configuration
+from snaptrade_client.auth import SnapTradeAuth, AuthMode, CommercialApiKeyAuth, PersonalApiKeyAuth
 
 # import exceptions
 from snaptrade_client.exceptions import OpenApiException

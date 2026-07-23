@@ -21,23 +21,23 @@ import {
   TradingApi,
   TransactionsAndReportingApi,
 } from "./api";
-import { Configuration, ConfigurationParameters } from "./configuration";
+import { AuthMode, Configuration, ConfigurationParameters } from "./configuration";
 import { SnaptradeCustom } from "./client-custom";
 
-export class Snaptrade extends SnaptradeCustom {
-  readonly accountInformation: AccountInformationApi;
-  readonly apiStatus: ApiStatusApi;
-  readonly authentication: AuthenticationApi;
-  readonly connections: ConnectionsApi;
-  readonly experimentalEndpoints: ExperimentalEndpointsApi;
-  readonly options: OptionsApi;
-  readonly referenceData: ReferenceDataApi;
-  readonly trading: TradingApi;
-  readonly transactionsAndReporting: TransactionsAndReportingApi;
+export class Snaptrade<TAuth extends AuthMode> extends SnaptradeCustom<TAuth> {
+  readonly accountInformation: AccountInformationApi<TAuth>;
+  readonly apiStatus: ApiStatusApi<TAuth>;
+  readonly authentication: AuthenticationApi<TAuth>;
+  readonly connections: ConnectionsApi<TAuth>;
+  readonly experimentalEndpoints: ExperimentalEndpointsApi<TAuth>;
+  readonly options: OptionsApi<TAuth>;
+  readonly referenceData: ReferenceDataApi<TAuth>;
+  readonly trading: TradingApi<TAuth>;
+  readonly transactionsAndReporting: TransactionsAndReportingApi<TAuth>;
 
-  constructor(configurationParameters: ConfigurationParameters = {}) {
+  constructor(configurationParameters: ConfigurationParameters<TAuth>) {
     super(configurationParameters);
-    const configuration = new Configuration(configurationParameters);
+    const configuration = new Configuration<TAuth>(configurationParameters);
     this.accountInformation = new AccountInformationApi(configuration);
     this.apiStatus = new ApiStatusApi(configuration);
     this.authentication = new AuthenticationApi(configuration);

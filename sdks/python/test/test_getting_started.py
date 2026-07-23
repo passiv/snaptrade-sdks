@@ -14,7 +14,17 @@ import os
 import unittest
 import uuid
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, SnapTradeAuth
+
+
+def _commercial_client(**kwargs):
+    return SnapTrade(
+        auth=SnapTradeAuth.commercial_api_key(
+            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
+            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
+        ),
+        **kwargs,
+    )
 
 
 class TestGettingStarted(unittest.TestCase):
@@ -31,10 +41,7 @@ class TestGettingStarted(unittest.TestCase):
         test getting started flow using kwargs
         """
         # 1) Initialize a client with your clientID and consumerKey.
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-        )
+        snaptrade = _commercial_client()
 
         # 2) Check that the client is able to make a request to the API server.
         api_response = snaptrade.api_status.check()
@@ -72,10 +79,7 @@ class TestGettingStarted(unittest.TestCase):
 
     def testGettingStarted(self):
         # 1) Initialize a client with your clientID and consumerKey.
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-        )
+        snaptrade = _commercial_client()
 
         # 2) Check that the client is able to make a request to the API server.
         api_response = snaptrade.api_status.check()
@@ -84,7 +88,7 @@ class TestGettingStarted(unittest.TestCase):
         # 3) Create a new user on SnapTrade
         user_id = str(uuid.uuid4())
         register_response = snaptrade.authentication.register_snap_trade_user(
-            body={"userId": user_id}
+            user_id=user_id
         )
         pprint(register_response.body)
 
@@ -95,77 +99,67 @@ class TestGettingStarted(unittest.TestCase):
         # 4) Get a redirect URI. Users will need this to connect
         # their brokerage to the SnapTrade server.
         redirect_uri = snaptrade.authentication.login_snap_trade_user(
-            query_params={"userId": user_id, "userSecret": user_secret}
+            user_id=user_id,
+            user_secret=user_secret,
         )
         print(redirect_uri.body)
 
         # 5) Obtaining account holdings data
         holdings = snaptrade.account_information.get_all_user_holdings(
-            query_params={"userId": user_id, "userSecret": user_secret}
+            user_id=user_id,
+            user_secret=user_secret,
         )
         pprint(holdings.body)
 
         # 6) Deleting a user
         deleted_response = snaptrade.authentication.delete_snap_trade_user(
-            query_params={"userId": user_id}
+            user_id=user_id
         )
         pprint(deleted_response.body)
 
     def test_get_user_account_balance(self):
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-        )
+        snaptrade = _commercial_client()
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
         accounts = snaptrade.account_information.list_user_accounts(
-            query_params={"userId": user_id, "userSecret": user_secret}
+            user_id=user_id,
+            user_secret=user_secret,
         )
         response = snaptrade.account_information.get_user_account_balance(
-            path_params={
-                "accountId": accounts.body[0]["id"],
-            },
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-            },
+            account_id=accounts.body[0]["id"],
+            user_id=user_id,
+            user_secret=user_secret,
         )
         pprint(response.body)
 
     def test_get_user_holdings(self):
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-        )
+        snaptrade = _commercial_client()
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
         accounts = snaptrade.account_information.list_user_accounts(
-            query_params={"userId": user_id, "userSecret": user_secret}
+            user_id=user_id,
+            user_secret=user_secret,
         )
         account_id = accounts.body[0]["id"]
         holdings = snaptrade.account_information.get_user_holdings(
-            query_params={"userId": user_id, "userSecret": user_secret},
-            path_params={"accountId": account_id},
+            account_id=account_id,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         pprint(holdings)
 
     def test_get_activities(self):
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-        )
+        snaptrade = _commercial_client()
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
         # instantiate two variables, one date that is 1 year ago and another that is today
         from_date = datetime.datetime.now() - datetime.timedelta(days=365)
         to_date = datetime.datetime.now()
         response = snaptrade.transactions_and_reporting.get_activities(
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-                "startDate": from_date,
-                "endDate": to_date,
-            }
+            user_id=user_id,
+            user_secret=user_secret,
+            start_date=from_date,
+            end_date=to_date,
         )
         pprint(response)
         self.assertIsNotNone(response)
@@ -173,12 +167,10 @@ class TestGettingStarted(unittest.TestCase):
         from_date = datetime.date.today() - datetime.timedelta(days=365)
         to_date = datetime.date.today()
         response = snaptrade.transactions_and_reporting.get_activities(
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-                "startDate": from_date,
-                "endDate": to_date,
-            }
+            user_id=user_id,
+            user_secret=user_secret,
+            start_date=from_date,
+            end_date=to_date,
         )
         pprint(response)
         self.assertIsNotNone(response)
@@ -188,12 +180,10 @@ class TestGettingStarted(unittest.TestCase):
         )
         to_date = datetime.date.today().strftime("%Y-%m-%d")
         response = snaptrade.transactions_and_reporting.get_activities(
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-                "startDate": from_date,
-                "endDate": to_date,
-            }
+            user_id=user_id,
+            user_secret=user_secret,
+            start_date=from_date,
+            end_date=to_date,
         )
         pprint(response)
         # assert that response is not None
@@ -202,12 +192,10 @@ class TestGettingStarted(unittest.TestCase):
         from_date = (datetime.date.today() - datetime.timedelta(days=365)).isoformat()
         to_date = datetime.date.today().isoformat()
         response = snaptrade.transactions_and_reporting.get_activities(
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-                "startDate": from_date,
-                "endDate": to_date,
-            }
+            user_id=user_id,
+            user_secret=user_secret,
+            start_date=from_date,
+            end_date=to_date,
         )
         pprint(response)
         # assert that response is not None
@@ -223,53 +211,41 @@ class TestGettingStarted(unittest.TestCase):
         # call the get_activities method and assert that an exception is thrown
         with self.assertRaises(Exception):
             snaptrade.transactions_and_reporting.get_activities(
-                query_params={
-                    "userId": user_id,
-                    "userSecret": user_secret,
-                    "startDate": from_date,
-                    "endDate": to_date,
-                }
+                user_id=user_id,
+                user_secret=user_secret,
+                start_date=from_date,
+                end_date=to_date,
             )
 
     @unittest.skip(reason="getting 500 internal server error")
     def test_get_options_chain(self):
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-        )
+        snaptrade = _commercial_client()
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
         accounts = snaptrade.account_information.list_user_accounts(
-            query_params={"userId": user_id, "userSecret": user_secret}
+            user_id=user_id,
+            user_secret=user_secret,
         )
         account_id = accounts.body[0]["id"]
-        symbols = snaptrade.reference_data.get_symbols(body={"substring": "apple"})
+        symbols = snaptrade.reference_data.get_symbols(substring="apple")
         symbol_id = symbols.body[0]["id"]
         options_chain = snaptrade.options.get_options_chain(
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-                "symbol": symbol_id,
-            },
-            path_params={"accountId": account_id},
+            account_id=account_id,
+            user_id=user_id,
+            user_secret=user_secret,
+            symbol=symbol_id,
         )
         pprint(options_chain)
 
     def test_remove_brokerage_authorization(self):
-        snaptrade = SnapTrade(
-            consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
-            client_id=os.environ["SNAPTRADE_CLIENT_ID"],
-            host="http://127.0.0.1:4010"
-        )
+        snaptrade = _commercial_client(host="http://127.0.0.1:4010")
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
 
         response = snaptrade.connections.remove_brokerage_authorization(
-            query_params={
-                "userId": user_id,
-                "userSecret": user_secret,
-            },
-            path_params={"authorizationId": uuid.uuid4()},
+            authorization_id=uuid.uuid4(),
+            user_id=user_id,
+            user_secret=user_secret,
         )
         pprint(response)
         self.assertIsNotNone(response)

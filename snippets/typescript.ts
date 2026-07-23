@@ -1,12 +1,15 @@
-const { Snaptrade } = require("snaptrade-typescript-sdk");
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret.
+const { Snaptrade, SnaptradeAuth } = require("snaptrade-typescript-sdk");
 const { randomUUID } = require("crypto");
 const readline = require("readline");
 
 async function main() {
   // 1) Initialize a client with your clientID and consumerKey.
   const snaptrade = new Snaptrade({
-    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-    clientId: process.env.SNAPTRADE_CLIENT_ID,
+    auth: SnaptradeAuth.commercialApiKey({
+      consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+      clientId: process.env.SNAPTRADE_CLIENT_ID,
+    }),
   });
 
   // 2) Check that the client is able to make a request to the API server.

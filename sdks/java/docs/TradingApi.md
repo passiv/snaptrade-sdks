@@ -460,7 +460,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
+| **501** | Deprecated. Previously returned when option impact was not supported for this brokerage; such requests now return 400. |  -  |
 
 <a name="getOrderImpact"></a>
 # **getOrderImpact**

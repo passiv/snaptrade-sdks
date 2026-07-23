@@ -25,7 +25,7 @@ Use `raw_type` when you need finer-grained distinctions than `account_category` 
 
 ## Filtering in Your Code
 
-The examples below select a single connection for brevity. If a user has multiple connections, choose the connection whose accounts you want to filter before listing accounts for that connection.
+The examples below select a single connection for brevity. If a user has multiple connections, choose the connection whose accounts you want to filter before listing accounts for that connection. The SDK snippets show the Commercial API key shape with `userId` and `userSecret`; Personal API key users should omit `userId` and `userSecret` for direct API calls. SDK support for Personal API key users is coming soon.
 
 ### Node.js / TypeScript
 
@@ -98,6 +98,7 @@ investment_accounts = [
 
 ```bash
 # Replace <authorizationId> with an id returned by /authorizations.
+# Commercial API key example. Personal API key requests omit userId and userSecret.
 curl 'https://api.snaptrade.com/api/v1/authorizations/<authorizationId>/accounts?userId=...&userSecret=...' \
   | jq '[.[] | select(.account_category == "INVESTMENT" or .account_category == null)]'
 ```

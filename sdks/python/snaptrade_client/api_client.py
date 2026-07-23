@@ -38,6 +38,7 @@ from snaptrade_client import rest
 from snaptrade_client.api_response import ApiResponse, AsyncApiResponse
 from snaptrade_client.rest import AsyncResponseWrapper, ResponseWrapper
 from snaptrade_client.configuration import Configuration
+from snaptrade_client.auth import AuthMode
 from snaptrade_client.exceptions import ApiTypeError, ApiValueError, MissingRequiredParametersError
 from snaptrade_client.request_after_hook import request_after_hook
 from snaptrade_client.request_before_url_hook import request_before_url_hook
@@ -68,6 +69,9 @@ class RequestField(RequestFieldBase):
         if not isinstance(other, RequestField):
             return False
         return self.__dict__ == other.__dict__
+
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
 
 def DeprecationWarningOnce(func=None, *, prefix=None):
@@ -1098,7 +1102,7 @@ class OpenApiResponse(JSONDetector):
                 )
             # Execute validation and throw as a side effect if validation fails
             body_schema.from_openapi_data_oapg(
-                body_data,
+                deserialized_body,
                 _configuration=configuration
             )
 
@@ -1114,7 +1118,7 @@ class OpenApiResponse(JSONDetector):
         )
 
 
-class ApiClient:
+class ApiClient(typing.Generic[TAuth]):
     """Generic API client for OpenAPI client library builds.
 
     OpenAPI generic API client. This client handles the client-
@@ -1138,7 +1142,7 @@ class ApiClient:
 
     def __init__(
         self,
-        configuration: typing.Optional[Configuration] = None,
+        configuration: typing.Optional[Configuration[TAuth]] = None,
         header_name: typing.Optional[str] = None,
         header_value: typing.Optional[str] = None,
         cookie: typing.Optional[str] = None,
@@ -1155,7 +1159,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'Konfig/11.0.210/python'
+        self.user_agent = 'Konfig/12.0.0/python'
 
     def __enter__(self):
         return self
@@ -1202,6 +1206,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1213,6 +1218,17 @@ class ApiClient:
         used_headers = HTTPHeaderDict(self.default_headers)
         if self.cookie:
             headers['Cookie'] = self.cookie
+
+        request_before_url_hook(
+            resource_path_ref=[resource_path],
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
+            headers=used_headers,
+        )
 
         # auth setting
         resource_path_ref = [self.update_params_for_auth(
@@ -1228,16 +1244,6 @@ class ApiClient:
         if headers:
             used_headers.update(headers)
 
-        request_before_url_hook(
-            resource_path_ref=resource_path_ref,
-            method=method,
-            configuration=self.configuration,
-            body=body,
-            fields=fields,
-            auth_settings=auth_settings,
-            headers=used_headers,
-        )
-
         # request url
         if host is None:
             url = self.configuration.host + resource_path_ref[0]
@@ -1252,6 +1258,7 @@ class ApiClient:
             body=body,
             fields=fields,
             auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
             headers=used_headers,
         )
 
@@ -1279,6 +1286,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1289,6 +1297,17 @@ class ApiClient:
         used_headers = HTTPHeaderDict(self.default_headers)
         if self.cookie:
             headers['Cookie'] = self.cookie
+
+        request_before_url_hook(
+            resource_path_ref=[resource_path],
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
+            headers=used_headers,
+        )
 
         # auth setting
         resource_path_ref = [self.update_params_for_auth(
@@ -1304,16 +1323,6 @@ class ApiClient:
         if headers:
             used_headers.update(headers)
 
-        request_before_url_hook(
-            resource_path_ref=resource_path_ref,
-            method=method,
-            configuration=self.configuration,
-            body=body,
-            fields=fields,
-            auth_settings=auth_settings,
-            headers=used_headers,
-        )
-
         # request url
         if host is None:
             url = self.configuration.host + resource_path_ref[0]
@@ -1328,6 +1337,7 @@ class ApiClient:
             body=body,
             fields=fields,
             auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
             headers=used_headers,
         )
 
@@ -1354,6 +1364,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1392,6 +1403,7 @@ class ApiClient:
             body,
             fields,
             auth_settings,
+            operation_auth_context,
             stream,
             timeout,
             host,
@@ -1408,6 +1420,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1445,6 +1458,7 @@ class ApiClient:
             body,
             fields,
             auth_settings,
+            operation_auth_context,
             stream,
             timeout,
             host,

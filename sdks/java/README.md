@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.213-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.213)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.216-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.216)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -128,7 +128,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.snaptrade</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.213</version>
+  <version>5.0.216</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -144,7 +144,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.snaptrade:snaptrade-java-sdk:5.0.213"
+   implementation "com.snaptrade:snaptrade-java-sdk:5.0.216"
 }
 ```
 
@@ -181,7 +181,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.213.jar`
+* `target/snaptrade-java-sdk-5.0.216.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
@@ -189,6 +189,7 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.Snaptrade;
@@ -1703,7 +1704,7 @@ List<TradeDetectionSubscription> result = client
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
-This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.

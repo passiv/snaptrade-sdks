@@ -14,7 +14,7 @@ import unittest
 
 import os
 from pprint import pprint
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, SnapTradeAuth
 
 class TestSimple(unittest.TestCase):
     def setUp(self):
@@ -22,8 +22,11 @@ class TestSimple(unittest.TestCase):
 
     def test_client(self):
         snaptrade = SnapTrade(
-            consumer_key="YOUR_CONSUMER_KEY",
-    client_id="YOUR_CLIENT_ID",
+            auth=SnapTradeAuth.commercial_api_key(
+        consumer_key="YOUR_CONSUMER_KEY",
+        client_id="YOUR_CLIENT_ID",
+    ),
+
         )
         self.assertIsNotNone(snaptrade)
 

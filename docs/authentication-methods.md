@@ -253,20 +253,8 @@ Signature: <signature>
 
 For signature details, see [Request Signatures](https://docs.snaptrade.com/docs/request-signatures).
 
-## Common Mistakes
-
-- Initializing the upcoming SDKs with old constructor fields such as `new Snaptrade({ clientId, consumerKey })` or `SnapTrade(client_id=..., consumer_key=...)`. Use the `auth` helpers instead.
-- Passing `userId` or `userSecret` with Personal API key auth. Your Personal API key already identifies your SnapTrade account.
-- Omitting `userId` or `userSecret` with Commercial API key auth on user-scoped account-data calls.
-- Calling :api[Authentication_registerSnapTradeUser] for Personal API key integrations. User registration is a Commercial workflow.
-- Fetching account data before the brokerage account has been connected through the Connection Portal.
-- Listing SnapTrade users with Personal API key auth. Personal API key calls already resolve to you.
-- Exposing `consumerKey` or `userSecret` in browser or mobile clients. Keep signed-request credentials on a secure backend.
-- Treating `userId` as the brokerage account ID. `userId` identifies a SnapTrade user under a Commercial app; account-data methods return brokerage account IDs separately.
-
 ## Related
 
 - [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial)
 - [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
 - [Request Signatures](https://docs.snaptrade.com/docs/request-signatures)
-- [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)

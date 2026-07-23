@@ -11,6 +11,7 @@
 """
 
 from dataclasses import dataclass
+import typing
 import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
@@ -19,6 +20,9 @@ from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
+from snaptrade_client.auth import AuthMode
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401
@@ -33,9 +37,11 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
+from snaptrade_client.model.model503_brokerage_request_response import Model503BrokerageRequestResponse as Model503BrokerageRequestResponseSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.model501_not_implemented_response import Model501NotImplementedResponse as Model501NotImplementedResponseSchema
 
+from snaptrade_client.type.model503_brokerage_request_response import Model503BrokerageRequestResponse
 from snaptrade_client.type.model501_not_implemented_response import Model501NotImplementedResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
@@ -43,8 +49,6 @@ from snaptrade_client.type.account_order_record import AccountOrderRecord
 from . import path
 
 # Query params
-UserIdSchema = schemas.StrSchema
-UserSecretSchema = schemas.StrSchema
 
 
 class StateSchema(
@@ -85,8 +89,6 @@ class DaysSchema(
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
     }
 )
 RequestOptionalQueryParams = typing_extensions.TypedDict(
@@ -94,6 +96,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'state': typing.Union[StateSchema, str, ],
         'days': typing.Union[DaysSchema, decimal.Decimal, int, ],
+        'userId': str,
+        'userSecret': str,
     },
     total=False
 )
@@ -103,20 +107,6 @@ class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams)
     pass
 
 
-request_query_user_id = api_client.QueryParameter(
-    name="userId",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserIdSchema,
-    required=True,
-    explode=True,
-)
-request_query_user_secret = api_client.QueryParameter(
-    name="userSecret",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserSecretSchema,
-    required=True,
-    explode=True,
-)
 request_query_state = api_client.QueryParameter(
     name="state",
     style=api_client.ParameterStyle.FORM,
@@ -155,11 +145,51 @@ request_path_account_id = api_client.PathParameter(
     schema=AccountIdSchema,
     required=True,
 )
-_auth = [
+_auth_modes = {
+    "commercialApiKey": [
+        "PartnerClientId",
+        "PartnerTimestamp",
+        "userId",
+        "userSecret",
+    ],
+    "personalApiKey": [
+        "PersonalClientId",
+        "PersonalTimestamp",
+    ],
+}
+_operation_auth_context = {
+    "auth_modes": [
+        "commercialApiKey",
+        "personalApiKey",
+    ],
+    "request_signing_by_auth_mode": {
+        "commercialApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PartnerSignature",
+                "PartnerTimestamp",
+            ],
+        },
+        "personalApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PersonalSignature",
+                "PersonalTimestamp",
+            ],
+        },
+    },
+}
+_legacy_auth = [
     'PartnerClientId',
     'PartnerSignature',
     'PartnerTimestamp',
+    'PersonalClientId',
+    'PersonalSignature',
+    'PersonalTimestamp',
+    'userId',
+    'userSecret',
 ]
+_auth = None
 
 
 class SchemaFor200ResponseBodyApplicationJson(
@@ -248,10 +278,32 @@ _response_for_501 = api_client.OpenApiResponse(
             schema=SchemaFor501ResponseBodyApplicationJson),
     },
 )
+SchemaFor503ResponseBodyApplicationJson = Model503BrokerageRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor503(api_client.ApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+@dataclass
+class ApiResponseFor503Async(api_client.AsyncApiResponse):
+    body: Model503BrokerageRequestResponse
+
+
+_response_for_503 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor503,
+    response_cls_async=ApiResponseFor503Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor503ResponseBodyApplicationJson),
+    },
+)
 _status_code_to_response = {
     '200': _response_for_200,
     '500': _response_for_500,
     '501': _response_for_501,
+    '503': _response_for_503,
 }
 _all_accept_content_types = (
     'application/json',
@@ -262,34 +314,38 @@ class BaseApi(api_client.Api):
 
     def _get_user_account_orders_mapped_args(
         self,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
         days: typing.Optional[int] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
+        _header_params = {}
         _path_params = {}
-        if user_id is not None:
-            _query_params["userId"] = user_id
-        if user_secret is not None:
-            _query_params["userSecret"] = user_secret
         if state is not None:
             _query_params["state"] = state
         if days is not None:
             _query_params["days"] = days
+        if user_id is not None:
+            _query_params["userId"] = user_id
+        if user_secret is not None:
+            _query_params["userSecret"] = user_secret
         if account_id is not None:
             _path_params["accountId"] = account_id
         args.query = query_params if query_params else _query_params
+        args.header = _header_params
         args.path = path_params if path_params else _path_params
         return args
 
     async def _aget_user_account_orders_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
@@ -326,8 +382,6 @@ class BaseApi(api_client.Api):
     
         prefix_separator_iterator = None
         for parameter in (
-            request_query_user_id,
-            request_query_user_secret,
             request_query_state,
             request_query_days,
         ):
@@ -339,6 +393,26 @@ class BaseApi(api_client.Api):
             serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
             for serialized_value in serialized_data.values():
                 used_path += serialized_value
+        if query_params.get("userId", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userId",
+                in_data=query_params["userId"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
+        if query_params.get("userSecret", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userSecret",
+                in_data=query_params["userSecret"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -346,12 +420,17 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'get'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
             path_template='/accounts/{accountId}/orders',
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
     
@@ -360,6 +439,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
             **kwargs
@@ -422,6 +502,7 @@ class BaseApi(api_client.Api):
     def _get_user_account_orders_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
@@ -456,8 +537,6 @@ class BaseApi(api_client.Api):
     
         prefix_separator_iterator = None
         for parameter in (
-            request_query_user_id,
-            request_query_user_secret,
             request_query_state,
             request_query_days,
         ):
@@ -469,6 +548,26 @@ class BaseApi(api_client.Api):
             serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
             for serialized_value in serialized_data.values():
                 used_path += serialized_value
+        if query_params.get("userId", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userId",
+                in_data=query_params["userId"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
+        if query_params.get("userSecret", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userSecret",
+                in_data=query_params["userSecret"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -476,12 +575,17 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'get'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
             path_template='/accounts/{accountId}/orders',
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
     
@@ -490,6 +594,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
@@ -518,17 +623,18 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class GetUserAccountOrders(BaseApi):
+class GetUserAccountOrders(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def aget_user_account_orders(
         self,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
         days: typing.Optional[int] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -539,26 +645,28 @@ class GetUserAccountOrders(BaseApi):
         args = self._get_user_account_orders_mapped_args(
             query_params=query_params,
             path_params=path_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             state=state,
             days=days,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return await self._aget_user_account_orders_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
             **kwargs,
         )
     
     def get_user_account_orders(
         self,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
         days: typing.Optional[int] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -568,28 +676,30 @@ class GetUserAccountOrders(BaseApi):
         args = self._get_user_account_orders_mapped_args(
             query_params=query_params,
             path_params=path_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             state=state,
             days=days,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return self._get_user_account_orders_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
         )
 
-class ApiForget(BaseApi):
+class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     async def aget(
         self,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
         days: typing.Optional[int] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -600,26 +710,28 @@ class ApiForget(BaseApi):
         args = self._get_user_account_orders_mapped_args(
             query_params=query_params,
             path_params=path_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             state=state,
             days=days,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return await self._aget_user_account_orders_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
             **kwargs,
         )
     
     def get(
         self,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         state: typing.Optional[str] = None,
         days: typing.Optional[int] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -629,14 +741,15 @@ class ApiForget(BaseApi):
         args = self._get_user_account_orders_mapped_args(
             query_params=query_params,
             path_params=path_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             state=state,
             days=days,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return self._get_user_account_orders_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
         )
 

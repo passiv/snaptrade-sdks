@@ -1,36 +1,42 @@
 # Syncing and Data Freshness
 
-It's first important to understand whether you are on Pay as you Go / Real-time or Pay as you Go / Daily, which you can find in [the dashboard](https://dashboard.snaptrade.com/settings/billing). Note that [if the connection is disabled](https://docs.snaptrade.com/docs/fix-broken-connections), fresh data cannot be fetched on either plan until the connection is fixed.
-Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
+First, confirm whether your API key uses the **Real-time** or **Daily** data freshness option on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing). See [Real-time vs Daily plans](https://docs.snaptrade.com/docs/realtime-data) for a comparison and recommended application flows.
 
-Pay as you Go / Real-time: holdings (positions, balances, orders) are fetched with every API request.
+If a [connection is disabled](https://docs.snaptrade.com/docs/fix-broken-connections), fresh data cannot be fetched on either plan until the connection is fixed.
 
-Pay as you Go / Daily: holdings are updated once per day with the daily sync.
+For both plans, transactions are cached, updated once per day with the daily sync, and delayed by one day. Intraday transactions are not available. If you need intraday trade activity, [compare orders with transactions](https://docs.snaptrade.com/docs/account-data#account-data-orders).
 
-For both plans, transactions are cached, updated once per day with the daily sync, and delayed by one day (no intraday transactions, [compare orders to transactions here](https://docs.snaptrade.com/docs/account-data#account-data-orders) if you need real-time trades).
+If you need to know when transactions—or holdings data on Daily plans—have synced, use webhooks or the account sync status.
 
-If you need to know when transactions (and holdings data on Daily data plans) are synced, there are two methods:
+## Webhooks
 
-Webhooks:
-- [ACCOUNT_TRANSACTIONS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_transactions_updated) webhook will be sent when we create a new transaction for an account. Note that no webhook will be sent if we sync transactions and no new data is found.
-- [ACCOUNT_HOLDINGS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once per day when holdings are updated (regardless of if data changes or not). This is only really helpful for Daily data since Pay as you Go / Real-time plans will update brokerage data with each request.
+- [ACCOUNT_TRANSACTIONS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_transactions_updated) is sent when SnapTrade creates a new transaction for an account. No webhook is sent if a transaction sync finds no new data.
+- [ACCOUNT_HOLDINGS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) is sent once per day when holdings are updated, whether or not the data changed. This is primarily useful for Daily plans because Real-time plans refresh supported holdings data when it is requested.
 
-API Account Status:
-- [List accounts for a connection endpoint](https://docs.snaptrade.com/reference/Connections/Connections_listBrokerageAuthorizationAccounts) will return a `sync_status` object for each account in the connection. This tells you when the daily sync last ran for holdings, as well as the last day that transactions **have been fully synced** (transactions have been pulled from 00:00 to 23:59). If a user has multiple connections, first call :api[Connections_listBrokerageAuthorizations], then call :api[Connections_listBrokerageAuthorizationAccounts] for each connection.
-  ```
+## API account status
+
+[List accounts for a connection](https://docs.snaptrade.com/reference/Connections/Connections_listBrokerageAuthorizationAccounts) returns a `sync_status` object for each account. It reports when the daily holdings sync last ran and the last day for which transactions **have been fully synced** from 00:00 through 23:59.
+
+If a user has multiple connections, first call :api[Connections_listBrokerageAuthorizations], then call :api[Connections_listBrokerageAuthorizationAccounts] for each connection.
+
+```json
+{
   "sync_status": {
-      "transactions": {
-        "initial_sync_completed": true,
-        "last_successful_sync": "2022-01-24",
-        "first_transaction_date": "2022-01-24"
-      },
-      "holdings": {
-        "initial_sync_completed": true,
-        "last_successful_sync": "2024-06-28 18:42:46.561408+00:00"
-      }
+    "transactions": {
+      "initial_sync_completed": true,
+      "last_successful_sync": "2022-01-24",
+      "first_transaction_date": "2022-01-24"
     },
-  ```
+    "holdings": {
+      "initial_sync_completed": true,
+      "last_successful_sync": "2024-06-28 18:42:46.561408+00:00"
+    }
+  }
+}
+```
 
-If on Pay as you Go / Daily and a holdings update is needed, you can call [the Refresh connection endpoint](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization). Please note that additional charges may apply to each of these calls, you can find pricing information in [the dashboard](https://dashboard.snaptrade.com/settings/billing).
+## Request an intraday holdings update
 
-If looking to control at what time of day transactions are updated, please reach out to the team about [a custom plan](https://snaptrade.com/pricing).
+On a Daily plan, call the [Refresh connection endpoint](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization) when an intraday holdings update is needed. Additional charges may apply to each call; see the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) for pricing.
+
+If you need to control the time of day when transactions are updated, contact the SnapTrade team about [a custom plan](https://snaptrade.com/pricing).

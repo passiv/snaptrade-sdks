@@ -11,6 +11,7 @@
 """
 
 from dataclasses import dataclass
+import typing
 import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
@@ -19,6 +20,9 @@ from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
+from snaptrade_client.auth import AuthMode
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401
@@ -36,42 +40,6 @@ from snaptrade_client import schemas  # noqa: F401
 
 from . import path
 
-# Query params
-UserIdSchema = schemas.StrSchema
-UserSecretSchema = schemas.StrSchema
-RequestRequiredQueryParams = typing_extensions.TypedDict(
-    'RequestRequiredQueryParams',
-    {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
-    }
-)
-RequestOptionalQueryParams = typing_extensions.TypedDict(
-    'RequestOptionalQueryParams',
-    {
-    },
-    total=False
-)
-
-
-class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams):
-    pass
-
-
-request_query_user_id = api_client.QueryParameter(
-    name="userId",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserIdSchema,
-    required=True,
-    explode=True,
-)
-request_query_user_secret = api_client.QueryParameter(
-    name="userSecret",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserSecretSchema,
-    required=True,
-    explode=True,
-)
 # Path params
 AuthorizationIdSchema = schemas.UUIDSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
@@ -98,11 +66,51 @@ request_path_authorization_id = api_client.PathParameter(
     schema=AuthorizationIdSchema,
     required=True,
 )
-_auth = [
+_auth_modes = {
+    "commercialApiKey": [
+        "PartnerClientId",
+        "PartnerTimestamp",
+        "userId",
+        "userSecret",
+    ],
+    "personalApiKey": [
+        "PersonalClientId",
+        "PersonalTimestamp",
+    ],
+}
+_operation_auth_context = {
+    "auth_modes": [
+        "commercialApiKey",
+        "personalApiKey",
+    ],
+    "request_signing_by_auth_mode": {
+        "commercialApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PartnerSignature",
+                "PartnerTimestamp",
+            ],
+        },
+        "personalApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PersonalSignature",
+                "PersonalTimestamp",
+            ],
+        },
+    },
+}
+_legacy_auth = [
     'PartnerClientId',
     'PartnerSignature',
     'PartnerTimestamp',
+    'PersonalClientId',
+    'PersonalSignature',
+    'PersonalTimestamp',
+    'userId',
+    'userSecret',
 ]
+_auth = None
 
 
 @dataclass
@@ -182,10 +190,12 @@ class BaseApi(api_client.Api):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
+        _header_params = {}
         _path_params = {}
         if user_id is not None:
             _query_params["userId"] = user_id
@@ -193,13 +203,15 @@ class BaseApi(api_client.Api):
             _query_params["userSecret"] = user_secret
         if authorization_id is not None:
             _path_params["authorizationId"] = authorization_id
-        args.query = query_params if query_params else _query_params
+        args.query = _query_params
+        args.header = _header_params
         args.path = path_params if path_params else _path_params
         return args
 
     async def _aremove_brokerage_authorization_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
@@ -217,7 +229,6 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
-        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
     
@@ -233,30 +244,42 @@ class BaseApi(api_client.Api):
     
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
-    
         prefix_separator_iterator = None
-        for parameter in (
-            request_query_user_id,
-            request_query_user_secret,
-        ):
-            parameter_data = query_params.get(parameter.name, schemas.unset)
-            if parameter_data is schemas.unset:
-                continue
+        if query_params.get("userId", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
-                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
-            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
-            for serialized_value in serialized_data.values():
-                used_path += serialized_value
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userId",
+                in_data=query_params["userId"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
+        if query_params.get("userSecret", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userSecret",
+                in_data=query_params["userSecret"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
         method = 'delete'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
             path_template='/authorizations/{authorizationId}',
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
     
@@ -264,6 +287,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
             **kwargs
@@ -331,6 +355,7 @@ class BaseApi(api_client.Api):
     def _remove_brokerage_authorization_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
@@ -346,7 +371,6 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
-        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
     
@@ -362,30 +386,42 @@ class BaseApi(api_client.Api):
     
         for k, v in _path_params.items():
             used_path = used_path.replace('{%s}' % k, v)
-    
         prefix_separator_iterator = None
-        for parameter in (
-            request_query_user_id,
-            request_query_user_secret,
-        ):
-            parameter_data = query_params.get(parameter.name, schemas.unset)
-            if parameter_data is schemas.unset:
-                continue
+        if query_params.get("userId", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
-                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
-            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
-            for serialized_value in serialized_data.values():
-                used_path += serialized_value
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userId",
+                in_data=query_params["userId"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
+        if query_params.get("userSecret", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userSecret",
+                in_data=query_params["userSecret"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
         method = 'delete'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
             path_template='/authorizations/{authorizationId}',
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
     
@@ -393,6 +429,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
@@ -426,7 +463,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class RemoveBrokerageAuthorization(BaseApi):
+class RemoveBrokerageAuthorization(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def aremove_brokerage_authorization(
@@ -435,6 +472,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -444,7 +482,6 @@ class RemoveBrokerageAuthorization(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._remove_brokerage_authorization_mapped_args(
-            query_params=query_params,
             path_params=path_params,
             authorization_id=authorization_id,
             user_id=user_id,
@@ -452,6 +489,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         )
         return await self._aremove_brokerage_authorization_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
             **kwargs,
         )
@@ -462,6 +500,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
@@ -470,7 +509,6 @@ class RemoveBrokerageAuthorization(BaseApi):
     ]:
         """ Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted. """
         args = self._remove_brokerage_authorization_mapped_args(
-            query_params=query_params,
             path_params=path_params,
             authorization_id=authorization_id,
             user_id=user_id,
@@ -478,10 +516,11 @@ class RemoveBrokerageAuthorization(BaseApi):
         )
         return self._remove_brokerage_authorization_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
         )
 
-class ApiFordelete(BaseApi):
+class ApiFordelete(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     async def adelete(
@@ -490,6 +529,7 @@ class ApiFordelete(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -499,7 +539,6 @@ class ApiFordelete(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._remove_brokerage_authorization_mapped_args(
-            query_params=query_params,
             path_params=path_params,
             authorization_id=authorization_id,
             user_id=user_id,
@@ -507,6 +546,7 @@ class ApiFordelete(BaseApi):
         )
         return await self._aremove_brokerage_authorization_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
             **kwargs,
         )
@@ -517,6 +557,7 @@ class ApiFordelete(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor204,
@@ -525,7 +566,6 @@ class ApiFordelete(BaseApi):
     ]:
         """ Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted. """
         args = self._remove_brokerage_authorization_mapped_args(
-            query_params=query_params,
             path_params=path_params,
             authorization_id=authorization_id,
             user_id=user_id,
@@ -533,6 +573,7 @@ class ApiFordelete(BaseApi):
         )
         return self._remove_brokerage_authorization_oapg(
             query_params=args.query,
+            header_params=args.header,
             path_params=args.path,
         )
 

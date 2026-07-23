@@ -11,6 +11,7 @@
 """
 
 from dataclasses import dataclass
+import typing
 import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
@@ -19,6 +20,9 @@ from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
+from snaptrade_client.auth import AuthMode
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401
@@ -48,42 +52,6 @@ from snaptrade_client.type.model404_failed_request_response import Model404Faile
 
 from . import path
 
-# Query params
-UserIdSchema = schemas.StrSchema
-UserSecretSchema = schemas.StrSchema
-RequestRequiredQueryParams = typing_extensions.TypedDict(
-    'RequestRequiredQueryParams',
-    {
-        'userId': typing.Union[UserIdSchema, str, ],
-        'userSecret': typing.Union[UserSecretSchema, str, ],
-    }
-)
-RequestOptionalQueryParams = typing_extensions.TypedDict(
-    'RequestOptionalQueryParams',
-    {
-    },
-    total=False
-)
-
-
-class RequestQueryParams(RequestRequiredQueryParams, RequestOptionalQueryParams):
-    pass
-
-
-request_query_user_id = api_client.QueryParameter(
-    name="userId",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserIdSchema,
-    required=True,
-    explode=True,
-)
-request_query_user_secret = api_client.QueryParameter(
-    name="userSecret",
-    style=api_client.ParameterStyle.FORM,
-    schema=UserSecretSchema,
-    required=True,
-    explode=True,
-)
 # body param
 SchemaForRequestBodyApplicationJson = SnapTradeLoginUserRequestBodySchema
 
@@ -94,11 +62,51 @@ request_body_snap_trade_login_user_request_body = api_client.RequestBody(
             schema=SchemaForRequestBodyApplicationJson),
     },
 )
-_auth = [
+_auth_modes = {
+    "commercialApiKey": [
+        "PartnerClientId",
+        "PartnerTimestamp",
+        "userId",
+        "userSecret",
+    ],
+    "personalApiKey": [
+        "PersonalClientId",
+        "PersonalTimestamp",
+    ],
+}
+_operation_auth_context = {
+    "auth_modes": [
+        "commercialApiKey",
+        "personalApiKey",
+    ],
+    "request_signing_by_auth_mode": {
+        "commercialApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PartnerSignature",
+                "PartnerTimestamp",
+            ],
+        },
+        "personalApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PersonalSignature",
+                "PersonalTimestamp",
+            ],
+        },
+    },
+}
+_legacy_auth = [
     'PartnerClientId',
     'PartnerSignature',
     'PartnerTimestamp',
+    'PersonalClientId',
+    'PersonalSignature',
+    'PersonalTimestamp',
+    'userId',
+    'userSecret',
 ]
+_auth = None
 
 
 class SchemaFor200ResponseBodyApplicationJson(
@@ -119,8 +127,8 @@ class SchemaFor200ResponseBodyApplicationJson(
             # classes don't exist yet because their module has not finished
             # loading
             return [
-                LoginRedirectURI,
-                EncryptedResponse,
+                LoginRedirectURISchema,
+                EncryptedResponseSchema,
             ]
 
 
@@ -252,8 +260,6 @@ class BaseApi(api_client.Api):
     def _login_snap_trade_user_mapped_args(
         self,
         body: typing.Optional[SnapTradeLoginUserRequestBody] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         broker: typing.Optional[str] = None,
         immediate_redirect: typing.Optional[bool] = None,
         custom_redirect: typing.Optional[str] = None,
@@ -262,10 +268,14 @@ class BaseApi(api_client.Api):
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
+        _header_params = {}
         _body = {}
         if broker is not None:
             _body["broker"] = broker
@@ -288,13 +298,15 @@ class BaseApi(api_client.Api):
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
-        args.query = query_params if query_params else _query_params
+        args.query = _query_params
+        args.header = _header_params
         return args
 
     async def _alogin_snap_trade_user_oapg(
         self,
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -312,22 +324,28 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
-        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         used_path = path.value
-    
         prefix_separator_iterator = None
-        for parameter in (
-            request_query_user_id,
-            request_query_user_secret,
-        ):
-            parameter_data = query_params.get(parameter.name, schemas.unset)
-            if parameter_data is schemas.unset:
-                continue
+        if query_params.get("userId", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
-                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
-            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
-            for serialized_value in serialized_data.values():
-                used_path += serialized_value
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userId",
+                in_data=query_params["userId"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
+        if query_params.get("userSecret", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userSecret",
+                in_data=query_params["userSecret"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -335,6 +353,10 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         _headers.add('Content-Type', content_type)
     
         _fields = None
@@ -346,6 +368,7 @@ class BaseApi(api_client.Api):
             path_template='/snapTrade/login',
             body=body,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
         if body is not schemas.unset:
@@ -363,6 +386,7 @@ class BaseApi(api_client.Api):
             serialized_body=_body,
             body=body,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
             **kwargs
@@ -426,6 +450,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -441,22 +466,28 @@ class BaseApi(api_client.Api):
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
-        self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
         used_path = path.value
-    
         prefix_separator_iterator = None
-        for parameter in (
-            request_query_user_id,
-            request_query_user_secret,
-        ):
-            parameter_data = query_params.get(parameter.name, schemas.unset)
-            if parameter_data is schemas.unset:
-                continue
+        if query_params.get("userId", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
-                prefix_separator_iterator = parameter.get_prefix_separator_iterator()
-            serialized_data = parameter.serialize(parameter_data, prefix_separator_iterator)
-            for serialized_value in serialized_data.values():
-                used_path += serialized_value
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userId",
+                in_data=query_params["userId"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
+        if query_params.get("userSecret", schemas.unset) is not schemas.unset:
+            if prefix_separator_iterator is None:
+                prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
+            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+                variable_name="userSecret",
+                in_data=query_params["userSecret"],
+                explode=False,
+                percent_encode=False,
+                prefix_separator_iterator=prefix_separator_iterator
+            )
     
         _headers = HTTPHeaderDict()
         # TODO add cookie handling
@@ -464,6 +495,10 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         _headers.add('Content-Type', content_type)
     
         _fields = None
@@ -475,6 +510,7 @@ class BaseApi(api_client.Api):
             path_template='/snapTrade/login',
             body=body,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
         if body is not schemas.unset:
@@ -492,6 +528,7 @@ class BaseApi(api_client.Api):
             serialized_body=_body,
             body=body,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
         )
@@ -520,14 +557,12 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class LoginSnapTradeUser(BaseApi):
+class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def alogin_snap_trade_user(
         self,
         body: typing.Optional[SnapTradeLoginUserRequestBody] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         broker: typing.Optional[str] = None,
         immediate_redirect: typing.Optional[bool] = None,
         custom_redirect: typing.Optional[str] = None,
@@ -536,7 +571,10 @@ class LoginSnapTradeUser(BaseApi):
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -545,9 +583,6 @@ class LoginSnapTradeUser(BaseApi):
     ]:
         args = self._login_snap_trade_user_mapped_args(
             body=body,
-            query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             broker=broker,
             immediate_redirect=immediate_redirect,
             custom_redirect=custom_redirect,
@@ -556,18 +591,19 @@ class LoginSnapTradeUser(BaseApi):
             show_close_button=show_close_button,
             dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return await self._alogin_snap_trade_user_oapg(
             body=args.body,
             query_params=args.query,
+            header_params=args.header,
             **kwargs,
         )
     
     def login_snap_trade_user(
         self,
         body: typing.Optional[SnapTradeLoginUserRequestBody] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         broker: typing.Optional[str] = None,
         immediate_redirect: typing.Optional[bool] = None,
         custom_redirect: typing.Optional[str] = None,
@@ -576,7 +612,10 @@ class LoginSnapTradeUser(BaseApi):
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -584,9 +623,6 @@ class LoginSnapTradeUser(BaseApi):
         """ Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.  """
         args = self._login_snap_trade_user_mapped_args(
             body=body,
-            query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             broker=broker,
             immediate_redirect=immediate_redirect,
             custom_redirect=custom_redirect,
@@ -595,20 +631,21 @@ class LoginSnapTradeUser(BaseApi):
             show_close_button=show_close_button,
             dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return self._login_snap_trade_user_oapg(
             body=args.body,
             query_params=args.query,
+            header_params=args.header,
         )
 
-class ApiForpost(BaseApi):
+class ApiForpost(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     async def apost(
         self,
         body: typing.Optional[SnapTradeLoginUserRequestBody] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         broker: typing.Optional[str] = None,
         immediate_redirect: typing.Optional[bool] = None,
         custom_redirect: typing.Optional[str] = None,
@@ -617,7 +654,10 @@ class ApiForpost(BaseApi):
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -626,9 +666,6 @@ class ApiForpost(BaseApi):
     ]:
         args = self._login_snap_trade_user_mapped_args(
             body=body,
-            query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             broker=broker,
             immediate_redirect=immediate_redirect,
             custom_redirect=custom_redirect,
@@ -637,18 +674,19 @@ class ApiForpost(BaseApi):
             show_close_button=show_close_button,
             dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return await self._alogin_snap_trade_user_oapg(
             body=args.body,
             query_params=args.query,
+            header_params=args.header,
             **kwargs,
         )
     
     def post(
         self,
         body: typing.Optional[SnapTradeLoginUserRequestBody] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         broker: typing.Optional[str] = None,
         immediate_redirect: typing.Optional[bool] = None,
         custom_redirect: typing.Optional[str] = None,
@@ -657,7 +695,10 @@ class ApiForpost(BaseApi):
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -665,9 +706,6 @@ class ApiForpost(BaseApi):
         """ Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.  """
         args = self._login_snap_trade_user_mapped_args(
             body=body,
-            query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             broker=broker,
             immediate_redirect=immediate_redirect,
             custom_redirect=custom_redirect,
@@ -676,9 +714,12 @@ class ApiForpost(BaseApi):
             show_close_button=show_close_button,
             dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
+            user_id=user_id,
+            user_secret=user_secret,
         )
         return self._login_snap_trade_user_oapg(
             body=args.body,
             query_params=args.query,
+            header_params=args.header,
         )
 

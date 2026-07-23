@@ -11,12 +11,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'accountId'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'startDate'
             },
             {
@@ -36,24 +30,12 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/balanceHistory-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
         ]
     },
     '/accounts/{accountId}/positions/all-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -62,12 +44,6 @@ export const operationParameterMap: Record<string, Entry> = {
     '/holdings-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'brokerage_authorizations'
             },
         ]
@@ -75,24 +51,12 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/balances-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
         ]
     },
     '/accounts/{accountId}-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -106,22 +70,10 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'accountId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/accounts/{accountId}/orders-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -136,24 +88,12 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/positions-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
         ]
     },
     '/accounts/{accountId}/recentOrders-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -164,12 +104,6 @@ export const operationParameterMap: Record<string, Entry> = {
     },
     '/accounts/{accountId}/returnRates-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -183,32 +117,14 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'accountId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/accounts-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/accounts/{accountId}-PUT': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -220,9 +136,6 @@ export const operationParameterMap: Record<string, Entry> = {
     },
     '/snapTrade/deleteUser-DELETE': {
         parameters: [
-            {
-                name: 'userId'
-            },
         ]
     },
     '/snapTrade/listUsers-GET': {
@@ -231,12 +144,6 @@ export const operationParameterMap: Record<string, Entry> = {
     },
     '/snapTrade/login-POST': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'broker'
             },
@@ -285,24 +192,12 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'connectionId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}-GET': {
         parameters: [
             {
                 name: 'authorizationId'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
         ]
     },
@@ -311,12 +206,6 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'authorizationId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}/accounts-GET': {
@@ -324,34 +213,16 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'authorizationId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/authorizations-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}/refresh-POST': {
         parameters: [
             {
                 name: 'authorizationId'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
         ]
     },
@@ -360,22 +231,10 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'authorizationId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/authorizations/{authorizationId}/returnRates-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'authorizationId'
             },
@@ -402,12 +261,6 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'authorizationId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/snapTrade/tradeDetection/subscriptions-POST': {
@@ -417,12 +270,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'check_interval_seconds'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
         ]
     },
@@ -441,22 +288,10 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'brokerageOrderId'
             },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
         ]
     },
     '/accounts/{accountId}/orders/v2-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -471,12 +306,6 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/recentOrders/v2-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
             {
@@ -490,12 +319,6 @@ export const operationParameterMap: Record<string, Entry> = {
     },
     '/accounts/{accountId}/options-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -563,12 +386,6 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/symbols-POST': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
             {
@@ -582,12 +399,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'brokerage_order_id'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
         ]
@@ -598,24 +409,12 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'brokerage_order_id'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
         ]
     },
     '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'accountId'
             },
@@ -634,12 +433,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'legs'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
             {
                 name: 'accountId'
@@ -673,12 +466,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'time_in_force'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'price'
             },
             {
@@ -695,12 +482,6 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/quotes/options-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
             {
@@ -710,12 +491,6 @@ export const operationParameterMap: Record<string, Entry> = {
     },
     '/accounts/{accountId}/quotes-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'symbols'
             },
@@ -751,12 +526,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'accountId'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'price'
             },
             {
@@ -779,12 +548,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'accountId'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'client_order_id'
             },
         ]
@@ -805,12 +568,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'amount'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
             {
                 name: 'accountId'
@@ -842,12 +599,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'time_in_force'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
             {
                 name: 'universal_symbol_id'
@@ -890,12 +641,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'legs'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
             {
@@ -913,12 +658,6 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
             {
                 name: 'tradeId'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
             {
                 name: 'wait_to_confirm'
@@ -941,12 +680,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'amount'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
             {
                 name: 'accountId'
@@ -983,12 +716,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'accountId'
             },
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'price'
             },
             {
@@ -1005,12 +732,6 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'accountId'
             },
             {
@@ -1023,12 +744,6 @@ export const operationParameterMap: Record<string, Entry> = {
     },
     '/activities-GET': {
         parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
             {
                 name: 'startDate'
             },
@@ -1053,12 +768,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'endDate'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
             },
             {
                 name: 'accounts'

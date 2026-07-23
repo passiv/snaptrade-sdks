@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "snaptrade-python-sdk"
-VERSION = "11.0.210"
+VERSION = "12.0.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -48,6 +48,7 @@ setup(
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
+    package_data={"snaptrade_client": ["py.typed", "**/*.pyi"]},
     license="MIT",
     long_description=long_description,
     long_description_content_type='text/markdown'
