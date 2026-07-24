@@ -1,60 +1,34 @@
 # Getting Started with SnapTrade
 
-## Introduction
+This guide will help you connect a brokerage account, retrieve account data, and, where enabled, place a trade. Start by choosing the customer model that matches who will use the integration.
 
-Welcome to SnapTrade! This is intended to be one of the first documents you read when learning how to use the SnapTrade API and will answer many questions you might have while getting started. This document when read from top-to-bottom is also a guide for making your first connection, and will get you set up to start pulling account data and placing trades.
+For definitions used throughout this guide, see [Terminology](https://docs.snaptrade.com/docs/terminology). For more detail about the two customer models, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial) and [Authentication Methods](https://docs.snaptrade.com/docs/authentication-methods).
 
-If you want a quick definitions reference while reading, see [Terminology](https://docs.snaptrade.com/docs/terminology).
-
-If you are unsure whether to build as an individual user or as an app with many end users, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
-
-For a focused reference on Commercial credentials and Personal API keys, see [Authentication Methods](https://docs.snaptrade.com/docs/authentication-methods).
-
-Please see the FAQ of each section, as any questions you might have should be answered there.
-
-If after reading this document you still have questions or need help, please do not hesitate to contact us through our [Discord](https://discord.gg/rkYWBxb8Qu).
-
-For a live demo, see the [Getting Started Demo](https://docs.snaptrade.com/demo/getting-started).
+The [interactive Getting Started Demo](https://docs.snaptrade.com/demo/getting-started) currently demonstrates the Commercial flow.
 
 ---
 
-## API Keys
+<a id="getting-started-api-keys"></a>
 
-![image.png](./assets/250312_apikey.png)
+## Choose a Customer Model
 
+Personal users can share their connected brokerage data with OAuth-enabled apps or access it directly with a Personal API key. Commercial integrations use an API key to manage brokerage accounts for their end users.
 
-Your `API key` consists of a `clientId` and `consumerKey`. SnapTrade supports both **Personal API keys**, which represent the signed-in SnapTrade user directly, and **Commercial API keys**, which let an application manage SnapTrade users for its own end users. Please note that your `consumerKey` is sensitive information and should be kept secure at all times. This `API key` is used to make any requests to the SnapTrade API, and is the first thing required to get started.
+| | Personal | Commercial |
+| --- | --- | --- |
+| Use when | You are accessing your own brokerage accounts | Your application manages brokerage accounts for its end users |
+| Access methods | OAuth for sharing data, or a Personal API key for direct access | A Commercial API key |
+| User identity | Your signed-in SnapTrade account identifies you | Each app user has a SnapTrade `userId` and `userSecret` |
+| User registration | Not required | Required before connecting a brokerage |
+| Trading | Available through Personal API keys where enabled; OAuth is currently read-only | Available for app users where enabled |
+| Webhooks | Available for Personal API keys | Available |
 
-### How to: Create a new API Key
-
-When you are ready to get started with SnapTrade and want to start making requests to our API, create the `API key` that matches your use case. Personal users can create a Personal API key for their own accounts. Commercial integrations can create test and, after approval, production API keys for apps that manage end users.
-
-1. Create a SnapTrade account at the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
-2. Verify your email (You cannot create any `API Keys` until your account is verified).
-3. Generate your free `API Key` through the [SnapTrade Dashboard](https://dashboard.snaptrade.com/api-key).
-4. [OPTIONAL] Add a payment method through the Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
-5. [OPTIONAL] Upgrade to Pay-as-you-Go through Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
-6. [OPTIONAL] Generate your paid `API Key` through the [SnapTrade Dashboard](https://dashboard.snaptrade.com/api-key).
-
-For Commercial accounts, after completing these steps, you may have two SnapTrade `API Keys`:
-
-- A free `API Key` that limits the number of concurrent connections.
-- Optionally, a paid `API Key` that allows for unlimited connections.
-
-These Commercial `API keys` are essentially the same in terms of functionality, and the core difference between them is that the free `API key` is limited in terms of the number of concurrent connections you can have. Personal API keys instead represent the Personal account owner directly and do not require creating SnapTrade users.
-
-### How to: Make a request to the SnapTrade API
-
-When you have an `API Key` and want to start using the SnapTrade API, you will need to use your `API Key` to make requests to the SnapTrade API.
-
-1. With your Free `API Key`, enter your `clientId` and `consumerKey` into the corresponding fields of :api[ApiStatus_check].
-2. Press ‘Send’.
-
-In the box below the ‘request’ you should receive a response from the SnapTrade API. The :api[ApiStatus_check] endpoint is the most basic request you can make to the SnapTrade API.
-
-You can also make this request with any of the SnapTrade SDKs. While we recommend using an SDK, custom direct API integrations can generate signatures by following [Request Signatures](https://docs.snaptrade.com/docs/request-signatures).
+- [Follow the Personal quickstart](#personal-quickstart)
+- [Follow the Commercial quickstart](#commercial-quickstart)
 
 ### SnapTrade SDKs
+
+We recommend using a SnapTrade SDK. If you call the API directly, follow [Request Signatures](https://docs.snaptrade.com/docs/request-signatures) to sign each request.
 
 | **Language** | **SDK Link** |
 | --- | --- |
@@ -66,91 +40,162 @@ You can also make this request with any of the SnapTrade SDKs. While we recommen
 | PHP | [**https://packagist.org/packages/konfig/snaptrade-php-sdk**](https://packagist.org/packages/konfig/snaptrade-php-sdk) |
 | Go | [**https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go**](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go) |
 
-### [API Keys FAQ](https://docs.snaptrade.com/docs/faq#faq-api-keys)
+---
+
+<a id="personal-quickstart"></a>
+
+## Personal Quickstart
+
+Use this path when you are connecting and managing your own brokerage accounts.
+
+<!-- Add the Personal account -> brokerage connections -> OAuth apps or Personal API key diagram here. -->
+
+### 1. Create a Personal Account
+
+1. Create a Personal account in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
+2. Verify your email.
+
+### 2. Choose How to Access Your Data
+
+Most Personal users connect their brokerage accounts in the SnapTrade Dashboard and share that data with apps through OAuth. You can also create a Personal API key when you want to access your data programmatically.
+
+#### Share Your Data Through OAuth
+
+1. Connect and manage your brokerage accounts in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
+2. In an OAuth-enabled app or AI assistant, choose SnapTrade as a data source.
+3. Sign in to SnapTrade and approve the app's requested read access.
+
+The app receives a scoped OAuth token instead of your Personal API credentials. Do not give an app your `consumerKey`. OAuth currently supports reading account data and managing connections, but it does not support trading.
+
+To share data with an AI assistant, see the [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server). Developers building an app that receives shared data should see [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
+
+#### Access Your Data With a Personal API Key
+
+1. Enable two-factor authentication in the SnapTrade Dashboard.
+2. Create your Personal API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
+3. Store the `clientId` and `consumerKey` securely.
+
+Your Personal API key represents you. Do not register a separate SnapTrade user, and do not send a `userId` or `userSecret` in Personal API requests.
+
+<a id="getting-started-connections"></a>
+
+### 3. Connect a Brokerage With Your API Key
+
+If you already connected your brokerage account in the Dashboard, you can skip this step. To add another connection programmatically:
+
+1. Open :api[Authentication_loginSnapTradeUser] and select **Personal API Key** authentication.
+2. Enter your Personal `clientId` and `consumerKey`. Leave `userId` and `userSecret` unset.
+3. If you intend to trade, set `connectionType` to `trade-if-available`. The default `read` connection type supports data access only.
+4. Send the request and open the returned Connection Portal URL.
+5. Complete the Connection Portal flow for your brokerage.
+
+A `connection` represents a linked set of brokerage credentials. Completing the portal flow makes the brokerage accounts under that connection available through SnapTrade.
+
+For more ways to open and configure the portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal).
+
+<a id="getting-started-accounts"></a>
+
+### 4. Retrieve Accounts and Positions
+
+1. Call :api[AccountInformation_listUserAccounts] using **Personal API Key** authentication to list your accounts.
+2. Choose the `accountId` for the account you want to inspect.
+3. Call :api[AccountInformation_getAllAccountPositions] with that `accountId`.
+
+You can also retrieve balances with :api[AccountInformation_getUserAccountBalance] and orders with :api[AccountInformation_getUserAccountOrders].
+
+### 5. Place an Equity Trade
+
+Personal users can trade their own accounts when trading is enabled for the API key, brokerage, connection, and account.
+
+1. Build the order using the account ID and the brokerage ticker in the `symbol` field.
+2. Validate the order details and confirm them before submission.
+3. Call :api[Trading_placeForceOrder] to submit the order to the brokerage.
+
+Use **Personal API Key** authentication throughout and continue to omit `userId` and `userSecret`.
+
+For order types, brokerage support, and other asset classes, see [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
+
+### Personal Next Steps
+
+- Learn more about retrieving [Account Data](https://docs.snaptrade.com/docs/account-data).
+- Learn how to manage and repair [Connections](https://docs.snaptrade.com/docs/connections).
+- Configure [Webhooks](https://docs.snaptrade.com/docs/webhooks).
+- Access your data through AI assistants with the [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server).
+
+[Back to customer models](#getting-started-api-keys)
 
 ---
 
-## Users
+<a id="commercial-quickstart"></a>
 
-![image.png](./assets/250312_apikey2users.png)
+## Commercial Quickstart
 
-This section applies to **Commercial API keys**. A Commercial `API key` can manage a set of SnapTrade `users`. A SnapTrade `user` consists of a `userId` and a `userSecret`. The `userSecret` is a randomly generated string and is sensitive information. It should be kept secure at all times.
+Use this path when you are building an application that manages brokerage connections for its own end users.
 
-Personal API key users do not create or manage SnapTrade `users`, and should skip this section. With Personal API key authentication, the API key represents the authenticated SnapTrade user directly; omit `userId` and `userSecret` when making API requests.
+<!-- Add the Commercial API key -> users -> connections -> accounts diagram here. -->
 
-Typically if you have a Commercial application that manages end-users, each end-user of your application will get one SnapTrade `user` that will be used to manage that end-user’s `connections`. This way, SnapTrade `users` will be one-to-one with the end-users of your application.
+### 1. Create a Commercial API Key
 
-### How to: Create a new SnapTrade User (Commercial only)
+1. Create a Commercial account in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
+2. Verify your email.
+3. Enable two-factor authentication.
+4. Create a test API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
+5. When you are ready for production, complete the required approval and billing steps in the Dashboard and create a production key.
+6. Store the `clientId` and `consumerKey` on a secure backend.
 
-When you have a working Commercial `API Key` and want to create a new `connection` for an app user, you will first need to register a SnapTrade `user`.
+For plan limits and production requirements, see [Billing](https://docs.snaptrade.com/docs/billing).
 
-1. Using your Commercial API Key, create a request to the :api[Authentication_registerSnapTradeUser] endpoint. You will need to provide a unique SnapTrade `userId` . This can be anything that is immutable. For this reason, it is recommended to NOT use email addresses for a SnapTrade `userId`.
-2. The response you receive from the SnapTrade API will contain the `userId` you provided and the `userSecret` generated by SnapTrade. The `userSecret` is a randomly generated string and is sensitive information.
+<a id="getting-started-users"></a>
 
-You can list your created users by using the :api[Authentication_listSnapTradeUsers] endpoint, and you can delete created users by using the :api[Authentication_deleteSnapTradeUser] endpoint. If needed, you may reset a user’s userSecret by using the :api[Authentication_resetSnapTradeUserSecret] endpoint. Now that you have one or more SnapTrade `users` under your Commercial `API Key`, you are ready to create `connections` under these `users`.
+### 2. Register a SnapTrade User
 
-### [Users FAQ](https://docs.snaptrade.com/docs/faq#faq-users)
+A Commercial integration creates one SnapTrade `user` for each end user in the application.
 
----
+1. Call :api[Authentication_registerSnapTradeUser] with a stable, immutable `userId` from your system. Avoid using an email address.
+2. Store the returned `userSecret` securely. SnapTrade returns it only when the user is registered.
 
-## Connections
+The `userId` and `userSecret` identify this app user in subsequent user-scoped requests.
 
-![image.png](./assets/250312_users2connections.png)
+### 3. Connect a Brokerage
 
-For Commercial API keys, each SnapTrade `user` under your API key is used to create and manage `connections` associated with that user. For Personal API keys, the authenticated Personal user is the connection owner, so you do not send `userId` or `userSecret`. Each connection is associated one-to-one with a set of credentials to an institution.
+1. Call :api[Authentication_loginSnapTradeUser] using **Commercial API Key** authentication.
+2. Provide the app user's `userId` and `userSecret`.
+3. If the user intends to trade, set `connectionType` to `trade-if-available`. The default `read` connection type supports data access only.
+4. Open the returned Connection Portal URL and send the end user through the portal flow.
 
-:::info
-Throughout these docs, the term `connection` is used to refer to a linked brokerage account.
-:::
+After the user completes the flow, the connection and its brokerage accounts are available through SnapTrade.
 
-### How to: Create a new connection for a user
+For more ways to open and configure the portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal).
 
-When you want to get access to account data and/or place trades for an account, create a `connection` for the relevant SnapTrade user context.
+### 4. Retrieve Accounts and Positions
 
-1. Generate a new redirectURI for the SnapTrade Connection Portal using :api[Authentication_loginSnapTradeUser]. Commercial requests use the SnapTrade `userId` and `userSecret`; Personal API key requests use the authenticated self context and omit those fields.
-3. Open the generated link. Depending on your application, there are different ways to open this link. See [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal).
+1. Call :api[AccountInformation_listUserAccounts] with the user's `userId` and `userSecret`.
+2. Choose the `accountId` for the account you want to inspect.
+3. Call :api[AccountInformation_getAllAccountPositions] with the `accountId`, `userId`, and `userSecret`.
 
-Once you have successfully completed the Connection Portal Flow, you should have an active connection to work with, and should have access to the accounts under that connection.
+You can also retrieve balances with :api[AccountInformation_getUserAccountBalance] and orders with :api[AccountInformation_getUserAccountOrders].
 
-### [Connections FAQ](https://docs.snaptrade.com/docs/faq#faq-connections)
+### 5. Place an Equity Trade
 
----
+Commercial integrations can trade when trading is enabled for the API key, brokerage, connection, and account.
 
-## Accounts
+1. Build the order using the account ID and the brokerage ticker in the `symbol` field.
+2. Validate the order details in your application and have the end user confirm them.
+3. Call :api[Trading_placeForceOrder] to submit the order to the brokerage.
 
-![image.png](./assets/250312_connections2accounts.png)
+Include the user's `userId` and `userSecret` in each user-scoped request.
 
-When you create a `connection`, SnapTrade will automatically sync all `accounts` under the set of credentials to the brokerage. For example, if you made a new `connection` to Questrade (a Canadian brokerage) and that `connection` had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these `accounts` accessible over the SnapTrade API.
+For order types, brokerage support, and other asset classes, see [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
 
-Once you have a connected `account`, you are ready to move on to pulling account data, and placing trades for that account.
+### Commercial Next Steps
 
-### How to: Get positions for an account
+- Configure [Webhooks](https://docs.snaptrade.com/docs/webhooks).
+- Finish integrating the [Connection Portal](https://docs.snaptrade.com/docs/implement-connection-portal).
+- Prepare your integration for production with [Launching Your Application](https://docs.snaptrade.com/docs/launching-your-application).
+- Review Commercial pricing and limits in [Billing](https://docs.snaptrade.com/docs/billing).
 
-When you have at least one connected `account` and want to start making use of the `positions`, you will first need to get the `accountId`.
-
-1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, call :api[Connections_listBrokerageAuthorizations] to list the user's connections, then call :api[Connections_listBrokerageAuthorizationAccounts] for the relevant connection to get the `accountId` of the account you wish to pull `positions` for.
-2. With the `accountId`, call :api[AccountInformation_getAllAccountPositions]. This will return a list of positions in the specified account.
-
-Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in. Other core endpoints for retrieving account information include :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
-
-### How to: Place a checked trade for an account
-
-When you have at least one connected `account` and want to place a trade in the account, you will need to follow these steps to place a checked order. Note that you may also place an order without checking it.
-
-1. You need to get the `universalSymbolId` for the instrument that you wish to place an order for. You can find this using :api[Trading_getUserAccountQuotes].
-2. Validate the order with :api[Trading_getOrderImpact]. This is a safe way to check the impact that the trade will have on the account if it is executed, and this is recommended to show on a screen to the account owner or end user to have them confirm the order. Save the `tradeId` returned by this endpoint, it will be used in the next step. This `tradeId` will expire after a few minutes.
-3. Using the `tradeId` returned from :api[Trading_getOrderImpact], place the checked order using :api[Trading_placeOrder]. This will place the order at the brokerage for the account, and return the response given by the broker.
-
-The order will now show over the :api[AccountInformation_getUserAccountOrders] endpoint. If it does not, you may need to trigger a refresh for the connection using :api[Connections_refreshBrokerageAuthorization].
-
-### [Accounts FAQ](https://docs.snaptrade.com/docs/faq#faq-account-information)
+[Back to customer models](#getting-started-api-keys)
 
 ---
 
-![image.png](./assets/250312_model.png)
-
-## Next Steps
-
-- To get started with Webhooks, see [Webhooks](https://docs.snaptrade.com/docs/webhooks)
-- To get started with implementing the SnapTrade Connection Portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal)
-- To let Personal users access their data through AI assistants like Claude and ChatGPT, see [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)
+For troubleshooting, see the [FAQ](https://docs.snaptrade.com/docs/faq). If you still need help, contact us through [Discord](https://discord.gg/rkYWBxb8Qu).

@@ -15,10 +15,12 @@ Personal and Commercial are customer experiences, not billing plan names. Billin
 | Intended user | An individual using SnapTrade for their own brokerage accounts | A company building an app for its own end users |
 | SnapTrade account owner | The individual investor | The developer, company, or partner |
 | End-user model | The signed-in Personal user is the SnapTrade user | Your app creates one SnapTrade `userId` and `userSecret` per end user |
-| Authentication options | Personal client ID and consumer key | Commercial client ID and consumer key |
-| API authorization | Signed requests with a Personal consumer key | Signed requests using the Commercial consumer key |
+| Authentication options | OAuth for sharing connected account data, or a Personal client ID and consumer key for direct access | Commercial client ID and consumer key |
+| API authorization | OAuth bearer tokens for apps, or signed requests with a Personal consumer key | Signed requests using the Commercial consumer key |
 | User registration | Do not call :api[Authentication_registerSnapTradeUser] for Personal API key authentication | Call :api[Authentication_registerSnapTradeUser] before creating connections |
 | Connection Portal | Opens for the Personal user's own brokerage connections | Opens for a specific SnapTrade user managed by your app |
+| Trading | Supported for the Personal user's own accounts where enabled | Supported for app users where enabled |
+| Webhooks | Available | Available |
 | MCP server | Supported; the MCP server is designed for SnapTrade Personal users | Not used with Commercial developer API keys |
 | Key lifecycle | Personal customers can create one Personal client ID and consumer key in the dashboard | Commercial customers start with a test key and can create production keys after KYC approval |
 | Billing | Free | Connected users and usage under the Commercial customer agreement |
@@ -34,7 +36,9 @@ Common Personal use cases include:
 - Portfolio analysis and trading for the user's own accounts.
 - Connection management for the user's own brokerages.
 
-Personal client ID and consumer key authentication is available for Personal users who need signed-request workflows, including trading with their own accounts where enabled. The Personal user represents themselves. Unlike a Commercial integration, your app should not create a separate SnapTrade user for them.
+Most Personal users connect their brokerage accounts in the SnapTrade Dashboard and authorize OAuth-enabled apps or AI assistants to read their data. OAuth apps receive scoped tokens rather than the user's API credentials.
+
+Personal client ID and consumer key authentication is available for Personal users who need direct signed-request workflows, including trading with their own accounts where enabled. The Personal user represents themselves. Unlike a Commercial integration, your app should not create a separate SnapTrade user for them.
 
 For Personal API key authentication:
 
@@ -52,7 +56,7 @@ Common Commercial use cases include:
 - A fintech app that lets many app users connect their brokerages.
 - A portfolio management, tax, financial planning, trading, or analytics product.
 - A backend service that needs to create, track, and support many SnapTrade users.
-- Production integrations that need webhooks, billing, compliance review, and higher limits.
+- Production integrations that need billing, compliance review, and higher limits.
 
 Commercial integrations use a SnapTrade client ID and consumer key. Your backend signs requests with the consumer key and keeps that key secret.
 
@@ -84,7 +88,7 @@ Both experiences can involve a SnapTrade client ID and consumer key, but they ar
 - Must be stored only on a backend or other secure server-side environment.
 - Are used to generate request signatures and validate webhook signatures.
 
-In the SnapTrade Dashboard, Commercial customers typically create a test key first. Production key creation requires KYC approval and a payment method. Personal customers are limited to one free Personal client ID and consumer key, which they can use for their own production use cases.
+In the SnapTrade Dashboard, Commercial customers typically create a test key first. Production key creation requires KYC approval and a payment method. Personal customers are limited to one free Personal client ID and consumer key for their own brokerage accounts.
 
 ## Users And Connections
 
@@ -120,6 +124,8 @@ For Commercial integrations, trading requires:
 - A brokerage and account that support trading.
 - A connection created with the appropriate connection type.
 - Your application's own user confirmation and compliance flow before submitting orders.
+
+Both Personal and Commercial API keys can receive webhooks after a webhook listener URL is configured in the SnapTrade Dashboard.
 
 ## Billing And Limits
 
