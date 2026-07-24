@@ -84,7 +84,7 @@ const ConnectionPortalModal = ({ loginLink }) => (
 
 - Key Considerations:
   - Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages).
-  - Your application is responsible for closing the iframe modal post connections.
+  - Your application is responsible for closing the iframe modal once the flow finishes — the portal sends a `CLOSE_MODAL` window message as your cue. See [Who closes the window?](#implement-connection-portal-who-closes-the-window)
   - If not using `snaptrade-react` SDK, you must handle responsive sizing and closing the modal. The SDK simplifies this.
 
 ### New Browser Tab
@@ -98,6 +98,7 @@ Opens the portal in a separate browser tab or popup window.
     - **Option 1: Window messages**
       - Open the Connection Portal in a new window using `window.open`. This is required to receive client-side window messages.
       - Refer to the documentation on how to listen for and handle these messages [here](#implement-connection-portal-window-messages).
+      - The portal never closes its own tab or popup — it redirects back to your redirect URL when the flow finishes. If you want the popup gone sooner, close it from your app when you receive a `SUCCESS`, `ERROR`, or `ABANDONED` message.
     - **Option 2: Query parameters in redirect**
       - The portal will redirect back to your URL with query parameters:
         - **SUCCESS:** `{your_redirect_url}?status=SUCCESS&connection_id={connection_id}`
@@ -137,10 +138,12 @@ Your app should listen for these messages and respond accordingly, for example b
   {status: 'ERROR', errorCode: 'ERROR_CODE', statusCode: 'STATUS_CODE', detail: 'DETAIL_OF_THE_ERROR'}
   ```
 
-  - **CLOSED:** Sent when the user manually closes the OAuth connection window that opens in a new tab.
+  - **CLOSED:** Sent as a plain string when the user closes the OAuth connection window (which opens in a second tab) without completing it. This is a best-effort abandonment signal: the portal first shows a retry screen and only emits `CLOSED` if the user then walks away without interacting. If the user instead clicks the close button on that screen, the portal sends `CLOSE_MODAL`.
     - Note: This message is only emitted when the connection portal is loaded inside an iframe. In other integration methods, the OAuth flow opens in the same tab as the connection portal, so closing the OAuth window also ends the entire connection portal session.
 
-  - **ABANDONED:** Functions the same as `CLOSE_MODAL` but only triggers for non-iframe implementations.
+  - **CLOSE_MODAL:** Sent as a plain string (not an object) when the portal is loaded inside an iframe and the session has ended — after a successful connection, a failed connection, or the user exiting without connecting. This is your cue to dismiss the modal; the portal never closes the iframe itself. It is the signal the `snaptrade-react` SDK uses to close the modal for you.
+
+  - **ABANDONED:** Sent as a plain string when the user exits the portal without connecting. In non-iframe integrations this is the exit signal (also delivered as `status=ABANDONED` in the redirect query parameters). In the iframe integration, the signal to dismiss the modal is `CLOSE_MODAL` instead.
     - Example React snippet:
 
     ```jsx
@@ -172,6 +175,19 @@ Your app should listen for these messages and respond accordingly, for example b
       };
     }, []);
     ```
+
+### Who closes the window?
+
+The Connection Portal never closes a window or modal that _your app_ created — it tells you when to do so via the messages above. The only window SnapTrade closes automatically is the OAuth popup that the portal itself opens (in the iframe integration), once the brokerage OAuth flow completes.
+
+| Integration method     | SnapTrade closes                                                                  | Your app closes                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| React SDK              | Everything — the SDK closes the modal and SnapTrade closes the OAuth popup        | Nothing                                                                                             |
+| Embedded iframe        | The OAuth popup the portal opens, once the OAuth flow completes                   | The iframe modal, when you receive `CLOSE_MODAL` (or `SUCCESS` / `ERROR`)                           |
+| New browser tab        | Nothing — the portal redirects back to your redirect URL instead of closing its tab | The popup (optional), when you receive `SUCCESS`, `ERROR`, or `ABANDONED` after using `window.open` |
+| Mobile in-app browser  | Nothing — the portal redirects to your app's deep link                            | The in-app browser, in your deep-link handler (see the platform guides below)                       |
+
+If the user closes the OAuth popup instead of finishing the flow, the portal keeps the modal open and shows a retry screen rather than closing it. It emits `CLOSED` (iframe integrations only) as a best-effort signal that the OAuth step was abandoned.
 
 ## React Native
 
