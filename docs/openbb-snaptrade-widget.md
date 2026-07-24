@@ -1,6 +1,6 @@
-# OpenBB SnapTrade Widget
+# OpenBB Snaptrade App
 
-The OpenBB SnapTrade widget connects your own brokerage accounts to OpenBB Workspace through [SnapTrade](https://snaptrade.com), so you can see your live holdings, balances, orders, and activity next to the rest of your research — plus let the Workspace AI agent answer questions about your real portfolio.
+The OpenBB Snaptrade app connects your own brokerage accounts to OpenBB Workspace through [SnapTrade](https://snaptrade.com), so you can see your live holdings, balances, orders, and activity next to the rest of your research — plus let the Workspace AI agent answer questions about your real portfolio.
 
 ---
 
@@ -25,7 +25,7 @@ Treat these keys like a password: they unlock the brokerage accounts you connect
 
 ## 3. Add your credentials in OpenBB Workspace
 
-The OpenBB SnapTrade widget is available in the OpenBB Workspace app marketplace.
+The OpenBB Snaptrade app is available in the OpenBB Workspace app marketplace.
 
 Click **Add Authentication** and add these two headers, using the values from step 2:
 
