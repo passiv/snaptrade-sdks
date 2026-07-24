@@ -218,7 +218,8 @@ func (r TradingApiCancelUserAccountOrderRequest) Execute() (*AccountOrderRecord,
 /*
 CancelUserAccountOrder Cancel equity order
 
-**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
+**Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.
+
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
@@ -1160,8 +1161,6 @@ The quotes returned can be delayed depending on the brokerage the account belong
 
 This endpoint does not work for options quotes.
 
-This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
-
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -1337,7 +1336,8 @@ func (r TradingApiPlaceBracketOrderRequest) Execute() (*AccountOrderRecord, *htt
 /*
 PlaceBracketOrder Place bracket order
 
-**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
+**Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.
+
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
 use. Only supported on certain brokerages
 

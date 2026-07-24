@@ -616,12 +616,12 @@ func (r AccountInformationApiGetAllUserHoldingsRequest) Execute() ([]AccountHold
 /*
 GetAllUserHoldings List all accounts for the user, plus balances, positions, and orders for each account.
 
-**Deprecated, please use the account-specific holdings endpoint instead.**
+**Deprecated.** Use the account-specific holdings endpoint instead.
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 List all accounts for the user, plus balances, positions, and orders for each
 account.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1600,9 +1600,9 @@ func (r AccountInformationApiGetUserAccountPositionsRequest) Execute() ([]Positi
 /*
 GetUserAccountPositions List account positions
 
-Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+**Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
 
-This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
+Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
@@ -2212,6 +2212,9 @@ func (r AccountInformationApiGetUserHoldingsRequest) Execute() (*AccountHoldings
 GetUserHoldings List account holdings
 
 **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
+
 Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:

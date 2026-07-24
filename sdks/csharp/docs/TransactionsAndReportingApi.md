@@ -12,7 +12,7 @@ All URIs are relative to *https://api.snaptrade.com*
 
 
 
-This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
+**Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. 
 
 ### Example
 ```csharp
@@ -115,7 +115,7 @@ catch (ApiException e)
 
 
 
-Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+**Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies. 
 
 ### Example
 ```csharp
