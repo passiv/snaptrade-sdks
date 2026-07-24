@@ -627,7 +627,7 @@ class CancelUserAccountOrder(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
+        """ **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
         args = self._cancel_user_account_order_mapped_args(
             body=body,
             path_params=path_params,
@@ -694,7 +694,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
+        """ **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
         args = self._cancel_user_account_order_mapped_args(
             body=body,
             path_params=path_params,
