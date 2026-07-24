@@ -74,6 +74,9 @@ portal:
               path: docs/launching-your-application.md
             - id: trade-detection
               path: docs/trade-detection.md
+            - id: openbb-snaptrade-widget
+              path: docs/openbb-snaptrade-widget.md
+              hidden: true
         - label: Billing
           links:
             - id: billing
