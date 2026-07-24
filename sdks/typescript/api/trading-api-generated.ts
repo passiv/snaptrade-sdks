@@ -174,7 +174,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+         * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
          * @summary Cancel equity order
          * @param {string} accountId 
          * @param {AccountInformationGetUserAccountOrderDetailRequest} accountInformationGetUserAccountOrderDetailRequest 
@@ -496,7 +496,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
          * @summary Get equity symbol quotes
          * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
          * @param {string} accountId 
@@ -566,7 +566,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place bracket order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {ManualTradeFormBracket} manualTradeFormBracket 
@@ -1182,7 +1182,7 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+         * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
          * @summary Cancel equity order
          * @param {TradingApiCancelUserAccountOrderRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1265,7 +1265,7 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
          * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1277,7 +1277,7 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place bracket order
          * @param {TradingApiPlaceBracketOrderRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1481,7 +1481,7 @@ options?: AxiosRequestConfig): AxiosPromise<CancelOrderResponse> {
             return localVarFp.cancelOrder(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+         * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
          * @summary Cancel equity order
          * @param {TradingApiCancelUserAccountOrderRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1537,7 +1537,7 @@ options?: AxiosRequestConfig): AxiosPromise<OptionQuote> {
             return localVarFp.getUserAccountOptionQuotes(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
          * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1548,7 +1548,7 @@ options?: AxiosRequestConfig): AxiosPromise<Array<SymbolsQuotesInner>> {
             return localVarFp.getUserAccountQuotes(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place bracket order
          * @param {TradingApiPlaceBracketOrderRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2164,7 +2164,7 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+     * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
      * @summary Cancel equity order
      * @param {TradingApiCancelUserAccountOrderRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2235,7 +2235,7 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+     * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
      * @summary Get equity symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2249,7 +2249,7 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
      * @summary Place bracket order
      * @param {TradingApiPlaceBracketOrderRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

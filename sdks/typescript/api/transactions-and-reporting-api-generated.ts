@@ -32,7 +32,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const TransactionsAndReportingApiAxiosParamCreator = function (configuration?: Configuration<AuthMode>) {
     return {
         /**
-         * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
+         * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. 
          * @summary Get transaction history for a user
          * @param {string | Date} [startDate] The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;.
          * @param {string | Date} [endDate] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;.
@@ -116,7 +116,7 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
             };
         },
         /**
-         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+         * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies. 
          * @summary Get performance information for a specific timeframe
          * @param {string | Date} startDate 
          * @param {string | Date} endDate 
@@ -214,7 +214,7 @@ export const TransactionsAndReportingApiFp = function<TAuth extends AuthMode>(co
     const localVarAxiosParamCreator = TransactionsAndReportingApiAxiosParamCreator(configuration)
     return {
         /**
-         * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
+         * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. 
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -227,7 +227,7 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+         * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies. 
          * @summary Get performance information for a specific timeframe
          * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -250,7 +250,7 @@ export const TransactionsAndReportingApiFactory = function<TAuth extends AuthMod
     const localVarFp = TransactionsAndReportingApiFp(configuration)
     return {
         /**
-         * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
+         * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. 
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -262,7 +262,7 @@ options?: AxiosRequestConfig): AxiosPromise<Array<UniversalActivity>> {
             return localVarFp.getActivities(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+         * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies. 
          * @summary Get performance information for a specific timeframe
          * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -398,7 +398,7 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest<TAuth exte
  */
 export class TransactionsAndReportingApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> {
     /**
-     * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
+     * **Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. 
      * @summary Get transaction history for a user
      * @param {TransactionsAndReportingApiGetActivitiesRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -413,7 +413,7 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
+     * **Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies. 
      * @summary Get performance information for a specific timeframe
      * @param {TransactionsAndReportingApiGetReportingCustomRangeRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
