@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.215-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.215)
+[![npm](https://img.shields.io/badge/gem-v2.0.216-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.216)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -94,7 +94,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.215'
+gem 'snaptrade', '~> 2.0.216'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -144,6 +144,8 @@ p.result[3] # [Faraday::Response] Raw HTTP response
 
 
 ### `snaptrade.account_information.get_account_activities`<a id="snaptradeaccount_informationget_account_activities"></a>
+
+This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
 
 Returns all historical transactions for the specified account.
 
@@ -199,14 +201,15 @@ of 1000.
 Optional comma separated list of transaction types to filter by. SnapTrade does
 a best effort to categorize brokerage transaction types into a common set of
 values. Here are some of the most popular values: - `BUY` - Asset bought. -
-`SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash
-contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment.
-- `STOCK_DIVIDEND` - A type of dividend where a company distributes shares
-instead of cash - `INTEREST` - Interest deposited into the account. - `FEE` -
-Fee withdrawn from the account. - `TAX` - A tax related fee. -
-`OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option
-assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` -
-Transfer of assets from one account to another. - `SPLIT` - A stock share split.
+`SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `SUBSTITUTE_DIVIDEND` -
+Payment in lieu of a dividend. - `CONTRIBUTION` - Cash contribution. -
+`WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. -
+`STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead
+of cash - `INTEREST` - Interest deposited into the account. - `FEE` - Fee
+withdrawn from the account. - `TAX` - A tax related fee. - `OPTIONEXPIRATION` -
+Option expiration event. - `OPTIONASSIGNMENT` - Option assignment event. -
+`OPTIONEXERCISE` - Option exercise event. - `TRANSFER` - Transfer of assets from
+one account to another. - `SPLIT` - A stock share split.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3039,12 +3042,13 @@ parameter takes precedence over the `accounts` parameter.
 Optional comma separated list of transaction types to filter by. SnapTrade does
 a best effort to categorize brokerage transaction types into a common set of
 values. Here are some of the most popular values: - `BUY` - Asset bought. -
-`SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash
-contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment.
-- `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from
-the account. - `OPTIONEXPIRATION` - Option expiration event. -
-`OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option
-exercise event. - `TRANSFER` - Transfer of assets from one account to another
+`SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `SUBSTITUTE_DIVIDEND` -
+Payment in lieu of a dividend. - `CONTRIBUTION` - Cash contribution. -
+`WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `INTEREST` -
+Interest deposited into the account. - `FEE` - Fee withdrawn from the account. -
+`OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option
+assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` -
+Transfer of assets from one account to another
 
 #### 🔄 Return<a id="🔄-return"></a>
 
