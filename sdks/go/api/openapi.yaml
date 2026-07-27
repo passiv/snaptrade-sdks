@@ -1231,7 +1231,7 @@ paths:
 
         The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-        `mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+        `mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getAllAccountPositions
@@ -3941,6 +3941,7 @@ components:
         holdings:
           last_successful_sync: ""
           initial_sync_completed: true
+          holdings_unavailable: true
         transactions:
           last_successful_sync: ""
           initial_sync_completed: true
@@ -3992,6 +3993,7 @@ components:
       example:
         last_successful_sync: ""
         initial_sync_completed: true
+        holdings_unavailable: true
       properties:
         initial_sync_completed:
           description: "Indicates if the initial sync of holdings has been completed.\
@@ -4006,6 +4008,18 @@ components:
           - $ref: '#/components/schemas/HoldingsSyncStatusDate'
           description: The last time holdings were successfully synced by SnapTrade.
           nullable: true
+        holdings_unavailable:
+          description: |
+            Indicates that the brokerage does not expose this account's holdings to SnapTrade, so the
+            empty positions and balances reported for it do not mean the account is empty. This is set
+            for accounts served by a separate brokerage system that we cannot read, such as Vanguard
+            employer-sponsored retirement plans. When this is `true`, prefer the account's total value
+            over the sum of its positions and cash, and note that `initial_sync_completed` and
+            `last_successful_sync` may still reflect an earlier sync.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsStatus-properties-holdings_unavailable
     AccountBalance:
       description: Contains balance related information for the account.
       example:
@@ -4040,6 +4054,7 @@ components:
           holdings:
             last_successful_sync: ""
             initial_sync_completed: true
+            holdings_unavailable: true
           transactions:
             last_successful_sync: ""
             initial_sync_completed: true
@@ -4229,6 +4244,7 @@ components:
           holdings:
             last_successful_sync: ""
             initial_sync_completed: true
+            holdings_unavailable: true
           transactions:
             last_successful_sync: ""
             initial_sync_completed: true
@@ -4512,6 +4528,7 @@ components:
             holdings:
               last_successful_sync: ""
               initial_sync_completed: true
+              holdings_unavailable: true
             transactions:
               last_successful_sync: ""
               initial_sync_completed: true
@@ -4784,6 +4801,7 @@ components:
             holdings:
               last_successful_sync: ""
               initial_sync_completed: true
+              holdings_unavailable: true
             transactions:
               last_successful_sync: ""
               initial_sync_completed: true
@@ -5969,6 +5987,7 @@ components:
           holdings:
             last_successful_sync: ""
             initial_sync_completed: true
+            holdings_unavailable: true
           transactions:
             last_successful_sync: ""
             initial_sync_completed: true
@@ -9066,6 +9085,7 @@ components:
             holdings:
               last_successful_sync: ""
               initial_sync_completed: true
+              holdings_unavailable: true
             transactions:
               last_successful_sync: ""
               initial_sync_completed: true
@@ -9131,6 +9151,7 @@ components:
               holdings:
                 last_successful_sync: ""
                 initial_sync_completed: true
+                holdings_unavailable: true
               transactions:
                 last_successful_sync: ""
                 initial_sync_completed: true
@@ -10573,6 +10594,7 @@ components:
             holdings:
               last_successful_sync: ""
               initial_sync_completed: true
+              holdings_unavailable: true
             transactions:
               last_successful_sync: ""
               initial_sync_completed: true
@@ -11404,6 +11426,10 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-HoldingsStatus-properties-initial_sync_completed:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-HoldingsStatus-properties-holdings_unavailable:
       example: true
       type: boolean
       x-do-not-generate: true

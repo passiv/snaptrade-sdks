@@ -60,6 +60,10 @@ public class HoldingsStatus {
   @SerializedName(SERIALIZED_NAME_LAST_SUCCESSFUL_SYNC)
   private OffsetDateTime lastSuccessfulSync;
 
+  public static final String SERIALIZED_NAME_HOLDINGS_UNAVAILABLE = "holdings_unavailable";
+  @SerializedName(SERIALIZED_NAME_HOLDINGS_UNAVAILABLE)
+  private Boolean holdingsUnavailable;
+
   public HoldingsStatus() {
   }
 
@@ -120,6 +124,35 @@ public class HoldingsStatus {
     this.lastSuccessfulSync = lastSuccessfulSync;
   }
 
+
+  public HoldingsStatus holdingsUnavailable(Boolean holdingsUnavailable) {
+    
+    
+    
+    
+    this.holdingsUnavailable = holdingsUnavailable;
+    return this;
+  }
+
+   /**
+   * Indicates that the brokerage does not expose this account&#39;s holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is &#x60;true&#x60;, prefer the account&#39;s total value over the sum of its positions and cash, and note that &#x60;initial_sync_completed&#x60; and &#x60;last_successful_sync&#x60; may still reflect an earlier sync. 
+   * @return holdingsUnavailable
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "true", value = "Indicates that the brokerage does not expose this account's holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is `true`, prefer the account's total value over the sum of its positions and cash, and note that `initial_sync_completed` and `last_successful_sync` may still reflect an earlier sync. ")
+
+  public Boolean getHoldingsUnavailable() {
+    return holdingsUnavailable;
+  }
+
+
+  public void setHoldingsUnavailable(Boolean holdingsUnavailable) {
+    
+    
+    
+    this.holdingsUnavailable = holdingsUnavailable;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -176,7 +209,8 @@ public class HoldingsStatus {
     }
     HoldingsStatus holdingsStatus = (HoldingsStatus) o;
     return Objects.equals(this.initialSyncCompleted, holdingsStatus.initialSyncCompleted) &&
-        Objects.equals(this.lastSuccessfulSync, holdingsStatus.lastSuccessfulSync)&&
+        Objects.equals(this.lastSuccessfulSync, holdingsStatus.lastSuccessfulSync) &&
+        Objects.equals(this.holdingsUnavailable, holdingsStatus.holdingsUnavailable)&&
         Objects.equals(this.additionalProperties, holdingsStatus.additionalProperties);
   }
 
@@ -186,7 +220,7 @@ public class HoldingsStatus {
 
   @Override
   public int hashCode() {
-    return Objects.hash(initialSyncCompleted, lastSuccessfulSync, additionalProperties);
+    return Objects.hash(initialSyncCompleted, lastSuccessfulSync, holdingsUnavailable, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -202,6 +236,7 @@ public class HoldingsStatus {
     sb.append("class HoldingsStatus {\n");
     sb.append("    initialSyncCompleted: ").append(toIndentedString(initialSyncCompleted)).append("\n");
     sb.append("    lastSuccessfulSync: ").append(toIndentedString(lastSuccessfulSync)).append("\n");
+    sb.append("    holdingsUnavailable: ").append(toIndentedString(holdingsUnavailable)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -227,6 +262,7 @@ public class HoldingsStatus {
     openapiFields = new HashSet<String>();
     openapiFields.add("initial_sync_completed");
     openapiFields.add("last_successful_sync");
+    openapiFields.add("holdings_unavailable");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
