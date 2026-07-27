@@ -26,5 +26,8 @@ class OptionalHoldingsStatus(TypedDict, total=False):
 
     last_successful_sync: HoldingsSyncStatusDateNullable
 
+    # Indicates that the brokerage does not expose this account's holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is `true`, prefer the account's total value over the sum of its positions and cash, and note that `initial_sync_completed` and `last_successful_sync` may still reflect an earlier sync. 
+    holdings_unavailable: bool
+
 class HoldingsStatus(RequiredHoldingsStatus, OptionalHoldingsStatus):
     pass

@@ -10,6 +10,7 @@ Status of account holdings sync. SnapTrade syncs holdings from the brokerage und
 |------------ | ------------- | ------------- | -------------|
 |**initialSyncCompleted** | **Boolean** | Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete. |  [optional] |
 |**lastSuccessfulSync** | **OffsetDateTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) |  [optional] |
+|**holdingsUnavailable** | **Boolean** | Indicates that the brokerage does not expose this account&#39;s holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is &#x60;true&#x60;, prefer the account&#39;s total value over the sum of its positions and cash, and note that &#x60;initial_sync_completed&#x60; and &#x60;last_successful_sync&#x60; may still reflect an earlier sync.  |  [optional] |
 
 
 

@@ -73,6 +73,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'LastSuccessfulSync'
         }
+        /// <summary>
+        /// Test the property 'HoldingsUnavailable'
+        /// </summary>
+        [Fact]
+        public void HoldingsUnavailableTest()
+        {
+            // TODO unit test for the property 'HoldingsUnavailable'
+        }
 
     }
 

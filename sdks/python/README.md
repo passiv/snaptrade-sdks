@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v12.0.2-blue)](https://pypi.org/project/snaptrade-python-sdk/12.0.2)
+[![PyPI](https://img.shields.io/badge/PyPI-v12.0.3-blue)](https://pypi.org/project/snaptrade-python-sdk/12.0.3)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -99,7 +99,7 @@ Python >=3.8
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==12.0.2
+pip install snaptrade-python-sdk==12.0.3
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -321,7 +321,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 

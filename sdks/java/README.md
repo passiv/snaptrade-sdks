@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.218-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.218)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.219-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.219)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -128,7 +128,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.snaptrade</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.218</version>
+  <version>5.0.219</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -144,7 +144,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.snaptrade:snaptrade-java-sdk:5.0.218"
+   implementation "com.snaptrade:snaptrade-java-sdk:5.0.219"
 }
 ```
 
@@ -181,7 +181,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.218.jar`
+* `target/snaptrade-java-sdk-5.0.219.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
@@ -374,7 +374,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 

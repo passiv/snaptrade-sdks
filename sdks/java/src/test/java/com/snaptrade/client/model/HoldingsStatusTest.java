@@ -56,4 +56,12 @@ public class HoldingsStatusTest {
         // TODO: test lastSuccessfulSync
     }
 
+    /**
+     * Test the property 'holdingsUnavailable'
+     */
+    @Test
+    public void holdingsUnavailableTest() {
+        // TODO: test holdingsUnavailable
+    }
+
 }

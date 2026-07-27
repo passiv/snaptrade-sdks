@@ -19,11 +19,15 @@ module SnapTrade
     # The last time holdings were successfully synced by SnapTrade.
     attr_accessor :last_successful_sync
 
+    # Indicates that the brokerage does not expose this account's holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is `true`, prefer the account's total value over the sum of its positions and cash, and note that `initial_sync_completed` and `last_successful_sync` may still reflect an earlier sync. 
+    attr_accessor :holdings_unavailable
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'initial_sync_completed' => :'initial_sync_completed',
-        :'last_successful_sync' => :'last_successful_sync'
+        :'last_successful_sync' => :'last_successful_sync',
+        :'holdings_unavailable' => :'holdings_unavailable'
       }
     end
 
@@ -36,14 +40,15 @@ module SnapTrade
     def self.openapi_types
       {
         :'initial_sync_completed' => :'Boolean',
-        :'last_successful_sync' => :'Time'
+        :'last_successful_sync' => :'Time',
+        :'holdings_unavailable' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'last_successful_sync'
+        :'last_successful_sync',
       ])
     end
 
@@ -69,6 +74,10 @@ module SnapTrade
       if attributes.key?(:'last_successful_sync')
         self.last_successful_sync = attributes[:'last_successful_sync']
       end
+
+      if attributes.key?(:'holdings_unavailable')
+        self.holdings_unavailable = attributes[:'holdings_unavailable']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -90,7 +99,8 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           initial_sync_completed == o.initial_sync_completed &&
-          last_successful_sync == o.last_successful_sync
+          last_successful_sync == o.last_successful_sync &&
+          holdings_unavailable == o.holdings_unavailable
     end
 
     # @see the `==` method
@@ -102,7 +112,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [initial_sync_completed, last_successful_sync].hash
+      [initial_sync_completed, last_successful_sync, holdings_unavailable].hash
     end
 
     # Builds the object from hash
