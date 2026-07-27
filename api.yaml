@@ -786,7 +786,7 @@ paths:
 
         The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-        `mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+        `mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       parameters:
@@ -3543,6 +3543,16 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/HoldingsSyncStatusDate"
+        holdings_unavailable:
+          description: |
+            Indicates that the brokerage does not expose this account's holdings to SnapTrade, so the
+            empty positions and balances reported for it do not mean the account is empty. This is set
+            for accounts served by a separate brokerage system that we cannot read, such as Vanguard
+            employer-sponsored retirement plans. When this is `true`, prefer the account's total value
+            over the sum of its positions and cash, and note that `initial_sync_completed` and
+            `last_successful_sync` may still reflect an earlier sync.
+          type: boolean
+          example: true
     AccountBalance:
       description: Contains balance related information for the account.
       properties:
