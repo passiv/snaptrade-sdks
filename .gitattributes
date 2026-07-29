@@ -1,0 +1,3 @@
+# Generated SDK snapshots preserve the generator's whitespace exactly.
+sdks/php/** -whitespace
+sdks/php7/** -whitespace
