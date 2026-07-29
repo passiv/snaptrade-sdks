@@ -164,6 +164,8 @@ Store the following encrypted and associated with the signed-in user in your app
 - `scope`
 - useful subject fields returned in `sub`, such as the SnapTrade user ID
 
+Access tokens are valid for 10 hours (`expires_in` is `36000`). Refresh tokens do not have a fixed time-based expiry. A refresh token remains valid until it is successfully used, revoked, or otherwise invalidated. Because refresh tokens rotate, successfully using one invalidates it and returns a new refresh token that your app must store.
+
 Never log authorization codes, access tokens, refresh tokens, or the client secret.
 
 ## 6. Call the SnapTrade API
@@ -201,7 +203,7 @@ const response = await fetch(tokenEndpoint, {
 const refreshedTokens = await response.json();
 ```
 
-SnapTrade rotates refresh tokens. Replace the stored refresh token atomically whenever a refresh succeeds; do not keep using the previous value. If an API request returns `401`, refresh once and retry once. If that fails, clear the stored tokens and ask the user to authorize again.
+SnapTrade rotates refresh tokens. Refreshing invalidates the token you sent and returns a new refresh token with no fixed time-based expiry. Replace the stored refresh token atomically whenever a refresh succeeds; do not keep using the previous value. If an API request returns `401`, refresh once and retry once. If that fails, clear the stored tokens and ask the user to authorize again.
 
 ## 8. Revoke Access
 
