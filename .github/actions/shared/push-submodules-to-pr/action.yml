@@ -1,0 +1,61 @@
+name: Push submodules to pull requests
+description: Commits generated SDK changes and opens pull requests in submodule repositories
+inputs:
+  sdk_submodule_dirs:
+    description: Space-delimited SDK submodule directories
+    required: true
+  submodule_deploy_keys:
+    description: Newline-delimited submodule deploy keys
+    required: true
+  head:
+    description: Branch to push
+    required: true
+  commit_message:
+    description: Commit message
+    required: true
+  pull_request_title:
+    description: Pull request title
+    required: true
+  pull_request_body:
+    description: Pull request body
+    required: false
+    default: ""
+  force:
+    description: Whether to force-push the branch
+    required: false
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - name: Set up SSH keys
+      uses: webfactory/ssh-agent@v0.10.0
+      with:
+        ssh-private-key: ${{ inputs.submodule_deploy_keys }}
+
+    - name: Push submodule changes
+      shell: bash
+      run: |
+        git submodule foreach '
+          case " ${{ inputs.sdk_submodule_dirs }} " in
+            *" $displaypath "*)
+              git add -A
+              git commit -m "${{ inputs.commit_message }}"
+
+              if [ "${{ inputs.force }}" = "true" ]; then
+                git push origin "HEAD:refs/heads/${{ inputs.head }}" --force
+              else
+                git push origin "HEAD:refs/heads/${{ inputs.head }}"
+              fi
+
+              remote_url=$(git remote get-url origin)
+              owner=$(echo "$remote_url" | cut -d "/" -f 1 | cut -d ":" -f 2)
+              repo=$(echo "$remote_url" | cut -d "/" -f 2 | sed "s/\.git.*//")
+              konfig pr-create \
+                --head "${{ inputs.head }}" \
+                --owner "$owner" \
+                --repo "$repo" \
+                --title "${{ inputs.pull_request_title }}" \
+                --body "${{ inputs.pull_request_body }}"
+              ;;
+          esac
+        '

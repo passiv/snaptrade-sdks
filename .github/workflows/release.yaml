@@ -13,20 +13,269 @@ on:
       - templates/**
       - flows/**
 
-
 jobs:
-  release:
-    uses: passiv/konfig-workflows/.github/workflows/release.yaml@main
-    secrets:
-      TEST_ENV: ${{ secrets.TEST_ENV }}
-      KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
-      SUBMODULE_DEPLOY_KEY_PHP: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
-      SUBMODULE_DEPLOY_KEY_PHP7: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
+  detect-changesets:
+    name: Detect changesets
+    runs-on: ubuntu-latest
+    outputs:
+      has_changesets: ${{ steps.changesets.outputs.has_changesets }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Detect changesets
+        id: changesets
+        uses: ./.github/actions/shared/detect-changesets
+
+  bump:
+    name: Bump SDK versions
+    needs: detect-changesets
+    if: needs.detect-changesets.outputs.has_changesets == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Detect SDK submodules
+        id: sdk-submodules
+        uses: ./.github/actions/shared/detect-sdk-submodules
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+
+      - name: Update submodule references
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: ./.github/actions/shared/sync-submodules
+        with:
+          sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+
+      - name: Get version-bump branch
+        id: bump-branch
+        uses: ./.github/actions/shared/get-bump-branch
+
+      - name: Bump SDK versions
+        run: konfig version
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+
+      - name: Regenerate SDKs
+        run: konfig generate
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+
+      - name: Push SDK submodules to pull requests
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: ./.github/actions/shared/push-submodules-to-pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        with:
+          sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+          submodule_deploy_keys: |
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
+          head: ${{ steps.bump-branch.outputs.branch }}
+          commit_message: Version Bump SDKs
+          pull_request_title: Version Bump SDKs
+          pull_request_body: Do not manually merge this PR. It will be merged automatically once the top-level PR is merged.
+          force: "true"
+
+      - name: Commit and push version bumps
+        env:
+          BRANCH: ${{ steps.bump-branch.outputs.branch }}
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        run: |
+          git add -A
+          git commit -m "Version Bump SDKs"
+          git push origin "HEAD:refs/heads/$BRANCH" --force
+          konfig pr-create \
+            --head "$BRANCH" \
+            --base "${{ github.ref_name }}" \
+            --owner "${{ github.repository_owner }}" \
+            --repo "${{ github.event.repository.name }}" \
+            --title "Version Bump SDKs" \
+            --body "Version Bumps SDKs"
+
+      - name: Check whether automatic bump merging is disabled
+        id: merge-disabled
+        uses: mikefarah/yq@v4.35.2
+        with:
+          cmd: yq '.doNotAutoMergeBumpPr' konfig.yaml
+
+      - name: Merge top-level version-bump pull request
+        if: steps.merge-disabled.outputs.result != 'true'
+        env:
+          BRANCH: ${{ steps.bump-branch.outputs.branch }}
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        run: |
+          konfig pr-merge \
+            --head "$BRANCH" \
+            --base "${{ github.ref_name }}" \
+            --owner "${{ github.repository_owner }}" \
+            --repo "${{ github.event.repository.name }}"
+
+  prepare-publish:
+    name: Prepare publishing
+    needs: detect-changesets
+    if: needs.detect-changesets.outputs.has_changesets == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: write
+    outputs:
+      sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Detect SDK submodules
+        id: sdk-submodules
+        uses: ./.github/actions/shared/detect-sdk-submodules
+
+      - name: Get version-bump branch
+        id: bump-branch
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: ./.github/actions/shared/get-bump-branch
+
+      - name: Configure Git
+        if: steps.sdk-submodules.outputs.dirs != ''
+        run: |
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+
+      - name: Merge submodule version-bump pull requests
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: ./.github/actions/shared/merge-submodule-prs
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        with:
+          sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+          head: ${{ steps.bump-branch.outputs.branch }}
+
+      - name: Update submodule references
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: ./.github/actions/shared/sync-submodules
+        with:
+          sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+          push_to: ${{ github.ref_name }}
+
+  publish:
+    name: Publish ${{ matrix.language }} SDK
+    needs:
+      - detect-changesets
+      - prepare-publish
+    if: needs.detect-changesets.outputs.has_changesets == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      artifact-metadata: write
+      attestations: write
+      checks: write
+      contents: write
+      deployments: write
+      discussions: write
+      issues: write
+      models: read
+      packages: write
+      pages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
+      id-token: write
+    strategy:
+      matrix:
+        # C# remains disabled while NuGet trusted publishing is unresolved.
+        language: [typescript, python, go, ruby, php, php7, java]
+    container:
+      image: konfigdev/test-and-publish:latest
+    env:
       PYPI_TOKEN_1: ${{ secrets.PYPI_TOKEN_1 }}
-      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      PYPI_TOKEN_2: ${{ secrets.PYPI_TOKEN_2 }}
+      GH_TOKEN: ${{ github.token }}
       GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-      CENTRAL_TOKEN_USERNAME: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
-      CENTRAL_TOKEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
       PACKAGIST_API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
       GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+          submodules: ${{ matrix.language == 'php' || matrix.language == 'php7' }}
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Set up test environment
+        uses: ./.github/actions/shared/inject-testing-env-vars
+        with:
+          test_env: ${{ secrets.TEST_ENV }}
+
+      - name: Test SDK
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_on: error
+          command: konfig test --filter ${{ matrix.language }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+          git config --global --add safe.directory "/__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}"
+
+      - name: Set up SSH keys for submodule publishing
+        if: needs.prepare-publish.outputs.sdk_submodule_dirs != '' && (matrix.language == 'php' || matrix.language == 'php7')
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: |
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
+
+      - name: Set up GPG
+        if: matrix.language == 'java' && env.GPG_PRIVATE_KEY && env.GPG_PASSPHRASE && env.GPG_KEY_ID
+        run: |
+          echo "$GPG_PRIVATE_KEY" | base64 -d | gpg --batch --passphrase "$GPG_PASSPHRASE" --import
+          echo "use-agent" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --kill gpg-agent
+          gpg-connect-agent reloadagent /bye
+
+      - name: Write Maven settings
+        if: matrix.language == 'java'
+        uses: ./.github/actions/shared/write-settings-xml
+        with:
+          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          central_token_username: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
+          central_token_password: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
+
+      - name: Publish SDK
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_on: error
+          command: konfig publish --generator ${{ matrix.language }} --skipTests --tolerateRepublish --skipRemoteCheck --ci

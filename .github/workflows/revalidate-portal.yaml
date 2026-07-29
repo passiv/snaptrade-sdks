@@ -1,0 +1,19 @@
+name: Revalidate portal
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  revalidate:
+    name: Revalidate portal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Revalidate portal
+        run: konfig revalidate-portal -o passiv -r snaptrade-sdks

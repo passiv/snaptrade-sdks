@@ -1,0 +1,18 @@
+name: Detect changeset files
+description: Determines whether .konfig/changesets contains any files
+outputs:
+  has_changesets:
+    description: Whether changeset files are present
+    value: ${{ steps.detect.outputs.has_changesets }}
+runs:
+  using: composite
+  steps:
+    - name: Detect changesets
+      id: detect
+      shell: bash
+      run: |
+        if [ -d .konfig/changesets ] && find .konfig/changesets -type f -print -quit | grep -q .; then
+          echo "has_changesets=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "has_changesets=false" >> "$GITHUB_OUTPUT"
+        fi

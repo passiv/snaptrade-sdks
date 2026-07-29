@@ -1,0 +1,340 @@
+name: Regenerate SDKs
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+    branches:
+      - master
+    paths:
+      - api.yaml
+  workflow_dispatch:
+    inputs:
+      changeset_type:
+        description: Semver bump to use for the generated SDK changeset
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prerelease
+      changeset_message:
+        description: Description to use for the generated SDK changeset
+        required: true
+        type: string
+      create_pull_request:
+        description: Create a pull request for the generated SDK changes
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  prepare:
+    name: Prepare regeneration
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      base_branch: ${{ steps.automatic.outputs.base_branch || steps.manual-pr.outputs.base_branch }}
+      head_branch: ${{ steps.automatic.outputs.head_branch || steps.manual-pr.outputs.head_branch }}
+      pr_url: ${{ steps.automatic.outputs.pr_url || steps.manual-pr.outputs.pr_url }}
+      merge_environment: ${{ steps.automatic.outputs.merge_environment || steps.manual.outputs.merge_environment }}
+      changeset_type: ${{ steps.automatic.outputs.changeset_type || steps.manual.outputs.changeset_type }}
+      changeset_message: ${{ steps.automatic.outputs.changeset_message || steps.manual.outputs.changeset_message }}
+    steps:
+      - name: Resolve automatic regeneration
+        if: github.event_name == 'pull_request'
+        id: automatic
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          HEAD_BRANCH: ${{ github.head_ref }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          echo "base_branch=$BASE_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "head_branch=$HEAD_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+          echo "merge_environment=sdk-regeneration-auto-merge" >> "$GITHUB_OUTPUT"
+          echo "changeset_type=patch" >> "$GITHUB_OUTPUT"
+          echo "changeset_message=Regenerate SDKs" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve manual regeneration
+        if: github.event_name == 'workflow_dispatch'
+        id: manual
+        env:
+          CREATE_PULL_REQUEST: ${{ inputs.create_pull_request }}
+          CURRENT_BRANCH: ${{ github.ref_name }}
+          CHANGESET_TYPE: ${{ inputs.changeset_type }}
+          CHANGESET_MESSAGE: ${{ inputs.changeset_message }}
+        run: |
+          head_branch="$CURRENT_BRANCH"
+          if [ "$CREATE_PULL_REQUEST" = "true" ]; then
+            head_branch="sdk-regeneration/manual-${{ github.run_id }}"
+          fi
+
+          echo "head_branch=$head_branch" >> "$GITHUB_OUTPUT"
+          echo "merge_environment=sdk-regeneration-merge" >> "$GITHUB_OUTPUT"
+          echo "changeset_type=$CHANGESET_TYPE" >> "$GITHUB_OUTPUT"
+          {
+            echo "changeset_message<<CHANGESET_MESSAGE"
+            echo "$CHANGESET_MESSAGE"
+            echo "CHANGESET_MESSAGE"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Checkout manual regeneration base
+        if: github.event_name == 'workflow_dispatch' && inputs.create_pull_request
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Create regeneration branch
+        if: github.event_name == 'workflow_dispatch' && inputs.create_pull_request
+        env:
+          HEAD_BRANCH: ${{ steps.manual.outputs.head_branch }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$HEAD_BRANCH"
+          git commit --allow-empty -m "chore: prepare manual SDK regeneration"
+          git push --set-upstream origin "$HEAD_BRANCH"
+
+      - name: Create pull request
+        if: github.event_name == 'workflow_dispatch' && inputs.create_pull_request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_BRANCH: ${{ steps.manual.outputs.head_branch }}
+        run: |
+          cat > pr-body.md <<'PR_BODY'
+          Manually triggered SDK regeneration from ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}.
+
+          Changeset type: ${{ inputs.changeset_type }}
+          Changeset message: ${{ inputs.changeset_message }}
+          PR_BODY
+
+          gh pr create \
+            --base "${{ github.ref_name }}" \
+            --head "$HEAD_BRANCH" \
+            --title "Regenerate SDKs" \
+            --body-file pr-body.md
+
+      - name: Resolve manual pull request
+        if: github.event_name == 'workflow_dispatch'
+        id: manual-pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_BRANCH: ${{ steps.manual.outputs.head_branch }}
+        run: |
+          prs=$(gh pr list \
+            --head "$HEAD_BRANCH" \
+            --state open \
+            --limit 2 \
+            --json baseRefName,headRefName,url)
+          count=$(jq 'length' <<< "$prs")
+
+          if [ "$count" -ne 1 ]; then
+            echo "::error::Expected exactly one open pull request with head branch '$HEAD_BRANCH', found $count."
+            exit 1
+          fi
+
+          echo "base_branch=$(jq -r '.[0].baseRefName' <<< "$prs")" >> "$GITHUB_OUTPUT"
+          echo "head_branch=$(jq -r '.[0].headRefName' <<< "$prs")" >> "$GITHUB_OUTPUT"
+          echo "pr_url=$(jq -r '.[0].url' <<< "$prs")" >> "$GITHUB_OUTPUT"
+
+  regenerate:
+    name: Regenerate SDKs
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: write
+    outputs:
+      sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+      head_branch: ${{ needs.prepare.outputs.head_branch }}
+      generated_sha: ${{ steps.commit-generated.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.prepare.outputs.head_branch }}
+          submodules: true
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Fix OpenAPI specification
+        run: konfig fix --ci
+
+      - name: Check whether linting is disabled
+        id: lint-disabled
+        uses: mikefarah/yq@v4.35.2
+        with:
+          cmd: yq '.disableAutomationLinter' konfig.yaml
+
+      - name: Lint OpenAPI specification
+        if: steps.lint-disabled.outputs.result != 'true'
+        run: konfig lint
+
+      - name: Regenerate SDKs
+        run: konfig generate
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+
+      - name: Create changeset
+        env:
+          CHANGESET_TYPE: ${{ needs.prepare.outputs.changeset_type }}
+          CHANGESET_MESSAGE: ${{ needs.prepare.outputs.changeset_message }}
+        run: konfig changeset -a -m "$CHANGESET_MESSAGE" --type="$CHANGESET_TYPE"
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+
+      - name: Build submodule pull request body
+        id: pull-request
+        env:
+          PR_URL: ${{ needs.prepare.outputs.pr_url }}
+        run: |
+          {
+            echo "body<<PR_BODY"
+            echo "Automatically created by top-level SDK repo PR: $PR_URL"
+            echo "PR_BODY"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Detect SDK submodules
+        id: sdk-submodules
+        uses: ./.github/actions/shared/detect-sdk-submodules
+
+      - name: Push SDK submodules to pull requests
+        if: steps.sdk-submodules.outputs.dirs != ''
+        uses: ./.github/actions/shared/push-submodules-to-pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        with:
+          sdk_submodule_dirs: ${{ steps.sdk-submodules.outputs.dirs }}
+          submodule_deploy_keys: |
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
+            ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
+          head: ${{ needs.prepare.outputs.head_branch }}
+          commit_message: Regenerate SDKs
+          pull_request_title: Regenerate SDKs
+          pull_request_body: ${{ steps.pull-request.outputs.body }}
+
+      - name: Commit and push generated changes
+        id: commit-generated
+        env:
+          HEAD_BRANCH: ${{ needs.prepare.outputs.head_branch }}
+        run: |
+          git add -A
+          git commit -m "Regenerate SDKs"
+          git push origin "HEAD:$HEAD_BRANCH"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  test:
+    name: Test ${{ matrix.language }} SDK
+    needs: regenerate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language: [typescript, python, go, ruby, php, php7, csharp, java]
+    container:
+      image: konfigdev/test-and-publish:latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.regenerate.outputs.generated_sha }}
+          submodules: true
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Set up test environment
+        uses: ./.github/actions/shared/inject-testing-env-vars
+        with:
+          test_env: ${{ secrets.TEST_ENV }}
+
+      - name: Test SDK
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_on: error
+          command: konfig test --filter ${{ matrix.language }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  merge:
+    name: Merge regenerated SDKs
+    needs:
+      - prepare
+      - regenerate
+      - test
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.prepare.outputs.merge_environment }}
+      deployment: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.regenerate.outputs.generated_sha }}
+          submodules: true
+
+      - name: Verify tested head is current
+        env:
+          EXPECTED_SHA: ${{ needs.regenerate.outputs.generated_sha }}
+          HEAD_BRANCH: ${{ needs.regenerate.outputs.head_branch }}
+        run: |
+          actual_sha=$(git ls-remote origin "refs/heads/$HEAD_BRANCH" | cut -f1)
+          if [ "$actual_sha" != "$EXPECTED_SHA" ]; then
+            echo "::error::The top-level PR head changed after SDK tests completed. Run regeneration again before merging."
+            exit 1
+          fi
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "publisher@konfigthis.com"
+          git config --global user.name "konfig-publisher"
+
+      - name: Merge submodule pull requests
+        if: needs.regenerate.outputs.sdk_submodule_dirs != ''
+        uses: ./.github/actions/shared/merge-submodule-prs
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        with:
+          sdk_submodule_dirs: ${{ needs.regenerate.outputs.sdk_submodule_dirs }}
+          head: ${{ needs.regenerate.outputs.head_branch }}
+
+      - name: Update submodule references
+        if: needs.regenerate.outputs.sdk_submodule_dirs != ''
+        uses: ./.github/actions/shared/sync-submodules
+        with:
+          sdk_submodule_dirs: ${{ needs.regenerate.outputs.sdk_submodule_dirs }}
+          push_to: ${{ needs.regenerate.outputs.head_branch }}
+
+      - name: Merge top-level pull request
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+        run: |
+          konfig pr-merge \
+            --head "${{ needs.regenerate.outputs.head_branch }}" \
+            --base "${{ needs.prepare.outputs.base_branch }}" \
+            --owner "${{ github.repository_owner }}" \
+            --repo "${{ github.event.repository.name }}"
