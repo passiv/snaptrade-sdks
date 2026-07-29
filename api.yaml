@@ -4170,7 +4170,9 @@ components:
           type: string
           example: EQUITY
         exchange_mic_code:
-          description: Market Identifier Code (MIC) for the exchange on which the instrument trades.
+          description: |
+            Market Identifier Code (MIC) for the exchange on which the instrument trades.
+            Omitted for instruments with no listing exchange, such as index options (VIX, SPX).
           type: string
           example: XNAS
         figi_code:
