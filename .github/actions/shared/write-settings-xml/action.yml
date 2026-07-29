@@ -1,0 +1,42 @@
+name: Write Maven settings
+description: Writes the Maven settings used for Java publishing
+inputs:
+  gpg_passphrase:
+    description: GPG passphrase
+    required: true
+  central_token_username:
+    description: Central repository username
+    required: true
+  central_token_password:
+    description: Central repository password
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Write settings.xml
+      shell: bash
+      run: |
+        mkdir -p ~/.m2
+        cat <<EOF > ~/.m2/settings.xml
+        <settings>
+          <profiles>
+            <profile>
+              <id>central_token</id>
+              <activation>
+                <activeByDefault>true</activeByDefault>
+              </activation>
+              <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>${{ inputs.gpg_passphrase }}</gpg.passphrase>
+              </properties>
+            </profile>
+          </profiles>
+          <servers>
+            <server>
+              <id>central</id>
+              <username>${{ inputs.central_token_username }}</username>
+              <password>${{ inputs.central_token_password }}</password>
+            </server>
+          </servers>
+        </settings>
+        EOF

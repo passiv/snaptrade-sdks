@@ -4,9 +4,9 @@ on:
   workflow_run:
     workflows:
       - Release
-      - Regenerate SDKs on OAS Change
-      - konfig-lint-openapi-spec
-      - konfig-revalidate-portal
+      - Regenerate SDKs
+      - OpenAPI lint
+      - Revalidate portal
     types:
       - completed
 
