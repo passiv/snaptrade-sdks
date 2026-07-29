@@ -24,22 +24,27 @@ on:
         type: boolean
 
 jobs:
-  create-pull-request:
-    name: Create pull request
-    if: inputs.create_pull_request
+  prepare-regeneration:
+    name: Prepare regeneration
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+    outputs:
+      base_branch: ${{ steps.resolve-pr.outputs.base_branch }}
+      head_branch: ${{ steps.resolve-pr.outputs.head_branch }}
+      pr_url: ${{ steps.resolve-pr.outputs.pr_url }}
     env:
-      HEAD_BRANCH: ${{ format('sdks-regeneration/manual-{0}', github.run_id) }}
+      HEAD_BRANCH: ${{ inputs.create_pull_request && format('sdk-regeneration/manual-{0}', github.run_id) || github.ref_name }}
     steps:
       - name: Checkout base branch
+        if: inputs.create_pull_request
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
 
       - name: Create regeneration branch
+        if: inputs.create_pull_request
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -48,6 +53,7 @@ jobs:
           git push --set-upstream origin "$HEAD_BRANCH"
 
       - name: Create pull request
+        if: inputs.create_pull_request
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -64,17 +70,43 @@ jobs:
             --title "Regenerate SDKs" \
             --body-file pr-body.md
 
+      - name: Resolve top-level pull request
+        id: resolve-pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          prs=$(gh pr list \
+            --head "$HEAD_BRANCH" \
+            --state open \
+            --limit 2 \
+            --json baseRefName,headRefName,url)
+          count=$(jq 'length' <<<"$prs")
+
+          if [ "$count" -ne 1 ]; then
+            echo "::error::Expected exactly one open pull request with head branch '$HEAD_BRANCH', found $count."
+            exit 1
+          fi
+
+          echo "base_branch=$(jq -r '.[0].baseRefName' <<<"$prs")" >> "$GITHUB_OUTPUT"
+          echo "head_branch=$(jq -r '.[0].headRefName' <<<"$prs")" >> "$GITHUB_OUTPUT"
+          echo "pr_url=$(jq -r '.[0].url' <<<"$prs")" >> "$GITHUB_OUTPUT"
+
   regenerate-sdks-manual:
     name: Regenerate SDKs
-    needs: create-pull-request
-    if: always() && (needs.create-pull-request.result == 'success' || needs.create-pull-request.result == 'skipped')
+    needs: prepare-regeneration
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: write
     uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
     with:
       konfig_yaml_dir: ./
       changeset_type: ${{ inputs.changeset_type }}
       changeset_message: ${{ inputs.changeset_message }}
-      base_branch: ${{ github.ref_name }}
-      head_branch: ${{ inputs.create_pull_request && (format('sdk-regeneration/manual-{0}', github.run_id)) || github.ref_name }}
+      base_branch: ${{ needs.prepare-regeneration.outputs.base_branch }}
+      head_branch: ${{ needs.prepare-regeneration.outputs.head_branch }}
+      top_level_pr_url: ${{ needs.prepare-regeneration.outputs.pr_url }}
+      merge_environment: sdk-regeneration-merge
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}

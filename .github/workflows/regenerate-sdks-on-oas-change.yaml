@@ -15,10 +15,16 @@ jobs:
   regenerate-sdks-on-oas-change:
     uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
     if: github.event.pull_request.draft == false
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: write
     with:
       konfig_yaml_dir: ./
       base_branch: ${{ github.base_ref }}
       head_branch: ${{ github.head_ref }}
+      top_level_pr_url: ${{ github.event.pull_request.html_url }}
+      merge_environment: sdk-regeneration-auto-merge
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
