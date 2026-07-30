@@ -3,7 +3,7 @@ name: Slack CI failure alert
 on:
   workflow_run:
     workflows:
-      - Release
+      - Bump or Release
       - Regenerate SDKs
       - OpenAPI lint
       - Revalidate portal
