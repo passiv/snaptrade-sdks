@@ -3,8 +3,8 @@
 set -euo pipefail
 
 validate_inputs() {
-  if [[ ! -d "$source_directory" ]]; then
-    echo "Source directory does not exist: $source_directory" >&2
+  if ! git -C "$mirror_directory" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Mirror directory is not a Git worktree: $mirror_directory" >&2
     exit 1
   fi
 
@@ -19,29 +19,7 @@ validate_inputs() {
   fi
 }
 
-prepare_mirror_checkout() {
-  local temporary_root=${RUNNER_TEMP:-${TMPDIR:-/tmp}}
-  mirror_directory=$(mktemp -d "$temporary_root/sdk-mirror.XXXXXX")
-  trap 'rm -rf "$mirror_directory"' EXIT
-
-  git clone \
-    --branch "$target_branch" \
-    --single-branch \
-    "$remote_url" \
-    "$mirror_directory"
-
-  git -C "$mirror_directory" config user.name "github-actions[bot]"
-  git -C "$mirror_directory" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-}
-
-stage_authoritative_tree() {
-  rsync \
-    --archive \
-    --delete \
-    --exclude=.git \
-    "$source_directory/" \
-    "$mirror_directory/"
-
+stage_mirror_tree() {
   git -C "$mirror_directory" add --all --force
   desired_tree=$(git -C "$mirror_directory" write-tree)
 }
@@ -49,21 +27,16 @@ stage_authoritative_tree() {
 enforce_immutable_version_tag() {
   local tagged_tree
 
-  if ! git ls-remote --exit-code --tags "$remote_url" "refs/tags/$tag" >/dev/null 2>&1; then
+  if ! git -C "$mirror_directory" show-ref --verify --quiet "refs/tags/$tag"; then
     return
   fi
 
   tag_exists=true
-  git -C "$mirror_directory" fetch \
-    --force \
-    origin \
-    "refs/tags/$tag:refs/tags/$tag"
   tagged_tree=$(git -C "$mirror_directory" rev-parse "$tag^{tree}")
 
-  # Reject conflicting version content before any remote mutation.
   if [[ "$tagged_tree" != "$desired_tree" ]]; then
-    echo "Tag $tag already exists with different content; bump the SDK version before mirroring." >&2
-    exit 1
+    tag_conflicts=true
+    echo "::warning::Tag $tag already exists with different content; mirror update skipped."
   fi
 }
 
@@ -112,32 +85,38 @@ write_results() {
   fi
 
   echo "Mirror commit: $mirror_sha"
-  echo "Mirror tree: $desired_tree"
+  echo "Desired source tree: $desired_tree"
   echo "Version tag: $tag"
 }
 
 main() {
-  if [[ "$#" -ne 5 ]]; then
-    echo "Usage: $0 <source-directory> <remote-url> <target-branch> <version> <source-reference>" >&2
+  if [[ "$#" -ne 4 ]]; then
+    echo "Usage: $0 <mirror-directory> <target-branch> <version> <source-reference>" >&2
     exit 2
   fi
 
-  source_directory=$1
-  remote_url=$2
-  target_branch=$3
-  version=$4
-  source_reference=$5
+  mirror_directory=$1
+  target_branch=$2
+  version=$3
+  source_reference=$4
   tag="v$version"
-  mirror_directory=
   desired_tree=
   tag_exists=false
+  tag_conflicts=false
   changed=false
   tag_created=false
 
   validate_inputs
-  prepare_mirror_checkout
-  stage_authoritative_tree
+  git -C "$mirror_directory" config user.name "github-actions[bot]"
+  git -C "$mirror_directory" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  stage_mirror_tree
   enforce_immutable_version_tag
+
+  if [[ "$tag_conflicts" == true ]]; then
+    write_results
+    return
+  fi
+
   commit_if_changed
   create_tag_if_missing
   push_updates

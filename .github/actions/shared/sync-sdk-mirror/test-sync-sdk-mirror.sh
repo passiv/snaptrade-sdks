@@ -11,6 +11,7 @@ seed_repository="$temporary_root/seed"
 source_directory="$temporary_root/source"
 checkout_directory="$temporary_root/checkout"
 output_file="$temporary_root/github-output"
+log_file="$temporary_root/sync-log"
 
 fail() {
   echo "FAIL: $*" >&2
@@ -38,15 +39,27 @@ remote_tag_tree() {
 
 run_sync() {
   local version=$1
+  local mirror_directory
+
+  mirror_directory=$(mktemp -d "$temporary_root/mirror.XXXXXX")
+  git clone --branch master "$remote_repository" "$mirror_directory" >/dev/null
+
+  rsync \
+    --archive \
+    --delete \
+    --exclude=.git \
+    "$source_directory/" \
+    "$mirror_directory/"
+
   : > "$output_file"
+  : > "$log_file"
   GITHUB_OUTPUT="$output_file" \
-    RUNNER_TEMP="$temporary_root" \
     bash "$script_directory/sync-sdk-mirror.sh" \
-      "$source_directory" \
-      "$remote_repository" \
+      "$mirror_directory" \
       master \
       "$version" \
-      "passiv/snaptrade-sdks@test"
+      "passiv/snaptrade-sdks@test" 2>&1 |
+    tee "$log_file"
 }
 
 git init --bare "$remote_repository" >/dev/null
@@ -101,12 +114,20 @@ second_head=$(remote_head)
   fail "Changed source content must create a mirror commit"
 
 git --git-dir="$remote_repository" tag v9.9.9 refs/heads/master
+conflicting_tag=$(git --git-dir="$remote_repository" rev-parse refs/tags/v9.9.9)
 echo "conflicting" > "$source_directory/conflicting.txt"
 head_before_conflict=$(remote_head)
-if run_sync 9.9.9; then
-  fail "A tag containing different content must be rejected"
-fi
+run_sync 9.9.9
 assert_equal "$head_before_conflict" "$(remote_head)" "Tag conflict must not mutate the mirror branch"
+assert_equal "$conflicting_tag" "$(git --git-dir="$remote_repository" rev-parse refs/tags/v9.9.9)" "Tag conflict must not mutate the existing tag"
+grep -Fqx "::warning::Tag v9.9.9 already exists with different content; mirror update skipped." "$log_file" ||
+  fail "Tag conflict must emit a warning"
+grep -qx "changed=false" "$output_file" ||
+  fail "Tag conflict must report changed=false"
+grep -qx "tag_created=false" "$output_file" ||
+  fail "Tag conflict must report tag_created=false"
+grep -qx "mirror_sha=$head_before_conflict" "$output_file" ||
+  fail "Tag conflict must report the unchanged mirror commit"
 
 cat > "$remote_repository/hooks/pre-receive" <<'HOOK'
 #!/usr/bin/env bash
