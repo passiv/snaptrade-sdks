@@ -25,7 +25,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
   * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
   * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
-  * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
   * [`snaptrade.account_information.get_user_account_order_detail`](#snaptradeaccount_informationget_user_account_order_detail)
@@ -347,43 +346,6 @@ get_all_account_positions_response = (
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the account-specific holdings endpoint instead.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
-    brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### brokerage_authorizations: `str`<a id="brokerage_authorizations-str"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AccountHoldings`](./snaptrade_client/type/account_holdings.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

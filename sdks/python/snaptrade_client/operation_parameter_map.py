@@ -35,13 +35,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/holdings-GET': {
-        'parameters': [
-            {
-                'name': 'brokerage_authorizations'
-            },
-        ]
-    },
     '/accounts/{accountId}/balances-GET': {
         'parameters': [
             {

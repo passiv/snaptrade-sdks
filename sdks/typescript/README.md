@@ -21,7 +21,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
-  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
@@ -342,45 +341,6 @@ const getAllAccountPositionsResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the account-specific holdings endpoint instead.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getAllUserHoldingsResponse =
-  await snaptrade.accountInformation.getAllUserHoldings({
-    brokerageAuthorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### brokerageAuthorizations: `string`<a id="brokerageauthorizations-string"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountHoldings](./models/account-holdings.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

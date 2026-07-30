@@ -17,7 +17,6 @@ from snaptrade_client.apis.paths.authorizations_authorization_id_disable import 
 from snaptrade_client.apis.paths.authorizations_authorization_id_accounts import AuthorizationsAuthorizationIdAccounts
 from snaptrade_client.apis.paths.session_events import SessionEvents
 from snaptrade_client.apis.paths.accounts import Accounts
-from snaptrade_client.apis.paths.holdings import Holdings
 from snaptrade_client.apis.paths.accounts_account_id_holdings import AccountsAccountIdHoldings
 from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
@@ -85,7 +84,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
         PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
-        PathValues.HOLDINGS: Holdings,
         PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
@@ -154,7 +152,6 @@ path_to_api = PathToApi(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
         PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
-        PathValues.HOLDINGS: Holdings,
         PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,

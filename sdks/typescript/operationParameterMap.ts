@@ -41,13 +41,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/holdings-GET': {
-        parameters: [
-            {
-                name: 'brokerage_authorizations'
-            },
-        ]
-    },
     '/accounts/{accountId}/balances-GET': {
         parameters: [
             {

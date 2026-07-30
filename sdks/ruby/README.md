@@ -22,7 +22,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
   * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
   * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
-  * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
   * [`snaptrade.account_information.get_user_account_order_detail`](#snaptradeaccount_informationget_user_account_order_detail)
@@ -292,49 +291,6 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the account-specific holdings endpoint instead.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.account_information.get_all_user_holdings(
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### brokerage_authorizations: `String`<a id="brokerage_authorizations-string"></a>
-Optional. Comma separated list of authorization IDs (only use if filtering is
-needed on one or more authorizations).
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountHoldings](./lib/snaptrade/models/account_holdings.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

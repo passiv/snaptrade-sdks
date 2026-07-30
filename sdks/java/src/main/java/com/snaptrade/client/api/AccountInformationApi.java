@@ -2,7 +2,6 @@ package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.Account;
-import com.snaptrade.client.model.AccountHoldings;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -38,11 +37,6 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     public class GetAllAccountPositionsRequestBuilder extends GetAllAccountPositionsRequestBuilderGenerated {
         public GetAllAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
-        }
-    }
-    public class GetAllUserHoldingsRequestBuilder extends GetAllUserHoldingsRequestBuilderGenerated {
-        public GetAllUserHoldingsRequestBuilder(String userId, String userSecret) {
-            super(userId, userSecret);
         }
     }
     public class GetUserAccountBalanceRequestBuilder extends GetUserAccountBalanceRequestBuilderGenerated {

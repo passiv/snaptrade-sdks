@@ -79,22 +79,6 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         */
     })
 
-    t.Run("Test AccountInformationApiService GetAllUserHoldings", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.AccountInformationApi.GetAllUserHoldings(
-            "userId_example",
-            "userSecret_example",
-        )
-        request.BrokerageAuthorizations("917c8734-8470-4a3e-a18f-57c3f2ee6631")
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
     t.Run("Test AccountInformationApiService GetUserAccountBalance", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetUserAccountBalance(

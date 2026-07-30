@@ -7,7 +7,6 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**getAccountActivities**](AccountInformationApi.md#getAccountActivities) | **GET** /accounts/{accountId}/activities | List account activities |
 | [**getAccountBalanceHistory**](AccountInformationApi.md#getAccountBalanceHistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
 | [**getAllAccountPositions**](AccountInformationApi.md#getAllAccountPositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
-| [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Get account detail |
 | [**getUserAccountOrderDetail**](AccountInformationApi.md#getUserAccountOrderDetail) | **POST** /accounts/{accountId}/orders/details | Get account order detail |
@@ -335,105 +334,6 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
-
-<a name="getAllUserHoldings"></a>
-# **getAllUserHoldings**
-> List&lt;AccountHoldings&gt; getAllUserHoldings(userId, userSecret).brokerageAuthorizations(brokerageAuthorizations).execute();
-
-List all accounts for the user, plus balances, positions, and orders for each account.
-
-**Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-
-### Example
-```java
-import com.snaptrade.client.ApiClient;
-import com.snaptrade.client.ApiException;
-import com.snaptrade.client.ApiResponse;
-import com.snaptrade.client.Snaptrade;
-import com.snaptrade.client.Configuration;
-import com.snaptrade.client.auth.*;
-import com.snaptrade.client.model.*;
-import com.snaptrade.client.api.AccountInformationApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com";
-    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-    
-    Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID brokerageAuthorizations = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-    try {
-      List<AccountHoldings> result = client
-              .accountInformation
-              .getAllUserHoldings(userId, userSecret)
-              .brokerageAuthorizations(brokerageAuthorizations)
-              .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AccountInformationApi#getAllUserHoldings");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      ApiResponse<List<AccountHoldings>> response = client
-              .accountInformation
-              .getAllUserHoldings(userId, userSecret)
-              .brokerageAuthorizations(brokerageAuthorizations)
-              .executeWithHttpInfo();
-      System.out.println(response.getResponseBody());
-      System.out.println(response.getResponseHeaders());
-      System.out.println(response.getStatusCode());
-      System.out.println(response.getRoundTripTime());
-      System.out.println(response.getRequest());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AccountInformationApi#getAllUserHoldings");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-| **brokerageAuthorizations** | **UUID**| Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional] |
-
-### Return type
-
-[**List&lt;AccountHoldings&gt;**](AccountHoldings.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Returns list of accounts and holdings |  -  |
-| **500** | Unexpected Error |  -  |
 
 <a name="getUserAccountBalance"></a>
 # **getUserAccountBalance**

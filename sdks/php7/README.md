@@ -24,7 +24,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
-  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
@@ -302,52 +301,6 @@ $result = $snaptrade->accountInformation->getAllAccountPositions(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the account-specific holdings endpoint instead.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->accountInformation->getAllUserHoldings(
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**AccountHoldings**](./lib/Model/AccountHoldings.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

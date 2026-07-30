@@ -22,7 +22,6 @@ class PathValues(str, enum.Enum):
     AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS = "/authorizations/{authorizationId}/accounts"
     SESSION_EVENTS = "/sessionEvents"
     ACCOUNTS = "/accounts"
-    HOLDINGS = "/holdings"
     ACCOUNTS_ACCOUNT_ID_HOLDINGS = "/accounts/{accountId}/holdings"
     ACCOUNTS_ACCOUNT_ID = "/accounts/{accountId}"
     ACCOUNTS_ACCOUNT_ID_BALANCES = "/accounts/{accountId}/balances"

@@ -26,7 +26,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
-  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
@@ -403,50 +402,6 @@ AllAccountPositionsResponse result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the account-specific holdings endpoint instead.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<AccountHoldings> result = client
-        .accountInformation
-        .getAllUserHoldings(userId, userSecret)
-        .brokerageAuthorizations(brokerageAuthorizations)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### brokerageAuthorizations: `UUID`<a id="brokerageauthorizations-uuid"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountHoldings](./src/main/java/com/snaptrade/client/model/AccountHoldings.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

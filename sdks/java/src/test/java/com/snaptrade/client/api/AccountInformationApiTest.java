@@ -17,7 +17,6 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.Account;
-import com.snaptrade.client.model.AccountHoldings;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -111,24 +110,6 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         AllAccountPositionsResponse response = api.getAllAccountPositions(userId, userSecret, accountId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * List all accounts for the user, plus balances, positions, and orders for each account.
-     *
-     * **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getAllUserHoldingsTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID brokerageAuthorizations = null;
-        List<AccountHoldings> response = api.getAllUserHoldings(userId, userSecret)
-                .brokerageAuthorizations(brokerageAuthorizations)
                 .execute();
         // TODO: test validations
     }
