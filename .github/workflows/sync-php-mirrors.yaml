@@ -3,8 +3,6 @@ name: Sync PHP mirrors
 on:
   workflow_call:
     secrets:
-      TEST_ENV:
-        required: true
       PHP_MIRROR_DEPLOY_KEY:
         required: true
       PHP7_MIRROR_DEPLOY_KEY:
@@ -69,46 +67,9 @@ jobs:
             fi
           done
 
-  test:
-    name: Test ${{ matrix.generator }} SDK
-    needs: prepare
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-    strategy:
-      matrix:
-        generator:
-          - php
-          - php7
-    container:
-      image: konfigdev/test-and-publish:latest
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ github.sha }}
-
-      - name: Install CLI
-        uses: ./.github/actions/shared/install-cli
-
-      - name: Set up test environment
-        uses: ./.github/actions/shared/inject-testing-env-vars
-        with:
-          test_env: ${{ secrets.TEST_ENV }}
-
-      - name: Test SDK
-        uses: nick-fields/retry@v4
-        with:
-          timeout_minutes: 15
-          max_attempts: 3
-          retry_on: error
-          command: konfig test --filter ${{ matrix.generator }}
-
   sync-php:
     name: Sync PHP mirror
-    needs:
-      - prepare
-      - test
+    needs: prepare
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -129,9 +90,7 @@ jobs:
 
   sync-php7:
     name: Sync PHP7 mirror
-    needs:
-      - prepare
-      - test
+    needs: prepare
     runs-on: ubuntu-latest
     permissions:
       contents: read

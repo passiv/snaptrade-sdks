@@ -209,7 +209,6 @@ jobs:
       packages: read
     uses: ./.github/workflows/sync-php-mirrors.yaml
     secrets:
-      TEST_ENV: ${{ secrets.TEST_ENV }}
       # These historical secret names no longer imply that the PHP SDKs are submodules.
       PHP_MIRROR_DEPLOY_KEY: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
       PHP7_MIRROR_DEPLOY_KEY: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
