@@ -249,6 +249,7 @@ jobs:
       deployment: false
     permissions:
       contents: write
+      packages: read
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
