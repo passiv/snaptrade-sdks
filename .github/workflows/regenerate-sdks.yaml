@@ -166,6 +166,11 @@ jobs:
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+
       - name: Fix OpenAPI specification
         run: konfig fix --ci
 
@@ -189,11 +194,6 @@ jobs:
           CHANGESET_TYPE: ${{ needs.prepare.outputs.changeset_type }}
           CHANGESET_MESSAGE: ${{ needs.prepare.outputs.changeset_message }}
         run: konfig changeset -a -m "$CHANGESET_MESSAGE" --type="$CHANGESET_TYPE"
-
-      - name: Configure Git
-        run: |
-          git config --global user.email "passiv-ops@passiv.com"
-          git config --global user.name "Passiv Ops"
 
       - name: Commit and push generated changes
         id: commit-generated
