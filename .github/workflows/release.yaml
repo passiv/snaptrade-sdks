@@ -1,6 +1,7 @@
-name: Release
+name: Bump or Release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
