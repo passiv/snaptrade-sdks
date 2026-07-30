@@ -171,11 +171,11 @@ public class AccountOrderRecordLegInstrument {
   }
 
    /**
-   * Market Identifier Code (MIC) for the exchange on which the instrument trades.
+   * Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). 
    * @return exchangeMicCode
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "XNAS", value = "Market Identifier Code (MIC) for the exchange on which the instrument trades.")
+  @ApiModelProperty(example = "XNAS", value = "Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). ")
 
   public String getExchangeMicCode() {
     return exchangeMicCode;

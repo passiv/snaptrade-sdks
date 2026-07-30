@@ -22,7 +22,7 @@ module SnapTrade
     # Type of instrument for the leg. - EQUITY - OPTION - CRYPTO 
     attr_accessor :asset_type
 
-    # Market Identifier Code (MIC) for the exchange on which the instrument trades.
+    # Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). 
     attr_accessor :exchange_mic_code
 
     # Financial Instrument Global Identifier (FIGI) if available.

@@ -38,7 +38,7 @@ export interface AccountOrderRecordLegInstrument {
      */
     'asset_type'?: string;
     /**
-     * Market Identifier Code (MIC) for the exchange on which the instrument trades.
+     * Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). 
      * @type {string}
      * @memberof AccountOrderRecordLegInstrument
      */

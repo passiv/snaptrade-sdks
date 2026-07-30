@@ -411,7 +411,7 @@ class AccountOrderRecordLegInstrument implements ModelInterface, ArrayAccess, \J
     /**
      * Sets exchange_mic_code
      *
-     * @param string|null $exchange_mic_code Market Identifier Code (MIC) for the exchange on which the instrument trades.
+     * @param string|null $exchange_mic_code Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX).
      *
      * @return self
      */
