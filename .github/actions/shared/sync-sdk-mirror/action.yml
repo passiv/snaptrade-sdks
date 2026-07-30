@@ -28,7 +28,7 @@ outputs:
     description: Whether the mirror branch received a new commit
     value: ${{ steps.sync.outputs.changed }}
   mirror-sha:
-    description: Commit containing the mirrored SDK
+    description: Current mirror branch commit after synchronization
     value: ${{ steps.sync.outputs.mirror_sha }}
   tag-created:
     description: Whether a new version tag was created
@@ -36,24 +36,39 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Set up mirror deploy key
-      uses: webfactory/ssh-agent@v0.10.0
+    - name: Check out mirror repository
+      uses: actions/checkout@v6
       with:
-        ssh-private-key: ${{ inputs.deploy-key }}
+        repository: ${{ inputs.target-repository }}
+        ref: ${{ inputs.target-branch }}
+        ssh-key: ${{ inputs.deploy-key }}
+        path: .sdk-mirror
+        fetch-depth: 0
 
-    - name: Sync mirror repository
+    - name: Copy SDK to mirror
+      shell: bash
+      env:
+        MIRROR_DIRECTORY: ${{ github.workspace }}/.sdk-mirror
+        SOURCE_DIRECTORY: ${{ github.workspace }}/${{ inputs.source-directory }}
+      run: |
+        rsync \
+          --archive \
+          --delete \
+          --exclude=.git \
+          "$SOURCE_DIRECTORY/" \
+          "$MIRROR_DIRECTORY/"
+
+    - name: Enforce mirror publishing rules
       id: sync
       shell: bash
       env:
-        SOURCE_DIRECTORY: ${{ inputs.source-directory }}
+        MIRROR_DIRECTORY: ${{ github.workspace }}/.sdk-mirror
         SOURCE_REFERENCE: ${{ github.repository }}@${{ github.sha }}
         TARGET_BRANCH: ${{ inputs.target-branch }}
-        TARGET_REPOSITORY: ${{ inputs.target-repository }}
         VERSION: ${{ inputs.version }}
       run: |
         bash "${{ github.action_path }}/sync-sdk-mirror.sh" \
-          "$SOURCE_DIRECTORY" \
-          "git@github.com:$TARGET_REPOSITORY.git" \
+          "$MIRROR_DIRECTORY" \
           "$TARGET_BRANCH" \
           "$VERSION" \
           "$SOURCE_REFERENCE"
