@@ -123,9 +123,8 @@ jobs:
       id-token: write
     strategy:
       matrix:
-        # C# remains disabled while NuGet trusted publishing is unresolved.
         # PHP SDKs are published from their mirrored repositories.
-        language: [typescript, python, go, ruby, java]
+        language: [typescript, python, go, ruby, java, csharp]
     container:
       image: konfigdev/test-and-publish:latest
     env:
@@ -184,8 +183,17 @@ jobs:
           central_token_username: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
           central_token_password: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
 
+      - name: Log in to NuGet
+        if: matrix.language == 'csharp'
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: snaptrade
+
       - name: Publish SDK
         uses: nick-fields/retry@v4
+        env:
+          NUGET_TRUSTED_PUBLISHING_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         with:
           timeout_minutes: 15
           max_attempts: 3
