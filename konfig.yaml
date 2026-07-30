@@ -83,6 +83,9 @@ portal:
               path: docs/billing.md
         - label: AI & MCP
           links:
+            - id: build-with-ai
+              path: docs/build-with-ai.md
+              hidden: true
             - id: mcp-server
               path: docs/mcp-server.md
             - id: connector-privacy
