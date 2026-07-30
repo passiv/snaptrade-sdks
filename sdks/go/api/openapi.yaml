@@ -5611,8 +5611,9 @@ components:
           x-konfig-original-example: EQUITY
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-asset_type
         exchange_mic_code:
-          description: Market Identifier Code (MIC) for the exchange on which the
-            instrument trades.
+          description: |
+            Market Identifier Code (MIC) for the exchange on which the instrument trades.
+            Omitted for instruments with no listing exchange, such as index options (VIX, SPX).
           example: XNAS
           type: string
           x-konfig-original-example: XNAS
@@ -7032,7 +7033,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-price
         cost_basis:
           description: "Book price or average purchase price for the position. For\
-            \ options, this is per-contract."
+            \ options, this is per-share."
           example: "118.2"
           format: decimal
           nullable: true

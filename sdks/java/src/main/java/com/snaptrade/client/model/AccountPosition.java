@@ -183,11 +183,11 @@ public class AccountPosition {
   }
 
    /**
-   * Book price or average purchase price for the position. For options, this is per-contract.
+   * Book price or average purchase price for the position. For options, this is per-share.
    * @return costBasis
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "118.2", value = "Book price or average purchase price for the position. For options, this is per-contract.")
+  @ApiModelProperty(example = "118.2", value = "Book price or average purchase price for the position. For options, this is per-share.")
 
   public BigDecimal getCostBasis() {
     return costBasis;

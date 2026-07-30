@@ -442,7 +442,7 @@ class AccountPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cost_basis
      *
-     * @param float|null $cost_basis Book price or average purchase price for the position. For options, this is per-contract.
+     * @param float|null $cost_basis Book price or average purchase price for the position. For options, this is per-share.
      *
      * @return self
      */

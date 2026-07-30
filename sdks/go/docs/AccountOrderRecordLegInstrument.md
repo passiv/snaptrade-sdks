@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Symbol** | Pointer to **string** | The symbol or ticker for the security. | [optional] 
 **Description** | Pointer to **string** | Human-readable description of the security. | [optional] 
 **AssetType** | Pointer to **string** | Type of instrument for the leg. - EQUITY - OPTION - CRYPTO  | [optional] 
-**ExchangeMicCode** | Pointer to **string** | Market Identifier Code (MIC) for the exchange on which the instrument trades. | [optional] 
+**ExchangeMicCode** | Pointer to **string** | Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX).  | [optional] 
 **FigiCode** | Pointer to **NullableString** | Financial Instrument Global Identifier (FIGI) if available. | [optional] 
 
 ## Methods

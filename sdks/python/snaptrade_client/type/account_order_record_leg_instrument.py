@@ -29,7 +29,7 @@ class OptionalAccountOrderRecordLegInstrument(TypedDict, total=False):
     # Type of instrument for the leg. - EQUITY - OPTION - CRYPTO 
     asset_type: str
 
-    # Market Identifier Code (MIC) for the exchange on which the instrument trades.
+    # Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). 
     exchange_mic_code: str
 
     # Financial Instrument Global Identifier (FIGI) if available.

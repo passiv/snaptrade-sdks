@@ -23,7 +23,7 @@ type AccountOrderRecordLegInstrument struct {
 	Description *string `json:"description,omitempty"`
 	// Type of instrument for the leg. - EQUITY - OPTION - CRYPTO 
 	AssetType *string `json:"asset_type,omitempty"`
-	// Market Identifier Code (MIC) for the exchange on which the instrument trades.
+	// Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). 
 	ExchangeMicCode *string `json:"exchange_mic_code,omitempty"`
 	// Financial Instrument Global Identifier (FIGI) if available.
 	FigiCode NullableString `json:"figi_code,omitempty"`
