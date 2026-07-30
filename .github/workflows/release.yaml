@@ -190,3 +190,17 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: konfig publish --generator ${{ matrix.language }} --skipTests --tolerateRepublish --skipRemoteCheck --ci
+
+  sync-php-mirrors:
+    name: Sync PHP mirrors
+    needs: detect-changesets
+    if: needs.detect-changesets.outputs.has_changesets == 'false'
+    permissions:
+      contents: read
+      packages: read
+    uses: ./.github/workflows/sync-php-mirrors.yaml
+    secrets:
+      TEST_ENV: ${{ secrets.TEST_ENV }}
+      PHP_MIRROR_DEPLOY_KEY: ${{ secrets.PHP_MIRROR_DEPLOY_KEY }}
+      PHP7_MIRROR_DEPLOY_KEY: ${{ secrets.PHP7_MIRROR_DEPLOY_KEY }}
+      PACKAGIST_API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
