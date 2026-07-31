@@ -85,7 +85,6 @@ portal:
           links:
             - id: build-with-ai
               path: docs/build-with-ai.md
-              hidden: true
             - id: mcp-server
               path: docs/mcp-server.md
             - id: connector-privacy
