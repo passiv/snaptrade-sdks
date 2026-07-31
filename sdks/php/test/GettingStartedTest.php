@@ -90,8 +90,8 @@ class GettingStartedTest extends TestCase
         );
         $user_id = getenv("SNAPTRADE_TEST_USER_ID");
         $user_secret = getenv("SNAPTRADE_TEST_USER_SECRET");
-        $holdings = $snaptrade->accountInformation->getAllUserHoldings($user_id, $user_secret);
-        $account_id = $holdings[0]->getAccount()->getId();
+        $accounts = $snaptrade->accountInformation->listUserAccounts($user_id, $user_secret);
+        $account_id = $accounts[0]->getId();
         $result = $snaptrade->trading->getUserAccountQuotes(
             user_id: $user_id,
             user_secret: $user_secret,

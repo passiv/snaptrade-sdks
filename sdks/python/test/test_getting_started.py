@@ -28,7 +28,7 @@ def _commercial_client(**kwargs):
 
 
 class TestGettingStarted(unittest.TestCase):
-    """AccountHoldings unit test stubs"""
+    """Getting started integration tests."""
 
     def setUp(self):
         pass
@@ -65,11 +65,11 @@ class TestGettingStarted(unittest.TestCase):
         )
         print(redirect_uri.body)
 
-        # 5) Obtaining account holdings data
-        holdings = snaptrade.account_information.get_all_user_holdings(
+        # 5) List the user's accounts
+        accounts = snaptrade.account_information.list_user_accounts(
             user_id=user_id, user_secret=user_secret
         )
-        pprint(holdings.body)
+        pprint(accounts.body)
 
         # 6) Deleting a user
         deleted_response = snaptrade.authentication.delete_snap_trade_user(
@@ -104,12 +104,12 @@ class TestGettingStarted(unittest.TestCase):
         )
         print(redirect_uri.body)
 
-        # 5) Obtaining account holdings data
-        holdings = snaptrade.account_information.get_all_user_holdings(
+        # 5) List the user's accounts
+        accounts = snaptrade.account_information.list_user_accounts(
             user_id=user_id,
             user_secret=user_secret,
         )
-        pprint(holdings.body)
+        pprint(accounts.body)
 
         # 6) Deleting a user
         deleted_response = snaptrade.authentication.delete_snap_trade_user(
@@ -132,7 +132,7 @@ class TestGettingStarted(unittest.TestCase):
         )
         pprint(response.body)
 
-    def test_get_user_holdings(self):
+    def test_get_all_account_positions(self):
         snaptrade = _commercial_client()
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
@@ -141,21 +141,27 @@ class TestGettingStarted(unittest.TestCase):
             user_secret=user_secret,
         )
         account_id = accounts.body[0]["id"]
-        holdings = snaptrade.account_information.get_user_holdings(
+        positions = snaptrade.account_information.get_all_account_positions(
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
         )
-        pprint(holdings)
+        pprint(positions.body)
 
-    def test_get_activities(self):
+    def test_get_account_activities(self):
         snaptrade = _commercial_client()
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
+        accounts = snaptrade.account_information.list_user_accounts(
+            user_id=user_id,
+            user_secret=user_secret,
+        )
+        account_id = accounts.body[0]["id"]
         # instantiate two variables, one date that is 1 year ago and another that is today
         from_date = datetime.datetime.now() - datetime.timedelta(days=365)
         to_date = datetime.datetime.now()
-        response = snaptrade.transactions_and_reporting.get_activities(
+        response = snaptrade.account_information.get_account_activities(
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=from_date,
@@ -166,7 +172,8 @@ class TestGettingStarted(unittest.TestCase):
         # instantiate two variables of type "date", one date that is 1 year ago and another that is today
         from_date = datetime.date.today() - datetime.timedelta(days=365)
         to_date = datetime.date.today()
-        response = snaptrade.transactions_and_reporting.get_activities(
+        response = snaptrade.account_information.get_account_activities(
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=from_date,
@@ -179,7 +186,8 @@ class TestGettingStarted(unittest.TestCase):
             "%Y-%m-%d"
         )
         to_date = datetime.date.today().strftime("%Y-%m-%d")
-        response = snaptrade.transactions_and_reporting.get_activities(
+        response = snaptrade.account_information.get_account_activities(
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=from_date,
@@ -191,7 +199,8 @@ class TestGettingStarted(unittest.TestCase):
         # instantiate two variables of type "string" in ISO format, one date that is 1 year ago and another that is today
         from_date = (datetime.date.today() - datetime.timedelta(days=365)).isoformat()
         to_date = datetime.date.today().isoformat()
-        response = snaptrade.transactions_and_reporting.get_activities(
+        response = snaptrade.account_information.get_account_activities(
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=from_date,
@@ -208,9 +217,10 @@ class TestGettingStarted(unittest.TestCase):
         # print both from_date and to_date
         print(from_date)
         print(to_date)
-        # call the get_activities method and assert that an exception is thrown
+        # call the get_account_activities method and assert that an exception is thrown
         with self.assertRaises(Exception):
-            snaptrade.transactions_and_reporting.get_activities(
+            snaptrade.account_information.get_account_activities(
+                account_id=account_id,
                 user_id=user_id,
                 user_secret=user_secret,
                 start_date=from_date,

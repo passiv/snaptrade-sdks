@@ -47,29 +47,29 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test CancelUserAccountOrder
+        /// Test CancelOrder
         /// </summary>
         [Fact]
-        public void CancelUserAccountOrderTest()
+        public void CancelOrderTest()
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            var tradingCancelUserAccountOrderRequest = new AccountInformationGetUserAccountOrderDetailRequest(
+            var tradingCancelOrderRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 brokerageOrderId
             );
             
             try
             {
                 // Cancel order
-                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+                CancelOrderResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, tradingCancelOrderRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Console.WriteLine("Exception when calling TradingApi.CancelUserAccountOrder: " + e.Message);
+                Console.WriteLine("Exception when calling TradingApi.CancelOrder: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
