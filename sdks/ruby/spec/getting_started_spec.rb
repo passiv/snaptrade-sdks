@@ -63,9 +63,9 @@ describe 'GettingStarted' do
       redirect_uri = SnapTrade::Authentication.login_snap_trade_user(user_id: user_id, user_secret: response.user_secret)
       puts redirect_uri
 
-      # 5) Obtaining account holdings data
-      holdings = SnapTrade::AccountInformation.get_all_user_holdings(user_id: user_id, user_secret: response.user_secret)
-      puts holdings
+      # 5) List the user's accounts
+      accounts = SnapTrade::AccountInformation.list_user_accounts(user_id: user_id, user_secret: response.user_secret)
+      puts accounts
 
       # 6) Deleting a user
       deleted_response = SnapTrade::Authentication.delete_snap_trade_user(user_id: user_id)
@@ -95,9 +95,9 @@ describe 'GettingStarted' do
       redirect_uri = snaptrade.authentication.login_snap_trade_user(user_id: user_id, user_secret: response.user_secret)
       puts redirect_uri
 
-      # 5) Obtaining account holdings data
-      holdings = snaptrade.account_information.get_all_user_holdings(user_id: user_id, user_secret: response.user_secret)
-      puts holdings
+      # 5) List the user's accounts
+      accounts = snaptrade.account_information.list_user_accounts(user_id: user_id, user_secret: response.user_secret)
+      puts accounts
 
       # 6) Deleting a user
       deleted_response = snaptrade.authentication.delete_snap_trade_user(user_id: user_id)

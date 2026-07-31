@@ -57,14 +57,14 @@ it("getting started", async () => {
   if (!("redirectURI" in data)) throw Error("Should have gotten redirect URI");
   console.log("redirectURI:", data.redirectURI);
 
-  // 5) Obtaining account holdings data
-  const holdings = (
-    await snaptrade.accountInformation.getAllUserHoldings({
+  // 5) List the user's accounts
+  const accounts = (
+    await snaptrade.accountInformation.listUserAccounts({
       userId,
       userSecret,
     })
   ).data;
-  console.log("holdings:", holdings);
+  console.log("accounts:", accounts);
 
   // 6) Deleting a user
   const deleteResponse = (
@@ -92,13 +92,19 @@ it("getUserAccountBalance", async () => {
   console.log(response.data);
 });
 
-it("getActivities", async () => {
+it("getAccountActivities", async () => {
   const snaptrade = new Snaptrade({
     auth: commercialAuth(),
   });
   const userId = process.env.SNAPTRADE_TEST_USER_ID as string;
   const userSecret = process.env.SNAPTRADE_TEST_USER_SECRET as string;
-  let activities = await snaptrade.transactionsAndReporting.getActivities({
+  const accounts = await snaptrade.accountInformation.listUserAccounts({
+    userId,
+    userSecret,
+  });
+  const accountId = accounts.data[0].id as string;
+  let activities = await snaptrade.accountInformation.getAccountActivities({
+    accountId,
     userId,
     userSecret,
   });
@@ -107,7 +113,8 @@ it("getActivities", async () => {
   // create two variables "startDate" and "endDate" that are strings representing 1 year ago and today in yyyy-mm-dd format using today's date
   const startDate = "2020-01-01";
   const endDate = "2020-12-31";
-  activities = await snaptrade.transactionsAndReporting.getActivities({
+  activities = await snaptrade.accountInformation.getAccountActivities({
+    accountId,
     userId,
     userSecret,
     startDate,
@@ -120,7 +127,8 @@ it("getActivities", async () => {
   // create variable startDate2 which is 1 year before endDate2
   const startDate2 = new Date(endDate2);
   startDate2.setFullYear(startDate2.getFullYear() - 1);
-  activities = await snaptrade.transactionsAndReporting.getActivities({
+  activities = await snaptrade.accountInformation.getAccountActivities({
+    accountId,
     userId,
     userSecret,
     startDate: startDate2,
@@ -130,7 +138,7 @@ it("getActivities", async () => {
   expect(activities).not.toBeNull();
 });
 
-it("getUserHoldings", async () => {
+it("getAllAccountPositions", async () => {
   const snaptrade = new Snaptrade({
     auth: commercialAuth(),
   });
@@ -140,12 +148,11 @@ it("getUserHoldings", async () => {
     userId,
     userSecret,
   });
-  const holdings = await snaptrade.accountInformation.getUserHoldings({
+  const positions = await snaptrade.accountInformation.getAllAccountPositions({
     userId,
     userSecret,
     accountId: accounts.data[0].id as string,
   });
-  // assert holdings is not null with jest
-  expect(holdings).not.toBeNull();
-  console.log(holdings.data);
+  expect(positions).not.toBeNull();
+  console.log(positions.data);
 });

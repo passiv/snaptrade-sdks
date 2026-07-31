@@ -71,10 +71,10 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 		assert.Equal(t, 200, httpRes.StatusCode)
 		assert.NotEmpty(t, loginResp.LoginRedirectURI)
 
-		// 4) Obtain account holdings data
-		holdingsResp, httpRes, err := client.AccountInformationApi.GetAllUserHoldings(userId, *userSecret).Execute()
+		// 4) List the user's accounts
+		accountsResp, httpRes, err := client.AccountInformationApi.ListUserAccounts(userId, *userSecret).Execute()
 		require.Nil(t, err)
-		require.NotNil(t, holdingsResp)
+		require.NotNil(t, accountsResp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 		// 5) Delete the user
