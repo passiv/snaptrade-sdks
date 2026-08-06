@@ -434,6 +434,72 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /holdings:
+    get:
+      deprecated: true
+      tags:
+        - Account Information
+      summary:
+        List all accounts for the user, plus balances, positions, and orders for each
+        account.
+      description: |
+        **Deprecated.** Use the account-specific holdings endpoint instead.
+
+        This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
+
+        List all accounts for the user, plus balances, positions, and orders for each
+        account.
+      operationId: AccountInformation_getAllUserHoldings
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          required: false
+          name: brokerage_authorizations
+          description:
+            Optional. Comma separated list of authorization IDs (only use if
+            filtering is needed on one or more authorizations).
+          schema:
+            type: string
+            format: uuid
+            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      responses:
+        "200":
+          description: Returns list of accounts and holdings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountHoldings"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "425":
+          description: Too Early
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/425FailedRequestResponse"
+        "500":
+          description: Unexpected Error
   /accounts/{accountId}/holdings:
     get:
       tags:
