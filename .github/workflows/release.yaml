@@ -17,7 +17,7 @@ on:
 jobs:
   detect-changesets:
     name: Detect changesets
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     outputs:
       has_changesets: ${{ steps.changesets.outputs.has_changesets }}
     steps:
@@ -31,7 +31,7 @@ jobs:
     name: Bump SDK versions
     needs: detect-changesets
     if: needs.detect-changesets.outputs.has_changesets == 'true'
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     permissions:
       contents: write
       packages: read
@@ -103,7 +103,7 @@ jobs:
     name: Publish ${{ matrix.language }} SDK
     needs: detect-changesets
     if: needs.detect-changesets.outputs.has_changesets == 'false'
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     permissions:
       actions: write
       artifact-metadata: write
