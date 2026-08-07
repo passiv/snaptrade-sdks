@@ -15,9 +15,7 @@ from snaptrade_client.paths.authorizations_authorization_id_disable.post import 
 from snaptrade_client.paths.authorizations_authorization_id_accounts.get import ListBrokerageAuthorizationAccounts
 from snaptrade_client.paths.authorizations.get import ListBrokerageAuthorizations
 from snaptrade_client.paths.authorizations_authorization_id_refresh.post import RefreshBrokerageAuthorization
-from snaptrade_client.paths.authorizations_authorization_id.delete import RemoveBrokerageAuthorization
 from snaptrade_client.paths.authorizations_authorization_id_return_rates.get import ReturnRates
-from snaptrade_client.paths.session_events.get import SessionEvents
 from snaptrade_client.paths.authorizations_authorization_id_transactions_sync.post import SyncBrokerageAuthorizationTransactions
 import typing
 from snaptrade_client.auth import AuthMode
@@ -32,9 +30,7 @@ class ConnectionsApiGenerated(
     ListBrokerageAuthorizationAccounts[TAuth],
     ListBrokerageAuthorizations[TAuth],
     RefreshBrokerageAuthorization[TAuth],
-    RemoveBrokerageAuthorization[TAuth],
     ReturnRates[TAuth],
-    SessionEvents[TAuth],
     SyncBrokerageAuthorizationTransactions[TAuth],
 ):
     """NOTE:

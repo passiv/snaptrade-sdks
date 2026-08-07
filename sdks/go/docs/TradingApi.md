@@ -5,13 +5,11 @@ All URIs are relative to *https://api.snaptrade.com*
 Method | Path | Description
 ------------- | ------------- | -------------
 [**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
-[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
 [**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
 [**GetOptionImpact**](TradingApi.md#GetOptionImpact) | **Post** /accounts/{accountId}/trading/options/impact | Get option order impact
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
 [**GetUserAccountOptionQuotes**](TradingApi.md#GetUserAccountOptionQuotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
-[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
 [**PlaceComplexOrder**](TradingApi.md#PlaceComplexOrder) | **Post** /accounts/{accountId}/trading/complex | Place complex order
 [**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
@@ -68,83 +66,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `CancelOrderResponse.CancelOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
     fmt.Fprintf(os.Stdout, "Response from `CancelOrderResponse.CancelOrder.RawResponse`: %v\n", *resp.RawResponse)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CancelUserAccountOrder
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Cancel equity order
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    
-    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
-        "66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
-    
-    request := client.TradingApi.CancelUserAccountOrder(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        accountInformationGetUserAccountOrderDetailRequest,
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.CancelUserAccountOrder``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `CancelUserAccountOrder`: AccountOrderRecord
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelUserAccountOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OrderRole`: %v\n", *resp.OrderRole)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.QuoteUniversalSymbol`: %v\n", *resp.QuoteUniversalSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Action`: %v\n", *resp.Action)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.LimitPrice`: %v\n", *resp.LimitPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.StopPrice`: %v\n", *resp.StopPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TrailingStop`: %v\n", *resp.TrailingStop)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OrderType`: %v\n", *resp.OrderType)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimeInForce`: %v\n", *resp.TimeInForce)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimePlaced`: %v\n", *resp.TimePlaced)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 
@@ -420,94 +341,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.AskPrice`: %v\n", *resp.AskPrice)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.BidSize`: %v\n", *resp.BidSize)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.AskSize`: %v\n", *resp.AskSize)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PlaceBracketOrder
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Place bracket order
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    instrument := *snaptrade.NewTradingInstrument()
-    stopLoss := *snaptrade.NewStopLoss()
-    takeProfit := *snaptrade.NewTakeProfit()
-    
-    manualTradeFormBracket := *snaptrade.NewManualTradeFormBracket(
-        null,
-        instrument,
-        null,
-        null,
-        stopLoss,
-        takeProfit,
-    )
-    manualTradeFormBracket.SetPrice(31.33)
-    manualTradeFormBracket.SetStop(31.33)
-    manualTradeFormBracket.SetUnits(10.5)
-    
-    request := client.TradingApi.PlaceBracketOrder(
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "userId_example",
-        "userSecret_example",
-        manualTradeFormBracket,
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceBracketOrder``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `PlaceBracketOrder`: AccountOrderRecord
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceBracketOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.BrokerageGroupOrderId`: %v\n", *resp.BrokerageGroupOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OrderRole`: %v\n", *resp.OrderRole)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.QuoteUniversalSymbol`: %v\n", *resp.QuoteUniversalSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Action`: %v\n", *resp.Action)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.LimitPrice`: %v\n", *resp.LimitPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.StopPrice`: %v\n", *resp.StopPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TrailingStop`: %v\n", *resp.TrailingStop)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OrderType`: %v\n", *resp.OrderType)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimeInForce`: %v\n", *resp.TimeInForce)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimePlaced`: %v\n", *resp.TimePlaced)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 

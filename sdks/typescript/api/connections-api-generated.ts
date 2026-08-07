@@ -29,8 +29,6 @@ import { BrokerageAuthorizationRefreshConfirmation } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationTransactionsSyncConfirmation } from '../models';
 // @ts-ignore
-import { ConnectionsSessionEvents200ResponseInner } from '../models';
-// @ts-ignore
 import { DeleteConnectionConfirmation } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
@@ -406,64 +404,6 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-         * @summary Delete connection
-         * @param {string} authorizationId 
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeBrokerageAuthorization: async (authorizationId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorizationId' is not null or undefined
-            assertParamExists('removeBrokerageAuthorization', 'authorizationId', authorizationId)
-            const localVarPath = `/authorizations/{authorizationId}`
-                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/authorizations/{authorizationId}',
-                httpMethod: 'DELETE',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {string} authorizationId 
@@ -516,71 +456,6 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/authorizations/{authorizationId}/returnRates',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of session events associated with a user.
-         * @summary Get all session events for a user
-         * @param {string} partnerClientId 
-         * @param {string} [userId] Optional comma separated list of user IDs used to filter the request on specific users
-         * @param {string} [sessionId] Optional comma separated list of session IDs used to filter the request on specific users
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sessionEvents: async (partnerClientId: string, userId?: string, sessionId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'partnerClientId' is not null or undefined
-            assertParamExists('sessionEvents', 'partnerClientId', partnerClientId)
-            const localVarPath = `/sessionEvents`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (partnerClientId !== undefined) {
-                localVarQueryParameter['PartnerClientId'] = partnerClientId;
-            }
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (sessionId !== undefined) {
-                localVarQueryParameter['sessionId'] = sessionId;
-            }
-
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/sessionEvents',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -732,18 +607,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-         * @summary Delete connection
-         * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest<TAuth>} requestParameters Request parameters.
@@ -753,18 +616,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
         async returnRates(requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, 
 options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.authorizationId, requestParameters.timeframes, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * Returns a list of session events associated with a user.
-         * @summary Get all session events for a user
-         * @param {ConnectionsApiSessionEventsRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sessionEvents(requestParameters.partnerClientId, requestParameters.userId, requestParameters.sessionId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
@@ -856,17 +707,6 @@ options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationRefreshConfirm
             return localVarFp.refreshBrokerageAuthorization(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-         * @summary Delete connection
-         * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.removeBrokerageAuthorization(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest<TAuth>} requestParameters Request parameters.
@@ -876,17 +716,6 @@ options?: AxiosRequestConfig): AxiosPromise<void> {
         returnRates(requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, 
 options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
             return localVarFp.returnRates(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of session events associated with a user.
-         * @summary Get all session events for a user
-         * @param {ConnectionsApiSessionEventsRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<ConnectionsSessionEvents200ResponseInner>> {
-            return localVarFp.sessionEvents(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
          * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
@@ -1070,35 +899,6 @@ export type ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth extends Aut
     ConnectionsApiRefreshBrokerageAuthorizationRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiRefreshBrokerageAuthorizationRequestByAuthMode]
 
 /**
- * Request parameters for removeBrokerageAuthorization operation in ConnectionsApi.
- * @export
- */
-export type ConnectionsApiRemoveBrokerageAuthorizationBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ConnectionsApiRemoveBrokerageAuthorization
-    */
-    readonly authorizationId: string
-    
-}
-export type ConnectionsApiRemoveBrokerageAuthorizationcommercialApiKeyRequest = ConnectionsApiRemoveBrokerageAuthorizationBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type ConnectionsApiRemoveBrokerageAuthorizationpersonalApiKeyRequest = ConnectionsApiRemoveBrokerageAuthorizationBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type ConnectionsApiRemoveBrokerageAuthorizationRequestByAuthMode = {
-    "commercialApiKey": ConnectionsApiRemoveBrokerageAuthorizationcommercialApiKeyRequest;
-    "personalApiKey": ConnectionsApiRemoveBrokerageAuthorizationpersonalApiKeyRequest;
-}
-export type ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth extends AuthMode> =
-    ConnectionsApiRemoveBrokerageAuthorizationRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiRemoveBrokerageAuthorizationRequestByAuthMode]
-
-/**
  * Request parameters for returnRates operation in ConnectionsApi.
  * @export
  */
@@ -1133,45 +933,6 @@ export type ConnectionsApiReturnRatesRequestByAuthMode = {
 }
 export type ConnectionsApiReturnRatesRequest<TAuth extends AuthMode> =
     ConnectionsApiReturnRatesRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiReturnRatesRequestByAuthMode]
-
-/**
- * Request parameters for sessionEvents operation in ConnectionsApi.
- * @export
- */
-export type ConnectionsApiSessionEventsBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ConnectionsApiSessionEvents
-    */
-    readonly partnerClientId: string
-    
-    /**
-    * Optional comma separated list of user IDs used to filter the request on specific users
-    * @type {string}
-    * @memberof ConnectionsApiSessionEvents
-    */
-    readonly userId?: string
-    
-    /**
-    * Optional comma separated list of session IDs used to filter the request on specific users
-    * @type {string}
-    * @memberof ConnectionsApiSessionEvents
-    */
-    readonly sessionId?: string
-    
-}
-export type ConnectionsApiSessionEventscommercialApiKeyRequest = ConnectionsApiSessionEventsBaseRequest & {
-}
-export type ConnectionsApiSessionEventspersonalApiKeyRequest = ConnectionsApiSessionEventsBaseRequest & {
-}
-export type ConnectionsApiSessionEventsRequestByAuthMode = {
-    "commercialApiKey": ConnectionsApiSessionEventscommercialApiKeyRequest;
-    "personalApiKey": ConnectionsApiSessionEventspersonalApiKeyRequest;
-}
-export type ConnectionsApiSessionEventsRequest<TAuth extends AuthMode> =
-    ConnectionsApiSessionEventsRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiSessionEventsRequestByAuthMode]
 
 /**
  * Request parameters for syncBrokerageAuthorizationTransactions operation in ConnectionsApi.
@@ -1294,20 +1055,6 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-     * @summary Delete connection
-     * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectionsApiGenerated
-     */
-    public removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).removeBrokerageAuthorization(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
      * Returns a list of rate of return percents for a given connection. 
      * @summary List connection rate of returns
      * @param {ConnectionsApiReturnRatesRequest<TAuth>} requestParameters Request parameters.
@@ -1318,20 +1065,6 @@ options?: AxiosRequestConfig) {
     public returnRates(requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, 
 options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).returnRates(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * Returns a list of session events associated with a user.
-     * @summary Get all session events for a user
-     * @param {ConnectionsApiSessionEventsRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ConnectionsApiGenerated
-     */
-    public sessionEvents(requestParameters: ConnectionsApiSessionEventsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).sessionEvents(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
 
     }
 

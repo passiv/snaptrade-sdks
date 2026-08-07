@@ -101,12 +101,10 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetAccountActivities**](docs/AccountInformationApi.md#getaccountactivities) | **GET** /accounts/{accountId}/activities | List account activities
 *AccountInformationApi* | [**GetAccountBalanceHistory**](docs/AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value
 *AccountInformationApi* | [**GetAllAccountPositions**](docs/AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions
-*AccountInformationApi* | [**GetAllUserHoldings**](docs/AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Get account detail
 *AccountInformationApi* | [**GetUserAccountOrderDetail**](docs/AccountInformationApi.md#getuseraccountorderdetail) | **POST** /accounts/{accountId}/orders/details | Get account order detail
 *AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account orders
-*AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions
 *AccountInformationApi* | [**GetUserAccountRecentOrders**](docs/AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 *AccountInformationApi* | [**GetUserAccountReturnRates**](docs/AccountInformationApi.md#getuseraccountreturnrates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns
 *AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings
@@ -124,9 +122,7 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**ListBrokerageAuthorizationAccounts**](docs/ConnectionsApi.md#listbrokerageauthorizationaccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections
 *ConnectionsApi* | [**RefreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
-*ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns
-*ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | Get all session events for a user
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 *ExperimentalEndpointsApi* | [**AddSubscription**](docs/ExperimentalEndpointsApi.md#addsubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**CancelSubscription**](docs/ExperimentalEndpointsApi.md#cancelsubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
@@ -135,27 +131,20 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *ExperimentalEndpointsApi* | [**ListConnectionAccounts**](docs/ExperimentalEndpointsApi.md#listconnectionaccounts) | **GET** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
-*OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | List account option positions
-*ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get Client Info
-*ReferenceDataApi* | [**GetSecurityTypes**](docs/ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List security types
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols
 *ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail
 *ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types
 *ReferenceDataApi* | [**ListAllBrokerageInstruments**](docs/ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments
 *ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages
-*ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies
-*ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search account symbols
 *TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order
-*TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order
 *TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
 *TradingApi* | [**GetOptionImpact**](docs/TradingApi.md#getoptionimpact) | **POST** /accounts/{accountId}/trading/options/impact | Get option order impact
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact
 *TradingApi* | [**GetUserAccountOptionQuotes**](docs/TradingApi.md#getuseraccountoptionquotes) | **GET** /accounts/{accountId}/quotes/options | Get option quote
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes
-*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order
 *TradingApi* | [**PlaceComplexOrder**](docs/TradingApi.md#placecomplexorder) | **POST** /accounts/{accountId}/trading/complex | Place complex order
 *TradingApi* | [**PlaceCryptoOrder**](docs/TradingApi.md#placecryptoorder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order
@@ -164,8 +153,6 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
 *TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **POST** /accounts/{accountId}/trading/replace | Replace order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
-*TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
-*TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **GET** /performance/custom | Get performance information for a specific timeframe
 
 
 ## Documentation for Models
@@ -218,7 +205,6 @@ Class | Method | HTTP request | Description
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
  - [ConnectionAccount](docs/ConnectionAccount.md)
  - [ConnectionAccountSyncStatus](docs/ConnectionAccountSyncStatus.md)
- - [ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [CryptoInstrument](docs/CryptoInstrument.md)
  - [CryptoOrderForm](docs/CryptoOrderForm.md)
  - [CryptoOrderPreview](docs/CryptoOrderPreview.md)

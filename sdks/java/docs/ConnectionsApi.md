@@ -10,9 +10,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**listBrokerageAuthorizationAccounts**](ConnectionsApi.md#listBrokerageAuthorizationAccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection |
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all connections |
 | [**refreshBrokerageAuthorization**](ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
-| [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
 | [**returnRates**](ConnectionsApi.md#returnRates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
-| [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user |
 | [**syncBrokerageAuthorizationTransactions**](ConnectionsApi.md#syncBrokerageAuthorizationTransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection |
 
 
@@ -610,99 +608,6 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
-<a name="removeBrokerageAuthorization"></a>
-# **removeBrokerageAuthorization**
-> removeBrokerageAuthorization(authorizationId, userId, userSecret).execute();
-
-Delete connection
-
-Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-
-### Example
-```java
-import com.snaptrade.client.ApiClient;
-import com.snaptrade.client.ApiException;
-import com.snaptrade.client.ApiResponse;
-import com.snaptrade.client.Snaptrade;
-import com.snaptrade.client.Configuration;
-import com.snaptrade.client.auth.*;
-import com.snaptrade.client.model.*;
-import com.snaptrade.client.api.ConnectionsApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com";
-    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-    
-    Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    try {
-      client
-              .connections
-              .removeBrokerageAuthorization(authorizationId, userId, userSecret)
-              .execute();
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ConnectionsApi#removeBrokerageAuthorization");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      client
-              .connections
-              .removeBrokerageAuthorization(authorizationId, userId, userSecret)
-              .executeWithHttpInfo();
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ConnectionsApi#removeBrokerageAuthorization");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **authorizationId** | **UUID**|  | |
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **204** | OK |  -  |
-| **400** | Bad Request |  -  |
-| **404** | Not Found |  -  |
-| **0** | Unexpected error |  -  |
-
 <a name="returnRates"></a>
 # **returnRates**
 > RateOfReturnResponse returnRates(userId, userSecret, authorizationId).timeframes(timeframes).execute();
@@ -803,107 +708,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-
-<a name="sessionEvents"></a>
-# **sessionEvents**
-> List&lt;SessionEvent&gt; sessionEvents(partnerClientId).userId(userId).sessionId(sessionId).execute();
-
-Get all session events for a user
-
-Returns a list of session events associated with a user.
-
-### Example
-```java
-import com.snaptrade.client.ApiClient;
-import com.snaptrade.client.ApiException;
-import com.snaptrade.client.ApiResponse;
-import com.snaptrade.client.Snaptrade;
-import com.snaptrade.client.Configuration;
-import com.snaptrade.client.auth.*;
-import com.snaptrade.client.model.*;
-import com.snaptrade.client.api.ConnectionsApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com";
-    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-    
-    Snaptrade client = new Snaptrade(configuration);
-    String partnerClientId = "partnerClientId_example";
-    String userId = "userId_example"; // Optional comma separated list of user IDs used to filter the request on specific users
-    String sessionId = "sessionId_example"; // Optional comma separated list of session IDs used to filter the request on specific users
-    try {
-      List<SessionEvent> result = client
-              .connections
-              .sessionEvents(partnerClientId)
-              .userId(userId)
-              .sessionId(sessionId)
-              .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ConnectionsApi#sessionEvents");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      ApiResponse<List<SessionEvent>> response = client
-              .connections
-              .sessionEvents(partnerClientId)
-              .userId(userId)
-              .sessionId(sessionId)
-              .executeWithHttpInfo();
-      System.out.println(response.getResponseBody());
-      System.out.println(response.getResponseHeaders());
-      System.out.println(response.getStatusCode());
-      System.out.println(response.getRoundTripTime());
-      System.out.println(response.getRequest());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling ConnectionsApi#sessionEvents");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **partnerClientId** | **String**|  | |
-| **userId** | **String**| Optional comma separated list of user IDs used to filter the request on specific users | [optional] |
-| **sessionId** | **String**| Optional comma separated list of session IDs used to filter the request on specific users | [optional] |
-
-### Return type
-
-[**List&lt;SessionEvent&gt;**](SessionEvent.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | A list of all Session Events for the Partner. |  -  |
-| **0** | Unexpected error. |  -  |
 
 <a name="syncBrokerageAuthorizationTransactions"></a>
 # **syncBrokerageAuthorizationTransactions**

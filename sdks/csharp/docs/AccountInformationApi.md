@@ -7,12 +7,10 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetAccountActivities**](AccountInformationApi.md#getaccountactivities) | **GET** /accounts/{accountId}/activities | List account activities |
 | [**GetAccountBalanceHistory**](AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
 | [**GetAllAccountPositions**](AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
-| [**GetAllUserHoldings**](AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**GetUserAccountBalance**](AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**GetUserAccountDetails**](AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Get account detail |
 | [**GetUserAccountOrderDetail**](AccountInformationApi.md#getuseraccountorderdetail) | **POST** /accounts/{accountId}/orders/details | Get account order detail |
 | [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account orders |
-| [**GetUserAccountPositions**](AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**GetUserAccountRecentOrders**](AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
 | [**GetUserAccountReturnRates**](AccountInformationApi.md#getuseraccountreturnrates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns |
 | [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings |
@@ -312,104 +310,6 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry. |  -  |
 | **0** | Unexpected error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-# **GetAllUserHoldings**
-
-
-
-**Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-
-### Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using SnapTrade.Net.Client;
-using SnapTrade.Net.Model;
-
-namespace Example
-{
-    public class GetAllUserHoldingsExample
-    {
-        public static void Main()
-        {
-            Snaptrade client = new Snaptrade();
-            // Configure custom BasePath if desired
-            // client.SetBasePath("https://api.snaptrade.com/api/v1");
-            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
-
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var brokerageAuthorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
-            
-            try
-            {
-                // List all accounts for the user, plus balances, positions, and orders for each account.
-                List<AccountHoldings> result = client.AccountInformation.GetAllUserHoldings(userId, userSecret, brokerageAuthorizations);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling AccountInformationApi.GetAllUserHoldings: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-    }
-}
-```
-
-#### Using the GetAllUserHoldingsWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // List all accounts for the user, plus balances, positions, and orders for each account.
-    ApiResponse<List<AccountHoldings>> response = apiInstance.GetAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling AccountInformationApi.GetAllUserHoldingsWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **userId** | **string** |  |  |
-| **userSecret** | **string** |  |  |
-| **brokerageAuthorizations** | **string** | Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional]  |
-
-### Return type
-
-[**List&lt;AccountHoldings&gt;**](AccountHoldings.md)
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Returns list of accounts and holdings |  -  |
-| **400** | Bad Request |  -  |
-| **403** | Forbidden |  -  |
-| **425** | Too Early |  -  |
-| **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -806,102 +706,6 @@ catch (ApiException e)
 | **500** | Unexpected error |  -  |
 | **501** | Not Implemented - orders are not supported for this brokerage |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-# **GetUserAccountPositions**
-
-
-
-**Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-
-### Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using SnapTrade.Net.Client;
-using SnapTrade.Net.Model;
-
-namespace Example
-{
-    public class GetUserAccountPositionsExample
-    {
-        public static void Main()
-        {
-            Snaptrade client = new Snaptrade();
-            // Configure custom BasePath if desired
-            // client.SetBasePath("https://api.snaptrade.com/api/v1");
-            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
-
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
-            
-            try
-            {
-                // List account positions
-                List<Position> result = client.AccountInformation.GetUserAccountPositions(userId, userSecret, accountId);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAccountPositions: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-    }
-}
-```
-
-#### Using the GetUserAccountPositionsWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // List account positions
-    ApiResponse<List<Position>> response = apiInstance.GetUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling AccountInformationApi.GetUserAccountPositionsWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **userId** | **string** |  |  |
-| **userSecret** | **string** |  |  |
-| **accountId** | **string** |  |  |
-
-### Return type
-
-[**List&lt;Position&gt;**](Position.md)
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry. |  -  |
-| **0** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

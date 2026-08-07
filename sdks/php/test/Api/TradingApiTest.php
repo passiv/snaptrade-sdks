@@ -71,18 +71,6 @@ class TradingApiTest extends TestCase
     }
 
     /**
-     * Test case for cancelUserAccountOrder
-     *
-     * Cancel equity order.
-     *
-     */
-    public function testCancelUserAccountOrder()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getCryptocurrencyPairQuote
      *
      * Get crypto pair quote.
@@ -137,18 +125,6 @@ class TradingApiTest extends TestCase
      *
      */
     public function testGetUserAccountQuotes()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for placeBracketOrder
-     *
-     * Place bracket order.
-     *
-     */
-    public function testPlaceBracketOrder()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -8,7 +8,6 @@ import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
-import com.snaptrade.client.model.SessionEvent;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,19 +49,9 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
             super(authorizationId, userId, userSecret);
         }
     }
-    public class RemoveBrokerageAuthorizationRequestBuilder extends RemoveBrokerageAuthorizationRequestBuilderGenerated {
-        public RemoveBrokerageAuthorizationRequestBuilder(UUID authorizationId, String userId, String userSecret) {
-            super(authorizationId, userId, userSecret);
-        }
-    }
     public class ReturnRatesRequestBuilder extends ReturnRatesRequestBuilderGenerated {
         public ReturnRatesRequestBuilder(String userId, String userSecret, UUID authorizationId) {
             super(userId, userSecret, authorizationId);
-        }
-    }
-    public class SessionEventsRequestBuilder extends SessionEventsRequestBuilderGenerated {
-        public SessionEventsRequestBuilder(String partnerClientId) {
-            super(partnerClientId);
         }
     }
     public class SyncBrokerageAuthorizationTransactionsRequestBuilder extends SyncBrokerageAuthorizationTransactionsRequestBuilderGenerated {

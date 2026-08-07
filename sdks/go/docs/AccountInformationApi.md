@@ -7,12 +7,10 @@ Method | Path | Description
 [**GetAccountActivities**](AccountInformationApi.md#GetAccountActivities) | **Get** /accounts/{accountId}/activities | List account activities
 [**GetAccountBalanceHistory**](AccountInformationApi.md#GetAccountBalanceHistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
 [**GetAllAccountPositions**](AccountInformationApi.md#GetAllAccountPositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
-[**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
 [**GetUserAccountOrderDetail**](AccountInformationApi.md#GetUserAccountOrderDetail) | **Post** /accounts/{accountId}/orders/details | Get account order detail
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account orders
-[**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 [**GetUserAccountReturnRates**](AccountInformationApi.md#GetUserAccountReturnRates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
 [**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List account holdings
@@ -160,56 +158,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllAccountPositions`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.Results`: %v\n", resp.Results)
     fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.DataFreshness`: %v\n", resp.DataFreshness)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAllUserHoldings
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-List all accounts for the user, plus balances, positions, and orders for each account.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.AccountInformationApi.GetAllUserHoldings(
-        "userId_example",
-        "userSecret_example",
-    )
-    request.BrokerageAuthorizations("917c8734-8470-4a3e-a18f-57c3f2ee6631")
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAllUserHoldings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetAllUserHoldings`: []AccountHoldings
-    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllUserHoldings`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.Account`: %v\n", *resp.Account)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.Balances`: %v\n", *resp.Balances)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.Positions`: %v\n", *resp.Positions)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.TotalValue`: %v\n", *resp.TotalValue)
 }
 ```
 
@@ -469,61 +417,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetUserAccountPositions
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-List account positions
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.AccountInformationApi.GetUserAccountPositions(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetUserAccountPositions``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetUserAccountPositions`: []Position
-    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountPositions`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Units`: %v\n", *resp.Units)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Price`: %v\n", *resp.Price)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.OpenPnl`: %v\n", *resp.OpenPnl)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.AveragePurchasePrice`: %v\n", *resp.AveragePurchasePrice)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.FractionalUnits`: %v\n", *resp.FractionalUnits)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Currency`: %v\n", *resp.Currency)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.CashEquivalent`: %v\n", *resp.CashEquivalent)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.TaxLots`: %v\n", *resp.TaxLots)
 }
 ```
 

@@ -60,13 +60,9 @@ type APIClient struct {
 
 	ExperimentalEndpointsApi *ExperimentalEndpointsApiService
 
-	OptionsApi *OptionsApiService
-
 	ReferenceDataApi *ReferenceDataApiService
 
 	TradingApi *TradingApiService
-
-	TransactionsAndReportingApi *TransactionsAndReportingApiService
 }
 
 type service struct {
@@ -90,10 +86,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AuthenticationApi = (*AuthenticationApiService)(&c.common)
 	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
 	c.ExperimentalEndpointsApi = (*ExperimentalEndpointsApiService)(&c.common)
-	c.OptionsApi = (*OptionsApiService)(&c.common)
 	c.ReferenceDataApi = (*ReferenceDataApiService)(&c.common)
 	c.TradingApi = (*TradingApiService)(&c.common)
-	c.TransactionsAndReportingApi = (*TransactionsAndReportingApiService)(&c.common)
 
 	return c
 }

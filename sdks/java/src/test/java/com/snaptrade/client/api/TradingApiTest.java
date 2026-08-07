@@ -30,7 +30,6 @@ import com.snaptrade.client.model.CryptoTradingInstrument;
 import com.snaptrade.client.model.CryptocurrencyPairQuote;
 import com.snaptrade.client.model.ManualTradeAndImpact;
 import com.snaptrade.client.model.ManualTradeForm;
-import com.snaptrade.client.model.ManualTradeFormBracket;
 import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
 import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
@@ -45,11 +44,8 @@ import com.snaptrade.client.model.OptionImpact;
 import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.OrderUpdatedResponse;
-import com.snaptrade.client.model.StopLoss;
 import com.snaptrade.client.model.SymbolsQuotesInner;
-import com.snaptrade.client.model.TakeProfit;
 import com.snaptrade.client.model.TimeInForceStrict;
-import com.snaptrade.client.model.TradingInstrument;
 import com.snaptrade.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import com.snaptrade.client.model.TradingSession;
 import java.util.UUID;
@@ -92,24 +88,6 @@ public class TradingApiTest {
         String userSecret = null;
         UUID accountId = null;
         CancelOrderResponse response = api.cancelOrder(brokerageOrderId, userId, userSecret, accountId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Cancel equity order
-     *
-     * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void cancelUserAccountOrderTest() throws ApiException {
-        String brokerageOrderId = null;
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        AccountOrderRecord response = api.cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }
@@ -221,35 +199,6 @@ public class TradingApiTest {
         Boolean useTicker = null;
         List<SymbolsQuotesInner> response = api.getUserAccountQuotes(userId, userSecret, symbols, accountId)
                 .useTicker(useTicker)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Place bracket order
-     *
-     * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void placeBracketOrderTest() throws ApiException {
-        ActionStrictWithOptions action = null;
-        TradingInstrument instrument = null;
-        OrderTypeStrict orderType = null;
-        TimeInForceStrict timeInForce = null;
-        StopLoss stopLoss = null;
-        TakeProfit takeProfit = null;
-        UUID accountId = null;
-        String userId = null;
-        String userSecret = null;
-        Double price = null;
-        Double stop = null;
-        Double units = null;
-        AccountOrderRecord response = api.placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-                .price(price)
-                .stop(stop)
-                .units(units)
                 .execute();
         // TODO: test validations
     }

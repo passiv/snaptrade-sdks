@@ -74,20 +74,6 @@ describe 'AccountInformationApi' do
     end
   end
 
-  # unit tests for get_all_user_holdings
-  # List all accounts for the user, plus balances, positions, and orders for each account.
-  # **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-  # @param user_id 
-  # @param user_secret 
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-  # @return [Array<AccountHoldings>]
-  describe 'get_all_user_holdings test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_user_account_balance
   # List account balances
   # Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -142,20 +128,6 @@ describe 'AccountInformationApi' do
   # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
   # @return [Array<AccountOrderRecord>]
   describe 'get_user_account_orders test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_user_account_positions
-  # List account positions
-  # **Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-  # @param user_id 
-  # @param user_secret 
-  # @param account_id 
-  # @param [Hash] opts the optional parameters
-  # @return [Array<Position>]
-  describe 'get_user_account_positions test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

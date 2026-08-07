@@ -9,17 +9,13 @@
     Created by: https://snaptrade.com/
 """
 
-from snaptrade_client.paths.currencies_rates_currency_pair.get import GetCurrencyExchangeRatePair
 from snaptrade_client.paths.snap_trade_partners.get import GetPartnerInfo
-from snaptrade_client.paths.security_types.get import GetSecurityTypes
 from snaptrade_client.paths.exchanges.get import GetStockExchanges
 from snaptrade_client.paths.symbols.post import GetSymbols
 from snaptrade_client.paths.symbols_query.get import GetSymbolsByTicker
 from snaptrade_client.paths.brokerage_authorization_types.get import ListAllBrokerageAuthorizationType
 from snaptrade_client.paths.brokerages_slug_instruments.get import ListAllBrokerageInstruments
 from snaptrade_client.paths.brokerages.get import ListAllBrokerages
-from snaptrade_client.paths.currencies.get import ListAllCurrencies
-from snaptrade_client.paths.currencies_rates.get import ListAllCurrenciesRates
 from snaptrade_client.paths.accounts_account_id_symbols.post import SymbolSearchUserAccount
 import typing
 from snaptrade_client.auth import AuthMode
@@ -28,17 +24,13 @@ TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
 
 class ReferenceDataApiGenerated(
-    GetCurrencyExchangeRatePair[TAuth],
     GetPartnerInfo[TAuth],
-    GetSecurityTypes[TAuth],
     GetStockExchanges[TAuth],
     GetSymbols[TAuth],
     GetSymbolsByTicker[TAuth],
     ListAllBrokerageAuthorizationType[TAuth],
     ListAllBrokerageInstruments[TAuth],
     ListAllBrokerages[TAuth],
-    ListAllCurrencies[TAuth],
-    ListAllCurrenciesRates[TAuth],
     SymbolSearchUserAccount[TAuth],
 ):
     """NOTE:

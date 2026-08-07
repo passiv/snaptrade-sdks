@@ -45,8 +45,6 @@ import { ManualTradeAndImpact } from '../models';
 // @ts-ignore
 import { ManualTradeForm } from '../models';
 // @ts-ignore
-import { ManualTradeFormBracket } from '../models';
-// @ts-ignore
 import { ManualTradeFormComplex } from '../models';
 // @ts-ignore
 import { ManualTradeFormNotionalValue } from '../models';
@@ -83,15 +81,9 @@ import { OrderTypeStrict } from '../models';
 // @ts-ignore
 import { OrderUpdatedResponse } from '../models';
 // @ts-ignore
-import { StopLoss } from '../models';
-// @ts-ignore
 import { SymbolsQuotesInner } from '../models';
 // @ts-ignore
-import { TakeProfit } from '../models';
-// @ts-ignore
 import { TimeInForceStrict } from '../models';
-// @ts-ignore
-import { TradingInstrument } from '../models';
 // @ts-ignore
 import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
 // @ts-ignore
@@ -162,73 +154,6 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/trading/cancel',
-                httpMethod: 'POST',
-                operationAuth: localVarOperationAuth
-            });
-            localVarRequestOptions.data = serializeDataIfNeeded(accountInformationGetUserAccountOrderDetailRequest, localVarRequestOptions, configuration)
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-         * @summary Cancel equity order
-         * @param {string} accountId 
-         * @param {AccountInformationGetUserAccountOrderDetailRequest} accountInformationGetUserAccountOrderDetailRequest 
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        cancelUserAccountOrder: async (accountId: string, accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('cancelUserAccountOrder', 'accountId', accountId)
-            // verify required parameter 'accountInformationGetUserAccountOrderDetailRequest' is not null or undefined
-            assertParamExists('cancelUserAccountOrder', 'accountInformationGetUserAccountOrderDetailRequest', accountInformationGetUserAccountOrderDetailRequest)
-            const localVarPath = `/accounts/{accountId}/orders/cancel`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                requestBody: accountInformationGetUserAccountOrderDetailRequest,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/orders/cancel',
                 httpMethod: 'POST',
                 operationAuth: localVarOperationAuth
             });
@@ -558,73 +483,6 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place bracket order
-         * @param {string} accountId The ID of the account to execute the trade on.
-         * @param {ManualTradeFormBracket} manualTradeFormBracket 
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        placeBracketOrder: async (accountId: string, manualTradeFormBracket: ManualTradeFormBracket, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('placeBracketOrder', 'accountId', accountId)
-            // verify required parameter 'manualTradeFormBracket' is not null or undefined
-            assertParamExists('placeBracketOrder', 'manualTradeFormBracket', manualTradeFormBracket)
-            const localVarPath = `/accounts/{accountId}/trading/bracket`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                requestBody: manualTradeFormBracket,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/trading/bracket',
-                httpMethod: 'POST',
-                operationAuth: localVarOperationAuth
-            });
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormBracket, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1182,22 +1040,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-         * @summary Cancel equity order
-         * @param {TradingApiCancelUserAccountOrderRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async cancelUserAccountOrder(requestParameters: TradingApiCancelUserAccountOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest = {
-                brokerage_order_id: requestParameters.brokerage_order_id
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelUserAccountOrder(requestParameters.accountId, accountInformationGetUserAccountOrderDetailRequest, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * Gets a quote for the specified account. 
          * @summary Get crypto pair quote
          * @param {TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>} requestParameters Request parameters.
@@ -1274,30 +1116,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
         async getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, 
 options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SymbolsQuotesInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountQuotes(requestParameters.symbols, requestParameters.accountId, requestParameters.useTicker, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place bracket order
-         * @param {TradingApiPlaceBracketOrderRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const manualTradeFormBracket: ManualTradeFormBracket = {
-                action: requestParameters.action,
-                instrument: requestParameters.instrument,
-                order_type: requestParameters.order_type,
-                time_in_force: requestParameters.time_in_force,
-                price: requestParameters.price,
-                stop: requestParameters.stop,
-                units: requestParameters.units,
-                stop_loss: requestParameters.stop_loss,
-                take_profit: requestParameters.take_profit
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeBracketOrder(requestParameters.accountId, manualTradeFormBracket, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
@@ -1481,18 +1299,6 @@ options?: AxiosRequestConfig): AxiosPromise<CancelOrderResponse> {
             return localVarFp.cancelOrder(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-         * @summary Cancel equity order
-         * @param {TradingApiCancelUserAccountOrderRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        cancelUserAccountOrder(requestParameters: TradingApiCancelUserAccountOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.cancelUserAccountOrder(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Gets a quote for the specified account. 
          * @summary Get crypto pair quote
          * @param {TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>} requestParameters Request parameters.
@@ -1546,18 +1352,6 @@ options?: AxiosRequestConfig): AxiosPromise<OptionQuote> {
         getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, 
 options?: AxiosRequestConfig): AxiosPromise<Array<SymbolsQuotesInner>> {
             return localVarFp.getUserAccountQuotes(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place bracket order
-         * @param {TradingApiPlaceBracketOrderRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.placeBracketOrder(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
          * Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
@@ -1678,35 +1472,6 @@ export type TradingApiCancelOrderRequestByAuthMode = {
 }
 export type TradingApiCancelOrderRequest<TAuth extends AuthMode> =
     TradingApiCancelOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiCancelOrderRequestByAuthMode]
-
-/**
- * Request parameters for cancelUserAccountOrder operation in TradingApi.
- * @export
- */
-export type TradingApiCancelUserAccountOrderBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof TradingApiCancelUserAccountOrder
-    */
-    readonly accountId: string
-    
-} & AccountInformationGetUserAccountOrderDetailRequest
-export type TradingApiCancelUserAccountOrdercommercialApiKeyRequest = TradingApiCancelUserAccountOrderBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type TradingApiCancelUserAccountOrderpersonalApiKeyRequest = TradingApiCancelUserAccountOrderBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type TradingApiCancelUserAccountOrderRequestByAuthMode = {
-    "commercialApiKey": TradingApiCancelUserAccountOrdercommercialApiKeyRequest;
-    "personalApiKey": TradingApiCancelUserAccountOrderpersonalApiKeyRequest;
-}
-export type TradingApiCancelUserAccountOrderRequest<TAuth extends AuthMode> =
-    TradingApiCancelUserAccountOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiCancelUserAccountOrderRequestByAuthMode]
 
 /**
  * Request parameters for getCryptocurrencyPairQuote operation in TradingApi.
@@ -1873,35 +1638,6 @@ export type TradingApiGetUserAccountQuotesRequestByAuthMode = {
 }
 export type TradingApiGetUserAccountQuotesRequest<TAuth extends AuthMode> =
     TradingApiGetUserAccountQuotesRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetUserAccountQuotesRequestByAuthMode]
-
-/**
- * Request parameters for placeBracketOrder operation in TradingApi.
- * @export
- */
-export type TradingApiPlaceBracketOrderBaseRequest = {
-    
-    /**
-    * The ID of the account to execute the trade on.
-    * @type {string}
-    * @memberof TradingApiPlaceBracketOrder
-    */
-    readonly accountId: string
-    
-} & ManualTradeFormBracket
-export type TradingApiPlaceBracketOrdercommercialApiKeyRequest = TradingApiPlaceBracketOrderBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type TradingApiPlaceBracketOrderpersonalApiKeyRequest = TradingApiPlaceBracketOrderBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type TradingApiPlaceBracketOrderRequestByAuthMode = {
-    "commercialApiKey": TradingApiPlaceBracketOrdercommercialApiKeyRequest;
-    "personalApiKey": TradingApiPlaceBracketOrderpersonalApiKeyRequest;
-}
-export type TradingApiPlaceBracketOrderRequest<TAuth extends AuthMode> =
-    TradingApiPlaceBracketOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceBracketOrderRequestByAuthMode]
 
 /**
  * Request parameters for placeComplexOrder operation in TradingApi.
@@ -2164,21 +1900,6 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * **Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.  Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-     * @summary Cancel equity order
-     * @param {TradingApiCancelUserAccountOrderRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TradingApiGenerated
-     */
-    public cancelUserAccountOrder(requestParameters: TradingApiCancelUserAccountOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).cancelUserAccountOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
      * Gets a quote for the specified account. 
      * @summary Get crypto pair quote
      * @param {TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>} requestParameters Request parameters.
@@ -2245,21 +1966,6 @@ options?: AxiosRequestConfig) {
     public getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, 
 options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).getUserAccountQuotes(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * **Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.  Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-     * @summary Place bracket order
-     * @param {TradingApiPlaceBracketOrderRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TradingApiGenerated
-     */
-    public placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeBracketOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
 
     }
 

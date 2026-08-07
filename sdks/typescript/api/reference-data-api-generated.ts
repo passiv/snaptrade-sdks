@@ -25,11 +25,7 @@ import { BrokerageAuthorizationTypeReadOnly } from '../models';
 // @ts-ignore
 import { BrokerageInstrumentsResponse } from '../models';
 // @ts-ignore
-import { Currency } from '../models';
-// @ts-ignore
 import { Exchange } from '../models';
-// @ts-ignore
-import { ExchangeRatePairs } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
@@ -38,8 +34,6 @@ import { Model401FailedRequestResponse } from '../models';
 import { Model404FailedRequestResponse } from '../models';
 // @ts-ignore
 import { PartnerData } from '../models';
-// @ts-ignore
-import { SecurityType } from '../models';
 // @ts-ignore
 import { SymbolQuery } from '../models';
 // @ts-ignore
@@ -53,58 +47,6 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const ReferenceDataApiAxiosParamCreator = function (configuration?: Configuration<AuthMode>) {
     return {
-        /**
-         * Returns an Exchange Rate Pair object for the specified Currency Pair.
-         * @summary Get exchange rate of a currency pair
-         * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCurrencyExchangeRatePair: async (currencyPair: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'currencyPair' is not null or undefined
-            assertParamExists('getCurrencyExchangeRatePair', 'currencyPair', currencyPair)
-            const localVarPath = `/currencies/rates/{currencyPair}`
-                .replace(`{${"currencyPair"}}`, encodeURIComponent(String(currencyPair !== undefined ? currencyPair : `-currencyPair-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/currencies/rates/{currencyPair}',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
          * @summary Get Client Info
@@ -143,54 +85,6 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/snapTrade/partners',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Return all available security types supported by SnapTrade.
-         * @summary List security types
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSecurityTypes: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/securityTypes`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/securityTypes',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -509,102 +403,6 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns a list of all defined Currency objects.
-         * @summary Get currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAllCurrencies: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/currencies`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/currencies',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of all Exchange Rate Pairs for all supported Currencies.
-         * @summary Get currency exchange rates
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAllCurrenciesRates: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/currencies/rates`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/currencies/rates',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
          * @summary Search account symbols
          * @param {string} accountId 
@@ -679,18 +477,6 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
     const localVarAxiosParamCreator = ReferenceDataApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns an Exchange Rate Pair object for the specified Currency Pair.
-         * @summary Get exchange rate of a currency pair
-         * @param {ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getCurrencyExchangeRatePair(requestParameters: ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExchangeRatePairs>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCurrencyExchangeRatePair(requestParameters.currencyPair, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
          * @summary Get Client Info
          * @param {*} [options] Override http request option.
@@ -699,17 +485,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
         async getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PartnerData>> {
             const [options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPartnerInfo(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * Return all available security types supported by SnapTrade.
-         * @summary List security types
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getSecurityTypes(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SecurityType>>> {
-            const [options] = args;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSecurityTypes(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
@@ -786,28 +561,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns a list of all defined Currency objects.
-         * @summary Get currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listAllCurrencies(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Currency>>> {
-            const [options] = args;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllCurrencies(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * Returns a list of all Exchange Rate Pairs for all supported Currencies.
-         * @summary Get currency exchange rates
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async listAllCurrenciesRates(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ExchangeRatePairs>>> {
-            const [options] = args;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllCurrenciesRates(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
          * @summary Search account symbols
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>} requestParameters Request parameters.
@@ -833,17 +586,6 @@ export const ReferenceDataApiFactory = function<TAuth extends AuthMode>(configur
     const localVarFp = ReferenceDataApiFp(configuration)
     return {
         /**
-         * Returns an Exchange Rate Pair object for the specified Currency Pair.
-         * @summary Get exchange rate of a currency pair
-         * @param {ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCurrencyExchangeRatePair(requestParameters: ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<ExchangeRatePairs> {
-            return localVarFp.getCurrencyExchangeRatePair(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
          * @summary Get Client Info
          * @param {*} [options] Override http request option.
@@ -851,15 +593,6 @@ options?: AxiosRequestConfig): AxiosPromise<ExchangeRatePairs> {
          */
         getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): AxiosPromise<PartnerData> {
             return localVarFp.getPartnerInfo(...args).then((request) => request(axios, basePath));
-        },
-        /**
-         * Return all available security types supported by SnapTrade.
-         * @summary List security types
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSecurityTypes(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): AxiosPromise<Array<SecurityType>> {
-            return localVarFp.getSecurityTypes(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all supported Exchanges.
@@ -924,24 +657,6 @@ options?: AxiosRequestConfig): AxiosPromise<BrokerageInstrumentsResponse> {
             return localVarFp.listAllBrokerages(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all defined Currency objects.
-         * @summary Get currencies
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAllCurrencies(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): AxiosPromise<Array<Currency>> {
-            return localVarFp.listAllCurrencies(...args).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of all Exchange Rate Pairs for all supported Currencies.
-         * @summary Get currency exchange rates
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        listAllCurrenciesRates(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): AxiosPromise<Array<ExchangeRatePairs>> {
-            return localVarFp.listAllCurrenciesRates(...args).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
          * @summary Search account symbols
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>} requestParameters Request parameters.
@@ -954,31 +669,6 @@ options?: AxiosRequestConfig): AxiosPromise<Array<UniversalSymbol>> {
         },
     };
 };
-
-/**
- * Request parameters for getCurrencyExchangeRatePair operation in ReferenceDataApi.
- * @export
- */
-export type ReferenceDataApiGetCurrencyExchangeRatePairBaseRequest = {
-    
-    /**
-    * A currency pair based on currency code for example, {CAD-USD}
-    * @type {string}
-    * @memberof ReferenceDataApiGetCurrencyExchangeRatePair
-    */
-    readonly currencyPair: string
-    
-}
-export type ReferenceDataApiGetCurrencyExchangeRatePaircommercialApiKeyRequest = ReferenceDataApiGetCurrencyExchangeRatePairBaseRequest & {
-}
-export type ReferenceDataApiGetCurrencyExchangeRatePairpersonalApiKeyRequest = ReferenceDataApiGetCurrencyExchangeRatePairBaseRequest & {
-}
-export type ReferenceDataApiGetCurrencyExchangeRatePairRequestByAuthMode = {
-    "commercialApiKey": ReferenceDataApiGetCurrencyExchangeRatePaircommercialApiKeyRequest;
-    "personalApiKey": ReferenceDataApiGetCurrencyExchangeRatePairpersonalApiKeyRequest;
-}
-export type ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth extends AuthMode> =
-    ReferenceDataApiGetCurrencyExchangeRatePairRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiGetCurrencyExchangeRatePairRequestByAuthMode]
 
 /**
  * Request parameters for getSymbols operation in ReferenceDataApi.
@@ -1110,20 +800,6 @@ export type ReferenceDataApiSymbolSearchUserAccountRequest<TAuth extends AuthMod
  */
 export class ReferenceDataApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> {
     /**
-     * Returns an Exchange Rate Pair object for the specified Currency Pair.
-     * @summary Get exchange rate of a currency pair
-     * @param {ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApiGenerated
-     */
-    public getCurrencyExchangeRatePair(requestParameters: ReferenceDataApiGetCurrencyExchangeRatePairRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).getCurrencyExchangeRatePair(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
      * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      * @summary Get Client Info
      * @param {*} [options] Override http request option.
@@ -1132,17 +808,6 @@ options?: AxiosRequestConfig) {
      */
     public getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
         return ReferenceDataApiFp(this.configuration).getPartnerInfo(...args).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Return all available security types supported by SnapTrade.
-     * @summary List security types
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApiGenerated
-     */
-    public getSecurityTypes(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
-        return ReferenceDataApiFp(this.configuration).getSecurityTypes(...args).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1221,28 +886,6 @@ options?: AxiosRequestConfig) {
      */
     public listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
         return ReferenceDataApiFp(this.configuration).listAllBrokerages(...args).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of all defined Currency objects.
-     * @summary Get currencies
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApiGenerated
-     */
-    public listAllCurrencies(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
-        return ReferenceDataApiFp(this.configuration).listAllCurrencies(...args).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
-     * @summary Get currency exchange rates
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReferenceDataApiGenerated
-     */
-    public listAllCurrenciesRates(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
-        return ReferenceDataApiFp(this.configuration).listAllCurrenciesRates(...args).then((request) => request(this.axios, this.basePath));
     }
 
     /**

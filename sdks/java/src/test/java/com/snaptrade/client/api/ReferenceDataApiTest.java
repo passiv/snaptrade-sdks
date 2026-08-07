@@ -19,11 +19,8 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.Brokerage;
 import com.snaptrade.client.model.BrokerageAuthorizationTypeReadOnly;
 import com.snaptrade.client.model.BrokerageInstrumentsResponse;
-import com.snaptrade.client.model.Currency;
 import com.snaptrade.client.model.Exchange;
-import com.snaptrade.client.model.ExchangeRatePairs;
 import com.snaptrade.client.model.PartnerData;
-import com.snaptrade.client.model.SecurityType;
 import com.snaptrade.client.model.SymbolQuery;
 import java.util.UUID;
 import com.snaptrade.client.model.UniversalSymbol;
@@ -52,21 +49,6 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Get exchange rate of a currency pair
-     *
-     * Returns an Exchange Rate Pair object for the specified Currency Pair.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getCurrencyExchangeRatePairTest() throws ApiException {
-        String currencyPair = null;
-        ExchangeRatePairs response = api.getCurrencyExchangeRatePair(currencyPair)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * Get Client Info
      *
      * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
@@ -76,20 +58,6 @@ public class ReferenceDataApiTest {
     @Test
     public void getPartnerInfoTest() throws ApiException {
         PartnerData response = api.getPartnerInfo()
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * List security types
-     *
-     * Return all available security types supported by SnapTrade.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getSecurityTypesTest() throws ApiException {
-        List<SecurityType> response = api.getSecurityTypes()
                 .execute();
         // TODO: test validations
     }
@@ -180,34 +148,6 @@ public class ReferenceDataApiTest {
     @Test
     public void listAllBrokeragesTest() throws ApiException {
         List<Brokerage> response = api.listAllBrokerages()
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Get currencies
-     *
-     * Returns a list of all defined Currency objects.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void listAllCurrenciesTest() throws ApiException {
-        List<Currency> response = api.listAllCurrencies()
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Get currency exchange rates
-     *
-     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void listAllCurrenciesRatesTest() throws ApiException {
-        List<ExchangeRatePairs> response = api.listAllCurrenciesRates()
                 .execute();
         // TODO: test validations
     }

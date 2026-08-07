@@ -59,36 +59,12 @@ class ReferenceDataApiTest extends TestCase
     }
 
     /**
-     * Test case for getCurrencyExchangeRatePair
-     *
-     * Get exchange rate of a currency pair.
-     *
-     */
-    public function testGetCurrencyExchangeRatePair()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getPartnerInfo
      *
      * Get Client Info.
      *
      */
     public function testGetPartnerInfo()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getSecurityTypes
-     *
-     * List security types.
-     *
-     */
-    public function testGetSecurityTypes()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -161,30 +137,6 @@ class ReferenceDataApiTest extends TestCase
      *
      */
     public function testListAllBrokerages()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllCurrencies
-     *
-     * Get currencies.
-     *
-     */
-    public function testListAllCurrencies()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllCurrenciesRates
-     *
-     * Get currency exchange rates.
-     *
-     */
-    public function testListAllCurrenciesRates()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
