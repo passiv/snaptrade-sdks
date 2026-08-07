@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
+| [**ListConnectionAccounts**](ExperimentalEndpointsApi.md#listconnectionaccounts) | **GET** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union) |
 | [**ListSubscriptions**](ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
 
 
@@ -511,6 +512,102 @@ catch (ApiException e)
 | **403** | Forbidden |  -  |
 | **500** | Unexpected error |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **ListConnectionAccounts**
+
+
+
+Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present - - see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class ListConnectionAccountsExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var authorizationId = "authorizationId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // List accounts for a connection (discriminated union)
+                List<ConnectionAccount> result = client.ExperimentalEndpoints.ListConnectionAccounts(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.ListConnectionAccounts: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the ListConnectionAccountsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List accounts for a connection (discriminated union)
+    ApiResponse<List<ConnectionAccount>> response = apiInstance.ListConnectionAccountsWithHttpInfo(authorizationId, userId, userSecret);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ExperimentalEndpointsApi.ListConnectionAccountsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **authorizationId** | **string** |  |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+
+### Return type
+
+[**List&lt;ConnectionAccount&gt;**](ConnectionAccount.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized, invalid credentials for this resource |  -  |
+| **404** | The requested resource does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -313,6 +313,13 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/connections/{authorizationId}/accounts-GET': {
+        parameters: [
+            {
+                name: 'authorizationId'
+            },
+        ]
+    },
     '/snapTrade/tradeDetection/subscriptions-GET': {
         parameters: [
         ]

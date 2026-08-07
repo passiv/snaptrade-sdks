@@ -57,6 +57,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.experimental_endpoints.list_connection_accounts`](#snaptradeexperimental_endpointslist_connection_accounts)
   * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
@@ -1491,6 +1492,47 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ---
 
+### `snaptrade.experimental_endpoints.list_connection_accounts`<a id="snaptradeexperimental_endpointslist_connection_accounts"></a>
+
+Experimental and subject to change without notice.
+
+Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+
+Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+list_connection_accounts_response = (
+    snaptrade.experimental_endpoints.list_connection_accounts(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`ConnectionAccount`](./snaptrade_client/type/connection_account.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connections/{authorizationId}/accounts` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.experimental_endpoints.list_subscriptions`<a id="snaptradeexperimental_endpointslist_subscriptions"></a>
 
 Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
@@ -2495,7 +2537,7 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
 
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 

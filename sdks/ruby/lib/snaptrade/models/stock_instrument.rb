@@ -58,7 +58,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'kind' => :'Kind',
+        :'kind' => :'StockInstrumentKind',
         :'id' => :'String',
         :'symbol' => :'String',
         :'raw_symbol' => :'String',

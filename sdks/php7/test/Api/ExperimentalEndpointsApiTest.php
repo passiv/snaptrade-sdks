@@ -119,6 +119,18 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
+     * Test case for listConnectionAccounts
+     *
+     * List accounts for a connection (discriminated union).
+     *
+     */
+    public function testListConnectionAccounts()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listSubscriptions
      *
      * List active Trade Detection subscriptions.

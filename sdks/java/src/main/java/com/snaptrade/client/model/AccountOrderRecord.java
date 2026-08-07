@@ -19,7 +19,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
 import com.snaptrade.client.model.ChildBrokerageOrderIDsNullable;
 import com.snaptrade.client.model.CurrencyNullable;
@@ -136,7 +135,7 @@ public class AccountOrderRecord {
 
   public static final String SERIALIZED_NAME_QUOTE_UNIVERSAL_SYMBOL = "quote_universal_symbol";
   @SerializedName(SERIALIZED_NAME_QUOTE_UNIVERSAL_SYMBOL)
-  private AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol;
+  private UniversalSymbolNullable quoteUniversalSymbol;
 
   public static final String SERIALIZED_NAME_QUOTE_CURRENCY = "quote_currency";
   @SerializedName(SERIALIZED_NAME_QUOTE_CURRENCY)
@@ -387,7 +386,7 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord quoteUniversalSymbol(AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol) {
+  public AccountOrderRecord quoteUniversalSymbol(UniversalSymbolNullable quoteUniversalSymbol) {
     
     
     
@@ -403,12 +402,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountOrderRecordQuoteUniversalSymbol getQuoteUniversalSymbol() {
+  public UniversalSymbolNullable getQuoteUniversalSymbol() {
     return quoteUniversalSymbol;
   }
 
 
-  public void setQuoteUniversalSymbol(AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol) {
+  public void setQuoteUniversalSymbol(UniversalSymbolNullable quoteUniversalSymbol) {
     
     
     
@@ -1151,7 +1150,7 @@ public class AccountOrderRecord {
       }
       // validate the optional field `quote_universal_symbol`
       if (jsonObj.get("quote_universal_symbol") != null && !jsonObj.get("quote_universal_symbol").isJsonNull()) {
-        AccountOrderRecordQuoteUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("quote_universal_symbol"));
+        UniversalSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("quote_universal_symbol"));
       }
       // validate the optional field `quote_currency`
       if (jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) {

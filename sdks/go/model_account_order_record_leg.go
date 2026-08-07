@@ -30,7 +30,7 @@ type AccountOrderRecordLeg struct {
 	CanceledQuantity NullableString `json:"canceled_quantity,omitempty"`
 	// The number of shares or contracts that have been filled for this leg.
 	FilledQuantity NullableString `json:"filled_quantity,omitempty"`
-	Status NullableAccountOrderRecordStatusV2 `json:"status,omitempty"`
+	Status NullableAccountOrderRecordStatusV2Nullable `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -328,9 +328,9 @@ func (o *AccountOrderRecordLeg) UnsetFilledQuantity() {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordLeg) GetStatus() AccountOrderRecordStatusV2 {
+func (o *AccountOrderRecordLeg) GetStatus() AccountOrderRecordStatusV2Nullable {
 	if o == nil || isNil(o.Status.Get()) {
-		var ret AccountOrderRecordStatusV2
+		var ret AccountOrderRecordStatusV2Nullable
 		return ret
 	}
 	return *o.Status.Get()
@@ -339,7 +339,7 @@ func (o *AccountOrderRecordLeg) GetStatus() AccountOrderRecordStatusV2 {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordLeg) GetStatusOk() (*AccountOrderRecordStatusV2, bool) {
+func (o *AccountOrderRecordLeg) GetStatusOk() (*AccountOrderRecordStatusV2Nullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -355,8 +355,8 @@ func (o *AccountOrderRecordLeg) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given NullableAccountOrderRecordStatusV2 and assigns it to the Status field.
-func (o *AccountOrderRecordLeg) SetStatus(v AccountOrderRecordStatusV2) {
+// SetStatus gets a reference to the given NullableAccountOrderRecordStatusV2Nullable and assigns it to the Status field.
+func (o *AccountOrderRecordLeg) SetStatus(v AccountOrderRecordStatusV2Nullable) {
 	o.Status.Set(&v)
 }
 // SetStatusNil sets the value for Status to be an explicit nil

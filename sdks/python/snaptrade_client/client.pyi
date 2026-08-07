@@ -30,12 +30,44 @@ TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
 class SnapTrade(ClientCustom, typing.Generic[TAuth]):
     @typing.overload
-    def __init__(self: "SnapTrade[CommercialApiKeyAuth]", configuration: None = None, *, auth: CommercialApiKeyAuth, **kwargs: typing.Any) -> None: ...
+    def __init__(
+        self: "SnapTrade[CommercialApiKeyAuth]",
+        configuration: None = None,
+        *,
+        auth: CommercialApiKeyAuth,
+        consumer_key: None = None,
+        client_id: None = None,
+        **kwargs: typing.Any,
+    ) -> None: ...
     @typing.overload
-    def __init__(self: "SnapTrade[PersonalApiKeyAuth]", configuration: None = None, *, auth: PersonalApiKeyAuth, **kwargs: typing.Any) -> None: ...
+    def __init__(
+        self: "SnapTrade[PersonalApiKeyAuth]",
+        configuration: None = None,
+        *,
+        auth: PersonalApiKeyAuth,
+        consumer_key: None = None,
+        client_id: None = None,
+        **kwargs: typing.Any,
+    ) -> None: ...
     @typing.overload
-    def __init__(self: "SnapTrade[TAuth]", configuration: typing.Optional[Configuration[TAuth]] = None, **kwargs: typing.Any) -> None: ...
-    def __init__(self, configuration: typing.Optional[Configuration[TAuth]] = None, **kwargs: typing.Any) -> None:
+    def __init__(
+        self: "SnapTrade[TAuth]",
+        configuration: typing.Optional[Configuration[TAuth]] = None,
+        *,
+        auth: None,
+        consumer_key: None = None,
+        client_id: None = None,
+        **kwargs: typing.Any,
+    ) -> None: ...
+    def __init__(
+        self,
+        configuration: typing.Optional[Configuration[TAuth]] = None,
+        *,
+        auth: typing.Optional[TAuth],
+        consumer_key: None = None,
+        client_id: None = None,
+        **kwargs: typing.Any,
+    ) -> None:
         ...
     account_information: AccountInformationApi[TAuth]
     api_status: APIStatusApi[TAuth]

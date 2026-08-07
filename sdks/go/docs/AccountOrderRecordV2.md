@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **ExecutionPrice** | Pointer to **NullableFloat64** | The price at which the order was executed. | [optional] 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
-**TrailingStop** | Pointer to [**NullableAccountOrderRecordTrailingStop**](AccountOrderRecordTrailingStop.md) |  | [optional] 
+**TrailingStop** | Pointer to [**NullableTrailingStopNullable**](TrailingStopNullable.md) |  | [optional] 
 **Legs** | Pointer to [**[]AccountOrderRecordLeg**](AccountOrderRecordLeg.md) | List of legs that make up the order. | [optional] 
 
 ## Methods
@@ -410,20 +410,20 @@ HasStopPrice returns a boolean if a field has been set.
 UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
 ### GetTrailingStop
 
-`func (o *AccountOrderRecordV2) GetTrailingStop() AccountOrderRecordTrailingStop`
+`func (o *AccountOrderRecordV2) GetTrailingStop() TrailingStopNullable`
 
 GetTrailingStop returns the TrailingStop field if non-nil, zero value otherwise.
 
 ### GetTrailingStopOk
 
-`func (o *AccountOrderRecordV2) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool)`
+`func (o *AccountOrderRecordV2) GetTrailingStopOk() (*TrailingStopNullable, bool)`
 
 GetTrailingStopOk returns a tuple with the TrailingStop field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrailingStop
 
-`func (o *AccountOrderRecordV2) SetTrailingStop(v AccountOrderRecordTrailingStop)`
+`func (o *AccountOrderRecordV2) SetTrailingStop(v TrailingStopNullable)`
 
 SetTrailingStop sets TrailingStop field to given value.
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
-**Order** | Pointer to [**NullableOrderUpdatedResponseOrder**](OrderUpdatedResponseOrder.md) |  | [optional] 
+**Order** | Pointer to [**NullableAccountOrderRecordNullable**](AccountOrderRecordNullable.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetBrokerageOrderId sets BrokerageOrderId field to given value.
 
 ### GetOrder
 
-`func (o *OrderUpdatedResponse) GetOrder() OrderUpdatedResponseOrder`
+`func (o *OrderUpdatedResponse) GetOrder() AccountOrderRecordNullable`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *OrderUpdatedResponse) GetOrderOk() (*OrderUpdatedResponseOrder, bool)`
+`func (o *OrderUpdatedResponse) GetOrderOk() (*AccountOrderRecordNullable, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *OrderUpdatedResponse) SetOrder(v OrderUpdatedResponseOrder)`
+`func (o *OrderUpdatedResponse) SetOrder(v AccountOrderRecordNullable)`
 
 SetOrder sets Order field to given value.
 

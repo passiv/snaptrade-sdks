@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.CurrencyNullable;
 import com.snaptrade.client.model.OptionBrokerageSymbol;
-import com.snaptrade.client.model.OptionsPositionCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -71,7 +71,7 @@ public class OptionsPosition {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private OptionsPositionCurrency currency;
+  private CurrencyNullable currency;
 
   public OptionsPosition() {
   }
@@ -219,7 +219,7 @@ public class OptionsPosition {
   }
 
 
-  public OptionsPosition currency(OptionsPositionCurrency currency) {
+  public OptionsPosition currency(CurrencyNullable currency) {
     
     
     
@@ -231,18 +231,16 @@ public class OptionsPosition {
    /**
    * Get currency
    * @return currency
-   * @deprecated
   **/
-  @Deprecated
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public OptionsPositionCurrency getCurrency() {
+  public CurrencyNullable getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(OptionsPositionCurrency currency) {
+  public void setCurrency(CurrencyNullable currency) {
     
     
     
@@ -388,7 +386,7 @@ public class OptionsPosition {
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        OptionsPositionCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        CurrencyNullable.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
   }
 

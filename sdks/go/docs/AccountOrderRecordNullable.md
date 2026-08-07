@@ -1,0 +1,870 @@
+# AccountOrderRecordNullable
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**BrokerageOrderId** | Pointer to **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
+**BrokerageGroupOrderId** | Pointer to **NullableString** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  | [optional] 
+**OrderRole** | Pointer to **NullableString** | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  | [optional] 
+**Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
+**UniversalSymbol** | Pointer to [**NullableUniversalSymbolNullable**](UniversalSymbolNullable.md) |  | [optional] 
+**OptionSymbol** | Pointer to [**NullableOptionsSymbolNullable**](OptionsSymbolNullable.md) |  | [optional] 
+**QuoteUniversalSymbol** | Pointer to [**NullableUniversalSymbolNullable**](UniversalSymbolNullable.md) |  | [optional] 
+**QuoteCurrency** | Pointer to [**NullableCurrencyNullable**](CurrencyNullable.md) |  | [optional] 
+**Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
+**TotalQuantity** | Pointer to **NullableString** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
+**OpenQuantity** | Pointer to **NullableString** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
+**CanceledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. | [optional] 
+**FilledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. | [optional] 
+**ExecutionPrice** | Pointer to **NullableFloat64** | The price at which the order was executed. For option orders, this represents the price per share. | [optional] 
+**LimitPrice** | Pointer to **NullableFloat64** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. | [optional] 
+**StopPrice** | Pointer to **NullableFloat64** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. | [optional] 
+**TrailingStop** | Pointer to [**NullableTrailingStopNullable**](TrailingStopNullable.md) |  | [optional] 
+**OrderType** | Pointer to **NullableString** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. | [optional] 
+**TimeInForce** | Pointer to **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.  | [optional] 
+**TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
+**TimeUpdated** | Pointer to **NullableTime** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. | [optional] 
+**TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
+**ExpiryDate** | Pointer to **NullableTime** | The time the order expires. This value is not always available from the brokerage. | [optional] 
+**Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
+**ChildBrokerageOrderIds** | Pointer to [**NullableChildBrokerageOrderIDsNullable**](ChildBrokerageOrderIDsNullable.md) |  | [optional] 
+
+## Methods
+
+### NewAccountOrderRecordNullable
+
+`func NewAccountOrderRecordNullable() *AccountOrderRecordNullable`
+
+NewAccountOrderRecordNullable instantiates a new AccountOrderRecordNullable object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewAccountOrderRecordNullableWithDefaults
+
+`func NewAccountOrderRecordNullableWithDefaults() *AccountOrderRecordNullable`
+
+NewAccountOrderRecordNullableWithDefaults instantiates a new AccountOrderRecordNullable object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetBrokerageOrderId
+
+`func (o *AccountOrderRecordNullable) GetBrokerageOrderId() string`
+
+GetBrokerageOrderId returns the BrokerageOrderId field if non-nil, zero value otherwise.
+
+### GetBrokerageOrderIdOk
+
+`func (o *AccountOrderRecordNullable) GetBrokerageOrderIdOk() (*string, bool)`
+
+GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrokerageOrderId
+
+`func (o *AccountOrderRecordNullable) SetBrokerageOrderId(v string)`
+
+SetBrokerageOrderId sets BrokerageOrderId field to given value.
+
+### HasBrokerageOrderId
+
+`func (o *AccountOrderRecordNullable) HasBrokerageOrderId() bool`
+
+HasBrokerageOrderId returns a boolean if a field has been set.
+
+### GetBrokerageGroupOrderId
+
+`func (o *AccountOrderRecordNullable) GetBrokerageGroupOrderId() string`
+
+GetBrokerageGroupOrderId returns the BrokerageGroupOrderId field if non-nil, zero value otherwise.
+
+### GetBrokerageGroupOrderIdOk
+
+`func (o *AccountOrderRecordNullable) GetBrokerageGroupOrderIdOk() (*string, bool)`
+
+GetBrokerageGroupOrderIdOk returns a tuple with the BrokerageGroupOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrokerageGroupOrderId
+
+`func (o *AccountOrderRecordNullable) SetBrokerageGroupOrderId(v string)`
+
+SetBrokerageGroupOrderId sets BrokerageGroupOrderId field to given value.
+
+### HasBrokerageGroupOrderId
+
+`func (o *AccountOrderRecordNullable) HasBrokerageGroupOrderId() bool`
+
+HasBrokerageGroupOrderId returns a boolean if a field has been set.
+
+### SetBrokerageGroupOrderIdNil
+
+`func (o *AccountOrderRecordNullable) SetBrokerageGroupOrderIdNil(b bool)`
+
+ SetBrokerageGroupOrderIdNil sets the value for BrokerageGroupOrderId to be an explicit nil
+
+### UnsetBrokerageGroupOrderId
+`func (o *AccountOrderRecordNullable) UnsetBrokerageGroupOrderId()`
+
+UnsetBrokerageGroupOrderId ensures that no value is present for BrokerageGroupOrderId, not even an explicit nil
+### GetOrderRole
+
+`func (o *AccountOrderRecordNullable) GetOrderRole() string`
+
+GetOrderRole returns the OrderRole field if non-nil, zero value otherwise.
+
+### GetOrderRoleOk
+
+`func (o *AccountOrderRecordNullable) GetOrderRoleOk() (*string, bool)`
+
+GetOrderRoleOk returns a tuple with the OrderRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderRole
+
+`func (o *AccountOrderRecordNullable) SetOrderRole(v string)`
+
+SetOrderRole sets OrderRole field to given value.
+
+### HasOrderRole
+
+`func (o *AccountOrderRecordNullable) HasOrderRole() bool`
+
+HasOrderRole returns a boolean if a field has been set.
+
+### SetOrderRoleNil
+
+`func (o *AccountOrderRecordNullable) SetOrderRoleNil(b bool)`
+
+ SetOrderRoleNil sets the value for OrderRole to be an explicit nil
+
+### UnsetOrderRole
+`func (o *AccountOrderRecordNullable) UnsetOrderRole()`
+
+UnsetOrderRole ensures that no value is present for OrderRole, not even an explicit nil
+### GetStatus
+
+`func (o *AccountOrderRecordNullable) GetStatus() AccountOrderRecordStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *AccountOrderRecordNullable) GetStatusOk() (*AccountOrderRecordStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *AccountOrderRecordNullable) SetStatus(v AccountOrderRecordStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *AccountOrderRecordNullable) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetUniversalSymbol
+
+`func (o *AccountOrderRecordNullable) GetUniversalSymbol() UniversalSymbolNullable`
+
+GetUniversalSymbol returns the UniversalSymbol field if non-nil, zero value otherwise.
+
+### GetUniversalSymbolOk
+
+`func (o *AccountOrderRecordNullable) GetUniversalSymbolOk() (*UniversalSymbolNullable, bool)`
+
+GetUniversalSymbolOk returns a tuple with the UniversalSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniversalSymbol
+
+`func (o *AccountOrderRecordNullable) SetUniversalSymbol(v UniversalSymbolNullable)`
+
+SetUniversalSymbol sets UniversalSymbol field to given value.
+
+### HasUniversalSymbol
+
+`func (o *AccountOrderRecordNullable) HasUniversalSymbol() bool`
+
+HasUniversalSymbol returns a boolean if a field has been set.
+
+### SetUniversalSymbolNil
+
+`func (o *AccountOrderRecordNullable) SetUniversalSymbolNil(b bool)`
+
+ SetUniversalSymbolNil sets the value for UniversalSymbol to be an explicit nil
+
+### UnsetUniversalSymbol
+`func (o *AccountOrderRecordNullable) UnsetUniversalSymbol()`
+
+UnsetUniversalSymbol ensures that no value is present for UniversalSymbol, not even an explicit nil
+### GetOptionSymbol
+
+`func (o *AccountOrderRecordNullable) GetOptionSymbol() OptionsSymbolNullable`
+
+GetOptionSymbol returns the OptionSymbol field if non-nil, zero value otherwise.
+
+### GetOptionSymbolOk
+
+`func (o *AccountOrderRecordNullable) GetOptionSymbolOk() (*OptionsSymbolNullable, bool)`
+
+GetOptionSymbolOk returns a tuple with the OptionSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOptionSymbol
+
+`func (o *AccountOrderRecordNullable) SetOptionSymbol(v OptionsSymbolNullable)`
+
+SetOptionSymbol sets OptionSymbol field to given value.
+
+### HasOptionSymbol
+
+`func (o *AccountOrderRecordNullable) HasOptionSymbol() bool`
+
+HasOptionSymbol returns a boolean if a field has been set.
+
+### SetOptionSymbolNil
+
+`func (o *AccountOrderRecordNullable) SetOptionSymbolNil(b bool)`
+
+ SetOptionSymbolNil sets the value for OptionSymbol to be an explicit nil
+
+### UnsetOptionSymbol
+`func (o *AccountOrderRecordNullable) UnsetOptionSymbol()`
+
+UnsetOptionSymbol ensures that no value is present for OptionSymbol, not even an explicit nil
+### GetQuoteUniversalSymbol
+
+`func (o *AccountOrderRecordNullable) GetQuoteUniversalSymbol() UniversalSymbolNullable`
+
+GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field if non-nil, zero value otherwise.
+
+### GetQuoteUniversalSymbolOk
+
+`func (o *AccountOrderRecordNullable) GetQuoteUniversalSymbolOk() (*UniversalSymbolNullable, bool)`
+
+GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteUniversalSymbol
+
+`func (o *AccountOrderRecordNullable) SetQuoteUniversalSymbol(v UniversalSymbolNullable)`
+
+SetQuoteUniversalSymbol sets QuoteUniversalSymbol field to given value.
+
+### HasQuoteUniversalSymbol
+
+`func (o *AccountOrderRecordNullable) HasQuoteUniversalSymbol() bool`
+
+HasQuoteUniversalSymbol returns a boolean if a field has been set.
+
+### SetQuoteUniversalSymbolNil
+
+`func (o *AccountOrderRecordNullable) SetQuoteUniversalSymbolNil(b bool)`
+
+ SetQuoteUniversalSymbolNil sets the value for QuoteUniversalSymbol to be an explicit nil
+
+### UnsetQuoteUniversalSymbol
+`func (o *AccountOrderRecordNullable) UnsetQuoteUniversalSymbol()`
+
+UnsetQuoteUniversalSymbol ensures that no value is present for QuoteUniversalSymbol, not even an explicit nil
+### GetQuoteCurrency
+
+`func (o *AccountOrderRecordNullable) GetQuoteCurrency() CurrencyNullable`
+
+GetQuoteCurrency returns the QuoteCurrency field if non-nil, zero value otherwise.
+
+### GetQuoteCurrencyOk
+
+`func (o *AccountOrderRecordNullable) GetQuoteCurrencyOk() (*CurrencyNullable, bool)`
+
+GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteCurrency
+
+`func (o *AccountOrderRecordNullable) SetQuoteCurrency(v CurrencyNullable)`
+
+SetQuoteCurrency sets QuoteCurrency field to given value.
+
+### HasQuoteCurrency
+
+`func (o *AccountOrderRecordNullable) HasQuoteCurrency() bool`
+
+HasQuoteCurrency returns a boolean if a field has been set.
+
+### SetQuoteCurrencyNil
+
+`func (o *AccountOrderRecordNullable) SetQuoteCurrencyNil(b bool)`
+
+ SetQuoteCurrencyNil sets the value for QuoteCurrency to be an explicit nil
+
+### UnsetQuoteCurrency
+`func (o *AccountOrderRecordNullable) UnsetQuoteCurrency()`
+
+UnsetQuoteCurrency ensures that no value is present for QuoteCurrency, not even an explicit nil
+### GetAction
+
+`func (o *AccountOrderRecordNullable) GetAction() string`
+
+GetAction returns the Action field if non-nil, zero value otherwise.
+
+### GetActionOk
+
+`func (o *AccountOrderRecordNullable) GetActionOk() (*string, bool)`
+
+GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAction
+
+`func (o *AccountOrderRecordNullable) SetAction(v string)`
+
+SetAction sets Action field to given value.
+
+### HasAction
+
+`func (o *AccountOrderRecordNullable) HasAction() bool`
+
+HasAction returns a boolean if a field has been set.
+
+### GetTotalQuantity
+
+`func (o *AccountOrderRecordNullable) GetTotalQuantity() string`
+
+GetTotalQuantity returns the TotalQuantity field if non-nil, zero value otherwise.
+
+### GetTotalQuantityOk
+
+`func (o *AccountOrderRecordNullable) GetTotalQuantityOk() (*string, bool)`
+
+GetTotalQuantityOk returns a tuple with the TotalQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalQuantity
+
+`func (o *AccountOrderRecordNullable) SetTotalQuantity(v string)`
+
+SetTotalQuantity sets TotalQuantity field to given value.
+
+### HasTotalQuantity
+
+`func (o *AccountOrderRecordNullable) HasTotalQuantity() bool`
+
+HasTotalQuantity returns a boolean if a field has been set.
+
+### SetTotalQuantityNil
+
+`func (o *AccountOrderRecordNullable) SetTotalQuantityNil(b bool)`
+
+ SetTotalQuantityNil sets the value for TotalQuantity to be an explicit nil
+
+### UnsetTotalQuantity
+`func (o *AccountOrderRecordNullable) UnsetTotalQuantity()`
+
+UnsetTotalQuantity ensures that no value is present for TotalQuantity, not even an explicit nil
+### GetOpenQuantity
+
+`func (o *AccountOrderRecordNullable) GetOpenQuantity() string`
+
+GetOpenQuantity returns the OpenQuantity field if non-nil, zero value otherwise.
+
+### GetOpenQuantityOk
+
+`func (o *AccountOrderRecordNullable) GetOpenQuantityOk() (*string, bool)`
+
+GetOpenQuantityOk returns a tuple with the OpenQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenQuantity
+
+`func (o *AccountOrderRecordNullable) SetOpenQuantity(v string)`
+
+SetOpenQuantity sets OpenQuantity field to given value.
+
+### HasOpenQuantity
+
+`func (o *AccountOrderRecordNullable) HasOpenQuantity() bool`
+
+HasOpenQuantity returns a boolean if a field has been set.
+
+### SetOpenQuantityNil
+
+`func (o *AccountOrderRecordNullable) SetOpenQuantityNil(b bool)`
+
+ SetOpenQuantityNil sets the value for OpenQuantity to be an explicit nil
+
+### UnsetOpenQuantity
+`func (o *AccountOrderRecordNullable) UnsetOpenQuantity()`
+
+UnsetOpenQuantity ensures that no value is present for OpenQuantity, not even an explicit nil
+### GetCanceledQuantity
+
+`func (o *AccountOrderRecordNullable) GetCanceledQuantity() string`
+
+GetCanceledQuantity returns the CanceledQuantity field if non-nil, zero value otherwise.
+
+### GetCanceledQuantityOk
+
+`func (o *AccountOrderRecordNullable) GetCanceledQuantityOk() (*string, bool)`
+
+GetCanceledQuantityOk returns a tuple with the CanceledQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanceledQuantity
+
+`func (o *AccountOrderRecordNullable) SetCanceledQuantity(v string)`
+
+SetCanceledQuantity sets CanceledQuantity field to given value.
+
+### HasCanceledQuantity
+
+`func (o *AccountOrderRecordNullable) HasCanceledQuantity() bool`
+
+HasCanceledQuantity returns a boolean if a field has been set.
+
+### SetCanceledQuantityNil
+
+`func (o *AccountOrderRecordNullable) SetCanceledQuantityNil(b bool)`
+
+ SetCanceledQuantityNil sets the value for CanceledQuantity to be an explicit nil
+
+### UnsetCanceledQuantity
+`func (o *AccountOrderRecordNullable) UnsetCanceledQuantity()`
+
+UnsetCanceledQuantity ensures that no value is present for CanceledQuantity, not even an explicit nil
+### GetFilledQuantity
+
+`func (o *AccountOrderRecordNullable) GetFilledQuantity() string`
+
+GetFilledQuantity returns the FilledQuantity field if non-nil, zero value otherwise.
+
+### GetFilledQuantityOk
+
+`func (o *AccountOrderRecordNullable) GetFilledQuantityOk() (*string, bool)`
+
+GetFilledQuantityOk returns a tuple with the FilledQuantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilledQuantity
+
+`func (o *AccountOrderRecordNullable) SetFilledQuantity(v string)`
+
+SetFilledQuantity sets FilledQuantity field to given value.
+
+### HasFilledQuantity
+
+`func (o *AccountOrderRecordNullable) HasFilledQuantity() bool`
+
+HasFilledQuantity returns a boolean if a field has been set.
+
+### SetFilledQuantityNil
+
+`func (o *AccountOrderRecordNullable) SetFilledQuantityNil(b bool)`
+
+ SetFilledQuantityNil sets the value for FilledQuantity to be an explicit nil
+
+### UnsetFilledQuantity
+`func (o *AccountOrderRecordNullable) UnsetFilledQuantity()`
+
+UnsetFilledQuantity ensures that no value is present for FilledQuantity, not even an explicit nil
+### GetExecutionPrice
+
+`func (o *AccountOrderRecordNullable) GetExecutionPrice() float64`
+
+GetExecutionPrice returns the ExecutionPrice field if non-nil, zero value otherwise.
+
+### GetExecutionPriceOk
+
+`func (o *AccountOrderRecordNullable) GetExecutionPriceOk() (*float64, bool)`
+
+GetExecutionPriceOk returns a tuple with the ExecutionPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExecutionPrice
+
+`func (o *AccountOrderRecordNullable) SetExecutionPrice(v float64)`
+
+SetExecutionPrice sets ExecutionPrice field to given value.
+
+### HasExecutionPrice
+
+`func (o *AccountOrderRecordNullable) HasExecutionPrice() bool`
+
+HasExecutionPrice returns a boolean if a field has been set.
+
+### SetExecutionPriceNil
+
+`func (o *AccountOrderRecordNullable) SetExecutionPriceNil(b bool)`
+
+ SetExecutionPriceNil sets the value for ExecutionPrice to be an explicit nil
+
+### UnsetExecutionPrice
+`func (o *AccountOrderRecordNullable) UnsetExecutionPrice()`
+
+UnsetExecutionPrice ensures that no value is present for ExecutionPrice, not even an explicit nil
+### GetLimitPrice
+
+`func (o *AccountOrderRecordNullable) GetLimitPrice() float64`
+
+GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
+
+### GetLimitPriceOk
+
+`func (o *AccountOrderRecordNullable) GetLimitPriceOk() (*float64, bool)`
+
+GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLimitPrice
+
+`func (o *AccountOrderRecordNullable) SetLimitPrice(v float64)`
+
+SetLimitPrice sets LimitPrice field to given value.
+
+### HasLimitPrice
+
+`func (o *AccountOrderRecordNullable) HasLimitPrice() bool`
+
+HasLimitPrice returns a boolean if a field has been set.
+
+### SetLimitPriceNil
+
+`func (o *AccountOrderRecordNullable) SetLimitPriceNil(b bool)`
+
+ SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
+
+### UnsetLimitPrice
+`func (o *AccountOrderRecordNullable) UnsetLimitPrice()`
+
+UnsetLimitPrice ensures that no value is present for LimitPrice, not even an explicit nil
+### GetStopPrice
+
+`func (o *AccountOrderRecordNullable) GetStopPrice() float64`
+
+GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
+
+### GetStopPriceOk
+
+`func (o *AccountOrderRecordNullable) GetStopPriceOk() (*float64, bool)`
+
+GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopPrice
+
+`func (o *AccountOrderRecordNullable) SetStopPrice(v float64)`
+
+SetStopPrice sets StopPrice field to given value.
+
+### HasStopPrice
+
+`func (o *AccountOrderRecordNullable) HasStopPrice() bool`
+
+HasStopPrice returns a boolean if a field has been set.
+
+### SetStopPriceNil
+
+`func (o *AccountOrderRecordNullable) SetStopPriceNil(b bool)`
+
+ SetStopPriceNil sets the value for StopPrice to be an explicit nil
+
+### UnsetStopPrice
+`func (o *AccountOrderRecordNullable) UnsetStopPrice()`
+
+UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
+### GetTrailingStop
+
+`func (o *AccountOrderRecordNullable) GetTrailingStop() TrailingStopNullable`
+
+GetTrailingStop returns the TrailingStop field if non-nil, zero value otherwise.
+
+### GetTrailingStopOk
+
+`func (o *AccountOrderRecordNullable) GetTrailingStopOk() (*TrailingStopNullable, bool)`
+
+GetTrailingStopOk returns a tuple with the TrailingStop field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrailingStop
+
+`func (o *AccountOrderRecordNullable) SetTrailingStop(v TrailingStopNullable)`
+
+SetTrailingStop sets TrailingStop field to given value.
+
+### HasTrailingStop
+
+`func (o *AccountOrderRecordNullable) HasTrailingStop() bool`
+
+HasTrailingStop returns a boolean if a field has been set.
+
+### SetTrailingStopNil
+
+`func (o *AccountOrderRecordNullable) SetTrailingStopNil(b bool)`
+
+ SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
+
+### UnsetTrailingStop
+`func (o *AccountOrderRecordNullable) UnsetTrailingStop()`
+
+UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
+### GetOrderType
+
+`func (o *AccountOrderRecordNullable) GetOrderType() string`
+
+GetOrderType returns the OrderType field if non-nil, zero value otherwise.
+
+### GetOrderTypeOk
+
+`func (o *AccountOrderRecordNullable) GetOrderTypeOk() (*string, bool)`
+
+GetOrderTypeOk returns a tuple with the OrderType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderType
+
+`func (o *AccountOrderRecordNullable) SetOrderType(v string)`
+
+SetOrderType sets OrderType field to given value.
+
+### HasOrderType
+
+`func (o *AccountOrderRecordNullable) HasOrderType() bool`
+
+HasOrderType returns a boolean if a field has been set.
+
+### SetOrderTypeNil
+
+`func (o *AccountOrderRecordNullable) SetOrderTypeNil(b bool)`
+
+ SetOrderTypeNil sets the value for OrderType to be an explicit nil
+
+### UnsetOrderType
+`func (o *AccountOrderRecordNullable) UnsetOrderType()`
+
+UnsetOrderType ensures that no value is present for OrderType, not even an explicit nil
+### GetTimeInForce
+
+`func (o *AccountOrderRecordNullable) GetTimeInForce() string`
+
+GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
+
+### GetTimeInForceOk
+
+`func (o *AccountOrderRecordNullable) GetTimeInForceOk() (*string, bool)`
+
+GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeInForce
+
+`func (o *AccountOrderRecordNullable) SetTimeInForce(v string)`
+
+SetTimeInForce sets TimeInForce field to given value.
+
+### HasTimeInForce
+
+`func (o *AccountOrderRecordNullable) HasTimeInForce() bool`
+
+HasTimeInForce returns a boolean if a field has been set.
+
+### GetTimePlaced
+
+`func (o *AccountOrderRecordNullable) GetTimePlaced() time.Time`
+
+GetTimePlaced returns the TimePlaced field if non-nil, zero value otherwise.
+
+### GetTimePlacedOk
+
+`func (o *AccountOrderRecordNullable) GetTimePlacedOk() (*time.Time, bool)`
+
+GetTimePlacedOk returns a tuple with the TimePlaced field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimePlaced
+
+`func (o *AccountOrderRecordNullable) SetTimePlaced(v time.Time)`
+
+SetTimePlaced sets TimePlaced field to given value.
+
+### HasTimePlaced
+
+`func (o *AccountOrderRecordNullable) HasTimePlaced() bool`
+
+HasTimePlaced returns a boolean if a field has been set.
+
+### GetTimeUpdated
+
+`func (o *AccountOrderRecordNullable) GetTimeUpdated() time.Time`
+
+GetTimeUpdated returns the TimeUpdated field if non-nil, zero value otherwise.
+
+### GetTimeUpdatedOk
+
+`func (o *AccountOrderRecordNullable) GetTimeUpdatedOk() (*time.Time, bool)`
+
+GetTimeUpdatedOk returns a tuple with the TimeUpdated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeUpdated
+
+`func (o *AccountOrderRecordNullable) SetTimeUpdated(v time.Time)`
+
+SetTimeUpdated sets TimeUpdated field to given value.
+
+### HasTimeUpdated
+
+`func (o *AccountOrderRecordNullable) HasTimeUpdated() bool`
+
+HasTimeUpdated returns a boolean if a field has been set.
+
+### SetTimeUpdatedNil
+
+`func (o *AccountOrderRecordNullable) SetTimeUpdatedNil(b bool)`
+
+ SetTimeUpdatedNil sets the value for TimeUpdated to be an explicit nil
+
+### UnsetTimeUpdated
+`func (o *AccountOrderRecordNullable) UnsetTimeUpdated()`
+
+UnsetTimeUpdated ensures that no value is present for TimeUpdated, not even an explicit nil
+### GetTimeExecuted
+
+`func (o *AccountOrderRecordNullable) GetTimeExecuted() time.Time`
+
+GetTimeExecuted returns the TimeExecuted field if non-nil, zero value otherwise.
+
+### GetTimeExecutedOk
+
+`func (o *AccountOrderRecordNullable) GetTimeExecutedOk() (*time.Time, bool)`
+
+GetTimeExecutedOk returns a tuple with the TimeExecuted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeExecuted
+
+`func (o *AccountOrderRecordNullable) SetTimeExecuted(v time.Time)`
+
+SetTimeExecuted sets TimeExecuted field to given value.
+
+### HasTimeExecuted
+
+`func (o *AccountOrderRecordNullable) HasTimeExecuted() bool`
+
+HasTimeExecuted returns a boolean if a field has been set.
+
+### SetTimeExecutedNil
+
+`func (o *AccountOrderRecordNullable) SetTimeExecutedNil(b bool)`
+
+ SetTimeExecutedNil sets the value for TimeExecuted to be an explicit nil
+
+### UnsetTimeExecuted
+`func (o *AccountOrderRecordNullable) UnsetTimeExecuted()`
+
+UnsetTimeExecuted ensures that no value is present for TimeExecuted, not even an explicit nil
+### GetExpiryDate
+
+`func (o *AccountOrderRecordNullable) GetExpiryDate() time.Time`
+
+GetExpiryDate returns the ExpiryDate field if non-nil, zero value otherwise.
+
+### GetExpiryDateOk
+
+`func (o *AccountOrderRecordNullable) GetExpiryDateOk() (*time.Time, bool)`
+
+GetExpiryDateOk returns a tuple with the ExpiryDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryDate
+
+`func (o *AccountOrderRecordNullable) SetExpiryDate(v time.Time)`
+
+SetExpiryDate sets ExpiryDate field to given value.
+
+### HasExpiryDate
+
+`func (o *AccountOrderRecordNullable) HasExpiryDate() bool`
+
+HasExpiryDate returns a boolean if a field has been set.
+
+### SetExpiryDateNil
+
+`func (o *AccountOrderRecordNullable) SetExpiryDateNil(b bool)`
+
+ SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
+
+### UnsetExpiryDate
+`func (o *AccountOrderRecordNullable) UnsetExpiryDate()`
+
+UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
+### GetSymbol
+
+`func (o *AccountOrderRecordNullable) GetSymbol() string`
+
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
+
+### GetSymbolOk
+
+`func (o *AccountOrderRecordNullable) GetSymbolOk() (*string, bool)`
+
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbol
+
+`func (o *AccountOrderRecordNullable) SetSymbol(v string)`
+
+SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *AccountOrderRecordNullable) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
+
+### GetChildBrokerageOrderIds
+
+`func (o *AccountOrderRecordNullable) GetChildBrokerageOrderIds() ChildBrokerageOrderIDsNullable`
+
+GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field if non-nil, zero value otherwise.
+
+### GetChildBrokerageOrderIdsOk
+
+`func (o *AccountOrderRecordNullable) GetChildBrokerageOrderIdsOk() (*ChildBrokerageOrderIDsNullable, bool)`
+
+GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildBrokerageOrderIds
+
+`func (o *AccountOrderRecordNullable) SetChildBrokerageOrderIds(v ChildBrokerageOrderIDsNullable)`
+
+SetChildBrokerageOrderIds sets ChildBrokerageOrderIds field to given value.
+
+### HasChildBrokerageOrderIds
+
+`func (o *AccountOrderRecordNullable) HasChildBrokerageOrderIds() bool`
+
+HasChildBrokerageOrderIds returns a boolean if a field has been set.
+
+### SetChildBrokerageOrderIdsNil
+
+`func (o *AccountOrderRecordNullable) SetChildBrokerageOrderIdsNil(b bool)`
+
+ SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
+
+### UnsetChildBrokerageOrderIds
+`func (o *AccountOrderRecordNullable) UnsetChildBrokerageOrderIds()`
+
+UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

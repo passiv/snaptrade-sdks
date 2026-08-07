@@ -2721,11 +2721,22 @@ public class TradingApiGenerated {
         
         /**
          * Set units
-         * @param units For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). (optional)
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder units(Double units) {
             this.units = units;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set units
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder units(Integer units) {
+            this.units = units.doubleValue();
             return (TradingApi.PlaceForceOrderRequestBuilder) this;
         }
         

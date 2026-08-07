@@ -9,6 +9,7 @@ Method | Path | Description
 [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
+[**ListConnectionAccounts**](ExperimentalEndpointsApi.md#ListConnectionAccounts) | **Get** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union)
 [**ListSubscriptions**](ExperimentalEndpointsApi.md#ListSubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 
 
@@ -263,6 +264,64 @@ func main() {
     // response from `GetUserAccountRecentOrdersV2`: AccountOrdersV2Response
     fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrdersV2Response.GetUserAccountRecentOrdersV2.Orders`: %v\n", resp.Orders)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListConnectionAccounts
+
+List accounts for a connection (discriminated union)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ExperimentalEndpointsApi.ListConnectionAccounts(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.ListConnectionAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ListConnectionAccounts`: []ConnectionAccount
+    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.ListConnectionAccounts`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Kind`: %v\n", resp.Kind)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Id`: %v\n", resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.ConnectionId`: %v\n", resp.ConnectionId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.DisplayName`: %v\n", *resp.DisplayName)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionId`: %v\n", *resp.InstitutionId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.SyncStatus`: %v\n", resp.SyncStatus)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.RawType`: %v\n", *resp.RawType)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.FundingDate`: %v\n", *resp.FundingDate)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MarketValue`: %v\n", *resp.MarketValue)
 }
 ```
 

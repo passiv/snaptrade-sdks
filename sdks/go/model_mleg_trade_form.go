@@ -23,7 +23,7 @@ type MlegTradeForm struct {
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
-	PriceEffect NullableMlegPriceEffectStrict `json:"price_effect,omitempty"`
+	PriceEffect NullableMlegPriceEffectStrictNullable `json:"price_effect,omitempty"`
 	Legs []MlegLeg `json:"legs"`
 }
 
@@ -180,9 +180,9 @@ func (o *MlegTradeForm) UnsetStopPrice() {
 }
 
 // GetPriceEffect returns the PriceEffect field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MlegTradeForm) GetPriceEffect() MlegPriceEffectStrict {
+func (o *MlegTradeForm) GetPriceEffect() MlegPriceEffectStrictNullable {
 	if o == nil || isNil(o.PriceEffect.Get()) {
-		var ret MlegPriceEffectStrict
+		var ret MlegPriceEffectStrictNullable
 		return ret
 	}
 	return *o.PriceEffect.Get()
@@ -191,7 +191,7 @@ func (o *MlegTradeForm) GetPriceEffect() MlegPriceEffectStrict {
 // GetPriceEffectOk returns a tuple with the PriceEffect field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MlegTradeForm) GetPriceEffectOk() (*MlegPriceEffectStrict, bool) {
+func (o *MlegTradeForm) GetPriceEffectOk() (*MlegPriceEffectStrictNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -207,8 +207,8 @@ func (o *MlegTradeForm) HasPriceEffect() bool {
 	return false
 }
 
-// SetPriceEffect gets a reference to the given NullableMlegPriceEffectStrict and assigns it to the PriceEffect field.
-func (o *MlegTradeForm) SetPriceEffect(v MlegPriceEffectStrict) {
+// SetPriceEffect gets a reference to the given NullableMlegPriceEffectStrictNullable and assigns it to the PriceEffect field.
+func (o *MlegTradeForm) SetPriceEffect(v MlegPriceEffectStrictNullable) {
 	o.PriceEffect.Set(&v)
 }
 // SetPriceEffectNil sets the value for PriceEffect to be an explicit nil

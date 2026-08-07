@@ -19,9 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.AccountUniversalActivityCurrency;
-import com.snaptrade.client.model.AccountUniversalActivityCurrencyUniversalSymbol;
-import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
+import com.snaptrade.client.model.CurrencyNullable;
+import com.snaptrade.client.model.OptionsSymbolNullable;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -66,11 +65,11 @@ public class AccountUniversalActivity {
 
   public static final String SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL = "currency_universal_symbol";
   @SerializedName(SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL)
-  private AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol;
+  private SymbolNullable currencyUniversalSymbol;
 
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
-  private AccountUniversalActivityOptionSymbol optionSymbol;
+  private OptionsSymbolNullable optionSymbol;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -86,7 +85,7 @@ public class AccountUniversalActivity {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private AccountUniversalActivityCurrency currency;
+  private CurrencyNullable currency;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -185,7 +184,7 @@ public class AccountUniversalActivity {
   }
 
 
-  public AccountUniversalActivity currencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+  public AccountUniversalActivity currencyUniversalSymbol(SymbolNullable currencyUniversalSymbol) {
     
     
     
@@ -201,12 +200,12 @@ public class AccountUniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountUniversalActivityCurrencyUniversalSymbol getCurrencyUniversalSymbol() {
+  public SymbolNullable getCurrencyUniversalSymbol() {
     return currencyUniversalSymbol;
   }
 
 
-  public void setCurrencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+  public void setCurrencyUniversalSymbol(SymbolNullable currencyUniversalSymbol) {
     
     
     
@@ -214,7 +213,7 @@ public class AccountUniversalActivity {
   }
 
 
-  public AccountUniversalActivity optionSymbol(AccountUniversalActivityOptionSymbol optionSymbol) {
+  public AccountUniversalActivity optionSymbol(OptionsSymbolNullable optionSymbol) {
     
     
     
@@ -230,12 +229,12 @@ public class AccountUniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountUniversalActivityOptionSymbol getOptionSymbol() {
+  public OptionsSymbolNullable getOptionSymbol() {
     return optionSymbol;
   }
 
 
-  public void setOptionSymbol(AccountUniversalActivityOptionSymbol optionSymbol) {
+  public void setOptionSymbol(OptionsSymbolNullable optionSymbol) {
     
     
     
@@ -357,7 +356,7 @@ public class AccountUniversalActivity {
   }
 
 
-  public AccountUniversalActivity currency(AccountUniversalActivityCurrency currency) {
+  public AccountUniversalActivity currency(CurrencyNullable currency) {
     
     
     
@@ -373,12 +372,12 @@ public class AccountUniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountUniversalActivityCurrency getCurrency() {
+  public CurrencyNullable getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(AccountUniversalActivityCurrency currency) {
+  public void setCurrency(CurrencyNullable currency) {
     
     
     
@@ -842,15 +841,15 @@ public class AccountUniversalActivity {
       }
       // validate the optional field `currency_universal_symbol`
       if (jsonObj.get("currency_universal_symbol") != null && !jsonObj.get("currency_universal_symbol").isJsonNull()) {
-        AccountUniversalActivityCurrencyUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("currency_universal_symbol"));
+        SymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("currency_universal_symbol"));
       }
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
-        AccountUniversalActivityOptionSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+        OptionsSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        AccountUniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        CurrencyNullable.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));

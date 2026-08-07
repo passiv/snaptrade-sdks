@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **TotalQuantity** | Pointer to **NullableString** | The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares. | [optional] 
 **CanceledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been canceled for this leg. | [optional] 
 **FilledQuantity** | Pointer to **NullableString** | The number of shares or contracts that have been filled for this leg. | [optional] 
-**Status** | Pointer to [**NullableAccountOrderRecordStatusV2**](AccountOrderRecordStatusV2.md) |  | [optional] 
+**Status** | Pointer to [**NullableAccountOrderRecordStatusV2Nullable**](AccountOrderRecordStatusV2Nullable.md) |  | [optional] 
 
 ## Methods
 
@@ -259,20 +259,20 @@ HasFilledQuantity returns a boolean if a field has been set.
 UnsetFilledQuantity ensures that no value is present for FilledQuantity, not even an explicit nil
 ### GetStatus
 
-`func (o *AccountOrderRecordLeg) GetStatus() AccountOrderRecordStatusV2`
+`func (o *AccountOrderRecordLeg) GetStatus() AccountOrderRecordStatusV2Nullable`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *AccountOrderRecordLeg) GetStatusOk() (*AccountOrderRecordStatusV2, bool)`
+`func (o *AccountOrderRecordLeg) GetStatusOk() (*AccountOrderRecordStatusV2Nullable, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *AccountOrderRecordLeg) SetStatus(v AccountOrderRecordStatusV2)`
+`func (o *AccountOrderRecordLeg) SetStatus(v AccountOrderRecordStatusV2Nullable)`
 
 SetStatus sets Status field to given value.
 
