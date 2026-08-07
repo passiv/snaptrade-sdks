@@ -127,6 +127,7 @@ jobs:
           HEAD_BRANCH: ${{ steps.manual.outputs.head_branch }}
         run: |
           prs=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
             --head "$HEAD_BRANCH" \
             --state open \
             --limit 2 \
