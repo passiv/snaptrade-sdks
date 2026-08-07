@@ -2738,9 +2738,9 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`Double`](./src/main/java/com/snaptrade/client/model/ModelDouble.java)<a id="units-doublesrcmainjavacomsnaptradeclientmodelmodeldoublejava"></a>
+##### units: `Double`<a id="units-double"></a>
 
-For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
 ##### notional_value: `Object`<a id="notional_value-object"></a>
 

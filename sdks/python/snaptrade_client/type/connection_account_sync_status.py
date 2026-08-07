@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.holdings_sync_status_date import HoldingsSyncStatusDate
+from snaptrade_client.type.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable
 from snaptrade_client.type.transactions_status import TransactionsStatus
 
 class RequiredConnectionAccountSyncStatus(TypedDict):
@@ -24,14 +24,11 @@ class RequiredConnectionAccountSyncStatus(TypedDict):
 class OptionalConnectionAccountSyncStatus(TypedDict, total=False):
     transactions: TransactionsStatus
 
-    # The last time orders were successfully synced by SnapTrade.
-    orders: HoldingsSyncStatusDate
+    orders: HoldingsSyncStatusDateNullable
 
-    # The last time positions were successfully synced by SnapTrade.
-    positions: HoldingsSyncStatusDate
+    positions: HoldingsSyncStatusDateNullable
 
-    # The last time balances were successfully synced by SnapTrade.
-    balances: HoldingsSyncStatusDate
+    balances: HoldingsSyncStatusDateNullable
 
 class ConnectionAccountSyncStatus(RequiredConnectionAccountSyncStatus, OptionalConnectionAccountSyncStatus):
     pass

@@ -21,6 +21,7 @@ from snaptrade_client.type.manual_trade_place_time_in_force_strict import Manual
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.trading_session import TradingSession
+from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
 
 class RequiredManualTradeFormWithOptions(TypedDict):
@@ -53,7 +54,7 @@ class OptionalManualTradeFormWithOptions(TypedDict, total=False):
     stop: typing.Optional[typing.Union[int, float]]
 
     # For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
-    units: float
+    units: UnitsNullable
 
     notional_value: typing.Optional[NotionalValueNullable]
 

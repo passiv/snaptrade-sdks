@@ -111,11 +111,11 @@ public class ConnectionAccountSyncStatus {
   }
 
    /**
-   * The last time orders were successfully synced by SnapTrade.
+   * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
    * @return orders
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The last time orders were successfully synced by SnapTrade.")
+  @ApiModelProperty(value = "Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)")
 
   public OffsetDateTime getOrders() {
     return orders;
@@ -140,11 +140,11 @@ public class ConnectionAccountSyncStatus {
   }
 
    /**
-   * The last time positions were successfully synced by SnapTrade.
+   * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
    * @return positions
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The last time positions were successfully synced by SnapTrade.")
+  @ApiModelProperty(value = "Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)")
 
   public OffsetDateTime getPositions() {
     return positions;
@@ -169,11 +169,11 @@ public class ConnectionAccountSyncStatus {
   }
 
    /**
-   * The last time balances were successfully synced by SnapTrade.
+   * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
    * @return balances
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The last time balances were successfully synced by SnapTrade.")
+  @ApiModelProperty(value = "Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)")
 
   public OffsetDateTime getBalances() {
     return balances;

@@ -1185,7 +1185,7 @@ public class Example {
     OffsetDateTime expiryDate = OffsetDateTime.now(); // Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when `time_in_force` is `GTD`. Include a timezone offset or `Z` for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-    Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+    Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     Object notionalValue = null;
     UUID clientOrderId = UUID.randomUUID(); // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
     try {

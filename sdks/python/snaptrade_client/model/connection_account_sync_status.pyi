@@ -45,114 +45,18 @@ timestamp of the last successful sync of that data type (null if never synced).
             @staticmethod
             def transactions() -> typing.Type['TransactionsStatus']:
                 return TransactionsStatus
-            
-            
-            class orders(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            HoldingsSyncStatusDate,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'orders':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
-            
-            
-            class positions(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            HoldingsSyncStatusDate,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'positions':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
-            
-            
-            class balances(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            HoldingsSyncStatusDate,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'balances':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def orders() -> typing.Type['HoldingsSyncStatusDateNullable']:
+                return HoldingsSyncStatusDateNullable
+        
+            @staticmethod
+            def positions() -> typing.Type['HoldingsSyncStatusDateNullable']:
+                return HoldingsSyncStatusDateNullable
+        
+            @staticmethod
+            def balances() -> typing.Type['HoldingsSyncStatusDateNullable']:
+                return HoldingsSyncStatusDateNullable
             __annotations__ = {
                 "transactions": transactions,
                 "orders": orders,
@@ -165,13 +69,13 @@ timestamp of the last successful sync of that data type (null if never synced).
     def __getitem__(self, name: typing_extensions.Literal["transactions"]) -> 'TransactionsStatus': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["orders"]) -> MetaOapg.properties.orders: ...
+    def __getitem__(self, name: typing_extensions.Literal["orders"]) -> 'HoldingsSyncStatusDateNullable': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["positions"]) -> MetaOapg.properties.positions: ...
+    def __getitem__(self, name: typing_extensions.Literal["positions"]) -> 'HoldingsSyncStatusDateNullable': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["balances"]) -> MetaOapg.properties.balances: ...
+    def __getitem__(self, name: typing_extensions.Literal["balances"]) -> 'HoldingsSyncStatusDateNullable': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -184,13 +88,13 @@ timestamp of the last successful sync of that data type (null if never synced).
     def get_item_oapg(self, name: typing_extensions.Literal["transactions"]) -> typing.Union['TransactionsStatus', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["orders"]) -> typing.Union[MetaOapg.properties.orders, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["orders"]) -> typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union[MetaOapg.properties.positions, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union[MetaOapg.properties.balances, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -202,9 +106,9 @@ timestamp of the last successful sync of that data type (null if never synced).
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         transactions: typing.Union['TransactionsStatus', schemas.Unset] = schemas.unset,
-        orders: typing.Union[MetaOapg.properties.orders, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
-        positions: typing.Union[MetaOapg.properties.positions, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
-        balances: typing.Union[MetaOapg.properties.balances, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        orders: typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset] = schemas.unset,
+        positions: typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset] = schemas.unset,
+        balances: typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'ConnectionAccountSyncStatus':
@@ -219,5 +123,5 @@ timestamp of the last successful sync of that data type (null if never synced).
             **kwargs,
         )
 
-from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
+from snaptrade_client.model.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable
 from snaptrade_client.model.transactions_status import TransactionsStatus

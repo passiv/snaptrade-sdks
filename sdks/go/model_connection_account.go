@@ -13,7 +13,6 @@ package snaptrade
 
 import (
 	"encoding/json"
-	"time"
 	"fmt"
 )
 

@@ -429,12 +429,21 @@ public class ManualTradeFormWithOptions {
     return this;
   }
 
+  public ManualTradeFormWithOptions units(Integer units) {
+    
+    
+    
+    
+    this.units = units.doubleValue();
+    return this;
+  }
+
    /**
-   * For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares).
+   * Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.
    * @return units
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).")
+  @ApiModelProperty(example = "10.5", value = "Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.")
 
   public Double getUnits() {
     return units;

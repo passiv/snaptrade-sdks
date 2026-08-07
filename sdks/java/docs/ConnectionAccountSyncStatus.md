@@ -9,9 +9,9 @@ Contains status updates for the account sync process between SnapTrade and the b
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**transactions** | [**TransactionsStatus**](TransactionsStatus.md) |  |  [optional] |
-|**orders** | [**OffsetDateTime**](OffsetDateTime.md) | The last time orders were successfully synced by SnapTrade. |  [optional] |
-|**positions** | [**OffsetDateTime**](OffsetDateTime.md) | The last time positions were successfully synced by SnapTrade. |  [optional] |
-|**balances** | [**OffsetDateTime**](OffsetDateTime.md) | The last time balances were successfully synced by SnapTrade. |  [optional] |
+|**orders** | **OffsetDateTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) |  [optional] |
+|**positions** | **OffsetDateTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) |  [optional] |
+|**balances** | **OffsetDateTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) |  [optional] |
 
 
 

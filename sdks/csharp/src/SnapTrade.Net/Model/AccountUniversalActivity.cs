@@ -52,7 +52,7 @@ namespace SnapTrade.Net.Model
         /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency).</param>
         /// <param name="institution">The institution that the transaction is associated with. This is usually the brokerage name..</param>
         /// <param name="externalReferenceId">Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;.</param>
-        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol = default(AccountUniversalActivityCurrencyUniversalSymbol), AccountUniversalActivityOptionSymbol optionSymbol = default(AccountUniversalActivityOptionSymbol), double price = default(double), double units = default(double), double? amount = default(double?), AccountUniversalActivityCurrency currency = default(AccountUniversalActivityCurrency), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
+        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), SymbolNullable currencyUniversalSymbol = default(SymbolNullable), OptionsSymbolNullable optionSymbol = default(OptionsSymbolNullable), double price = default(double), double units = default(double), double? amount = default(double?), CurrencyNullable currency = default(CurrencyNullable), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -91,13 +91,13 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets CurrencyUniversalSymbol
         /// </summary>
         [DataMember(Name = "currency_universal_symbol", EmitDefaultValue = true)]
-        public AccountUniversalActivityCurrencyUniversalSymbol CurrencyUniversalSymbol { get; set; }
+        public SymbolNullable CurrencyUniversalSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets OptionSymbol
         /// </summary>
         [DataMember(Name = "option_symbol", EmitDefaultValue = true)]
-        public AccountUniversalActivityOptionSymbol OptionSymbol { get; set; }
+        public OptionsSymbolNullable OptionSymbol { get; set; }
 
         /// <summary>
         /// The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. For option transactions, this represents the price per share of the option contract.
@@ -124,7 +124,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = true)]
-        public AccountUniversalActivityCurrency Currency { get; set; }
+        public CurrencyNullable Currency { get; set; }
 
         /// <summary>
         /// A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of asset(s) from one account to another.   - &#x60;EXTERNAL_ASSET_TRANSFER_IN&#x60; - Incoming transfer of an asset from an external account to this account.   - &#x60;EXTERNAL_ASSET_TRANSFER_OUT&#x60; - Outgoing transfer of an asset from this account to an external account.   - &#x60;SPLIT&#x60; - A stock share split.   - &#x60;ADJUSTMENT&#x60; - A one time adjustment of the account&#39;s cash balance or shares of an asset 

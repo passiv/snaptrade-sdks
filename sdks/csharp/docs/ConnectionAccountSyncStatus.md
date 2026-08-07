@@ -6,9 +6,9 @@ Contains status updates for the account sync process between SnapTrade and the b
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Transactions** | [**TransactionsStatus**](TransactionsStatus.md) |  | [optional] 
-**Orders** | **DateTime?** | The last time orders were successfully synced by SnapTrade. | [optional] 
-**Positions** | **DateTime?** | The last time positions were successfully synced by SnapTrade. | [optional] 
-**Balances** | **DateTime?** | The last time balances were successfully synced by SnapTrade. | [optional] 
+**Orders** | **DateTime?** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
+**Positions** | **DateTime?** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
+**Balances** | **DateTime?** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

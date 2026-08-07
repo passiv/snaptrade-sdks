@@ -38,6 +38,7 @@ from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict as ManualTradePlaceTimeInForceStrictSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
+from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
 from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable as UniversalSymbolIDNullableSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
@@ -50,6 +51,7 @@ from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTyp
 
 from snaptrade_client.type.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
+from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
@@ -223,7 +225,7 @@ class BaseApi(api_client.Api):
         expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         user_id: typing.Optional[str] = None,
@@ -545,7 +547,7 @@ class PlaceForceOrder(BaseApi, typing.Generic[TAuth]):
         expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         user_id: typing.Optional[str] = None,
@@ -596,7 +598,7 @@ class PlaceForceOrder(BaseApi, typing.Generic[TAuth]):
         expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         user_id: typing.Optional[str] = None,
@@ -648,7 +650,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         user_id: typing.Optional[str] = None,
@@ -699,7 +701,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         expiry_date: typing.Optional[typing.Optional[datetime]] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         user_id: typing.Optional[str] = None,

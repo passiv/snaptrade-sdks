@@ -4251,7 +4251,7 @@ components:
         transactions:
           last_successful_sync: 2022-01-24T00:00:00.000+00:00
           initial_sync_completed: true
-          first_transaction_date: ""
+          first_transaction_date: 2022-01-24T00:00:00.000+00:00
       properties:
         transactions:
           $ref: '#/components/schemas/TransactionsStatus'
@@ -4266,7 +4266,7 @@ components:
       example:
         last_successful_sync: 2022-01-24T00:00:00.000+00:00
         initial_sync_completed: true
-        first_transaction_date: ""
+        first_transaction_date: 2022-01-24T00:00:00.000+00:00
       properties:
         initial_sync_completed:
           description: "Indicates if the initial sync of transactions has been completed.\
@@ -4285,12 +4285,13 @@ components:
           x-konfig-original-example: 2022-01-24
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
         first_transaction_date:
-          allOf:
-          - $ref: '#/components/schemas/SyncStatusDate'
-          description: "The date of the first transaction in the account known to\
-            \ SnapTrade. It's possible that the account has transactions before this\
-            \ date, but they are not known to SnapTrade."
+          description: Date in YYYY-MM-DD format or null
+          example: 2022-01-24
+          format: date
           nullable: true
+          type: string
+          x-konfig-original-example: 2022-01-24
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
     HoldingsStatus:
       description: |
         Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions:
@@ -4367,7 +4368,7 @@ components:
           transactions:
             last_successful_sync: 2022-01-24T00:00:00.000+00:00
             initial_sync_completed: true
-            first_transaction_date: ""
+            first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: ""
         created_date: 2024-07-23T22:50:22.761Z
         funding_date: 2024-07-25T12:00:00Z
@@ -4660,20 +4661,26 @@ components:
         transactions:
           $ref: '#/components/schemas/TransactionsStatus'
         orders:
-          allOf:
-          - $ref: '#/components/schemas/HoldingsSyncStatusDate'
-          description: The last time orders were successfully synced by SnapTrade.
+          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+          format: date-time
           nullable: true
+          type: string
+          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
         positions:
-          allOf:
-          - $ref: '#/components/schemas/HoldingsSyncStatusDate'
-          description: The last time positions were successfully synced by SnapTrade.
+          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+          format: date-time
           nullable: true
+          type: string
+          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
         balances:
-          allOf:
-          - $ref: '#/components/schemas/HoldingsSyncStatusDate'
-          description: The last time balances were successfully synced by SnapTrade.
+          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+          format: date-time
           nullable: true
+          type: string
+          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
       type: object
       x-konfig-properties:
         orders:
@@ -4699,7 +4706,7 @@ components:
           transactions:
             last_successful_sync: 2022-01-24T00:00:00.000+00:00
             initial_sync_completed: true
-            first_transaction_date: ""
+            first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         institution_account_id: "54953432"
       properties:
@@ -4989,7 +4996,7 @@ components:
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
-              first_transaction_date: ""
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           institution_name: Alpaca
@@ -5054,7 +5061,10 @@ components:
               expiration_date: 2026-12-18T00:00:00.000+00:00
               strike_price: 240
           price: 38.4
-          currency: null
+          currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           units: -50
           average_purchase_price: 4126
         - symbol:
@@ -5087,7 +5097,10 @@ components:
               expiration_date: 2026-12-18T00:00:00.000+00:00
               strike_price: 240
           price: 38.4
-          currency: null
+          currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           units: -50
           average_purchase_price: 4126
         positions:
@@ -5247,7 +5260,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -5326,7 +5361,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -5378,7 +5435,7 @@ components:
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
-              first_transaction_date: ""
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: ""
           created_date: 2024-07-23T22:50:22.761Z
           funding_date: 2024-07-25T12:00:00Z
@@ -5479,7 +5536,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -5558,7 +5637,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -5706,7 +5807,29 @@ components:
         canceled_quantity: "10"
         time_in_force: time_in_force
         execution_price: "12.34"
-        quote_universal_symbol: null
+        quote_universal_symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          currencies:
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
         universal_symbol:
           figi_code: BBG000B9XRY4
           symbol: VAB.TO
@@ -5768,7 +5891,7 @@ components:
         option_symbol:
           $ref: '#/components/schemas/OptionsSymbolNullable'
         quote_universal_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_quote_universal_symbol'
+          $ref: '#/components/schemas/UniversalSymbolNullable'
         quote_currency:
           $ref: '#/components/schemas/CurrencyNullable'
         action:
@@ -6255,6 +6378,11 @@ components:
           type: array
       type: object
       x-konfig-is-used-in-successful-response: true
+      x-konfig-properties:
+        trailing_stop:
+          description: "For trailing stop orders, contains the trail configuration.\
+            \ Null for all other order types."
+          nullable: true
     TrailingStop:
       additionalProperties: true
       description: Trail configuration for trailing stop orders.
@@ -6537,7 +6665,10 @@ components:
             expiration_date: 2026-12-18T00:00:00.000+00:00
             strike_price: 240
         price: 38.4
-        currency: null
+        currency:
+          code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
         units: -50
         average_purchase_price: 4126
       properties:
@@ -6572,7 +6703,7 @@ components:
           x-konfig-original-example: 4126
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
         currency:
-          $ref: '#/components/schemas/OptionsPosition_currency'
+          $ref: '#/components/schemas/CurrencyNullable'
       type: object
       x-konfig-properties:
         currency:
@@ -6778,7 +6909,7 @@ components:
           transactions:
             last_successful_sync: 2022-01-24T00:00:00.000+00:00
             initial_sync_completed: true
-            first_transaction_date: ""
+            first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         institution_name: Alpaca
@@ -8046,6 +8177,9 @@ components:
       - raw_symbol
       - symbol
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     EtfInstrument:
       additionalProperties: true
       description: Security instrument metadata for ETF positions.
@@ -8106,6 +8240,9 @@ components:
       - raw_symbol
       - symbol
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     MutualFundInstrument:
       additionalProperties: true
       description: Security instrument metadata for mutual fund positions.
@@ -8166,6 +8303,9 @@ components:
       - raw_symbol
       - symbol
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     CefInstrument:
       additionalProperties: true
       description: Security instrument metadata for closed-end fund positions.
@@ -8226,6 +8366,9 @@ components:
       - raw_symbol
       - symbol
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     CryptoInstrument:
       additionalProperties: true
       description: Security instrument metadata for crypto positions.
@@ -8286,6 +8429,9 @@ components:
       - raw_symbol
       - symbol
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     OtherInstrument:
       additionalProperties: true
       description: Security instrument metadata for other mapped security positions.
@@ -8346,6 +8492,9 @@ components:
       - raw_symbol
       - symbol
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     FutureInstrument:
       additionalProperties: true
       description: Future instrument metadata for a V2 position.
@@ -8658,6 +8807,9 @@ components:
         figi_instrument:
           $ref: '#/components/schemas/FigiInstrumentNullable'
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     UserIDandSecret:
       example:
         userSecret: adf2aa34-8219-40f7-a6b3-60156985cc61
@@ -9844,7 +9996,7 @@ components:
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
-              first_transaction_date: ""
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           institution_account_id: "54953432"
       properties:
@@ -9910,7 +10062,7 @@ components:
               transactions:
                 last_successful_sync: 2022-01-24T00:00:00.000+00:00
                 initial_sync_completed: true
-                first_transaction_date: ""
+                first_transaction_date: 2022-01-24T00:00:00.000+00:00
             id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
             institution_account_id: "54953432"
       properties:
@@ -9999,6 +10151,8 @@ components:
       - universal_symbol_id
       type: object
       x-konfig-properties:
+        units:
+          nullable: true
         notional_value:
           nullable: true
     OptionImpact:
@@ -10152,6 +10306,9 @@ components:
       - order_type
       - time_in_force
       type: object
+      x-konfig-properties:
+        units:
+          nullable: true
     ManualTradeFormWithOptions:
       description: Inputs for placing an order with the brokerage.
       example:
@@ -10160,7 +10317,7 @@ components:
         client_order_id: 550e8400-e29b-41d4-a716-446655440000
         trading_session: REGULAR
         expiry_date: 2026-08-21T23:27:55.027Z
-        units: ""
+        units: 10.5
         time_in_force: Day
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         stop: 31.33
@@ -10230,14 +10387,13 @@ components:
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-stop
         units:
-          allOf:
-          - $ref: '#/components/schemas/Units'
-          description: "For Equity orders, this represents the number of shares for\
-            \ the order. This can be a decimal for fractional orders. Must be `null`\
-            \ if `notional_value` is provided. If placing an Option order, this field\
-            \ represents the number of contracts to buy or sell. (e.g., 1 contract\
-            \ = 100 shares)."
+          description: Number of shares for the order. This can be a decimal for fractional
+            orders. Must be `null` if `notional_value` is provided.
+          example: 10.5
           nullable: true
+          type: number
+          x-konfig-original-example: 10.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
         notional_value: {}
         client_order_id:
           description: |
@@ -10269,6 +10425,8 @@ components:
             \ if `notional_value` is provided. If placing an Option order, this field\
             \ represents the number of contracts to buy or sell. (e.g., 1 contract\
             \ = 100 shares)."
+          nullable: true
+        notional_value:
           nullable: true
         client_order_id:
           nullable: true
@@ -10403,6 +10561,9 @@ components:
       - orders
       - type
       type: object
+      x-konfig-properties:
+        client_order_id:
+          nullable: true
     ComplexOrderResponse:
       additionalProperties: true
       description: |
@@ -11063,7 +11224,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -11195,7 +11378,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -11274,7 +11479,29 @@ components:
           canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: "12.34"
-          quote_universal_symbol: null
+          quote_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
           universal_symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -11372,7 +11599,22 @@ components:
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           amount: 263.82
           settlement_date: 2024-03-26T00:00:00Z
-          currency_universal_symbol: null
+          currency_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           option_type: BUY_TO_OPEN
           fee: 0
           description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -11382,10 +11624,38 @@ components:
           trade_date: 2024-03-22T16:27:55Z
           institution: Robinhood
           price: 0.4
-          currency: null
+          currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           fx_rate: 1.032
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
         - symbol:
             figi_code: BBG000B9XRY4
             symbol: VAB.TO
@@ -11404,7 +11674,22 @@ components:
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           amount: 263.82
           settlement_date: 2024-03-26T00:00:00Z
-          currency_universal_symbol: null
+          currency_universal_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           option_type: BUY_TO_OPEN
           fee: 0
           description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -11414,10 +11699,38 @@ components:
           trade_date: 2024-03-22T16:27:55Z
           institution: Robinhood
           price: 0.4
-          currency: null
+          currency:
+            code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           fx_rate: 1.032
-          option_symbol: null
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
       properties:
         data:
           items:
@@ -11449,7 +11762,22 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         amount: 263.82
         settlement_date: 2024-03-26T00:00:00Z
-        currency_universal_symbol: null
+        currency_universal_symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         option_type: BUY_TO_OPEN
         fee: 0
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -11459,10 +11787,38 @@ components:
         trade_date: 2024-03-22T16:27:55Z
         institution: Robinhood
         price: 0.4
-        currency: null
+        currency:
+          code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         fx_rate: 1.032
-        option_symbol: null
+        option_symbol:
+          ticker: AAPL  261218C00240000
+          is_mini_option: false
+          option_type: CALL
+          underlying_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: SPY
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: SPDR S&P 500 ETF Trust
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          expiration_date: 2026-12-18T00:00:00.000+00:00
+          strike_price: 240
       properties:
         id:
           description: |
@@ -11476,9 +11832,9 @@ components:
         symbol:
           $ref: '#/components/schemas/SymbolNullable'
         currency_universal_symbol:
-          $ref: '#/components/schemas/AccountUniversalActivity_currency_universal_symbol'
+          $ref: '#/components/schemas/SymbolNullable'
         option_symbol:
-          $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
+          $ref: '#/components/schemas/OptionsSymbolNullable'
         price:
           description: "The price of the security for the transaction. This is mostly\
             \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option\
@@ -11507,7 +11863,7 @@ components:
           x-konfig-original-example: 263.82
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-amount
         currency:
-          $ref: '#/components/schemas/AccountUniversalActivity_currency'
+          $ref: '#/components/schemas/CurrencyNullable'
         type:
           description: |
             A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
@@ -11657,7 +12013,22 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         amount: 263.82
         settlement_date: 2024-03-26T00:00:00Z
-        currency_universal_symbol: null
+        currency_universal_symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         option_type: BUY_TO_OPEN
         fee: 0
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
@@ -11667,10 +12038,38 @@ components:
         trade_date: 2024-03-22T16:27:55Z
         institution: Robinhood
         price: 0.4
-        currency: null
+        currency:
+          code: USD
+          name: US Dollar
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         fx_rate: 1.032
-        option_symbol: null
+        option_symbol:
+          ticker: AAPL  261218C00240000
+          is_mini_option: false
+          option_type: CALL
+          underlying_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: SPY
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: SPDR S&P 500 ETF Trust
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          expiration_date: 2026-12-18T00:00:00.000+00:00
+          strike_price: 240
         account:
           number: Q6542138443
           name: Robinhood Individual
@@ -11682,7 +12081,7 @@ components:
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
-              first_transaction_date: ""
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           institution_account_id: "54953432"
       properties:
@@ -11700,9 +12099,9 @@ components:
         symbol:
           $ref: '#/components/schemas/SymbolNullable'
         currency_universal_symbol:
-          $ref: '#/components/schemas/AccountUniversalActivity_currency_universal_symbol'
+          $ref: '#/components/schemas/SymbolNullable'
         option_symbol:
-          $ref: '#/components/schemas/AccountUniversalActivity_option_symbol'
+          $ref: '#/components/schemas/OptionsSymbolNullable'
         price:
           description: "The price of the security for the transaction. This is mostly\
             \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions."
@@ -11730,7 +12129,7 @@ components:
           x-konfig-original-example: 263.82
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-amount
         currency:
-          $ref: '#/components/schemas/AccountUniversalActivity_currency'
+          $ref: '#/components/schemas/CurrencyNullable'
         type:
           description: |
             A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
@@ -11826,6 +12225,13 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-external_reference_id
       type: object
       x-konfig-properties:
+        symbol:
+          description: "The security for the transaction. The field is `null` if the\
+            \ transaction is not related to a security (like a deposit, withdrawal,\
+            \ fee, etc). SnapTrade does a best effort to map the brokerage's symbol.\
+            \ In cases where the brokerage symbol is not recognized, the field will\
+            \ be set to `null`."
+          nullable: true
         currency_universal_symbol:
           description: "The quote security for the transaction when `price`, `amount`,\
             \ and `fee` are denominated in a security instead of a fiat currency.\
@@ -11968,6 +12374,9 @@ components:
       - type
       type: object
       x-konfig-is-used-in-successful-response: true
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     UnderlyingSymbol:
       additionalProperties: true
       description: Symbol object for the underlying security of an option.
@@ -12052,6 +12461,9 @@ components:
             $ref: '#/components/schemas/Currency'
           type: array
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     OptionsSymbol:
       additionalProperties: true
       description: Uniquely describes an option security + exchange combination across
@@ -15475,14 +15887,7 @@ components:
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-stop
         units:
-          allOf:
-          - $ref: '#/components/schemas/Units'
-          description: "For Equity orders, this represents the number of shares for\
-            \ the order. This can be a decimal for fractional orders. Must be `null`\
-            \ if `notional_value` is provided. If placing an Option order, this field\
-            \ represents the number of contracts to buy or sell. (e.g., 1 contract\
-            \ = 100 shares)."
-          nullable: true
+          $ref: '#/components/schemas/UnitsNullable'
         notional_value:
           $ref: '#/components/schemas/NotionalValueNullable'
         client_order_id:
@@ -15499,14 +15904,6 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
-      x-konfig-properties:
-        units:
-          description: "For Equity orders, this represents the number of shares for\
-            \ the order. This can be a decimal for fractional orders. Must be `null`\
-            \ if `notional_value` is provided. If placing an Option order, this field\
-            \ represents the number of contracts to buy or sell. (e.g., 1 contract\
-            \ = 100 shares)."
-          nullable: true
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
       additionalProperties: true
       properties:
@@ -16888,7 +17285,29 @@ components:
         canceled_quantity: "10"
         time_in_force: time_in_force
         execution_price: "12.34"
-        quote_universal_symbol: null
+        quote_universal_symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          currencies:
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+          - code: USD
+            name: US Dollar
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
         universal_symbol:
           figi_code: BBG000B9XRY4
           symbol: VAB.TO
@@ -16951,7 +17370,7 @@ components:
         option_symbol:
           $ref: '#/components/schemas/OptionsSymbolNullable'
         quote_universal_symbol:
-          $ref: '#/components/schemas/AccountOrderRecord_quote_universal_symbol'
+          $ref: '#/components/schemas/UniversalSymbolNullable'
         quote_currency:
           $ref: '#/components/schemas/CurrencyNullable'
         action:
@@ -17205,6 +17624,9 @@ components:
         figi_instrument:
           $ref: '#/components/schemas/FigiInstrumentNullable'
       type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     AccountInformation_getUserAccountOrderDetail_request:
       properties:
         brokerage_order_id:
@@ -17319,12 +17741,6 @@ components:
         amount: 84213.55
         currency: USD
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value
-    AccountOrderRecord_quote_universal_symbol:
-      allOf:
-      - $ref: '#/components/schemas/UniversalSymbol'
-      description: Quote cryptocurrency. This field is only present for cryptocurrency
-        pair orders with a cryptocurrency as quote.
-      nullable: true
     OptionQuote_greeks:
       additionalProperties: true
       description: The Greeks for the option contract.
@@ -17364,14 +17780,6 @@ components:
           x-konfig-original-example: 0.2
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-vega
       type: object
-    OptionsPosition_currency:
-      allOf:
-      - $ref: '#/components/schemas/Currency'
-      deprecated: true
-      description: The currency of the price. This field is deprecated and will be
-        removed in a future version. The currency of the price is determined by the
-        currency of the underlying security.
-      nullable: true
     OptionStrategy_legs_inner:
       properties:
         option_symbol_id:
@@ -17642,29 +18050,6 @@ components:
       - amount
       - currency
       type: object
-    AccountUniversalActivity_currency_universal_symbol:
-      allOf:
-      - $ref: '#/components/schemas/Symbol'
-      description: "The quote security for the transaction when `price`, `amount`,\
-        \ and `fee` are denominated in a security instead of a fiat currency. This\
-        \ is most common for cryptocurrency trades. The field is `null` when the transaction\
-        \ is denominated in `currency`."
-      nullable: true
-    AccountUniversalActivity_option_symbol:
-      allOf:
-      - $ref: '#/components/schemas/OptionsSymbol'
-      description: "The option security for the transaction. The field is `null` if\
-        \ the transaction is not related to an option security (like a deposit, withdrawal,\
-        \ fee, etc). SnapTrade does a best effort to map the brokerage's option symbol.\
-        \ In cases where the brokerage option symbol is not recognized, the field\
-        \ will be set to `null`."
-      nullable: true
-    AccountUniversalActivity_currency:
-      allOf:
-      - $ref: '#/components/schemas/Currency'
-      description: "The currency in which the transaction `price`, `amount`, and `fee`\
-        \ are denominated. This is `null` when those values are denominated in `currency_universal_symbol`."
-      nullable: true
     UnderlyingSymbol_exchange:
       allOf:
       - $ref: '#/components/schemas/USExchange'

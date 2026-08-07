@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Status** | **AccountOrderRecordStatus** |  | [optional] 
 **UniversalSymbol** | [**UniversalSymbolNullable**](UniversalSymbolNullable.md) |  | [optional] 
 **OptionSymbol** | [**OptionsSymbolNullable**](OptionsSymbolNullable.md) |  | [optional] 
-**QuoteUniversalSymbol** | [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
+**QuoteUniversalSymbol** | [**UniversalSymbolNullable**](UniversalSymbolNullable.md) |  | [optional] 
 **QuoteCurrency** | [**CurrencyNullable**](CurrencyNullable.md) |  | [optional] 
 **_Action** | **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
 **TotalQuantity** | **string** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 

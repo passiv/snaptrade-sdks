@@ -36,9 +36,9 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="ConnectionAccountSyncStatus" /> class.
         /// </summary>
         /// <param name="transactions">transactions.</param>
-        /// <param name="orders">The last time orders were successfully synced by SnapTrade..</param>
-        /// <param name="positions">The last time positions were successfully synced by SnapTrade..</param>
-        /// <param name="balances">The last time balances were successfully synced by SnapTrade..</param>
+        /// <param name="orders">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
+        /// <param name="positions">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
+        /// <param name="balances">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
         public ConnectionAccountSyncStatus(TransactionsStatus transactions = default(TransactionsStatus), DateTime? orders = default(DateTime?), DateTime? positions = default(DateTime?), DateTime? balances = default(DateTime?)) : base()
         {
             this.Transactions = transactions;
@@ -55,23 +55,23 @@ namespace SnapTrade.Net.Model
         public TransactionsStatus Transactions { get; set; }
 
         /// <summary>
-        /// The last time orders were successfully synced by SnapTrade.
+        /// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
         /// </summary>
-        /// <value>The last time orders were successfully synced by SnapTrade.</value>
+        /// <value>Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)</value>
         [DataMember(Name = "orders", EmitDefaultValue = true)]
         public DateTime? Orders { get; set; }
 
         /// <summary>
-        /// The last time positions were successfully synced by SnapTrade.
+        /// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
         /// </summary>
-        /// <value>The last time positions were successfully synced by SnapTrade.</value>
+        /// <value>Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)</value>
         [DataMember(Name = "positions", EmitDefaultValue = true)]
         public DateTime? Positions { get; set; }
 
         /// <summary>
-        /// The last time balances were successfully synced by SnapTrade.
+        /// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
         /// </summary>
-        /// <value>The last time balances were successfully synced by SnapTrade.</value>
+        /// <value>Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)</value>
         [DataMember(Name = "balances", EmitDefaultValue = true)]
         public DateTime? Balances { get; set; }
 

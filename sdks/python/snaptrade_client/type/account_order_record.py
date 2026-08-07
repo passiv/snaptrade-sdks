@@ -20,7 +20,6 @@ from snaptrade_client.type.child_brokerage_order_ids_nullable import ChildBroker
 from snaptrade_client.type.currency_nullable import CurrencyNullable
 from snaptrade_client.type.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.type.trailing_stop_nullable import TrailingStopNullable
-from snaptrade_client.type.universal_symbol import UniversalSymbol
 from snaptrade_client.type.universal_symbol_nullable import UniversalSymbolNullable
 
 class RequiredAccountOrderRecord(TypedDict):
@@ -42,8 +41,7 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     option_symbol: typing.Optional[OptionsSymbolNullable]
 
-    # Quote cryptocurrency. This field is only present for cryptocurrency pair orders with a cryptocurrency as quote.
-    quote_universal_symbol: UniversalSymbol
+    quote_universal_symbol: typing.Optional[UniversalSymbolNullable]
 
     quote_currency: typing.Optional[CurrencyNullable]
 

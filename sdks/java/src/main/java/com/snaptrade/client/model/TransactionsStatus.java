@@ -135,11 +135,11 @@ public class TransactionsStatus {
   }
 
    /**
-   * The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade.
+   * Date in YYYY-MM-DD format or null
    * @return firstTransactionDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.")
+  @ApiModelProperty(example = "Mon Jan 24 00:00:00 UTC 2022", value = "Date in YYYY-MM-DD format or null")
 
   public LocalDate getFirstTransactionDate() {
     return firstTransactionDate;

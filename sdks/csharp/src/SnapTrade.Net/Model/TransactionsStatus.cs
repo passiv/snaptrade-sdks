@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="initialSyncCompleted">Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete..</param>
         /// <param name="lastSuccessfulSync">Date in YYYY-MM-DD format or null.</param>
-        /// <param name="firstTransactionDate">The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade..</param>
+        /// <param name="firstTransactionDate">Date in YYYY-MM-DD format or null.</param>
         public TransactionsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?), DateTime? firstTransactionDate = default(DateTime?))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
@@ -61,10 +61,11 @@ namespace SnapTrade.Net.Model
         public DateTime? LastSuccessfulSync { get; set; }
 
         /// <summary>
-        /// The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade.
+        /// Date in YYYY-MM-DD format or null
         /// </summary>
-        /// <value>The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade.</value>
+        /// <value>Date in YYYY-MM-DD format or null</value>
         [DataMember(Name = "first_transaction_date", EmitDefaultValue = true)]
+        [JsonConverter(typeof(OpenAPIDateConverter))]
         public DateTime? FirstTransactionDate { get; set; }
 
         /// <summary>
