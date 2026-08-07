@@ -12,12 +12,10 @@
 from snaptrade_client.paths.accounts_account_id_activities.get import GetAccountActivities
 from snaptrade_client.paths.accounts_account_id_balance_history.get import GetAccountBalanceHistory
 from snaptrade_client.paths.accounts_account_id_positions_all.get import GetAllAccountPositions
-from snaptrade_client.paths.holdings.get import GetAllUserHoldings
 from snaptrade_client.paths.accounts_account_id_balances.get import GetUserAccountBalance
 from snaptrade_client.paths.accounts_account_id.get import GetUserAccountDetails
 from snaptrade_client.paths.accounts_account_id_orders_details.post import GetUserAccountOrderDetail
 from snaptrade_client.paths.accounts_account_id_orders.get import GetUserAccountOrders
-from snaptrade_client.paths.accounts_account_id_positions.get import GetUserAccountPositions
 from snaptrade_client.paths.accounts_account_id_recent_orders.get import GetUserAccountRecentOrders
 from snaptrade_client.paths.accounts_account_id_return_rates.get import GetUserAccountReturnRates
 from snaptrade_client.paths.accounts_account_id_holdings.get import GetUserHoldings
@@ -33,12 +31,10 @@ class AccountInformationApiGenerated(
     GetAccountActivities[TAuth],
     GetAccountBalanceHistory[TAuth],
     GetAllAccountPositions[TAuth],
-    GetAllUserHoldings[TAuth],
     GetUserAccountBalance[TAuth],
     GetUserAccountDetails[TAuth],
     GetUserAccountOrderDetail[TAuth],
     GetUserAccountOrders[TAuth],
-    GetUserAccountPositions[TAuth],
     GetUserAccountRecentOrders[TAuth],
     GetUserAccountReturnRates[TAuth],
     GetUserHoldings[TAuth],

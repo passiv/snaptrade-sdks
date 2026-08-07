@@ -41,13 +41,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/holdings-GET': {
-        parameters: [
-            {
-                name: 'brokerage_authorizations'
-            },
-        ]
-    },
     '/accounts/{accountId}/balances-GET': {
         parameters: [
             {
@@ -82,13 +75,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'days'
-            },
-        ]
-    },
-    '/accounts/{accountId}/positions-GET': {
-        parameters: [
-            {
-                name: 'accountId'
             },
         ]
     },
@@ -226,13 +212,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/authorizations/{authorizationId}-DELETE': {
-        parameters: [
-            {
-                name: 'authorizationId'
-            },
-        ]
-    },
     '/authorizations/{authorizationId}/returnRates-GET': {
         parameters: [
             {
@@ -240,19 +219,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'timeframes'
-            },
-        ]
-    },
-    '/sessionEvents-GET': {
-        parameters: [
-            {
-                name: 'PartnerClientId'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'sessionId'
             },
         ]
     },
@@ -324,25 +290,7 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
         ]
     },
-    '/accounts/{accountId}/options-GET': {
-        parameters: [
-            {
-                name: 'accountId'
-            },
-        ]
-    },
-    '/currencies/rates/{currencyPair}-GET': {
-        parameters: [
-            {
-                name: 'currencyPair'
-            },
-        ]
-    },
     '/snapTrade/partners-GET': {
-        parameters: [
-        ]
-    },
-    '/securityTypes-GET': {
         parameters: [
         ]
     },
@@ -382,14 +330,6 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
         ]
     },
-    '/currencies-GET': {
-        parameters: [
-        ]
-    },
-    '/currencies/rates-GET': {
-        parameters: [
-        ]
-    },
     '/accounts/{accountId}/symbols-POST': {
         parameters: [
             {
@@ -401,16 +341,6 @@ export const operationParameterMap: Record<string, Entry> = {
         ]
     },
     '/accounts/{accountId}/trading/cancel-POST': {
-        parameters: [
-            {
-                name: 'brokerage_order_id'
-            },
-            {
-                name: 'accountId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/orders/cancel-POST': {
         parameters: [
             {
                 name: 'brokerage_order_id'
@@ -506,40 +436,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'use_ticker'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/bracket-POST': {
-        parameters: [
-            {
-                name: 'action'
-            },
-            {
-                name: 'instrument'
-            },
-            {
-                name: 'order_type'
-            },
-            {
-                name: 'time_in_force'
-            },
-            {
-                name: 'stop_loss'
-            },
-            {
-                name: 'take_profit'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'price'
-            },
-            {
-                name: 'stop'
-            },
-            {
-                name: 'units'
             },
         ]
     },
@@ -746,44 +642,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'quote'
-            },
-        ]
-    },
-    '/activities-GET': {
-        parameters: [
-            {
-                name: 'startDate'
-            },
-            {
-                name: 'endDate'
-            },
-            {
-                name: 'accounts'
-            },
-            {
-                name: 'brokerageAuthorizations'
-            },
-            {
-                name: 'type'
-            },
-        ]
-    },
-    '/performance/custom-GET': {
-        parameters: [
-            {
-                name: 'startDate'
-            },
-            {
-                name: 'endDate'
-            },
-            {
-                name: 'accounts'
-            },
-            {
-                name: 'detailed'
-            },
-            {
-                name: 'frequency'
             },
         ]
     },

@@ -27,35 +27,12 @@ describe 'ReferenceDataApi' do
     end
   end
 
-  # unit tests for get_currency_exchange_rate_pair
-  # Get exchange rate of a currency pair
-  # Returns an Exchange Rate Pair object for the specified Currency Pair.
-  # @param currency_pair A currency pair based on currency code for example, {CAD-USD}
-  # @param [Hash] opts the optional parameters
-  # @return [ExchangeRatePairs]
-  describe 'get_currency_exchange_rate_pair test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_partner_info
   # Get Client Info
   # Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
   # @param [Hash] opts the optional parameters
   # @return [PartnerData]
   describe 'get_partner_info test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for get_security_types
-  # List security types
-  # Return all available security types supported by SnapTrade.
-  # @param [Hash] opts the optional parameters
-  # @return [Array<SecurityType>]
-  describe 'get_security_types test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -126,28 +103,6 @@ describe 'ReferenceDataApi' do
   # @param [Hash] opts the optional parameters
   # @return [Array<Brokerage>]
   describe 'list_all_brokerages test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for list_all_currencies
-  # Get currencies
-  # Returns a list of all defined Currency objects.
-  # @param [Hash] opts the optional parameters
-  # @return [Array<Currency>]
-  describe 'list_all_currencies test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for list_all_currencies_rates
-  # Get currency exchange rates
-  # Returns a list of all Exchange Rate Pairs for all supported Currencies.
-  # @param [Hash] opts the optional parameters
-  # @return [Array<ExchangeRatePairs>]
-  describe 'list_all_currencies_rates test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

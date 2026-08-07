@@ -26,36 +26,9 @@ func Test_snaptrade_ReferenceDataApiService(t *testing.T) {
     client := snaptrade.NewAPIClient(configuration)
     */
 
-    t.Run("Test ReferenceDataApiService GetCurrencyExchangeRatePair", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ReferenceDataApi.GetCurrencyExchangeRatePair(
-            "currencyPair_example",
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
     t.Run("Test ReferenceDataApiService GetPartnerInfo", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ReferenceDataApi.GetPartnerInfo(
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test ReferenceDataApiService GetSecurityTypes", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ReferenceDataApi.GetSecurityTypes(
         )
         
         resp, httpRes, err := request.Execute()
@@ -142,32 +115,6 @@ func Test_snaptrade_ReferenceDataApiService(t *testing.T) {
     t.Run("Test ReferenceDataApiService ListAllBrokerages", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ReferenceDataApi.ListAllBrokerages(
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test ReferenceDataApiService ListAllCurrencies", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ReferenceDataApi.ListAllCurrencies(
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test ReferenceDataApiService ListAllCurrenciesRates", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ReferenceDataApi.ListAllCurrenciesRates(
         )
         
         resp, httpRes, err := request.Execute()

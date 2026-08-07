@@ -83,7 +83,6 @@ require 'snaptrade/models/connection_account'
 require 'snaptrade/models/connection_account_sync_status'
 require 'snaptrade/models/connection_portal_version'
 require 'snaptrade/models/connection_type'
-require 'snaptrade/models/connections_session_events200_response_inner'
 require 'snaptrade/models/crypto_instrument'
 require 'snaptrade/models/crypto_instrument_kind'
 require 'snaptrade/models/crypto_order_form'
@@ -246,10 +245,8 @@ require 'snaptrade/api/api_status_api'
 require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
 require 'snaptrade/api/experimental_endpoints_api'
-require 'snaptrade/api/options_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
-require 'snaptrade/api/transactions_and_reporting_api'
 
 module SnapTrade
   @config = Configuration.default
@@ -320,10 +317,8 @@ module SnapTrade
     attr_reader :authentication
     attr_reader :connections
     attr_reader :experimental_endpoints
-    attr_reader :options
     attr_reader :reference_data
     attr_reader :trading
-    attr_reader :transactions_and_reporting
 
     def initialize(config = Configuration.default)
       @api_client = ApiClient::new(config)
@@ -332,10 +327,8 @@ module SnapTrade
       @authentication = SnapTrade::AuthenticationApi.new(@api_client)
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
       @experimental_endpoints = SnapTrade::ExperimentalEndpointsApi.new(@api_client)
-      @options = SnapTrade::OptionsApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)
-      @transactions_and_reporting = SnapTrade::TransactionsAndReportingApi.new(@api_client)
     end
   end
 end

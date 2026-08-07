@@ -47,34 +47,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetCurrencyExchangeRatePair
-        /// </summary>
-        [Fact]
-        public void GetCurrencyExchangeRatePairTest()
-        {
-            var currencyPair = "currencyPair_example"; // A currency pair based on currency code for example, {CAD-USD}
-            
-            try
-            {
-                // Get exchange rate of a currency pair
-                ExchangeRatePairs result = client.ReferenceData.GetCurrencyExchangeRatePair(currencyPair);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ReferenceDataApi.GetCurrencyExchangeRatePair: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test GetPartnerInfo
         /// </summary>
         [Fact]
@@ -90,33 +62,6 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ReferenceDataApi.GetPartnerInfo: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test GetSecurityTypes
-        /// </summary>
-        [Fact]
-        public void GetSecurityTypesTest()
-        {
-            
-            try
-            {
-                // List security types
-                List<SecurityType> result = client.ReferenceData.GetSecurityTypes();
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ReferenceDataApi.GetSecurityTypes: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }
@@ -287,60 +232,6 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ReferenceDataApi.ListAllBrokerages: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test ListAllCurrencies
-        /// </summary>
-        [Fact]
-        public void ListAllCurrenciesTest()
-        {
-            
-            try
-            {
-                // Get currencies
-                List<Currency> result = client.ReferenceData.ListAllCurrencies();
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ReferenceDataApi.ListAllCurrencies: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test ListAllCurrenciesRates
-        /// </summary>
-        [Fact]
-        public void ListAllCurrenciesRatesTest()
-        {
-            
-            try
-            {
-                // Get currency exchange rates
-                List<ExchangeRatePairs> result = client.ReferenceData.ListAllCurrenciesRates();
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ReferenceDataApi.ListAllCurrenciesRates: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

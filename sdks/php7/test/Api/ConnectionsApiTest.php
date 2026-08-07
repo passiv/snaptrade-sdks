@@ -131,36 +131,12 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
-     * Test case for removeBrokerageAuthorization
-     *
-     * Delete connection.
-     *
-     */
-    public function testRemoveBrokerageAuthorization()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for returnRates
      *
      * List connection rate of returns.
      *
      */
     public function testReturnRates()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for sessionEvents
-     *
-     * Get all session events for a user.
-     *
-     */
-    public function testSessionEvents()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

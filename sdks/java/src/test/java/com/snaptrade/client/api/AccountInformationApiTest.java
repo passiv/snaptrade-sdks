@@ -17,7 +17,6 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.Account;
-import com.snaptrade.client.model.AccountHoldings;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -26,7 +25,6 @@ import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.Balance;
 import java.time.LocalDate;
 import com.snaptrade.client.model.PaginatedUniversalActivity;
-import com.snaptrade.client.model.Position;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.RecentOrdersResponse;
 import java.util.UUID;
@@ -116,24 +114,6 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * List all accounts for the user, plus balances, positions, and orders for each account.
-     *
-     * **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getAllUserHoldingsTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID brokerageAuthorizations = null;
-        List<AccountHoldings> response = api.getAllUserHoldings(userId, userSecret)
-                .brokerageAuthorizations(brokerageAuthorizations)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * List account balances
      *
      * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -202,23 +182,6 @@ public class AccountInformationApiTest {
         List<AccountOrderRecord> response = api.getUserAccountOrders(userId, userSecret, accountId)
                 .state(state)
                 .days(days)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * List account positions
-     *
-     * **Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getUserAccountPositionsTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        List<Position> response = api.getUserAccountPositions(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }
