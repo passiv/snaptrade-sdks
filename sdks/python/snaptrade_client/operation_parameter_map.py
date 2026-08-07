@@ -307,6 +307,13 @@ operation_parameter_map = {
             },
         ]
     },
+    '/connections/{authorizationId}/accounts-GET': {
+        'parameters': [
+            {
+                'name': 'authorizationId'
+            },
+        ]
+    },
     '/snapTrade/tradeDetection/subscriptions-GET': {
         'parameters': [
         ]

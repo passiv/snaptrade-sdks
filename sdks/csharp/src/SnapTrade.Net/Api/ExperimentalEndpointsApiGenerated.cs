@@ -167,6 +167,33 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
         ApiResponse<AccountOrdersV2Response> GetUserAccountRecentOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
         /// <summary>
+        /// List accounts for a connection (discriminated union)
+        /// </summary>
+        /// <remarks>
+        /// Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>List&lt;ConnectionAccount&gt;</returns>
+        List<ConnectionAccount> ListConnectionAccounts(string authorizationId, string userId, string userSecret, int operationIndex = 0);
+
+        /// <summary>
+        /// List accounts for a connection (discriminated union)
+        /// </summary>
+        /// <remarks>
+        /// Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of List&lt;ConnectionAccount&gt;</returns>
+        ApiResponse<List<ConnectionAccount>> ListConnectionAccountsWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
+        /// <summary>
         /// List active Trade Detection subscriptions
         /// </summary>
         /// <remarks>
@@ -345,6 +372,35 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrdersV2Response>> GetUserAccountRecentOrdersV2WithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// List accounts for a connection (discriminated union)
+        /// </summary>
+        /// <remarks>
+        /// Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;ConnectionAccount&gt;</returns>
+        System.Threading.Tasks.Task<List<ConnectionAccount>> ListConnectionAccountsAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// List accounts for a connection (discriminated union)
+        /// </summary>
+        /// <remarks>
+        /// Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;ConnectionAccount&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<ConnectionAccount>>> ListConnectionAccountsWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List active Trade Detection subscriptions
         /// </summary>
@@ -1551,6 +1607,216 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountRecentOrdersV2", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List accounts for a connection (discriminated union) Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>List&lt;ConnectionAccount&gt;</returns>
+        public List<ConnectionAccount> ListConnectionAccounts(string authorizationId, string userId, string userSecret, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<List<ConnectionAccount>> localVarResponse = ListConnectionAccountsWithHttpInfo(authorizationId, userId, userSecret);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List accounts for a connection (discriminated union) Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of List&lt;ConnectionAccount&gt;</returns>
+        public SnapTrade.Net.Client.ApiResponse<List<ConnectionAccount>> ListConnectionAccountsWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0)
+        {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ExperimentalEndpointsApi->ListConnectionAccounts");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->ListConnectionAccounts");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->ListConnectionAccounts");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("authorizationId", SnapTrade.Net.Client.ClientUtils.ParameterToString(authorizationId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.ListConnectionAccounts";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<List<ConnectionAccount>>("/connections/{authorizationId}/accounts", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ListConnectionAccounts", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List accounts for a connection (discriminated union) Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;ConnectionAccount&gt;</returns>
+        public async System.Threading.Tasks.Task<List<ConnectionAccount>> ListConnectionAccountsAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<List<ConnectionAccount>> localVarResponse = await ListConnectionAccountsWithHttpInfoAsync(authorizationId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List accounts for a connection (discriminated union) Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present - - see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;ConnectionAccount&gt;)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<ConnectionAccount>>> ListConnectionAccountsWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ExperimentalEndpointsApi->ListConnectionAccounts");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->ListConnectionAccounts");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->ListConnectionAccounts");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("authorizationId", SnapTrade.Net.Client.ClientUtils.ParameterToString(authorizationId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.ListConnectionAccounts";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<ConnectionAccount>>("/connections/{authorizationId}/accounts", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ListConnectionAccounts", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

@@ -619,6 +619,129 @@ module SnapTrade
     end
 
 
+    # List accounts for a connection (discriminated union)
+    #
+    # Experimental and subject to change without notice.
+    # 
+    # Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+    # 
+    # Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+    # 
+    # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.
+    # 
+    # On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_connection_accounts(authorization_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = list_connection_accounts_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+      data
+    end
+
+    # List accounts for a connection (discriminated union)
+    #
+    # Experimental and subject to change without notice.
+    # 
+    # Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+    # 
+    # Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+    # 
+    # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.
+    # 
+    # On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+    #
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_connection_accounts_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
+      list_connection_accounts_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+    end
+
+    # List accounts for a connection (discriminated union)
+    # Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<ConnectionAccount>]
+    private def list_connection_accounts_impl(authorization_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = list_connection_accounts_with_http_info(authorization_id, user_id, user_secret, opts)
+      data
+    end
+
+    # List accounts for a connection (discriminated union)
+    # Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently only &#x60;investment&#x60; is implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and market value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # @param authorization_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<ConnectionAccount>, Integer, Hash)>] Array<ConnectionAccount> data, response status code and response headers
+    private def list_connection_accounts_with_http_info_impl(authorization_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.list_connection_accounts ...'
+      end
+      # verify the required parameter 'authorization_id' is set
+      if @api_client.config.client_side_validation && authorization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_id' when calling ExperimentalEndpointsApi.list_connection_accounts"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.list_connection_accounts"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.list_connection_accounts"
+      end
+      # resource path
+      local_var_path = '/connections/{authorizationId}/accounts'.sub('{' + 'authorizationId' + '}', CGI.escape(authorization_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<ConnectionAccount>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.list_connection_accounts",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#list_connection_accounts\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List active Trade Detection subscriptions
     #
     # Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.

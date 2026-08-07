@@ -133,6 +133,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
+*ExperimentalEndpointsApi* | [**ListConnectionAccounts**](docs/ExperimentalEndpointsApi.md#listconnectionaccounts) | **GET** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | List account option positions
 *ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
@@ -219,6 +220,8 @@ Class | Method | HTTP request | Description
  - [ChildBrokerageOrderIDsNullable](docs/ChildBrokerageOrderIDsNullable.md)
  - [ComplexOrderLeg](docs/ComplexOrderLeg.md)
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
+ - [ConnectionAccount](docs/ConnectionAccount.md)
+ - [ConnectionAccountSyncStatus](docs/ConnectionAccountSyncStatus.md)
  - [ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [CryptoInstrument](docs/CryptoInstrument.md)
  - [CryptoOrderForm](docs/CryptoOrderForm.md)
@@ -242,6 +245,8 @@ Class | Method | HTTP request | Description
  - [FutureInstrument](docs/FutureInstrument.md)
  - [HoldingsStatus](docs/HoldingsStatus.md)
  - [Instrument](docs/Instrument.md)
+ - [InvestmentAccount](docs/InvestmentAccount.md)
+ - [InvestmentAccountMarketValue](docs/InvestmentAccountMarketValue.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)
  - [ManualTrade](docs/ManualTrade.md)
  - [ManualTradeAndImpact](docs/ManualTradeAndImpact.md)

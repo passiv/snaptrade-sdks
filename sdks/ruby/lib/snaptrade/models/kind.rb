@@ -12,10 +12,10 @@ require 'time'
 
 module SnapTrade
   class Kind
-    STOCK = "stock".freeze
+    INVESTMENT = "investment".freeze
 
     def self.all_vars
-      @all_vars ||= [STOCK].freeze
+      @all_vars ||= [INVESTMENT].freeze
     end
 
     # Builds the enum from string

@@ -32,10 +32,28 @@ TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
 class SnapTrade(ClientCustom, typing.Generic[TAuth]):
 
-    def __init__(self, configuration: typing.Union[Configuration[TAuth], None] = None, **kwargs):
-        super().__init__(configuration, **kwargs)
-        if (len(kwargs) > 0):
-            configuration = Configuration(**kwargs)
+    def __init__(
+        self,
+        configuration: typing.Union[Configuration[TAuth], None] = None,
+        *,
+        auth: typing.Optional[TAuth],
+        consumer_key: None = None,
+        client_id: None = None,
+        **kwargs,
+    ):
+        """Create a client.
+
+        Authentication credentials must be provided through ``auth``.
+        :param consumer_key: Unsupported. Pass this credential through ``auth``.
+        :param client_id: Unsupported. Pass this credential through ``auth``.
+        """
+        if consumer_key is not None:
+            raise TypeError("consumer_key must be passed through 'auth'")
+        if client_id is not None:
+            raise TypeError("client_id must be passed through 'auth'")
+        if len(kwargs) > 0 or configuration is None:
+            configuration = Configuration(auth=auth, **kwargs)
+        super().__init__(configuration)
         if (configuration is None):
             raise Exception("configuration is required")
         api_client = ApiClient(configuration)
