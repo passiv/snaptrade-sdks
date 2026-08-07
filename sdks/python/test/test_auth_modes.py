@@ -53,20 +53,17 @@ def test_commercial_api_key_auth_mode_uses_operation_user_credentials(monkeypatc
     assert "Signature" in calls[0]["headers"]
 
 
-def test_api_key_auth_mode_preserves_explicit_constructor_consumer_key(monkeypatch):
-    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
-    client = SnapTrade(
-        auth=SnapTradeAuth.commercial_api_key(client_id="client_id"),
-        consumer_key="constructor_consumer_key",
-        host="https://api.snaptrade.com/api/v1",
-    )
-
-    client.authentication.list_snap_trade_users()
-
-    assert len(calls) == 1
-    assert "clientId=client_id" in calls[0]["url"]
-    assert "timestamp=" in calls[0]["url"]
-    assert "Signature" in calls[0]["headers"]
+@pytest.mark.parametrize("legacy_param", ["consumer_key", "client_id"])
+def test_legacy_constructor_auth_params_are_rejected(legacy_param):
+    with pytest.raises(
+        TypeError,
+        match=rf"{legacy_param} must be passed through 'auth'",
+    ):
+        SnapTrade(
+            auth=SnapTradeAuth.commercial_api_key(),
+            host="https://api.snaptrade.com/api/v1",
+            **{legacy_param: "legacy_value"},
+        )
 
 
 def test_personal_api_key_auth_mode_omits_operation_user_credentials(monkeypatch):
