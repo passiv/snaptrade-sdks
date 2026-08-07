@@ -14,6 +14,10 @@ on:
       - templates/**
       - flows/**
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   detect-changesets:
     name: Detect changesets
@@ -141,6 +145,26 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
+      - name: Check whether SDK release tag exists
+        id: release-tag
+        env:
+          LANGUAGE: ${{ matrix.language }}
+        run: |
+          if [[ "$LANGUAGE" == "go" ]]; then
+            tag_pattern="refs/tags/sdks/go/v*"
+          else
+            tag_pattern="refs/tags/v*-$LANGUAGE"
+          fi
+
+          if git ls-remote --tags origin "$tag_pattern" |
+            awk -v sha="$GITHUB_SHA" '$1 == sha { found = 1 } END { exit !found }'
+          then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release tag for $LANGUAGE already exists on $GITHUB_SHA; publishing will be skipped."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli
 
@@ -191,6 +215,7 @@ jobs:
           user: snaptrade
 
       - name: Publish SDK
+        if: steps.release-tag.outputs.exists != 'true'
         uses: nick-fields/retry@v4
         env:
           NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
