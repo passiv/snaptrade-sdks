@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InitialSyncCompleted** | Pointer to **bool** | Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete. | [optional] 
-**LastSuccessfulSync** | Pointer to **NullableString** | All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions. | [optional] 
-**FirstTransactionDate** | Pointer to **NullableString** | The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade. | [optional] 
+**LastSuccessfulSync** | Pointer to **NullableString** | Date in YYYY-MM-DD format or null | [optional] 
+**FirstTransactionDate** | Pointer to **NullableString** | Date in YYYY-MM-DD format or null | [optional] 
 
 ## Methods
 

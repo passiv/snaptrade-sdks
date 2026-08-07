@@ -15,35 +15,38 @@ import (
 	"encoding/json"
 )
 
-// AccountOrderRecordTrailingStop For trailing stop orders, contains the trail configuration. Null for all other order types.
-type AccountOrderRecordTrailingStop struct {
+// TrailingStopNullable Trail configuration for trailing stop orders.
+type TrailingStopNullable struct {
 	// The trail amount. Interpreted as dollars if `type` is `DOLLAR`, or a percentage if `type` is `PERCENT`.
 	Amount string `json:"amount"`
 	// Whether the trail `amount` is a dollar amount (`DOLLAR`) or a percentage (`PERCENT`). For example, if `amount` is \"0.60\" and `type` is `DOLLAR`, the stop price will trail the market price by $0.60. If `amount` is \"5\" and `type` is `PERCENT`, the stop price will trail the market price by 5%.
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewAccountOrderRecordTrailingStop instantiates a new AccountOrderRecordTrailingStop object
+type _TrailingStopNullable TrailingStopNullable
+
+// NewTrailingStopNullable instantiates a new TrailingStopNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrderRecordTrailingStop(amount string, type_ string) *AccountOrderRecordTrailingStop {
-	this := AccountOrderRecordTrailingStop{}
+func NewTrailingStopNullable(amount string, type_ string) *TrailingStopNullable {
+	this := TrailingStopNullable{}
 	this.Amount = amount
 	this.Type = type_
 	return &this
 }
 
-// NewAccountOrderRecordTrailingStopWithDefaults instantiates a new AccountOrderRecordTrailingStop object
+// NewTrailingStopNullableWithDefaults instantiates a new TrailingStopNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountOrderRecordTrailingStopWithDefaults() *AccountOrderRecordTrailingStop {
-	this := AccountOrderRecordTrailingStop{}
+func NewTrailingStopNullableWithDefaults() *TrailingStopNullable {
+	this := TrailingStopNullable{}
 	return &this
 }
 
 // GetAmount returns the Amount field value
-func (o *AccountOrderRecordTrailingStop) GetAmount() string {
+func (o *TrailingStopNullable) GetAmount() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +57,7 @@ func (o *AccountOrderRecordTrailingStop) GetAmount() string {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordTrailingStop) GetAmountOk() (*string, bool) {
+func (o *TrailingStopNullable) GetAmountOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -62,12 +65,12 @@ func (o *AccountOrderRecordTrailingStop) GetAmountOk() (*string, bool) {
 }
 
 // SetAmount sets field value
-func (o *AccountOrderRecordTrailingStop) SetAmount(v string) {
+func (o *TrailingStopNullable) SetAmount(v string) {
 	o.Amount = v
 }
 
 // GetType returns the Type field value
-func (o *AccountOrderRecordTrailingStop) GetType() string {
+func (o *TrailingStopNullable) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -78,7 +81,7 @@ func (o *AccountOrderRecordTrailingStop) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordTrailingStop) GetTypeOk() (*string, bool) {
+func (o *TrailingStopNullable) GetTypeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -86,11 +89,11 @@ func (o *AccountOrderRecordTrailingStop) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AccountOrderRecordTrailingStop) SetType(v string) {
+func (o *TrailingStopNullable) SetType(v string) {
 	o.Type = v
 }
 
-func (o AccountOrderRecordTrailingStop) MarshalJSON() ([]byte, error) {
+func (o TrailingStopNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["amount"] = o.Amount
@@ -98,41 +101,64 @@ func (o AccountOrderRecordTrailingStop) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableAccountOrderRecordTrailingStop struct {
-	value *AccountOrderRecordTrailingStop
+func (o *TrailingStopNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varTrailingStopNullable := _TrailingStopNullable{}
+
+	if err = json.Unmarshal(bytes, &varTrailingStopNullable); err == nil {
+		*o = TrailingStopNullable(varTrailingStopNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableTrailingStopNullable struct {
+	value *TrailingStopNullable
 	isSet bool
 }
 
-func (v NullableAccountOrderRecordTrailingStop) Get() *AccountOrderRecordTrailingStop {
+func (v NullableTrailingStopNullable) Get() *TrailingStopNullable {
 	return v.value
 }
 
-func (v *NullableAccountOrderRecordTrailingStop) Set(val *AccountOrderRecordTrailingStop) {
+func (v *NullableTrailingStopNullable) Set(val *TrailingStopNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountOrderRecordTrailingStop) IsSet() bool {
+func (v NullableTrailingStopNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountOrderRecordTrailingStop) Unset() {
+func (v *NullableTrailingStopNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountOrderRecordTrailingStop(val *AccountOrderRecordTrailingStop) *NullableAccountOrderRecordTrailingStop {
-	return &NullableAccountOrderRecordTrailingStop{value: val, isSet: true}
+func NewNullableTrailingStopNullable(val *TrailingStopNullable) *NullableTrailingStopNullable {
+	return &NullableTrailingStopNullable{value: val, isSet: true}
 }
 
-func (v NullableAccountOrderRecordTrailingStop) MarshalJSON() ([]byte, error) {
+func (v NullableTrailingStopNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountOrderRecordTrailingStop) UnmarshalJSON(src []byte) error {
+func (v *NullableTrailingStopNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

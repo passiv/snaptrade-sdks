@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
-**Units** | Pointer to **NullableFloat32** |  | [optional] 
-**NotionalValue** | Pointer to [**NullableManualTradeFormNotionalValue**](ManualTradeFormNotionalValue.md) |  | [optional] 
+**Units** | Pointer to **NullableFloat32** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. | [optional] 
+**NotionalValue** | Pointer to [**NullableNotionalValueNullable**](NotionalValueNullable.md) |  | [optional] 
 
 ## Methods
 
@@ -240,20 +240,20 @@ HasUnits returns a boolean if a field has been set.
 UnsetUnits ensures that no value is present for Units, not even an explicit nil
 ### GetNotionalValue
 
-`func (o *ManualTradeForm) GetNotionalValue() ManualTradeFormNotionalValue`
+`func (o *ManualTradeForm) GetNotionalValue() NotionalValueNullable`
 
 GetNotionalValue returns the NotionalValue field if non-nil, zero value otherwise.
 
 ### GetNotionalValueOk
 
-`func (o *ManualTradeForm) GetNotionalValueOk() (*ManualTradeFormNotionalValue, bool)`
+`func (o *ManualTradeForm) GetNotionalValueOk() (*NotionalValueNullable, bool)`
 
 GetNotionalValueOk returns a tuple with the NotionalValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotionalValue
 
-`func (o *ManualTradeForm) SetNotionalValue(v ManualTradeFormNotionalValue)`
+`func (o *ManualTradeForm) SetNotionalValue(v NotionalValueNullable)`
 
 SetNotionalValue sets NotionalValue field to given value.
 

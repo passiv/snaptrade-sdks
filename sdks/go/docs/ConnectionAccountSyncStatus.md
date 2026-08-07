@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Transactions** | Pointer to [**TransactionsStatus**](TransactionsStatus.md) |  | [optional] 
-**Orders** | Pointer to [**NullableTime.Time**](time.Time.md) | The last time orders were successfully synced by SnapTrade. | [optional] 
-**Positions** | Pointer to [**NullableTime.Time**](time.Time.md) | The last time positions were successfully synced by SnapTrade. | [optional] 
-**Balances** | Pointer to [**NullableTime.Time**](time.Time.md) | The last time balances were successfully synced by SnapTrade. | [optional] 
+**Orders** | Pointer to **NullableTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
+**Positions** | Pointer to **NullableTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
+**Balances** | Pointer to **NullableTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
 
 ## Methods
 

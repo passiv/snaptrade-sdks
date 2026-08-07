@@ -15,33 +15,36 @@ import (
 	"encoding/json"
 )
 
-// AccountOrderRecordChildBrokerageOrderIds struct for AccountOrderRecordChildBrokerageOrderIds
-type AccountOrderRecordChildBrokerageOrderIds struct {
+// ChildBrokerageOrderIDsNullable struct for ChildBrokerageOrderIDsNullable
+type ChildBrokerageOrderIDsNullable struct {
 	// The brokerage order ID for the take profit leg of the bracket order
 	TakeProfitOrderId *string `json:"take_profit_order_id,omitempty"`
 	// The brokerage order ID for the stop loss leg of the bracket order
 	StopLossOrderId *string `json:"stop_loss_order_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewAccountOrderRecordChildBrokerageOrderIds instantiates a new AccountOrderRecordChildBrokerageOrderIds object
+type _ChildBrokerageOrderIDsNullable ChildBrokerageOrderIDsNullable
+
+// NewChildBrokerageOrderIDsNullable instantiates a new ChildBrokerageOrderIDsNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrderRecordChildBrokerageOrderIds() *AccountOrderRecordChildBrokerageOrderIds {
-	this := AccountOrderRecordChildBrokerageOrderIds{}
+func NewChildBrokerageOrderIDsNullable() *ChildBrokerageOrderIDsNullable {
+	this := ChildBrokerageOrderIDsNullable{}
 	return &this
 }
 
-// NewAccountOrderRecordChildBrokerageOrderIdsWithDefaults instantiates a new AccountOrderRecordChildBrokerageOrderIds object
+// NewChildBrokerageOrderIDsNullableWithDefaults instantiates a new ChildBrokerageOrderIDsNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountOrderRecordChildBrokerageOrderIdsWithDefaults() *AccountOrderRecordChildBrokerageOrderIds {
-	this := AccountOrderRecordChildBrokerageOrderIds{}
+func NewChildBrokerageOrderIDsNullableWithDefaults() *ChildBrokerageOrderIDsNullable {
+	this := ChildBrokerageOrderIDsNullable{}
 	return &this
 }
 
 // GetTakeProfitOrderId returns the TakeProfitOrderId field value if set, zero value otherwise.
-func (o *AccountOrderRecordChildBrokerageOrderIds) GetTakeProfitOrderId() string {
+func (o *ChildBrokerageOrderIDsNullable) GetTakeProfitOrderId() string {
 	if o == nil || isNil(o.TakeProfitOrderId) {
 		var ret string
 		return ret
@@ -51,7 +54,7 @@ func (o *AccountOrderRecordChildBrokerageOrderIds) GetTakeProfitOrderId() string
 
 // GetTakeProfitOrderIdOk returns a tuple with the TakeProfitOrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordChildBrokerageOrderIds) GetTakeProfitOrderIdOk() (*string, bool) {
+func (o *ChildBrokerageOrderIDsNullable) GetTakeProfitOrderIdOk() (*string, bool) {
 	if o == nil || isNil(o.TakeProfitOrderId) {
     return nil, false
 	}
@@ -59,7 +62,7 @@ func (o *AccountOrderRecordChildBrokerageOrderIds) GetTakeProfitOrderIdOk() (*st
 }
 
 // HasTakeProfitOrderId returns a boolean if a field has been set.
-func (o *AccountOrderRecordChildBrokerageOrderIds) HasTakeProfitOrderId() bool {
+func (o *ChildBrokerageOrderIDsNullable) HasTakeProfitOrderId() bool {
 	if o != nil && !isNil(o.TakeProfitOrderId) {
 		return true
 	}
@@ -68,12 +71,12 @@ func (o *AccountOrderRecordChildBrokerageOrderIds) HasTakeProfitOrderId() bool {
 }
 
 // SetTakeProfitOrderId gets a reference to the given string and assigns it to the TakeProfitOrderId field.
-func (o *AccountOrderRecordChildBrokerageOrderIds) SetTakeProfitOrderId(v string) {
+func (o *ChildBrokerageOrderIDsNullable) SetTakeProfitOrderId(v string) {
 	o.TakeProfitOrderId = &v
 }
 
 // GetStopLossOrderId returns the StopLossOrderId field value if set, zero value otherwise.
-func (o *AccountOrderRecordChildBrokerageOrderIds) GetStopLossOrderId() string {
+func (o *ChildBrokerageOrderIDsNullable) GetStopLossOrderId() string {
 	if o == nil || isNil(o.StopLossOrderId) {
 		var ret string
 		return ret
@@ -83,7 +86,7 @@ func (o *AccountOrderRecordChildBrokerageOrderIds) GetStopLossOrderId() string {
 
 // GetStopLossOrderIdOk returns a tuple with the StopLossOrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordChildBrokerageOrderIds) GetStopLossOrderIdOk() (*string, bool) {
+func (o *ChildBrokerageOrderIDsNullable) GetStopLossOrderIdOk() (*string, bool) {
 	if o == nil || isNil(o.StopLossOrderId) {
     return nil, false
 	}
@@ -91,7 +94,7 @@ func (o *AccountOrderRecordChildBrokerageOrderIds) GetStopLossOrderIdOk() (*stri
 }
 
 // HasStopLossOrderId returns a boolean if a field has been set.
-func (o *AccountOrderRecordChildBrokerageOrderIds) HasStopLossOrderId() bool {
+func (o *ChildBrokerageOrderIDsNullable) HasStopLossOrderId() bool {
 	if o != nil && !isNil(o.StopLossOrderId) {
 		return true
 	}
@@ -100,11 +103,11 @@ func (o *AccountOrderRecordChildBrokerageOrderIds) HasStopLossOrderId() bool {
 }
 
 // SetStopLossOrderId gets a reference to the given string and assigns it to the StopLossOrderId field.
-func (o *AccountOrderRecordChildBrokerageOrderIds) SetStopLossOrderId(v string) {
+func (o *ChildBrokerageOrderIDsNullable) SetStopLossOrderId(v string) {
 	o.StopLossOrderId = &v
 }
 
-func (o AccountOrderRecordChildBrokerageOrderIds) MarshalJSON() ([]byte, error) {
+func (o ChildBrokerageOrderIDsNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.TakeProfitOrderId) {
 		toSerialize["take_profit_order_id"] = o.TakeProfitOrderId
@@ -112,41 +115,64 @@ func (o AccountOrderRecordChildBrokerageOrderIds) MarshalJSON() ([]byte, error) 
 	if !isNil(o.StopLossOrderId) {
 		toSerialize["stop_loss_order_id"] = o.StopLossOrderId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableAccountOrderRecordChildBrokerageOrderIds struct {
-	value *AccountOrderRecordChildBrokerageOrderIds
+func (o *ChildBrokerageOrderIDsNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varChildBrokerageOrderIDsNullable := _ChildBrokerageOrderIDsNullable{}
+
+	if err = json.Unmarshal(bytes, &varChildBrokerageOrderIDsNullable); err == nil {
+		*o = ChildBrokerageOrderIDsNullable(varChildBrokerageOrderIDsNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "take_profit_order_id")
+		delete(additionalProperties, "stop_loss_order_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableChildBrokerageOrderIDsNullable struct {
+	value *ChildBrokerageOrderIDsNullable
 	isSet bool
 }
 
-func (v NullableAccountOrderRecordChildBrokerageOrderIds) Get() *AccountOrderRecordChildBrokerageOrderIds {
+func (v NullableChildBrokerageOrderIDsNullable) Get() *ChildBrokerageOrderIDsNullable {
 	return v.value
 }
 
-func (v *NullableAccountOrderRecordChildBrokerageOrderIds) Set(val *AccountOrderRecordChildBrokerageOrderIds) {
+func (v *NullableChildBrokerageOrderIDsNullable) Set(val *ChildBrokerageOrderIDsNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountOrderRecordChildBrokerageOrderIds) IsSet() bool {
+func (v NullableChildBrokerageOrderIDsNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountOrderRecordChildBrokerageOrderIds) Unset() {
+func (v *NullableChildBrokerageOrderIDsNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountOrderRecordChildBrokerageOrderIds(val *AccountOrderRecordChildBrokerageOrderIds) *NullableAccountOrderRecordChildBrokerageOrderIds {
-	return &NullableAccountOrderRecordChildBrokerageOrderIds{value: val, isSet: true}
+func NewNullableChildBrokerageOrderIDsNullable(val *ChildBrokerageOrderIDsNullable) *NullableChildBrokerageOrderIDsNullable {
+	return &NullableChildBrokerageOrderIDsNullable{value: val, isSet: true}
 }
 
-func (v NullableAccountOrderRecordChildBrokerageOrderIds) MarshalJSON() ([]byte, error) {
+func (v NullableChildBrokerageOrderIDsNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountOrderRecordChildBrokerageOrderIds) UnmarshalJSON(src []byte) error {
+func (v *NullableChildBrokerageOrderIDsNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

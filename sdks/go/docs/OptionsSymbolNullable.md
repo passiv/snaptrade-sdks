@@ -1,4 +1,4 @@
-# AccountUniversalActivityOptionSymbol
+# OptionsSymbolNullable
 
 ## Properties
 
@@ -14,164 +14,164 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAccountUniversalActivityOptionSymbol
+### NewOptionsSymbolNullable
 
-`func NewAccountUniversalActivityOptionSymbol(id string, ticker string, optionType string, strikePrice float32, expirationDate string, underlyingSymbol UnderlyingSymbol, ) *AccountUniversalActivityOptionSymbol`
+`func NewOptionsSymbolNullable(id string, ticker string, optionType string, strikePrice float32, expirationDate string, underlyingSymbol UnderlyingSymbol, ) *OptionsSymbolNullable`
 
-NewAccountUniversalActivityOptionSymbol instantiates a new AccountUniversalActivityOptionSymbol object
+NewOptionsSymbolNullable instantiates a new OptionsSymbolNullable object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAccountUniversalActivityOptionSymbolWithDefaults
+### NewOptionsSymbolNullableWithDefaults
 
-`func NewAccountUniversalActivityOptionSymbolWithDefaults() *AccountUniversalActivityOptionSymbol`
+`func NewOptionsSymbolNullableWithDefaults() *OptionsSymbolNullable`
 
-NewAccountUniversalActivityOptionSymbolWithDefaults instantiates a new AccountUniversalActivityOptionSymbol object
+NewOptionsSymbolNullableWithDefaults instantiates a new OptionsSymbolNullable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *AccountUniversalActivityOptionSymbol) GetId() string`
+`func (o *OptionsSymbolNullable) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetIdOk() (*string, bool)`
+`func (o *OptionsSymbolNullable) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *AccountUniversalActivityOptionSymbol) SetId(v string)`
+`func (o *OptionsSymbolNullable) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetTicker
 
-`func (o *AccountUniversalActivityOptionSymbol) GetTicker() string`
+`func (o *OptionsSymbolNullable) GetTicker() string`
 
 GetTicker returns the Ticker field if non-nil, zero value otherwise.
 
 ### GetTickerOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetTickerOk() (*string, bool)`
+`func (o *OptionsSymbolNullable) GetTickerOk() (*string, bool)`
 
 GetTickerOk returns a tuple with the Ticker field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTicker
 
-`func (o *AccountUniversalActivityOptionSymbol) SetTicker(v string)`
+`func (o *OptionsSymbolNullable) SetTicker(v string)`
 
 SetTicker sets Ticker field to given value.
 
 
 ### GetOptionType
 
-`func (o *AccountUniversalActivityOptionSymbol) GetOptionType() string`
+`func (o *OptionsSymbolNullable) GetOptionType() string`
 
 GetOptionType returns the OptionType field if non-nil, zero value otherwise.
 
 ### GetOptionTypeOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetOptionTypeOk() (*string, bool)`
+`func (o *OptionsSymbolNullable) GetOptionTypeOk() (*string, bool)`
 
 GetOptionTypeOk returns a tuple with the OptionType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOptionType
 
-`func (o *AccountUniversalActivityOptionSymbol) SetOptionType(v string)`
+`func (o *OptionsSymbolNullable) SetOptionType(v string)`
 
 SetOptionType sets OptionType field to given value.
 
 
 ### GetStrikePrice
 
-`func (o *AccountUniversalActivityOptionSymbol) GetStrikePrice() float32`
+`func (o *OptionsSymbolNullable) GetStrikePrice() float32`
 
 GetStrikePrice returns the StrikePrice field if non-nil, zero value otherwise.
 
 ### GetStrikePriceOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetStrikePriceOk() (*float32, bool)`
+`func (o *OptionsSymbolNullable) GetStrikePriceOk() (*float32, bool)`
 
 GetStrikePriceOk returns a tuple with the StrikePrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStrikePrice
 
-`func (o *AccountUniversalActivityOptionSymbol) SetStrikePrice(v float32)`
+`func (o *OptionsSymbolNullable) SetStrikePrice(v float32)`
 
 SetStrikePrice sets StrikePrice field to given value.
 
 
 ### GetExpirationDate
 
-`func (o *AccountUniversalActivityOptionSymbol) GetExpirationDate() string`
+`func (o *OptionsSymbolNullable) GetExpirationDate() string`
 
 GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
 
 ### GetExpirationDateOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetExpirationDateOk() (*string, bool)`
+`func (o *OptionsSymbolNullable) GetExpirationDateOk() (*string, bool)`
 
 GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpirationDate
 
-`func (o *AccountUniversalActivityOptionSymbol) SetExpirationDate(v string)`
+`func (o *OptionsSymbolNullable) SetExpirationDate(v string)`
 
 SetExpirationDate sets ExpirationDate field to given value.
 
 
 ### GetIsMiniOption
 
-`func (o *AccountUniversalActivityOptionSymbol) GetIsMiniOption() bool`
+`func (o *OptionsSymbolNullable) GetIsMiniOption() bool`
 
 GetIsMiniOption returns the IsMiniOption field if non-nil, zero value otherwise.
 
 ### GetIsMiniOptionOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetIsMiniOptionOk() (*bool, bool)`
+`func (o *OptionsSymbolNullable) GetIsMiniOptionOk() (*bool, bool)`
 
 GetIsMiniOptionOk returns a tuple with the IsMiniOption field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsMiniOption
 
-`func (o *AccountUniversalActivityOptionSymbol) SetIsMiniOption(v bool)`
+`func (o *OptionsSymbolNullable) SetIsMiniOption(v bool)`
 
 SetIsMiniOption sets IsMiniOption field to given value.
 
 ### HasIsMiniOption
 
-`func (o *AccountUniversalActivityOptionSymbol) HasIsMiniOption() bool`
+`func (o *OptionsSymbolNullable) HasIsMiniOption() bool`
 
 HasIsMiniOption returns a boolean if a field has been set.
 
 ### GetUnderlyingSymbol
 
-`func (o *AccountUniversalActivityOptionSymbol) GetUnderlyingSymbol() UnderlyingSymbol`
+`func (o *OptionsSymbolNullable) GetUnderlyingSymbol() UnderlyingSymbol`
 
 GetUnderlyingSymbol returns the UnderlyingSymbol field if non-nil, zero value otherwise.
 
 ### GetUnderlyingSymbolOk
 
-`func (o *AccountUniversalActivityOptionSymbol) GetUnderlyingSymbolOk() (*UnderlyingSymbol, bool)`
+`func (o *OptionsSymbolNullable) GetUnderlyingSymbolOk() (*UnderlyingSymbol, bool)`
 
 GetUnderlyingSymbolOk returns a tuple with the UnderlyingSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnderlyingSymbol
 
-`func (o *AccountUniversalActivityOptionSymbol) SetUnderlyingSymbol(v UnderlyingSymbol)`
+`func (o *OptionsSymbolNullable) SetUnderlyingSymbol(v UnderlyingSymbol)`
 
 SetUnderlyingSymbol sets UnderlyingSymbol field to given value.
 

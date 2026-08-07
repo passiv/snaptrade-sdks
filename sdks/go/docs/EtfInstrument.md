@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** | Human-readable description of the security. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the security listing. | [optional] 
 **Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the security. | [optional] 
-**FigiInstrument** | Pointer to [**NullableStockInstrumentFigiInstrument**](StockInstrumentFigiInstrument.md) |  | [optional] 
+**FigiInstrument** | Pointer to [**NullableFigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
 
 ## Methods
 
@@ -219,20 +219,20 @@ HasExchange returns a boolean if a field has been set.
 UnsetExchange ensures that no value is present for Exchange, not even an explicit nil
 ### GetFigiInstrument
 
-`func (o *EtfInstrument) GetFigiInstrument() StockInstrumentFigiInstrument`
+`func (o *EtfInstrument) GetFigiInstrument() FigiInstrumentNullable`
 
 GetFigiInstrument returns the FigiInstrument field if non-nil, zero value otherwise.
 
 ### GetFigiInstrumentOk
 
-`func (o *EtfInstrument) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool)`
+`func (o *EtfInstrument) GetFigiInstrumentOk() (*FigiInstrumentNullable, bool)`
 
 GetFigiInstrumentOk returns a tuple with the FigiInstrument field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFigiInstrument
 
-`func (o *EtfInstrument) SetFigiInstrument(v StockInstrumentFigiInstrument)`
+`func (o *EtfInstrument) SetFigiInstrument(v FigiInstrumentNullable)`
 
 SetFigiInstrument sets FigiInstrument field to given value.
 

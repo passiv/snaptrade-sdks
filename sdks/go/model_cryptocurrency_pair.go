@@ -23,6 +23,7 @@ type CryptocurrencyPair struct {
 	Base string `json:"base"`
 	// The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
 	Quote string `json:"quote"`
+	// The precision or smallest price incremental step available for this cryptocurrency pair 
 	Increment NullableString `json:"increment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

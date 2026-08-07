@@ -19,12 +19,12 @@ import (
 // ConnectionAccountSyncStatus Contains status updates for the account sync process between SnapTrade and the brokerage, used only by `Connections_listConnectionAccounts`. Each property is optional -- a brokerage may not report sync status for every data type. `orders`/`positions`/`balances` are the timestamp of the last successful sync of that data type (null if never synced). 
 type ConnectionAccountSyncStatus struct {
 	Transactions *TransactionsStatus `json:"transactions,omitempty"`
-	// The last time orders were successfully synced by SnapTrade.
-	Orders NullableTime.Time `json:"orders,omitempty"`
-	// The last time positions were successfully synced by SnapTrade.
-	Positions NullableTime.Time `json:"positions,omitempty"`
-	// The last time balances were successfully synced by SnapTrade.
-	Balances NullableTime.Time `json:"balances,omitempty"`
+	// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+	Orders NullableTime `json:"orders,omitempty"`
+	// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+	Positions NullableTime `json:"positions,omitempty"`
+	// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+	Balances NullableTime `json:"balances,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,7 +107,7 @@ func (o *ConnectionAccountSyncStatus) HasOrders() bool {
 	return false
 }
 
-// SetOrders gets a reference to the given NullableTime.Time and assigns it to the Orders field.
+// SetOrders gets a reference to the given NullableTime and assigns it to the Orders field.
 func (o *ConnectionAccountSyncStatus) SetOrders(v time.Time) {
 	o.Orders.Set(&v)
 }
@@ -149,7 +149,7 @@ func (o *ConnectionAccountSyncStatus) HasPositions() bool {
 	return false
 }
 
-// SetPositions gets a reference to the given NullableTime.Time and assigns it to the Positions field.
+// SetPositions gets a reference to the given NullableTime and assigns it to the Positions field.
 func (o *ConnectionAccountSyncStatus) SetPositions(v time.Time) {
 	o.Positions.Set(&v)
 }
@@ -191,7 +191,7 @@ func (o *ConnectionAccountSyncStatus) HasBalances() bool {
 	return false
 }
 
-// SetBalances gets a reference to the given NullableTime.Time and assigns it to the Balances field.
+// SetBalances gets a reference to the given NullableTime and assigns it to the Balances field.
 func (o *ConnectionAccountSyncStatus) SetBalances(v time.Time) {
 	o.Balances.Set(&v)
 }

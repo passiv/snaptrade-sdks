@@ -25,10 +25,10 @@ type AccountOrderRecord struct {
 	// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
 	OrderRole NullableString `json:"order_role,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
-	UniversalSymbol NullableAccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
-	OptionSymbol NullableAccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
-	QuoteUniversalSymbol NullableAccountOrderRecordQuoteUniversalSymbol `json:"quote_universal_symbol,omitempty"`
-	QuoteCurrency NullableAccountOrderRecordQuoteCurrency `json:"quote_currency,omitempty"`
+	UniversalSymbol NullableUniversalSymbolNullable `json:"universal_symbol,omitempty"`
+	OptionSymbol NullableOptionsSymbolNullable `json:"option_symbol,omitempty"`
+	QuoteUniversalSymbol NullableUniversalSymbolNullable `json:"quote_universal_symbol,omitempty"`
+	QuoteCurrency NullableCurrencyNullable `json:"quote_currency,omitempty"`
 	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
@@ -45,7 +45,7 @@ type AccountOrderRecord struct {
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
-	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
+	TrailingStop NullableTrailingStopNullable `json:"trailing_stop,omitempty"`
 	// The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
 	OrderType NullableString `json:"order_type,omitempty"`
 	// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.   - `MOO` - Market On Open. The order is to be executed at the day's opening price.   - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close. 
@@ -61,7 +61,7 @@ type AccountOrderRecord struct {
 	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
 	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
-	ChildBrokerageOrderIds NullableAccountOrderRecordChildBrokerageOrderIds `json:"child_brokerage_order_ids,omitempty"`
+	ChildBrokerageOrderIds NullableChildBrokerageOrderIDsNullable `json:"child_brokerage_order_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -233,9 +233,9 @@ func (o *AccountOrderRecord) SetStatus(v AccountOrderRecordStatus) {
 }
 
 // GetUniversalSymbol returns the UniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol {
+func (o *AccountOrderRecord) GetUniversalSymbol() UniversalSymbolNullable {
 	if o == nil || isNil(o.UniversalSymbol.Get()) {
-		var ret AccountOrderRecordUniversalSymbol
+		var ret UniversalSymbolNullable
 		return ret
 	}
 	return *o.UniversalSymbol.Get()
@@ -244,7 +244,7 @@ func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSym
 // GetUniversalSymbolOk returns a tuple with the UniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool) {
+func (o *AccountOrderRecord) GetUniversalSymbolOk() (*UniversalSymbolNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -260,8 +260,8 @@ func (o *AccountOrderRecord) HasUniversalSymbol() bool {
 	return false
 }
 
-// SetUniversalSymbol gets a reference to the given NullableAccountOrderRecordUniversalSymbol and assigns it to the UniversalSymbol field.
-func (o *AccountOrderRecord) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol) {
+// SetUniversalSymbol gets a reference to the given NullableUniversalSymbolNullable and assigns it to the UniversalSymbol field.
+func (o *AccountOrderRecord) SetUniversalSymbol(v UniversalSymbolNullable) {
 	o.UniversalSymbol.Set(&v)
 }
 // SetUniversalSymbolNil sets the value for UniversalSymbol to be an explicit nil
@@ -275,9 +275,9 @@ func (o *AccountOrderRecord) UnsetUniversalSymbol() {
 }
 
 // GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetOptionSymbol() AccountOrderRecordOptionSymbol {
+func (o *AccountOrderRecord) GetOptionSymbol() OptionsSymbolNullable {
 	if o == nil || isNil(o.OptionSymbol.Get()) {
-		var ret AccountOrderRecordOptionSymbol
+		var ret OptionsSymbolNullable
 		return ret
 	}
 	return *o.OptionSymbol.Get()
@@ -286,7 +286,7 @@ func (o *AccountOrderRecord) GetOptionSymbol() AccountOrderRecordOptionSymbol {
 // GetOptionSymbolOk returns a tuple with the OptionSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool) {
+func (o *AccountOrderRecord) GetOptionSymbolOk() (*OptionsSymbolNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -302,8 +302,8 @@ func (o *AccountOrderRecord) HasOptionSymbol() bool {
 	return false
 }
 
-// SetOptionSymbol gets a reference to the given NullableAccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
-func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol) {
+// SetOptionSymbol gets a reference to the given NullableOptionsSymbolNullable and assigns it to the OptionSymbol field.
+func (o *AccountOrderRecord) SetOptionSymbol(v OptionsSymbolNullable) {
 	o.OptionSymbol.Set(&v)
 }
 // SetOptionSymbolNil sets the value for OptionSymbol to be an explicit nil
@@ -317,9 +317,9 @@ func (o *AccountOrderRecord) UnsetOptionSymbol() {
 }
 
 // GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol {
+func (o *AccountOrderRecord) GetQuoteUniversalSymbol() UniversalSymbolNullable {
 	if o == nil || isNil(o.QuoteUniversalSymbol.Get()) {
-		var ret AccountOrderRecordQuoteUniversalSymbol
+		var ret UniversalSymbolNullable
 		return ret
 	}
 	return *o.QuoteUniversalSymbol.Get()
@@ -328,7 +328,7 @@ func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUn
 // GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool) {
+func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*UniversalSymbolNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -344,8 +344,8 @@ func (o *AccountOrderRecord) HasQuoteUniversalSymbol() bool {
 	return false
 }
 
-// SetQuoteUniversalSymbol gets a reference to the given NullableAccountOrderRecordQuoteUniversalSymbol and assigns it to the QuoteUniversalSymbol field.
-func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol) {
+// SetQuoteUniversalSymbol gets a reference to the given NullableUniversalSymbolNullable and assigns it to the QuoteUniversalSymbol field.
+func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v UniversalSymbolNullable) {
 	o.QuoteUniversalSymbol.Set(&v)
 }
 // SetQuoteUniversalSymbolNil sets the value for QuoteUniversalSymbol to be an explicit nil
@@ -359,9 +359,9 @@ func (o *AccountOrderRecord) UnsetQuoteUniversalSymbol() {
 }
 
 // GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency {
+func (o *AccountOrderRecord) GetQuoteCurrency() CurrencyNullable {
 	if o == nil || isNil(o.QuoteCurrency.Get()) {
-		var ret AccountOrderRecordQuoteCurrency
+		var ret CurrencyNullable
 		return ret
 	}
 	return *o.QuoteCurrency.Get()
@@ -370,7 +370,7 @@ func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency 
 // GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool) {
+func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*CurrencyNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -386,8 +386,8 @@ func (o *AccountOrderRecord) HasQuoteCurrency() bool {
 	return false
 }
 
-// SetQuoteCurrency gets a reference to the given NullableAccountOrderRecordQuoteCurrency and assigns it to the QuoteCurrency field.
-func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency) {
+// SetQuoteCurrency gets a reference to the given NullableCurrencyNullable and assigns it to the QuoteCurrency field.
+func (o *AccountOrderRecord) SetQuoteCurrency(v CurrencyNullable) {
 	o.QuoteCurrency.Set(&v)
 }
 // SetQuoteCurrencyNil sets the value for QuoteCurrency to be an explicit nil
@@ -727,9 +727,9 @@ func (o *AccountOrderRecord) UnsetStopPrice() {
 }
 
 // GetTrailingStop returns the TrailingStop field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetTrailingStop() AccountOrderRecordTrailingStop {
+func (o *AccountOrderRecord) GetTrailingStop() TrailingStopNullable {
 	if o == nil || isNil(o.TrailingStop.Get()) {
-		var ret AccountOrderRecordTrailingStop
+		var ret TrailingStopNullable
 		return ret
 	}
 	return *o.TrailingStop.Get()
@@ -738,7 +738,7 @@ func (o *AccountOrderRecord) GetTrailingStop() AccountOrderRecordTrailingStop {
 // GetTrailingStopOk returns a tuple with the TrailingStop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool) {
+func (o *AccountOrderRecord) GetTrailingStopOk() (*TrailingStopNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -754,8 +754,8 @@ func (o *AccountOrderRecord) HasTrailingStop() bool {
 	return false
 }
 
-// SetTrailingStop gets a reference to the given NullableAccountOrderRecordTrailingStop and assigns it to the TrailingStop field.
-func (o *AccountOrderRecord) SetTrailingStop(v AccountOrderRecordTrailingStop) {
+// SetTrailingStop gets a reference to the given NullableTrailingStopNullable and assigns it to the TrailingStop field.
+func (o *AccountOrderRecord) SetTrailingStop(v TrailingStopNullable) {
 	o.TrailingStop.Set(&v)
 }
 // SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
@@ -1036,9 +1036,9 @@ func (o *AccountOrderRecord) SetSymbol(v string) {
 }
 
 // GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds {
+func (o *AccountOrderRecord) GetChildBrokerageOrderIds() ChildBrokerageOrderIDsNullable {
 	if o == nil || isNil(o.ChildBrokerageOrderIds.Get()) {
-		var ret AccountOrderRecordChildBrokerageOrderIds
+		var ret ChildBrokerageOrderIDsNullable
 		return ret
 	}
 	return *o.ChildBrokerageOrderIds.Get()
@@ -1047,7 +1047,7 @@ func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChild
 // GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool) {
+func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*ChildBrokerageOrderIDsNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -1063,8 +1063,8 @@ func (o *AccountOrderRecord) HasChildBrokerageOrderIds() bool {
 	return false
 }
 
-// SetChildBrokerageOrderIds gets a reference to the given NullableAccountOrderRecordChildBrokerageOrderIds and assigns it to the ChildBrokerageOrderIds field.
-func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds) {
+// SetChildBrokerageOrderIds gets a reference to the given NullableChildBrokerageOrderIDsNullable and assigns it to the ChildBrokerageOrderIds field.
+func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v ChildBrokerageOrderIDsNullable) {
 	o.ChildBrokerageOrderIds.Set(&v)
 }
 // SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil

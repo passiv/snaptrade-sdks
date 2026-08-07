@@ -31,7 +31,7 @@ type EtfInstrument struct {
 	Currency NullableString `json:"currency,omitempty"`
 	// Exchange MIC code or exchange code for the security.
 	Exchange NullableString `json:"exchange,omitempty"`
-	FigiInstrument NullableStockInstrumentFigiInstrument `json:"figi_instrument,omitempty"`
+	FigiInstrument NullableFigiInstrumentNullable `json:"figi_instrument,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -281,9 +281,9 @@ func (o *EtfInstrument) UnsetExchange() {
 }
 
 // GetFigiInstrument returns the FigiInstrument field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *EtfInstrument) GetFigiInstrument() StockInstrumentFigiInstrument {
+func (o *EtfInstrument) GetFigiInstrument() FigiInstrumentNullable {
 	if o == nil || isNil(o.FigiInstrument.Get()) {
-		var ret StockInstrumentFigiInstrument
+		var ret FigiInstrumentNullable
 		return ret
 	}
 	return *o.FigiInstrument.Get()
@@ -292,7 +292,7 @@ func (o *EtfInstrument) GetFigiInstrument() StockInstrumentFigiInstrument {
 // GetFigiInstrumentOk returns a tuple with the FigiInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EtfInstrument) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool) {
+func (o *EtfInstrument) GetFigiInstrumentOk() (*FigiInstrumentNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -308,8 +308,8 @@ func (o *EtfInstrument) HasFigiInstrument() bool {
 	return false
 }
 
-// SetFigiInstrument gets a reference to the given NullableStockInstrumentFigiInstrument and assigns it to the FigiInstrument field.
-func (o *EtfInstrument) SetFigiInstrument(v StockInstrumentFigiInstrument) {
+// SetFigiInstrument gets a reference to the given NullableFigiInstrumentNullable and assigns it to the FigiInstrument field.
+func (o *EtfInstrument) SetFigiInstrument(v FigiInstrumentNullable) {
 	o.FigiInstrument.Set(&v)
 }
 // SetFigiInstrumentNil sets the value for FigiInstrument to be an explicit nil

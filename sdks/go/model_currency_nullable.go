@@ -15,35 +15,38 @@ import (
 	"encoding/json"
 )
 
-// AccountOrderRecordQuoteCurrency Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
-type AccountOrderRecordQuoteCurrency struct {
+// CurrencyNullable Describes a currency object.
+type CurrencyNullable struct {
 	// Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
 	Id *string `json:"id,omitempty"`
 	// The ISO-4217 currency code for the currency.
 	Code *string `json:"code,omitempty"`
 	// A human-friendly name of the currency.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewAccountOrderRecordQuoteCurrency instantiates a new AccountOrderRecordQuoteCurrency object
+type _CurrencyNullable CurrencyNullable
+
+// NewCurrencyNullable instantiates a new CurrencyNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrderRecordQuoteCurrency() *AccountOrderRecordQuoteCurrency {
-	this := AccountOrderRecordQuoteCurrency{}
+func NewCurrencyNullable() *CurrencyNullable {
+	this := CurrencyNullable{}
 	return &this
 }
 
-// NewAccountOrderRecordQuoteCurrencyWithDefaults instantiates a new AccountOrderRecordQuoteCurrency object
+// NewCurrencyNullableWithDefaults instantiates a new CurrencyNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountOrderRecordQuoteCurrencyWithDefaults() *AccountOrderRecordQuoteCurrency {
-	this := AccountOrderRecordQuoteCurrency{}
+func NewCurrencyNullableWithDefaults() *CurrencyNullable {
+	this := CurrencyNullable{}
 	return &this
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *AccountOrderRecordQuoteCurrency) GetId() string {
+func (o *CurrencyNullable) GetId() string {
 	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
@@ -53,7 +56,7 @@ func (o *AccountOrderRecordQuoteCurrency) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordQuoteCurrency) GetIdOk() (*string, bool) {
+func (o *CurrencyNullable) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
     return nil, false
 	}
@@ -61,7 +64,7 @@ func (o *AccountOrderRecordQuoteCurrency) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *AccountOrderRecordQuoteCurrency) HasId() bool {
+func (o *CurrencyNullable) HasId() bool {
 	if o != nil && !isNil(o.Id) {
 		return true
 	}
@@ -70,12 +73,12 @@ func (o *AccountOrderRecordQuoteCurrency) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *AccountOrderRecordQuoteCurrency) SetId(v string) {
+func (o *CurrencyNullable) SetId(v string) {
 	o.Id = &v
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
-func (o *AccountOrderRecordQuoteCurrency) GetCode() string {
+func (o *CurrencyNullable) GetCode() string {
 	if o == nil || isNil(o.Code) {
 		var ret string
 		return ret
@@ -85,7 +88,7 @@ func (o *AccountOrderRecordQuoteCurrency) GetCode() string {
 
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordQuoteCurrency) GetCodeOk() (*string, bool) {
+func (o *CurrencyNullable) GetCodeOk() (*string, bool) {
 	if o == nil || isNil(o.Code) {
     return nil, false
 	}
@@ -93,7 +96,7 @@ func (o *AccountOrderRecordQuoteCurrency) GetCodeOk() (*string, bool) {
 }
 
 // HasCode returns a boolean if a field has been set.
-func (o *AccountOrderRecordQuoteCurrency) HasCode() bool {
+func (o *CurrencyNullable) HasCode() bool {
 	if o != nil && !isNil(o.Code) {
 		return true
 	}
@@ -102,12 +105,12 @@ func (o *AccountOrderRecordQuoteCurrency) HasCode() bool {
 }
 
 // SetCode gets a reference to the given string and assigns it to the Code field.
-func (o *AccountOrderRecordQuoteCurrency) SetCode(v string) {
+func (o *CurrencyNullable) SetCode(v string) {
 	o.Code = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *AccountOrderRecordQuoteCurrency) GetName() string {
+func (o *CurrencyNullable) GetName() string {
 	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
@@ -117,7 +120,7 @@ func (o *AccountOrderRecordQuoteCurrency) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordQuoteCurrency) GetNameOk() (*string, bool) {
+func (o *CurrencyNullable) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
     return nil, false
 	}
@@ -125,7 +128,7 @@ func (o *AccountOrderRecordQuoteCurrency) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *AccountOrderRecordQuoteCurrency) HasName() bool {
+func (o *CurrencyNullable) HasName() bool {
 	if o != nil && !isNil(o.Name) {
 		return true
 	}
@@ -134,11 +137,11 @@ func (o *AccountOrderRecordQuoteCurrency) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *AccountOrderRecordQuoteCurrency) SetName(v string) {
+func (o *CurrencyNullable) SetName(v string) {
 	o.Name = &v
 }
 
-func (o AccountOrderRecordQuoteCurrency) MarshalJSON() ([]byte, error) {
+func (o CurrencyNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
@@ -149,41 +152,65 @@ func (o AccountOrderRecordQuoteCurrency) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableAccountOrderRecordQuoteCurrency struct {
-	value *AccountOrderRecordQuoteCurrency
+func (o *CurrencyNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varCurrencyNullable := _CurrencyNullable{}
+
+	if err = json.Unmarshal(bytes, &varCurrencyNullable); err == nil {
+		*o = CurrencyNullable(varCurrencyNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableCurrencyNullable struct {
+	value *CurrencyNullable
 	isSet bool
 }
 
-func (v NullableAccountOrderRecordQuoteCurrency) Get() *AccountOrderRecordQuoteCurrency {
+func (v NullableCurrencyNullable) Get() *CurrencyNullable {
 	return v.value
 }
 
-func (v *NullableAccountOrderRecordQuoteCurrency) Set(val *AccountOrderRecordQuoteCurrency) {
+func (v *NullableCurrencyNullable) Set(val *CurrencyNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountOrderRecordQuoteCurrency) IsSet() bool {
+func (v NullableCurrencyNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountOrderRecordQuoteCurrency) Unset() {
+func (v *NullableCurrencyNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountOrderRecordQuoteCurrency(val *AccountOrderRecordQuoteCurrency) *NullableAccountOrderRecordQuoteCurrency {
-	return &NullableAccountOrderRecordQuoteCurrency{value: val, isSet: true}
+func NewNullableCurrencyNullable(val *CurrencyNullable) *NullableCurrencyNullable {
+	return &NullableCurrencyNullable{value: val, isSet: true}
 }
 
-func (v NullableAccountOrderRecordQuoteCurrency) MarshalJSON() ([]byte, error) {
+func (v NullableCurrencyNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountOrderRecordQuoteCurrency) UnmarshalJSON(src []byte) error {
+func (v *NullableCurrencyNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

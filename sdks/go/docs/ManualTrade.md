@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **TimeInForce** | Pointer to [**TimeInForceStrict**](TimeInForceStrict.md) |  | [optional] 
 **Symbol** | Pointer to [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
 **Action** | Pointer to [**ActionStrict**](ActionStrict.md) |  | [optional] 
-**Units** | Pointer to **NullableFloat32** |  | [optional] 
+**Units** | Pointer to **NullableFloat32** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. | [optional] 
 **Price** | Pointer to **NullableFloat32** | Trade Price if limit or stop limit order | [optional] 
 
 ## Methods

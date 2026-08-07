@@ -1,4 +1,4 @@
-# ManualTradeFormNotionalValue
+# NotionalValueNullable
 
 ## Properties
 
@@ -7,20 +7,20 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewManualTradeFormNotionalValue
+### NewNotionalValueNullable
 
-`func NewManualTradeFormNotionalValue() *ManualTradeFormNotionalValue`
+`func NewNotionalValueNullable() *NotionalValueNullable`
 
-NewManualTradeFormNotionalValue instantiates a new ManualTradeFormNotionalValue object
+NewNotionalValueNullable instantiates a new NotionalValueNullable object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewManualTradeFormNotionalValueWithDefaults
+### NewNotionalValueNullableWithDefaults
 
-`func NewManualTradeFormNotionalValueWithDefaults() *ManualTradeFormNotionalValue`
+`func NewNotionalValueNullableWithDefaults() *NotionalValueNullable`
 
-NewManualTradeFormNotionalValueWithDefaults instantiates a new ManualTradeFormNotionalValue object
+NewNotionalValueNullableWithDefaults instantiates a new NotionalValueNullable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 

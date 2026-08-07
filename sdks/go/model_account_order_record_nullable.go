@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// OrderUpdatedResponseOrder struct for OrderUpdatedResponseOrder
-type OrderUpdatedResponseOrder struct {
+// AccountOrderRecordNullable Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
+type AccountOrderRecordNullable struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
 	// The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
@@ -25,10 +25,10 @@ type OrderUpdatedResponseOrder struct {
 	// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
 	OrderRole NullableString `json:"order_role,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
-	UniversalSymbol NullableAccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
-	OptionSymbol NullableAccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
-	QuoteUniversalSymbol NullableAccountOrderRecordQuoteUniversalSymbol `json:"quote_universal_symbol,omitempty"`
-	QuoteCurrency NullableAccountOrderRecordQuoteCurrency `json:"quote_currency,omitempty"`
+	UniversalSymbol NullableUniversalSymbolNullable `json:"universal_symbol,omitempty"`
+	OptionSymbol NullableOptionsSymbolNullable `json:"option_symbol,omitempty"`
+	QuoteUniversalSymbol NullableUniversalSymbolNullable `json:"quote_universal_symbol,omitempty"`
+	QuoteCurrency NullableCurrencyNullable `json:"quote_currency,omitempty"`
 	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
@@ -45,7 +45,7 @@ type OrderUpdatedResponseOrder struct {
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders. For option orders, this represents the price per share.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
-	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
+	TrailingStop NullableTrailingStopNullable `json:"trailing_stop,omitempty"`
 	// The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
 	OrderType NullableString `json:"order_type,omitempty"`
 	// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date.   - `MOO` - Market On Open. The order is to be executed at the day's opening price.   - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close. 
@@ -61,28 +61,31 @@ type OrderUpdatedResponseOrder struct {
 	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
 	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
-	ChildBrokerageOrderIds NullableAccountOrderRecordChildBrokerageOrderIds `json:"child_brokerage_order_ids,omitempty"`
+	ChildBrokerageOrderIds NullableChildBrokerageOrderIDsNullable `json:"child_brokerage_order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewOrderUpdatedResponseOrder instantiates a new OrderUpdatedResponseOrder object
+type _AccountOrderRecordNullable AccountOrderRecordNullable
+
+// NewAccountOrderRecordNullable instantiates a new AccountOrderRecordNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderUpdatedResponseOrder() *OrderUpdatedResponseOrder {
-	this := OrderUpdatedResponseOrder{}
+func NewAccountOrderRecordNullable() *AccountOrderRecordNullable {
+	this := AccountOrderRecordNullable{}
 	return &this
 }
 
-// NewOrderUpdatedResponseOrderWithDefaults instantiates a new OrderUpdatedResponseOrder object
+// NewAccountOrderRecordNullableWithDefaults instantiates a new AccountOrderRecordNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewOrderUpdatedResponseOrderWithDefaults() *OrderUpdatedResponseOrder {
-	this := OrderUpdatedResponseOrder{}
+func NewAccountOrderRecordNullableWithDefaults() *AccountOrderRecordNullable {
+	this := AccountOrderRecordNullable{}
 	return &this
 }
 
 // GetBrokerageOrderId returns the BrokerageOrderId field value if set, zero value otherwise.
-func (o *OrderUpdatedResponseOrder) GetBrokerageOrderId() string {
+func (o *AccountOrderRecordNullable) GetBrokerageOrderId() string {
 	if o == nil || isNil(o.BrokerageOrderId) {
 		var ret string
 		return ret
@@ -92,7 +95,7 @@ func (o *OrderUpdatedResponseOrder) GetBrokerageOrderId() string {
 
 // GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdatedResponseOrder) GetBrokerageOrderIdOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetBrokerageOrderIdOk() (*string, bool) {
 	if o == nil || isNil(o.BrokerageOrderId) {
     return nil, false
 	}
@@ -100,7 +103,7 @@ func (o *OrderUpdatedResponseOrder) GetBrokerageOrderIdOk() (*string, bool) {
 }
 
 // HasBrokerageOrderId returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasBrokerageOrderId() bool {
+func (o *AccountOrderRecordNullable) HasBrokerageOrderId() bool {
 	if o != nil && !isNil(o.BrokerageOrderId) {
 		return true
 	}
@@ -109,12 +112,12 @@ func (o *OrderUpdatedResponseOrder) HasBrokerageOrderId() bool {
 }
 
 // SetBrokerageOrderId gets a reference to the given string and assigns it to the BrokerageOrderId field.
-func (o *OrderUpdatedResponseOrder) SetBrokerageOrderId(v string) {
+func (o *AccountOrderRecordNullable) SetBrokerageOrderId(v string) {
 	o.BrokerageOrderId = &v
 }
 
 // GetBrokerageGroupOrderId returns the BrokerageGroupOrderId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetBrokerageGroupOrderId() string {
+func (o *AccountOrderRecordNullable) GetBrokerageGroupOrderId() string {
 	if o == nil || isNil(o.BrokerageGroupOrderId.Get()) {
 		var ret string
 		return ret
@@ -125,7 +128,7 @@ func (o *OrderUpdatedResponseOrder) GetBrokerageGroupOrderId() string {
 // GetBrokerageGroupOrderIdOk returns a tuple with the BrokerageGroupOrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetBrokerageGroupOrderIdOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetBrokerageGroupOrderIdOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -133,7 +136,7 @@ func (o *OrderUpdatedResponseOrder) GetBrokerageGroupOrderIdOk() (*string, bool)
 }
 
 // HasBrokerageGroupOrderId returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasBrokerageGroupOrderId() bool {
+func (o *AccountOrderRecordNullable) HasBrokerageGroupOrderId() bool {
 	if o != nil && o.BrokerageGroupOrderId.IsSet() {
 		return true
 	}
@@ -142,21 +145,21 @@ func (o *OrderUpdatedResponseOrder) HasBrokerageGroupOrderId() bool {
 }
 
 // SetBrokerageGroupOrderId gets a reference to the given NullableString and assigns it to the BrokerageGroupOrderId field.
-func (o *OrderUpdatedResponseOrder) SetBrokerageGroupOrderId(v string) {
+func (o *AccountOrderRecordNullable) SetBrokerageGroupOrderId(v string) {
 	o.BrokerageGroupOrderId.Set(&v)
 }
 // SetBrokerageGroupOrderIdNil sets the value for BrokerageGroupOrderId to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetBrokerageGroupOrderIdNil() {
+func (o *AccountOrderRecordNullable) SetBrokerageGroupOrderIdNil() {
 	o.BrokerageGroupOrderId.Set(nil)
 }
 
 // UnsetBrokerageGroupOrderId ensures that no value is present for BrokerageGroupOrderId, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetBrokerageGroupOrderId() {
+func (o *AccountOrderRecordNullable) UnsetBrokerageGroupOrderId() {
 	o.BrokerageGroupOrderId.Unset()
 }
 
 // GetOrderRole returns the OrderRole field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetOrderRole() string {
+func (o *AccountOrderRecordNullable) GetOrderRole() string {
 	if o == nil || isNil(o.OrderRole.Get()) {
 		var ret string
 		return ret
@@ -167,7 +170,7 @@ func (o *OrderUpdatedResponseOrder) GetOrderRole() string {
 // GetOrderRoleOk returns a tuple with the OrderRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetOrderRoleOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetOrderRoleOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -175,7 +178,7 @@ func (o *OrderUpdatedResponseOrder) GetOrderRoleOk() (*string, bool) {
 }
 
 // HasOrderRole returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasOrderRole() bool {
+func (o *AccountOrderRecordNullable) HasOrderRole() bool {
 	if o != nil && o.OrderRole.IsSet() {
 		return true
 	}
@@ -184,21 +187,21 @@ func (o *OrderUpdatedResponseOrder) HasOrderRole() bool {
 }
 
 // SetOrderRole gets a reference to the given NullableString and assigns it to the OrderRole field.
-func (o *OrderUpdatedResponseOrder) SetOrderRole(v string) {
+func (o *AccountOrderRecordNullable) SetOrderRole(v string) {
 	o.OrderRole.Set(&v)
 }
 // SetOrderRoleNil sets the value for OrderRole to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetOrderRoleNil() {
+func (o *AccountOrderRecordNullable) SetOrderRoleNil() {
 	o.OrderRole.Set(nil)
 }
 
 // UnsetOrderRole ensures that no value is present for OrderRole, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetOrderRole() {
+func (o *AccountOrderRecordNullable) UnsetOrderRole() {
 	o.OrderRole.Unset()
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *OrderUpdatedResponseOrder) GetStatus() AccountOrderRecordStatus {
+func (o *AccountOrderRecordNullable) GetStatus() AccountOrderRecordStatus {
 	if o == nil || isNil(o.Status) {
 		var ret AccountOrderRecordStatus
 		return ret
@@ -208,7 +211,7 @@ func (o *OrderUpdatedResponseOrder) GetStatus() AccountOrderRecordStatus {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdatedResponseOrder) GetStatusOk() (*AccountOrderRecordStatus, bool) {
+func (o *AccountOrderRecordNullable) GetStatusOk() (*AccountOrderRecordStatus, bool) {
 	if o == nil || isNil(o.Status) {
     return nil, false
 	}
@@ -216,7 +219,7 @@ func (o *OrderUpdatedResponseOrder) GetStatusOk() (*AccountOrderRecordStatus, bo
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasStatus() bool {
+func (o *AccountOrderRecordNullable) HasStatus() bool {
 	if o != nil && !isNil(o.Status) {
 		return true
 	}
@@ -225,14 +228,14 @@ func (o *OrderUpdatedResponseOrder) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given AccountOrderRecordStatus and assigns it to the Status field.
-func (o *OrderUpdatedResponseOrder) SetStatus(v AccountOrderRecordStatus) {
+func (o *AccountOrderRecordNullable) SetStatus(v AccountOrderRecordStatus) {
 	o.Status = &v
 }
 
 // GetUniversalSymbol returns the UniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetUniversalSymbol() AccountOrderRecordUniversalSymbol {
+func (o *AccountOrderRecordNullable) GetUniversalSymbol() UniversalSymbolNullable {
 	if o == nil || isNil(o.UniversalSymbol.Get()) {
-		var ret AccountOrderRecordUniversalSymbol
+		var ret UniversalSymbolNullable
 		return ret
 	}
 	return *o.UniversalSymbol.Get()
@@ -241,7 +244,7 @@ func (o *OrderUpdatedResponseOrder) GetUniversalSymbol() AccountOrderRecordUnive
 // GetUniversalSymbolOk returns a tuple with the UniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool) {
+func (o *AccountOrderRecordNullable) GetUniversalSymbolOk() (*UniversalSymbolNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -249,7 +252,7 @@ func (o *OrderUpdatedResponseOrder) GetUniversalSymbolOk() (*AccountOrderRecordU
 }
 
 // HasUniversalSymbol returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasUniversalSymbol() bool {
+func (o *AccountOrderRecordNullable) HasUniversalSymbol() bool {
 	if o != nil && o.UniversalSymbol.IsSet() {
 		return true
 	}
@@ -257,24 +260,24 @@ func (o *OrderUpdatedResponseOrder) HasUniversalSymbol() bool {
 	return false
 }
 
-// SetUniversalSymbol gets a reference to the given NullableAccountOrderRecordUniversalSymbol and assigns it to the UniversalSymbol field.
-func (o *OrderUpdatedResponseOrder) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol) {
+// SetUniversalSymbol gets a reference to the given NullableUniversalSymbolNullable and assigns it to the UniversalSymbol field.
+func (o *AccountOrderRecordNullable) SetUniversalSymbol(v UniversalSymbolNullable) {
 	o.UniversalSymbol.Set(&v)
 }
 // SetUniversalSymbolNil sets the value for UniversalSymbol to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetUniversalSymbolNil() {
+func (o *AccountOrderRecordNullable) SetUniversalSymbolNil() {
 	o.UniversalSymbol.Set(nil)
 }
 
 // UnsetUniversalSymbol ensures that no value is present for UniversalSymbol, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetUniversalSymbol() {
+func (o *AccountOrderRecordNullable) UnsetUniversalSymbol() {
 	o.UniversalSymbol.Unset()
 }
 
 // GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetOptionSymbol() AccountOrderRecordOptionSymbol {
+func (o *AccountOrderRecordNullable) GetOptionSymbol() OptionsSymbolNullable {
 	if o == nil || isNil(o.OptionSymbol.Get()) {
-		var ret AccountOrderRecordOptionSymbol
+		var ret OptionsSymbolNullable
 		return ret
 	}
 	return *o.OptionSymbol.Get()
@@ -283,7 +286,7 @@ func (o *OrderUpdatedResponseOrder) GetOptionSymbol() AccountOrderRecordOptionSy
 // GetOptionSymbolOk returns a tuple with the OptionSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool) {
+func (o *AccountOrderRecordNullable) GetOptionSymbolOk() (*OptionsSymbolNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -291,7 +294,7 @@ func (o *OrderUpdatedResponseOrder) GetOptionSymbolOk() (*AccountOrderRecordOpti
 }
 
 // HasOptionSymbol returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasOptionSymbol() bool {
+func (o *AccountOrderRecordNullable) HasOptionSymbol() bool {
 	if o != nil && o.OptionSymbol.IsSet() {
 		return true
 	}
@@ -299,24 +302,24 @@ func (o *OrderUpdatedResponseOrder) HasOptionSymbol() bool {
 	return false
 }
 
-// SetOptionSymbol gets a reference to the given NullableAccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
-func (o *OrderUpdatedResponseOrder) SetOptionSymbol(v AccountOrderRecordOptionSymbol) {
+// SetOptionSymbol gets a reference to the given NullableOptionsSymbolNullable and assigns it to the OptionSymbol field.
+func (o *AccountOrderRecordNullable) SetOptionSymbol(v OptionsSymbolNullable) {
 	o.OptionSymbol.Set(&v)
 }
 // SetOptionSymbolNil sets the value for OptionSymbol to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetOptionSymbolNil() {
+func (o *AccountOrderRecordNullable) SetOptionSymbolNil() {
 	o.OptionSymbol.Set(nil)
 }
 
 // UnsetOptionSymbol ensures that no value is present for OptionSymbol, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetOptionSymbol() {
+func (o *AccountOrderRecordNullable) UnsetOptionSymbol() {
 	o.OptionSymbol.Unset()
 }
 
 // GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol {
+func (o *AccountOrderRecordNullable) GetQuoteUniversalSymbol() UniversalSymbolNullable {
 	if o == nil || isNil(o.QuoteUniversalSymbol.Get()) {
-		var ret AccountOrderRecordQuoteUniversalSymbol
+		var ret UniversalSymbolNullable
 		return ret
 	}
 	return *o.QuoteUniversalSymbol.Get()
@@ -325,7 +328,7 @@ func (o *OrderUpdatedResponseOrder) GetQuoteUniversalSymbol() AccountOrderRecord
 // GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool) {
+func (o *AccountOrderRecordNullable) GetQuoteUniversalSymbolOk() (*UniversalSymbolNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -333,7 +336,7 @@ func (o *OrderUpdatedResponseOrder) GetQuoteUniversalSymbolOk() (*AccountOrderRe
 }
 
 // HasQuoteUniversalSymbol returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasQuoteUniversalSymbol() bool {
+func (o *AccountOrderRecordNullable) HasQuoteUniversalSymbol() bool {
 	if o != nil && o.QuoteUniversalSymbol.IsSet() {
 		return true
 	}
@@ -341,24 +344,24 @@ func (o *OrderUpdatedResponseOrder) HasQuoteUniversalSymbol() bool {
 	return false
 }
 
-// SetQuoteUniversalSymbol gets a reference to the given NullableAccountOrderRecordQuoteUniversalSymbol and assigns it to the QuoteUniversalSymbol field.
-func (o *OrderUpdatedResponseOrder) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol) {
+// SetQuoteUniversalSymbol gets a reference to the given NullableUniversalSymbolNullable and assigns it to the QuoteUniversalSymbol field.
+func (o *AccountOrderRecordNullable) SetQuoteUniversalSymbol(v UniversalSymbolNullable) {
 	o.QuoteUniversalSymbol.Set(&v)
 }
 // SetQuoteUniversalSymbolNil sets the value for QuoteUniversalSymbol to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetQuoteUniversalSymbolNil() {
+func (o *AccountOrderRecordNullable) SetQuoteUniversalSymbolNil() {
 	o.QuoteUniversalSymbol.Set(nil)
 }
 
 // UnsetQuoteUniversalSymbol ensures that no value is present for QuoteUniversalSymbol, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetQuoteUniversalSymbol() {
+func (o *AccountOrderRecordNullable) UnsetQuoteUniversalSymbol() {
 	o.QuoteUniversalSymbol.Unset()
 }
 
 // GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetQuoteCurrency() AccountOrderRecordQuoteCurrency {
+func (o *AccountOrderRecordNullable) GetQuoteCurrency() CurrencyNullable {
 	if o == nil || isNil(o.QuoteCurrency.Get()) {
-		var ret AccountOrderRecordQuoteCurrency
+		var ret CurrencyNullable
 		return ret
 	}
 	return *o.QuoteCurrency.Get()
@@ -367,7 +370,7 @@ func (o *OrderUpdatedResponseOrder) GetQuoteCurrency() AccountOrderRecordQuoteCu
 // GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool) {
+func (o *AccountOrderRecordNullable) GetQuoteCurrencyOk() (*CurrencyNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -375,7 +378,7 @@ func (o *OrderUpdatedResponseOrder) GetQuoteCurrencyOk() (*AccountOrderRecordQuo
 }
 
 // HasQuoteCurrency returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasQuoteCurrency() bool {
+func (o *AccountOrderRecordNullable) HasQuoteCurrency() bool {
 	if o != nil && o.QuoteCurrency.IsSet() {
 		return true
 	}
@@ -383,22 +386,22 @@ func (o *OrderUpdatedResponseOrder) HasQuoteCurrency() bool {
 	return false
 }
 
-// SetQuoteCurrency gets a reference to the given NullableAccountOrderRecordQuoteCurrency and assigns it to the QuoteCurrency field.
-func (o *OrderUpdatedResponseOrder) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency) {
+// SetQuoteCurrency gets a reference to the given NullableCurrencyNullable and assigns it to the QuoteCurrency field.
+func (o *AccountOrderRecordNullable) SetQuoteCurrency(v CurrencyNullable) {
 	o.QuoteCurrency.Set(&v)
 }
 // SetQuoteCurrencyNil sets the value for QuoteCurrency to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetQuoteCurrencyNil() {
+func (o *AccountOrderRecordNullable) SetQuoteCurrencyNil() {
 	o.QuoteCurrency.Set(nil)
 }
 
 // UnsetQuoteCurrency ensures that no value is present for QuoteCurrency, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetQuoteCurrency() {
+func (o *AccountOrderRecordNullable) UnsetQuoteCurrency() {
 	o.QuoteCurrency.Unset()
 }
 
 // GetAction returns the Action field value if set, zero value otherwise.
-func (o *OrderUpdatedResponseOrder) GetAction() string {
+func (o *AccountOrderRecordNullable) GetAction() string {
 	if o == nil || isNil(o.Action) {
 		var ret string
 		return ret
@@ -408,7 +411,7 @@ func (o *OrderUpdatedResponseOrder) GetAction() string {
 
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdatedResponseOrder) GetActionOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetActionOk() (*string, bool) {
 	if o == nil || isNil(o.Action) {
     return nil, false
 	}
@@ -416,7 +419,7 @@ func (o *OrderUpdatedResponseOrder) GetActionOk() (*string, bool) {
 }
 
 // HasAction returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasAction() bool {
+func (o *AccountOrderRecordNullable) HasAction() bool {
 	if o != nil && !isNil(o.Action) {
 		return true
 	}
@@ -425,12 +428,12 @@ func (o *OrderUpdatedResponseOrder) HasAction() bool {
 }
 
 // SetAction gets a reference to the given string and assigns it to the Action field.
-func (o *OrderUpdatedResponseOrder) SetAction(v string) {
+func (o *AccountOrderRecordNullable) SetAction(v string) {
 	o.Action = &v
 }
 
 // GetTotalQuantity returns the TotalQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetTotalQuantity() string {
+func (o *AccountOrderRecordNullable) GetTotalQuantity() string {
 	if o == nil || isNil(o.TotalQuantity.Get()) {
 		var ret string
 		return ret
@@ -441,7 +444,7 @@ func (o *OrderUpdatedResponseOrder) GetTotalQuantity() string {
 // GetTotalQuantityOk returns a tuple with the TotalQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetTotalQuantityOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetTotalQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -449,7 +452,7 @@ func (o *OrderUpdatedResponseOrder) GetTotalQuantityOk() (*string, bool) {
 }
 
 // HasTotalQuantity returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasTotalQuantity() bool {
+func (o *AccountOrderRecordNullable) HasTotalQuantity() bool {
 	if o != nil && o.TotalQuantity.IsSet() {
 		return true
 	}
@@ -458,21 +461,21 @@ func (o *OrderUpdatedResponseOrder) HasTotalQuantity() bool {
 }
 
 // SetTotalQuantity gets a reference to the given NullableString and assigns it to the TotalQuantity field.
-func (o *OrderUpdatedResponseOrder) SetTotalQuantity(v string) {
+func (o *AccountOrderRecordNullable) SetTotalQuantity(v string) {
 	o.TotalQuantity.Set(&v)
 }
 // SetTotalQuantityNil sets the value for TotalQuantity to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetTotalQuantityNil() {
+func (o *AccountOrderRecordNullable) SetTotalQuantityNil() {
 	o.TotalQuantity.Set(nil)
 }
 
 // UnsetTotalQuantity ensures that no value is present for TotalQuantity, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetTotalQuantity() {
+func (o *AccountOrderRecordNullable) UnsetTotalQuantity() {
 	o.TotalQuantity.Unset()
 }
 
 // GetOpenQuantity returns the OpenQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetOpenQuantity() string {
+func (o *AccountOrderRecordNullable) GetOpenQuantity() string {
 	if o == nil || isNil(o.OpenQuantity.Get()) {
 		var ret string
 		return ret
@@ -483,7 +486,7 @@ func (o *OrderUpdatedResponseOrder) GetOpenQuantity() string {
 // GetOpenQuantityOk returns a tuple with the OpenQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetOpenQuantityOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetOpenQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -491,7 +494,7 @@ func (o *OrderUpdatedResponseOrder) GetOpenQuantityOk() (*string, bool) {
 }
 
 // HasOpenQuantity returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasOpenQuantity() bool {
+func (o *AccountOrderRecordNullable) HasOpenQuantity() bool {
 	if o != nil && o.OpenQuantity.IsSet() {
 		return true
 	}
@@ -500,21 +503,21 @@ func (o *OrderUpdatedResponseOrder) HasOpenQuantity() bool {
 }
 
 // SetOpenQuantity gets a reference to the given NullableString and assigns it to the OpenQuantity field.
-func (o *OrderUpdatedResponseOrder) SetOpenQuantity(v string) {
+func (o *AccountOrderRecordNullable) SetOpenQuantity(v string) {
 	o.OpenQuantity.Set(&v)
 }
 // SetOpenQuantityNil sets the value for OpenQuantity to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetOpenQuantityNil() {
+func (o *AccountOrderRecordNullable) SetOpenQuantityNil() {
 	o.OpenQuantity.Set(nil)
 }
 
 // UnsetOpenQuantity ensures that no value is present for OpenQuantity, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetOpenQuantity() {
+func (o *AccountOrderRecordNullable) UnsetOpenQuantity() {
 	o.OpenQuantity.Unset()
 }
 
 // GetCanceledQuantity returns the CanceledQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetCanceledQuantity() string {
+func (o *AccountOrderRecordNullable) GetCanceledQuantity() string {
 	if o == nil || isNil(o.CanceledQuantity.Get()) {
 		var ret string
 		return ret
@@ -525,7 +528,7 @@ func (o *OrderUpdatedResponseOrder) GetCanceledQuantity() string {
 // GetCanceledQuantityOk returns a tuple with the CanceledQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetCanceledQuantityOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetCanceledQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -533,7 +536,7 @@ func (o *OrderUpdatedResponseOrder) GetCanceledQuantityOk() (*string, bool) {
 }
 
 // HasCanceledQuantity returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasCanceledQuantity() bool {
+func (o *AccountOrderRecordNullable) HasCanceledQuantity() bool {
 	if o != nil && o.CanceledQuantity.IsSet() {
 		return true
 	}
@@ -542,21 +545,21 @@ func (o *OrderUpdatedResponseOrder) HasCanceledQuantity() bool {
 }
 
 // SetCanceledQuantity gets a reference to the given NullableString and assigns it to the CanceledQuantity field.
-func (o *OrderUpdatedResponseOrder) SetCanceledQuantity(v string) {
+func (o *AccountOrderRecordNullable) SetCanceledQuantity(v string) {
 	o.CanceledQuantity.Set(&v)
 }
 // SetCanceledQuantityNil sets the value for CanceledQuantity to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetCanceledQuantityNil() {
+func (o *AccountOrderRecordNullable) SetCanceledQuantityNil() {
 	o.CanceledQuantity.Set(nil)
 }
 
 // UnsetCanceledQuantity ensures that no value is present for CanceledQuantity, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetCanceledQuantity() {
+func (o *AccountOrderRecordNullable) UnsetCanceledQuantity() {
 	o.CanceledQuantity.Unset()
 }
 
 // GetFilledQuantity returns the FilledQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetFilledQuantity() string {
+func (o *AccountOrderRecordNullable) GetFilledQuantity() string {
 	if o == nil || isNil(o.FilledQuantity.Get()) {
 		var ret string
 		return ret
@@ -567,7 +570,7 @@ func (o *OrderUpdatedResponseOrder) GetFilledQuantity() string {
 // GetFilledQuantityOk returns a tuple with the FilledQuantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetFilledQuantityOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetFilledQuantityOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -575,7 +578,7 @@ func (o *OrderUpdatedResponseOrder) GetFilledQuantityOk() (*string, bool) {
 }
 
 // HasFilledQuantity returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasFilledQuantity() bool {
+func (o *AccountOrderRecordNullable) HasFilledQuantity() bool {
 	if o != nil && o.FilledQuantity.IsSet() {
 		return true
 	}
@@ -584,21 +587,21 @@ func (o *OrderUpdatedResponseOrder) HasFilledQuantity() bool {
 }
 
 // SetFilledQuantity gets a reference to the given NullableString and assigns it to the FilledQuantity field.
-func (o *OrderUpdatedResponseOrder) SetFilledQuantity(v string) {
+func (o *AccountOrderRecordNullable) SetFilledQuantity(v string) {
 	o.FilledQuantity.Set(&v)
 }
 // SetFilledQuantityNil sets the value for FilledQuantity to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetFilledQuantityNil() {
+func (o *AccountOrderRecordNullable) SetFilledQuantityNil() {
 	o.FilledQuantity.Set(nil)
 }
 
 // UnsetFilledQuantity ensures that no value is present for FilledQuantity, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetFilledQuantity() {
+func (o *AccountOrderRecordNullable) UnsetFilledQuantity() {
 	o.FilledQuantity.Unset()
 }
 
 // GetExecutionPrice returns the ExecutionPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetExecutionPrice() float64 {
+func (o *AccountOrderRecordNullable) GetExecutionPrice() float64 {
 	if o == nil || isNil(o.ExecutionPrice.Get()) {
 		var ret float64
 		return ret
@@ -609,7 +612,7 @@ func (o *OrderUpdatedResponseOrder) GetExecutionPrice() float64 {
 // GetExecutionPriceOk returns a tuple with the ExecutionPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetExecutionPriceOk() (*float64, bool) {
+func (o *AccountOrderRecordNullable) GetExecutionPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -617,7 +620,7 @@ func (o *OrderUpdatedResponseOrder) GetExecutionPriceOk() (*float64, bool) {
 }
 
 // HasExecutionPrice returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasExecutionPrice() bool {
+func (o *AccountOrderRecordNullable) HasExecutionPrice() bool {
 	if o != nil && o.ExecutionPrice.IsSet() {
 		return true
 	}
@@ -626,21 +629,21 @@ func (o *OrderUpdatedResponseOrder) HasExecutionPrice() bool {
 }
 
 // SetExecutionPrice gets a reference to the given NullableFloat64 and assigns it to the ExecutionPrice field.
-func (o *OrderUpdatedResponseOrder) SetExecutionPrice(v float64) {
+func (o *AccountOrderRecordNullable) SetExecutionPrice(v float64) {
 	o.ExecutionPrice.Set(&v)
 }
 // SetExecutionPriceNil sets the value for ExecutionPrice to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetExecutionPriceNil() {
+func (o *AccountOrderRecordNullable) SetExecutionPriceNil() {
 	o.ExecutionPrice.Set(nil)
 }
 
 // UnsetExecutionPrice ensures that no value is present for ExecutionPrice, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetExecutionPrice() {
+func (o *AccountOrderRecordNullable) UnsetExecutionPrice() {
 	o.ExecutionPrice.Unset()
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetLimitPrice() float64 {
+func (o *AccountOrderRecordNullable) GetLimitPrice() float64 {
 	if o == nil || isNil(o.LimitPrice.Get()) {
 		var ret float64
 		return ret
@@ -651,7 +654,7 @@ func (o *OrderUpdatedResponseOrder) GetLimitPrice() float64 {
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetLimitPriceOk() (*float64, bool) {
+func (o *AccountOrderRecordNullable) GetLimitPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -659,7 +662,7 @@ func (o *OrderUpdatedResponseOrder) GetLimitPriceOk() (*float64, bool) {
 }
 
 // HasLimitPrice returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasLimitPrice() bool {
+func (o *AccountOrderRecordNullable) HasLimitPrice() bool {
 	if o != nil && o.LimitPrice.IsSet() {
 		return true
 	}
@@ -668,21 +671,21 @@ func (o *OrderUpdatedResponseOrder) HasLimitPrice() bool {
 }
 
 // SetLimitPrice gets a reference to the given NullableFloat64 and assigns it to the LimitPrice field.
-func (o *OrderUpdatedResponseOrder) SetLimitPrice(v float64) {
+func (o *AccountOrderRecordNullable) SetLimitPrice(v float64) {
 	o.LimitPrice.Set(&v)
 }
 // SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetLimitPriceNil() {
+func (o *AccountOrderRecordNullable) SetLimitPriceNil() {
 	o.LimitPrice.Set(nil)
 }
 
 // UnsetLimitPrice ensures that no value is present for LimitPrice, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetLimitPrice() {
+func (o *AccountOrderRecordNullable) UnsetLimitPrice() {
 	o.LimitPrice.Unset()
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetStopPrice() float64 {
+func (o *AccountOrderRecordNullable) GetStopPrice() float64 {
 	if o == nil || isNil(o.StopPrice.Get()) {
 		var ret float64
 		return ret
@@ -693,7 +696,7 @@ func (o *OrderUpdatedResponseOrder) GetStopPrice() float64 {
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetStopPriceOk() (*float64, bool) {
+func (o *AccountOrderRecordNullable) GetStopPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -701,7 +704,7 @@ func (o *OrderUpdatedResponseOrder) GetStopPriceOk() (*float64, bool) {
 }
 
 // HasStopPrice returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasStopPrice() bool {
+func (o *AccountOrderRecordNullable) HasStopPrice() bool {
 	if o != nil && o.StopPrice.IsSet() {
 		return true
 	}
@@ -710,23 +713,23 @@ func (o *OrderUpdatedResponseOrder) HasStopPrice() bool {
 }
 
 // SetStopPrice gets a reference to the given NullableFloat64 and assigns it to the StopPrice field.
-func (o *OrderUpdatedResponseOrder) SetStopPrice(v float64) {
+func (o *AccountOrderRecordNullable) SetStopPrice(v float64) {
 	o.StopPrice.Set(&v)
 }
 // SetStopPriceNil sets the value for StopPrice to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetStopPriceNil() {
+func (o *AccountOrderRecordNullable) SetStopPriceNil() {
 	o.StopPrice.Set(nil)
 }
 
 // UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetStopPrice() {
+func (o *AccountOrderRecordNullable) UnsetStopPrice() {
 	o.StopPrice.Unset()
 }
 
 // GetTrailingStop returns the TrailingStop field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetTrailingStop() AccountOrderRecordTrailingStop {
+func (o *AccountOrderRecordNullable) GetTrailingStop() TrailingStopNullable {
 	if o == nil || isNil(o.TrailingStop.Get()) {
-		var ret AccountOrderRecordTrailingStop
+		var ret TrailingStopNullable
 		return ret
 	}
 	return *o.TrailingStop.Get()
@@ -735,7 +738,7 @@ func (o *OrderUpdatedResponseOrder) GetTrailingStop() AccountOrderRecordTrailing
 // GetTrailingStopOk returns a tuple with the TrailingStop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool) {
+func (o *AccountOrderRecordNullable) GetTrailingStopOk() (*TrailingStopNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -743,7 +746,7 @@ func (o *OrderUpdatedResponseOrder) GetTrailingStopOk() (*AccountOrderRecordTrai
 }
 
 // HasTrailingStop returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasTrailingStop() bool {
+func (o *AccountOrderRecordNullable) HasTrailingStop() bool {
 	if o != nil && o.TrailingStop.IsSet() {
 		return true
 	}
@@ -751,22 +754,22 @@ func (o *OrderUpdatedResponseOrder) HasTrailingStop() bool {
 	return false
 }
 
-// SetTrailingStop gets a reference to the given NullableAccountOrderRecordTrailingStop and assigns it to the TrailingStop field.
-func (o *OrderUpdatedResponseOrder) SetTrailingStop(v AccountOrderRecordTrailingStop) {
+// SetTrailingStop gets a reference to the given NullableTrailingStopNullable and assigns it to the TrailingStop field.
+func (o *AccountOrderRecordNullable) SetTrailingStop(v TrailingStopNullable) {
 	o.TrailingStop.Set(&v)
 }
 // SetTrailingStopNil sets the value for TrailingStop to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetTrailingStopNil() {
+func (o *AccountOrderRecordNullable) SetTrailingStopNil() {
 	o.TrailingStop.Set(nil)
 }
 
 // UnsetTrailingStop ensures that no value is present for TrailingStop, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetTrailingStop() {
+func (o *AccountOrderRecordNullable) UnsetTrailingStop() {
 	o.TrailingStop.Unset()
 }
 
 // GetOrderType returns the OrderType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetOrderType() string {
+func (o *AccountOrderRecordNullable) GetOrderType() string {
 	if o == nil || isNil(o.OrderType.Get()) {
 		var ret string
 		return ret
@@ -777,7 +780,7 @@ func (o *OrderUpdatedResponseOrder) GetOrderType() string {
 // GetOrderTypeOk returns a tuple with the OrderType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetOrderTypeOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetOrderTypeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -785,7 +788,7 @@ func (o *OrderUpdatedResponseOrder) GetOrderTypeOk() (*string, bool) {
 }
 
 // HasOrderType returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasOrderType() bool {
+func (o *AccountOrderRecordNullable) HasOrderType() bool {
 	if o != nil && o.OrderType.IsSet() {
 		return true
 	}
@@ -794,21 +797,21 @@ func (o *OrderUpdatedResponseOrder) HasOrderType() bool {
 }
 
 // SetOrderType gets a reference to the given NullableString and assigns it to the OrderType field.
-func (o *OrderUpdatedResponseOrder) SetOrderType(v string) {
+func (o *AccountOrderRecordNullable) SetOrderType(v string) {
 	o.OrderType.Set(&v)
 }
 // SetOrderTypeNil sets the value for OrderType to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetOrderTypeNil() {
+func (o *AccountOrderRecordNullable) SetOrderTypeNil() {
 	o.OrderType.Set(nil)
 }
 
 // UnsetOrderType ensures that no value is present for OrderType, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetOrderType() {
+func (o *AccountOrderRecordNullable) UnsetOrderType() {
 	o.OrderType.Unset()
 }
 
 // GetTimeInForce returns the TimeInForce field value if set, zero value otherwise.
-func (o *OrderUpdatedResponseOrder) GetTimeInForce() string {
+func (o *AccountOrderRecordNullable) GetTimeInForce() string {
 	if o == nil || isNil(o.TimeInForce) {
 		var ret string
 		return ret
@@ -818,7 +821,7 @@ func (o *OrderUpdatedResponseOrder) GetTimeInForce() string {
 
 // GetTimeInForceOk returns a tuple with the TimeInForce field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdatedResponseOrder) GetTimeInForceOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetTimeInForceOk() (*string, bool) {
 	if o == nil || isNil(o.TimeInForce) {
     return nil, false
 	}
@@ -826,7 +829,7 @@ func (o *OrderUpdatedResponseOrder) GetTimeInForceOk() (*string, bool) {
 }
 
 // HasTimeInForce returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasTimeInForce() bool {
+func (o *AccountOrderRecordNullable) HasTimeInForce() bool {
 	if o != nil && !isNil(o.TimeInForce) {
 		return true
 	}
@@ -835,12 +838,12 @@ func (o *OrderUpdatedResponseOrder) HasTimeInForce() bool {
 }
 
 // SetTimeInForce gets a reference to the given string and assigns it to the TimeInForce field.
-func (o *OrderUpdatedResponseOrder) SetTimeInForce(v string) {
+func (o *AccountOrderRecordNullable) SetTimeInForce(v string) {
 	o.TimeInForce = &v
 }
 
 // GetTimePlaced returns the TimePlaced field value if set, zero value otherwise.
-func (o *OrderUpdatedResponseOrder) GetTimePlaced() time.Time {
+func (o *AccountOrderRecordNullable) GetTimePlaced() time.Time {
 	if o == nil || isNil(o.TimePlaced) {
 		var ret time.Time
 		return ret
@@ -850,7 +853,7 @@ func (o *OrderUpdatedResponseOrder) GetTimePlaced() time.Time {
 
 // GetTimePlacedOk returns a tuple with the TimePlaced field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdatedResponseOrder) GetTimePlacedOk() (*time.Time, bool) {
+func (o *AccountOrderRecordNullable) GetTimePlacedOk() (*time.Time, bool) {
 	if o == nil || isNil(o.TimePlaced) {
     return nil, false
 	}
@@ -858,7 +861,7 @@ func (o *OrderUpdatedResponseOrder) GetTimePlacedOk() (*time.Time, bool) {
 }
 
 // HasTimePlaced returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasTimePlaced() bool {
+func (o *AccountOrderRecordNullable) HasTimePlaced() bool {
 	if o != nil && !isNil(o.TimePlaced) {
 		return true
 	}
@@ -867,12 +870,12 @@ func (o *OrderUpdatedResponseOrder) HasTimePlaced() bool {
 }
 
 // SetTimePlaced gets a reference to the given time.Time and assigns it to the TimePlaced field.
-func (o *OrderUpdatedResponseOrder) SetTimePlaced(v time.Time) {
+func (o *AccountOrderRecordNullable) SetTimePlaced(v time.Time) {
 	o.TimePlaced = &v
 }
 
 // GetTimeUpdated returns the TimeUpdated field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetTimeUpdated() time.Time {
+func (o *AccountOrderRecordNullable) GetTimeUpdated() time.Time {
 	if o == nil || isNil(o.TimeUpdated.Get()) {
 		var ret time.Time
 		return ret
@@ -883,7 +886,7 @@ func (o *OrderUpdatedResponseOrder) GetTimeUpdated() time.Time {
 // GetTimeUpdatedOk returns a tuple with the TimeUpdated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetTimeUpdatedOk() (*time.Time, bool) {
+func (o *AccountOrderRecordNullable) GetTimeUpdatedOk() (*time.Time, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -891,7 +894,7 @@ func (o *OrderUpdatedResponseOrder) GetTimeUpdatedOk() (*time.Time, bool) {
 }
 
 // HasTimeUpdated returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasTimeUpdated() bool {
+func (o *AccountOrderRecordNullable) HasTimeUpdated() bool {
 	if o != nil && o.TimeUpdated.IsSet() {
 		return true
 	}
@@ -900,21 +903,21 @@ func (o *OrderUpdatedResponseOrder) HasTimeUpdated() bool {
 }
 
 // SetTimeUpdated gets a reference to the given NullableTime and assigns it to the TimeUpdated field.
-func (o *OrderUpdatedResponseOrder) SetTimeUpdated(v time.Time) {
+func (o *AccountOrderRecordNullable) SetTimeUpdated(v time.Time) {
 	o.TimeUpdated.Set(&v)
 }
 // SetTimeUpdatedNil sets the value for TimeUpdated to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetTimeUpdatedNil() {
+func (o *AccountOrderRecordNullable) SetTimeUpdatedNil() {
 	o.TimeUpdated.Set(nil)
 }
 
 // UnsetTimeUpdated ensures that no value is present for TimeUpdated, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetTimeUpdated() {
+func (o *AccountOrderRecordNullable) UnsetTimeUpdated() {
 	o.TimeUpdated.Unset()
 }
 
 // GetTimeExecuted returns the TimeExecuted field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetTimeExecuted() time.Time {
+func (o *AccountOrderRecordNullable) GetTimeExecuted() time.Time {
 	if o == nil || isNil(o.TimeExecuted.Get()) {
 		var ret time.Time
 		return ret
@@ -925,7 +928,7 @@ func (o *OrderUpdatedResponseOrder) GetTimeExecuted() time.Time {
 // GetTimeExecutedOk returns a tuple with the TimeExecuted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetTimeExecutedOk() (*time.Time, bool) {
+func (o *AccountOrderRecordNullable) GetTimeExecutedOk() (*time.Time, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -933,7 +936,7 @@ func (o *OrderUpdatedResponseOrder) GetTimeExecutedOk() (*time.Time, bool) {
 }
 
 // HasTimeExecuted returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasTimeExecuted() bool {
+func (o *AccountOrderRecordNullable) HasTimeExecuted() bool {
 	if o != nil && o.TimeExecuted.IsSet() {
 		return true
 	}
@@ -942,21 +945,21 @@ func (o *OrderUpdatedResponseOrder) HasTimeExecuted() bool {
 }
 
 // SetTimeExecuted gets a reference to the given NullableTime and assigns it to the TimeExecuted field.
-func (o *OrderUpdatedResponseOrder) SetTimeExecuted(v time.Time) {
+func (o *AccountOrderRecordNullable) SetTimeExecuted(v time.Time) {
 	o.TimeExecuted.Set(&v)
 }
 // SetTimeExecutedNil sets the value for TimeExecuted to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetTimeExecutedNil() {
+func (o *AccountOrderRecordNullable) SetTimeExecutedNil() {
 	o.TimeExecuted.Set(nil)
 }
 
 // UnsetTimeExecuted ensures that no value is present for TimeExecuted, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetTimeExecuted() {
+func (o *AccountOrderRecordNullable) UnsetTimeExecuted() {
 	o.TimeExecuted.Unset()
 }
 
 // GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetExpiryDate() time.Time {
+func (o *AccountOrderRecordNullable) GetExpiryDate() time.Time {
 	if o == nil || isNil(o.ExpiryDate.Get()) {
 		var ret time.Time
 		return ret
@@ -967,7 +970,7 @@ func (o *OrderUpdatedResponseOrder) GetExpiryDate() time.Time {
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetExpiryDateOk() (*time.Time, bool) {
+func (o *AccountOrderRecordNullable) GetExpiryDateOk() (*time.Time, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -975,7 +978,7 @@ func (o *OrderUpdatedResponseOrder) GetExpiryDateOk() (*time.Time, bool) {
 }
 
 // HasExpiryDate returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasExpiryDate() bool {
+func (o *AccountOrderRecordNullable) HasExpiryDate() bool {
 	if o != nil && o.ExpiryDate.IsSet() {
 		return true
 	}
@@ -984,22 +987,22 @@ func (o *OrderUpdatedResponseOrder) HasExpiryDate() bool {
 }
 
 // SetExpiryDate gets a reference to the given NullableTime and assigns it to the ExpiryDate field.
-func (o *OrderUpdatedResponseOrder) SetExpiryDate(v time.Time) {
+func (o *AccountOrderRecordNullable) SetExpiryDate(v time.Time) {
 	o.ExpiryDate.Set(&v)
 }
 // SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetExpiryDateNil() {
+func (o *AccountOrderRecordNullable) SetExpiryDateNil() {
 	o.ExpiryDate.Set(nil)
 }
 
 // UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetExpiryDate() {
+func (o *AccountOrderRecordNullable) UnsetExpiryDate() {
 	o.ExpiryDate.Unset()
 }
 
 // GetSymbol returns the Symbol field value if set, zero value otherwise.
 // Deprecated
-func (o *OrderUpdatedResponseOrder) GetSymbol() string {
+func (o *AccountOrderRecordNullable) GetSymbol() string {
 	if o == nil || isNil(o.Symbol) {
 		var ret string
 		return ret
@@ -1010,7 +1013,7 @@ func (o *OrderUpdatedResponseOrder) GetSymbol() string {
 // GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *OrderUpdatedResponseOrder) GetSymbolOk() (*string, bool) {
+func (o *AccountOrderRecordNullable) GetSymbolOk() (*string, bool) {
 	if o == nil || isNil(o.Symbol) {
     return nil, false
 	}
@@ -1018,7 +1021,7 @@ func (o *OrderUpdatedResponseOrder) GetSymbolOk() (*string, bool) {
 }
 
 // HasSymbol returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasSymbol() bool {
+func (o *AccountOrderRecordNullable) HasSymbol() bool {
 	if o != nil && !isNil(o.Symbol) {
 		return true
 	}
@@ -1028,14 +1031,14 @@ func (o *OrderUpdatedResponseOrder) HasSymbol() bool {
 
 // SetSymbol gets a reference to the given string and assigns it to the Symbol field.
 // Deprecated
-func (o *OrderUpdatedResponseOrder) SetSymbol(v string) {
+func (o *AccountOrderRecordNullable) SetSymbol(v string) {
 	o.Symbol = &v
 }
 
 // GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponseOrder) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds {
+func (o *AccountOrderRecordNullable) GetChildBrokerageOrderIds() ChildBrokerageOrderIDsNullable {
 	if o == nil || isNil(o.ChildBrokerageOrderIds.Get()) {
-		var ret AccountOrderRecordChildBrokerageOrderIds
+		var ret ChildBrokerageOrderIDsNullable
 		return ret
 	}
 	return *o.ChildBrokerageOrderIds.Get()
@@ -1044,7 +1047,7 @@ func (o *OrderUpdatedResponseOrder) GetChildBrokerageOrderIds() AccountOrderReco
 // GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponseOrder) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool) {
+func (o *AccountOrderRecordNullable) GetChildBrokerageOrderIdsOk() (*ChildBrokerageOrderIDsNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -1052,7 +1055,7 @@ func (o *OrderUpdatedResponseOrder) GetChildBrokerageOrderIdsOk() (*AccountOrder
 }
 
 // HasChildBrokerageOrderIds returns a boolean if a field has been set.
-func (o *OrderUpdatedResponseOrder) HasChildBrokerageOrderIds() bool {
+func (o *AccountOrderRecordNullable) HasChildBrokerageOrderIds() bool {
 	if o != nil && o.ChildBrokerageOrderIds.IsSet() {
 		return true
 	}
@@ -1060,21 +1063,21 @@ func (o *OrderUpdatedResponseOrder) HasChildBrokerageOrderIds() bool {
 	return false
 }
 
-// SetChildBrokerageOrderIds gets a reference to the given NullableAccountOrderRecordChildBrokerageOrderIds and assigns it to the ChildBrokerageOrderIds field.
-func (o *OrderUpdatedResponseOrder) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds) {
+// SetChildBrokerageOrderIds gets a reference to the given NullableChildBrokerageOrderIDsNullable and assigns it to the ChildBrokerageOrderIds field.
+func (o *AccountOrderRecordNullable) SetChildBrokerageOrderIds(v ChildBrokerageOrderIDsNullable) {
 	o.ChildBrokerageOrderIds.Set(&v)
 }
 // SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
-func (o *OrderUpdatedResponseOrder) SetChildBrokerageOrderIdsNil() {
+func (o *AccountOrderRecordNullable) SetChildBrokerageOrderIdsNil() {
 	o.ChildBrokerageOrderIds.Set(nil)
 }
 
 // UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
-func (o *OrderUpdatedResponseOrder) UnsetChildBrokerageOrderIds() {
+func (o *AccountOrderRecordNullable) UnsetChildBrokerageOrderIds() {
 	o.ChildBrokerageOrderIds.Unset()
 }
 
-func (o OrderUpdatedResponseOrder) MarshalJSON() ([]byte, error) {
+func (o AccountOrderRecordNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.BrokerageOrderId) {
 		toSerialize["brokerage_order_id"] = o.BrokerageOrderId
@@ -1151,41 +1154,87 @@ func (o OrderUpdatedResponseOrder) MarshalJSON() ([]byte, error) {
 	if o.ChildBrokerageOrderIds.IsSet() {
 		toSerialize["child_brokerage_order_ids"] = o.ChildBrokerageOrderIds.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableOrderUpdatedResponseOrder struct {
-	value *OrderUpdatedResponseOrder
+func (o *AccountOrderRecordNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varAccountOrderRecordNullable := _AccountOrderRecordNullable{}
+
+	if err = json.Unmarshal(bytes, &varAccountOrderRecordNullable); err == nil {
+		*o = AccountOrderRecordNullable(varAccountOrderRecordNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "brokerage_order_id")
+		delete(additionalProperties, "brokerage_group_order_id")
+		delete(additionalProperties, "order_role")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "universal_symbol")
+		delete(additionalProperties, "option_symbol")
+		delete(additionalProperties, "quote_universal_symbol")
+		delete(additionalProperties, "quote_currency")
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "total_quantity")
+		delete(additionalProperties, "open_quantity")
+		delete(additionalProperties, "canceled_quantity")
+		delete(additionalProperties, "filled_quantity")
+		delete(additionalProperties, "execution_price")
+		delete(additionalProperties, "limit_price")
+		delete(additionalProperties, "stop_price")
+		delete(additionalProperties, "trailing_stop")
+		delete(additionalProperties, "order_type")
+		delete(additionalProperties, "time_in_force")
+		delete(additionalProperties, "time_placed")
+		delete(additionalProperties, "time_updated")
+		delete(additionalProperties, "time_executed")
+		delete(additionalProperties, "expiry_date")
+		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "child_brokerage_order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableAccountOrderRecordNullable struct {
+	value *AccountOrderRecordNullable
 	isSet bool
 }
 
-func (v NullableOrderUpdatedResponseOrder) Get() *OrderUpdatedResponseOrder {
+func (v NullableAccountOrderRecordNullable) Get() *AccountOrderRecordNullable {
 	return v.value
 }
 
-func (v *NullableOrderUpdatedResponseOrder) Set(val *OrderUpdatedResponseOrder) {
+func (v *NullableAccountOrderRecordNullable) Set(val *AccountOrderRecordNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableOrderUpdatedResponseOrder) IsSet() bool {
+func (v NullableAccountOrderRecordNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableOrderUpdatedResponseOrder) Unset() {
+func (v *NullableAccountOrderRecordNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableOrderUpdatedResponseOrder(val *OrderUpdatedResponseOrder) *NullableOrderUpdatedResponseOrder {
-	return &NullableOrderUpdatedResponseOrder{value: val, isSet: true}
+func NewNullableAccountOrderRecordNullable(val *AccountOrderRecordNullable) *NullableAccountOrderRecordNullable {
+	return &NullableAccountOrderRecordNullable{value: val, isSet: true}
 }
 
-func (v NullableOrderUpdatedResponseOrder) MarshalJSON() ([]byte, error) {
+func (v NullableAccountOrderRecordNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableOrderUpdatedResponseOrder) UnmarshalJSON(src []byte) error {
+func (v *NullableAccountOrderRecordNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

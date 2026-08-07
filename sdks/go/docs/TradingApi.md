@@ -226,7 +226,6 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    priceEffect := *snaptrade.NewMlegPriceEffectStrict()
     
     mlegTradeForm := *snaptrade.NewMlegTradeForm(
         null,
@@ -235,7 +234,7 @@ func main() {
     )
     mlegTradeForm.SetLimitPrice("")
     mlegTradeForm.SetStopPrice("")
-    mlegTradeForm.SetPriceEffect(priceEffect)
+    mlegTradeForm.SetPriceEffect(DEBIT)
     
     request := client.TradingApi.GetOptionImpact(
         "userId_example",
@@ -286,8 +285,7 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    units := *snaptrade.Newfloat32()
-    notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
+    notionalValue := *snaptrade.NewNotionalValueNullable()
     
     manualTradeForm := *snaptrade.NewManualTradeForm(
         "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -298,7 +296,7 @@ func main() {
     )
     manualTradeForm.SetPrice(31.33)
     manualTradeForm.SetStop(31.33)
-    manualTradeForm.SetUnits(units)
+    manualTradeForm.SetUnits(10.5)
     manualTradeForm.SetNotionalValue(notionalValue)
     
     request := client.TradingApi.GetOrderImpact(
@@ -541,13 +539,12 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    clientOrderId := *snaptrade.Newstring()
     
     manualTradeFormComplex := *snaptrade.NewManualTradeFormComplex(
         "OTO",
         null,
     )
-    manualTradeFormComplex.SetClientOrderId(clientOrderId)
+    manualTradeFormComplex.SetClientOrderId("550e8400-e29b-41d4-a716-446655440000")
     
     request := client.TradingApi.PlaceComplexOrder(
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
@@ -659,10 +656,7 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    universalSymbolId := *snaptrade.Newstring()
-    units := *snaptrade.Newfloat32()
-    notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
-    clientOrderId := *snaptrade.Newstring()
+    notionalValue := *snaptrade.NewNotionalValueNullable()
     
     manualTradeFormWithOptions := *snaptrade.NewManualTradeFormWithOptions(
         "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -670,15 +664,15 @@ func main() {
         null,
         null,
     )
-    manualTradeFormWithOptions.SetUniversalSymbolId(universalSymbolId)
+    manualTradeFormWithOptions.SetUniversalSymbolId("2bcd7cc3-e922-4976-bce1-9858296801c3")
     manualTradeFormWithOptions.SetSymbol("AAPL")
     manualTradeFormWithOptions.SetTradingSession(null)
     manualTradeFormWithOptions.SetExpiryDate(2026-08-21T23:27:55.027Z)
     manualTradeFormWithOptions.SetPrice(31.33)
     manualTradeFormWithOptions.SetStop(31.33)
-    manualTradeFormWithOptions.SetUnits(units)
+    manualTradeFormWithOptions.SetUnits(10.5)
     manualTradeFormWithOptions.SetNotionalValue(notionalValue)
-    manualTradeFormWithOptions.SetClientOrderId(clientOrderId)
+    manualTradeFormWithOptions.SetClientOrderId("550e8400-e29b-41d4-a716-446655440000")
     
     request := client.TradingApi.PlaceForceOrder(
         "userId_example",
@@ -750,7 +744,6 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    priceEffect := *snaptrade.NewMlegPriceEffectStrict()
     
     mlegTradeForm := *snaptrade.NewMlegTradeForm(
         null,
@@ -759,7 +752,7 @@ func main() {
     )
     mlegTradeForm.SetLimitPrice("")
     mlegTradeForm.SetStopPrice("")
-    mlegTradeForm.SetPriceEffect(priceEffect)
+    mlegTradeForm.SetPriceEffect(DEBIT)
     
     request := client.TradingApi.PlaceMlegOrder(
         "userId_example",
@@ -945,7 +938,6 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    units := *snaptrade.Newfloat32()
     
     manualTradeReplaceForm := *snaptrade.NewManualTradeReplaceForm(
         "66a033fa-da74-4fcf-b527-feefdec9257e",
@@ -956,7 +948,7 @@ func main() {
     manualTradeReplaceForm.SetPrice(31.33)
     manualTradeReplaceForm.SetSymbol("AAPL")
     manualTradeReplaceForm.SetStop(31.33)
-    manualTradeReplaceForm.SetUnits(units)
+    manualTradeReplaceForm.SetUnits(10.5)
     
     request := client.TradingApi.ReplaceOrder(
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",

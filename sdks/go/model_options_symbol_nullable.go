@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// AccountUniversalActivityOptionSymbol The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
-type AccountUniversalActivityOptionSymbol struct {
+// OptionsSymbolNullable Uniquely describes an option security + exchange combination across all brokerages.
+type OptionsSymbolNullable struct {
 	// Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	Id string `json:"id"`
 	// The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
@@ -30,14 +30,17 @@ type AccountUniversalActivityOptionSymbol struct {
 	// Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
 	IsMiniOption *bool `json:"is_mini_option,omitempty"`
 	UnderlyingSymbol UnderlyingSymbol `json:"underlying_symbol"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewAccountUniversalActivityOptionSymbol instantiates a new AccountUniversalActivityOptionSymbol object
+type _OptionsSymbolNullable OptionsSymbolNullable
+
+// NewOptionsSymbolNullable instantiates a new OptionsSymbolNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountUniversalActivityOptionSymbol(id string, ticker string, optionType string, strikePrice float32, expirationDate string, underlyingSymbol UnderlyingSymbol) *AccountUniversalActivityOptionSymbol {
-	this := AccountUniversalActivityOptionSymbol{}
+func NewOptionsSymbolNullable(id string, ticker string, optionType string, strikePrice float32, expirationDate string, underlyingSymbol UnderlyingSymbol) *OptionsSymbolNullable {
+	this := OptionsSymbolNullable{}
 	this.Id = id
 	this.Ticker = ticker
 	this.OptionType = optionType
@@ -47,16 +50,16 @@ func NewAccountUniversalActivityOptionSymbol(id string, ticker string, optionTyp
 	return &this
 }
 
-// NewAccountUniversalActivityOptionSymbolWithDefaults instantiates a new AccountUniversalActivityOptionSymbol object
+// NewOptionsSymbolNullableWithDefaults instantiates a new OptionsSymbolNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountUniversalActivityOptionSymbolWithDefaults() *AccountUniversalActivityOptionSymbol {
-	this := AccountUniversalActivityOptionSymbol{}
+func NewOptionsSymbolNullableWithDefaults() *OptionsSymbolNullable {
+	this := OptionsSymbolNullable{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *AccountUniversalActivityOptionSymbol) GetId() string {
+func (o *OptionsSymbolNullable) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -67,7 +70,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetIdOk() (*string, bool) {
+func (o *OptionsSymbolNullable) GetIdOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -75,12 +78,12 @@ func (o *AccountUniversalActivityOptionSymbol) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *AccountUniversalActivityOptionSymbol) SetId(v string) {
+func (o *OptionsSymbolNullable) SetId(v string) {
 	o.Id = v
 }
 
 // GetTicker returns the Ticker field value
-func (o *AccountUniversalActivityOptionSymbol) GetTicker() string {
+func (o *OptionsSymbolNullable) GetTicker() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -91,7 +94,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetTicker() string {
 
 // GetTickerOk returns a tuple with the Ticker field value
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetTickerOk() (*string, bool) {
+func (o *OptionsSymbolNullable) GetTickerOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -99,12 +102,12 @@ func (o *AccountUniversalActivityOptionSymbol) GetTickerOk() (*string, bool) {
 }
 
 // SetTicker sets field value
-func (o *AccountUniversalActivityOptionSymbol) SetTicker(v string) {
+func (o *OptionsSymbolNullable) SetTicker(v string) {
 	o.Ticker = v
 }
 
 // GetOptionType returns the OptionType field value
-func (o *AccountUniversalActivityOptionSymbol) GetOptionType() string {
+func (o *OptionsSymbolNullable) GetOptionType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -115,7 +118,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetOptionType() string {
 
 // GetOptionTypeOk returns a tuple with the OptionType field value
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetOptionTypeOk() (*string, bool) {
+func (o *OptionsSymbolNullable) GetOptionTypeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -123,12 +126,12 @@ func (o *AccountUniversalActivityOptionSymbol) GetOptionTypeOk() (*string, bool)
 }
 
 // SetOptionType sets field value
-func (o *AccountUniversalActivityOptionSymbol) SetOptionType(v string) {
+func (o *OptionsSymbolNullable) SetOptionType(v string) {
 	o.OptionType = v
 }
 
 // GetStrikePrice returns the StrikePrice field value
-func (o *AccountUniversalActivityOptionSymbol) GetStrikePrice() float32 {
+func (o *OptionsSymbolNullable) GetStrikePrice() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -139,7 +142,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetStrikePrice() float32 {
 
 // GetStrikePriceOk returns a tuple with the StrikePrice field value
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetStrikePriceOk() (*float32, bool) {
+func (o *OptionsSymbolNullable) GetStrikePriceOk() (*float32, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -147,12 +150,12 @@ func (o *AccountUniversalActivityOptionSymbol) GetStrikePriceOk() (*float32, boo
 }
 
 // SetStrikePrice sets field value
-func (o *AccountUniversalActivityOptionSymbol) SetStrikePrice(v float32) {
+func (o *OptionsSymbolNullable) SetStrikePrice(v float32) {
 	o.StrikePrice = v
 }
 
 // GetExpirationDate returns the ExpirationDate field value
-func (o *AccountUniversalActivityOptionSymbol) GetExpirationDate() string {
+func (o *OptionsSymbolNullable) GetExpirationDate() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -163,7 +166,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetExpirationDate() string {
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetExpirationDateOk() (*string, bool) {
+func (o *OptionsSymbolNullable) GetExpirationDateOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -171,12 +174,12 @@ func (o *AccountUniversalActivityOptionSymbol) GetExpirationDateOk() (*string, b
 }
 
 // SetExpirationDate sets field value
-func (o *AccountUniversalActivityOptionSymbol) SetExpirationDate(v string) {
+func (o *OptionsSymbolNullable) SetExpirationDate(v string) {
 	o.ExpirationDate = v
 }
 
 // GetIsMiniOption returns the IsMiniOption field value if set, zero value otherwise.
-func (o *AccountUniversalActivityOptionSymbol) GetIsMiniOption() bool {
+func (o *OptionsSymbolNullable) GetIsMiniOption() bool {
 	if o == nil || isNil(o.IsMiniOption) {
 		var ret bool
 		return ret
@@ -186,7 +189,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetIsMiniOption() bool {
 
 // GetIsMiniOptionOk returns a tuple with the IsMiniOption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetIsMiniOptionOk() (*bool, bool) {
+func (o *OptionsSymbolNullable) GetIsMiniOptionOk() (*bool, bool) {
 	if o == nil || isNil(o.IsMiniOption) {
     return nil, false
 	}
@@ -194,7 +197,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetIsMiniOptionOk() (*bool, bool)
 }
 
 // HasIsMiniOption returns a boolean if a field has been set.
-func (o *AccountUniversalActivityOptionSymbol) HasIsMiniOption() bool {
+func (o *OptionsSymbolNullable) HasIsMiniOption() bool {
 	if o != nil && !isNil(o.IsMiniOption) {
 		return true
 	}
@@ -203,12 +206,12 @@ func (o *AccountUniversalActivityOptionSymbol) HasIsMiniOption() bool {
 }
 
 // SetIsMiniOption gets a reference to the given bool and assigns it to the IsMiniOption field.
-func (o *AccountUniversalActivityOptionSymbol) SetIsMiniOption(v bool) {
+func (o *OptionsSymbolNullable) SetIsMiniOption(v bool) {
 	o.IsMiniOption = &v
 }
 
 // GetUnderlyingSymbol returns the UnderlyingSymbol field value
-func (o *AccountUniversalActivityOptionSymbol) GetUnderlyingSymbol() UnderlyingSymbol {
+func (o *OptionsSymbolNullable) GetUnderlyingSymbol() UnderlyingSymbol {
 	if o == nil {
 		var ret UnderlyingSymbol
 		return ret
@@ -219,7 +222,7 @@ func (o *AccountUniversalActivityOptionSymbol) GetUnderlyingSymbol() UnderlyingS
 
 // GetUnderlyingSymbolOk returns a tuple with the UnderlyingSymbol field value
 // and a boolean to check if the value has been set.
-func (o *AccountUniversalActivityOptionSymbol) GetUnderlyingSymbolOk() (*UnderlyingSymbol, bool) {
+func (o *OptionsSymbolNullable) GetUnderlyingSymbolOk() (*UnderlyingSymbol, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -227,11 +230,11 @@ func (o *AccountUniversalActivityOptionSymbol) GetUnderlyingSymbolOk() (*Underly
 }
 
 // SetUnderlyingSymbol sets field value
-func (o *AccountUniversalActivityOptionSymbol) SetUnderlyingSymbol(v UnderlyingSymbol) {
+func (o *OptionsSymbolNullable) SetUnderlyingSymbol(v UnderlyingSymbol) {
 	o.UnderlyingSymbol = v
 }
 
-func (o AccountUniversalActivityOptionSymbol) MarshalJSON() ([]byte, error) {
+func (o OptionsSymbolNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["id"] = o.Id
@@ -254,41 +257,69 @@ func (o AccountUniversalActivityOptionSymbol) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["underlying_symbol"] = o.UnderlyingSymbol
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableAccountUniversalActivityOptionSymbol struct {
-	value *AccountUniversalActivityOptionSymbol
+func (o *OptionsSymbolNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varOptionsSymbolNullable := _OptionsSymbolNullable{}
+
+	if err = json.Unmarshal(bytes, &varOptionsSymbolNullable); err == nil {
+		*o = OptionsSymbolNullable(varOptionsSymbolNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "ticker")
+		delete(additionalProperties, "option_type")
+		delete(additionalProperties, "strike_price")
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "is_mini_option")
+		delete(additionalProperties, "underlying_symbol")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableOptionsSymbolNullable struct {
+	value *OptionsSymbolNullable
 	isSet bool
 }
 
-func (v NullableAccountUniversalActivityOptionSymbol) Get() *AccountUniversalActivityOptionSymbol {
+func (v NullableOptionsSymbolNullable) Get() *OptionsSymbolNullable {
 	return v.value
 }
 
-func (v *NullableAccountUniversalActivityOptionSymbol) Set(val *AccountUniversalActivityOptionSymbol) {
+func (v *NullableOptionsSymbolNullable) Set(val *OptionsSymbolNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountUniversalActivityOptionSymbol) IsSet() bool {
+func (v NullableOptionsSymbolNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountUniversalActivityOptionSymbol) Unset() {
+func (v *NullableOptionsSymbolNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountUniversalActivityOptionSymbol(val *AccountUniversalActivityOptionSymbol) *NullableAccountUniversalActivityOptionSymbol {
-	return &NullableAccountUniversalActivityOptionSymbol{value: val, isSet: true}
+func NewNullableOptionsSymbolNullable(val *OptionsSymbolNullable) *NullableOptionsSymbolNullable {
+	return &NullableOptionsSymbolNullable{value: val, isSet: true}
 }
 
-func (v NullableAccountUniversalActivityOptionSymbol) MarshalJSON() ([]byte, error) {
+func (v NullableOptionsSymbolNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountUniversalActivityOptionSymbol) UnmarshalJSON(src []byte) error {
+func (v *NullableOptionsSymbolNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **BrokerageGroupOrderId** | Pointer to **NullableString** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  | [optional] 
 **OrderRole** | Pointer to **NullableString** | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  | [optional] 
 **Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
-**UniversalSymbol** | Pointer to [**NullableAccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
-**OptionSymbol** | Pointer to [**NullableAccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
-**QuoteUniversalSymbol** | Pointer to [**NullableAccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
-**QuoteCurrency** | Pointer to [**NullableAccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  | [optional] 
+**UniversalSymbol** | Pointer to [**NullableUniversalSymbolNullable**](UniversalSymbolNullable.md) |  | [optional] 
+**OptionSymbol** | Pointer to [**NullableOptionsSymbolNullable**](OptionsSymbolNullable.md) |  | [optional] 
+**QuoteUniversalSymbol** | Pointer to [**NullableUniversalSymbolNullable**](UniversalSymbolNullable.md) |  | [optional] 
+**QuoteCurrency** | Pointer to [**NullableCurrencyNullable**](CurrencyNullable.md) |  | [optional] 
 **Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
 **TotalQuantity** | Pointer to **NullableString** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
 **OpenQuantity** | Pointer to **NullableString** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **ExecutionPrice** | Pointer to **NullableFloat64** | The price at which the order was executed. For option orders, this represents the price per share. | [optional] 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. For option orders, this represents the price per share. | [optional] 
-**TrailingStop** | Pointer to [**NullableAccountOrderRecordTrailingStop**](AccountOrderRecordTrailingStop.md) |  | [optional] 
+**TrailingStop** | Pointer to [**NullableTrailingStopNullable**](TrailingStopNullable.md) |  | [optional] 
 **OrderType** | Pointer to **NullableString** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. | [optional] 
 **TimeInForce** | Pointer to **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.  | [optional] 
 **TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **ExpiryDate** | Pointer to **NullableTime** | The time the order expires. This value is not always available from the brokerage. | [optional] 
 **Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
-**ChildBrokerageOrderIds** | Pointer to [**NullableAccountOrderRecordChildBrokerageOrderIds**](AccountOrderRecordChildBrokerageOrderIds.md) |  | [optional] 
+**ChildBrokerageOrderIds** | Pointer to [**NullableChildBrokerageOrderIDsNullable**](ChildBrokerageOrderIDsNullable.md) |  | [optional] 
 
 ## Methods
 
@@ -171,20 +171,20 @@ HasStatus returns a boolean if a field has been set.
 
 ### GetUniversalSymbol
 
-`func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol`
+`func (o *AccountOrderRecord) GetUniversalSymbol() UniversalSymbolNullable`
 
 GetUniversalSymbol returns the UniversalSymbol field if non-nil, zero value otherwise.
 
 ### GetUniversalSymbolOk
 
-`func (o *AccountOrderRecord) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool)`
+`func (o *AccountOrderRecord) GetUniversalSymbolOk() (*UniversalSymbolNullable, bool)`
 
 GetUniversalSymbolOk returns a tuple with the UniversalSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUniversalSymbol
 
-`func (o *AccountOrderRecord) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol)`
+`func (o *AccountOrderRecord) SetUniversalSymbol(v UniversalSymbolNullable)`
 
 SetUniversalSymbol sets UniversalSymbol field to given value.
 
@@ -206,20 +206,20 @@ HasUniversalSymbol returns a boolean if a field has been set.
 UnsetUniversalSymbol ensures that no value is present for UniversalSymbol, not even an explicit nil
 ### GetOptionSymbol
 
-`func (o *AccountOrderRecord) GetOptionSymbol() AccountOrderRecordOptionSymbol`
+`func (o *AccountOrderRecord) GetOptionSymbol() OptionsSymbolNullable`
 
 GetOptionSymbol returns the OptionSymbol field if non-nil, zero value otherwise.
 
 ### GetOptionSymbolOk
 
-`func (o *AccountOrderRecord) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool)`
+`func (o *AccountOrderRecord) GetOptionSymbolOk() (*OptionsSymbolNullable, bool)`
 
 GetOptionSymbolOk returns a tuple with the OptionSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOptionSymbol
 
-`func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol)`
+`func (o *AccountOrderRecord) SetOptionSymbol(v OptionsSymbolNullable)`
 
 SetOptionSymbol sets OptionSymbol field to given value.
 
@@ -241,20 +241,20 @@ HasOptionSymbol returns a boolean if a field has been set.
 UnsetOptionSymbol ensures that no value is present for OptionSymbol, not even an explicit nil
 ### GetQuoteUniversalSymbol
 
-`func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol`
+`func (o *AccountOrderRecord) GetQuoteUniversalSymbol() UniversalSymbolNullable`
 
 GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field if non-nil, zero value otherwise.
 
 ### GetQuoteUniversalSymbolOk
 
-`func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool)`
+`func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*UniversalSymbolNullable, bool)`
 
 GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuoteUniversalSymbol
 
-`func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol)`
+`func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v UniversalSymbolNullable)`
 
 SetQuoteUniversalSymbol sets QuoteUniversalSymbol field to given value.
 
@@ -276,20 +276,20 @@ HasQuoteUniversalSymbol returns a boolean if a field has been set.
 UnsetQuoteUniversalSymbol ensures that no value is present for QuoteUniversalSymbol, not even an explicit nil
 ### GetQuoteCurrency
 
-`func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency`
+`func (o *AccountOrderRecord) GetQuoteCurrency() CurrencyNullable`
 
 GetQuoteCurrency returns the QuoteCurrency field if non-nil, zero value otherwise.
 
 ### GetQuoteCurrencyOk
 
-`func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool)`
+`func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*CurrencyNullable, bool)`
 
 GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuoteCurrency
 
-`func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency)`
+`func (o *AccountOrderRecord) SetQuoteCurrency(v CurrencyNullable)`
 
 SetQuoteCurrency sets QuoteCurrency field to given value.
 
@@ -581,20 +581,20 @@ HasStopPrice returns a boolean if a field has been set.
 UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
 ### GetTrailingStop
 
-`func (o *AccountOrderRecord) GetTrailingStop() AccountOrderRecordTrailingStop`
+`func (o *AccountOrderRecord) GetTrailingStop() TrailingStopNullable`
 
 GetTrailingStop returns the TrailingStop field if non-nil, zero value otherwise.
 
 ### GetTrailingStopOk
 
-`func (o *AccountOrderRecord) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool)`
+`func (o *AccountOrderRecord) GetTrailingStopOk() (*TrailingStopNullable, bool)`
 
 GetTrailingStopOk returns a tuple with the TrailingStop field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrailingStop
 
-`func (o *AccountOrderRecord) SetTrailingStop(v AccountOrderRecordTrailingStop)`
+`func (o *AccountOrderRecord) SetTrailingStop(v TrailingStopNullable)`
 
 SetTrailingStop sets TrailingStop field to given value.
 
@@ -831,20 +831,20 @@ HasSymbol returns a boolean if a field has been set.
 
 ### GetChildBrokerageOrderIds
 
-`func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds`
+`func (o *AccountOrderRecord) GetChildBrokerageOrderIds() ChildBrokerageOrderIDsNullable`
 
 GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field if non-nil, zero value otherwise.
 
 ### GetChildBrokerageOrderIdsOk
 
-`func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool)`
+`func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*ChildBrokerageOrderIDsNullable, bool)`
 
 GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChildBrokerageOrderIds
 
-`func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds)`
+`func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v ChildBrokerageOrderIDsNullable)`
 
 SetChildBrokerageOrderIds sets ChildBrokerageOrderIds field to given value.
 

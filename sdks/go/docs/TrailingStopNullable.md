@@ -1,4 +1,4 @@
-# AccountOrderRecordTrailingStop
+# TrailingStopNullable
 
 ## Properties
 
@@ -9,59 +9,59 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAccountOrderRecordTrailingStop
+### NewTrailingStopNullable
 
-`func NewAccountOrderRecordTrailingStop(amount string, type_ string, ) *AccountOrderRecordTrailingStop`
+`func NewTrailingStopNullable(amount string, type_ string, ) *TrailingStopNullable`
 
-NewAccountOrderRecordTrailingStop instantiates a new AccountOrderRecordTrailingStop object
+NewTrailingStopNullable instantiates a new TrailingStopNullable object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAccountOrderRecordTrailingStopWithDefaults
+### NewTrailingStopNullableWithDefaults
 
-`func NewAccountOrderRecordTrailingStopWithDefaults() *AccountOrderRecordTrailingStop`
+`func NewTrailingStopNullableWithDefaults() *TrailingStopNullable`
 
-NewAccountOrderRecordTrailingStopWithDefaults instantiates a new AccountOrderRecordTrailingStop object
+NewTrailingStopNullableWithDefaults instantiates a new TrailingStopNullable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *AccountOrderRecordTrailingStop) GetAmount() string`
+`func (o *TrailingStopNullable) GetAmount() string`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *AccountOrderRecordTrailingStop) GetAmountOk() (*string, bool)`
+`func (o *TrailingStopNullable) GetAmountOk() (*string, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *AccountOrderRecordTrailingStop) SetAmount(v string)`
+`func (o *TrailingStopNullable) SetAmount(v string)`
 
 SetAmount sets Amount field to given value.
 
 
 ### GetType
 
-`func (o *AccountOrderRecordTrailingStop) GetType() string`
+`func (o *TrailingStopNullable) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *AccountOrderRecordTrailingStop) GetTypeOk() (*string, bool)`
+`func (o *TrailingStopNullable) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *AccountOrderRecordTrailingStop) SetType(v string)`
+`func (o *TrailingStopNullable) SetType(v string)`
 
 SetType sets Type field to given value.
 

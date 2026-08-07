@@ -19,7 +19,7 @@ import (
 type OrderUpdatedResponse struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId string `json:"brokerage_order_id"`
-	Order NullableOrderUpdatedResponseOrder `json:"order,omitempty"`
+	Order NullableAccountOrderRecordNullable `json:"order,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -68,9 +68,9 @@ func (o *OrderUpdatedResponse) SetBrokerageOrderId(v string) {
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrderUpdatedResponse) GetOrder() OrderUpdatedResponseOrder {
+func (o *OrderUpdatedResponse) GetOrder() AccountOrderRecordNullable {
 	if o == nil || isNil(o.Order.Get()) {
-		var ret OrderUpdatedResponseOrder
+		var ret AccountOrderRecordNullable
 		return ret
 	}
 	return *o.Order.Get()
@@ -79,7 +79,7 @@ func (o *OrderUpdatedResponse) GetOrder() OrderUpdatedResponseOrder {
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrderUpdatedResponse) GetOrderOk() (*OrderUpdatedResponseOrder, bool) {
+func (o *OrderUpdatedResponse) GetOrderOk() (*AccountOrderRecordNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -95,8 +95,8 @@ func (o *OrderUpdatedResponse) HasOrder() bool {
 	return false
 }
 
-// SetOrder gets a reference to the given NullableOrderUpdatedResponseOrder and assigns it to the Order field.
-func (o *OrderUpdatedResponse) SetOrder(v OrderUpdatedResponseOrder) {
+// SetOrder gets a reference to the given NullableAccountOrderRecordNullable and assigns it to the Order field.
+func (o *OrderUpdatedResponse) SetOrder(v AccountOrderRecordNullable) {
 	o.Order.Set(&v)
 }
 // SetOrderNil sets the value for Order to be an explicit nil

@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// AccountOrderRecordUniversalSymbol Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
-type AccountOrderRecordUniversalSymbol struct {
+// UniversalSymbolNullable Uniquely describes a single security + exchange combination across all brokerages.
+type UniversalSymbolNullable struct {
 	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	Id string `json:"id"`
 	// The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
@@ -30,18 +30,21 @@ type AccountOrderRecordUniversalSymbol struct {
 	Type SecurityType `json:"type"`
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
-	FigiInstrument NullableStockInstrumentFigiInstrument `json:"figi_instrument,omitempty"`
+	FigiInstrument NullableFigiInstrumentNullable `json:"figi_instrument,omitempty"`
 	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
 	// Deprecated
 	Currencies []Currency `json:"currencies"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewAccountOrderRecordUniversalSymbol instantiates a new AccountOrderRecordUniversalSymbol object
+type _UniversalSymbolNullable UniversalSymbolNullable
+
+// NewUniversalSymbolNullable instantiates a new UniversalSymbolNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrderRecordUniversalSymbol(id string, symbol string, rawSymbol string, currency SymbolCurrency, type_ SecurityType, currencies []Currency) *AccountOrderRecordUniversalSymbol {
-	this := AccountOrderRecordUniversalSymbol{}
+func NewUniversalSymbolNullable(id string, symbol string, rawSymbol string, currency SymbolCurrency, type_ SecurityType, currencies []Currency) *UniversalSymbolNullable {
+	this := UniversalSymbolNullable{}
 	this.Id = id
 	this.Symbol = symbol
 	this.RawSymbol = rawSymbol
@@ -51,16 +54,16 @@ func NewAccountOrderRecordUniversalSymbol(id string, symbol string, rawSymbol st
 	return &this
 }
 
-// NewAccountOrderRecordUniversalSymbolWithDefaults instantiates a new AccountOrderRecordUniversalSymbol object
+// NewUniversalSymbolNullableWithDefaults instantiates a new UniversalSymbolNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountOrderRecordUniversalSymbolWithDefaults() *AccountOrderRecordUniversalSymbol {
-	this := AccountOrderRecordUniversalSymbol{}
+func NewUniversalSymbolNullableWithDefaults() *UniversalSymbolNullable {
+	this := UniversalSymbolNullable{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *AccountOrderRecordUniversalSymbol) GetId() string {
+func (o *UniversalSymbolNullable) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -71,7 +74,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetIdOk() (*string, bool) {
+func (o *UniversalSymbolNullable) GetIdOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -79,12 +82,12 @@ func (o *AccountOrderRecordUniversalSymbol) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *AccountOrderRecordUniversalSymbol) SetId(v string) {
+func (o *UniversalSymbolNullable) SetId(v string) {
 	o.Id = v
 }
 
 // GetSymbol returns the Symbol field value
-func (o *AccountOrderRecordUniversalSymbol) GetSymbol() string {
+func (o *UniversalSymbolNullable) GetSymbol() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -95,7 +98,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetSymbol() string {
 
 // GetSymbolOk returns a tuple with the Symbol field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetSymbolOk() (*string, bool) {
+func (o *UniversalSymbolNullable) GetSymbolOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -103,12 +106,12 @@ func (o *AccountOrderRecordUniversalSymbol) GetSymbolOk() (*string, bool) {
 }
 
 // SetSymbol sets field value
-func (o *AccountOrderRecordUniversalSymbol) SetSymbol(v string) {
+func (o *UniversalSymbolNullable) SetSymbol(v string) {
 	o.Symbol = v
 }
 
 // GetRawSymbol returns the RawSymbol field value
-func (o *AccountOrderRecordUniversalSymbol) GetRawSymbol() string {
+func (o *UniversalSymbolNullable) GetRawSymbol() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -119,7 +122,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetRawSymbol() string {
 
 // GetRawSymbolOk returns a tuple with the RawSymbol field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetRawSymbolOk() (*string, bool) {
+func (o *UniversalSymbolNullable) GetRawSymbolOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -127,12 +130,12 @@ func (o *AccountOrderRecordUniversalSymbol) GetRawSymbolOk() (*string, bool) {
 }
 
 // SetRawSymbol sets field value
-func (o *AccountOrderRecordUniversalSymbol) SetRawSymbol(v string) {
+func (o *UniversalSymbolNullable) SetRawSymbol(v string) {
 	o.RawSymbol = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordUniversalSymbol) GetDescription() string {
+func (o *UniversalSymbolNullable) GetDescription() string {
 	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
@@ -143,7 +146,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordUniversalSymbol) GetDescriptionOk() (*string, bool) {
+func (o *UniversalSymbolNullable) GetDescriptionOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -151,7 +154,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *AccountOrderRecordUniversalSymbol) HasDescription() bool {
+func (o *UniversalSymbolNullable) HasDescription() bool {
 	if o != nil && o.Description.IsSet() {
 		return true
 	}
@@ -160,21 +163,21 @@ func (o *AccountOrderRecordUniversalSymbol) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given NullableString and assigns it to the Description field.
-func (o *AccountOrderRecordUniversalSymbol) SetDescription(v string) {
+func (o *UniversalSymbolNullable) SetDescription(v string) {
 	o.Description.Set(&v)
 }
 // SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *AccountOrderRecordUniversalSymbol) SetDescriptionNil() {
+func (o *UniversalSymbolNullable) SetDescriptionNil() {
 	o.Description.Set(nil)
 }
 
 // UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *AccountOrderRecordUniversalSymbol) UnsetDescription() {
+func (o *UniversalSymbolNullable) UnsetDescription() {
 	o.Description.Unset()
 }
 
 // GetCurrency returns the Currency field value
-func (o *AccountOrderRecordUniversalSymbol) GetCurrency() SymbolCurrency {
+func (o *UniversalSymbolNullable) GetCurrency() SymbolCurrency {
 	if o == nil {
 		var ret SymbolCurrency
 		return ret
@@ -185,7 +188,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetCurrency() SymbolCurrency {
 
 // GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*SymbolCurrency, bool) {
+func (o *UniversalSymbolNullable) GetCurrencyOk() (*SymbolCurrency, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -193,12 +196,12 @@ func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*SymbolCurrency, bo
 }
 
 // SetCurrency sets field value
-func (o *AccountOrderRecordUniversalSymbol) SetCurrency(v SymbolCurrency) {
+func (o *UniversalSymbolNullable) SetCurrency(v SymbolCurrency) {
 	o.Currency = v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
-func (o *AccountOrderRecordUniversalSymbol) GetExchange() SymbolExchange {
+func (o *UniversalSymbolNullable) GetExchange() SymbolExchange {
 	if o == nil || isNil(o.Exchange) {
 		var ret SymbolExchange
 		return ret
@@ -208,7 +211,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetExchange() SymbolExchange {
 
 // GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetExchangeOk() (*SymbolExchange, bool) {
+func (o *UniversalSymbolNullable) GetExchangeOk() (*SymbolExchange, bool) {
 	if o == nil || isNil(o.Exchange) {
     return nil, false
 	}
@@ -216,7 +219,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetExchangeOk() (*SymbolExchange, bo
 }
 
 // HasExchange returns a boolean if a field has been set.
-func (o *AccountOrderRecordUniversalSymbol) HasExchange() bool {
+func (o *UniversalSymbolNullable) HasExchange() bool {
 	if o != nil && !isNil(o.Exchange) {
 		return true
 	}
@@ -225,12 +228,12 @@ func (o *AccountOrderRecordUniversalSymbol) HasExchange() bool {
 }
 
 // SetExchange gets a reference to the given SymbolExchange and assigns it to the Exchange field.
-func (o *AccountOrderRecordUniversalSymbol) SetExchange(v SymbolExchange) {
+func (o *UniversalSymbolNullable) SetExchange(v SymbolExchange) {
 	o.Exchange = &v
 }
 
 // GetType returns the Type field value
-func (o *AccountOrderRecordUniversalSymbol) GetType() SecurityType {
+func (o *UniversalSymbolNullable) GetType() SecurityType {
 	if o == nil {
 		var ret SecurityType
 		return ret
@@ -241,7 +244,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetType() SecurityType {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetTypeOk() (*SecurityType, bool) {
+func (o *UniversalSymbolNullable) GetTypeOk() (*SecurityType, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -249,12 +252,12 @@ func (o *AccountOrderRecordUniversalSymbol) GetTypeOk() (*SecurityType, bool) {
 }
 
 // SetType sets field value
-func (o *AccountOrderRecordUniversalSymbol) SetType(v SecurityType) {
+func (o *UniversalSymbolNullable) SetType(v SecurityType) {
 	o.Type = v
 }
 
 // GetFigiCode returns the FigiCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordUniversalSymbol) GetFigiCode() string {
+func (o *UniversalSymbolNullable) GetFigiCode() string {
 	if o == nil || isNil(o.FigiCode.Get()) {
 		var ret string
 		return ret
@@ -265,7 +268,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetFigiCode() string {
 // GetFigiCodeOk returns a tuple with the FigiCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordUniversalSymbol) GetFigiCodeOk() (*string, bool) {
+func (o *UniversalSymbolNullable) GetFigiCodeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -273,7 +276,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetFigiCodeOk() (*string, bool) {
 }
 
 // HasFigiCode returns a boolean if a field has been set.
-func (o *AccountOrderRecordUniversalSymbol) HasFigiCode() bool {
+func (o *UniversalSymbolNullable) HasFigiCode() bool {
 	if o != nil && o.FigiCode.IsSet() {
 		return true
 	}
@@ -282,23 +285,23 @@ func (o *AccountOrderRecordUniversalSymbol) HasFigiCode() bool {
 }
 
 // SetFigiCode gets a reference to the given NullableString and assigns it to the FigiCode field.
-func (o *AccountOrderRecordUniversalSymbol) SetFigiCode(v string) {
+func (o *UniversalSymbolNullable) SetFigiCode(v string) {
 	o.FigiCode.Set(&v)
 }
 // SetFigiCodeNil sets the value for FigiCode to be an explicit nil
-func (o *AccountOrderRecordUniversalSymbol) SetFigiCodeNil() {
+func (o *UniversalSymbolNullable) SetFigiCodeNil() {
 	o.FigiCode.Set(nil)
 }
 
 // UnsetFigiCode ensures that no value is present for FigiCode, not even an explicit nil
-func (o *AccountOrderRecordUniversalSymbol) UnsetFigiCode() {
+func (o *UniversalSymbolNullable) UnsetFigiCode() {
 	o.FigiCode.Unset()
 }
 
 // GetFigiInstrument returns the FigiInstrument field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrument() StockInstrumentFigiInstrument {
+func (o *UniversalSymbolNullable) GetFigiInstrument() FigiInstrumentNullable {
 	if o == nil || isNil(o.FigiInstrument.Get()) {
-		var ret StockInstrumentFigiInstrument
+		var ret FigiInstrumentNullable
 		return ret
 	}
 	return *o.FigiInstrument.Get()
@@ -307,7 +310,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrument() StockInstrumentF
 // GetFigiInstrumentOk returns a tuple with the FigiInstrument field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrumentOk() (*StockInstrumentFigiInstrument, bool) {
+func (o *UniversalSymbolNullable) GetFigiInstrumentOk() (*FigiInstrumentNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -315,7 +318,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetFigiInstrumentOk() (*StockInstrum
 }
 
 // HasFigiInstrument returns a boolean if a field has been set.
-func (o *AccountOrderRecordUniversalSymbol) HasFigiInstrument() bool {
+func (o *UniversalSymbolNullable) HasFigiInstrument() bool {
 	if o != nil && o.FigiInstrument.IsSet() {
 		return true
 	}
@@ -323,23 +326,23 @@ func (o *AccountOrderRecordUniversalSymbol) HasFigiInstrument() bool {
 	return false
 }
 
-// SetFigiInstrument gets a reference to the given NullableStockInstrumentFigiInstrument and assigns it to the FigiInstrument field.
-func (o *AccountOrderRecordUniversalSymbol) SetFigiInstrument(v StockInstrumentFigiInstrument) {
+// SetFigiInstrument gets a reference to the given NullableFigiInstrumentNullable and assigns it to the FigiInstrument field.
+func (o *UniversalSymbolNullable) SetFigiInstrument(v FigiInstrumentNullable) {
 	o.FigiInstrument.Set(&v)
 }
 // SetFigiInstrumentNil sets the value for FigiInstrument to be an explicit nil
-func (o *AccountOrderRecordUniversalSymbol) SetFigiInstrumentNil() {
+func (o *UniversalSymbolNullable) SetFigiInstrumentNil() {
 	o.FigiInstrument.Set(nil)
 }
 
 // UnsetFigiInstrument ensures that no value is present for FigiInstrument, not even an explicit nil
-func (o *AccountOrderRecordUniversalSymbol) UnsetFigiInstrument() {
+func (o *UniversalSymbolNullable) UnsetFigiInstrument() {
 	o.FigiInstrument.Unset()
 }
 
 // GetCurrencies returns the Currencies field value
 // Deprecated
-func (o *AccountOrderRecordUniversalSymbol) GetCurrencies() []Currency {
+func (o *UniversalSymbolNullable) GetCurrencies() []Currency {
 	if o == nil {
 		var ret []Currency
 		return ret
@@ -351,7 +354,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetCurrencies() []Currency {
 // GetCurrenciesOk returns a tuple with the Currencies field value
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *AccountOrderRecordUniversalSymbol) GetCurrenciesOk() ([]Currency, bool) {
+func (o *UniversalSymbolNullable) GetCurrenciesOk() ([]Currency, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -360,11 +363,11 @@ func (o *AccountOrderRecordUniversalSymbol) GetCurrenciesOk() ([]Currency, bool)
 
 // SetCurrencies sets field value
 // Deprecated
-func (o *AccountOrderRecordUniversalSymbol) SetCurrencies(v []Currency) {
+func (o *UniversalSymbolNullable) SetCurrencies(v []Currency) {
 	o.Currencies = v
 }
 
-func (o AccountOrderRecordUniversalSymbol) MarshalJSON() ([]byte, error) {
+func (o UniversalSymbolNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["id"] = o.Id
@@ -396,41 +399,72 @@ func (o AccountOrderRecordUniversalSymbol) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["currencies"] = o.Currencies
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableAccountOrderRecordUniversalSymbol struct {
-	value *AccountOrderRecordUniversalSymbol
+func (o *UniversalSymbolNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varUniversalSymbolNullable := _UniversalSymbolNullable{}
+
+	if err = json.Unmarshal(bytes, &varUniversalSymbolNullable); err == nil {
+		*o = UniversalSymbolNullable(varUniversalSymbolNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "raw_symbol")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "exchange")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "figi_code")
+		delete(additionalProperties, "figi_instrument")
+		delete(additionalProperties, "currencies")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableUniversalSymbolNullable struct {
+	value *UniversalSymbolNullable
 	isSet bool
 }
 
-func (v NullableAccountOrderRecordUniversalSymbol) Get() *AccountOrderRecordUniversalSymbol {
+func (v NullableUniversalSymbolNullable) Get() *UniversalSymbolNullable {
 	return v.value
 }
 
-func (v *NullableAccountOrderRecordUniversalSymbol) Set(val *AccountOrderRecordUniversalSymbol) {
+func (v *NullableUniversalSymbolNullable) Set(val *UniversalSymbolNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountOrderRecordUniversalSymbol) IsSet() bool {
+func (v NullableUniversalSymbolNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountOrderRecordUniversalSymbol) Unset() {
+func (v *NullableUniversalSymbolNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountOrderRecordUniversalSymbol(val *AccountOrderRecordUniversalSymbol) *NullableAccountOrderRecordUniversalSymbol {
-	return &NullableAccountOrderRecordUniversalSymbol{value: val, isSet: true}
+func NewNullableUniversalSymbolNullable(val *UniversalSymbolNullable) *NullableUniversalSymbolNullable {
+	return &NullableUniversalSymbolNullable{value: val, isSet: true}
 }
 
-func (v NullableAccountOrderRecordUniversalSymbol) MarshalJSON() ([]byte, error) {
+func (v NullableUniversalSymbolNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountOrderRecordUniversalSymbol) UnmarshalJSON(src []byte) error {
+func (v *NullableUniversalSymbolNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

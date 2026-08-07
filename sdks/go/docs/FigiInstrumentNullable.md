@@ -1,4 +1,4 @@
-# StockInstrumentFigiInstrument
+# FigiInstrumentNullable
 
 ## Properties
 
@@ -9,91 +9,91 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewStockInstrumentFigiInstrument
+### NewFigiInstrumentNullable
 
-`func NewStockInstrumentFigiInstrument() *StockInstrumentFigiInstrument`
+`func NewFigiInstrumentNullable() *FigiInstrumentNullable`
 
-NewStockInstrumentFigiInstrument instantiates a new StockInstrumentFigiInstrument object
+NewFigiInstrumentNullable instantiates a new FigiInstrumentNullable object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewStockInstrumentFigiInstrumentWithDefaults
+### NewFigiInstrumentNullableWithDefaults
 
-`func NewStockInstrumentFigiInstrumentWithDefaults() *StockInstrumentFigiInstrument`
+`func NewFigiInstrumentNullableWithDefaults() *FigiInstrumentNullable`
 
-NewStockInstrumentFigiInstrumentWithDefaults instantiates a new StockInstrumentFigiInstrument object
+NewFigiInstrumentNullableWithDefaults instantiates a new FigiInstrumentNullable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetFigiCode
 
-`func (o *StockInstrumentFigiInstrument) GetFigiCode() string`
+`func (o *FigiInstrumentNullable) GetFigiCode() string`
 
 GetFigiCode returns the FigiCode field if non-nil, zero value otherwise.
 
 ### GetFigiCodeOk
 
-`func (o *StockInstrumentFigiInstrument) GetFigiCodeOk() (*string, bool)`
+`func (o *FigiInstrumentNullable) GetFigiCodeOk() (*string, bool)`
 
 GetFigiCodeOk returns a tuple with the FigiCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFigiCode
 
-`func (o *StockInstrumentFigiInstrument) SetFigiCode(v string)`
+`func (o *FigiInstrumentNullable) SetFigiCode(v string)`
 
 SetFigiCode sets FigiCode field to given value.
 
 ### HasFigiCode
 
-`func (o *StockInstrumentFigiInstrument) HasFigiCode() bool`
+`func (o *FigiInstrumentNullable) HasFigiCode() bool`
 
 HasFigiCode returns a boolean if a field has been set.
 
 ### SetFigiCodeNil
 
-`func (o *StockInstrumentFigiInstrument) SetFigiCodeNil(b bool)`
+`func (o *FigiInstrumentNullable) SetFigiCodeNil(b bool)`
 
  SetFigiCodeNil sets the value for FigiCode to be an explicit nil
 
 ### UnsetFigiCode
-`func (o *StockInstrumentFigiInstrument) UnsetFigiCode()`
+`func (o *FigiInstrumentNullable) UnsetFigiCode()`
 
 UnsetFigiCode ensures that no value is present for FigiCode, not even an explicit nil
 ### GetFigiShareClass
 
-`func (o *StockInstrumentFigiInstrument) GetFigiShareClass() string`
+`func (o *FigiInstrumentNullable) GetFigiShareClass() string`
 
 GetFigiShareClass returns the FigiShareClass field if non-nil, zero value otherwise.
 
 ### GetFigiShareClassOk
 
-`func (o *StockInstrumentFigiInstrument) GetFigiShareClassOk() (*string, bool)`
+`func (o *FigiInstrumentNullable) GetFigiShareClassOk() (*string, bool)`
 
 GetFigiShareClassOk returns a tuple with the FigiShareClass field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFigiShareClass
 
-`func (o *StockInstrumentFigiInstrument) SetFigiShareClass(v string)`
+`func (o *FigiInstrumentNullable) SetFigiShareClass(v string)`
 
 SetFigiShareClass sets FigiShareClass field to given value.
 
 ### HasFigiShareClass
 
-`func (o *StockInstrumentFigiInstrument) HasFigiShareClass() bool`
+`func (o *FigiInstrumentNullable) HasFigiShareClass() bool`
 
 HasFigiShareClass returns a boolean if a field has been set.
 
 ### SetFigiShareClassNil
 
-`func (o *StockInstrumentFigiInstrument) SetFigiShareClassNil(b bool)`
+`func (o *FigiInstrumentNullable) SetFigiShareClassNil(b bool)`
 
  SetFigiShareClassNil sets the value for FigiShareClass to be an explicit nil
 
 ### UnsetFigiShareClass
-`func (o *StockInstrumentFigiInstrument) UnsetFigiShareClass()`
+`func (o *FigiInstrumentNullable) UnsetFigiShareClass()`
 
 UnsetFigiShareClass ensures that no value is present for FigiShareClass, not even an explicit nil
 

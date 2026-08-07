@@ -15,33 +15,36 @@ import (
 	"encoding/json"
 )
 
-// StockInstrumentFigiInstrument struct for StockInstrumentFigiInstrument
-type StockInstrumentFigiInstrument struct {
+// FigiInstrumentNullable Financial Instrument Global Identifier (FIGI) information for the security. See [OpenFIGI](https://www.openfigi.com/) for more information.
+type FigiInstrumentNullable struct {
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
 	FigiCode NullableString `json:"figi_code,omitempty"`
 	// This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, `AAPL` has a different FIGI for each exchange/trading venue it is traded on. The `figi_share_class` is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
 	FigiShareClass NullableString `json:"figi_share_class,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-// NewStockInstrumentFigiInstrument instantiates a new StockInstrumentFigiInstrument object
+type _FigiInstrumentNullable FigiInstrumentNullable
+
+// NewFigiInstrumentNullable instantiates a new FigiInstrumentNullable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStockInstrumentFigiInstrument() *StockInstrumentFigiInstrument {
-	this := StockInstrumentFigiInstrument{}
+func NewFigiInstrumentNullable() *FigiInstrumentNullable {
+	this := FigiInstrumentNullable{}
 	return &this
 }
 
-// NewStockInstrumentFigiInstrumentWithDefaults instantiates a new StockInstrumentFigiInstrument object
+// NewFigiInstrumentNullableWithDefaults instantiates a new FigiInstrumentNullable object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewStockInstrumentFigiInstrumentWithDefaults() *StockInstrumentFigiInstrument {
-	this := StockInstrumentFigiInstrument{}
+func NewFigiInstrumentNullableWithDefaults() *FigiInstrumentNullable {
+	this := FigiInstrumentNullable{}
 	return &this
 }
 
 // GetFigiCode returns the FigiCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StockInstrumentFigiInstrument) GetFigiCode() string {
+func (o *FigiInstrumentNullable) GetFigiCode() string {
 	if o == nil || isNil(o.FigiCode.Get()) {
 		var ret string
 		return ret
@@ -52,7 +55,7 @@ func (o *StockInstrumentFigiInstrument) GetFigiCode() string {
 // GetFigiCodeOk returns a tuple with the FigiCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StockInstrumentFigiInstrument) GetFigiCodeOk() (*string, bool) {
+func (o *FigiInstrumentNullable) GetFigiCodeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -60,7 +63,7 @@ func (o *StockInstrumentFigiInstrument) GetFigiCodeOk() (*string, bool) {
 }
 
 // HasFigiCode returns a boolean if a field has been set.
-func (o *StockInstrumentFigiInstrument) HasFigiCode() bool {
+func (o *FigiInstrumentNullable) HasFigiCode() bool {
 	if o != nil && o.FigiCode.IsSet() {
 		return true
 	}
@@ -69,21 +72,21 @@ func (o *StockInstrumentFigiInstrument) HasFigiCode() bool {
 }
 
 // SetFigiCode gets a reference to the given NullableString and assigns it to the FigiCode field.
-func (o *StockInstrumentFigiInstrument) SetFigiCode(v string) {
+func (o *FigiInstrumentNullable) SetFigiCode(v string) {
 	o.FigiCode.Set(&v)
 }
 // SetFigiCodeNil sets the value for FigiCode to be an explicit nil
-func (o *StockInstrumentFigiInstrument) SetFigiCodeNil() {
+func (o *FigiInstrumentNullable) SetFigiCodeNil() {
 	o.FigiCode.Set(nil)
 }
 
 // UnsetFigiCode ensures that no value is present for FigiCode, not even an explicit nil
-func (o *StockInstrumentFigiInstrument) UnsetFigiCode() {
+func (o *FigiInstrumentNullable) UnsetFigiCode() {
 	o.FigiCode.Unset()
 }
 
 // GetFigiShareClass returns the FigiShareClass field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StockInstrumentFigiInstrument) GetFigiShareClass() string {
+func (o *FigiInstrumentNullable) GetFigiShareClass() string {
 	if o == nil || isNil(o.FigiShareClass.Get()) {
 		var ret string
 		return ret
@@ -94,7 +97,7 @@ func (o *StockInstrumentFigiInstrument) GetFigiShareClass() string {
 // GetFigiShareClassOk returns a tuple with the FigiShareClass field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StockInstrumentFigiInstrument) GetFigiShareClassOk() (*string, bool) {
+func (o *FigiInstrumentNullable) GetFigiShareClassOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -102,7 +105,7 @@ func (o *StockInstrumentFigiInstrument) GetFigiShareClassOk() (*string, bool) {
 }
 
 // HasFigiShareClass returns a boolean if a field has been set.
-func (o *StockInstrumentFigiInstrument) HasFigiShareClass() bool {
+func (o *FigiInstrumentNullable) HasFigiShareClass() bool {
 	if o != nil && o.FigiShareClass.IsSet() {
 		return true
 	}
@@ -111,20 +114,20 @@ func (o *StockInstrumentFigiInstrument) HasFigiShareClass() bool {
 }
 
 // SetFigiShareClass gets a reference to the given NullableString and assigns it to the FigiShareClass field.
-func (o *StockInstrumentFigiInstrument) SetFigiShareClass(v string) {
+func (o *FigiInstrumentNullable) SetFigiShareClass(v string) {
 	o.FigiShareClass.Set(&v)
 }
 // SetFigiShareClassNil sets the value for FigiShareClass to be an explicit nil
-func (o *StockInstrumentFigiInstrument) SetFigiShareClassNil() {
+func (o *FigiInstrumentNullable) SetFigiShareClassNil() {
 	o.FigiShareClass.Set(nil)
 }
 
 // UnsetFigiShareClass ensures that no value is present for FigiShareClass, not even an explicit nil
-func (o *StockInstrumentFigiInstrument) UnsetFigiShareClass() {
+func (o *FigiInstrumentNullable) UnsetFigiShareClass() {
 	o.FigiShareClass.Unset()
 }
 
-func (o StockInstrumentFigiInstrument) MarshalJSON() ([]byte, error) {
+func (o FigiInstrumentNullable) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.FigiCode.IsSet() {
 		toSerialize["figi_code"] = o.FigiCode.Get()
@@ -132,41 +135,64 @@ func (o StockInstrumentFigiInstrument) MarshalJSON() ([]byte, error) {
 	if o.FigiShareClass.IsSet() {
 		toSerialize["figi_share_class"] = o.FigiShareClass.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
 }
 
-type NullableStockInstrumentFigiInstrument struct {
-	value *StockInstrumentFigiInstrument
+func (o *FigiInstrumentNullable) UnmarshalJSON(bytes []byte) (err error) {
+	varFigiInstrumentNullable := _FigiInstrumentNullable{}
+
+	if err = json.Unmarshal(bytes, &varFigiInstrumentNullable); err == nil {
+		*o = FigiInstrumentNullable(varFigiInstrumentNullable)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "figi_code")
+		delete(additionalProperties, "figi_share_class")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableFigiInstrumentNullable struct {
+	value *FigiInstrumentNullable
 	isSet bool
 }
 
-func (v NullableStockInstrumentFigiInstrument) Get() *StockInstrumentFigiInstrument {
+func (v NullableFigiInstrumentNullable) Get() *FigiInstrumentNullable {
 	return v.value
 }
 
-func (v *NullableStockInstrumentFigiInstrument) Set(val *StockInstrumentFigiInstrument) {
+func (v *NullableFigiInstrumentNullable) Set(val *FigiInstrumentNullable) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableStockInstrumentFigiInstrument) IsSet() bool {
+func (v NullableFigiInstrumentNullable) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableStockInstrumentFigiInstrument) Unset() {
+func (v *NullableFigiInstrumentNullable) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableStockInstrumentFigiInstrument(val *StockInstrumentFigiInstrument) *NullableStockInstrumentFigiInstrument {
-	return &NullableStockInstrumentFigiInstrument{value: val, isSet: true}
+func NewNullableFigiInstrumentNullable(val *FigiInstrumentNullable) *NullableFigiInstrumentNullable {
+	return &NullableFigiInstrumentNullable{value: val, isSet: true}
 }
 
-func (v NullableStockInstrumentFigiInstrument) MarshalJSON() ([]byte, error) {
+func (v NullableFigiInstrumentNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableStockInstrumentFigiInstrument) UnmarshalJSON(src []byte) error {
+func (v *NullableFigiInstrumentNullable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

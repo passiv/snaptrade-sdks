@@ -1,4 +1,4 @@
-# AccountUniversalActivityCurrency
+# CurrencyNullable
 
 ## Properties
 
@@ -10,95 +10,95 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAccountUniversalActivityCurrency
+### NewCurrencyNullable
 
-`func NewAccountUniversalActivityCurrency() *AccountUniversalActivityCurrency`
+`func NewCurrencyNullable() *CurrencyNullable`
 
-NewAccountUniversalActivityCurrency instantiates a new AccountUniversalActivityCurrency object
+NewCurrencyNullable instantiates a new CurrencyNullable object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAccountUniversalActivityCurrencyWithDefaults
+### NewCurrencyNullableWithDefaults
 
-`func NewAccountUniversalActivityCurrencyWithDefaults() *AccountUniversalActivityCurrency`
+`func NewCurrencyNullableWithDefaults() *CurrencyNullable`
 
-NewAccountUniversalActivityCurrencyWithDefaults instantiates a new AccountUniversalActivityCurrency object
+NewCurrencyNullableWithDefaults instantiates a new CurrencyNullable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *AccountUniversalActivityCurrency) GetId() string`
+`func (o *CurrencyNullable) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *AccountUniversalActivityCurrency) GetIdOk() (*string, bool)`
+`func (o *CurrencyNullable) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *AccountUniversalActivityCurrency) SetId(v string)`
+`func (o *CurrencyNullable) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *AccountUniversalActivityCurrency) HasId() bool`
+`func (o *CurrencyNullable) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetCode
 
-`func (o *AccountUniversalActivityCurrency) GetCode() string`
+`func (o *CurrencyNullable) GetCode() string`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *AccountUniversalActivityCurrency) GetCodeOk() (*string, bool)`
+`func (o *CurrencyNullable) GetCodeOk() (*string, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *AccountUniversalActivityCurrency) SetCode(v string)`
+`func (o *CurrencyNullable) SetCode(v string)`
 
 SetCode sets Code field to given value.
 
 ### HasCode
 
-`func (o *AccountUniversalActivityCurrency) HasCode() bool`
+`func (o *CurrencyNullable) HasCode() bool`
 
 HasCode returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *AccountUniversalActivityCurrency) GetName() string`
+`func (o *CurrencyNullable) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *AccountUniversalActivityCurrency) GetNameOk() (*string, bool)`
+`func (o *CurrencyNullable) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *AccountUniversalActivityCurrency) SetName(v string)`
+`func (o *CurrencyNullable) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *AccountUniversalActivityCurrency) HasName() bool`
+`func (o *CurrencyNullable) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 

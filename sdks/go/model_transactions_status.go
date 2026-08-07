@@ -19,9 +19,9 @@ import (
 type TransactionsStatus struct {
 	// Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
 	InitialSyncCompleted *bool `json:"initial_sync_completed,omitempty"`
-	// All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
+	// Date in YYYY-MM-DD format or null
 	LastSuccessfulSync NullableString `json:"last_successful_sync,omitempty"`
-	// The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
+	// Date in YYYY-MM-DD format or null
 	FirstTransactionDate NullableString `json:"first_transaction_date,omitempty"`
 }
 

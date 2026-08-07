@@ -24,8 +24,7 @@ type OptionsPosition struct {
 	Units *float32 `json:"units,omitempty"`
 	// Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
 	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
-	// Deprecated
-	Currency NullableOptionsPositionCurrency `json:"currency,omitempty"`
+	Currency NullableCurrencyNullable `json:"currency,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -197,10 +196,9 @@ func (o *OptionsPosition) UnsetAveragePurchasePrice() {
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency {
+func (o *OptionsPosition) GetCurrency() CurrencyNullable {
 	if o == nil || isNil(o.Currency.Get()) {
-		var ret OptionsPositionCurrency
+		var ret CurrencyNullable
 		return ret
 	}
 	return *o.Currency.Get()
@@ -209,8 +207,7 @@ func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *OptionsPosition) GetCurrencyOk() (*OptionsPositionCurrency, bool) {
+func (o *OptionsPosition) GetCurrencyOk() (*CurrencyNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -226,9 +223,8 @@ func (o *OptionsPosition) HasCurrency() bool {
 	return false
 }
 
-// SetCurrency gets a reference to the given NullableOptionsPositionCurrency and assigns it to the Currency field.
-// Deprecated
-func (o *OptionsPosition) SetCurrency(v OptionsPositionCurrency) {
+// SetCurrency gets a reference to the given NullableCurrencyNullable and assigns it to the Currency field.
+func (o *OptionsPosition) SetCurrency(v CurrencyNullable) {
 	o.Currency.Set(&v)
 }
 // SetCurrencyNil sets the value for Currency to be an explicit nil
