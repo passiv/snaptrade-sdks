@@ -1,4 +1,4 @@
-module github.com/passiv/snaptrade-sdks/sdks/go
+module github.com/passiv/snaptrade-sdks/sdks/go/v2
 
 go 1.13
 
