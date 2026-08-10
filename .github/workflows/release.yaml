@@ -107,7 +107,8 @@ jobs:
     name: Publish ${{ matrix.language }} SDK
     needs: detect-changesets
     if: needs.detect-changesets.outputs.has_changesets == 'false'
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    # npm provenance only supports GitHub-hosted runners.
+    runs-on: ${{ matrix.language == 'typescript' && 'ubuntu-latest' || 'blacksmith-2vcpu-ubuntu-2404' }}
     permissions:
       actions: write
       artifact-metadata: write
