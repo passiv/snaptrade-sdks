@@ -226,35 +226,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test RemoveBrokerageAuthorization
-        /// </summary>
-        [Fact]
-        public void RemoveBrokerageAuthorizationTest()
-        {
-            var authorizationId = "authorizationId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            
-            try
-            {
-                // Delete connection
-                client.Connections.RemoveBrokerageAuthorization(authorizationId, userId, userSecret);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ConnectionsApi.RemoveBrokerageAuthorization: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test ReturnRates
         /// </summary>
         [Fact]
@@ -274,36 +245,6 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ConnectionsApi.ReturnRates: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test SessionEvents
-        /// </summary>
-        [Fact]
-        public void SessionEventsTest()
-        {
-            var partnerClientId = "partnerClientId_example";
-            var userId = "userId_example"; // Optional comma separated list of user IDs used to filter the request on specific users (optional) 
-            var sessionId = "sessionId_example"; // Optional comma separated list of session IDs used to filter the request on specific users (optional) 
-            
-            try
-            {
-                // Get all session events for a user
-                List<ConnectionsSessionEvents200ResponseInner> result = client.Connections.SessionEvents(partnerClientId, userId, sessionId);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling ConnectionsApi.SessionEvents: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

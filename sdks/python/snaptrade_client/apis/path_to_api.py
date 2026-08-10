@@ -15,13 +15,10 @@ from snaptrade_client.apis.paths.authorizations_authorization_id_refresh import 
 from snaptrade_client.apis.paths.authorizations_authorization_id_transactions_sync import AuthorizationsAuthorizationIdTransactionsSync
 from snaptrade_client.apis.paths.authorizations_authorization_id_disable import AuthorizationsAuthorizationIdDisable
 from snaptrade_client.apis.paths.authorizations_authorization_id_accounts import AuthorizationsAuthorizationIdAccounts
-from snaptrade_client.apis.paths.session_events import SessionEvents
 from snaptrade_client.apis.paths.accounts import Accounts
-from snaptrade_client.apis.paths.holdings import Holdings
 from snaptrade_client.apis.paths.accounts_account_id_holdings import AccountsAccountIdHoldings
 from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
-from snaptrade_client.apis.paths.accounts_account_id_positions import AccountsAccountIdPositions
 from snaptrade_client.apis.paths.accounts_account_id_positions_all import AccountsAccountIdPositionsAll
 from snaptrade_client.apis.paths.accounts_account_id_orders import AccountsAccountIdOrders
 from snaptrade_client.apis.paths.accounts_account_id_balance_history import AccountsAccountIdBalanceHistory
@@ -29,17 +26,12 @@ from snaptrade_client.apis.paths.accounts_account_id_recent_orders import Accoun
 from snaptrade_client.apis.paths.accounts_account_id_return_rates import AccountsAccountIdReturnRates
 from snaptrade_client.apis.paths.accounts_account_id_activities import AccountsAccountIdActivities
 from snaptrade_client.apis.paths.accounts_account_id_orders_details import AccountsAccountIdOrdersDetails
-from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
-from snaptrade_client.apis.paths.activities import Activities
-from snaptrade_client.apis.paths.performance_custom import PerformanceCustom
 from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccountIdQuotes
 from snaptrade_client.apis.paths.trade_impact import TradeImpact
 from snaptrade_client.apis.paths.accounts_account_id_trading_options_impact import AccountsAccountIdTradingOptionsImpact
 from snaptrade_client.apis.paths.accounts_account_id_quotes_options import AccountsAccountIdQuotesOptions
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
 from snaptrade_client.apis.paths.trade_place import TradePlace
-from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
-from snaptrade_client.apis.paths.accounts_account_id_trading_bracket import AccountsAccountIdTradingBracket
 from snaptrade_client.apis.paths.accounts_account_id_trading_options import AccountsAccountIdTradingOptions
 from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
 from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote import AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote
@@ -58,11 +50,7 @@ from snaptrade_client.apis.paths.connections_authorization_id_accounts import Co
 from snaptrade_client.apis.paths.brokerages import Brokerages
 from snaptrade_client.apis.paths.brokerages_slug_instruments import BrokeragesSlugInstruments
 from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageAuthorizationTypes
-from snaptrade_client.apis.paths.currencies import Currencies
-from snaptrade_client.apis.paths.currencies_rates import CurrenciesRates
-from snaptrade_client.apis.paths.currencies_rates_currency_pair import CurrenciesRatesCurrencyPair
 from snaptrade_client.apis.paths.exchanges import Exchanges
-from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
 from snaptrade_client.apis.paths.accounts_account_id_orders_details_v2_brokerage_order_id import AccountsAccountIdOrdersDetailsV2BrokerageOrderId
@@ -84,13 +72,10 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC: AuthorizationsAuthorizationIdTransactionsSync,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
-        PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
-        PathValues.HOLDINGS: Holdings,
         PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
-        PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS_ALL: AccountsAccountIdPositionsAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
@@ -98,17 +83,12 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
-        PathValues.ACTIVITIES: Activities,
-        PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS_IMPACT: AccountsAccountIdTradingOptionsImpact,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS: AccountsAccountIdQuotesOptions,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
@@ -127,11 +107,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGES_SLUG_INSTRUMENTS: BrokeragesSlugInstruments,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
-        PathValues.CURRENCIES: Currencies,
-        PathValues.CURRENCIES_RATES: CurrenciesRates,
-        PathValues.CURRENCIES_RATES_CURRENCY_PAIR: CurrenciesRatesCurrencyPair,
         PathValues.EXCHANGES: Exchanges,
-        PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersDetailsV2BrokerageOrderId,
@@ -154,13 +130,10 @@ path_to_api = PathToApi(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_TRANSACTIONS_SYNC: AuthorizationsAuthorizationIdTransactionsSync,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
-        PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
-        PathValues.HOLDINGS: Holdings,
         PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
-        PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS_ALL: AccountsAccountIdPositionsAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCE_HISTORY: AccountsAccountIdBalanceHistory,
@@ -168,17 +141,12 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
-        PathValues.ACTIVITIES: Activities,
-        PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS_IMPACT: AccountsAccountIdTradingOptionsImpact,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES_OPTIONS: AccountsAccountIdQuotesOptions,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
@@ -197,11 +165,7 @@ path_to_api = PathToApi(
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGES_SLUG_INSTRUMENTS: BrokeragesSlugInstruments,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
-        PathValues.CURRENCIES: Currencies,
-        PathValues.CURRENCIES_RATES: CurrenciesRates,
-        PathValues.CURRENCIES_RATES_CURRENCY_PAIR: CurrenciesRatesCurrencyPair,
         PathValues.EXCHANGES: Exchanges,
-        PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersDetailsV2BrokerageOrderId,

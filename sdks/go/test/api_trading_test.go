@@ -48,28 +48,6 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         */
     })
 
-    t.Run("Test TradingApiService CancelUserAccountOrder", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        
-        accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
-            "66a033fa-da74-4fcf-b527-feefdec9257e",
-        )
-        
-        request := client.TradingApi.CancelUserAccountOrder(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            accountInformationGetUserAccountOrderDetailRequest,
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
     t.Run("Test TradingApiService GetCryptocurrencyPairQuote", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.TradingApi.GetCryptocurrencyPairQuote(
@@ -170,39 +148,6 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.UseTicker(true)
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test TradingApiService PlaceBracketOrder", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        instrument := *snaptrade.NewTradingInstrument()
-        stopLoss := *snaptrade.NewStopLoss()
-        takeProfit := *snaptrade.NewTakeProfit()
-        
-        manualTradeFormBracket := *snaptrade.NewManualTradeFormBracket(
-            null,
-            instrument,
-            null,
-            null,
-            stopLoss,
-            takeProfit,
-        )
-        manualTradeFormBracket.SetPrice(31.33)
-        manualTradeFormBracket.SetStop(31.33)
-        manualTradeFormBracket.SetUnits(10.5)
-        
-        request := client.TradingApi.PlaceBracketOrder(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
-            manualTradeFormBracket,
-        )
         
         resp, httpRes, err := request.Execute()
 

@@ -21,8 +21,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { Account } from '../models';
 // @ts-ignore
-import { AccountHoldings } from '../models';
-// @ts-ignore
 import { AccountHoldingsAccount } from '../models';
 // @ts-ignore
 import { AccountInformationGetUserAccountOrderDetailRequest } from '../models';
@@ -52,8 +50,6 @@ import { Model501NotImplementedResponse } from '../models';
 import { Model503BrokerageRequestResponse } from '../models';
 // @ts-ignore
 import { PaginatedUniversalActivity } from '../models';
-// @ts-ignore
-import { Position } from '../models';
 // @ts-ignore
 import { RateOfReturnResponse } from '../models';
 // @ts-ignore
@@ -260,66 +256,6 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/positions/all',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-         * @summary List all accounts for the user, plus balances, positions, and orders for each account.
-         * @param {string} [brokerageAuthorizations] Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        getAllUserHoldings: async (brokerageAuthorizations?: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/holdings`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (brokerageAuthorizations !== undefined) {
-                localVarQueryParameter['brokerage_authorizations'] = brokerageAuthorizations;
-            }
-
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/holdings',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -570,65 +506,6 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/orders',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * **Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-         * @summary List account positions
-         * @param {string} accountId 
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        getUserAccountPositions: async (accountId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getUserAccountPositions', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/positions`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/positions',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -983,19 +860,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-         * @summary List all accounts for the user, plus balances, positions, and orders for each account.
-         * @param {AccountInformationApiGetAllUserHoldingsRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async getAllUserHoldings(requestParameters: AccountInformationApiGetAllUserHoldingsRequest<TAuth> = {} as AccountInformationApiGetAllUserHoldingsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountHoldings>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllUserHoldings(requestParameters.brokerageAuthorizations, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List account balances
          * @param {AccountInformationApiGetUserAccountBalanceRequest<TAuth>} requestParameters Request parameters.
@@ -1044,19 +908,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
         async getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, 
 options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountOrderRecord>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrders(requestParameters.accountId, requestParameters.state, requestParameters.days, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * **Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-         * @summary List account positions
-         * @param {AccountInformationApiGetUserAccountPositionsRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async getUserAccountPositions(requestParameters: AccountInformationApiGetUserAccountPositionsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Position>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountPositions(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
@@ -1164,18 +1015,6 @@ options?: AxiosRequestConfig): AxiosPromise<AllAccountPositionsResponse> {
             return localVarFp.getAllAccountPositions(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
-         * **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-         * @summary List all accounts for the user, plus balances, positions, and orders for each account.
-         * @param {AccountInformationApiGetAllUserHoldingsRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        getAllUserHoldings(requestParameters: AccountInformationApiGetAllUserHoldingsRequest<TAuth> = {} as AccountInformationApiGetAllUserHoldingsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<AccountHoldings>> {
-            return localVarFp.getAllUserHoldings(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List account balances
          * @param {AccountInformationApiGetUserAccountBalanceRequest<TAuth>} requestParameters Request parameters.
@@ -1218,18 +1057,6 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
         getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, 
 options?: AxiosRequestConfig): AxiosPromise<Array<AccountOrderRecord>> {
             return localVarFp.getUserAccountOrders(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * **Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-         * @summary List account positions
-         * @param {AccountInformationApiGetUserAccountPositionsRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        getUserAccountPositions(requestParameters: AccountInformationApiGetUserAccountPositionsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<Position>> {
-            return localVarFp.getUserAccountPositions(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
          * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
@@ -1413,35 +1240,6 @@ export type AccountInformationApiGetAllAccountPositionsRequest<TAuth extends Aut
     AccountInformationApiGetAllAccountPositionsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAllAccountPositionsRequestByAuthMode]
 
 /**
- * Request parameters for getAllUserHoldings operation in AccountInformationApi.
- * @export
- */
-export type AccountInformationApiGetAllUserHoldingsBaseRequest = {
-    
-    /**
-    * Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-    * @type {string}
-    * @memberof AccountInformationApiGetAllUserHoldings
-    */
-    readonly brokerageAuthorizations?: string
-    
-}
-export type AccountInformationApiGetAllUserHoldingscommercialApiKeyRequest = AccountInformationApiGetAllUserHoldingsBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type AccountInformationApiGetAllUserHoldingspersonalApiKeyRequest = AccountInformationApiGetAllUserHoldingsBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type AccountInformationApiGetAllUserHoldingsRequestByAuthMode = {
-    "commercialApiKey": AccountInformationApiGetAllUserHoldingscommercialApiKeyRequest;
-    "personalApiKey": AccountInformationApiGetAllUserHoldingspersonalApiKeyRequest;
-}
-export type AccountInformationApiGetAllUserHoldingsRequest<TAuth extends AuthMode> =
-    AccountInformationApiGetAllUserHoldingsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAllUserHoldingsRequestByAuthMode]
-
-/**
  * Request parameters for getUserAccountBalance operation in AccountInformationApi.
  * @export
  */
@@ -1570,35 +1368,6 @@ export type AccountInformationApiGetUserAccountOrdersRequestByAuthMode = {
 }
 export type AccountInformationApiGetUserAccountOrdersRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountOrdersRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountOrdersRequestByAuthMode]
-
-/**
- * Request parameters for getUserAccountPositions operation in AccountInformationApi.
- * @export
- */
-export type AccountInformationApiGetUserAccountPositionsBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof AccountInformationApiGetUserAccountPositions
-    */
-    readonly accountId: string
-    
-}
-export type AccountInformationApiGetUserAccountPositionscommercialApiKeyRequest = AccountInformationApiGetUserAccountPositionsBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type AccountInformationApiGetUserAccountPositionspersonalApiKeyRequest = AccountInformationApiGetUserAccountPositionsBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type AccountInformationApiGetUserAccountPositionsRequestByAuthMode = {
-    "commercialApiKey": AccountInformationApiGetUserAccountPositionscommercialApiKeyRequest;
-    "personalApiKey": AccountInformationApiGetUserAccountPositionspersonalApiKeyRequest;
-}
-export type AccountInformationApiGetUserAccountPositionsRequest<TAuth extends AuthMode> =
-    AccountInformationApiGetUserAccountPositionsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountPositionsRequestByAuthMode]
 
 /**
  * Request parameters for getUserAccountRecentOrders operation in AccountInformationApi.
@@ -1802,21 +1571,6 @@ options?: AxiosRequestConfig) {
     }
 
     /**
-     * **Deprecated.** Use the account-specific holdings endpoint instead.  This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.  List all accounts for the user, plus balances, positions, and orders for each account. 
-     * @summary List all accounts for the user, plus balances, positions, and orders for each account.
-     * @param {AccountInformationApiGetAllUserHoldingsRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof AccountInformationApiGenerated
-     */
-    public getAllUserHoldings(requestParameters: AccountInformationApiGetAllUserHoldingsRequest<TAuth> = {} as AccountInformationApiGetAllUserHoldingsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getAllUserHoldings(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
      * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @summary List account balances
      * @param {AccountInformationApiGetUserAccountBalanceRequest<TAuth>} requestParameters Request parameters.
@@ -1869,21 +1623,6 @@ options?: AxiosRequestConfig) {
     public getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, 
 options?: AxiosRequestConfig) {
         return AccountInformationApiFp(this.configuration).getUserAccountOrders(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * **Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-     * @summary List account positions
-     * @param {AccountInformationApiGetUserAccountPositionsRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof AccountInformationApiGenerated
-     */
-    public getUserAccountPositions(requestParameters: AccountInformationApiGetUserAccountPositionsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountPositions(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
 
     }
 

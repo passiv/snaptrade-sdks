@@ -23,7 +23,6 @@ import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
-import com.snaptrade.client.model.SessionEvent;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -151,23 +150,6 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * Delete connection
-     *
-     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void removeBrokerageAuthorizationTest() throws ApiException {
-        UUID authorizationId = null;
-        String userId = null;
-        String userSecret = null;
-        api.removeBrokerageAuthorization(authorizationId, userId, userSecret)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * List connection rate of returns
      *
      * Returns a list of rate of return percents for a given connection. 
@@ -182,25 +164,6 @@ public class ConnectionsApiTest {
         String timeframes = null;
         RateOfReturnResponse response = api.returnRates(userId, userSecret, authorizationId)
                 .timeframes(timeframes)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Get all session events for a user
-     *
-     * Returns a list of session events associated with a user.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void sessionEventsTest() throws ApiException {
-        String partnerClientId = null;
-        String userId = null;
-        String sessionId = null;
-        List<SessionEvent> response = api.sessionEvents(partnerClientId)
-                .userId(userId)
-                .sessionId(sessionId)
                 .execute();
         // TODO: test validations
     }

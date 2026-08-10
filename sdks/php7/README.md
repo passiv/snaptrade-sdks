@@ -24,12 +24,10 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
-  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
-  * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
   * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
   * [`snaptrade.accountInformation.getUserAccountReturnRates`](#snaptradeaccountinformationgetuseraccountreturnrates)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
@@ -47,9 +45,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizationAccounts`](#snaptradeconnectionslistbrokerageauthorizationaccounts)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
-  * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
-  * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
@@ -58,27 +54,20 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
   * [`snaptrade.experimentalEndpoints.listConnectionAccounts`](#snaptradeexperimentalendpointslistconnectionaccounts)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
-  * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
-  * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
-  * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
   * [`snaptrade.referenceData.getSymbolsByTicker`](#snaptradereferencedatagetsymbolsbyticker)
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
   * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
-  * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
-  * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
-  * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountOptionQuotes`](#snaptradetradinggetuseraccountoptionquotes)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
-  * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeComplexOrder`](#snaptradetradingplacecomplexorder)
   * [`snaptrade.trading.placeCryptoOrder`](#snaptradetradingplacecryptoorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
@@ -87,8 +76,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.previewCryptoOrder`](#snaptradetradingpreviewcryptoorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
-  * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
-  * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
 <!-- tocstop -->
 
@@ -309,52 +296,6 @@ $result = $snaptrade->accountInformation->getAllAccountPositions(
 ---
 
 
-### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the account-specific holdings endpoint instead.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->accountInformation->getAllUserHoldings(
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**AccountHoldings**](./lib/Model/AccountHoldings.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.accountInformation.getUserAccountBalance`<a id="snaptradeaccountinformationgetuseraccountbalance"></a>
 
 Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
@@ -540,53 +481,6 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
-
-Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, this endpoint returns real-time data.
-  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->accountInformation->getUserAccountPositions(
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**Position**](./lib/Model/Position.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/positions` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1279,43 +1173,6 @@ $result = $snaptrade->connections->refreshBrokerageAuthorization(
 ---
 
 
-### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
-
-Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$snaptrade->connections->removeBrokerageAuthorization(
-    "87b24961-b51e-4db8-9226-f198f6518a89", 
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### authorization_id: `string`<a id="authorization_id-string"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-void (empty response body)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorizations/{authorizationId}` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
 
 Returns a list of rate of return percents for a given connection.
@@ -1353,47 +1210,6 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}/returnRates` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.connections.sessionEvents`<a id="snaptradeconnectionssessionevents"></a>
-
-Returns a list of session events associated with a user.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->connections->sessionEvents(
-    "SNAPTRADETEST", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### partner_client_id: `string`<a id="partner_client_id-string"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-Optional comma separated list of user IDs used to filter the request on specific users
-
-##### session_id: `string`<a id="session_id-string"></a>
-
-Optional comma separated list of session IDs used to filter the request on specific users
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**ConnectionsSessionEvents200ResponseInner**](./lib/Model/ConnectionsSessionEvents200ResponseInner.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/sessionEvents` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1739,84 +1555,6 @@ $result = $snaptrade->experimentalEndpoints->listSubscriptions();
 ---
 
 
-### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions) instead. This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
-
-Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, this endpoint returns real-time data.
-  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->options->listOptionHoldings(
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**OptionsPosition**](./lib/Model/OptionsPosition.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.getCurrencyExchangeRatePair`<a id="snaptradereferencedatagetcurrencyexchangeratepair"></a>
-
-Returns an Exchange Rate Pair object for the specified Currency Pair.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->referenceData->getCurrencyExchangeRatePair(
-    "currencyPair_example"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### currency_pair: `string`<a id="currency_pair-string"></a>
-
-A currency pair based on currency code for example, {CAD-USD}
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**ExchangeRatePairs**](./lib/Model/ExchangeRatePairs.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies/rates/{currencyPair}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
 Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
@@ -1836,31 +1574,6 @@ $result = $snaptrade->referenceData->getPartnerInfo();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/partners` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
-
-Return all available security types supported by SnapTrade.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->referenceData->getSecurityTypes();
-```
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**SecurityType**](./lib/Model/SecurityType.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/securityTypes` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2051,56 +1764,6 @@ $result = $snaptrade->referenceData->listAllBrokerages();
 ---
 
 
-### `snaptrade.referenceData.listAllCurrencies`<a id="snaptradereferencedatalistallcurrencies"></a>
-
-Returns a list of all defined Currency objects.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->referenceData->listAllCurrencies();
-```
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**Currency**](./lib/Model/Currency.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.listAllCurrenciesRates`<a id="snaptradereferencedatalistallcurrenciesrates"></a>
-
-Returns a list of all Exchange Rate Pairs for all supported Currencies.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->referenceData->listAllCurrenciesRates();
-```
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**ExchangeRatePairs**](./lib/Model/ExchangeRatePairs.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies/rates` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
 Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
@@ -2183,52 +1846,6 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/cancel` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) instead.
-
-Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->trading->cancelUserAccountOrder(
-    "66a033fa-da74-4fcf-b527-feefdec9257e", 
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**AccountOrderRecord**](./lib/Model/AccountOrderRecord.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2507,91 +2124,6 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.placeBracketOrder`<a id="snaptradetradingplacebracketorder"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) instead.
-
-Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
-use. Only supported on certain brokerages
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->trading->placeBracketOrder(
-    "BUY", 
-    [
-        "symbol" => "AAPL",
-        "type" => "EQUITY",
-    ], 
-    "Market", 
-    "Day", 
-    [
-        "stop_price" => "48.55",
-        "limit_price" => "48.50",
-    ], 
-    [
-        "limit_price" => "49.95",
-    ], 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    31.33, 
-    31.33, 
-    10.5
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### action:<a id="action"></a>
-
-##### instrument: [`TradingInstrument`](./lib/Model/TradingInstrument.php)<a id="instrument-tradinginstrumentlibmodeltradinginstrumentphp"></a>
-
-##### order_type:<a id="order_type"></a>
-
-##### time_in_force:<a id="time_in_force"></a>
-
-##### stop_loss: [`StopLoss`](./lib/Model/StopLoss.php)<a id="stop_loss-stoplosslibmodelstoplossphp"></a>
-
-##### take_profit: [`TakeProfit`](./lib/Model/TakeProfit.php)<a id="take_profit-takeprofitlibmodeltakeprofitphp"></a>
-
-##### account_id: `string`<a id="account_id-string"></a>
-
-The ID of the account to execute the trade on.
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### price: `float`<a id="price-float"></a>
-
-The limit price for `Limit` and `StopLimit` orders.
-
-##### stop: `float`<a id="stop-float"></a>
-
-The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-
-##### units: `float`<a id="units-float"></a>
-
-Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**AccountOrderRecord**](./lib/Model/AccountOrderRecord.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -3156,132 +2688,6 @@ $result = $snaptrade->trading->searchCryptocurrencyPairInstruments(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) instead, if possible.
-
-This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
-
-There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
-
-This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->transactionsAndReporting->getActivities(
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "2022-01-24", 
-    "2022-01-24", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
-    "BUY,SELL,DIVIDEND"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### start_date: `\DateTime`<a id="start_date-datetime"></a>
-
-The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
-
-##### end_date: `\DateTime`<a id="end_date-datetime"></a>
-
-The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
-
-##### accounts: `string`<a id="accounts-string"></a>
-
-Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
-
-##### brokerage_authorizations: `string`<a id="brokerage_authorizations-string"></a>
-
-Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-
-##### type: `string`<a id="type-string"></a>
-
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**UniversalActivity**](./lib/Model/UniversalActivity.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/activities` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated.** Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
-
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```php
-$result = $snaptrade->transactionsAndReporting->getReportingCustomRange(
-    "2022-01-24", 
-    "2022-01-24", 
-    "snaptrade-user-123", 
-    "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2", 
-    True, 
-    "monthly"
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### start_date: `\DateTime`<a id="start_date-datetime"></a>
-
-##### end_date: `\DateTime`<a id="end_date-datetime"></a>
-
-##### user_id: `string`<a id="user_id-string"></a>
-
-##### user_secret: `string`<a id="user_secret-string"></a>
-
-##### accounts: `string`<a id="accounts-string"></a>
-
-Optional comma separated list of account IDs used to filter the request on specific accounts
-
-##### detailed: `bool`<a id="detailed-bool"></a>
-
-Optional, increases frequency of data points for the total value and contribution charts if set to true
-
-##### frequency: `string`<a id="frequency-string"></a>
-
-Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
-
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[**PerformanceCustom**](./lib/Model/PerformanceCustom.php)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/performance/custom` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

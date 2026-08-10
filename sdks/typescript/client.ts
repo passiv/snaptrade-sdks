@@ -16,10 +16,8 @@ import {
   AuthenticationApi,
   ConnectionsApi,
   ExperimentalEndpointsApi,
-  OptionsApi,
   ReferenceDataApi,
   TradingApi,
-  TransactionsAndReportingApi,
 } from "./api";
 import { AuthMode, Configuration, ConfigurationParameters } from "./configuration";
 import { SnaptradeCustom } from "./client-custom";
@@ -30,10 +28,8 @@ export class Snaptrade<TAuth extends AuthMode> extends SnaptradeCustom<TAuth> {
   readonly authentication: AuthenticationApi<TAuth>;
   readonly connections: ConnectionsApi<TAuth>;
   readonly experimentalEndpoints: ExperimentalEndpointsApi<TAuth>;
-  readonly options: OptionsApi<TAuth>;
   readonly referenceData: ReferenceDataApi<TAuth>;
   readonly trading: TradingApi<TAuth>;
-  readonly transactionsAndReporting: TransactionsAndReportingApi<TAuth>;
 
   constructor(configurationParameters: ConfigurationParameters<TAuth>) {
     super(configurationParameters);
@@ -43,10 +39,8 @@ export class Snaptrade<TAuth extends AuthMode> extends SnaptradeCustom<TAuth> {
     this.authentication = new AuthenticationApi(configuration);
     this.connections = new ConnectionsApi(configuration);
     this.experimentalEndpoints = new ExperimentalEndpointsApi(configuration);
-    this.options = new OptionsApi(configuration);
     this.referenceData = new ReferenceDataApi(configuration);
     this.trading = new TradingApi(configuration);
-    this.transactionsAndReporting = new TransactionsAndReportingApi(configuration);
   }
 
 }

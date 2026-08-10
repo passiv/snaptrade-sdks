@@ -29,7 +29,10 @@ type ManualTradeFormBracket struct {
 	Units *float32 `json:"units,omitempty"`
 	StopLoss StopLoss `json:"stop_loss"`
 	TakeProfit TakeProfit `json:"take_profit"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManualTradeFormBracket ManualTradeFormBracket
 
 // NewManualTradeFormBracket instantiates a new ManualTradeFormBracket object
 // This constructor will assign default values to properties that have it defined,
@@ -343,7 +346,37 @@ func (o ManualTradeFormBracket) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["take_profit"] = o.TakeProfit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
+}
+
+func (o *ManualTradeFormBracket) UnmarshalJSON(bytes []byte) (err error) {
+	varManualTradeFormBracket := _ManualTradeFormBracket{}
+
+	if err = json.Unmarshal(bytes, &varManualTradeFormBracket); err == nil {
+		*o = ManualTradeFormBracket(varManualTradeFormBracket)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "instrument")
+		delete(additionalProperties, "order_type")
+		delete(additionalProperties, "time_in_force")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "stop")
+		delete(additionalProperties, "units")
+		delete(additionalProperties, "stop_loss")
+		delete(additionalProperties, "take_profit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManualTradeFormBracket struct {

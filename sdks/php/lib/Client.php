@@ -15,13 +15,9 @@ class Client
     
     public readonly \SnapTrade\Api\ExperimentalEndpointsApi $experimentalEndpoints;
     
-    public readonly \SnapTrade\Api\OptionsApi $options;
-    
     public readonly \SnapTrade\Api\ReferenceDataApi $referenceData;
     
     public readonly \SnapTrade\Api\TradingApi $trading;
-    
-    public readonly \SnapTrade\Api\TransactionsAndReportingApi $transactionsAndReporting;
 
     /**
      * Constructor
@@ -51,9 +47,7 @@ class Client
         $this->authentication = new \SnapTrade\Api\AuthenticationApi($config);
         $this->connections = new \SnapTrade\Api\ConnectionsApi($config);
         $this->experimentalEndpoints = new \SnapTrade\Api\ExperimentalEndpointsApi($config);
-        $this->options = new \SnapTrade\Api\OptionsApi($config);
         $this->referenceData = new \SnapTrade\Api\ReferenceDataApi($config);
         $this->trading = new \SnapTrade\Api\TradingApi($config);
-        $this->transactionsAndReporting = new \SnapTrade\Api\TransactionsAndReportingApi($config);
     }
 }

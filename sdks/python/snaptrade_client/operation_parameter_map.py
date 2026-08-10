@@ -35,13 +35,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/holdings-GET': {
-        'parameters': [
-            {
-                'name': 'brokerage_authorizations'
-            },
-        ]
-    },
     '/accounts/{accountId}/balances-GET': {
         'parameters': [
             {
@@ -76,13 +69,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'days'
-            },
-        ]
-    },
-    '/accounts/{accountId}/positions-GET': {
-        'parameters': [
-            {
-                'name': 'accountId'
             },
         ]
     },
@@ -220,13 +206,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/authorizations/{authorizationId}-DELETE': {
-        'parameters': [
-            {
-                'name': 'authorizationId'
-            },
-        ]
-    },
     '/authorizations/{authorizationId}/returnRates-GET': {
         'parameters': [
             {
@@ -234,19 +213,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'timeframes'
-            },
-        ]
-    },
-    '/sessionEvents-GET': {
-        'parameters': [
-            {
-                'name': 'PartnerClientId'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'sessionId'
             },
         ]
     },
@@ -318,25 +284,7 @@ operation_parameter_map = {
         'parameters': [
         ]
     },
-    '/accounts/{accountId}/options-GET': {
-        'parameters': [
-            {
-                'name': 'accountId'
-            },
-        ]
-    },
-    '/currencies/rates/{currencyPair}-GET': {
-        'parameters': [
-            {
-                'name': 'currencyPair'
-            },
-        ]
-    },
     '/snapTrade/partners-GET': {
-        'parameters': [
-        ]
-    },
-    '/securityTypes-GET': {
         'parameters': [
         ]
     },
@@ -376,14 +324,6 @@ operation_parameter_map = {
         'parameters': [
         ]
     },
-    '/currencies-GET': {
-        'parameters': [
-        ]
-    },
-    '/currencies/rates-GET': {
-        'parameters': [
-        ]
-    },
     '/accounts/{accountId}/symbols-POST': {
         'parameters': [
             {
@@ -395,16 +335,6 @@ operation_parameter_map = {
         ]
     },
     '/accounts/{accountId}/trading/cancel-POST': {
-        'parameters': [
-            {
-                'name': 'brokerage_order_id'
-            },
-            {
-                'name': 'accountId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/orders/cancel-POST': {
         'parameters': [
             {
                 'name': 'brokerage_order_id'
@@ -500,40 +430,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'use_ticker'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/bracket-POST': {
-        'parameters': [
-            {
-                'name': 'action'
-            },
-            {
-                'name': 'instrument'
-            },
-            {
-                'name': 'order_type'
-            },
-            {
-                'name': 'time_in_force'
-            },
-            {
-                'name': 'stop_loss'
-            },
-            {
-                'name': 'take_profit'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'price'
-            },
-            {
-                'name': 'stop'
-            },
-            {
-                'name': 'units'
             },
         ]
     },
@@ -740,44 +636,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'quote'
-            },
-        ]
-    },
-    '/activities-GET': {
-        'parameters': [
-            {
-                'name': 'startDate'
-            },
-            {
-                'name': 'endDate'
-            },
-            {
-                'name': 'accounts'
-            },
-            {
-                'name': 'brokerageAuthorizations'
-            },
-            {
-                'name': 'type'
-            },
-        ]
-    },
-    '/performance/custom-GET': {
-        'parameters': [
-            {
-                'name': 'startDate'
-            },
-            {
-                'name': 'endDate'
-            },
-            {
-                'name': 'accounts'
-            },
-            {
-                'name': 'detailed'
-            },
-            {
-                'name': 'frequency'
             },
         ]
     },

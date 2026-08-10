@@ -54,7 +54,10 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="ManualTradeFormBracket" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ManualTradeFormBracket() { }
+        protected ManualTradeFormBracket()
+        {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeFormBracket" /> class.
         /// </summary>
@@ -67,7 +70,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
         /// <param name="stopLoss">stopLoss (required).</param>
         /// <param name="takeProfit">takeProfit (required).</param>
-        public ManualTradeFormBracket(ActionStrictWithOptions action = default(ActionStrictWithOptions), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double units = default(double), StopLoss stopLoss = default(StopLoss), TakeProfit takeProfit = default(TakeProfit))
+        public ManualTradeFormBracket(ActionStrictWithOptions action = default(ActionStrictWithOptions), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double units = default(double), StopLoss stopLoss = default(StopLoss), TakeProfit takeProfit = default(TakeProfit)) : base()
         {
             this._Action = action;
             // to ensure "instrument" is required (not null)
@@ -93,6 +96,7 @@ namespace SnapTrade.Net.Model
             this.Price = price;
             this.Stop = stop;
             this.Units = units;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -135,6 +139,12 @@ namespace SnapTrade.Net.Model
         public TakeProfit TakeProfit { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -142,6 +152,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeFormBracket {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  Instrument: ").Append(Instrument).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
@@ -151,6 +162,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  StopLoss: ").Append(StopLoss).Append("\n");
             sb.Append("  TakeProfit: ").Append(TakeProfit).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -159,7 +171,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -185,48 +197,49 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this._Action == input._Action ||
                     this._Action.Equals(input._Action)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Instrument == input.Instrument ||
                     (this.Instrument != null &&
                     this.Instrument.Equals(input.Instrument))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrderType == input.OrderType ||
                     this.OrderType.Equals(input.OrderType)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
                     this.TimeInForce.Equals(input.TimeInForce)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Price == input.Price ||
                     (this.Price != null &&
                     this.Price.Equals(input.Price))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Stop == input.Stop ||
                     (this.Stop != null &&
                     this.Stop.Equals(input.Stop))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
                     this.Units.Equals(input.Units)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StopLoss == input.StopLoss ||
                     (this.StopLoss != null &&
                     this.StopLoss.Equals(input.StopLoss))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TakeProfit == input.TakeProfit ||
                     (this.TakeProfit != null &&
                     this.TakeProfit.Equals(input.TakeProfit))
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -237,7 +250,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 if (this.Instrument != null)
                 {
@@ -261,6 +274,10 @@ namespace SnapTrade.Net.Model
                 if (this.TakeProfit != null)
                 {
                     hashCode = (hashCode * 59) + this.TakeProfit.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

@@ -247,13 +247,13 @@ class TestGettingStarted(unittest.TestCase):
         )
         pprint(options_chain)
 
-    def test_remove_brokerage_authorization(self):
+    def test_delete_connection(self):
         snaptrade = _commercial_client(host="http://127.0.0.1:4010")
         user_id = os.environ["SNAPTRADE_TEST_USER_ID"]
         user_secret = os.environ["SNAPTRADE_TEST_USER_SECRET"]
 
-        response = snaptrade.connections.remove_brokerage_authorization(
-            authorization_id=uuid.uuid4(),
+        response = snaptrade.connections.delete_connection(
+            connection_id=uuid.uuid4(),
             user_id=user_id,
             user_secret=user_secret,
         )
