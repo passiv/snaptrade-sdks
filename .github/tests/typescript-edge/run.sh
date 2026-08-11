@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root=$(git rev-parse --show-toplevel)
-test_dir="$repo_root/.github/tests/typescript-edge"
+test_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(cd -- "$test_dir/../../.." && pwd)
 bundle_path="$test_dir/worker.bundle.js"
 log_path="$test_dir/workerd.log"
 workerd_pid=""
