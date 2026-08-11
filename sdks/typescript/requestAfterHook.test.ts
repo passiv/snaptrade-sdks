@@ -1,7 +1,19 @@
 import { createHmac, webcrypto } from "node:crypto";
 import type { RequestArgs } from "./base";
 import { Configuration } from "./configuration";
+import { SnaptradeAuth } from "./index";
 import { computeHmacSha256, requestAfterHook } from "./requestAfterHook";
+
+const signingOperationAuth = {
+  selectedAuthMode: "commercialApiKey",
+  authModes: ["commercialApiKey"],
+  requestSigningByAuthMode: {
+    commercialApiKey: {
+      secretParameter: "consumerKey",
+      signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"],
+    },
+  },
+};
 
 async function withWebCrypto(test: () => Promise<void>) {
   const originalCrypto = globalThis.crypto;
@@ -53,7 +65,13 @@ describe("requestAfterHook", () => {
         axiosArgs,
         basePath,
         url: `${basePath}${axiosArgs.url}`,
-        configuration: new Configuration({ consumerKey }),
+        configuration: new Configuration({
+          auth: SnaptradeAuth.commercialApiKey({
+            clientId: "client_id",
+            consumerKey,
+          }),
+        }),
+        operationAuth: signingOperationAuth,
       });
 
       const canonicalPayload = JSON.stringify({

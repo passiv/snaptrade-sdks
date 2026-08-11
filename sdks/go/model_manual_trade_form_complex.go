@@ -21,6 +21,7 @@ type ManualTradeFormComplex struct {
 	Type string `json:"type"`
 	// The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
 	Orders []ComplexOrderLeg `json:"orders"`
+	// Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 	ClientOrderId NullableString `json:"client_order_id,omitempty"`
 }
 

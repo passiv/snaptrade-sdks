@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v10.0.17-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/10.0.17)
+[![npm](https://img.shields.io/badge/npm-v12.0.0-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/12.0.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -21,12 +21,10 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
-  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
-  * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
   * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
   * [`snaptrade.accountInformation.getUserAccountReturnRates`](#snaptradeaccountinformationgetuseraccountreturnrates)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
@@ -44,37 +42,29 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizationAccounts`](#snaptradeconnectionslistbrokerageauthorizationaccounts)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
-  * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
-  * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
+  * [`snaptrade.experimentalEndpoints.listConnectionAccounts`](#snaptradeexperimentalendpointslistconnectionaccounts)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
-  * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
-  * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
-  * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
   * [`snaptrade.referenceData.getSymbolsByTicker`](#snaptradereferencedatagetsymbolsbyticker)
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
   * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
-  * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
-  * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
-  * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountOptionQuotes`](#snaptradetradinggetuseraccountoptionquotes)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
-  * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeComplexOrder`](#snaptradetradingplacecomplexorder)
   * [`snaptrade.trading.placeCryptoOrder`](#snaptradetradingplacecryptoorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
@@ -83,8 +73,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.previewCryptoOrder`](#snaptradetradingpreviewcryptoorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
-  * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
-  * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
 <!-- tocstop -->
 
@@ -124,15 +112,18 @@ yarn add snaptrade-typescript-sdk
 ## Getting Started<a id="getting-started"></a>
 
 ```typescript
-const { Snaptrade } = require("snaptrade-typescript-sdk");
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret.
+const { Snaptrade, SnaptradeAuth } = require("snaptrade-typescript-sdk");
 const { randomUUID } = require("crypto");
 const readline = require("readline");
 
 async function main() {
   // 1) Initialize a client with your clientID and consumerKey.
   const snaptrade = new Snaptrade({
-    consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
-    clientId: process.env.SNAPTRADE_CLIENT_ID,
+    auth: SnaptradeAuth.commercialApiKey({
+      consumerKey: process.env.SNAPTRADE_CONSUMER_KEY,
+      clientId: process.env.SNAPTRADE_CLIENT_ID,
+    }),
   });
 
   // 2) Check that the client is able to make a request to the API server.
@@ -215,6 +206,8 @@ main();
 
 ### `snaptrade.accountInformation.getAccountActivities`<a id="snaptradeaccountinformationgetaccountactivities"></a>
 
+This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
+
 Returns all historical transactions for the specified account.
 
 This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
@@ -232,21 +225,15 @@ If the connection has become disabled, it can no longer access the latest data f
 const getAccountActivitiesResponse =
   await snaptrade.accountInformation.getAccountActivities({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    startDate: "2022-01-24",
-    endDate: "2022-01-24",
+    startDate: "2022-01-24T00:00:00.000Z",
+    endDate: "2022-01-24T00:00:00.000Z",
     type: "BUY,SELL,DIVIDEND",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### startDate: `string | Date`<a id="startdate-string--date"></a>
 
@@ -266,7 +253,7 @@ An integer that specifies the maximum number of transactions to return. Default 
 
 ##### type: `string`<a id="type-string"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -291,17 +278,11 @@ An experimental endpoint that returns estimated historical total account value f
 ```typescript
 const getAccountBalanceHistoryResponse =
   await snaptrade.accountInformation.getAccountBalanceHistory({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -324,7 +305,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -334,17 +315,11 @@ If the connection has become disabled, it can no longer access the latest data f
 ```typescript
 const getAllAccountPositionsResponse =
   await snaptrade.accountInformation.getAllAccountPositions({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -355,51 +330,6 @@ const getAllAccountPositionsResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated, please use the account-specific holdings endpoint instead.**
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getAllUserHoldingsResponse =
-  await snaptrade.accountInformation.getAllUserHoldings({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    brokerageAuthorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### brokerageAuthorizations: `string`<a id="brokerageauthorizations-string"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountHoldings](./models/account-holdings.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -422,17 +352,11 @@ If the connection has become disabled, it can no longer access the latest data f
 ```typescript
 const getUserAccountBalanceResponse =
   await snaptrade.accountInformation.getUserAccountBalance({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -465,17 +389,11 @@ If the connection has become disabled, it can no longer access the latest data f
 ```typescript
 const getUserAccountDetailsResponse =
   await snaptrade.accountInformation.getUserAccountDetails({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -509,8 +427,6 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 const getUserAccountOrderDetailResponse =
   await snaptrade.accountInformation.getUserAccountOrderDetail({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   });
 ```
@@ -522,10 +438,6 @@ const getUserAccountOrderDetailResponse =
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -556,8 +468,6 @@ If the connection has become disabled, it can no longer access the latest data f
 ```typescript
 const getUserAccountOrdersResponse =
   await snaptrade.accountInformation.getUserAccountOrders({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     state: "all",
     days: 30,
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -565,10 +475,6 @@ const getUserAccountOrdersResponse =
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -593,52 +499,6 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
-
-This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, this endpoint returns real-time data.
-  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getUserAccountPositionsResponse =
-  await snaptrade.accountInformation.getUserAccountPositions({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[Position](./models/position.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/positions` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.accountInformation.getUserAccountRecentOrders`<a id="snaptradeaccountinformationgetuseraccountrecentorders"></a>
 
 A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
@@ -652,17 +512,11 @@ By default only returns executed orders, but that can be changed by setting *onl
 ```typescript
 const getUserAccountRecentOrdersResponse =
   await snaptrade.accountInformation.getUserAccountRecentOrders({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -693,18 +547,12 @@ Returns a list of rate of return percents for a given account.
 ```typescript
 const getUserAccountReturnRatesResponse =
   await snaptrade.accountInformation.getUserAccountReturnRates({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     timeframes: "ALL,1Y",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -729,6 +577,9 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
+
 Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -744,18 +595,12 @@ If the connection has become disabled, it can no longer access the latest data f
 const getUserHoldingsResponse =
   await snaptrade.accountInformation.getUserHoldings({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -781,17 +626,8 @@ This endpoint returns Daily data regardless of the customer's plan. Daily data i
 
 ```typescript
 const listUserAccountsResponse =
-  await snaptrade.accountInformation.listUserAccounts({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
+  await snaptrade.accountInformation.listUserAccounts();
 ```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -815,17 +651,11 @@ Updates various properties of a specified account.
 ```typescript
 const updateUserAccountResponse =
   await snaptrade.accountInformation.updateUserAccount({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "accountId_example",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -875,14 +705,8 @@ Deletes a registered user and all associated data. This action is irreversible. 
 
 ```typescript
 const deleteSnapTradeUserResponse =
-  await snaptrade.authentication.deleteSnapTradeUser({
-    userId: "snaptrade-user-123",
-  });
+  await snaptrade.authentication.deleteSnapTradeUser();
 ```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -929,8 +753,6 @@ Please note that the returned URL expires in 5 minutes.
 ```typescript
 const loginSnapTradeUserResponse =
   await snaptrade.authentication.loginSnapTradeUser({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     broker: "ALPACA",
     immediateRedirect: true,
     customRedirect: "https://snaptrade.com",
@@ -943,10 +765,6 @@ const loginSnapTradeUserResponse =
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### broker: `string`<a id="broker-string"></a>
 
@@ -1074,18 +892,12 @@ Deletes the SnapTrade connection specified by the ID. This will also remove the 
 ```typescript
 const deleteConnectionResponse = await snaptrade.connections.deleteConnection({
   connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### connectionId: `string`<a id="connectionid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1110,18 +922,12 @@ Returns a single connection for the specified ID.
 const detailBrokerageAuthorizationResponse =
   await snaptrade.connections.detailBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1150,18 +956,12 @@ This endpoint is available on test keys. If you would like it enabled on product
 const disableBrokerageAuthorizationResponse =
   await snaptrade.connections.disableBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1193,18 +993,12 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 const listBrokerageAuthorizationAccountsResponse =
   await snaptrade.connections.listBrokerageAuthorizationAccounts({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1232,17 +1026,8 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
 
 ```typescript
 const listBrokerageAuthorizationsResponse =
-  await snaptrade.connections.listBrokerageAuthorizations({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
+  await snaptrade.connections.listBrokerageAuthorizations();
 ```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1272,18 +1057,12 @@ This endpoint will also trigger a transaction sync for the past day if one has n
 const refreshBrokerageAuthorizationResponse =
   await snaptrade.connections.refreshBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1292,38 +1071,6 @@ const refreshBrokerageAuthorizationResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}/refresh` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
-
-Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const removeBrokerageAuthorizationResponse =
-  await snaptrade.connections.removeBrokerageAuthorization({
-    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorizations/{authorizationId}` `DELETE`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1339,18 +1086,12 @@ Returns a list of rate of return percents for a given connection.
 
 ```typescript
 const returnRatesResponse = await snaptrade.connections.returnRates({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   timeframes: "ALL,1Y",
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
 
@@ -1371,47 +1112,6 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ---
 
 
-### `snaptrade.connections.sessionEvents`<a id="snaptradeconnectionssessionevents"></a>
-
-Returns a list of session events associated with a user.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const sessionEventsResponse = await snaptrade.connections.sessionEvents({
-  partnerClientId: "SNAPTRADETEST",
-  userId:
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-  sessionId:
-    "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### partnerClientId: `string`<a id="partnerclientid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-Optional comma separated list of user IDs used to filter the request on specific users
-
-##### sessionId: `string`<a id="sessionid-string"></a>
-
-Optional comma separated list of session IDs used to filter the request on specific users
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ConnectionsSessionEvents200ResponseInner](./models/connections-session-events200-response-inner.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.connections.syncBrokerageAuthorizationTransactions`<a id="snaptradeconnectionssyncbrokerageauthorizationtransactions"></a>
 
 Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day's transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing
@@ -1423,18 +1123,12 @@ Trigger a transactions sync for all accounts under this connection. Updates will
 const syncBrokerageAuthorizationTransactionsResponse =
   await snaptrade.connections.syncBrokerageAuthorizationTransactions({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1460,8 +1154,6 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 ```typescript
 const addSubscriptionResponse =
   await snaptrade.experimentalEndpoints.addSubscription({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     check_interval_seconds: 300,
   });
@@ -1476,10 +1168,6 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 ##### check_interval_seconds: `number`<a id="check_interval_seconds-number"></a>
 
 How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1547,8 +1235,6 @@ const getUserAccountOrderDetailV2Response =
   await snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
 
@@ -1557,10 +1243,6 @@ const getUserAccountOrderDetailV2Response =
 ##### accountId: `string`<a id="accountid-string"></a>
 
 ##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1589,8 +1271,6 @@ If the connection has become disabled, it can no longer access the latest data f
 ```typescript
 const getUserAccountOrdersV2Response =
   await snaptrade.experimentalEndpoints.getUserAccountOrdersV2({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     state: "all",
     days: 30,
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -1598,10 +1278,6 @@ const getUserAccountOrdersV2Response =
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -1640,17 +1316,11 @@ By default only returns executed orders, but that can be changed by setting *onl
 ```typescript
 const getUserAccountRecentOrdersV2Response =
   await snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -1665,6 +1335,47 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.listConnectionAccounts`<a id="snaptradeexperimentalendpointslistconnectionaccounts"></a>
+
+Experimental and subject to change without notice.
+
+Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+
+Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const listConnectionAccountsResponse =
+  await snaptrade.experimentalEndpoints.listConnectionAccounts({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorizationId: `string`<a id="authorizationid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ConnectionAccount](./models/connection-account.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connections/{authorizationId}/accounts` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1695,81 +1406,6 @@ const listSubscriptionsResponse =
 ---
 
 
-### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
-
-This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, this endpoint returns real-time data.
-  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OptionsPosition](./models/options-position.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.getCurrencyExchangeRatePair`<a id="snaptradereferencedatagetcurrencyexchangeratepair"></a>
-
-Returns an Exchange Rate Pair object for the specified Currency Pair.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getCurrencyExchangeRatePairResponse =
-  await snaptrade.referenceData.getCurrencyExchangeRatePair({
-    currencyPair: "currencyPair_example",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### currencyPair: `string`<a id="currencypair-string"></a>
-
-A currency pair based on currency code for example, {CAD-USD}
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ExchangeRatePairs](./models/exchange-rate-pairs.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies/rates/{currencyPair}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
 Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
@@ -1787,30 +1423,6 @@ const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/partners` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
-
-Return all available security types supported by SnapTrade.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getSecurityTypesResponse =
-  await snaptrade.referenceData.getSecurityTypes();
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[SecurityType](./models/security-type.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/securityTypes` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1994,54 +1606,6 @@ const listAllBrokeragesResponse =
 ---
 
 
-### `snaptrade.referenceData.listAllCurrencies`<a id="snaptradereferencedatalistallcurrencies"></a>
-
-Returns a list of all defined Currency objects.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const listAllCurrenciesResponse =
-  await snaptrade.referenceData.listAllCurrencies();
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[Currency](./models/currency.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.listAllCurrenciesRates`<a id="snaptradereferencedatalistallcurrenciesrates"></a>
-
-Returns a list of all Exchange Rate Pairs for all supported Currencies.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const listAllCurrenciesRatesResponse =
-  await snaptrade.referenceData.listAllCurrenciesRates();
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ExchangeRatePairs](./models/exchange-rate-pairs.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies/rates` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
 Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
@@ -2054,18 +1618,12 @@ The search results are further limited to the symbols supported by the brokerage
 ```typescript
 const symbolSearchUserAccountResponse =
   await snaptrade.referenceData.symbolSearchUserAccount({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     substring: "AAPL",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2095,8 +1653,6 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 
 ```typescript
 const cancelOrderResponse = await snaptrade.trading.cancelOrder({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 });
@@ -2107,10 +1663,6 @@ const cancelOrderResponse = await snaptrade.trading.cancelOrder({
 ##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
 
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2127,50 +1679,6 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ---
 
 
-### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
-Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const cancelUserAccountOrderResponse =
-  await snaptrade.trading.cancelUserAccountOrder({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecord](./models/account-order-record.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/cancel` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.trading.getCryptocurrencyPairQuote`<a id="snaptradetradinggetcryptocurrencypairquote"></a>
 
 Gets a quote for the specified account.
@@ -2181,18 +1689,12 @@ Gets a quote for the specified account.
 ```typescript
 const getCryptocurrencyPairQuoteResponse =
   await snaptrade.trading.getCryptocurrencyPairQuote({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     instrumentSymbol: "BTC-USD",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2221,8 +1723,6 @@ Only supported for certain enabled brokerages. Please refer to the [brokerage tr
 
 ```typescript
 const getOptionImpactResponse = await snaptrade.trading.getOptionImpact({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   order_type: "MARKET",
   time_in_force: "Day",
@@ -2253,10 +1753,6 @@ The type of order to place.
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
 
 ##### legs: [`MlegLeg`](./models/mleg-leg.ts)[]<a id="legs-mleglegmodelsmleg-legts"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2291,8 +1787,6 @@ Simulates an order and its impact on the account. This endpoint does not place t
 
 ```typescript
 const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -2325,10 +1819,6 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 ##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -2366,18 +1856,12 @@ Returns a quote for a single option contract. The option contract is specified u
 ```typescript
 const getUserAccountOptionQuotesResponse =
   await snaptrade.trading.getUserAccountOptionQuotes({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     symbol: "AAPL  251219C00150000",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2408,26 +1892,18 @@ The quotes returned can be delayed depending on the brokerage the account belong
 
 This endpoint does not work for options quotes.
 
-This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const getUserAccountQuotesResponse =
   await snaptrade.trading.getUserAccountQuotes({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     symbols: "symbols_example",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### symbols: `string`<a id="symbols-string"></a>
 
@@ -2452,94 +1928,6 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 ---
 
 
-### `snaptrade.trading.placeBracketOrder`<a id="snaptradetradingplacebracketorder"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
-Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
-use. Only supported on certain brokerages
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const placeBracketOrderResponse = await snaptrade.trading.placeBracketOrder({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  action: "BUY",
-  instrument: {
-    symbol: "AAPL",
-    type: "EQUITY",
-  },
-  order_type: "Market",
-  time_in_force: "Day",
-  price: 31.33,
-  stop: 31.33,
-  units: 10.5,
-  stop_loss: {
-    stop_price: "48.55",
-    limit_price: "48.50",
-  },
-  take_profit: {
-    limit_price: "49.95",
-  },
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### action: [`ActionStrictWithOptions`](./models/action-strict-with-options.ts)<a id="action-actionstrictwithoptionsmodelsaction-strict-with-optionsts"></a>
-
-The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
-
-##### instrument: [`TradingInstrument`](./models/trading-instrument.ts)<a id="instrument-tradinginstrumentmodelstrading-instrumentts"></a>
-
-##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
-
-The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
-
-##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-
-##### stop_loss: [`StopLoss`](./models/stop-loss.ts)<a id="stop_loss-stoplossmodelsstop-lossts"></a>
-
-##### take_profit: [`TakeProfit`](./models/take-profit.ts)<a id="take_profit-takeprofitmodelstake-profitts"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account to execute the trade on.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### price: `number`<a id="price-number"></a>
-
-The limit price for `Limit` and `StopLimit` orders.
-
-##### stop: `number`<a id="stop-number"></a>
-
-The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-
-##### units: `number`<a id="units-number"></a>
-
-Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecord](./models/account-order-record.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/bracket` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.trading.placeComplexOrder`<a id="snaptradetradingplacecomplexorder"></a>
 
 Places a complex conditional order (OCO, OTO, or OTOCO).
@@ -2556,8 +1944,6 @@ Please refer to the [brokerage trading support page](https://support.snaptrade.c
 ```typescript
 const placeComplexOrderResponse = await snaptrade.trading.placeComplexOrder({
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   type: "OTO",
   orders: [
     {
@@ -2592,10 +1978,6 @@ The orders that make up the complex order. Required counts and roles per type: -
 
 The ID of the account to execute the trade on.
 
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
 ##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -2621,8 +2003,6 @@ This endpoint does not compute the impact to the account balance from the order 
 
 ```typescript
 const placeCryptoOrderResponse = await snaptrade.trading.placeCryptoOrder({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   instrument: {
     symbol: "BTC",
@@ -2635,7 +2015,7 @@ const placeCryptoOrderResponse = await snaptrade.trading.placeCryptoOrder({
   limit_price: "123.45",
   stop_price: "123.45",
   post_only: false,
-  expiration_date: "2024-01-01T00:00:00Z",
+  expiration_date: "2024-01-01T00:00:00.000Z",
 });
 ```
 
@@ -2658,10 +2038,6 @@ The Time in Force type for the order. This field indicates how long the order wi
 ##### amount: `string`<a id="amount-string"></a>
 
 The amount of the base currency to buy or sell.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2707,8 +2083,6 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 ```typescript
 const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -2741,10 +2115,6 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 ##### time_in_force: [`ManualTradePlaceTimeInForceStrict`](./models/manual-trade-place-time-in-force-strict.ts)<a id="time_in_force-manualtradeplacetimeinforcestrictmodelsmanual-trade-place-time-in-force-strictts"></a>
 
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. 
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### universal_symbol_id: [`string`](./models/model-string.ts)<a id="universal_symbol_id-stringmodelsmodel-stringts"></a>
 
@@ -2800,8 +2170,6 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 ```typescript
 const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   order_type: "MARKET",
   time_in_force: "Day",
@@ -2832,10 +2200,6 @@ The type of order to place.
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
 
 ##### legs: [`MlegLeg`](./models/mleg-leg.ts)[]<a id="legs-mleglegmodelsmleg-legts"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -2874,8 +2238,6 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 ```typescript
 const placeOrderResponse = await snaptrade.trading.placeOrder({
   tradeId: "139e307a-82f7-4402-b39e-4da7baa87758",
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   wait_to_confirm: true,
 });
 ```
@@ -2885,10 +2247,6 @@ const placeOrderResponse = await snaptrade.trading.placeOrder({
 ##### tradeId: `string`<a id="tradeid-string"></a>
 
 Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### wait_to_confirm: `boolean`<a id="wait_to_confirm-boolean"></a>
 
@@ -2916,8 +2274,6 @@ Previews an order using the specified account.
 
 ```typescript
 const previewCryptoOrderResponse = await snaptrade.trading.previewCryptoOrder({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   instrument: {
     symbol: "BTC",
@@ -2930,7 +2286,7 @@ const previewCryptoOrderResponse = await snaptrade.trading.previewCryptoOrder({
   limit_price: "123.45",
   stop_price: "123.45",
   post_only: false,
-  expiration_date: "2024-01-01T00:00:00Z",
+  expiration_date: "2024-01-01T00:00:00.000Z",
 });
 ```
 
@@ -2953,10 +2309,6 @@ The Time in Force type for the order. This field indicates how long the order wi
 ##### amount: `string`<a id="amount-string"></a>
 
 The amount of the base currency to buy or sell.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -3001,8 +2353,6 @@ returned in the response going forward. Only supported on some brokerages
 ```typescript
 const replaceOrderResponse = await snaptrade.trading.replaceOrder({
   accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   action: "BUY",
   order_type: "Market",
@@ -3035,10 +2385,6 @@ The Time in Force type for the order. This field indicates how long the order wi
 ##### accountId: `string`<a id="accountid-string"></a>
 
 The ID of the account to execute the trade on.
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -3077,8 +2423,6 @@ Searches cryptocurrency pairs instruments accessible to the specified account. B
 ```typescript
 const searchCryptocurrencyPairInstrumentsResponse =
   await snaptrade.trading.searchCryptocurrencyPairInstruments({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     base: "BTC",
     quote: "USD",
@@ -3086,10 +2430,6 @@ const searchCryptocurrencyPairInstrumentsResponse =
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -3104,132 +2444,6 @@ const searchCryptocurrencyPairInstrumentsResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
-
-Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
-
-There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
-
-This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getActivitiesResponse =
-  await snaptrade.transactionsAndReporting.getActivities({
-    startDate: "2022-01-24",
-    endDate: "2022-01-24",
-    accounts:
-      "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    brokerageAuthorizations:
-      "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    type: "BUY,SELL,DIVIDEND",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### startDate: `string | Date`<a id="startdate-string--date"></a>
-
-The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
-
-##### endDate: `string | Date`<a id="enddate-string--date"></a>
-
-The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
-
-##### accounts: `string`<a id="accounts-string"></a>
-
-Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
-
-##### brokerageAuthorizations: `string`<a id="brokerageauthorizations-string"></a>
-
-Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-
-##### type: `string`<a id="type-string"></a>
-
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[UniversalActivity](./models/universal-activity.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/activities` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getReportingCustomRangeResponse =
-  await snaptrade.transactionsAndReporting.getReportingCustomRange({
-    startDate: "2022-01-24",
-    endDate: "2022-01-24",
-    accounts:
-      "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    detailed: true,
-    frequency: "monthly",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### startDate: `string | Date`<a id="startdate-string--date"></a>
-
-##### endDate: `string | Date`<a id="enddate-string--date"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accounts: `string`<a id="accounts-string"></a>
-
-Optional comma separated list of account IDs used to filter the request on specific accounts
-
-##### detailed: `boolean`<a id="detailed-boolean"></a>
-
-Optional, increases frequency of data points for the total value and contribution charts if set to true
-
-##### frequency: `string`<a id="frequency-string"></a>
-
-Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[PerformanceCustom](./models/performance-custom.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/performance/custom` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

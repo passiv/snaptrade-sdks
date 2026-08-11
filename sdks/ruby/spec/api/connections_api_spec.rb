@@ -110,20 +110,6 @@ describe 'ConnectionsApi' do
     end
   end
 
-  # unit tests for remove_brokerage_authorization
-  # Delete connection
-  # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-  # @param authorization_id 
-  # @param user_id 
-  # @param user_secret 
-  # @param [Hash] opts the optional parameters
-  # @return [nil]
-  describe 'remove_brokerage_authorization test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for return_rates
   # List connection rate of returns
   # Returns a list of rate of return percents for a given connection. 
@@ -134,20 +120,6 @@ describe 'ConnectionsApi' do
   # @option opts [String] :timeframes Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
   # @return [RateOfReturnResponse]
   describe 'return_rates test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for session_events
-  # Get all session events for a user
-  # Returns a list of session events associated with a user.
-  # @param partner_client_id 
-  # @param [Hash] opts the optional parameters
-  # @option opts [String] :user_id Optional comma separated list of user IDs used to filter the request on specific users
-  # @option opts [String] :session_id Optional comma separated list of session IDs used to filter the request on specific users
-  # @return [Array<ConnectionsSessionEvents200ResponseInner>]
-  describe 'session_events test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

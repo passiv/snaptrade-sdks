@@ -28,6 +28,7 @@ type ManualTradeReplaceForm struct {
 	Symbol *string `json:"symbol,omitempty"`
 	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 	Stop NullableFloat32 `json:"stop,omitempty"`
+	// Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 	Units NullableFloat32 `json:"units,omitempty"`
 }
 

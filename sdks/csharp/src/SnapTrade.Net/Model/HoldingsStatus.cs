@@ -37,10 +37,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="initialSyncCompleted">Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete..</param>
         /// <param name="lastSuccessfulSync">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
-        public HoldingsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?))
+        /// <param name="holdingsUnavailable">Indicates that the brokerage does not expose this account&#39;s holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is &#x60;true&#x60;, prefer the account&#39;s total value over the sum of its positions and cash, and note that &#x60;initial_sync_completed&#x60; and &#x60;last_successful_sync&#x60; may still reflect an earlier sync. .</param>
+        public HoldingsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?), bool holdingsUnavailable = default(bool))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
             this.LastSuccessfulSync = lastSuccessfulSync;
+            this.HoldingsUnavailable = holdingsUnavailable;
         }
 
         /// <summary>
@@ -58,6 +60,13 @@ namespace SnapTrade.Net.Model
         public DateTime? LastSuccessfulSync { get; set; }
 
         /// <summary>
+        /// Indicates that the brokerage does not expose this account&#39;s holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is &#x60;true&#x60;, prefer the account&#39;s total value over the sum of its positions and cash, and note that &#x60;initial_sync_completed&#x60; and &#x60;last_successful_sync&#x60; may still reflect an earlier sync. 
+        /// </summary>
+        /// <value>Indicates that the brokerage does not expose this account&#39;s holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is &#x60;true&#x60;, prefer the account&#39;s total value over the sum of its positions and cash, and note that &#x60;initial_sync_completed&#x60; and &#x60;last_successful_sync&#x60; may still reflect an earlier sync. </value>
+        [DataMember(Name = "holdings_unavailable", EmitDefaultValue = true)]
+        public bool HoldingsUnavailable { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -67,6 +76,7 @@ namespace SnapTrade.Net.Model
             sb.Append("class HoldingsStatus {\n");
             sb.Append("  InitialSyncCompleted: ").Append(InitialSyncCompleted).Append("\n");
             sb.Append("  LastSuccessfulSync: ").Append(LastSuccessfulSync).Append("\n");
+            sb.Append("  HoldingsUnavailable: ").Append(HoldingsUnavailable).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -110,6 +120,10 @@ namespace SnapTrade.Net.Model
                     this.LastSuccessfulSync == input.LastSuccessfulSync ||
                     (this.LastSuccessfulSync != null &&
                     this.LastSuccessfulSync.Equals(input.LastSuccessfulSync))
+                ) && 
+                (
+                    this.HoldingsUnavailable == input.HoldingsUnavailable ||
+                    this.HoldingsUnavailable.Equals(input.HoldingsUnavailable)
                 );
         }
 
@@ -127,6 +141,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.LastSuccessfulSync.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.HoldingsUnavailable.GetHashCode();
                 return hashCode;
             }
         }

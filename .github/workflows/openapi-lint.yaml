@@ -1,0 +1,26 @@
+name: OpenAPI lint
+
+on:
+  pull_request:
+    paths:
+      - api.yaml
+      - konfig.yaml
+  push:
+    branches:
+      - master
+    paths:
+      - api.yaml
+      - konfig.yaml
+
+jobs:
+  lint:
+    name: Lint OpenAPI specification
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Lint OpenAPI specification
+        run: konfig lint api.yaml

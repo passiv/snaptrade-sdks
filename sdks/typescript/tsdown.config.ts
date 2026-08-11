@@ -16,13 +16,13 @@ const shared = {
 const nodeShared = {
   ...shared,
   entry: ["./index.ts"],
-  target: "node18",
+  target: "node18" as const,
 };
 
 const browserShared = {
   ...shared,
-  target: "es2020",
-  platform: "browser",
+  target: "es2020" as const,
+  platform: "browser" as const,
   dts: false,
   minify: true,
   deps: {
@@ -34,7 +34,7 @@ const browserShared = {
     // Suppress tsdown's warning about the intentionally bundled dependency graph
     // instead of maintaining a fragile allow-list of direct and transitive
     // browser dependencies.
-    onlyBundle: false,
+    onlyBundle: false as const,
   },
 };
 

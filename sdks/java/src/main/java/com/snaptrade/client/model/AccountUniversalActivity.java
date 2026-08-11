@@ -19,9 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.AccountUniversalActivityCurrency;
-import com.snaptrade.client.model.AccountUniversalActivityCurrencyUniversalSymbol;
-import com.snaptrade.client.model.AccountUniversalActivityOptionSymbol;
+import com.snaptrade.client.model.CurrencyNullable;
+import com.snaptrade.client.model.OptionsSymbolNullable;
 import com.snaptrade.client.model.SymbolNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -66,11 +65,11 @@ public class AccountUniversalActivity {
 
   public static final String SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL = "currency_universal_symbol";
   @SerializedName(SERIALIZED_NAME_CURRENCY_UNIVERSAL_SYMBOL)
-  private AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol;
+  private SymbolNullable currencyUniversalSymbol;
 
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
-  private AccountUniversalActivityOptionSymbol optionSymbol;
+  private OptionsSymbolNullable optionSymbol;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -86,7 +85,7 @@ public class AccountUniversalActivity {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private AccountUniversalActivityCurrency currency;
+  private CurrencyNullable currency;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -185,7 +184,7 @@ public class AccountUniversalActivity {
   }
 
 
-  public AccountUniversalActivity currencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+  public AccountUniversalActivity currencyUniversalSymbol(SymbolNullable currencyUniversalSymbol) {
     
     
     
@@ -201,12 +200,12 @@ public class AccountUniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountUniversalActivityCurrencyUniversalSymbol getCurrencyUniversalSymbol() {
+  public SymbolNullable getCurrencyUniversalSymbol() {
     return currencyUniversalSymbol;
   }
 
 
-  public void setCurrencyUniversalSymbol(AccountUniversalActivityCurrencyUniversalSymbol currencyUniversalSymbol) {
+  public void setCurrencyUniversalSymbol(SymbolNullable currencyUniversalSymbol) {
     
     
     
@@ -214,7 +213,7 @@ public class AccountUniversalActivity {
   }
 
 
-  public AccountUniversalActivity optionSymbol(AccountUniversalActivityOptionSymbol optionSymbol) {
+  public AccountUniversalActivity optionSymbol(OptionsSymbolNullable optionSymbol) {
     
     
     
@@ -230,12 +229,12 @@ public class AccountUniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountUniversalActivityOptionSymbol getOptionSymbol() {
+  public OptionsSymbolNullable getOptionSymbol() {
     return optionSymbol;
   }
 
 
-  public void setOptionSymbol(AccountUniversalActivityOptionSymbol optionSymbol) {
+  public void setOptionSymbol(OptionsSymbolNullable optionSymbol) {
     
     
     
@@ -357,7 +356,7 @@ public class AccountUniversalActivity {
   }
 
 
-  public AccountUniversalActivity currency(AccountUniversalActivityCurrency currency) {
+  public AccountUniversalActivity currency(CurrencyNullable currency) {
     
     
     
@@ -373,12 +372,12 @@ public class AccountUniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public AccountUniversalActivityCurrency getCurrency() {
+  public CurrencyNullable getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(AccountUniversalActivityCurrency currency) {
+  public void setCurrency(CurrencyNullable currency) {
     
     
     
@@ -396,11 +395,11 @@ public class AccountUniversalActivity {
   }
 
    /**
-   * A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of asset(s) from one account to another.   - &#x60;EXTERNAL_ASSET_TRANSFER_IN&#x60; - Incoming transfer of an asset from an external account to this account.   - &#x60;EXTERNAL_ASSET_TRANSFER_OUT&#x60; - Outgoing transfer of an asset from this account to an external account.   - &#x60;SPLIT&#x60; - A stock share split.   - &#x60;ADJUSTMENT&#x60; - A one time adjustment of the account&#39;s cash balance or shares of an asset 
+   * A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of asset(s) from one account to another.   - &#x60;EXTERNAL_ASSET_TRANSFER_IN&#x60; - Incoming transfer of an asset from an external account to this account.   - &#x60;EXTERNAL_ASSET_TRANSFER_OUT&#x60; - Outgoing transfer of an asset from this account to an external account.   - &#x60;SPLIT&#x60; - A stock share split.   - &#x60;ADJUSTMENT&#x60; - A one time adjustment of the account&#39;s cash balance or shares of an asset 
    * @return type
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "BUY", value = "A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of asset(s) from one account to another.   - `EXTERNAL_ASSET_TRANSFER_IN` - Incoming transfer of an asset from an external account to this account.   - `EXTERNAL_ASSET_TRANSFER_OUT` - Outgoing transfer of an asset from this account to an external account.   - `SPLIT` - A stock share split.   - `ADJUSTMENT` - A one time adjustment of the account's cash balance or shares of an asset ")
+  @ApiModelProperty(example = "BUY", value = "A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of asset(s) from one account to another.   - `EXTERNAL_ASSET_TRANSFER_IN` - Incoming transfer of an asset from an external account to this account.   - `EXTERNAL_ASSET_TRANSFER_OUT` - Outgoing transfer of an asset from this account to an external account.   - `SPLIT` - A stock share split.   - `ADJUSTMENT` - A one time adjustment of the account's cash balance or shares of an asset ")
 
   public String getType() {
     return type;
@@ -842,15 +841,15 @@ public class AccountUniversalActivity {
       }
       // validate the optional field `currency_universal_symbol`
       if (jsonObj.get("currency_universal_symbol") != null && !jsonObj.get("currency_universal_symbol").isJsonNull()) {
-        AccountUniversalActivityCurrencyUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("currency_universal_symbol"));
+        SymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("currency_universal_symbol"));
       }
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
-        AccountUniversalActivityOptionSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+        OptionsSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        AccountUniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        CurrencyNullable.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));

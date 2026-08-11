@@ -1,0 +1,13 @@
+name: Get bump branch
+description: Returns the deterministic version-bump branch for this repository
+outputs:
+  branch:
+    description: Version-bump branch name
+    value: ${{ steps.branch.outputs.name }}
+runs:
+  using: composite
+  steps:
+    - name: Get bump branch
+      id: branch
+      shell: bash
+      run: echo "name=bump" >> "$GITHUB_OUTPUT"

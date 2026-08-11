@@ -1,7 +1,6 @@
 package com.snaptrade.client;
 
 import com.snaptrade.client.model.Account;
-import com.snaptrade.client.model.AccountHoldings;
 import com.snaptrade.client.model.Brokerage;
 import com.snaptrade.client.model.DeleteUserResponse;
 import com.snaptrade.client.model.SnapTradeRegisterUserRequestBody;
@@ -52,12 +51,7 @@ public class GettingStartedTest {
                                 .execute();
                 System.out.println(response.get("redirectURI"));
 
-                // 5) Query holdings and available brokerages
-                List<AccountHoldings> holdings = snaptrade.accountInformation
-                                .getAllUserHoldings(userIDandSecret.getUserId(),
-                                                userIDandSecret.getUserSecret())
-                                .execute();
-                System.out.println(holdings);
+                // 5) Query accounts and available brokerages
                 List<Account> accounts = snaptrade.accountInformation.listUserAccounts(userIDandSecret.getUserId(),
                                 userIDandSecret.getUserSecret()).execute();
                 System.out.println(accounts);

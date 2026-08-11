@@ -21,7 +21,7 @@ type ManualTradeFormWithOptions struct {
 	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 	AccountId string `json:"account_id"`
 	Action ActionStrictWithOptions `json:"action"`
-	// The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	UniversalSymbolId NullableString `json:"universal_symbol_id,omitempty"`
 	// The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 	Symbol NullableString `json:"symbol,omitempty"`
@@ -34,9 +34,10 @@ type ManualTradeFormWithOptions struct {
 	Price NullableFloat32 `json:"price,omitempty"`
 	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 	Stop NullableFloat32 `json:"stop,omitempty"`
-	// For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+	// Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 	Units NullableFloat32 `json:"units,omitempty"`
-	NotionalValue NullableManualTradeFormNotionalValue `json:"notional_value,omitempty"`
+	NotionalValue NullableNotionalValueNullable `json:"notional_value,omitempty"`
+	// Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 	ClientOrderId NullableString `json:"client_order_id,omitempty"`
 }
 
@@ -446,9 +447,9 @@ func (o *ManualTradeFormWithOptions) UnsetUnits() {
 }
 
 // GetNotionalValue returns the NotionalValue field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ManualTradeFormWithOptions) GetNotionalValue() ManualTradeFormNotionalValue {
+func (o *ManualTradeFormWithOptions) GetNotionalValue() NotionalValueNullable {
 	if o == nil || isNil(o.NotionalValue.Get()) {
-		var ret ManualTradeFormNotionalValue
+		var ret NotionalValueNullable
 		return ret
 	}
 	return *o.NotionalValue.Get()
@@ -457,7 +458,7 @@ func (o *ManualTradeFormWithOptions) GetNotionalValue() ManualTradeFormNotionalV
 // GetNotionalValueOk returns a tuple with the NotionalValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ManualTradeFormWithOptions) GetNotionalValueOk() (*ManualTradeFormNotionalValue, bool) {
+func (o *ManualTradeFormWithOptions) GetNotionalValueOk() (*NotionalValueNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -473,8 +474,8 @@ func (o *ManualTradeFormWithOptions) HasNotionalValue() bool {
 	return false
 }
 
-// SetNotionalValue gets a reference to the given NullableManualTradeFormNotionalValue and assigns it to the NotionalValue field.
-func (o *ManualTradeFormWithOptions) SetNotionalValue(v ManualTradeFormNotionalValue) {
+// SetNotionalValue gets a reference to the given NullableNotionalValueNullable and assigns it to the NotionalValue field.
+func (o *ManualTradeFormWithOptions) SetNotionalValue(v NotionalValueNullable) {
 	o.NotionalValue.Set(&v)
 }
 // SetNotionalValueNil sets the value for NotionalValue to be an explicit nil

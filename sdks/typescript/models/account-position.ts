@@ -40,7 +40,7 @@ export interface AccountPosition {
      */
     'price'?: string | null;
     /**
-     * Book price or average purchase price for the position. For options, this is per-contract.
+     * Book price or average purchase price for the position. For options, this is per-share.
      * @type {string}
      * @memberof AccountPosition
      */

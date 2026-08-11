@@ -6,7 +6,7 @@ Need a quick definition while reading? See [Terminology](https://docs.snaptrade.
 
 ### I have lost the consumerKey to my API Key. What should I do?
 
-You should reach out to SnapTrade support. If it is compromised, your users are still safe due to also requiring a user secret to get account data or place trades.
+You should reach out to SnapTrade support. If a Commercial key is compromised, user-scoped calls also require a `userSecret`, but you should still contact SnapTrade support immediately. Personal API keys represent the Personal user directly and should be treated as sensitive credentials.
 
 ---
 
@@ -26,11 +26,11 @@ A connected user is a user who has at least one connection. If someone connects 
 
 A user is considered a connected user from the moment they successfully complete the first connection process to when you or the user deletes their last connection (some times users have multiple brokers connected). You can handle this on your end or let the users delete the connections from your platform.
 
-### What should I do if I lose the userSecret of one of my users?
+### What should I do if I lose the userSecret of one of my users? (Commercial only)
 
-If you lose the userSecret the easiest thing to do is create a new user and ask the end user to reconnect.
+If you lose the `userSecret` for a Commercial SnapTrade user, the easiest thing to do is create a new user and ask the end user to reconnect. Personal API key users do not have a `userSecret`.
 
-### **The userSecret to one of my SnapTrade users has been compromised. What should I do?**
+### **The userSecret to one of my SnapTrade users has been compromised. What should I do? (Commercial only)**
 
 The best thing to do in this case is to rotate the user secret using :api[Authentication_resetSnapTradeUserSecret].
 

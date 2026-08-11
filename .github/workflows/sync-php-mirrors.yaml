@@ -1,0 +1,110 @@
+name: Sync PHP mirrors
+
+on:
+  workflow_call:
+    secrets:
+      PHP_MIRROR_DEPLOY_KEY:
+        required: true
+      PHP7_MIRROR_DEPLOY_KEY:
+        required: true
+      PACKAGIST_API_TOKEN:
+        required: true
+  workflow_dispatch:
+
+concurrency:
+  group: sync-php-mirrors
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Resolve PHP versions
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    outputs:
+      php_version: ${{ steps.php-version.outputs.result }}
+      php7_version: ${{ steps.php7-version.outputs.result }}
+    steps:
+      - name: Require the default branch
+        env:
+          SOURCE_REF: ${{ github.ref }}
+        run: |
+          if [[ "$SOURCE_REF" != "refs/heads/master" ]]; then
+            echo "::error::PHP mirrors can only be synchronized from master."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Resolve PHP version
+        id: php-version
+        uses: mikefarah/yq@v4.35.2
+        with:
+          cmd: yq -r '.generators.php.version' konfig.yaml
+
+      - name: Resolve PHP7 version
+        id: php7-version
+        uses: mikefarah/yq@v4.35.2
+        with:
+          cmd: yq -r '.additionalGenerators.php7.version' konfig.yaml
+
+      - name: Validate PHP versions
+        env:
+          PHP_VERSION: ${{ steps.php-version.outputs.result }}
+          PHP7_VERSION: ${{ steps.php7-version.outputs.result }}
+        run: |
+          for version in "$PHP_VERSION" "$PHP7_VERSION"; do
+            if [[ -z "$version" || "$version" == "null" ]]; then
+              echo "::error::Both PHP generators must have a configured version."
+              exit 1
+            fi
+
+            if ! git check-ref-format "refs/tags/v$version"; then
+              echo "::error::Invalid PHP SDK version tag: v$version"
+              exit 1
+            fi
+          done
+
+  sync-php:
+    name: Sync PHP mirror
+    needs: prepare
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Sync PHP mirror
+        uses: ./.github/actions/shared/sync-sdk-mirror
+        with:
+          source-directory: sdks/php
+          target-repository: passiv/snaptrade-php-sdk
+          version: ${{ needs.prepare.outputs.php_version }}
+          deploy-key: ${{ secrets.PHP_MIRROR_DEPLOY_KEY }}
+          packagist-repository-url: https://github.com/passiv/snaptrade-php-sdk
+          packagist-api-token: ${{ secrets.PACKAGIST_API_TOKEN }}
+
+  sync-php7:
+    name: Sync PHP7 mirror
+    needs: prepare
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Sync PHP7 mirror
+        uses: ./.github/actions/shared/sync-sdk-mirror
+        with:
+          source-directory: sdks/php7
+          target-repository: passiv/snaptrade-php-7-sdk
+          version: ${{ needs.prepare.outputs.php7_version }}
+          deploy-key: ${{ secrets.PHP7_MIRROR_DEPLOY_KEY }}
+          packagist-repository-url: https://github.com/passiv/snaptrade-php-7-sdk
+          packagist-api-token: ${{ secrets.PACKAGIST_API_TOKEN }}

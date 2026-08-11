@@ -11,6 +11,7 @@
 """
 
 from dataclasses import dataclass
+import typing
 import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
@@ -19,6 +20,9 @@ from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
+from snaptrade_client.auth import AuthMode
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401
@@ -46,11 +50,47 @@ from snaptrade_client.type.model404_failed_request_response import Model404Faile
 
 from . import path
 
-_auth = [
+_auth_modes = {
+    "commercialApiKey": [
+        "PartnerClientId",
+        "PartnerTimestamp",
+    ],
+    "personalApiKey": [
+        "PersonalClientId",
+        "PersonalTimestamp",
+    ],
+}
+_operation_auth_context = {
+    "auth_modes": [
+        "commercialApiKey",
+        "personalApiKey",
+    ],
+    "request_signing_by_auth_mode": {
+        "commercialApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PartnerSignature",
+                "PartnerTimestamp",
+            ],
+        },
+        "personalApiKey": {
+            "secret_parameter": "consumer_key",
+            "signed_security_schemes": [
+                "PersonalSignature",
+                "PersonalTimestamp",
+            ],
+        },
+    },
+}
+_legacy_auth = [
     'PartnerClientId',
     'PartnerSignature',
     'PartnerTimestamp',
+    'PersonalClientId',
+    'PersonalSignature',
+    'PersonalTimestamp',
 ]
+_auth = None
 
 
 class SchemaFor200ResponseBodyApplicationJson(
@@ -244,12 +284,17 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'get'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
             path_template='/snapTrade/tradeDetection/subscriptions',
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
     
@@ -258,6 +303,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             timeout=timeout,
             **kwargs
         )
@@ -340,12 +386,17 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'get'.upper()
+        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
+            _auth_modes,
+            _legacy_auth,
+        )
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
             path_template='/snapTrade/tradeDetection/subscriptions',
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
     
@@ -354,6 +405,7 @@ class BaseApi(api_client.Api):
             method=method,
             headers=_headers,
             auth_settings=_auth,
+            operation_auth_context=_operation_auth_context,
             timeout=timeout,
         )
     
@@ -381,7 +433,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class ListSubscriptions(BaseApi):
+class ListSubscriptions(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def alist_subscriptions(
@@ -410,7 +462,7 @@ class ListSubscriptions(BaseApi):
         return self._list_subscriptions_oapg(
         )
 
-class ApiForget(BaseApi):
+class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     async def aget(

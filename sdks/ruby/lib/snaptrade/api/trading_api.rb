@@ -141,132 +141,6 @@ module SnapTrade
     end
 
 
-    # Cancel equity order
-    #
-    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
-    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-    #
-    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_user_account_order(brokerage_order_id:, user_id:, user_secret:, account_id:, extra: {})
-      _body = {}
-      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
-      account_information_get_user_account_order_detail_request = _body
-      data, _status_code, _headers = cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, extra)
-      data
-    end
-
-    # Cancel equity order
-    #
-    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
-    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-    #
-    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_user_account_order_with_http_info(brokerage_order_id:, user_id:, user_secret:, account_id:, extra: {})
-      _body = {}
-      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
-      account_information_get_user_account_order_detail_request = _body
-      cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, extra)
-    end
-
-    # Cancel equity order
-    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param account_information_get_user_account_order_detail_request [AccountInformationGetUserAccountOrderDetailRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [AccountOrderRecord]
-    private def cancel_user_account_order_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts = {})
-      data, _status_code, _headers = cancel_user_account_order_with_http_info(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts)
-      data
-    end
-
-    # Cancel equity order
-    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param account_information_get_user_account_order_detail_request [AccountInformationGetUserAccountOrderDetailRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TradingApi.cancel_user_account_order ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.cancel_user_account_order"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.cancel_user_account_order"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.cancel_user_account_order"
-      end
-      # verify the required parameter 'account_information_get_user_account_order_detail_request' is set
-      if @api_client.config.client_side_validation && account_information_get_user_account_order_detail_request.nil?
-        fail ArgumentError, "Missing the required parameter 'account_information_get_user_account_order_detail_request' when calling TradingApi.cancel_user_account_order"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/orders/cancel'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-        header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(account_information_get_user_account_order_detail_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"TradingApi.cancel_user_account_order",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TradingApi#cancel_user_account_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
     # Get crypto pair quote
     #
     # Gets a quote for the specified account.
@@ -795,8 +669,6 @@ module SnapTrade
     # **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**
     # 
     # This endpoint does not work for options quotes.
-    # 
-    # This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -819,8 +691,6 @@ module SnapTrade
     # **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**
     # 
     # This endpoint does not work for options quotes.
-    # 
-    # This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -834,7 +704,7 @@ module SnapTrade
     end
 
     # Get equity symbol quotes
-    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
@@ -848,7 +718,7 @@ module SnapTrade
     end
 
     # Get equity symbol quotes
-    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+    # Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
@@ -916,166 +786,6 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#get_user_account_quotes\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Place bracket order
-    #
-    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
-    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
-    # use. Only supported on certain brokerages
-    #
-    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
-    # @param instrument [TradingInstrument] 
-    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
-    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-    # @param stop_loss [StopLoss] 
-    # @param take_profit [TakeProfit] 
-    # @param account_id [String] The ID of the account to execute the trade on.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
-    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-    # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-    # @param body [ManualTradeFormBracket] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_bracket_order(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
-      _body = {}
-      _body[:action] = action if action != SENTINEL
-      _body[:instrument] = instrument if instrument != SENTINEL
-      _body[:order_type] = order_type if order_type != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
-      _body[:price] = price if price != SENTINEL
-      _body[:stop] = stop if stop != SENTINEL
-      _body[:units] = units if units != SENTINEL
-      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
-      _body[:take_profit] = take_profit if take_profit != SENTINEL
-      manual_trade_form_bracket = _body
-      data, _status_code, _headers = place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, extra)
-      data
-    end
-
-    # Place bracket order
-    #
-    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
-    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
-    # use. Only supported on certain brokerages
-    #
-    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
-    # @param instrument [TradingInstrument] 
-    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
-    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-    # @param stop_loss [StopLoss] 
-    # @param take_profit [TakeProfit] 
-    # @param account_id [String] The ID of the account to execute the trade on.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
-    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-    # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-    # @param body [ManualTradeFormBracket] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_bracket_order_with_http_info(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
-      _body = {}
-      _body[:action] = action if action != SENTINEL
-      _body[:instrument] = instrument if instrument != SENTINEL
-      _body[:order_type] = order_type if order_type != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
-      _body[:price] = price if price != SENTINEL
-      _body[:stop] = stop if stop != SENTINEL
-      _body[:units] = units if units != SENTINEL
-      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
-      _body[:take_profit] = take_profit if take_profit != SENTINEL
-      manual_trade_form_bracket = _body
-      place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, extra)
-    end
-
-    # Place bracket order
-    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-    # @param account_id [String] The ID of the account to execute the trade on.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param manual_trade_form_bracket [ManualTradeFormBracket] 
-    # @param [Hash] opts the optional parameters
-    # @return [AccountOrderRecord]
-    private def place_bracket_order_impl(account_id, user_id, user_secret, manual_trade_form_bracket, opts = {})
-      data, _status_code, _headers = place_bracket_order_with_http_info(account_id, user_id, user_secret, manual_trade_form_bracket, opts)
-      data
-    end
-
-    # Place bracket order
-    # **This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) ** Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-    # @param account_id [String] The ID of the account to execute the trade on.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param manual_trade_form_bracket [ManualTradeFormBracket] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TradingApi.place_bracket_order ...'
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_bracket_order"
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_bracket_order"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_bracket_order"
-      end
-      # verify the required parameter 'manual_trade_form_bracket' is set
-      if @api_client.config.client_side_validation && manual_trade_form_bracket.nil?
-        fail ArgumentError, "Missing the required parameter 'manual_trade_form_bracket' when calling TradingApi.place_bracket_order"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/trading/bracket'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-        header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(manual_trade_form_bracket)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"TradingApi.place_bracket_order",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TradingApi#place_bracket_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">The symbol or ticker for the security..</param>
         /// <param name="description">Human-readable description of the security..</param>
         /// <param name="assetType">Type of instrument for the leg. - EQUITY - OPTION - CRYPTO .</param>
-        /// <param name="exchangeMicCode">Market Identifier Code (MIC) for the exchange on which the instrument trades..</param>
+        /// <param name="exchangeMicCode">Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). .</param>
         /// <param name="figiCode">Financial Instrument Global Identifier (FIGI) if available..</param>
         public AccountOrderRecordLegInstrument(string symbol = default(string), string description = default(string), string assetType = default(string), string exchangeMicCode = default(string), string figiCode = default(string)) : base()
         {
@@ -72,9 +72,9 @@ namespace SnapTrade.Net.Model
         public string AssetType { get; set; }
 
         /// <summary>
-        /// Market Identifier Code (MIC) for the exchange on which the instrument trades.
+        /// Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). 
         /// </summary>
-        /// <value>Market Identifier Code (MIC) for the exchange on which the instrument trades.</value>
+        /// <value>Market Identifier Code (MIC) for the exchange on which the instrument trades. Omitted for instruments with no listing exchange, such as index options (VIX, SPX). </value>
         [DataMember(Name = "exchange_mic_code", EmitDefaultValue = false)]
         public string ExchangeMicCode { get; set; }
 

@@ -2,7 +2,6 @@ package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.Account;
-import com.snaptrade.client.model.AccountHoldings;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -11,7 +10,6 @@ import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.Balance;
 import java.time.LocalDate;
 import com.snaptrade.client.model.PaginatedUniversalActivity;
-import com.snaptrade.client.model.Position;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.RecentOrdersResponse;
 import java.util.UUID;
@@ -40,11 +38,6 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
             super(userId, userSecret, accountId);
         }
     }
-    public class GetAllUserHoldingsRequestBuilder extends GetAllUserHoldingsRequestBuilderGenerated {
-        public GetAllUserHoldingsRequestBuilder(String userId, String userSecret) {
-            super(userId, userSecret);
-        }
-    }
     public class GetUserAccountBalanceRequestBuilder extends GetUserAccountBalanceRequestBuilderGenerated {
         public GetUserAccountBalanceRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
@@ -62,11 +55,6 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     }
     public class GetUserAccountOrdersRequestBuilder extends GetUserAccountOrdersRequestBuilderGenerated {
         public GetUserAccountOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
-        }
-    }
-    public class GetUserAccountPositionsRequestBuilder extends GetUserAccountPositionsRequestBuilderGenerated {
-        public GetUserAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
         }
     }

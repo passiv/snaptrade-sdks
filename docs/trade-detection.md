@@ -1,7 +1,7 @@
 # Trade Detection Subscriptions
 
 > **Summary**: Important behavior and integration details for SnapTrade `TRADE_DETECTION` webhook subscriptions.
-> **Related docs**: [Best practices to serve real-time data](./realtime-data), [TRADE_DETECTION webhook](./webhooks#webhooks-trade_detection)
+> **Related docs**: [Real-time vs Daily plans](./realtime-data), [TRADE_DETECTION webhook](./webhooks#webhooks-trade_detection)
 
 `TRADE_DETECTION` notifies partners when SnapTrade detects an executed order in a subscribed account. This feature is only supported for accounts where the brokerage supports realtime order updates. You can manage your subscriptions when logged in to the SnapTrade Dashboard at https://dashboard.snaptrade.com/webhooks
 

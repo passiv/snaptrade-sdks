@@ -55,6 +55,9 @@ portal:
               path: docs/authentication-methods.md
             - id: personal-vs-commercial
               path: docs/personal-vs-commercial.md
+            - id: oauth-apps
+              path: docs/oauth-apps.md
+              hidden: true
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
@@ -71,12 +74,17 @@ portal:
               path: docs/launching-your-application.md
             - id: trade-detection
               path: docs/trade-detection.md
+            - id: openbb-snaptrade-widget
+              path: docs/openbb-snaptrade-widget.md
+              hidden: true
         - label: Billing
           links:
             - id: billing
               path: docs/billing.md
         - label: AI & MCP
           links:
+            - id: build-with-ai
+              path: docs/build-with-ai.md
             - id: mcp-server
               path: docs/mcp-server.md
             - id: connector-privacy
@@ -186,6 +194,8 @@ portal:
       delete: true
     /accounts/{accountId}/holdings:
       get: true
+    /accounts/{accountId}/trading/bracket:
+      post: true
   hideTags:
     - Experimental endpoints
   hideSecurity:
@@ -228,7 +238,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 2.0.212
+    version: 3.0.0
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -242,7 +252,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 1.0.184
+    version: 2.0.0
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -254,7 +264,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 2.0.212
+    version: 3.0.0
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -265,7 +275,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 2.0.211
+    version: 3.0.0
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -277,7 +287,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 5.0.214
+    version: 6.0.0
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -288,7 +298,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 5.0.214
+    version: 6.0.0
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -302,7 +312,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.211
+    version: 13.0.0
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -320,7 +330,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 10.0.17
+    version: 12.0.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Price** | Pointer to **NullableFloat32** | Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices. | [optional] 
 **Units** | Pointer to **float32** | The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position. | [optional] 
 **AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100). | [optional] 
-**Currency** | Pointer to [**NullableOptionsPositionCurrency**](OptionsPositionCurrency.md) |  | [optional] 
+**Currency** | Pointer to [**NullableCurrencyNullable**](CurrencyNullable.md) |  | [optional] 
 
 ## Methods
 
@@ -151,20 +151,20 @@ HasAveragePurchasePrice returns a boolean if a field has been set.
 UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
 ### GetCurrency
 
-`func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency`
+`func (o *OptionsPosition) GetCurrency() CurrencyNullable`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *OptionsPosition) GetCurrencyOk() (*OptionsPositionCurrency, bool)`
+`func (o *OptionsPosition) GetCurrencyOk() (*CurrencyNullable, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *OptionsPosition) SetCurrency(v OptionsPositionCurrency)`
+`func (o *OptionsPosition) SetCurrency(v CurrencyNullable)`
 
 SetCurrency sets Currency field to given value.
 

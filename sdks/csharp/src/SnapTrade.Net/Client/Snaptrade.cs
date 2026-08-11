@@ -46,22 +46,12 @@ namespace SnapTrade.Net.Client
         /// <summary>
         /// API instance
         /// </summary>
-        public virtual OptionsApi Options { get; set; }
-
-        /// <summary>
-        /// API instance
-        /// </summary>
         public virtual ReferenceDataApi ReferenceData { get; set; }
 
         /// <summary>
         /// API instance
         /// </summary>
         public virtual TradingApi Trading { get; set; }
-
-        /// <summary>
-        /// API instance
-        /// </summary>
-        public virtual TransactionsAndReportingApi TransactionsAndReporting { get; set; }
 
         /// <summary>
         /// Configuration instance
@@ -84,10 +74,8 @@ namespace SnapTrade.Net.Client
             Authentication = new AuthenticationApi(Configuration);
             Connections = new ConnectionsApi(Configuration);
             ExperimentalEndpoints = new ExperimentalEndpointsApi(Configuration);
-            Options = new OptionsApi(Configuration);
             ReferenceData = new ReferenceDataApi(Configuration);
             Trading = new TradingApi(Configuration);
-            TransactionsAndReporting = new TransactionsAndReportingApi(Configuration);
         }
 
         /// <summary>

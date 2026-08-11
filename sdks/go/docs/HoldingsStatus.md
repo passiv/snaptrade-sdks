@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InitialSyncCompleted** | Pointer to **bool** | Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete. | [optional] 
-**LastSuccessfulSync** | Pointer to [**NullableTime.Time**](time.Time.md) | The last time holdings were successfully synced by SnapTrade. | [optional] 
+**LastSuccessfulSync** | Pointer to **NullableTime** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
+**HoldingsUnavailable** | Pointer to **bool** | Indicates that the brokerage does not expose this account&#39;s holdings to SnapTrade, so the empty positions and balances reported for it do not mean the account is empty. This is set for accounts served by a separate brokerage system that we cannot read, such as Vanguard employer-sponsored retirement plans. When this is &#x60;true&#x60;, prefer the account&#39;s total value over the sum of its positions and cash, and note that &#x60;initial_sync_completed&#x60; and &#x60;last_successful_sync&#x60; may still reflect an earlier sync.  | [optional] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ HasLastSuccessfulSync returns a boolean if a field has been set.
 `func (o *HoldingsStatus) UnsetLastSuccessfulSync()`
 
 UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
+### GetHoldingsUnavailable
+
+`func (o *HoldingsStatus) GetHoldingsUnavailable() bool`
+
+GetHoldingsUnavailable returns the HoldingsUnavailable field if non-nil, zero value otherwise.
+
+### GetHoldingsUnavailableOk
+
+`func (o *HoldingsStatus) GetHoldingsUnavailableOk() (*bool, bool)`
+
+GetHoldingsUnavailableOk returns a tuple with the HoldingsUnavailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHoldingsUnavailable
+
+`func (o *HoldingsStatus) SetHoldingsUnavailable(v bool)`
+
+SetHoldingsUnavailable sets HoldingsUnavailable field to given value.
+
+### HasHoldingsUnavailable
+
+`func (o *HoldingsStatus) HasHoldingsUnavailable() bool`
+
+HasHoldingsUnavailable returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

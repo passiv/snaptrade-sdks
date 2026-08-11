@@ -11,6 +11,7 @@
 """
 
 from dataclasses import dataclass
+import typing
 import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
@@ -19,6 +20,9 @@ from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
+from snaptrade_client.auth import AuthMode
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401
@@ -262,7 +266,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class Check(BaseApi):
+class Check(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def acheck(
@@ -293,7 +297,7 @@ class Check(BaseApi):
         return self._check_oapg(
         )
 
-class ApiForget(BaseApi):
+class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     async def aget(

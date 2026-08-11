@@ -46,7 +46,7 @@ namespace SnapTrade.Net.Model
         /// <param name="instrument">instrument (required).</param>
         /// <param name="units">The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions..</param>
         /// <param name="price">Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
-        /// <param name="costBasis">Book price or average purchase price for the position. For options, this is per-contract..</param>
+        /// <param name="costBasis">Book price or average purchase price for the position. For options, this is per-share..</param>
         /// <param name="currency">ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;..</param>
         /// <param name="cashEquivalent">Present for mutual fund positions that are also counted in cash balance or buying power..</param>
         /// <param name="taxLots">List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed).</param>
@@ -90,9 +90,9 @@ namespace SnapTrade.Net.Model
         public decimal? Price { get; set; }
 
         /// <summary>
-        /// Book price or average purchase price for the position. For options, this is per-contract.
+        /// Book price or average purchase price for the position. For options, this is per-share.
         /// </summary>
-        /// <value>Book price or average purchase price for the position. For options, this is per-contract.</value>
+        /// <value>Book price or average purchase price for the position. For options, this is per-share.</value>
         [DataMember(Name = "cost_basis", EmitDefaultValue = true)]
         [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal? CostBasis { get; set; }

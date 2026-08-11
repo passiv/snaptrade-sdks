@@ -1,0 +1,21 @@
+name: Revalidate portal
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - .github/**
+
+jobs:
+  revalidate:
+    name: Revalidate portal
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Revalidate portal
+        run: konfig revalidate-portal -o passiv -r snaptrade-sdks

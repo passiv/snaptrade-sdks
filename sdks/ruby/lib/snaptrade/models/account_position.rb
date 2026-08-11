@@ -21,7 +21,7 @@ module SnapTrade
     # Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
     attr_accessor :price
 
-    # Book price or average purchase price for the position. For options, this is per-contract.
+    # Book price or average purchase price for the position. For options, this is per-share.
     attr_accessor :cost_basis
 
     # ISO-4217 currency code for the position `price` and `cost_basis`.

@@ -41,7 +41,7 @@ type AccountOrderRecordV2 struct {
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
-	TrailingStop NullableAccountOrderRecordTrailingStop `json:"trailing_stop,omitempty"`
+	TrailingStop NullableTrailingStopNullable `json:"trailing_stop,omitempty"`
 	// List of legs that make up the order.
 	Legs []AccountOrderRecordLeg `json:"legs,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -521,9 +521,9 @@ func (o *AccountOrderRecordV2) UnsetStopPrice() {
 }
 
 // GetTrailingStop returns the TrailingStop field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordV2) GetTrailingStop() AccountOrderRecordTrailingStop {
+func (o *AccountOrderRecordV2) GetTrailingStop() TrailingStopNullable {
 	if o == nil || isNil(o.TrailingStop.Get()) {
-		var ret AccountOrderRecordTrailingStop
+		var ret TrailingStopNullable
 		return ret
 	}
 	return *o.TrailingStop.Get()
@@ -532,7 +532,7 @@ func (o *AccountOrderRecordV2) GetTrailingStop() AccountOrderRecordTrailingStop 
 // GetTrailingStopOk returns a tuple with the TrailingStop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordV2) GetTrailingStopOk() (*AccountOrderRecordTrailingStop, bool) {
+func (o *AccountOrderRecordV2) GetTrailingStopOk() (*TrailingStopNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -548,8 +548,8 @@ func (o *AccountOrderRecordV2) HasTrailingStop() bool {
 	return false
 }
 
-// SetTrailingStop gets a reference to the given NullableAccountOrderRecordTrailingStop and assigns it to the TrailingStop field.
-func (o *AccountOrderRecordV2) SetTrailingStop(v AccountOrderRecordTrailingStop) {
+// SetTrailingStop gets a reference to the given NullableTrailingStopNullable and assigns it to the TrailingStop field.
+func (o *AccountOrderRecordV2) SetTrailingStop(v TrailingStopNullable) {
 	o.TrailingStop.Set(&v)
 }
 // SetTrailingStopNil sets the value for TrailingStop to be an explicit nil

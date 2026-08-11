@@ -1,0 +1,113 @@
+name: Sync SDK mirror
+description: Copies an SDK directory to its publishable mirror and refreshes Packagist
+inputs:
+  source-directory:
+    description: SDK directory in the source repository
+    required: true
+  target-repository:
+    description: GitHub repository in owner/name format
+    required: true
+  target-branch:
+    description: Branch updated in the mirror repository
+    required: false
+    default: master
+  version:
+    description: SDK version used for the immutable Git tag
+    required: true
+  deploy-key:
+    description: Write-enabled deploy key for the mirror repository
+    required: true
+  packagist-repository-url:
+    description: Canonical repository URL registered with Packagist
+    required: true
+  packagist-api-token:
+    description: Packagist API token
+    required: true
+outputs:
+  changed:
+    description: Whether the mirror branch received a new commit
+    value: ${{ steps.sync.outputs.changed }}
+  mirror-sha:
+    description: Current mirror branch commit after synchronization
+    value: ${{ steps.sync.outputs.mirror_sha }}
+  tag-created:
+    description: Whether a new version tag was created
+    value: ${{ steps.sync.outputs.tag_created }}
+runs:
+  using: composite
+  steps:
+    - name: Check out mirror repository
+      uses: actions/checkout@v6
+      with:
+        repository: ${{ inputs.target-repository }}
+        ref: ${{ inputs.target-branch }}
+        ssh-key: ${{ inputs.deploy-key }}
+        path: .sdk-mirror
+        fetch-depth: 0
+
+    - name: Copy SDK to mirror
+      shell: bash
+      env:
+        MIRROR_DIRECTORY: ${{ github.workspace }}/.sdk-mirror
+        SOURCE_DIRECTORY: ${{ github.workspace }}/${{ inputs.source-directory }}
+      run: |
+        rsync \
+          --archive \
+          --delete \
+          --exclude=.git \
+          "$SOURCE_DIRECTORY/" \
+          "$MIRROR_DIRECTORY/"
+
+    - name: Enforce mirror publishing rules
+      id: sync
+      shell: bash
+      env:
+        MIRROR_DIRECTORY: ${{ github.workspace }}/.sdk-mirror
+        SOURCE_REFERENCE: ${{ github.repository }}@${{ github.sha }}
+        TARGET_BRANCH: ${{ inputs.target-branch }}
+        VERSION: ${{ inputs.version }}
+      run: |
+        bash "${{ github.action_path }}/sync-sdk-mirror.sh" \
+          "$MIRROR_DIRECTORY" \
+          "$TARGET_BRANCH" \
+          "$VERSION" \
+          "$SOURCE_REFERENCE"
+
+    - name: Refresh Packagist package
+      shell: bash
+      env:
+        PACKAGIST_API_TOKEN: ${{ inputs.packagist-api-token }}
+        PACKAGIST_REPOSITORY_URL: ${{ inputs.packagist-repository-url }}
+      run: |
+        response_file=$(mktemp)
+        trap 'rm -f "$response_file"' EXIT
+        payload=$(jq -nc \
+          --arg repository "$PACKAGIST_REPOSITORY_URL" \
+          '{repository: $repository}')
+
+        status_code=$(curl \
+          --silent \
+          --show-error \
+          --output "$response_file" \
+          --write-out '%{http_code}' \
+          --retry 3 \
+          --request POST \
+          --header "Authorization: Bearer konfig:$PACKAGIST_API_TOKEN" \
+          --header "Content-Type: application/json" \
+          --header "User-Agent: snaptrade-sdks-php-mirror" \
+          --data "$payload" \
+          https://packagist.org/api/update-package)
+
+        if [[ "$status_code" -lt 200 || "$status_code" -ge 300 ]]; then
+          echo "::error::Packagist refresh failed with HTTP $status_code."
+          cat "$response_file"
+          exit 1
+        fi
+
+        if [[ "$(jq -r '.status // empty' "$response_file")" != "success" ]]; then
+          echo "::error::Packagist did not accept the package refresh."
+          cat "$response_file"
+          exit 1
+        fi
+
+        echo "Packagist accepted the refresh: $(jq -c '.jobs // []' "$response_file")"

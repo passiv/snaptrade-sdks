@@ -158,33 +158,18 @@ print(json.dumps(account_detail.body, indent=2))
 
 ## 6. Get account positions
 
-The <a href="https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions" target="_blank">Account Positions</a> endpoint give you a list of stock/ETF/crypto/mutual fund positions in the account. 
+The <a href="https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountPositions" target="_blank">Account Positions</a> endpoint gives you a list of all positions in the account, including stocks, ETFs, crypto, mutual funds, and option positions.
 
 :::form{skippable}
 
 ```python
-positions = snaptrade.account_information.get_user_account_positions(
+positions = snaptrade.account_information.get_all_account_positions(
     account_id=account_id, user_id=user_id, user_secret=user_secret
 )
 print(json.dumps(positions.body, indent=2))
 ```
 
-::button[Get Equity Positions]
-
-:::
-
-Option positions are currently returned via a separate <a href="https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings" target="_blank">Options Positions</a> endpoint.
-
-:::form{skippable}
-
-```python
-option_positions = snaptrade.options.list_option_holdings(
-    account_id=account_id, user_id=user_id, user_secret=user_secret
-)
-print(json.dumps(option_positions.body, indent=2))
-```
-
-::button[Get Option Positions]
+::button[Get Account Positions]
 
 :::
 

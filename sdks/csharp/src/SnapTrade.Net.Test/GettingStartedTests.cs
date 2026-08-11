@@ -37,11 +37,7 @@ namespace SnapTrade.Net.Test.Api
         private AuthenticationApi authenticationApi;
         private AccountInformationApi accountInformationApi;
 
-        private TransactionsAndReportingApi transactionsAndReportingApi;
-
         private ReferenceDataApi referenceDataApi;
-
-        private OptionsApi optionsApi;
 
         private string testUserId;
 
@@ -63,9 +59,7 @@ namespace SnapTrade.Net.Test.Api
             apiStatusApi = new APIStatusApi(configuration);
             authenticationApi = new AuthenticationApi(configuration);
             accountInformationApi = new AccountInformationApi(configuration);
-            transactionsAndReportingApi = new TransactionsAndReportingApi(configuration);
             referenceDataApi = new ReferenceDataApi(configuration);
-            optionsApi = new OptionsApi(configuration);
         }
 
         public void Dispose()
@@ -97,8 +91,8 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
             var redirectUri = authenticationApi.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
             Console.WriteLine(redirectUri);
-            var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
-            Console.WriteLine(holdings);
+            var accounts = accountInformationApi.ListUserAccounts(userIDandSecret.UserId, userIDandSecret.UserSecret);
+            Console.WriteLine(accounts);
             var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
             Console.WriteLine(deleteResponse);
         }
@@ -116,8 +110,8 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
             var redirectUri = snaptrade.Authentication.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
             Console.WriteLine(redirectUri);
-            var holdings = snaptrade.AccountInformation.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
-            Console.WriteLine(holdings);
+            var accounts = snaptrade.AccountInformation.ListUserAccounts(userIDandSecret.UserId, userIDandSecret.UserSecret);
+            Console.WriteLine(accounts);
             var deleteResponse = snaptrade.Authentication.DeleteSnapTradeUser(userIDandSecret.UserId);
             Console.WriteLine(deleteResponse);
         }
@@ -133,8 +127,8 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(string.Format("userID: {0}, userSecret: {1}", userIDandSecret.UserId, userIDandSecret.UserSecret));
             var redirectUri = authenticationApi.LoginSnapTradeUser(userIDandSecret.UserId, userIDandSecret.UserSecret).GetLoginRedirectURI().RedirectURI;
             Console.WriteLine(redirectUri);
-            var holdings = accountInformationApi.GetAllUserHoldings(userIDandSecret.UserId, userIDandSecret.UserSecret);
-            Console.WriteLine(holdings);
+            var accounts = accountInformationApi.ListUserAccounts(userIDandSecret.UserId, userIDandSecret.UserSecret);
+            Console.WriteLine(accounts);
             var deleteResponse = authenticationApi.DeleteSnapTradeUser(userIDandSecret.UserId);
             Console.WriteLine(deleteResponse);
         }
@@ -149,29 +143,29 @@ namespace SnapTrade.Net.Test.Api
         }
 
         [Fact]
-        public void GetAllUserHoldings()
+        public void ListUserAccounts()
         {
-            // List all accounts for the user, plus balances and positions for each account.
-            List<AccountHoldings> result = accountInformationApi.GetAllUserHoldings(this.testUserId, this.testUserSecret);
+            var result = accountInformationApi.ListUserAccounts(this.testUserId, this.testUserSecret);
             Console.WriteLine(result);
         }
 
         [Fact]
-        async public void GetUserHoldings()
+        async public void GetAllAccountPositions()
         {
             var accounts = await accountInformationApi.ListUserAccountsAsync(this.testUserId, this.testUserSecret);
             Console.WriteLine(accounts);
-            var response = await accountInformationApi.GetUserHoldingsAsync(accounts[0].Id, this.testUserId, this.testUserSecret);
+            var response = await accountInformationApi.GetAllAccountPositionsAsync(this.testUserId, this.testUserSecret, accounts[0].Id);
             Console.WriteLine(response);
         }
 
 
         [Fact]
-        async public void GetActivitiesAsync()
+        async public void GetAccountActivitiesAsync()
         {
+            var accounts = await accountInformationApi.ListUserAccountsAsync(this.testUserId, this.testUserSecret);
             var from = DateTime.Now.AddYears(-1);
             var to = DateTime.Now;
-            var activities = await transactionsAndReportingApi.GetActivitiesAsync(this.testUserId, this.testUserSecret, from, to);
+            var activities = await accountInformationApi.GetAccountActivitiesAsync(accounts[0].Id, this.testUserId, this.testUserSecret, from, to);
             Console.WriteLine(activities);
         }
 

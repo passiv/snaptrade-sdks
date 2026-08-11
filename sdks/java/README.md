@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.214-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.214)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v6.0.0-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/6.0.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -26,12 +26,10 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
-  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
-  * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
   * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
   * [`snaptrade.accountInformation.getUserAccountReturnRates`](#snaptradeaccountinformationgetuseraccountreturnrates)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
@@ -49,37 +47,29 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizationAccounts`](#snaptradeconnectionslistbrokerageauthorizationaccounts)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
-  * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
-  * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
+  * [`snaptrade.experimentalEndpoints.listConnectionAccounts`](#snaptradeexperimentalendpointslistconnectionaccounts)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
-  * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
-  * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
-  * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
   * [`snaptrade.referenceData.getSymbolsByTicker`](#snaptradereferencedatagetsymbolsbyticker)
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
   * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
-  * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
-  * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
-  * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountOptionQuotes`](#snaptradetradinggetuseraccountoptionquotes)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
-  * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeComplexOrder`](#snaptradetradingplacecomplexorder)
   * [`snaptrade.trading.placeCryptoOrder`](#snaptradetradingplacecryptoorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
@@ -88,8 +78,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.previewCryptoOrder`](#snaptradetradingpreviewcryptoorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
-  * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
-  * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
 <!-- tocstop -->
 
@@ -128,7 +116,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.snaptrade</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.214</version>
+  <version>6.0.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -144,7 +132,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.snaptrade:snaptrade-java-sdk:5.0.214"
+   implementation "com.snaptrade:snaptrade-java-sdk:6.0.0"
 }
 ```
 
@@ -181,7 +169,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.214.jar`
+* `target/snaptrade-java-sdk-6.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
@@ -189,6 +177,7 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.Snaptrade;
@@ -264,6 +253,8 @@ public class Example {
 
 ### `snaptrade.accountInformation.getAccountActivities`<a id="snaptradeaccountinformationgetaccountactivities"></a>
 
+This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
+
 Returns all historical transactions for the specified account.
 
 This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
@@ -315,7 +306,7 @@ An integer that specifies the maximum number of transactions to return. Default 
 
 ##### type: `String`<a id="type-string"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -371,7 +362,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-`mutualfund` positions may also include `cash_equivalent`. `stock` positions may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -400,50 +391,6 @@ AllAccountPositionsResponse result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**Deprecated, please use the account-specific holdings endpoint instead.**
-
-List all accounts for the user, plus balances, positions, and orders for each
-account.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<AccountHoldings> result = client
-        .accountInformation
-        .getAllUserHoldings(userId, userSecret)
-        .brokerageAuthorizations(brokerageAuthorizations)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### brokerageAuthorizations: `UUID`<a id="brokerageauthorizations-uuid"></a>
-
-Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountHoldings](./src/main/java/com/snaptrade/client/model/AccountHoldings.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/holdings` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -628,50 +575,6 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
-
-This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, this endpoint returns real-time data.
-  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<Position> result = client
-        .accountInformation
-        .getUserAccountPositions(userId, userSecret, accountId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[Position](./src/main/java/com/snaptrade/client/model/Position.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/positions` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.accountInformation.getUserAccountRecentOrders`<a id="snaptradeaccountinformationgetuseraccountrecentorders"></a>
 
 A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
@@ -759,6 +662,9 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
+
 Returns a list of balances, positions, and recent orders for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1314,36 +1220,6 @@ BrokerageAuthorizationRefreshConfirmation result = client
 ---
 
 
-### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
-
-Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-client
-        .connections
-        .removeBrokerageAuthorization(authorizationId, userId, userSecret)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/authorizations/{authorizationId}` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
 
 Returns a list of rate of return percents for a given connection.
@@ -1378,46 +1254,6 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}/returnRates` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.connections.sessionEvents`<a id="snaptradeconnectionssessionevents"></a>
-
-Returns a list of session events associated with a user.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<SessionEvent> result = client
-        .connections
-        .sessionEvents(partnerClientId)
-        .userId(userId)
-        .sessionId(sessionId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### partnerClientId: `String`<a id="partnerclientid-string"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-Optional comma separated list of user IDs used to filter the request on specific users
-
-##### sessionId: `String`<a id="sessionid-string"></a>
-
-Optional comma separated list of session IDs used to filter the request on specific users
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[SessionEvent](./src/main/java/com/snaptrade/client/model/SessionEvent.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/sessionEvents` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1672,6 +1508,47 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 ---
 
 
+### `snaptrade.experimentalEndpoints.listConnectionAccounts`<a id="snaptradeexperimentalendpointslistconnectionaccounts"></a>
+
+Experimental and subject to change without notice.
+
+Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+
+Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+List<Object> result = client
+        .experimentalEndpoints
+        .listConnectionAccounts(authorizationId, userId, userSecret)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connections/{authorizationId}/accounts` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.experimentalEndpoints.listSubscriptions`<a id="snaptradeexperimentalendpointslistsubscriptions"></a>
 
 Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
@@ -1698,80 +1575,6 @@ List<TradeDetectionSubscription> result = client
 ---
 
 
-### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
-
-This endpoint is deprecatd. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-  - If you do, this endpoint returns real-time data.
-  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<OptionsPosition> result = client
-        .options
-        .listOptionHoldings(userId, userSecret, accountId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OptionsPosition](./src/main/java/com/snaptrade/client/model/OptionsPosition.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.getCurrencyExchangeRatePair`<a id="snaptradereferencedatagetcurrencyexchangeratepair"></a>
-
-Returns an Exchange Rate Pair object for the specified Currency Pair.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-ExchangeRatePairs result = client
-        .referenceData
-        .getCurrencyExchangeRatePair(currencyPair)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### currencyPair: `String`<a id="currencypair-string"></a>
-
-A currency pair based on currency code for example, {CAD-USD}
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ExchangeRatePairs](./src/main/java/com/snaptrade/client/model/ExchangeRatePairs.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies/rates/{currencyPair}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
 Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
@@ -1792,32 +1595,6 @@ PartnerData result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/partners` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
-
-Return all available security types supported by SnapTrade.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<SecurityType> result = client
-        .referenceData
-        .getSecurityTypes()
-        .execute();
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[SecurityType](./src/main/java/com/snaptrade/client/model/SecurityType.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/securityTypes` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2008,58 +1785,6 @@ List<Brokerage> result = client
 ---
 
 
-### `snaptrade.referenceData.listAllCurrencies`<a id="snaptradereferencedatalistallcurrencies"></a>
-
-Returns a list of all defined Currency objects.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<Currency> result = client
-        .referenceData
-        .listAllCurrencies()
-        .execute();
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[Currency](./src/main/java/com/snaptrade/client/model/Currency.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.referenceData.listAllCurrenciesRates`<a id="snaptradereferencedatalistallcurrenciesrates"></a>
-
-Returns a list of all Exchange Rate Pairs for all supported Currencies.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<ExchangeRatePairs> result = client
-        .referenceData
-        .listAllCurrenciesRates()
-        .execute();
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ExchangeRatePairs](./src/main/java/com/snaptrade/client/model/ExchangeRatePairs.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/currencies/rates` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
 Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
@@ -2135,47 +1860,6 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/cancel` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
-Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountOrderRecord result = client
-        .trading
-        .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2388,8 +2072,6 @@ The quotes returned can be delayed depending on the brokerage the account belong
 
 This endpoint does not work for options quotes.
 
-This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -2424,73 +2106,6 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.placeBracketOrder`<a id="snaptradetradingplacebracketorder"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-**This endpoint is deprecated. Please switch to [the new complex order endpoint](/reference/Trading/Trading_placeComplexOrder) **
-Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
-use. Only supported on certain brokerages
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountOrderRecord result = client
-        .trading
-        .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-        .price(price)
-        .stop(stop)
-        .units(units)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### action:<a id="action"></a>
-
-##### instrument: [`TradingInstrument`](./src/main/java/com/snaptrade/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomsnaptradeclientmodeltradinginstrumentjava"></a>
-
-##### order_type:<a id="order_type"></a>
-
-##### time_in_force:<a id="time_in_force"></a>
-
-##### stop_loss: [`StopLoss`](./src/main/java/com/snaptrade/client/model/StopLoss.java)<a id="stop_loss-stoplosssrcmainjavacomsnaptradeclientmodelstoplossjava"></a>
-
-##### take_profit: [`TakeProfit`](./src/main/java/com/snaptrade/client/model/TakeProfit.java)<a id="take_profit-takeprofitsrcmainjavacomsnaptradeclientmodeltakeprofitjava"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-The ID of the account to execute the trade on.
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### price: `Double`<a id="price-double"></a>
-
-The limit price for `Limit` and `StopLimit` orders.
-
-##### stop: `Double`<a id="stop-double"></a>
-
-The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-
-##### units: `Double`<a id="units-double"></a>
-
-Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2690,9 +2305,9 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`Double`](./src/main/java/com/snaptrade/client/model/ModelDouble.java)<a id="units-doublesrcmainjavacomsnaptradeclientmodelmodeldoublejava"></a>
+##### units: `Double`<a id="units-double"></a>
 
-For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
 ##### notional_value: `Object`<a id="notional_value-object"></a>
 
@@ -2986,125 +2601,6 @@ TradingSearchCryptocurrencyPairInstruments200Response result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
-
-Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
-
-There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
-
-This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.
-
-**Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<UniversalActivity> result = client
-        .transactionsAndReporting
-        .getActivities(userId, userSecret)
-        .startDate(startDate)
-        .endDate(endDate)
-        .accounts(accounts)
-        .brokerageAuthorizations(brokerageAuthorizations)
-        .type(type)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### startDate: `LocalDate`<a id="startdate-localdate"></a>
-
-The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
-
-##### endDate: `LocalDate`<a id="enddate-localdate"></a>
-
-The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
-
-##### accounts: `String`<a id="accounts-string"></a>
-
-Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
-
-##### brokerageAuthorizations: `String`<a id="brokerageauthorizations-string"></a>
-
-Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-
-##### type: `String`<a id="type-string"></a>
-
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[UniversalActivity](./src/main/java/com/snaptrade/client/model/UniversalActivity.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/activities` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
-![Deprecated](https://img.shields.io/badge/deprecated-yellow)
-
-Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-PerformanceCustom result = client
-        .transactionsAndReporting
-        .getReportingCustomRange(startDate, endDate, userId, userSecret)
-        .accounts(accounts)
-        .detailed(detailed)
-        .frequency(frequency)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### startDate: `LocalDate`<a id="startdate-localdate"></a>
-
-##### endDate: `LocalDate`<a id="enddate-localdate"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accounts: `String`<a id="accounts-string"></a>
-
-Optional comma separated list of account IDs used to filter the request on specific accounts
-
-##### detailed: `Boolean`<a id="detailed-boolean"></a>
-
-Optional, increases frequency of data points for the total value and contribution charts if set to true
-
-##### frequency: `String`<a id="frequency-string"></a>
-
-Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[PerformanceCustom](./src/main/java/com/snaptrade/client/model/PerformanceCustom.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/performance/custom` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

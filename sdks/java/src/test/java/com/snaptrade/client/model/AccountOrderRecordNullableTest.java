@@ -17,7 +17,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
 import com.snaptrade.client.model.ChildBrokerageOrderIDsNullable;
 import com.snaptrade.client.model.CurrencyNullable;

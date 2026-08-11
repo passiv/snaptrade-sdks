@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountId** | **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | 
 **Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
-**UniversalSymbolId** | Pointer to **NullableString** | The universal symbol ID of the security to trade. Must be &#39;null&#39; if &#x60;symbol&#x60; is provided, otherwise must be provided. | [optional] 
+**UniversalSymbolId** | Pointer to **NullableString** | Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | [optional] 
 **Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**ManualTradePlaceTimeInForceStrict**](ManualTradePlaceTimeInForceStrict.md) |  | 
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **ExpiryDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the order expires. Required when &#x60;time_in_force&#x60; is &#x60;GTD&#x60;. Include a timezone offset or &#x60;Z&#x60; for UTC; if no timezone is provided, UTC is assumed. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. | [optional] 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
-**Units** | Pointer to **NullableFloat32** | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). | [optional] 
-**NotionalValue** | Pointer to [**NullableManualTradeFormNotionalValue**](ManualTradeFormNotionalValue.md) |  | [optional] 
-**ClientOrderId** | Pointer to **NullableString** |  | [optional] 
+**Units** | Pointer to **NullableFloat32** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. | [optional] 
+**NotionalValue** | Pointer to [**NullableNotionalValueNullable**](NotionalValueNullable.md) |  | [optional] 
+**ClientOrderId** | Pointer to **NullableString** | Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission.  | [optional] 
 
 ## Methods
 
@@ -354,20 +354,20 @@ HasUnits returns a boolean if a field has been set.
 UnsetUnits ensures that no value is present for Units, not even an explicit nil
 ### GetNotionalValue
 
-`func (o *ManualTradeFormWithOptions) GetNotionalValue() ManualTradeFormNotionalValue`
+`func (o *ManualTradeFormWithOptions) GetNotionalValue() NotionalValueNullable`
 
 GetNotionalValue returns the NotionalValue field if non-nil, zero value otherwise.
 
 ### GetNotionalValueOk
 
-`func (o *ManualTradeFormWithOptions) GetNotionalValueOk() (*ManualTradeFormNotionalValue, bool)`
+`func (o *ManualTradeFormWithOptions) GetNotionalValueOk() (*NotionalValueNullable, bool)`
 
 GetNotionalValueOk returns a tuple with the NotionalValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotionalValue
 
-`func (o *ManualTradeFormWithOptions) SetNotionalValue(v ManualTradeFormNotionalValue)`
+`func (o *ManualTradeFormWithOptions) SetNotionalValue(v NotionalValueNullable)`
 
 SetNotionalValue sets NotionalValue field to given value.
 

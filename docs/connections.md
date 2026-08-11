@@ -1,10 +1,10 @@
 # Connections
 
-A connection is an open channel for you to access the account data of your end-users. Each connection is associated one-to-one with a set of credentials to an institution. If the access token for the connection is no longer valid, the connection will become disabled and the end-user will need to go through the connection portal again to enable the connection.
+A connection is an open channel for accessing brokerage account data. In Commercial integrations, connections belong to the end users of your app; in Personal API key integrations, connections provide access to your own brokerage data. Each connection is associated one-to-one with a set of credentials to an institution. If the access token for the connection is no longer valid, the connection will become disabled and the end-user will need to go through the connection portal again to enable the connection.
 
 ## Connection Portal
 
-The Connection Portal is a UI widget designed to allow end users to securely connect their brokerage accounts to your app. It handles brokerage selection, OAuth redirects, username/password authentication, and multi-factor auth verification in one flow.
+The Connection Portal is a UI widget designed to allow users to securely connect brokerage accounts to SnapTrade-powered applications. It handles brokerage selection, OAuth redirects, username/password authentication, and multi-factor auth verification in one flow.
 
 ## Disabled Connections
 

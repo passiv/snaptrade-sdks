@@ -4,65 +4,15 @@ All URIs are relative to *https://api.snaptrade.com*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#GetCurrencyExchangeRatePair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 [**GetPartnerInfo**](ReferenceDataApi.md#GetPartnerInfo) | **Get** /snapTrade/partners | Get Client Info
-[**GetSecurityTypes**](ReferenceDataApi.md#GetSecurityTypes) | **Get** /securityTypes | List security types
 [**GetStockExchanges**](ReferenceDataApi.md#GetStockExchanges) | **Get** /exchanges | Get exchanges
 [**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
 [**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
 [**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
-[**ListAllCurrencies**](ReferenceDataApi.md#ListAllCurrencies) | **Get** /currencies | Get currencies
-[**ListAllCurrenciesRates**](ReferenceDataApi.md#ListAllCurrenciesRates) | **Get** /currencies/rates | Get currency exchange rates
 [**SymbolSearchUserAccount**](ReferenceDataApi.md#SymbolSearchUserAccount) | **Post** /accounts/{accountId}/symbols | Search account symbols
 
-
-
-## GetCurrencyExchangeRatePair
-
-Get exchange rate of a currency pair
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ReferenceDataApi.GetCurrencyExchangeRatePair(
-        "currencyPair_example",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.GetCurrencyExchangeRatePair``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetCurrencyExchangeRatePair`: ExchangeRatePairs
-    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.GetCurrencyExchangeRatePair`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `ExchangeRatePairs.GetCurrencyExchangeRatePair.Src`: %v\n", *resp.Src)
-    fmt.Fprintf(os.Stdout, "Response from `ExchangeRatePairs.GetCurrencyExchangeRatePair.Dst`: %v\n", *resp.Dst)
-    fmt.Fprintf(os.Stdout, "Response from `ExchangeRatePairs.GetCurrencyExchangeRatePair.ExchangeRate`: %v\n", *resp.ExchangeRate)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GetPartnerInfo
@@ -111,52 +61,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessOrders`: %v\n", *resp.CanAccessOrders)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.RedirectUri`: %v\n", *resp.RedirectUri)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.PinRequired`: %v\n", *resp.PinRequired)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetSecurityTypes
-
-List security types
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ReferenceDataApi.GetSecurityTypes(
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.GetSecurityTypes``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetSecurityTypes`: []SecurityType
-    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.GetSecurityTypes`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `SecurityType.GetSecurityTypes.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `SecurityType.GetSecurityTypes.Code`: %v\n", *resp.Code)
-    fmt.Fprintf(os.Stdout, "Response from `SecurityType.GetSecurityTypes.Description`: %v\n", *resp.Description)
-    fmt.Fprintf(os.Stdout, "Response from `SecurityType.GetSecurityTypes.IsSupported`: %v\n", *resp.IsSupported)
 }
 ```
 
@@ -468,96 +372,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.BrokerageType`: %v\n", *resp.BrokerageType)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Exchanges`: %v\n", *resp.Exchanges)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.OpenUrl`: %v\n", *resp.OpenUrl)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListAllCurrencies
-
-Get currencies
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ReferenceDataApi.ListAllCurrencies(
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.ListAllCurrencies``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `ListAllCurrencies`: []Currency
-    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.ListAllCurrencies`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `Currency.ListAllCurrencies.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `Currency.ListAllCurrencies.Code`: %v\n", *resp.Code)
-    fmt.Fprintf(os.Stdout, "Response from `Currency.ListAllCurrencies.Name`: %v\n", *resp.Name)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListAllCurrenciesRates
-
-Get currency exchange rates
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ReferenceDataApi.ListAllCurrenciesRates(
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.ListAllCurrenciesRates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `ListAllCurrenciesRates`: []ExchangeRatePairs
-    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.ListAllCurrenciesRates`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `ExchangeRatePairs.ListAllCurrenciesRates.Src`: %v\n", *resp.Src)
-    fmt.Fprintf(os.Stdout, "Response from `ExchangeRatePairs.ListAllCurrenciesRates.Dst`: %v\n", *resp.Dst)
-    fmt.Fprintf(os.Stdout, "Response from `ExchangeRatePairs.ListAllCurrenciesRates.ExchangeRate`: %v\n", *resp.ExchangeRate)
 }
 ```
 

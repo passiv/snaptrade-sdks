@@ -10,7 +10,7 @@ Status of account transaction sync. SnapTrade syncs transactions from the broker
 |------------ | ------------- | ------------- | -------------|
 |**initialSyncCompleted** | **Boolean** | Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete. |  [optional] |
 |**lastSuccessfulSync** | **LocalDate** | Date in YYYY-MM-DD format or null |  [optional] |
-|**firstTransactionDate** | [**LocalDate**](LocalDate.md) | The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade. |  [optional] |
+|**firstTransactionDate** | **LocalDate** | Date in YYYY-MM-DD format or null |  [optional] |
 
 
 

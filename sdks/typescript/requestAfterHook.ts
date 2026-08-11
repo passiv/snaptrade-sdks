@@ -1,5 +1,5 @@
 import { RequestArgs } from "./base";
-import { Configuration } from "./configuration";
+import { AuthMode, Configuration } from "./configuration";
 
 function bytesToBase64(bytes: Uint8Array): string {
   let binary = "";
@@ -18,7 +18,7 @@ function bytesToBase64(bytes: Uint8Array): string {
   throw Error("Base64 encoding is not available in this runtime");
 }
 
-// Compute HMAC SHA256 using Web Crypto so ESM bundles are safe in edge runtimes.
+// Use Web Crypto so ESM bundles remain safe in edge runtimes.
 export async function computeHmacSha256(
   message: string,
   key: string
@@ -42,7 +42,6 @@ export async function computeHmacSha256(
     cryptoKey,
     msgBuffer
   );
-
   return bytesToBase64(new Uint8Array(signature));
 }
 
@@ -64,23 +63,42 @@ export async function requestAfterHook(request: {
   axiosArgs: RequestArgs;
   basePath: string;
   url: string;
-  configuration?: Configuration;
+  configuration?: Configuration<AuthMode>;
+  operationAuth?: {
+    selectedAuthMode?: string;
+    authModes?: string[];
+    requestSigningByAuthMode?: Record<string, {
+      secretParameter: string;
+      signedSecuritySchemes: string[];
+    }>;
+  };
 }): Promise<void> {
-  const { configuration, basePath, axiosArgs, url } = request;
-  if (configuration?.consumerKey === undefined)
-    throw Error("Consumer key is required");
-  const consumerKey = encodeURI(configuration.consumerKey);
+  const { configuration, basePath, axiosArgs, url, operationAuth } = request;
+  const selectedAuthMode = operationAuth?.selectedAuthMode;
+  const requestSigning = selectedAuthMode === undefined
+    ? undefined
+    : operationAuth?.requestSigningByAuthMode?.[selectedAuthMode];
+  if (requestSigning === undefined) return;
+  const signatureScheme = requestSigning.signedSecuritySchemes.find(
+    (scheme) => scheme.toLowerCase().endsWith("signature")
+  );
+  if (signatureScheme === undefined) return;
+  const signingSecret = configuration?.[requestSigning.secretParameter as keyof Configuration<AuthMode>];
+  if (typeof signingSecret !== "string")
+    throw Error(`${requestSigning.secretParameter} is required`);
+  const encodedSigningSecret = encodeURI(signingSecret);
   const requestData =
     axiosArgs.options.data === undefined || axiosArgs.options.data === "{}"
       ? null
       : JSON.parse(axiosArgs.options.data);
-  const requestPath =
+  const path =
     axiosArgs.url.indexOf("?") === -1
       ? `${axiosArgs.url}`
       : `${axiosArgs.url.split("?")[0]}`;
+  const requestPath = path;
   const requestQuery = url
     .replace(basePath, "")
-    .replace(requestPath, "")
+    .replace(path, "")
     .replace("?", "");
   const sigObject = {
     content: requestData,
@@ -88,7 +106,7 @@ export async function requestAfterHook(request: {
     query: requestQuery,
   };
   const sigContent = JSONstringifyOrder(sigObject);
-  const signature = await computeHmacSha256(sigContent, consumerKey);
+  const signature = await computeHmacSha256(sigContent, encodedSigningSecret);
 
   if (axiosArgs.options.headers)
     axiosArgs.options.headers["Signature"] = signature;

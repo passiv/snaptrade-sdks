@@ -15,7 +15,6 @@ import com.snaptrade.client.model.CryptoTradingInstrument;
 import com.snaptrade.client.model.CryptocurrencyPairQuote;
 import com.snaptrade.client.model.ManualTradeAndImpact;
 import com.snaptrade.client.model.ManualTradeForm;
-import com.snaptrade.client.model.ManualTradeFormBracket;
 import com.snaptrade.client.model.ManualTradeFormComplex;
 import com.snaptrade.client.model.ManualTradeFormWithOptions;
 import com.snaptrade.client.model.ManualTradePlaceTimeInForceStrict;
@@ -30,11 +29,8 @@ import com.snaptrade.client.model.OptionImpact;
 import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.OrderUpdatedResponse;
-import com.snaptrade.client.model.StopLoss;
 import com.snaptrade.client.model.SymbolsQuotesInner;
-import com.snaptrade.client.model.TakeProfit;
 import com.snaptrade.client.model.TimeInForceStrict;
-import com.snaptrade.client.model.TradingInstrument;
 import com.snaptrade.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import com.snaptrade.client.model.TradingSession;
 import java.util.UUID;
@@ -51,11 +47,6 @@ public class TradingApi extends TradingApiGenerated {
     }
     public class CancelOrderRequestBuilder extends CancelOrderRequestBuilderGenerated {
         public CancelOrderRequestBuilder(String brokerageOrderId, String userId, String userSecret, UUID accountId) {
-            super(brokerageOrderId, userId, userSecret, accountId);
-        }
-    }
-    public class CancelUserAccountOrderRequestBuilder extends CancelUserAccountOrderRequestBuilderGenerated {
-        public CancelUserAccountOrderRequestBuilder(String brokerageOrderId, String userId, String userSecret, UUID accountId) {
             super(brokerageOrderId, userId, userSecret, accountId);
         }
     }
@@ -82,11 +73,6 @@ public class TradingApi extends TradingApiGenerated {
     public class GetUserAccountQuotesRequestBuilder extends GetUserAccountQuotesRequestBuilderGenerated {
         public GetUserAccountQuotesRequestBuilder(String userId, String userSecret, String symbols, UUID accountId) {
             super(userId, userSecret, symbols, accountId);
-        }
-    }
-    public class PlaceBracketOrderRequestBuilder extends PlaceBracketOrderRequestBuilderGenerated {
-        public PlaceBracketOrderRequestBuilder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) {
-            super(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
         }
     }
     public class PlaceComplexOrderRequestBuilder extends PlaceComplexOrderRequestBuilderGenerated {

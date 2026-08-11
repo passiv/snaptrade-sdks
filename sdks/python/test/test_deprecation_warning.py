@@ -1,14 +1,18 @@
 import unittest
 from unittest.mock import patch
 
+from snaptrade_client import SnapTradeAuth
 from snaptrade_client.api_client import ApiClient, DeprecationWarningOnce
 from snaptrade_client.configuration import Configuration
 
 
 class RandomClass:
     configuration = Configuration(
+        auth=SnapTradeAuth.commercial_api_key(
         consumer_key="YOUR_CONSUMER_KEY",
-    client_id="YOUR_CLIENT_ID",
+        client_id="YOUR_CLIENT_ID",
+    ),
+
     )
     api_client = ApiClient(configuration)
 

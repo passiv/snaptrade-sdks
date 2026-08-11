@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v1.0.184)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v2.0.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -22,6 +22,7 @@ go get github.com/passiv/snaptrade-sdks/sdks/go
 ## Getting Started
 
 ```golang
+// Commercial API key example: registers a SnapTrade user and uses userId/userSecret. SDK support for Personal API key users is coming soon.
 package main
 
 import (
@@ -109,12 +110,10 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetAccountActivities**](docs/AccountInformationApi.md#getaccountactivities) | **Get** /accounts/{accountId}/activities | List account activities
 *AccountInformationApi* | [**GetAccountBalanceHistory**](docs/AccountInformationApi.md#getaccountbalancehistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
 *AccountInformationApi* | [**GetAllAccountPositions**](docs/AccountInformationApi.md#getallaccountpositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
-*AccountInformationApi* | [**GetAllUserHoldings**](docs/AccountInformationApi.md#getalluserholdings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **Get** /accounts/{accountId}/balances | List account balances
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **Get** /accounts/{accountId} | Get account detail
 *AccountInformationApi* | [**GetUserAccountOrderDetail**](docs/AccountInformationApi.md#getuseraccountorderdetail) | **Post** /accounts/{accountId}/orders/details | Get account order detail
 *AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **Get** /accounts/{accountId}/orders | List account orders
-*AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **Get** /accounts/{accountId}/positions | List account positions
 *AccountInformationApi* | [**GetUserAccountRecentOrders**](docs/AccountInformationApi.md#getuseraccountrecentorders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 *AccountInformationApi* | [**GetUserAccountReturnRates**](docs/AccountInformationApi.md#getuseraccountreturnrates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
 *AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **Get** /accounts/{accountId}/holdings | List account holdings
@@ -132,37 +131,29 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**ListBrokerageAuthorizationAccounts**](docs/ConnectionsApi.md#listbrokerageauthorizationaccounts) | **Get** /authorizations/{authorizationId}/accounts | List accounts for a connection
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **Get** /authorizations | List all connections
 *ConnectionsApi* | [**RefreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshbrokerageauthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
-*ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
-*ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 *ExperimentalEndpointsApi* | [**AddSubscription**](docs/ExperimentalEndpointsApi.md#addsubscription) | **Post** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**CancelSubscription**](docs/ExperimentalEndpointsApi.md#cancelsubscription) | **Post** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
+*ExperimentalEndpointsApi* | [**ListConnectionAccounts**](docs/ExperimentalEndpointsApi.md#listconnectionaccounts) | **Get** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
-*OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | List account option positions
-*ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
-*ReferenceDataApi* | [**GetSecurityTypes**](docs/ReferenceDataApi.md#getsecuritytypes) | **Get** /securityTypes | List security types
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **Get** /exchanges | Get exchanges
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **Post** /symbols | Search symbols
 *ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **Get** /symbols/{query} | Get symbol detail
 *ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
 *ReferenceDataApi* | [**ListAllBrokerageInstruments**](docs/ReferenceDataApi.md#listallbrokerageinstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 *ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **Get** /brokerages | Get brokerages
-*ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **Get** /currencies | Get currencies
-*ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **Get** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **Post** /accounts/{accountId}/symbols | Search account symbols
 *TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
-*TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
 *TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
 *TradingApi* | [**GetOptionImpact**](docs/TradingApi.md#getoptionimpact) | **Post** /accounts/{accountId}/trading/options/impact | Get option order impact
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **Post** /trade/impact | Check equity order impact
 *TradingApi* | [**GetUserAccountOptionQuotes**](docs/TradingApi.md#getuseraccountoptionquotes) | **Get** /accounts/{accountId}/quotes/options | Get option quote
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
-*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
 *TradingApi* | [**PlaceComplexOrder**](docs/TradingApi.md#placecomplexorder) | **Post** /accounts/{accountId}/trading/complex | Place complex order
 *TradingApi* | [**PlaceCryptoOrder**](docs/TradingApi.md#placecryptoorder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place equity order
@@ -171,8 +162,6 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
 *TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Post** /accounts/{accountId}/trading/replace | Replace order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
-*TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
-*TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe
 
 
 ## Documentation For Models
@@ -184,26 +173,18 @@ Class | Method | HTTP request | Description
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountInformationGetUserAccountOrderDetailRequest](docs/AccountInformationGetUserAccountOrderDetailRequest.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
- - [AccountOrderRecordChildBrokerageOrderIds](docs/AccountOrderRecordChildBrokerageOrderIds.md)
  - [AccountOrderRecordLeg](docs/AccountOrderRecordLeg.md)
  - [AccountOrderRecordLegInstrument](docs/AccountOrderRecordLegInstrument.md)
- - [AccountOrderRecordOptionSymbol](docs/AccountOrderRecordOptionSymbol.md)
- - [AccountOrderRecordQuoteCurrency](docs/AccountOrderRecordQuoteCurrency.md)
- - [AccountOrderRecordQuoteUniversalSymbol](docs/AccountOrderRecordQuoteUniversalSymbol.md)
+ - [AccountOrderRecordNullable](docs/AccountOrderRecordNullable.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountOrderRecordStatusV2](docs/AccountOrderRecordStatusV2.md)
- - [AccountOrderRecordTrailingStop](docs/AccountOrderRecordTrailingStop.md)
- - [AccountOrderRecordUniversalSymbol](docs/AccountOrderRecordUniversalSymbol.md)
+ - [AccountOrderRecordStatusV2Nullable](docs/AccountOrderRecordStatusV2Nullable.md)
  - [AccountOrderRecordV2](docs/AccountOrderRecordV2.md)
  - [AccountOrdersV2Response](docs/AccountOrdersV2Response.md)
  - [AccountPosition](docs/AccountPosition.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [AccountUniversalActivity](docs/AccountUniversalActivity.md)
- - [AccountUniversalActivityCurrency](docs/AccountUniversalActivityCurrency.md)
- - [AccountUniversalActivityCurrencyUniversalSymbol](docs/AccountUniversalActivityCurrencyUniversalSymbol.md)
- - [AccountUniversalActivityOptionSymbol](docs/AccountUniversalActivityOptionSymbol.md)
- - [AccountUniversalActivitySymbol](docs/AccountUniversalActivitySymbol.md)
  - [AccountValueHistoryItem](docs/AccountValueHistoryItem.md)
  - [AccountValueHistoryResponse](docs/AccountValueHistoryResponse.md)
  - [ActionStrict](docs/ActionStrict.md)
@@ -228,8 +209,11 @@ Class | Method | HTTP request | Description
  - [CefInstrument](docs/CefInstrument.md)
  - [CfdInstrument](docs/CfdInstrument.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
+ - [ChildBrokerageOrderIDsNullable](docs/ChildBrokerageOrderIDsNullable.md)
  - [ComplexOrderLeg](docs/ComplexOrderLeg.md)
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
+ - [ConnectionAccount](docs/ConnectionAccount.md)
+ - [ConnectionAccountSyncStatus](docs/ConnectionAccountSyncStatus.md)
  - [CryptoInstrument](docs/CryptoInstrument.md)
  - [CryptoOrderForm](docs/CryptoOrderForm.md)
  - [CryptoOrderPreview](docs/CryptoOrderPreview.md)
@@ -238,6 +222,7 @@ Class | Method | HTTP request | Description
  - [CryptocurrencyPair](docs/CryptocurrencyPair.md)
  - [CryptocurrencyPairQuote](docs/CryptocurrencyPairQuote.md)
  - [Currency](docs/Currency.md)
+ - [CurrencyNullable](docs/CurrencyNullable.md)
  - [DeleteConnectionConfirmation](docs/DeleteConnectionConfirmation.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DividendAtDate](docs/DividendAtDate.md)
@@ -247,9 +232,12 @@ Class | Method | HTTP request | Description
  - [Exchange](docs/Exchange.md)
  - [ExchangeRatePairs](docs/ExchangeRatePairs.md)
  - [FigiInstrument](docs/FigiInstrument.md)
+ - [FigiInstrumentNullable](docs/FigiInstrumentNullable.md)
  - [FutureInstrument](docs/FutureInstrument.md)
  - [HoldingsStatus](docs/HoldingsStatus.md)
  - [Instrument](docs/Instrument.md)
+ - [InvestmentAccount](docs/InvestmentAccount.md)
+ - [InvestmentAccountMarketValue](docs/InvestmentAccountMarketValue.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)
  - [ManualTrade](docs/ManualTrade.md)
  - [ManualTradeAndImpact](docs/ManualTradeAndImpact.md)
@@ -257,7 +245,6 @@ Class | Method | HTTP request | Description
  - [ManualTradeForm](docs/ManualTradeForm.md)
  - [ManualTradeFormBracket](docs/ManualTradeFormBracket.md)
  - [ManualTradeFormComplex](docs/ManualTradeFormComplex.md)
- - [ManualTradeFormNotionalValue](docs/ManualTradeFormNotionalValue.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
  - [ManualTradePlaceTimeInForceStrict](docs/ManualTradePlaceTimeInForceStrict.md)
@@ -269,6 +256,7 @@ Class | Method | HTTP request | Description
  - [MlegOrderResponse](docs/MlegOrderResponse.md)
  - [MlegOrderTypeStrict](docs/MlegOrderTypeStrict.md)
  - [MlegPriceEffectStrict](docs/MlegPriceEffectStrict.md)
+ - [MlegPriceEffectStrictNullable](docs/MlegPriceEffectStrictNullable.md)
  - [MlegTradeForm](docs/MlegTradeForm.md)
  - [MlegTradingInstrument](docs/MlegTradingInstrument.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)
@@ -288,6 +276,7 @@ Class | Method | HTTP request | Description
  - [NetContributions](docs/NetContributions.md)
  - [NetDividend](docs/NetDividend.md)
  - [NotionalValue](docs/NotionalValue.md)
+ - [NotionalValueNullable](docs/NotionalValueNullable.md)
  - [OptionBrokerageSymbol](docs/OptionBrokerageSymbol.md)
  - [OptionChainInner](docs/OptionChainInner.md)
  - [OptionChainInnerChainPerRootInner](docs/OptionChainInnerChainPerRootInner.md)
@@ -300,11 +289,10 @@ Class | Method | HTTP request | Description
  - [OptionStrategy](docs/OptionStrategy.md)
  - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
  - [OptionsPosition](docs/OptionsPosition.md)
- - [OptionsPositionCurrency](docs/OptionsPositionCurrency.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
+ - [OptionsSymbolNullable](docs/OptionsSymbolNullable.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
  - [OrderUpdatedResponse](docs/OrderUpdatedResponse.md)
- - [OrderUpdatedResponseOrder](docs/OrderUpdatedResponseOrder.md)
  - [OtherInstrument](docs/OtherInstrument.md)
  - [PaginatedUniversalActivity](docs/PaginatedUniversalActivity.md)
  - [PaginationDetails](docs/PaginationDetails.md)
@@ -326,7 +314,6 @@ Class | Method | HTTP request | Description
  - [SnapTradeRegisterUserRequestBody](docs/SnapTradeRegisterUserRequestBody.md)
  - [Status](docs/Status.md)
  - [StockInstrument](docs/StockInstrument.md)
- - [StockInstrumentFigiInstrument](docs/StockInstrumentFigiInstrument.md)
  - [StopLoss](docs/StopLoss.md)
  - [StrategyOrderRecord](docs/StrategyOrderRecord.md)
  - [StrategyQuotes](docs/StrategyQuotes.md)
@@ -335,6 +322,7 @@ Class | Method | HTTP request | Description
  - [Symbol](docs/Symbol.md)
  - [SymbolCurrency](docs/SymbolCurrency.md)
  - [SymbolExchange](docs/SymbolExchange.md)
+ - [SymbolNullable](docs/SymbolNullable.md)
  - [SymbolQuery](docs/SymbolQuery.md)
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [TakeProfit](docs/TakeProfit.md)
@@ -348,6 +336,7 @@ Class | Method | HTTP request | Description
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TradingSession](docs/TradingSession.md)
  - [TrailingStop](docs/TrailingStop.md)
+ - [TrailingStopNullable](docs/TrailingStopNullable.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingCfdInstrument](docs/UnderlyingCfdInstrument.md)
@@ -357,5 +346,6 @@ Class | Method | HTTP request | Description
  - [UnderlyingSymbolType](docs/UnderlyingSymbolType.md)
  - [UniversalActivity](docs/UniversalActivity.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
+ - [UniversalSymbolNullable](docs/UniversalSymbolNullable.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [ValidatedTradeBody](docs/ValidatedTradeBody.md)

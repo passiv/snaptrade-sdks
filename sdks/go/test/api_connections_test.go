@@ -121,22 +121,6 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
         */
     })
 
-    t.Run("Test ConnectionsApiService RemoveBrokerageAuthorization", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ConnectionsApi.RemoveBrokerageAuthorization(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
     t.Run("Test ConnectionsApiService ReturnRates", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.ReturnRates(
@@ -145,22 +129,6 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.Timeframes(""ALL,1Y"")
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test ConnectionsApiService SessionEvents", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ConnectionsApi.SessionEvents(
-            "partnerClientId_example",
-        )
-        request.UserId("userId_example")
-        request.SessionId("sessionId_example")
         
         resp, httpRes, err := request.Execute()
 

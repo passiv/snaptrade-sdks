@@ -14,7 +14,7 @@ Describes a single recent order in an account. Each record here represents a sin
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
 |**universalSymbol** | [**UniversalSymbolNullable**](UniversalSymbolNullable.md) |  |  [optional] |
 |**optionSymbol** | [**OptionsSymbolNullable**](OptionsSymbolNullable.md) |  |  [optional] |
-|**quoteUniversalSymbol** | [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  |  [optional] |
+|**quoteUniversalSymbol** | [**UniversalSymbolNullable**](UniversalSymbolNullable.md) |  |  [optional] |
 |**quoteCurrency** | [**CurrencyNullable**](CurrencyNullable.md) |  |  [optional] |
 |**action** | **String** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  |  [optional] |
 |**totalQuantity** | **String** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. |  [optional] |

@@ -70,6 +70,8 @@ from snaptrade_client.model.client_order_id import ClientOrderID
 from snaptrade_client.model.client_order_id_nullable import ClientOrderIDNullable
 from snaptrade_client.model.complex_order_leg import ComplexOrderLeg
 from snaptrade_client.model.complex_order_response import ComplexOrderResponse
+from snaptrade_client.model.connection_account import ConnectionAccount
+from snaptrade_client.model.connection_account_sync_status import ConnectionAccountSyncStatus
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.crypto_order_form import CryptoOrderForm
 from snaptrade_client.model.crypto_order_preview import CryptoOrderPreview
@@ -103,6 +105,8 @@ from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusD
 from snaptrade_client.model.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable
 from snaptrade_client.model.id import Id
 from snaptrade_client.model.instrument import Instrument
+from snaptrade_client.model.investment_account import InvestmentAccount
+from snaptrade_client.model.investment_account_market_value import InvestmentAccountMarketValue
 from snaptrade_client.model.login_redirect_uri import LoginRedirectURI
 from snaptrade_client.model.manual_trade import ManualTrade
 from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact

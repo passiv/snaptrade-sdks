@@ -25,6 +25,7 @@ type ManualTrade struct {
 	TimeInForce *TimeInForceStrict `json:"time_in_force,omitempty"`
 	Symbol *ManualTradeSymbol `json:"symbol,omitempty"`
 	Action *ActionStrict `json:"action,omitempty"`
+	// Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 	Units NullableFloat32 `json:"units,omitempty"`
 	// Trade Price if limit or stop limit order
 	Price NullableFloat32 `json:"price,omitempty"`

@@ -27,7 +27,6 @@ import java.io.IOException;
 
 
 import com.snaptrade.client.model.Account;
-import com.snaptrade.client.model.AccountHoldings;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -36,7 +35,6 @@ import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.Balance;
 import java.time.LocalDate;
 import com.snaptrade.client.model.PaginatedUniversalActivity;
-import com.snaptrade.client.model.Position;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.RecentOrdersResponse;
 import java.util.UUID;
@@ -252,7 +250,7 @@ public class AccountInformationApiGenerated {
         
         /**
          * Set type
-         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split.  (optional)
+         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split.  (optional)
          * @return AccountInformationApi.GetAccountActivitiesRequestBuilder
          */
         public AccountInformationApi.GetAccountActivitiesRequestBuilder type(String type) {
@@ -327,7 +325,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account activities
-     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy &#x60;/api/v1&#x60; path prefix include &#x60;Deprecation: @1781222400&#x60; (June 12, 2026); that header applies only to the path prefix. Use the canonical root path &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @param accountId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -704,7 +702,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List all account positions
-     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  &#x60;mutualfund&#x60; positions may also include &#x60;cash_equivalent&#x60;. &#x60;stock&#x60; positions may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  &#x60;mutualfund&#x60; positions may also include &#x60;cash_equivalent&#x60;. &#x60;stock&#x60;, &#x60;etf&#x60;, and &#x60;mutualfund&#x60; positions may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
@@ -727,211 +725,6 @@ public class AccountInformationApiGenerated {
             
 
         return ((AccountInformationApi) this).new GetAllAccountPositionsRequestBuilder(userId, userSecret, accountId);
-    }
-    private okhttp3.Call getAllUserHoldingsCall(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/holdings";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        if (brokerageAuthorizations != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("brokerage_authorizations", brokerageAuthorizations));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @Deprecated
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAllUserHoldingsValidateBeforeCall(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling getAllUserHoldings(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling getAllUserHoldings(Async)");
-        }
-
-        return getAllUserHoldingsCall(userId, userSecret, brokerageAuthorizations, _callback);
-
-    }
-
-
-    private ApiResponse<List<AccountHoldings>> getAllUserHoldingsWithHttpInfo(String userId, String userSecret, UUID brokerageAuthorizations) throws ApiException {
-        okhttp3.Call localVarCall = getAllUserHoldingsValidateBeforeCall(userId, userSecret, brokerageAuthorizations, null);
-        Type localVarReturnType = new TypeToken<List<AccountHoldings>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    private okhttp3.Call getAllUserHoldingsAsync(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback<List<AccountHoldings>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = getAllUserHoldingsValidateBeforeCall(userId, userSecret, brokerageAuthorizations, _callback);
-        Type localVarReturnType = new TypeToken<List<AccountHoldings>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-
-    public abstract class GetAllUserHoldingsRequestBuilderGenerated {
-        final String userId;
-        final String userSecret;
-        UUID brokerageAuthorizations;
-
-        public GetAllUserHoldingsRequestBuilderGenerated(String userId, String userSecret) {
-            this.userId = userId;
-            this.userSecret = userSecret;
-        }
-
-        /**
-         * Set brokerageAuthorizations
-         * @param brokerageAuthorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
-         * @return AccountInformationApi.GetAllUserHoldingsRequestBuilder
-         */
-        public AccountInformationApi.GetAllUserHoldingsRequestBuilder brokerageAuthorizations(UUID brokerageAuthorizations) {
-            this.brokerageAuthorizations = brokerageAuthorizations;
-            return (AccountInformationApi.GetAllUserHoldingsRequestBuilder) this;
-        }
-        
-        /**
-         * Build call for getAllUserHoldings
-         * @param _callback ApiCallback API callback
-         * @return Call to execute
-         * @throws ApiException If fail to serialize the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getAllUserHoldingsCall(userId, userSecret, brokerageAuthorizations, _callback);
-        }
-
-
-        /**
-         * Execute getAllUserHoldings request
-         * @return List&lt;AccountHoldings&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public List<AccountHoldings> execute() throws ApiException {
-            ApiResponse<List<AccountHoldings>> localVarResp = getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
-            return localVarResp.getResponseBody();
-        }
-
-        /**
-         * Execute getAllUserHoldings request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;AccountHoldings&gt;&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public ApiResponse<List<AccountHoldings>> executeWithHttpInfo() throws ApiException {
-            return getAllUserHoldingsWithHttpInfo(userId, userSecret, brokerageAuthorizations);
-        }
-
-        /**
-         * Execute getAllUserHoldings request (asynchronously)
-         * @param _callback The callback to be executed when the API call finishes
-         * @return The request call
-         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(final ApiCallback<List<AccountHoldings>> _callback) throws ApiException {
-            return getAllUserHoldingsAsync(userId, userSecret, brokerageAuthorizations, _callback);
-        }
-    }
-
-    /**
-     * List all accounts for the user, plus balances, positions, and orders for each account.
-     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  **Note:** This endpoint will return HTTP 410 Gone for all customers that sign up after April 25, 2026. 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @return GetAllUserHoldingsRequestBuilder
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns list of accounts and holdings </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     * @deprecated
-     */
-    @Deprecated
-    public AccountInformationApi.GetAllUserHoldingsRequestBuilder getAllUserHoldings(String userId, String userSecret) throws IllegalArgumentException {
-        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
-            
-
-        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
-            
-
-        return ((AccountInformationApi) this).new GetAllUserHoldingsRequestBuilder(userId, userSecret);
     }
     private okhttp3.Call getUserAccountBalanceCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -1738,208 +1531,6 @@ public class AccountInformationApiGenerated {
 
         return ((AccountInformationApi) this).new GetUserAccountOrdersRequestBuilder(userId, userSecret, accountId);
     }
-    private okhttp3.Call getUserAccountPositionsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/accounts/{accountId}/positions"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @Deprecated
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call getUserAccountPositionsValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling getUserAccountPositions(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling getUserAccountPositions(Async)");
-        }
-
-        // verify the required parameter 'accountId' is set
-        if (accountId == null) {
-            throw new ApiException("Missing the required parameter 'accountId' when calling getUserAccountPositions(Async)");
-        }
-
-        return getUserAccountPositionsCall(userId, userSecret, accountId, _callback);
-
-    }
-
-
-    private ApiResponse<List<Position>> getUserAccountPositionsWithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
-        okhttp3.Call localVarCall = getUserAccountPositionsValidateBeforeCall(userId, userSecret, accountId, null);
-        Type localVarReturnType = new TypeToken<List<Position>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    private okhttp3.Call getUserAccountPositionsAsync(String userId, String userSecret, UUID accountId, final ApiCallback<List<Position>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = getUserAccountPositionsValidateBeforeCall(userId, userSecret, accountId, _callback);
-        Type localVarReturnType = new TypeToken<List<Position>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-
-    public abstract class GetUserAccountPositionsRequestBuilderGenerated {
-        final String userId;
-        final String userSecret;
-        final UUID accountId;
-
-        public GetUserAccountPositionsRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
-            this.userId = userId;
-            this.userSecret = userSecret;
-            this.accountId = accountId;
-        }
-
-        /**
-         * Build call for getUserAccountPositions
-         * @param _callback ApiCallback API callback
-         * @return Call to execute
-         * @throws ApiException If fail to serialize the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return getUserAccountPositionsCall(userId, userSecret, accountId, _callback);
-        }
-
-
-        /**
-         * Execute getUserAccountPositions request
-         * @return List&lt;Position&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public List<Position> execute() throws ApiException {
-            ApiResponse<List<Position>> localVarResp = getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
-            return localVarResp.getResponseBody();
-        }
-
-        /**
-         * Execute getUserAccountPositions request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;Position&gt;&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public ApiResponse<List<Position>> executeWithHttpInfo() throws ApiException {
-            return getUserAccountPositionsWithHttpInfo(userId, userSecret, accountId);
-        }
-
-        /**
-         * Execute getUserAccountPositions request (asynchronously)
-         * @param _callback The callback to be executed when the API call finishes
-         * @return The request call
-         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(final ApiCallback<List<Position>> _callback) throws ApiException {
-            return getUserAccountPositionsAsync(userId, userSecret, accountId, _callback);
-        }
-    }
-
-    /**
-     * List account positions
-     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param accountId  (required)
-     * @return GetUserAccountPositionsRequestBuilder
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
-     </table>
-     * @deprecated
-     */
-    @Deprecated
-    public AccountInformationApi.GetUserAccountPositionsRequestBuilder getUserAccountPositions(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
-        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
-            
-
-        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
-            
-
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
-        return ((AccountInformationApi) this).new GetUserAccountPositionsRequestBuilder(userId, userSecret, accountId);
-    }
     private okhttp3.Call getUserAccountRecentOrdersCall(String userId, String userSecret, UUID accountId, Boolean onlyExecuted, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -2518,7 +2109,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account holdings
-     * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders). Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @param accountId  (required)
      * @param userId  (required)
      * @param userSecret  (required)

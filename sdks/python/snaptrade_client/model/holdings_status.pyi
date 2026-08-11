@@ -46,9 +46,11 @@ class HoldingsStatus(
             @staticmethod
             def last_successful_sync() -> typing.Type['HoldingsSyncStatusDateNullable']:
                 return HoldingsSyncStatusDateNullable
+            holdings_unavailable = schemas.BoolSchema
             __annotations__ = {
                 "initial_sync_completed": initial_sync_completed,
                 "last_successful_sync": last_successful_sync,
+                "holdings_unavailable": holdings_unavailable,
             }
 
     
@@ -59,9 +61,12 @@ class HoldingsStatus(
     def __getitem__(self, name: typing_extensions.Literal["last_successful_sync"]) -> 'HoldingsSyncStatusDateNullable': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["holdings_unavailable"]) -> MetaOapg.properties.holdings_unavailable: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["initial_sync_completed", "last_successful_sync", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["initial_sync_completed", "last_successful_sync", "holdings_unavailable", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -73,9 +78,12 @@ class HoldingsStatus(
     def get_item_oapg(self, name: typing_extensions.Literal["last_successful_sync"]) -> typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["holdings_unavailable"]) -> typing.Union[MetaOapg.properties.holdings_unavailable, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["initial_sync_completed", "last_successful_sync", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["initial_sync_completed", "last_successful_sync", "holdings_unavailable", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -84,6 +92,7 @@ class HoldingsStatus(
         *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
         initial_sync_completed: typing.Union[MetaOapg.properties.initial_sync_completed, bool, schemas.Unset] = schemas.unset,
         last_successful_sync: typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset] = schemas.unset,
+        holdings_unavailable: typing.Union[MetaOapg.properties.holdings_unavailable, bool, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'HoldingsStatus':
@@ -92,6 +101,7 @@ class HoldingsStatus(
             *args,
             initial_sync_completed=initial_sync_completed,
             last_successful_sync=last_successful_sync,
+            holdings_unavailable=holdings_unavailable,
             _configuration=_configuration,
             **kwargs,
         )

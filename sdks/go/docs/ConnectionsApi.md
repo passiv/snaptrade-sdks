@@ -10,9 +10,7 @@ Method | Path | Description
 [**ListBrokerageAuthorizationAccounts**](ConnectionsApi.md#ListBrokerageAuthorizationAccounts) | **Get** /authorizations/{authorizationId}/accounts | List accounts for a connection
 [**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
 [**RefreshBrokerageAuthorization**](ConnectionsApi.md#RefreshBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
-[**RemoveBrokerageAuthorization**](ConnectionsApi.md#RemoveBrokerageAuthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 [**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
-[**SessionEvents**](ConnectionsApi.md#SessionEvents) | **Get** /sessionEvents | Get all session events for a user
 [**SyncBrokerageAuthorizationTransactions**](ConnectionsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 
 
@@ -330,49 +328,6 @@ func main() {
 [[Back to README]](../README.md)
 
 
-## RemoveBrokerageAuthorization
-
-Delete connection
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ConnectionsApi.RemoveBrokerageAuthorization(
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "userId_example",
-        "userSecret_example",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.RemoveBrokerageAuthorization``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ReturnRates
 
 List connection rate of returns
@@ -412,58 +367,6 @@ func main() {
     // response from `ReturnRates`: RateOfReturnResponse
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ReturnRates`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `RateOfReturnResponse.ReturnRates.Data`: %v\n", *resp.Data)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SessionEvents
-
-Get all session events for a user
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ConnectionsApi.SessionEvents(
-        "partnerClientId_example",
-    )
-    request.UserId("userId_example")
-    request.SessionId("sessionId_example")
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.SessionEvents``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `SessionEvents`: []SessionEvent
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.SessionEvents`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.SessionEventType`: %v\n", *resp.SessionEventType)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.SessionId`: %v\n", *resp.SessionId)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.UserId`: %v\n", *resp.UserId)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.CreatedDate`: %v\n", *resp.CreatedDate)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.BrokerageStatusCode`: %v\n", *resp.BrokerageStatusCode)
-    fmt.Fprintf(os.Stdout, "Response from `SessionEvent.SessionEvents.BrokerageAuthorizationId`: %v\n", *resp.BrokerageAuthorizationId)
 }
 ```
 
