@@ -238,8 +238,33 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Test TypeScript SDK in Cloudflare Workers runtime
-        if: matrix.language == 'typescript'
+  test-typescript-edge:
+    name: Test TypeScript SDK in Cloudflare Workers runtime
+    needs: regenerate
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.regenerate.outputs.generated_sha }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: sdks/typescript/pnpm-lock.yaml
+
+      - name: Install TypeScript SDK dependencies
+        run: pnpm --dir sdks/typescript install --frozen-lockfile
+
+      - name: Run Cloudflare Workers compatibility test
         run: .github/tests/typescript-edge/run.sh
 
   merge:
@@ -249,6 +274,7 @@ jobs:
       - prepare
       - regenerate
       - test
+      - test-typescript-edge
     runs-on: blacksmith-2vcpu-ubuntu-2404
     environment:
       name: ${{ needs.prepare.outputs.merge_environment }}
