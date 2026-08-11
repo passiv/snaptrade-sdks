@@ -240,6 +240,7 @@ jobs:
 
   merge:
     name: Merge regenerated SDKs
+    if: github.event_name != 'workflow_dispatch'
     needs:
       - prepare
       - regenerate
