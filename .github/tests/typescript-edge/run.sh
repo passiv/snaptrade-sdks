@@ -16,8 +16,6 @@ cleanup() {
 }
 trap cleanup EXIT
 
-npx --yes --registry=https://registry.npmjs.org pnpm@8.15.9 \
-  --dir "$repo_root/sdks/typescript" install --frozen-lockfile
 npm --prefix "$repo_root/sdks/typescript" run build
 
 npx --yes --registry=https://registry.npmjs.org esbuild@0.25.9 \
