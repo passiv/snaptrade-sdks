@@ -29,7 +29,7 @@ class ReplaceOrder(BaseApi, typing.Generic[TAuth]):
     def replace_order(
         self: "ReplaceOrder[CommercialApiKeyAuth]",
         brokerage_order_id: str,
-        action: ActionStrict,
+        action: ActionStrictWithOptions,
         order_type: OrderTypeStrict,
         time_in_force: TimeInForceStrict,
         account_id: str,
@@ -48,7 +48,7 @@ class ReplaceOrder(BaseApi, typing.Generic[TAuth]):
     def replace_order(
         self: "ReplaceOrder[PersonalApiKeyAuth]",
         brokerage_order_id: str,
-        action: ActionStrict,
+        action: ActionStrictWithOptions,
         order_type: OrderTypeStrict,
         time_in_force: TimeInForceStrict,
         account_id: str,
@@ -70,7 +70,7 @@ class ApiForpost(ReplaceOrder[TAuth]):
     def post(
         self: "ApiForpost[CommercialApiKeyAuth]",
         brokerage_order_id: str,
-        action: ActionStrict,
+        action: ActionStrictWithOptions,
         order_type: OrderTypeStrict,
         time_in_force: TimeInForceStrict,
         account_id: str,
@@ -89,7 +89,7 @@ class ApiForpost(ReplaceOrder[TAuth]):
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
         brokerage_order_id: str,
-        action: ActionStrict,
+        action: ActionStrictWithOptions,
         order_type: OrderTypeStrict,
         time_in_force: TimeInForceStrict,
         account_id: str,

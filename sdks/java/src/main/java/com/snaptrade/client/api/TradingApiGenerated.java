@@ -3199,7 +3199,7 @@ public class TradingApiGenerated {
 
     public abstract class ReplaceOrderRequestBuilderGenerated {
         final String brokerageOrderId;
-        final ActionStrict action;
+        final ActionStrictWithOptions action;
         final OrderTypeStrict orderType;
         final TimeInForceStrict timeInForce;
         final UUID accountId;
@@ -3210,7 +3210,7 @@ public class TradingApiGenerated {
         Double stop;
         Double units;
 
-        public ReplaceOrderRequestBuilderGenerated(String brokerageOrderId, ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) {
+        public ReplaceOrderRequestBuilderGenerated(String brokerageOrderId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) {
             this.brokerageOrderId = brokerageOrderId;
             this.action = action;
             this.orderType = orderType;
@@ -3243,7 +3243,7 @@ public class TradingApiGenerated {
         
         /**
          * Set symbol
-         * @param symbol The security&#39;s trading ticker symbol (optional)
+         * @param symbol The security&#39;s trading ticker symbol. Use the OCC symbol to replace an option order. (optional)
          * @return TradingApi.ReplaceOrderRequestBuilder
          */
         public TradingApi.ReplaceOrderRequestBuilder symbol(String symbol) {
@@ -3389,7 +3389,7 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.ReplaceOrderRequestBuilder replaceOrder(String brokerageOrderId, ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+    public TradingApi.ReplaceOrderRequestBuilder replaceOrder(String brokerageOrderId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
         if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
             
 

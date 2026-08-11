@@ -16,7 +16,7 @@ module SnapTrade
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
 
-    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     attr_accessor :action
 
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
@@ -28,7 +28,7 @@ module SnapTrade
     # The limit price for `Limit` and `StopLimit` orders.
     attr_accessor :price
 
-    # The security's trading ticker symbol
+    # The security's trading ticker symbol. Use the OCC symbol to replace an option order.
     attr_accessor :symbol
 
     # The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
@@ -59,7 +59,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'brokerage_order_id' => :'String',
-        :'action' => :'ActionStrict',
+        :'action' => :'ActionStrictWithOptions',
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
         :'price' => :'Float',

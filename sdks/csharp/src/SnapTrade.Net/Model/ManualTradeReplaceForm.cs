@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
-        public ActionStrict _Action { get; set; }
+        public ActionStrictWithOptions _Action { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderType
@@ -63,10 +63,10 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
-        /// <param name="symbol">The security&#39;s trading ticker symbol.</param>
+        /// <param name="symbol">The security&#39;s trading ticker symbol. Use the OCC symbol to replace an option order..</param>
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
-        public ManualTradeReplaceForm(string brokerageOrderId = default(string), ActionStrict action = default(ActionStrict), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), string symbol = default(string), double? stop = default(double?), double? units = default(double?))
+        public ManualTradeReplaceForm(string brokerageOrderId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), string symbol = default(string), double? stop = default(double?), double? units = default(double?))
         {
             // to ensure "brokerageOrderId" is required (not null)
             if (brokerageOrderId == null)
@@ -98,9 +98,9 @@ namespace SnapTrade.Net.Model
         public double? Price { get; set; }
 
         /// <summary>
-        /// The security&#39;s trading ticker symbol
+        /// The security&#39;s trading ticker symbol. Use the OCC symbol to replace an option order.
         /// </summary>
-        /// <value>The security&#39;s trading ticker symbol</value>
+        /// <value>The security&#39;s trading ticker symbol. Use the OCC symbol to replace an option order.</value>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
         public string Symbol { get; set; }
 

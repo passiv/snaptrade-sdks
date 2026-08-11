@@ -252,7 +252,7 @@ Returns a list of all positions in the specified account.
 
 The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-`mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account.
+`mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -2501,9 +2501,10 @@ p result
 Order ID returned by brokerage. This is the unique identifier for the order in
 the brokerage system.
 
-##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
+##### action: [`ActionStrictWithOptions`](./lib/snaptrade/models/action_strict_with_options.rb)<a id="action-actionstrictwithoptionslibsnaptrademodelsaction_strict_with_optionsrb"></a>
 The action describes the intent or side of a trade. This is either `BUY` or
-`SELL`.
+`SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or
+`SELL_TO_CLOSE` for Options.
 
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
 The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
@@ -2529,7 +2530,8 @@ The ID of the account to execute the trade on.
 The limit price for `Limit` and `StopLimit` orders.
 
 ##### symbol: `String`<a id="symbol-string"></a>
-The security's trading ticker symbol
+The security's trading ticker symbol. Use the OCC symbol to replace an option
+order.
 
 ##### stop: `Float`<a id="stop-float"></a>
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.

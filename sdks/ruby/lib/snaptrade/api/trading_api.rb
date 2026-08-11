@@ -1696,14 +1696,14 @@ module SnapTrade
     # returned in the response going forward. Only supported on some brokerages
     #
     # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
-    # @param symbol [String] The security's trading ticker symbol
+    # @param symbol [String] The security's trading ticker symbol. Use the OCC symbol to replace an option order.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
     # @param body [ManualTradeReplaceForm] 
@@ -1730,14 +1730,14 @@ module SnapTrade
     # returned in the response going forward. Only supported on some brokerages
     #
     # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
-    # @param symbol [String] The security's trading ticker symbol
+    # @param symbol [String] The security's trading ticker symbol. Use the OCC symbol to replace an option order.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
     # @param body [ManualTradeReplaceForm] 

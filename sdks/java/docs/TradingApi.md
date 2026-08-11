@@ -1417,14 +1417,14 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    ActionStrict action = ActionStrict.fromValue("BUY");
+    ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
-    String symbol = "symbol_example"; // The security's trading ticker symbol
+    String symbol = "symbol_example"; // The security's trading ticker symbol. Use the OCC symbol to replace an option order.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     try {

@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.ActionStrict;
+import com.snaptrade.client.model.ActionStrictWithOptions;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
@@ -60,7 +60,7 @@ public class ManualTradeReplaceForm {
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
-  private ActionStrict action;
+  private ActionStrictWithOptions action;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
@@ -118,7 +118,7 @@ public class ManualTradeReplaceForm {
   }
 
 
-  public ManualTradeReplaceForm action(ActionStrict action) {
+  public ManualTradeReplaceForm action(ActionStrictWithOptions action) {
     
     
     
@@ -134,12 +134,12 @@ public class ManualTradeReplaceForm {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public ActionStrict getAction() {
+  public ActionStrictWithOptions getAction() {
     return action;
   }
 
 
-  public void setAction(ActionStrict action) {
+  public void setAction(ActionStrictWithOptions action) {
     
     
     
@@ -253,11 +253,11 @@ public class ManualTradeReplaceForm {
   }
 
    /**
-   * The security&#39;s trading ticker symbol
+   * The security&#39;s trading ticker symbol. Use the OCC symbol to replace an option order.
    * @return symbol
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "AAPL", value = "The security's trading ticker symbol")
+  @ApiModelProperty(example = "AAPL", value = "The security's trading ticker symbol. Use the OCC symbol to replace an option order.")
 
   public String getSymbol() {
     return symbol;
