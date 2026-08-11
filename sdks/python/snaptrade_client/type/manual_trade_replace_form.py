@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.action_strict import ActionStrict
+from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.units_nullable import UnitsNullable
@@ -24,7 +24,7 @@ class RequiredManualTradeReplaceForm(TypedDict):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     brokerage_order_id: str
 
-    action: ActionStrict
+    action: ActionStrictWithOptions
 
     order_type: OrderTypeStrict
 
@@ -35,7 +35,7 @@ class OptionalManualTradeReplaceForm(TypedDict, total=False):
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]
 
-    # The security's trading ticker symbol
+    # The security's trading ticker symbol. Use the OCC symbol to replace an option order.
     symbol: str
 
     # The price at which a stop order is triggered for `Stop` and `StopLimit` orders.

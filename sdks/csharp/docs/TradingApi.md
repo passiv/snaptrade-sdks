@@ -1359,11 +1359,11 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-            var action = ActionStrict.BUY;
+            var action = ActionStrictWithOptions.BUY;
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
-            var symbol = "AAPL"; // The security's trading ticker symbol
+            var symbol = "AAPL"; // The security's trading ticker symbol. Use the OCC symbol to replace an option order.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             

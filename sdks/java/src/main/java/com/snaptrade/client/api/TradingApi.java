@@ -106,7 +106,7 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class ReplaceOrderRequestBuilder extends ReplaceOrderRequestBuilderGenerated {
-        public ReplaceOrderRequestBuilder(String brokerageOrderId, ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) {
+        public ReplaceOrderRequestBuilder(String brokerageOrderId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) {
             super(brokerageOrderId, action, orderType, timeInForce, accountId, userId, userSecret);
         }
     }

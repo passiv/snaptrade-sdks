@@ -19,12 +19,12 @@ import (
 type ManualTradeReplaceForm struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId string `json:"brokerage_order_id"`
-	Action ActionStrict `json:"action"`
+	Action ActionStrictWithOptions `json:"action"`
 	OrderType OrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price for `Limit` and `StopLimit` orders.
 	Price NullableFloat32 `json:"price,omitempty"`
-	// The security's trading ticker symbol
+	// The security's trading ticker symbol. Use the OCC symbol to replace an option order.
 	Symbol *string `json:"symbol,omitempty"`
 	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 	Stop NullableFloat32 `json:"stop,omitempty"`
@@ -36,7 +36,7 @@ type ManualTradeReplaceForm struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManualTradeReplaceForm(brokerageOrderId string, action ActionStrict, orderType OrderTypeStrict, timeInForce TimeInForceStrict) *ManualTradeReplaceForm {
+func NewManualTradeReplaceForm(brokerageOrderId string, action ActionStrictWithOptions, orderType OrderTypeStrict, timeInForce TimeInForceStrict) *ManualTradeReplaceForm {
 	this := ManualTradeReplaceForm{}
 	this.BrokerageOrderId = brokerageOrderId
 	this.Action = action
@@ -78,9 +78,9 @@ func (o *ManualTradeReplaceForm) SetBrokerageOrderId(v string) {
 }
 
 // GetAction returns the Action field value
-func (o *ManualTradeReplaceForm) GetAction() ActionStrict {
+func (o *ManualTradeReplaceForm) GetAction() ActionStrictWithOptions {
 	if o == nil {
-		var ret ActionStrict
+		var ret ActionStrictWithOptions
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *ManualTradeReplaceForm) GetAction() ActionStrict {
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *ManualTradeReplaceForm) GetActionOk() (*ActionStrict, bool) {
+func (o *ManualTradeReplaceForm) GetActionOk() (*ActionStrictWithOptions, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *ManualTradeReplaceForm) GetActionOk() (*ActionStrict, bool) {
 }
 
 // SetAction sets field value
-func (o *ManualTradeReplaceForm) SetAction(v ActionStrict) {
+func (o *ManualTradeReplaceForm) SetAction(v ActionStrictWithOptions) {
 	o.Action = v
 }
 

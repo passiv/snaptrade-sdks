@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
-**Action** | [**ActionStrict**](ActionStrict.md) |  | 
+**Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
-**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol | [optional] 
+**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol. Use the OCC symbol to replace an option order. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. | [optional] 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewManualTradeReplaceForm
 
-`func NewManualTradeReplaceForm(brokerageOrderId string, action ActionStrict, orderType OrderTypeStrict, timeInForce TimeInForceStrict, ) *ManualTradeReplaceForm`
+`func NewManualTradeReplaceForm(brokerageOrderId string, action ActionStrictWithOptions, orderType OrderTypeStrict, timeInForce TimeInForceStrict, ) *ManualTradeReplaceForm`
 
 NewManualTradeReplaceForm instantiates a new ManualTradeReplaceForm object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ SetBrokerageOrderId sets BrokerageOrderId field to given value.
 
 ### GetAction
 
-`func (o *ManualTradeReplaceForm) GetAction() ActionStrict`
+`func (o *ManualTradeReplaceForm) GetAction() ActionStrictWithOptions`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *ManualTradeReplaceForm) GetActionOk() (*ActionStrict, bool)`
+`func (o *ManualTradeReplaceForm) GetActionOk() (*ActionStrictWithOptions, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *ManualTradeReplaceForm) SetAction(v ActionStrict)`
+`func (o *ManualTradeReplaceForm) SetAction(v ActionStrictWithOptions)`
 
 SetAction sets Action field to given value.
 

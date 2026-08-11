@@ -17,7 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.ActionStrict;
+import com.snaptrade.client.model.ActionStrictWithOptions;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;

@@ -377,7 +377,7 @@ public class TradingApiTest {
     @Test
     public void replaceOrderTest() throws ApiException {
         String brokerageOrderId = null;
-        ActionStrict action = null;
+        ActionStrictWithOptions action = null;
         OrderTypeStrict orderType = null;
         TimeInForceStrict timeInForce = null;
         UUID accountId = null;

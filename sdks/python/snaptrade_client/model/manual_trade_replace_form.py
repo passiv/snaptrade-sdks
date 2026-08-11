@@ -46,8 +46,8 @@ class ManualTradeReplaceForm(
             brokerage_order_id = schemas.StrSchema
         
             @staticmethod
-            def action() -> typing.Type['ActionStrict']:
-                return ActionStrict
+            def action() -> typing.Type['ActionStrictWithOptions']:
+                return ActionStrictWithOptions
         
             @staticmethod
             def order_type() -> typing.Type['OrderTypeStrict']:
@@ -113,7 +113,7 @@ class ManualTradeReplaceForm(
             }
     
     time_in_force: 'TimeInForceStrict'
-    action: 'ActionStrict'
+    action: 'ActionStrictWithOptions'
     brokerage_order_id: MetaOapg.properties.brokerage_order_id
     order_type: 'OrderTypeStrict'
     
@@ -121,7 +121,7 @@ class ManualTradeReplaceForm(
     def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'ActionStrict': ...
+    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'ActionStrictWithOptions': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
@@ -153,7 +153,7 @@ class ManualTradeReplaceForm(
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> 'ActionStrict': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> 'ActionStrictWithOptions': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
@@ -184,7 +184,7 @@ class ManualTradeReplaceForm(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         time_in_force: 'TimeInForceStrict',
-        action: 'ActionStrict',
+        action: 'ActionStrictWithOptions',
         brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, ],
         order_type: 'OrderTypeStrict',
         price: typing.Union[MetaOapg.properties.price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
@@ -209,7 +209,7 @@ class ManualTradeReplaceForm(
             **kwargs,
         )
 
-from snaptrade_client.model.action_strict import ActionStrict
+from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.model.units_nullable import UnitsNullable

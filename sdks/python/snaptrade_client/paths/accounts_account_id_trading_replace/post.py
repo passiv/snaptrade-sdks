@@ -37,18 +37,18 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.action_strict import ActionStrict as ActionStrictSchema
 from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
+from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions as ActionStrictWithOptionsSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
 from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm as ManualTradeReplaceFormSchema
 from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
 from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
-from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.type.manual_trade_replace_form import ManualTradeReplaceForm
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
@@ -234,7 +234,7 @@ class BaseApi(api_client.Api):
         self,
         body: typing.Optional[ManualTradeReplaceForm] = None,
         brokerage_order_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrict] = None,
+        action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         account_id: typing.Optional[str] = None,
@@ -577,7 +577,7 @@ class ReplaceOrder(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[ManualTradeReplaceForm] = None,
         brokerage_order_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrict] = None,
+        action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         account_id: typing.Optional[str] = None,
@@ -623,7 +623,7 @@ class ReplaceOrder(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[ManualTradeReplaceForm] = None,
         brokerage_order_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrict] = None,
+        action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         account_id: typing.Optional[str] = None,
@@ -670,7 +670,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[ManualTradeReplaceForm] = None,
         brokerage_order_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrict] = None,
+        action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         account_id: typing.Optional[str] = None,
@@ -716,7 +716,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[ManualTradeReplaceForm] = None,
         brokerage_order_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrict] = None,
+        action: typing.Optional[ActionStrictWithOptions] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         account_id: typing.Optional[str] = None,

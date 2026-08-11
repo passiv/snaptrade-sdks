@@ -52,7 +52,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
-        'action' => '\SnapTrade\Model\ActionStrict',
+        'action' => '\SnapTrade\Model\ActionStrictWithOptions',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float',
@@ -376,7 +376,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets action
      *
-     * @return \SnapTrade\Model\ActionStrict
+     * @return \SnapTrade\Model\ActionStrictWithOptions
      */
     public function getAction()
     {
@@ -386,7 +386,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets action
      *
-     * @param \SnapTrade\Model\ActionStrict $action action
+     * @param \SnapTrade\Model\ActionStrictWithOptions $action action
      *
      * @return self
      */
@@ -509,7 +509,7 @@ class ManualTradeReplaceForm implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The security's trading ticker symbol
+     * @param string|null $symbol The security's trading ticker symbol. Use the OCC symbol to replace an option order.
      *
      * @return self
      */
