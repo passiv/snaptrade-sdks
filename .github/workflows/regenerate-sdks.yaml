@@ -238,6 +238,10 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Test TypeScript SDK in Cloudflare Workers runtime
+        if: matrix.language == 'typescript'
+        run: .github/tests/typescript-edge/run.sh
+
   merge:
     name: Merge regenerated SDKs
     if: github.event_name != 'workflow_dispatch'
