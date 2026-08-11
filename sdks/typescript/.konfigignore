@@ -1,5 +1,6 @@
 index.test.ts
 requestAfterHook.ts
+requestAfterHook.test.ts
 requestBeforeHook.ts
 mock.test.ts
 auth-mode.tstest.ts

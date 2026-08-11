@@ -1,22 +1,30 @@
-import * as crypto from "crypto";
 import { RequestArgs } from "./base";
 import { AuthMode, Configuration } from "./configuration";
 
-function isNodeEnvironment() {
-  return (
-    typeof process !== "undefined" && process.versions && process.versions.node
-  );
+function bytesToBase64(bytes: Uint8Array): string {
+  let binary = "";
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+
+  if (typeof globalThis.btoa === "function") {
+    return globalThis.btoa(binary);
+  }
+
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(bytes).toString("base64");
+  }
+
+  throw Error("Base64 encoding is not available in this runtime");
 }
 
-async function computeHmacSha256(
+// Use Web Crypto so ESM bundles remain safe in edge runtimes.
+export async function computeHmacSha256(
   message: string,
   key: string
 ): Promise<string> {
-  if (isNodeEnvironment()) {
-    const crypto = require("crypto");
-    const hmac = crypto.createHmac("sha256", key);
-    hmac.update(message);
-    return hmac.digest("base64");
+  if (!globalThis.crypto?.subtle) {
+    throw Error("Web Crypto API is required to compute SnapTrade request signatures");
   }
 
   const encoder = new TextEncoder();
@@ -34,8 +42,7 @@ async function computeHmacSha256(
     cryptoKey,
     msgBuffer
   );
-  const byteArray = Array.from(new Uint8Array(signature));
-  return btoa(String.fromCharCode.apply(null, byteArray));
+  return bytesToBase64(new Uint8Array(signature));
 }
 
 const JSONstringifyOrder = (obj: any) => {
