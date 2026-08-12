@@ -34,9 +34,10 @@ A simulated brokerage for exercising your integration end-to-end — connection 
 ## What the data covers (data scenarios)
 
 - Accounts, balances (cash + buying power), and positions across a handful of well-known tickers
+- Positions spanning **stocks**, an **ETF**, a **mutual fund**, a **money market fund** (returned with `cash_equivalent` set), and **crypto** — including fractional quantities, so you can exercise instrument-type and fractional-unit handling
 - Orders spanning every status — executed, partially filled, accepted, canceled, rejected
 - Transactions spanning **trades**, **cash & fees**, **dividends & income**, **corporate actions**, and **transfers** (see the full list of types below)
-- In the default **Self-directed** scenario these are **spread across the two accounts** (e.g. splits & dividends on one, transfers & mergers on the other) — iterate **all** accounts to see the full set
+- In the default **Self-directed** scenario these are **spread across the two accounts** (e.g. splits & dividends on the individual account, transfers & mergers on the IRA; crypto and the ETF on the individual account, the mutual fund and money market sweep on the IRA) — iterate **all** accounts to see the full set
 
 <details>
 <summary><b>All transaction types</b></summary>
@@ -79,4 +80,5 @@ These are the normalized `type` values SnapTrade maps real brokerage transaction
 ## Limitations
 
 - **Read-only** — placing/canceling trades isn't supported, and Sandbox won't appear in **trade-only** connection sessions
+- **No options yet** — the Sandbox returns no option positions, option orders, or `OPTION*` transactions
 - Data is **static and simulated** (timestamps are relative to the current time)
