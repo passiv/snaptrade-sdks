@@ -5,9 +5,9 @@ The SnapTrade API uses rate limiting to protect against bursts of incoming traff
 There are two layers of rate limiting that may apply to your requests:
 
 1. **Customer-level rate limiting** -- a global limit across all requests from your `clientId`.
-2. **Account-level rate limiting** -- a [per-account](https://docs.snaptrade.com/docs/account-data) limit on specific account data endpoints.
+2. **Account-level rate limiting** -- a [per-account](https://docs.snaptrade.com/docs/account-data) limit on specific account data endpoints. This layer applies only to [SnapTrade Personal](https://docs.snaptrade.com/docs/personal-vs-commercial) users. Commercial users are subject to the customer-level limit only.
 
-A request must pass both layers. Even if you have remaining capacity at the customer level, you can still be throttled at the account level, and vice versa.
+A request must pass every layer that applies to you. For Personal users, even if you have remaining capacity at the customer level, you can still be throttled at the account level, and vice versa.
 
 When you exceed a rate limit, the API returns an HTTP status code `429` with a response body indicating how long to wait before retrying:
 
@@ -35,7 +35,7 @@ These are rolling limits that look at the trailing 60 seconds.
 
 In addition to the customer-level limit, the SnapTrade API enforces a **per-account** rate limit on endpoints that fetch account data. This limit is **10 requests per minute per account** by default.
 
-> **Note:** Account-level rate limiting is only enforced for **Personal** users. Commercial users are subject to the customer-level limit only. For more on the difference, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
+> **Note:** As noted above, account-level rate limiting is only enforced for **Personal** users. Commercial users are subject to the customer-level limit only. For more on the difference, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
 Account-level rate limiting is scoped to the combination of your `clientId` and the `accountId` in the request URL. This means:
 
