@@ -113,6 +113,8 @@ portal:
               path: docs/request-ids.md
             - id: fix-broken-connections
               path: docs/fix-broken-connections.md
+            - id: broker-access-guide
+              path: docs/broker-access-guide.md
             - id: faq
               path: docs/faq.md
             - id: sandbox
