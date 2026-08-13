@@ -246,6 +246,7 @@ func main() {
 
 
 ## GetUserAccountOptionQuotes
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Get option quote
 

@@ -34,7 +34,7 @@ export interface MlegTradeForm {
      */
     'time_in_force': TimeInForceStrict;
     /**
-     * The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+     * The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
      * @type {string}
      * @memberof MlegTradeForm
      */

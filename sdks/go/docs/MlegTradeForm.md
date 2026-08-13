@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderType** | [**MlegOrderTypeStrict**](MlegOrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
-**LimitPrice** | Pointer to **NullableFloat64** | The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. | [optional] 
+**LimitPrice** | Pointer to **NullableFloat64** | The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. | [optional] 
 **PriceEffect** | Pointer to [**NullableMlegPriceEffectStrictNullable**](MlegPriceEffectStrictNullable.md) |  | [optional] 
 **Legs** | [**[]MlegLeg**](MlegLeg.md) |  | 

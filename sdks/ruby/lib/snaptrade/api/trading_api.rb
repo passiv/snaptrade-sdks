@@ -263,7 +263,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
@@ -292,7 +292,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
@@ -550,6 +550,8 @@ module SnapTrade
     #
     # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
     # **Note:** These are derived values and are not suitable for trading purposes.
+    # 
+    # **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -565,6 +567,8 @@ module SnapTrade
     #
     # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
     # **Note:** These are derived values and are not suitable for trading purposes.
+    # 
+    # **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -576,7 +580,7 @@ module SnapTrade
     end
 
     # Get option quote
-    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
+    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -589,7 +593,7 @@ module SnapTrade
     end
 
     # Get option quote
-    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
+    # Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1275,7 +1279,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
@@ -1303,7 +1307,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+    # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 

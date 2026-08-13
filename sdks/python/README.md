@@ -1755,7 +1755,7 @@ get_option_impact_response = snaptrade.trading.get_option_impact(
 
 ##### limit_price: `Optional[str]`<a id="limit_price-optionalstr"></a>
 
-The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
 
 ##### stop_price: `Optional[str]`<a id="stop_price-optionalstr"></a>
 
@@ -1842,9 +1842,12 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 ---
 
 ### `snaptrade.trading.get_user_account_option_quotes`<a id="snaptradetradingget_user_account_option_quotes"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 **Note:** These are derived values and are not suitable for trading purposes.
+
+**This Endpoint is deprecated and will cease to return data as of October 1, 2026**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2194,7 +2197,7 @@ place_mleg_order_response = snaptrade.trading.place_mleg_order(
 
 ##### limit_price: `Optional[str]`<a id="limit_price-optionalstr"></a>
 
-The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
 
 ##### stop_price: `Optional[str]`<a id="stop_price-optionalstr"></a>
 

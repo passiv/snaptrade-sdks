@@ -770,6 +770,8 @@ GetUserAccountOptionQuotes Get option quote
 Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 **Note:** These are derived values and are not suitable for trading purposes.
 
+**This Endpoint is deprecated and will cease to return data as of October 1, 2026**
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -777,6 +779,8 @@ Returns a quote for a single option contract. The option contract is specified u
  @param accountId
  @param symbol The OCC-formatted option symbol.
  @return TradingApiGetUserAccountOptionQuotesRequest
+
+Deprecated
 */
 func (a *TradingApiService) GetUserAccountOptionQuotes(userId string, userSecret string, accountId string, symbol string) TradingApiGetUserAccountOptionQuotesRequest {
 	return TradingApiGetUserAccountOptionQuotesRequest{
@@ -791,6 +795,7 @@ func (a *TradingApiService) GetUserAccountOptionQuotes(userId string, userSecret
 
 // Execute executes the request
 //  @return OptionQuote
+// Deprecated
 func (a *TradingApiService) GetUserAccountOptionQuotesExecute(r TradingApiGetUserAccountOptionQuotesRequest) (*OptionQuote, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

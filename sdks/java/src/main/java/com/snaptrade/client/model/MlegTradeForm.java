@@ -153,11 +153,11 @@ public class MlegTradeForm {
   }
 
    /**
-   * The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;.
+   * The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent.
    * @return limitPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "", value = "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.")
+  @ApiModelProperty(example = "", value = "The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.")
 
   public BigDecimal getLimitPrice() {
     return limitPrice;
