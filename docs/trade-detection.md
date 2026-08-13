@@ -15,6 +15,23 @@ Trade detection runs only when all of the following are true:
 
 Because disabled or broken connections cannot return new data, partners should also listen for `CONNECTION_BROKEN` webhooks. When a connection breaks, prompt the user to fix it as soon as possible using the public reconnection guidance: [Fix Broken Connections](https://docs.snaptrade.com/docs/fix-broken-connections).
 
+## Supported Brokerages
+
+The following brokerages support `TRADE_DETECTION` at every available detection frequency:
+
+- Webull
+- tastytrade
+- Alpaca
+- Moomoo
+- Webull Canada
+
+The following brokerages support `TRADE_DETECTION` only at intervals of five minutes or longer:
+
+- Schwab
+- Robinhood
+- Wealthsimple
+- E*Trade
+
 Brokerage availability can change as brokerage capabilities change. Do not assume every brokerage supports `TRADE_DETECTION`, and feel free to ask about specific brokerage support.
 
 ## Scheduling
@@ -41,3 +58,16 @@ Connection health is a separate signal. A `TRADE_DETECTION` subscription on an a
 Trade detection billing is seat-based. One seat is one subscribed account for one month.
 
 For example, if a partner subscribes three accounts for trade detection in a billing month, that counts as three seats for that month.
+
+The monthly cost for each subscribed account depends on the selected detection frequency:
+
+| Detection frequency | Cost per account per month |
+| --- | ---: |
+| 5 seconds | $100.00 |
+| 25 seconds | $25.00 |
+| 100 seconds | $7.50 |
+| 300 seconds (5 minutes) | $2.50 |
+| 900 seconds (15 minutes) | $0.83 |
+| 1500 seconds (25 minutes) | $0.50 |
+
+For Schwab, Robinhood, Wealthsimple, and E*Trade, select the 300-, 900-, or 1500-second plan; faster frequencies are not supported.
