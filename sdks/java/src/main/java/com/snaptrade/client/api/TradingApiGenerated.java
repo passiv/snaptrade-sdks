@@ -637,7 +637,7 @@ public class TradingApiGenerated {
 
         /**
          * Set limitPrice
-         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. (optional)
+         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent. (optional)
          * @return TradingApi.GetOptionImpactRequestBuilder
          */
         public TradingApi.GetOptionImpactRequestBuilder limitPrice(BigDecimal limitPrice) {
@@ -1130,6 +1130,7 @@ public class TradingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getUserAccountOptionQuotesValidateBeforeCall(String userId, String userSecret, UUID accountId, String symbol, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -1194,7 +1195,9 @@ public class TradingApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getUserAccountOptionQuotesCall(userId, userSecret, accountId, symbol, _callback);
         }
@@ -1209,7 +1212,9 @@ public class TradingApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public OptionQuote execute() throws ApiException {
             ApiResponse<OptionQuote> localVarResp = getUserAccountOptionQuotesWithHttpInfo(userId, userSecret, accountId, symbol);
             return localVarResp.getResponseBody();
@@ -1224,7 +1229,9 @@ public class TradingApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<OptionQuote> executeWithHttpInfo() throws ApiException {
             return getUserAccountOptionQuotesWithHttpInfo(userId, userSecret, accountId, symbol);
         }
@@ -1239,7 +1246,9 @@ public class TradingApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<OptionQuote> _callback) throws ApiException {
             return getUserAccountOptionQuotesAsync(userId, userSecret, accountId, symbol, _callback);
         }
@@ -1247,7 +1256,7 @@ public class TradingApiGenerated {
 
     /**
      * Get option quote
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
+     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
@@ -1258,7 +1267,9 @@ public class TradingApiGenerated {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public TradingApi.GetUserAccountOptionQuotesRequestBuilder getUserAccountOptionQuotes(String userId, String userSecret, UUID accountId, String symbol) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
@@ -2471,7 +2482,7 @@ public class TradingApiGenerated {
 
         /**
          * Set limitPrice
-         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;. (optional)
+         * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent. (optional)
          * @return TradingApi.PlaceMlegOrderRequestBuilder
          */
         public TradingApi.PlaceMlegOrderRequestBuilder limitPrice(BigDecimal limitPrice) {

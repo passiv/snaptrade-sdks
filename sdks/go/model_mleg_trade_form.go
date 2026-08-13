@@ -19,7 +19,7 @@ import (
 type MlegTradeForm struct {
 	OrderType MlegOrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
-	// The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`.
+	// The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`

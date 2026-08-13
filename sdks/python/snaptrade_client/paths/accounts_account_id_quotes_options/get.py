@@ -530,6 +530,7 @@ class BaseApi(api_client.Api):
 class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def aget_user_account_option_quotes(
         self,
         account_id: typing.Optional[str] = None,
@@ -560,6 +561,7 @@ class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def get_user_account_option_quotes(
         self,
         account_id: typing.Optional[str] = None,
@@ -573,7 +575,7 @@ class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  """
+        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**  """
         args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -591,6 +593,7 @@ class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
 class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="trading")
     async def aget(
         self,
         account_id: typing.Optional[str] = None,
@@ -621,6 +624,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="trading")
     def get(
         self,
         account_id: typing.Optional[str] = None,
@@ -634,7 +638,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  """
+        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**  """
         args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,

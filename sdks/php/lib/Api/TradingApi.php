@@ -2082,7 +2082,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.
+     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -2093,6 +2093,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\OptionQuote|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @deprecated
      */
     public function getUserAccountOptionQuotes(
         $user_id,
@@ -2113,7 +2114,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.
+     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2124,6 +2125,7 @@ class TradingApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\OptionQuote|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserAccountOptionQuotesWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getUserAccountOptionQuotes'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2282,7 +2284,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.
+     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2292,6 +2294,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountOptionQuotesAsync(
         $user_id,
@@ -2316,7 +2319,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Get option quote
      *
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.
+     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example &#x60;AAPL  251114C00240000&#x60; represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2326,6 +2329,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountOptionQuotesAsyncWithHttpInfo($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getUserAccountOptionQuotes'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2382,6 +2386,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserAccountOptionQuotesRequest($user_id, $user_secret, $account_id, $symbol, string $contentType = self::contentTypes['getUserAccountOptionQuotes'][0])
     {
