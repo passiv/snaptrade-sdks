@@ -141,8 +141,6 @@ portal:
       get: true
     /accounts/{accountId}/trading/options/impact:
       post: true
-    /accounts/{accountId}/quotes/options:
-      get: true
     /authorizations/{authorizationId}/transactions/sync:
       post: true
     /accounts/{accountId}/balanceHistory:
@@ -198,6 +196,8 @@ portal:
       get: true
     /accounts/{accountId}/trading/bracket:
       post: true
+    /accounts/{accountId}/quotes/options:
+      get: true
   hideTags:
     - Experimental endpoints
   hideSecurity:
