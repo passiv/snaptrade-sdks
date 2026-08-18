@@ -34,7 +34,7 @@ module SnapTrade
     # Unique identifier for the institution (brokerage) that holds the account.
     attr_accessor :institution_id
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
     attr_accessor :opening_date
 
     attr_accessor :sync_status
@@ -42,7 +42,7 @@ module SnapTrade
     # The account type as provided by the brokerage.
     attr_accessor :raw_type
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
     attr_accessor :funding_date
 
     # Indicates whether the account is a paper (simulated) trading account.

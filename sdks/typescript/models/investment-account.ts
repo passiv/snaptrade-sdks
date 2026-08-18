@@ -64,7 +64,7 @@ export interface InvestmentAccount {
      */
     'institution_id'?: string;
     /**
-     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
      * @type {string}
      * @memberof InvestmentAccount
      */
@@ -82,7 +82,7 @@ export interface InvestmentAccount {
      */
     'raw_type'?: string | null;
     /**
-     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
      * @type {string}
      * @memberof InvestmentAccount
      */

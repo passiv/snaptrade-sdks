@@ -32,12 +32,12 @@ type InvestmentAccount struct {
 	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
 	// Unique identifier for the institution (brokerage) that holds the account.
 	InstitutionId *string `json:"institution_id,omitempty"`
-	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
 	OpeningDate NullableTime `json:"opening_date,omitempty"`
 	SyncStatus ConnectionAccountSyncStatus `json:"sync_status"`
 	// The account type as provided by the brokerage.
 	RawType NullableString `json:"raw_type,omitempty"`
-	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
 	FundingDate NullableTime `json:"funding_date,omitempty"`
 	// Indicates whether the account is a paper (simulated) trading account.
 	IsPaper bool `json:"is_paper"`

@@ -3719,7 +3719,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-created_date
         funding_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was funded."
+            \ format indicating when the account was funded. Only populated for brokerages\
+            \ that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok);\
+            \ `null` for all other brokerages."
           example: 2024-07-25T12:00:00Z
           format: date-time
           nullable: true
@@ -3728,7 +3730,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-funding_date
         opening_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was opened at the brokerage."
+            \ format indicating when the account was opened at the brokerage. Only\
+            \ populated for brokerages that expose this data (Tastytrade, eToro, moomoo,\
+            \ Public, and Unlok); `null` for all other brokerages."
           example: 2024-07-20T09:30:00Z
           format: date-time
           nullable: true
@@ -3894,7 +3898,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-institution_id
         opening_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was opened at the brokerage."
+            \ format indicating when the account was opened at the brokerage. Only\
+            \ populated for brokerages that expose this data (Tastytrade, eToro, moomoo,\
+            \ Public, and Unlok); `null` for all other brokerages."
           example: 2024-07-20T09:30:00Z
           format: date-time
           nullable: true
@@ -3912,7 +3918,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type
         funding_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was funded."
+            \ format indicating when the account was funded. Only populated for brokerages\
+            \ that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok);\
+            \ `null` for all other brokerages."
           example: 2024-07-25T12:00:00Z
           format: date-time
           nullable: true

@@ -713,7 +713,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets funding_date
      *
-     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
      *
      * @return self
      */
@@ -749,7 +749,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets opening_date
      *
-     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
      *
      * @return self
      */
