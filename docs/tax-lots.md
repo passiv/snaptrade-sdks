@@ -1,7 +1,6 @@
 # Tax Lots
 
 > **Summary**: Tax lots is a feature available on certain brokerages that provides the acquisition and cost-basis details for the individual lots that make up a position. The data comes directly from the brokerage and is not created by SnapTrade.
-> **Related docs**: [Account Data](./account-data), [Real-time vs Daily plans](./realtime-data)
 
 A tax lot represents a specific acquisition of a security. When a position was built through multiple purchases, its tax lots can provide the purchase date, quantity, purchase price, cost basis, current value, and position type for each acquisition.
 
