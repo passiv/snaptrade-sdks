@@ -47,13 +47,13 @@ class OptionalInvestmentAccount(TypedDict, total=False):
     # Unique identifier for the institution (brokerage) that holds the account.
     institution_id: str
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
     opening_date: typing.Optional[datetime]
 
     # The account type as provided by the brokerage.
     raw_type: typing.Optional[str]
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
     funding_date: typing.Optional[datetime]
 
     market_value: typing.Optional[InvestmentAccountMarketValue]

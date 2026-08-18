@@ -368,11 +368,11 @@ public class InvestmentAccount {
   }
 
    /**
-   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages.
    * @return openingDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-07-20T09:30Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.")
+  @ApiModelProperty(example = "2024-07-20T09:30Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.")
 
   public OffsetDateTime getOpeningDate() {
     return openingDate;
@@ -455,11 +455,11 @@ public class InvestmentAccount {
   }
 
    /**
-   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages.
    * @return fundingDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-07-25T12:00Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.")
+  @ApiModelProperty(example = "2024-07-25T12:00Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.")
 
   public OffsetDateTime getFundingDate() {
     return fundingDate;
