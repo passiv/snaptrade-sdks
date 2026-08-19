@@ -998,6 +998,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+  /aumPercentile:
+    get:
+      tags:
+        - Account Information
+      summary: Get the user's AUM percentile
+      operationId: AccountInformation_getUserAumPercentile
+      description: |
+        Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
+
+        The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
+
+        `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAumPercentileResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   /accounts/{accountId}/returnRates:
     get:
       tags:
@@ -3406,6 +3448,52 @@ components:
           description: List of orders executed in the last 24 hours
           items:
             $ref: "#/components/schemas/AccountOrderRecord"
+    UserAumPercentileResponse:
+      description: The user's placement within your book, or null when SnapTrade declines to place them
+      type: object
+      properties:
+        data:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/UserAumPercentileObject"
+    UserAumPercentileObject:
+      description: A user's AUM placement within a single SnapTrade customer's book
+      type: object
+      properties:
+        bucket:
+          type: string
+          enum:
+            - TOP_1_PERCENT
+            - TOP_5_PERCENT
+            - TOP_10_PERCENT
+            - TOP_25_PERCENT
+            - TOP_50_PERCENT
+            - BOTTOM_50_PERCENT
+          description: |
+            The band the user falls into. Deliberately coarse: the underlying totals are only as current as each brokerage's last sync, so an exact percentile would imply more precision than the data supports.
+          example: TOP_25_PERCENT
+        percentile:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: |
+            The percent of the cohort the user's assets are strictly above, 0-100. Integer by design: the distribution is stored as 101 interpolated cutoffs, so a fractional percentile would not mean anything.
+
+            Prefer `bucket` for anything you display prominently. The distribution is recomputed monthly, so a user's percentile can move a few points on its own as other users' holdings refresh, while their bucket stays put. Users tied on the same total all receive the lowest percentile that total spans.
+          example: 78
+        cohort_size:
+          type: integer
+          description: Number of your users the distribution was computed from.
+          example: 24193
+        as_of:
+          type: string
+          format: date
+          description: The month whose distribution produced this placement.
+          example: "2026-08-01"
+        currency:
+          type: string
+          description: The currency the distribution was computed in.
+          example: USD
     RateOfReturnResponse:
       description: List of return rates with their timeframe
       type: object
@@ -5133,6 +5221,19 @@ components:
             description: Enable dark mode for the connection portal. Defaults to false.
             type: boolean
             example: true
+        locale:
+            description: >
+              Language the connection portal renders in. `en` and `pt-BR` are the languages
+              we ship; any other language is rejected with a 400. Matching is case- and
+              separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a
+              regional tag resolves to the language when we ship it, so `en-US` renders `en`.
+              Deliberately not an enum: those equivalent spellings are all accepted by the
+              API, and an enum would have generated SDKs reject them before the request is
+              sent. Screens without translated copy fall back to English individually.
+              Defaults to `en`.
+            type: string
+            example: pt-BR
+            default: en
         connectionPortalVersion:
           description: Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
           type: string
