@@ -58,6 +58,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'connection_type' => 'string',
         'show_close_button' => 'bool',
         'dark_mode' => 'bool',
+        'locale' => 'string',
         'connection_portal_version' => 'string'
     ];
 
@@ -76,6 +77,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'connection_type' => null,
         'show_close_button' => null,
         'dark_mode' => null,
+        'locale' => null,
         'connection_portal_version' => null
     ];
 
@@ -92,6 +94,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
 		'connection_type' => false,
 		'show_close_button' => false,
 		'dark_mode' => false,
+		'locale' => false,
 		'connection_portal_version' => false
     ];
 
@@ -188,6 +191,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'connection_type' => 'connectionType',
         'show_close_button' => 'showCloseButton',
         'dark_mode' => 'darkMode',
+        'locale' => 'locale',
         'connection_portal_version' => 'connectionPortalVersion'
     ];
 
@@ -204,6 +208,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'connection_type' => 'setConnectionType',
         'show_close_button' => 'setShowCloseButton',
         'dark_mode' => 'setDarkMode',
+        'locale' => 'setLocale',
         'connection_portal_version' => 'setConnectionPortalVersion'
     ];
 
@@ -220,6 +225,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         'connection_type' => 'getConnectionType',
         'show_close_button' => 'getShowCloseButton',
         'dark_mode' => 'getDarkMode',
+        'locale' => 'getLocale',
         'connection_portal_version' => 'getConnectionPortalVersion'
     ];
 
@@ -321,6 +327,7 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('connection_type', $data ?? [], 'read');
         $this->setIfExists('show_close_button', $data ?? [], null);
         $this->setIfExists('dark_mode', $data ?? [], null);
+        $this->setIfExists('locale', $data ?? [], 'en');
         $this->setIfExists('connection_portal_version', $data ?? [], 'v4');
     }
 
@@ -593,6 +600,35 @@ class SnapTradeLoginUserRequestBody implements ModelInterface, ArrayAccess, \Jso
         }
 
         $this->container['dark_mode'] = $dark_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets locale
+     *
+     * @return string|null
+     */
+    public function getLocale()
+    {
+        return $this->container['locale'];
+    }
+
+    /**
+     * Sets locale
+     *
+     * @param string|null $locale Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`.
+     *
+     * @return self
+     */
+    public function setLocale($locale)
+    {
+
+        if (is_null($locale)) {
+            throw new \InvalidArgumentException('non-nullable locale cannot be null');
+        }
+
+        $this->container['locale'] = $locale;
 
         return $this;
     }

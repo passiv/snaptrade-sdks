@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ConnectionType** | Pointer to **string** | Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  | [optional] [default to "read"]
 **ShowCloseButton** | Pointer to **bool** | Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true. | [optional] 
 **DarkMode** | Pointer to **bool** | Enable dark mode for the connection portal. Defaults to false. | [optional] 
+**Locale** | Pointer to **string** | Language the connection portal renders in. &#x60;en&#x60; and &#x60;pt-BR&#x60; are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so &#x60;pt-br&#x60;, &#x60;pt-BR&#x60; and &#x60;pt_BR&#x60; are equivalent, and a regional tag resolves to the language when we ship it, so &#x60;en-US&#x60; renders &#x60;en&#x60;. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to &#x60;en&#x60;.  | [optional] [default to "en"]
 **ConnectionPortalVersion** | Pointer to **string** | Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4. | [optional] [default to "v4"]
 
 ## Methods
@@ -206,6 +207,31 @@ SetDarkMode sets DarkMode field to given value.
 `func (o *SnapTradeLoginUserRequestBody) HasDarkMode() bool`
 
 HasDarkMode returns a boolean if a field has been set.
+
+### GetLocale
+
+`func (o *SnapTradeLoginUserRequestBody) GetLocale() string`
+
+GetLocale returns the Locale field if non-nil, zero value otherwise.
+
+### GetLocaleOk
+
+`func (o *SnapTradeLoginUserRequestBody) GetLocaleOk() (*string, bool)`
+
+GetLocaleOk returns a tuple with the Locale field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocale
+
+`func (o *SnapTradeLoginUserRequestBody) SetLocale(v string)`
+
+SetLocale sets Locale field to given value.
+
+### HasLocale
+
+`func (o *SnapTradeLoginUserRequestBody) HasLocale() bool`
+
+HasLocale returns a boolean if a field has been set.
 
 ### GetConnectionPortalVersion
 

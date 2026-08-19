@@ -1269,6 +1269,54 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders
+  /aumPercentile:
+    get:
+      description: |
+        Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
+
+        The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
+
+        `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
+      operationId: AccountInformation_getUserAumPercentile
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAumPercentileResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: Get the user's AUM percentile
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--aumPercentile
   /accounts/{accountId}/returnRates:
     get:
       description: |
@@ -4617,6 +4665,73 @@ components:
             $ref: '#/components/schemas/AccountOrderRecord'
           type: array
       type: object
+    UserAumPercentileResponse:
+      additionalProperties: true
+      description: "The user's placement within your book, or null when SnapTrade\
+        \ declines to place them"
+      example:
+        data:
+          bucket: TOP_25_PERCENT
+          percentile: 78
+          as_of: 2026-08-01T00:00:00.000+00:00
+          cohort_size: 24193
+          currency: USD
+      properties:
+        data:
+          $ref: '#/components/schemas/UserAumPercentileObjectNullable'
+      type: object
+      x-konfig-properties:
+        data:
+          nullable: true
+    UserAumPercentileObject:
+      additionalProperties: true
+      description: A user's AUM placement within a single SnapTrade customer's book
+      properties:
+        bucket:
+          description: |
+            The band the user falls into. Deliberately coarse: the underlying totals are only as current as each brokerage's last sync, so an exact percentile would imply more precision than the data supports.
+          enum:
+          - TOP_1_PERCENT
+          - TOP_5_PERCENT
+          - TOP_10_PERCENT
+          - TOP_25_PERCENT
+          - TOP_50_PERCENT
+          - BOTTOM_50_PERCENT
+          example: TOP_25_PERCENT
+          type: string
+          x-konfig-original-example: TOP_25_PERCENT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-bucket
+        percentile:
+          description: |
+            The percent of the cohort the user's assets are strictly above, 0-100. Integer by design: the distribution is stored as 101 interpolated cutoffs, so a fractional percentile would not mean anything.
+
+            Prefer `bucket` for anything you display prominently. The distribution is recomputed monthly, so a user's percentile can move a few points on its own as other users' holdings refresh, while their bucket stays put. Users tied on the same total all receive the lowest percentile that total spans.
+          example: 78
+          maximum: 100
+          minimum: 0
+          type: integer
+          x-konfig-original-example: 78
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-percentile
+        cohort_size:
+          description: Number of your users the distribution was computed from.
+          example: 24193
+          type: integer
+          x-konfig-original-example: 24193
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-cohort_size
+        as_of:
+          description: The month whose distribution produced this placement.
+          example: 2026-08-01
+          format: date
+          type: string
+          x-konfig-original-example: 2026-08-01
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-as_of
+        currency:
+          description: The currency the distribution was computed in.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-currency
+      type: object
     RateOfReturnResponse:
       additionalProperties: true
       description: List of return rates with their timeframe
@@ -7468,6 +7583,7 @@ components:
         customRedirect: https://snaptrade.com
         darkMode: true
         broker: ALPACA
+        locale: pt-BR
         connectionType: read
       properties:
         broker:
@@ -7532,6 +7648,14 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-darkMode
+        locale:
+          default: en
+          description: |
+            Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`.
+          example: pt-BR
+          type: string
+          x-konfig-original-example: pt-BR
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-locale
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only
@@ -11741,6 +11865,26 @@ components:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-bucket:
+      example: TOP_25_PERCENT
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-percentile:
+      example: 78
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-cohort_size:
+      example: 24193
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-as_of:
+      example: 2026-08-01
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-RateOfReturnObject-properties-timeframe:
       example: ALL
       type: string
@@ -12638,6 +12782,10 @@ components:
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-darkMode:
       example: true
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-locale:
+      example: pt-BR
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionPortalVersion:
       example: v4
@@ -13621,6 +13769,14 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-darkMode
+        locale:
+          default: en
+          description: |
+            Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`.
+          example: pt-BR
+          type: string
+          x-konfig-original-example: pt-BR
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-locale
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only
@@ -14010,6 +14166,21 @@ components:
       - userSecret
       - only_executed
       - accountId
+    konfig-generated-schema-single-parameter-schema-get--aumPercentile:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-returnRates:
       additionalProperties: true
       properties:
@@ -15208,6 +15379,62 @@ components:
       type: string
       x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
+    UserAumPercentileObjectNullable:
+      additionalProperties: true
+      description: A user's AUM placement within a single SnapTrade customer's book
+      example:
+        bucket: TOP_25_PERCENT
+        percentile: 78
+        as_of: 2026-08-01T00:00:00.000+00:00
+        cohort_size: 24193
+        currency: USD
+      nullable: true
+      properties:
+        bucket:
+          description: |
+            The band the user falls into. Deliberately coarse: the underlying totals are only as current as each brokerage's last sync, so an exact percentile would imply more precision than the data supports.
+          enum:
+          - TOP_1_PERCENT
+          - TOP_5_PERCENT
+          - TOP_10_PERCENT
+          - TOP_25_PERCENT
+          - TOP_50_PERCENT
+          - BOTTOM_50_PERCENT
+          example: TOP_25_PERCENT
+          type: string
+          x-konfig-original-example: TOP_25_PERCENT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-bucket
+        percentile:
+          description: |
+            The percent of the cohort the user's assets are strictly above, 0-100. Integer by design: the distribution is stored as 101 interpolated cutoffs, so a fractional percentile would not mean anything.
+
+            Prefer `bucket` for anything you display prominently. The distribution is recomputed monthly, so a user's percentile can move a few points on its own as other users' holdings refresh, while their bucket stays put. Users tied on the same total all receive the lowest percentile that total spans.
+          example: 78
+          maximum: 100
+          minimum: 0
+          type: integer
+          x-konfig-original-example: 78
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-percentile
+        cohort_size:
+          description: Number of your users the distribution was computed from.
+          example: 24193
+          type: integer
+          x-konfig-original-example: 24193
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-cohort_size
+        as_of:
+          description: The month whose distribution produced this placement.
+          example: 2026-08-01
+          format: date
+          type: string
+          x-konfig-original-example: 2026-08-01
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-as_of
+        currency:
+          description: The currency the distribution was computed in.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-currency
+      type: object
     UniversalSymbolNullable:
       additionalProperties: true
       description: Uniquely describes a single security + exchange combination across

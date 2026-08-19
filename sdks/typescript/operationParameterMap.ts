@@ -98,6 +98,10 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/aumPercentile-GET': {
+        parameters: [
+        ]
+    },
     '/accounts/{accountId}/holdings-GET': {
         parameters: [
             {
@@ -150,6 +154,9 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'darkMode'
+            },
+            {
+                name: 'locale'
             },
             {
                 name: 'connectionPortalVersion'

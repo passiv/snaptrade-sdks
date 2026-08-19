@@ -64,6 +64,7 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
         snapTradeLoginUserRequestBody.SetConnectionType("READ")
         snapTradeLoginUserRequestBody.SetShowCloseButton(true)
         snapTradeLoginUserRequestBody.SetDarkMode(true)
+        snapTradeLoginUserRequestBody.SetLocale("pt-BR")
         snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
         
         request := client.AuthenticationApi.LoginSnapTradeUser(

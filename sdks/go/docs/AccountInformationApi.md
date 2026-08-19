@@ -13,6 +13,7 @@ Method | Path | Description
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account orders
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 [**GetUserAccountReturnRates**](AccountInformationApi.md#GetUserAccountReturnRates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
+[**GetUserAumPercentile**](AccountInformationApi.md#GetUserAumPercentile) | **Get** /aumPercentile | Get the user&#39;s AUM percentile
 [**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List account holdings
 [**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List accounts
 [**UpdateUserAccount**](AccountInformationApi.md#UpdateUserAccount) | **Put** /accounts/{accountId} | Update details of an investment account
@@ -511,6 +512,51 @@ func main() {
     // response from `GetUserAccountReturnRates`: RateOfReturnResponse
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountReturnRates`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `RateOfReturnResponse.GetUserAccountReturnRates.Data`: %v\n", *resp.Data)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserAumPercentile
+
+Get the user's AUM percentile
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetUserAumPercentile(
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetUserAumPercentile``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetUserAumPercentile`: UserAumPercentileResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAumPercentile`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `UserAumPercentileResponse.GetUserAumPercentile.Data`: %v\n", *resp.Data)
 }
 ```
 

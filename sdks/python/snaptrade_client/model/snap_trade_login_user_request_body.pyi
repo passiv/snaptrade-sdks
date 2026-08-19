@@ -61,6 +61,7 @@ class SnapTradeLoginUserRequestBody(
                     return cls("trade-if-available")
             showCloseButton = schemas.BoolSchema
             darkMode = schemas.BoolSchema
+            locale = schemas.StrSchema
             
             
             class connectionPortalVersion(
@@ -87,6 +88,7 @@ class SnapTradeLoginUserRequestBody(
                 "connectionType": connectionType,
                 "showCloseButton": showCloseButton,
                 "darkMode": darkMode,
+                "locale": locale,
                 "connectionPortalVersion": connectionPortalVersion,
             }
     
@@ -112,12 +114,15 @@ class SnapTradeLoginUserRequestBody(
     def __getitem__(self, name: typing_extensions.Literal["darkMode"]) -> MetaOapg.properties.darkMode: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["locale"]) -> MetaOapg.properties.locale: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["connectionPortalVersion"]) -> MetaOapg.properties.connectionPortalVersion: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "showCloseButton", "darkMode", "connectionPortalVersion", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "showCloseButton", "darkMode", "locale", "connectionPortalVersion", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -144,12 +149,15 @@ class SnapTradeLoginUserRequestBody(
     def get_item_oapg(self, name: typing_extensions.Literal["darkMode"]) -> typing.Union[MetaOapg.properties.darkMode, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["locale"]) -> typing.Union[MetaOapg.properties.locale, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["connectionPortalVersion"]) -> typing.Union[MetaOapg.properties.connectionPortalVersion, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "showCloseButton", "darkMode", "connectionPortalVersion", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "showCloseButton", "darkMode", "locale", "connectionPortalVersion", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -163,6 +171,7 @@ class SnapTradeLoginUserRequestBody(
         connectionType: typing.Union[MetaOapg.properties.connectionType, str, schemas.Unset] = schemas.unset,
         showCloseButton: typing.Union[MetaOapg.properties.showCloseButton, bool, schemas.Unset] = schemas.unset,
         darkMode: typing.Union[MetaOapg.properties.darkMode, bool, schemas.Unset] = schemas.unset,
+        locale: typing.Union[MetaOapg.properties.locale, str, schemas.Unset] = schemas.unset,
         connectionPortalVersion: typing.Union[MetaOapg.properties.connectionPortalVersion, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -177,6 +186,7 @@ class SnapTradeLoginUserRequestBody(
             connectionType=connectionType,
             showCloseButton=showCloseButton,
             darkMode=darkMode,
+            locale=locale,
             connectionPortalVersion=connectionPortalVersion,
             _configuration=_configuration,
             **kwargs,

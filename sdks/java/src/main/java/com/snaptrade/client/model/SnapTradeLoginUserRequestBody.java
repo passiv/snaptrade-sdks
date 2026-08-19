@@ -127,6 +127,10 @@ public class SnapTradeLoginUserRequestBody {
   @SerializedName(SERIALIZED_NAME_DARK_MODE)
   private Boolean darkMode;
 
+  public static final String SERIALIZED_NAME_LOCALE = "locale";
+  @SerializedName(SERIALIZED_NAME_LOCALE)
+  private String locale = "en";
+
   /**
    * Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4.
    */
@@ -386,6 +390,35 @@ public class SnapTradeLoginUserRequestBody {
   }
 
 
+  public SnapTradeLoginUserRequestBody locale(String locale) {
+    
+    
+    
+    
+    this.locale = locale;
+    return this;
+  }
+
+   /**
+   * Language the connection portal renders in. &#x60;en&#x60; and &#x60;pt-BR&#x60; are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so &#x60;pt-br&#x60;, &#x60;pt-BR&#x60; and &#x60;pt_BR&#x60; are equivalent, and a regional tag resolves to the language when we ship it, so &#x60;en-US&#x60; renders &#x60;en&#x60;. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to &#x60;en&#x60;. 
+   * @return locale
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "pt-BR", value = "Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. ")
+
+  public String getLocale() {
+    return locale;
+  }
+
+
+  public void setLocale(String locale) {
+    
+    
+    
+    this.locale = locale;
+  }
+
+
   public SnapTradeLoginUserRequestBody connectionPortalVersion(ConnectionPortalVersionEnum connectionPortalVersion) {
     
     
@@ -476,13 +509,14 @@ public class SnapTradeLoginUserRequestBody {
         Objects.equals(this.connectionType, snapTradeLoginUserRequestBody.connectionType) &&
         Objects.equals(this.showCloseButton, snapTradeLoginUserRequestBody.showCloseButton) &&
         Objects.equals(this.darkMode, snapTradeLoginUserRequestBody.darkMode) &&
+        Objects.equals(this.locale, snapTradeLoginUserRequestBody.locale) &&
         Objects.equals(this.connectionPortalVersion, snapTradeLoginUserRequestBody.connectionPortalVersion)&&
         Objects.equals(this.additionalProperties, snapTradeLoginUserRequestBody.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(broker, immediateRedirect, customRedirect, reconnect, connectionType, showCloseButton, darkMode, connectionPortalVersion, additionalProperties);
+    return Objects.hash(broker, immediateRedirect, customRedirect, reconnect, connectionType, showCloseButton, darkMode, locale, connectionPortalVersion, additionalProperties);
   }
 
   @Override
@@ -496,6 +530,7 @@ public class SnapTradeLoginUserRequestBody {
     sb.append("    connectionType: ").append(toIndentedString(connectionType)).append("\n");
     sb.append("    showCloseButton: ").append(toIndentedString(showCloseButton)).append("\n");
     sb.append("    darkMode: ").append(toIndentedString(darkMode)).append("\n");
+    sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
     sb.append("    connectionPortalVersion: ").append(toIndentedString(connectionPortalVersion)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -527,6 +562,7 @@ public class SnapTradeLoginUserRequestBody {
     openapiFields.add("connectionType");
     openapiFields.add("showCloseButton");
     openapiFields.add("darkMode");
+    openapiFields.add("locale");
     openapiFields.add("connectionPortalVersion");
 
     // a set of required properties/fields (JSON key names)
@@ -556,6 +592,9 @@ public class SnapTradeLoginUserRequestBody {
       }
       if ((jsonObj.get("connectionType") != null && !jsonObj.get("connectionType").isJsonNull()) && !jsonObj.get("connectionType").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `connectionType` to be a primitive type in the JSON string but got `%s`", jsonObj.get("connectionType").toString()));
+      }
+      if ((jsonObj.get("locale") != null && !jsonObj.get("locale").isJsonNull()) && !jsonObj.get("locale").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("locale").toString()));
       }
       if ((jsonObj.get("connectionPortalVersion") != null && !jsonObj.get("connectionPortalVersion").isJsonNull()) && !jsonObj.get("connectionPortalVersion").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `connectionPortalVersion` to be a primitive type in the JSON string but got `%s`", jsonObj.get("connectionPortalVersion").toString()));

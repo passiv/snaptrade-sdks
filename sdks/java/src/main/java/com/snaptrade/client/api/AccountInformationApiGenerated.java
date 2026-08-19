@@ -38,6 +38,7 @@ import com.snaptrade.client.model.PaginatedUniversalActivity;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.RecentOrdersResponse;
 import java.util.UUID;
+import com.snaptrade.client.model.UserAumPercentileResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1932,6 +1933,180 @@ public class AccountInformationApiGenerated {
             
 
         return ((AccountInformationApi) this).new GetUserAccountReturnRatesRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getUserAumPercentileCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/aumPercentile";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUserAumPercentileValidateBeforeCall(String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserAumPercentile(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getUserAumPercentile(Async)");
+        }
+
+        return getUserAumPercentileCall(userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<UserAumPercentileResponse> getUserAumPercentileWithHttpInfo(String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = getUserAumPercentileValidateBeforeCall(userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<UserAumPercentileResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getUserAumPercentileAsync(String userId, String userSecret, final ApiCallback<UserAumPercentileResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserAumPercentileValidateBeforeCall(userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<UserAumPercentileResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetUserAumPercentileRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+
+        public GetUserAumPercentileRequestBuilderGenerated(String userId, String userSecret) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for getUserAumPercentile
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserAumPercentileCall(userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute getUserAumPercentile request
+         * @return UserAumPercentileResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserAumPercentileResponse execute() throws ApiException {
+            ApiResponse<UserAumPercentileResponse> localVarResp = getUserAumPercentileWithHttpInfo(userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserAumPercentile request with HTTP info returned
+         * @return ApiResponse&lt;UserAumPercentileResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserAumPercentileResponse> executeWithHttpInfo() throws ApiException {
+            return getUserAumPercentileWithHttpInfo(userId, userSecret);
+        }
+
+        /**
+         * Execute getUserAumPercentile request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserAumPercentileResponse> _callback) throws ApiException {
+            return getUserAumPercentileAsync(userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * Get the user&#39;s AUM percentile
+     * Returns where the user&#39;s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and &#x60;as_of&#x60; reports which month&#39;s distribution the placement came from.  &#x60;data&#x60; is &#x60;null&#x60; — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user&#39;s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user&#39;s assets would understate them, so none is returned. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return GetUserAumPercentileRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public AccountInformationApi.GetUserAumPercentileRequestBuilder getUserAumPercentile(String userId, String userSecret) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((AccountInformationApi) this).new GetUserAumPercentileRequestBuilder(userId, userSecret);
     }
     private okhttp3.Call getUserHoldingsCall(UUID accountId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;

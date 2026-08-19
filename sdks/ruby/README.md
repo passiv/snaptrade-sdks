@@ -28,6 +28,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
   * [`snaptrade.account_information.get_user_account_return_rates`](#snaptradeaccount_informationget_user_account_return_rates)
+  * [`snaptrade.account_information.get_user_aum_percentile`](#snaptradeaccount_informationget_user_aum_percentile)
   * [`snaptrade.account_information.get_user_holdings`](#snaptradeaccount_informationget_user_holdings)
   * [`snaptrade.account_information.list_user_accounts`](#snaptradeaccount_informationlist_user_accounts)
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
@@ -542,6 +543,42 @@ returns all six supported timeframes.
 ---
 
 
+### `snaptrade.account_information.get_user_aum_percentile`<a id="snaptradeaccount_informationget_user_aum_percentile"></a>
+
+Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
+
+The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
+
+`data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_user_aum_percentile(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[UserAumPercentileResponse](./lib/snaptrade/models/user_aum_percentile_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/aumPercentile` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
@@ -749,6 +786,7 @@ result = snaptrade.authentication.login_snap_trade_user(
   connection_type: "read",
   show_close_button: true,
   dark_mode: true,
+  locale: "pt-BR",
   connection_portal_version: "v4",
 )
 p result
@@ -792,6 +830,16 @@ When false, you control closing behavior from your app. Defaults to true.
 
 ##### darkMode: `Boolean`<a id="darkmode-boolean"></a>
 Enable dark mode for the connection portal. Defaults to false.
+
+##### locale: `String`<a id="locale-string"></a>
+Language the connection portal renders in. `en` and `pt-BR` are the languages we
+ship; any other language is rejected with a 400. Matching is case- and
+separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a
+regional tag resolves to the language when we ship it, so `en-US` renders `en`.
+Deliberately not an enum: those equivalent spellings are all accepted by the
+API, and an enum would have generated SDKs reject them before the request is
+sent. Screens without translated copy fall back to English individually.
+Defaults to `en`.
 
 ##### connectionPortalVersion: [`ConnectionPortalVersion`](./lib/snaptrade/models/connection_portal_version.rb)<a id="connectionportalversion-connectionportalversionlibsnaptrademodelsconnection_portal_versionrb"></a>
 Sets the connection portal version to render. Currently only `v4` is supported

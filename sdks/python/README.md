@@ -31,6 +31,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
   * [`snaptrade.account_information.get_user_account_return_rates`](#snaptradeaccount_informationget_user_account_return_rates)
+  * [`snaptrade.account_information.get_user_aum_percentile`](#snaptradeaccount_informationget_user_aum_percentile)
   * [`snaptrade.account_information.get_user_holdings`](#snaptradeaccount_informationget_user_holdings)
   * [`snaptrade.account_information.list_user_accounts`](#snaptradeaccount_informationlist_user_accounts)
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
@@ -581,6 +582,35 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 
 ---
 
+### `snaptrade.account_information.get_user_aum_percentile`<a id="snaptradeaccount_informationget_user_aum_percentile"></a>
+
+Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
+
+The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
+
+`data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_aum_percentile_response = (
+    snaptrade.account_information.get_user_aum_percentile()
+)
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`UserAumPercentileResponse`](./snaptrade_client/type/user_aum_percentile_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/aumPercentile` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
@@ -760,6 +790,7 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     connection_type="read",
     show_close_button=True,
     dark_mode=True,
+    locale="pt-BR",
     connection_portal_version="v4",
 )
 ```
@@ -793,6 +824,10 @@ Controls whether the close (X) button is displayed in the connection portal. Whe
 ##### dark_mode: `bool`<a id="dark_mode-bool"></a>
 
 Enable dark mode for the connection portal. Defaults to false.
+
+##### locale: `str`<a id="locale-str"></a>
+
+Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
 
 ##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
 

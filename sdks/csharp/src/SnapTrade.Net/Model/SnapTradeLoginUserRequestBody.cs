@@ -110,8 +110,9 @@ namespace SnapTrade.Net.Model
         /// <param name="connectionType">Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (default to ConnectionTypeEnum.Read).</param>
         /// <param name="showCloseButton">Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true..</param>
         /// <param name="darkMode">Enable dark mode for the connection portal. Defaults to false..</param>
+        /// <param name="locale">Language the connection portal renders in. &#x60;en&#x60; and &#x60;pt-BR&#x60; are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so &#x60;pt-br&#x60;, &#x60;pt-BR&#x60; and &#x60;pt_BR&#x60; are equivalent, and a regional tag resolves to the language when we ship it, so &#x60;en-US&#x60; renders &#x60;en&#x60;. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to &#x60;en&#x60;.  (default to &quot;en&quot;).</param>
         /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
-        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, bool showCloseButton = default(bool), bool darkMode = default(bool), ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
+        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, bool showCloseButton = default(bool), bool darkMode = default(bool), string locale = "en", ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
         {
             this.Broker = broker;
             this.ImmediateRedirect = immediateRedirect;
@@ -120,6 +121,8 @@ namespace SnapTrade.Net.Model
             this.ConnectionType = connectionType;
             this.ShowCloseButton = showCloseButton;
             this.DarkMode = darkMode;
+            // use default value if no "locale" provided
+            this.Locale = locale ?? "en";
             this.ConnectionPortalVersion = connectionPortalVersion;
         }
 
@@ -166,6 +169,13 @@ namespace SnapTrade.Net.Model
         public bool DarkMode { get; set; }
 
         /// <summary>
+        /// Language the connection portal renders in. &#x60;en&#x60; and &#x60;pt-BR&#x60; are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so &#x60;pt-br&#x60;, &#x60;pt-BR&#x60; and &#x60;pt_BR&#x60; are equivalent, and a regional tag resolves to the language when we ship it, so &#x60;en-US&#x60; renders &#x60;en&#x60;. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to &#x60;en&#x60;. 
+        /// </summary>
+        /// <value>Language the connection portal renders in. &#x60;en&#x60; and &#x60;pt-BR&#x60; are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so &#x60;pt-br&#x60;, &#x60;pt-BR&#x60; and &#x60;pt_BR&#x60; are equivalent, and a regional tag resolves to the language when we ship it, so &#x60;en-US&#x60; renders &#x60;en&#x60;. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to &#x60;en&#x60;. </value>
+        [DataMember(Name = "locale", EmitDefaultValue = false)]
+        public string Locale { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -180,6 +190,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  ConnectionType: ").Append(ConnectionType).Append("\n");
             sb.Append("  ShowCloseButton: ").Append(ShowCloseButton).Append("\n");
             sb.Append("  DarkMode: ").Append(DarkMode).Append("\n");
+            sb.Append("  Locale: ").Append(Locale).Append("\n");
             sb.Append("  ConnectionPortalVersion: ").Append(ConnectionPortalVersion).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -248,6 +259,11 @@ namespace SnapTrade.Net.Model
                     this.DarkMode.Equals(input.DarkMode)
                 ) && 
                 (
+                    this.Locale == input.Locale ||
+                    (this.Locale != null &&
+                    this.Locale.Equals(input.Locale))
+                ) && 
+                (
                     this.ConnectionPortalVersion == input.ConnectionPortalVersion ||
                     this.ConnectionPortalVersion.Equals(input.ConnectionPortalVersion)
                 );
@@ -278,6 +294,10 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.ConnectionType.GetHashCode();
                 hashCode = (hashCode * 59) + this.ShowCloseButton.GetHashCode();
                 hashCode = (hashCode * 59) + this.DarkMode.GetHashCode();
+                if (this.Locale != null)
+                {
+                    hashCode = (hashCode * 59) + this.Locale.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.ConnectionPortalVersion.GetHashCode();
                 return hashCode;
             }

@@ -182,5 +182,8 @@ export * from './underlying-symbol-exchange';
 export * from './underlying-symbol-type';
 export * from './universal-activity';
 export * from './universal-symbol';
+export * from './user-aum-percentile-object';
+export * from './user-aum-percentile-response';
+export * from './user-aum-percentile-response-data';
 export * from './user-idand-secret';
 export * from './validated-trade-body';

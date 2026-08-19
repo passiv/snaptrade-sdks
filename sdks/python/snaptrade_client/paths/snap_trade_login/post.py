@@ -267,6 +267,7 @@ class BaseApi(api_client.Api):
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
         connection_portal_version: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -291,6 +292,8 @@ class BaseApi(api_client.Api):
             _body["showCloseButton"] = show_close_button
         if dark_mode is not None:
             _body["darkMode"] = dark_mode
+        if locale is not None:
+            _body["locale"] = locale
         if connection_portal_version is not None:
             _body["connectionPortalVersion"] = connection_portal_version
         args.body = body if body is not None else _body
@@ -570,6 +573,7 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
         connection_portal_version: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -590,6 +594,7 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
             connection_type=connection_type,
             show_close_button=show_close_button,
             dark_mode=dark_mode,
+            locale=locale,
             connection_portal_version=connection_portal_version,
             user_id=user_id,
             user_secret=user_secret,
@@ -611,6 +616,7 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
         connection_portal_version: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -630,6 +636,7 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
             connection_type=connection_type,
             show_close_button=show_close_button,
             dark_mode=dark_mode,
+            locale=locale,
             connection_portal_version=connection_portal_version,
             user_id=user_id,
             user_secret=user_secret,
@@ -653,6 +660,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
         connection_portal_version: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -673,6 +681,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             connection_type=connection_type,
             show_close_button=show_close_button,
             dark_mode=dark_mode,
+            locale=locale,
             connection_portal_version=connection_portal_version,
             user_id=user_id,
             user_secret=user_secret,
@@ -694,6 +703,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
         dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
         connection_portal_version: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -713,6 +723,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             connection_type=connection_type,
             show_close_button=show_close_button,
             dark_mode=dark_mode,
+            locale=locale,
             connection_portal_version=connection_portal_version,
             user_id=user_id,
             user_secret=user_secret,
