@@ -105,7 +105,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "Konfig/2.0.3/go",
+		UserAgent:        "Konfig/2.0.4/go",
 		TokenUrl:   	  "",
 		Debug:            false,
         Context: context.Background(),
