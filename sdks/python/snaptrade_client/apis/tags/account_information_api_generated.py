@@ -18,6 +18,7 @@ from snaptrade_client.paths.accounts_account_id_orders_details.post import GetUs
 from snaptrade_client.paths.accounts_account_id_orders.get import GetUserAccountOrders
 from snaptrade_client.paths.accounts_account_id_recent_orders.get import GetUserAccountRecentOrders
 from snaptrade_client.paths.accounts_account_id_return_rates.get import GetUserAccountReturnRates
+from snaptrade_client.paths.aum_percentile.get import GetUserAumPercentile
 from snaptrade_client.paths.accounts_account_id_holdings.get import GetUserHoldings
 from snaptrade_client.paths.accounts.get import ListUserAccounts
 from snaptrade_client.paths.accounts_account_id.put import UpdateUserAccount
@@ -37,6 +38,7 @@ class AccountInformationApiGenerated(
     GetUserAccountOrders[TAuth],
     GetUserAccountRecentOrders[TAuth],
     GetUserAccountReturnRates[TAuth],
+    GetUserAumPercentile[TAuth],
     GetUserHoldings[TAuth],
     ListUserAccounts[TAuth],
     UpdateUserAccount[TAuth],

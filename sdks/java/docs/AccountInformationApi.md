@@ -13,6 +13,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account orders |
 | [**getUserAccountRecentOrders**](AccountInformationApi.md#getUserAccountRecentOrders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
 | [**getUserAccountReturnRates**](AccountInformationApi.md#getUserAccountReturnRates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns |
+| [**getUserAumPercentile**](AccountInformationApi.md#getUserAumPercentile) | **GET** /aumPercentile | Get the user&#39;s AUM percentile |
 | [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List account holdings |
 | [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
 | [**updateUserAccount**](AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
@@ -960,6 +961,101 @@ public class Example {
 ### Return type
 
 [**RateOfReturnResponse**](RateOfReturnResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+<a name="getUserAumPercentile"></a>
+# **getUserAumPercentile**
+> UserAumPercentileResponse getUserAumPercentile(userId, userSecret).execute();
+
+Get the user&#39;s AUM percentile
+
+Returns where the user&#39;s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and &#x60;as_of&#x60; reports which month&#39;s distribution the placement came from.  &#x60;data&#x60; is &#x60;null&#x60; — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user&#39;s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user&#39;s assets would understate them, so none is returned. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    try {
+      UserAumPercentileResponse result = client
+              .accountInformation
+              .getUserAumPercentile(userId, userSecret)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getData());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAumPercentile");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<UserAumPercentileResponse> response = client
+              .accountInformation
+              .getUserAumPercentile(userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAumPercentile");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+[**UserAumPercentileResponse**](UserAumPercentileResponse.md)
 
 ### Authorization
 

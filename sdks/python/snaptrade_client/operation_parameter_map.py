@@ -92,6 +92,10 @@ operation_parameter_map = {
             },
         ]
     },
+    '/aumPercentile-GET': {
+        'parameters': [
+        ]
+    },
     '/accounts/{accountId}/holdings-GET': {
         'parameters': [
             {
@@ -144,6 +148,9 @@ operation_parameter_map = {
             },
             {
                 'name': 'darkMode'
+            },
+            {
+                'name': 'locale'
             },
             {
                 'name': 'connectionPortalVersion'

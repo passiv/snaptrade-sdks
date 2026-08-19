@@ -114,6 +114,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'DarkMode'
         }
         /// <summary>
+        /// Test the property 'Locale'
+        /// </summary>
+        [Fact]
+        public void LocaleTest()
+        {
+            // TODO unit test for the property 'Locale'
+        }
+        /// <summary>
         /// Test the property 'ConnectionPortalVersion'
         /// </summary>
         [Fact]

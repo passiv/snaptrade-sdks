@@ -228,6 +228,7 @@ namespace Example
             var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
             var showCloseButton = true; // Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
             var darkMode = true; // Enable dark mode for the connection portal. Defaults to false.
+            var locale = "pt-BR"; // Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
             var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V4; // Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
@@ -238,6 +239,7 @@ namespace Example
                 connectionType,
                 showCloseButton,
                 darkMode,
+                locale,
                 connectionPortalVersion
             );
             

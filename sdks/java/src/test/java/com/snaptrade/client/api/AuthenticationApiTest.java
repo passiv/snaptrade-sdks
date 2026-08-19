@@ -91,6 +91,7 @@ public class AuthenticationApiTest {
         String connectionType = null;
         Boolean showCloseButton = null;
         Boolean darkMode = null;
+        String locale = null;
         String connectionPortalVersion = null;
         Object response = api.loginSnapTradeUser(userId, userSecret)
                 .broker(broker)
@@ -100,6 +101,7 @@ public class AuthenticationApiTest {
                 .connectionType(connectionType)
                 .showCloseButton(showCloseButton)
                 .darkMode(darkMode)
+                .locale(locale)
                 .connectionPortalVersion(connectionPortalVersion)
                 .execute();
         // TODO: test validations

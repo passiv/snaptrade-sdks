@@ -195,10 +195,11 @@ module SnapTrade
     # @param connection_type [ConnectionType] Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     # @param show_close_button [Boolean] Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     # @param dark_mode [Boolean] Enable dark mode for the connection portal. Defaults to false.
+    # @param locale [String] Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
     # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', show_close_button: SENTINEL, dark_mode: SENTINEL, connection_portal_version: 'v4', extra: {})
+    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', show_close_button: SENTINEL, dark_mode: SENTINEL, locale: 'en', connection_portal_version: 'v4', extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -207,6 +208,7 @@ module SnapTrade
       _body[:connectionType] = connection_type if connection_type != SENTINEL
       _body[:showCloseButton] = show_close_button if show_close_button != SENTINEL
       _body[:darkMode] = dark_mode if dark_mode != SENTINEL
+      _body[:locale] = locale if locale != SENTINEL
       _body[:connectionPortalVersion] = connection_portal_version if connection_portal_version != SENTINEL
       extra[:snap_trade_login_user_request_body] = _body if !_body.empty?
       data, _status_code, _headers = login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
@@ -228,10 +230,11 @@ module SnapTrade
     # @param connection_type [ConnectionType] Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     # @param show_close_button [Boolean] Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     # @param dark_mode [Boolean] Enable dark mode for the connection portal. Defaults to false.
+    # @param locale [String] Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
     # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', show_close_button: SENTINEL, dark_mode: SENTINEL, connection_portal_version: 'v4', extra: {})
+    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', show_close_button: SENTINEL, dark_mode: SENTINEL, locale: 'en', connection_portal_version: 'v4', extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -240,6 +243,7 @@ module SnapTrade
       _body[:connectionType] = connection_type if connection_type != SENTINEL
       _body[:showCloseButton] = show_close_button if show_close_button != SENTINEL
       _body[:darkMode] = dark_mode if dark_mode != SENTINEL
+      _body[:locale] = locale if locale != SENTINEL
       _body[:connectionPortalVersion] = connection_portal_version if connection_portal_version != SENTINEL
       extra[:snap_trade_login_user_request_body] = _body if !_body.empty?
       login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)

@@ -136,6 +136,15 @@ class SnapTradeLoginUserRequestBodyTest extends TestCase
     }
 
     /**
+     * Test attribute "locale"
+     */
+    public function testPropertyLocale()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "connection_portal_version"
      */
     public function testPropertyConnectionPortalVersion()

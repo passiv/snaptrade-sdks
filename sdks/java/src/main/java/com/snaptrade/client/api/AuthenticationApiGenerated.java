@@ -477,6 +477,7 @@ public class AuthenticationApiGenerated {
         String connectionType;
         Boolean showCloseButton;
         Boolean darkMode;
+        String locale;
         String connectionPortalVersion;
 
         public LoginSnapTradeUserRequestBuilderGenerated(String userId, String userSecret) {
@@ -555,6 +556,16 @@ public class AuthenticationApiGenerated {
         }
         
         /**
+         * Set locale
+         * @param locale Language the connection portal renders in. &#x60;en&#x60; and &#x60;pt-BR&#x60; are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so &#x60;pt-br&#x60;, &#x60;pt-BR&#x60; and &#x60;pt_BR&#x60; are equivalent, and a regional tag resolves to the language when we ship it, so &#x60;en-US&#x60; renders &#x60;en&#x60;. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to &#x60;en&#x60;.  (optional, default to en)
+         * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
+         */
+        public AuthenticationApi.LoginSnapTradeUserRequestBuilder locale(String locale) {
+            this.locale = locale;
+            return (AuthenticationApi.LoginSnapTradeUserRequestBuilder) this;
+        }
+        
+        /**
          * Set connectionPortalVersion
          * @param connectionPortalVersion Sets the connection portal version to render. Currently only &#x60;v4&#x60; is supported and is the default. All other versions are deprecated and will automatically be set to v4. (optional, default to v4)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
@@ -591,6 +602,7 @@ public class AuthenticationApiGenerated {
             snapTradeLoginUserRequestBody.connectionType(SnapTradeLoginUserRequestBody.ConnectionTypeEnum.fromValue(this.connectionType));
             snapTradeLoginUserRequestBody.showCloseButton(this.showCloseButton);
             snapTradeLoginUserRequestBody.darkMode(this.darkMode);
+            snapTradeLoginUserRequestBody.locale(this.locale);
             if (this.connectionPortalVersion != null)
             snapTradeLoginUserRequestBody.connectionPortalVersion(SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.fromValue(this.connectionPortalVersion));
             return snapTradeLoginUserRequestBody;

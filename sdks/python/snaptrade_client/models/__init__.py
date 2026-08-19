@@ -229,6 +229,9 @@ from snaptrade_client.model.universal_symbol import UniversalSymbol
 from snaptrade_client.model.universal_symbol_id import UniversalSymbolID
 from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable
 from snaptrade_client.model.universal_symbol_nullable import UniversalSymbolNullable
+from snaptrade_client.model.user_aum_percentile_object import UserAumPercentileObject
+from snaptrade_client.model.user_aum_percentile_object_nullable import UserAumPercentileObjectNullable
+from snaptrade_client.model.user_aum_percentile_response import UserAumPercentileResponse
 from snaptrade_client.model.user_id import UserID
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret
 from snaptrade_client.model.user_list import UserList

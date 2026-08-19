@@ -352,6 +352,7 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
                 connectionType: requestParameters.connectionType,
                 showCloseButton: requestParameters.showCloseButton,
                 darkMode: requestParameters.darkMode,
+                locale: requestParameters.locale,
                 connectionPortalVersion: requestParameters.connectionPortalVersion
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.loginSnapTradeUser(snapTradeLoginUserRequestBody, requestParameters.userId, requestParameters.userSecret, options);

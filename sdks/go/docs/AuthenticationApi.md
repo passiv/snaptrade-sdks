@@ -132,6 +132,7 @@ func main() {
     snapTradeLoginUserRequestBody.SetConnectionType("READ")
     snapTradeLoginUserRequestBody.SetShowCloseButton(true)
     snapTradeLoginUserRequestBody.SetDarkMode(true)
+    snapTradeLoginUserRequestBody.SetLocale("pt-BR")
     snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
     
     request := client.AuthenticationApi.LoginSnapTradeUser(

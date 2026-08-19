@@ -986,6 +986,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $connection_type = 'read',
         $show_close_button = SENTINEL_VALUE,
         $dark_mode = SENTINEL_VALUE,
+        $locale = 'en',
         $connection_portal_version = 'v4',
 
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
@@ -999,6 +1000,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "connection_type", $connection_type);
         $this->setRequestBodyProperty($_body, "show_close_button", $show_close_button);
         $this->setRequestBodyProperty($_body, "dark_mode", $dark_mode);
+        $this->setRequestBodyProperty($_body, "locale", $locale);
         $this->setRequestBodyProperty($_body, "connection_portal_version", $connection_portal_version);
         $snap_trade_login_user_request_body = $_body;
 
@@ -1224,6 +1226,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $connection_type = 'read',
         $show_close_button = SENTINEL_VALUE,
         $dark_mode = SENTINEL_VALUE,
+        $locale = 'en',
         $connection_portal_version = 'v4',
 
         string $contentType = self::contentTypes['loginSnapTradeUser'][0]
@@ -1237,6 +1240,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
         $this->setRequestBodyProperty($_body, "connection_type", $connection_type);
         $this->setRequestBodyProperty($_body, "show_close_button", $show_close_button);
         $this->setRequestBodyProperty($_body, "dark_mode", $dark_mode);
+        $this->setRequestBodyProperty($_body, "locale", $locale);
         $this->setRequestBodyProperty($_body, "connection_portal_version", $connection_portal_version);
         $snap_trade_login_user_request_body = $_body;
 

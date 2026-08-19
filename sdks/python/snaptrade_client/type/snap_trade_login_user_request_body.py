@@ -41,6 +41,9 @@ class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
     # Enable dark mode for the connection portal. Defaults to false.
     darkMode: bool
 
+    # Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
+    locale: str
+
     # Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     connectionPortalVersion: Literal["v4", "v3", "v2"]
 

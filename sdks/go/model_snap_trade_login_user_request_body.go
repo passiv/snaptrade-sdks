@@ -31,6 +31,8 @@ type SnapTradeLoginUserRequestBody struct {
 	ShowCloseButton *bool `json:"showCloseButton,omitempty"`
 	// Enable dark mode for the connection portal. Defaults to false.
 	DarkMode *bool `json:"darkMode,omitempty"`
+	// Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
+	Locale *string `json:"locale,omitempty"`
 	// Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 	ConnectionPortalVersion *string `json:"connectionPortalVersion,omitempty"`
 }
@@ -43,6 +45,8 @@ func NewSnapTradeLoginUserRequestBody() *SnapTradeLoginUserRequestBody {
 	this := SnapTradeLoginUserRequestBody{}
 	var connectionType string = "read"
 	this.ConnectionType = &connectionType
+	var locale string = "en"
+	this.Locale = &locale
 	var connectionPortalVersion string = "v4"
 	this.ConnectionPortalVersion = &connectionPortalVersion
 	return &this
@@ -55,6 +59,8 @@ func NewSnapTradeLoginUserRequestBodyWithDefaults() *SnapTradeLoginUserRequestBo
 	this := SnapTradeLoginUserRequestBody{}
 	var connectionType string = "read"
 	this.ConnectionType = &connectionType
+	var locale string = "en"
+	this.Locale = &locale
 	var connectionPortalVersion string = "v4"
 	this.ConnectionPortalVersion = &connectionPortalVersion
 	return &this
@@ -284,6 +290,38 @@ func (o *SnapTradeLoginUserRequestBody) SetDarkMode(v bool) {
 	o.DarkMode = &v
 }
 
+// GetLocale returns the Locale field value if set, zero value otherwise.
+func (o *SnapTradeLoginUserRequestBody) GetLocale() string {
+	if o == nil || isNil(o.Locale) {
+		var ret string
+		return ret
+	}
+	return *o.Locale
+}
+
+// GetLocaleOk returns a tuple with the Locale field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SnapTradeLoginUserRequestBody) GetLocaleOk() (*string, bool) {
+	if o == nil || isNil(o.Locale) {
+    return nil, false
+	}
+	return o.Locale, true
+}
+
+// HasLocale returns a boolean if a field has been set.
+func (o *SnapTradeLoginUserRequestBody) HasLocale() bool {
+	if o != nil && !isNil(o.Locale) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocale gets a reference to the given string and assigns it to the Locale field.
+func (o *SnapTradeLoginUserRequestBody) SetLocale(v string) {
+	o.Locale = &v
+}
+
 // GetConnectionPortalVersion returns the ConnectionPortalVersion field value if set, zero value otherwise.
 func (o *SnapTradeLoginUserRequestBody) GetConnectionPortalVersion() string {
 	if o == nil || isNil(o.ConnectionPortalVersion) {
@@ -338,6 +376,9 @@ func (o SnapTradeLoginUserRequestBody) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.DarkMode) {
 		toSerialize["darkMode"] = o.DarkMode
+	}
+	if !isNil(o.Locale) {
+		toSerialize["locale"] = o.Locale
 	}
 	if !isNil(o.ConnectionPortalVersion) {
 		toSerialize["connectionPortalVersion"] = o.ConnectionPortalVersion

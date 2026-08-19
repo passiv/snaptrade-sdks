@@ -32,6 +32,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
   * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
   * [`snaptrade.accountInformation.getUserAccountReturnRates`](#snaptradeaccountinformationgetuseraccountreturnrates)
+  * [`snaptrade.accountInformation.getUserAumPercentile`](#snaptradeaccountinformationgetuseraumpercentile)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
   * [`snaptrade.accountInformation.listUserAccounts`](#snaptradeaccountinformationlistuseraccounts)
   * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
@@ -658,6 +659,43 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ---
 
 
+### `snaptrade.accountInformation.getUserAumPercentile`<a id="snaptradeaccountinformationgetuseraumpercentile"></a>
+
+Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
+
+The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
+
+`data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+UserAumPercentileResponse result = client
+        .accountInformation
+        .getUserAumPercentile(userId, userSecret)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[UserAumPercentileResponse](./src/main/java/com/snaptrade/client/model/UserAumPercentileResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/aumPercentile` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
@@ -873,6 +911,7 @@ Object result = client
         .connectionType(connectionType)
         .showCloseButton(showCloseButton)
         .darkMode(darkMode)
+        .locale(locale)
         .connectionPortalVersion(connectionPortalVersion)
         .execute();
 ```
@@ -910,6 +949,10 @@ Controls whether the close (X) button is displayed in the connection portal. Whe
 ##### darkMode: `Boolean`<a id="darkmode-boolean"></a>
 
 Enable dark mode for the connection portal. Defaults to false.
+
+##### locale: `String`<a id="locale-string"></a>
+
+Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
 
 ##### connectionPortalVersion: `String`<a id="connectionportalversion-string"></a>
 

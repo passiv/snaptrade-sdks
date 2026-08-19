@@ -95,6 +95,14 @@ public class SnapTradeLoginUserRequestBodyTest {
     }
 
     /**
+     * Test the property 'locale'
+     */
+    @Test
+    public void localeTest() {
+        // TODO: test locale
+    }
+
+    /**
      * Test the property 'connectionPortalVersion'
      */
     @Test

@@ -34,6 +34,9 @@ module SnapTrade
     # Enable dark mode for the connection portal. Defaults to false.
     attr_accessor :dark_mode
 
+    # Language the connection portal renders in. `en` and `pt-BR` are the languages we ship; any other language is rejected with a 400. Matching is case- and separator-insensitive, so `pt-br`, `pt-BR` and `pt_BR` are equivalent, and a regional tag resolves to the language when we ship it, so `en-US` renders `en`. Deliberately not an enum: those equivalent spellings are all accepted by the API, and an enum would have generated SDKs reject them before the request is sent. Screens without translated copy fall back to English individually. Defaults to `en`. 
+    attr_accessor :locale
+
     # Sets the connection portal version to render. Currently only `v4` is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     attr_accessor :connection_portal_version
 
@@ -47,6 +50,7 @@ module SnapTrade
         :'connection_type' => :'connectionType',
         :'show_close_button' => :'showCloseButton',
         :'dark_mode' => :'darkMode',
+        :'locale' => :'locale',
         :'connection_portal_version' => :'connectionPortalVersion'
       }
     end
@@ -66,6 +70,7 @@ module SnapTrade
         :'connection_type' => :'ConnectionType',
         :'show_close_button' => :'Boolean',
         :'dark_mode' => :'Boolean',
+        :'locale' => :'String',
         :'connection_portal_version' => :'ConnectionPortalVersion'
       }
     end
@@ -121,6 +126,12 @@ module SnapTrade
         self.dark_mode = attributes[:'dark_mode']
       end
 
+      if attributes.key?(:'locale')
+        self.locale = attributes[:'locale']
+      else
+        self.locale = 'en'
+      end
+
       if attributes.key?(:'connection_portal_version')
         self.connection_portal_version = attributes[:'connection_portal_version']
       else
@@ -153,6 +164,7 @@ module SnapTrade
           connection_type == o.connection_type &&
           show_close_button == o.show_close_button &&
           dark_mode == o.dark_mode &&
+          locale == o.locale &&
           connection_portal_version == o.connection_portal_version
     end
 
@@ -165,7 +177,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, show_close_button, dark_mode, connection_portal_version].hash
+      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, show_close_button, dark_mode, locale, connection_portal_version].hash
     end
 
     # Builds the object from hash
