@@ -2621,7 +2621,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookBase"
+              $ref: "#/components/schemas/WebhookPayload"
       responses:
         "200":
           description: Return a 200 status to indicate that the connection was successful
@@ -2638,7 +2638,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookBase"
+              $ref: "#/components/schemas/WebhookPayload"
       responses:
         "200":
           description:
@@ -2695,7 +2695,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookBase"
+              $ref: "#/components/schemas/WebhookPayload"
       responses:
         "200":
           description:
@@ -2716,7 +2716,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookBase"
+              $ref: "#/components/schemas/WebhookPayload"
       responses:
         "200":
           description:
@@ -2737,7 +2737,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookBase"
+              $ref: "#/components/schemas/WebhookPayload"
       responses:
         "200":
           description: Return a 200 status to indicate that the update was successful
@@ -2754,7 +2754,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookBase"
+              $ref: "#/components/schemas/WebhookPayload"
       responses:
         "200":
           description: Return a 200 status to indicate that the update was successful
@@ -7181,8 +7181,13 @@ components:
         name:
           type: string
           example: Traditional Brokerage
+    WebhookPayload:
+      description: An API-key webhook or an OAuth application webhook.
+      anyOf:
+        - $ref: "#/components/schemas/WebhookBase"
+        - $ref: "#/components/schemas/OAuthWebhookBase"
     WebhookBase:
-      description: The base webhook content
+      description: The API-key webhook content.
       type: object
       properties:
         webookId:
@@ -7197,6 +7202,60 @@ components:
         userId:
           type: string
           example: external_user@test.com
+    OAuthWebhookBase:
+      description: The versioned webhook content sent to an authorized OAuth application.
+      type: object
+      additionalProperties: false
+      required:
+        - schemaVersion
+        - webhookId
+        - oauthClientId
+        - eventTimestamp
+        - userId
+        - eventType
+      properties:
+        schemaVersion:
+          type: string
+          enum:
+            - oauth_v1
+        webhookId:
+          type: string
+          format: uuid
+          example: 06fe1fd7-fc50-43a7-b564-8a2c5f3bab44
+        oauthClientId:
+          description: The OAuth client ID of the application receiving the webhook.
+          type: string
+          example: portfolio-app
+        eventTimestamp:
+          type: string
+          format: date-time
+          example: 2026-08-18T14:31:55.858820+00:00
+        userId:
+          description: The SnapTrade Personal user UUID, matching `sub.snaptrade_user_id` in the OAuth token response.
+          type: string
+          format: uuid
+          example: b5980c55-0071-4b1d-b275-fefc2a497408
+        eventType:
+          type: string
+          example: CONNECTION_ADDED
+        accountId:
+          type: string
+          format: uuid
+          example: 83d70abb-3d5f-40bb-98b3-d56300f1281b
+        connectionId:
+          type: string
+          format: uuid
+          example: 868470ff-c2df-41de-b082-9d6f1f207daa
+        brokerageId:
+          type: string
+          format: uuid
+          example: 9e0fb25b-4cdd-4841-9507-c8aa19f59d63
+        connectionAttemptedResult:
+          type: string
+          example: SUCCESS
+        details:
+          type: object
+          additionalProperties: true
     encryptedResponse:
       description: >
         This response consists of 2 different components that must be

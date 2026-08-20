@@ -1,8 +1,63 @@
 # Webhooks
 
-The SnapTrade API can be configured to send you webhook notifications when certain events happen.
+The SnapTrade API can be configured to send you webhook notifications when certain events happen. API-key integrations receive the API-key webhook schema, while OAuth applications receive the versioned `oauth_v1` schema described below.
 
 To get started with webhooks, visit the webhook tab of the SnapTrade Dashboard to configure a webhook listener.
+
+# OAuth Application Webhooks
+
+OAuth applications can receive connection and account events for SnapTrade Personal users. An event is delivered when all of the following are true:
+
+- The OAuth app is registered under the SnapTrade customer that owns the configured webhook listener.
+- The user has an active authorization for the app.
+- The authorization includes the `webhook` scope.
+
+Request the scope alongside `read`:
+
+```text
+scope=read webhook
+```
+
+Existing authorizations do not automatically gain a newly requested scope. A user who previously granted only `read` must go through the OAuth authorization flow again and approve `webhook` before the app can receive events for that user.
+
+OAuth apps registered under a customer reuse that customer's webhook URL, consumer key, and custom headers. If the customer has multiple OAuth apps, use `oauthClientId` in the payload to identify which app the notification targets. A Personal user who has granted webhook access to multiple apps can cause one notification to be delivered to each eligible app.
+
+## OAuth Webhook Schema
+
+OAuth application webhooks use `schemaVersion: "oauth_v1"`:
+
+```json
+{
+  "schemaVersion": "oauth_v1",
+  "webhookId": "35a74573-84a4-4cdd-aa30-9719f89a0123",
+  "oauthClientId": "portfolio-app",
+  "eventTimestamp": "2026-08-12T18:22:47.039837+00:00",
+  "userId": "e474391b-01a0-4eaf-8b3b-3d9c546b790c",
+  "eventType": "CONNECTION_ATTEMPTED",
+  "brokerageId": "a7f51999-ac26-4587-aa00-5dae607fd4a3",
+  "connectionId": "7c382af7-1faa-490c-8d10-b15e27a36a14",
+  "connectionAttemptedResult": "SUCCESS",
+  "details": {
+    "sessionId": "04525fa4-7194-4f37-ab15-c9eaa3bae886"
+  }
+}
+```
+
+| Field | Description |
+| --- | --- |
+| `schemaVersion` | The payload contract version. OAuth webhooks currently use `oauth_v1`. |
+| `webhookId` | The unique ID of this webhook notification. |
+| `oauthClientId` | The OAuth client ID of the application receiving the notification. |
+| `eventTimestamp` | When the event occurred, formatted as an ISO 8601 timestamp. |
+| `userId` | The SnapTrade Personal user UUID. This matches `sub.snaptrade_user_id` returned during OAuth token exchange. |
+| `eventType` | The event that occurred. |
+| `connectionId` | The brokerage connection UUID, when the event relates to a connection. This replaces `brokerageAuthorizationId` from the API-key schema. |
+| `brokerageId` | The brokerage UUID, when available. |
+| `accountId` | The brokerage account UUID, when the event relates to an account. |
+| `connectionAttemptedResult` | The result of a connection attempt, when applicable. |
+| `details` | Additional event-specific data, when available. |
+
+The OAuth schema does not include the API-key schema's `clientId`, `brokerageAuthorizationId`, or `webhookSecret` fields. Continue to verify authenticity using the `Signature` request header.
 
 # Verifying Webhook Authenticity
 

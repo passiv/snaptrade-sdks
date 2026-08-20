@@ -22,14 +22,14 @@ Because OAuth apps can reuse connections that users already maintain with SnapTr
 
 ## OAuth or a Commercial Integration?
 
-| Choose OAuth when | Choose a Commercial integration when |
-| --- | --- |
-| Users have or can create a SnapTrade Personal account | Your app must create and own the SnapTrade user lifecycle |
-| Users can manage their brokerage connections in SnapTrade | Your app must fully own the brokerage connection experience |
-| Your app needs the currently available `read` scope | Your app needs trading or another capability not available to OAuth apps |
-| You want users to grant access to existing connections | Each connection must belong exclusively to your app's integration |
+| Choose OAuth when                                                     | Choose a Commercial integration when                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Users have or can create a SnapTrade Personal account                 | Your app must create and own the SnapTrade user lifecycle                |
+| Users can manage their brokerage connections in SnapTrade             | Your app must fully own the brokerage connection experience              |
+| Your app needs `read` access, optionally with `webhook` notifications | Your app needs trading or another capability not available to OAuth apps |
+| You want users to grant access to existing connections                | Each connection must belong exclusively to your app's integration        |
 
-OAuth currently supports account data and connection-management workflows under the `read` scope. It does not currently support placing, modifying, or cancelling trades. Personal API keys can support trading for an individual user's own accounts where enabled; Commercial credentials support apps that manage SnapTrade users and connections themselves.
+OAuth currently supports account data and connection-management workflows under the `read` scope. Apps can also request the optional `webhook` scope to receive asynchronous connection and account events for users who grant that permission. OAuth does not currently support placing, modifying, or cancelling trades. Personal API keys can support trading for an individual user's own accounts where enabled; Commercial credentials support apps that manage SnapTrade users and connections themselves.
 
 ## Before You Start
 
@@ -45,6 +45,8 @@ The self-serve OAuth app created in the SnapTrade Dashboard is a **confidential 
 ## 1. Register Your App
 
 In the [SnapTrade Dashboard](https://dashboard.snaptrade.com), open **Settings**, select **OAuth App**, and add your callback URLs. During early access, each eligible developer account can register one OAuth app. The app name shown during consent comes from the name of your SnapTrade customer account.
+
+To receive webhooks, also configure a listener URL in the **Webhooks** section of the Dashboard. OAuth apps registered under the same SnapTrade customer use that customer's existing webhook URL, signing key, and custom headers. The `oauthClientId` in each OAuth webhook identifies the receiving app.
 
 When you create the app, SnapTrade shows the `client_id` and `client_secret`. Save the secret immediately: it is shown only once and is stored hashed. If it is lost or exposed, rotate it from the same settings page. Rotation invalidates the previous secret.
 
@@ -64,11 +66,11 @@ GET https://api.snaptrade.com/.well-known/oauth-authorization-server
 Accept: application/json
 ```
 
-The metadata includes the authorization, token, revocation, and registration endpoints, supported grant types, and supported token authentication methods.
+The metadata includes the authorization, token, revocation, and registration endpoints, supported scopes and grant types, and supported token authentication methods.
 
 ```typescript
 const metadata = await fetch(
-  'https://api.snaptrade.com/.well-known/oauth-authorization-server',
+  "https://api.snaptrade.com/.well-known/oauth-authorization-server",
 ).then((response) => response.json());
 
 const authorizationEndpoint = metadata.authorization_endpoint;
@@ -81,27 +83,30 @@ const revocationEndpoint = metadata.revocation_endpoint;
 Generate a new high-entropy `state` and PKCE `code_verifier` for every authorization attempt. Store them in the user's server-side login session. Derive the `code_challenge` using SHA-256 and base64url encoding without padding.
 
 ```typescript
-import crypto from 'node:crypto';
+import crypto from "node:crypto";
 
-const base64url = (value: Buffer) => value.toString('base64url');
+const base64url = (value: Buffer) => value.toString("base64url");
 
 const state = base64url(crypto.randomBytes(32));
 const codeVerifier = base64url(crypto.randomBytes(64));
 const codeChallenge = base64url(
-  crypto.createHash('sha256').update(codeVerifier).digest(),
+  crypto.createHash("sha256").update(codeVerifier).digest(),
 );
 
 const authorizationUrl = new URL(authorizationEndpoint);
-authorizationUrl.searchParams.set('response_type', 'code');
-authorizationUrl.searchParams.set('client_id', process.env.SNAPTRADE_OAUTH_CLIENT_ID!);
+authorizationUrl.searchParams.set("response_type", "code");
 authorizationUrl.searchParams.set(
-  'redirect_uri',
-  'https://app.example.com/oauth/snaptrade/callback',
+  "client_id",
+  process.env.SNAPTRADE_OAUTH_CLIENT_ID!,
 );
-authorizationUrl.searchParams.set('scope', 'read');
-authorizationUrl.searchParams.set('state', state);
-authorizationUrl.searchParams.set('code_challenge', codeChallenge);
-authorizationUrl.searchParams.set('code_challenge_method', 'S256');
+authorizationUrl.searchParams.set(
+  "redirect_uri",
+  "https://app.example.com/oauth/snaptrade/callback",
+);
+authorizationUrl.searchParams.set("scope", "read webhook");
+authorizationUrl.searchParams.set("state", state);
+authorizationUrl.searchParams.set("code_challenge", codeChallenge);
+authorizationUrl.searchParams.set("code_challenge_method", "S256");
 ```
 
 Redirect the user's browser to `authorizationUrl`. The user signs in to SnapTrade and approves or denies your app's request.
@@ -135,22 +140,24 @@ const clientId = process.env.SNAPTRADE_OAUTH_CLIENT_ID!;
 const clientSecret = process.env.SNAPTRADE_OAUTH_CLIENT_SECRET!;
 
 const response = await fetch(tokenEndpoint, {
-  method: 'POST',
+  method: "POST",
   headers: {
-    Accept: 'application/json',
-    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
+    Accept: "application/json",
+    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
+    "Content-Type": "application/x-www-form-urlencoded",
   },
   body: new URLSearchParams({
-    grant_type: 'authorization_code',
+    grant_type: "authorization_code",
     code,
     code_verifier: codeVerifier,
-    redirect_uri: 'https://app.example.com/oauth/snaptrade/callback',
+    redirect_uri: "https://app.example.com/oauth/snaptrade/callback",
   }),
 });
 
 if (!response.ok) {
-  throw new Error(`Token exchange failed: ${response.status} ${await response.text()}`);
+  throw new Error(
+    `Token exchange failed: ${response.status} ${await response.text()}`,
+  );
 }
 
 const tokens = await response.json();
@@ -182,20 +189,34 @@ You can then use the supported read and connection endpoints to list the user's 
 
 The API reference may still show Commercial authentication fields as required. Omit those fields when making a Bearer-token request.
 
-## 7. Refresh Tokens
+## 7. Receive Webhooks
+
+Request the `webhook` scope alongside `read` when you want SnapTrade to notify your app about supported connection and account events:
+
+```text
+scope=read webhook
+```
+
+The consent screen asks the user to grant webhook access. SnapTrade sends events only while the user has an active authorization for your OAuth app that includes `webhook`. Adding the scope to your app does not update an existing grant: users who previously granted only `read` must go through the authorization flow again and approve the new scope.
+
+Webhooks are sent to the listener URL configured for the SnapTrade customer that owns the OAuth app. Verify the `Signature` header with that customer's consumer key, and use `oauthClientId` to distinguish apps when the customer has more than one OAuth app.
+
+OAuth webhooks use the versioned `oauth_v1` payload. In this schema, `userId` is the SnapTrade Personal user UUID returned as `sub.snaptrade_user_id` during token exchange, and `connectionId` identifies the brokerage connection. See [Webhooks](https://docs.snaptrade.com/docs/webhooks#oauth-application-webhooks) for the full schema, supported events, delivery behavior, and signature-verification example.
+
+## 8. Refresh Tokens
 
 Refresh shortly before the access token expires. Use the same client authentication as the initial token exchange:
 
 ```typescript
 const response = await fetch(tokenEndpoint, {
-  method: 'POST',
+  method: "POST",
   headers: {
-    Accept: 'application/json',
-    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
+    Accept: "application/json",
+    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
+    "Content-Type": "application/x-www-form-urlencoded",
   },
   body: new URLSearchParams({
-    grant_type: 'refresh_token',
+    grant_type: "refresh_token",
     refresh_token: storedRefreshToken,
   }),
 });
@@ -205,21 +226,21 @@ const refreshedTokens = await response.json();
 
 SnapTrade rotates refresh tokens. Refreshing invalidates the token you sent and returns a new refresh token with no fixed time-based expiry. Replace the stored refresh token atomically whenever a refresh succeeds; do not keep using the previous value. If an API request returns `401`, refresh once and retry once. If that fails, clear the stored tokens and ask the user to authorize again.
 
-## 8. Revoke Access
+## 9. Revoke Access
 
 Let users disconnect SnapTrade from inside your app. Revoke the refresh token from your backend, then delete all locally stored SnapTrade tokens:
 
 ```typescript
 await fetch(revocationEndpoint, {
-  method: 'POST',
+  method: "POST",
   headers: {
-    Accept: 'application/json',
-    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
+    Accept: "application/json",
+    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
+    "Content-Type": "application/x-www-form-urlencoded",
   },
   body: new URLSearchParams({
     token: storedRefreshToken,
-    token_type_hint: 'refresh_token',
+    token_type_hint: "refresh_token",
   }),
 });
 ```
@@ -227,13 +248,15 @@ await fetch(revocationEndpoint, {
 ## Test Locally
 
 1. Register a loopback callback such as `http://127.0.0.1:3000/oauth/snaptrade/callback` alongside your production callback.
-2. Use a separate SnapTrade Personal test account instead of the developer account that owns the OAuth app.
-3. Connect the SnapTrade Sandbox brokerage or a test brokerage connection from the SnapTrade Dashboard.
-4. Run the authorization flow and confirm the consent page shows the expected app name and `read` access.
-5. Exchange the code from your backend and call `GET /api/v1/accounts` with only the Bearer token.
-6. Verify the same account is still visible in the SnapTrade Dashboard and can be granted to another test app without creating another brokerage connection.
-7. Test refresh-token rotation, a forced `401`, denial at the consent screen, a mismatched `state`, an expired code, and an unregistered redirect URI.
-8. Revoke access and confirm the refresh token can no longer obtain an access token.
+2. If testing webhooks, expose a local listener through an HTTPS tunnel and configure that public URL in the **Webhooks** section of the Dashboard.
+3. Use a separate SnapTrade Personal test account instead of the developer account that owns the OAuth app.
+4. Connect the SnapTrade Sandbox brokerage or a test brokerage connection from the SnapTrade Dashboard.
+5. Run the authorization flow with `scope=read webhook` and confirm the consent page shows both permissions.
+6. Exchange the code from your backend and call `GET /api/v1/accounts` with only the Bearer token.
+7. Add, reconnect, refresh, or remove a test connection and confirm your listener receives an `oauth_v1` payload with the expected `oauthClientId` and `userId`.
+8. Verify the same account is still visible in the SnapTrade Dashboard and can be granted to another test app without creating another brokerage connection.
+9. Test refresh-token rotation, a forced `401`, denial at the consent screen, a mismatched `state`, an expired code, and an unregistered redirect URI.
+10. Revoke access and confirm the refresh token can no longer obtain an access token or receive new webhooks.
 
 ## Production Checklist
 
@@ -246,6 +269,9 @@ await fetch(revocationEndpoint, {
 - Replace rotated refresh tokens atomically.
 - Retry at most once after refreshing a failed API request.
 - Provide an in-app disconnect action that revokes access.
+- Request the `webhook` scope only when your app needs notifications, and handle users denying that permission.
+- Configure a production webhook listener and verify every webhook's `Signature` header.
+- Ask existing users to authorize again before relying on a newly requested `webhook` scope.
 - Link users to the SnapTrade Dashboard to add, repair, or remove brokerage connections.
 - Explain what brokerage data your app uses and link to a privacy policy.
 - Do not describe OAuth as supporting trading until a trading scope is available to your app.
