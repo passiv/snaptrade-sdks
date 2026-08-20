@@ -286,10 +286,10 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/connections/{authorizationId}/accounts-GET': {
+    '/connections/{connectionId}/accounts-GET': {
         parameters: [
             {
-                name: 'authorizationId'
+                name: 'connectionId'
             },
         ]
     },

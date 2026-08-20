@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderRecordLeg;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
+import com.snaptrade.client.model.AccountOrderRecordV2OrderRoleNullable;
 import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -66,58 +67,9 @@ public class AccountOrderRecordV2 {
   @SerializedName(SERIALIZED_NAME_BROKERAGE_GROUP_ORDER_ID)
   private String brokerageGroupOrderId;
 
-  /**
-   * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
-   */
-  @JsonAdapter(OrderRoleEnum.Adapter.class)
- public enum OrderRoleEnum {
-    TRIGGER("TRIGGER"),
-    
-    CONDITIONAL("CONDITIONAL"),
-    
-    PEER("PEER");
-
-    private String value;
-
-    OrderRoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OrderRoleEnum fromValue(String value) {
-      for (OrderRoleEnum b : OrderRoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<OrderRoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OrderRoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OrderRoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OrderRoleEnum.fromValue(value);
-      }
-    }
-  }
-
   public static final String SERIALIZED_NAME_ORDER_ROLE = "order_role";
   @SerializedName(SERIALIZED_NAME_ORDER_ROLE)
-  private OrderRoleEnum orderRole;
+  private AccountOrderRecordV2OrderRoleNullable orderRole;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
@@ -139,9 +91,64 @@ public class AccountOrderRecordV2 {
   @SerializedName(SERIALIZED_NAME_TIME_EXECUTED)
   private OffsetDateTime timeExecuted;
 
-  public static final String SERIALIZED_NAME_QUOTE_CURRENCY = "quote_currency";
-  @SerializedName(SERIALIZED_NAME_QUOTE_CURRENCY)
-  private String quoteCurrency;
+  public static final String SERIALIZED_NAME_PRICE_CURRENCY = "price_currency";
+  @SerializedName(SERIALIZED_NAME_PRICE_CURRENCY)
+  private String priceCurrency;
+
+  /**
+   * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+   */
+  @JsonAdapter(PriceEffectEnum.Adapter.class)
+ public enum PriceEffectEnum {
+    CREDIT("CREDIT"),
+    
+    DEBIT("DEBIT"),
+    
+    EVEN("EVEN"),
+    
+    UNKNOWN("UNKNOWN");
+
+    private String value;
+
+    PriceEffectEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static PriceEffectEnum fromValue(String value) {
+      for (PriceEffectEnum b : PriceEffectEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<PriceEffectEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PriceEffectEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PriceEffectEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return PriceEffectEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_PRICE_EFFECT = "price_effect";
+  @SerializedName(SERIALIZED_NAME_PRICE_EFFECT)
+  private PriceEffectEnum priceEffect;
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
@@ -224,7 +231,7 @@ public class AccountOrderRecordV2 {
   }
 
 
-  public AccountOrderRecordV2 orderRole(OrderRoleEnum orderRole) {
+  public AccountOrderRecordV2 orderRole(AccountOrderRecordV2OrderRoleNullable orderRole) {
     
     
     
@@ -234,18 +241,18 @@ public class AccountOrderRecordV2 {
   }
 
    /**
-   * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+   * Get orderRole
    * @return orderRole
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "TRIGGER", value = "The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. ")
+  @ApiModelProperty(value = "")
 
-  public OrderRoleEnum getOrderRole() {
+  public AccountOrderRecordV2OrderRoleNullable getOrderRole() {
     return orderRole;
   }
 
 
-  public void setOrderRole(OrderRoleEnum orderRole) {
+  public void setOrderRole(AccountOrderRecordV2OrderRoleNullable orderRole) {
     
     
     
@@ -398,32 +405,61 @@ public class AccountOrderRecordV2 {
   }
 
 
-  public AccountOrderRecordV2 quoteCurrency(String quoteCurrency) {
+  public AccountOrderRecordV2 priceCurrency(String priceCurrency) {
     
     
     
     
-    this.quoteCurrency = quoteCurrency;
+    this.priceCurrency = priceCurrency;
     return this;
   }
 
    /**
-   * Quote currency code for the order.
-   * @return quoteCurrency
+   * Price currency code for the order.
+   * @return priceCurrency
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "USD", value = "Quote currency code for the order.")
+  @ApiModelProperty(example = "USD", value = "Price currency code for the order.")
 
-  public String getQuoteCurrency() {
-    return quoteCurrency;
+  public String getPriceCurrency() {
+    return priceCurrency;
   }
 
 
-  public void setQuoteCurrency(String quoteCurrency) {
+  public void setPriceCurrency(String priceCurrency) {
     
     
     
-    this.quoteCurrency = quoteCurrency;
+    this.priceCurrency = priceCurrency;
+  }
+
+
+  public AccountOrderRecordV2 priceEffect(PriceEffectEnum priceEffect) {
+    
+    
+    
+    
+    this.priceEffect = priceEffect;
+    return this;
+  }
+
+   /**
+   * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+   * @return priceEffect
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.")
+
+  public PriceEffectEnum getPriceEffect() {
+    return priceEffect;
+  }
+
+
+  public void setPriceEffect(PriceEffectEnum priceEffect) {
+    
+    
+    
+    this.priceEffect = priceEffect;
   }
 
 
@@ -642,7 +678,8 @@ public class AccountOrderRecordV2 {
         Objects.equals(this.timeInForce, accountOrderRecordV2.timeInForce) &&
         Objects.equals(this.timePlaced, accountOrderRecordV2.timePlaced) &&
         Objects.equals(this.timeExecuted, accountOrderRecordV2.timeExecuted) &&
-        Objects.equals(this.quoteCurrency, accountOrderRecordV2.quoteCurrency) &&
+        Objects.equals(this.priceCurrency, accountOrderRecordV2.priceCurrency) &&
+        Objects.equals(this.priceEffect, accountOrderRecordV2.priceEffect) &&
         Objects.equals(this.executionPrice, accountOrderRecordV2.executionPrice) &&
         Objects.equals(this.limitPrice, accountOrderRecordV2.limitPrice) &&
         Objects.equals(this.stopPrice, accountOrderRecordV2.stopPrice) &&
@@ -657,7 +694,7 @@ public class AccountOrderRecordV2 {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, brokerageGroupOrderId, orderRole, status, orderType, timeInForce, timePlaced, timeExecuted, quoteCurrency, executionPrice, limitPrice, stopPrice, trailingStop, legs, additionalProperties);
+    return Objects.hash(brokerageOrderId, brokerageGroupOrderId, orderRole, status, orderType, timeInForce, timePlaced, timeExecuted, priceCurrency, priceEffect, executionPrice, limitPrice, stopPrice, trailingStop, legs, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -679,7 +716,8 @@ public class AccountOrderRecordV2 {
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    timePlaced: ").append(toIndentedString(timePlaced)).append("\n");
     sb.append("    timeExecuted: ").append(toIndentedString(timeExecuted)).append("\n");
-    sb.append("    quoteCurrency: ").append(toIndentedString(quoteCurrency)).append("\n");
+    sb.append("    priceCurrency: ").append(toIndentedString(priceCurrency)).append("\n");
+    sb.append("    priceEffect: ").append(toIndentedString(priceEffect)).append("\n");
     sb.append("    executionPrice: ").append(toIndentedString(executionPrice)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");
     sb.append("    stopPrice: ").append(toIndentedString(stopPrice)).append("\n");
@@ -716,7 +754,8 @@ public class AccountOrderRecordV2 {
     openapiFields.add("time_in_force");
     openapiFields.add("time_placed");
     openapiFields.add("time_executed");
-    openapiFields.add("quote_currency");
+    openapiFields.add("price_currency");
+    openapiFields.add("price_effect");
     openapiFields.add("execution_price");
     openapiFields.add("limit_price");
     openapiFields.add("stop_price");
@@ -725,6 +764,7 @@ public class AccountOrderRecordV2 {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("price_effect");
   }
 
  /**
@@ -739,14 +779,18 @@ public class AccountOrderRecordV2 {
           throw new IllegalArgumentException(String.format("The required field(s) %s in AccountOrderRecordV2 is not found in the empty JSON string", AccountOrderRecordV2.openapiRequiredFields.toString()));
         }
       }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : AccountOrderRecordV2.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
       if ((jsonObj.get("brokerage_order_id") != null && !jsonObj.get("brokerage_order_id").isJsonNull()) && !jsonObj.get("brokerage_order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_order_id").toString()));
       }
       if (!jsonObj.get("brokerage_group_order_id").isJsonNull() && (jsonObj.get("brokerage_group_order_id") != null && !jsonObj.get("brokerage_group_order_id").isJsonNull()) && !jsonObj.get("brokerage_group_order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_group_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_group_order_id").toString()));
-      }
-      if (!jsonObj.get("order_role").isJsonNull() && (jsonObj.get("order_role") != null && !jsonObj.get("order_role").isJsonNull()) && !jsonObj.get("order_role").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `order_role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_role").toString()));
       }
       if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));
@@ -754,8 +798,11 @@ public class AccountOrderRecordV2 {
       if ((jsonObj.get("time_in_force") != null && !jsonObj.get("time_in_force").isJsonNull()) && !jsonObj.get("time_in_force").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
       }
-      if ((jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) && !jsonObj.get("quote_currency").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `quote_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quote_currency").toString()));
+      if ((jsonObj.get("price_currency") != null && !jsonObj.get("price_currency").isJsonNull()) && !jsonObj.get("price_currency").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `price_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_currency").toString()));
+      }
+      if (!jsonObj.get("price_effect").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));
       }
       if (!jsonObj.get("execution_price").isJsonNull() && (jsonObj.get("execution_price") != null && !jsonObj.get("execution_price").isJsonNull()) && !jsonObj.get("execution_price").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `execution_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("execution_price").toString()));

@@ -214,14 +214,14 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void ListConnectionAccountsTest()
         {
-            var authorizationId = "authorizationId_example";
+            var connectionId = "connectionId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
                 // List accounts for a connection (discriminated union)
-                List<ConnectionAccount> result = client.ExperimentalEndpoints.ListConnectionAccounts(authorizationId, userId, userSecret);
+                List<ConnectionAccount> result = client.ExperimentalEndpoints.ListConnectionAccounts(connectionId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

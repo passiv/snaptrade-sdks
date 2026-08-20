@@ -163,9 +163,9 @@ class DepositAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "balance"
+     * Test attribute "net_value"
      */
-    public function testPropertyBalance()
+    public function testPropertyNetValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

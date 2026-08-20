@@ -47,7 +47,7 @@ from snaptrade_client.apis.paths.snap_trade_trade_detection_subscriptions_cancel
 from snaptrade_client.apis.paths.accounts_account_id_orders_v2 import AccountsAccountIdOrdersV2
 from snaptrade_client.apis.paths.accounts_account_id_recent_orders_v2 import AccountsAccountIdRecentOrdersV2
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
-from snaptrade_client.apis.paths.connections_authorization_id_accounts import ConnectionsAuthorizationIdAccounts
+from snaptrade_client.apis.paths.connections_connection_id_accounts import ConnectionsConnectionIdAccounts
 from snaptrade_client.apis.paths.brokerages import Brokerages
 from snaptrade_client.apis.paths.brokerages_slug_instruments import BrokeragesSlugInstruments
 from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageAuthorizationTypes
@@ -105,7 +105,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
-        PathValues.CONNECTIONS_AUTHORIZATION_ID_ACCOUNTS: ConnectionsAuthorizationIdAccounts,
+        PathValues.CONNECTIONS_CONNECTION_ID_ACCOUNTS: ConnectionsConnectionIdAccounts,
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGES_SLUG_INSTRUMENTS: BrokeragesSlugInstruments,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
@@ -164,7 +164,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
-        PathValues.CONNECTIONS_AUTHORIZATION_ID_ACCOUNTS: ConnectionsAuthorizationIdAccounts,
+        PathValues.CONNECTIONS_CONNECTION_ID_ACCOUNTS: ConnectionsConnectionIdAccounts,
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGES_SLUG_INSTRUMENTS: BrokeragesSlugInstruments,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,

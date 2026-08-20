@@ -13,6 +13,7 @@ import type * as buffer from "buffer"
 import { AccountOrderRecordLeg } from './account-order-record-leg';
 import { AccountOrderRecordStatus } from './account-order-record-status';
 import { AccountOrderRecordTrailingStop } from './account-order-record-trailing-stop';
+import { AccountOrderRecordV2OrderRole } from './account-order-record-v2-order-role';
 
 /**
  * Describes a single order in the standardized V2 format.
@@ -36,10 +37,10 @@ export interface AccountOrderRecordV2 {
     'brokerage_group_order_id'?: string | null;
     /**
      * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
-     * @type {string}
+     * @type {AccountOrderRecordV2OrderRole}
      * @memberof AccountOrderRecordV2
      */
-    'order_role'?: AccountOrderRecordV2OrderRoleEnum;
+    'order_role'?: AccountOrderRecordV2OrderRole | null;
     /**
      * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
      * @type {AccountOrderRecordStatus}
@@ -71,11 +72,17 @@ export interface AccountOrderRecordV2 {
      */
     'time_executed'?: string | null;
     /**
-     * Quote currency code for the order.
+     * Price currency code for the order.
      * @type {string}
      * @memberof AccountOrderRecordV2
      */
-    'quote_currency'?: string;
+    'price_currency'?: string;
+    /**
+     * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+     * @type {string}
+     * @memberof AccountOrderRecordV2
+     */
+    'price_effect': AccountOrderRecordV2PriceEffectEnum;
     /**
      * The price at which the order was executed.
      * @type {string}
@@ -108,6 +115,6 @@ export interface AccountOrderRecordV2 {
     'legs'?: Array<AccountOrderRecordLeg>;
 }
 
-type AccountOrderRecordV2OrderRoleEnum = 'TRIGGER' | 'CONDITIONAL' | 'PEER'
+type AccountOrderRecordV2PriceEffectEnum = 'CREDIT' | 'DEBIT' | 'EVEN' | 'UNKNOWN'
 
 

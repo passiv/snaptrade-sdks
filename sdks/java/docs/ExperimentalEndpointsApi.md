@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**getUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getUserAccountOrderDetailV2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**getUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountOrdersV2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**getUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountRecentOrdersV2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
-| [**listConnectionAccounts**](ExperimentalEndpointsApi.md#listConnectionAccounts) | **GET** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union) |
+| [**listConnectionAccounts**](ExperimentalEndpointsApi.md#listConnectionAccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union) |
 | [**listSubscriptions**](ExperimentalEndpointsApi.md#listSubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
 
 
@@ -257,7 +257,8 @@ public class Example {
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
       System.out.println(result.getTimeExecuted());
-      System.out.println(result.getQuoteCurrency());
+      System.out.println(result.getPriceCurrency());
+      System.out.println(result.getPriceEffect());
       System.out.println(result.getExecutionPrice());
       System.out.println(result.getLimitPrice());
       System.out.println(result.getStopPrice());
@@ -529,11 +530,11 @@ public class Example {
 
 <a name="listConnectionAccounts"></a>
 # **listConnectionAccounts**
-> List&lt;Object&gt; listConnectionAccounts(authorizationId, userId, userSecret).execute();
+> List&lt;Object&gt; listConnectionAccounts(connectionId, userId, userSecret).execute();
 
 List accounts for a connection (discriminated union)
 
-Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total balance (&#x60;market_value&#x60; for &#x60;investment&#x60;, &#x60;balance&#x60; for &#x60;deposit&#x60;) live from the brokerage on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
 
 ### Example
 ```java
@@ -557,13 +558,13 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
+    UUID connectionId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
       List<Object> result = client
               .experimentalEndpoints
-              .listConnectionAccounts(authorizationId, userId, userSecret)
+              .listConnectionAccounts(connectionId, userId, userSecret)
               .execute();
     } catch (ApiException e) {
       System.err.println("Exception when calling ExperimentalEndpointsApi#listConnectionAccounts");
@@ -577,7 +578,7 @@ public class Example {
     try {
       ApiResponse<List<Object>> response = client
               .experimentalEndpoints
-              .listConnectionAccounts(authorizationId, userId, userSecret)
+              .listConnectionAccounts(connectionId, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -600,7 +601,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **authorizationId** | **UUID**|  | |
+| **connectionId** | **UUID**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 

@@ -37,8 +37,11 @@ module SnapTrade
     # The time the order was executed in the brokerage system. This value is not always available from the brokerage.
     attr_accessor :time_executed
 
-    # Quote currency code for the order.
-    attr_accessor :quote_currency
+    # Price currency code for the order.
+    attr_accessor :price_currency
+
+    # Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+    attr_accessor :price_effect
 
     # The price at which the order was executed.
     attr_accessor :execution_price
@@ -54,28 +57,6 @@ module SnapTrade
     # List of legs that make up the order.
     attr_accessor :legs
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -87,7 +68,8 @@ module SnapTrade
         :'time_in_force' => :'time_in_force',
         :'time_placed' => :'time_placed',
         :'time_executed' => :'time_executed',
-        :'quote_currency' => :'quote_currency',
+        :'price_currency' => :'price_currency',
+        :'price_effect' => :'price_effect',
         :'execution_price' => :'execution_price',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
@@ -106,13 +88,14 @@ module SnapTrade
       {
         :'brokerage_order_id' => :'String',
         :'brokerage_group_order_id' => :'String',
-        :'order_role' => :'String',
+        :'order_role' => :'AccountOrderRecordV2OrderRole',
         :'status' => :'AccountOrderRecordStatus',
         :'order_type' => :'String',
         :'time_in_force' => :'String',
         :'time_placed' => :'Time',
         :'time_executed' => :'Time',
-        :'quote_currency' => :'String',
+        :'price_currency' => :'String',
+        :'price_effect' => :'PriceEffect',
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
@@ -182,8 +165,12 @@ module SnapTrade
         self.time_executed = attributes[:'time_executed']
       end
 
-      if attributes.key?(:'quote_currency')
-        self.quote_currency = attributes[:'quote_currency']
+      if attributes.key?(:'price_currency')
+        self.price_currency = attributes[:'price_currency']
+      end
+
+      if attributes.key?(:'price_effect')
+        self.price_effect = attributes[:'price_effect']
       end
 
       if attributes.key?(:'execution_price')
@@ -213,25 +200,18 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @price_effect.nil?
+        invalid_properties.push('invalid value for "price_effect", price_effect cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      order_role_validator = EnumAttributeValidator.new('String', ["TRIGGER", "CONDITIONAL", "PEER"])
-      return false unless order_role_validator.valid?(@order_role)
+      return false if @price_effect.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] order_role Object to be assigned
-    def order_role=(order_role)
-      validator = EnumAttributeValidator.new('String', ["TRIGGER", "CONDITIONAL", "PEER"])
-      unless validator.valid?(order_role)
-        fail ArgumentError, "invalid value for \"order_role\", must be one of #{validator.allowable_values}."
-      end
-      @order_role = order_role
     end
 
     # Checks equality by comparing each attribute.
@@ -247,7 +227,8 @@ module SnapTrade
           time_in_force == o.time_in_force &&
           time_placed == o.time_placed &&
           time_executed == o.time_executed &&
-          quote_currency == o.quote_currency &&
+          price_currency == o.price_currency &&
+          price_effect == o.price_effect &&
           execution_price == o.execution_price &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
@@ -264,7 +245,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, brokerage_group_order_id, order_role, status, order_type, time_in_force, time_placed, time_executed, quote_currency, execution_price, limit_price, stop_price, trailing_stop, legs].hash
+      [brokerage_order_id, brokerage_group_order_id, order_role, status, order_type, time_in_force, time_placed, time_executed, price_currency, price_effect, execution_price, limit_price, stop_price, trailing_stop, legs].hash
     end
 
     # Builds the object from hash

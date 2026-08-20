@@ -122,6 +122,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'OpeningDate'
         }
         /// <summary>
+        /// Test the property 'FundingDate'
+        /// </summary>
+        [Fact]
+        public void FundingDateTest()
+        {
+            // TODO unit test for the property 'FundingDate'
+        }
+        /// <summary>
         /// Test the property 'SyncStatus'
         /// </summary>
         [Fact]
@@ -138,14 +146,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'RawType'
         }
         /// <summary>
-        /// Test the property 'FundingDate'
-        /// </summary>
-        [Fact]
-        public void FundingDateTest()
-        {
-            // TODO unit test for the property 'FundingDate'
-        }
-        /// <summary>
         /// Test the property 'IsPaper'
         /// </summary>
         [Fact]
@@ -154,20 +154,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'IsPaper'
         }
         /// <summary>
-        /// Test the property 'MarketValue'
+        /// Test the property 'NetValue'
         /// </summary>
         [Fact]
-        public void MarketValueTest()
+        public void NetValueTest()
         {
-            // TODO unit test for the property 'MarketValue'
-        }
-        /// <summary>
-        /// Test the property 'Balance'
-        /// </summary>
-        [Fact]
-        public void BalanceTest()
-        {
-            // TODO unit test for the property 'Balance'
+            // TODO unit test for the property 'NetValue'
         }
 
     }

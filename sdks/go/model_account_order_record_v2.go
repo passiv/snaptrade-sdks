@@ -22,8 +22,7 @@ type AccountOrderRecordV2 struct {
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
 	// The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
 	BrokerageGroupOrderId NullableString `json:"brokerage_group_order_id,omitempty"`
-	// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
-	OrderRole NullableString `json:"order_role,omitempty"`
+	OrderRole NullableAccountOrderRecordV2OrderRoleNullable `json:"order_role,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
 	// The type of order placed.   - `MARKET`   - `LIMIT`   - `STOP`   - `STOP_LIMIT` 
 	OrderType NullableString `json:"order_type,omitempty"`
@@ -33,8 +32,10 @@ type AccountOrderRecordV2 struct {
 	TimePlaced *time.Time `json:"time_placed,omitempty"`
 	// The time the order was executed in the brokerage system. This value is not always available from the brokerage.
 	TimeExecuted NullableTime `json:"time_executed,omitempty"`
-	// Quote currency code for the order.
-	QuoteCurrency *string `json:"quote_currency,omitempty"`
+	// Price currency code for the order.
+	PriceCurrency *string `json:"price_currency,omitempty"`
+	// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+	PriceEffect string `json:"price_effect"`
 	// The price at which the order was executed.
 	ExecutionPrice NullableFloat64 `json:"execution_price,omitempty"`
 	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
@@ -53,8 +54,9 @@ type _AccountOrderRecordV2 AccountOrderRecordV2
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrderRecordV2() *AccountOrderRecordV2 {
+func NewAccountOrderRecordV2(priceEffect string) *AccountOrderRecordV2 {
 	this := AccountOrderRecordV2{}
+	this.PriceEffect = priceEffect
 	return &this
 }
 
@@ -141,9 +143,9 @@ func (o *AccountOrderRecordV2) UnsetBrokerageGroupOrderId() {
 }
 
 // GetOrderRole returns the OrderRole field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecordV2) GetOrderRole() string {
+func (o *AccountOrderRecordV2) GetOrderRole() AccountOrderRecordV2OrderRoleNullable {
 	if o == nil || isNil(o.OrderRole.Get()) {
-		var ret string
+		var ret AccountOrderRecordV2OrderRoleNullable
 		return ret
 	}
 	return *o.OrderRole.Get()
@@ -152,7 +154,7 @@ func (o *AccountOrderRecordV2) GetOrderRole() string {
 // GetOrderRoleOk returns a tuple with the OrderRole field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecordV2) GetOrderRoleOk() (*string, bool) {
+func (o *AccountOrderRecordV2) GetOrderRoleOk() (*AccountOrderRecordV2OrderRoleNullable, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -168,8 +170,8 @@ func (o *AccountOrderRecordV2) HasOrderRole() bool {
 	return false
 }
 
-// SetOrderRole gets a reference to the given NullableString and assigns it to the OrderRole field.
-func (o *AccountOrderRecordV2) SetOrderRole(v string) {
+// SetOrderRole gets a reference to the given NullableAccountOrderRecordV2OrderRoleNullable and assigns it to the OrderRole field.
+func (o *AccountOrderRecordV2) SetOrderRole(v AccountOrderRecordV2OrderRoleNullable) {
 	o.OrderRole.Set(&v)
 }
 // SetOrderRoleNil sets the value for OrderRole to be an explicit nil
@@ -362,36 +364,60 @@ func (o *AccountOrderRecordV2) UnsetTimeExecuted() {
 	o.TimeExecuted.Unset()
 }
 
-// GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise.
-func (o *AccountOrderRecordV2) GetQuoteCurrency() string {
-	if o == nil || isNil(o.QuoteCurrency) {
+// GetPriceCurrency returns the PriceCurrency field value if set, zero value otherwise.
+func (o *AccountOrderRecordV2) GetPriceCurrency() string {
+	if o == nil || isNil(o.PriceCurrency) {
 		var ret string
 		return ret
 	}
-	return *o.QuoteCurrency
+	return *o.PriceCurrency
 }
 
-// GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field value if set, nil otherwise
+// GetPriceCurrencyOk returns a tuple with the PriceCurrency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordV2) GetQuoteCurrencyOk() (*string, bool) {
-	if o == nil || isNil(o.QuoteCurrency) {
+func (o *AccountOrderRecordV2) GetPriceCurrencyOk() (*string, bool) {
+	if o == nil || isNil(o.PriceCurrency) {
     return nil, false
 	}
-	return o.QuoteCurrency, true
+	return o.PriceCurrency, true
 }
 
-// HasQuoteCurrency returns a boolean if a field has been set.
-func (o *AccountOrderRecordV2) HasQuoteCurrency() bool {
-	if o != nil && !isNil(o.QuoteCurrency) {
+// HasPriceCurrency returns a boolean if a field has been set.
+func (o *AccountOrderRecordV2) HasPriceCurrency() bool {
+	if o != nil && !isNil(o.PriceCurrency) {
 		return true
 	}
 
 	return false
 }
 
-// SetQuoteCurrency gets a reference to the given string and assigns it to the QuoteCurrency field.
-func (o *AccountOrderRecordV2) SetQuoteCurrency(v string) {
-	o.QuoteCurrency = &v
+// SetPriceCurrency gets a reference to the given string and assigns it to the PriceCurrency field.
+func (o *AccountOrderRecordV2) SetPriceCurrency(v string) {
+	o.PriceCurrency = &v
+}
+
+// GetPriceEffect returns the PriceEffect field value
+func (o *AccountOrderRecordV2) GetPriceEffect() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.PriceEffect
+}
+
+// GetPriceEffectOk returns a tuple with the PriceEffect field value
+// and a boolean to check if the value has been set.
+func (o *AccountOrderRecordV2) GetPriceEffectOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.PriceEffect, true
+}
+
+// SetPriceEffect sets field value
+func (o *AccountOrderRecordV2) SetPriceEffect(v string) {
+	o.PriceEffect = v
 }
 
 // GetExecutionPrice returns the ExecutionPrice field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -620,8 +646,11 @@ func (o AccountOrderRecordV2) MarshalJSON() ([]byte, error) {
 	if o.TimeExecuted.IsSet() {
 		toSerialize["time_executed"] = o.TimeExecuted.Get()
 	}
-	if !isNil(o.QuoteCurrency) {
-		toSerialize["quote_currency"] = o.QuoteCurrency
+	if !isNil(o.PriceCurrency) {
+		toSerialize["price_currency"] = o.PriceCurrency
+	}
+	if true {
+		toSerialize["price_effect"] = o.PriceEffect
 	}
 	if o.ExecutionPrice.IsSet() {
 		toSerialize["execution_price"] = o.ExecutionPrice.Get()
@@ -664,7 +693,8 @@ func (o *AccountOrderRecordV2) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "time_in_force")
 		delete(additionalProperties, "time_placed")
 		delete(additionalProperties, "time_executed")
-		delete(additionalProperties, "quote_currency")
+		delete(additionalProperties, "price_currency")
+		delete(additionalProperties, "price_effect")
 		delete(additionalProperties, "execution_price")
 		delete(additionalProperties, "limit_price")
 		delete(additionalProperties, "stop_price")

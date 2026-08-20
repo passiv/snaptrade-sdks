@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.ConnectionAccountSyncStatus;
-import com.snaptrade.client.model.DepositAccountBalance;
+import com.snaptrade.client.model.DepositAccountNetValue;
+import com.snaptrade.client.model.DepositAccountSyncStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -134,15 +134,15 @@ public class DepositAccount {
 
   public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
   @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
-  private ConnectionAccountSyncStatus syncStatus;
+  private DepositAccountSyncStatus syncStatus;
 
   public static final String SERIALIZED_NAME_RAW_TYPE = "raw_type";
   @SerializedName(SERIALIZED_NAME_RAW_TYPE)
   private String rawType;
 
-  public static final String SERIALIZED_NAME_BALANCE = "balance";
-  @SerializedName(SERIALIZED_NAME_BALANCE)
-  private DepositAccountBalance balance;
+  public static final String SERIALIZED_NAME_NET_VALUE = "net_value";
+  @SerializedName(SERIALIZED_NAME_NET_VALUE)
+  private DepositAccountNetValue netValue;
 
   public DepositAccount() {
   }
@@ -186,11 +186,11 @@ public class DepositAccount {
   }
 
    /**
-   * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+   * Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
    * @return id
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.")
+  @ApiModelProperty(required = true, value = "Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.")
 
   public UUID getId() {
     return id;
@@ -244,11 +244,11 @@ public class DepositAccount {
   }
 
    /**
-   * A display name for the account. Either assigned by the user or by the brokerage itself.
+   * A display name for the account. Either assigned by the user or by the institution itself.
    * @return displayName
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Chase Total Checking", value = "A display name for the account. Either assigned by the user or by the brokerage itself.")
+  @ApiModelProperty(example = "Chase Total Checking", value = "A display name for the account. Either assigned by the user or by the institution itself.")
 
   public String getDisplayName() {
     return displayName;
@@ -273,11 +273,11 @@ public class DepositAccount {
   }
 
    /**
-   * The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+   * The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;).
    * @return number
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "****4821", required = true, value = "The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.")
+  @ApiModelProperty(example = "****4821", required = true, value = "The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).")
 
   public String getNumber() {
     return number;
@@ -302,11 +302,11 @@ public class DepositAccount {
   }
 
    /**
-   * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+   * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
    * @return institutionAccountId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "88213092", value = "A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.")
+  @ApiModelProperty(example = "88213092", value = "A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.")
 
   public String getInstitutionAccountId() {
     return institutionAccountId;
@@ -331,11 +331,11 @@ public class DepositAccount {
   }
 
    /**
-   * Unique identifier for the institution (brokerage) that holds the account.
+   * Unique identifier for the institution that holds the account.
    * @return institutionId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "a7f0c9d1-2b3e-4f5a-8c6d-9e0f1a2b3c4d", value = "Unique identifier for the institution (brokerage) that holds the account.")
+  @ApiModelProperty(example = "a7f0c9d1-2b3e-4f5a-8c6d-9e0f1a2b3c4d", value = "Unique identifier for the institution that holds the account.")
 
   public UUID getInstitutionId() {
     return institutionId;
@@ -360,11 +360,11 @@ public class DepositAccount {
   }
 
    /**
-   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; &#x60;null&#x60; for all other brokerages.
+   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions.
    * @return openingDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2018-06-04T00:00Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; `null` for all other brokerages.")
+  @ApiModelProperty(example = "2018-06-04T00:00Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions.")
 
   public OffsetDateTime getOpeningDate() {
     return openingDate;
@@ -379,7 +379,7 @@ public class DepositAccount {
   }
 
 
-  public DepositAccount syncStatus(ConnectionAccountSyncStatus syncStatus) {
+  public DepositAccount syncStatus(DepositAccountSyncStatus syncStatus) {
     
     
     
@@ -395,12 +395,12 @@ public class DepositAccount {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public ConnectionAccountSyncStatus getSyncStatus() {
+  public DepositAccountSyncStatus getSyncStatus() {
     return syncStatus;
   }
 
 
-  public void setSyncStatus(ConnectionAccountSyncStatus syncStatus) {
+  public void setSyncStatus(DepositAccountSyncStatus syncStatus) {
     
     
     
@@ -418,11 +418,11 @@ public class DepositAccount {
   }
 
    /**
-   * The account type as provided by the brokerage.
+   * The account type as provided by the institution.
    * @return rawType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "CHECKING", value = "The account type as provided by the brokerage.")
+  @ApiModelProperty(example = "CHECKING", value = "The account type as provided by the institution.")
 
   public String getRawType() {
     return rawType;
@@ -437,32 +437,32 @@ public class DepositAccount {
   }
 
 
-  public DepositAccount balance(DepositAccountBalance balance) {
+  public DepositAccount netValue(DepositAccountNetValue netValue) {
     
     
     
     
-    this.balance = balance;
+    this.netValue = netValue;
     return this;
   }
 
    /**
-   * Get balance
-   * @return balance
+   * Get netValue
+   * @return netValue
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public DepositAccountBalance getBalance() {
-    return balance;
+  public DepositAccountNetValue getNetValue() {
+    return netValue;
   }
 
 
-  public void setBalance(DepositAccountBalance balance) {
+  public void setNetValue(DepositAccountNetValue netValue) {
     
     
     
-    this.balance = balance;
+    this.netValue = netValue;
   }
 
   /**
@@ -530,7 +530,7 @@ public class DepositAccount {
         Objects.equals(this.openingDate, depositAccount.openingDate) &&
         Objects.equals(this.syncStatus, depositAccount.syncStatus) &&
         Objects.equals(this.rawType, depositAccount.rawType) &&
-        Objects.equals(this.balance, depositAccount.balance)&&
+        Objects.equals(this.netValue, depositAccount.netValue)&&
         Objects.equals(this.additionalProperties, depositAccount.additionalProperties);
   }
 
@@ -540,7 +540,7 @@ public class DepositAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, connectionId, displayName, number, institutionAccountId, institutionId, openingDate, syncStatus, rawType, balance, additionalProperties);
+    return Objects.hash(kind, id, connectionId, displayName, number, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -564,7 +564,7 @@ public class DepositAccount {
     sb.append("    openingDate: ").append(toIndentedString(openingDate)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
-    sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
+    sb.append("    netValue: ").append(toIndentedString(netValue)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -598,7 +598,7 @@ public class DepositAccount {
     openapiFields.add("opening_date");
     openapiFields.add("sync_status");
     openapiFields.add("raw_type");
-    openapiFields.add("balance");
+    openapiFields.add("net_value");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -647,13 +647,13 @@ public class DepositAccount {
         throw new IllegalArgumentException(String.format("Expected the field `institution_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_id").toString()));
       }
       // validate the required field `sync_status`
-      ConnectionAccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
+      DepositAccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
       }
-      // validate the optional field `balance`
-      if (jsonObj.get("balance") != null && !jsonObj.get("balance").isJsonNull()) {
-        DepositAccountBalance.validateJsonObject(jsonObj.getAsJsonObject("balance"));
+      // validate the optional field `net_value`
+      if (jsonObj.get("net_value") != null && !jsonObj.get("net_value").isJsonNull()) {
+        DepositAccountNetValue.validateJsonObject(jsonObj.getAsJsonObject("net_value"));
       }
   }
 

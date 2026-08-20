@@ -280,10 +280,10 @@ operation_parameter_map = {
             },
         ]
     },
-    '/connections/{authorizationId}/accounts-GET': {
+    '/connections/{connectionId}/accounts-GET': {
         'parameters': [
             {
-                'name': 'authorizationId'
+                'name': 'connectionId'
             },
         ]
     },

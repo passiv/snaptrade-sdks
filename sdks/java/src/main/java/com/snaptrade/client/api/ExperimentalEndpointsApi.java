@@ -44,8 +44,8 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
         }
     }
     public class ListConnectionAccountsRequestBuilder extends ListConnectionAccountsRequestBuilderGenerated {
-        public ListConnectionAccountsRequestBuilder(UUID authorizationId, String userId, String userSecret) {
-            super(authorizationId, userId, userSecret);
+        public ListConnectionAccountsRequestBuilder(UUID connectionId, String userId, String userSecret) {
+            super(connectionId, userId, userSecret);
         }
     }
     public class ListSubscriptionsRequestBuilder extends ListSubscriptionsRequestBuilderGenerated {

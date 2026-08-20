@@ -17,8 +17,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.ConnectionAccountSyncStatus;
-import com.snaptrade.client.model.DepositAccountBalance;
+import com.snaptrade.client.model.DepositAccountNetValue;
+import com.snaptrade.client.model.DepositAccountSyncStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -124,11 +124,11 @@ public class DepositAccountTest {
     }
 
     /**
-     * Test the property 'balance'
+     * Test the property 'netValue'
      */
     @Test
-    public void balanceTest() {
-        // TODO: test balance
+    public void netValueTest() {
+        // TODO: test netValue
     }
 
 }
