@@ -2621,7 +2621,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookPayload"
+              $ref: "#/components/schemas/WebhookBase"
       responses:
         "200":
           description: Return a 200 status to indicate that the connection was successful
@@ -2638,7 +2638,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookPayload"
+              $ref: "#/components/schemas/WebhookBase"
       responses:
         "200":
           description:
@@ -2695,7 +2695,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookPayload"
+              $ref: "#/components/schemas/WebhookBase"
       responses:
         "200":
           description:
@@ -2716,7 +2716,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookPayload"
+              $ref: "#/components/schemas/WebhookBase"
       responses:
         "200":
           description:
@@ -2737,7 +2737,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookPayload"
+              $ref: "#/components/schemas/WebhookBase"
       responses:
         "200":
           description: Return a 200 status to indicate that the update was successful
@@ -2754,7 +2754,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WebhookPayload"
+              $ref: "#/components/schemas/WebhookBase"
       responses:
         "200":
           description: Return a 200 status to indicate that the update was successful
@@ -7181,11 +7181,6 @@ components:
         name:
           type: string
           example: Traditional Brokerage
-    WebhookPayload:
-      description: An API-key webhook or an OAuth application webhook.
-      anyOf:
-        - $ref: "#/components/schemas/WebhookBase"
-        - $ref: "#/components/schemas/OAuthWebhookBase"
     WebhookBase:
       description: The API-key webhook content.
       type: object

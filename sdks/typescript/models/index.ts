@@ -115,6 +115,7 @@ export * from './mutual-fund-instrument';
 export * from './net-contributions';
 export * from './net-dividend';
 export * from './notional-value';
+export * from './oauth-webhook-base';
 export * from './option-brokerage-symbol';
 export * from './option-chain-inner';
 export * from './option-chain-inner-chain-per-root-inner';

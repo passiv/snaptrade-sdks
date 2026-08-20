@@ -11487,6 +11487,79 @@ components:
           x-konfig-original-example: Traditional Brokerage
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageType-properties-name
       type: object
+    OAuthWebhookBase:
+      additionalProperties: true
+      description: The versioned webhook content sent to an authorized OAuth application.
+      properties:
+        schemaVersion:
+          enum:
+          - oauth_v1
+          type: string
+        webhookId:
+          example: 06fe1fd7-fc50-43a7-b564-8a2c5f3bab44
+          format: uuid
+          type: string
+          x-konfig-original-example: 06fe1fd7-fc50-43a7-b564-8a2c5f3bab44
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-webhookId
+        oauthClientId:
+          description: The OAuth client ID of the application receiving the webhook.
+          example: portfolio-app
+          type: string
+          x-konfig-original-example: portfolio-app
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-oauthClientId
+        eventTimestamp:
+          example: 2026-08-18T14:31:55.858Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2026-08-18T14:31:55.858Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-eventTimestamp
+        userId:
+          description: "The SnapTrade Personal user UUID, matching `sub.snaptrade_user_id`\
+            \ in the OAuth token response."
+          example: b5980c55-0071-4b1d-b275-fefc2a497408
+          format: uuid
+          type: string
+          x-konfig-original-example: b5980c55-0071-4b1d-b275-fefc2a497408
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-userId
+        eventType:
+          example: CONNECTION_ADDED
+          type: string
+          x-konfig-original-example: CONNECTION_ADDED
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-eventType
+        accountId:
+          example: 83d70abb-3d5f-40bb-98b3-d56300f1281b
+          format: uuid
+          type: string
+          x-konfig-original-example: 83d70abb-3d5f-40bb-98b3-d56300f1281b
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-accountId
+        connectionId:
+          example: 868470ff-c2df-41de-b082-9d6f1f207daa
+          format: uuid
+          type: string
+          x-konfig-original-example: 868470ff-c2df-41de-b082-9d6f1f207daa
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-connectionId
+        brokerageId:
+          example: 9e0fb25b-4cdd-4841-9507-c8aa19f59d63
+          format: uuid
+          type: string
+          x-konfig-original-example: 9e0fb25b-4cdd-4841-9507-c8aa19f59d63
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-brokerageId
+        connectionAttemptedResult:
+          example: SUCCESS
+          type: string
+          x-konfig-original-example: SUCCESS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-connectionAttemptedResult
+        details:
+          additionalProperties: true
+          type: object
+      required:
+      - eventTimestamp
+      - eventType
+      - oauthClientId
+      - schemaVersion
+      - userId
+      - webhookId
+      type: object
     encryptedResponse:
       additionalProperties: false
       description: |
@@ -13761,6 +13834,42 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-WebhookBase-properties-userId:
       example: external_user@test.com
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-webhookId:
+      example: 06fe1fd7-fc50-43a7-b564-8a2c5f3bab44
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-oauthClientId:
+      example: portfolio-app
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-eventTimestamp:
+      example: 2026-08-18T14:31:55.858Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-userId:
+      example: b5980c55-0071-4b1d-b275-fefc2a497408
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-eventType:
+      example: CONNECTION_ADDED
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-accountId:
+      example: 83d70abb-3d5f-40bb-98b3-d56300f1281b
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-connectionId:
+      example: 868470ff-c2df-41de-b082-9d6f1f207daa
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-brokerageId:
+      example: 9e0fb25b-4cdd-4841-9507-c8aa19f59d63
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-connectionAttemptedResult:
+      example: SUCCESS
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-encryptedResponse-properties-encryptedSharedKey:

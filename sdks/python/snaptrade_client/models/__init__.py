@@ -148,6 +148,8 @@ from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
 from snaptrade_client.model.notional_value import NotionalValue
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
+from snaptrade_client.model.o_auth_webhook_base import OAuthWebhookBase
+from snaptrade_client.model.o_auth_webhook_base_details import OAuthWebhookBaseDetails
 from snaptrade_client.model.option_brokerage_symbol import OptionBrokerageSymbol
 from snaptrade_client.model.option_chain import OptionChain
 from snaptrade_client.model.option_chain_item import OptionChainItem
