@@ -66,17 +66,17 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="DepositAccount" /> class.
         /// </summary>
         /// <param name="kind">Discriminator for the account kind. (required).</param>
-        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
+        /// <param name="id">Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="connectionId">Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. (required).</param>
-        /// <param name="displayName">A display name for the account. Either assigned by the user or by the brokerage itself..</param>
-        /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. (required).</param>
-        /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections..</param>
-        /// <param name="institutionId">Unique identifier for the institution (brokerage) that holds the account..</param>
-        /// <param name="openingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; &#x60;null&#x60; for all other brokerages..</param>
+        /// <param name="displayName">A display name for the account. Either assigned by the user or by the institution itself..</param>
+        /// <param name="number">The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). (required).</param>
+        /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections..</param>
+        /// <param name="institutionId">Unique identifier for the institution that holds the account..</param>
+        /// <param name="openingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions..</param>
         /// <param name="syncStatus">syncStatus (required).</param>
-        /// <param name="rawType">The account type as provided by the brokerage..</param>
-        /// <param name="balance">balance.</param>
-        public DepositAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string number = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), DepositAccountBalance balance = default(DepositAccountBalance)) : base()
+        /// <param name="rawType">The account type as provided by the institution..</param>
+        /// <param name="netValue">netValue.</param>
+        public DepositAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string number = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), DepositAccountSyncStatus syncStatus = default(DepositAccountSyncStatus), string rawType = default(string), DepositAccountNetValue netValue = default(DepositAccountNetValue)) : base()
         {
             this.Kind = kind;
             // to ensure "id" is required (not null)
@@ -108,14 +108,14 @@ namespace SnapTrade.Net.Model
             this.InstitutionId = institutionId;
             this.OpeningDate = openingDate;
             this.RawType = rawType;
-            this.Balance = balance;
+            this.NetValue = netValue;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+        /// Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
         /// </summary>
-        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
+        /// <value>Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.</value>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
         public string Id { get; set; }
 
@@ -127,37 +127,37 @@ namespace SnapTrade.Net.Model
         public string ConnectionId { get; set; }
 
         /// <summary>
-        /// A display name for the account. Either assigned by the user or by the brokerage itself.
+        /// A display name for the account. Either assigned by the user or by the institution itself.
         /// </summary>
-        /// <value>A display name for the account. Either assigned by the user or by the brokerage itself.</value>
+        /// <value>A display name for the account. Either assigned by the user or by the institution itself.</value>
         [DataMember(Name = "display_name", EmitDefaultValue = true)]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+        /// The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;).
         /// </summary>
-        /// <value>The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.</value>
+        /// <value>The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;).</value>
         [DataMember(Name = "number", IsRequired = true, EmitDefaultValue = true)]
         public string Number { get; set; }
 
         /// <summary>
-        /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+        /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
         /// </summary>
-        /// <value>A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.</value>
+        /// <value>A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.</value>
         [DataMember(Name = "institution_account_id", EmitDefaultValue = true)]
         public string InstitutionAccountId { get; set; }
 
         /// <summary>
-        /// Unique identifier for the institution (brokerage) that holds the account.
+        /// Unique identifier for the institution that holds the account.
         /// </summary>
-        /// <value>Unique identifier for the institution (brokerage) that holds the account.</value>
+        /// <value>Unique identifier for the institution that holds the account.</value>
         [DataMember(Name = "institution_id", EmitDefaultValue = false)]
         public string InstitutionId { get; set; }
 
         /// <summary>
-        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; &#x60;null&#x60; for all other brokerages.
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions.
         /// </summary>
-        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; &#x60;null&#x60; for all other brokerages.</value>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions.</value>
         [DataMember(Name = "opening_date", EmitDefaultValue = true)]
         public DateTime? OpeningDate { get; set; }
 
@@ -165,20 +165,20 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets SyncStatus
         /// </summary>
         [DataMember(Name = "sync_status", IsRequired = true, EmitDefaultValue = true)]
-        public ConnectionAccountSyncStatus SyncStatus { get; set; }
+        public DepositAccountSyncStatus SyncStatus { get; set; }
 
         /// <summary>
-        /// The account type as provided by the brokerage.
+        /// The account type as provided by the institution.
         /// </summary>
-        /// <value>The account type as provided by the brokerage.</value>
+        /// <value>The account type as provided by the institution.</value>
         [DataMember(Name = "raw_type", EmitDefaultValue = true)]
         public string RawType { get; set; }
 
         /// <summary>
-        /// Gets or Sets Balance
+        /// Gets or Sets NetValue
         /// </summary>
-        [DataMember(Name = "balance", EmitDefaultValue = true)]
-        public DepositAccountBalance Balance { get; set; }
+        [DataMember(Name = "net_value", EmitDefaultValue = true)]
+        public DepositAccountNetValue NetValue { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -205,7 +205,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OpeningDate: ").Append(OpeningDate).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  RawType: ").Append(RawType).Append("\n");
-            sb.Append("  Balance: ").Append(Balance).Append("\n");
+            sb.Append("  NetValue: ").Append(NetValue).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -292,9 +292,9 @@ namespace SnapTrade.Net.Model
                     this.RawType.Equals(input.RawType))
                 ) && base.Equals(input) && 
                 (
-                    this.Balance == input.Balance ||
-                    (this.Balance != null &&
-                    this.Balance.Equals(input.Balance))
+                    this.NetValue == input.NetValue ||
+                    (this.NetValue != null &&
+                    this.NetValue.Equals(input.NetValue))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -345,9 +345,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.RawType.GetHashCode();
                 }
-                if (this.Balance != null)
+                if (this.NetValue != null)
                 {
-                    hashCode = (hashCode * 59) + this.Balance.GetHashCode();
+                    hashCode = (hashCode * 59) + this.NetValue.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

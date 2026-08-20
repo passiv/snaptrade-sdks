@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.ConnectionAccountSyncStatus;
-import com.snaptrade.client.model.InvestmentAccountMarketValue;
+import com.snaptrade.client.model.InvestmentAccountNetValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -108,6 +108,14 @@ public class InvestmentAccountTest {
     }
 
     /**
+     * Test the property 'fundingDate'
+     */
+    @Test
+    public void fundingDateTest() {
+        // TODO: test fundingDate
+    }
+
+    /**
      * Test the property 'syncStatus'
      */
     @Test
@@ -124,14 +132,6 @@ public class InvestmentAccountTest {
     }
 
     /**
-     * Test the property 'fundingDate'
-     */
-    @Test
-    public void fundingDateTest() {
-        // TODO: test fundingDate
-    }
-
-    /**
      * Test the property 'isPaper'
      */
     @Test
@@ -140,11 +140,11 @@ public class InvestmentAccountTest {
     }
 
     /**
-     * Test the property 'marketValue'
+     * Test the property 'netValue'
      */
     @Test
-    public void marketValueTest() {
-        // TODO: test marketValue
+    public void netValueTest() {
+        // TODO: test netValue
     }
 
 }

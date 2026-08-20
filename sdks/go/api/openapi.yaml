@@ -2774,7 +2774,7 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols
-  /connections/{authorizationId}/accounts:
+  /connections/{connectionId}/accounts:
     get:
       description: |
         Experimental and subject to change without notice.
@@ -2783,16 +2783,16 @@ paths:
 
         Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
-        On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total balance (`market_value` for `investment`, `balance` for `deposit`) live from the brokerage on each call, along with funding date for `investment` accounts.
+        On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
-        On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+        On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
       operationId: Connections_listConnectionAccounts
       parameters:
       - explode: false
         in: path
-        name: authorizationId
+        name: connectionId
         required: true
         schema:
           $ref: '#/components/schemas/BrokerageAuthID'
@@ -2837,7 +2837,7 @@ paths:
       tags:
       - Experimental endpoints
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--connections-authorizationId-accounts
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts
   /brokerages:
     get:
       description: Returns a list of all defined Brokerage objects.
@@ -3692,8 +3692,8 @@ components:
     InvestmentAccount:
       additionalProperties: true
       description: |
-        An investment/brokerage account under a connection. `opening_date`,
-        `funding_date`, and `market_value` are real-time or cached depending
+        An investment account under a connection. `opening_date`,
+        `funding_date`, and `net_value` are real-time or cached depending
         on the caller's plan -- see `Connections_listConnectionAccounts`.
       properties:
         kind:
@@ -3707,7 +3707,7 @@ components:
         id:
           allOf:
           - $ref: '#/components/schemas/AccountID'
-          description: Unique identifier for the connected brokerage account. This
+          description: Unique identifier for the connected institution account. This
             is the UUID used to reference the account in SnapTrade.
         connection_id:
           description: Unique identifier for the connection (brokerage_authorization_id).
@@ -3719,31 +3719,31 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
         display_name:
           description: A display name for the account. Either assigned by the user
-            or by the brokerage itself.
+            or by the institution itself.
           example: Robinhood Individual
           nullable: true
           type: string
           x-konfig-original-example: Robinhood Individual
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-display_name
         number:
-          description: "The account number assigned by the brokerage. For some brokerages,\
-            \ this field may be masked for security reasons."
-          example: Q6542138443
+          description: "The account number assigned by the institution, masked to\
+            \ the last 4 characters (e.g. `****8443`)."
+          example: '****8443'
           type: string
-          x-konfig-original-example: Q6542138443
+          x-konfig-original-example: '****8443'
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-number
         institution_account_id:
           description: "A stable and unique account identifier provided by the institution.\
             \ Will be set to null if not provided. When present, can be used to check\
-            \ if a user has connected the same brokerage account across multiple connections."
+            \ if a user has connected the same institution account across multiple\
+            \ connections."
           example: "54953432"
           nullable: true
           type: string
           x-konfig-original-example: "54953432"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-institution_account_id
         institution_id:
-          description: Unique identifier for the institution (brokerage) that holds
-            the account.
+          description: Unique identifier for the institution that holds the account.
           example: b6e1a9f0-6e2a-4c37-9b0a-6f1e2d3c4b5a
           format: uuid
           type: string
@@ -3751,35 +3751,37 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-institution_id
         opening_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was opened at the brokerage. Only\
-            \ populated for brokerages that expose this data (Tastytrade, eToro, moomoo,\
-            \ Public, and Unlok); `null` for all other brokerages."
+            \ format indicating when the account was opened at the institution. Only\
+            \ populated for institutions that expose this data; `null` for all other\
+            \ institutions. See [supported institutions](https://support.snaptrade.com/brokerages)\
+            \ for the full list."
           example: 2024-07-20T09:30:00Z
           format: date-time
           nullable: true
           type: string
           x-konfig-original-example: 2024-07-20T09:30:00.000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-opening_date
-        sync_status:
-          $ref: '#/components/schemas/ConnectionAccountSyncStatus'
-        raw_type:
-          description: The account type as provided by the brokerage.
-          example: Margin
-          nullable: true
-          type: string
-          x-konfig-original-example: Margin
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type
         funding_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was funded. Only populated for brokerages\
-            \ that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok);\
-            \ `null` for all other brokerages."
+            \ format indicating when the account was funded. Only populated for institutions\
+            \ that expose this data; `null` for all other institutions. See [supported\
+            \ institutions](https://support.snaptrade.com/brokerages) for the full\
+            \ list."
           example: 2024-07-25T12:00:00Z
           format: date-time
           nullable: true
           type: string
           x-konfig-original-example: 2024-07-25T12:00:00.000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-funding_date
+        sync_status:
+          $ref: '#/components/schemas/ConnectionAccountSyncStatus'
+        raw_type:
+          description: The account type as provided by the institution.
+          example: Margin
+          nullable: true
+          type: string
+          x-konfig-original-example: Margin
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type
         is_paper:
           description: Indicates whether the account is a paper (simulated) trading
             account.
@@ -3787,8 +3789,8 @@ components:
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-is_paper
-        market_value:
-          $ref: '#/components/schemas/InvestmentAccount_market_value'
+        net_value:
+          $ref: '#/components/schemas/InvestmentAccount_net_value'
       required:
       - connection_id
       - id
@@ -3813,7 +3815,7 @@ components:
         id:
           allOf:
           - $ref: '#/components/schemas/AccountID'
-          description: Unique identifier for the connected brokerage account. This
+          description: Unique identifier for the connected institution account. This
             is the UUID used to reference the account in SnapTrade.
         connection_id:
           description: Unique identifier for the connection (brokerage_authorization_id).
@@ -3825,15 +3827,15 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
         display_name:
           description: A display name for the account. Either assigned by the user
-            or by the brokerage itself.
+            or by the institution itself.
           example: Chase Total Checking
           nullable: true
           type: string
           x-konfig-original-example: Chase Total Checking
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-display_name
         number:
-          description: "The account number assigned by the brokerage. For some brokerages,\
-            \ this field may be masked for security reasons."
+          description: "The account number assigned by the institution, masked to\
+            \ the last 4 characters (e.g. `****4821`)."
           example: '****4821'
           type: string
           x-konfig-original-example: '****4821'
@@ -3841,15 +3843,15 @@ components:
         institution_account_id:
           description: "A stable and unique account identifier provided by the institution.\
             \ Will be set to null if not provided. When present, can be used to check\
-            \ if a user has connected the same brokerage account across multiple connections."
+            \ if a user has connected the same institution account across multiple\
+            \ connections."
           example: "88213092"
           nullable: true
           type: string
           x-konfig-original-example: "88213092"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-institution_account_id
         institution_id:
-          description: Unique identifier for the institution (brokerage) that holds
-            the account.
+          description: Unique identifier for the institution that holds the account.
           example: a7f0c9d1-2b3e-4f5a-8c6d-9e0f1a2b3c4d
           format: uuid
           type: string
@@ -3857,9 +3859,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-institution_id
         opening_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was opened at the brokerage. Only\
-            \ populated for brokerages that expose this data; `null` for all other\
-            \ brokerages."
+            \ format indicating when the account was opened at the institution. Only\
+            \ populated for institutions that expose this data; `null` for all other\
+            \ institutions."
           example: 2018-06-04T00:00:00Z
           format: date-time
           nullable: true
@@ -3867,16 +3869,16 @@ components:
           x-konfig-original-example: 2018-06-04T00:00:00.000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-opening_date
         sync_status:
-          $ref: '#/components/schemas/ConnectionAccountSyncStatus'
+          $ref: '#/components/schemas/DepositAccountSyncStatus'
         raw_type:
-          description: The account type as provided by the brokerage.
+          description: The account type as provided by the institution.
           example: CHECKING
           nullable: true
           type: string
           x-konfig-original-example: CHECKING
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-raw_type
-        balance:
-          $ref: '#/components/schemas/DepositAccount_balance'
+        net_value:
+          $ref: '#/components/schemas/DepositAccount_net_value'
       required:
       - connection_id
       - id
@@ -3887,10 +3889,12 @@ components:
     ConnectionAccountSyncStatus:
       additionalProperties: true
       description: |
-        Contains status updates for the account sync process between SnapTrade and the brokerage,
-        used only by `Connections_listConnectionAccounts`. Each property is optional -- a brokerage
-        may not report sync status for every data type. `orders`/`positions`/`balances` are the
-        timestamp of the last successful sync of that data type (null if never synced).
+        Contains status updates for the account sync process between SnapTrade and the institution,
+        used by `InvestmentAccount` in `Connections_listConnectionAccounts`. Each property is optional
+        -- an institution may not report sync status for every data type. `orders`/`positions`/`balances`
+        are the timestamp of the last successful sync of that data type (null if never synced). See
+        `DepositAccountSyncStatus` for the deposit-account counterpart, which omits `orders`/`positions`
+        since deposit accounts don't place orders or hold positions.
       properties:
         transactions:
           $ref: '#/components/schemas/TransactionsStatus'
@@ -3923,6 +3927,30 @@ components:
         positions:
           description: The last time positions were successfully synced by SnapTrade.
           nullable: true
+        balances:
+          description: The last time balances were successfully synced by SnapTrade.
+          nullable: true
+    DepositAccountSyncStatus:
+      additionalProperties: true
+      description: |
+        Contains status updates for the account sync process between SnapTrade and the institution,
+        used by `DepositAccount` in `Connections_listConnectionAccounts`. Each property is optional --
+        an institution may not report sync status for every data type. Deposit accounts don't place
+        orders or hold positions, so unlike `ConnectionAccountSyncStatus` this type has no `orders` or
+        `positions` field. `balances` is the timestamp of the last successful sync of that data type
+        (null if never synced).
+      properties:
+        transactions:
+          $ref: '#/components/schemas/TransactionsStatus'
+        balances:
+          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
+      type: object
+      x-konfig-properties:
         balances:
           description: The last time balances were successfully synced by SnapTrade.
           nullable: true
@@ -5252,9 +5280,9 @@ components:
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: "12.34"
-          quote_currency: USD
           order_role: TRIGGER
           time_in_force: DAY
+          price_effect: CREDIT
           execution_price: "12.34"
           stop_price: "12.50"
           legs:
@@ -5288,15 +5316,16 @@ components:
             amount: "0.60"
             type: DOLLAR
           order_type: MARKET
+          price_currency: USD
           status: null
         - brokerage_group_order_id: "1234567890"
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: "12.34"
-          quote_currency: USD
           order_role: TRIGGER
           time_in_force: DAY
+          price_effect: CREDIT
           execution_price: "12.34"
           stop_price: "12.50"
           legs:
@@ -5330,6 +5359,7 @@ components:
             amount: "0.60"
             type: DOLLAR
           order_type: MARKET
+          price_currency: USD
           status: null
       properties:
         orders:
@@ -5349,9 +5379,9 @@ components:
         time_placed: 2024-07-30T22:51:49.746Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         limit_price: "12.34"
-        quote_currency: USD
         order_role: TRIGGER
         time_in_force: DAY
+        price_effect: CREDIT
         execution_price: "12.34"
         stop_price: "12.50"
         legs:
@@ -5385,6 +5415,7 @@ components:
           amount: "0.60"
           type: DOLLAR
         order_type: MARKET
+        price_currency: USD
         status: null
       properties:
         brokerage_order_id:
@@ -5404,17 +5435,7 @@ components:
           x-konfig-original-example: "1234567890"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-brokerage_group_order_id
         order_role:
-          description: |
-            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
-          enum:
-          - TRIGGER
-          - CONDITIONAL
-          - PEER
-          example: TRIGGER
-          nullable: true
-          type: string
-          x-konfig-original-example: TRIGGER
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_role
+          $ref: '#/components/schemas/AccountOrderRecordV2OrderRoleNullable'
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
         order_type:
@@ -5460,12 +5481,22 @@ components:
           type: string
           x-konfig-original-example: 2024-08-05T00:05:57.409Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_executed
-        quote_currency:
-          description: Quote currency code for the order.
+        price_currency:
+          description: Price currency code for the order.
           example: USD
           type: string
           x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-quote_currency
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-price_currency
+        price_effect:
+          description: "Direction of the net order price. CREDIT means cash is received,\
+            \ DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN\
+            \ means the direction could not be determined."
+          enum:
+          - CREDIT
+          - DEBIT
+          - EVEN
+          - UNKNOWN
+          type: string
         execution_price:
           description: The price at which the order was executed.
           example: "12.34"
@@ -5500,12 +5531,28 @@ components:
           items:
             $ref: '#/components/schemas/AccountOrderRecordLeg'
           type: array
+      required:
+      - price_effect
       type: object
       x-konfig-properties:
+        order_role:
+          description: |
+            The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+          nullable: true
         trailing_stop:
           description: "For trailing stop orders, contains the trail configuration.\
             \ Null for all other order types."
           nullable: true
+    AccountOrderRecordV2OrderRole:
+      description: "The role of an order within a complex order group (OCO, OTO, OTOCO)."
+      enum:
+      - TRIGGER
+      - CONDITIONAL
+      - PEER
+      example: TRIGGER
+      type: string
+      x-konfig-original-example: TRIGGER
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2OrderRole
     TrailingStop:
       additionalProperties: true
       description: Trail configuration for trailing stop orders.
@@ -11934,7 +11981,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-number:
-      example: Q6542138443
+      example: '****8443'
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-institution_account_id:
@@ -11949,19 +11996,19 @@ components:
       example: 2024-07-20T09:30:00.000Z
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type:
-      example: Margin
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-funding_date:
       example: 2024-07-25T12:00:00.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type:
+      example: Margin
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-is_paper:
       example: false
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value:
+    konfig-generated-schema-components-schemas-InvestmentAccount-properties-net_value:
       additionalProperties: true
       example:
         amount: 84213.55
@@ -11975,11 +12022,11 @@ components:
           type: string
       type: object
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value-properties-amount:
+    konfig-generated-schema-components-schemas-InvestmentAccount-properties-net_value-properties-amount:
       example: 84213.55
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value-properties-currency:
+    konfig-generated-schema-components-schemas-InvestmentAccount-properties-net_value-properties-currency:
       example: USD
       type: string
       x-do-not-generate: true
@@ -12011,7 +12058,7 @@ components:
       example: CHECKING
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-DepositAccount-properties-balance:
+    konfig-generated-schema-components-schemas-DepositAccount-properties-net_value:
       additionalProperties: true
       example:
         amount: 3120.44
@@ -12025,11 +12072,11 @@ components:
           type: string
       type: object
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-DepositAccount-properties-balance-properties-amount:
+    konfig-generated-schema-components-schemas-DepositAccount-properties-net_value-properties-amount:
       example: 3120.44
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-DepositAccount-properties-balance-properties-currency:
+    konfig-generated-schema-components-schemas-DepositAccount-properties-net_value-properties-currency:
       example: USD
       type: string
       x-do-not-generate: true
@@ -12181,10 +12228,6 @@ components:
       example: "1234567890"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_role:
-      example: TRIGGER
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_type:
       example: MARKET
       type: string
@@ -12201,7 +12244,7 @@ components:
       example: 2024-08-05T00:05:57.409Z
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-quote_currency:
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-price_currency:
       example: USD
       type: string
       x-do-not-generate: true
@@ -12215,6 +12258,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price:
       example: "12.50"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2OrderRole:
+      example: TRIGGER
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TrailingStop-properties-amount:
@@ -15301,23 +15348,23 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--connections-authorizationId-accounts:
+    konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts:
       additionalProperties: true
       properties:
-        authorizationId:
+        connectionId:
           $ref: '#/components/schemas/BrokerageAuthID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
       required:
-      - authorizationId
+      - connectionId
       - userId
       - userSecret
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
-      - authorizationId
+      - connectionId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-get--brokerages:
@@ -15947,6 +15994,17 @@ components:
           x-konfig-original-example: "12345678"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
       type: object
+    AccountOrderRecordV2OrderRoleNullable:
+      description: "The role of an order within a complex order group (OCO, OTO, OTOCO)."
+      enum:
+      - TRIGGER
+      - CONDITIONAL
+      - PEER
+      example: TRIGGER
+      nullable: true
+      type: string
+      x-konfig-original-example: TRIGGER
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2OrderRole
     AccountOrderRecordStatusV2Nullable:
       description: Indicates the status of an order. SnapTrade does a best effort
         to map brokerage statuses to statuses in this enum.
@@ -16549,10 +16607,12 @@ components:
           type: string
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-currency
-    InvestmentAccount_market_value:
+    InvestmentAccount_net_value:
       additionalProperties: true
-      description: Total market value of the account. Null when unknown (e.g. a real-time
-        fetch failed and no cached value exists).
+      description: "Net value of the account -- total market value for investment\
+        \ accounts. Shared across all account kinds so that, e.g., a future `line_of_credit`\
+        \ account can report a negative net value here. Null when unknown (e.g. a\
+        \ real-time fetch failed and no cached value exists)."
       example:
         amount: 84213.55
         currency: USD
@@ -16562,21 +16622,23 @@ components:
           example: 84213.55
           nullable: true
           type: number
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value-properties-amount
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-net_value-properties-amount
         currency:
           example: USD
           nullable: true
           type: string
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value-properties-currency
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-net_value-properties-currency
       type: object
       x-konfig-original-example:
         amount: 84213.55
         currency: USD
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-market_value
-    DepositAccount_balance:
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-net_value
+    DepositAccount_net_value:
       additionalProperties: true
-      description: Cash balance of the account. Null when unknown (e.g. a real-time
-        fetch failed and no cached value exists).
+      description: "Net value of the account -- cash balance for deposit accounts.\
+        \ Shared across all account kinds so that, e.g., a future `line_of_credit`\
+        \ account can report a negative net value here. Null when unknown (e.g. a\
+        \ real-time fetch failed and no cached value exists)."
       example:
         amount: 3120.44
         currency: USD
@@ -16586,17 +16648,17 @@ components:
           example: 3120.44
           nullable: true
           type: number
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-balance-properties-amount
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-net_value-properties-amount
         currency:
           example: USD
           nullable: true
           type: string
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-balance-properties-currency
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-net_value-properties-currency
       type: object
       x-konfig-original-example:
         amount: 3120.44
         currency: USD
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-balance
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-net_value
     OptionQuote_greeks:
       additionalProperties: true
       description: The Greeks for the option contract.

@@ -122,12 +122,20 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'TimeExecuted'
         }
         /// <summary>
-        /// Test the property 'QuoteCurrency'
+        /// Test the property 'PriceCurrency'
         /// </summary>
         [Fact]
-        public void QuoteCurrencyTest()
+        public void PriceCurrencyTest()
         {
-            // TODO unit test for the property 'QuoteCurrency'
+            // TODO unit test for the property 'PriceCurrency'
+        }
+        /// <summary>
+        /// Test the property 'PriceEffect'
+        /// </summary>
+        [Fact]
+        public void PriceEffectTest()
+        {
+            // TODO unit test for the property 'PriceEffect'
         }
         /// <summary>
         /// Test the property 'ExecutionPrice'

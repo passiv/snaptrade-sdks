@@ -6,13 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | Pointer to **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
 **BrokerageGroupOrderId** | Pointer to **NullableString** | The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier.  | [optional] 
-**OrderRole** | Pointer to **NullableString** | The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.  | [optional] 
+**OrderRole** | Pointer to [**NullableAccountOrderRecordV2OrderRoleNullable**](AccountOrderRecordV2OrderRoleNullable.md) |  | [optional] 
 **Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
 **OrderType** | Pointer to **NullableString** | The type of order placed.   - &#x60;MARKET&#x60;   - &#x60;LIMIT&#x60;   - &#x60;STOP&#x60;   - &#x60;STOP_LIMIT&#x60;  | [optional] 
 **TimeInForce** | Pointer to **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;DAY&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.  | [optional] 
 **TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
 **TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
-**QuoteCurrency** | Pointer to **string** | Quote currency code for the order. | [optional] 
+**PriceCurrency** | Pointer to **string** | Price currency code for the order. | [optional] 
+**PriceEffect** | **string** | Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. | 
 **ExecutionPrice** | Pointer to **NullableFloat64** | The price at which the order was executed. | [optional] 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewAccountOrderRecordV2
 
-`func NewAccountOrderRecordV2() *AccountOrderRecordV2`
+`func NewAccountOrderRecordV2(priceEffect string, ) *AccountOrderRecordV2`
 
 NewAccountOrderRecordV2 instantiates a new AccountOrderRecordV2 object
 This constructor will assign default values to properties that have it defined,
@@ -100,20 +101,20 @@ HasBrokerageGroupOrderId returns a boolean if a field has been set.
 UnsetBrokerageGroupOrderId ensures that no value is present for BrokerageGroupOrderId, not even an explicit nil
 ### GetOrderRole
 
-`func (o *AccountOrderRecordV2) GetOrderRole() string`
+`func (o *AccountOrderRecordV2) GetOrderRole() AccountOrderRecordV2OrderRoleNullable`
 
 GetOrderRole returns the OrderRole field if non-nil, zero value otherwise.
 
 ### GetOrderRoleOk
 
-`func (o *AccountOrderRecordV2) GetOrderRoleOk() (*string, bool)`
+`func (o *AccountOrderRecordV2) GetOrderRoleOk() (*AccountOrderRecordV2OrderRoleNullable, bool)`
 
 GetOrderRoleOk returns a tuple with the OrderRole field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrderRole
 
-`func (o *AccountOrderRecordV2) SetOrderRole(v string)`
+`func (o *AccountOrderRecordV2) SetOrderRole(v AccountOrderRecordV2OrderRoleNullable)`
 
 SetOrderRole sets OrderRole field to given value.
 
@@ -278,30 +279,50 @@ HasTimeExecuted returns a boolean if a field has been set.
 `func (o *AccountOrderRecordV2) UnsetTimeExecuted()`
 
 UnsetTimeExecuted ensures that no value is present for TimeExecuted, not even an explicit nil
-### GetQuoteCurrency
+### GetPriceCurrency
 
-`func (o *AccountOrderRecordV2) GetQuoteCurrency() string`
+`func (o *AccountOrderRecordV2) GetPriceCurrency() string`
 
-GetQuoteCurrency returns the QuoteCurrency field if non-nil, zero value otherwise.
+GetPriceCurrency returns the PriceCurrency field if non-nil, zero value otherwise.
 
-### GetQuoteCurrencyOk
+### GetPriceCurrencyOk
 
-`func (o *AccountOrderRecordV2) GetQuoteCurrencyOk() (*string, bool)`
+`func (o *AccountOrderRecordV2) GetPriceCurrencyOk() (*string, bool)`
 
-GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field if it's non-nil, zero value otherwise
+GetPriceCurrencyOk returns a tuple with the PriceCurrency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetQuoteCurrency
+### SetPriceCurrency
 
-`func (o *AccountOrderRecordV2) SetQuoteCurrency(v string)`
+`func (o *AccountOrderRecordV2) SetPriceCurrency(v string)`
 
-SetQuoteCurrency sets QuoteCurrency field to given value.
+SetPriceCurrency sets PriceCurrency field to given value.
 
-### HasQuoteCurrency
+### HasPriceCurrency
 
-`func (o *AccountOrderRecordV2) HasQuoteCurrency() bool`
+`func (o *AccountOrderRecordV2) HasPriceCurrency() bool`
 
-HasQuoteCurrency returns a boolean if a field has been set.
+HasPriceCurrency returns a boolean if a field has been set.
+
+### GetPriceEffect
+
+`func (o *AccountOrderRecordV2) GetPriceEffect() string`
+
+GetPriceEffect returns the PriceEffect field if non-nil, zero value otherwise.
+
+### GetPriceEffectOk
+
+`func (o *AccountOrderRecordV2) GetPriceEffectOk() (*string, bool)`
+
+GetPriceEffectOk returns a tuple with the PriceEffect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPriceEffect
+
+`func (o *AccountOrderRecordV2) SetPriceEffect(v string)`
+
+SetPriceEffect sets PriceEffect field to given value.
+
 
 ### GetExecutionPrice
 

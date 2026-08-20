@@ -5,25 +5,24 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Discriminator for the account kind. | 
-**Id** | **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | 
+**Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
-**DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the brokerage itself. | [optional] 
-**Number** | **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | 
-**InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. | [optional] 
-**InstitutionId** | Pointer to **string** | Unique identifier for the institution (brokerage) that holds the account. | [optional] 
-**OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; &#x60;null&#x60; for all other brokerages. | [optional] 
-**SyncStatus** | [**ConnectionAccountSyncStatus**](ConnectionAccountSyncStatus.md) |  | 
-**RawType** | Pointer to **NullableString** | The account type as provided by the brokerage. | [optional] 
-**FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages. | [optional] 
+**DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
+**Number** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
+**InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 
+**InstitutionId** | Pointer to **string** | Unique identifier for the institution that holds the account. | [optional] 
+**OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. | [optional] 
+**FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list. | [optional] 
+**SyncStatus** | [**DepositAccountSyncStatus**](DepositAccountSyncStatus.md) |  | 
+**RawType** | Pointer to **NullableString** | The account type as provided by the institution. | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
-**MarketValue** | Pointer to [**NullableInvestmentAccountMarketValue**](InvestmentAccountMarketValue.md) |  | [optional] 
-**Balance** | Pointer to [**NullableDepositAccountBalance**](DepositAccountBalance.md) |  | [optional] 
+**NetValue** | Pointer to [**NullableDepositAccountNetValue**](DepositAccountNetValue.md) |  | [optional] 
 
 ## Methods
 
 ### NewConnectionAccount
 
-`func NewConnectionAccount(kind string, id string, connectionId string, number string, syncStatus ConnectionAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
+`func NewConnectionAccount(kind string, id string, connectionId string, number string, syncStatus DepositAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
 
 NewConnectionAccount instantiates a new ConnectionAccount object
 This constructor will assign default values to properties that have it defined,
@@ -248,22 +247,57 @@ HasOpeningDate returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetOpeningDate()`
 
 UnsetOpeningDate ensures that no value is present for OpeningDate, not even an explicit nil
+### GetFundingDate
+
+`func (o *ConnectionAccount) GetFundingDate() time.Time`
+
+GetFundingDate returns the FundingDate field if non-nil, zero value otherwise.
+
+### GetFundingDateOk
+
+`func (o *ConnectionAccount) GetFundingDateOk() (*time.Time, bool)`
+
+GetFundingDateOk returns a tuple with the FundingDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFundingDate
+
+`func (o *ConnectionAccount) SetFundingDate(v time.Time)`
+
+SetFundingDate sets FundingDate field to given value.
+
+### HasFundingDate
+
+`func (o *ConnectionAccount) HasFundingDate() bool`
+
+HasFundingDate returns a boolean if a field has been set.
+
+### SetFundingDateNil
+
+`func (o *ConnectionAccount) SetFundingDateNil(b bool)`
+
+ SetFundingDateNil sets the value for FundingDate to be an explicit nil
+
+### UnsetFundingDate
+`func (o *ConnectionAccount) UnsetFundingDate()`
+
+UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
 ### GetSyncStatus
 
-`func (o *ConnectionAccount) GetSyncStatus() ConnectionAccountSyncStatus`
+`func (o *ConnectionAccount) GetSyncStatus() DepositAccountSyncStatus`
 
 GetSyncStatus returns the SyncStatus field if non-nil, zero value otherwise.
 
 ### GetSyncStatusOk
 
-`func (o *ConnectionAccount) GetSyncStatusOk() (*ConnectionAccountSyncStatus, bool)`
+`func (o *ConnectionAccount) GetSyncStatusOk() (*DepositAccountSyncStatus, bool)`
 
 GetSyncStatusOk returns a tuple with the SyncStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSyncStatus
 
-`func (o *ConnectionAccount) SetSyncStatus(v ConnectionAccountSyncStatus)`
+`func (o *ConnectionAccount) SetSyncStatus(v DepositAccountSyncStatus)`
 
 SetSyncStatus sets SyncStatus field to given value.
 
@@ -303,41 +337,6 @@ HasRawType returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetRawType()`
 
 UnsetRawType ensures that no value is present for RawType, not even an explicit nil
-### GetFundingDate
-
-`func (o *ConnectionAccount) GetFundingDate() time.Time`
-
-GetFundingDate returns the FundingDate field if non-nil, zero value otherwise.
-
-### GetFundingDateOk
-
-`func (o *ConnectionAccount) GetFundingDateOk() (*time.Time, bool)`
-
-GetFundingDateOk returns a tuple with the FundingDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFundingDate
-
-`func (o *ConnectionAccount) SetFundingDate(v time.Time)`
-
-SetFundingDate sets FundingDate field to given value.
-
-### HasFundingDate
-
-`func (o *ConnectionAccount) HasFundingDate() bool`
-
-HasFundingDate returns a boolean if a field has been set.
-
-### SetFundingDateNil
-
-`func (o *ConnectionAccount) SetFundingDateNil(b bool)`
-
- SetFundingDateNil sets the value for FundingDate to be an explicit nil
-
-### UnsetFundingDate
-`func (o *ConnectionAccount) UnsetFundingDate()`
-
-UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
 ### GetIsPaper
 
 `func (o *ConnectionAccount) GetIsPaper() bool`
@@ -358,76 +357,41 @@ and a boolean to check if the value has been set.
 SetIsPaper sets IsPaper field to given value.
 
 
-### GetMarketValue
+### GetNetValue
 
-`func (o *ConnectionAccount) GetMarketValue() InvestmentAccountMarketValue`
+`func (o *ConnectionAccount) GetNetValue() DepositAccountNetValue`
 
-GetMarketValue returns the MarketValue field if non-nil, zero value otherwise.
+GetNetValue returns the NetValue field if non-nil, zero value otherwise.
 
-### GetMarketValueOk
+### GetNetValueOk
 
-`func (o *ConnectionAccount) GetMarketValueOk() (*InvestmentAccountMarketValue, bool)`
+`func (o *ConnectionAccount) GetNetValueOk() (*DepositAccountNetValue, bool)`
 
-GetMarketValueOk returns a tuple with the MarketValue field if it's non-nil, zero value otherwise
+GetNetValueOk returns a tuple with the NetValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMarketValue
+### SetNetValue
 
-`func (o *ConnectionAccount) SetMarketValue(v InvestmentAccountMarketValue)`
+`func (o *ConnectionAccount) SetNetValue(v DepositAccountNetValue)`
 
-SetMarketValue sets MarketValue field to given value.
+SetNetValue sets NetValue field to given value.
 
-### HasMarketValue
+### HasNetValue
 
-`func (o *ConnectionAccount) HasMarketValue() bool`
+`func (o *ConnectionAccount) HasNetValue() bool`
 
-HasMarketValue returns a boolean if a field has been set.
+HasNetValue returns a boolean if a field has been set.
 
-### SetMarketValueNil
+### SetNetValueNil
 
-`func (o *ConnectionAccount) SetMarketValueNil(b bool)`
+`func (o *ConnectionAccount) SetNetValueNil(b bool)`
 
- SetMarketValueNil sets the value for MarketValue to be an explicit nil
+ SetNetValueNil sets the value for NetValue to be an explicit nil
 
-### UnsetMarketValue
-`func (o *ConnectionAccount) UnsetMarketValue()`
+### UnsetNetValue
+`func (o *ConnectionAccount) UnsetNetValue()`
 
-UnsetMarketValue ensures that no value is present for MarketValue, not even an explicit nil
-### GetBalance
-
-`func (o *ConnectionAccount) GetBalance() DepositAccountBalance`
-
-GetBalance returns the Balance field if non-nil, zero value otherwise.
-
-### GetBalanceOk
-
-`func (o *ConnectionAccount) GetBalanceOk() (*DepositAccountBalance, bool)`
-
-GetBalanceOk returns a tuple with the Balance field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBalance
-
-`func (o *ConnectionAccount) SetBalance(v DepositAccountBalance)`
-
-SetBalance sets Balance field to given value.
-
-### HasBalance
-
-`func (o *ConnectionAccount) HasBalance() bool`
-
-HasBalance returns a boolean if a field has been set.
-
-### SetBalanceNil
-
-`func (o *ConnectionAccount) SetBalanceNil(b bool)`
-
- SetBalanceNil sets the value for Balance to be an explicit nil
-
-### UnsetBalance
-`func (o *ConnectionAccount) UnsetBalance()`
-
-UnsetBalance ensures that no value is present for Balance, not even an explicit nil
+UnsetNetValue ensures that no value is present for NetValue, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

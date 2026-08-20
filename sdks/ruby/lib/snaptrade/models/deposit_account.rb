@@ -16,33 +16,33 @@ module SnapTrade
     # Discriminator for the account kind.
     attr_accessor :kind
 
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :id
 
     # Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :connection_id
 
-    # A display name for the account. Either assigned by the user or by the brokerage itself.
+    # A display name for the account. Either assigned by the user or by the institution itself.
     attr_accessor :display_name
 
-    # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+    # The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
     attr_accessor :number
 
-    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
     attr_accessor :institution_account_id
 
-    # Unique identifier for the institution (brokerage) that holds the account.
+    # Unique identifier for the institution that holds the account.
     attr_accessor :institution_id
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; `null` for all other brokerages.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions.
     attr_accessor :opening_date
 
     attr_accessor :sync_status
 
-    # The account type as provided by the brokerage.
+    # The account type as provided by the institution.
     attr_accessor :raw_type
 
-    attr_accessor :balance
+    attr_accessor :net_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -57,7 +57,7 @@ module SnapTrade
         :'opening_date' => :'opening_date',
         :'sync_status' => :'sync_status',
         :'raw_type' => :'raw_type',
-        :'balance' => :'balance'
+        :'net_value' => :'net_value'
       }
     end
 
@@ -77,9 +77,9 @@ module SnapTrade
         :'institution_account_id' => :'String',
         :'institution_id' => :'String',
         :'opening_date' => :'Time',
-        :'sync_status' => :'ConnectionAccountSyncStatus',
+        :'sync_status' => :'DepositAccountSyncStatus',
         :'raw_type' => :'String',
-        :'balance' => :'DepositAccountBalance'
+        :'net_value' => :'DepositAccountNetValue'
       }
     end
 
@@ -90,7 +90,7 @@ module SnapTrade
         :'institution_account_id',
         :'opening_date',
         :'raw_type',
-        :'balance'
+        :'net_value'
       ])
     end
 
@@ -149,8 +149,8 @@ module SnapTrade
         self.raw_type = attributes[:'raw_type']
       end
 
-      if attributes.key?(:'balance')
-        self.balance = attributes[:'balance']
+      if attributes.key?(:'net_value')
+        self.net_value = attributes[:'net_value']
       end
     end
 
@@ -207,7 +207,7 @@ module SnapTrade
           opening_date == o.opening_date &&
           sync_status == o.sync_status &&
           raw_type == o.raw_type &&
-          balance == o.balance
+          net_value == o.net_value
     end
 
     # @see the `==` method
@@ -219,7 +219,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, number, institution_account_id, institution_id, opening_date, sync_status, raw_type, balance].hash
+      [kind, id, connection_id, display_name, number, institution_account_id, institution_id, opening_date, sync_status, raw_type, net_value].hash
     end
 
     # Builds the object from hash

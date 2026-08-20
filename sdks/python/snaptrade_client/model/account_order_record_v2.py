@@ -35,8 +35,42 @@ class AccountOrderRecordV2(
 
 
     class MetaOapg:
+        required = {
+            "price_effect",
+        }
         
         class properties:
+            
+            
+            class price_effect(
+                schemas.EnumBase,
+                schemas.StrSchema
+            ):
+            
+            
+                class MetaOapg:
+                    enum_value_to_name = {
+                        "CREDIT": "CREDIT",
+                        "DEBIT": "DEBIT",
+                        "EVEN": "EVEN",
+                        "UNKNOWN": "UNKNOWN",
+                    }
+                
+                @schemas.classproperty
+                def CREDIT(cls):
+                    return cls("CREDIT")
+                
+                @schemas.classproperty
+                def DEBIT(cls):
+                    return cls("DEBIT")
+                
+                @schemas.classproperty
+                def EVEN(cls):
+                    return cls("EVEN")
+                
+                @schemas.classproperty
+                def UNKNOWN(cls):
+                    return cls("UNKNOWN")
             brokerage_order_id = schemas.StrSchema
             
             
@@ -58,47 +92,10 @@ class AccountOrderRecordV2(
                         *args,
                         _configuration=_configuration,
                     )
-            
-            
-            class order_role(
-                schemas.EnumBase,
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                class MetaOapg:
-                    enum_value_to_name = {
-                        "TRIGGER": "TRIGGER",
-                        "CONDITIONAL": "CONDITIONAL",
-                        "PEER": "PEER",
-                    }
-                
-                @schemas.classproperty
-                def TRIGGER(cls):
-                    return cls("TRIGGER")
-                
-                @schemas.classproperty
-                def CONDITIONAL(cls):
-                    return cls("CONDITIONAL")
-                
-                @schemas.classproperty
-                def PEER(cls):
-                    return cls("PEER")
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'order_role':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
+        
+            @staticmethod
+            def order_role() -> typing.Type['AccountOrderRecordV2OrderRoleNullable']:
+                return AccountOrderRecordV2OrderRoleNullable
         
             @staticmethod
             def status() -> typing.Type['AccountOrderRecordStatus']:
@@ -150,7 +147,7 @@ class AccountOrderRecordV2(
                         *args,
                         _configuration=_configuration,
                     )
-            quote_currency = schemas.StrSchema
+            price_currency = schemas.StrSchema
             
             
             class execution_price(
@@ -254,6 +251,7 @@ class AccountOrderRecordV2(
                 def __getitem__(self, i: int) -> 'AccountOrderRecordLeg':
                     return super().__getitem__(i)
             __annotations__ = {
+                "price_effect": price_effect,
                 "brokerage_order_id": brokerage_order_id,
                 "brokerage_group_order_id": brokerage_group_order_id,
                 "order_role": order_role,
@@ -262,7 +260,7 @@ class AccountOrderRecordV2(
                 "time_in_force": time_in_force,
                 "time_placed": time_placed,
                 "time_executed": time_executed,
-                "quote_currency": quote_currency,
+                "price_currency": price_currency,
                 "execution_price": execution_price,
                 "limit_price": limit_price,
                 "stop_price": stop_price,
@@ -271,6 +269,11 @@ class AccountOrderRecordV2(
             }
         additional_properties = schemas.AnyTypeSchema
     
+    price_effect: MetaOapg.properties.price_effect
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["price_effect"]) -> MetaOapg.properties.price_effect: ...
+    
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
@@ -278,7 +281,7 @@ class AccountOrderRecordV2(
     def __getitem__(self, name: typing_extensions.Literal["brokerage_group_order_id"]) -> MetaOapg.properties.brokerage_group_order_id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["order_role"]) -> MetaOapg.properties.order_role: ...
+    def __getitem__(self, name: typing_extensions.Literal["order_role"]) -> 'AccountOrderRecordV2OrderRoleNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["status"]) -> 'AccountOrderRecordStatus': ...
@@ -296,7 +299,7 @@ class AccountOrderRecordV2(
     def __getitem__(self, name: typing_extensions.Literal["time_executed"]) -> MetaOapg.properties.time_executed: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["quote_currency"]) -> MetaOapg.properties.quote_currency: ...
+    def __getitem__(self, name: typing_extensions.Literal["price_currency"]) -> MetaOapg.properties.price_currency: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["execution_price"]) -> MetaOapg.properties.execution_price: ...
@@ -316,9 +319,12 @@ class AccountOrderRecordV2(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["brokerage_group_order_id"], typing_extensions.Literal["order_role"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["legs"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["price_effect"], typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["brokerage_group_order_id"], typing_extensions.Literal["order_role"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["price_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["legs"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["price_effect"]) -> MetaOapg.properties.price_effect: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_order_id, schemas.Unset]: ...
@@ -327,7 +333,7 @@ class AccountOrderRecordV2(
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage_group_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_group_order_id, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["order_role"]) -> typing.Union[MetaOapg.properties.order_role, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["order_role"]) -> typing.Union['AccountOrderRecordV2OrderRoleNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union['AccountOrderRecordStatus', schemas.Unset]: ...
@@ -345,7 +351,7 @@ class AccountOrderRecordV2(
     def get_item_oapg(self, name: typing_extensions.Literal["time_executed"]) -> typing.Union[MetaOapg.properties.time_executed, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["quote_currency"]) -> typing.Union[MetaOapg.properties.quote_currency, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price_currency"]) -> typing.Union[MetaOapg.properties.price_currency, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["execution_price"]) -> typing.Union[MetaOapg.properties.execution_price, schemas.Unset]: ...
@@ -365,21 +371,22 @@ class AccountOrderRecordV2(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["brokerage_group_order_id"], typing_extensions.Literal["order_role"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["legs"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["price_effect"], typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["brokerage_group_order_id"], typing_extensions.Literal["order_role"], typing_extensions.Literal["status"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["price_currency"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["trailing_stop"], typing_extensions.Literal["legs"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        price_effect: typing.Union[MetaOapg.properties.price_effect, str, ],
         brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, schemas.Unset] = schemas.unset,
         brokerage_group_order_id: typing.Union[MetaOapg.properties.brokerage_group_order_id, None, str, schemas.Unset] = schemas.unset,
-        order_role: typing.Union[MetaOapg.properties.order_role, None, str, schemas.Unset] = schemas.unset,
+        order_role: typing.Union['AccountOrderRecordV2OrderRoleNullable', schemas.Unset] = schemas.unset,
         status: typing.Union['AccountOrderRecordStatus', schemas.Unset] = schemas.unset,
         order_type: typing.Union[MetaOapg.properties.order_type, None, str, schemas.Unset] = schemas.unset,
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, datetime, schemas.Unset] = schemas.unset,
         time_executed: typing.Union[MetaOapg.properties.time_executed, None, str, datetime, schemas.Unset] = schemas.unset,
-        quote_currency: typing.Union[MetaOapg.properties.quote_currency, str, schemas.Unset] = schemas.unset,
+        price_currency: typing.Union[MetaOapg.properties.price_currency, str, schemas.Unset] = schemas.unset,
         execution_price: typing.Union[MetaOapg.properties.execution_price, None, str, schemas.Unset] = schemas.unset,
         limit_price: typing.Union[MetaOapg.properties.limit_price, None, str, schemas.Unset] = schemas.unset,
         stop_price: typing.Union[MetaOapg.properties.stop_price, None, str, schemas.Unset] = schemas.unset,
@@ -391,6 +398,7 @@ class AccountOrderRecordV2(
         return super().__new__(
             cls,
             *args,
+            price_effect=price_effect,
             brokerage_order_id=brokerage_order_id,
             brokerage_group_order_id=brokerage_group_order_id,
             order_role=order_role,
@@ -399,7 +407,7 @@ class AccountOrderRecordV2(
             time_in_force=time_in_force,
             time_placed=time_placed,
             time_executed=time_executed,
-            quote_currency=quote_currency,
+            price_currency=price_currency,
             execution_price=execution_price,
             limit_price=limit_price,
             stop_price=stop_price,
@@ -411,4 +419,5 @@ class AccountOrderRecordV2(
 
 from snaptrade_client.model.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.model.account_order_record_v2_order_role_nullable import AccountOrderRecordV2OrderRoleNullable
 from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable

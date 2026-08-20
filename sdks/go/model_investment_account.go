@@ -16,32 +16,32 @@ import (
 	"time"
 )
 
-// InvestmentAccount An investment/brokerage account under a connection. `opening_date`, `funding_date`, and `market_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts`. 
+// InvestmentAccount An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts`. 
 type InvestmentAccount struct {
 	// Discriminator for the account kind.
 	Kind string `json:"kind"`
-	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+	// Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
 	Id string `json:"id"`
 	// Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
 	ConnectionId string `json:"connection_id"`
-	// A display name for the account. Either assigned by the user or by the brokerage itself.
+	// A display name for the account. Either assigned by the user or by the institution itself.
 	DisplayName NullableString `json:"display_name,omitempty"`
-	// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+	// The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).
 	Number string `json:"number"`
-	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
 	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
-	// Unique identifier for the institution (brokerage) that holds the account.
+	// Unique identifier for the institution that holds the account.
 	InstitutionId *string `json:"institution_id,omitempty"`
-	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
 	OpeningDate NullableTime `json:"opening_date,omitempty"`
-	SyncStatus ConnectionAccountSyncStatus `json:"sync_status"`
-	// The account type as provided by the brokerage.
-	RawType NullableString `json:"raw_type,omitempty"`
-	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
 	FundingDate NullableTime `json:"funding_date,omitempty"`
+	SyncStatus ConnectionAccountSyncStatus `json:"sync_status"`
+	// The account type as provided by the institution.
+	RawType NullableString `json:"raw_type,omitempty"`
 	// Indicates whether the account is a paper (simulated) trading account.
 	IsPaper bool `json:"is_paper"`
-	MarketValue NullableInvestmentAccountMarketValue `json:"market_value,omitempty"`
+	NetValue NullableInvestmentAccountNetValue `json:"net_value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -324,6 +324,48 @@ func (o *InvestmentAccount) UnsetOpeningDate() {
 	o.OpeningDate.Unset()
 }
 
+// GetFundingDate returns the FundingDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvestmentAccount) GetFundingDate() time.Time {
+	if o == nil || isNil(o.FundingDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.FundingDate.Get()
+}
+
+// GetFundingDateOk returns a tuple with the FundingDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvestmentAccount) GetFundingDateOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.FundingDate.Get(), o.FundingDate.IsSet()
+}
+
+// HasFundingDate returns a boolean if a field has been set.
+func (o *InvestmentAccount) HasFundingDate() bool {
+	if o != nil && o.FundingDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFundingDate gets a reference to the given NullableTime and assigns it to the FundingDate field.
+func (o *InvestmentAccount) SetFundingDate(v time.Time) {
+	o.FundingDate.Set(&v)
+}
+// SetFundingDateNil sets the value for FundingDate to be an explicit nil
+func (o *InvestmentAccount) SetFundingDateNil() {
+	o.FundingDate.Set(nil)
+}
+
+// UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
+func (o *InvestmentAccount) UnsetFundingDate() {
+	o.FundingDate.Unset()
+}
+
 // GetSyncStatus returns the SyncStatus field value
 func (o *InvestmentAccount) GetSyncStatus() ConnectionAccountSyncStatus {
 	if o == nil {
@@ -390,48 +432,6 @@ func (o *InvestmentAccount) UnsetRawType() {
 	o.RawType.Unset()
 }
 
-// GetFundingDate returns the FundingDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvestmentAccount) GetFundingDate() time.Time {
-	if o == nil || isNil(o.FundingDate.Get()) {
-		var ret time.Time
-		return ret
-	}
-	return *o.FundingDate.Get()
-}
-
-// GetFundingDateOk returns a tuple with the FundingDate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvestmentAccount) GetFundingDateOk() (*time.Time, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.FundingDate.Get(), o.FundingDate.IsSet()
-}
-
-// HasFundingDate returns a boolean if a field has been set.
-func (o *InvestmentAccount) HasFundingDate() bool {
-	if o != nil && o.FundingDate.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFundingDate gets a reference to the given NullableTime and assigns it to the FundingDate field.
-func (o *InvestmentAccount) SetFundingDate(v time.Time) {
-	o.FundingDate.Set(&v)
-}
-// SetFundingDateNil sets the value for FundingDate to be an explicit nil
-func (o *InvestmentAccount) SetFundingDateNil() {
-	o.FundingDate.Set(nil)
-}
-
-// UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
-func (o *InvestmentAccount) UnsetFundingDate() {
-	o.FundingDate.Unset()
-}
-
 // GetIsPaper returns the IsPaper field value
 func (o *InvestmentAccount) GetIsPaper() bool {
 	if o == nil {
@@ -456,46 +456,46 @@ func (o *InvestmentAccount) SetIsPaper(v bool) {
 	o.IsPaper = v
 }
 
-// GetMarketValue returns the MarketValue field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InvestmentAccount) GetMarketValue() InvestmentAccountMarketValue {
-	if o == nil || isNil(o.MarketValue.Get()) {
-		var ret InvestmentAccountMarketValue
+// GetNetValue returns the NetValue field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InvestmentAccount) GetNetValue() InvestmentAccountNetValue {
+	if o == nil || isNil(o.NetValue.Get()) {
+		var ret InvestmentAccountNetValue
 		return ret
 	}
-	return *o.MarketValue.Get()
+	return *o.NetValue.Get()
 }
 
-// GetMarketValueOk returns a tuple with the MarketValue field value if set, nil otherwise
+// GetNetValueOk returns a tuple with the NetValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InvestmentAccount) GetMarketValueOk() (*InvestmentAccountMarketValue, bool) {
+func (o *InvestmentAccount) GetNetValueOk() (*InvestmentAccountNetValue, bool) {
 	if o == nil {
     return nil, false
 	}
-	return o.MarketValue.Get(), o.MarketValue.IsSet()
+	return o.NetValue.Get(), o.NetValue.IsSet()
 }
 
-// HasMarketValue returns a boolean if a field has been set.
-func (o *InvestmentAccount) HasMarketValue() bool {
-	if o != nil && o.MarketValue.IsSet() {
+// HasNetValue returns a boolean if a field has been set.
+func (o *InvestmentAccount) HasNetValue() bool {
+	if o != nil && o.NetValue.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMarketValue gets a reference to the given NullableInvestmentAccountMarketValue and assigns it to the MarketValue field.
-func (o *InvestmentAccount) SetMarketValue(v InvestmentAccountMarketValue) {
-	o.MarketValue.Set(&v)
+// SetNetValue gets a reference to the given NullableInvestmentAccountNetValue and assigns it to the NetValue field.
+func (o *InvestmentAccount) SetNetValue(v InvestmentAccountNetValue) {
+	o.NetValue.Set(&v)
 }
-// SetMarketValueNil sets the value for MarketValue to be an explicit nil
-func (o *InvestmentAccount) SetMarketValueNil() {
-	o.MarketValue.Set(nil)
+// SetNetValueNil sets the value for NetValue to be an explicit nil
+func (o *InvestmentAccount) SetNetValueNil() {
+	o.NetValue.Set(nil)
 }
 
-// UnsetMarketValue ensures that no value is present for MarketValue, not even an explicit nil
-func (o *InvestmentAccount) UnsetMarketValue() {
-	o.MarketValue.Unset()
+// UnsetNetValue ensures that no value is present for NetValue, not even an explicit nil
+func (o *InvestmentAccount) UnsetNetValue() {
+	o.NetValue.Unset()
 }
 
 func (o InvestmentAccount) MarshalJSON() ([]byte, error) {
@@ -524,20 +524,20 @@ func (o InvestmentAccount) MarshalJSON() ([]byte, error) {
 	if o.OpeningDate.IsSet() {
 		toSerialize["opening_date"] = o.OpeningDate.Get()
 	}
+	if o.FundingDate.IsSet() {
+		toSerialize["funding_date"] = o.FundingDate.Get()
+	}
 	if true {
 		toSerialize["sync_status"] = o.SyncStatus
 	}
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
-	if o.FundingDate.IsSet() {
-		toSerialize["funding_date"] = o.FundingDate.Get()
-	}
 	if true {
 		toSerialize["is_paper"] = o.IsPaper
 	}
-	if o.MarketValue.IsSet() {
-		toSerialize["market_value"] = o.MarketValue.Get()
+	if o.NetValue.IsSet() {
+		toSerialize["net_value"] = o.NetValue.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -565,11 +565,11 @@ func (o *InvestmentAccount) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "institution_account_id")
 		delete(additionalProperties, "institution_id")
 		delete(additionalProperties, "opening_date")
+		delete(additionalProperties, "funding_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "raw_type")
-		delete(additionalProperties, "funding_date")
 		delete(additionalProperties, "is_paper")
-		delete(additionalProperties, "market_value")
+		delete(additionalProperties, "net_value")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -53,13 +53,14 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
         'brokerage_group_order_id' => 'string',
-        'order_role' => 'string',
+        'order_role' => 'AccountOrderRecordV2OrderRole',
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
         'order_type' => 'string',
         'time_in_force' => 'string',
         'time_placed' => '\DateTime',
         'time_executed' => '\DateTime',
-        'quote_currency' => 'string',
+        'price_currency' => 'string',
+        'price_effect' => 'string',
         'execution_price' => 'float',
         'limit_price' => 'float',
         'stop_price' => 'float',
@@ -83,7 +84,8 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         'time_in_force' => null,
         'time_placed' => 'date-time',
         'time_executed' => 'date-time',
-        'quote_currency' => null,
+        'price_currency' => null,
+        'price_effect' => null,
         'execution_price' => 'decimal',
         'limit_price' => 'decimal',
         'stop_price' => 'decimal',
@@ -105,7 +107,8 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
 		'time_in_force' => false,
 		'time_placed' => false,
 		'time_executed' => true,
-		'quote_currency' => false,
+		'price_currency' => false,
+		'price_effect' => false,
 		'execution_price' => true,
 		'limit_price' => true,
 		'stop_price' => true,
@@ -207,7 +210,8 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         'time_in_force' => 'time_in_force',
         'time_placed' => 'time_placed',
         'time_executed' => 'time_executed',
-        'quote_currency' => 'quote_currency',
+        'price_currency' => 'price_currency',
+        'price_effect' => 'price_effect',
         'execution_price' => 'execution_price',
         'limit_price' => 'limit_price',
         'stop_price' => 'stop_price',
@@ -229,7 +233,8 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         'time_in_force' => 'setTimeInForce',
         'time_placed' => 'setTimePlaced',
         'time_executed' => 'setTimeExecuted',
-        'quote_currency' => 'setQuoteCurrency',
+        'price_currency' => 'setPriceCurrency',
+        'price_effect' => 'setPriceEffect',
         'execution_price' => 'setExecutionPrice',
         'limit_price' => 'setLimitPrice',
         'stop_price' => 'setStopPrice',
@@ -251,7 +256,8 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         'time_in_force' => 'getTimeInForce',
         'time_placed' => 'getTimePlaced',
         'time_executed' => 'getTimeExecuted',
-        'quote_currency' => 'getQuoteCurrency',
+        'price_currency' => 'getPriceCurrency',
+        'price_effect' => 'getPriceEffect',
         'execution_price' => 'getExecutionPrice',
         'limit_price' => 'getLimitPrice',
         'stop_price' => 'getStopPrice',
@@ -300,21 +306,23 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         return self::$openAPIModelName;
     }
 
-    public const ORDER_ROLE_TRIGGER = 'TRIGGER';
-    public const ORDER_ROLE_CONDITIONAL = 'CONDITIONAL';
-    public const ORDER_ROLE_PEER = 'PEER';
+    public const PRICE_EFFECT_CREDIT = 'CREDIT';
+    public const PRICE_EFFECT_DEBIT = 'DEBIT';
+    public const PRICE_EFFECT_EVEN = 'EVEN';
+    public const PRICE_EFFECT_UNKNOWN = 'UNKNOWN';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getOrderRoleAllowableValues()
+    public function getPriceEffectAllowableValues()
     {
         return [
-            self::ORDER_ROLE_TRIGGER,
-            self::ORDER_ROLE_CONDITIONAL,
-            self::ORDER_ROLE_PEER,
+            self::PRICE_EFFECT_CREDIT,
+            self::PRICE_EFFECT_DEBIT,
+            self::PRICE_EFFECT_EVEN,
+            self::PRICE_EFFECT_UNKNOWN,
         ];
     }
 
@@ -341,7 +349,8 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('time_placed', $data ?? [], null);
         $this->setIfExists('time_executed', $data ?? [], null);
-        $this->setIfExists('quote_currency', $data ?? [], null);
+        $this->setIfExists('price_currency', $data ?? [], null);
+        $this->setIfExists('price_effect', $data ?? [], null);
         $this->setIfExists('execution_price', $data ?? [], null);
         $this->setIfExists('limit_price', $data ?? [], null);
         $this->setIfExists('stop_price', $data ?? [], null);
@@ -376,11 +385,14 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getOrderRoleAllowableValues();
-        if (!is_null($this->container['order_role']) && !in_array($this->container['order_role'], $allowedValues, true)) {
+        if ($this->container['price_effect'] === null) {
+            $invalidProperties[] = "'price_effect' can't be null";
+        }
+        $allowedValues = $this->getPriceEffectAllowableValues();
+        if (!is_null($this->container['price_effect']) && !in_array($this->container['price_effect'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'order_role', must be one of '%s'",
-                $this->container['order_role'],
+                "invalid value '%s' for 'price_effect', must be one of '%s'",
+                $this->container['price_effect'],
                 implode("', '", $allowedValues)
             );
         }
@@ -468,7 +480,7 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets order_role
      *
-     * @return string|null
+     * @return AccountOrderRecordV2OrderRole|null
      */
     public function getOrderRole()
     {
@@ -478,22 +490,12 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets order_role
      *
-     * @param string|null $order_role The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+     * @param AccountOrderRecordV2OrderRole|null $order_role The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
      *
      * @return self
      */
     public function setOrderRole($order_role)
     {
-        $allowedValues = $this->getOrderRoleAllowableValues();
-        if (!is_null($order_role) && !in_array($order_role, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'order_role', must be one of '%s'",
-                    $order_role,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($order_role)) {
             array_push($this->openAPINullablesSetToNull, 'order_role');
@@ -671,30 +673,69 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     }
 
     /**
-     * Gets quote_currency
+     * Gets price_currency
      *
      * @return string|null
      */
-    public function getQuoteCurrency()
+    public function getPriceCurrency()
     {
-        return $this->container['quote_currency'];
+        return $this->container['price_currency'];
     }
 
     /**
-     * Sets quote_currency
+     * Sets price_currency
      *
-     * @param string|null $quote_currency Quote currency code for the order.
+     * @param string|null $price_currency Price currency code for the order.
      *
      * @return self
      */
-    public function setQuoteCurrency($quote_currency)
+    public function setPriceCurrency($price_currency)
     {
 
-        if (is_null($quote_currency)) {
-            throw new \InvalidArgumentException('non-nullable quote_currency cannot be null');
+        if (is_null($price_currency)) {
+            throw new \InvalidArgumentException('non-nullable price_currency cannot be null');
         }
 
-        $this->container['quote_currency'] = $quote_currency;
+        $this->container['price_currency'] = $price_currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets price_effect
+     *
+     * @return string
+     */
+    public function getPriceEffect()
+    {
+        return $this->container['price_effect'];
+    }
+
+    /**
+     * Sets price_effect
+     *
+     * @param string $price_effect Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+     *
+     * @return self
+     */
+    public function setPriceEffect($price_effect)
+    {
+        $allowedValues = $this->getPriceEffectAllowableValues();
+        if (!in_array($price_effect, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'price_effect', must be one of '%s'",
+                    $price_effect,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($price_effect)) {
+            throw new \InvalidArgumentException('non-nullable price_effect cannot be null');
+        }
+
+        $this->container['price_effect'] = $price_effect;
 
         return $this;
     }

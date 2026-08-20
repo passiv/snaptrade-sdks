@@ -35,10 +35,6 @@ describe SnapTrade::AccountOrderRecordV2 do
   describe 'test attribute "order_role"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["TRIGGER", "CONDITIONAL", "PEER"])
-      # validator.allowable_values.each do |value|
-      #   expect { instance.order_role = value }.not_to raise_error
-      # end
     end
   end
 
@@ -72,7 +68,13 @@ describe SnapTrade::AccountOrderRecordV2 do
     end
   end
 
-  describe 'test attribute "quote_currency"' do
+  describe 'test attribute "price_currency"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "price_effect"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

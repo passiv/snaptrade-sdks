@@ -59,9 +59,9 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         'institution_account_id' => 'string',
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
-        'sync_status' => '\SnapTrade\Model\ConnectionAccountSyncStatus',
+        'sync_status' => '\SnapTrade\Model\DepositAccountSyncStatus',
         'raw_type' => 'string',
-        'balance' => '\SnapTrade\Model\DepositAccountBalance'
+        'net_value' => '\SnapTrade\Model\DepositAccountNetValue'
     ];
 
     /**
@@ -82,7 +82,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         'opening_date' => 'date-time',
         'sync_status' => null,
         'raw_type' => null,
-        'balance' => null
+        'net_value' => null
     ];
 
     /**
@@ -101,7 +101,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
 		'opening_date' => true,
 		'sync_status' => false,
 		'raw_type' => true,
-		'balance' => true
+		'net_value' => true
     ];
 
     /**
@@ -200,7 +200,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         'opening_date' => 'opening_date',
         'sync_status' => 'sync_status',
         'raw_type' => 'raw_type',
-        'balance' => 'balance'
+        'net_value' => 'net_value'
     ];
 
     /**
@@ -219,7 +219,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         'opening_date' => 'setOpeningDate',
         'sync_status' => 'setSyncStatus',
         'raw_type' => 'setRawType',
-        'balance' => 'setBalance'
+        'net_value' => 'setNetValue'
     ];
 
     /**
@@ -238,7 +238,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         'opening_date' => 'getOpeningDate',
         'sync_status' => 'getSyncStatus',
         'raw_type' => 'getRawType',
-        'balance' => 'getBalance'
+        'net_value' => 'getNetValue'
     ];
 
     /**
@@ -321,7 +321,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('opening_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
-        $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('net_value', $data ?? [], null);
     }
 
     /**
@@ -442,7 +442,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+     * @param string $id Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
@@ -500,7 +500,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets display_name
      *
-     * @param string|null $display_name A display name for the account. Either assigned by the user or by the brokerage itself.
+     * @param string|null $display_name A display name for the account. Either assigned by the user or by the institution itself.
      *
      * @return self
      */
@@ -536,7 +536,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets number
      *
-     * @param string $number The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+     * @param string $number The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
      *
      * @return self
      */
@@ -565,7 +565,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets institution_account_id
      *
-     * @param string|null $institution_account_id A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     * @param string|null $institution_account_id A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
      *
      * @return self
      */
@@ -601,7 +601,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets institution_id
      *
-     * @param string|null $institution_id Unique identifier for the institution (brokerage) that holds the account.
+     * @param string|null $institution_id Unique identifier for the institution that holds the account.
      *
      * @return self
      */
@@ -630,7 +630,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets opening_date
      *
-     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; `null` for all other brokerages.
+     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions.
      *
      * @return self
      */
@@ -656,7 +656,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets sync_status
      *
-     * @return \SnapTrade\Model\ConnectionAccountSyncStatus
+     * @return \SnapTrade\Model\DepositAccountSyncStatus
      */
     public function getSyncStatus()
     {
@@ -666,7 +666,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sync_status
      *
-     * @param \SnapTrade\Model\ConnectionAccountSyncStatus $sync_status sync_status
+     * @param \SnapTrade\Model\DepositAccountSyncStatus $sync_status sync_status
      *
      * @return self
      */
@@ -695,7 +695,7 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets raw_type
      *
-     * @param string|null $raw_type The account type as provided by the brokerage.
+     * @param string|null $raw_type The account type as provided by the institution.
      *
      * @return self
      */
@@ -719,37 +719,37 @@ class DepositAccount implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets balance
+     * Gets net_value
      *
-     * @return \SnapTrade\Model\DepositAccountBalance|null
+     * @return \SnapTrade\Model\DepositAccountNetValue|null
      */
-    public function getBalance()
+    public function getNetValue()
     {
-        return $this->container['balance'];
+        return $this->container['net_value'];
     }
 
     /**
-     * Sets balance
+     * Sets net_value
      *
-     * @param \SnapTrade\Model\DepositAccountBalance|null $balance balance
+     * @param \SnapTrade\Model\DepositAccountNetValue|null $net_value net_value
      *
      * @return self
      */
-    public function setBalance($balance)
+    public function setNetValue($net_value)
     {
 
-        if (is_null($balance)) {
-            array_push($this->openAPINullablesSetToNull, 'balance');
+        if (is_null($net_value)) {
+            array_push($this->openAPINullablesSetToNull, 'net_value');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('balance', $nullablesSetToNull);
+            $index = array_search('net_value', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['balance'] = $balance;
+        $this->container['net_value'] = $net_value;
 
         return $this;
     }

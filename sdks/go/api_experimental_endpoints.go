@@ -1055,7 +1055,7 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountRecentOrdersV2Execute(r 
 type ExperimentalEndpointsApiListConnectionAccountsRequest struct {
 	ctx context.Context
 	ApiService *ExperimentalEndpointsApiService
-	authorizationId string
+	connectionId string
 	userId string
 	userSecret string
 }
@@ -1073,24 +1073,24 @@ Returns the accounts that belong to the specified connection for the authenticat
 
 Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
-On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total balance (`market_value` for `investment`, `balance` for `deposit`) live from the brokerage on each call, along with funding date for `investment` accounts.
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
-On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param authorizationId
+ @param connectionId
  @param userId
  @param userSecret
  @return ExperimentalEndpointsApiListConnectionAccountsRequest
 */
-func (a *ExperimentalEndpointsApiService) ListConnectionAccounts(authorizationId string, userId string, userSecret string) ExperimentalEndpointsApiListConnectionAccountsRequest {
+func (a *ExperimentalEndpointsApiService) ListConnectionAccounts(connectionId string, userId string, userSecret string) ExperimentalEndpointsApiListConnectionAccountsRequest {
 	return ExperimentalEndpointsApiListConnectionAccountsRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
-		authorizationId: authorizationId,
+		connectionId: connectionId,
 		userId: userId,
 		userSecret: userSecret,
 	}
@@ -1111,12 +1111,12 @@ func (a *ExperimentalEndpointsApiService) ListConnectionAccountsExecute(r Experi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/connections/{authorizationId}/accounts"
+    subpath := "/connections/{connectionId}/accounts"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
-	localVarPath = strings.Replace(localVarPath, "{"+"authorizationId"+"}", url.PathEscape(parameterToString(r.authorizationId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"connectionId"+"}", url.PathEscape(parameterToString(r.connectionId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

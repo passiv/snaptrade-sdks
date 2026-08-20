@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ConnectionAccountSyncStatusTest Class Doc Comment
  *
  * @category    Class
- * @description Contains status updates for the account sync process between SnapTrade and the brokerage, used only by &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- a brokerage may not report sync status for every data type. &#x60;orders&#x60;/&#x60;positions&#x60;/&#x60;balances&#x60; are the timestamp of the last successful sync of that data type (null if never synced).
+ * @description Contains status updates for the account sync process between SnapTrade and the institution, used by &#x60;InvestmentAccount&#x60; in &#x60;Connections_listConnectionAccounts&#x60;. Each property is optional -- an institution may not report sync status for every data type. &#x60;orders&#x60;/&#x60;positions&#x60;/&#x60;balances&#x60; are the timestamp of the last successful sync of that data type (null if never synced). See &#x60;DepositAccountSyncStatus&#x60; for the deposit-account counterpart, which omits &#x60;orders&#x60;/&#x60;positions&#x60; since deposit accounts don&#39;t place orders or hold positions.
  * @package     SnapTrade
  */
 class ConnectionAccountSyncStatusTest extends TestCase

@@ -145,6 +145,15 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "funding_date"
+     */
+    public function testPropertyFundingDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "sync_status"
      */
     public function testPropertySyncStatus()
@@ -163,15 +172,6 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "funding_date"
-     */
-    public function testPropertyFundingDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "is_paper"
      */
     public function testPropertyIsPaper()
@@ -181,18 +181,9 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "market_value"
+     * Test attribute "net_value"
      */
-    public function testPropertyMarketValue()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "balance"
-     */
-    public function testPropertyBalance()
+    public function testPropertyNetValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

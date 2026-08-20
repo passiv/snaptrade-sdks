@@ -11,44 +11,44 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # An investment/brokerage account under a connection. `opening_date`, `funding_date`, and `market_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts`. 
+  # An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts`. 
   class InvestmentAccount
     # Discriminator for the account kind.
     attr_accessor :kind
 
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :id
 
     # Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :connection_id
 
-    # A display name for the account. Either assigned by the user or by the brokerage itself.
+    # A display name for the account. Either assigned by the user or by the institution itself.
     attr_accessor :display_name
 
-    # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+    # The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).
     attr_accessor :number
 
-    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
     attr_accessor :institution_account_id
 
-    # Unique identifier for the institution (brokerage) that holds the account.
+    # Unique identifier for the institution that holds the account.
     attr_accessor :institution_id
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
     attr_accessor :opening_date
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
+    attr_accessor :funding_date
 
     attr_accessor :sync_status
 
-    # The account type as provided by the brokerage.
+    # The account type as provided by the institution.
     attr_accessor :raw_type
-
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
-    attr_accessor :funding_date
 
     # Indicates whether the account is a paper (simulated) trading account.
     attr_accessor :is_paper
 
-    attr_accessor :market_value
+    attr_accessor :net_value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -61,11 +61,11 @@ module SnapTrade
         :'institution_account_id' => :'institution_account_id',
         :'institution_id' => :'institution_id',
         :'opening_date' => :'opening_date',
+        :'funding_date' => :'funding_date',
         :'sync_status' => :'sync_status',
         :'raw_type' => :'raw_type',
-        :'funding_date' => :'funding_date',
         :'is_paper' => :'is_paper',
-        :'market_value' => :'market_value'
+        :'net_value' => :'net_value'
       }
     end
 
@@ -85,11 +85,11 @@ module SnapTrade
         :'institution_account_id' => :'String',
         :'institution_id' => :'String',
         :'opening_date' => :'Time',
+        :'funding_date' => :'Time',
         :'sync_status' => :'ConnectionAccountSyncStatus',
         :'raw_type' => :'String',
-        :'funding_date' => :'Time',
         :'is_paper' => :'Boolean',
-        :'market_value' => :'InvestmentAccountMarketValue'
+        :'net_value' => :'InvestmentAccountNetValue'
       }
     end
 
@@ -99,9 +99,9 @@ module SnapTrade
         :'display_name',
         :'institution_account_id',
         :'opening_date',
-        :'raw_type',
         :'funding_date',
-        :'market_value'
+        :'raw_type',
+        :'net_value'
       ])
     end
 
@@ -152,6 +152,10 @@ module SnapTrade
         self.opening_date = attributes[:'opening_date']
       end
 
+      if attributes.key?(:'funding_date')
+        self.funding_date = attributes[:'funding_date']
+      end
+
       if attributes.key?(:'sync_status')
         self.sync_status = attributes[:'sync_status']
       end
@@ -160,16 +164,12 @@ module SnapTrade
         self.raw_type = attributes[:'raw_type']
       end
 
-      if attributes.key?(:'funding_date')
-        self.funding_date = attributes[:'funding_date']
-      end
-
       if attributes.key?(:'is_paper')
         self.is_paper = attributes[:'is_paper']
       end
 
-      if attributes.key?(:'market_value')
-        self.market_value = attributes[:'market_value']
+      if attributes.key?(:'net_value')
+        self.net_value = attributes[:'net_value']
       end
     end
 
@@ -229,11 +229,11 @@ module SnapTrade
           institution_account_id == o.institution_account_id &&
           institution_id == o.institution_id &&
           opening_date == o.opening_date &&
+          funding_date == o.funding_date &&
           sync_status == o.sync_status &&
           raw_type == o.raw_type &&
-          funding_date == o.funding_date &&
           is_paper == o.is_paper &&
-          market_value == o.market_value
+          net_value == o.net_value
     end
 
     # @see the `==` method
@@ -245,7 +245,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, number, institution_account_id, institution_id, opening_date, sync_status, raw_type, funding_date, is_paper, market_value].hash
+      [kind, id, connection_id, display_name, number, institution_account_id, institution_id, opening_date, funding_date, sync_status, raw_type, is_paper, net_value].hash
     end
 
     # Builds the object from hash

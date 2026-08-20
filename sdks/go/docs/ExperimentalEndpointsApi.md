@@ -9,7 +9,7 @@ Method | Path | Description
 [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
-[**ListConnectionAccounts**](ExperimentalEndpointsApi.md#ListConnectionAccounts) | **Get** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union)
+[**ListConnectionAccounts**](ExperimentalEndpointsApi.md#ListConnectionAccounts) | **Get** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
 [**ListSubscriptions**](ExperimentalEndpointsApi.md#ListSubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 
 
@@ -163,7 +163,8 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.TimeInForce`: %v\n", *resp.TimeInForce)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.TimePlaced`: %v\n", *resp.TimePlaced)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.TimeExecuted`: %v\n", *resp.TimeExecuted)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.PriceCurrency`: %v\n", *resp.PriceCurrency)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.PriceEffect`: %v\n", resp.PriceEffect)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.LimitPrice`: %v\n", *resp.LimitPrice)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecordV2.GetUserAccountOrderDetailV2.StopPrice`: %v\n", *resp.StopPrice)
@@ -317,12 +318,11 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionId`: %v\n", *resp.InstitutionId)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.FundingDate`: %v\n", *resp.FundingDate)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.SyncStatus`: %v\n", resp.SyncStatus)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.RawType`: %v\n", *resp.RawType)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.FundingDate`: %v\n", *resp.FundingDate)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MarketValue`: %v\n", *resp.MarketValue)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Balance`: %v\n", *resp.Balance)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NetValue`: %v\n", *resp.NetValue)
 }
 ```
 

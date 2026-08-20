@@ -1072,7 +1072,7 @@ public class ExperimentalEndpointsApiGenerated {
 
         return ((ExperimentalEndpointsApi) this).new GetUserAccountRecentOrdersV2RequestBuilder(userId, userSecret, accountId);
     }
-    private okhttp3.Call listConnectionAccountsCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listConnectionAccountsCall(UUID connectionId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1089,8 +1089,8 @@ public class ExperimentalEndpointsApiGenerated {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/connections/{authorizationId}/accounts"
-            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
+        String localVarPath = "/connections/{connectionId}/accounts"
+            .replace("{" + "connectionId" + "}", localVarApiClient.escapeString(connectionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1126,10 +1126,10 @@ public class ExperimentalEndpointsApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listConnectionAccountsValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'authorizationId' is set
-        if (authorizationId == null) {
-            throw new ApiException("Missing the required parameter 'authorizationId' when calling listConnectionAccounts(Async)");
+    private okhttp3.Call listConnectionAccountsValidateBeforeCall(UUID connectionId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'connectionId' is set
+        if (connectionId == null) {
+            throw new ApiException("Missing the required parameter 'connectionId' when calling listConnectionAccounts(Async)");
         }
 
         // verify the required parameter 'userId' is set
@@ -1142,32 +1142,32 @@ public class ExperimentalEndpointsApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling listConnectionAccounts(Async)");
         }
 
-        return listConnectionAccountsCall(authorizationId, userId, userSecret, _callback);
+        return listConnectionAccountsCall(connectionId, userId, userSecret, _callback);
 
     }
 
 
-    private ApiResponse<List<Object>> listConnectionAccountsWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
-        okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(authorizationId, userId, userSecret, null);
+    private ApiResponse<List<Object>> listConnectionAccountsWithHttpInfo(UUID connectionId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(connectionId, userId, userSecret, null);
         Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listConnectionAccountsAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<List<Object>> _callback) throws ApiException {
+    private okhttp3.Call listConnectionAccountsAsync(UUID connectionId, String userId, String userSecret, final ApiCallback<List<Object>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(authorizationId, userId, userSecret, _callback);
+        okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(connectionId, userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class ListConnectionAccountsRequestBuilderGenerated {
-        final UUID authorizationId;
+        final UUID connectionId;
         final String userId;
         final String userSecret;
 
-        public ListConnectionAccountsRequestBuilderGenerated(UUID authorizationId, String userId, String userSecret) {
-            this.authorizationId = authorizationId;
+        public ListConnectionAccountsRequestBuilderGenerated(UUID connectionId, String userId, String userSecret) {
+            this.connectionId = connectionId;
             this.userId = userId;
             this.userSecret = userSecret;
         }
@@ -1184,7 +1184,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return listConnectionAccountsCall(authorizationId, userId, userSecret, _callback);
+            return listConnectionAccountsCall(connectionId, userId, userSecret, _callback);
         }
 
 
@@ -1199,7 +1199,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public List<Object> execute() throws ApiException {
-            ApiResponse<List<Object>> localVarResp = listConnectionAccountsWithHttpInfo(authorizationId, userId, userSecret);
+            ApiResponse<List<Object>> localVarResp = listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
             return localVarResp.getResponseBody();
         }
 
@@ -1214,7 +1214,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public ApiResponse<List<Object>> executeWithHttpInfo() throws ApiException {
-            return listConnectionAccountsWithHttpInfo(authorizationId, userId, userSecret);
+            return listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
         }
 
         /**
@@ -1229,14 +1229,14 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<Object>> _callback) throws ApiException {
-            return listConnectionAccountsAsync(authorizationId, userId, userSecret, _callback);
+            return listConnectionAccountsAsync(connectionId, userId, userSecret, _callback);
         }
     }
 
     /**
      * List accounts for a connection (discriminated union)
-     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total balance (&#x60;market_value&#x60; for &#x60;investment&#x60;, &#x60;balance&#x60; for &#x60;deposit&#x60;) live from the brokerage on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
-     * @param authorizationId  (required)
+     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * @param connectionId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return ListConnectionAccountsRequestBuilder
@@ -1246,8 +1246,8 @@ public class ExperimentalEndpointsApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ExperimentalEndpointsApi.ListConnectionAccountsRequestBuilder listConnectionAccounts(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
-        if (authorizationId == null) throw new IllegalArgumentException("\"authorizationId\" is required but got null");
+    public ExperimentalEndpointsApi.ListConnectionAccountsRequestBuilder listConnectionAccounts(UUID connectionId, String userId, String userSecret) throws IllegalArgumentException {
+        if (connectionId == null) throw new IllegalArgumentException("\"connectionId\" is required but got null");
             
 
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
@@ -1256,7 +1256,7 @@ public class ExperimentalEndpointsApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((ExperimentalEndpointsApi) this).new ListConnectionAccountsRequestBuilder(authorizationId, userId, userSecret);
+        return ((ExperimentalEndpointsApi) this).new ListConnectionAccountsRequestBuilder(connectionId, userId, userSecret);
     }
     private okhttp3.Call listSubscriptionsCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;

@@ -32,40 +32,12 @@ namespace SnapTrade.Net.Model
     [DataContract(Name = "AccountOrderRecordV2")]
     public partial class AccountOrderRecordV2 : IEquatable<AccountOrderRecordV2>, IValidatableObject
     {
-        /// <summary>
-        /// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
-        /// </summary>
-        /// <value>The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. </value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum OrderRoleEnum
-        {
-            /// <summary>
-            /// Enum TRIGGER for value: TRIGGER
-            /// </summary>
-            [EnumMember(Value = "TRIGGER")]
-            TRIGGER = 1,
-
-            /// <summary>
-            /// Enum CONDITIONAL for value: CONDITIONAL
-            /// </summary>
-            [EnumMember(Value = "CONDITIONAL")]
-            CONDITIONAL = 2,
-
-            /// <summary>
-            /// Enum PEER for value: PEER
-            /// </summary>
-            [EnumMember(Value = "PEER")]
-            PEER = 3
-
-        }
-
 
         /// <summary>
-        /// The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
+        /// Gets or Sets OrderRole
         /// </summary>
-        /// <value>The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. </value>
         [DataMember(Name = "order_role", EmitDefaultValue = true)]
-        public OrderRoleEnum? OrderRole { get; set; }
+        public AccountOrderRecordV2OrderRoleNullable? OrderRole { get; set; }
 
         /// <summary>
         /// Gets or Sets Status
@@ -73,24 +45,74 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public AccountOrderRecordStatus? Status { get; set; }
         /// <summary>
+        /// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+        /// </summary>
+        /// <value>Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PriceEffectEnum
+        {
+            /// <summary>
+            /// Enum CREDIT for value: CREDIT
+            /// </summary>
+            [EnumMember(Value = "CREDIT")]
+            CREDIT = 1,
+
+            /// <summary>
+            /// Enum DEBIT for value: DEBIT
+            /// </summary>
+            [EnumMember(Value = "DEBIT")]
+            DEBIT = 2,
+
+            /// <summary>
+            /// Enum EVEN for value: EVEN
+            /// </summary>
+            [EnumMember(Value = "EVEN")]
+            EVEN = 3,
+
+            /// <summary>
+            /// Enum UNKNOWN for value: UNKNOWN
+            /// </summary>
+            [EnumMember(Value = "UNKNOWN")]
+            UNKNOWN = 4
+
+        }
+
+
+        /// <summary>
+        /// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+        /// </summary>
+        /// <value>Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.</value>
+        [DataMember(Name = "price_effect", IsRequired = true, EmitDefaultValue = true)]
+        public PriceEffectEnum PriceEffect { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountOrderRecordV2" /> class.
+        /// </summary>
+        [JsonConstructorAttribute]
+        protected AccountOrderRecordV2()
+        {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
+        /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecordV2" /> class.
         /// </summary>
         /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system..</param>
         /// <param name="brokerageGroupOrderId">The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. .</param>
-        /// <param name="orderRole">The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. .</param>
+        /// <param name="orderRole">orderRole.</param>
         /// <param name="status">status.</param>
         /// <param name="orderType">The type of order placed.   - &#x60;MARKET&#x60;   - &#x60;LIMIT&#x60;   - &#x60;STOP&#x60;   - &#x60;STOP_LIMIT&#x60; .</param>
         /// <param name="timeInForce">The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;DAY&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.   - &#x60;MOO&#x60; - Market On Open. The order is to be executed at the day&#39;s opening price.   - &#x60;EHP&#x60; - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close. .</param>
         /// <param name="timePlaced">The time the order was placed. This is the time the order was submitted to the brokerage..</param>
         /// <param name="timeExecuted">The time the order was executed in the brokerage system. This value is not always available from the brokerage..</param>
-        /// <param name="quoteCurrency">Quote currency code for the order..</param>
+        /// <param name="priceCurrency">Price currency code for the order..</param>
+        /// <param name="priceEffect">Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. (required).</param>
         /// <param name="executionPrice">The price at which the order was executed..</param>
         /// <param name="limitPrice">The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="trailingStop">trailingStop.</param>
         /// <param name="legs">List of legs that make up the order..</param>
-        public AccountOrderRecordV2(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), OrderRoleEnum? orderRole = default(OrderRoleEnum?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeExecuted = default(DateTime?), string quoteCurrency = default(string), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), TrailingStopNullable trailingStop = default(TrailingStopNullable), List<AccountOrderRecordLeg> legs = default(List<AccountOrderRecordLeg>)) : base()
+        public AccountOrderRecordV2(string brokerageOrderId = default(string), string brokerageGroupOrderId = default(string), AccountOrderRecordV2OrderRoleNullable? orderRole = default(AccountOrderRecordV2OrderRoleNullable?), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeExecuted = default(DateTime?), string priceCurrency = default(string), PriceEffectEnum priceEffect = default(PriceEffectEnum), decimal? executionPrice = default(decimal?), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), TrailingStopNullable trailingStop = default(TrailingStopNullable), List<AccountOrderRecordLeg> legs = default(List<AccountOrderRecordLeg>)) : base()
         {
+            this.PriceEffect = priceEffect;
             this.BrokerageOrderId = brokerageOrderId;
             this.BrokerageGroupOrderId = brokerageGroupOrderId;
             this.OrderRole = orderRole;
@@ -99,7 +121,7 @@ namespace SnapTrade.Net.Model
             this.TimeInForce = timeInForce;
             this.TimePlaced = timePlaced;
             this.TimeExecuted = timeExecuted;
-            this.QuoteCurrency = quoteCurrency;
+            this.PriceCurrency = priceCurrency;
             this.ExecutionPrice = executionPrice;
             this.LimitPrice = limitPrice;
             this.StopPrice = stopPrice;
@@ -151,11 +173,11 @@ namespace SnapTrade.Net.Model
         public DateTime? TimeExecuted { get; set; }
 
         /// <summary>
-        /// Quote currency code for the order.
+        /// Price currency code for the order.
         /// </summary>
-        /// <value>Quote currency code for the order.</value>
-        [DataMember(Name = "quote_currency", EmitDefaultValue = false)]
-        public string QuoteCurrency { get; set; }
+        /// <value>Price currency code for the order.</value>
+        [DataMember(Name = "price_currency", EmitDefaultValue = false)]
+        public string PriceCurrency { get; set; }
 
         /// <summary>
         /// The price at which the order was executed.
@@ -217,7 +239,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  TimePlaced: ").Append(TimePlaced).Append("\n");
             sb.Append("  TimeExecuted: ").Append(TimeExecuted).Append("\n");
-            sb.Append("  QuoteCurrency: ").Append(QuoteCurrency).Append("\n");
+            sb.Append("  PriceCurrency: ").Append(PriceCurrency).Append("\n");
+            sb.Append("  PriceEffect: ").Append(PriceEffect).Append("\n");
             sb.Append("  ExecutionPrice: ").Append(ExecutionPrice).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
             sb.Append("  StopPrice: ").Append(StopPrice).Append("\n");
@@ -298,9 +321,13 @@ namespace SnapTrade.Net.Model
                     this.TimeExecuted.Equals(input.TimeExecuted))
                 ) && base.Equals(input) && 
                 (
-                    this.QuoteCurrency == input.QuoteCurrency ||
-                    (this.QuoteCurrency != null &&
-                    this.QuoteCurrency.Equals(input.QuoteCurrency))
+                    this.PriceCurrency == input.PriceCurrency ||
+                    (this.PriceCurrency != null &&
+                    this.PriceCurrency.Equals(input.PriceCurrency))
+                ) && base.Equals(input) && 
+                (
+                    this.PriceEffect == input.PriceEffect ||
+                    this.PriceEffect.Equals(input.PriceEffect)
                 ) && base.Equals(input) && 
                 (
                     this.ExecutionPrice == input.ExecutionPrice ||
@@ -366,10 +393,11 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.TimeExecuted.GetHashCode();
                 }
-                if (this.QuoteCurrency != null)
+                if (this.PriceCurrency != null)
                 {
-                    hashCode = (hashCode * 59) + this.QuoteCurrency.GetHashCode();
+                    hashCode = (hashCode * 59) + this.PriceCurrency.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.PriceEffect.GetHashCode();
                 if (this.ExecutionPrice != null)
                 {
                     hashCode = (hashCode * 59) + this.ExecutionPrice.GetHashCode();

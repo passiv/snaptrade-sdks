@@ -20,24 +20,24 @@ import (
 type DepositAccount struct {
 	// Discriminator for the account kind.
 	Kind string `json:"kind"`
-	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+	// Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
 	Id string `json:"id"`
 	// Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
 	ConnectionId string `json:"connection_id"`
-	// A display name for the account. Either assigned by the user or by the brokerage itself.
+	// A display name for the account. Either assigned by the user or by the institution itself.
 	DisplayName NullableString `json:"display_name,omitempty"`
-	// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+	// The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
 	Number string `json:"number"`
-	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
 	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
-	// Unique identifier for the institution (brokerage) that holds the account.
+	// Unique identifier for the institution that holds the account.
 	InstitutionId *string `json:"institution_id,omitempty"`
-	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; `null` for all other brokerages.
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions.
 	OpeningDate NullableTime `json:"opening_date,omitempty"`
-	SyncStatus ConnectionAccountSyncStatus `json:"sync_status"`
-	// The account type as provided by the brokerage.
+	SyncStatus DepositAccountSyncStatus `json:"sync_status"`
+	// The account type as provided by the institution.
 	RawType NullableString `json:"raw_type,omitempty"`
-	Balance NullableDepositAccountBalance `json:"balance,omitempty"`
+	NetValue NullableDepositAccountNetValue `json:"net_value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,7 +47,7 @@ type _DepositAccount DepositAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDepositAccount(kind string, id string, connectionId string, number string, syncStatus ConnectionAccountSyncStatus) *DepositAccount {
+func NewDepositAccount(kind string, id string, connectionId string, number string, syncStatus DepositAccountSyncStatus) *DepositAccount {
 	this := DepositAccount{}
 	this.Kind = kind
 	this.Id = id
@@ -320,9 +320,9 @@ func (o *DepositAccount) UnsetOpeningDate() {
 }
 
 // GetSyncStatus returns the SyncStatus field value
-func (o *DepositAccount) GetSyncStatus() ConnectionAccountSyncStatus {
+func (o *DepositAccount) GetSyncStatus() DepositAccountSyncStatus {
 	if o == nil {
-		var ret ConnectionAccountSyncStatus
+		var ret DepositAccountSyncStatus
 		return ret
 	}
 
@@ -331,7 +331,7 @@ func (o *DepositAccount) GetSyncStatus() ConnectionAccountSyncStatus {
 
 // GetSyncStatusOk returns a tuple with the SyncStatus field value
 // and a boolean to check if the value has been set.
-func (o *DepositAccount) GetSyncStatusOk() (*ConnectionAccountSyncStatus, bool) {
+func (o *DepositAccount) GetSyncStatusOk() (*DepositAccountSyncStatus, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -339,7 +339,7 @@ func (o *DepositAccount) GetSyncStatusOk() (*ConnectionAccountSyncStatus, bool) 
 }
 
 // SetSyncStatus sets field value
-func (o *DepositAccount) SetSyncStatus(v ConnectionAccountSyncStatus) {
+func (o *DepositAccount) SetSyncStatus(v DepositAccountSyncStatus) {
 	o.SyncStatus = v
 }
 
@@ -385,46 +385,46 @@ func (o *DepositAccount) UnsetRawType() {
 	o.RawType.Unset()
 }
 
-// GetBalance returns the Balance field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DepositAccount) GetBalance() DepositAccountBalance {
-	if o == nil || isNil(o.Balance.Get()) {
-		var ret DepositAccountBalance
+// GetNetValue returns the NetValue field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DepositAccount) GetNetValue() DepositAccountNetValue {
+	if o == nil || isNil(o.NetValue.Get()) {
+		var ret DepositAccountNetValue
 		return ret
 	}
-	return *o.Balance.Get()
+	return *o.NetValue.Get()
 }
 
-// GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
+// GetNetValueOk returns a tuple with the NetValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DepositAccount) GetBalanceOk() (*DepositAccountBalance, bool) {
+func (o *DepositAccount) GetNetValueOk() (*DepositAccountNetValue, bool) {
 	if o == nil {
     return nil, false
 	}
-	return o.Balance.Get(), o.Balance.IsSet()
+	return o.NetValue.Get(), o.NetValue.IsSet()
 }
 
-// HasBalance returns a boolean if a field has been set.
-func (o *DepositAccount) HasBalance() bool {
-	if o != nil && o.Balance.IsSet() {
+// HasNetValue returns a boolean if a field has been set.
+func (o *DepositAccount) HasNetValue() bool {
+	if o != nil && o.NetValue.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBalance gets a reference to the given NullableDepositAccountBalance and assigns it to the Balance field.
-func (o *DepositAccount) SetBalance(v DepositAccountBalance) {
-	o.Balance.Set(&v)
+// SetNetValue gets a reference to the given NullableDepositAccountNetValue and assigns it to the NetValue field.
+func (o *DepositAccount) SetNetValue(v DepositAccountNetValue) {
+	o.NetValue.Set(&v)
 }
-// SetBalanceNil sets the value for Balance to be an explicit nil
-func (o *DepositAccount) SetBalanceNil() {
-	o.Balance.Set(nil)
+// SetNetValueNil sets the value for NetValue to be an explicit nil
+func (o *DepositAccount) SetNetValueNil() {
+	o.NetValue.Set(nil)
 }
 
-// UnsetBalance ensures that no value is present for Balance, not even an explicit nil
-func (o *DepositAccount) UnsetBalance() {
-	o.Balance.Unset()
+// UnsetNetValue ensures that no value is present for NetValue, not even an explicit nil
+func (o *DepositAccount) UnsetNetValue() {
+	o.NetValue.Unset()
 }
 
 func (o DepositAccount) MarshalJSON() ([]byte, error) {
@@ -459,8 +459,8 @@ func (o DepositAccount) MarshalJSON() ([]byte, error) {
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
-	if o.Balance.IsSet() {
-		toSerialize["balance"] = o.Balance.Get()
+	if o.NetValue.IsSet() {
+		toSerialize["net_value"] = o.NetValue.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -490,7 +490,7 @@ func (o *DepositAccount) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "opening_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "raw_type")
-		delete(additionalProperties, "balance")
+		delete(additionalProperties, "net_value")
 		o.AdditionalProperties = additionalProperties
 	}
 

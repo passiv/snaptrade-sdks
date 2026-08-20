@@ -2616,9 +2616,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List accounts for a connection (discriminated union)
      *
-     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total balance (&#x60;market_value&#x60; for &#x60;investment&#x60;, &#x60;balance&#x60; for &#x60;deposit&#x60;) live from the brokerage on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
      *
-     * @param  string $authorization_id authorization_id (required)
+     * @param  string $connection_id connection_id (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionAccounts'] to see the possible values for this operation
@@ -2628,7 +2628,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @return \SnapTrade\Model\ConnectionAccount[]|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse
      */
     public function listConnectionAccounts(
-        $authorization_id,
+        $connection_id,
         $user_id,
         $user_secret,
 
@@ -2636,7 +2636,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
     )
     {
 
-        list($response) = $this->listConnectionAccountsWithHttpInfo($authorization_id, $user_id, $user_secret, $contentType);
+        list($response) = $this->listConnectionAccountsWithHttpInfo($connection_id, $user_id, $user_secret, $contentType);
         return $response;
     }
 
@@ -2645,9 +2645,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List accounts for a connection (discriminated union)
      *
-     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total balance (&#x60;market_value&#x60; for &#x60;investment&#x60;, &#x60;balance&#x60; for &#x60;deposit&#x60;) live from the brokerage on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
      *
-     * @param  string $authorization_id (required)
+     * @param  string $connection_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionAccounts'] to see the possible values for this operation
@@ -2656,9 +2656,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\ConnectionAccount[]|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model404FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listConnectionAccountsWithHttpInfo($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['listConnectionAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listConnectionAccountsWithHttpInfo($connection_id, $user_id, $user_secret, string $contentType = self::contentTypes['listConnectionAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listConnectionAccountsRequest($authorization_id, $user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listConnectionAccountsRequest($connection_id, $user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2674,7 +2674,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->listConnectionAccountsWithHttpInfo(
-                        $authorization_id,
+                        $connection_id,
                         $user_id,
                         $user_secret,
                         $contentType,
@@ -2812,9 +2812,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List accounts for a connection (discriminated union)
      *
-     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total balance (&#x60;market_value&#x60; for &#x60;investment&#x60;, &#x60;balance&#x60; for &#x60;deposit&#x60;) live from the brokerage on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
      *
-     * @param  string $authorization_id (required)
+     * @param  string $connection_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionAccounts'] to see the possible values for this operation
@@ -2823,7 +2823,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function listConnectionAccountsAsync(
-        $authorization_id,
+        $connection_id,
         $user_id,
         $user_secret,
 
@@ -2831,7 +2831,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
     )
     {
 
-        return $this->listConnectionAccountsAsyncWithHttpInfo($authorization_id, $user_id, $user_secret, $contentType)
+        return $this->listConnectionAccountsAsyncWithHttpInfo($connection_id, $user_id, $user_secret, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2844,9 +2844,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List accounts for a connection (discriminated union)
      *
-     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total balance (&#x60;market_value&#x60; for &#x60;investment&#x60;, &#x60;balance&#x60; for &#x60;deposit&#x60;) live from the brokerage on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+     * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
      *
-     * @param  string $authorization_id (required)
+     * @param  string $connection_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionAccounts'] to see the possible values for this operation
@@ -2854,10 +2854,10 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listConnectionAccountsAsyncWithHttpInfo($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['listConnectionAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    public function listConnectionAccountsAsyncWithHttpInfo($connection_id, $user_id, $user_secret, string $contentType = self::contentTypes['listConnectionAccounts'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
         $returnType = '\SnapTrade\Model\ConnectionAccount[]';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->listConnectionAccountsRequest($authorization_id, $user_id, $user_secret, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->listConnectionAccountsRequest($connection_id, $user_id, $user_secret, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -2901,7 +2901,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
     /**
      * Create request for operation 'listConnectionAccounts'
      *
-     * @param  string $authorization_id (required)
+     * @param  string $connection_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listConnectionAccounts'] to see the possible values for this operation
@@ -2909,17 +2909,17 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listConnectionAccountsRequest($authorization_id, $user_id, $user_secret, string $contentType = self::contentTypes['listConnectionAccounts'][0])
+    public function listConnectionAccountsRequest($connection_id, $user_id, $user_secret, string $contentType = self::contentTypes['listConnectionAccounts'][0])
     {
 
-        // Check if $authorization_id is a string
-        if ($authorization_id !== SENTINEL_VALUE && !is_string($authorization_id)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($authorization_id, true), gettype($authorization_id)));
+        // Check if $connection_id is a string
+        if ($connection_id !== SENTINEL_VALUE && !is_string($connection_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($connection_id, true), gettype($connection_id)));
         }
-        // verify the required parameter 'authorization_id' is set
-        if ($authorization_id === SENTINEL_VALUE || (is_array($authorization_id) && count($authorization_id) === 0)) {
+        // verify the required parameter 'connection_id' is set
+        if ($connection_id === SENTINEL_VALUE || (is_array($connection_id) && count($connection_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter authorization_id when calling listConnectionAccounts'
+                'Missing the required parameter connection_id when calling listConnectionAccounts'
             );
         }
         // Check if $user_id is a string
@@ -2944,7 +2944,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
         }
 
 
-        $resourcePath = '/connections/{authorizationId}/accounts';
+        $resourcePath = '/connections/{connectionId}/accounts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2976,10 +2976,10 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
 
 
         // path params
-        if ($authorization_id !== SENTINEL_VALUE) {
+        if ($connection_id !== SENTINEL_VALUE) {
             $resourcePath = str_replace(
-                '{' . 'authorizationId' . '}',
-                ObjectSerializer::toPathValue($authorization_id),
+                '{' . 'connectionId' . '}',
+                ObjectSerializer::toPathValue($connection_id),
                 $resourcePath
             );
         }

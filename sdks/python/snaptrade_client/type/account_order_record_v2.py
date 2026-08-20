@@ -17,10 +17,13 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.type.account_order_record_v2_order_role_nullable import AccountOrderRecordV2OrderRoleNullable
 from snaptrade_client.type.trailing_stop_nullable import TrailingStopNullable
 
 class RequiredAccountOrderRecordV2(TypedDict):
-    pass
+    # Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+    price_effect: Literal["CREDIT", "DEBIT", "EVEN", "UNKNOWN"]
+
 
 class OptionalAccountOrderRecordV2(TypedDict, total=False):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
@@ -29,8 +32,7 @@ class OptionalAccountOrderRecordV2(TypedDict, total=False):
     # The brokerage-assigned identifier that links all orders within a complex order (OCO, OTO, OTOCO) together. Null for non-complex orders or when the brokerage does not return a group identifier. 
     brokerage_group_order_id: typing.Optional[str]
 
-    # The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
-    order_role: typing.Optional[Literal["TRIGGER", "CONDITIONAL", "PEER"]]
+    order_role: typing.Optional[AccountOrderRecordV2OrderRoleNullable]
 
     status: AccountOrderRecordStatus
 
@@ -46,8 +48,8 @@ class OptionalAccountOrderRecordV2(TypedDict, total=False):
     # The time the order was executed in the brokerage system. This value is not always available from the brokerage.
     time_executed: typing.Optional[datetime]
 
-    # Quote currency code for the order.
-    quote_currency: str
+    # Price currency code for the order.
+    price_currency: str
 
     # The price at which the order was executed.
     execution_price: typing.Optional[str]

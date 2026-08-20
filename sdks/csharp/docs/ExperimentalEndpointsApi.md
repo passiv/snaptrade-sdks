@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
-| [**ListConnectionAccounts**](ExperimentalEndpointsApi.md#listconnectionaccounts) | **GET** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union) |
+| [**ListConnectionAccounts**](ExperimentalEndpointsApi.md#listconnectionaccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union) |
 | [**ListSubscriptions**](ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
 
 
@@ -520,7 +520,7 @@ catch (ApiException e)
 
 
 
-Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present - - see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total balance (`market_value` for `investment`, `balance` for `deposit`) live from the brokerage on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present - - see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
 
 ### Example
 ```csharp
@@ -542,14 +542,14 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var authorizationId = "authorizationId_example";
+            var connectionId = "connectionId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
                 // List accounts for a connection (discriminated union)
-                List<ConnectionAccount> result = client.ExperimentalEndpoints.ListConnectionAccounts(authorizationId, userId, userSecret);
+                List<ConnectionAccount> result = client.ExperimentalEndpoints.ListConnectionAccounts(connectionId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -576,7 +576,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List accounts for a connection (discriminated union)
-    ApiResponse<List<ConnectionAccount>> response = apiInstance.ListConnectionAccountsWithHttpInfo(authorizationId, userId, userSecret);
+    ApiResponse<List<ConnectionAccount>> response = apiInstance.ListConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -593,7 +593,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **string** |  |  |
+| **connectionId** | **string** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 

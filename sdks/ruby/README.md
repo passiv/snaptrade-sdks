@@ -1445,9 +1445,9 @@ Returns the accounts that belong to the specified connection for the authenticat
 
 Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
-On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total balance (`market_value` for `investment`, `balance` for `deposit`) live from the brokerage on each call, along with funding date for `investment` accounts.
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
-On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
 
@@ -1456,7 +1456,7 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 ```ruby
 result = snaptrade.experimental_endpoints.list_connection_accounts(
-  authorization_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  connection_id: "87b24961-b51e-4db8-9226-f198f6518a89",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
@@ -1465,7 +1465,7 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorization_id: `String`<a id="authorization_id-string"></a>
+##### connection_id: `String`<a id="connection_id-string"></a>
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1474,7 +1474,7 @@ p result
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/connections/{authorizationId}/accounts` `GET`
+`/connections/{connectionId}/accounts` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

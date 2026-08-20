@@ -145,9 +145,18 @@ class AccountOrderRecordV2Test extends TestCase
     }
 
     /**
-     * Test attribute "quote_currency"
+     * Test attribute "price_currency"
      */
-    public function testPropertyQuoteCurrency()
+    public function testPropertyPriceCurrency()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "price_effect"
+     */
+    public function testPropertyPriceEffect()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

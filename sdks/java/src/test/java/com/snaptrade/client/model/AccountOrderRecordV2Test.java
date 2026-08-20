@@ -19,6 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderRecordLeg;
 import com.snaptrade.client.model.AccountOrderRecordStatus;
+import com.snaptrade.client.model.AccountOrderRecordV2OrderRoleNullable;
 import com.snaptrade.client.model.TrailingStopNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -111,11 +112,19 @@ public class AccountOrderRecordV2Test {
     }
 
     /**
-     * Test the property 'quoteCurrency'
+     * Test the property 'priceCurrency'
      */
     @Test
-    public void quoteCurrencyTest() {
-        // TODO: test quoteCurrency
+    public void priceCurrencyTest() {
+        // TODO: test priceCurrency
+    }
+
+    /**
+     * Test the property 'priceEffect'
+     */
+    @Test
+    public void priceEffectTest() {
+        // TODO: test priceEffect
     }
 
     /**

@@ -138,12 +138,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'RawType'
         }
         /// <summary>
-        /// Test the property 'Balance'
+        /// Test the property 'NetValue'
         /// </summary>
         [Fact]
-        public void BalanceTest()
+        public void NetValueTest()
         {
-            // TODO unit test for the property 'Balance'
+            // TODO unit test for the property 'NetValue'
         }
 
     }

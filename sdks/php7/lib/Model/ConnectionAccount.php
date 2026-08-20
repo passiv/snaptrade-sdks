@@ -59,12 +59,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'string',
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
-        'sync_status' => '\SnapTrade\Model\ConnectionAccountSyncStatus',
-        'raw_type' => 'string',
         'funding_date' => '\DateTime',
+        'sync_status' => '\SnapTrade\Model\DepositAccountSyncStatus',
+        'raw_type' => 'string',
         'is_paper' => 'bool',
-        'market_value' => '\SnapTrade\Model\InvestmentAccountMarketValue',
-        'balance' => '\SnapTrade\Model\DepositAccountBalance'
+        'net_value' => '\SnapTrade\Model\DepositAccountNetValue'
     ];
 
     /**
@@ -83,12 +82,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => null,
         'institution_id' => 'uuid',
         'opening_date' => 'date-time',
+        'funding_date' => 'date-time',
         'sync_status' => null,
         'raw_type' => null,
-        'funding_date' => 'date-time',
         'is_paper' => null,
-        'market_value' => null,
-        'balance' => null
+        'net_value' => null
     ];
 
     /**
@@ -105,12 +103,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'institution_account_id' => true,
 		'institution_id' => false,
 		'opening_date' => true,
+		'funding_date' => true,
 		'sync_status' => false,
 		'raw_type' => true,
-		'funding_date' => true,
 		'is_paper' => false,
-		'market_value' => true,
-		'balance' => true
+		'net_value' => true
     ];
 
     /**
@@ -207,12 +204,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'institution_account_id',
         'institution_id' => 'institution_id',
         'opening_date' => 'opening_date',
+        'funding_date' => 'funding_date',
         'sync_status' => 'sync_status',
         'raw_type' => 'raw_type',
-        'funding_date' => 'funding_date',
         'is_paper' => 'is_paper',
-        'market_value' => 'market_value',
-        'balance' => 'balance'
+        'net_value' => 'net_value'
     ];
 
     /**
@@ -229,12 +225,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'setInstitutionAccountId',
         'institution_id' => 'setInstitutionId',
         'opening_date' => 'setOpeningDate',
+        'funding_date' => 'setFundingDate',
         'sync_status' => 'setSyncStatus',
         'raw_type' => 'setRawType',
-        'funding_date' => 'setFundingDate',
         'is_paper' => 'setIsPaper',
-        'market_value' => 'setMarketValue',
-        'balance' => 'setBalance'
+        'net_value' => 'setNetValue'
     ];
 
     /**
@@ -251,12 +246,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_account_id' => 'getInstitutionAccountId',
         'institution_id' => 'getInstitutionId',
         'opening_date' => 'getOpeningDate',
+        'funding_date' => 'getFundingDate',
         'sync_status' => 'getSyncStatus',
         'raw_type' => 'getRawType',
-        'funding_date' => 'getFundingDate',
         'is_paper' => 'getIsPaper',
-        'market_value' => 'getMarketValue',
-        'balance' => 'getBalance'
+        'net_value' => 'getNetValue'
     ];
 
     /**
@@ -337,12 +331,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('institution_account_id', $data ?? [], null);
         $this->setIfExists('institution_id', $data ?? [], null);
         $this->setIfExists('opening_date', $data ?? [], null);
+        $this->setIfExists('funding_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
-        $this->setIfExists('funding_date', $data ?? [], null);
         $this->setIfExists('is_paper', $data ?? [], null);
-        $this->setIfExists('market_value', $data ?? [], null);
-        $this->setIfExists('balance', $data ?? [], null);
+        $this->setIfExists('net_value', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -469,7 +462,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets id
      *
-     * @param string $id Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+     * @param string $id Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
      *
      * @return self
      */
@@ -527,7 +520,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets display_name
      *
-     * @param string|null $display_name A display name for the account. Either assigned by the user or by the brokerage itself.
+     * @param string|null $display_name A display name for the account. Either assigned by the user or by the institution itself.
      *
      * @return self
      */
@@ -563,7 +556,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets number
      *
-     * @param string $number The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+     * @param string $number The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
      *
      * @return self
      */
@@ -592,7 +585,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets institution_account_id
      *
-     * @param string|null $institution_account_id A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     * @param string|null $institution_account_id A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
      *
      * @return self
      */
@@ -628,7 +621,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets institution_id
      *
-     * @param string|null $institution_id Unique identifier for the institution (brokerage) that holds the account.
+     * @param string|null $institution_id Unique identifier for the institution that holds the account.
      *
      * @return self
      */
@@ -657,7 +650,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets opening_date
      *
-     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; `null` for all other brokerages.
+     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions.
      *
      * @return self
      */
@@ -681,9 +674,45 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
+     * Gets funding_date
+     *
+     * @return \DateTime|null
+     */
+    public function getFundingDate()
+    {
+        return $this->container['funding_date'];
+    }
+
+    /**
+     * Sets funding_date
+     *
+     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
+     *
+     * @return self
+     */
+    public function setFundingDate($funding_date)
+    {
+
+        if (is_null($funding_date)) {
+            array_push($this->openAPINullablesSetToNull, 'funding_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('funding_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['funding_date'] = $funding_date;
+
+        return $this;
+    }
+
+    /**
      * Gets sync_status
      *
-     * @return \SnapTrade\Model\ConnectionAccountSyncStatus
+     * @return \SnapTrade\Model\DepositAccountSyncStatus
      */
     public function getSyncStatus()
     {
@@ -693,7 +722,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets sync_status
      *
-     * @param \SnapTrade\Model\ConnectionAccountSyncStatus $sync_status sync_status
+     * @param \SnapTrade\Model\DepositAccountSyncStatus $sync_status sync_status
      *
      * @return self
      */
@@ -722,7 +751,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets raw_type
      *
-     * @param string|null $raw_type The account type as provided by the brokerage.
+     * @param string|null $raw_type The account type as provided by the institution.
      *
      * @return self
      */
@@ -741,42 +770,6 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['raw_type'] = $raw_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets funding_date
-     *
-     * @return \DateTime|null
-     */
-    public function getFundingDate()
-    {
-        return $this->container['funding_date'];
-    }
-
-    /**
-     * Sets funding_date
-     *
-     * @param \DateTime|null $funding_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
-     *
-     * @return self
-     */
-    public function setFundingDate($funding_date)
-    {
-
-        if (is_null($funding_date)) {
-            array_push($this->openAPINullablesSetToNull, 'funding_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('funding_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['funding_date'] = $funding_date;
 
         return $this;
     }
@@ -811,73 +804,37 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
-     * Gets market_value
+     * Gets net_value
      *
-     * @return \SnapTrade\Model\InvestmentAccountMarketValue|null
+     * @return \SnapTrade\Model\DepositAccountNetValue|null
      */
-    public function getMarketValue()
+    public function getNetValue()
     {
-        return $this->container['market_value'];
+        return $this->container['net_value'];
     }
 
     /**
-     * Sets market_value
+     * Sets net_value
      *
-     * @param \SnapTrade\Model\InvestmentAccountMarketValue|null $market_value market_value
+     * @param \SnapTrade\Model\DepositAccountNetValue|null $net_value net_value
      *
      * @return self
      */
-    public function setMarketValue($market_value)
+    public function setNetValue($net_value)
     {
 
-        if (is_null($market_value)) {
-            array_push($this->openAPINullablesSetToNull, 'market_value');
+        if (is_null($net_value)) {
+            array_push($this->openAPINullablesSetToNull, 'net_value');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('market_value', $nullablesSetToNull);
+            $index = array_search('net_value', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['market_value'] = $market_value;
-
-        return $this;
-    }
-
-    /**
-     * Gets balance
-     *
-     * @return \SnapTrade\Model\DepositAccountBalance|null
-     */
-    public function getBalance()
-    {
-        return $this->container['balance'];
-    }
-
-    /**
-     * Sets balance
-     *
-     * @param \SnapTrade\Model\DepositAccountBalance|null $balance balance
-     *
-     * @return self
-     */
-    public function setBalance($balance)
-    {
-
-        if (is_null($balance)) {
-            array_push($this->openAPINullablesSetToNull, 'balance');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('balance', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-
-        $this->container['balance'] = $balance;
+        $this->container['net_value'] = $net_value;
 
         return $this;
     }

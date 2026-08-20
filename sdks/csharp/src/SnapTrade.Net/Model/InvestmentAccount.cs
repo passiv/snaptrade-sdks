@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// An investment/brokerage account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;market_value&#x60; are real-time or cached depending on the caller&#39;s plan - - see &#x60;Connections_listConnectionAccounts&#x60;. 
+    /// An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan - - see &#x60;Connections_listConnectionAccounts&#x60;. 
     /// </summary>
     [DataContract(Name = "InvestmentAccount")]
     public partial class InvestmentAccount : IEquatable<InvestmentAccount>, IValidatableObject
@@ -66,19 +66,19 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="InvestmentAccount" /> class.
         /// </summary>
         /// <param name="kind">Discriminator for the account kind. (required).</param>
-        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
+        /// <param name="id">Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="connectionId">Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. (required).</param>
-        /// <param name="displayName">A display name for the account. Either assigned by the user or by the brokerage itself..</param>
-        /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. (required).</param>
-        /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections..</param>
-        /// <param name="institutionId">Unique identifier for the institution (brokerage) that holds the account..</param>
-        /// <param name="openingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages..</param>
+        /// <param name="displayName">A display name for the account. Either assigned by the user or by the institution itself..</param>
+        /// <param name="number">The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;). (required).</param>
+        /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections..</param>
+        /// <param name="institutionId">Unique identifier for the institution that holds the account..</param>
+        /// <param name="openingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list..</param>
+        /// <param name="fundingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list..</param>
         /// <param name="syncStatus">syncStatus (required).</param>
-        /// <param name="rawType">The account type as provided by the brokerage..</param>
-        /// <param name="fundingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages..</param>
+        /// <param name="rawType">The account type as provided by the institution..</param>
         /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
-        /// <param name="marketValue">marketValue.</param>
-        public InvestmentAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string number = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), DateTime? fundingDate = default(DateTime?), bool isPaper = default(bool), InvestmentAccountMarketValue marketValue = default(InvestmentAccountMarketValue)) : base()
+        /// <param name="netValue">netValue.</param>
+        public InvestmentAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string number = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), DateTime? fundingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), bool isPaper = default(bool), InvestmentAccountNetValue netValue = default(InvestmentAccountNetValue)) : base()
         {
             this.Kind = kind;
             // to ensure "id" is required (not null)
@@ -110,16 +110,16 @@ namespace SnapTrade.Net.Model
             this.InstitutionAccountId = institutionAccountId;
             this.InstitutionId = institutionId;
             this.OpeningDate = openingDate;
-            this.RawType = rawType;
             this.FundingDate = fundingDate;
-            this.MarketValue = marketValue;
+            this.RawType = rawType;
+            this.NetValue = netValue;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+        /// Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
         /// </summary>
-        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
+        /// <value>Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.</value>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
         public string Id { get; set; }
 
@@ -131,39 +131,46 @@ namespace SnapTrade.Net.Model
         public string ConnectionId { get; set; }
 
         /// <summary>
-        /// A display name for the account. Either assigned by the user or by the brokerage itself.
+        /// A display name for the account. Either assigned by the user or by the institution itself.
         /// </summary>
-        /// <value>A display name for the account. Either assigned by the user or by the brokerage itself.</value>
+        /// <value>A display name for the account. Either assigned by the user or by the institution itself.</value>
         [DataMember(Name = "display_name", EmitDefaultValue = true)]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+        /// The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;).
         /// </summary>
-        /// <value>The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.</value>
+        /// <value>The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;).</value>
         [DataMember(Name = "number", IsRequired = true, EmitDefaultValue = true)]
         public string Number { get; set; }
 
         /// <summary>
-        /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+        /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
         /// </summary>
-        /// <value>A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.</value>
+        /// <value>A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.</value>
         [DataMember(Name = "institution_account_id", EmitDefaultValue = true)]
         public string InstitutionAccountId { get; set; }
 
         /// <summary>
-        /// Unique identifier for the institution (brokerage) that holds the account.
+        /// Unique identifier for the institution that holds the account.
         /// </summary>
-        /// <value>Unique identifier for the institution (brokerage) that holds the account.</value>
+        /// <value>Unique identifier for the institution that holds the account.</value>
         [DataMember(Name = "institution_id", EmitDefaultValue = false)]
         public string InstitutionId { get; set; }
 
         /// <summary>
-        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages.
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
         /// </summary>
-        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages.</value>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.</value>
         [DataMember(Name = "opening_date", EmitDefaultValue = true)]
         public DateTime? OpeningDate { get; set; }
+
+        /// <summary>
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
+        /// </summary>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.</value>
+        [DataMember(Name = "funding_date", EmitDefaultValue = true)]
+        public DateTime? FundingDate { get; set; }
 
         /// <summary>
         /// Gets or Sets SyncStatus
@@ -172,18 +179,11 @@ namespace SnapTrade.Net.Model
         public ConnectionAccountSyncStatus SyncStatus { get; set; }
 
         /// <summary>
-        /// The account type as provided by the brokerage.
+        /// The account type as provided by the institution.
         /// </summary>
-        /// <value>The account type as provided by the brokerage.</value>
+        /// <value>The account type as provided by the institution.</value>
         [DataMember(Name = "raw_type", EmitDefaultValue = true)]
         public string RawType { get; set; }
-
-        /// <summary>
-        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages.
-        /// </summary>
-        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages.</value>
-        [DataMember(Name = "funding_date", EmitDefaultValue = true)]
-        public DateTime? FundingDate { get; set; }
 
         /// <summary>
         /// Indicates whether the account is a paper (simulated) trading account.
@@ -193,10 +193,10 @@ namespace SnapTrade.Net.Model
         public bool IsPaper { get; set; }
 
         /// <summary>
-        /// Gets or Sets MarketValue
+        /// Gets or Sets NetValue
         /// </summary>
-        [DataMember(Name = "market_value", EmitDefaultValue = true)]
-        public InvestmentAccountMarketValue MarketValue { get; set; }
+        [DataMember(Name = "net_value", EmitDefaultValue = true)]
+        public InvestmentAccountNetValue NetValue { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -221,11 +221,11 @@ namespace SnapTrade.Net.Model
             sb.Append("  InstitutionAccountId: ").Append(InstitutionAccountId).Append("\n");
             sb.Append("  InstitutionId: ").Append(InstitutionId).Append("\n");
             sb.Append("  OpeningDate: ").Append(OpeningDate).Append("\n");
+            sb.Append("  FundingDate: ").Append(FundingDate).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  RawType: ").Append(RawType).Append("\n");
-            sb.Append("  FundingDate: ").Append(FundingDate).Append("\n");
             sb.Append("  IsPaper: ").Append(IsPaper).Append("\n");
-            sb.Append("  MarketValue: ").Append(MarketValue).Append("\n");
+            sb.Append("  NetValue: ").Append(NetValue).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -302,6 +302,11 @@ namespace SnapTrade.Net.Model
                     this.OpeningDate.Equals(input.OpeningDate))
                 ) && base.Equals(input) && 
                 (
+                    this.FundingDate == input.FundingDate ||
+                    (this.FundingDate != null &&
+                    this.FundingDate.Equals(input.FundingDate))
+                ) && base.Equals(input) && 
+                (
                     this.SyncStatus == input.SyncStatus ||
                     (this.SyncStatus != null &&
                     this.SyncStatus.Equals(input.SyncStatus))
@@ -312,18 +317,13 @@ namespace SnapTrade.Net.Model
                     this.RawType.Equals(input.RawType))
                 ) && base.Equals(input) && 
                 (
-                    this.FundingDate == input.FundingDate ||
-                    (this.FundingDate != null &&
-                    this.FundingDate.Equals(input.FundingDate))
-                ) && base.Equals(input) && 
-                (
                     this.IsPaper == input.IsPaper ||
                     this.IsPaper.Equals(input.IsPaper)
                 ) && base.Equals(input) && 
                 (
-                    this.MarketValue == input.MarketValue ||
-                    (this.MarketValue != null &&
-                    this.MarketValue.Equals(input.MarketValue))
+                    this.NetValue == input.NetValue ||
+                    (this.NetValue != null &&
+                    this.NetValue.Equals(input.NetValue))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -366,6 +366,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.OpeningDate.GetHashCode();
                 }
+                if (this.FundingDate != null)
+                {
+                    hashCode = (hashCode * 59) + this.FundingDate.GetHashCode();
+                }
                 if (this.SyncStatus != null)
                 {
                     hashCode = (hashCode * 59) + this.SyncStatus.GetHashCode();
@@ -374,14 +378,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.RawType.GetHashCode();
                 }
-                if (this.FundingDate != null)
-                {
-                    hashCode = (hashCode * 59) + this.FundingDate.GetHashCode();
-                }
                 hashCode = (hashCode * 59) + this.IsPaper.GetHashCode();
-                if (this.MarketValue != null)
+                if (this.NetValue != null)
                 {
-                    hashCode = (hashCode * 59) + this.MarketValue.GetHashCode();
+                    hashCode = (hashCode * 59) + this.NetValue.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

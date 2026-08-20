@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * InvestmentAccountTest Class Doc Comment
  *
  * @category    Class
- * @description An investment/brokerage account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;market_value&#x60; are real-time or cached depending on the caller&#39;s plan -- see &#x60;Connections_listConnectionAccounts&#x60;.
+ * @description An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan -- see &#x60;Connections_listConnectionAccounts&#x60;.
  * @package     SnapTrade
  */
 class InvestmentAccountTest extends TestCase
@@ -145,6 +145,15 @@ class InvestmentAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "funding_date"
+     */
+    public function testPropertyFundingDate()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "sync_status"
      */
     public function testPropertySyncStatus()
@@ -163,15 +172,6 @@ class InvestmentAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "funding_date"
-     */
-    public function testPropertyFundingDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "is_paper"
      */
     public function testPropertyIsPaper()
@@ -181,9 +181,9 @@ class InvestmentAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "market_value"
+     * Test attribute "net_value"
      */
-    public function testPropertyMarketValue()
+    public function testPropertyNetValue()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

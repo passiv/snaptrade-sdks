@@ -139,7 +139,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
-*ExperimentalEndpointsApi* | [**ListConnectionAccounts**](docs/ExperimentalEndpointsApi.md#listconnectionaccounts) | **Get** /connections/{authorizationId}/accounts | List accounts for a connection (discriminated union)
+*ExperimentalEndpointsApi* | [**ListConnectionAccounts**](docs/ExperimentalEndpointsApi.md#listconnectionaccounts) | **Get** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **Get** /exchanges | Get exchanges
@@ -181,6 +181,8 @@ Class | Method | HTTP request | Description
  - [AccountOrderRecordStatusV2](docs/AccountOrderRecordStatusV2.md)
  - [AccountOrderRecordStatusV2Nullable](docs/AccountOrderRecordStatusV2Nullable.md)
  - [AccountOrderRecordV2](docs/AccountOrderRecordV2.md)
+ - [AccountOrderRecordV2OrderRole](docs/AccountOrderRecordV2OrderRole.md)
+ - [AccountOrderRecordV2OrderRoleNullable](docs/AccountOrderRecordV2OrderRoleNullable.md)
  - [AccountOrdersV2Response](docs/AccountOrdersV2Response.md)
  - [AccountPosition](docs/AccountPosition.md)
  - [AccountSimple](docs/AccountSimple.md)
@@ -227,7 +229,8 @@ Class | Method | HTTP request | Description
  - [DeleteConnectionConfirmation](docs/DeleteConnectionConfirmation.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DepositAccount](docs/DepositAccount.md)
- - [DepositAccountBalance](docs/DepositAccountBalance.md)
+ - [DepositAccountNetValue](docs/DepositAccountNetValue.md)
+ - [DepositAccountSyncStatus](docs/DepositAccountSyncStatus.md)
  - [DividendAtDate](docs/DividendAtDate.md)
  - [EncryptedResponse](docs/EncryptedResponse.md)
  - [EncryptedResponseEncryptedMessageData](docs/EncryptedResponseEncryptedMessageData.md)
@@ -240,7 +243,7 @@ Class | Method | HTTP request | Description
  - [HoldingsStatus](docs/HoldingsStatus.md)
  - [Instrument](docs/Instrument.md)
  - [InvestmentAccount](docs/InvestmentAccount.md)
- - [InvestmentAccountMarketValue](docs/InvestmentAccountMarketValue.md)
+ - [InvestmentAccountNetValue](docs/InvestmentAccountNetValue.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)
  - [ManualTrade](docs/ManualTrade.md)
  - [ManualTradeAndImpact](docs/ManualTradeAndImpact.md)
