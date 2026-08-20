@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v3.0.6-blue)](https://rubygems.org/gems/snaptrade/versions/3.0.6)
+[![npm](https://img.shields.io/badge/gem-v3.0.7-blue)](https://rubygems.org/gems/snaptrade/versions/3.0.7)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -83,7 +83,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 3.0.6'
+gem 'snaptrade', '~> 3.0.7'
 ```
 
 ## Getting Started<a id="getting-started"></a>
