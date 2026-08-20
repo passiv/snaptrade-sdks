@@ -29,7 +29,7 @@ using System.Reflection;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  Only &#x60;investment&#x60; is implemented today; &#x60;deposit&#x60; and &#x60;line_of_credit&#x60; will be added as additional variants in a future release. 
+    /// A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release. 
     /// </summary>
     [JsonConverter(typeof(ConnectionAccountJsonConverter))]
     [DataContract(Name = "ConnectionAccount")]
@@ -41,6 +41,18 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="actualInstance">An instance of InvestmentAccount.</param>
         public ConnectionAccount(InvestmentAccount actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConnectionAccount" /> class
+        /// with the <see cref="DepositAccount" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of DepositAccount.</param>
+        public ConnectionAccount(DepositAccount actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -61,13 +73,17 @@ namespace SnapTrade.Net.Model
             }
             set
             {
-                if (value.GetType() == typeof(InvestmentAccount))
+                if (value.GetType() == typeof(DepositAccount))
+                {
+                    this._actualInstance = value;
+                }
+                else if (value.GetType() == typeof(InvestmentAccount))
                 {
                     this._actualInstance = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid instance found. Must be the following types: InvestmentAccount");
+                    throw new ArgumentException("Invalid instance found. Must be the following types: DepositAccount, InvestmentAccount");
                 }
             }
         }
@@ -80,6 +96,16 @@ namespace SnapTrade.Net.Model
         public InvestmentAccount GetInvestmentAccount()
         {
             return (InvestmentAccount)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `DepositAccount`. If the actual instance is not `DepositAccount`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of DepositAccount</returns>
+        public DepositAccount GetDepositAccount()
+        {
+            return (DepositAccount)this.ActualInstance;
         }
 
         /// <summary>
@@ -119,6 +145,26 @@ namespace SnapTrade.Net.Model
             }
             int match = 0;
             List<string> matchedTypes = new List<string>();
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(DepositAccount).GetProperty("AdditionalProperties") == null)
+                {
+                    newConnectionAccount = new ConnectionAccount(JsonConvert.DeserializeObject<DepositAccount>(jsonString, ConnectionAccount.SerializerSettings));
+                }
+                else
+                {
+                    newConnectionAccount = new ConnectionAccount(JsonConvert.DeserializeObject<DepositAccount>(jsonString, ConnectionAccount.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("DepositAccount");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into DepositAccount: {1}", jsonString, exception.ToString()));
+            }
 
             try
             {

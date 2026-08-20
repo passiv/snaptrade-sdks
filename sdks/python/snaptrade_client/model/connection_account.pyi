@@ -34,8 +34,8 @@ class ConnectionAccount(
 used by `Connections_listConnectionAccounts`. Use `kind` to determine
 which schema is present.
 
-Only `investment` is implemented today; `deposit` and `line_of_credit`
-will be added as additional variants in a future release.
+`investment` and `deposit` are implemented today; `line_of_credit`
+will be added as an additional variant in a future release.
 
     """
 
@@ -46,7 +46,9 @@ will be added as additional variants in a future release.
         def discriminator():
             return {
                 'kind': {
+                    'DepositAccount': DepositAccount,
                     'InvestmentAccount': InvestmentAccount,
+                    'deposit': DepositAccount,
                     'investment': InvestmentAccount,
                 }
             }
@@ -63,6 +65,7 @@ will be added as additional variants in a future release.
             # loading
             return [
                 InvestmentAccount,
+                DepositAccount,
             ]
 
 
@@ -79,4 +82,5 @@ will be added as additional variants in a future release.
             **kwargs,
         )
 
+from snaptrade_client.model.deposit_account import DepositAccount
 from snaptrade_client.model.investment_account import InvestmentAccount

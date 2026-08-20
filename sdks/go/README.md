@@ -226,6 +226,8 @@ Class | Method | HTTP request | Description
  - [CurrencyNullable](docs/CurrencyNullable.md)
  - [DeleteConnectionConfirmation](docs/DeleteConnectionConfirmation.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
+ - [DepositAccount](docs/DepositAccount.md)
+ - [DepositAccountBalance](docs/DepositAccountBalance.md)
  - [DividendAtDate](docs/DividendAtDate.md)
  - [EncryptedResponse](docs/EncryptedResponse.md)
  - [EncryptedResponseEncryptedMessageData](docs/EncryptedResponseEncryptedMessageData.md)

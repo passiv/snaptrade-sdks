@@ -11,12 +11,13 @@ Name | Type | Description | Notes
 **Number** | **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | 
 **InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. | [optional] 
 **InstitutionId** | Pointer to **string** | Unique identifier for the institution (brokerage) that holds the account. | [optional] 
-**OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages. | [optional] 
+**OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; &#x60;null&#x60; for all other brokerages. | [optional] 
 **SyncStatus** | [**ConnectionAccountSyncStatus**](ConnectionAccountSyncStatus.md) |  | 
 **RawType** | Pointer to **NullableString** | The account type as provided by the brokerage. | [optional] 
 **FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); &#x60;null&#x60; for all other brokerages. | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 **MarketValue** | Pointer to [**NullableInvestmentAccountMarketValue**](InvestmentAccountMarketValue.md) |  | [optional] 
+**Balance** | Pointer to [**NullableDepositAccountBalance**](DepositAccountBalance.md) |  | [optional] 
 
 ## Methods
 
@@ -392,6 +393,41 @@ HasMarketValue returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetMarketValue()`
 
 UnsetMarketValue ensures that no value is present for MarketValue, not even an explicit nil
+### GetBalance
+
+`func (o *ConnectionAccount) GetBalance() DepositAccountBalance`
+
+GetBalance returns the Balance field if non-nil, zero value otherwise.
+
+### GetBalanceOk
+
+`func (o *ConnectionAccount) GetBalanceOk() (*DepositAccountBalance, bool)`
+
+GetBalanceOk returns a tuple with the Balance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBalance
+
+`func (o *ConnectionAccount) SetBalance(v DepositAccountBalance)`
+
+SetBalance sets Balance field to given value.
+
+### HasBalance
+
+`func (o *ConnectionAccount) HasBalance() bool`
+
+HasBalance returns a boolean if a field has been set.
+
+### SetBalanceNil
+
+`func (o *ConnectionAccount) SetBalanceNil(b bool)`
+
+ SetBalanceNil sets the value for Balance to be an explicit nil
+
+### UnsetBalance
+`func (o *ConnectionAccount) UnsetBalance()`
+
+UnsetBalance ensures that no value is present for Balance, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

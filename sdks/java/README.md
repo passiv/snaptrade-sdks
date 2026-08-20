@@ -1557,9 +1557,9 @@ Experimental and subject to change without notice.
 
 Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
 
-Each item in the response carries a `kind` field (currently only `investment` is implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
-On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and market value live from the brokerage on each call.
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total balance (`market_value` for `investment`, `balance` for `deposit`) live from the brokerage on each call, along with funding date for `investment` accounts.
 
 On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 

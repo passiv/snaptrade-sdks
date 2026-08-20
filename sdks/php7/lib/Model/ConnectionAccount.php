@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ConnectionAccount Class Doc Comment
  *
  * @category Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  Only &#x60;investment&#x60; is implemented today; &#x60;deposit&#x60; and &#x60;line_of_credit&#x60; will be added as additional variants in a future release.
+ * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -63,7 +63,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'string',
         'funding_date' => '\DateTime',
         'is_paper' => 'bool',
-        'market_value' => '\SnapTrade\Model\InvestmentAccountMarketValue'
+        'market_value' => '\SnapTrade\Model\InvestmentAccountMarketValue',
+        'balance' => '\SnapTrade\Model\DepositAccountBalance'
     ];
 
     /**
@@ -86,7 +87,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => null,
         'funding_date' => 'date-time',
         'is_paper' => null,
-        'market_value' => null
+        'market_value' => null,
+        'balance' => null
     ];
 
     /**
@@ -107,7 +109,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'raw_type' => true,
 		'funding_date' => true,
 		'is_paper' => false,
-		'market_value' => true
+		'market_value' => true,
+		'balance' => true
     ];
 
     /**
@@ -208,7 +211,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'raw_type',
         'funding_date' => 'funding_date',
         'is_paper' => 'is_paper',
-        'market_value' => 'market_value'
+        'market_value' => 'market_value',
+        'balance' => 'balance'
     ];
 
     /**
@@ -229,7 +233,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'setRawType',
         'funding_date' => 'setFundingDate',
         'is_paper' => 'setIsPaper',
-        'market_value' => 'setMarketValue'
+        'market_value' => 'setMarketValue',
+        'balance' => 'setBalance'
     ];
 
     /**
@@ -250,7 +255,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'getRawType',
         'funding_date' => 'getFundingDate',
         'is_paper' => 'getIsPaper',
-        'market_value' => 'getMarketValue'
+        'market_value' => 'getMarketValue',
+        'balance' => 'getBalance'
     ];
 
     /**
@@ -294,7 +300,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const KIND_INVESTMENT = 'investment';
+    public const KIND_DEPOSIT = 'deposit';
 
     /**
      * Gets allowable values of the enum
@@ -304,7 +310,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_INVESTMENT,
+            self::KIND_DEPOSIT,
         ];
     }
 
@@ -336,6 +342,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('funding_date', $data ?? [], null);
         $this->setIfExists('is_paper', $data ?? [], null);
         $this->setIfExists('market_value', $data ?? [], null);
+        $this->setIfExists('balance', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -650,7 +657,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets opening_date
      *
-     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data (Tastytrade, eToro, moomoo, Public, and Unlok); `null` for all other brokerages.
+     * @param \DateTime|null $opening_date Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. Only populated for brokerages that expose this data; `null` for all other brokerages.
      *
      * @return self
      */
@@ -835,6 +842,42 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['market_value'] = $market_value;
+
+        return $this;
+    }
+
+    /**
+     * Gets balance
+     *
+     * @return \SnapTrade\Model\DepositAccountBalance|null
+     */
+    public function getBalance()
+    {
+        return $this->container['balance'];
+    }
+
+    /**
+     * Sets balance
+     *
+     * @param \SnapTrade\Model\DepositAccountBalance|null $balance balance
+     *
+     * @return self
+     */
+    public function setBalance($balance)
+    {
+
+        if (is_null($balance)) {
+            array_push($this->openAPINullablesSetToNull, 'balance');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('balance', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['balance'] = $balance;
 
         return $this;
     }
