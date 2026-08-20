@@ -12,7 +12,7 @@
     Created by: https://snaptrade.com/
 """
 
-__version__ = "13.0.6"
+__version__ = "13.0.7"
 
 # import ApiClient
 from snaptrade_client.api_client import ApiClient
