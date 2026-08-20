@@ -16,9 +16,17 @@ import (
 	"fmt"
 )
 
-// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  Only `investment` is implemented today; `deposit` and `line_of_credit` will be added as additional variants in a future release. 
+// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  `investment` and `deposit` are implemented today; `line_of_credit` will be added as an additional variant in a future release. 
 type ConnectionAccount struct {
+	DepositAccount *DepositAccount
 	InvestmentAccount *InvestmentAccount
+}
+
+// DepositAccountAsConnectionAccount is a convenience function that returns DepositAccount wrapped in ConnectionAccount
+func DepositAccountAsConnectionAccount(v *DepositAccount) ConnectionAccount {
+	return ConnectionAccount{
+		DepositAccount: v,
+	}
 }
 
 // InvestmentAccountAsConnectionAccount is a convenience function that returns InvestmentAccount wrapped in ConnectionAccount
@@ -33,6 +41,19 @@ func InvestmentAccountAsConnectionAccount(v *InvestmentAccount) ConnectionAccoun
 func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into DepositAccount
+	err = newStrictDecoder(data).Decode(&dst.DepositAccount)
+	if err == nil {
+		jsonDepositAccount, _ := json.Marshal(dst.DepositAccount)
+		if string(jsonDepositAccount) == "{}" { // empty struct
+			dst.DepositAccount = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.DepositAccount = nil
+	}
+
 	// try to unmarshal data into InvestmentAccount
 	err = newStrictDecoder(data).Decode(&dst.InvestmentAccount)
 	if err == nil {
@@ -48,6 +69,7 @@ func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.DepositAccount = nil
 		dst.InvestmentAccount = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ConnectionAccount)")
@@ -60,6 +82,10 @@ func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ConnectionAccount) MarshalJSON() ([]byte, error) {
+	if src.DepositAccount != nil {
+		return json.Marshal(&src.DepositAccount)
+	}
+
 	if src.InvestmentAccount != nil {
 		return json.Marshal(&src.InvestmentAccount)
 	}
@@ -72,6 +98,10 @@ func (obj *ConnectionAccount) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.DepositAccount != nil {
+		return obj.DepositAccount
+	}
+
 	if obj.InvestmentAccount != nil {
 		return obj.InvestmentAccount
 	}

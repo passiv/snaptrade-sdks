@@ -63,6 +63,8 @@ export * from './cryptocurrency-pair-quote';
 export * from './currency';
 export * from './delete-connection-confirmation';
 export * from './delete-user-response';
+export * from './deposit-account';
+export * from './deposit-account-balance';
 export * from './dividend-at-date';
 export * from './encrypted-response';
 export * from './encrypted-response-encrypted-message-data';

@@ -11,12 +11,13 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  Only `investment` is implemented today; `deposit` and `line_of_credit` will be added as additional variants in a future release. 
+  # A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  `investment` and `deposit` are implemented today; `line_of_credit` will be added as an additional variant in a future release. 
   module ConnectionAccount
     class << self
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of
         [
+          :'DepositAccount',
           :'InvestmentAccount'
         ]
       end
@@ -29,6 +30,7 @@ module SnapTrade
       # Discriminator's mapping (OpenAPI v3)
       def openapi_discriminator_mapping
         {
+          :'deposit' => :'DepositAccount',
           :'investment' => :'InvestmentAccount'
         }
       end

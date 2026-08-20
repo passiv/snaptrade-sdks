@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ConnectionAccountTest Class Doc Comment
  *
  * @category    Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  Only &#x60;investment&#x60; is implemented today; &#x60;deposit&#x60; and &#x60;line_of_credit&#x60; will be added as additional variants in a future release.
+ * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release.
  * @package     SnapTrade
  */
 class ConnectionAccountTest extends TestCase
@@ -184,6 +184,15 @@ class ConnectionAccountTest extends TestCase
      * Test attribute "market_value"
      */
     public function testPropertyMarketValue()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "balance"
+     */
+    public function testPropertyBalance()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

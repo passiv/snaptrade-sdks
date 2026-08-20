@@ -322,6 +322,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.FundingDate`: %v\n", *resp.FundingDate)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MarketValue`: %v\n", *resp.MarketValue)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Balance`: %v\n", *resp.Balance)
 }
 ```
 
