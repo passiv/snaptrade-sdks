@@ -1071,7 +1071,7 @@ Experimental and subject to change without notice.
 
 Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
 
-Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
 On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 

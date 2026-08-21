@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// DepositAccountNetValue Net value of the account -- cash balance for deposit accounts. Shared across all account kinds so that, e.g., a future `line_of_credit` account can report a negative net value here. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+// DepositAccountNetValue Net value of the account -- cash balance for deposit accounts. Shared across all account kinds -- negative for `line_of_credit` accounts, representing money owed. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
 type DepositAccountNetValue struct {
 	Amount NullableFloat32 `json:"amount,omitempty"`
 	Currency NullableString `json:"currency,omitempty"`

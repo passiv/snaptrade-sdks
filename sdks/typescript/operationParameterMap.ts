@@ -98,10 +98,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/aumPercentile-GET': {
-        parameters: [
-        ]
-    },
     '/accounts/{accountId}/holdings-GET': {
         parameters: [
             {

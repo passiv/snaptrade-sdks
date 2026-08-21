@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * InvestmentAccountNetValueTest Class Doc Comment
  *
  * @category    Class
- * @description Net value of the account -- total market value for investment accounts. Shared across all account kinds so that, e.g., a future &#x60;line_of_credit&#x60; account can report a negative net value here. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+ * @description Net value of the account -- total market value for investment accounts. Shared across all account kinds -- negative for &#x60;line_of_credit&#x60; accounts, representing money owed. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
  * @package     SnapTrade
  */
 class InvestmentAccountNetValueTest extends TestCase

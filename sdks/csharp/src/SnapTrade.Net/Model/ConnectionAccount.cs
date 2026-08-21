@@ -29,7 +29,7 @@ using System.Reflection;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release. 
+    /// A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today. 
     /// </summary>
     [JsonConverter(typeof(ConnectionAccountJsonConverter))]
     [DataContract(Name = "ConnectionAccount")]
@@ -59,6 +59,18 @@ namespace SnapTrade.Net.Model
             this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConnectionAccount" /> class
+        /// with the <see cref="LineOfCreditAccount" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of LineOfCreditAccount.</param>
+        public ConnectionAccount(LineOfCreditAccount actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
 
         private Object _actualInstance;
 
@@ -81,9 +93,13 @@ namespace SnapTrade.Net.Model
                 {
                     this._actualInstance = value;
                 }
+                else if (value.GetType() == typeof(LineOfCreditAccount))
+                {
+                    this._actualInstance = value;
+                }
                 else
                 {
-                    throw new ArgumentException("Invalid instance found. Must be the following types: DepositAccount, InvestmentAccount");
+                    throw new ArgumentException("Invalid instance found. Must be the following types: DepositAccount, InvestmentAccount, LineOfCreditAccount");
                 }
             }
         }
@@ -106,6 +122,16 @@ namespace SnapTrade.Net.Model
         public DepositAccount GetDepositAccount()
         {
             return (DepositAccount)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `LineOfCreditAccount`. If the actual instance is not `LineOfCreditAccount`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of LineOfCreditAccount</returns>
+        public LineOfCreditAccount GetLineOfCreditAccount()
+        {
+            return (LineOfCreditAccount)this.ActualInstance;
         }
 
         /// <summary>
@@ -184,6 +210,26 @@ namespace SnapTrade.Net.Model
             {
                 // deserialization failed, try the next one
                 System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into InvestmentAccount: {1}", jsonString, exception.ToString()));
+            }
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(LineOfCreditAccount).GetProperty("AdditionalProperties") == null)
+                {
+                    newConnectionAccount = new ConnectionAccount(JsonConvert.DeserializeObject<LineOfCreditAccount>(jsonString, ConnectionAccount.SerializerSettings));
+                }
+                else
+                {
+                    newConnectionAccount = new ConnectionAccount(JsonConvert.DeserializeObject<LineOfCreditAccount>(jsonString, ConnectionAccount.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("LineOfCreditAccount");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into LineOfCreditAccount: {1}", jsonString, exception.ToString()));
             }
 
             if (match == 0)

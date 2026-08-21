@@ -331,35 +331,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetUserAumPercentile
-        /// </summary>
-        [Fact]
-        public void GetUserAumPercentileTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            
-            try
-            {
-                // Get the user's AUM percentile
-                UserAumPercentileResponse result = client.AccountInformation.GetUserAumPercentile(userId, userSecret);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAumPercentile: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test GetUserHoldings
         /// </summary>
         [Fact]

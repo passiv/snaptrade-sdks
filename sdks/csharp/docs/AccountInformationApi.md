@@ -13,7 +13,6 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account orders |
 | [**GetUserAccountRecentOrders**](AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
 | [**GetUserAccountReturnRates**](AccountInformationApi.md#getuseraccountreturnrates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns |
-| [**GetUserAumPercentile**](AccountInformationApi.md#getuseraumpercentile) | **GET** /aumPercentile | Get the user&#39;s AUM percentile |
 | [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings |
 | [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
 | [**UpdateUserAccount**](AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
@@ -907,100 +906,6 @@ catch (ApiException e)
 | **500** | Unexpected error |  -  |
 | **501** | Not Implemented - return rates are not supported for this brokerage |  -  |
 | **503** | Brokerage API failure |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-# **GetUserAumPercentile**
-
-
-
-Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.  `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned. 
-
-### Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using SnapTrade.Net.Client;
-using SnapTrade.Net.Model;
-
-namespace Example
-{
-    public class GetUserAumPercentileExample
-    {
-        public static void Main()
-        {
-            Snaptrade client = new Snaptrade();
-            // Configure custom BasePath if desired
-            // client.SetBasePath("https://api.snaptrade.com/api/v1");
-            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
-
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            
-            try
-            {
-                // Get the user's AUM percentile
-                UserAumPercentileResponse result = client.AccountInformation.GetUserAumPercentile(userId, userSecret);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAumPercentile: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-    }
-}
-```
-
-#### Using the GetUserAumPercentileWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Get the user's AUM percentile
-    ApiResponse<UserAumPercentileResponse> response = apiInstance.GetUserAumPercentileWithHttpInfo(userId, userSecret);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling AccountInformationApi.GetUserAumPercentileWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **userId** | **string** |  |  |
-| **userSecret** | **string** |  |  |
-
-### Return type
-
-[**UserAumPercentileResponse**](UserAumPercentileResponse.md)
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | OK |  -  |
-| **403** | Forbidden |  -  |
-| **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

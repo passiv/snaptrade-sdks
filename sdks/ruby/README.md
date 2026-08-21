@@ -28,7 +28,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
   * [`snaptrade.account_information.get_user_account_return_rates`](#snaptradeaccount_informationget_user_account_return_rates)
-  * [`snaptrade.account_information.get_user_aum_percentile`](#snaptradeaccount_informationget_user_aum_percentile)
   * [`snaptrade.account_information.get_user_holdings`](#snaptradeaccount_informationget_user_holdings)
   * [`snaptrade.account_information.list_user_accounts`](#snaptradeaccount_informationlist_user_accounts)
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
@@ -537,42 +536,6 @@ returns all six supported timeframes.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/returnRates` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.account_information.get_user_aum_percentile`<a id="snaptradeaccount_informationget_user_aum_percentile"></a>
-
-Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
-
-The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
-
-`data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.account_information.get_user_aum_percentile(
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-#### 🔄 Return<a id="🔄-return"></a>
-
-[UserAumPercentileResponse](./lib/snaptrade/models/user_aum_percentile_response.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/aumPercentile` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1443,7 +1406,7 @@ Experimental and subject to change without notice.
 
 Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
 
-Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
 On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 

@@ -625,7 +625,7 @@ module SnapTrade
     # 
     # Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
     # 
-    # Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+    # Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
     # 
     # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
     # 
@@ -648,7 +648,7 @@ module SnapTrade
     # 
     # Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
     # 
-    # Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+    # Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
     # 
     # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
     # 
@@ -665,7 +665,7 @@ module SnapTrade
     end
 
     # List accounts for a connection (discriminated union)
-    # Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
     # @param connection_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -677,7 +677,7 @@ module SnapTrade
     end
 
     # List accounts for a connection (discriminated union)
-    # Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (currently &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (&#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
     # @param connection_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 

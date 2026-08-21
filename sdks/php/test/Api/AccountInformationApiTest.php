@@ -167,18 +167,6 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
-     * Test case for getUserAumPercentile
-     *
-     * Get the user's AUM percentile.
-     *
-     */
-    public function testGetUserAumPercentile()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getUserHoldings
      *
      * List account holdings.

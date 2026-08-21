@@ -13,7 +13,6 @@ import com.snaptrade.client.model.PaginatedUniversalActivity;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.RecentOrdersResponse;
 import java.util.UUID;
-import com.snaptrade.client.model.UserAumPercentileResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,11 +66,6 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     public class GetUserAccountReturnRatesRequestBuilder extends GetUserAccountReturnRatesRequestBuilderGenerated {
         public GetUserAccountReturnRatesRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
-        }
-    }
-    public class GetUserAumPercentileRequestBuilder extends GetUserAumPercentileRequestBuilderGenerated {
-        public GetUserAumPercentileRequestBuilder(String userId, String userSecret) {
-            super(userId, userSecret);
         }
     }
     public class GetUserHoldingsRequestBuilder extends GetUserHoldingsRequestBuilderGenerated {

@@ -54,8 +54,6 @@ import { PaginatedUniversalActivity } from '../models';
 import { RateOfReturnResponse } from '../models';
 // @ts-ignore
 import { RecentOrdersResponse } from '../models';
-// @ts-ignore
-import { UserAumPercentileResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -645,60 +643,6 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns where the user\'s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month\'s distribution the placement came from.  `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user\'s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user\'s assets would understate them, so none is returned. 
-         * @summary Get the user\'s AUM percentile
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserAumPercentile: async (userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/aumPercentile`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/aumPercentile',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List account holdings
          * @param {string} accountId 
@@ -991,18 +935,6 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns where the user\'s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month\'s distribution the placement came from.  `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user\'s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user\'s assets would understate them, so none is returned. 
-         * @summary Get the user\'s AUM percentile
-         * @param {AccountInformationApiGetUserAumPercentileRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUserAumPercentile(requestParameters: AccountInformationApiGetUserAumPercentileRequest<TAuth> = {} as AccountInformationApiGetUserAumPercentileRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserAumPercentileResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAumPercentile(requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List account holdings
          * @param {AccountInformationApiGetUserHoldingsRequest<TAuth>} requestParameters Request parameters.
@@ -1147,17 +1079,6 @@ options?: AxiosRequestConfig): AxiosPromise<RecentOrdersResponse> {
         getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, 
 options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
             return localVarFp.getUserAccountReturnRates(requestParameters as any, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns where the user\'s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month\'s distribution the placement came from.  `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user\'s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user\'s assets would understate them, so none is returned. 
-         * @summary Get the user\'s AUM percentile
-         * @param {AccountInformationApiGetUserAumPercentileRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserAumPercentile(requestParameters: AccountInformationApiGetUserAumPercentileRequest<TAuth> = {} as AccountInformationApiGetUserAumPercentileRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<UserAumPercentileResponse> {
-            return localVarFp.getUserAumPercentile(requestParameters as any, options).then((request) => request(axios, basePath));
         },
         /**
          * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1521,28 +1442,6 @@ export type AccountInformationApiGetUserAccountReturnRatesRequest<TAuth extends 
     AccountInformationApiGetUserAccountReturnRatesRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountReturnRatesRequestByAuthMode]
 
 /**
- * Request parameters for getUserAumPercentile operation in AccountInformationApi.
- * @export
- */
-export type AccountInformationApiGetUserAumPercentileBaseRequest = {
-    
-}
-export type AccountInformationApiGetUserAumPercentilecommercialApiKeyRequest = AccountInformationApiGetUserAumPercentileBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type AccountInformationApiGetUserAumPercentilepersonalApiKeyRequest = AccountInformationApiGetUserAumPercentileBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type AccountInformationApiGetUserAumPercentileRequestByAuthMode = {
-    "commercialApiKey": AccountInformationApiGetUserAumPercentilecommercialApiKeyRequest;
-    "personalApiKey": AccountInformationApiGetUserAumPercentilepersonalApiKeyRequest;
-}
-export type AccountInformationApiGetUserAumPercentileRequest<TAuth extends AuthMode> =
-    AccountInformationApiGetUserAumPercentileRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAumPercentileRequestByAuthMode]
-
-/**
  * Request parameters for getUserHoldings operation in AccountInformationApi.
  * @export
  */
@@ -1752,20 +1651,6 @@ options?: AxiosRequestConfig) {
     public getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, 
 options?: AxiosRequestConfig) {
         return AccountInformationApiFp(this.configuration).getUserAccountReturnRates(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * Returns where the user\'s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month\'s distribution the placement came from.  `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user\'s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user\'s assets would understate them, so none is returned. 
-     * @summary Get the user\'s AUM percentile
-     * @param {AccountInformationApiGetUserAumPercentileRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AccountInformationApiGenerated
-     */
-    public getUserAumPercentile(requestParameters: AccountInformationApiGetUserAumPercentileRequest<TAuth> = {} as AccountInformationApiGetUserAumPercentileRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAumPercentile(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
 
     }
 

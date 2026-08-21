@@ -92,10 +92,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/aumPercentile-GET': {
-        'parameters': [
-        ]
-    },
     '/accounts/{accountId}/holdings-GET': {
         'parameters': [
             {
