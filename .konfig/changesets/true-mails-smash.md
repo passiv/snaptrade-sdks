@@ -9,4 +9,4 @@ go: patch
 php7: patch
 ---
 
-Fix PHP account position instrument deserialization
+Fix PHP SDK account position instrument deserialization
