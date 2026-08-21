@@ -8,21 +8,22 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
 **DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
-**Number** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
+**Number** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****1881&#x60;). | 
 **InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 
 **InstitutionId** | Pointer to **string** | Unique identifier for the institution that holds the account. | [optional] 
 **OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. | [optional] 
 **FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list. | [optional] 
-**SyncStatus** | [**DepositAccountSyncStatus**](DepositAccountSyncStatus.md) |  | 
+**SyncStatus** | [**LineOfCreditAccountSyncStatus**](LineOfCreditAccountSyncStatus.md) |  | 
 **RawType** | Pointer to **NullableString** | The account type as provided by the institution. | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
-**NetValue** | Pointer to [**NullableDepositAccountNetValue**](DepositAccountNetValue.md) |  | [optional] 
+**NetValue** | Pointer to [**NullableLineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  | [optional] 
+**CreditDetails** | Pointer to [**NullableLineOfCreditAccountCreditDetails**](LineOfCreditAccountCreditDetails.md) |  | [optional] 
 
 ## Methods
 
 ### NewConnectionAccount
 
-`func NewConnectionAccount(kind string, id string, connectionId string, number string, syncStatus DepositAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
+`func NewConnectionAccount(kind string, id string, connectionId string, number string, syncStatus LineOfCreditAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
 
 NewConnectionAccount instantiates a new ConnectionAccount object
 This constructor will assign default values to properties that have it defined,
@@ -284,20 +285,20 @@ HasFundingDate returns a boolean if a field has been set.
 UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
 ### GetSyncStatus
 
-`func (o *ConnectionAccount) GetSyncStatus() DepositAccountSyncStatus`
+`func (o *ConnectionAccount) GetSyncStatus() LineOfCreditAccountSyncStatus`
 
 GetSyncStatus returns the SyncStatus field if non-nil, zero value otherwise.
 
 ### GetSyncStatusOk
 
-`func (o *ConnectionAccount) GetSyncStatusOk() (*DepositAccountSyncStatus, bool)`
+`func (o *ConnectionAccount) GetSyncStatusOk() (*LineOfCreditAccountSyncStatus, bool)`
 
 GetSyncStatusOk returns a tuple with the SyncStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSyncStatus
 
-`func (o *ConnectionAccount) SetSyncStatus(v DepositAccountSyncStatus)`
+`func (o *ConnectionAccount) SetSyncStatus(v LineOfCreditAccountSyncStatus)`
 
 SetSyncStatus sets SyncStatus field to given value.
 
@@ -359,20 +360,20 @@ SetIsPaper sets IsPaper field to given value.
 
 ### GetNetValue
 
-`func (o *ConnectionAccount) GetNetValue() DepositAccountNetValue`
+`func (o *ConnectionAccount) GetNetValue() LineOfCreditAccountNetValue`
 
 GetNetValue returns the NetValue field if non-nil, zero value otherwise.
 
 ### GetNetValueOk
 
-`func (o *ConnectionAccount) GetNetValueOk() (*DepositAccountNetValue, bool)`
+`func (o *ConnectionAccount) GetNetValueOk() (*LineOfCreditAccountNetValue, bool)`
 
 GetNetValueOk returns a tuple with the NetValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetValue
 
-`func (o *ConnectionAccount) SetNetValue(v DepositAccountNetValue)`
+`func (o *ConnectionAccount) SetNetValue(v LineOfCreditAccountNetValue)`
 
 SetNetValue sets NetValue field to given value.
 
@@ -392,6 +393,41 @@ HasNetValue returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetNetValue()`
 
 UnsetNetValue ensures that no value is present for NetValue, not even an explicit nil
+### GetCreditDetails
+
+`func (o *ConnectionAccount) GetCreditDetails() LineOfCreditAccountCreditDetails`
+
+GetCreditDetails returns the CreditDetails field if non-nil, zero value otherwise.
+
+### GetCreditDetailsOk
+
+`func (o *ConnectionAccount) GetCreditDetailsOk() (*LineOfCreditAccountCreditDetails, bool)`
+
+GetCreditDetailsOk returns a tuple with the CreditDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreditDetails
+
+`func (o *ConnectionAccount) SetCreditDetails(v LineOfCreditAccountCreditDetails)`
+
+SetCreditDetails sets CreditDetails field to given value.
+
+### HasCreditDetails
+
+`func (o *ConnectionAccount) HasCreditDetails() bool`
+
+HasCreditDetails returns a boolean if a field has been set.
+
+### SetCreditDetailsNil
+
+`func (o *ConnectionAccount) SetCreditDetailsNil(b bool)`
+
+ SetCreditDetailsNil sets the value for CreditDetails to be an explicit nil
+
+### UnsetCreditDetails
+`func (o *ConnectionAccount) UnsetCreditDetails()`
+
+UnsetCreditDetails ensures that no value is present for CreditDetails, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

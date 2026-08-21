@@ -1346,57 +1346,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders
       x-accepts: application/json
-  /aumPercentile:
-    get:
-      description: |
-        Returns where the user's total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.
-
-        The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and `as_of` reports which month's distribution the placement came from.
-
-        `data` is `null` — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user's own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user's assets would understate them, so none is returned.
-      operationId: AccountInformation_getUserAumPercentile
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserAumPercentileResponse'
-          description: OK
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
-          description: Forbidden
-          x-do-not-generate: true
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Get the user's AUM percentile
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--aumPercentile
-      x-accepts: application/json
   /accounts/{accountId}/returnRates:
     get:
       description: |
@@ -2949,7 +2898,7 @@ paths:
 
         Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
 
-        Each item in the response carries a `kind` field (currently `investment` and `deposit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+        Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
 
         On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -4084,6 +4033,95 @@ components:
       - number
       - sync_status
       type: object
+    LineOfCreditAccount:
+      additionalProperties: true
+      description: |
+        A line-of-credit account (e.g. a credit card) under a connection.
+      properties:
+        kind:
+          description: Discriminator for the account kind.
+          enum:
+          - line_of_credit
+          example: line_of_credit
+          type: string
+          x-konfig-original-example: line_of_credit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-kind
+        id:
+          allOf:
+          - $ref: '#/components/schemas/AccountID'
+          description: Unique identifier for the connected institution account. This
+            is the UUID used to reference the account in SnapTrade.
+        connection_id:
+          description: Unique identifier for the connection (brokerage_authorization_id).
+            This is the UUID used to reference the connection in SnapTrade.
+          example: 87b24961-b51e-4db8-9226-f198f6518a89
+          format: uuid
+          type: string
+          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
+        display_name:
+          description: A display name for the account. Either assigned by the user
+            or by the institution itself.
+          example: Chase Sapphire Preferred
+          nullable: true
+          type: string
+          x-konfig-original-example: Chase Sapphire Preferred
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-display_name
+        number:
+          description: "The account number assigned by the institution, masked to\
+            \ the last 4 characters (e.g. `****1881`)."
+          example: '****1881'
+          type: string
+          x-konfig-original-example: '****1881'
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-number
+        institution_account_id:
+          description: "A stable and unique account identifier provided by the institution.\
+            \ Will be set to null if not provided. When present, can be used to check\
+            \ if a user has connected the same institution account across multiple\
+            \ connections."
+          example: "77102934"
+          nullable: true
+          type: string
+          x-konfig-original-example: "77102934"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-institution_account_id
+        institution_id:
+          description: Unique identifier for the institution that holds the account.
+          example: c8f1d0e2-3c4f-5a6b-9d7e-0f2a3b4c5d6e
+          format: uuid
+          type: string
+          x-konfig-original-example: c8f1d0e2-3c4f-5a6b-9d7e-0f2a3b4c5d6e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-institution_id
+        opening_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the account was opened at the institution. Only\
+            \ populated for institutions that expose this data; `null` for all other\
+            \ institutions."
+          example: 2019-11-15T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2019-11-15T00:00:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-opening_date
+        sync_status:
+          $ref: '#/components/schemas/LineOfCreditAccountSyncStatus'
+        raw_type:
+          description: The account type as provided by the institution.
+          example: CREDIT_CARD
+          nullable: true
+          type: string
+          x-konfig-original-example: CREDIT_CARD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-raw_type
+        net_value:
+          $ref: '#/components/schemas/LineOfCreditAccount_net_value'
+        credit_details:
+          $ref: '#/components/schemas/LineOfCreditAccount_credit_details'
+      required:
+      - connection_id
+      - id
+      - kind
+      - number
+      - sync_status
+      type: object
     ConnectionAccountSyncStatus:
       additionalProperties: true
       description: |
@@ -4091,8 +4129,9 @@ components:
         used by `InvestmentAccount` in `Connections_listConnectionAccounts`. Each property is optional
         -- an institution may not report sync status for every data type. `orders`/`positions`/`balances`
         are the timestamp of the last successful sync of that data type (null if never synced). See
-        `DepositAccountSyncStatus` for the deposit-account counterpart, which omits `orders`/`positions`
-        since deposit accounts don't place orders or hold positions.
+        `DepositAccountSyncStatus`/`LineOfCreditAccountSyncStatus` for the deposit/line-of-credit
+        counterparts, which omit `orders`/`positions` since those account kinds don't place orders or
+        hold positions.
       properties:
         transactions:
           $ref: '#/components/schemas/TransactionsStatus'
@@ -4135,6 +4174,30 @@ components:
         used by `DepositAccount` in `Connections_listConnectionAccounts`. Each property is optional --
         an institution may not report sync status for every data type. Deposit accounts don't place
         orders or hold positions, so unlike `ConnectionAccountSyncStatus` this type has no `orders` or
+        `positions` field. `balances` is the timestamp of the last successful sync of that data type
+        (null if never synced).
+      properties:
+        transactions:
+          $ref: '#/components/schemas/TransactionsStatus'
+        balances:
+          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
+      type: object
+      x-konfig-properties:
+        balances:
+          description: The last time balances were successfully synced by SnapTrade.
+          nullable: true
+    LineOfCreditAccountSyncStatus:
+      additionalProperties: true
+      description: |
+        Contains status updates for the account sync process between SnapTrade and the institution,
+        used by `LineOfCreditAccount` in `Connections_listConnectionAccounts`. Each property is optional --
+        an institution may not report sync status for every data type. Line-of-credit accounts don't place
+        orders or hold positions, so like `DepositAccountSyncStatus` this type has no `orders` or
         `positions` field. `balances` is the timestamp of the last successful sync of that data type
         (null if never synced).
       properties:
@@ -4984,74 +5047,6 @@ components:
           type: array
       type: object
       x-konfig-is-used-in-successful-response: true
-    UserAumPercentileResponse:
-      additionalProperties: true
-      description: "The user's placement within your book, or null when SnapTrade\
-        \ declines to place them"
-      example:
-        data:
-          bucket: TOP_25_PERCENT
-          percentile: 78
-          as_of: 2026-08-01T00:00:00.000+00:00
-          cohort_size: 24193
-          currency: USD
-      properties:
-        data:
-          $ref: '#/components/schemas/UserAumPercentileObjectNullable'
-      type: object
-      x-konfig-is-used-in-successful-response: true
-      x-konfig-properties:
-        data:
-          nullable: true
-    UserAumPercentileObject:
-      additionalProperties: true
-      description: A user's AUM placement within a single SnapTrade customer's book
-      properties:
-        bucket:
-          description: |
-            The band the user falls into. Deliberately coarse: the underlying totals are only as current as each brokerage's last sync, so an exact percentile would imply more precision than the data supports.
-          enum:
-          - TOP_1_PERCENT
-          - TOP_5_PERCENT
-          - TOP_10_PERCENT
-          - TOP_25_PERCENT
-          - TOP_50_PERCENT
-          - BOTTOM_50_PERCENT
-          example: TOP_25_PERCENT
-          type: string
-          x-konfig-original-example: TOP_25_PERCENT
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-bucket
-        percentile:
-          description: |
-            The percent of the cohort the user's assets are strictly above, 0-100. Integer by design: the distribution is stored as 101 interpolated cutoffs, so a fractional percentile would not mean anything.
-
-            Prefer `bucket` for anything you display prominently. The distribution is recomputed monthly, so a user's percentile can move a few points on its own as other users' holdings refresh, while their bucket stays put. Users tied on the same total all receive the lowest percentile that total spans.
-          example: 78
-          maximum: 100
-          minimum: 0
-          type: integer
-          x-konfig-original-example: 78
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-percentile
-        cohort_size:
-          description: Number of your users the distribution was computed from.
-          example: 24193
-          type: integer
-          x-konfig-original-example: 24193
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-cohort_size
-        as_of:
-          description: The month whose distribution produced this placement.
-          example: 2026-08-01
-          format: date
-          type: string
-          x-konfig-original-example: 2026-08-01
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-as_of
-        currency:
-          description: The currency the distribution was computed in.
-          example: USD
-          type: string
-          x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-currency
-      type: object
     RateOfReturnResponse:
       additionalProperties: true
       description: List of return rates with their timeframe
@@ -12233,6 +12228,78 @@ components:
       example: USD
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-kind:
+      example: line_of_credit
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-display_name:
+      example: Chase Sapphire Preferred
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-number:
+      example: '****1881'
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-institution_account_id:
+      example: "77102934"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-institution_id:
+      example: c8f1d0e2-3c4f-5a6b-9d7e-0f2a3b4c5d6e
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-opening_date:
+      example: 2019-11-15T00:00:00.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-raw_type:
+      example: CREDIT_CARD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value:
+      additionalProperties: true
+      example:
+        amount: -842.17
+        currency: USD
+      properties:
+        amount:
+          example: -842.17
+          type: number
+        currency:
+          example: USD
+          type: string
+      type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value-properties-amount:
+      example: -842.17
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount:
+      additionalProperties: true
+      example:
+        amount: 40
+        currency: USD
+      properties:
+        amount:
+          example: 40
+          type: number
+        currency:
+          example: USD
+          type: string
+      type: object
+      x-do-not-generate: true
+    ? konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-amount
+    : example: 40
+      type: number
+      x-do-not-generate: true
+    ? konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-currency
+    : example: USD
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountSimple-properties-name:
       example: Robinhood Individual
       type: string
@@ -12275,26 +12342,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthIDs:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-bucket:
-      example: TOP_25_PERCENT
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-percentile:
-      example: 78
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-cohort_size:
-      example: 24193
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-as_of:
-      example: 2026-08-01
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-currency:
-      example: USD
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-RateOfReturnObject-properties-timeframe:
@@ -14614,21 +14661,6 @@ components:
       - userSecret
       - only_executed
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--aumPercentile:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-returnRates:
       additionalProperties: true
       properties:
@@ -15827,62 +15859,6 @@ components:
       type: string
       x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
-    UserAumPercentileObjectNullable:
-      additionalProperties: true
-      description: A user's AUM placement within a single SnapTrade customer's book
-      example:
-        bucket: TOP_25_PERCENT
-        percentile: 78
-        as_of: 2026-08-01T00:00:00.000+00:00
-        cohort_size: 24193
-        currency: USD
-      nullable: true
-      properties:
-        bucket:
-          description: |
-            The band the user falls into. Deliberately coarse: the underlying totals are only as current as each brokerage's last sync, so an exact percentile would imply more precision than the data supports.
-          enum:
-          - TOP_1_PERCENT
-          - TOP_5_PERCENT
-          - TOP_10_PERCENT
-          - TOP_25_PERCENT
-          - TOP_50_PERCENT
-          - BOTTOM_50_PERCENT
-          example: TOP_25_PERCENT
-          type: string
-          x-konfig-original-example: TOP_25_PERCENT
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-bucket
-        percentile:
-          description: |
-            The percent of the cohort the user's assets are strictly above, 0-100. Integer by design: the distribution is stored as 101 interpolated cutoffs, so a fractional percentile would not mean anything.
-
-            Prefer `bucket` for anything you display prominently. The distribution is recomputed monthly, so a user's percentile can move a few points on its own as other users' holdings refresh, while their bucket stays put. Users tied on the same total all receive the lowest percentile that total spans.
-          example: 78
-          maximum: 100
-          minimum: 0
-          type: integer
-          x-konfig-original-example: 78
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-percentile
-        cohort_size:
-          description: Number of your users the distribution was computed from.
-          example: 24193
-          type: integer
-          x-konfig-original-example: 24193
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-cohort_size
-        as_of:
-          description: The month whose distribution produced this placement.
-          example: 2026-08-01
-          format: date
-          type: string
-          x-konfig-original-example: 2026-08-01
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-as_of
-        currency:
-          description: The currency the distribution was computed in.
-          example: USD
-          type: string
-          x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserAumPercentileObject-properties-currency
-      type: object
     UniversalSymbolNullable:
       additionalProperties: true
       description: Uniquely describes a single security + exchange combination across
@@ -16751,9 +16727,9 @@ components:
     InvestmentAccount_net_value:
       additionalProperties: true
       description: "Net value of the account -- total market value for investment\
-        \ accounts. Shared across all account kinds so that, e.g., a future `line_of_credit`\
-        \ account can report a negative net value here. Null when unknown (e.g. a\
-        \ real-time fetch failed and no cached value exists)."
+        \ accounts. Shared across all account kinds -- negative for `line_of_credit`\
+        \ accounts, representing money owed. Null when unknown (e.g. a real-time fetch\
+        \ failed and no cached value exists)."
       example:
         amount: 84213.55
         currency: USD
@@ -16777,9 +16753,9 @@ components:
     DepositAccount_net_value:
       additionalProperties: true
       description: "Net value of the account -- cash balance for deposit accounts.\
-        \ Shared across all account kinds so that, e.g., a future `line_of_credit`\
-        \ account can report a negative net value here. Null when unknown (e.g. a\
-        \ real-time fetch failed and no cached value exists)."
+        \ Shared across all account kinds -- negative for `line_of_credit` accounts,\
+        \ representing money owed. Null when unknown (e.g. a real-time fetch failed\
+        \ and no cached value exists)."
       example:
         amount: 3120.44
         currency: USD
@@ -16800,6 +16776,64 @@ components:
         amount: 3120.44
         currency: USD
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-net_value
+    LineOfCreditAccount_net_value:
+      additionalProperties: true
+      description: "Net value of the account -- negative, representing money owed.\
+        \ Shared across all account kinds. Null when unknown (e.g. a real-time fetch\
+        \ failed and no cached value exists)."
+      example:
+        amount: -842.17
+        currency: USD
+      nullable: true
+      properties:
+        amount:
+          example: -842.17
+          nullable: true
+          type: number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value-properties-amount
+        currency:
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value-properties-currency
+      type: object
+      x-konfig-original-example:
+        amount: -842.17
+        currency: USD
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value
+    LineOfCreditAccount_credit_details_minimum_payment_amount:
+      additionalProperties: true
+      description: The minimum payment due on the account's next statement.
+      example:
+        amount: 40
+        currency: USD
+      nullable: true
+      properties:
+        amount:
+          example: 40
+          nullable: true
+          type: number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-amount
+        currency:
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-currency
+      type: object
+      x-konfig-original-example:
+        amount: 40
+        currency: USD
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount
+    LineOfCreditAccount_credit_details:
+      additionalProperties: true
+      description: Additional line-of-credit details. Currently only `minimum_payment_amount`;
+        more properties (e.g. credit limit) may be added later without a breaking
+        change. Omitted when no such data is available.
+      nullable: true
+      properties:
+        minimum_payment_amount:
+          $ref: '#/components/schemas/LineOfCreditAccount_credit_details_minimum_payment_amount'
+      type: object
     OptionQuote_greeks:
       additionalProperties: true
       description: The Greeks for the option contract.

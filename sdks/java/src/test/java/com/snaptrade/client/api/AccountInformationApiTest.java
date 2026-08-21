@@ -28,7 +28,6 @@ import com.snaptrade.client.model.PaginatedUniversalActivity;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.RecentOrdersResponse;
 import java.util.UUID;
-import com.snaptrade.client.model.UserAumPercentileResponse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -221,22 +220,6 @@ public class AccountInformationApiTest {
         String timeframes = null;
         RateOfReturnResponse response = api.getUserAccountReturnRates(userId, userSecret, accountId)
                 .timeframes(timeframes)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Get the user&#39;s AUM percentile
-     *
-     * Returns where the user&#39;s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and &#x60;as_of&#x60; reports which month&#39;s distribution the placement came from.  &#x60;data&#x60; is &#x60;null&#x60; — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user&#39;s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user&#39;s assets would understate them, so none is returned. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getUserAumPercentileTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UserAumPercentileResponse response = api.getUserAumPercentile(userId, userSecret)
                 .execute();
         // TODO: test validations
     }

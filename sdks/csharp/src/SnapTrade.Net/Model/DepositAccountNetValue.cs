@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Net value of the account - - cash balance for deposit accounts. Shared across all account kinds so that, e.g., a future &#x60;line_of_credit&#x60; account can report a negative net value here. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
+    /// Net value of the account - - cash balance for deposit accounts. Shared across all account kinds - - negative for &#x60;line_of_credit&#x60; accounts, representing money owed. Null when unknown (e.g. a real-time fetch failed and no cached value exists).
     /// </summary>
     [DataContract(Name = "DepositAccount_net_value")]
     public partial class DepositAccountNetValue : IEquatable<DepositAccountNetValue>, IValidatableObject

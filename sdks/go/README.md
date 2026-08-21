@@ -116,7 +116,6 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **Get** /accounts/{accountId}/orders | List account orders
 *AccountInformationApi* | [**GetUserAccountRecentOrders**](docs/AccountInformationApi.md#getuseraccountrecentorders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 *AccountInformationApi* | [**GetUserAccountReturnRates**](docs/AccountInformationApi.md#getuseraccountreturnrates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
-*AccountInformationApi* | [**GetUserAumPercentile**](docs/AccountInformationApi.md#getuseraumpercentile) | **Get** /aumPercentile | Get the user&#39;s AUM percentile
 *AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **Get** /accounts/{accountId}/holdings | List account holdings
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **Get** /accounts | List accounts
 *AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **Put** /accounts/{accountId} | Update details of an investment account
@@ -244,6 +243,11 @@ Class | Method | HTTP request | Description
  - [Instrument](docs/Instrument.md)
  - [InvestmentAccount](docs/InvestmentAccount.md)
  - [InvestmentAccountNetValue](docs/InvestmentAccountNetValue.md)
+ - [LineOfCreditAccount](docs/LineOfCreditAccount.md)
+ - [LineOfCreditAccountCreditDetails](docs/LineOfCreditAccountCreditDetails.md)
+ - [LineOfCreditAccountCreditDetailsMinimumPaymentAmount](docs/LineOfCreditAccountCreditDetailsMinimumPaymentAmount.md)
+ - [LineOfCreditAccountNetValue](docs/LineOfCreditAccountNetValue.md)
+ - [LineOfCreditAccountSyncStatus](docs/LineOfCreditAccountSyncStatus.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)
  - [ManualTrade](docs/ManualTrade.md)
  - [ManualTradeAndImpact](docs/ManualTradeAndImpact.md)
@@ -354,8 +358,5 @@ Class | Method | HTTP request | Description
  - [UniversalActivity](docs/UniversalActivity.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
  - [UniversalSymbolNullable](docs/UniversalSymbolNullable.md)
- - [UserAumPercentileObject](docs/UserAumPercentileObject.md)
- - [UserAumPercentileObjectNullable](docs/UserAumPercentileObjectNullable.md)
- - [UserAumPercentileResponse](docs/UserAumPercentileResponse.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [ValidatedTradeBody](docs/ValidatedTradeBody.md)

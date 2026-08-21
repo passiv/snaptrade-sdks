@@ -163,19 +163,6 @@ describe 'AccountInformationApi' do
     end
   end
 
-  # unit tests for get_user_aum_percentile
-  # Get the user&#39;s AUM percentile
-  # Returns where the user&#39;s total assets sit within the distribution of a cohort of comparable users, as a coarse bucket plus an integer percentile.  The cohort is scoped to your own book: a user is only ever compared against your other users, never across SnapTrade customers. (Users on personal-use keys are the exception — they are compared against all other personal-use users, since a personal key has a single user and cannot form a distribution of its own.) The distribution is recomputed monthly, and &#x60;as_of&#x60; reports which month&#39;s distribution the placement came from.  &#x60;data&#x60; is &#x60;null&#x60; — a 200, not an error — when SnapTrade declines to place the user. That happens when the cohort is too small to publish a distribution, or when the user&#39;s own holdings are incomplete or stale (for example they hold a disabled connection). A placement computed from a partial view of a user&#39;s assets would understate them, so none is returned. 
-  # @param user_id 
-  # @param user_secret 
-  # @param [Hash] opts the optional parameters
-  # @return [UserAumPercentileResponse]
-  describe 'get_user_aum_percentile test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for get_user_holdings
   # List account holdings
   # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 

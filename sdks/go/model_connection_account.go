@@ -16,10 +16,11 @@ import (
 	"fmt"
 )
 
-// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  `investment` and `deposit` are implemented today; `line_of_credit` will be added as an additional variant in a future release. 
+// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, and `line_of_credit` are implemented today. 
 type ConnectionAccount struct {
 	DepositAccount *DepositAccount
 	InvestmentAccount *InvestmentAccount
+	LineOfCreditAccount *LineOfCreditAccount
 }
 
 // DepositAccountAsConnectionAccount is a convenience function that returns DepositAccount wrapped in ConnectionAccount
@@ -33,6 +34,13 @@ func DepositAccountAsConnectionAccount(v *DepositAccount) ConnectionAccount {
 func InvestmentAccountAsConnectionAccount(v *InvestmentAccount) ConnectionAccount {
 	return ConnectionAccount{
 		InvestmentAccount: v,
+	}
+}
+
+// LineOfCreditAccountAsConnectionAccount is a convenience function that returns LineOfCreditAccount wrapped in ConnectionAccount
+func LineOfCreditAccountAsConnectionAccount(v *LineOfCreditAccount) ConnectionAccount {
+	return ConnectionAccount{
+		LineOfCreditAccount: v,
 	}
 }
 
@@ -67,10 +75,24 @@ func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 		dst.InvestmentAccount = nil
 	}
 
+	// try to unmarshal data into LineOfCreditAccount
+	err = newStrictDecoder(data).Decode(&dst.LineOfCreditAccount)
+	if err == nil {
+		jsonLineOfCreditAccount, _ := json.Marshal(dst.LineOfCreditAccount)
+		if string(jsonLineOfCreditAccount) == "{}" { // empty struct
+			dst.LineOfCreditAccount = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.LineOfCreditAccount = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.DepositAccount = nil
 		dst.InvestmentAccount = nil
+		dst.LineOfCreditAccount = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ConnectionAccount)")
 	} else if match == 1 {
@@ -90,6 +112,10 @@ func (src ConnectionAccount) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.InvestmentAccount)
 	}
 
+	if src.LineOfCreditAccount != nil {
+		return json.Marshal(&src.LineOfCreditAccount)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -104,6 +130,10 @@ func (obj *ConnectionAccount) GetActualInstance() (interface{}) {
 
 	if obj.InvestmentAccount != nil {
 		return obj.InvestmentAccount
+	}
+
+	if obj.LineOfCreditAccount != nil {
+		return obj.LineOfCreditAccount
 	}
 
 	// all schemas are nil

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ConnectionAccount Class Doc Comment
  *
  * @category Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60; and &#x60;deposit&#x60; are implemented today; &#x60;line_of_credit&#x60; will be added as an additional variant in a future release.
+ * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -46,6 +46,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     public const DISCRIMINATOR_MAPPING = [
         'deposit' => \SnapTrade\Model\DepositAccount::class,
         'investment' => \SnapTrade\Model\InvestmentAccount::class,
+        'line_of_credit' => \SnapTrade\Model\LineOfCreditAccount::class,
     ];
 
     /**
@@ -70,10 +71,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
         'funding_date' => '\DateTime',
-        'sync_status' => '\SnapTrade\Model\DepositAccountSyncStatus',
+        'sync_status' => '\SnapTrade\Model\LineOfCreditAccountSyncStatus',
         'raw_type' => 'string',
         'is_paper' => 'bool',
-        'net_value' => '\SnapTrade\Model\DepositAccountNetValue'
+        'net_value' => '\SnapTrade\Model\LineOfCreditAccountNetValue',
+        'credit_details' => '\SnapTrade\Model\LineOfCreditAccountCreditDetails'
     ];
 
     /**
@@ -96,7 +98,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'sync_status' => null,
         'raw_type' => null,
         'is_paper' => null,
-        'net_value' => null
+        'net_value' => null,
+        'credit_details' => null
     ];
 
     /**
@@ -117,7 +120,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'sync_status' => false,
 		'raw_type' => true,
 		'is_paper' => false,
-		'net_value' => true
+		'net_value' => true,
+		'credit_details' => true
     ];
 
     /**
@@ -218,7 +222,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'sync_status' => 'sync_status',
         'raw_type' => 'raw_type',
         'is_paper' => 'is_paper',
-        'net_value' => 'net_value'
+        'net_value' => 'net_value',
+        'credit_details' => 'credit_details'
     ];
 
     /**
@@ -239,7 +244,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'sync_status' => 'setSyncStatus',
         'raw_type' => 'setRawType',
         'is_paper' => 'setIsPaper',
-        'net_value' => 'setNetValue'
+        'net_value' => 'setNetValue',
+        'credit_details' => 'setCreditDetails'
     ];
 
     /**
@@ -260,7 +266,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'sync_status' => 'getSyncStatus',
         'raw_type' => 'getRawType',
         'is_paper' => 'getIsPaper',
-        'net_value' => 'getNetValue'
+        'net_value' => 'getNetValue',
+        'credit_details' => 'getCreditDetails'
     ];
 
     /**
@@ -304,7 +311,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const KIND_DEPOSIT = 'deposit';
+    public const KIND_LINE_OF_CREDIT = 'line_of_credit';
 
     /**
      * Gets allowable values of the enum
@@ -314,7 +321,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_DEPOSIT,
+            self::KIND_LINE_OF_CREDIT,
         ];
     }
 
@@ -346,6 +353,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('raw_type', $data ?? [], null);
         $this->setIfExists('is_paper', $data ?? [], null);
         $this->setIfExists('net_value', $data ?? [], null);
+        $this->setIfExists('credit_details', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -566,7 +574,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets number
      *
-     * @param string $number The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
+     * @param string $number The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
      *
      * @return self
      */
@@ -722,7 +730,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets sync_status
      *
-     * @return \SnapTrade\Model\DepositAccountSyncStatus
+     * @return \SnapTrade\Model\LineOfCreditAccountSyncStatus
      */
     public function getSyncStatus()
     {
@@ -732,7 +740,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets sync_status
      *
-     * @param \SnapTrade\Model\DepositAccountSyncStatus $sync_status sync_status
+     * @param \SnapTrade\Model\LineOfCreditAccountSyncStatus $sync_status sync_status
      *
      * @return self
      */
@@ -816,7 +824,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets net_value
      *
-     * @return \SnapTrade\Model\DepositAccountNetValue|null
+     * @return \SnapTrade\Model\LineOfCreditAccountNetValue|null
      */
     public function getNetValue()
     {
@@ -826,7 +834,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets net_value
      *
-     * @param \SnapTrade\Model\DepositAccountNetValue|null $net_value net_value
+     * @param \SnapTrade\Model\LineOfCreditAccountNetValue|null $net_value net_value
      *
      * @return self
      */
@@ -845,6 +853,42 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['net_value'] = $net_value;
+
+        return $this;
+    }
+
+    /**
+     * Gets credit_details
+     *
+     * @return \SnapTrade\Model\LineOfCreditAccountCreditDetails|null
+     */
+    public function getCreditDetails()
+    {
+        return $this->container['credit_details'];
+    }
+
+    /**
+     * Sets credit_details
+     *
+     * @param \SnapTrade\Model\LineOfCreditAccountCreditDetails|null $credit_details credit_details
+     *
+     * @return self
+     */
+    public function setCreditDetails($credit_details)
+    {
+
+        if (is_null($credit_details)) {
+            array_push($this->openAPINullablesSetToNull, 'credit_details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('credit_details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['credit_details'] = $credit_details;
 
         return $this;
     }

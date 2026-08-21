@@ -323,6 +323,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.RawType`: %v\n", *resp.RawType)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NetValue`: %v\n", *resp.NetValue)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.CreditDetails`: %v\n", *resp.CreditDetails)
 }
 ```
 

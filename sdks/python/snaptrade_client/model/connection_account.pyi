@@ -34,8 +34,7 @@ class ConnectionAccount(
 used by `Connections_listConnectionAccounts`. Use `kind` to determine
 which schema is present.
 
-`investment` and `deposit` are implemented today; `line_of_credit`
-will be added as an additional variant in a future release.
+`investment`, `deposit`, and `line_of_credit` are implemented today.
 
     """
 
@@ -48,8 +47,10 @@ will be added as an additional variant in a future release.
                 'kind': {
                     'DepositAccount': DepositAccount,
                     'InvestmentAccount': InvestmentAccount,
+                    'LineOfCreditAccount': LineOfCreditAccount,
                     'deposit': DepositAccount,
                     'investment': InvestmentAccount,
+                    'line_of_credit': LineOfCreditAccount,
                 }
             }
         
@@ -66,6 +67,7 @@ will be added as an additional variant in a future release.
             return [
                 InvestmentAccount,
                 DepositAccount,
+                LineOfCreditAccount,
             ]
 
 
@@ -84,3 +86,4 @@ will be added as an additional variant in a future release.
 
 from snaptrade_client.model.deposit_account import DepositAccount
 from snaptrade_client.model.investment_account import InvestmentAccount
+from snaptrade_client.model.line_of_credit_account import LineOfCreditAccount
