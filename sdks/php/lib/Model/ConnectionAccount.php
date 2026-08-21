@@ -39,6 +39,16 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     public const DISCRIMINATOR = 'kind';
 
     /**
+     * Map discriminator values to model classes.
+     *
+     * @var array<string, class-string<ModelInterface>>
+     */
+    public const DISCRIMINATOR_MAPPING = [
+        'deposit' => \SnapTrade\Model\DepositAccount::class,
+        'investment' => \SnapTrade\Model\InvestmentAccount::class,
+    ];
+
+    /**
       * The original name of the model.
       *
       * @var string
