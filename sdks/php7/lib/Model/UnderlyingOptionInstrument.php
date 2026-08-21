@@ -39,6 +39,21 @@ class UnderlyingOptionInstrument implements ModelInterface, ArrayAccess, \JsonSe
     public const DISCRIMINATOR = 'kind';
 
     /**
+     * Map discriminator values to model classes.
+     *
+     * @var array<string, class-string<ModelInterface>>
+     */
+    public const DISCRIMINATOR_MAPPING = [
+        'adr' => \SnapTrade\Model\AdrInstrument::class,
+        'cef' => \SnapTrade\Model\CefInstrument::class,
+        'crypto' => \SnapTrade\Model\CryptoInstrument::class,
+        'etf' => \SnapTrade\Model\EtfInstrument::class,
+        'mutualfund' => \SnapTrade\Model\MutualFundInstrument::class,
+        'other' => \SnapTrade\Model\OtherInstrument::class,
+        'stock' => \SnapTrade\Model\StockInstrument::class,
+    ];
+
+    /**
       * The original name of the model.
       *
       * @var string

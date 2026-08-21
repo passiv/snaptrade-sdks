@@ -505,12 +505,26 @@ class ObjectSerializer
                 $data = (object)$data;
             }
 
-            // If a discriminator is defined and points to a valid subclass, use it.
+            // If a discriminator is defined and points to a valid model, use it.
             $discriminator = $class::DISCRIMINATOR;
             if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {
-                $subclass = '\SnapTrade\Model\\' . $data->{$discriminator};
-                if (is_subclass_of($subclass, $class)) {
-                    $class = $subclass;
+                $discriminatorValue = $data->{$discriminator};
+                $mappedClass = null;
+
+                if (defined($class . '::DISCRIMINATOR_MAPPING')) {
+                    $discriminatorMapping = $class::DISCRIMINATOR_MAPPING;
+                    if (isset($discriminatorMapping[$discriminatorValue])) {
+                        $mappedClass = $discriminatorMapping[$discriminatorValue];
+                    }
+                }
+
+                if (is_string($mappedClass) && class_exists($mappedClass)) {
+                    $class = $mappedClass;
+                } else {
+                    $subclass = '\SnapTrade\Model\\' . $discriminatorValue;
+                    if (is_subclass_of($subclass, $class)) {
+                        $class = $subclass;
+                    }
                 }
             }
 

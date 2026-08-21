@@ -39,6 +39,24 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public const DISCRIMINATOR = 'kind';
 
     /**
+     * Map discriminator values to model classes.
+     *
+     * @var array<string, class-string<ModelInterface>>
+     */
+    public const DISCRIMINATOR_MAPPING = [
+        'adr' => \SnapTrade\Model\AdrInstrument::class,
+        'cef' => \SnapTrade\Model\CefInstrument::class,
+        'cfd' => \SnapTrade\Model\CfdInstrument::class,
+        'crypto' => \SnapTrade\Model\CryptoInstrument::class,
+        'etf' => \SnapTrade\Model\EtfInstrument::class,
+        'future' => \SnapTrade\Model\FutureInstrument::class,
+        'mutualfund' => \SnapTrade\Model\MutualFundInstrument::class,
+        'option' => \SnapTrade\Model\OptionInstrument::class,
+        'other' => \SnapTrade\Model\OtherInstrument::class,
+        'stock' => \SnapTrade\Model\StockInstrument::class,
+    ];
+
+    /**
       * The original name of the model.
       *
       * @var string
