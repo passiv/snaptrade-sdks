@@ -58,9 +58,9 @@ See [Ratelimiting](https://docs.snaptrade.com/docs/ratelimiting).
 
 ### 8. Trading
 
-If you're using trading functionality, you must have either clear user consent for automated trading or a trade preview flow that shows all expected fees and commissions. Users must also have the ability to opt out of SnapTrade functionality and delete their brokerage connection at any time. It’s recommended to not execute trades faster than 1 trade per connected account per second.
+If you're using trading functionality, you must have either clear user consent for automated trading or an order-confirmation flow that shows all available impact, fee, and commission information. Clearly identify estimates and unavailable values, and obtain the account owner's consent before proceeding without exact information. Users must also have the ability to opt out of SnapTrade functionality and delete their brokerage connection at any time. It’s recommended to not execute trades faster than 1 trade per connected account per second.
 
-See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
+See [Trading with SnapTrade](/docs/trading-with-snaptrade) and [Order impact and confirmation](/docs/order-impact-and-confirmation).
 
 ### 9. Webhooks
 

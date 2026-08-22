@@ -61,6 +61,8 @@ portal:
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+            - id: order-impact-and-confirmation
+              path: docs/order-impact-and-confirmation.md
             - id: filtering-accounts-by-category
               path: docs/filtering-accounts-by-category.md
             - id: realtime-data
