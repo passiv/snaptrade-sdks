@@ -1,6 +1,6 @@
 # Trading with SnapTrade
 
-SnapTrade supports trading workflows for stocks, ETFs, other equities, options, and crypto. The exact feature set depends on the connected brokerage or exchange, so you should always [verify support](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for the account you are about to trade with.
+SnapTrade supports trading workflows for stocks, ETFs, other equities, options, and crypto. The exact feature set depends on the connected brokerage or exchange, so you should always [verify support](https://support.snaptrade.com/brokerages) for the account you are about to trade with.
 
 > 🚧 **Soft Rate Limit**
 >
@@ -18,6 +18,12 @@ Most trading integrations with SnapTrade follow the same high-level flow:
 6. Monitor execution status.
 
 The sections below explain how that flow differs for equities, options, and crypto.
+
+## Confirm Order Details and Impact
+
+Before submitting an order, show the account owner the order instructions, all available impact and fee information, the source of any estimates, and a clear confirmation action. A brokerage preview is not available for every supported trading workflow and is not a universal prerequisite for placing an order.
+
+See [Order impact and confirmation](/docs/order-impact-and-confirmation) for confirmation requirements, recommended source labels and disclaimers, and guidance for orders without a reliable preview.
 
 ## Set Up Trading Access
 
@@ -132,6 +138,6 @@ In this example, the order buys `0.01` ETH with EUR.
 
 ## Brokerage Support and Reconciliation
 
-Not every brokerage supports every trading workflow. Extended-hours sessions, multi-leg options, and crypto trading are all institution-specific. Review the [SnapTrade Brokerage Support Matrix](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) before enabling a feature in production.
+Not every brokerage supports every trading workflow. Extended-hours sessions, multi-leg options, and crypto trading are all institution-specific. Review the [SnapTrade Institution Support guide](https://support.snaptrade.com/brokerages) before enabling a feature in production.
 
 After placing an order, we recommend you reconcile the latest state by pulling a list of recent orders with :api[AccountInformation_getUserAccountRecentOrders].
