@@ -68,7 +68,7 @@ namespace SnapTrade.Net.Api
         /// List historical account total value
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -82,7 +82,7 @@ namespace SnapTrade.Net.Api
         /// List historical account total value
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -423,7 +423,7 @@ namespace SnapTrade.Net.Api
         /// List historical account total value
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -438,7 +438,7 @@ namespace SnapTrade.Net.Api
         /// List historical account total value
         /// </summary>
         /// <remarks>
-        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1139,7 +1139,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1154,7 +1154,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1242,7 +1242,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1258,7 +1258,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. 
+        /// List historical account total value An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature in the Add-on section of the Billing page: https://dashboard.snaptrade.com/settings/billing 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
