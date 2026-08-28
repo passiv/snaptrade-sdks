@@ -9,4 +9,4 @@ go: patch
 php7: patch
 ---
 
-Percent-encode Python query authentication parameters
+Regenerate SDKs with percent-encoded Python query authentication parameters and fully qualified PHP/PHP7 allOf model types.
