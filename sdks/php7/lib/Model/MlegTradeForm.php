@@ -55,7 +55,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'limit_price' => 'float',
         'stop_price' => 'float',
-        'price_effect' => 'MlegPriceEffectStrict',
+        'price_effect' => '\SnapTrade\Model\MlegPriceEffectStrict',
         'legs' => '\SnapTrade\Model\MlegLeg[]'
     ];
 
@@ -460,7 +460,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets price_effect
      *
-     * @return MlegPriceEffectStrict|null
+     * @return \SnapTrade\Model\MlegPriceEffectStrict|null
      */
     public function getPriceEffect()
     {
@@ -470,7 +470,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_effect
      *
-     * @param MlegPriceEffectStrict|null $price_effect price_effect
+     * @param \SnapTrade\Model\MlegPriceEffectStrict|null $price_effect price_effect
      *
      * @return self
      */

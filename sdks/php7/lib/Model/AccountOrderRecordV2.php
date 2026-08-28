@@ -53,7 +53,7 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPITypes = [
         'brokerage_order_id' => 'string',
         'brokerage_group_order_id' => 'string',
-        'order_role' => 'AccountOrderRecordV2OrderRole',
+        'order_role' => '\SnapTrade\Model\AccountOrderRecordV2OrderRole',
         'status' => '\SnapTrade\Model\AccountOrderRecordStatus',
         'order_type' => 'string',
         'time_in_force' => 'string',
@@ -480,7 +480,7 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets order_role
      *
-     * @return AccountOrderRecordV2OrderRole|null
+     * @return \SnapTrade\Model\AccountOrderRecordV2OrderRole|null
      */
     public function getOrderRole()
     {
@@ -490,7 +490,7 @@ class AccountOrderRecordV2 implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets order_role
      *
-     * @param AccountOrderRecordV2OrderRole|null $order_role The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
+     * @param \SnapTrade\Model\AccountOrderRecordV2OrderRole|null $order_role The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders.
      *
      * @return self
      */

@@ -288,7 +288,7 @@ class ParameterSerializerBase:
         )
 
     @classmethod
-    def _ref6570_expansion(
+    def _rfc6570_expansion(
         cls,
         variable_name: str,
         in_data: typing.Any,
@@ -344,6 +344,22 @@ class ParameterSerializerBase:
         # bytes, etc
         raise ApiValueError('Unable to generate a ref6570 representation of {}'.format(in_data))
 
+    @classmethod
+    def _query_auth_parameter_expansion(
+        cls,
+        variable_name: str,
+        in_data: typing.Any,
+        prefix_separator_iterator: PrefixSeparatorIterator
+    ) -> str:
+        """Serialize a query authentication value like a regular query parameter."""
+        return cls._rfc6570_expansion(
+            variable_name=variable_name,
+            in_data=in_data,
+            explode=False,
+            percent_encode=True,
+            prefix_separator_iterator=prefix_separator_iterator
+        )
+
 
 class StyleFormSerializer(ParameterSerializerBase):
     @classmethod
@@ -362,7 +378,7 @@ class StyleFormSerializer(ParameterSerializerBase):
     ) -> str:
         if prefix_separator_iterator is None:
             prefix_separator_iterator = PrefixSeparatorIterator('', '&')
-        return self._ref6570_expansion(
+        return self._rfc6570_expansion(
             variable_name=name,
             in_data=in_data,
             explode=explode,
@@ -381,7 +397,7 @@ class StyleSimpleSerializer(ParameterSerializerBase):
         percent_encode: bool
     ) -> str:
         prefix_separator_iterator = PrefixSeparatorIterator('', ',')
-        return self._ref6570_expansion(
+        return self._rfc6570_expansion(
             variable_name=name,
             in_data=in_data,
             explode=explode,
@@ -517,7 +533,7 @@ class PathParameter(ParameterBase, StyleSimpleSerializer):
         in_data: typing.Union[None, int, float, str, bool, dict, list]
     ) -> typing.Dict[str, str]:
         prefix_separator_iterator = PrefixSeparatorIterator('.', '.')
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -531,7 +547,7 @@ class PathParameter(ParameterBase, StyleSimpleSerializer):
         in_data: typing.Union[None, int, float, str, bool, dict, list]
     ) -> typing.Dict[str, str]:
         prefix_separator_iterator = PrefixSeparatorIterator(';', ';')
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -619,7 +635,7 @@ class QueryParameter(ParameterBase, StyleFormSerializer):
     ) -> typing.Dict[str, str]:
         if prefix_separator_iterator is None:
             prefix_separator_iterator = self.get_prefix_separator_iterator()
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -635,7 +651,7 @@ class QueryParameter(ParameterBase, StyleFormSerializer):
     ) -> typing.Dict[str, str]:
         if prefix_separator_iterator is None:
             prefix_separator_iterator = self.get_prefix_separator_iterator()
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -1619,11 +1635,9 @@ class ApiClient(typing.Generic[TAuth]):
                 need to pass in prefix_separator_iterator
                 and need to output resource_path with query params added
                 """
-                resource_path += ParameterSerializerBase._ref6570_expansion(
+                resource_path += ParameterSerializerBase._query_auth_parameter_expansion(
                     variable_name=auth_setting['key'],
                     in_data=auth_setting['value'],
-                    explode=False,
-                    percent_encode=False,
                     prefix_separator_iterator=prefix_separator_iterator
                 )
             else:
