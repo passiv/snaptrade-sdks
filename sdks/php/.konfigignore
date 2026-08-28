@@ -1,3 +1,4 @@
 test/GettingStartedTest.php
 test/DiscriminatorDeserializationTest.php
+test/AllOfReferenceDeserializationTest.php
 lib/CustomApi.php
