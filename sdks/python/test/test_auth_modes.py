@@ -3,6 +3,7 @@ import pytest
 
 from snaptrade_client import SnapTrade
 from snaptrade_client import SnapTradeAuth
+from snaptrade_client.request_after_hook import compute_request_signature
 from snaptrade_client.rest import ResponseWrapper
 
 
@@ -51,6 +52,38 @@ def test_commercial_api_key_auth_mode_uses_operation_user_credentials(monkeypatc
     assert "userSecret=secret-1" in url
     assert "timestamp=" in url
     assert "Signature" in calls[0]["headers"]
+
+
+def test_commercial_api_key_percent_encodes_operation_auth_before_signing(monkeypatch):
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    monkeypatch.setattr(
+        "snaptrade_client.request_before_url_hook.time.time",
+        lambda: 1700000000,
+    )
+    client = SnapTrade(
+        auth=SnapTradeAuth.commercial_api_key(
+            consumer_key="consumer_key",
+            client_id="client_id",
+        ),
+        host="https://api.snaptrade.com/api/v1",
+    )
+
+    client.account_information.list_user_accounts(
+        user_id="$user-1",
+        user_secret="secret-1",
+    )
+
+    expected_resource_path = (
+        "/accounts?userId=%24user-1&userSecret=secret-1"
+        "&clientId=client_id&timestamp=1700000000"
+    )
+    assert calls[0]["url"] == "https://api.snaptrade.com/api/v1" + expected_resource_path
+    assert "userId=$user-1" not in calls[0]["url"]
+    assert calls[0]["headers"]["Signature"] == compute_request_signature(
+        expected_resource_path,
+        "consumer_key",
+        None,
+    )
 
 
 @pytest.mark.parametrize("legacy_param", ["consumer_key", "client_id"])

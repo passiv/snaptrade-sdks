@@ -58,7 +58,7 @@ class AccountOrderRecordLeg implements ModelInterface, ArrayAccess, \JsonSeriali
         'total_quantity' => 'string',
         'canceled_quantity' => 'string',
         'filled_quantity' => 'string',
-        'status' => 'AccountOrderRecordStatusV2'
+        'status' => '\SnapTrade\Model\AccountOrderRecordStatusV2'
     ];
 
     /**
@@ -573,7 +573,7 @@ class AccountOrderRecordLeg implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets status
      *
-     * @return AccountOrderRecordStatusV2|null
+     * @return \SnapTrade\Model\AccountOrderRecordStatusV2|null
      */
     public function getStatus()
     {
@@ -583,7 +583,7 @@ class AccountOrderRecordLeg implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets status
      *
-     * @param AccountOrderRecordStatusV2|null $status status
+     * @param \SnapTrade\Model\AccountOrderRecordStatusV2|null $status status
      *
      * @return self
      */

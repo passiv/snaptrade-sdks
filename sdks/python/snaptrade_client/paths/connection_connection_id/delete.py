@@ -259,21 +259,17 @@ class BaseApi(api_client.Api):
         if query_params.get("userId", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
                 prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
-            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+            used_path += api_client.ParameterSerializerBase._query_auth_parameter_expansion(
                 variable_name="userId",
                 in_data=query_params["userId"],
-                explode=False,
-                percent_encode=False,
                 prefix_separator_iterator=prefix_separator_iterator
             )
         if query_params.get("userSecret", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
                 prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
-            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+            used_path += api_client.ParameterSerializerBase._query_auth_parameter_expansion(
                 variable_name="userSecret",
                 in_data=query_params["userSecret"],
-                explode=False,
-                percent_encode=False,
                 prefix_separator_iterator=prefix_separator_iterator
             )
     
@@ -406,21 +402,17 @@ class BaseApi(api_client.Api):
         if query_params.get("userId", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
                 prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
-            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+            used_path += api_client.ParameterSerializerBase._query_auth_parameter_expansion(
                 variable_name="userId",
                 in_data=query_params["userId"],
-                explode=False,
-                percent_encode=False,
                 prefix_separator_iterator=prefix_separator_iterator
             )
         if query_params.get("userSecret", schemas.unset) is not schemas.unset:
             if prefix_separator_iterator is None:
                 prefix_separator_iterator = api_client.PrefixSeparatorIterator("?", "&")
-            used_path += api_client.ParameterSerializerBase._ref6570_expansion(
+            used_path += api_client.ParameterSerializerBase._query_auth_parameter_expansion(
                 variable_name="userSecret",
                 in_data=query_params["userSecret"],
-                explode=False,
-                percent_encode=False,
                 prefix_separator_iterator=prefix_separator_iterator
             )
     
