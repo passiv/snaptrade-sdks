@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **WebhookId** | **string** |  | 
 **OauthClientId** | **string** | The OAuth client ID of the application receiving the webhook. | 
 **EventTimestamp** | **DateTime** |  | 
-**UserId** | **string** | The SnapTrade Personal user UUID, matching &#x60;sub.snaptrade_user_id&#x60; in the OAuth token response. | 
+**UserId** | **string** | The SnapTrade Personal user UUID, matching the &#x60;sub&#x60; claim of the OIDC &#x60;id_token&#x60; (issued when the &#x60;openid&#x60; scope is requested) and the deprecated top-level &#x60;sub.snaptrade_user_id&#x60; field in the OAuth token response. | 
 **EventType** | **string** |  | 
 **AccountId** | **string** |  | [optional] 
 **ConnectionId** | **string** |  | [optional] 

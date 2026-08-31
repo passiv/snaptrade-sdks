@@ -272,11 +272,11 @@ public class OAuthWebhookBase {
   }
 
    /**
-   * The SnapTrade Personal user UUID, matching &#x60;sub.snaptrade_user_id&#x60; in the OAuth token response.
+   * The SnapTrade Personal user UUID, matching the &#x60;sub&#x60; claim of the OIDC &#x60;id_token&#x60; (issued when the &#x60;openid&#x60; scope is requested) and the deprecated top-level &#x60;sub.snaptrade_user_id&#x60; field in the OAuth token response.
    * @return userId
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "b5980c55-0071-4b1d-b275-fefc2a497408", required = true, value = "The SnapTrade Personal user UUID, matching `sub.snaptrade_user_id` in the OAuth token response.")
+  @ApiModelProperty(example = "b5980c55-0071-4b1d-b275-fefc2a497408", required = true, value = "The SnapTrade Personal user UUID, matching the `sub` claim of the OIDC `id_token` (issued when the `openid` scope is requested) and the deprecated top-level `sub.snaptrade_user_id` field in the OAuth token response.")
 
   public UUID getUserId() {
     return userId;

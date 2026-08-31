@@ -27,7 +27,7 @@ class RequiredOAuthWebhookBase(TypedDict):
 
     eventTimestamp: datetime
 
-    # The SnapTrade Personal user UUID, matching `sub.snaptrade_user_id` in the OAuth token response.
+    # The SnapTrade Personal user UUID, matching the `sub` claim of the OIDC `id_token` (issued when the `openid` scope is requested) and the deprecated top-level `sub.snaptrade_user_id` field in the OAuth token response.
     userId: str
 
     eventType: str
