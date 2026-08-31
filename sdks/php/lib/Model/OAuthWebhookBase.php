@@ -532,7 +532,7 @@ class OAuthWebhookBase implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets user_id
      *
-     * @param string $user_id The SnapTrade Personal user UUID, matching `sub.snaptrade_user_id` in the OAuth token response.
+     * @param string $user_id The SnapTrade Personal user UUID, matching the `sub` claim of the OIDC `id_token` (issued when the `openid` scope is requested) and the deprecated top-level `sub.snaptrade_user_id` field in the OAuth token response.
      *
      * @return self
      */

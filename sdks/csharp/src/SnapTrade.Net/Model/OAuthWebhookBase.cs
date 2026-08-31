@@ -67,7 +67,7 @@ namespace SnapTrade.Net.Model
         /// <param name="webhookId">webhookId (required).</param>
         /// <param name="oauthClientId">The OAuth client ID of the application receiving the webhook. (required).</param>
         /// <param name="eventTimestamp">eventTimestamp (required).</param>
-        /// <param name="userId">The SnapTrade Personal user UUID, matching &#x60;sub.snaptrade_user_id&#x60; in the OAuth token response. (required).</param>
+        /// <param name="userId">The SnapTrade Personal user UUID, matching the &#x60;sub&#x60; claim of the OIDC &#x60;id_token&#x60; (issued when the &#x60;openid&#x60; scope is requested) and the deprecated top-level &#x60;sub.snaptrade_user_id&#x60; field in the OAuth token response. (required).</param>
         /// <param name="eventType">eventType (required).</param>
         /// <param name="accountId">accountId.</param>
         /// <param name="connectionId">connectionId.</param>
@@ -130,9 +130,9 @@ namespace SnapTrade.Net.Model
         public DateTime EventTimestamp { get; set; }
 
         /// <summary>
-        /// The SnapTrade Personal user UUID, matching &#x60;sub.snaptrade_user_id&#x60; in the OAuth token response.
+        /// The SnapTrade Personal user UUID, matching the &#x60;sub&#x60; claim of the OIDC &#x60;id_token&#x60; (issued when the &#x60;openid&#x60; scope is requested) and the deprecated top-level &#x60;sub.snaptrade_user_id&#x60; field in the OAuth token response.
         /// </summary>
-        /// <value>The SnapTrade Personal user UUID, matching &#x60;sub.snaptrade_user_id&#x60; in the OAuth token response.</value>
+        /// <value>The SnapTrade Personal user UUID, matching the &#x60;sub&#x60; claim of the OIDC &#x60;id_token&#x60; (issued when the &#x60;openid&#x60; scope is requested) and the deprecated top-level &#x60;sub.snaptrade_user_id&#x60; field in the OAuth token response.</value>
         [DataMember(Name = "userId", IsRequired = true, EmitDefaultValue = true)]
         public string UserId { get; set; }
 

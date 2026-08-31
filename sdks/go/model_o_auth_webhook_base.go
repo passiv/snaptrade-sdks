@@ -23,7 +23,7 @@ type OAuthWebhookBase struct {
 	// The OAuth client ID of the application receiving the webhook.
 	OauthClientId string `json:"oauthClientId"`
 	EventTimestamp time.Time `json:"eventTimestamp"`
-	// The SnapTrade Personal user UUID, matching `sub.snaptrade_user_id` in the OAuth token response.
+	// The SnapTrade Personal user UUID, matching the `sub` claim of the OIDC `id_token` (issued when the `openid` scope is requested) and the deprecated top-level `sub.snaptrade_user_id` field in the OAuth token response.
 	UserId string `json:"userId"`
 	EventType string `json:"eventType"`
 	AccountId *string `json:"accountId,omitempty"`
