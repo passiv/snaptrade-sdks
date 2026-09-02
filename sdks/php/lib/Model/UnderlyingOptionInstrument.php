@@ -45,6 +45,7 @@ class UnderlyingOptionInstrument implements ModelInterface, ArrayAccess, \JsonSe
      */
     public const DISCRIMINATOR_MAPPING = [
         'adr' => \SnapTrade\Model\AdrInstrument::class,
+        'bond' => \SnapTrade\Model\OtherInstrument::class,
         'cef' => \SnapTrade\Model\CefInstrument::class,
         'crypto' => \SnapTrade\Model\CryptoInstrument::class,
         'etf' => \SnapTrade\Model\EtfInstrument::class,
@@ -279,6 +280,7 @@ class UnderlyingOptionInstrument implements ModelInterface, ArrayAccess, \JsonSe
         return self::$openAPIModelName;
     }
 
+    public const KIND_BOND = 'bond';
     public const KIND_OTHER = 'other';
 
     /**
@@ -289,6 +291,7 @@ class UnderlyingOptionInstrument implements ModelInterface, ArrayAccess, \JsonSe
     public function getKindAllowableValues()
     {
         return [
+            self::KIND_BOND,
             self::KIND_OTHER,
         ];
     }

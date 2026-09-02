@@ -514,7 +514,7 @@ class AccountPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cash_equivalent
      *
-     * @param bool|null $cash_equivalent Present for mutual fund positions that are also counted in cash balance or buying power.
+     * @param bool|null $cash_equivalent Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
      *
      * @return self
      */

@@ -26,7 +26,7 @@ module SnapTrade
     attr_accessor :display_name
 
     # The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
-    attr_accessor :number
+    attr_accessor :masked_account_number
 
     # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
     attr_accessor :institution_account_id
@@ -44,7 +44,7 @@ module SnapTrade
 
     attr_accessor :net_value
 
-    attr_accessor :credit_details
+    attr_accessor :minimum_payment_amount
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -53,14 +53,14 @@ module SnapTrade
         :'id' => :'id',
         :'connection_id' => :'connection_id',
         :'display_name' => :'display_name',
-        :'number' => :'number',
+        :'masked_account_number' => :'masked_account_number',
         :'institution_account_id' => :'institution_account_id',
         :'institution_id' => :'institution_id',
         :'opening_date' => :'opening_date',
         :'sync_status' => :'sync_status',
         :'raw_type' => :'raw_type',
         :'net_value' => :'net_value',
-        :'credit_details' => :'credit_details'
+        :'minimum_payment_amount' => :'minimum_payment_amount'
       }
     end
 
@@ -76,14 +76,14 @@ module SnapTrade
         :'id' => :'String',
         :'connection_id' => :'String',
         :'display_name' => :'String',
-        :'number' => :'String',
+        :'masked_account_number' => :'String',
         :'institution_account_id' => :'String',
         :'institution_id' => :'String',
         :'opening_date' => :'Time',
         :'sync_status' => :'LineOfCreditAccountSyncStatus',
         :'raw_type' => :'String',
         :'net_value' => :'LineOfCreditAccountNetValue',
-        :'credit_details' => :'LineOfCreditAccountCreditDetails'
+        :'minimum_payment_amount' => :'LineOfCreditAccountMinimumPaymentAmount'
       }
     end
 
@@ -95,7 +95,7 @@ module SnapTrade
         :'opening_date',
         :'raw_type',
         :'net_value',
-        :'credit_details'
+        :'minimum_payment_amount'
       ])
     end
 
@@ -130,8 +130,8 @@ module SnapTrade
         self.display_name = attributes[:'display_name']
       end
 
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'masked_account_number')
+        self.masked_account_number = attributes[:'masked_account_number']
       end
 
       if attributes.key?(:'institution_account_id')
@@ -158,8 +158,8 @@ module SnapTrade
         self.net_value = attributes[:'net_value']
       end
 
-      if attributes.key?(:'credit_details')
-        self.credit_details = attributes[:'credit_details']
+      if attributes.key?(:'minimum_payment_amount')
+        self.minimum_payment_amount = attributes[:'minimum_payment_amount']
       end
     end
 
@@ -179,8 +179,8 @@ module SnapTrade
         invalid_properties.push('invalid value for "connection_id", connection_id cannot be nil.')
       end
 
-      if @number.nil?
-        invalid_properties.push('invalid value for "number", number cannot be nil.')
+      if @masked_account_number.nil?
+        invalid_properties.push('invalid value for "masked_account_number", masked_account_number cannot be nil.')
       end
 
       if @sync_status.nil?
@@ -196,7 +196,7 @@ module SnapTrade
       return false if @kind.nil?
       return false if @id.nil?
       return false if @connection_id.nil?
-      return false if @number.nil?
+      return false if @masked_account_number.nil?
       return false if @sync_status.nil?
       true
     end
@@ -210,14 +210,14 @@ module SnapTrade
           id == o.id &&
           connection_id == o.connection_id &&
           display_name == o.display_name &&
-          number == o.number &&
+          masked_account_number == o.masked_account_number &&
           institution_account_id == o.institution_account_id &&
           institution_id == o.institution_id &&
           opening_date == o.opening_date &&
           sync_status == o.sync_status &&
           raw_type == o.raw_type &&
           net_value == o.net_value &&
-          credit_details == o.credit_details
+          minimum_payment_amount == o.minimum_payment_amount
     end
 
     # @see the `==` method
@@ -229,7 +229,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, number, institution_account_id, institution_id, opening_date, sync_status, raw_type, net_value, credit_details].hash
+      [kind, id, connection_id, display_name, masked_account_number, institution_account_id, institution_id, opening_date, sync_status, raw_type, net_value, minimum_payment_amount].hash
     end
 
     # Builds the object from hash

@@ -26,7 +26,7 @@ module SnapTrade
     attr_accessor :display_name
 
     # The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
-    attr_accessor :number
+    attr_accessor :masked_account_number
 
     # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
     attr_accessor :institution_account_id
@@ -51,7 +51,7 @@ module SnapTrade
         :'id' => :'id',
         :'connection_id' => :'connection_id',
         :'display_name' => :'display_name',
-        :'number' => :'number',
+        :'masked_account_number' => :'masked_account_number',
         :'institution_account_id' => :'institution_account_id',
         :'institution_id' => :'institution_id',
         :'opening_date' => :'opening_date',
@@ -73,7 +73,7 @@ module SnapTrade
         :'id' => :'String',
         :'connection_id' => :'String',
         :'display_name' => :'String',
-        :'number' => :'String',
+        :'masked_account_number' => :'String',
         :'institution_account_id' => :'String',
         :'institution_id' => :'String',
         :'opening_date' => :'Time',
@@ -125,8 +125,8 @@ module SnapTrade
         self.display_name = attributes[:'display_name']
       end
 
-      if attributes.key?(:'number')
-        self.number = attributes[:'number']
+      if attributes.key?(:'masked_account_number')
+        self.masked_account_number = attributes[:'masked_account_number']
       end
 
       if attributes.key?(:'institution_account_id')
@@ -170,8 +170,8 @@ module SnapTrade
         invalid_properties.push('invalid value for "connection_id", connection_id cannot be nil.')
       end
 
-      if @number.nil?
-        invalid_properties.push('invalid value for "number", number cannot be nil.')
+      if @masked_account_number.nil?
+        invalid_properties.push('invalid value for "masked_account_number", masked_account_number cannot be nil.')
       end
 
       if @sync_status.nil?
@@ -187,7 +187,7 @@ module SnapTrade
       return false if @kind.nil?
       return false if @id.nil?
       return false if @connection_id.nil?
-      return false if @number.nil?
+      return false if @masked_account_number.nil?
       return false if @sync_status.nil?
       true
     end
@@ -201,7 +201,7 @@ module SnapTrade
           id == o.id &&
           connection_id == o.connection_id &&
           display_name == o.display_name &&
-          number == o.number &&
+          masked_account_number == o.masked_account_number &&
           institution_account_id == o.institution_account_id &&
           institution_id == o.institution_id &&
           opening_date == o.opening_date &&
@@ -219,7 +219,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, number, institution_account_id, institution_id, opening_date, sync_status, raw_type, net_value].hash
+      [kind, id, connection_id, display_name, masked_account_number, institution_account_id, institution_id, opening_date, sync_status, raw_type, net_value].hash
     end
 
     # Builds the object from hash

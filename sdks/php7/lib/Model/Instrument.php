@@ -45,6 +45,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public const DISCRIMINATOR_MAPPING = [
         'adr' => \SnapTrade\Model\AdrInstrument::class,
+        'bond' => \SnapTrade\Model\OtherInstrument::class,
         'cef' => \SnapTrade\Model\CefInstrument::class,
         'cfd' => \SnapTrade\Model\CfdInstrument::class,
         'crypto' => \SnapTrade\Model\CryptoInstrument::class,
@@ -330,6 +331,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const KIND_BOND = 'bond';
     public const KIND_OTHER = 'other';
     public const OPTION_TYPE_CALL = 'CALL';
     public const OPTION_TYPE_PUT = 'PUT';
@@ -342,6 +344,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getKindAllowableValues()
     {
         return [
+            self::KIND_BOND,
             self::KIND_OTHER,
         ];
     }

@@ -44,7 +44,7 @@ describe SnapTrade::LineOfCreditAccount do
     end
   end
 
-  describe 'test attribute "number"' do
+  describe 'test attribute "masked_account_number"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -86,7 +86,7 @@ describe SnapTrade::LineOfCreditAccount do
     end
   end
 
-  describe 'test attribute "credit_details"' do
+  describe 'test attribute "minimum_payment_amount"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

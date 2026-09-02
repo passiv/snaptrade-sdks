@@ -26,7 +26,7 @@ type AccountPosition struct {
 	CostBasis NullableFloat64 `json:"cost_basis,omitempty"`
 	// ISO-4217 currency code for the position `price` and `cost_basis`.
 	Currency NullableString `json:"currency,omitempty"`
-	// Present for mutual fund positions that are also counted in cash balance or buying power.
+	// Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
 	CashEquivalent *bool `json:"cash_equivalent,omitempty"`
 	// List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
 	TaxLots []TaxLot `json:"tax_lots,omitempty"`

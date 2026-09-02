@@ -37,7 +37,7 @@ class DepositAccount(
 
     class MetaOapg:
         required = {
-            "number",
+            "masked_account_number",
             "connection_id",
             "kind",
             "sync_status",
@@ -93,7 +93,7 @@ class DepositAccount(
                         **kwargs,
                     )
             connection_id = schemas.UUIDSchema
-            number = schemas.StrSchema
+            masked_account_number = schemas.StrSchema
         
             @staticmethod
             def sync_status() -> typing.Type['DepositAccountSyncStatus']:
@@ -192,7 +192,7 @@ class DepositAccount(
                 "kind": kind,
                 "id": id,
                 "connection_id": connection_id,
-                "number": number,
+                "masked_account_number": masked_account_number,
                 "sync_status": sync_status,
                 "display_name": display_name,
                 "institution_account_id": institution_account_id,
@@ -203,14 +203,14 @@ class DepositAccount(
             }
         additional_properties = schemas.AnyTypeSchema
     
-    number: MetaOapg.properties.number
+    masked_account_number: MetaOapg.properties.masked_account_number
     connection_id: MetaOapg.properties.connection_id
     kind: MetaOapg.properties.kind
     sync_status: 'DepositAccountSyncStatus'
     id: MetaOapg.properties.id
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["number"]) -> MetaOapg.properties.number: ...
+    def __getitem__(self, name: typing_extensions.Literal["masked_account_number"]) -> MetaOapg.properties.masked_account_number: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["connection_id"]) -> MetaOapg.properties.connection_id: ...
@@ -245,12 +245,12 @@ class DepositAccount(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["number"]) -> MetaOapg.properties.number: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["masked_account_number"]) -> MetaOapg.properties.masked_account_number: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["connection_id"]) -> MetaOapg.properties.connection_id: ...
@@ -285,13 +285,13 @@ class DepositAccount(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        number: typing.Union[MetaOapg.properties.number, str, ],
+        masked_account_number: typing.Union[MetaOapg.properties.masked_account_number, str, ],
         connection_id: typing.Union[MetaOapg.properties.connection_id, str, uuid.UUID, ],
         kind: typing.Union[MetaOapg.properties.kind, str, ],
         sync_status: 'DepositAccountSyncStatus',
@@ -308,7 +308,7 @@ class DepositAccount(
         return super().__new__(
             cls,
             *args,
-            number=number,
+            masked_account_number=masked_account_number,
             connection_id=connection_id,
             kind=kind,
             sync_status=sync_status,

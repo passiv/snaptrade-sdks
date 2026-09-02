@@ -27,7 +27,7 @@ type InvestmentAccount struct {
 	// A display name for the account. Either assigned by the user or by the institution itself.
 	DisplayName NullableString `json:"display_name,omitempty"`
 	// The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).
-	Number string `json:"number"`
+	MaskedAccountNumber string `json:"masked_account_number"`
 	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
 	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
 	// Unique identifier for the institution that holds the account.
@@ -51,12 +51,12 @@ type _InvestmentAccount InvestmentAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvestmentAccount(kind string, id string, connectionId string, number string, syncStatus ConnectionAccountSyncStatus, isPaper bool) *InvestmentAccount {
+func NewInvestmentAccount(kind string, id string, connectionId string, maskedAccountNumber string, syncStatus ConnectionAccountSyncStatus, isPaper bool) *InvestmentAccount {
 	this := InvestmentAccount{}
 	this.Kind = kind
 	this.Id = id
 	this.ConnectionId = connectionId
-	this.Number = number
+	this.MaskedAccountNumber = maskedAccountNumber
 	this.SyncStatus = syncStatus
 	this.IsPaper = isPaper
 	return &this
@@ -184,28 +184,28 @@ func (o *InvestmentAccount) UnsetDisplayName() {
 	o.DisplayName.Unset()
 }
 
-// GetNumber returns the Number field value
-func (o *InvestmentAccount) GetNumber() string {
+// GetMaskedAccountNumber returns the MaskedAccountNumber field value
+func (o *InvestmentAccount) GetMaskedAccountNumber() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Number
+	return o.MaskedAccountNumber
 }
 
-// GetNumberOk returns a tuple with the Number field value
+// GetMaskedAccountNumberOk returns a tuple with the MaskedAccountNumber field value
 // and a boolean to check if the value has been set.
-func (o *InvestmentAccount) GetNumberOk() (*string, bool) {
+func (o *InvestmentAccount) GetMaskedAccountNumberOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.Number, true
+	return &o.MaskedAccountNumber, true
 }
 
-// SetNumber sets field value
-func (o *InvestmentAccount) SetNumber(v string) {
-	o.Number = v
+// SetMaskedAccountNumber sets field value
+func (o *InvestmentAccount) SetMaskedAccountNumber(v string) {
+	o.MaskedAccountNumber = v
 }
 
 // GetInstitutionAccountId returns the InstitutionAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -513,7 +513,7 @@ func (o InvestmentAccount) MarshalJSON() ([]byte, error) {
 		toSerialize["display_name"] = o.DisplayName.Get()
 	}
 	if true {
-		toSerialize["number"] = o.Number
+		toSerialize["masked_account_number"] = o.MaskedAccountNumber
 	}
 	if o.InstitutionAccountId.IsSet() {
 		toSerialize["institution_account_id"] = o.InstitutionAccountId.Get()
@@ -561,7 +561,7 @@ func (o *InvestmentAccount) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "connection_id")
 		delete(additionalProperties, "display_name")
-		delete(additionalProperties, "number")
+		delete(additionalProperties, "masked_account_number")
 		delete(additionalProperties, "institution_account_id")
 		delete(additionalProperties, "institution_id")
 		delete(additionalProperties, "opening_date")

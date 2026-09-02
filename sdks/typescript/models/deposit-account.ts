@@ -50,7 +50,7 @@ export interface DepositAccount {
      * @type {string}
      * @memberof DepositAccount
      */
-    'number': string;
+    'masked_account_number': string;
     /**
      * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
      * @type {string}

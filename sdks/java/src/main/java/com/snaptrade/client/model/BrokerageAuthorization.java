@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.Brokerage;
+import com.snaptrade.client.model.BrokerageAuthorizationDataFreshnessMode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -98,7 +99,7 @@ public class BrokerageAuthorization {
 
   public static final String SERIALIZED_NAME_DATA_FRESHNESS_MODE = "data_freshness_mode";
   @SerializedName(SERIALIZED_NAME_DATA_FRESHNESS_MODE)
-  private String dataFreshnessMode;
+  private BrokerageAuthorizationDataFreshnessMode dataFreshnessMode;
 
   public BrokerageAuthorization() {
   }
@@ -405,7 +406,7 @@ public class BrokerageAuthorization {
   }
 
 
-  public BrokerageAuthorization dataFreshnessMode(String dataFreshnessMode) {
+  public BrokerageAuthorization dataFreshnessMode(BrokerageAuthorizationDataFreshnessMode dataFreshnessMode) {
     
     
     
@@ -415,18 +416,18 @@ public class BrokerageAuthorization {
   }
 
    /**
-   * Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages. 
+   * Get dataFreshnessMode
    * @return dataFreshnessMode
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "realtime", value = "Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Data freshness\" column on the \"Positions & recent orders\" tab at https://support.snaptrade.com/brokerages. ")
+  @ApiModelProperty(value = "")
 
-  public String getDataFreshnessMode() {
+  public BrokerageAuthorizationDataFreshnessMode getDataFreshnessMode() {
     return dataFreshnessMode;
   }
 
 
-  public void setDataFreshnessMode(String dataFreshnessMode) {
+  public void setDataFreshnessMode(BrokerageAuthorizationDataFreshnessMode dataFreshnessMode) {
     
     
     
@@ -597,8 +598,9 @@ public class BrokerageAuthorization {
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      if ((jsonObj.get("data_freshness_mode") != null && !jsonObj.get("data_freshness_mode").isJsonNull()) && !jsonObj.get("data_freshness_mode").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `data_freshness_mode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("data_freshness_mode").toString()));
+      // validate the optional field `data_freshness_mode`
+      if (jsonObj.get("data_freshness_mode") != null && !jsonObj.get("data_freshness_mode").isJsonNull()) {
+        BrokerageAuthorizationDataFreshnessMode.validateJsonObject(jsonObj.getAsJsonObject("data_freshness_mode"));
       }
   }
 
