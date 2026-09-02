@@ -109,9 +109,9 @@ class DepositAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "number"
+     * Test attribute "masked_account_number"
      */
-    public function testPropertyNumber()
+    public function testPropertyMaskedAccountNumber()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

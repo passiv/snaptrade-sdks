@@ -29,6 +29,6 @@ import { UnderlyingOptionInstrument } from './underlying-option-instrument';
  * Instrument metadata for a V2 position. Use `kind` to determine which schema is present.
  * @export
  */
-export type Instrument = { kind: 'adr' } & AdrInstrument | { kind: 'cef' } & CefInstrument | { kind: 'cfd' } & CfdInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'future' } & FutureInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'option' } & OptionInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
+export type Instrument = { kind: 'adr' } & AdrInstrument | { kind: 'bond' } & OtherInstrument | { kind: 'cef' } & CefInstrument | { kind: 'cfd' } & CfdInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'future' } & FutureInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'option' } & OptionInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
 
 

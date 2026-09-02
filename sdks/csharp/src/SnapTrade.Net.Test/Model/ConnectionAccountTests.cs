@@ -90,12 +90,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'DisplayName'
         }
         /// <summary>
-        /// Test the property 'Number'
+        /// Test the property 'MaskedAccountNumber'
         /// </summary>
         [Fact]
-        public void NumberTest()
+        public void MaskedAccountNumberTest()
         {
-            // TODO unit test for the property 'Number'
+            // TODO unit test for the property 'MaskedAccountNumber'
         }
         /// <summary>
         /// Test the property 'InstitutionAccountId'
@@ -162,12 +162,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'NetValue'
         }
         /// <summary>
-        /// Test the property 'CreditDetails'
+        /// Test the property 'MinimumPaymentAmount'
         /// </summary>
         [Fact]
-        public void CreditDetailsTest()
+        public void MinimumPaymentAmountTest()
         {
-            // TODO unit test for the property 'CreditDetails'
+            // TODO unit test for the property 'MinimumPaymentAmount'
         }
 
     }

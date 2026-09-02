@@ -36,6 +36,7 @@ module SnapTrade
       def openapi_discriminator_mapping
         {
           :'adr' => :'AdrInstrument',
+          :'bond' => :'OtherInstrument',
           :'cef' => :'CefInstrument',
           :'crypto' => :'CryptoInstrument',
           :'etf' => :'EtfInstrument',

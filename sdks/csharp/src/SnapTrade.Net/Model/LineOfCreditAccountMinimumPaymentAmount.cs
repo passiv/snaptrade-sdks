@@ -27,26 +27,34 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Additional line-of-credit details. Currently only &#x60;minimum_payment_amount&#x60;; more properties (e.g. credit limit) may be added later without a breaking change. Omitted when no such data is available.
+    /// The minimum payment due on the account&#39;s next statement. Omitted when no such data is available.
     /// </summary>
-    [DataContract(Name = "LineOfCreditAccount_credit_details")]
-    public partial class LineOfCreditAccountCreditDetails : IEquatable<LineOfCreditAccountCreditDetails>, IValidatableObject
+    [DataContract(Name = "LineOfCreditAccount_minimum_payment_amount")]
+    public partial class LineOfCreditAccountMinimumPaymentAmount : IEquatable<LineOfCreditAccountMinimumPaymentAmount>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LineOfCreditAccountCreditDetails" /> class.
+        /// Initializes a new instance of the <see cref="LineOfCreditAccountMinimumPaymentAmount" /> class.
         /// </summary>
-        /// <param name="minimumPaymentAmount">minimumPaymentAmount.</param>
-        public LineOfCreditAccountCreditDetails(LineOfCreditAccountCreditDetailsMinimumPaymentAmount minimumPaymentAmount = default(LineOfCreditAccountCreditDetailsMinimumPaymentAmount)) : base()
+        /// <param name="amount">amount.</param>
+        /// <param name="currency">currency.</param>
+        public LineOfCreditAccountMinimumPaymentAmount(double? amount = default(double?), string currency = default(string)) : base()
         {
-            this.MinimumPaymentAmount = minimumPaymentAmount;
+            this.Amount = amount;
+            this.Currency = currency;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Gets or Sets MinimumPaymentAmount
+        /// Gets or Sets Amount
         /// </summary>
-        [DataMember(Name = "minimum_payment_amount", EmitDefaultValue = true)]
-        public LineOfCreditAccountCreditDetailsMinimumPaymentAmount MinimumPaymentAmount { get; set; }
+        [DataMember(Name = "amount", EmitDefaultValue = true)]
+        public double? Amount { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Currency
+        /// </summary>
+        [DataMember(Name = "currency", EmitDefaultValue = true)]
+        public string Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -61,9 +69,10 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class LineOfCreditAccountCreditDetails {\n");
+            sb.Append("class LineOfCreditAccountMinimumPaymentAmount {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  MinimumPaymentAmount: ").Append(MinimumPaymentAmount).Append("\n");
+            sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -85,15 +94,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LineOfCreditAccountCreditDetails);
+            return this.Equals(input as LineOfCreditAccountMinimumPaymentAmount);
         }
 
         /// <summary>
-        /// Returns true if LineOfCreditAccountCreditDetails instances are equal
+        /// Returns true if LineOfCreditAccountMinimumPaymentAmount instances are equal
         /// </summary>
-        /// <param name="input">Instance of LineOfCreditAccountCreditDetails to be compared</param>
+        /// <param name="input">Instance of LineOfCreditAccountMinimumPaymentAmount to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LineOfCreditAccountCreditDetails input)
+        public bool Equals(LineOfCreditAccountMinimumPaymentAmount input)
         {
             if (input == null)
             {
@@ -101,9 +110,14 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.MinimumPaymentAmount == input.MinimumPaymentAmount ||
-                    (this.MinimumPaymentAmount != null &&
-                    this.MinimumPaymentAmount.Equals(input.MinimumPaymentAmount))
+                    this.Amount == input.Amount ||
+                    (this.Amount != null &&
+                    this.Amount.Equals(input.Amount))
+                ) && base.Equals(input) && 
+                (
+                    this.Currency == input.Currency ||
+                    (this.Currency != null &&
+                    this.Currency.Equals(input.Currency))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -117,9 +131,13 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.MinimumPaymentAmount != null)
+                if (this.Amount != null)
                 {
-                    hashCode = (hashCode * 59) + this.MinimumPaymentAmount.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Amount.GetHashCode();
+                }
+                if (this.Currency != null)
+                {
+                    hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

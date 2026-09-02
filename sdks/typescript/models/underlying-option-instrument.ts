@@ -24,6 +24,6 @@ import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrumen
  * The underlying instrument for an option.
  * @export
  */
-export type UnderlyingOptionInstrument = { kind: 'adr' } & AdrInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
+export type UnderlyingOptionInstrument = { kind: 'adr' } & AdrInstrument | { kind: 'bond' } & OtherInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
 
 

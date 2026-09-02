@@ -29,7 +29,7 @@ class RequiredInvestmentAccount(TypedDict):
     connection_id: str
 
     # The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).
-    number: str
+    masked_account_number: str
 
     sync_status: ConnectionAccountSyncStatus
 

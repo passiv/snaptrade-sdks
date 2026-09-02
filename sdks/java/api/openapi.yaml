@@ -1064,9 +1064,9 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-        `mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
+        Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getAllAccountPositions
@@ -3872,13 +3872,13 @@ components:
           type: string
           x-konfig-original-example: Robinhood Individual
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-display_name
-        number:
+        masked_account_number:
           description: "The account number assigned by the institution, masked to\
             \ the last 4 characters (e.g. `****8443`)."
           example: '****8443'
           type: string
           x-konfig-original-example: '****8443'
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-masked_account_number
         institution_account_id:
           description: "A stable and unique account identifier provided by the institution.\
             \ Will be set to null if not provided. When present, can be used to check\
@@ -3943,7 +3943,7 @@ components:
       - id
       - is_paper
       - kind
-      - number
+      - masked_account_number
       - sync_status
       type: object
     DepositAccount:
@@ -3980,13 +3980,13 @@ components:
           type: string
           x-konfig-original-example: Chase Total Checking
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-display_name
-        number:
+        masked_account_number:
           description: "The account number assigned by the institution, masked to\
             \ the last 4 characters (e.g. `****4821`)."
           example: '****4821'
           type: string
           x-konfig-original-example: '****4821'
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-masked_account_number
         institution_account_id:
           description: "A stable and unique account identifier provided by the institution.\
             \ Will be set to null if not provided. When present, can be used to check\
@@ -4030,7 +4030,7 @@ components:
       - connection_id
       - id
       - kind
-      - number
+      - masked_account_number
       - sync_status
       type: object
     LineOfCreditAccount:
@@ -4067,13 +4067,13 @@ components:
           type: string
           x-konfig-original-example: Chase Sapphire Preferred
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-display_name
-        number:
+        masked_account_number:
           description: "The account number assigned by the institution, masked to\
             \ the last 4 characters (e.g. `****1881`)."
           example: '****1881'
           type: string
           x-konfig-original-example: '****1881'
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-masked_account_number
         institution_account_id:
           description: "A stable and unique account identifier provided by the institution.\
             \ Will be set to null if not provided. When present, can be used to check\
@@ -4113,13 +4113,13 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-raw_type
         net_value:
           $ref: '#/components/schemas/LineOfCreditAccount_net_value'
-        credit_details:
-          $ref: '#/components/schemas/LineOfCreditAccount_credit_details'
+        minimum_payment_amount:
+          $ref: '#/components/schemas/LineOfCreditAccount_minimum_payment_amount'
       required:
       - connection_id
       - id
       - kind
-      - number
+      - masked_account_number
       - sync_status
       type: object
     ConnectionAccountSyncStatus:
@@ -7161,8 +7161,9 @@ components:
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-currency
         cash_equivalent:
-          description: Present for mutual fund positions that are also counted in
-            cash balance or buying power.
+          description: Present for mutual fund positions and for other instrument
+            kinds when true. A true value means the position is also counted in cash
+            balance or buying power.
           example: false
           type: boolean
           x-konfig-original-example: false
@@ -7622,11 +7623,13 @@ components:
           nullable: true
     OtherInstrument:
       additionalProperties: true
-      description: Security instrument metadata for other mapped security positions.
+      description: Security instrument metadata for bonds and other mapped security
+        positions.
       properties:
         kind:
           description: Type of security instrument.
           enum:
+          - bond
           - other
           example: other
           type: string
@@ -12130,7 +12133,7 @@ components:
       example: Robinhood Individual
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-InvestmentAccount-properties-number:
+    konfig-generated-schema-components-schemas-InvestmentAccount-properties-masked_account_number:
       example: '****8443'
       type: string
       x-do-not-generate: true
@@ -12188,7 +12191,7 @@ components:
       example: Chase Total Checking
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-DepositAccount-properties-number:
+    konfig-generated-schema-components-schemas-DepositAccount-properties-masked_account_number:
       example: '****4821'
       type: string
       x-do-not-generate: true
@@ -12238,7 +12241,7 @@ components:
       example: Chase Sapphire Preferred
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-number:
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-masked_account_number:
       example: '****1881'
       type: string
       x-do-not-generate: true
@@ -12280,7 +12283,7 @@ components:
       example: USD
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount:
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-minimum_payment_amount:
       additionalProperties: true
       example:
         amount: 40
@@ -12294,12 +12297,12 @@ components:
           type: string
       type: object
       x-do-not-generate: true
-    ? konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-amount
-    : example: 40
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-minimum_payment_amount-properties-amount:
+      example: 40
       type: number
       x-do-not-generate: true
-    ? konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-currency
-    : example: USD
+    konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-minimum_payment_amount-properties-currency:
+      example: USD
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountSimple-properties-name:
@@ -16803,9 +16806,10 @@ components:
         amount: -842.17
         currency: USD
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-net_value
-    LineOfCreditAccount_credit_details_minimum_payment_amount:
+    LineOfCreditAccount_minimum_payment_amount:
       additionalProperties: true
-      description: The minimum payment due on the account's next statement.
+      description: The minimum payment due on the account's next statement. Omitted
+        when no such data is available.
       example:
         amount: 40
         currency: USD
@@ -16815,27 +16819,17 @@ components:
           example: 40
           nullable: true
           type: number
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-amount
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-minimum_payment_amount-properties-amount
         currency:
           example: USD
           nullable: true
           type: string
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount-properties-currency
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-minimum_payment_amount-properties-currency
       type: object
       x-konfig-original-example:
         amount: 40
         currency: USD
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-credit_details-properties-minimum_payment_amount
-    LineOfCreditAccount_credit_details:
-      additionalProperties: true
-      description: Additional line-of-credit details. Currently only `minimum_payment_amount`;
-        more properties (e.g. credit limit) may be added later without a breaking
-        change. Omitted when no such data is available.
-      nullable: true
-      properties:
-        minimum_payment_amount:
-          $ref: '#/components/schemas/LineOfCreditAccount_credit_details_minimum_payment_amount'
-      type: object
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-minimum_payment_amount
     OptionQuote_greeks:
       additionalProperties: true
       description: The Greeks for the option contract.

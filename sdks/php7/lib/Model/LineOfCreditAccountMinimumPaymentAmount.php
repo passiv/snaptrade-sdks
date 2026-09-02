@@ -1,6 +1,6 @@
 <?php
 /**
- * LineOfCreditAccountCreditDetails
+ * LineOfCreditAccountMinimumPaymentAmount
  *
  * PHP version 7.4
  *
@@ -27,14 +27,14 @@ use \ArrayAccess;
 use \SnapTrade\ObjectSerializer;
 
 /**
- * LineOfCreditAccountCreditDetails Class Doc Comment
+ * LineOfCreditAccountMinimumPaymentAmount Class Doc Comment
  *
  * @category Class
- * @description Additional line-of-credit details. Currently only &#x60;minimum_payment_amount&#x60;; more properties (e.g. credit limit) may be added later without a breaking change. Omitted when no such data is available.
+ * @description The minimum payment due on the account&#39;s next statement. Omitted when no such data is available.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
-class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \JsonSerializable
+class LineOfCreditAccountMinimumPaymentAmount implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LineOfCreditAccount_credit_details';
+    protected static $openAPIModelName = 'LineOfCreditAccount_minimum_payment_amount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,8 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'minimum_payment_amount' => '\SnapTrade\Model\LineOfCreditAccountCreditDetailsMinimumPaymentAmount'
+        'amount' => 'float',
+        'currency' => 'string'
     ];
 
     /**
@@ -62,7 +63,8 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'minimum_payment_amount' => null
+        'amount' => null,
+        'currency' => null
     ];
 
     /**
@@ -70,8 +72,9 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
       *
       * @var boolean[]
       */
-    protected static array $openAPINullables = [
-        'minimum_payment_amount' => true
+    protected static $openAPINullables = [
+        'amount' => true,
+		'currency' => true
     ];
 
     /**
@@ -79,7 +82,7 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
       *
       * @var boolean[]
       */
-    protected array $openAPINullablesSetToNull = [];
+    protected $openAPINullablesSetToNull = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -160,7 +163,8 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'minimum_payment_amount' => 'minimum_payment_amount'
+        'amount' => 'amount',
+        'currency' => 'currency'
     ];
 
     /**
@@ -169,7 +173,8 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'minimum_payment_amount' => 'setMinimumPaymentAmount'
+        'amount' => 'setAmount',
+        'currency' => 'setCurrency'
     ];
 
     /**
@@ -178,7 +183,8 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'minimum_payment_amount' => 'getMinimumPaymentAmount'
+        'amount' => 'getAmount',
+        'currency' => 'getCurrency'
     ];
 
     /**
@@ -236,9 +242,10 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(?array $data = null)
+    public function __construct($data = null)
     {
-        $this->setIfExists('minimum_payment_amount', $data ?? [], null);
+        $this->setIfExists('amount', $data ?? [], null);
+        $this->setIfExists('currency', $data ?? [], null);
     }
 
     /**
@@ -284,37 +291,73 @@ class LineOfCreditAccountCreditDetails implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets minimum_payment_amount
+     * Gets amount
      *
-     * @return \SnapTrade\Model\LineOfCreditAccountCreditDetailsMinimumPaymentAmount|null
+     * @return float|null
      */
-    public function getMinimumPaymentAmount()
+    public function getAmount()
     {
-        return $this->container['minimum_payment_amount'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets minimum_payment_amount
+     * Sets amount
      *
-     * @param \SnapTrade\Model\LineOfCreditAccountCreditDetailsMinimumPaymentAmount|null $minimum_payment_amount minimum_payment_amount
+     * @param float|null $amount amount
      *
      * @return self
      */
-    public function setMinimumPaymentAmount($minimum_payment_amount)
+    public function setAmount($amount)
     {
 
-        if (is_null($minimum_payment_amount)) {
-            array_push($this->openAPINullablesSetToNull, 'minimum_payment_amount');
+        if (is_null($amount)) {
+            array_push($this->openAPINullablesSetToNull, 'amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('minimum_payment_amount', $nullablesSetToNull);
+            $index = array_search('amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['minimum_payment_amount'] = $minimum_payment_amount;
+        $this->container['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency currency
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+
+        if (is_null($currency)) {
+            array_push($this->openAPINullablesSetToNull, 'currency');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('currency', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['currency'] = $currency;
 
         return $this;
     }

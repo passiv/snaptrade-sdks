@@ -69,7 +69,7 @@ namespace SnapTrade.Net.Model
         /// <param name="id">Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="connectionId">Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. (required).</param>
         /// <param name="displayName">A display name for the account. Either assigned by the user or by the institution itself..</param>
-        /// <param name="number">The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;). (required).</param>
+        /// <param name="maskedAccountNumber">The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;). (required).</param>
         /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections..</param>
         /// <param name="institutionId">Unique identifier for the institution that holds the account..</param>
         /// <param name="openingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list..</param>
@@ -78,7 +78,7 @@ namespace SnapTrade.Net.Model
         /// <param name="rawType">The account type as provided by the institution..</param>
         /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
         /// <param name="netValue">netValue.</param>
-        public InvestmentAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string number = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), DateTime? fundingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), bool isPaper = default(bool), InvestmentAccountNetValue netValue = default(InvestmentAccountNetValue)) : base()
+        public InvestmentAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string maskedAccountNumber = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), DateTime? fundingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), bool isPaper = default(bool), InvestmentAccountNetValue netValue = default(InvestmentAccountNetValue)) : base()
         {
             this.Kind = kind;
             // to ensure "id" is required (not null)
@@ -93,12 +93,12 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("connectionId is a required property for InvestmentAccount and cannot be null");
             }
             this.ConnectionId = connectionId;
-            // to ensure "number" is required (not null)
-            if (number == null)
+            // to ensure "maskedAccountNumber" is required (not null)
+            if (maskedAccountNumber == null)
             {
-                throw new ArgumentNullException("number is a required property for InvestmentAccount and cannot be null");
+                throw new ArgumentNullException("maskedAccountNumber is a required property for InvestmentAccount and cannot be null");
             }
-            this.Number = number;
+            this.MaskedAccountNumber = maskedAccountNumber;
             // to ensure "syncStatus" is required (not null)
             if (syncStatus == null)
             {
@@ -141,8 +141,8 @@ namespace SnapTrade.Net.Model
         /// The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;).
         /// </summary>
         /// <value>The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;).</value>
-        [DataMember(Name = "number", IsRequired = true, EmitDefaultValue = true)]
-        public string Number { get; set; }
+        [DataMember(Name = "masked_account_number", IsRequired = true, EmitDefaultValue = true)]
+        public string MaskedAccountNumber { get; set; }
 
         /// <summary>
         /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
@@ -217,7 +217,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  ConnectionId: ").Append(ConnectionId).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Number: ").Append(Number).Append("\n");
+            sb.Append("  MaskedAccountNumber: ").Append(MaskedAccountNumber).Append("\n");
             sb.Append("  InstitutionAccountId: ").Append(InstitutionAccountId).Append("\n");
             sb.Append("  InstitutionId: ").Append(InstitutionId).Append("\n");
             sb.Append("  OpeningDate: ").Append(OpeningDate).Append("\n");
@@ -282,9 +282,9 @@ namespace SnapTrade.Net.Model
                     this.DisplayName.Equals(input.DisplayName))
                 ) && base.Equals(input) && 
                 (
-                    this.Number == input.Number ||
-                    (this.Number != null &&
-                    this.Number.Equals(input.Number))
+                    this.MaskedAccountNumber == input.MaskedAccountNumber ||
+                    (this.MaskedAccountNumber != null &&
+                    this.MaskedAccountNumber.Equals(input.MaskedAccountNumber))
                 ) && base.Equals(input) && 
                 (
                     this.InstitutionAccountId == input.InstitutionAccountId ||
@@ -350,9 +350,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.DisplayName.GetHashCode();
                 }
-                if (this.Number != null)
+                if (this.MaskedAccountNumber != null)
                 {
-                    hashCode = (hashCode * 59) + this.Number.GetHashCode();
+                    hashCode = (hashCode * 59) + this.MaskedAccountNumber.GetHashCode();
                 }
                 if (this.InstitutionAccountId != null)
                 {

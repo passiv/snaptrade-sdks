@@ -16,13 +16,13 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-class RequiredLineOfCreditAccountCreditDetailsMinimumPaymentAmount(TypedDict):
+class RequiredLineOfCreditAccountMinimumPaymentAmount(TypedDict):
     pass
 
-class OptionalLineOfCreditAccountCreditDetailsMinimumPaymentAmount(TypedDict, total=False):
+class OptionalLineOfCreditAccountMinimumPaymentAmount(TypedDict, total=False):
     amount: typing.Optional[typing.Union[int, float]]
 
     currency: typing.Optional[str]
 
-class LineOfCreditAccountCreditDetailsMinimumPaymentAmount(RequiredLineOfCreditAccountCreditDetailsMinimumPaymentAmount, OptionalLineOfCreditAccountCreditDetailsMinimumPaymentAmount):
+class LineOfCreditAccountMinimumPaymentAmount(RequiredLineOfCreditAccountMinimumPaymentAmount, OptionalLineOfCreditAccountMinimumPaymentAmount):
     pass

@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrument';
 
 /**
- * Security instrument metadata for other mapped security positions.
+ * Security instrument metadata for bonds and other mapped security positions.
  * @export
  * @interface OtherInstrument
  */
@@ -70,6 +70,6 @@ export interface OtherInstrument {
     'figi_instrument'?: StockInstrumentFigiInstrument | null;
 }
 
-type OtherInstrumentKindEnum = 'other'
+type OtherInstrumentKindEnum = 'bond' | 'other'
 
 

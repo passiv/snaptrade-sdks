@@ -12,23 +12,23 @@ import type * as buffer from "buffer"
 
 
 /**
- * The minimum payment due on the account\'s next statement.
+ * The minimum payment due on the account\'s next statement. Omitted when no such data is available.
  * @export
- * @interface LineOfCreditAccountCreditDetailsMinimumPaymentAmount
+ * @interface LineOfCreditAccountMinimumPaymentAmount
  */
-export interface LineOfCreditAccountCreditDetailsMinimumPaymentAmount {
+export interface LineOfCreditAccountMinimumPaymentAmount {
     [key: string]: any;
 
     /**
      * 
      * @type {number}
-     * @memberof LineOfCreditAccountCreditDetailsMinimumPaymentAmount
+     * @memberof LineOfCreditAccountMinimumPaymentAmount
      */
     'amount'?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof LineOfCreditAccountCreditDetailsMinimumPaymentAmount
+     * @memberof LineOfCreditAccountMinimumPaymentAmount
      */
     'currency'?: string | null;
 }

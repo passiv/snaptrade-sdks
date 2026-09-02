@@ -51,6 +51,7 @@ class Instrument(
                     'OtherInstrument': OtherInstrument,
                     'StockInstrument': StockInstrument,
                     'adr': AdrInstrument,
+                    'bond': OtherInstrument,
                     'cef': CefInstrument,
                     'cfd': CfdInstrument,
                     'crypto': CryptoInstrument,

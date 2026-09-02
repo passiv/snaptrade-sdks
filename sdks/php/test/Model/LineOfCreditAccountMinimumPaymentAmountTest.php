@@ -1,6 +1,6 @@
 <?php
 /**
- * LineOfCreditAccountCreditDetailsTest
+ * LineOfCreditAccountMinimumPaymentAmountTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * LineOfCreditAccountCreditDetailsTest Class Doc Comment
+ * LineOfCreditAccountMinimumPaymentAmountTest Class Doc Comment
  *
  * @category    Class
- * @description Additional line-of-credit details. Currently only &#x60;minimum_payment_amount&#x60;; more properties (e.g. credit limit) may be added later without a breaking change. Omitted when no such data is available.
+ * @description The minimum payment due on the account&#39;s next statement. Omitted when no such data is available.
  * @package     SnapTrade
  */
-class LineOfCreditAccountCreditDetailsTest extends TestCase
+class LineOfCreditAccountMinimumPaymentAmountTest extends TestCase
 {
 
     /**
@@ -64,18 +64,27 @@ class LineOfCreditAccountCreditDetailsTest extends TestCase
     }
 
     /**
-     * Test "LineOfCreditAccountCreditDetails"
+     * Test "LineOfCreditAccountMinimumPaymentAmount"
      */
-    public function testLineOfCreditAccountCreditDetails()
+    public function testLineOfCreditAccountMinimumPaymentAmount()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "minimum_payment_amount"
+     * Test attribute "amount"
      */
-    public function testPropertyMinimumPaymentAmount()
+    public function testPropertyAmount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currency"
+     */
+    public function testPropertyCurrency()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

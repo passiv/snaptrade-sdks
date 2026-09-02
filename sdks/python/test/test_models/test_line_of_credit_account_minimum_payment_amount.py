@@ -13,12 +13,12 @@
 import unittest
 
 import snaptrade_client
-from snaptrade_client.model.line_of_credit_account_credit_details_minimum_payment_amount import LineOfCreditAccountCreditDetailsMinimumPaymentAmount
+from snaptrade_client.model.line_of_credit_account_minimum_payment_amount import LineOfCreditAccountMinimumPaymentAmount
 from snaptrade_client import configuration
 
 
-class TestLineOfCreditAccountCreditDetailsMinimumPaymentAmount(unittest.TestCase):
-    """LineOfCreditAccountCreditDetailsMinimumPaymentAmount unit test stubs"""
+class TestLineOfCreditAccountMinimumPaymentAmount(unittest.TestCase):
+    """LineOfCreditAccountMinimumPaymentAmount unit test stubs"""
     pass
 
 

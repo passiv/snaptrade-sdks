@@ -116,9 +116,9 @@ public class InvestmentAccount {
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
   private String displayName;
 
-  public static final String SERIALIZED_NAME_NUMBER = "number";
-  @SerializedName(SERIALIZED_NAME_NUMBER)
-  private String number;
+  public static final String SERIALIZED_NAME_MASKED_ACCOUNT_NUMBER = "masked_account_number";
+  @SerializedName(SERIALIZED_NAME_MASKED_ACCOUNT_NUMBER)
+  private String maskedAccountNumber;
 
   public static final String SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID = "institution_account_id";
   @SerializedName(SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID)
@@ -271,32 +271,32 @@ public class InvestmentAccount {
   }
 
 
-  public InvestmentAccount number(String number) {
+  public InvestmentAccount maskedAccountNumber(String maskedAccountNumber) {
     
     
     
     
-    this.number = number;
+    this.maskedAccountNumber = maskedAccountNumber;
     return this;
   }
 
    /**
    * The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****8443&#x60;).
-   * @return number
+   * @return maskedAccountNumber
   **/
   @javax.annotation.Nonnull
   @ApiModelProperty(example = "****8443", required = true, value = "The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).")
 
-  public String getNumber() {
-    return number;
+  public String getMaskedAccountNumber() {
+    return maskedAccountNumber;
   }
 
 
-  public void setNumber(String number) {
+  public void setMaskedAccountNumber(String maskedAccountNumber) {
     
     
     
-    this.number = number;
+    this.maskedAccountNumber = maskedAccountNumber;
   }
 
 
@@ -590,7 +590,7 @@ public class InvestmentAccount {
         Objects.equals(this.id, investmentAccount.id) &&
         Objects.equals(this.connectionId, investmentAccount.connectionId) &&
         Objects.equals(this.displayName, investmentAccount.displayName) &&
-        Objects.equals(this.number, investmentAccount.number) &&
+        Objects.equals(this.maskedAccountNumber, investmentAccount.maskedAccountNumber) &&
         Objects.equals(this.institutionAccountId, investmentAccount.institutionAccountId) &&
         Objects.equals(this.institutionId, investmentAccount.institutionId) &&
         Objects.equals(this.openingDate, investmentAccount.openingDate) &&
@@ -608,7 +608,7 @@ public class InvestmentAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, connectionId, displayName, number, institutionAccountId, institutionId, openingDate, fundingDate, syncStatus, rawType, isPaper, netValue, additionalProperties);
+    return Objects.hash(kind, id, connectionId, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, fundingDate, syncStatus, rawType, isPaper, netValue, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -626,7 +626,7 @@ public class InvestmentAccount {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
-    sb.append("    number: ").append(toIndentedString(number)).append("\n");
+    sb.append("    maskedAccountNumber: ").append(toIndentedString(maskedAccountNumber)).append("\n");
     sb.append("    institutionAccountId: ").append(toIndentedString(institutionAccountId)).append("\n");
     sb.append("    institutionId: ").append(toIndentedString(institutionId)).append("\n");
     sb.append("    openingDate: ").append(toIndentedString(openingDate)).append("\n");
@@ -662,7 +662,7 @@ public class InvestmentAccount {
     openapiFields.add("id");
     openapiFields.add("connection_id");
     openapiFields.add("display_name");
-    openapiFields.add("number");
+    openapiFields.add("masked_account_number");
     openapiFields.add("institution_account_id");
     openapiFields.add("institution_id");
     openapiFields.add("opening_date");
@@ -677,7 +677,7 @@ public class InvestmentAccount {
     openapiRequiredFields.add("kind");
     openapiRequiredFields.add("id");
     openapiRequiredFields.add("connection_id");
-    openapiRequiredFields.add("number");
+    openapiRequiredFields.add("masked_account_number");
     openapiRequiredFields.add("sync_status");
     openapiRequiredFields.add("is_paper");
   }
@@ -710,8 +710,8 @@ public class InvestmentAccount {
       if (!jsonObj.get("display_name").isJsonNull() && (jsonObj.get("display_name") != null && !jsonObj.get("display_name").isJsonNull()) && !jsonObj.get("display_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `display_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("display_name").toString()));
       }
-      if (!jsonObj.get("number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
+      if (!jsonObj.get("masked_account_number").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `masked_account_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("masked_account_number").toString()));
       }
       if (!jsonObj.get("institution_account_id").isJsonNull() && (jsonObj.get("institution_account_id") != null && !jsonObj.get("institution_account_id").isJsonNull()) && !jsonObj.get("institution_account_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution_account_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_account_id").toString()));

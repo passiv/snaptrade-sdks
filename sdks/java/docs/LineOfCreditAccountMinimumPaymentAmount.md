@@ -1,8 +1,8 @@
 
 
-# LineOfCreditAccountCreditDetailsMinimumPaymentAmount
+# LineOfCreditAccountMinimumPaymentAmount
 
-The minimum payment due on the account's next statement.
+The minimum payment due on the account's next statement. Omitted when no such data is available.
 
 ## Properties
 

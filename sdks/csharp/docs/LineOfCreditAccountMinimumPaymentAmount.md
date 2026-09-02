@@ -1,5 +1,5 @@
-# SnapTrade.Net.Model.LineOfCreditAccountCreditDetailsMinimumPaymentAmount
-The minimum payment due on the account's next statement.
+# SnapTrade.Net.Model.LineOfCreditAccountMinimumPaymentAmount
+The minimum payment due on the account's next statement. Omitted when no such data is available.
 
 ## Properties
 

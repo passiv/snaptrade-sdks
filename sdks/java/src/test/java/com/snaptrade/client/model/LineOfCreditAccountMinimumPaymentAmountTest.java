@@ -17,7 +17,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.LineOfCreditAccountCreditDetailsMinimumPaymentAmount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -27,25 +26,33 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for LineOfCreditAccountCreditDetails
+ * Model tests for LineOfCreditAccountMinimumPaymentAmount
  */
-public class LineOfCreditAccountCreditDetailsTest {
-    private final LineOfCreditAccountCreditDetails model = new LineOfCreditAccountCreditDetails();
+public class LineOfCreditAccountMinimumPaymentAmountTest {
+    private final LineOfCreditAccountMinimumPaymentAmount model = new LineOfCreditAccountMinimumPaymentAmount();
 
     /**
-     * Model tests for LineOfCreditAccountCreditDetails
+     * Model tests for LineOfCreditAccountMinimumPaymentAmount
      */
     @Test
-    public void testLineOfCreditAccountCreditDetails() {
-        // TODO: test LineOfCreditAccountCreditDetails
+    public void testLineOfCreditAccountMinimumPaymentAmount() {
+        // TODO: test LineOfCreditAccountMinimumPaymentAmount
     }
 
     /**
-     * Test the property 'minimumPaymentAmount'
+     * Test the property 'amount'
      */
     @Test
-    public void minimumPaymentAmountTest() {
-        // TODO: test minimumPaymentAmount
+    public void amountTest() {
+        // TODO: test amount
+    }
+
+    /**
+     * Test the property 'currency'
+     */
+    @Test
+    public void currencyTest() {
+        // TODO: test currency
     }
 
 }

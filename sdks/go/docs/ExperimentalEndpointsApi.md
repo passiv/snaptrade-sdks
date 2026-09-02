@@ -314,7 +314,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Id`: %v\n", resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.ConnectionId`: %v\n", resp.ConnectionId)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.DisplayName`: %v\n", *resp.DisplayName)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MaskedAccountNumber`: %v\n", resp.MaskedAccountNumber)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionId`: %v\n", *resp.InstitutionId)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
@@ -323,7 +323,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.RawType`: %v\n", *resp.RawType)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NetValue`: %v\n", *resp.NetValue)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.CreditDetails`: %v\n", *resp.CreditDetails)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MinimumPaymentAmount`: %v\n", *resp.MinimumPaymentAmount)
 }
 ```
 

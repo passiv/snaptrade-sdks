@@ -11,13 +11,13 @@ require 'spec_helper'
 require 'json'
 require 'date'
 
-# Unit tests for SnapTrade::LineOfCreditAccountCreditDetailsMinimumPaymentAmount
-describe SnapTrade::LineOfCreditAccountCreditDetailsMinimumPaymentAmount do
-  let(:instance) { SnapTrade::LineOfCreditAccountCreditDetailsMinimumPaymentAmount.new }
+# Unit tests for SnapTrade::LineOfCreditAccountMinimumPaymentAmount
+describe SnapTrade::LineOfCreditAccountMinimumPaymentAmount do
+  let(:instance) { SnapTrade::LineOfCreditAccountMinimumPaymentAmount.new }
 
-  describe 'test an instance of LineOfCreditAccountCreditDetailsMinimumPaymentAmount' do
-    it 'should create an instance of LineOfCreditAccountCreditDetailsMinimumPaymentAmount' do
-      expect(instance).to be_instance_of(SnapTrade::LineOfCreditAccountCreditDetailsMinimumPaymentAmount)
+  describe 'test an instance of LineOfCreditAccountMinimumPaymentAmount' do
+    it 'should create an instance of LineOfCreditAccountMinimumPaymentAmount' do
+      expect(instance).to be_instance_of(SnapTrade::LineOfCreditAccountMinimumPaymentAmount)
     end
   end
   describe 'test attribute "amount"' do
