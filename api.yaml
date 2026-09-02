@@ -664,9 +664,9 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
-        `mutualfund` positions may also include `cash_equivalent`. `stock`, `etf`, and `mutualfund` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
+        Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       parameters:
@@ -1482,7 +1482,7 @@ paths:
         This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
         **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-        **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless the connection is delayed. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to the `data_freshness_mode` field on a connection to determine this.**
+        **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless SnapTrade uses delayed data for the connection. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to `data_freshness_mode.snaptrade` on a connection to determine this.**
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
         - in: path
@@ -3183,7 +3183,7 @@ components:
         - kind
         - id
         - connection_id
-        - number
+        - masked_account_number
         - sync_status
         - is_paper
       properties:
@@ -3204,7 +3204,7 @@ components:
           nullable: true
           description: A display name for the account. Either assigned by the user or by the institution itself.
           example: Robinhood Individual
-        number:
+        masked_account_number:
           type: string
           example: "****8443"
           description: The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).
@@ -3263,7 +3263,7 @@ components:
         - kind
         - id
         - connection_id
-        - number
+        - masked_account_number
         - sync_status
       properties:
         kind:
@@ -3283,7 +3283,7 @@ components:
           nullable: true
           description: A display name for the account. Either assigned by the user or by the institution itself.
           example: Chase Total Checking
-        number:
+        masked_account_number:
           type: string
           example: "****4821"
           description: The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
@@ -3332,7 +3332,7 @@ components:
         - kind
         - id
         - connection_id
-        - number
+        - masked_account_number
         - sync_status
       properties:
         kind:
@@ -3352,7 +3352,7 @@ components:
           nullable: true
           description: A display name for the account. Either assigned by the user or by the institution itself.
           example: Chase Sapphire Preferred
-        number:
+        masked_account_number:
           type: string
           example: "****1881"
           description: The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
@@ -3393,25 +3393,20 @@ components:
           example:
             amount: -842.17
             currency: USD
-        credit_details:
+        minimum_payment_amount:
           type: object
           nullable: true
-          description: Additional line-of-credit details. Currently only `minimum_payment_amount`; more properties (e.g. credit limit) may be added later without a breaking change. Omitted when no such data is available.
+          description: The minimum payment due on the account's next statement. Omitted when no such data is available.
           properties:
-            minimum_payment_amount:
-              type: object
+            amount:
+              type: number
               nullable: true
-              description: The minimum payment due on the account's next statement.
-              properties:
-                amount:
-                  type: number
-                  nullable: true
-                currency:
-                  type: string
-                  nullable: true
-              example:
-                amount: 40.00
-                currency: USD
+            currency:
+              type: string
+              nullable: true
+          example:
+            amount: 40.00
+            currency: USD
     ConnectionAccountSyncStatus:
       description: |
         Contains status updates for the account sync process between SnapTrade and the institution,
@@ -4735,7 +4730,7 @@ components:
           example: USD
         cash_equivalent:
           type: boolean
-          description: Present for mutual fund positions that are also counted in cash balance or buying power.
+          description: Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
           example: false
         tax_lots:
           type: array
@@ -4769,6 +4764,7 @@ components:
           cef: "#/components/schemas/CefInstrument"
           adr: "#/components/schemas/AdrInstrument"
           cfd: "#/components/schemas/CfdInstrument"
+          bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
@@ -4789,6 +4785,7 @@ components:
           mutualfund: "#/components/schemas/MutualFundInstrument"
           cef: "#/components/schemas/CefInstrument"
           adr: "#/components/schemas/AdrInstrument"
+          bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
     UnderlyingCfdInstrument:
       description: The underlying instrument referenced by a CFD contract.
@@ -4809,6 +4806,7 @@ components:
           mutualfund: "#/components/schemas/MutualFundInstrument"
           cef: "#/components/schemas/CefInstrument"
           adr: "#/components/schemas/AdrInstrument"
+          bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
     StockInstrument:
       description: Security instrument metadata for stock positions.
@@ -5139,13 +5137,14 @@ components:
         - symbol
         - raw_symbol
     OtherInstrument:
-      description: Security instrument metadata for other mapped security positions.
+      description: Security instrument metadata for bonds and other mapped security positions.
       type: object
       properties:
         kind:
           type: string
           description: Type of security instrument.
           enum:
+            - bond
             - other
           example: other
         id:
@@ -5620,13 +5619,30 @@ components:
           example: true
         data_freshness_mode:
           description: |
-            Possible values include:
-            - realtime
-            - delayed
+            Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.
 
-            Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the "Data freshness" column on the "Positions & recent orders" tab at https://support.snaptrade.com/brokerages.
-          type: string
-          example: realtime
+            `institution` is `delayed` when the brokerage itself provides delayed data. See the "Data freshness" column on the "Positions & recent orders" tab at https://support.snaptrade.com/brokerages.
+
+            `snaptrade` is `delayed` when SnapTrade uses cached data for the connection because of the customer's plan or the integration. Otherwise, it is `realtime` and SnapTrade retrieves current data from the brokerage during API calls.
+          type: object
+          required:
+            - institution
+            - snaptrade
+          properties:
+            institution:
+              type: string
+              enum:
+                - realtime
+                - delayed
+            snaptrade:
+              type: string
+              enum:
+                - realtime
+                - delayed
+          additionalProperties: false
+          example:
+            institution: realtime
+            snaptrade: delayed
     BrokerageAuthorizationRefreshConfirmation:
       description: Confirmation that the syncs have been scheduled.
       type: object
