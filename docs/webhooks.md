@@ -49,7 +49,7 @@ OAuth application webhooks use `schemaVersion: "oauth_v1"`:
 | `webhookId` | The unique ID of this webhook notification. |
 | `oauthClientId` | The OAuth client ID of the application receiving the notification. |
 | `eventTimestamp` | When the event occurred, formatted as an ISO 8601 timestamp. |
-| `userId` | The SnapTrade Personal user UUID. This matches `sub.snaptrade_user_id` returned during OAuth token exchange. |
+| `userId` | The SnapTrade Personal user UUID. This matches the `sub` claim of the `id_token` returned during OAuth token exchange, and the deprecated `sub.snaptrade_user_id` field. |
 | `eventType` | The event that occurred. |
 | `connectionId` | The brokerage connection UUID, when the event relates to a connection. This replaces `brokerageAuthorizationId` from the API-key schema. |
 | `brokerageId` | The brokerage UUID, when available. |
