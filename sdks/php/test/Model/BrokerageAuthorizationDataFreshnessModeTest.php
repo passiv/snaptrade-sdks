@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * BrokerageAuthorizationDataFreshnessModeTest Class Doc Comment
  *
  * @category    Class
- * @description Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.  &#x60;institution&#x60; is &#x60;delayed&#x60; when the brokerage itself provides delayed data. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages.  &#x60;snaptrade&#x60; is &#x60;delayed&#x60; when SnapTrade uses cached data for the connection because of the customer&#39;s plan or the integration. Otherwise, it is &#x60;realtime&#x60; and SnapTrade retrieves current data from the brokerage during API calls.
+ * @description Indicates the data freshness provided by the institution and by SnapTrade for this connection. The two values are independent; the connection&#39;s data is effectively delayed if either value is &#x60;delayed&#x60;.  The \&quot;Data freshness\&quot; column on the [SnapTrade Institution Support](https://support.snaptrade.com/brokerages) page (Positions &amp; recent orders tab) identifies institutions whose connections are considered delayed on a Real-time plan because either &#x60;institution&#x60; or &#x60;snaptrade&#x60; is &#x60;delayed&#x60;.
  * @package     SnapTrade
  */
 class BrokerageAuthorizationDataFreshnessModeTest extends TestCase

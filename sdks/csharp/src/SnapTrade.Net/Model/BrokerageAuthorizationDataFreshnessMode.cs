@@ -27,14 +27,15 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.  &#x60;institution&#x60; is &#x60;delayed&#x60; when the brokerage itself provides delayed data. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages.  &#x60;snaptrade&#x60; is &#x60;delayed&#x60; when SnapTrade uses cached data for the connection because of the customer&#39;s plan or the integration. Otherwise, it is &#x60;realtime&#x60; and SnapTrade retrieves current data from the brokerage during API calls. 
+    /// Indicates the data freshness provided by the institution and by SnapTrade for this connection. The two values are independent; the connection&#39;s data is effectively delayed if either value is &#x60;delayed&#x60;.  The \&quot;Data freshness\&quot; column on the [SnapTrade Institution Support](https://support.snaptrade.com/brokerages) page (Positions &amp; recent orders tab) identifies institutions whose connections are considered delayed on a Real-time plan because either &#x60;institution&#x60; or &#x60;snaptrade&#x60; is &#x60;delayed&#x60;. 
     /// </summary>
     [DataContract(Name = "BrokerageAuthorization_data_freshness_mode")]
     public partial class BrokerageAuthorizationDataFreshnessMode : IEquatable<BrokerageAuthorizationDataFreshnessMode>, IValidatableObject
     {
         /// <summary>
-        /// Defines Institution
+        /// Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. 
         /// </summary>
+        /// <value>Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstitutionEnum
         {
@@ -54,13 +55,15 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Institution
+        /// Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. 
         /// </summary>
+        /// <value>Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. </value>
         [DataMember(Name = "institution", IsRequired = true, EmitDefaultValue = true)]
         public InstitutionEnum Institution { get; set; }
         /// <summary>
-        /// Defines Snaptrade
+        /// Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
         /// </summary>
+        /// <value>Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SnaptradeEnum
         {
@@ -80,8 +83,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Snaptrade
+        /// Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
         /// </summary>
+        /// <value>Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). </value>
         [DataMember(Name = "snaptrade", IsRequired = true, EmitDefaultValue = true)]
         public SnaptradeEnum Snaptrade { get; set; }
         /// <summary>
@@ -95,8 +99,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationDataFreshnessMode" /> class.
         /// </summary>
-        /// <param name="institution">institution (required).</param>
-        /// <param name="snaptrade">snaptrade (required).</param>
+        /// <param name="institution">Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates.  (required).</param>
+        /// <param name="snaptrade">Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  (required).</param>
         public BrokerageAuthorizationDataFreshnessMode(InstitutionEnum institution = default(InstitutionEnum), SnaptradeEnum snaptrade = default(SnaptradeEnum)) : base()
         {
             this.Institution = institution;
