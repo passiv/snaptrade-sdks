@@ -180,7 +180,7 @@ Never log authorization codes, access tokens, refresh tokens, or the client secr
 Send the access token as a Bearer token. Do not include `clientId`, `consumerKey`, `userId`, `userSecret`, `timestamp`, or `Signature` on an OAuth request. The token identifies the SnapTrade Personal user.
 
 ```http
-GET https://api.snaptrade.com/api/v1/accounts
+GET https://api.snaptrade.com/accounts
 Authorization: Bearer ACCESS_TOKEN
 Accept: application/json
 ```
@@ -252,7 +252,7 @@ await fetch(revocationEndpoint, {
 3. Use a separate SnapTrade Personal test account instead of the developer account that owns the OAuth app.
 4. Connect the SnapTrade Sandbox brokerage or a test brokerage connection from the SnapTrade Dashboard.
 5. Run the authorization flow with `scope=read webhook` and confirm the consent page shows both permissions.
-6. Exchange the code from your backend and call `GET /api/v1/accounts` with only the Bearer token.
+6. Exchange the code from your backend and call `GET /accounts` with only the Bearer token.
 7. Add, reconnect, refresh, or remove a test connection and confirm your listener receives an `oauth_v1` payload with the expected `oauthClientId` and `userId`.
 8. Verify the same account is still visible in the SnapTrade Dashboard and can be granted to another test app without creating another brokerage connection.
 9. Test refresh-token rotation, a forced `401`, denial at the consent screen, a mismatched `state`, an expired code, and an unregistered redirect URI.
