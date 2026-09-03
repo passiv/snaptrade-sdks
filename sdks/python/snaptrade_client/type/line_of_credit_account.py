@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.line_of_credit_account_credit_details import LineOfCreditAccountCreditDetails
+from snaptrade_client.type.line_of_credit_account_minimum_payment_amount import LineOfCreditAccountMinimumPaymentAmount
 from snaptrade_client.type.line_of_credit_account_net_value import LineOfCreditAccountNetValue
 from snaptrade_client.type.line_of_credit_account_sync_status import LineOfCreditAccountSyncStatus
 
@@ -30,7 +30,7 @@ class RequiredLineOfCreditAccount(TypedDict):
     connection_id: str
 
     # The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
-    number: str
+    masked_account_number: str
 
     sync_status: LineOfCreditAccountSyncStatus
 
@@ -53,7 +53,7 @@ class OptionalLineOfCreditAccount(TypedDict, total=False):
 
     net_value: typing.Optional[LineOfCreditAccountNetValue]
 
-    credit_details: typing.Optional[LineOfCreditAccountCreditDetails]
+    minimum_payment_amount: typing.Optional[LineOfCreditAccountMinimumPaymentAmount]
 
 class LineOfCreditAccount(RequiredLineOfCreditAccount, OptionalLineOfCreditAccount):
     pass

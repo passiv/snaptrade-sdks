@@ -27,7 +27,7 @@ describe SnapTrade::Instrument do
 
   describe '.openapi_discriminator_mapping' do
     it 'returns the key/values of the "mapping" property' do
-      expect(described_class.openapi_discriminator_mapping.values.sort).to eq(described_class.openapi_one_of.sort)
+      expect(described_class.openapi_discriminator_mapping.values.uniq.sort).to eq(described_class.openapi_one_of.sort)
     end
   end
 

@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * OtherInstrument Class Doc Comment
  *
  * @category Class
- * @description Security instrument metadata for other mapped security positions.
+ * @description Security instrument metadata for bonds and other mapped security positions.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -264,6 +264,7 @@ class OtherInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const KIND_BOND = 'bond';
     public const KIND_OTHER = 'other';
 
     /**
@@ -274,6 +275,7 @@ class OtherInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getKindAllowableValues()
     {
         return [
+            self::KIND_BOND,
             self::KIND_OTHER,
         ];
     }

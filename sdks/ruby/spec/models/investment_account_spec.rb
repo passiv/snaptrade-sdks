@@ -44,7 +44,7 @@ describe SnapTrade::InvestmentAccount do
     end
   end
 
-  describe 'test attribute "number"' do
+  describe 'test attribute "masked_account_number"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

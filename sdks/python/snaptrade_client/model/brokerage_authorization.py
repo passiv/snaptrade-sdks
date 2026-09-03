@@ -82,7 +82,10 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
                 return BrokerageAuthorizationMeta
             updated_date = schemas.DateTimeSchema
             is_eligible_for_payout = schemas.BoolSchema
-            data_freshness_mode = schemas.StrSchema
+        
+            @staticmethod
+            def data_freshness_mode() -> typing.Type['BrokerageAuthorizationDataFreshnessMode']:
+                return BrokerageAuthorizationDataFreshnessMode
             __annotations__ = {
                 "id": id,
                 "created_date": created_date,
@@ -129,7 +132,7 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
     def __getitem__(self, name: typing_extensions.Literal["is_eligible_for_payout"]) -> MetaOapg.properties.is_eligible_for_payout: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["data_freshness_mode"]) -> MetaOapg.properties.data_freshness_mode: ...
+    def __getitem__(self, name: typing_extensions.Literal["data_freshness_mode"]) -> 'BrokerageAuthorizationDataFreshnessMode': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -169,7 +172,7 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
     def get_item_oapg(self, name: typing_extensions.Literal["is_eligible_for_payout"]) -> typing.Union[MetaOapg.properties.is_eligible_for_payout, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["data_freshness_mode"]) -> typing.Union[MetaOapg.properties.data_freshness_mode, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["data_freshness_mode"]) -> typing.Union['BrokerageAuthorizationDataFreshnessMode', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -190,7 +193,7 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
         meta: typing.Union['BrokerageAuthorizationMeta', schemas.Unset] = schemas.unset,
         updated_date: typing.Union[MetaOapg.properties.updated_date, str, datetime, schemas.Unset] = schemas.unset,
         is_eligible_for_payout: typing.Union[MetaOapg.properties.is_eligible_for_payout, bool, schemas.Unset] = schemas.unset,
-        data_freshness_mode: typing.Union[MetaOapg.properties.data_freshness_mode, str, schemas.Unset] = schemas.unset,
+        data_freshness_mode: typing.Union['BrokerageAuthorizationDataFreshnessMode', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'BrokerageAuthorization':
@@ -213,4 +216,5 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
         )
 
 from snaptrade_client.model.brokerage import Brokerage
+from snaptrade_client.model.brokerage_authorization_data_freshness_mode import BrokerageAuthorizationDataFreshnessMode
 from snaptrade_client.model.brokerage_authorization_meta import BrokerageAuthorizationMeta

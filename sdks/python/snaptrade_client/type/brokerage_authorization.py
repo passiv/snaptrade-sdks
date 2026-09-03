@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.brokerage import Brokerage
+from snaptrade_client.type.brokerage_authorization_data_freshness_mode import BrokerageAuthorizationDataFreshnessMode
 from snaptrade_client.type.brokerage_authorization_meta import BrokerageAuthorizationMeta
 
 class RequiredBrokerageAuthorization(TypedDict):
@@ -52,8 +53,7 @@ class OptionalBrokerageAuthorization(TypedDict, total=False):
     # Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
     is_eligible_for_payout: bool
 
-    # Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Data freshness\" column on the \"Positions & recent orders\" tab at https://support.snaptrade.com/brokerages. 
-    data_freshness_mode: str
+    data_freshness_mode: BrokerageAuthorizationDataFreshnessMode
 
 class BrokerageAuthorization(RequiredBrokerageAuthorization, OptionalBrokerageAuthorization):
     pass

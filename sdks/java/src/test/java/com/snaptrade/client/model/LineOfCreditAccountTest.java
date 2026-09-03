@@ -17,7 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.LineOfCreditAccountCreditDetails;
+import com.snaptrade.client.model.LineOfCreditAccountMinimumPaymentAmount;
 import com.snaptrade.client.model.LineOfCreditAccountNetValue;
 import com.snaptrade.client.model.LineOfCreditAccountSyncStatus;
 import io.swagger.annotations.ApiModel;
@@ -77,11 +77,11 @@ public class LineOfCreditAccountTest {
     }
 
     /**
-     * Test the property 'number'
+     * Test the property 'maskedAccountNumber'
      */
     @Test
-    public void numberTest() {
-        // TODO: test number
+    public void maskedAccountNumberTest() {
+        // TODO: test maskedAccountNumber
     }
 
     /**
@@ -133,11 +133,11 @@ public class LineOfCreditAccountTest {
     }
 
     /**
-     * Test the property 'creditDetails'
+     * Test the property 'minimumPaymentAmount'
      */
     @Test
-    public void creditDetailsTest() {
-        // TODO: test creditDetails
+    public void minimumPaymentAmountTest() {
+        // TODO: test minimumPaymentAmount
     }
 
 }

@@ -76,11 +76,11 @@ public class DepositAccountTest {
     }
 
     /**
-     * Test the property 'number'
+     * Test the property 'maskedAccountNumber'
      */
     @Test
-    public void numberTest() {
-        // TODO: test number
+    public void maskedAccountNumberTest() {
+        // TODO: test maskedAccountNumber
     }
 
     /**

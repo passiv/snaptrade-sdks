@@ -61,7 +61,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
         'meta' => 'array<string,mixed>',
         'updated_date' => '\DateTime',
         'is_eligible_for_payout' => 'bool',
-        'data_freshness_mode' => 'string'
+        'data_freshness_mode' => '\SnapTrade\Model\BrokerageAuthorizationDataFreshnessMode'
     ];
 
     /**
@@ -657,7 +657,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets data_freshness_mode
      *
-     * @return string|null
+     * @return \SnapTrade\Model\BrokerageAuthorizationDataFreshnessMode|null
      */
     public function getDataFreshnessMode()
     {
@@ -667,7 +667,7 @@ class BrokerageAuthorization implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets data_freshness_mode
      *
-     * @param string|null $data_freshness_mode Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Data freshness\" column on the \"Positions & recent orders\" tab at https://support.snaptrade.com/brokerages.
+     * @param \SnapTrade\Model\BrokerageAuthorizationDataFreshnessMode|null $data_freshness_mode data_freshness_mode
      *
      * @return self
      */

@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { DepositAccount } from './deposit-account';
 import { InvestmentAccount } from './investment-account';
 import { LineOfCreditAccount } from './line-of-credit-account';
-import { LineOfCreditAccountCreditDetails } from './line-of-credit-account-credit-details';
+import { LineOfCreditAccountMinimumPaymentAmount } from './line-of-credit-account-minimum-payment-amount';
 import { LineOfCreditAccountNetValue } from './line-of-credit-account-net-value';
 import { LineOfCreditAccountSyncStatus } from './line-of-credit-account-sync-status';
 

@@ -48,6 +48,7 @@ class UnderlyingOptionInstrument(
                     'OtherInstrument': OtherInstrument,
                     'StockInstrument': StockInstrument,
                     'adr': AdrInstrument,
+                    'bond': OtherInstrument,
                     'cef': CefInstrument,
                     'crypto': CryptoInstrument,
                     'etf': EtfInstrument,

@@ -24,6 +24,6 @@ import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrumen
  * The underlying instrument referenced by a CFD contract.
  * @export
  */
-export type UnderlyingCfdInstrument = { kind: 'adr' } & AdrInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
+export type UnderlyingCfdInstrument = { kind: 'adr' } & AdrInstrument | { kind: 'bond' } & OtherInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
 
 

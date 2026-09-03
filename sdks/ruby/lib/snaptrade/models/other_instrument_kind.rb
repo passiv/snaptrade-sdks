@@ -12,10 +12,11 @@ require 'time'
 
 module SnapTrade
   class OtherInstrumentKind
+    BOND = "bond".freeze
     OTHER = "other".freeze
 
     def self.all_vars
-      @all_vars ||= [OTHER].freeze
+      @all_vars ||= [BOND, OTHER].freeze
     end
 
     # Builds the enum from string
