@@ -11,10 +11,12 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.  `institution` is `delayed` when the brokerage itself provides delayed data. See the \"Data freshness\" column on the \"Positions & recent orders\" tab at https://support.snaptrade.com/brokerages.  `snaptrade` is `delayed` when SnapTrade uses cached data for the connection because of the customer's plan or the integration. Otherwise, it is `realtime` and SnapTrade retrieves current data from the brokerage during API calls. 
+  # Indicates the data freshness provided by the institution and by SnapTrade for this connection. The two values are independent; the connection's data is effectively delayed if either value is `delayed`.  The \"Data freshness\" column on the [SnapTrade Institution Support](https://support.snaptrade.com/brokerages) page (Positions & recent orders tab) identifies institutions whose connections are considered delayed on a Real-time plan because either `institution` or `snaptrade` is `delayed`. 
   class BrokerageAuthorizationDataFreshnessMode
+    # Indicates the freshness of the data provided by the institution. `realtime` means the institution provides current data; `delayed` means the institution itself does not allow intra-day data updates. 
     attr_accessor :institution
 
+    # Indicates how SnapTrade retrieves data for this connection. `realtime` means SnapTrade retrieves current data from the institution during API calls. `delayed` means SnapTrade serves cached data, either because the customer's plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is `delayed`, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
     attr_accessor :snaptrade
 
     # Attribute mapping from ruby-style variable name to JSON key.
