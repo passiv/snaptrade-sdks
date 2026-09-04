@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-6.0.13-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/6.0.13)
+[![NuGet](https://img.shields.io/badge/NuGet-6.0.14-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/6.0.14)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -190,6 +190,7 @@ Class | Method | HTTP request | Description
  - [BalanceCurrency](docs/BalanceCurrency.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
+ - [BrokerageAuthorizationDataFreshnessMode](docs/BrokerageAuthorizationDataFreshnessMode.md)
  - [BrokerageAuthorizationDisabledConfirmation](docs/BrokerageAuthorizationDisabledConfirmation.md)
  - [BrokerageAuthorizationRefreshConfirmation](docs/BrokerageAuthorizationRefreshConfirmation.md)
  - [BrokerageAuthorizationTransactionsSyncConfirmation](docs/BrokerageAuthorizationTransactionsSyncConfirmation.md)
@@ -235,8 +236,7 @@ Class | Method | HTTP request | Description
  - [InvestmentAccount](docs/InvestmentAccount.md)
  - [InvestmentAccountNetValue](docs/InvestmentAccountNetValue.md)
  - [LineOfCreditAccount](docs/LineOfCreditAccount.md)
- - [LineOfCreditAccountCreditDetails](docs/LineOfCreditAccountCreditDetails.md)
- - [LineOfCreditAccountCreditDetailsMinimumPaymentAmount](docs/LineOfCreditAccountCreditDetailsMinimumPaymentAmount.md)
+ - [LineOfCreditAccountMinimumPaymentAmount](docs/LineOfCreditAccountMinimumPaymentAmount.md)
  - [LineOfCreditAccountNetValue](docs/LineOfCreditAccountNetValue.md)
  - [LineOfCreditAccountSyncStatus](docs/LineOfCreditAccountSyncStatus.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)

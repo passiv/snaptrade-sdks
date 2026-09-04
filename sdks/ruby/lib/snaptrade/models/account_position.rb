@@ -27,7 +27,7 @@ module SnapTrade
     # ISO-4217 currency code for the position `price` and `cost_basis`.
     attr_accessor :currency
 
-    # Present for mutual fund positions that are also counted in cash balance or buying power.
+    # Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
     attr_accessor :cash_equivalent
 
     # List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)

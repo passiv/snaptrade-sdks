@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// OtherInstrument Security instrument metadata for other mapped security positions.
+// OtherInstrument Security instrument metadata for bonds and other mapped security positions.
 type OtherInstrument struct {
 	// Type of security instrument.
 	Kind string `json:"kind"`

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Security instrument metadata for other mapped security positions.
+    /// Security instrument metadata for bonds and other mapped security positions.
     /// </summary>
     [DataContract(Name = "OtherInstrument")]
     public partial class OtherInstrument : IEquatable<OtherInstrument>, IValidatableObject
@@ -40,10 +40,16 @@ namespace SnapTrade.Net.Model
         public enum KindEnum
         {
             /// <summary>
+            /// Enum Bond for value: bond
+            /// </summary>
+            [EnumMember(Value = "bond")]
+            Bond = 1,
+
+            /// <summary>
             /// Enum Other for value: other
             /// </summary>
             [EnumMember(Value = "other")]
-            Other = 1
+            Other = 2
 
         }
 

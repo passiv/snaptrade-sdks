@@ -66,7 +66,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'string',
         'connection_id' => 'string',
         'display_name' => 'string',
-        'number' => 'string',
+        'masked_account_number' => 'string',
         'institution_account_id' => 'string',
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
@@ -75,7 +75,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'string',
         'is_paper' => 'bool',
         'net_value' => '\SnapTrade\Model\LineOfCreditAccountNetValue',
-        'credit_details' => '\SnapTrade\Model\LineOfCreditAccountCreditDetails'
+        'minimum_payment_amount' => '\SnapTrade\Model\LineOfCreditAccountMinimumPaymentAmount'
     ];
 
     /**
@@ -90,7 +90,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => null,
         'connection_id' => 'uuid',
         'display_name' => null,
-        'number' => null,
+        'masked_account_number' => null,
         'institution_account_id' => null,
         'institution_id' => 'uuid',
         'opening_date' => 'date-time',
@@ -99,7 +99,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => null,
         'is_paper' => null,
         'net_value' => null,
-        'credit_details' => null
+        'minimum_payment_amount' => null
     ];
 
     /**
@@ -112,7 +112,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'id' => false,
 		'connection_id' => false,
 		'display_name' => true,
-		'number' => false,
+		'masked_account_number' => false,
 		'institution_account_id' => true,
 		'institution_id' => false,
 		'opening_date' => true,
@@ -121,7 +121,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'raw_type' => true,
 		'is_paper' => false,
 		'net_value' => true,
-		'credit_details' => true
+		'minimum_payment_amount' => true
     ];
 
     /**
@@ -214,7 +214,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'id',
         'connection_id' => 'connection_id',
         'display_name' => 'display_name',
-        'number' => 'number',
+        'masked_account_number' => 'masked_account_number',
         'institution_account_id' => 'institution_account_id',
         'institution_id' => 'institution_id',
         'opening_date' => 'opening_date',
@@ -223,7 +223,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'raw_type',
         'is_paper' => 'is_paper',
         'net_value' => 'net_value',
-        'credit_details' => 'credit_details'
+        'minimum_payment_amount' => 'minimum_payment_amount'
     ];
 
     /**
@@ -236,7 +236,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'setId',
         'connection_id' => 'setConnectionId',
         'display_name' => 'setDisplayName',
-        'number' => 'setNumber',
+        'masked_account_number' => 'setMaskedAccountNumber',
         'institution_account_id' => 'setInstitutionAccountId',
         'institution_id' => 'setInstitutionId',
         'opening_date' => 'setOpeningDate',
@@ -245,7 +245,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'setRawType',
         'is_paper' => 'setIsPaper',
         'net_value' => 'setNetValue',
-        'credit_details' => 'setCreditDetails'
+        'minimum_payment_amount' => 'setMinimumPaymentAmount'
     ];
 
     /**
@@ -258,7 +258,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'id' => 'getId',
         'connection_id' => 'getConnectionId',
         'display_name' => 'getDisplayName',
-        'number' => 'getNumber',
+        'masked_account_number' => 'getMaskedAccountNumber',
         'institution_account_id' => 'getInstitutionAccountId',
         'institution_id' => 'getInstitutionId',
         'opening_date' => 'getOpeningDate',
@@ -267,7 +267,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'raw_type' => 'getRawType',
         'is_paper' => 'getIsPaper',
         'net_value' => 'getNetValue',
-        'credit_details' => 'getCreditDetails'
+        'minimum_payment_amount' => 'getMinimumPaymentAmount'
     ];
 
     /**
@@ -344,7 +344,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('connection_id', $data ?? [], null);
         $this->setIfExists('display_name', $data ?? [], null);
-        $this->setIfExists('number', $data ?? [], null);
+        $this->setIfExists('masked_account_number', $data ?? [], null);
         $this->setIfExists('institution_account_id', $data ?? [], null);
         $this->setIfExists('institution_id', $data ?? [], null);
         $this->setIfExists('opening_date', $data ?? [], null);
@@ -353,7 +353,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('raw_type', $data ?? [], null);
         $this->setIfExists('is_paper', $data ?? [], null);
         $this->setIfExists('net_value', $data ?? [], null);
-        $this->setIfExists('credit_details', $data ?? [], null);
+        $this->setIfExists('minimum_payment_amount', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -404,8 +404,8 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         if ($this->container['connection_id'] === null) {
             $invalidProperties[] = "'connection_id' can't be null";
         }
-        if ($this->container['number'] === null) {
-            $invalidProperties[] = "'number' can't be null";
+        if ($this->container['masked_account_number'] === null) {
+            $invalidProperties[] = "'masked_account_number' can't be null";
         }
         if ($this->container['sync_status'] === null) {
             $invalidProperties[] = "'sync_status' can't be null";
@@ -562,30 +562,30 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
-     * Gets number
+     * Gets masked_account_number
      *
      * @return string
      */
-    public function getNumber()
+    public function getMaskedAccountNumber()
     {
-        return $this->container['number'];
+        return $this->container['masked_account_number'];
     }
 
     /**
-     * Sets number
+     * Sets masked_account_number
      *
-     * @param string $number The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
+     * @param string $masked_account_number The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
      *
      * @return self
      */
-    public function setNumber($number)
+    public function setMaskedAccountNumber($masked_account_number)
     {
 
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
+        if (is_null($masked_account_number)) {
+            throw new \InvalidArgumentException('non-nullable masked_account_number cannot be null');
         }
 
-        $this->container['number'] = $number;
+        $this->container['masked_account_number'] = $masked_account_number;
 
         return $this;
     }
@@ -858,37 +858,37 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     /**
-     * Gets credit_details
+     * Gets minimum_payment_amount
      *
-     * @return \SnapTrade\Model\LineOfCreditAccountCreditDetails|null
+     * @return \SnapTrade\Model\LineOfCreditAccountMinimumPaymentAmount|null
      */
-    public function getCreditDetails()
+    public function getMinimumPaymentAmount()
     {
-        return $this->container['credit_details'];
+        return $this->container['minimum_payment_amount'];
     }
 
     /**
-     * Sets credit_details
+     * Sets minimum_payment_amount
      *
-     * @param \SnapTrade\Model\LineOfCreditAccountCreditDetails|null $credit_details credit_details
+     * @param \SnapTrade\Model\LineOfCreditAccountMinimumPaymentAmount|null $minimum_payment_amount minimum_payment_amount
      *
      * @return self
      */
-    public function setCreditDetails($credit_details)
+    public function setMinimumPaymentAmount($minimum_payment_amount)
     {
 
-        if (is_null($credit_details)) {
-            array_push($this->openAPINullablesSetToNull, 'credit_details');
+        if (is_null($minimum_payment_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'minimum_payment_amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('credit_details', $nullablesSetToNull);
+            $index = array_search('minimum_payment_amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['credit_details'] = $credit_details;
+        $this->container['minimum_payment_amount'] = $minimum_payment_amount;
 
         return $this;
     }

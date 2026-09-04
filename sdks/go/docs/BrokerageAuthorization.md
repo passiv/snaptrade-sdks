@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Meta** | Pointer to **map[string]interface{}** | Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **UpdatedDate** | Pointer to **time.Time** | Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field. | [optional] 
 **IsEligibleForPayout** | Pointer to **bool** | Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team. | [optional] 
-**DataFreshnessMode** | Pointer to **string** | Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. &#x60;delayed&#x60; means SnapTrade uses cached data for the connection because of the customer&#39;s plan, or because of brokerage limitations. &#x60;realtime&#x60; means SnapTrade retrieves current data from the brokerage during API calls. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages.  | [optional] 
+**DataFreshnessMode** | Pointer to [**BrokerageAuthorizationDataFreshnessMode**](BrokerageAuthorizationDataFreshnessMode.md) |  | [optional] 
 
 ## Methods
 
@@ -297,20 +297,20 @@ HasIsEligibleForPayout returns a boolean if a field has been set.
 
 ### GetDataFreshnessMode
 
-`func (o *BrokerageAuthorization) GetDataFreshnessMode() string`
+`func (o *BrokerageAuthorization) GetDataFreshnessMode() BrokerageAuthorizationDataFreshnessMode`
 
 GetDataFreshnessMode returns the DataFreshnessMode field if non-nil, zero value otherwise.
 
 ### GetDataFreshnessModeOk
 
-`func (o *BrokerageAuthorization) GetDataFreshnessModeOk() (*string, bool)`
+`func (o *BrokerageAuthorization) GetDataFreshnessModeOk() (*BrokerageAuthorizationDataFreshnessMode, bool)`
 
 GetDataFreshnessModeOk returns a tuple with the DataFreshnessMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDataFreshnessMode
 
-`func (o *BrokerageAuthorization) SetDataFreshnessMode(v string)`
+`func (o *BrokerageAuthorization) SetDataFreshnessMode(v BrokerageAuthorizationDataFreshnessMode)`
 
 SetDataFreshnessMode sets DataFreshnessMode field to given value.
 

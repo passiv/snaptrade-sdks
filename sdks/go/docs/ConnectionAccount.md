@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
 **DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
-**Number** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****1881&#x60;). | 
+**MaskedAccountNumber** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****1881&#x60;). | 
 **InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 
 **InstitutionId** | Pointer to **string** | Unique identifier for the institution that holds the account. | [optional] 
 **OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. | [optional] 
@@ -17,13 +17,13 @@ Name | Type | Description | Notes
 **RawType** | Pointer to **NullableString** | The account type as provided by the institution. | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 **NetValue** | Pointer to [**NullableLineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  | [optional] 
-**CreditDetails** | Pointer to [**NullableLineOfCreditAccountCreditDetails**](LineOfCreditAccountCreditDetails.md) |  | [optional] 
+**MinimumPaymentAmount** | Pointer to [**NullableLineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  | [optional] 
 
 ## Methods
 
 ### NewConnectionAccount
 
-`func NewConnectionAccount(kind string, id string, connectionId string, number string, syncStatus LineOfCreditAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
+`func NewConnectionAccount(kind string, id string, connectionId string, maskedAccountNumber string, syncStatus LineOfCreditAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
 
 NewConnectionAccount instantiates a new ConnectionAccount object
 This constructor will assign default values to properties that have it defined,
@@ -133,24 +133,24 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
-### GetNumber
+### GetMaskedAccountNumber
 
-`func (o *ConnectionAccount) GetNumber() string`
+`func (o *ConnectionAccount) GetMaskedAccountNumber() string`
 
-GetNumber returns the Number field if non-nil, zero value otherwise.
+GetMaskedAccountNumber returns the MaskedAccountNumber field if non-nil, zero value otherwise.
 
-### GetNumberOk
+### GetMaskedAccountNumberOk
 
-`func (o *ConnectionAccount) GetNumberOk() (*string, bool)`
+`func (o *ConnectionAccount) GetMaskedAccountNumberOk() (*string, bool)`
 
-GetNumberOk returns a tuple with the Number field if it's non-nil, zero value otherwise
+GetMaskedAccountNumberOk returns a tuple with the MaskedAccountNumber field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNumber
+### SetMaskedAccountNumber
 
-`func (o *ConnectionAccount) SetNumber(v string)`
+`func (o *ConnectionAccount) SetMaskedAccountNumber(v string)`
 
-SetNumber sets Number field to given value.
+SetMaskedAccountNumber sets MaskedAccountNumber field to given value.
 
 
 ### GetInstitutionAccountId
@@ -393,41 +393,41 @@ HasNetValue returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetNetValue()`
 
 UnsetNetValue ensures that no value is present for NetValue, not even an explicit nil
-### GetCreditDetails
+### GetMinimumPaymentAmount
 
-`func (o *ConnectionAccount) GetCreditDetails() LineOfCreditAccountCreditDetails`
+`func (o *ConnectionAccount) GetMinimumPaymentAmount() LineOfCreditAccountMinimumPaymentAmount`
 
-GetCreditDetails returns the CreditDetails field if non-nil, zero value otherwise.
+GetMinimumPaymentAmount returns the MinimumPaymentAmount field if non-nil, zero value otherwise.
 
-### GetCreditDetailsOk
+### GetMinimumPaymentAmountOk
 
-`func (o *ConnectionAccount) GetCreditDetailsOk() (*LineOfCreditAccountCreditDetails, bool)`
+`func (o *ConnectionAccount) GetMinimumPaymentAmountOk() (*LineOfCreditAccountMinimumPaymentAmount, bool)`
 
-GetCreditDetailsOk returns a tuple with the CreditDetails field if it's non-nil, zero value otherwise
+GetMinimumPaymentAmountOk returns a tuple with the MinimumPaymentAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreditDetails
+### SetMinimumPaymentAmount
 
-`func (o *ConnectionAccount) SetCreditDetails(v LineOfCreditAccountCreditDetails)`
+`func (o *ConnectionAccount) SetMinimumPaymentAmount(v LineOfCreditAccountMinimumPaymentAmount)`
 
-SetCreditDetails sets CreditDetails field to given value.
+SetMinimumPaymentAmount sets MinimumPaymentAmount field to given value.
 
-### HasCreditDetails
+### HasMinimumPaymentAmount
 
-`func (o *ConnectionAccount) HasCreditDetails() bool`
+`func (o *ConnectionAccount) HasMinimumPaymentAmount() bool`
 
-HasCreditDetails returns a boolean if a field has been set.
+HasMinimumPaymentAmount returns a boolean if a field has been set.
 
-### SetCreditDetailsNil
+### SetMinimumPaymentAmountNil
 
-`func (o *ConnectionAccount) SetCreditDetailsNil(b bool)`
+`func (o *ConnectionAccount) SetMinimumPaymentAmountNil(b bool)`
 
- SetCreditDetailsNil sets the value for CreditDetails to be an explicit nil
+ SetMinimumPaymentAmountNil sets the value for MinimumPaymentAmount to be an explicit nil
 
-### UnsetCreditDetails
-`func (o *ConnectionAccount) UnsetCreditDetails()`
+### UnsetMinimumPaymentAmount
+`func (o *ConnectionAccount) UnsetMinimumPaymentAmount()`
 
-UnsetCreditDetails ensures that no value is present for CreditDetails, not even an explicit nil
+UnsetMinimumPaymentAmount ensures that no value is present for MinimumPaymentAmount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

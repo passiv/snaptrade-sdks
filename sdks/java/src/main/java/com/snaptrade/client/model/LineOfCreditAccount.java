@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.snaptrade.client.model.LineOfCreditAccountCreditDetails;
+import com.snaptrade.client.model.LineOfCreditAccountMinimumPaymentAmount;
 import com.snaptrade.client.model.LineOfCreditAccountNetValue;
 import com.snaptrade.client.model.LineOfCreditAccountSyncStatus;
 import io.swagger.annotations.ApiModel;
@@ -117,9 +117,9 @@ public class LineOfCreditAccount {
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
   private String displayName;
 
-  public static final String SERIALIZED_NAME_NUMBER = "number";
-  @SerializedName(SERIALIZED_NAME_NUMBER)
-  private String number;
+  public static final String SERIALIZED_NAME_MASKED_ACCOUNT_NUMBER = "masked_account_number";
+  @SerializedName(SERIALIZED_NAME_MASKED_ACCOUNT_NUMBER)
+  private String maskedAccountNumber;
 
   public static final String SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID = "institution_account_id";
   @SerializedName(SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID)
@@ -145,9 +145,9 @@ public class LineOfCreditAccount {
   @SerializedName(SERIALIZED_NAME_NET_VALUE)
   private LineOfCreditAccountNetValue netValue;
 
-  public static final String SERIALIZED_NAME_CREDIT_DETAILS = "credit_details";
-  @SerializedName(SERIALIZED_NAME_CREDIT_DETAILS)
-  private LineOfCreditAccountCreditDetails creditDetails;
+  public static final String SERIALIZED_NAME_MINIMUM_PAYMENT_AMOUNT = "minimum_payment_amount";
+  @SerializedName(SERIALIZED_NAME_MINIMUM_PAYMENT_AMOUNT)
+  private LineOfCreditAccountMinimumPaymentAmount minimumPaymentAmount;
 
   public LineOfCreditAccount() {
   }
@@ -268,32 +268,32 @@ public class LineOfCreditAccount {
   }
 
 
-  public LineOfCreditAccount number(String number) {
+  public LineOfCreditAccount maskedAccountNumber(String maskedAccountNumber) {
     
     
     
     
-    this.number = number;
+    this.maskedAccountNumber = maskedAccountNumber;
     return this;
   }
 
    /**
    * The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****1881&#x60;).
-   * @return number
+   * @return maskedAccountNumber
   **/
   @javax.annotation.Nonnull
   @ApiModelProperty(example = "****1881", required = true, value = "The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).")
 
-  public String getNumber() {
-    return number;
+  public String getMaskedAccountNumber() {
+    return maskedAccountNumber;
   }
 
 
-  public void setNumber(String number) {
+  public void setMaskedAccountNumber(String maskedAccountNumber) {
     
     
     
-    this.number = number;
+    this.maskedAccountNumber = maskedAccountNumber;
   }
 
 
@@ -471,32 +471,32 @@ public class LineOfCreditAccount {
   }
 
 
-  public LineOfCreditAccount creditDetails(LineOfCreditAccountCreditDetails creditDetails) {
+  public LineOfCreditAccount minimumPaymentAmount(LineOfCreditAccountMinimumPaymentAmount minimumPaymentAmount) {
     
     
     
     
-    this.creditDetails = creditDetails;
+    this.minimumPaymentAmount = minimumPaymentAmount;
     return this;
   }
 
    /**
-   * Get creditDetails
-   * @return creditDetails
+   * Get minimumPaymentAmount
+   * @return minimumPaymentAmount
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public LineOfCreditAccountCreditDetails getCreditDetails() {
-    return creditDetails;
+  public LineOfCreditAccountMinimumPaymentAmount getMinimumPaymentAmount() {
+    return minimumPaymentAmount;
   }
 
 
-  public void setCreditDetails(LineOfCreditAccountCreditDetails creditDetails) {
+  public void setMinimumPaymentAmount(LineOfCreditAccountMinimumPaymentAmount minimumPaymentAmount) {
     
     
     
-    this.creditDetails = creditDetails;
+    this.minimumPaymentAmount = minimumPaymentAmount;
   }
 
   /**
@@ -558,14 +558,14 @@ public class LineOfCreditAccount {
         Objects.equals(this.id, lineOfCreditAccount.id) &&
         Objects.equals(this.connectionId, lineOfCreditAccount.connectionId) &&
         Objects.equals(this.displayName, lineOfCreditAccount.displayName) &&
-        Objects.equals(this.number, lineOfCreditAccount.number) &&
+        Objects.equals(this.maskedAccountNumber, lineOfCreditAccount.maskedAccountNumber) &&
         Objects.equals(this.institutionAccountId, lineOfCreditAccount.institutionAccountId) &&
         Objects.equals(this.institutionId, lineOfCreditAccount.institutionId) &&
         Objects.equals(this.openingDate, lineOfCreditAccount.openingDate) &&
         Objects.equals(this.syncStatus, lineOfCreditAccount.syncStatus) &&
         Objects.equals(this.rawType, lineOfCreditAccount.rawType) &&
         Objects.equals(this.netValue, lineOfCreditAccount.netValue) &&
-        Objects.equals(this.creditDetails, lineOfCreditAccount.creditDetails)&&
+        Objects.equals(this.minimumPaymentAmount, lineOfCreditAccount.minimumPaymentAmount)&&
         Objects.equals(this.additionalProperties, lineOfCreditAccount.additionalProperties);
   }
 
@@ -575,7 +575,7 @@ public class LineOfCreditAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, connectionId, displayName, number, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, creditDetails, additionalProperties);
+    return Objects.hash(kind, id, connectionId, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, minimumPaymentAmount, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -593,14 +593,14 @@ public class LineOfCreditAccount {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
-    sb.append("    number: ").append(toIndentedString(number)).append("\n");
+    sb.append("    maskedAccountNumber: ").append(toIndentedString(maskedAccountNumber)).append("\n");
     sb.append("    institutionAccountId: ").append(toIndentedString(institutionAccountId)).append("\n");
     sb.append("    institutionId: ").append(toIndentedString(institutionId)).append("\n");
     sb.append("    openingDate: ").append(toIndentedString(openingDate)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
     sb.append("    netValue: ").append(toIndentedString(netValue)).append("\n");
-    sb.append("    creditDetails: ").append(toIndentedString(creditDetails)).append("\n");
+    sb.append("    minimumPaymentAmount: ").append(toIndentedString(minimumPaymentAmount)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -628,21 +628,21 @@ public class LineOfCreditAccount {
     openapiFields.add("id");
     openapiFields.add("connection_id");
     openapiFields.add("display_name");
-    openapiFields.add("number");
+    openapiFields.add("masked_account_number");
     openapiFields.add("institution_account_id");
     openapiFields.add("institution_id");
     openapiFields.add("opening_date");
     openapiFields.add("sync_status");
     openapiFields.add("raw_type");
     openapiFields.add("net_value");
-    openapiFields.add("credit_details");
+    openapiFields.add("minimum_payment_amount");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("kind");
     openapiRequiredFields.add("id");
     openapiRequiredFields.add("connection_id");
-    openapiRequiredFields.add("number");
+    openapiRequiredFields.add("masked_account_number");
     openapiRequiredFields.add("sync_status");
   }
 
@@ -674,8 +674,8 @@ public class LineOfCreditAccount {
       if (!jsonObj.get("display_name").isJsonNull() && (jsonObj.get("display_name") != null && !jsonObj.get("display_name").isJsonNull()) && !jsonObj.get("display_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `display_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("display_name").toString()));
       }
-      if (!jsonObj.get("number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
+      if (!jsonObj.get("masked_account_number").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `masked_account_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("masked_account_number").toString()));
       }
       if (!jsonObj.get("institution_account_id").isJsonNull() && (jsonObj.get("institution_account_id") != null && !jsonObj.get("institution_account_id").isJsonNull()) && !jsonObj.get("institution_account_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution_account_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_account_id").toString()));
@@ -692,9 +692,9 @@ public class LineOfCreditAccount {
       if (jsonObj.get("net_value") != null && !jsonObj.get("net_value").isJsonNull()) {
         LineOfCreditAccountNetValue.validateJsonObject(jsonObj.getAsJsonObject("net_value"));
       }
-      // validate the optional field `credit_details`
-      if (jsonObj.get("credit_details") != null && !jsonObj.get("credit_details").isJsonNull()) {
-        LineOfCreditAccountCreditDetails.validateJsonObject(jsonObj.getAsJsonObject("credit_details"));
+      // validate the optional field `minimum_payment_amount`
+      if (jsonObj.get("minimum_payment_amount") != null && !jsonObj.get("minimum_payment_amount").isJsonNull()) {
+        LineOfCreditAccountMinimumPaymentAmount.validateJsonObject(jsonObj.getAsJsonObject("minimum_payment_amount"));
       }
   }
 

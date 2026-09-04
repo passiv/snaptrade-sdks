@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v2.0.13)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v2.0.14)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -199,6 +199,7 @@ Class | Method | HTTP request | Description
  - [BalanceCurrency](docs/BalanceCurrency.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
+ - [BrokerageAuthorizationDataFreshnessMode](docs/BrokerageAuthorizationDataFreshnessMode.md)
  - [BrokerageAuthorizationDisabledConfirmation](docs/BrokerageAuthorizationDisabledConfirmation.md)
  - [BrokerageAuthorizationRefreshConfirmation](docs/BrokerageAuthorizationRefreshConfirmation.md)
  - [BrokerageAuthorizationTransactionsSyncConfirmation](docs/BrokerageAuthorizationTransactionsSyncConfirmation.md)
@@ -244,8 +245,7 @@ Class | Method | HTTP request | Description
  - [InvestmentAccount](docs/InvestmentAccount.md)
  - [InvestmentAccountNetValue](docs/InvestmentAccountNetValue.md)
  - [LineOfCreditAccount](docs/LineOfCreditAccount.md)
- - [LineOfCreditAccountCreditDetails](docs/LineOfCreditAccountCreditDetails.md)
- - [LineOfCreditAccountCreditDetailsMinimumPaymentAmount](docs/LineOfCreditAccountCreditDetailsMinimumPaymentAmount.md)
+ - [LineOfCreditAccountMinimumPaymentAmount](docs/LineOfCreditAccountMinimumPaymentAmount.md)
  - [LineOfCreditAccountNetValue](docs/LineOfCreditAccountNetValue.md)
  - [LineOfCreditAccountSyncStatus](docs/LineOfCreditAccountSyncStatus.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)

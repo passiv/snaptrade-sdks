@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Security instrument metadata for other mapped security positions.
+  # Security instrument metadata for bonds and other mapped security positions.
   class OtherInstrument
     # Type of security instrument.
     attr_accessor :kind

@@ -27,7 +27,7 @@ type LineOfCreditAccount struct {
 	// A display name for the account. Either assigned by the user or by the institution itself.
 	DisplayName NullableString `json:"display_name,omitempty"`
 	// The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
-	Number string `json:"number"`
+	MaskedAccountNumber string `json:"masked_account_number"`
 	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
 	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
 	// Unique identifier for the institution that holds the account.
@@ -38,7 +38,7 @@ type LineOfCreditAccount struct {
 	// The account type as provided by the institution.
 	RawType NullableString `json:"raw_type,omitempty"`
 	NetValue NullableLineOfCreditAccountNetValue `json:"net_value,omitempty"`
-	CreditDetails NullableLineOfCreditAccountCreditDetails `json:"credit_details,omitempty"`
+	MinimumPaymentAmount NullableLineOfCreditAccountMinimumPaymentAmount `json:"minimum_payment_amount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,12 +48,12 @@ type _LineOfCreditAccount LineOfCreditAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLineOfCreditAccount(kind string, id string, connectionId string, number string, syncStatus LineOfCreditAccountSyncStatus) *LineOfCreditAccount {
+func NewLineOfCreditAccount(kind string, id string, connectionId string, maskedAccountNumber string, syncStatus LineOfCreditAccountSyncStatus) *LineOfCreditAccount {
 	this := LineOfCreditAccount{}
 	this.Kind = kind
 	this.Id = id
 	this.ConnectionId = connectionId
-	this.Number = number
+	this.MaskedAccountNumber = maskedAccountNumber
 	this.SyncStatus = syncStatus
 	return &this
 }
@@ -180,28 +180,28 @@ func (o *LineOfCreditAccount) UnsetDisplayName() {
 	o.DisplayName.Unset()
 }
 
-// GetNumber returns the Number field value
-func (o *LineOfCreditAccount) GetNumber() string {
+// GetMaskedAccountNumber returns the MaskedAccountNumber field value
+func (o *LineOfCreditAccount) GetMaskedAccountNumber() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Number
+	return o.MaskedAccountNumber
 }
 
-// GetNumberOk returns a tuple with the Number field value
+// GetMaskedAccountNumberOk returns a tuple with the MaskedAccountNumber field value
 // and a boolean to check if the value has been set.
-func (o *LineOfCreditAccount) GetNumberOk() (*string, bool) {
+func (o *LineOfCreditAccount) GetMaskedAccountNumberOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.Number, true
+	return &o.MaskedAccountNumber, true
 }
 
-// SetNumber sets field value
-func (o *LineOfCreditAccount) SetNumber(v string) {
-	o.Number = v
+// SetMaskedAccountNumber sets field value
+func (o *LineOfCreditAccount) SetMaskedAccountNumber(v string) {
+	o.MaskedAccountNumber = v
 }
 
 // GetInstitutionAccountId returns the InstitutionAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -428,46 +428,46 @@ func (o *LineOfCreditAccount) UnsetNetValue() {
 	o.NetValue.Unset()
 }
 
-// GetCreditDetails returns the CreditDetails field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LineOfCreditAccount) GetCreditDetails() LineOfCreditAccountCreditDetails {
-	if o == nil || isNil(o.CreditDetails.Get()) {
-		var ret LineOfCreditAccountCreditDetails
+// GetMinimumPaymentAmount returns the MinimumPaymentAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LineOfCreditAccount) GetMinimumPaymentAmount() LineOfCreditAccountMinimumPaymentAmount {
+	if o == nil || isNil(o.MinimumPaymentAmount.Get()) {
+		var ret LineOfCreditAccountMinimumPaymentAmount
 		return ret
 	}
-	return *o.CreditDetails.Get()
+	return *o.MinimumPaymentAmount.Get()
 }
 
-// GetCreditDetailsOk returns a tuple with the CreditDetails field value if set, nil otherwise
+// GetMinimumPaymentAmountOk returns a tuple with the MinimumPaymentAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LineOfCreditAccount) GetCreditDetailsOk() (*LineOfCreditAccountCreditDetails, bool) {
+func (o *LineOfCreditAccount) GetMinimumPaymentAmountOk() (*LineOfCreditAccountMinimumPaymentAmount, bool) {
 	if o == nil {
     return nil, false
 	}
-	return o.CreditDetails.Get(), o.CreditDetails.IsSet()
+	return o.MinimumPaymentAmount.Get(), o.MinimumPaymentAmount.IsSet()
 }
 
-// HasCreditDetails returns a boolean if a field has been set.
-func (o *LineOfCreditAccount) HasCreditDetails() bool {
-	if o != nil && o.CreditDetails.IsSet() {
+// HasMinimumPaymentAmount returns a boolean if a field has been set.
+func (o *LineOfCreditAccount) HasMinimumPaymentAmount() bool {
+	if o != nil && o.MinimumPaymentAmount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCreditDetails gets a reference to the given NullableLineOfCreditAccountCreditDetails and assigns it to the CreditDetails field.
-func (o *LineOfCreditAccount) SetCreditDetails(v LineOfCreditAccountCreditDetails) {
-	o.CreditDetails.Set(&v)
+// SetMinimumPaymentAmount gets a reference to the given NullableLineOfCreditAccountMinimumPaymentAmount and assigns it to the MinimumPaymentAmount field.
+func (o *LineOfCreditAccount) SetMinimumPaymentAmount(v LineOfCreditAccountMinimumPaymentAmount) {
+	o.MinimumPaymentAmount.Set(&v)
 }
-// SetCreditDetailsNil sets the value for CreditDetails to be an explicit nil
-func (o *LineOfCreditAccount) SetCreditDetailsNil() {
-	o.CreditDetails.Set(nil)
+// SetMinimumPaymentAmountNil sets the value for MinimumPaymentAmount to be an explicit nil
+func (o *LineOfCreditAccount) SetMinimumPaymentAmountNil() {
+	o.MinimumPaymentAmount.Set(nil)
 }
 
-// UnsetCreditDetails ensures that no value is present for CreditDetails, not even an explicit nil
-func (o *LineOfCreditAccount) UnsetCreditDetails() {
-	o.CreditDetails.Unset()
+// UnsetMinimumPaymentAmount ensures that no value is present for MinimumPaymentAmount, not even an explicit nil
+func (o *LineOfCreditAccount) UnsetMinimumPaymentAmount() {
+	o.MinimumPaymentAmount.Unset()
 }
 
 func (o LineOfCreditAccount) MarshalJSON() ([]byte, error) {
@@ -485,7 +485,7 @@ func (o LineOfCreditAccount) MarshalJSON() ([]byte, error) {
 		toSerialize["display_name"] = o.DisplayName.Get()
 	}
 	if true {
-		toSerialize["number"] = o.Number
+		toSerialize["masked_account_number"] = o.MaskedAccountNumber
 	}
 	if o.InstitutionAccountId.IsSet() {
 		toSerialize["institution_account_id"] = o.InstitutionAccountId.Get()
@@ -505,8 +505,8 @@ func (o LineOfCreditAccount) MarshalJSON() ([]byte, error) {
 	if o.NetValue.IsSet() {
 		toSerialize["net_value"] = o.NetValue.Get()
 	}
-	if o.CreditDetails.IsSet() {
-		toSerialize["credit_details"] = o.CreditDetails.Get()
+	if o.MinimumPaymentAmount.IsSet() {
+		toSerialize["minimum_payment_amount"] = o.MinimumPaymentAmount.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -530,14 +530,14 @@ func (o *LineOfCreditAccount) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "connection_id")
 		delete(additionalProperties, "display_name")
-		delete(additionalProperties, "number")
+		delete(additionalProperties, "masked_account_number")
 		delete(additionalProperties, "institution_account_id")
 		delete(additionalProperties, "institution_id")
 		delete(additionalProperties, "opening_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "raw_type")
 		delete(additionalProperties, "net_value")
-		delete(additionalProperties, "credit_details")
+		delete(additionalProperties, "minimum_payment_amount")
 		o.AdditionalProperties = additionalProperties
 	}
 

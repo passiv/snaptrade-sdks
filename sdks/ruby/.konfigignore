@@ -1,2 +1,5 @@
 spec/getting_started_spec.rb
+spec/models/instrument_spec.rb
+spec/models/underlying_cfd_instrument_spec.rb
+spec/models/underlying_option_instrument_spec.rb
 lib/snaptrade/api_client_custom.rb

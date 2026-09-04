@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
 **DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
-**Number** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
+**MaskedAccountNumber** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
 **InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 
 **InstitutionId** | Pointer to **string** | Unique identifier for the institution that holds the account. | [optional] 
 **OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewDepositAccount
 
-`func NewDepositAccount(kind string, id string, connectionId string, number string, syncStatus DepositAccountSyncStatus, ) *DepositAccount`
+`func NewDepositAccount(kind string, id string, connectionId string, maskedAccountNumber string, syncStatus DepositAccountSyncStatus, ) *DepositAccount`
 
 NewDepositAccount instantiates a new DepositAccount object
 This constructor will assign default values to properties that have it defined,
@@ -130,24 +130,24 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *DepositAccount) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
-### GetNumber
+### GetMaskedAccountNumber
 
-`func (o *DepositAccount) GetNumber() string`
+`func (o *DepositAccount) GetMaskedAccountNumber() string`
 
-GetNumber returns the Number field if non-nil, zero value otherwise.
+GetMaskedAccountNumber returns the MaskedAccountNumber field if non-nil, zero value otherwise.
 
-### GetNumberOk
+### GetMaskedAccountNumberOk
 
-`func (o *DepositAccount) GetNumberOk() (*string, bool)`
+`func (o *DepositAccount) GetMaskedAccountNumberOk() (*string, bool)`
 
-GetNumberOk returns a tuple with the Number field if it's non-nil, zero value otherwise
+GetMaskedAccountNumberOk returns a tuple with the MaskedAccountNumber field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNumber
+### SetMaskedAccountNumber
 
-`func (o *DepositAccount) SetNumber(v string)`
+`func (o *DepositAccount) SetMaskedAccountNumber(v string)`
 
-SetNumber sets Number field to given value.
+SetMaskedAccountNumber sets MaskedAccountNumber field to given value.
 
 
 ### GetInstitutionAccountId

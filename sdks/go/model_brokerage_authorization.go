@@ -39,8 +39,7 @@ type BrokerageAuthorization struct {
 	UpdatedDate *time.Time `json:"updated_date,omitempty"`
 	// Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
 	IsEligibleForPayout *bool `json:"is_eligible_for_payout,omitempty"`
-	// Possible values include: - realtime - delayed  Indicates whether SnapTrade will provide delayed or realtime data for this connection. `delayed` means SnapTrade uses cached data for the connection because of the customer's plan, or because of brokerage limitations. `realtime` means SnapTrade retrieves current data from the brokerage during API calls. See the \"Data freshness\" column on the \"Positions & recent orders\" tab at https://support.snaptrade.com/brokerages. 
-	DataFreshnessMode *string `json:"data_freshness_mode,omitempty"`
+	DataFreshnessMode *BrokerageAuthorizationDataFreshnessMode `json:"data_freshness_mode,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -400,9 +399,9 @@ func (o *BrokerageAuthorization) SetIsEligibleForPayout(v bool) {
 }
 
 // GetDataFreshnessMode returns the DataFreshnessMode field value if set, zero value otherwise.
-func (o *BrokerageAuthorization) GetDataFreshnessMode() string {
+func (o *BrokerageAuthorization) GetDataFreshnessMode() BrokerageAuthorizationDataFreshnessMode {
 	if o == nil || isNil(o.DataFreshnessMode) {
-		var ret string
+		var ret BrokerageAuthorizationDataFreshnessMode
 		return ret
 	}
 	return *o.DataFreshnessMode
@@ -410,7 +409,7 @@ func (o *BrokerageAuthorization) GetDataFreshnessMode() string {
 
 // GetDataFreshnessModeOk returns a tuple with the DataFreshnessMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BrokerageAuthorization) GetDataFreshnessModeOk() (*string, bool) {
+func (o *BrokerageAuthorization) GetDataFreshnessModeOk() (*BrokerageAuthorizationDataFreshnessMode, bool) {
 	if o == nil || isNil(o.DataFreshnessMode) {
     return nil, false
 	}
@@ -426,8 +425,8 @@ func (o *BrokerageAuthorization) HasDataFreshnessMode() bool {
 	return false
 }
 
-// SetDataFreshnessMode gets a reference to the given string and assigns it to the DataFreshnessMode field.
-func (o *BrokerageAuthorization) SetDataFreshnessMode(v string) {
+// SetDataFreshnessMode gets a reference to the given BrokerageAuthorizationDataFreshnessMode and assigns it to the DataFreshnessMode field.
+func (o *BrokerageAuthorization) SetDataFreshnessMode(v BrokerageAuthorizationDataFreshnessMode) {
 	o.DataFreshnessMode = &v
 }
 

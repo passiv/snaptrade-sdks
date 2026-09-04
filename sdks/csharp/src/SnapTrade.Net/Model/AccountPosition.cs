@@ -48,7 +48,7 @@ namespace SnapTrade.Net.Model
         /// <param name="price">Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
         /// <param name="costBasis">Book price or average purchase price for the position. For options, this is per-share..</param>
         /// <param name="currency">ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;..</param>
-        /// <param name="cashEquivalent">Present for mutual fund positions that are also counted in cash balance or buying power..</param>
+        /// <param name="cashEquivalent">Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power..</param>
         /// <param name="taxLots">List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed).</param>
         public AccountPosition(Instrument instrument = default(Instrument), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? costBasis = default(decimal?), string currency = default(string), bool cashEquivalent = default(bool), List<TaxLot> taxLots = default(List<TaxLot>)) : base()
         {
@@ -105,9 +105,9 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Present for mutual fund positions that are also counted in cash balance or buying power.
+        /// Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
         /// </summary>
-        /// <value>Present for mutual fund positions that are also counted in cash balance or buying power.</value>
+        /// <value>Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.</value>
         [DataMember(Name = "cash_equivalent", EmitDefaultValue = true)]
         public bool CashEquivalent { get; set; }
 

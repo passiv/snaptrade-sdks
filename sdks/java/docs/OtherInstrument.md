@@ -2,7 +2,7 @@
 
 # OtherInstrument
 
-Security instrument metadata for other mapped security positions.
+Security instrument metadata for bonds and other mapped security positions.
 
 ## Properties
 
@@ -23,6 +23,7 @@ Security instrument metadata for other mapped security positions.
 
 | Name | Value |
 |---- | -----|
+| BOND | &quot;bond&quot; |
 | OTHER | &quot;other&quot; |
 
 

@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * OtherInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description Security instrument metadata for other mapped security positions.
+ * @description Security instrument metadata for bonds and other mapped security positions.
  * @package     SnapTrade
  */
 class OtherInstrumentTest extends TestCase

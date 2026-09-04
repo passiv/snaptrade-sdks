@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.OtherInstrument
-Security instrument metadata for other mapped security positions.
+Security instrument metadata for bonds and other mapped security positions.
 
 ## Properties
 
