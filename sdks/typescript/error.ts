@@ -24,9 +24,10 @@ function redactSensitiveQueryValues(url: string | undefined): string | undefined
     const parsedUrl = new URL(url, "http://konfig.invalid");
     const redactedSearchParams = new URLSearchParams();
     for (const [name, value] of parsedUrl.searchParams.entries()) {
-      const redactedValue = SENSITIVE_QUERY_PARAMETER_NAMES.has(name.toLowerCase())
-        ? REDACTED_QUERY_VALUE
-        : value;
+      let redactedValue = value;
+      if (SENSITIVE_QUERY_PARAMETER_NAMES.has(name.toLowerCase())) {
+        redactedValue = REDACTED_QUERY_VALUE;
+      }
       redactedSearchParams.append(name, redactedValue);
     }
     parsedUrl.search = redactedSearchParams.toString();
@@ -75,7 +76,7 @@ export class SnaptradeError extends Error {
   readonly statusText?: string;
 
   /**
-   * The URL that the original request was sent to
+   * The request URL with authentication query parameter values redacted.
    */
   readonly url?: string;
 

@@ -1,9 +1,12 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosError } from "axios";
+import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { inspect } from "util";
 import { Snaptrade, SnaptradeError, SnaptradeAuth } from "./index";
 
 const USER_SECRET = "user-secret-canary";
+const USER_ID = "user-id-canary";
 const CLIENT_ID = "client-id-canary";
+const REDACTED_QUERY_VALUE = "%5BREDACTED%5D";
 
 function axiosError(url: string, response?: AxiosResponse): AxiosError {
   const config = { method: "get", url } as InternalAxiosRequestConfig;
@@ -18,7 +21,21 @@ function axiosError(url: string, response?: AxiosResponse): AxiosError {
 
 function expectCredentialsRedacted(value: string): void {
   expect(value).not.toContain(USER_SECRET);
+  expect(value).not.toContain(USER_ID);
   expect(value).not.toContain(CLIENT_ID);
+}
+
+function listUserAccounts() {
+  return new Snaptrade({
+    auth: SnaptradeAuth.commercialApiKey({
+      clientId: CLIENT_ID,
+      consumerKey: "consumer-key",
+    }),
+    basePath: "https://api.snaptrade.com",
+  }).accountInformation.listUserAccounts({
+    userId: USER_ID,
+    userSecret: USER_SECRET,
+  });
 }
 
 it("redacts authentication query values without changing the outgoing request", async () => {
@@ -28,16 +45,7 @@ it("redacts authentication query values without changing the outgoing request", 
     throw axiosError(config.url!);
   });
 
-  const request = new Snaptrade({
-    auth: SnaptradeAuth.commercialApiKey({
-      clientId: CLIENT_ID,
-      consumerKey: "consumer-key",
-    }),
-    basePath: "https://api.snaptrade.com",
-  }).accountInformation.listUserAccounts({
-    userId: "user-id-canary",
-    userSecret: USER_SECRET,
-  });
+  const request = listUserAccounts();
 
   let caughtError: unknown;
   try {
@@ -48,9 +56,16 @@ it("redacts authentication query values without changing the outgoing request", 
 
   expect(caughtError).toBeInstanceOf(SnaptradeError);
   expect(outgoingRequest?.url).toContain(`clientId=${CLIENT_ID}`);
+  expect(outgoingRequest?.url).toContain(`userId=${USER_ID}`);
   expect(outgoingRequest?.url).toContain(`userSecret=${USER_SECRET}`);
+  expect(outgoingRequest?.url).toMatch(/[?&]timestamp=\d+/);
   expect(outgoingRequest?.headers).toHaveProperty("Signature");
-  expectCredentialsRedacted((caughtError as SnaptradeError).url ?? "");
+  const errorUrl = (caughtError as SnaptradeError).url ?? "";
+  expect(errorUrl).toContain(`clientId=${REDACTED_QUERY_VALUE}`);
+  expect(errorUrl).toContain(`userId=${REDACTED_QUERY_VALUE}`);
+  expect(errorUrl).toContain(`userSecret=${REDACTED_QUERY_VALUE}`);
+  expect(errorUrl).toContain(`timestamp=${REDACTED_QUERY_VALUE}`);
+  expectCredentialsRedacted(errorUrl);
   expectCredentialsRedacted((caughtError as SnaptradeError).message);
 });
 
@@ -84,18 +99,7 @@ it("still wraps Axios failures when response body inspection fails", async () =>
     throw axiosError(config.url!, response);
   });
 
-  const request = new Snaptrade({
-    auth: SnaptradeAuth.commercialApiKey({
-      clientId: CLIENT_ID,
-      consumerKey: "consumer-key",
-    }),
-    basePath: "https://api.snaptrade.com",
-  }).accountInformation.listUserAccounts({
-    userId: "user-id-canary",
-    userSecret: USER_SECRET,
-  });
-
-  await expect(request).rejects.toMatchObject({
+  await expect(listUserAccounts()).rejects.toMatchObject({
     name: "SnaptradeError",
     responseBody: undefined,
   });
@@ -112,18 +116,7 @@ it("wraps Axios errors created by a different Axios module instance", async () =
     },
   });
 
-  const request = new Snaptrade({
-    auth: SnaptradeAuth.commercialApiKey({
-      clientId: CLIENT_ID,
-      consumerKey: "consumer-key",
-    }),
-    basePath: "https://api.snaptrade.com",
-  }).accountInformation.listUserAccounts({
-    userId: "user-id-canary",
-    userSecret: USER_SECRET,
-  });
-
-  await expect(request).rejects.toBeInstanceOf(SnaptradeError);
+  await expect(listUserAccounts()).rejects.toBeInstanceOf(SnaptradeError);
 });
 
 it("omits an unparseable URL instead of exposing it", () => {

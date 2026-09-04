@@ -168,10 +168,10 @@ async function wrapAxiosRequest<R>(makeRequest: () => Promise<R>): Promise<R> {
                 let responseBody: unknown;
                 try {
                     const responseData = e.response?.data;
-                    responseBody =
-                        typeof ReadableStream !== "undefined" && responseData instanceof ReadableStream
-                        ? await readableStreamToString(responseData)
-                        : responseData;
+                    responseBody = responseData;
+                    if (typeof ReadableStream !== "undefined" && responseData instanceof ReadableStream) {
+                        responseBody = await readableStreamToString(responseData);
+                    }
                     responseBody = parseIfJson(responseBody);
                 } catch {
                     // Response inspection is best effort and must not expose the raw Axios error.
