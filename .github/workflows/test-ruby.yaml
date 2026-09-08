@@ -48,11 +48,11 @@ jobs:
         run: |
           ruby --version
           bundle --version
-          bundle exec ruby -r faraday -e 'puts "Faraday #{Faraday::VERSION}"'
+          bundle exec ruby -e 'require "faraday"; require "json"; puts "Faraday #{Faraday::VERSION}, JSON #{JSON::VERSION}"'
 
-      - name: Check positions response deserialization
+      - name: Check response deserialization and request signing
         working-directory: sdks/ruby
-        run: bundle exec rspec spec/regression/all_account_positions_spec.rb --format documentation
+        run: bundle exec rspec spec/regression --format documentation
 
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli

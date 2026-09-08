@@ -1,4 +1,5 @@
 spec/getting_started_spec.rb
 lib/snaptrade/api_client_custom.rb
 spec/regression/all_account_positions_spec.rb
+spec/regression/request_signing_spec.rb
 spec/regression/fixtures/all_account_positions.json
