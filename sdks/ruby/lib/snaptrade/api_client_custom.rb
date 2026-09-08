@@ -23,7 +23,7 @@ module SnapTrade
         "path" => path,
         "query" => query
       }
-      sig_content = JSON.generate(sig_object, sort_by: :to_s)
+      sig_content = JSON.generate(sig_object)
       sig_digest = OpenSSL::HMAC.digest(OpenSSL::Digest::SHA256.new, configuration.consumer_key, sig_content)
       signature = Base64.encode64(sig_digest).strip()
       request.headers[:Signature] = signature

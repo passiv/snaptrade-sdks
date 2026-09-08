@@ -1,0 +1,66 @@
+name: Ruby SDK compatibility
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/test-ruby.yaml
+      - .github/workflows/regenerate-sdks.yaml
+      - .github/workflows/release.yaml
+      - sdks/ruby/**
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit containing the SDK to test
+        required: true
+        type: string
+    secrets:
+      TEST_ENV:
+        required: true
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  test:
+    name: Ruby ${{ matrix.ruby }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['2.7.8', '3.3.11']
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler: '2.4.22'
+          bundler-cache: true
+          working-directory: sdks/ruby
+
+      - name: Record runtime and dependency versions
+        working-directory: sdks/ruby
+        run: |
+          ruby --version
+          bundle --version
+          bundle exec ruby -e 'require "faraday"; require "json"; puts "Faraday #{Faraday::VERSION}, JSON #{JSON::VERSION}"'
+
+      - name: Check response deserialization and request signing
+        working-directory: sdks/ruby
+        run: bundle exec rspec spec/regression --format documentation
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Set up test environment
+        uses: ./.github/actions/shared/inject-testing-env-vars
+        with:
+          test_env: ${{ secrets.TEST_ENV }}
+
+      - name: Test Ruby SDK
+        run: konfig test --filter ruby --sequence

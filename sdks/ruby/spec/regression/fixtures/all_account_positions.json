@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "instrument": {
+        "kind": "bond",
+        "id": "a7ade77d-74f4-4d8a-a1f8-1a582c2f4e3b",
+        "symbol": "912797SA6",
+        "raw_symbol": "912797SA6",
+        "description": "UNITED STATES TREAS BILLS ZERO CPN 0.00000% 10/01/2026",
+        "currency": "USD"
+      },
+      "units": "70",
+      "price": "99.768",
+      "cost_basis": "97.51",
+      "currency": "USD"
+    },
+    {
+      "instrument": {
+        "kind": "bond",
+        "id": "e538a57c-2bb8-40e2-812d-d07ee525b1cf",
+        "symbol": "91282CJT9",
+        "raw_symbol": "91282CJT9",
+        "description": "UNITED STATES TREAS SER AJ-2027 4.00000% 01/15/2027 NTS NOTE",
+        "currency": "USD"
+      },
+      "units": "70",
+      "price": "100.025",
+      "cost_basis": "100.25",
+      "currency": "USD"
+    }
+  ],
+  "data_freshness": { "as_of": "2026-09-08T11:02:57Z" }
+}

@@ -103,9 +103,22 @@ jobs:
             --owner "${{ github.repository_owner }}" \
             --repo "${{ github.event.repository.name }}"
 
+  test-ruby:
+    name: Test Ruby SDK compatibility
+    needs: detect-changesets
+    if: needs.detect-changesets.outputs.has_changesets == 'false'
+    permissions:
+      contents: read
+      packages: read
+    uses: ./.github/workflows/test-ruby.yaml
+    with:
+      ref: ${{ github.sha }}
+    secrets:
+      TEST_ENV: ${{ secrets.TEST_ENV }}
+
   publish:
     name: Publish ${{ matrix.language }} SDK
-    needs: detect-changesets
+    needs: [detect-changesets, test-ruby]
     if: needs.detect-changesets.outputs.has_changesets == 'false'
     # npm provenance only supports GitHub-hosted runners.
     runs-on: ${{ matrix.language == 'typescript' && 'ubuntu-latest' || 'blacksmith-2vcpu-ubuntu-2404' }}
@@ -155,6 +168,7 @@ jobs:
           test_env: ${{ secrets.TEST_ENV }}
 
       - name: Test SDK
+        if: matrix.language != 'ruby'
         uses: nick-fields/retry@v4
         with:
           timeout_minutes: 15
