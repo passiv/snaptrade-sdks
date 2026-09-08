@@ -52,16 +52,16 @@ A few rules the authorization endpoint enforces:
 
 You need:
 
-- An eligible Commercial Pay-as-you-go SnapTrade account with OAuth app registration enabled.
+- A Commercial SnapTrade account.
 - An app backend that can keep a client secret and refresh tokens confidential.
 - At least one redirect URI. Production redirects must use HTTPS; local testing can use `http://localhost`, `http://127.0.0.1`, or `http://[::1]`.
-- A SnapTrade Personal test account with Personal OAuth enabled and at least one brokerage connection. During early access, contact [support@snaptrade.com](mailto:support@snaptrade.com) to enable a test account.
+- A SnapTrade Personal account/workspace with at least one brokerage connection, for testing the consent flow.
 
 The self-serve OAuth app created in the SnapTrade Dashboard is a **confidential client**. Do not embed its client secret in browser JavaScript, a mobile app, a desktop app, or a distributed CLI. Those clients should send the authorization result to a backend that performs the token exchange and stores tokens securely.
 
 ## 1. Register Your App
 
-In the [SnapTrade Dashboard](https://dashboard.snaptrade.com), open **Settings**, select **OAuth App**, and add your callback URLs. During early access, each eligible developer account can register one OAuth app. The app name shown during consent comes from the name of your SnapTrade customer account.
+In the [SnapTrade Dashboard](https://dashboard.snaptrade.com), open **Settings**, select **OAuth App**, and add your callback URLs. Each developer account can register one OAuth app. The app name shown during consent comes from the name of your SnapTrade customer account.
 
 To receive webhooks, also configure a listener URL in the **Webhooks** section of the Dashboard. OAuth apps registered under the same SnapTrade customer use that customer's existing webhook URL, signing key, and custom headers. The `oauthClientId` in each OAuth webhook identifies the receiving app.
 
@@ -367,7 +367,7 @@ await fetch(revocationEndpoint, {
 
 1. Register a loopback callback such as `http://127.0.0.1:3000/oauth/snaptrade/callback` alongside your production callback.
 2. If testing webhooks, expose a local listener through an HTTPS tunnel and configure that public URL in the **Webhooks** section of the Dashboard.
-3. Use a separate SnapTrade Personal test account instead of the developer account that owns the OAuth app.
+3. Use a SnapTrade Personal workspace as the test user granting access to your app.
 4. Connect the SnapTrade Sandbox brokerage or a test brokerage connection from the SnapTrade Dashboard.
 5. Run the authorization flow with `scope=openid email read webhook` and confirm the consent page lists every permission you requested.
 6. Exchange the code from your backend and call `GET /accounts` with only the Bearer token.
@@ -402,4 +402,4 @@ await fetch(revocationEndpoint, {
 - Explain what brokerage data your app uses and link to a privacy policy.
 - Do not describe OAuth as supporting trading until a trading scope is available to your app.
 
-The OAuth preview is the best time to start building: access is free, the integration is smaller than a traditional Commercial implementation, and early apps can give direct feedback on the platform. When your integration is ready, contact SnapTrade to discuss production access and app discovery eligibility.
+The OAuth preview is the best time to start building: access is free, the integration is smaller than a traditional Commercial implementation, and early apps can give direct feedback on the platform. When your integration is ready, contact SnapTrade to discuss app discovery eligibility.
