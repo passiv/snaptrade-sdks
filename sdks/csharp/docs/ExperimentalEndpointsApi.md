@@ -311,6 +311,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **404** | Not Found |  -  |
+| **429** | Rate limit exceeded. Check &#x60;X-RateLimit-Remaining&#x60; (customer-level) and &#x60;X-RateLimit-Account-Remaining&#x60; (account-level) to see which limit you hit, then wait for the matching &#x60;*-Reset&#x60; value before retrying.  Not every header listed below appears on every operation. The &#x60;X-RateLimit-Account-*&#x60; headers are sent only where the per-account limit is enforced, and OAuth-authenticated requests never receive the customer-level &#x60;X-RateLimit-Limit&#x60;, &#x60;X-RateLimit-Remaining&#x60; or &#x60;X-RateLimit-Reset&#x60;.  A separate per-authenticated-user limit, reported in no &#x60;X-RateLimit-*&#x60; header, covers OAuth-authenticated requests and signed requests not governed by the customer-level limit; it does not stack on top of that limit. So a 429 can arrive with every reported counter above zero — or with no &#x60;X-RateLimit-*&#x60; headers at all. Honour &#x60;Retry-After&#x60; in that case.  |  * Retry-After - Seconds to wait before retrying. <br>  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  * X-RateLimit-Account-Limit -  <br>  * X-RateLimit-Account-Remaining -  <br>  * X-RateLimit-Account-Reset -  <br>  |
 | **500** | Unexpected error |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
 
@@ -411,6 +412,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **429** | Rate limit exceeded. Check &#x60;X-RateLimit-Remaining&#x60; (customer-level) and &#x60;X-RateLimit-Account-Remaining&#x60; (account-level) to see which limit you hit, then wait for the matching &#x60;*-Reset&#x60; value before retrying.  Not every header listed below appears on every operation. The &#x60;X-RateLimit-Account-*&#x60; headers are sent only where the per-account limit is enforced, and OAuth-authenticated requests never receive the customer-level &#x60;X-RateLimit-Limit&#x60;, &#x60;X-RateLimit-Remaining&#x60; or &#x60;X-RateLimit-Reset&#x60;.  A separate per-authenticated-user limit, reported in no &#x60;X-RateLimit-*&#x60; header, covers OAuth-authenticated requests and signed requests not governed by the customer-level limit; it does not stack on top of that limit. So a 429 can arrive with every reported counter above zero — or with no &#x60;X-RateLimit-*&#x60; headers at all. Honour &#x60;Retry-After&#x60; in that case.  |  * Retry-After - Seconds to wait before retrying. <br>  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  * X-RateLimit-Account-Limit -  <br>  * X-RateLimit-Account-Remaining -  <br>  * X-RateLimit-Account-Reset -  <br>  |
 | **500** | Unexpected error |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
 
@@ -510,6 +512,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **403** | Forbidden |  -  |
+| **429** | Rate limit exceeded. Check &#x60;X-RateLimit-Remaining&#x60; (customer-level) and &#x60;X-RateLimit-Account-Remaining&#x60; (account-level) to see which limit you hit, then wait for the matching &#x60;*-Reset&#x60; value before retrying.  Not every header listed below appears on every operation. The &#x60;X-RateLimit-Account-*&#x60; headers are sent only where the per-account limit is enforced, and OAuth-authenticated requests never receive the customer-level &#x60;X-RateLimit-Limit&#x60;, &#x60;X-RateLimit-Remaining&#x60; or &#x60;X-RateLimit-Reset&#x60;.  A separate per-authenticated-user limit, reported in no &#x60;X-RateLimit-*&#x60; header, covers OAuth-authenticated requests and signed requests not governed by the customer-level limit; it does not stack on top of that limit. So a 429 can arrive with every reported counter above zero — or with no &#x60;X-RateLimit-*&#x60; headers at all. Honour &#x60;Retry-After&#x60; in that case.  |  * Retry-After - Seconds to wait before retrying. <br>  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  * X-RateLimit-Account-Limit -  <br>  * X-RateLimit-Account-Remaining -  <br>  * X-RateLimit-Account-Reset -  <br>  |
 | **500** | Unexpected error |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
 

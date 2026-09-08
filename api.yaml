@@ -1,6 +1,63 @@
 openapi: 3.0.0
 info:
-  description: Connect brokerage accounts to your app for live positions and trading
+  description: |
+    Connect brokerage accounts to your app for live positions and trading.
+
+    ## Rate limiting
+
+    Two limits apply to requests signed with your `clientId`. The stricter one
+    wins, and exceeding either returns `429 Too Many Requests`.
+
+    - **Customer-level** — 250 requests/minute by default, scoped to your
+      `clientId` and applied across all endpoints. Reported in
+      `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`.
+    - **Account-level** — 10 requests/minute per account, scoped to
+      (`clientId`, `accountId`). All covered operations for one account draw on
+      the same bucket — reading balances and reading positions share it — and
+      enforcement does not depend on the HTTP method, so updating an account
+      consumes the same bucket as reading it. Only enforced for Personal users,
+      and only for integrations it has been rolled out to — it is not yet in
+      force for every Personal integration. It also does not apply on every
+      operation that documents a 429 below. Where it applies it is reported in
+      `X-RateLimit-Account-Limit`, `X-RateLimit-Account-Remaining` and
+      `X-RateLimit-Account-Reset`. Do not read the absence of those headers as
+      proof the limit is off — some configurations omit the rate limit headers
+      while still enforcing the limit, so header absence tells you nothing
+      about your allowance.
+
+    On a 429, `X-RateLimit-Remaining: 0` means you hit the customer-level limit
+    and `X-RateLimit-Account-Remaining: 0` means the account-level one. Wait for
+    the corresponding `*-Reset` value (seconds) before retrying, or fall back to
+    exponential backoff with jitter.
+
+    Not every 429 is explained by those headers. A separate
+    per-authenticated-user limit, reported in no `X-RateLimit-*` header, covers
+    OAuth-authenticated requests and signed requests in configurations where the
+    customer-level limit is not in effect — on the operations that use the
+    default throttles. A few operations override those and are governed by the
+    customer-level limit alone. The two do not stack: a signed request
+    governed by the customer-level limit above is not additionally subject to the
+    per-user one. If a 429 arrives with no header at zero — or with no
+    `X-RateLimit-*` headers at all — honour `Retry-After` and back off. Treat the
+    remaining counts as a hint, not a guarantee that the next request will
+    succeed.
+
+    Because the customer-level limit applies everywhere, any signed request can
+    return 429.
+
+    **OAuth-authenticated requests are an exception.** They are not subject to
+    the customer-level limit and do not receive `X-RateLimit-Limit`,
+    `X-RateLimit-Remaining` or `X-RateLimit-Reset` — do not wait on those headers
+    or design around a customer-level allowance on this path. The account-level
+    limit still applies to them on the account-data endpoints above, reported in
+    the `X-RateLimit-Account-*` headers. On operations using the default
+    throttles the per-user limit above applies to them as well, so an OAuth
+    request can be rejected while the account headers still show capacity; on
+    the few operations that override those throttles, OAuth callers have no
+    per-user ceiling at all. Drive retries from `Retry-After` and exponential
+    backoff with jitter rather than from the headers.
+
+    See https://docs.snaptrade.com/docs/ratelimiting.
   version: 1.0.0
   title: SnapTrade
   termsOfService: N/A
@@ -499,6 +556,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts:
     get:
       tags:
@@ -572,6 +631,8 @@ paths:
                 $ref: "#/components/schemas/Account"
         default:
           description: Unexpected error
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
     put:
       tags:
         - Account Information
@@ -607,6 +668,8 @@ paths:
                   $ref: "#/components/schemas/Account"
         default:
           description: Unexpected error
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/balances:
     get:
       tags:
@@ -655,6 +718,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/positions/all:
     get:
       tags:
@@ -700,6 +765,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/orders:
     get:
       tags:
@@ -775,6 +842,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/orders/v2:
     get:
       tags:
@@ -840,6 +909,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/balanceHistory:
     get:
       tags:
@@ -940,6 +1011,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/recentOrders/v2:
     get:
       tags:
@@ -998,6 +1071,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/returnRates:
     get:
       tags:
@@ -1155,6 +1230,8 @@ paths:
                 $ref: "#/components/schemas/PaginatedUniversalActivity"
         default:
           description: Unexpected error
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /authorizations/{authorizationId}/returnRates:
     get:
       tags:
@@ -1272,6 +1349,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   "/accounts/{accountId}/quotes/options":
     get:
       tags:
@@ -2187,6 +2266,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
     get:
       tags:
@@ -2249,6 +2330,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
 
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/trading/crypto:
     post:
       tags:
@@ -2719,6 +2802,78 @@ paths:
         "201":
           description: Return a 201 status to indicate the update was successful
 components:
+  headers:
+    X-RateLimit-Limit:
+      description: Customer-level request allowance for the current window.
+      schema:
+        type: integer
+        example: 250
+    X-RateLimit-Remaining:
+      description: Customer-level requests left in the current window. 0 on a 429 means this is the limit you hit.
+      schema:
+        type: integer
+        example: 249
+    X-RateLimit-Reset:
+      description: Seconds until the customer-level window resets.
+      schema:
+        type: integer
+        example: 60
+    X-RateLimit-Account-Limit:
+      description: Per-account request allowance for the current window. Only sent on account-data endpoints where the account-level limit applies.
+      schema:
+        type: integer
+        example: 10
+    X-RateLimit-Account-Remaining:
+      description: Per-account requests left in the current window. 0 on a 429 means this is the limit you hit.
+      schema:
+        type: integer
+        example: 9
+    X-RateLimit-Account-Reset:
+      description: Seconds until the per-account window resets.
+      schema:
+        type: integer
+        example: 60
+  responses:
+    TooManyRequests:
+      description: |
+        Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
+        `X-RateLimit-Account-Remaining` (account-level) to see which limit you
+        hit, then wait for the matching `*-Reset` value before retrying.
+
+        Not every header listed below appears on every operation. The
+        `X-RateLimit-Account-*` headers are sent only where the per-account limit
+        is enforced, and OAuth-authenticated requests never receive the
+        customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
+        `X-RateLimit-Reset`.
+
+        A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
+        header, covers OAuth-authenticated requests and signed requests not
+        governed by the customer-level limit; it does not stack on top of that
+        limit. So a 429 can arrive with every reported counter above zero — or
+        with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
+        case.
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying.
+          schema:
+            type: integer
+            example: 7
+        X-RateLimit-Limit:
+          $ref: "#/components/headers/X-RateLimit-Limit"
+        X-RateLimit-Remaining:
+          $ref: "#/components/headers/X-RateLimit-Remaining"
+        X-RateLimit-Reset:
+          $ref: "#/components/headers/X-RateLimit-Reset"
+        X-RateLimit-Account-Limit:
+          $ref: "#/components/headers/X-RateLimit-Account-Limit"
+        X-RateLimit-Account-Remaining:
+          $ref: "#/components/headers/X-RateLimit-Account-Remaining"
+        X-RateLimit-Account-Reset:
+          $ref: "#/components/headers/X-RateLimit-Account-Reset"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/429TooManyRequestsResponse"
   securitySchemes:
     PartnerSignature:
       type: apiKey
@@ -3407,6 +3562,26 @@ components:
           example:
             amount: 40.00
             currency: USD
+        available_credit:
+          type: object
+          nullable: true
+          description: The remaining credit available to spend on the account (credit limit less the current balance). Omitted when no such data is available.
+          properties:
+            amount:
+              type: number
+              nullable: true
+            currency:
+              type: string
+              nullable: true
+          example:
+            amount: 4157.83
+            currency: USD
+        next_payment_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date the account's next payment is due, in `YYYY-MM-DD` format. Omitted when no such data is available.
+          example: "2026-09-25"
     ConnectionAccountSyncStatus:
       description: |
         Contains status updates for the account sync process between SnapTrade and the institution,
@@ -5619,22 +5794,26 @@ components:
           example: true
         data_freshness_mode:
           description: |
-            Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.
+            Indicates the data freshness provided by the institution and by SnapTrade for this connection. The two values are independent; the connection's data is effectively delayed if either value is `delayed`.
 
-            `institution` is `delayed` when the brokerage itself provides delayed data. See the "Data freshness" column on the "Positions & recent orders" tab at https://support.snaptrade.com/brokerages.
-
-            `snaptrade` is `delayed` when SnapTrade uses cached data for the connection because of the customer's plan or the integration. Otherwise, it is `realtime` and SnapTrade retrieves current data from the brokerage during API calls.
+            The "Data freshness" column on the [SnapTrade Institution Support](https://support.snaptrade.com/brokerages) page (Positions & recent orders tab) identifies institutions whose connections are considered delayed on a Real-time plan because either `institution` or `snaptrade` is `delayed`.
           type: object
           required:
             - institution
             - snaptrade
           properties:
             institution:
+              description: |
+                Indicates the freshness of the data provided by the institution. `realtime` means the institution provides current data; `delayed` means the institution itself does not allow intra-day data updates.
               type: string
               enum:
                 - realtime
                 - delayed
             snaptrade:
+              description: |
+                Indicates how SnapTrade retrieves data for this connection. `realtime` means SnapTrade retrieves current data from the institution during API calls. `delayed` means SnapTrade serves cached data, either because the customer's plan uses Daily data or because retrieving live data from the institution is too latency-intensive.
+
+                When this value is `delayed`, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
               type: string
               enum:
                 - realtime

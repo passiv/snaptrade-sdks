@@ -3,7 +3,7 @@
 """
     SnapTrade
 
-    Connect brokerage accounts to your app for live positions and trading
+    Connect brokerage accounts to your app for live positions and trading.  ## Rate limiting  Two limits apply to requests signed with your `clientId`. The stricter one wins, and exceeding either returns `429 Too Many Requests`.  - **Customer-level** — 250 requests/minute by default, scoped to your   `clientId` and applied across all endpoints. Reported in   `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`. - **Account-level** — 10 requests/minute per account, scoped to   (`clientId`, `accountId`). All covered operations for one account draw on   the same bucket — reading balances and reading positions share it — and   enforcement does not depend on the HTTP method, so updating an account   consumes the same bucket as reading it. Only enforced for Personal users,   and only for integrations it has been rolled out to — it is not yet in   force for every Personal integration. It also does not apply on every   operation that documents a 429 below. Where it applies it is reported in   `X-RateLimit-Account-Limit`, `X-RateLimit-Account-Remaining` and   `X-RateLimit-Account-Reset`. Do not read the absence of those headers as   proof the limit is off — some configurations omit the rate limit headers   while still enforcing the limit, so header absence tells you nothing   about your allowance.  On a 429, `X-RateLimit-Remaining: 0` means you hit the customer-level limit and `X-RateLimit-Account-Remaining: 0` means the account-level one. Wait for the corresponding `*-Reset` value (seconds) before retrying, or fall back to exponential backoff with jitter.  Not every 429 is explained by those headers. A separate per-authenticated-user limit, reported in no `X-RateLimit-*` header, covers OAuth-authenticated requests and signed requests in configurations where the customer-level limit is not in effect — on the operations that use the default throttles. A few operations override those and are governed by the customer-level limit alone. The two do not stack: a signed request governed by the customer-level limit above is not additionally subject to the per-user one. If a 429 arrives with no header at zero — or with no `X-RateLimit-*` headers at all — honour `Retry-After` and back off. Treat the remaining counts as a hint, not a guarantee that the next request will succeed.  Because the customer-level limit applies everywhere, any signed request can return 429.  **OAuth-authenticated requests are an exception.** They are not subject to the customer-level limit and do not receive `X-RateLimit-Limit`, `X-RateLimit-Remaining` or `X-RateLimit-Reset` — do not wait on those headers or design around a customer-level allowance on this path. The account-level limit still applies to them on the account-data endpoints above, reported in the `X-RateLimit-Account-*` headers. On operations using the default throttles the per-user limit above applies to them as well, so an OAuth request can be rejected while the account headers still show capacity; on the few operations that override those throttles, OAuth callers have no per-user ceiling at all. Drive retries from `Retry-After` and exponential backoff with jitter rather than from the headers.  See https://docs.snaptrade.com/docs/ratelimiting. 
 
     The version of the OpenAPI document: 1.0.0
     Contact: api@snaptrade.com
@@ -192,6 +192,35 @@ class LineOfCreditAccount(
             @staticmethod
             def minimum_payment_amount() -> typing.Type['LineOfCreditAccountMinimumPaymentAmount']:
                 return LineOfCreditAccountMinimumPaymentAmount
+        
+            @staticmethod
+            def available_credit() -> typing.Type['LineOfCreditAccountAvailableCredit']:
+                return LineOfCreditAccountAvailableCredit
+            
+            
+            class next_payment_date(
+                schemas.DateBase,
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    format = 'date'
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, date, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'next_payment_date':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "kind": kind,
                 "id": id,
@@ -205,6 +234,8 @@ class LineOfCreditAccount(
                 "raw_type": raw_type,
                 "net_value": net_value,
                 "minimum_payment_amount": minimum_payment_amount,
+                "available_credit": available_credit,
+                "next_payment_date": next_payment_date,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -251,9 +282,15 @@ class LineOfCreditAccount(
     def __getitem__(self, name: typing_extensions.Literal["minimum_payment_amount"]) -> 'LineOfCreditAccountMinimumPaymentAmount': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["available_credit"]) -> 'LineOfCreditAccountAvailableCredit': ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["next_payment_date"]) -> MetaOapg.properties.next_payment_date: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], typing_extensions.Literal["available_credit"], typing_extensions.Literal["next_payment_date"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -294,9 +331,15 @@ class LineOfCreditAccount(
     def get_item_oapg(self, name: typing_extensions.Literal["minimum_payment_amount"]) -> typing.Union['LineOfCreditAccountMinimumPaymentAmount', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["available_credit"]) -> typing.Union['LineOfCreditAccountAvailableCredit', schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["next_payment_date"]) -> typing.Union[MetaOapg.properties.next_payment_date, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], typing_extensions.Literal["available_credit"], typing_extensions.Literal["next_payment_date"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -314,6 +357,8 @@ class LineOfCreditAccount(
         raw_type: typing.Union[MetaOapg.properties.raw_type, None, str, schemas.Unset] = schemas.unset,
         net_value: typing.Union['LineOfCreditAccountNetValue', schemas.Unset] = schemas.unset,
         minimum_payment_amount: typing.Union['LineOfCreditAccountMinimumPaymentAmount', schemas.Unset] = schemas.unset,
+        available_credit: typing.Union['LineOfCreditAccountAvailableCredit', schemas.Unset] = schemas.unset,
+        next_payment_date: typing.Union[MetaOapg.properties.next_payment_date, None, str, date, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'LineOfCreditAccount':
@@ -332,10 +377,13 @@ class LineOfCreditAccount(
             raw_type=raw_type,
             net_value=net_value,
             minimum_payment_amount=minimum_payment_amount,
+            available_credit=available_credit,
+            next_payment_date=next_payment_date,
             _configuration=_configuration,
             **kwargs,
         )
 
+from snaptrade_client.model.line_of_credit_account_available_credit import LineOfCreditAccountAvailableCredit
 from snaptrade_client.model.line_of_credit_account_minimum_payment_amount import LineOfCreditAccountMinimumPaymentAmount
 from snaptrade_client.model.line_of_credit_account_net_value import LineOfCreditAccountNetValue
 from snaptrade_client.model.line_of_credit_account_sync_status import LineOfCreditAccountSyncStatus

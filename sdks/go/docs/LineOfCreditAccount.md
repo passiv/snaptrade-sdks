@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **RawType** | Pointer to **NullableString** | The account type as provided by the institution. | [optional] 
 **NetValue** | Pointer to [**NullableLineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  | [optional] 
 **MinimumPaymentAmount** | Pointer to [**NullableLineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  | [optional] 
+**AvailableCredit** | Pointer to [**NullableLineOfCreditAccountAvailableCredit**](LineOfCreditAccountAvailableCredit.md) |  | [optional] 
+**NextPaymentDate** | Pointer to **NullableString** | The date the account&#39;s next payment is due, in &#x60;YYYY-MM-DD&#x60; format. Omitted when no such data is available. | [optional] 
 
 ## Methods
 
@@ -371,6 +373,76 @@ HasMinimumPaymentAmount returns a boolean if a field has been set.
 `func (o *LineOfCreditAccount) UnsetMinimumPaymentAmount()`
 
 UnsetMinimumPaymentAmount ensures that no value is present for MinimumPaymentAmount, not even an explicit nil
+### GetAvailableCredit
+
+`func (o *LineOfCreditAccount) GetAvailableCredit() LineOfCreditAccountAvailableCredit`
+
+GetAvailableCredit returns the AvailableCredit field if non-nil, zero value otherwise.
+
+### GetAvailableCreditOk
+
+`func (o *LineOfCreditAccount) GetAvailableCreditOk() (*LineOfCreditAccountAvailableCredit, bool)`
+
+GetAvailableCreditOk returns a tuple with the AvailableCredit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailableCredit
+
+`func (o *LineOfCreditAccount) SetAvailableCredit(v LineOfCreditAccountAvailableCredit)`
+
+SetAvailableCredit sets AvailableCredit field to given value.
+
+### HasAvailableCredit
+
+`func (o *LineOfCreditAccount) HasAvailableCredit() bool`
+
+HasAvailableCredit returns a boolean if a field has been set.
+
+### SetAvailableCreditNil
+
+`func (o *LineOfCreditAccount) SetAvailableCreditNil(b bool)`
+
+ SetAvailableCreditNil sets the value for AvailableCredit to be an explicit nil
+
+### UnsetAvailableCredit
+`func (o *LineOfCreditAccount) UnsetAvailableCredit()`
+
+UnsetAvailableCredit ensures that no value is present for AvailableCredit, not even an explicit nil
+### GetNextPaymentDate
+
+`func (o *LineOfCreditAccount) GetNextPaymentDate() string`
+
+GetNextPaymentDate returns the NextPaymentDate field if non-nil, zero value otherwise.
+
+### GetNextPaymentDateOk
+
+`func (o *LineOfCreditAccount) GetNextPaymentDateOk() (*string, bool)`
+
+GetNextPaymentDateOk returns a tuple with the NextPaymentDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextPaymentDate
+
+`func (o *LineOfCreditAccount) SetNextPaymentDate(v string)`
+
+SetNextPaymentDate sets NextPaymentDate field to given value.
+
+### HasNextPaymentDate
+
+`func (o *LineOfCreditAccount) HasNextPaymentDate() bool`
+
+HasNextPaymentDate returns a boolean if a field has been set.
+
+### SetNextPaymentDateNil
+
+`func (o *LineOfCreditAccount) SetNextPaymentDateNil(b bool)`
+
+ SetNextPaymentDateNil sets the value for NextPaymentDate to be an explicit nil
+
+### UnsetNextPaymentDate
+`func (o *LineOfCreditAccount) UnsetNextPaymentDate()`
+
+UnsetNextPaymentDate ensures that no value is present for NextPaymentDate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
