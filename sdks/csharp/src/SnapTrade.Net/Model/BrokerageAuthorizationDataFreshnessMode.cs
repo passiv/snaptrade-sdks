@@ -1,7 +1,7 @@
 /*
  * SnapTrade
  *
- * Connect brokerage accounts to your app for live positions and trading
+ * Connect brokerage accounts to your app for live positions and trading.  ## Rate limiting  Two limits apply to requests signed with your `clientId`. The stricter one wins, and exceeding either returns `429 Too Many Requests`.  - **Customer-level** — 250 requests/minute by default, scoped to your   `clientId` and applied across all endpoints. Reported in   `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`. - **Account-level** — 10 requests/minute per account, scoped to   (`clientId`, `accountId`). All covered operations for one account draw on   the same bucket — reading balances and reading positions share it — and   enforcement does not depend on the HTTP method, so updating an account   consumes the same bucket as reading it. Only enforced for Personal users,   and only for integrations it has been rolled out to — it is not yet in   force for every Personal integration. It also does not apply on every   operation that documents a 429 below. Where it applies it is reported in   `X-RateLimit-Account-Limit`, `X-RateLimit-Account-Remaining` and   `X-RateLimit-Account-Reset`. Do not read the absence of those headers as   proof the limit is off — some configurations omit the rate limit headers   while still enforcing the limit, so header absence tells you nothing   about your allowance.  On a 429, `X-RateLimit-Remaining: 0` means you hit the customer-level limit and `X-RateLimit-Account-Remaining: 0` means the account-level one. Wait for the corresponding `*-Reset` value (seconds) before retrying, or fall back to exponential backoff with jitter.  Not every 429 is explained by those headers. A separate per-authenticated-user limit, reported in no `X-RateLimit-*` header, covers OAuth-authenticated requests and signed requests in configurations where the customer-level limit is not in effect — on the operations that use the default throttles. A few operations override those and are governed by the customer-level limit alone. The two do not stack: a signed request governed by the customer-level limit above is not additionally subject to the per-user one. If a 429 arrives with no header at zero — or with no `X-RateLimit-*` headers at all — honour `Retry-After` and back off. Treat the remaining counts as a hint, not a guarantee that the next request will succeed.  Because the customer-level limit applies everywhere, any signed request can return 429.  **OAuth-authenticated requests are an exception.** They are not subject to the customer-level limit and do not receive `X-RateLimit-Limit`, `X-RateLimit-Remaining` or `X-RateLimit-Reset` — do not wait on those headers or design around a customer-level allowance on this path. The account-level limit still applies to them on the account-data endpoints above, reported in the `X-RateLimit-Account-*` headers. On operations using the default throttles the per-user limit above applies to them as well, so an OAuth request can be rejected while the account headers still show capacity; on the few operations that override those throttles, OAuth callers have no per-user ceiling at all. Drive retries from `Retry-After` and exponential backoff with jitter rather than from the headers.  See https://docs.snaptrade.com/docs/ratelimiting. 
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: api@snaptrade.com
@@ -27,14 +27,15 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Indicates the data freshness provided by the brokerage institution and by SnapTrade for this connection.  &#x60;institution&#x60; is &#x60;delayed&#x60; when the brokerage itself provides delayed data. See the \&quot;Data freshness\&quot; column on the \&quot;Positions &amp; recent orders\&quot; tab at https://support.snaptrade.com/brokerages.  &#x60;snaptrade&#x60; is &#x60;delayed&#x60; when SnapTrade uses cached data for the connection because of the customer&#39;s plan or the integration. Otherwise, it is &#x60;realtime&#x60; and SnapTrade retrieves current data from the brokerage during API calls. 
+    /// Indicates the data freshness provided by the institution and by SnapTrade for this connection. The two values are independent; the connection&#39;s data is effectively delayed if either value is &#x60;delayed&#x60;.  The \&quot;Data freshness\&quot; column on the [SnapTrade Institution Support](https://support.snaptrade.com/brokerages) page (Positions &amp; recent orders tab) identifies institutions whose connections are considered delayed on a Real-time plan because either &#x60;institution&#x60; or &#x60;snaptrade&#x60; is &#x60;delayed&#x60;. 
     /// </summary>
     [DataContract(Name = "BrokerageAuthorization_data_freshness_mode")]
     public partial class BrokerageAuthorizationDataFreshnessMode : IEquatable<BrokerageAuthorizationDataFreshnessMode>, IValidatableObject
     {
         /// <summary>
-        /// Defines Institution
+        /// Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. 
         /// </summary>
+        /// <value>Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstitutionEnum
         {
@@ -54,13 +55,15 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Institution
+        /// Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. 
         /// </summary>
+        /// <value>Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates. </value>
         [DataMember(Name = "institution", IsRequired = true, EmitDefaultValue = true)]
         public InstitutionEnum Institution { get; set; }
         /// <summary>
-        /// Defines Snaptrade
+        /// Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
         /// </summary>
+        /// <value>Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SnaptradeEnum
         {
@@ -80,8 +83,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Snaptrade
+        /// Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
         /// </summary>
+        /// <value>Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). </value>
         [DataMember(Name = "snaptrade", IsRequired = true, EmitDefaultValue = true)]
         public SnaptradeEnum Snaptrade { get; set; }
         /// <summary>
@@ -95,8 +99,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationDataFreshnessMode" /> class.
         /// </summary>
-        /// <param name="institution">institution (required).</param>
-        /// <param name="snaptrade">snaptrade (required).</param>
+        /// <param name="institution">Indicates the freshness of the data provided by the institution. &#x60;realtime&#x60; means the institution provides current data; &#x60;delayed&#x60; means the institution itself does not allow intra-day data updates.  (required).</param>
+        /// <param name="snaptrade">Indicates how SnapTrade retrieves data for this connection. &#x60;realtime&#x60; means SnapTrade retrieves current data from the institution during API calls. &#x60;delayed&#x60; means SnapTrade serves cached data, either because the customer&#39;s plan uses Daily data or because retrieving live data from the institution is too latency-intensive.  When this value is &#x60;delayed&#x60;, you can request updated data using the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  (required).</param>
         public BrokerageAuthorizationDataFreshnessMode(InstitutionEnum institution = default(InstitutionEnum), SnaptradeEnum snaptrade = default(SnaptradeEnum)) : base()
         {
             this.Institution = institution;

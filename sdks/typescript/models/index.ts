@@ -81,6 +81,7 @@ export * from './instrument';
 export * from './investment-account';
 export * from './investment-account-net-value';
 export * from './line-of-credit-account';
+export * from './line-of-credit-account-available-credit';
 export * from './line-of-credit-account-minimum-payment-amount';
 export * from './line-of-credit-account-net-value';
 export * from './line-of-credit-account-sync-status';

@@ -1,7 +1,7 @@
 /*
 SnapTrade
 
-Connect brokerage accounts to your app for live positions and trading
+Connect brokerage accounts to your app for live positions and trading.  ## Rate limiting  Two limits apply to requests signed with your `clientId`. The stricter one wins, and exceeding either returns `429 Too Many Requests`.  - **Customer-level** — 250 requests/minute by default, scoped to your   `clientId` and applied across all endpoints. Reported in   `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`. - **Account-level** — 10 requests/minute per account, scoped to   (`clientId`, `accountId`). All covered operations for one account draw on   the same bucket — reading balances and reading positions share it — and   enforcement does not depend on the HTTP method, so updating an account   consumes the same bucket as reading it. Only enforced for Personal users,   and only for integrations it has been rolled out to — it is not yet in   force for every Personal integration. It also does not apply on every   operation that documents a 429 below. Where it applies it is reported in   `X-RateLimit-Account-Limit`, `X-RateLimit-Account-Remaining` and   `X-RateLimit-Account-Reset`. Do not read the absence of those headers as   proof the limit is off — some configurations omit the rate limit headers   while still enforcing the limit, so header absence tells you nothing   about your allowance.  On a 429, `X-RateLimit-Remaining: 0` means you hit the customer-level limit and `X-RateLimit-Account-Remaining: 0` means the account-level one. Wait for the corresponding `*-Reset` value (seconds) before retrying, or fall back to exponential backoff with jitter.  Not every 429 is explained by those headers. A separate per-authenticated-user limit, reported in no `X-RateLimit-*` header, covers OAuth-authenticated requests and signed requests in configurations where the customer-level limit is not in effect — on the operations that use the default throttles. A few operations override those and are governed by the customer-level limit alone. The two do not stack: a signed request governed by the customer-level limit above is not additionally subject to the per-user one. If a 429 arrives with no header at zero — or with no `X-RateLimit-*` headers at all — honour `Retry-After` and back off. Treat the remaining counts as a hint, not a guarantee that the next request will succeed.  Because the customer-level limit applies everywhere, any signed request can return 429.  **OAuth-authenticated requests are an exception.** They are not subject to the customer-level limit and do not receive `X-RateLimit-Limit`, `X-RateLimit-Remaining` or `X-RateLimit-Reset` — do not wait on those headers or design around a customer-level allowance on this path. The account-level limit still applies to them on the account-data endpoints above, reported in the `X-RateLimit-Account-*` headers. On operations using the default throttles the per-user limit above applies to them as well, so an OAuth request can be rejected while the account headers still show capacity; on the few operations that override those throttles, OAuth callers have no per-user ceiling at all. Drive retries from `Retry-After` and exponential backoff with jitter rather than from the headers.  See https://docs.snaptrade.com/docs/ratelimiting. 
 
 API version: 1.0.0
 Contact: api@snaptrade.com
@@ -39,6 +39,9 @@ type LineOfCreditAccount struct {
 	RawType NullableString `json:"raw_type,omitempty"`
 	NetValue NullableLineOfCreditAccountNetValue `json:"net_value,omitempty"`
 	MinimumPaymentAmount NullableLineOfCreditAccountMinimumPaymentAmount `json:"minimum_payment_amount,omitempty"`
+	AvailableCredit NullableLineOfCreditAccountAvailableCredit `json:"available_credit,omitempty"`
+	// The date the account's next payment is due, in `YYYY-MM-DD` format. Omitted when no such data is available.
+	NextPaymentDate NullableString `json:"next_payment_date,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -470,6 +473,90 @@ func (o *LineOfCreditAccount) UnsetMinimumPaymentAmount() {
 	o.MinimumPaymentAmount.Unset()
 }
 
+// GetAvailableCredit returns the AvailableCredit field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LineOfCreditAccount) GetAvailableCredit() LineOfCreditAccountAvailableCredit {
+	if o == nil || isNil(o.AvailableCredit.Get()) {
+		var ret LineOfCreditAccountAvailableCredit
+		return ret
+	}
+	return *o.AvailableCredit.Get()
+}
+
+// GetAvailableCreditOk returns a tuple with the AvailableCredit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LineOfCreditAccount) GetAvailableCreditOk() (*LineOfCreditAccountAvailableCredit, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.AvailableCredit.Get(), o.AvailableCredit.IsSet()
+}
+
+// HasAvailableCredit returns a boolean if a field has been set.
+func (o *LineOfCreditAccount) HasAvailableCredit() bool {
+	if o != nil && o.AvailableCredit.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailableCredit gets a reference to the given NullableLineOfCreditAccountAvailableCredit and assigns it to the AvailableCredit field.
+func (o *LineOfCreditAccount) SetAvailableCredit(v LineOfCreditAccountAvailableCredit) {
+	o.AvailableCredit.Set(&v)
+}
+// SetAvailableCreditNil sets the value for AvailableCredit to be an explicit nil
+func (o *LineOfCreditAccount) SetAvailableCreditNil() {
+	o.AvailableCredit.Set(nil)
+}
+
+// UnsetAvailableCredit ensures that no value is present for AvailableCredit, not even an explicit nil
+func (o *LineOfCreditAccount) UnsetAvailableCredit() {
+	o.AvailableCredit.Unset()
+}
+
+// GetNextPaymentDate returns the NextPaymentDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LineOfCreditAccount) GetNextPaymentDate() string {
+	if o == nil || isNil(o.NextPaymentDate.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.NextPaymentDate.Get()
+}
+
+// GetNextPaymentDateOk returns a tuple with the NextPaymentDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LineOfCreditAccount) GetNextPaymentDateOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.NextPaymentDate.Get(), o.NextPaymentDate.IsSet()
+}
+
+// HasNextPaymentDate returns a boolean if a field has been set.
+func (o *LineOfCreditAccount) HasNextPaymentDate() bool {
+	if o != nil && o.NextPaymentDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNextPaymentDate gets a reference to the given NullableString and assigns it to the NextPaymentDate field.
+func (o *LineOfCreditAccount) SetNextPaymentDate(v string) {
+	o.NextPaymentDate.Set(&v)
+}
+// SetNextPaymentDateNil sets the value for NextPaymentDate to be an explicit nil
+func (o *LineOfCreditAccount) SetNextPaymentDateNil() {
+	o.NextPaymentDate.Set(nil)
+}
+
+// UnsetNextPaymentDate ensures that no value is present for NextPaymentDate, not even an explicit nil
+func (o *LineOfCreditAccount) UnsetNextPaymentDate() {
+	o.NextPaymentDate.Unset()
+}
+
 func (o LineOfCreditAccount) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -508,6 +595,12 @@ func (o LineOfCreditAccount) MarshalJSON() ([]byte, error) {
 	if o.MinimumPaymentAmount.IsSet() {
 		toSerialize["minimum_payment_amount"] = o.MinimumPaymentAmount.Get()
 	}
+	if o.AvailableCredit.IsSet() {
+		toSerialize["available_credit"] = o.AvailableCredit.Get()
+	}
+	if o.NextPaymentDate.IsSet() {
+		toSerialize["next_payment_date"] = o.NextPaymentDate.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -538,6 +631,8 @@ func (o *LineOfCreditAccount) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "raw_type")
 		delete(additionalProperties, "net_value")
 		delete(additionalProperties, "minimum_payment_amount")
+		delete(additionalProperties, "available_credit")
+		delete(additionalProperties, "next_payment_date")
 		o.AdditionalProperties = additionalProperties
 	}
 

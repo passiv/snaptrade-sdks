@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **RawType** | **string** | The account type as provided by the institution. | [optional] 
 **NetValue** | [**LineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  | [optional] 
 **MinimumPaymentAmount** | [**LineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  | [optional] 
+**AvailableCredit** | [**LineOfCreditAccountAvailableCredit**](LineOfCreditAccountAvailableCredit.md) |  | [optional] 
+**NextPaymentDate** | **DateTime?** | The date the account&#39;s next payment is due, in &#x60;YYYY-MM-DD&#x60; format. Omitted when no such data is available. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

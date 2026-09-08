@@ -20,6 +20,8 @@ A line-of-credit account (e.g. a credit card) under a connection.
 |**rawType** | **String** | The account type as provided by the institution. |  [optional] |
 |**netValue** | [**LineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  |  [optional] |
 |**minimumPaymentAmount** | [**LineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  |  [optional] |
+|**availableCredit** | [**LineOfCreditAccountAvailableCredit**](LineOfCreditAccountAvailableCredit.md) |  |  [optional] |
+|**nextPaymentDate** | **LocalDate** | The date the account&#39;s next payment is due, in &#x60;YYYY-MM-DD&#x60; format. Omitted when no such data is available. |  [optional] |
 
 
 
