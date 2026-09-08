@@ -212,7 +212,7 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
     strategy:
       matrix:
-        language: [typescript, python, go, ruby, php, php7, csharp, java]
+        language: [typescript, python, go, php, php7, csharp, java]
     container:
       image: konfigdev/test-and-publish:latest
     steps:
@@ -237,6 +237,18 @@ jobs:
           command: konfig test --filter ${{ matrix.language }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  test-ruby:
+    name: Test Ruby SDK compatibility
+    needs: regenerate
+    permissions:
+      contents: read
+      packages: read
+    uses: ./.github/workflows/test-ruby.yaml
+    with:
+      ref: ${{ needs.regenerate.outputs.generated_sha }}
+    secrets:
+      TEST_ENV: ${{ secrets.TEST_ENV }}
 
   test-typescript-edge:
     name: Test TypeScript SDK in Cloudflare Workers runtime
@@ -274,6 +286,7 @@ jobs:
       - prepare
       - regenerate
       - test
+      - test-ruby
       - test-typescript-edge
     runs-on: blacksmith-2vcpu-ubuntu-2404
     environment:
