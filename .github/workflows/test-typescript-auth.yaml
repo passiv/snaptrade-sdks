@@ -1,0 +1,42 @@
+name: Regenerate and typecheck TypeScript auth
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - konfig.yaml
+      - sdks/typescript/**
+      - .github/workflows/test-typescript-auth.yaml
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: typescript-auth-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+      - uses: ./.github/actions/shared/install-cli
+      - name: Regenerate TypeScript with the deployed generator
+        run: konfig generate -f typescript
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+      - name: Verify regeneration preserved the regression fixture
+        run: git diff --exit-code -- sdks/typescript/auth-mode.tstest.ts
+      - name: Install SDK dependencies
+        run: pnpm --dir sdks/typescript install
+      - name: Check auth argument types
+        run: pnpm --dir sdks/typescript typecheck
