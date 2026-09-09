@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ComplexOrderLegTest Class Doc Comment
  *
  * @category    Class
- * @description A single leg within a complex order.
+ * @description A single order within a complex group. For option OCOs, each peer trades one option contract type.
  * @package     SnapTrade
  */
 class ComplexOrderLegTest extends TestCase

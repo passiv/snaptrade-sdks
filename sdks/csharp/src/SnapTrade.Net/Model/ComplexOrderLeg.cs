@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A single leg within a complex order.
+    /// A single order within a complex group. For option OCOs, each peer trades one option contract type.
     /// </summary>
     [DataContract(Name = "ComplexOrderLeg")]
     public partial class ComplexOrderLeg : IEquatable<ComplexOrderLeg>, IValidatableObject
@@ -71,7 +71,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
-        public ActionStrict _Action { get; set; }
+        public ActionStrictWithOptions _Action { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderType
@@ -99,11 +99,11 @@ namespace SnapTrade.Net.Model
         /// <param name="action">action (required).</param>
         /// <param name="instrument">instrument (required).</param>
         /// <param name="orderType">orderType (required).</param>
-        /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (required).</param>
+        /// <param name="units">A positive whole number of shares or option contracts. Option OCO peers must use the same quantity. (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">The limit price. Required when &#x60;order_type&#x60; is &#x60;Limit&#x60; or &#x60;StopLimit&#x60;..</param>
         /// <param name="stop">The stop trigger price. Required when &#x60;order_type&#x60; is &#x60;Stop&#x60; or &#x60;StopLimit&#x60;..</param>
-        public ComplexOrderLeg(OrderRoleEnum orderRole = default(OrderRoleEnum), ActionStrict action = default(ActionStrict), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), double units = default(double), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?)) : base()
+        public ComplexOrderLeg(OrderRoleEnum orderRole = default(OrderRoleEnum), ActionStrictWithOptions action = default(ActionStrictWithOptions), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), int units = default(int), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?)) : base()
         {
             this.OrderRole = orderRole;
             this._Action = action;
@@ -128,11 +128,11 @@ namespace SnapTrade.Net.Model
         public TradingInstrument Instrument { get; set; }
 
         /// <summary>
-        /// Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.
+        /// A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.
         /// </summary>
-        /// <value>Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.</value>
+        /// <value>A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.</value>
         [DataMember(Name = "units", IsRequired = true, EmitDefaultValue = true)]
-        public double Units { get; set; }
+        public int Units { get; set; }
 
         /// <summary>
         /// The limit price. Required when &#x60;order_type&#x60; is &#x60;Limit&#x60; or &#x60;StopLimit&#x60;.
@@ -286,6 +286,12 @@ namespace SnapTrade.Net.Model
         /// <returns>Validation Result</returns>
         public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
         {
+            // Units (int) minimum
+            if (this.Units < (int)1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Units, must be a value greater than or equal to 1.", new [] { "Units" });
+            }
+
             yield break;
         }
     }

@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.action_strict import ActionStrict
+from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.trading_instrument import TradingInstrument
@@ -24,14 +24,14 @@ class RequiredComplexOrderLeg(TypedDict):
     # The role of this leg within the complex order.
     order_role: Literal["TRIGGER", "CONDITIONAL", "PEER"]
 
-    action: ActionStrict
+    action: ActionStrictWithOptions
 
     instrument: TradingInstrument
 
     order_type: OrderTypeStrict
 
-    # Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-    units: typing.Union[int, float]
+    # A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.
+    units: int
 
     time_in_force: TimeInForceStrict
 

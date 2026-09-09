@@ -10163,7 +10163,8 @@ components:
           nullable: true
     ComplexOrderLeg:
       additionalProperties: true
-      description: A single leg within a complex order.
+      description: "A single order within a complex group. For option OCOs, each peer\
+        \ trades one option contract type."
       example:
         order_role: TRIGGER
         time_in_force: Day
@@ -10173,7 +10174,7 @@ components:
         instrument:
           symbol: AAPL
           type: EQUITY
-        units: 10.5
+        units: 1
         order_type: Market
       properties:
         order_role:
@@ -10187,18 +10188,19 @@ components:
           x-konfig-original-example: TRIGGER
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-order_role
         action:
-          $ref: '#/components/schemas/ActionStrict'
+          $ref: '#/components/schemas/ActionStrictWithOptions'
         instrument:
           $ref: '#/components/schemas/TradingInstrument'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         units:
-          description: Number of shares for the order. This can be a decimal for fractional
-            orders. Must be `null` if `notional_value` is provided.
-          example: 10.5
-          type: number
-          x-konfig-original-example: 10.5
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
+          description: A positive whole number of shares or option contracts. Option
+            OCO peers must use the same quantity.
+          example: 1
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-units
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         price:
@@ -10238,7 +10240,7 @@ components:
           instrument:
             symbol: AAPL
             type: EQUITY
-          units: 10.5
+          units: 1
           order_type: Market
         - order_role: TRIGGER
           time_in_force: Day
@@ -10248,7 +10250,7 @@ components:
           instrument:
             symbol: AAPL
             type: EQUITY
-          units: 10.5
+          units: 1
           order_type: Market
         type: OTO
       properties:
@@ -14360,6 +14362,10 @@ components:
     konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-order_role:
       example: TRIGGER
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-units:
+      example: 1
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ComplexOrderLeg-properties-price:
       example: 31.33

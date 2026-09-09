@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ComplexOrderLeg Class Doc Comment
  *
  * @category Class
- * @description A single leg within a complex order.
+ * @description A single order within a complex group. For option OCOs, each peer trades one option contract type.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -52,10 +52,10 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'order_role' => 'string',
-        'action' => '\SnapTrade\Model\ActionStrict',
+        'action' => '\SnapTrade\Model\ActionStrictWithOptions',
         'instrument' => '\SnapTrade\Model\TradingInstrument',
         'order_type' => '\SnapTrade\Model\OrderTypeStrict',
-        'units' => 'float',
+        'units' => 'int',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'price' => 'float',
         'stop' => 'float'
@@ -358,6 +358,10 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['units'] === null) {
             $invalidProperties[] = "'units' can't be null";
         }
+        if (($this->container['units'] < 1)) {
+            $invalidProperties[] = "invalid value for 'units', must be bigger than or equal to 1.";
+        }
+
         if ($this->container['time_in_force'] === null) {
             $invalidProperties[] = "'time_in_force' can't be null";
         }
@@ -418,7 +422,7 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets action
      *
-     * @return \SnapTrade\Model\ActionStrict
+     * @return \SnapTrade\Model\ActionStrictWithOptions
      */
     public function getAction()
     {
@@ -428,7 +432,7 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets action
      *
-     * @param \SnapTrade\Model\ActionStrict $action action
+     * @param \SnapTrade\Model\ActionStrictWithOptions $action action
      *
      * @return self
      */
@@ -505,7 +509,7 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets units
      *
-     * @return float
+     * @return int
      */
     public function getUnits()
     {
@@ -515,12 +519,17 @@ class ComplexOrderLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float $units Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+     * @param int $units A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.
      *
      * @return self
      */
     public function setUnits($units)
     {
+
+        if (($units < 1)) {
+            throw new \InvalidArgumentException('invalid value for $units when calling ComplexOrderLeg., must be bigger than or equal to 1.');
+        }
+
 
         if (is_null($units)) {
             throw new \InvalidArgumentException('non-nullable units cannot be null');

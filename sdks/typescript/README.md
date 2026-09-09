@@ -2019,7 +2019,7 @@ const placeComplexOrderResponse = await snaptrade.trading.placeComplexOrder({
         type: "EQUITY",
       },
       order_type: "Market",
-      units: 10.5,
+      units: 1,
       time_in_force: "Day",
       price: 31.33,
       stop: 29.5,

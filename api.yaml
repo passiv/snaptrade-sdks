@@ -6446,7 +6446,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/ClientOrderID"
     ComplexOrderLeg:
-      description: A single leg within a complex order.
+      description: A single order within a complex group. For option OCOs, each peer trades one option contract type.
       type: object
       required:
         - order_role
@@ -6465,13 +6465,16 @@ components:
             - PEER
           example: TRIGGER
         action:
-          $ref: "#/components/schemas/ActionStrict"
+          $ref: "#/components/schemas/ActionStrictWithOptions"
         instrument:
           $ref: "#/components/schemas/TradingInstrument"
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
         units:
-          $ref: "#/components/schemas/Units"
+          description: A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.
+          type: integer
+          minimum: 1
+          example: 1
         time_in_force:
           $ref: "#/components/schemas/TimeInForceStrict"
         price:
