@@ -11,12 +11,12 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A single leg within a complex order.
+  # A single order within a complex group. For option OCOs, each peer trades one option contract type.
   class ComplexOrderLeg
     # The role of this leg within the complex order.
     attr_accessor :order_role
 
-    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     attr_accessor :action
 
     attr_accessor :instrument
@@ -24,7 +24,7 @@ module SnapTrade
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     attr_accessor :order_type
 
-    # Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+    # A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.
     attr_accessor :units
 
     # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -59,10 +59,10 @@ module SnapTrade
     def self.openapi_types
       {
         :'order_role' => :'ComplexOrderLegOrderRole',
-        :'action' => :'ActionStrict',
+        :'action' => :'ActionStrictWithOptions',
         :'instrument' => :'TradingInstrument',
         :'order_type' => :'OrderTypeStrict',
-        :'units' => :'Float',
+        :'units' => :'Integer',
         :'time_in_force' => :'TimeInForceStrict',
         :'price' => :'Float',
         :'stop' => :'Float'
@@ -149,6 +149,10 @@ module SnapTrade
         invalid_properties.push('invalid value for "units", units cannot be nil.')
       end
 
+      if @units < 1
+        invalid_properties.push('invalid value for "units", must be greater than or equal to 1.')
+      end
+
       if @time_in_force.nil?
         invalid_properties.push('invalid value for "time_in_force", time_in_force cannot be nil.')
       end
@@ -164,8 +168,23 @@ module SnapTrade
       return false if @instrument.nil?
       return false if @order_type.nil?
       return false if @units.nil?
+      return false if @units < 1
       return false if @time_in_force.nil?
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] units Value to be assigned
+    def units=(units)
+      if units.nil?
+        fail ArgumentError, 'units cannot be nil'
+      end
+
+      if units < 1
+        fail ArgumentError, 'invalid value for "units", must be greater than or equal to 1.'
+      end
+
+      @units = units
     end
 
     # Checks equality by comparing each attribute.

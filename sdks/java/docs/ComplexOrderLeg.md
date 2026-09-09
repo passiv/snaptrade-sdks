@@ -2,17 +2,17 @@
 
 # ComplexOrderLeg
 
-A single leg within a complex order.
+A single order within a complex group. For option OCOs, each peer trades one option contract type.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**orderRole** | [**OrderRoleEnum**](#OrderRoleEnum) | The role of this leg within the complex order. |  |
-|**action** | **ActionStrict** |  |  |
+|**action** | **ActionStrictWithOptions** |  |  |
 |**instrument** | [**TradingInstrument**](TradingInstrument.md) |  |  |
 |**orderType** | **OrderTypeStrict** |  |  |
-|**units** | **Double** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. |  |
+|**units** | **Integer** | A positive whole number of shares or option contracts. Option OCO peers must use the same quantity. |  |
 |**timeInForce** | **TimeInForceStrict** |  |  |
 |**price** | **Double** | The limit price. Required when &#x60;order_type&#x60; is &#x60;Limit&#x60; or &#x60;StopLimit&#x60;. |  [optional] |
 |**stop** | **Double** | The stop trigger price. Required when &#x60;order_type&#x60; is &#x60;Stop&#x60; or &#x60;StopLimit&#x60;. |  [optional] |

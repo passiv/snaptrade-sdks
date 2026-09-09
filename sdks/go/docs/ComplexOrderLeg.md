@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderRole** | **string** | The role of this leg within the complex order. | 
-**Action** | [**ActionStrict**](ActionStrict.md) |  | 
+**Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
 **Instrument** | [**TradingInstrument**](TradingInstrument.md) |  | 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
-**Units** | **float32** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. | 
+**Units** | **int32** | A positive whole number of shares or option contracts. Option OCO peers must use the same quantity. | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Price** | Pointer to **NullableFloat32** | The limit price. Required when &#x60;order_type&#x60; is &#x60;Limit&#x60; or &#x60;StopLimit&#x60;. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The stop trigger price. Required when &#x60;order_type&#x60; is &#x60;Stop&#x60; or &#x60;StopLimit&#x60;. | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewComplexOrderLeg
 
-`func NewComplexOrderLeg(orderRole string, action ActionStrict, instrument TradingInstrument, orderType OrderTypeStrict, units float32, timeInForce TimeInForceStrict, ) *ComplexOrderLeg`
+`func NewComplexOrderLeg(orderRole string, action ActionStrictWithOptions, instrument TradingInstrument, orderType OrderTypeStrict, units int32, timeInForce TimeInForceStrict, ) *ComplexOrderLeg`
 
 NewComplexOrderLeg instantiates a new ComplexOrderLeg object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ SetOrderRole sets OrderRole field to given value.
 
 ### GetAction
 
-`func (o *ComplexOrderLeg) GetAction() ActionStrict`
+`func (o *ComplexOrderLeg) GetAction() ActionStrictWithOptions`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *ComplexOrderLeg) GetActionOk() (*ActionStrict, bool)`
+`func (o *ComplexOrderLeg) GetActionOk() (*ActionStrictWithOptions, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *ComplexOrderLeg) SetAction(v ActionStrict)`
+`func (o *ComplexOrderLeg) SetAction(v ActionStrictWithOptions)`
 
 SetAction sets Action field to given value.
 
@@ -114,20 +114,20 @@ SetOrderType sets OrderType field to given value.
 
 ### GetUnits
 
-`func (o *ComplexOrderLeg) GetUnits() float32`
+`func (o *ComplexOrderLeg) GetUnits() int32`
 
 GetUnits returns the Units field if non-nil, zero value otherwise.
 
 ### GetUnitsOk
 
-`func (o *ComplexOrderLeg) GetUnitsOk() (*float32, bool)`
+`func (o *ComplexOrderLeg) GetUnitsOk() (*int32, bool)`
 
 GetUnitsOk returns a tuple with the Units field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnits
 
-`func (o *ComplexOrderLeg) SetUnits(v float32)`
+`func (o *ComplexOrderLeg) SetUnits(v int32)`
 
 SetUnits sets Units field to given value.
 

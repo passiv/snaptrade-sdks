@@ -15,15 +15,15 @@ import (
 	"encoding/json"
 )
 
-// ComplexOrderLeg A single leg within a complex order.
+// ComplexOrderLeg A single order within a complex group. For option OCOs, each peer trades one option contract type.
 type ComplexOrderLeg struct {
 	// The role of this leg within the complex order.
 	OrderRole string `json:"order_role"`
-	Action ActionStrict `json:"action"`
+	Action ActionStrictWithOptions `json:"action"`
 	Instrument TradingInstrument `json:"instrument"`
 	OrderType OrderTypeStrict `json:"order_type"`
-	// Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-	Units float32 `json:"units"`
+	// A positive whole number of shares or option contracts. Option OCO peers must use the same quantity.
+	Units int32 `json:"units"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price. Required when `order_type` is `Limit` or `StopLimit`.
 	Price NullableFloat32 `json:"price,omitempty"`
@@ -38,7 +38,7 @@ type _ComplexOrderLeg ComplexOrderLeg
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewComplexOrderLeg(orderRole string, action ActionStrict, instrument TradingInstrument, orderType OrderTypeStrict, units float32, timeInForce TimeInForceStrict) *ComplexOrderLeg {
+func NewComplexOrderLeg(orderRole string, action ActionStrictWithOptions, instrument TradingInstrument, orderType OrderTypeStrict, units int32, timeInForce TimeInForceStrict) *ComplexOrderLeg {
 	this := ComplexOrderLeg{}
 	this.OrderRole = orderRole
 	this.Action = action
@@ -82,9 +82,9 @@ func (o *ComplexOrderLeg) SetOrderRole(v string) {
 }
 
 // GetAction returns the Action field value
-func (o *ComplexOrderLeg) GetAction() ActionStrict {
+func (o *ComplexOrderLeg) GetAction() ActionStrictWithOptions {
 	if o == nil {
-		var ret ActionStrict
+		var ret ActionStrictWithOptions
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *ComplexOrderLeg) GetAction() ActionStrict {
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *ComplexOrderLeg) GetActionOk() (*ActionStrict, bool) {
+func (o *ComplexOrderLeg) GetActionOk() (*ActionStrictWithOptions, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *ComplexOrderLeg) GetActionOk() (*ActionStrict, bool) {
 }
 
 // SetAction sets field value
-func (o *ComplexOrderLeg) SetAction(v ActionStrict) {
+func (o *ComplexOrderLeg) SetAction(v ActionStrictWithOptions) {
 	o.Action = v
 }
 
@@ -154,9 +154,9 @@ func (o *ComplexOrderLeg) SetOrderType(v OrderTypeStrict) {
 }
 
 // GetUnits returns the Units field value
-func (o *ComplexOrderLeg) GetUnits() float32 {
+func (o *ComplexOrderLeg) GetUnits() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -165,7 +165,7 @@ func (o *ComplexOrderLeg) GetUnits() float32 {
 
 // GetUnitsOk returns a tuple with the Units field value
 // and a boolean to check if the value has been set.
-func (o *ComplexOrderLeg) GetUnitsOk() (*float32, bool) {
+func (o *ComplexOrderLeg) GetUnitsOk() (*int32, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -173,7 +173,7 @@ func (o *ComplexOrderLeg) GetUnitsOk() (*float32, bool) {
 }
 
 // SetUnits sets field value
-func (o *ComplexOrderLeg) SetUnits(v float32) {
+func (o *ComplexOrderLeg) SetUnits(v int32) {
 	o.Units = v
 }
 
