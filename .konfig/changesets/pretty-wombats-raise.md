@@ -1,12 +1,6 @@
 ---
-java: patch
-ruby: patch
 python: patch
 typescript: patch
-csharp: patch
-php: patch
-go: patch
-php7: patch
 ---
 
-Require Commercial auth parameters and document Commercial and Personal SDK usage
+Require user credentials for Commercial API-key TypeScript calls that previously compiled but failed at runtime. Document Commercial and Personal authentication separately in TypeScript and Python reference examples, preserving required request fields and trading body names.
