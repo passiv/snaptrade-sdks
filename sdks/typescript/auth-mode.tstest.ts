@@ -1,4 +1,8 @@
 import { Snaptrade, SnaptradeAuth } from "./index";
+import { Configuration } from "./configuration";
+import { ConnectionsApiFactory, ConnectionsApiFp } from "./api/connections-api";
+import { AccountInformationApiFactory, AccountInformationApiFp } from "./api/account-information-api";
+import { AuthenticationApiFactory, AuthenticationApiFp } from "./api/authentication-api";
 
 /**
  * This file is only testing correctness of the generated
@@ -190,3 +194,206 @@ async function authModeTypeCoverage() {
 }
 
 void authModeTypeCoverage;
+
+// Check each surface separately: a union of methods could hide a permissive signature.
+async function requestArgumentTypeCoverage() {
+  const commercialAuth = SnaptradeAuth.commercialApiKey({ clientId: "client", consumerKey: "key" });
+  const personalAuth = SnaptradeAuth.personalApiKey({ clientId: "client", consumerKey: "key" });
+  const commercialConfig = new Configuration({ auth: commercialAuth });
+  const personalConfig = new Configuration({ auth: personalAuth });
+  const commercialClient = new Snaptrade({ auth: commercialAuth });
+  const personalClient = new Snaptrade({ auth: personalAuth });
+  const commercialFactory = {
+    connections: ConnectionsApiFactory(commercialConfig),
+    accountInformation: AccountInformationApiFactory(commercialConfig),
+    authentication: AuthenticationApiFactory(commercialConfig),
+  };
+  const personalFactory = {
+    connections: ConnectionsApiFactory(personalConfig),
+    accountInformation: AccountInformationApiFactory(personalConfig),
+    authentication: AuthenticationApiFactory(personalConfig),
+  };
+  const commercialFunctional = {
+    connections: ConnectionsApiFp(commercialConfig),
+    accountInformation: AccountInformationApiFp(commercialConfig),
+    authentication: AuthenticationApiFp(commercialConfig),
+  };
+  const personalFunctional = {
+    connections: ConnectionsApiFp(personalConfig),
+    accountInformation: AccountInformationApiFp(personalConfig),
+    authentication: AuthenticationApiFp(personalConfig),
+  };
+
+  // Client: connections.listBrokerageAuthorizations requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.connections.listBrokerageAuthorizations();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.connections.listBrokerageAuthorizations(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.connections.listBrokerageAuthorizations(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.connections.listBrokerageAuthorizations({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.connections.listBrokerageAuthorizations({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.connections.listBrokerageAuthorizations({ userSecret: "secret" });
+  await commercialClient.connections.listBrokerageAuthorizations({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalClient.connections.listBrokerageAuthorizations();
+  await personalClient.connections.listBrokerageAuthorizations({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalClient.connections.listBrokerageAuthorizations({ userId: "user", userSecret: "secret" });
+
+  // Client: accountInformation.listUserAccounts requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.accountInformation.listUserAccounts();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.accountInformation.listUserAccounts(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.accountInformation.listUserAccounts(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.accountInformation.listUserAccounts({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.accountInformation.listUserAccounts({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.accountInformation.listUserAccounts({ userSecret: "secret" });
+  await commercialClient.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalClient.accountInformation.listUserAccounts();
+  await personalClient.accountInformation.listUserAccounts({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalClient.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" });
+
+  // Client: authentication.loginSnapTradeUser requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.authentication.loginSnapTradeUser();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.authentication.loginSnapTradeUser(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.authentication.loginSnapTradeUser(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.authentication.loginSnapTradeUser({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.authentication.loginSnapTradeUser({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialClient.authentication.loginSnapTradeUser({ userSecret: "secret" });
+  await commercialClient.authentication.loginSnapTradeUser({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalClient.authentication.loginSnapTradeUser();
+  await personalClient.authentication.loginSnapTradeUser({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalClient.authentication.loginSnapTradeUser({ userId: "user", userSecret: "secret" });
+
+  // Factory: connections.listBrokerageAuthorizations requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.connections.listBrokerageAuthorizations();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.connections.listBrokerageAuthorizations(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.connections.listBrokerageAuthorizations(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.connections.listBrokerageAuthorizations({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.connections.listBrokerageAuthorizations({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.connections.listBrokerageAuthorizations({ userSecret: "secret" });
+  await commercialFactory.connections.listBrokerageAuthorizations({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalFactory.connections.listBrokerageAuthorizations();
+  await personalFactory.connections.listBrokerageAuthorizations({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalFactory.connections.listBrokerageAuthorizations({ userId: "user", userSecret: "secret" });
+
+  // Factory: accountInformation.listUserAccounts requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.accountInformation.listUserAccounts();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.accountInformation.listUserAccounts(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.accountInformation.listUserAccounts(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.accountInformation.listUserAccounts({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.accountInformation.listUserAccounts({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.accountInformation.listUserAccounts({ userSecret: "secret" });
+  await commercialFactory.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalFactory.accountInformation.listUserAccounts();
+  await personalFactory.accountInformation.listUserAccounts({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalFactory.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" });
+
+  // Factory: authentication.loginSnapTradeUser requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.authentication.loginSnapTradeUser();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.authentication.loginSnapTradeUser(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.authentication.loginSnapTradeUser(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.authentication.loginSnapTradeUser({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.authentication.loginSnapTradeUser({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFactory.authentication.loginSnapTradeUser({ userSecret: "secret" });
+  await commercialFactory.authentication.loginSnapTradeUser({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalFactory.authentication.loginSnapTradeUser();
+  await personalFactory.authentication.loginSnapTradeUser({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalFactory.authentication.loginSnapTradeUser({ userId: "user", userSecret: "secret" });
+
+  // Functional: connections.listBrokerageAuthorizations requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.connections.listBrokerageAuthorizations();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.connections.listBrokerageAuthorizations(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.connections.listBrokerageAuthorizations(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.connections.listBrokerageAuthorizations({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.connections.listBrokerageAuthorizations({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.connections.listBrokerageAuthorizations({ userSecret: "secret" });
+  await commercialFunctional.connections.listBrokerageAuthorizations({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalFunctional.connections.listBrokerageAuthorizations();
+  await personalFunctional.connections.listBrokerageAuthorizations({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalFunctional.connections.listBrokerageAuthorizations({ userId: "user", userSecret: "secret" });
+
+  // Functional: accountInformation.listUserAccounts requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.accountInformation.listUserAccounts();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.accountInformation.listUserAccounts(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.accountInformation.listUserAccounts(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.accountInformation.listUserAccounts({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.accountInformation.listUserAccounts({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.accountInformation.listUserAccounts({ userSecret: "secret" });
+  await commercialFunctional.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalFunctional.accountInformation.listUserAccounts();
+  await personalFunctional.accountInformation.listUserAccounts({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalFunctional.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" });
+
+  // Functional: authentication.loginSnapTradeUser requires a Commercial request argument.
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.authentication.loginSnapTradeUser();
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.authentication.loginSnapTradeUser(undefined);
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.authentication.loginSnapTradeUser(undefined, { timeout: 1000 });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.authentication.loginSnapTradeUser({});
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.authentication.loginSnapTradeUser({ userId: "user" });
+  // @ts-expect-error Commercial auth requires both user credentials.
+  await commercialFunctional.authentication.loginSnapTradeUser({ userSecret: "secret" });
+  await commercialFunctional.authentication.loginSnapTradeUser({ userId: "user", userSecret: "secret" }, { timeout: 1000 });
+  await personalFunctional.authentication.loginSnapTradeUser();
+  await personalFunctional.authentication.loginSnapTradeUser({}, { timeout: 1000 });
+  // @ts-expect-error Personal auth does not accept Commercial user credentials.
+  await personalFunctional.authentication.loginSnapTradeUser({ userId: "user", userSecret: "secret" });
+}
+
+void requestArgumentTypeCoverage;

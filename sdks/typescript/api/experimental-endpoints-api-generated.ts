@@ -546,8 +546,8 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionSubscription>> {
+        async addSubscription(...args: ExperimentalEndpointsApiAddSubscriptionArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionSubscription>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiAddSubscriptionRequest<TAuth>, options] = args;
             const tradeDetectionAddSubscriptionRequest: TradeDetectionAddSubscriptionRequest = {
                 account_id: requestParameters.account_id,
                 check_interval_seconds: requestParameters.check_interval_seconds
@@ -562,8 +562,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionCancelSubscriptionResponse>> {
+        async cancelSubscription(...args: ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradeDetectionCancelSubscriptionResponse>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options] = args;
             const tradeDetectionCancelSubscriptionRequest: TradeDetectionCancelSubscriptionRequest = {
                 account_id: requestParameters.account_id
             };
@@ -577,8 +577,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountOrderDetailV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecordV2>> {
+        async getUserAccountOrderDetailV2(...args: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecordV2>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetailV2(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -589,8 +589,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrdersV2Response>> {
+        async getUserAccountOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountOrdersV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrdersV2Response>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrdersV2(requestParameters.accountId, requestParameters.state, requestParameters.days, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -601,8 +601,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrdersV2Response>> {
+        async getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrdersV2Response>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrdersV2(requestParameters.accountId, requestParameters.onlyExecuted, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -613,8 +613,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listConnectionAccounts(requestParameters: ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionAccount>>> {
+        async listConnectionAccounts(...args: ExperimentalEndpointsApiListConnectionAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionAccount>>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectionAccounts(requestParameters.connectionId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -646,9 +646,8 @@ export const ExperimentalEndpointsApiFactory = function<TAuth extends AuthMode>(
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<TradeDetectionSubscription> {
-            return localVarFp.addSubscription(requestParameters as any, options).then((request) => request(axios, basePath));
+        addSubscription(...args: ExperimentalEndpointsApiAddSubscriptionArgs<TAuth>): AxiosPromise<TradeDetectionSubscription> {
+            return localVarFp.addSubscription(...args).then((request) => request(axios, basePath));
         },
         /**
          * Cancels a Trade Detection subscription for a connected brokerage account. This endpoint requires partner signature authentication only and does not require `userId` or `userSecret`. 
@@ -657,9 +656,8 @@ options?: AxiosRequestConfig): AxiosPromise<TradeDetectionSubscription> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<TradeDetectionCancelSubscriptionResponse> {
-            return localVarFp.cancelSubscription(requestParameters as any, options).then((request) => request(axios, basePath));
+        cancelSubscription(...args: ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth>): AxiosPromise<TradeDetectionCancelSubscriptionResponse> {
+            return localVarFp.cancelSubscription(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
@@ -668,9 +666,8 @@ options?: AxiosRequestConfig): AxiosPromise<TradeDetectionCancelSubscriptionResp
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrderDetailV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecordV2> {
-            return localVarFp.getUserAccountOrderDetailV2(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountOrderDetailV2(...args: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Args<TAuth>): AxiosPromise<AccountOrderRecordV2> {
+            return localVarFp.getUserAccountOrderDetailV2(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -679,9 +676,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecordV2> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrdersV2Response> {
-            return localVarFp.getUserAccountOrdersV2(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountOrdersV2Args<TAuth>): AxiosPromise<AccountOrdersV2Response> {
+            return localVarFp.getUserAccountOrdersV2(...args).then((request) => request(axios, basePath));
         },
         /**
          * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
@@ -690,9 +686,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrdersV2Response> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrdersV2Response> {
-            return localVarFp.getUserAccountRecentOrdersV2(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>): AxiosPromise<AccountOrdersV2Response> {
+            return localVarFp.getUserAccountRecentOrdersV2(...args).then((request) => request(axios, basePath));
         },
         /**
          * Experimental and subject to change without notice.  Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
@@ -701,9 +696,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrdersV2Response> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listConnectionAccounts(requestParameters: ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<ConnectionAccount>> {
-            return localVarFp.listConnectionAccounts(requestParameters as any, options).then((request) => request(axios, basePath));
+        listConnectionAccounts(...args: ExperimentalEndpointsApiListConnectionAccountsArgs<TAuth>): AxiosPromise<Array<ConnectionAccount>> {
+            return localVarFp.listConnectionAccounts(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
@@ -739,6 +733,12 @@ export type ExperimentalEndpointsApiAddSubscriptionRequestByAuthMode = {
 export type ExperimentalEndpointsApiAddSubscriptionRequest<TAuth extends AuthMode> =
     ExperimentalEndpointsApiAddSubscriptionRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiAddSubscriptionRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiAddSubscriptionArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiAddSubscriptionRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for cancelSubscription operation in ExperimentalEndpointsApi.
  * @export
@@ -756,6 +756,12 @@ export type ExperimentalEndpointsApiCancelSubscriptionRequestByAuthMode = {
 }
 export type ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth extends AuthMode> =
     ExperimentalEndpointsApiCancelSubscriptionRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiCancelSubscriptionRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountOrderDetailV2 operation in ExperimentalEndpointsApi.
@@ -792,6 +798,12 @@ export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2RequestByAuthMode
 }
 export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth extends AuthMode> =
     ExperimentalEndpointsApiGetUserAccountOrderDetailV2RequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetUserAccountOrderDetailV2RequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Args<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountOrdersV2 operation in ExperimentalEndpointsApi.
@@ -836,6 +848,12 @@ export type ExperimentalEndpointsApiGetUserAccountOrdersV2RequestByAuthMode = {
 export type ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth extends AuthMode> =
     ExperimentalEndpointsApiGetUserAccountOrdersV2RequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetUserAccountOrdersV2RequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiGetUserAccountOrdersV2Args<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getUserAccountRecentOrdersV2 operation in ExperimentalEndpointsApi.
  * @export
@@ -872,6 +890,12 @@ export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2RequestByAuthMod
 export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth extends AuthMode> =
     ExperimentalEndpointsApiGetUserAccountRecentOrdersV2RequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetUserAccountRecentOrdersV2RequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for listConnectionAccounts operation in ExperimentalEndpointsApi.
  * @export
@@ -901,6 +925,12 @@ export type ExperimentalEndpointsApiListConnectionAccountsRequestByAuthMode = {
 export type ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth extends AuthMode> =
     ExperimentalEndpointsApiListConnectionAccountsRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiListConnectionAccountsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiListConnectionAccountsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * ExperimentalEndpointsApiGenerated - object-oriented interface
  * @export
@@ -916,9 +946,8 @@ export class ExperimentalEndpointsApiGenerated<TAuth extends AuthMode> extends B
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public addSubscription(requestParameters: ExperimentalEndpointsApiAddSubscriptionRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).addSubscription(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public addSubscription(...args: ExperimentalEndpointsApiAddSubscriptionArgs<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).addSubscription(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -930,9 +959,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public cancelSubscription(requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).cancelSubscription(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public cancelSubscription(...args: ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).cancelSubscription(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -944,9 +972,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public getUserAccountOrderDetailV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).getUserAccountOrderDetailV2(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountOrderDetailV2(...args: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Args<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).getUserAccountOrderDetailV2(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -958,9 +985,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public getUserAccountOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).getUserAccountOrdersV2(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountOrdersV2Args<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).getUserAccountOrdersV2(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -972,9 +998,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public getUserAccountRecentOrdersV2(requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).getUserAccountRecentOrdersV2(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).getUserAccountRecentOrdersV2(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -986,9 +1011,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ExperimentalEndpointsApiGenerated
      */
-    public listConnectionAccounts(requestParameters: ExperimentalEndpointsApiListConnectionAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ExperimentalEndpointsApiFp(this.configuration).listConnectionAccounts(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public listConnectionAccounts(...args: ExperimentalEndpointsApiListConnectionAccountsArgs<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).listConnectionAccounts(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

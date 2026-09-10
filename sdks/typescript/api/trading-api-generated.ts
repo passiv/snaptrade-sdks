@@ -1091,8 +1091,8 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelOrder(requestParameters: TradingApiCancelOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CancelOrderResponse>> {
+        async cancelOrder(...args: TradingApiCancelOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CancelOrderResponse>> {
+            const [requestParameters = {} as TradingApiCancelOrderRequest<TAuth>, options] = args;
             const accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest = {
                 brokerage_order_id: requestParameters.brokerage_order_id
             };
@@ -1106,8 +1106,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptocurrencyPairQuote>> {
+        async getCryptocurrencyPairQuote(...args: TradingApiGetCryptocurrencyPairQuoteArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptocurrencyPairQuote>> {
+            const [requestParameters = {} as TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCryptocurrencyPairQuote(requestParameters.accountId, requestParameters.instrumentSymbol, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1118,8 +1118,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOptionImpact(requestParameters: TradingApiGetOptionImpactRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionImpact>> {
+        async getOptionImpact(...args: TradingApiGetOptionImpactArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionImpact>> {
+            const [requestParameters = {} as TradingApiGetOptionImpactRequest<TAuth>, options] = args;
             const mlegTradeForm: MlegTradeForm = {
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
@@ -1138,8 +1138,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrderImpact(requestParameters: TradingApiGetOrderImpactRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManualTradeAndImpact>> {
+        async getOrderImpact(...args: TradingApiGetOrderImpactArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManualTradeAndImpact>> {
+            const [requestParameters = {} as TradingApiGetOrderImpactRequest<TAuth>, options] = args;
             const manualTradeForm: ManualTradeForm = {
                 account_id: requestParameters.account_id,
                 action: requestParameters.action,
@@ -1162,8 +1162,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @deprecated
          * @throws {RequiredError}
          */
-        async getUserAccountOptionQuotes(requestParameters: TradingApiGetUserAccountOptionQuotesRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionQuote>> {
+        async getUserAccountOptionQuotes(...args: TradingApiGetUserAccountOptionQuotesArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionQuote>> {
+            const [requestParameters = {} as TradingApiGetUserAccountOptionQuotesRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOptionQuotes(requestParameters.accountId, requestParameters.symbol, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1174,8 +1174,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SymbolsQuotesInner>>> {
+        async getUserAccountQuotes(...args: TradingApiGetUserAccountQuotesArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SymbolsQuotesInner>>> {
+            const [requestParameters = {} as TradingApiGetUserAccountQuotesRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountQuotes(requestParameters.symbols, requestParameters.accountId, requestParameters.useTicker, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1186,8 +1186,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ComplexOrderResponse>> {
+        async placeComplexOrder(...args: TradingApiPlaceComplexOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ComplexOrderResponse>> {
+            const [requestParameters = {} as TradingApiPlaceComplexOrderRequest<TAuth>, options] = args;
             const manualTradeFormComplex: ManualTradeFormComplex = {
                 type: requestParameters.type,
                 orders: requestParameters.orders,
@@ -1203,8 +1203,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placeCryptoOrder(requestParameters: TradingApiPlaceCryptoOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
+        async placeCryptoOrder(...args: TradingApiPlaceCryptoOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
+            const [requestParameters = {} as TradingApiPlaceCryptoOrderRequest<TAuth>, options] = args;
             const cryptoOrderForm: CryptoOrderForm = {
                 instrument: requestParameters.instrument,
                 side: requestParameters.side,
@@ -1226,8 +1226,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+        async placeForceOrder(...args: TradingApiPlaceForceOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const [requestParameters = {} as TradingApiPlaceForceOrderRequest<TAuth>, options] = args;
             const manualTradeFormWithOptions: ManualTradeFormWithOptions = {
                 account_id: requestParameters.account_id,
                 action: requestParameters.action,
@@ -1253,8 +1253,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MlegOrderResponse>> {
+        async placeMlegOrder(...args: TradingApiPlaceMlegOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MlegOrderResponse>> {
+            const [requestParameters = {} as TradingApiPlaceMlegOrderRequest<TAuth>, options] = args;
             const mlegTradeForm: MlegTradeForm = {
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
@@ -1273,8 +1273,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async placeOrder(requestParameters: TradingApiPlaceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+        async placeOrder(...args: TradingApiPlaceOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const [requestParameters = {} as TradingApiPlaceOrderRequest<TAuth>, options] = args;
             const validatedTradeBody: ValidatedTradeBody = {
                 wait_to_confirm: requestParameters.wait_to_confirm
             };
@@ -1288,8 +1288,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async previewCryptoOrder(requestParameters: TradingApiPreviewCryptoOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptoOrderPreview>> {
+        async previewCryptoOrder(...args: TradingApiPreviewCryptoOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptoOrderPreview>> {
+            const [requestParameters = {} as TradingApiPreviewCryptoOrderRequest<TAuth>, options] = args;
             const cryptoOrderForm: CryptoOrderForm = {
                 instrument: requestParameters.instrument,
                 side: requestParameters.side,
@@ -1311,8 +1311,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async replaceOrder(requestParameters: TradingApiReplaceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+        async replaceOrder(...args: TradingApiReplaceOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const [requestParameters = {} as TradingApiReplaceOrderRequest<TAuth>, options] = args;
             const manualTradeReplaceForm: ManualTradeReplaceForm = {
                 brokerage_order_id: requestParameters.brokerage_order_id,
                 action: requestParameters.action,
@@ -1333,8 +1333,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchCryptocurrencyPairInstruments(requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradingSearchCryptocurrencyPairInstruments200Response>> {
+        async searchCryptocurrencyPairInstruments(...args: TradingApiSearchCryptocurrencyPairInstrumentsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradingSearchCryptocurrencyPairInstruments200Response>> {
+            const [requestParameters = {} as TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchCryptocurrencyPairInstruments(requestParameters.accountId, requestParameters.base, requestParameters.quote, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1355,9 +1355,8 @@ export const TradingApiFactory = function<TAuth extends AuthMode>(configuration?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelOrder(requestParameters: TradingApiCancelOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<CancelOrderResponse> {
-            return localVarFp.cancelOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        cancelOrder(...args: TradingApiCancelOrderArgs<TAuth>): AxiosPromise<CancelOrderResponse> {
+            return localVarFp.cancelOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Gets a quote for the specified account. 
@@ -1366,9 +1365,8 @@ options?: AxiosRequestConfig): AxiosPromise<CancelOrderResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<CryptocurrencyPairQuote> {
-            return localVarFp.getCryptocurrencyPairQuote(requestParameters as any, options).then((request) => request(axios, basePath));
+        getCryptocurrencyPairQuote(...args: TradingApiGetCryptocurrencyPairQuoteArgs<TAuth>): AxiosPromise<CryptocurrencyPairQuote> {
+            return localVarFp.getCryptocurrencyPairQuote(...args).then((request) => request(axios, basePath));
         },
         /**
          * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint. 
@@ -1377,9 +1375,8 @@ options?: AxiosRequestConfig): AxiosPromise<CryptocurrencyPairQuote> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOptionImpact(requestParameters: TradingApiGetOptionImpactRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<OptionImpact> {
-            return localVarFp.getOptionImpact(requestParameters as any, options).then((request) => request(axios, basePath));
+        getOptionImpact(...args: TradingApiGetOptionImpactArgs<TAuth>): AxiosPromise<OptionImpact> {
+            return localVarFp.getOptionImpact(...args).then((request) => request(axios, basePath));
         },
         /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
@@ -1388,9 +1385,8 @@ options?: AxiosRequestConfig): AxiosPromise<OptionImpact> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrderImpact(requestParameters: TradingApiGetOrderImpactRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<ManualTradeAndImpact> {
-            return localVarFp.getOrderImpact(requestParameters as any, options).then((request) => request(axios, basePath));
+        getOrderImpact(...args: TradingApiGetOrderImpactArgs<TAuth>): AxiosPromise<ManualTradeAndImpact> {
+            return localVarFp.getOrderImpact(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
@@ -1400,9 +1396,8 @@ options?: AxiosRequestConfig): AxiosPromise<ManualTradeAndImpact> {
          * @deprecated
          * @throws {RequiredError}
          */
-        getUserAccountOptionQuotes(requestParameters: TradingApiGetUserAccountOptionQuotesRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<OptionQuote> {
-            return localVarFp.getUserAccountOptionQuotes(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountOptionQuotes(...args: TradingApiGetUserAccountOptionQuotesArgs<TAuth>): AxiosPromise<OptionQuote> {
+            return localVarFp.getUserAccountOptionQuotes(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a maximum of 10 quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes. 
@@ -1411,9 +1406,8 @@ options?: AxiosRequestConfig): AxiosPromise<OptionQuote> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<SymbolsQuotesInner>> {
-            return localVarFp.getUserAccountQuotes(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountQuotes(...args: TradingApiGetUserAccountQuotesArgs<TAuth>): AxiosPromise<Array<SymbolsQuotesInner>> {
+            return localVarFp.getUserAccountQuotes(...args).then((request) => request(axios, basePath));
         },
         /**
          * Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
@@ -1422,9 +1416,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<SymbolsQuotesInner>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<ComplexOrderResponse> {
-            return localVarFp.placeComplexOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        placeComplexOrder(...args: TradingApiPlaceComplexOrderArgs<TAuth>): AxiosPromise<ComplexOrderResponse> {
+            return localVarFp.placeComplexOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -1433,9 +1426,8 @@ options?: AxiosRequestConfig): AxiosPromise<ComplexOrderResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeCryptoOrder(requestParameters: TradingApiPlaceCryptoOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
-            return localVarFp.placeCryptoOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        placeCryptoOrder(...args: TradingApiPlaceCryptoOrderArgs<TAuth>): AxiosPromise<OrderUpdatedResponse> {
+            return localVarFp.placeCryptoOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -1444,9 +1436,8 @@ options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.placeForceOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        placeForceOrder(...args: TradingApiPlaceForceOrderArgs<TAuth>): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.placeForceOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
@@ -1455,9 +1446,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<MlegOrderResponse> {
-            return localVarFp.placeMlegOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        placeMlegOrder(...args: TradingApiPlaceMlegOrderArgs<TAuth>): AxiosPromise<MlegOrderResponse> {
+            return localVarFp.placeMlegOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -1466,9 +1456,8 @@ options?: AxiosRequestConfig): AxiosPromise<MlegOrderResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeOrder(requestParameters: TradingApiPlaceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.placeOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        placeOrder(...args: TradingApiPlaceOrderArgs<TAuth>): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.placeOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Previews an order using the specified account. 
@@ -1477,9 +1466,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        previewCryptoOrder(requestParameters: TradingApiPreviewCryptoOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<CryptoOrderPreview> {
-            return localVarFp.previewCryptoOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        previewCryptoOrder(...args: TradingApiPreviewCryptoOrderArgs<TAuth>): AxiosPromise<CryptoOrderPreview> {
+            return localVarFp.previewCryptoOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -1488,9 +1476,8 @@ options?: AxiosRequestConfig): AxiosPromise<CryptoOrderPreview> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        replaceOrder(requestParameters: TradingApiReplaceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.replaceOrder(requestParameters as any, options).then((request) => request(axios, basePath));
+        replaceOrder(...args: TradingApiReplaceOrderArgs<TAuth>): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.replaceOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
@@ -1499,9 +1486,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchCryptocurrencyPairInstruments(requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<TradingSearchCryptocurrencyPairInstruments200Response> {
-            return localVarFp.searchCryptocurrencyPairInstruments(requestParameters as any, options).then((request) => request(axios, basePath));
+        searchCryptocurrencyPairInstruments(...args: TradingApiSearchCryptocurrencyPairInstrumentsArgs<TAuth>): AxiosPromise<TradingSearchCryptocurrencyPairInstruments200Response> {
+            return localVarFp.searchCryptocurrencyPairInstruments(...args).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1534,6 +1520,12 @@ export type TradingApiCancelOrderRequestByAuthMode = {
 }
 export type TradingApiCancelOrderRequest<TAuth extends AuthMode> =
     TradingApiCancelOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiCancelOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiCancelOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiCancelOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiCancelOrderRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getCryptocurrencyPairQuote operation in TradingApi.
@@ -1571,6 +1563,12 @@ export type TradingApiGetCryptocurrencyPairQuoteRequestByAuthMode = {
 export type TradingApiGetCryptocurrencyPairQuoteRequest<TAuth extends AuthMode> =
     TradingApiGetCryptocurrencyPairQuoteRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetCryptocurrencyPairQuoteRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiGetCryptocurrencyPairQuoteArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getOptionImpact operation in TradingApi.
  * @export
@@ -1600,6 +1598,12 @@ export type TradingApiGetOptionImpactRequestByAuthMode = {
 export type TradingApiGetOptionImpactRequest<TAuth extends AuthMode> =
     TradingApiGetOptionImpactRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetOptionImpactRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiGetOptionImpactArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiGetOptionImpactRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiGetOptionImpactRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getOrderImpact operation in TradingApi.
  * @export
@@ -1621,6 +1625,12 @@ export type TradingApiGetOrderImpactRequestByAuthMode = {
 }
 export type TradingApiGetOrderImpactRequest<TAuth extends AuthMode> =
     TradingApiGetOrderImpactRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetOrderImpactRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiGetOrderImpactArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiGetOrderImpactRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiGetOrderImpactRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountOptionQuotes operation in TradingApi.
@@ -1657,6 +1667,12 @@ export type TradingApiGetUserAccountOptionQuotesRequestByAuthMode = {
 }
 export type TradingApiGetUserAccountOptionQuotesRequest<TAuth extends AuthMode> =
     TradingApiGetUserAccountOptionQuotesRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetUserAccountOptionQuotesRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiGetUserAccountOptionQuotesArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiGetUserAccountOptionQuotesRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiGetUserAccountOptionQuotesRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountQuotes operation in TradingApi.
@@ -1701,6 +1717,12 @@ export type TradingApiGetUserAccountQuotesRequestByAuthMode = {
 export type TradingApiGetUserAccountQuotesRequest<TAuth extends AuthMode> =
     TradingApiGetUserAccountQuotesRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetUserAccountQuotesRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiGetUserAccountQuotesArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiGetUserAccountQuotesRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for placeComplexOrder operation in TradingApi.
  * @export
@@ -1729,6 +1751,12 @@ export type TradingApiPlaceComplexOrderRequestByAuthMode = {
 }
 export type TradingApiPlaceComplexOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceComplexOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceComplexOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPlaceComplexOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPlaceComplexOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPlaceComplexOrderRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for placeCryptoOrder operation in TradingApi.
@@ -1759,6 +1787,12 @@ export type TradingApiPlaceCryptoOrderRequestByAuthMode = {
 export type TradingApiPlaceCryptoOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceCryptoOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceCryptoOrderRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPlaceCryptoOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPlaceCryptoOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPlaceCryptoOrderRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for placeForceOrder operation in TradingApi.
  * @export
@@ -1780,6 +1814,12 @@ export type TradingApiPlaceForceOrderRequestByAuthMode = {
 }
 export type TradingApiPlaceForceOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceForceOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceForceOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPlaceForceOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPlaceForceOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPlaceForceOrderRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for placeMlegOrder operation in TradingApi.
@@ -1810,6 +1850,12 @@ export type TradingApiPlaceMlegOrderRequestByAuthMode = {
 export type TradingApiPlaceMlegOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceMlegOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceMlegOrderRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPlaceMlegOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPlaceMlegOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPlaceMlegOrderRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for placeOrder operation in TradingApi.
  * @export
@@ -1838,6 +1884,12 @@ export type TradingApiPlaceOrderRequestByAuthMode = {
 }
 export type TradingApiPlaceOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPlaceOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPlaceOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPlaceOrderRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for previewCryptoOrder operation in TradingApi.
@@ -1868,6 +1920,12 @@ export type TradingApiPreviewCryptoOrderRequestByAuthMode = {
 export type TradingApiPreviewCryptoOrderRequest<TAuth extends AuthMode> =
     TradingApiPreviewCryptoOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPreviewCryptoOrderRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPreviewCryptoOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPreviewCryptoOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPreviewCryptoOrderRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for replaceOrder operation in TradingApi.
  * @export
@@ -1896,6 +1954,12 @@ export type TradingApiReplaceOrderRequestByAuthMode = {
 }
 export type TradingApiReplaceOrderRequest<TAuth extends AuthMode> =
     TradingApiReplaceOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiReplaceOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiReplaceOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiReplaceOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiReplaceOrderRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for searchCryptocurrencyPairInstruments operation in TradingApi.
@@ -1940,6 +2004,12 @@ export type TradingApiSearchCryptocurrencyPairInstrumentsRequestByAuthMode = {
 export type TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth extends AuthMode> =
     TradingApiSearchCryptocurrencyPairInstrumentsRequestByAuthMode[TAuth["mode"] & keyof TradingApiSearchCryptocurrencyPairInstrumentsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiSearchCryptocurrencyPairInstrumentsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * TradingApiGenerated - object-oriented interface
  * @export
@@ -1955,9 +2025,8 @@ export class TradingApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> 
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public cancelOrder(requestParameters: TradingApiCancelOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).cancelOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public cancelOrder(...args: TradingApiCancelOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).cancelOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1969,9 +2038,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).getCryptocurrencyPairQuote(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getCryptocurrencyPairQuote(...args: TradingApiGetCryptocurrencyPairQuoteArgs<TAuth>) {
+        return TradingApiFp(this.configuration).getCryptocurrencyPairQuote(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1983,9 +2051,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public getOptionImpact(requestParameters: TradingApiGetOptionImpactRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).getOptionImpact(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getOptionImpact(...args: TradingApiGetOptionImpactArgs<TAuth>) {
+        return TradingApiFp(this.configuration).getOptionImpact(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1997,9 +2064,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public getOrderImpact(requestParameters: TradingApiGetOrderImpactRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).getOrderImpact(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getOrderImpact(...args: TradingApiGetOrderImpactArgs<TAuth>) {
+        return TradingApiFp(this.configuration).getOrderImpact(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2012,9 +2078,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public getUserAccountOptionQuotes(requestParameters: TradingApiGetUserAccountOptionQuotesRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).getUserAccountOptionQuotes(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountOptionQuotes(...args: TradingApiGetUserAccountOptionQuotesArgs<TAuth>) {
+        return TradingApiFp(this.configuration).getUserAccountOptionQuotes(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2026,9 +2091,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).getUserAccountQuotes(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountQuotes(...args: TradingApiGetUserAccountQuotesArgs<TAuth>) {
+        return TradingApiFp(this.configuration).getUserAccountQuotes(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2040,9 +2104,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public placeComplexOrder(requestParameters: TradingApiPlaceComplexOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeComplexOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public placeComplexOrder(...args: TradingApiPlaceComplexOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).placeComplexOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2054,9 +2117,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public placeCryptoOrder(requestParameters: TradingApiPlaceCryptoOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeCryptoOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public placeCryptoOrder(...args: TradingApiPlaceCryptoOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).placeCryptoOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2068,9 +2130,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeForceOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public placeForceOrder(...args: TradingApiPlaceForceOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).placeForceOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2082,9 +2143,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeMlegOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public placeMlegOrder(...args: TradingApiPlaceMlegOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).placeMlegOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2096,9 +2156,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public placeOrder(requestParameters: TradingApiPlaceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public placeOrder(...args: TradingApiPlaceOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).placeOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2110,9 +2169,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public previewCryptoOrder(requestParameters: TradingApiPreviewCryptoOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).previewCryptoOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public previewCryptoOrder(...args: TradingApiPreviewCryptoOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).previewCryptoOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2124,9 +2182,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public replaceOrder(requestParameters: TradingApiReplaceOrderRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).replaceOrder(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public replaceOrder(...args: TradingApiReplaceOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).replaceOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -2138,9 +2195,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof TradingApiGenerated
      */
-    public searchCryptocurrencyPairInstruments(requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).searchCryptocurrencyPairInstruments(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public searchCryptocurrencyPairInstruments(...args: TradingApiSearchCryptocurrencyPairInstrumentsArgs<TAuth>) {
+        return TradingApiFp(this.configuration).searchCryptocurrencyPairInstruments(...args).then((request) => request(this.axios, this.basePath));
 
     }
 }
