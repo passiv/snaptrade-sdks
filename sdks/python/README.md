@@ -76,64 +76,14 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Authentication](#authentication)
+  * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
+  * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
 - [Getting Started](#getting-started)
 - [Async](#async)
 - [Reference](#reference)
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
-  * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
-  * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
-  * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
-  * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
-  * [`snaptrade.account_information.get_user_account_order_detail`](#snaptradeaccount_informationget_user_account_order_detail)
-  * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
-  * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
-  * [`snaptrade.account_information.get_user_account_return_rates`](#snaptradeaccount_informationget_user_account_return_rates)
-  * [`snaptrade.account_information.get_user_holdings`](#snaptradeaccount_informationget_user_holdings)
-  * [`snaptrade.account_information.list_user_accounts`](#snaptradeaccount_informationlist_user_accounts)
-  * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
-  * [`snaptrade.api_status.check`](#snaptradeapi_statuscheck)
   * [`snaptrade.authentication.delete_snap_trade_user`](#snaptradeauthenticationdelete_snap_trade_user)
-  * [`snaptrade.authentication.list_snap_trade_users`](#snaptradeauthenticationlist_snap_trade_users)
-  * [`snaptrade.authentication.login_snap_trade_user`](#snaptradeauthenticationlogin_snap_trade_user)
-  * [`snaptrade.authentication.register_snap_trade_user`](#snaptradeauthenticationregister_snap_trade_user)
-  * [`snaptrade.authentication.reset_snap_trade_user_secret`](#snaptradeauthenticationreset_snap_trade_user_secret)
-  * [`snaptrade.connections.delete_connection`](#snaptradeconnectionsdelete_connection)
-  * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
-  * [`snaptrade.connections.disable_brokerage_authorization`](#snaptradeconnectionsdisable_brokerage_authorization)
-  * [`snaptrade.connections.list_brokerage_authorization_accounts`](#snaptradeconnectionslist_brokerage_authorization_accounts)
-  * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
-  * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
-  * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
-  * [`snaptrade.connections.sync_brokerage_authorization_transactions`](#snaptradeconnectionssync_brokerage_authorization_transactions)
-  * [`snaptrade.experimental_endpoints.add_subscription`](#snaptradeexperimental_endpointsadd_subscription)
-  * [`snaptrade.experimental_endpoints.cancel_subscription`](#snaptradeexperimental_endpointscancel_subscription)
-  * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
-  * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
-  * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
-  * [`snaptrade.experimental_endpoints.list_connection_accounts`](#snaptradeexperimental_endpointslist_connection_accounts)
-  * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
-  * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
-  * [`snaptrade.reference_data.get_stock_exchanges`](#snaptradereference_dataget_stock_exchanges)
-  * [`snaptrade.reference_data.get_symbols`](#snaptradereference_dataget_symbols)
-  * [`snaptrade.reference_data.get_symbols_by_ticker`](#snaptradereference_dataget_symbols_by_ticker)
-  * [`snaptrade.reference_data.list_all_brokerage_authorization_type`](#snaptradereference_datalist_all_brokerage_authorization_type)
-  * [`snaptrade.reference_data.list_all_brokerage_instruments`](#snaptradereference_datalist_all_brokerage_instruments)
-  * [`snaptrade.reference_data.list_all_brokerages`](#snaptradereference_datalist_all_brokerages)
-  * [`snaptrade.reference_data.symbol_search_user_account`](#snaptradereference_datasymbol_search_user_account)
-  * [`snaptrade.trading.cancel_order`](#snaptradetradingcancel_order)
-  * [`snaptrade.trading.get_cryptocurrency_pair_quote`](#snaptradetradingget_cryptocurrency_pair_quote)
-  * [`snaptrade.trading.get_option_impact`](#snaptradetradingget_option_impact)
-  * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
-  * [`snaptrade.trading.get_user_account_option_quotes`](#snaptradetradingget_user_account_option_quotes)
-  * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
-  * [`snaptrade.trading.place_complex_order`](#snaptradetradingplace_complex_order)
-  * [`snaptrade.trading.place_crypto_order`](#snaptradetradingplace_crypto_order)
-  * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
-  * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
-  * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
-  * [`snaptrade.trading.preview_crypto_order`](#snaptradetradingpreview_crypto_order)
-  * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
-  * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
 
 <!-- tocstop -->
 
@@ -145,6 +95,38 @@ Python >=3.8
 
 ```sh
 pip install snaptrade-python-sdk==13.0.17
+```
+
+## Authentication<a id="authentication"></a>
+
+Choose the authentication mode that matches your credentials, then use its client in the reference examples.
+
+### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
+Use commercial authentication when acting on behalf of your application and passing end-user credentials with requests that require them.
+
+```python
+from snaptrade_client import SnapTrade, SnapTradeAuth
+
+commercial_api_key_client = SnapTrade(
+    auth=SnapTradeAuth.commercial_api_key(
+        consumer_key="CONSUMER_KEY",
+        client_id="CLIENT_ID",
+    ),
+)
+```
+
+### Personal API Key Auth authentication<a id="personal-api-key-auth-authentication"></a>
+Use personal authentication when the API key belongs to a single user and user credentials are not passed per request.
+
+```python
+from snaptrade_client import SnapTrade, SnapTradeAuth
+
+personal_api_key_client = SnapTrade(
+    auth=SnapTradeAuth.personal_api_key(
+        consumer_key="CONSUMER_KEY",
+        client_id="CLIENT_ID",
+    ),
+)
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -282,16 +264,21 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_account_activities_response = snaptrade.account_information.get_account_activities(
+Cannot parse: 10:1: )``````python
+get_account_activities_response = personal_api_key_client.account_information.get_account_activities(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     start_date="2022-01-24T00:00:00.000Z",
     end_date="2022-01-24T00:00:00.000Z",
     offset=0,
     limit=1,
     type="BUY,SELL,DIVIDEND",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -336,13 +323,16 @@ An experimental endpoint that returns estimated historical total account value f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_account_balance_history_response = (
-    snaptrade.account_information.get_account_balance_history(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+get_account_balance_history_response = personal_api_key_client.account_information.get_account_balance_history(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -373,13 +363,16 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_all_account_positions_response = (
-    snaptrade.account_information.get_all_account_positions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+get_all_account_positions_response = personal_api_key_client.account_information.get_all_account_positions(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -410,13 +403,16 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_balance_response = (
-    snaptrade.account_information.get_user_account_balance(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+get_user_account_balance_response = personal_api_key_client.account_information.get_user_account_balance(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -447,13 +443,16 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_details_response = (
-    snaptrade.account_information.get_user_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+get_user_account_details_response = personal_api_key_client.account_information.get_user_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -484,14 +483,17 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_order_detail_response = (
-    snaptrade.account_information.get_user_account_order_detail(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_user_account_order_detail_response = personal_api_key_client.account_information.get_user_account_order_detail(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -529,15 +531,18 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_orders_response = (
-    snaptrade.account_information.get_user_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
-)
-```
+Cannot parse: 7:1: )``````python
+get_user_account_orders_response = personal_api_key_client.account_information.get_user_account_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -573,14 +578,17 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_recent_orders_response = (
-    snaptrade.account_information.get_user_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_user_account_recent_orders_response = personal_api_key_client.account_information.get_user_account_recent_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -609,14 +617,17 @@ Returns a list of rate of return percents for a given account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_return_rates_response = (
-    snaptrade.account_information.get_user_account_return_rates(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        timeframes="ALL,1Y",
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_user_account_return_rates_response = personal_api_key_client.account_information.get_user_account_return_rates(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    timeframes="ALL,1Y",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -656,11 +667,16 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_holdings_response = snaptrade.account_information.get_user_holdings(
+Cannot parse: 5:1: )``````python
+get_user_holdings_response = personal_api_key_client.account_information.get_user_holdings(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -687,9 +703,14 @@ This endpoint returns Daily data regardless of the customer's plan. Daily data i
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_user_accounts_response = snaptrade.account_information.list_user_accounts()
-```
+Cannot parse: 4:1: )``````python
+list_user_accounts_response = personal_api_key_client.account_information.list_user_accounts()```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -709,11 +730,16 @@ Updates various properties of a specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-update_user_account_response = snaptrade.account_information.update_user_account(
+Cannot parse: 5:1: )``````python
+update_user_account_response = personal_api_key_client.account_information.update_user_account(
     account_id="accountId_example",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -761,31 +787,13 @@ Deletes a registered user and all associated data. This action is irreversible. 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-```python
-delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user()
-```
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`DeleteUserResponse`](./snaptrade_client/type/delete_user_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/deleteUser` `delete`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.authentication.list_snap_trade_users`<a id="snaptradeauthenticationlist_snap_trade_users"></a>
-
-Returns a list of all registered user IDs. Please note that the response is not currently paginated.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+This endpoint supports Commercial API Key Auth authentication only.
 
 ```python
-list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
-```
+Cannot parse: 3:1: )``````python
+list_snap_trade_users_response = commercial_api_key_client.authentication.list_snap_trade_users()```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -808,8 +816,11 @@ Please note that the returned URL expires in 5 minutes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
+Cannot parse: 13:1: )``````python
+login_snap_trade_user_response = personal_api_key_client.authentication.login_snap_trade_user(
     broker="ALPACA",
     immediate_redirect=True,
     custom_redirect="https://snaptrade.com",
@@ -819,8 +830,10 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     dark_mode=True,
     locale="pt-BR",
     connection_portal_version="v4",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -879,48 +892,16 @@ Most SnapTrade operations require a user ID and user secret to be passed in as p
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+This endpoint supports Commercial API Key Auth authentication only.
+
 ```python
-register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
+Cannot parse: 3:1: )``````python
+reset_snap_trade_user_secret_response = commercial_api_key_client.authentication.reset_snap_trade_user_secret(
     user_id="snaptrade-user-123",
-)
-```
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+)```
 
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`SnapTradeRegisterUserRequestBody`](./snaptrade_client/type/snap_trade_register_user_request_body.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`UserIDandSecret`](./snaptrade_client/type/user_i_dand_secret.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/registerUser` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.authentication.reset_snap_trade_user_secret`<a id="snaptradeauthenticationreset_snap_trade_user_secret"></a>
-
-Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-reset_snap_trade_user_secret_response = (
-    snaptrade.authentication.reset_snap_trade_user_secret(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -953,11 +934,16 @@ Deletes the SnapTrade connection specified by the ID. This will also remove the 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-delete_connection_response = snaptrade.connections.delete_connection(
+Cannot parse: 5:1: )``````python
+delete_connection_response = personal_api_key_client.connections.delete_connection(
     connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -981,13 +967,16 @@ Returns a single connection for the specified ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-detail_brokerage_authorization_response = (
-    snaptrade.connections.detail_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+detail_brokerage_authorization_response = personal_api_key_client.connections.detail_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1015,13 +1004,16 @@ This endpoint is available on test keys. If you would like it enabled on product
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-disable_brokerage_authorization_response = (
-    snaptrade.connections.disable_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+disable_brokerage_authorization_response = personal_api_key_client.connections.disable_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1052,13 +1044,16 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_brokerage_authorization_accounts_response = (
-    snaptrade.connections.list_brokerage_authorization_accounts(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+list_brokerage_authorization_accounts_response = personal_api_key_client.connections.list_brokerage_authorization_accounts(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1087,11 +1082,14 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_brokerage_authorizations_response = (
-    snaptrade.connections.list_brokerage_authorizations()
-)
-```
+Cannot parse: 4:1: )``````python
+list_brokerage_authorizations_response = personal_api_key_client.connections.list_brokerage_authorizations()```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1116,13 +1114,16 @@ This endpoint will also trigger a transaction sync for the past day if one has n
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-refresh_brokerage_authorization_response = (
-    snaptrade.connections.refresh_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+refresh_brokerage_authorization_response = personal_api_key_client.connections.refresh_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1147,12 +1148,17 @@ Returns a list of rate of return percents for a given connection.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-return_rates_response = snaptrade.connections.return_rates(
+Cannot parse: 6:1: )``````python
+return_rates_response = personal_api_key_client.connections.return_rates(
     authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     timeframes="ALL,1Y",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1181,13 +1187,16 @@ Trigger a transactions sync for all accounts under this connection. Updates will
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-sync_brokerage_authorization_transactions_response = (
-    snaptrade.connections.sync_brokerage_authorization_transactions(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+sync_brokerage_authorization_transactions_response = personal_api_key_client.connections.sync_brokerage_authorization_transactions(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1213,12 +1222,17 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-add_subscription_response = snaptrade.experimental_endpoints.add_subscription(
+Cannot parse: 6:1: )``````python
+add_subscription_response = personal_api_key_client.experimental_endpoints.add_subscription(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     check_interval_seconds=300,
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1253,11 +1267,14 @@ This endpoint requires partner signature authentication only and does not requir
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-cancel_subscription_response = snaptrade.experimental_endpoints.cancel_subscription(
+Cannot parse: 3:1: )``````python
+cancel_subscription_response = personal_api_key_client.experimental_endpoints.cancel_subscription(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-)
-```
+)```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1294,14 +1311,17 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_order_detail_v2_response = (
-    snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_user_account_order_detail_v2_response = personal_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1332,15 +1352,18 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_orders_v2_response = (
-    snaptrade.experimental_endpoints.get_user_account_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
-)
-```
+Cannot parse: 7:1: )``````python
+get_user_account_orders_v2_response = personal_api_key_client.experimental_endpoints.get_user_account_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1377,14 +1400,17 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_recent_orders_v2_response = (
-    snaptrade.experimental_endpoints.get_user_account_recent_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_user_account_recent_orders_v2_response = personal_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1423,13 +1449,16 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_connection_accounts_response = (
-    snaptrade.experimental_endpoints.list_connection_accounts(
-        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
+Cannot parse: 5:1: )``````python
+list_connection_accounts_response = personal_api_key_client.experimental_endpoints.list_connection_accounts(
+    connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1453,9 +1482,12 @@ Returns active Trade Detection subscriptions for your Client ID. Cancelled subsc
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_subscriptions_response = snaptrade.experimental_endpoints.list_subscriptions()
-```
+Cannot parse: 1:99: list_subscriptions_response = commercial_api_key_client.experimental_endpoints.list_subscriptions()``````python
+list_subscriptions_response = personal_api_key_client.experimental_endpoints.list_subscriptions()```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1475,9 +1507,12 @@ Returns configurations for your SnapTrade Client ID, including allowed brokerage
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_partner_info_response = snaptrade.reference_data.get_partner_info()
-```
+Cannot parse: 1:87: get_partner_info_response = commercial_api_key_client.reference_data.get_partner_info()``````python
+get_partner_info_response = personal_api_key_client.reference_data.get_partner_info()```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1497,9 +1532,12 @@ Returns a list of all supported Exchanges.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
-```
+Cannot parse: 1:93: get_stock_exchanges_response = commercial_api_key_client.reference_data.get_stock_exchanges()``````python
+get_stock_exchanges_response = personal_api_key_client.reference_data.get_stock_exchanges()```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1520,11 +1558,14 @@ Returns a list of Universal Symbol objects that match the given query. The match
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_symbols_response = snaptrade.reference_data.get_symbols(
+Cannot parse: 3:1: )``````python
+get_symbols_response = personal_api_key_client.reference_data.get_symbols(
     substring="AAPL",
-)
-```
+)```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1554,11 +1595,14 @@ Returns the Universal Symbol object specified by the ticker or the Universal Sym
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
+Cannot parse: 3:1: )``````python
+get_symbols_by_ticker_response = personal_api_key_client.reference_data.get_symbols_by_ticker(
     query="query_example",
-)
-```
+)```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1584,13 +1628,14 @@ Returns a list of all defined Brokerage authorization Type objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_all_brokerage_authorization_type_response = (
-    snaptrade.reference_data.list_all_brokerage_authorization_type(
-        brokerage="QUESTRADE,ALPACA",
-    )
-)
-```
+Cannot parse: 3:1: )``````python
+list_all_brokerage_authorization_type_response = personal_api_key_client.reference_data.list_all_brokerage_authorization_type(
+    brokerage="QUESTRADE,ALPACA",
+)```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1616,13 +1661,14 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_all_brokerage_instruments_response = (
-    snaptrade.reference_data.list_all_brokerage_instruments(
-        slug="QUESTRADE",
-    )
-)
-```
+Cannot parse: 3:1: )``````python
+list_all_brokerage_instruments_response = personal_api_key_client.reference_data.list_all_brokerage_instruments(
+    slug="QUESTRADE",
+)```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1648,9 +1694,12 @@ Returns a list of all defined Brokerage objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-list_all_brokerages_response = snaptrade.reference_data.list_all_brokerages()
-```
+Cannot parse: 1:93: list_all_brokerages_response = commercial_api_key_client.reference_data.list_all_brokerages()``````python
+list_all_brokerages_response = personal_api_key_client.reference_data.list_all_brokerages()```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1673,14 +1722,17 @@ The search results are further limited to the symbols supported by the brokerage
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-symbol_search_user_account_response = (
-    snaptrade.reference_data.symbol_search_user_account(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        substring="AAPL",
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+symbol_search_user_account_response = personal_api_key_client.reference_data.symbol_search_user_account(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    substring="AAPL",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1712,12 +1764,17 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-cancel_order_response = snaptrade.trading.cancel_order(
+Cannot parse: 6:1: )``````python
+cancel_order_response = personal_api_key_client.trading.cancel_order(
     brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1749,14 +1806,17 @@ Gets a quote for the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_cryptocurrency_pair_quote_response = (
-    snaptrade.trading.get_cryptocurrency_pair_quote(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        instrument_symbol="BTC-USD",
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_cryptocurrency_pair_quote_response = personal_api_key_client.trading.get_cryptocurrency_pair_quote(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrument_symbol="BTC-USD",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1784,8 +1844,11 @@ Only supported for certain enabled brokerages. Please refer to the [brokerage tr
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_option_impact_response = snaptrade.trading.get_option_impact(
+Cannot parse: 20:1: )``````python
+get_option_impact_response = personal_api_key_client.trading.get_option_impact(
     order_type="MARKET",
     time_in_force="Day",
     legs=[
@@ -1802,8 +1865,10 @@ get_option_impact_response = snaptrade.trading.get_option_impact(
     limit_price="",
     stop_price="",
     price_effect="DEBIT",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1846,8 +1911,11 @@ Simulates an order and its impact on the account. This endpoint does not place t
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_order_impact_response = snaptrade.trading.get_order_impact(
+Cannot parse: 13:1: )``````python
+get_order_impact_response = personal_api_key_client.trading.get_order_impact(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1857,8 +1925,10 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
     stop=31.33,
     units=10.5,
     notional_value=None,
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1914,14 +1984,17 @@ Returns a quote for a single option contract. The option contract is specified u
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_option_quotes_response = (
-    snaptrade.trading.get_user_account_option_quotes(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        symbol="AAPL  251219C00150000",
-    )
-)
-```
+Cannot parse: 6:1: )``````python
+get_user_account_option_quotes_response = personal_api_key_client.trading.get_user_account_option_quotes(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol="AAPL  251219C00150000",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1956,13 +2029,18 @@ This endpoint does not work for options quotes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
+Cannot parse: 7:1: )``````python
+get_user_account_quotes_response = personal_api_key_client.trading.get_user_account_quotes(
     symbols="symbols_example",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     use_ticker=True,
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2001,8 +2079,11 @@ Please refer to the [brokerage trading support page](https://support.snaptrade.c
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-place_complex_order_response = snaptrade.trading.place_complex_order(
+Cannot parse: 22:1: )``````python
+place_complex_order_response = personal_api_key_client.trading.place_complex_order(
     type="OTO",
     orders=[
         {
@@ -2021,8 +2102,10 @@ place_complex_order_response = snaptrade.trading.place_complex_order(
     ],
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     client_order_id="550e8400-e29b-41d4-a716-446655440000",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2063,8 +2146,11 @@ This endpoint does not compute the impact to the account balance from the order 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-place_crypto_order_response = snaptrade.trading.place_crypto_order(
+Cannot parse: 17:1: )``````python
+place_crypto_order_response = personal_api_key_client.trading.place_crypto_order(
     instrument={
         "symbol": "BTC",
         "type": "CRYPTOCURRENCY",
@@ -2078,8 +2164,10 @@ place_crypto_order_response = snaptrade.trading.place_crypto_order(
     stop_price="123.45",
     post_only=False,
     expiration_date="2024-01-01T00:00:00.000Z",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2144,8 +2232,11 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-place_force_order_response = snaptrade.trading.place_force_order(
+Cannot parse: 17:1: )``````python
+place_force_order_response = personal_api_key_client.trading.place_force_order(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
     order_type="Market",
@@ -2159,8 +2250,10 @@ place_force_order_response = snaptrade.trading.place_force_order(
     units=10.5,
     notional_value=None,
     client_order_id="550e8400-e29b-41d4-a716-446655440000",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2226,8 +2319,11 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-place_mleg_order_response = snaptrade.trading.place_mleg_order(
+Cannot parse: 20:1: )``````python
+place_mleg_order_response = personal_api_key_client.trading.place_mleg_order(
     order_type="MARKET",
     time_in_force="Day",
     legs=[
@@ -2244,8 +2340,10 @@ place_mleg_order_response = snaptrade.trading.place_mleg_order(
     limit_price="",
     stop_price="",
     price_effect="DEBIT",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2291,12 +2389,17 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-place_order_response = snaptrade.trading.place_order(
+Cannot parse: 6:1: )``````python
+place_order_response = personal_api_key_client.trading.place_order(
     trade_id="139e307a-82f7-4402-b39e-4da7baa87758",
     wait_to_confirm=True,
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2330,8 +2433,11 @@ Previews an order using the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-preview_crypto_order_response = snaptrade.trading.preview_crypto_order(
+Cannot parse: 17:1: )``````python
+preview_crypto_order_response = personal_api_key_client.trading.preview_crypto_order(
     instrument={
         "symbol": "BTC",
         "type": "CRYPTOCURRENCY",
@@ -2345,8 +2451,10 @@ preview_crypto_order_response = snaptrade.trading.preview_crypto_order(
     stop_price="123.45",
     post_only=False,
     expiration_date="2024-01-01T00:00:00.000Z",
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2409,8 +2517,11 @@ returned in the response going forward. Only supported on some brokerages
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-replace_order_response = snaptrade.trading.replace_order(
+Cannot parse: 13:1: )``````python
+replace_order_response = personal_api_key_client.trading.replace_order(
     brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     action="BUY",
     order_type="Market",
@@ -2420,8 +2531,10 @@ replace_order_response = snaptrade.trading.replace_order(
     symbol="AAPL",
     stop=31.33,
     units=10.5,
-)
-```
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2475,15 +2588,18 @@ Searches cryptocurrency pairs instruments accessible to the specified account. B
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```python
-search_cryptocurrency_pair_instruments_response = (
-    snaptrade.trading.search_cryptocurrency_pair_instruments(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        base="BTC",
-        quote="USD",
-    )
-)
-```
+Cannot parse: 7:1: )``````python
+search_cryptocurrency_pair_instruments_response = personal_api_key_client.trading.search_cryptocurrency_pair_instruments(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base="BTC",
+    quote="USD",
+)```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 

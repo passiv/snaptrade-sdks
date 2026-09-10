@@ -562,8 +562,8 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSymbols(requestParameters: ReferenceDataApiGetSymbolsRequest<TAuth> = {} as ReferenceDataApiGetSymbolsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+        async getSymbols(...args: ReferenceDataApiGetSymbolsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+            const [requestParameters = {} as ReferenceDataApiGetSymbolsRequest<TAuth>, options] = args;
             const symbolQuery: SymbolQuery = {
                 substring: requestParameters.substring
             };
@@ -577,8 +577,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSymbolsByTicker(requestParameters: ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UniversalSymbol>> {
+        async getSymbolsByTicker(...args: ReferenceDataApiGetSymbolsByTickerArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UniversalSymbol>> {
+            const [requestParameters = {} as ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbolsByTicker(requestParameters.query, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -589,8 +589,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAllBrokerageAuthorizationType(requestParameters: ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth> = {} as ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>>> {
+        async listAllBrokerageAuthorizationType(...args: ReferenceDataApiListAllBrokerageAuthorizationTypeArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>>> {
+            const [requestParameters = {} as ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageAuthorizationType(requestParameters.brokerage, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -601,8 +601,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageInstrumentsResponse>> {
+        async listAllBrokerageInstruments(...args: ReferenceDataApiListAllBrokerageInstrumentsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageInstrumentsResponse>> {
+            const [requestParameters = {} as ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageInstruments(requestParameters.slug, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -624,8 +624,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async symbolSearchUserAccount(requestParameters: ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+        async symbolSearchUserAccount(...args: ReferenceDataApiSymbolSearchUserAccountArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalSymbol>>> {
+            const [requestParameters = {} as ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>, options] = args;
             const symbolQuery: SymbolQuery = {
                 substring: requestParameters.substring
             };
@@ -667,9 +667,8 @@ export const ReferenceDataApiFactory = function<TAuth extends AuthMode>(configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSymbols(requestParameters: ReferenceDataApiGetSymbolsRequest<TAuth> = {} as ReferenceDataApiGetSymbolsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<UniversalSymbol>> {
-            return localVarFp.getSymbols(requestParameters as any, options).then((request) => request(axios, basePath));
+        getSymbols(...args: ReferenceDataApiGetSymbolsArgs<TAuth>): AxiosPromise<Array<UniversalSymbol>> {
+            return localVarFp.getSymbols(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a \'.TO\' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
@@ -678,9 +677,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<UniversalSymbol>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSymbolsByTicker(requestParameters: ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<UniversalSymbol> {
-            return localVarFp.getSymbolsByTicker(requestParameters as any, options).then((request) => request(axios, basePath));
+        getSymbolsByTicker(...args: ReferenceDataApiGetSymbolsByTickerArgs<TAuth>): AxiosPromise<UniversalSymbol> {
+            return localVarFp.getSymbolsByTicker(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all defined Brokerage authorization Type objects.
@@ -689,9 +687,8 @@ options?: AxiosRequestConfig): AxiosPromise<UniversalSymbol> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAllBrokerageAuthorizationType(requestParameters: ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth> = {} as ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>> {
-            return localVarFp.listAllBrokerageAuthorizationType(requestParameters as any, options).then((request) => request(axios, basePath));
+        listAllBrokerageAuthorizationType(...args: ReferenceDataApiListAllBrokerageAuthorizationTypeArgs<TAuth>): AxiosPromise<Array<BrokerageAuthorizationTypeReadOnly>> {
+            return localVarFp.listAllBrokerageAuthorizationType(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don\'t will return an empty list.
@@ -700,9 +697,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<BrokerageAuthorizationTypeRead
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<BrokerageInstrumentsResponse> {
-            return localVarFp.listAllBrokerageInstruments(requestParameters as any, options).then((request) => request(axios, basePath));
+        listAllBrokerageInstruments(...args: ReferenceDataApiListAllBrokerageInstrumentsArgs<TAuth>): AxiosPromise<BrokerageInstrumentsResponse> {
+            return localVarFp.listAllBrokerageInstruments(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all defined Brokerage objects.
@@ -720,9 +716,8 @@ options?: AxiosRequestConfig): AxiosPromise<BrokerageInstrumentsResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        symbolSearchUserAccount(requestParameters: ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<UniversalSymbol>> {
-            return localVarFp.symbolSearchUserAccount(requestParameters as any, options).then((request) => request(axios, basePath));
+        symbolSearchUserAccount(...args: ReferenceDataApiSymbolSearchUserAccountArgs<TAuth>): AxiosPromise<Array<UniversalSymbol>> {
+            return localVarFp.symbolSearchUserAccount(...args).then((request) => request(axios, basePath));
         },
     };
 };
@@ -744,6 +739,12 @@ export type ReferenceDataApiGetSymbolsRequestByAuthMode = {
 }
 export type ReferenceDataApiGetSymbolsRequest<TAuth extends AuthMode> =
     ReferenceDataApiGetSymbolsRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiGetSymbolsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ReferenceDataApiGetSymbolsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "commercialApiKey" | "personalApiKey"
+        ? [requestParameters?: ReferenceDataApiGetSymbolsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ReferenceDataApiGetSymbolsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getSymbolsByTicker operation in ReferenceDataApi.
@@ -770,6 +771,12 @@ export type ReferenceDataApiGetSymbolsByTickerRequestByAuthMode = {
 export type ReferenceDataApiGetSymbolsByTickerRequest<TAuth extends AuthMode> =
     ReferenceDataApiGetSymbolsByTickerRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiGetSymbolsByTickerRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ReferenceDataApiGetSymbolsByTickerArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for listAllBrokerageAuthorizationType operation in ReferenceDataApi.
  * @export
@@ -795,6 +802,12 @@ export type ReferenceDataApiListAllBrokerageAuthorizationTypeRequestByAuthMode =
 export type ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth extends AuthMode> =
     ReferenceDataApiListAllBrokerageAuthorizationTypeRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiListAllBrokerageAuthorizationTypeRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ReferenceDataApiListAllBrokerageAuthorizationTypeArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "commercialApiKey" | "personalApiKey"
+        ? [requestParameters?: ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for listAllBrokerageInstruments operation in ReferenceDataApi.
  * @export
@@ -819,6 +832,12 @@ export type ReferenceDataApiListAllBrokerageInstrumentsRequestByAuthMode = {
 }
 export type ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth extends AuthMode> =
     ReferenceDataApiListAllBrokerageInstrumentsRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiListAllBrokerageInstrumentsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ReferenceDataApiListAllBrokerageInstrumentsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for symbolSearchUserAccount operation in ReferenceDataApi.
@@ -848,6 +867,12 @@ export type ReferenceDataApiSymbolSearchUserAccountRequestByAuthMode = {
 }
 export type ReferenceDataApiSymbolSearchUserAccountRequest<TAuth extends AuthMode> =
     ReferenceDataApiSymbolSearchUserAccountRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiSymbolSearchUserAccountRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ReferenceDataApiSymbolSearchUserAccountArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * ReferenceDataApiGenerated - object-oriented interface
@@ -886,9 +911,8 @@ export class ReferenceDataApiGenerated<TAuth extends AuthMode> extends BaseAPI<T
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public getSymbols(requestParameters: ReferenceDataApiGetSymbolsRequest<TAuth> = {} as ReferenceDataApiGetSymbolsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).getSymbols(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getSymbols(...args: ReferenceDataApiGetSymbolsArgs<TAuth>) {
+        return ReferenceDataApiFp(this.configuration).getSymbols(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -900,9 +924,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public getSymbolsByTicker(requestParameters: ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).getSymbolsByTicker(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getSymbolsByTicker(...args: ReferenceDataApiGetSymbolsByTickerArgs<TAuth>) {
+        return ReferenceDataApiFp(this.configuration).getSymbolsByTicker(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -914,9 +937,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public listAllBrokerageAuthorizationType(requestParameters: ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth> = {} as ReferenceDataApiListAllBrokerageAuthorizationTypeRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).listAllBrokerageAuthorizationType(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public listAllBrokerageAuthorizationType(...args: ReferenceDataApiListAllBrokerageAuthorizationTypeArgs<TAuth>) {
+        return ReferenceDataApiFp(this.configuration).listAllBrokerageAuthorizationType(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -928,9 +950,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).listAllBrokerageInstruments(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public listAllBrokerageInstruments(...args: ReferenceDataApiListAllBrokerageInstrumentsArgs<TAuth>) {
+        return ReferenceDataApiFp(this.configuration).listAllBrokerageInstruments(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -953,9 +974,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public symbolSearchUserAccount(requestParameters: ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ReferenceDataApiFp(this.configuration).symbolSearchUserAccount(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public symbolSearchUserAccount(...args: ReferenceDataApiSymbolSearchUserAccountArgs<TAuth>) {
+        return ReferenceDataApiFp(this.configuration).symbolSearchUserAccount(...args).then((request) => request(this.axios, this.basePath));
 
     }
 }
