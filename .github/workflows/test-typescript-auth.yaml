@@ -36,6 +36,12 @@ jobs:
           KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
       - name: Verify regeneration preserved the regression fixture
         run: git diff --exit-code -- sdks/typescript/auth-mode.tstest.ts
+      - name: Retain generated reference for deployment verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-typescript-reference
+          path: sdks/typescript/README.md
+          retention-days: 7
       - name: Install SDK dependencies
         run: pnpm --dir sdks/typescript install
       - name: Check auth argument types
