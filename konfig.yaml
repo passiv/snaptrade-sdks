@@ -142,6 +142,8 @@ portal:
       get: true
     /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
       get: true
+    /connections/{connectionId}/accounts:
+      get: true
     /accounts/{accountId}/trading/options/impact:
       post: true
     /authorizations/{authorizationId}/transactions/sync:
