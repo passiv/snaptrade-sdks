@@ -48,6 +48,7 @@ jobs:
               assert not re.search(r'\S```', readme), language + ': joined code fence'
           PYTHON
       - name: Retain generated reference for deployment verification
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: generated-sdk-references
