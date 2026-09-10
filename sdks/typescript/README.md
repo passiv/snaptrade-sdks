@@ -73,6 +73,9 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 <!-- toc -->
 
 - [Installation](#installation)
+- [Authentication](#authentication)
+  * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
+  * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
@@ -165,6 +168,37 @@ yarn add snaptrade-typescript-sdk
 </td>
 </tr>
 </table>
+
+## Authentication<a id="authentication"></a>
+
+Choose the authentication mode that matches your credentials, then use its client in the reference examples.
+### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
+Use commercial authentication when acting on behalf of your application and passing end-user credentials with requests that require them.
+
+```typescript
+import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
+
+const commercialApiKeyClient = new Snaptrade({
+  auth: SnaptradeAuth.commercialApiKey({
+    consumerKey: "CONSUMER_KEY",
+    clientId: "CLIENT_ID",
+  }),
+});
+```
+
+### Personal API Key Auth authentication<a id="personal-api-key-auth-authentication"></a>
+Use personal authentication when the API key belongs to a single user and user credentials are not passed per request.
+
+```typescript
+import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
+
+const personalApiKeyClient = new Snaptrade({
+  auth: SnaptradeAuth.personalApiKey({
+    consumerKey: "CONSUMER_KEY",
+    clientId: "CLIENT_ID",
+  }),
+});
+```
 
 ## Getting Started<a id="getting-started"></a>
 
@@ -278,15 +312,44 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getAccountActivitiesResponse =
-  await snaptrade.accountInformation.getAccountActivities({
+  await commercialApiKeyClient.accountInformation.getAccountActivities({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     startDate: "2022-01-24T00:00:00.000Z",
     endDate: "2022-01-24T00:00:00.000Z",
+    offset: 0,
+    limit: 1,
+    type: "BUY,SELL,DIVIDEND",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAccountActivitiesResponse =
+  await personalApiKeyClient.accountInformation.getAccountActivities({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    startDate: "2022-01-24T00:00:00.000Z",
+    endDate: "2022-01-24T00:00:00.000Z",
+    offset: 0,
+    limit: 1,
     type: "BUY,SELL,DIVIDEND",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -332,12 +395,34 @@ An experimental endpoint that returns estimated historical total account value f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getAccountBalanceHistoryResponse =
-  await snaptrade.accountInformation.getAccountBalanceHistory({
+  await commercialApiKeyClient.accountInformation.getAccountBalanceHistory({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAccountBalanceHistoryResponse =
+  await personalApiKeyClient.accountInformation.getAccountBalanceHistory({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -369,12 +454,34 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getAllAccountPositionsResponse =
-  await snaptrade.accountInformation.getAllAccountPositions({
+  await commercialApiKeyClient.accountInformation.getAllAccountPositions({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAllAccountPositionsResponse =
+  await personalApiKeyClient.accountInformation.getAllAccountPositions({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -406,12 +513,34 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountBalanceResponse =
-  await snaptrade.accountInformation.getUserAccountBalance({
+  await commercialApiKeyClient.accountInformation.getUserAccountBalance({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountBalanceResponse =
+  await personalApiKeyClient.accountInformation.getUserAccountBalance({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -443,12 +572,34 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountDetailsResponse =
-  await snaptrade.accountInformation.getUserAccountDetails({
+  await commercialApiKeyClient.accountInformation.getUserAccountDetails({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountDetailsResponse =
+  await personalApiKeyClient.accountInformation.getUserAccountDetails({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -480,13 +631,36 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountOrderDetailResponse =
-  await snaptrade.accountInformation.getUserAccountOrderDetail({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  await commercialApiKeyClient.accountInformation.getUserAccountOrderDetail({
     brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountOrderDetailResponse =
+  await personalApiKeyClient.accountInformation.getUserAccountOrderDetail({
+    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -522,14 +696,38 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountOrdersResponse =
-  await snaptrade.accountInformation.getUserAccountOrders({
+  await commercialApiKeyClient.accountInformation.getUserAccountOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     state: "all",
     days: 30,
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountOrdersResponse =
+  await personalApiKeyClient.accountInformation.getUserAccountOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -566,12 +764,36 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountRecentOrdersResponse =
-  await snaptrade.accountInformation.getUserAccountRecentOrders({
+  await commercialApiKeyClient.accountInformation.getUserAccountRecentOrders({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountRecentOrdersResponse =
+  await personalApiKeyClient.accountInformation.getUserAccountRecentOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -601,13 +823,36 @@ Returns a list of rate of return percents for a given account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountReturnRatesResponse =
-  await snaptrade.accountInformation.getUserAccountReturnRates({
+  await commercialApiKeyClient.accountInformation.getUserAccountReturnRates({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    timeframes: "ALL,1Y",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountReturnRatesResponse =
+  await personalApiKeyClient.accountInformation.getUserAccountReturnRates({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     timeframes: "ALL,1Y",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -648,12 +893,34 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserHoldingsResponse =
-  await snaptrade.accountInformation.getUserHoldings({
+  await commercialApiKeyClient.accountInformation.getUserHoldings({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserHoldingsResponse =
+  await personalApiKeyClient.accountInformation.getUserHoldings({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -681,10 +948,31 @@ This endpoint returns Daily data regardless of the customer's plan. Daily data i
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listUserAccountsResponse =
-  await snaptrade.accountInformation.listUserAccounts();
+  await commercialApiKeyClient.accountInformation.listUserAccounts({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listUserAccountsResponse =
+  await personalApiKeyClient.accountInformation.listUserAccounts();
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -705,12 +993,34 @@ Updates various properties of a specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const updateUserAccountResponse =
-  await snaptrade.accountInformation.updateUserAccount({
+  await commercialApiKeyClient.accountInformation.updateUserAccount({
+    accountId: "accountId_example",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const updateUserAccountResponse =
+  await personalApiKeyClient.accountInformation.updateUserAccount({
     accountId: "accountId_example",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -760,10 +1070,20 @@ Deletes a registered user and all associated data. This action is irreversible. 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+This endpoint supports Commercial API Key Auth authentication only.
+
 ```typescript
 const deleteSnapTradeUserResponse =
-  await snaptrade.authentication.deleteSnapTradeUser();
+  await commercialApiKeyClient.authentication.deleteSnapTradeUser({
+    userId: "snaptrade-user-123",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -784,10 +1104,14 @@ Returns a list of all registered user IDs. Please note that the response is not 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+This endpoint supports Commercial API Key Auth authentication only.
+
 ```typescript
 const listSnapTradeUsersResponse =
-  await snaptrade.authentication.listSnapTradeUsers();
+  await commercialApiKeyClient.authentication.listSnapTradeUsers();
 ```
+
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -807,9 +1131,36 @@ Please note that the returned URL expires in 5 minutes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const loginSnapTradeUserResponse =
-  await snaptrade.authentication.loginSnapTradeUser({
+  await commercialApiKeyClient.authentication.loginSnapTradeUser({
+    broker: "ALPACA",
+    immediateRedirect: true,
+    customRedirect: "https://snaptrade.com",
+    reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connectionType: "read",
+    showCloseButton: true,
+    darkMode: true,
+    locale: "pt-BR",
+    connectionPortalVersion: "v4",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const loginSnapTradeUserResponse =
+  await personalApiKeyClient.authentication.loginSnapTradeUser({
     broker: "ALPACA",
     immediateRedirect: true,
     customRedirect: "https://snaptrade.com",
@@ -821,6 +1172,9 @@ const loginSnapTradeUserResponse =
     connectionPortalVersion: "v4",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -881,12 +1235,16 @@ Most SnapTrade operations require a user ID and user secret to be passed in as p
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+This endpoint supports Commercial API Key Auth authentication only.
+
 ```typescript
 const registerSnapTradeUserResponse =
-  await snaptrade.authentication.registerSnapTradeUser({
+  await commercialApiKeyClient.authentication.registerSnapTradeUser({
     userId: "snaptrade-user-123",
   });
 ```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -914,13 +1272,17 @@ Rotates the secret for a SnapTrade user. You might use this if `userSecret` is c
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+This endpoint supports Commercial API Key Auth authentication only.
+
 ```typescript
 const resetSnapTradeUserSecretResponse =
-  await snaptrade.authentication.resetSnapTradeUserSecret({
+  await commercialApiKeyClient.authentication.resetSnapTradeUserSecret({
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -951,11 +1313,34 @@ Deletes the SnapTrade connection specified by the ID. This will also remove the 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const deleteConnectionResponse = await snaptrade.connections.deleteConnection({
-  connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
-});
+const deleteConnectionResponse =
+  await commercialApiKeyClient.connections.deleteConnection({
+    connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const deleteConnectionResponse =
+  await personalApiKeyClient.connections.deleteConnection({
+    connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -980,12 +1365,34 @@ Returns a single connection for the specified ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const detailBrokerageAuthorizationResponse =
-  await snaptrade.connections.detailBrokerageAuthorization({
+  await commercialApiKeyClient.connections.detailBrokerageAuthorization({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const detailBrokerageAuthorizationResponse =
+  await personalApiKeyClient.connections.detailBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1014,12 +1421,34 @@ This endpoint is available on test keys. If you would like it enabled on product
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const disableBrokerageAuthorizationResponse =
-  await snaptrade.connections.disableBrokerageAuthorization({
+  await commercialApiKeyClient.connections.disableBrokerageAuthorization({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const disableBrokerageAuthorizationResponse =
+  await personalApiKeyClient.connections.disableBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1051,12 +1480,34 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listBrokerageAuthorizationAccountsResponse =
-  await snaptrade.connections.listBrokerageAuthorizationAccounts({
+  await commercialApiKeyClient.connections.listBrokerageAuthorizationAccounts({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listBrokerageAuthorizationAccountsResponse =
+  await personalApiKeyClient.connections.listBrokerageAuthorizationAccounts({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1086,10 +1537,31 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listBrokerageAuthorizationsResponse =
-  await snaptrade.connections.listBrokerageAuthorizations();
+  await commercialApiKeyClient.connections.listBrokerageAuthorizations({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listBrokerageAuthorizationsResponse =
+  await personalApiKeyClient.connections.listBrokerageAuthorizations();
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1115,12 +1587,34 @@ This endpoint will also trigger a transaction sync for the past day if one has n
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const refreshBrokerageAuthorizationResponse =
-  await snaptrade.connections.refreshBrokerageAuthorization({
+  await commercialApiKeyClient.connections.refreshBrokerageAuthorization({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const refreshBrokerageAuthorizationResponse =
+  await personalApiKeyClient.connections.refreshBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1146,12 +1640,35 @@ Returns a list of rate of return percents for a given connection.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const returnRatesResponse = await snaptrade.connections.returnRates({
+const returnRatesResponse =
+  await commercialApiKeyClient.connections.returnRates({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    timeframes: "ALL,1Y",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const returnRatesResponse = await personalApiKeyClient.connections.returnRates({
   authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   timeframes: "ALL,1Y",
 });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1181,12 +1698,38 @@ Trigger a transactions sync for all accounts under this connection. Updates will
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const syncBrokerageAuthorizationTransactionsResponse =
-  await snaptrade.connections.syncBrokerageAuthorizationTransactions({
-    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
-  });
+  await commercialApiKeyClient.connections.syncBrokerageAuthorizationTransactions(
+    {
+      authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+      userId: "snaptrade-user-123",
+      userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    }
+  );
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const syncBrokerageAuthorizationTransactionsResponse =
+  await personalApiKeyClient.connections.syncBrokerageAuthorizationTransactions(
+    {
+      authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    }
+  );
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1213,13 +1756,36 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const addSubscriptionResponse =
-  await snaptrade.experimentalEndpoints.addSubscription({
+  await commercialApiKeyClient.experimentalEndpoints.addSubscription({
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    check_interval_seconds: 300,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const addSubscriptionResponse =
+  await personalApiKeyClient.experimentalEndpoints.addSubscription({
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     check_interval_seconds: 300,
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1252,12 +1818,24 @@ This endpoint requires partner signature authentication only and does not requir
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const cancelSubscriptionResponse =
-  await snaptrade.experimentalEndpoints.cancelSubscription({
+  await commercialApiKeyClient.experimentalEndpoints.cancelSubscription({
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const cancelSubscriptionResponse =
+  await personalApiKeyClient.experimentalEndpoints.cancelSubscription({
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1292,13 +1870,38 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountOrderDetailV2Response =
-  await snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2({
+  await commercialApiKeyClient.experimentalEndpoints.getUserAccountOrderDetailV2(
+    {
+      accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+      brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+      userId: "snaptrade-user-123",
+      userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    }
+  );
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountOrderDetailV2Response =
+  await personalApiKeyClient.experimentalEndpoints.getUserAccountOrderDetailV2({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1330,14 +1933,38 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountOrdersV2Response =
-  await snaptrade.experimentalEndpoints.getUserAccountOrdersV2({
+  await commercialApiKeyClient.experimentalEndpoints.getUserAccountOrdersV2({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     state: "all",
     days: 30,
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountOrdersV2Response =
+  await personalApiKeyClient.experimentalEndpoints.getUserAccountOrdersV2({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1375,12 +2002,40 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountRecentOrdersV2Response =
-  await snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  });
+  await commercialApiKeyClient.experimentalEndpoints.getUserAccountRecentOrdersV2(
+    {
+      accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+      onlyExecuted: true,
+      userId: "snaptrade-user-123",
+      userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    }
+  );
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountRecentOrdersV2Response =
+  await personalApiKeyClient.experimentalEndpoints.getUserAccountRecentOrdersV2(
+    {
+      accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+      onlyExecuted: true,
+    }
+  );
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1420,12 +2075,34 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listConnectionAccountsResponse =
-  await snaptrade.experimentalEndpoints.listConnectionAccounts({
+  await commercialApiKeyClient.experimentalEndpoints.listConnectionAccounts({
+    connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listConnectionAccountsResponse =
+  await personalApiKeyClient.experimentalEndpoints.listConnectionAccounts({
     connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1450,10 +2127,20 @@ Returns active Trade Detection subscriptions for your Client ID. Cancelled subsc
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listSubscriptionsResponse =
-  await snaptrade.experimentalEndpoints.listSubscriptions();
+  await commercialApiKeyClient.experimentalEndpoints.listSubscriptions();
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listSubscriptionsResponse =
+  await personalApiKeyClient.experimentalEndpoints.listSubscriptions();
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1474,9 +2161,20 @@ Returns configurations for your SnapTrade Client ID, including allowed brokerage
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
+const getPartnerInfoResponse =
+  await commercialApiKeyClient.referenceData.getPartnerInfo();
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getPartnerInfoResponse =
+  await personalApiKeyClient.referenceData.getPartnerInfo();
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1497,10 +2195,20 @@ Returns a list of all supported Exchanges.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getStockExchangesResponse =
-  await snaptrade.referenceData.getStockExchanges();
+  await commercialApiKeyClient.referenceData.getStockExchanges();
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getStockExchangesResponse =
+  await personalApiKeyClient.referenceData.getStockExchanges();
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1522,11 +2230,23 @@ Returns a list of Universal Symbol objects that match the given query. The match
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const getSymbolsResponse = await snaptrade.referenceData.getSymbols({
+const getSymbolsResponse =
+  await commercialApiKeyClient.referenceData.getSymbols({
+    substring: "AAPL",
+  });
+```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getSymbolsResponse = await personalApiKeyClient.referenceData.getSymbols({
   substring: "AAPL",
 });
 ```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1554,12 +2274,24 @@ Returns the Universal Symbol object specified by the ticker or the Universal Sym
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getSymbolsByTickerResponse =
-  await snaptrade.referenceData.getSymbolsByTicker({
+  await commercialApiKeyClient.referenceData.getSymbolsByTicker({
     query: "query_example",
   });
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getSymbolsByTickerResponse =
+  await personalApiKeyClient.referenceData.getSymbolsByTicker({
+    query: "query_example",
+  });
+```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1586,12 +2318,24 @@ Returns a list of all defined Brokerage authorization Type objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listAllBrokerageAuthorizationTypeResponse =
-  await snaptrade.referenceData.listAllBrokerageAuthorizationType({
+  await commercialApiKeyClient.referenceData.listAllBrokerageAuthorizationType({
     brokerage: "QUESTRADE,ALPACA",
   });
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listAllBrokerageAuthorizationTypeResponse =
+  await personalApiKeyClient.referenceData.listAllBrokerageAuthorizationType({
+    brokerage: "QUESTRADE,ALPACA",
+  });
+```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1618,12 +2362,24 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listAllBrokerageInstrumentsResponse =
-  await snaptrade.referenceData.listAllBrokerageInstruments({
+  await commercialApiKeyClient.referenceData.listAllBrokerageInstruments({
     slug: "QUESTRADE",
   });
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listAllBrokerageInstrumentsResponse =
+  await personalApiKeyClient.referenceData.listAllBrokerageInstruments({
+    slug: "QUESTRADE",
+  });
+```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1650,10 +2406,20 @@ Returns a list of all defined Brokerage objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const listAllBrokeragesResponse =
-  await snaptrade.referenceData.listAllBrokerages();
+  await commercialApiKeyClient.referenceData.listAllBrokerages();
 ```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listAllBrokeragesResponse =
+  await personalApiKeyClient.referenceData.listAllBrokerages();
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1677,13 +2443,36 @@ The search results are further limited to the symbols supported by the brokerage
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const symbolSearchUserAccountResponse =
-  await snaptrade.referenceData.symbolSearchUserAccount({
+  await commercialApiKeyClient.referenceData.symbolSearchUserAccount({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    substring: "AAPL",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const symbolSearchUserAccountResponse =
+  await personalApiKeyClient.referenceData.symbolSearchUserAccount({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     substring: "AAPL",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1713,12 +2502,34 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const cancelOrderResponse = await snaptrade.trading.cancelOrder({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+const cancelOrderResponse = await commercialApiKeyClient.trading.cancelOrder({
   brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const cancelOrderResponse = await personalApiKeyClient.trading.cancelOrder({
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1748,13 +2559,36 @@ Gets a quote for the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getCryptocurrencyPairQuoteResponse =
-  await snaptrade.trading.getCryptocurrencyPairQuote({
+  await commercialApiKeyClient.trading.getCryptocurrencyPairQuote({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrumentSymbol: "BTC-USD",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getCryptocurrencyPairQuoteResponse =
+  await personalApiKeyClient.trading.getCryptocurrencyPairQuote({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     instrumentSymbol: "BTC-USD",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1783,26 +2617,64 @@ Only supported for certain enabled brokerages. Please refer to the [brokerage tr
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const getOptionImpactResponse = await snaptrade.trading.getOptionImpact({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  order_type: "MARKET",
-  time_in_force: "Day",
-  limit_price: "",
-  stop_price: "",
-  price_effect: "DEBIT",
-  legs: [
-    {
-      instrument: {
-        symbol: "PBI   250718C00006000",
-        instrument_type: "OPTION",
+const getOptionImpactResponse =
+  await commercialApiKeyClient.trading.getOptionImpact({
+    order_type: "MARKET",
+    time_in_force: "Day",
+    legs: [
+      {
+        instrument: {
+          symbol: "PBI   250718C00006000",
+          instrument_type: "OPTION",
+        },
+        action: "BUY_TO_OPEN",
+        units: 1,
       },
-      action: "BUY_TO_OPEN",
-      units: 1,
-    },
-  ],
-});
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "",
+    stop_price: "",
+    price_effect: "DEBIT",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getOptionImpactResponse =
+  await personalApiKeyClient.trading.getOptionImpact({
+    order_type: "MARKET",
+    time_in_force: "Day",
+    legs: [
+      {
+        instrument: {
+          symbol: "PBI   250718C00006000",
+          instrument_type: "OPTION",
+        },
+        action: "BUY_TO_OPEN",
+        units: 1,
+      },
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "",
+    stop_price: "",
+    price_effect: "DEBIT",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1847,18 +2719,50 @@ Simulates an order and its impact on the account. This endpoint does not place t
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  action: "BUY",
-  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  order_type: "Market",
-  time_in_force: "Day",
-  price: 31.33,
-  stop: 31.33,
-  units: 10.5,
-});
+const getOrderImpactResponse =
+  await commercialApiKeyClient.trading.getOrderImpact({
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action: "BUY",
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    order_type: "Market",
+    time_in_force: "Day",
+    price: 31.33,
+    stop: 31.33,
+    units: 10.5,
+    notional_value: null,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getOrderImpactResponse =
+  await personalApiKeyClient.trading.getOrderImpact({
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action: "BUY",
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    order_type: "Market",
+    time_in_force: "Day",
+    price: 31.33,
+    stop: 31.33,
+    units: 10.5,
+    notional_value: null,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1918,13 +2822,36 @@ Returns a quote for a single option contract. The option contract is specified u
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountOptionQuotesResponse =
-  await snaptrade.trading.getUserAccountOptionQuotes({
+  await commercialApiKeyClient.trading.getUserAccountOptionQuotes({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol: "AAPL  251219C00150000",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountOptionQuotesResponse =
+  await personalApiKeyClient.trading.getUserAccountOptionQuotes({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     symbol: "AAPL  251219C00150000",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1960,13 +2887,38 @@ This endpoint does not work for options quotes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const getUserAccountQuotesResponse =
-  await snaptrade.trading.getUserAccountQuotes({
+  await commercialApiKeyClient.trading.getUserAccountQuotes({
     symbols: "symbols_example",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    useTicker: true,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getUserAccountQuotesResponse =
+  await personalApiKeyClient.trading.getUserAccountQuotes({
+    symbols: "symbols_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    useTicker: true,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2006,28 +2958,68 @@ Please refer to the [brokerage trading support page](https://support.snaptrade.c
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const placeComplexOrderResponse = await snaptrade.trading.placeComplexOrder({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  type: "OTO",
-  orders: [
-    {
-      order_role: "TRIGGER",
-      action: "BUY",
-      instrument: {
-        symbol: "AAPL",
-        type: "EQUITY",
+const placeComplexOrderResponse =
+  await commercialApiKeyClient.trading.placeComplexOrder({
+    type: "OTO",
+    orders: [
+      {
+        order_role: "TRIGGER",
+        action: "BUY",
+        instrument: {
+          symbol: "AAPL",
+          type: "EQUITY",
+        },
+        order_type: "Market",
+        units: 1,
+        time_in_force: "Day",
+        price: 31.33,
+        stop: 29.5,
       },
-      order_type: "Market",
-      units: 1,
-      time_in_force: "Day",
-      price: 31.33,
-      stop: 29.5,
-    },
-  ],
-  client_order_id: "550e8400-e29b-41d4-a716-446655440000",
-});
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const placeComplexOrderResponse =
+  await personalApiKeyClient.trading.placeComplexOrder({
+    type: "OTO",
+    orders: [
+      {
+        order_role: "TRIGGER",
+        action: "BUY",
+        instrument: {
+          symbol: "AAPL",
+          type: "EQUITY",
+        },
+        order_type: "Market",
+        units: 1,
+        time_in_force: "Day",
+        price: 31.33,
+        stop: 29.5,
+      },
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2066,23 +3058,58 @@ This endpoint does not compute the impact to the account balance from the order 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const placeCryptoOrderResponse = await snaptrade.trading.placeCryptoOrder({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  instrument: {
-    symbol: "BTC",
-    type: "CRYPTOCURRENCY",
-  },
-  side: "BUY",
-  type: "MARKET",
-  time_in_force: "GTC",
-  amount: "123.45",
-  limit_price: "123.45",
-  stop_price: "123.45",
-  post_only: false,
-  expiration_date: "2024-01-01T00:00:00.000Z",
-});
+const placeCryptoOrderResponse =
+  await commercialApiKeyClient.trading.placeCryptoOrder({
+    instrument: {
+      symbol: "BTC",
+      type: "CRYPTOCURRENCY",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00.000Z",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const placeCryptoOrderResponse =
+  await personalApiKeyClient.trading.placeCryptoOrder({
+    instrument: {
+      symbol: "BTC",
+      type: "CRYPTOCURRENCY",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00.000Z",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2146,22 +3173,58 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  action: "BUY",
-  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  symbol: "AAPL",
-  order_type: "Market",
-  time_in_force: "Day",
-  trading_session: "REGULAR",
-  expiry_date: "2026-08-21T23:27:55.027Z",
-  price: 31.33,
-  stop: 31.33,
-  units: 10.5,
-  client_order_id: "550e8400-e29b-41d4-a716-446655440000",
-});
+const placeForceOrderResponse =
+  await commercialApiKeyClient.trading.placeForceOrder({
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action: "BUY",
+    order_type: "Market",
+    time_in_force: "Day",
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    symbol: "AAPL",
+    trading_session: "REGULAR",
+    expiry_date: "2026-08-21T23:27:55.027Z",
+    price: 31.33,
+    stop: 31.33,
+    units: 10.5,
+    notional_value: null,
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const placeForceOrderResponse =
+  await personalApiKeyClient.trading.placeForceOrder({
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action: "BUY",
+    order_type: "Market",
+    time_in_force: "Day",
+    universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    symbol: "AAPL",
+    trading_session: "REGULAR",
+    expiry_date: "2026-08-21T23:27:55.027Z",
+    price: 31.33,
+    stop: 31.33,
+    units: 10.5,
+    notional_value: null,
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2233,26 +3296,64 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  order_type: "MARKET",
-  time_in_force: "Day",
-  limit_price: "",
-  stop_price: "",
-  price_effect: "DEBIT",
-  legs: [
-    {
-      instrument: {
-        symbol: "PBI   250718C00006000",
-        instrument_type: "OPTION",
+const placeMlegOrderResponse =
+  await commercialApiKeyClient.trading.placeMlegOrder({
+    order_type: "MARKET",
+    time_in_force: "Day",
+    legs: [
+      {
+        instrument: {
+          symbol: "PBI   250718C00006000",
+          instrument_type: "OPTION",
+        },
+        action: "BUY_TO_OPEN",
+        units: 1,
       },
-      action: "BUY_TO_OPEN",
-      units: 1,
-    },
-  ],
-});
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "",
+    stop_price: "",
+    price_effect: "DEBIT",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const placeMlegOrderResponse =
+  await personalApiKeyClient.trading.placeMlegOrder({
+    order_type: "MARKET",
+    time_in_force: "Day",
+    legs: [
+      {
+        instrument: {
+          symbol: "PBI   250718C00006000",
+          instrument_type: "OPTION",
+        },
+        action: "BUY_TO_OPEN",
+        units: 1,
+      },
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "",
+    stop_price: "",
+    price_effect: "DEBIT",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2300,12 +3401,34 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const placeOrderResponse = await snaptrade.trading.placeOrder({
+const placeOrderResponse = await commercialApiKeyClient.trading.placeOrder({
+  tradeId: "139e307a-82f7-4402-b39e-4da7baa87758",
+  wait_to_confirm: true,
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+});
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const placeOrderResponse = await personalApiKeyClient.trading.placeOrder({
   tradeId: "139e307a-82f7-4402-b39e-4da7baa87758",
   wait_to_confirm: true,
 });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2337,23 +3460,58 @@ Previews an order using the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const previewCryptoOrderResponse = await snaptrade.trading.previewCryptoOrder({
-  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  instrument: {
-    symbol: "BTC",
-    type: "CRYPTOCURRENCY",
-  },
-  side: "BUY",
-  type: "MARKET",
-  time_in_force: "GTC",
-  amount: "123.45",
-  limit_price: "123.45",
-  stop_price: "123.45",
-  post_only: false,
-  expiration_date: "2024-01-01T00:00:00.000Z",
-});
+const previewCryptoOrderResponse =
+  await commercialApiKeyClient.trading.previewCryptoOrder({
+    instrument: {
+      symbol: "BTC",
+      type: "CRYPTOCURRENCY",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00.000Z",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
 ```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const previewCryptoOrderResponse =
+  await personalApiKeyClient.trading.previewCryptoOrder({
+    instrument: {
+      symbol: "BTC",
+      type: "CRYPTOCURRENCY",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00.000Z",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2415,19 +3573,48 @@ returned in the response going forward. Only supported on some brokerages
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
-const replaceOrderResponse = await snaptrade.trading.replaceOrder({
-  accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+const replaceOrderResponse = await commercialApiKeyClient.trading.replaceOrder({
   brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   action: "BUY",
   order_type: "Market",
   time_in_force: "Day",
+  accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  price: 31.33,
+  symbol: "AAPL",
+  stop: 31.33,
+  units: 10.5,
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+});
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const replaceOrderResponse = await personalApiKeyClient.trading.replaceOrder({
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  action: "BUY",
+  order_type: "Market",
+  time_in_force: "Day",
+  accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   price: 31.33,
   symbol: "AAPL",
   stop: 31.33,
   units: 10.5,
 });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2485,14 +3672,38 @@ Searches cryptocurrency pairs instruments accessible to the specified account. B
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
 ```typescript
 const searchCryptocurrencyPairInstrumentsResponse =
-  await snaptrade.trading.searchCryptocurrencyPairInstruments({
+  await commercialApiKeyClient.trading.searchCryptocurrencyPairInstruments({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base: "BTC",
+    quote: "USD",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const searchCryptocurrencyPairInstrumentsResponse =
+  await personalApiKeyClient.trading.searchCryptocurrencyPairInstruments({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     base: "BTC",
     quote: "USD",
   });
 ```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 

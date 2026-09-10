@@ -335,6 +335,12 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
+    test:
+      script:
+        - pnpm i
+        - pnpm typecheck
+        - pnpm test
+        - pnpm build
     version: 12.2.3
     outputDirectory: sdks/typescript
     clientState:

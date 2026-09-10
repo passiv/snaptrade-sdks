@@ -376,8 +376,8 @@ export const AuthenticationApiFp = function<TAuth extends AuthMode>(configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteSnapTradeUser(requestParameters: AuthenticationApiDeleteSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteUserResponse>> {
+        async deleteSnapTradeUser(...args: AuthenticationApiDeleteSnapTradeUserArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteUserResponse>> {
+            const [requestParameters = {} as AuthenticationApiDeleteSnapTradeUserRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteSnapTradeUser(requestParameters.userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] } } });
         },
@@ -399,8 +399,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async loginSnapTradeUser(requestParameters: AuthenticationApiLoginSnapTradeUserRequest<TAuth> = {} as AuthenticationApiLoginSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationLoginSnapTradeUser200Response>> {
+        async loginSnapTradeUser(...args: AuthenticationApiLoginSnapTradeUserArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticationLoginSnapTradeUser200Response>> {
+            const [requestParameters = {} as AuthenticationApiLoginSnapTradeUserRequest<TAuth>, options] = args;
             const snapTradeLoginUserRequestBody: SnapTradeLoginUserRequestBody = {
                 broker: requestParameters.broker,
                 immediateRedirect: requestParameters.immediateRedirect,
@@ -422,8 +422,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerSnapTradeUser(requestParameters: AuthenticationApiRegisterSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
+        async registerSnapTradeUser(...args: AuthenticationApiRegisterSnapTradeUserArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
+            const [requestParameters = {} as AuthenticationApiRegisterSnapTradeUserRequest<TAuth>, options] = args;
             const snapTradeRegisterUserRequestBody: SnapTradeRegisterUserRequestBody = {
                 userId: requestParameters.userId
             };
@@ -437,8 +437,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async resetSnapTradeUserSecret(requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
+        async resetSnapTradeUserSecret(...args: AuthenticationApiResetSnapTradeUserSecretArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserIDandSecret>> {
+            const [requestParameters = {} as AuthenticationApiResetSnapTradeUserSecretRequest<TAuth>, options] = args;
             const userIDandSecret: UserIDandSecret = {
                 userId: requestParameters.userId,
                 userSecret: requestParameters.userSecret
@@ -463,9 +463,8 @@ export const AuthenticationApiFactory = function<TAuth extends AuthMode>(configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteSnapTradeUser(requestParameters: AuthenticationApiDeleteSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse> {
-            return localVarFp.deleteSnapTradeUser(requestParameters as any, options).then((request) => request(axios, basePath));
+        deleteSnapTradeUser(...args: AuthenticationApiDeleteSnapTradeUserArgs<TAuth>): AxiosPromise<DeleteUserResponse> {
+            return localVarFp.deleteSnapTradeUser(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
@@ -483,9 +482,8 @@ options?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        loginSnapTradeUser(requestParameters: AuthenticationApiLoginSnapTradeUserRequest<TAuth> = {} as AuthenticationApiLoginSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AuthenticationLoginSnapTradeUser200Response> {
-            return localVarFp.loginSnapTradeUser(requestParameters as any, options).then((request) => request(axios, basePath));
+        loginSnapTradeUser(...args: AuthenticationApiLoginSnapTradeUserArgs<TAuth>): AxiosPromise<AuthenticationLoginSnapTradeUser200Response> {
+            return localVarFp.loginSnapTradeUser(...args).then((request) => request(axios, basePath));
         },
         /**
          * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters. 
@@ -494,9 +492,8 @@ options?: AxiosRequestConfig): AxiosPromise<AuthenticationLoginSnapTradeUser200R
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerSnapTradeUser(requestParameters: AuthenticationApiRegisterSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<UserIDandSecret> {
-            return localVarFp.registerSnapTradeUser(requestParameters as any, options).then((request) => request(axios, basePath));
+        registerSnapTradeUser(...args: AuthenticationApiRegisterSnapTradeUserArgs<TAuth>): AxiosPromise<UserIDandSecret> {
+            return localVarFp.registerSnapTradeUser(...args).then((request) => request(axios, basePath));
         },
         /**
          * Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
@@ -505,9 +502,8 @@ options?: AxiosRequestConfig): AxiosPromise<UserIDandSecret> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        resetSnapTradeUserSecret(requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<UserIDandSecret> {
-            return localVarFp.resetSnapTradeUserSecret(requestParameters as any, options).then((request) => request(axios, basePath));
+        resetSnapTradeUserSecret(...args: AuthenticationApiResetSnapTradeUserSecretArgs<TAuth>): AxiosPromise<UserIDandSecret> {
+            return localVarFp.resetSnapTradeUserSecret(...args).then((request) => request(axios, basePath));
         },
     };
 };
@@ -527,6 +523,12 @@ export type AuthenticationApiDeleteSnapTradeUserRequestByAuthMode = {
 }
 export type AuthenticationApiDeleteSnapTradeUserRequest<TAuth extends AuthMode> =
     AuthenticationApiDeleteSnapTradeUserRequestByAuthMode[TAuth["mode"] & keyof AuthenticationApiDeleteSnapTradeUserRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AuthenticationApiDeleteSnapTradeUserArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AuthenticationApiDeleteSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AuthenticationApiDeleteSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for loginSnapTradeUser operation in AuthenticationApi.
@@ -550,6 +552,12 @@ export type AuthenticationApiLoginSnapTradeUserRequestByAuthMode = {
 export type AuthenticationApiLoginSnapTradeUserRequest<TAuth extends AuthMode> =
     AuthenticationApiLoginSnapTradeUserRequestByAuthMode[TAuth["mode"] & keyof AuthenticationApiLoginSnapTradeUserRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AuthenticationApiLoginSnapTradeUserArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "personalApiKey"
+        ? [requestParameters?: AuthenticationApiLoginSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AuthenticationApiLoginSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for registerSnapTradeUser operation in AuthenticationApi.
  * @export
@@ -564,6 +572,12 @@ export type AuthenticationApiRegisterSnapTradeUserRequestByAuthMode = {
 }
 export type AuthenticationApiRegisterSnapTradeUserRequest<TAuth extends AuthMode> =
     AuthenticationApiRegisterSnapTradeUserRequestByAuthMode[TAuth["mode"] & keyof AuthenticationApiRegisterSnapTradeUserRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AuthenticationApiRegisterSnapTradeUserArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AuthenticationApiRegisterSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AuthenticationApiRegisterSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for resetSnapTradeUserSecret operation in AuthenticationApi.
@@ -580,6 +594,12 @@ export type AuthenticationApiResetSnapTradeUserSecretRequestByAuthMode = {
 export type AuthenticationApiResetSnapTradeUserSecretRequest<TAuth extends AuthMode> =
     AuthenticationApiResetSnapTradeUserSecretRequestByAuthMode[TAuth["mode"] & keyof AuthenticationApiResetSnapTradeUserSecretRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AuthenticationApiResetSnapTradeUserSecretArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AuthenticationApiResetSnapTradeUserSecretRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * AuthenticationApiGenerated - object-oriented interface
  * @export
@@ -595,9 +615,8 @@ export class AuthenticationApiGenerated<TAuth extends AuthMode> extends BaseAPI<
      * @throws {RequiredError}
      * @memberof AuthenticationApiGenerated
      */
-    public deleteSnapTradeUser(requestParameters: AuthenticationApiDeleteSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).deleteSnapTradeUser(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public deleteSnapTradeUser(...args: AuthenticationApiDeleteSnapTradeUserArgs<TAuth>) {
+        return AuthenticationApiFp(this.configuration).deleteSnapTradeUser(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -620,9 +639,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AuthenticationApiGenerated
      */
-    public loginSnapTradeUser(requestParameters: AuthenticationApiLoginSnapTradeUserRequest<TAuth> = {} as AuthenticationApiLoginSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).loginSnapTradeUser(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public loginSnapTradeUser(...args: AuthenticationApiLoginSnapTradeUserArgs<TAuth>) {
+        return AuthenticationApiFp(this.configuration).loginSnapTradeUser(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -634,9 +652,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AuthenticationApiGenerated
      */
-    public registerSnapTradeUser(requestParameters: AuthenticationApiRegisterSnapTradeUserRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).registerSnapTradeUser(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public registerSnapTradeUser(...args: AuthenticationApiRegisterSnapTradeUserArgs<TAuth>) {
+        return AuthenticationApiFp(this.configuration).registerSnapTradeUser(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -648,9 +665,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AuthenticationApiGenerated
      */
-    public resetSnapTradeUserSecret(requestParameters: AuthenticationApiResetSnapTradeUserSecretRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).resetSnapTradeUserSecret(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public resetSnapTradeUserSecret(...args: AuthenticationApiResetSnapTradeUserSecretArgs<TAuth>) {
+        return AuthenticationApiFp(this.configuration).resetSnapTradeUserSecret(...args).then((request) => request(this.axios, this.basePath));
 
     }
 }

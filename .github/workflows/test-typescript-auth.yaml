@@ -1,0 +1,62 @@
+name: Regenerate and validate SDK auth
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - konfig.yaml
+      - sdks/typescript/**
+      - sdks/python/**
+      - .github/workflows/test-typescript-auth.yaml
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: typescript-auth-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+      - uses: ./.github/actions/shared/install-cli
+      - name: Regenerate auth SDKs with the deployed generator
+        run: konfig generate -f typescript,python
+        env:
+          KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+      - name: Verify regeneration preserved the regression fixture
+        run: git diff --exit-code -- sdks/typescript/auth-mode.tstest.ts
+      - name: Check generated Markdown fences
+        run: |
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          import re
+          for language in ('typescript', 'python'):
+              readme = Path('sdks', language, 'README.md').read_text()
+              assert 'Cannot parse:' not in readme, language + ': formatter error'
+              assert not re.search(r'\S```', readme), language + ': joined code fence'
+          PYTHON
+      - name: Retain generated reference for deployment verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-sdk-references
+          path: |
+            sdks/typescript/README.md
+            sdks/python/README.md
+          retention-days: 7
+      - name: Install SDK dependencies
+        run: pnpm --dir sdks/typescript install
+      - name: Check auth argument types
+        run: pnpm --dir sdks/typescript typecheck

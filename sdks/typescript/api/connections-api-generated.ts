@@ -598,8 +598,8 @@ export const ConnectionsApiFp = function<TAuth extends AuthMode>(configuration?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteConnection(requestParameters: ConnectionsApiDeleteConnectionRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteConnectionConfirmation>> {
+        async deleteConnection(...args: ConnectionsApiDeleteConnectionArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteConnectionConfirmation>> {
+            const [requestParameters = {} as ConnectionsApiDeleteConnectionRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteConnection(requestParameters.connectionId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -610,8 +610,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async detailBrokerageAuthorization(requestParameters: ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorization>> {
+        async detailBrokerageAuthorization(...args: ConnectionsApiDetailBrokerageAuthorizationArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorization>> {
+            const [requestParameters = {} as ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.detailBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -622,8 +622,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async disableBrokerageAuthorization(requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationDisabledConfirmation>> {
+        async disableBrokerageAuthorization(...args: ConnectionsApiDisableBrokerageAuthorizationArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationDisabledConfirmation>> {
+            const [requestParameters = {} as ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.disableBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -634,8 +634,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listBrokerageAuthorizationAccounts(requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+        async listBrokerageAuthorizationAccounts(...args: ConnectionsApiListBrokerageAuthorizationAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const [requestParameters = {} as ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listBrokerageAuthorizationAccounts(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -646,8 +646,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listBrokerageAuthorizations(requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest<TAuth> = {} as ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorization>>> {
+        async listBrokerageAuthorizations(...args: ConnectionsApiListBrokerageAuthorizationsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BrokerageAuthorization>>> {
+            const [requestParameters = {} as ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listBrokerageAuthorizations(requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -658,8 +658,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async refreshBrokerageAuthorization(requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationRefreshConfirmation>> {
+        async refreshBrokerageAuthorization(...args: ConnectionsApiRefreshBrokerageAuthorizationArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationRefreshConfirmation>> {
+            const [requestParameters = {} as ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.refreshBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -670,8 +670,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async returnRates(requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+        async returnRates(...args: ConnectionsApiReturnRatesArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+            const [requestParameters = {} as ConnectionsApiReturnRatesRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.authorizationId, requestParameters.timeframes, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -682,8 +682,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async syncBrokerageAuthorizationTransactions(requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation>> {
+        async syncBrokerageAuthorizationTransactions(...args: ConnectionsApiSyncBrokerageAuthorizationTransactionsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation>> {
+            const [requestParameters = {} as ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.syncBrokerageAuthorizationTransactions(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -704,9 +704,8 @@ export const ConnectionsApiFactory = function<TAuth extends AuthMode>(configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteConnection(requestParameters: ConnectionsApiDeleteConnectionRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<DeleteConnectionConfirmation> {
-            return localVarFp.deleteConnection(requestParameters as any, options).then((request) => request(axios, basePath));
+        deleteConnection(...args: ConnectionsApiDeleteConnectionArgs<TAuth>): AxiosPromise<DeleteConnectionConfirmation> {
+            return localVarFp.deleteConnection(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a single connection for the specified ID.
@@ -715,9 +714,8 @@ options?: AxiosRequestConfig): AxiosPromise<DeleteConnectionConfirmation> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        detailBrokerageAuthorization(requestParameters: ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorization> {
-            return localVarFp.detailBrokerageAuthorization(requestParameters as any, options).then((request) => request(axios, basePath));
+        detailBrokerageAuthorization(...args: ConnectionsApiDetailBrokerageAuthorizationArgs<TAuth>): AxiosPromise<BrokerageAuthorization> {
+            return localVarFp.detailBrokerageAuthorization(...args).then((request) => request(axios, basePath));
         },
         /**
          * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
@@ -726,9 +724,8 @@ options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorization> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        disableBrokerageAuthorization(requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationDisabledConfirmation> {
-            return localVarFp.disableBrokerageAuthorization(requestParameters as any, options).then((request) => request(axios, basePath));
+        disableBrokerageAuthorization(...args: ConnectionsApiDisableBrokerageAuthorizationArgs<TAuth>): AxiosPromise<BrokerageAuthorizationDisabledConfirmation> {
+            return localVarFp.disableBrokerageAuthorization(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
@@ -737,9 +734,8 @@ options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationDisabledConfir
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBrokerageAuthorizationAccounts(requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
-            return localVarFp.listBrokerageAuthorizationAccounts(requestParameters as any, options).then((request) => request(axios, basePath));
+        listBrokerageAuthorizationAccounts(...args: ConnectionsApiListBrokerageAuthorizationAccountsArgs<TAuth>): AxiosPromise<Array<Account>> {
+            return localVarFp.listBrokerageAuthorizationAccounts(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
@@ -748,9 +744,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBrokerageAuthorizations(requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest<TAuth> = {} as ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<BrokerageAuthorization>> {
-            return localVarFp.listBrokerageAuthorizations(requestParameters as any, options).then((request) => request(axios, basePath));
+        listBrokerageAuthorizations(...args: ConnectionsApiListBrokerageAuthorizationsArgs<TAuth>): AxiosPromise<Array<BrokerageAuthorization>> {
+            return localVarFp.listBrokerageAuthorizations(...args).then((request) => request(axios, basePath));
         },
         /**
          * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless SnapTrade uses delayed data for the connection. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to `data_freshness_mode.snaptrade` on a connection to determine this.** 
@@ -759,9 +754,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<BrokerageAuthorization>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        refreshBrokerageAuthorization(requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationRefreshConfirmation> {
-            return localVarFp.refreshBrokerageAuthorization(requestParameters as any, options).then((request) => request(axios, basePath));
+        refreshBrokerageAuthorization(...args: ConnectionsApiRefreshBrokerageAuthorizationArgs<TAuth>): AxiosPromise<BrokerageAuthorizationRefreshConfirmation> {
+            return localVarFp.refreshBrokerageAuthorization(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of rate of return percents for a given connection. 
@@ -770,9 +764,8 @@ options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationRefreshConfirm
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        returnRates(requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
-            return localVarFp.returnRates(requestParameters as any, options).then((request) => request(axios, basePath));
+        returnRates(...args: ConnectionsApiReturnRatesArgs<TAuth>): AxiosPromise<RateOfReturnResponse> {
+            return localVarFp.returnRates(...args).then((request) => request(axios, basePath));
         },
         /**
          * Trigger a transactions sync for all accounts under this connection. Updates will be queued asynchronously. Transactions are not updated intra-day, but calling this endpoint can ensure that the previous day\'s transactions have been synced. For more information on sync behaviour, see: https://docs.snaptrade.com/docs/syncing 
@@ -781,9 +774,8 @@ options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        syncBrokerageAuthorizationTransactions(requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation> {
-            return localVarFp.syncBrokerageAuthorizationTransactions(requestParameters as any, options).then((request) => request(axios, basePath));
+        syncBrokerageAuthorizationTransactions(...args: ConnectionsApiSyncBrokerageAuthorizationTransactionsArgs<TAuth>): AxiosPromise<BrokerageAuthorizationTransactionsSyncConfirmation> {
+            return localVarFp.syncBrokerageAuthorizationTransactions(...args).then((request) => request(axios, basePath));
         },
     };
 };
@@ -817,6 +809,12 @@ export type ConnectionsApiDeleteConnectionRequestByAuthMode = {
 export type ConnectionsApiDeleteConnectionRequest<TAuth extends AuthMode> =
     ConnectionsApiDeleteConnectionRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiDeleteConnectionRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiDeleteConnectionArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiDeleteConnectionRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiDeleteConnectionRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for detailBrokerageAuthorization operation in ConnectionsApi.
  * @export
@@ -845,6 +843,12 @@ export type ConnectionsApiDetailBrokerageAuthorizationRequestByAuthMode = {
 }
 export type ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth extends AuthMode> =
     ConnectionsApiDetailBrokerageAuthorizationRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiDetailBrokerageAuthorizationRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiDetailBrokerageAuthorizationArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for disableBrokerageAuthorization operation in ConnectionsApi.
@@ -875,6 +879,12 @@ export type ConnectionsApiDisableBrokerageAuthorizationRequestByAuthMode = {
 export type ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth extends AuthMode> =
     ConnectionsApiDisableBrokerageAuthorizationRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiDisableBrokerageAuthorizationRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiDisableBrokerageAuthorizationArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for listBrokerageAuthorizationAccounts operation in ConnectionsApi.
  * @export
@@ -904,6 +914,12 @@ export type ConnectionsApiListBrokerageAuthorizationAccountsRequestByAuthMode = 
 export type ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth extends AuthMode> =
     ConnectionsApiListBrokerageAuthorizationAccountsRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiListBrokerageAuthorizationAccountsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiListBrokerageAuthorizationAccountsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for listBrokerageAuthorizations operation in ConnectionsApi.
  * @export
@@ -925,6 +941,12 @@ export type ConnectionsApiListBrokerageAuthorizationsRequestByAuthMode = {
 }
 export type ConnectionsApiListBrokerageAuthorizationsRequest<TAuth extends AuthMode> =
     ConnectionsApiListBrokerageAuthorizationsRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiListBrokerageAuthorizationsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiListBrokerageAuthorizationsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "personalApiKey"
+        ? [requestParameters?: ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for refreshBrokerageAuthorization operation in ConnectionsApi.
@@ -954,6 +976,12 @@ export type ConnectionsApiRefreshBrokerageAuthorizationRequestByAuthMode = {
 }
 export type ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth extends AuthMode> =
     ConnectionsApiRefreshBrokerageAuthorizationRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiRefreshBrokerageAuthorizationRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiRefreshBrokerageAuthorizationArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for returnRates operation in ConnectionsApi.
@@ -991,6 +1019,12 @@ export type ConnectionsApiReturnRatesRequestByAuthMode = {
 export type ConnectionsApiReturnRatesRequest<TAuth extends AuthMode> =
     ConnectionsApiReturnRatesRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiReturnRatesRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiReturnRatesArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiReturnRatesRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for syncBrokerageAuthorizationTransactions operation in ConnectionsApi.
  * @export
@@ -1020,6 +1054,12 @@ export type ConnectionsApiSyncBrokerageAuthorizationTransactionsRequestByAuthMod
 export type ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth extends AuthMode> =
     ConnectionsApiSyncBrokerageAuthorizationTransactionsRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiSyncBrokerageAuthorizationTransactionsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiSyncBrokerageAuthorizationTransactionsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * ConnectionsApiGenerated - object-oriented interface
  * @export
@@ -1035,9 +1075,8 @@ export class ConnectionsApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAu
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public deleteConnection(requestParameters: ConnectionsApiDeleteConnectionRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).deleteConnection(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public deleteConnection(...args: ConnectionsApiDeleteConnectionArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).deleteConnection(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1049,9 +1088,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public detailBrokerageAuthorization(requestParameters: ConnectionsApiDetailBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).detailBrokerageAuthorization(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public detailBrokerageAuthorization(...args: ConnectionsApiDetailBrokerageAuthorizationArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).detailBrokerageAuthorization(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1063,9 +1101,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public disableBrokerageAuthorization(requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).disableBrokerageAuthorization(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public disableBrokerageAuthorization(...args: ConnectionsApiDisableBrokerageAuthorizationArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).disableBrokerageAuthorization(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1077,9 +1114,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public listBrokerageAuthorizationAccounts(requestParameters: ConnectionsApiListBrokerageAuthorizationAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).listBrokerageAuthorizationAccounts(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public listBrokerageAuthorizationAccounts(...args: ConnectionsApiListBrokerageAuthorizationAccountsArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).listBrokerageAuthorizationAccounts(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1091,9 +1127,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public listBrokerageAuthorizations(requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest<TAuth> = {} as ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).listBrokerageAuthorizations(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public listBrokerageAuthorizations(...args: ConnectionsApiListBrokerageAuthorizationsArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).listBrokerageAuthorizations(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1105,9 +1140,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public refreshBrokerageAuthorization(requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).refreshBrokerageAuthorization(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public refreshBrokerageAuthorization(...args: ConnectionsApiRefreshBrokerageAuthorizationArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).refreshBrokerageAuthorization(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1119,9 +1153,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public returnRates(requestParameters: ConnectionsApiReturnRatesRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).returnRates(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public returnRates(...args: ConnectionsApiReturnRatesArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).returnRates(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1133,9 +1166,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof ConnectionsApiGenerated
      */
-    public syncBrokerageAuthorizationTransactions(requestParameters: ConnectionsApiSyncBrokerageAuthorizationTransactionsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return ConnectionsApiFp(this.configuration).syncBrokerageAuthorizationTransactions(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public syncBrokerageAuthorizationTransactions(...args: ConnectionsApiSyncBrokerageAuthorizationTransactionsArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).syncBrokerageAuthorizationTransactions(...args).then((request) => request(this.axios, this.basePath));
 
     }
 }

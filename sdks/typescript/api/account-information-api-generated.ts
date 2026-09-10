@@ -889,8 +889,8 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUniversalActivity>> {
+        async getAccountActivities(...args: AccountInformationApiGetAccountActivitiesArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUniversalActivity>> {
+            const [requestParameters = {} as AccountInformationApiGetAccountActivitiesRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountActivities(requestParameters.accountId, requestParameters.startDate, requestParameters.endDate, requestParameters.offset, requestParameters.limit, requestParameters.type, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -901,8 +901,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccountBalanceHistory(requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountValueHistoryResponse>> {
+        async getAccountBalanceHistory(...args: AccountInformationApiGetAccountBalanceHistoryArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountValueHistoryResponse>> {
+            const [requestParameters = {} as AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountBalanceHistory(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -913,8 +913,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllAccountPositions(requestParameters: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllAccountPositionsResponse>> {
+        async getAllAccountPositions(...args: AccountInformationApiGetAllAccountPositionsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllAccountPositionsResponse>> {
+            const [requestParameters = {} as AccountInformationApiGetAllAccountPositionsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountPositions(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -925,8 +925,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountBalance(requestParameters: AccountInformationApiGetUserAccountBalanceRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Balance>>> {
+        async getUserAccountBalance(...args: AccountInformationApiGetUserAccountBalanceArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Balance>>> {
+            const [requestParameters = {} as AccountInformationApiGetUserAccountBalanceRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountBalance(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -937,8 +937,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+        async getUserAccountDetails(...args: AccountInformationApiGetUserAccountDetailsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Account>> {
+            const [requestParameters = {} as AccountInformationApiGetUserAccountDetailsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountDetails(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -949,8 +949,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+        async getUserAccountOrderDetail(...args: AccountInformationApiGetUserAccountOrderDetailArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const [requestParameters = {} as AccountInformationApiGetUserAccountOrderDetailRequest<TAuth>, options] = args;
             const accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest = {
                 brokerage_order_id: requestParameters.brokerage_order_id
             };
@@ -964,8 +964,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountOrderRecord>>> {
+        async getUserAccountOrders(...args: AccountInformationApiGetUserAccountOrdersArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AccountOrderRecord>>> {
+            const [requestParameters = {} as AccountInformationApiGetUserAccountOrdersRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrders(requestParameters.accountId, requestParameters.state, requestParameters.days, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -976,8 +976,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecentOrdersResponse>> {
+        async getUserAccountRecentOrders(...args: AccountInformationApiGetUserAccountRecentOrdersArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecentOrdersResponse>> {
+            const [requestParameters = {} as AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrders(requestParameters.accountId, requestParameters.onlyExecuted, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -988,8 +988,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+        async getUserAccountReturnRates(...args: AccountInformationApiGetUserAccountReturnRatesArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+            const [requestParameters = {} as AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountReturnRates(requestParameters.accountId, requestParameters.timeframes, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1001,8 +1001,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @deprecated
          * @throws {RequiredError}
          */
-        async getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountHoldingsAccount>> {
+        async getUserHoldings(...args: AccountInformationApiGetUserHoldingsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountHoldingsAccount>> {
+            const [requestParameters = {} as AccountInformationApiGetUserHoldingsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserHoldings(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1013,8 +1013,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUserAccounts(requestParameters: AccountInformationApiListUserAccountsRequest<TAuth> = {} as AccountInformationApiListUserAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+        async listUserAccounts(...args: AccountInformationApiListUserAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const [requestParameters = {} as AccountInformationApiListUserAccountsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listUserAccounts(requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1025,8 +1025,8 @@ options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateUserAccount(requestParameters: AccountInformationApiUpdateUserAccountRequest<TAuth>, 
-options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+        async updateUserAccount(...args: AccountInformationApiUpdateUserAccountArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Account>>> {
+            const [requestParameters = {} as AccountInformationApiUpdateUserAccountRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserAccount(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
@@ -1047,9 +1047,8 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<PaginatedUniversalActivity> {
-            return localVarFp.getAccountActivities(requestParameters as any, options).then((request) => request(axios, basePath));
+        getAccountActivities(...args: AccountInformationApiGetAccountActivitiesArgs<TAuth>): AxiosPromise<PaginatedUniversalActivity> {
+            return localVarFp.getAccountActivities(...args).then((request) => request(axios, basePath));
         },
         /**
          * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) 
@@ -1058,9 +1057,8 @@ options?: AxiosRequestConfig): AxiosPromise<PaginatedUniversalActivity> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountBalanceHistory(requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountValueHistoryResponse> {
-            return localVarFp.getAccountBalanceHistory(requestParameters as any, options).then((request) => request(axios, basePath));
+        getAccountBalanceHistory(...args: AccountInformationApiGetAccountBalanceHistoryArgs<TAuth>): AxiosPromise<AccountValueHistoryResponse> {
+            return localVarFp.getAccountBalanceHistory(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1069,9 +1067,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountValueHistoryResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAccountPositions(requestParameters: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AllAccountPositionsResponse> {
-            return localVarFp.getAllAccountPositions(requestParameters as any, options).then((request) => request(axios, basePath));
+        getAllAccountPositions(...args: AccountInformationApiGetAllAccountPositionsArgs<TAuth>): AxiosPromise<AllAccountPositionsResponse> {
+            return localVarFp.getAllAccountPositions(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1080,9 +1077,8 @@ options?: AxiosRequestConfig): AxiosPromise<AllAccountPositionsResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountBalance(requestParameters: AccountInformationApiGetUserAccountBalanceRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<Balance>> {
-            return localVarFp.getUserAccountBalance(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountBalance(...args: AccountInformationApiGetUserAccountBalanceArgs<TAuth>): AxiosPromise<Array<Balance>> {
+            return localVarFp.getUserAccountBalance(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1091,9 +1087,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<Balance>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Account> {
-            return localVarFp.getUserAccountDetails(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountDetails(...args: AccountInformationApiGetUserAccountDetailsArgs<TAuth>): AxiosPromise<Account> {
+            return localVarFp.getUserAccountDetails(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
@@ -1102,9 +1097,8 @@ options?: AxiosRequestConfig): AxiosPromise<Account> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.getUserAccountOrderDetail(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountOrderDetail(...args: AccountInformationApiGetUserAccountOrderDetailArgs<TAuth>): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.getUserAccountOrderDetail(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1113,9 +1107,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<AccountOrderRecord>> {
-            return localVarFp.getUserAccountOrders(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountOrders(...args: AccountInformationApiGetUserAccountOrdersArgs<TAuth>): AxiosPromise<Array<AccountOrderRecord>> {
+            return localVarFp.getUserAccountOrders(...args).then((request) => request(axios, basePath));
         },
         /**
          * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
@@ -1124,9 +1117,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<AccountOrderRecord>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<RecentOrdersResponse> {
-            return localVarFp.getUserAccountRecentOrders(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountRecentOrders(...args: AccountInformationApiGetUserAccountRecentOrdersArgs<TAuth>): AxiosPromise<RecentOrdersResponse> {
+            return localVarFp.getUserAccountRecentOrders(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of rate of return percents for a given account. 
@@ -1135,9 +1127,8 @@ options?: AxiosRequestConfig): AxiosPromise<RecentOrdersResponse> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
-            return localVarFp.getUserAccountReturnRates(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserAccountReturnRates(...args: AccountInformationApiGetUserAccountReturnRatesArgs<TAuth>): AxiosPromise<RateOfReturnResponse> {
+            return localVarFp.getUserAccountReturnRates(...args).then((request) => request(axios, basePath));
         },
         /**
          * **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1147,9 +1138,8 @@ options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
          * @deprecated
          * @throws {RequiredError}
          */
-        getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<AccountHoldingsAccount> {
-            return localVarFp.getUserHoldings(requestParameters as any, options).then((request) => request(axios, basePath));
+        getUserHoldings(...args: AccountInformationApiGetUserHoldingsArgs<TAuth>): AxiosPromise<AccountHoldingsAccount> {
+            return localVarFp.getUserHoldings(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
@@ -1158,9 +1148,8 @@ options?: AxiosRequestConfig): AxiosPromise<AccountHoldingsAccount> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUserAccounts(requestParameters: AccountInformationApiListUserAccountsRequest<TAuth> = {} as AccountInformationApiListUserAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
-            return localVarFp.listUserAccounts(requestParameters as any, options).then((request) => request(axios, basePath));
+        listUserAccounts(...args: AccountInformationApiListUserAccountsArgs<TAuth>): AxiosPromise<Array<Account>> {
+            return localVarFp.listUserAccounts(...args).then((request) => request(axios, basePath));
         },
         /**
          * Updates various properties of a specified account.
@@ -1169,9 +1158,8 @@ options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateUserAccount(requestParameters: AccountInformationApiUpdateUserAccountRequest<TAuth>, 
-options?: AxiosRequestConfig): AxiosPromise<Array<Account>> {
-            return localVarFp.updateUserAccount(requestParameters as any, options).then((request) => request(axios, basePath));
+        updateUserAccount(...args: AccountInformationApiUpdateUserAccountArgs<TAuth>): AxiosPromise<Array<Account>> {
+            return localVarFp.updateUserAccount(...args).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1240,6 +1228,12 @@ export type AccountInformationApiGetAccountActivitiesRequestByAuthMode = {
 export type AccountInformationApiGetAccountActivitiesRequest<TAuth extends AuthMode> =
     AccountInformationApiGetAccountActivitiesRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAccountActivitiesRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAccountActivitiesArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAccountActivitiesRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAccountActivitiesRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getAccountBalanceHistory operation in AccountInformationApi.
  * @export
@@ -1268,6 +1262,12 @@ export type AccountInformationApiGetAccountBalanceHistoryRequestByAuthMode = {
 }
 export type AccountInformationApiGetAccountBalanceHistoryRequest<TAuth extends AuthMode> =
     AccountInformationApiGetAccountBalanceHistoryRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAccountBalanceHistoryRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAccountBalanceHistoryArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getAllAccountPositions operation in AccountInformationApi.
@@ -1298,6 +1298,12 @@ export type AccountInformationApiGetAllAccountPositionsRequestByAuthMode = {
 export type AccountInformationApiGetAllAccountPositionsRequest<TAuth extends AuthMode> =
     AccountInformationApiGetAllAccountPositionsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAllAccountPositionsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAllAccountPositionsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getUserAccountBalance operation in AccountInformationApi.
  * @export
@@ -1326,6 +1332,12 @@ export type AccountInformationApiGetUserAccountBalanceRequestByAuthMode = {
 }
 export type AccountInformationApiGetUserAccountBalanceRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountBalanceRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountBalanceRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserAccountBalanceArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserAccountBalanceRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserAccountBalanceRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountDetails operation in AccountInformationApi.
@@ -1356,6 +1368,12 @@ export type AccountInformationApiGetUserAccountDetailsRequestByAuthMode = {
 export type AccountInformationApiGetUserAccountDetailsRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountDetailsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountDetailsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserAccountDetailsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserAccountDetailsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserAccountDetailsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getUserAccountOrderDetail operation in AccountInformationApi.
  * @export
@@ -1384,6 +1402,12 @@ export type AccountInformationApiGetUserAccountOrderDetailRequestByAuthMode = {
 }
 export type AccountInformationApiGetUserAccountOrderDetailRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountOrderDetailRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountOrderDetailRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserAccountOrderDetailArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserAccountOrderDetailRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountOrders operation in AccountInformationApi.
@@ -1428,6 +1452,12 @@ export type AccountInformationApiGetUserAccountOrdersRequestByAuthMode = {
 export type AccountInformationApiGetUserAccountOrdersRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountOrdersRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountOrdersRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserAccountOrdersArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getUserAccountRecentOrders operation in AccountInformationApi.
  * @export
@@ -1463,6 +1493,12 @@ export type AccountInformationApiGetUserAccountRecentOrdersRequestByAuthMode = {
 }
 export type AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountRecentOrdersRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountRecentOrdersRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserAccountRecentOrdersArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountReturnRates operation in AccountInformationApi.
@@ -1500,6 +1536,12 @@ export type AccountInformationApiGetUserAccountReturnRatesRequestByAuthMode = {
 export type AccountInformationApiGetUserAccountReturnRatesRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserAccountReturnRatesRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserAccountReturnRatesRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserAccountReturnRatesArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for getUserHoldings operation in AccountInformationApi.
  * @export
@@ -1529,6 +1571,12 @@ export type AccountInformationApiGetUserHoldingsRequestByAuthMode = {
 export type AccountInformationApiGetUserHoldingsRequest<TAuth extends AuthMode> =
     AccountInformationApiGetUserHoldingsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetUserHoldingsRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetUserHoldingsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetUserHoldingsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetUserHoldingsRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * Request parameters for listUserAccounts operation in AccountInformationApi.
  * @export
@@ -1550,6 +1598,12 @@ export type AccountInformationApiListUserAccountsRequestByAuthMode = {
 }
 export type AccountInformationApiListUserAccountsRequest<TAuth extends AuthMode> =
     AccountInformationApiListUserAccountsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiListUserAccountsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiListUserAccountsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "personalApiKey"
+        ? [requestParameters?: AccountInformationApiListUserAccountsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiListUserAccountsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for updateUserAccount operation in AccountInformationApi.
@@ -1580,6 +1634,12 @@ export type AccountInformationApiUpdateUserAccountRequestByAuthMode = {
 export type AccountInformationApiUpdateUserAccountRequest<TAuth extends AuthMode> =
     AccountInformationApiUpdateUserAccountRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiUpdateUserAccountRequestByAuthMode]
 
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiUpdateUserAccountArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiUpdateUserAccountRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiUpdateUserAccountRequest<TAuth>, options?: AxiosRequestConfig];
+
 /**
  * AccountInformationApiGenerated - object-oriented interface
  * @export
@@ -1595,9 +1655,8 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getAccountActivities(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getAccountActivities(...args: AccountInformationApiGetAccountActivitiesArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAccountActivities(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1609,9 +1668,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getAccountBalanceHistory(requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getAccountBalanceHistory(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getAccountBalanceHistory(...args: AccountInformationApiGetAccountBalanceHistoryArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAccountBalanceHistory(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1623,9 +1681,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getAllAccountPositions(requestParameters: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getAllAccountPositions(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getAllAccountPositions(...args: AccountInformationApiGetAllAccountPositionsArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAllAccountPositions(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1637,9 +1694,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserAccountBalance(requestParameters: AccountInformationApiGetUserAccountBalanceRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountBalance(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountBalance(...args: AccountInformationApiGetUserAccountBalanceArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserAccountBalance(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1651,9 +1707,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountDetails(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountDetails(...args: AccountInformationApiGetUserAccountDetailsArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserAccountDetails(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1665,9 +1720,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountOrderDetail(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountOrderDetail(...args: AccountInformationApiGetUserAccountOrderDetailArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserAccountOrderDetail(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1679,9 +1733,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserAccountOrders(requestParameters: AccountInformationApiGetUserAccountOrdersRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountOrders(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountOrders(...args: AccountInformationApiGetUserAccountOrdersArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserAccountOrders(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1693,9 +1746,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountRecentOrders(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountRecentOrders(...args: AccountInformationApiGetUserAccountRecentOrdersArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserAccountRecentOrders(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1707,9 +1759,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserAccountReturnRates(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserAccountReturnRates(...args: AccountInformationApiGetUserAccountReturnRatesArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserAccountReturnRates(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1722,9 +1773,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public getUserHoldings(requestParameters: AccountInformationApiGetUserHoldingsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).getUserHoldings(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public getUserHoldings(...args: AccountInformationApiGetUserHoldingsArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getUserHoldings(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1736,9 +1786,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public listUserAccounts(requestParameters: AccountInformationApiListUserAccountsRequest<TAuth> = {} as AccountInformationApiListUserAccountsRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).listUserAccounts(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public listUserAccounts(...args: AccountInformationApiListUserAccountsArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).listUserAccounts(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -1750,9 +1799,8 @@ options?: AxiosRequestConfig) {
      * @throws {RequiredError}
      * @memberof AccountInformationApiGenerated
      */
-    public updateUserAccount(requestParameters: AccountInformationApiUpdateUserAccountRequest<TAuth>, 
-options?: AxiosRequestConfig) {
-        return AccountInformationApiFp(this.configuration).updateUserAccount(requestParameters as any, options).then((request) => request(this.axios, this.basePath));
+    public updateUserAccount(...args: AccountInformationApiUpdateUserAccountArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).updateUserAccount(...args).then((request) => request(this.axios, this.basePath));
 
     }
 }
