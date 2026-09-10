@@ -804,6 +804,22 @@ module SnapTrade
     # - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
     # - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
     # - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+    # 
+    # Option OCO peers must trade the same OCC option symbol with the same closing
+    # action and positive whole-contract quantity.
+    # 
+    # On tastytrade, option OCO supports closing an existing long or short option
+    # position with one `Limit` order and one `Stop` or `StopLimit` order. Both
+    # `PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with
+    # `Day` or `GTC` time in force. Opening option OCOs are not supported.
+    # 
+    # On enabled Webull US v3 accounts, option OCO supports closing an existing long
+    # option position with one `Limit` take-profit order and one `Stop` stop-loss order.
+    # Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol,
+    # and the same positive whole-contract quantity. Webull receives these as
+    # `STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order.
+    # Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs
+    # are not supported on Webull. Equity complex-order behavior is unchanged.
     #
     # @param type [ManualTradeFormComplexType] The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
     # @param orders [Array<ComplexOrderLeg>] The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
@@ -832,6 +848,22 @@ module SnapTrade
     # - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
     # - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
     # - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+    # 
+    # Option OCO peers must trade the same OCC option symbol with the same closing
+    # action and positive whole-contract quantity.
+    # 
+    # On tastytrade, option OCO supports closing an existing long or short option
+    # position with one `Limit` order and one `Stop` or `StopLimit` order. Both
+    # `PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with
+    # `Day` or `GTC` time in force. Opening option OCOs are not supported.
+    # 
+    # On enabled Webull US v3 accounts, option OCO supports closing an existing long
+    # option position with one `Limit` take-profit order and one `Stop` stop-loss order.
+    # Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol,
+    # and the same positive whole-contract quantity. Webull receives these as
+    # `STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order.
+    # Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs
+    # are not supported on Webull. Equity complex-order behavior is unchanged.
     #
     # @param type [ManualTradeFormComplexType] The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
     # @param orders [Array<ComplexOrderLeg>] The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
@@ -851,7 +883,7 @@ module SnapTrade
     end
 
     # Place complex order
-    # Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+    # Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.  Option OCO peers must trade the same OCC option symbol with the same closing action and positive whole-contract quantity.  On tastytrade, option OCO supports closing an existing long or short option position with one `Limit` order and one `Stop` or `StopLimit` order. Both `PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with `Day` or `GTC` time in force. Opening option OCOs are not supported.  On enabled Webull US v3 accounts, option OCO supports closing an existing long option position with one `Limit` take-profit order and one `Stop` stop-loss order. Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol, and the same positive whole-contract quantity. Webull receives these as `STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order. Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs are not supported on Webull. Equity complex-order behavior is unchanged. 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -864,7 +896,7 @@ module SnapTrade
     end
 
     # Place complex order
-    # Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders. 
+    # Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.  Option OCO peers must trade the same OCC option symbol with the same closing action and positive whole-contract quantity.  On tastytrade, option OCO supports closing an existing long or short option position with one &#x60;Limit&#x60; order and one &#x60;Stop&#x60; or &#x60;StopLimit&#x60; order. Both &#x60;PEER&#x60; orders must use &#x60;SELL_TO_CLOSE&#x60; or both must use &#x60;BUY_TO_CLOSE&#x60;, with &#x60;Day&#x60; or &#x60;GTC&#x60; time in force. Opening option OCOs are not supported.  On enabled Webull US v3 accounts, option OCO supports closing an existing long option position with one &#x60;Limit&#x60; take-profit order and one &#x60;Stop&#x60; stop-loss order. Both &#x60;PEER&#x60; orders must use &#x60;SELL_TO_CLOSE&#x60;, &#x60;Day&#x60;, the same OCC option symbol, and the same positive whole-contract quantity. Webull receives these as &#x60;STOP_PROFIT&#x60; and &#x60;STOP_LOSS&#x60; orders sharing a combo ID, without a MASTER order. Opening option OCOs, &#x60;BUY_TO_CLOSE&#x60;, &#x60;StopLimit&#x60;, and other option order pairs are not supported on Webull. Equity complex-order behavior is unchanged. 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
