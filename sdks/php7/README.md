@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.19-blue)](https://packagist.org/packages/konfig/snaptrade-php-7-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.20-blue)](https://packagist.org/packages/konfig/snaptrade-php-7-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -155,7 +155,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-7-sdk": "3.0.19"
+    "konfig/snaptrade-php-7-sdk": "3.0.20"
   }
 }
 ```
