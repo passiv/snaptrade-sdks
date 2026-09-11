@@ -46,6 +46,7 @@ class Instrument(
                     'CryptoInstrument': CryptoInstrument,
                     'EtfInstrument': EtfInstrument,
                     'FutureInstrument': FutureInstrument,
+                    'FutureOptionInstrument': FutureOptionInstrument,
                     'MutualFundInstrument': MutualFundInstrument,
                     'OptionInstrument': OptionInstrument,
                     'OtherInstrument': OtherInstrument,
@@ -57,6 +58,7 @@ class Instrument(
                     'crypto': CryptoInstrument,
                     'etf': EtfInstrument,
                     'future': FutureInstrument,
+                    'future_option': FutureOptionInstrument,
                     'mutualfund': MutualFundInstrument,
                     'option': OptionInstrument,
                     'other': OtherInstrument,
@@ -79,6 +81,7 @@ class Instrument(
                 OptionInstrument,
                 CryptoInstrument,
                 FutureInstrument,
+                FutureOptionInstrument,
                 EtfInstrument,
                 MutualFundInstrument,
                 CefInstrument,
@@ -107,6 +110,7 @@ from snaptrade_client.model.cfd_instrument import CfdInstrument
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.etf_instrument import EtfInstrument
 from snaptrade_client.model.future_instrument import FutureInstrument
+from snaptrade_client.model.future_option_instrument import FutureOptionInstrument
 from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.option_instrument import OptionInstrument
 from snaptrade_client.model.other_instrument import OtherInstrument

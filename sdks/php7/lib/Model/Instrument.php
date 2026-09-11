@@ -51,6 +51,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'crypto' => \SnapTrade\Model\CryptoInstrument::class,
         'etf' => \SnapTrade\Model\EtfInstrument::class,
         'future' => \SnapTrade\Model\FutureInstrument::class,
+        'future_option' => \SnapTrade\Model\FutureOptionInstrument::class,
         'mutualfund' => \SnapTrade\Model\MutualFundInstrument::class,
         'option' => \SnapTrade\Model\OptionInstrument::class,
         'other' => \SnapTrade\Model\OtherInstrument::class,
@@ -82,7 +83,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'strike_price' => 'float',
         'expiration_date' => '\DateTime',
         'multiplier' => 'float',
-        'underlying' => '\SnapTrade\Model\UnderlyingOptionInstrument',
+        'underlying' => '\SnapTrade\Model\FutureInstrument',
         'root_symbol' => 'string',
         'expiration_code' => 'string',
         'underlying_instrument' => '\SnapTrade\Model\UnderlyingCfdInstrument'
@@ -130,7 +131,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'figi_instrument' => true,
 		'option_type' => false,
 		'strike_price' => false,
-		'expiration_date' => true,
+		'expiration_date' => false,
 		'multiplier' => true,
 		'underlying' => false,
 		'root_symbol' => false,
@@ -845,7 +846,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expiration_date
      *
-     * @param \DateTime $expiration_date Expiration date of the contract.
+     * @param \DateTime $expiration_date Expiration date of the option contract.
      *
      * @return self
      */
@@ -853,14 +854,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($expiration_date)) {
-            array_push($this->openAPINullablesSetToNull, 'expiration_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expiration_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable expiration_date cannot be null');
         }
 
         $this->container['expiration_date'] = $expiration_date;
@@ -881,7 +875,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets multiplier
      *
-     * @param float $multiplier Multiplier for the future contract.
+     * @param float $multiplier Notional multiplier for the option contract.
      *
      * @return self
      */
@@ -907,7 +901,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets underlying
      *
-     * @return \SnapTrade\Model\UnderlyingOptionInstrument
+     * @return \SnapTrade\Model\FutureInstrument
      */
     public function getUnderlying()
     {
@@ -917,7 +911,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets underlying
      *
-     * @param \SnapTrade\Model\UnderlyingOptionInstrument $underlying underlying
+     * @param \SnapTrade\Model\FutureInstrument $underlying underlying
      *
      * @return self
      */

@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
 **OptionType** | **string** | Whether the contract is a call or put. | 
 **StrikePrice** | **decimal** | Strike price for the option contract. | 
-**ExpirationDate** | **DateTime?** | Expiration date of the contract. | 
-**Multiplier** | **decimal?** | Multiplier for the future contract. | 
-**Underlying** | [**UnderlyingOptionInstrument**](UnderlyingOptionInstrument.md) |  | 
+**ExpirationDate** | **DateTime** | Expiration date of the option contract. | 
+**Multiplier** | **decimal?** | Notional multiplier for the option contract. | 
+**Underlying** | [**FutureInstrument**](FutureInstrument.md) |  | 
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
 **UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 

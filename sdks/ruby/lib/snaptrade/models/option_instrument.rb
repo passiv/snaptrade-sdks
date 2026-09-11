@@ -65,7 +65,7 @@ module SnapTrade
         :'kind' => :'OptionInstrumentKind',
         :'id' => :'String',
         :'symbol' => :'String',
-        :'option_type' => :'OptionType',
+        :'option_type' => :'OptionInstrumentOptionType',
         :'strike_price' => :'Float',
         :'expiration_date' => :'Date',
         :'multiplier' => :'Float',

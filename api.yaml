@@ -729,7 +729,9 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+        **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
         Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
@@ -4937,6 +4939,7 @@ components:
         - $ref: "#/components/schemas/OptionInstrument"
         - $ref: "#/components/schemas/CryptoInstrument"
         - $ref: "#/components/schemas/FutureInstrument"
+        - $ref: "#/components/schemas/FutureOptionInstrument"
         - $ref: "#/components/schemas/EtfInstrument"
         - $ref: "#/components/schemas/MutualFundInstrument"
         - $ref: "#/components/schemas/CefInstrument"
@@ -4950,6 +4953,7 @@ components:
           option: "#/components/schemas/OptionInstrument"
           crypto: "#/components/schemas/CryptoInstrument"
           future: "#/components/schemas/FutureInstrument"
+          future_option: "#/components/schemas/FutureOptionInstrument"
           etf: "#/components/schemas/EtfInstrument"
           mutualfund: "#/components/schemas/MutualFundInstrument"
           cef: "#/components/schemas/CefInstrument"
@@ -5430,6 +5434,76 @@ components:
         - symbol
         - root_symbol
         - expiration_code
+    FutureOptionInstrument:
+      description: |
+        Future option (option on a futures contract) instrument metadata for a V2 position.
+
+        **Beta:** currently returned only for tastytrade and Interactive Brokers connections, and only for partners it has been enabled for. This schema may change.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - future_option
+          example: future_option
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the future option instrument.
+          example: 5f1c9a76-2c1e-4bfb-9d18-3a2f0f5b6c41
+        symbol:
+          type: string
+          description: Display symbol for the future option contract.
+          example: ZBZ25 P105
+        option_type:
+          type: string
+          description: Whether the contract is a call or put.
+          enum:
+            - CALL
+            - PUT
+          example: PUT
+        strike_price:
+          type: string
+          format: decimal
+          description: Strike price for the option contract.
+          example: "105"
+        expiration_date:
+          type: string
+          format: date
+          description: Expiration date of the option contract.
+          example: "2025-11-21"
+        multiplier:
+          type: string
+          format: decimal
+          nullable: true
+          description: Notional multiplier for the option contract.
+          example: "1000"
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the option contract.
+          example: 30 Year U.S. Treasury Bond Dec 2025 105 PUT
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the contract.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the contract.
+          example: XCBT
+        underlying:
+          $ref: "#/components/schemas/FutureInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - option_type
+        - strike_price
+        - expiration_date
+        - underlying
     OptionInstrument:
       description: Option instrument metadata for a V2 position.
       type: object

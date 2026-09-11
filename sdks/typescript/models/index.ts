@@ -76,6 +76,7 @@ export * from './exchange';
 export * from './exchange-rate-pairs';
 export * from './figi-instrument';
 export * from './future-instrument';
+export * from './future-option-instrument';
 export * from './holdings-status';
 export * from './instrument';
 export * from './investment-account';

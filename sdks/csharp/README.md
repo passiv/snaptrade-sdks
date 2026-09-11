@@ -288,6 +288,7 @@ Class | Method | HTTP request | Description
  - [FigiInstrument](docs/FigiInstrument.md)
  - [FigiInstrumentNullable](docs/FigiInstrumentNullable.md)
  - [FutureInstrument](docs/FutureInstrument.md)
+ - [FutureOptionInstrument](docs/FutureOptionInstrument.md)
  - [HoldingsStatus](docs/HoldingsStatus.md)
  - [Instrument](docs/Instrument.md)
  - [InvestmentAccount](docs/InvestmentAccount.md)
