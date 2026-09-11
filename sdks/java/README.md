@@ -103,6 +103,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.disableBrokerageAuthorization`](#snaptradeconnectionsdisablebrokerageauthorization)
   * [`snaptrade.connections.listBrokerageAuthorizationAccounts`](#snaptradeconnectionslistbrokerageauthorizationaccounts)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
+  * [`snaptrade.connections.listConnectionAccounts`](#snaptradeconnectionslistconnectionaccounts)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
@@ -111,7 +112,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
-  * [`snaptrade.experimentalEndpoints.listConnectionAccounts`](#snaptradeexperimentalendpointslistconnectionaccounts)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
@@ -1245,6 +1245,45 @@ List<BrokerageAuthorization> result = client
 ---
 
 
+### `snaptrade.connections.listConnectionAccounts`<a id="snaptradeconnectionslistconnectionaccounts"></a>
+
+Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+
+Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+List<Object> result = client
+        .connections
+        .listConnectionAccounts(connectionId, userId, userSecret)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### connectionId: `UUID`<a id="connectionid-uuid"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connections/{connectionId}/accounts` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
 
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
@@ -1566,47 +1605,6 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.listConnectionAccounts`<a id="snaptradeexperimentalendpointslistconnectionaccounts"></a>
-
-Experimental and subject to change without notice.
-
-Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
-
-Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
-
-On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
-
-On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-List<Object> result = client
-        .experimentalEndpoints
-        .listConnectionAccounts(connectionId, userId, userSecret)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### connectionId: `UUID`<a id="connectionid-uuid"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/connections/{connectionId}/accounts` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

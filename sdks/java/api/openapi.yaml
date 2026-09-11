@@ -839,6 +839,72 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId-accounts
       x-accepts: application/json
+  /connections/{connectionId}/accounts:
+    get:
+      description: |
+        Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+
+        Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+
+        On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
+
+        On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+      operationId: Connections_listConnectionAccounts
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: List of accounts under the specified connection.
+                items:
+                  $ref: '#/components/schemas/ConnectionAccount'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Unauthorized, invalid credentials for this resource"
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: The requested resource does not exist.
+          x-do-not-generate: true
+      summary: List accounts for a connection (discriminated union)
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts
+      x-accepts: application/json
   /accounts:
     get:
       description: |
@@ -3505,74 +3571,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols
       x-content-type: application/json
-      x-accepts: application/json
-  /connections/{connectionId}/accounts:
-    get:
-      description: |
-        Experimental and subject to change without notice.
-
-        Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
-
-        Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
-
-        On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
-
-        On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
-
-        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
-      operationId: Connections_listConnectionAccounts
-      parameters:
-      - explode: false
-        in: path
-        name: connectionId
-        required: true
-        schema:
-          $ref: '#/components/schemas/BrokerageAuthID'
-        style: simple
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                description: List of accounts under the specified connection.
-                items:
-                  $ref: '#/components/schemas/ConnectionAccount'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/401FailedRequestResponse'
-          description: "Unauthorized, invalid credentials for this resource"
-          x-do-not-generate: true
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: The requested resource does not exist.
-          x-do-not-generate: true
-      summary: List accounts for a connection (discriminated union)
-      tags:
-      - Experimental endpoints
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts
       x-accepts: application/json
   /brokerages:
     get:
@@ -15456,6 +15454,25 @@ components:
       - authorizationId
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts:
+      additionalProperties: true
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - connectionId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - connectionId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts:
       additionalProperties: true
       properties:
@@ -16515,25 +16532,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts:
-      additionalProperties: true
-      properties:
-        connectionId:
-          $ref: '#/components/schemas/BrokerageAuthID'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - connectionId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - connectionId
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-get--brokerages:
       additionalProperties: true
       properties: {}

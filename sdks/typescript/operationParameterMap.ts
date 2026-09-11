@@ -208,6 +208,13 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
         ]
     },
+    '/connections/{connectionId}/accounts-GET': {
+        parameters: [
+            {
+                name: 'connectionId'
+            },
+        ]
+    },
     '/authorizations/{authorizationId}/refresh-POST': {
         parameters: [
             {
@@ -279,13 +286,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'only_executed'
-            },
-        ]
-    },
-    '/connections/{connectionId}/accounts-GET': {
-        parameters: [
-            {
-                name: 'connectionId'
             },
         ]
     },

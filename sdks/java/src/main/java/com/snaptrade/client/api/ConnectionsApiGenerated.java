@@ -1022,6 +1022,192 @@ public class ConnectionsApiGenerated {
 
         return ((ConnectionsApi) this).new ListBrokerageAuthorizationsRequestBuilder(userId, userSecret);
     }
+    private okhttp3.Call listConnectionAccountsCall(UUID connectionId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/connections/{connectionId}/accounts"
+            .replace("{" + "connectionId" + "}", localVarApiClient.escapeString(connectionId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listConnectionAccountsValidateBeforeCall(UUID connectionId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'connectionId' is set
+        if (connectionId == null) {
+            throw new ApiException("Missing the required parameter 'connectionId' when calling listConnectionAccounts(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling listConnectionAccounts(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling listConnectionAccounts(Async)");
+        }
+
+        return listConnectionAccountsCall(connectionId, userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<List<Object>> listConnectionAccountsWithHttpInfo(UUID connectionId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(connectionId, userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call listConnectionAccountsAsync(UUID connectionId, String userId, String userSecret, final ApiCallback<List<Object>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(connectionId, userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ListConnectionAccountsRequestBuilderGenerated {
+        final UUID connectionId;
+        final String userId;
+        final String userSecret;
+
+        public ListConnectionAccountsRequestBuilderGenerated(UUID connectionId, String userId, String userSecret) {
+            this.connectionId = connectionId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for listConnectionAccounts
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listConnectionAccountsCall(connectionId, userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute listConnectionAccounts request
+         * @return List&lt;Object&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Object> execute() throws ApiException {
+            ApiResponse<List<Object>> localVarResp = listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listConnectionAccounts request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Object&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Object>> executeWithHttpInfo() throws ApiException {
+            return listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
+        }
+
+        /**
+         * Execute listConnectionAccounts request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Object>> _callback) throws ApiException {
+            return listConnectionAccountsAsync(connectionId, userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * List accounts for a connection (discriminated union)
+     * Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (&#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * @param connectionId  (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return ListConnectionAccountsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ConnectionsApi.ListConnectionAccountsRequestBuilder listConnectionAccounts(UUID connectionId, String userId, String userSecret) throws IllegalArgumentException {
+        if (connectionId == null) throw new IllegalArgumentException("\"connectionId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ConnectionsApi) this).new ListConnectionAccountsRequestBuilder(connectionId, userId, userSecret);
+    }
     private okhttp3.Call refreshBrokerageAuthorizationCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers

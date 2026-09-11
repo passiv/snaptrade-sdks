@@ -133,6 +133,23 @@ public class ConnectionsApiTest {
     }
 
     /**
+     * List accounts for a connection (discriminated union)
+     *
+     * Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (&#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listConnectionAccountsTest() throws ApiException {
+        UUID connectionId = null;
+        String userId = null;
+        String userSecret = null;
+        List<Object> response = api.listConnectionAccounts(connectionId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * Refresh holdings for a connection
      *
      * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless SnapTrade uses delayed data for the connection. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to &#x60;data_freshness_mode.snaptrade&#x60; on a connection to determine this.** 

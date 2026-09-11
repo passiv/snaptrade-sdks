@@ -86,6 +86,8 @@ import { BrokerageAuthorizationRefreshConfirmation } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationTransactionsSyncConfirmation } from '../models';
 // @ts-ignore
+import { ConnectionAccount } from '../models';
+// @ts-ignore
 import { DeleteConnectionConfirmation } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
@@ -403,6 +405,64 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts for a connection (discriminated union)
+         * @param {string} connectionId 
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listConnectionAccounts: async (connectionId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'connectionId' is not null or undefined
+            assertParamExists('listConnectionAccounts', 'connectionId', connectionId)
+            const localVarPath = `/connections/{connectionId}/accounts`
+                .replace(`{${"connectionId"}}`, encodeURIComponent(String(connectionId !== undefined ? connectionId : `-connectionId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/connections/{connectionId}/accounts',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless SnapTrade uses delayed data for the connection. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to `data_freshness_mode.snaptrade` on a connection to determine this.** 
          * @summary Refresh holdings for a connection
          * @param {string} authorizationId 
@@ -652,6 +712,18 @@ export const ConnectionsApiFp = function<TAuth extends AuthMode>(configuration?:
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts for a connection (discriminated union)
+         * @param {ConnectionsApiListConnectionAccountsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionAccount>>> {
+            const [requestParameters = {} as ConnectionsApiListConnectionAccountsRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectionAccounts(requestParameters.connectionId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
          * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless SnapTrade uses delayed data for the connection. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to `data_freshness_mode.snaptrade` on a connection to determine this.** 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest<TAuth>} requestParameters Request parameters.
@@ -746,6 +818,16 @@ export const ConnectionsApiFactory = function<TAuth extends AuthMode>(configurat
          */
         listBrokerageAuthorizations(...args: ConnectionsApiListBrokerageAuthorizationsArgs<TAuth>): AxiosPromise<Array<BrokerageAuthorization>> {
             return localVarFp.listBrokerageAuthorizations(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts for a connection (discriminated union)
+         * @param {ConnectionsApiListConnectionAccountsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>): AxiosPromise<Array<ConnectionAccount>> {
+            return localVarFp.listConnectionAccounts(...args).then((request) => request(axios, basePath));
         },
         /**
          * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** **Please note this endpoint is disabled for Real-time plans (Personal and Pay as you go) unless SnapTrade uses delayed data for the connection. Real-time connections do not benefit from this feature since data is refreshed when calls are made. Refer to `data_freshness_mode.snaptrade` on a connection to determine this.** 
@@ -949,6 +1031,41 @@ export type ConnectionsApiListBrokerageAuthorizationsArgs<TAuth extends AuthMode
         : [requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
+ * Request parameters for listConnectionAccounts operation in ConnectionsApi.
+ * @export
+ */
+export type ConnectionsApiListConnectionAccountsBaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiListConnectionAccounts
+    */
+    readonly connectionId: string
+    
+}
+export type ConnectionsApiListConnectionAccountscommercialApiKeyRequest = ConnectionsApiListConnectionAccountsBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type ConnectionsApiListConnectionAccountspersonalApiKeyRequest = ConnectionsApiListConnectionAccountsBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type ConnectionsApiListConnectionAccountsRequestByAuthMode = {
+    "commercialApiKey": ConnectionsApiListConnectionAccountscommercialApiKeyRequest;
+    "personalApiKey": ConnectionsApiListConnectionAccountspersonalApiKeyRequest;
+}
+export type ConnectionsApiListConnectionAccountsRequest<TAuth extends AuthMode> =
+    ConnectionsApiListConnectionAccountsRequestByAuthMode[TAuth["mode"] & keyof ConnectionsApiListConnectionAccountsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ConnectionsApiListConnectionAccountsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ConnectionsApiListConnectionAccountsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ConnectionsApiListConnectionAccountsRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
  * Request parameters for refreshBrokerageAuthorization operation in ConnectionsApi.
  * @export
  */
@@ -1129,6 +1246,19 @@ export class ConnectionsApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAu
      */
     public listBrokerageAuthorizations(...args: ConnectionsApiListBrokerageAuthorizationsArgs<TAuth>) {
         return ConnectionsApiFp(this.configuration).listBrokerageAuthorizations(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * @summary List accounts for a connection (discriminated union)
+     * @param {ConnectionsApiListConnectionAccountsRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>) {
+        return ConnectionsApiFp(this.configuration).listConnectionAccounts(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

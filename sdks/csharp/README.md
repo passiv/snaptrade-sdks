@@ -178,6 +178,7 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection
 *ConnectionsApi* | [**ListBrokerageAuthorizationAccounts**](docs/ConnectionsApi.md#listbrokerageauthorizationaccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections
+*ConnectionsApi* | [**ListConnectionAccounts**](docs/ConnectionsApi.md#listconnectionaccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
 *ConnectionsApi* | [**RefreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
@@ -186,7 +187,6 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
-*ExperimentalEndpointsApi* | [**ListConnectionAccounts**](docs/ExperimentalEndpointsApi.md#listconnectionaccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges

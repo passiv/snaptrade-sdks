@@ -14,6 +14,7 @@ from snaptrade_client.paths.authorizations_authorization_id.get import DetailBro
 from snaptrade_client.paths.authorizations_authorization_id_disable.post import DisableBrokerageAuthorization
 from snaptrade_client.paths.authorizations_authorization_id_accounts.get import ListBrokerageAuthorizationAccounts
 from snaptrade_client.paths.authorizations.get import ListBrokerageAuthorizations
+from snaptrade_client.paths.connections_connection_id_accounts.get import ListConnectionAccounts
 from snaptrade_client.paths.authorizations_authorization_id_refresh.post import RefreshBrokerageAuthorization
 from snaptrade_client.paths.authorizations_authorization_id_return_rates.get import ReturnRates
 from snaptrade_client.paths.authorizations_authorization_id_transactions_sync.post import SyncBrokerageAuthorizationTransactions
@@ -29,6 +30,7 @@ class ConnectionsApiGenerated(
     DisableBrokerageAuthorization[TAuth],
     ListBrokerageAuthorizationAccounts[TAuth],
     ListBrokerageAuthorizations[TAuth],
+    ListConnectionAccounts[TAuth],
     RefreshBrokerageAuthorization[TAuth],
     ReturnRates[TAuth],
     SyncBrokerageAuthorizationTransactions[TAuth],

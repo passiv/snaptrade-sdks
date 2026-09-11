@@ -105,6 +105,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.disable_brokerage_authorization`](#snaptradeconnectionsdisable_brokerage_authorization)
   * [`snaptrade.connections.list_brokerage_authorization_accounts`](#snaptradeconnectionslist_brokerage_authorization_accounts)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
+  * [`snaptrade.connections.list_connection_accounts`](#snaptradeconnectionslist_connection_accounts)
   * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.sync_brokerage_authorization_transactions`](#snaptradeconnectionssync_brokerage_authorization_transactions)
@@ -113,7 +114,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
-  * [`snaptrade.experimental_endpoints.list_connection_accounts`](#snaptradeexperimental_endpointslist_connection_accounts)
   * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
   * [`snaptrade.reference_data.get_stock_exchanges`](#snaptradereference_dataget_stock_exchanges)
@@ -1608,6 +1608,68 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 ---
 
+### `snaptrade.connections.list_connection_accounts`<a id="snaptradeconnectionslist_connection_accounts"></a>
+
+Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+
+Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+
+On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+list_connection_accounts_response = (
+    commercial_api_key_client.connections.list_connection_accounts(
+        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+list_connection_accounts_response = (
+    personal_api_key_client.connections.list_connection_accounts(
+        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### connection_id: `str`<a id="connection_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`ConnectionAccount`](./snaptrade_client/type/connection_account.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connections/{connectionId}/accounts` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
 
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
@@ -2086,70 +2148,6 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.list_connection_accounts`<a id="snaptradeexperimental_endpointslist_connection_accounts"></a>
-
-Experimental and subject to change without notice.
-
-Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
-
-Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
-
-On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
-
-On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
-
-Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```python
-list_connection_accounts_response = (
-    commercial_api_key_client.experimental_endpoints.list_connection_accounts(
-        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_connection_accounts_response = (
-    personal_api_key_client.experimental_endpoints.list_connection_accounts(
-        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### connection_id: `str`<a id="connection_id-str"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`ConnectionAccount`](./snaptrade_client/type/connection_account.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/connections/{connectionId}/accounts` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

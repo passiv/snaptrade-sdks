@@ -1774,11 +1774,9 @@ paths:
   "/connections/{connectionId}/accounts":
     get:
       tags:
-        - Experimental endpoints
+        - Connections
       summary: List accounts for a connection (discriminated union)
       description: |
-        Experimental and subject to change without notice.
-
         Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
 
         Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.

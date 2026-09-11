@@ -119,6 +119,18 @@ class ConnectionsApiTest extends TestCase
     }
 
     /**
+     * Test case for listConnectionAccounts
+     *
+     * List accounts for a connection (discriminated union).
+     *
+     */
+    public function testListConnectionAccounts()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for refreshBrokerageAuthorization
      *
      * Refresh holdings for a connection.
