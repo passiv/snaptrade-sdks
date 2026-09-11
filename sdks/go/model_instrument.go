@@ -24,6 +24,7 @@ type Instrument struct {
 	CryptoInstrument *CryptoInstrument
 	EtfInstrument *EtfInstrument
 	FutureInstrument *FutureInstrument
+	FutureOptionInstrument *FutureOptionInstrument
 	MutualFundInstrument *MutualFundInstrument
 	OptionInstrument *OptionInstrument
 	OtherInstrument *OtherInstrument
@@ -69,6 +70,13 @@ func EtfInstrumentAsInstrument(v *EtfInstrument) Instrument {
 func FutureInstrumentAsInstrument(v *FutureInstrument) Instrument {
 	return Instrument{
 		FutureInstrument: v,
+	}
+}
+
+// FutureOptionInstrumentAsInstrument is a convenience function that returns FutureOptionInstrument wrapped in Instrument
+func FutureOptionInstrumentAsInstrument(v *FutureOptionInstrument) Instrument {
+	return Instrument{
+		FutureOptionInstrument: v,
 	}
 }
 
@@ -183,6 +191,19 @@ func (dst *Instrument) UnmarshalJSON(data []byte) error {
 		dst.FutureInstrument = nil
 	}
 
+	// try to unmarshal data into FutureOptionInstrument
+	err = newStrictDecoder(data).Decode(&dst.FutureOptionInstrument)
+	if err == nil {
+		jsonFutureOptionInstrument, _ := json.Marshal(dst.FutureOptionInstrument)
+		if string(jsonFutureOptionInstrument) == "{}" { // empty struct
+			dst.FutureOptionInstrument = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.FutureOptionInstrument = nil
+	}
+
 	// try to unmarshal data into MutualFundInstrument
 	err = newStrictDecoder(data).Decode(&dst.MutualFundInstrument)
 	if err == nil {
@@ -243,6 +264,7 @@ func (dst *Instrument) UnmarshalJSON(data []byte) error {
 		dst.CryptoInstrument = nil
 		dst.EtfInstrument = nil
 		dst.FutureInstrument = nil
+		dst.FutureOptionInstrument = nil
 		dst.MutualFundInstrument = nil
 		dst.OptionInstrument = nil
 		dst.OtherInstrument = nil
@@ -280,6 +302,10 @@ func (src Instrument) MarshalJSON() ([]byte, error) {
 
 	if src.FutureInstrument != nil {
 		return json.Marshal(&src.FutureInstrument)
+	}
+
+	if src.FutureOptionInstrument != nil {
+		return json.Marshal(&src.FutureOptionInstrument)
 	}
 
 	if src.MutualFundInstrument != nil {
@@ -328,6 +354,10 @@ func (obj *Instrument) GetActualInstance() (interface{}) {
 
 	if obj.FutureInstrument != nil {
 		return obj.FutureInstrument
+	}
+
+	if obj.FutureOptionInstrument != nil {
+		return obj.FutureOptionInstrument
 	}
 
 	if obj.MutualFundInstrument != nil {

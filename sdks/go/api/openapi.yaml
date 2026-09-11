@@ -1234,7 +1234,9 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+
+        **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
         Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
@@ -7740,6 +7742,7 @@ components:
           option: '#/components/schemas/OptionInstrument'
           crypto: '#/components/schemas/CryptoInstrument'
           future: '#/components/schemas/FutureInstrument'
+          future_option: '#/components/schemas/FutureOptionInstrument'
           etf: '#/components/schemas/EtfInstrument'
           mutualfund: '#/components/schemas/MutualFundInstrument'
           cef: '#/components/schemas/CefInstrument'
@@ -7753,6 +7756,7 @@ components:
       - $ref: '#/components/schemas/OptionInstrument'
       - $ref: '#/components/schemas/CryptoInstrument'
       - $ref: '#/components/schemas/FutureInstrument'
+      - $ref: '#/components/schemas/FutureOptionInstrument'
       - $ref: '#/components/schemas/EtfInstrument'
       - $ref: '#/components/schemas/MutualFundInstrument'
       - $ref: '#/components/schemas/CefInstrument'
@@ -8381,6 +8385,97 @@ components:
       - kind
       - root_symbol
       - symbol
+      type: object
+    FutureOptionInstrument:
+      additionalProperties: true
+      description: |
+        Future option (option on a futures contract) instrument metadata for a V2 position.
+
+        **Beta:** currently returned only for tastytrade and Interactive Brokers connections, and only for partners it has been enabled for. This schema may change.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - future_option
+          example: future_option
+          type: string
+          x-konfig-original-example: future_option
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-kind
+        id:
+          description: Unique identifier for the future option instrument.
+          example: 5f1c9a76-2c1e-4bfb-9d18-3a2f0f5b6c41
+          format: uuid
+          type: string
+          x-konfig-original-example: 5f1c9a76-2c1e-4bfb-9d18-3a2f0f5b6c41
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-id
+        symbol:
+          description: Display symbol for the future option contract.
+          example: ZBZ25 P105
+          type: string
+          x-konfig-original-example: ZBZ25 P105
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-symbol
+        option_type:
+          description: Whether the contract is a call or put.
+          enum:
+          - CALL
+          - PUT
+          example: PUT
+          type: string
+          x-konfig-original-example: PUT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-option_type
+        strike_price:
+          description: Strike price for the option contract.
+          example: "105"
+          format: decimal
+          type: string
+          x-konfig-original-example: "105"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-strike_price
+        expiration_date:
+          description: Expiration date of the option contract.
+          example: 2025-11-21
+          format: date
+          type: string
+          x-konfig-original-example: 2025-11-21
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-expiration_date
+        multiplier:
+          description: Notional multiplier for the option contract.
+          example: "1000"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "1000"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-multiplier
+        description:
+          description: Human-readable description of the option contract.
+          example: 30 Year U.S. Treasury Bond Dec 2025 105 PUT
+          nullable: true
+          type: string
+          x-konfig-original-example: 30 Year U.S. Treasury Bond Dec 2025 105 PUT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the contract.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the contract.
+          example: XCBT
+          nullable: true
+          type: string
+          x-konfig-original-example: XCBT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-exchange
+        underlying:
+          $ref: '#/components/schemas/FutureInstrument'
+      required:
+      - expiration_date
+      - id
+      - kind
+      - option_type
+      - strike_price
+      - symbol
+      - underlying
       type: object
     OptionInstrument:
       additionalProperties: true
@@ -13848,6 +13943,46 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-FutureInstrument-properties-exchange:
       example: XCME
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-kind:
+      example: future_option
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-id:
+      example: 5f1c9a76-2c1e-4bfb-9d18-3a2f0f5b6c41
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-symbol:
+      example: ZBZ25 P105
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-option_type:
+      example: PUT
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-strike_price:
+      example: "105"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-expiration_date:
+      example: 2025-11-21
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-multiplier:
+      example: "1000"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-description:
+      example: 30 Year U.S. Treasury Bond Dec 2025 105 PUT
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-FutureOptionInstrument-properties-exchange:
+      example: XCBT
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionInstrument-properties-kind:

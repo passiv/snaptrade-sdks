@@ -85,6 +85,18 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Instrument" /> class
+        /// with the <see cref="FutureOptionInstrument" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of FutureOptionInstrument.</param>
+        public Instrument(FutureOptionInstrument actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Instrument" /> class
         /// with the <see cref="EtfInstrument" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of EtfInstrument.</param>
@@ -193,6 +205,10 @@ namespace SnapTrade.Net.Model
                 {
                     this._actualInstance = value;
                 }
+                else if (value.GetType() == typeof(FutureOptionInstrument))
+                {
+                    this._actualInstance = value;
+                }
                 else if (value.GetType() == typeof(MutualFundInstrument))
                 {
                     this._actualInstance = value;
@@ -211,7 +227,7 @@ namespace SnapTrade.Net.Model
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid instance found. Must be the following types: AdrInstrument, CefInstrument, CfdInstrument, CryptoInstrument, EtfInstrument, FutureInstrument, MutualFundInstrument, OptionInstrument, OtherInstrument, StockInstrument");
+                    throw new ArgumentException("Invalid instance found. Must be the following types: AdrInstrument, CefInstrument, CfdInstrument, CryptoInstrument, EtfInstrument, FutureInstrument, FutureOptionInstrument, MutualFundInstrument, OptionInstrument, OtherInstrument, StockInstrument");
                 }
             }
         }
@@ -254,6 +270,16 @@ namespace SnapTrade.Net.Model
         public FutureInstrument GetFutureInstrument()
         {
             return (FutureInstrument)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `FutureOptionInstrument`. If the actual instance is not `FutureOptionInstrument`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of FutureOptionInstrument</returns>
+        public FutureOptionInstrument GetFutureOptionInstrument()
+        {
+            return (FutureOptionInstrument)this.ActualInstance;
         }
 
         /// <summary>
@@ -472,6 +498,26 @@ namespace SnapTrade.Net.Model
             {
                 // deserialization failed, try the next one
                 System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into FutureInstrument: {1}", jsonString, exception.ToString()));
+            }
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(FutureOptionInstrument).GetProperty("AdditionalProperties") == null)
+                {
+                    newInstrument = new Instrument(JsonConvert.DeserializeObject<FutureOptionInstrument>(jsonString, Instrument.SerializerSettings));
+                }
+                else
+                {
+                    newInstrument = new Instrument(JsonConvert.DeserializeObject<FutureOptionInstrument>(jsonString, Instrument.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("FutureOptionInstrument");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into FutureOptionInstrument: {1}", jsonString, exception.ToString()));
             }
 
             try

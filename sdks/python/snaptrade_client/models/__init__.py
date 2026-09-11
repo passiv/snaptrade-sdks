@@ -106,6 +106,7 @@ from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs
 from snaptrade_client.model.figi_instrument import FigiInstrument
 from snaptrade_client.model.figi_instrument_nullable import FigiInstrumentNullable
 from snaptrade_client.model.future_instrument import FutureInstrument
+from snaptrade_client.model.future_option_instrument import FutureOptionInstrument
 from snaptrade_client.model.holdings_status import HoldingsStatus
 from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
 from snaptrade_client.model.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable

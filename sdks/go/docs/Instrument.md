@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 **FigiInstrument** | Pointer to [**NullableFigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
 **OptionType** | **string** | Whether the contract is a call or put. | 
 **StrikePrice** | **float64** | Strike price for the option contract. | 
-**ExpirationDate** | **NullableString** | Expiration date of the contract. | 
-**Multiplier** | **NullableFloat64** | Multiplier for the future contract. | 
-**Underlying** | [**UnderlyingOptionInstrument**](UnderlyingOptionInstrument.md) |  | 
+**ExpirationDate** | **string** | Expiration date of the option contract. | 
+**Multiplier** | **NullableFloat64** | Notional multiplier for the option contract. | 
+**Underlying** | [**FutureInstrument**](FutureInstrument.md) |  | 
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
 **UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewInstrument
 
-`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate NullableString, multiplier NullableFloat64, underlying UnderlyingOptionInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingCfdInstrument, ) *Instrument`
+`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate string, multiplier NullableFloat64, underlying FutureInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingCfdInstrument, ) *Instrument`
 
 NewInstrument instantiates a new Instrument object
 This constructor will assign default values to properties that have it defined,
@@ -320,16 +320,6 @@ and a boolean to check if the value has been set.
 SetExpirationDate sets ExpirationDate field to given value.
 
 
-### SetExpirationDateNil
-
-`func (o *Instrument) SetExpirationDateNil(b bool)`
-
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *Instrument) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetMultiplier
 
 `func (o *Instrument) GetMultiplier() float64`
@@ -362,20 +352,20 @@ SetMultiplier sets Multiplier field to given value.
 UnsetMultiplier ensures that no value is present for Multiplier, not even an explicit nil
 ### GetUnderlying
 
-`func (o *Instrument) GetUnderlying() UnderlyingOptionInstrument`
+`func (o *Instrument) GetUnderlying() FutureInstrument`
 
 GetUnderlying returns the Underlying field if non-nil, zero value otherwise.
 
 ### GetUnderlyingOk
 
-`func (o *Instrument) GetUnderlyingOk() (*UnderlyingOptionInstrument, bool)`
+`func (o *Instrument) GetUnderlyingOk() (*FutureInstrument, bool)`
 
 GetUnderlyingOk returns a tuple with the Underlying field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnderlying
 
-`func (o *Instrument) SetUnderlying(v UnderlyingOptionInstrument)`
+`func (o *Instrument) SetUnderlying(v FutureInstrument)`
 
 SetUnderlying sets Underlying field to given value.
 
