@@ -150,8 +150,6 @@ portal:
       post: true
     /accounts/{accountId}/balanceHistory:
       get: true
-    /authorizations/{authorizationId}/accounts:
-      get: true
   hideOperations:
     /accounts/{accountId}/positions:
       get: true
@@ -202,6 +200,8 @@ portal:
     /accounts/{accountId}/trading/bracket:
       post: true
     /accounts/{accountId}/quotes/options:
+      get: true
+    /authorizations/{authorizationId}/accounts:
       get: true
   hideTags:
     - Experimental endpoints
