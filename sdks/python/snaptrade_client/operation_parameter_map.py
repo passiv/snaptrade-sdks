@@ -202,6 +202,13 @@ operation_parameter_map = {
         'parameters': [
         ]
     },
+    '/connections/{connectionId}/accounts-GET': {
+        'parameters': [
+            {
+                'name': 'connectionId'
+            },
+        ]
+    },
     '/authorizations/{authorizationId}/refresh-POST': {
         'parameters': [
             {
@@ -273,13 +280,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'only_executed'
-            },
-        ]
-    },
-    '/connections/{connectionId}/accounts-GET': {
-        'parameters': [
-            {
-                'name': 'connectionId'
             },
         ]
     },

@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**disableBrokerageAuthorization**](ConnectionsApi.md#disableBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
 | [**listBrokerageAuthorizationAccounts**](ConnectionsApi.md#listBrokerageAuthorizationAccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection |
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all connections |
+| [**listConnectionAccounts**](ConnectionsApi.md#listConnectionAccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union) |
 | [**refreshBrokerageAuthorization**](ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**returnRates**](ConnectionsApi.md#returnRates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**syncBrokerageAuthorizationTransactions**](ConnectionsApi.md#syncBrokerageAuthorizationTransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection |
@@ -510,6 +511,101 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
+
+<a name="listConnectionAccounts"></a>
+# **listConnectionAccounts**
+> List&lt;Object&gt; listConnectionAccounts(connectionId, userId, userSecret).execute();
+
+List accounts for a connection (discriminated union)
+
+Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (&#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ConnectionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    UUID connectionId = UUID.randomUUID();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    try {
+      List<Object> result = client
+              .connections
+              .listConnectionAccounts(connectionId, userId, userSecret)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#listConnectionAccounts");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<List<Object>> response = client
+              .connections
+              .listConnectionAccounts(connectionId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#listConnectionAccounts");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **connectionId** | **UUID**|  | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+**List&lt;Object&gt;**
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="refreshBrokerageAuthorization"></a>
 # **refreshBrokerageAuthorization**

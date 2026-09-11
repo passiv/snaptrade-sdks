@@ -9,6 +9,7 @@ Method | Path | Description
 [**DisableBrokerageAuthorization**](ConnectionsApi.md#DisableBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/disable | Force disable connection
 [**ListBrokerageAuthorizationAccounts**](ConnectionsApi.md#ListBrokerageAuthorizationAccounts) | **Get** /authorizations/{authorizationId}/accounts | List accounts for a connection
 [**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
+[**ListConnectionAccounts**](ConnectionsApi.md#ListConnectionAccounts) | **Get** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
 [**RefreshBrokerageAuthorization**](ConnectionsApi.md#RefreshBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 [**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 [**SyncBrokerageAuthorizationTransactions**](ConnectionsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
@@ -274,6 +275,67 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.UpdatedDate`: %v\n", *resp.UpdatedDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.IsEligibleForPayout`: %v\n", *resp.IsEligibleForPayout)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.DataFreshnessMode`: %v\n", *resp.DataFreshnessMode)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListConnectionAccounts
+
+List accounts for a connection (discriminated union)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ConnectionsApi.ListConnectionAccounts(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.ListConnectionAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ListConnectionAccounts`: []ConnectionAccount
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ListConnectionAccounts`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Kind`: %v\n", resp.Kind)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Id`: %v\n", resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.ConnectionId`: %v\n", resp.ConnectionId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.DisplayName`: %v\n", *resp.DisplayName)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MaskedAccountNumber`: %v\n", resp.MaskedAccountNumber)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionId`: %v\n", *resp.InstitutionId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.FundingDate`: %v\n", *resp.FundingDate)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.SyncStatus`: %v\n", resp.SyncStatus)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.RawType`: %v\n", *resp.RawType)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NetValue`: %v\n", *resp.NetValue)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MinimumPaymentAmount`: %v\n", *resp.MinimumPaymentAmount)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.AvailableCredit`: %v\n", *resp.AvailableCredit)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NextPaymentDate`: %v\n", *resp.NextPaymentDate)
 }
 ```
 

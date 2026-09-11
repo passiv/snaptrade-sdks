@@ -44,6 +44,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
             super(userId, userSecret);
         }
     }
+    public class ListConnectionAccountsRequestBuilder extends ListConnectionAccountsRequestBuilderGenerated {
+        public ListConnectionAccountsRequestBuilder(UUID connectionId, String userId, String userSecret) {
+            super(connectionId, userId, userSecret);
+        }
+    }
     public class RefreshBrokerageAuthorizationRequestBuilder extends RefreshBrokerageAuthorizationRequestBuilderGenerated {
         public RefreshBrokerageAuthorizationRequestBuilder(UUID authorizationId, String userId, String userSecret) {
             super(authorizationId, userId, userSecret);
