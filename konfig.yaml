@@ -142,13 +142,13 @@ portal:
       get: true
     /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
       get: true
+    /connections/{connectionId}/accounts:
+      get: true
     /accounts/{accountId}/trading/options/impact:
       post: true
     /authorizations/{authorizationId}/transactions/sync:
       post: true
     /accounts/{accountId}/balanceHistory:
-      get: true
-    /authorizations/{authorizationId}/accounts:
       get: true
   hideOperations:
     /accounts/{accountId}/positions:
@@ -200,6 +200,8 @@ portal:
     /accounts/{accountId}/trading/bracket:
       post: true
     /accounts/{accountId}/quotes/options:
+      get: true
+    /authorizations/{authorizationId}/accounts:
       get: true
   hideTags:
     - Experimental endpoints
