@@ -259,6 +259,12 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
+    test:
+      script:
+        - test -s account_positions_regression_test.go
+        - test -s connection_decoding_regression_test.go
+        - go test -count=1 -run '^Test(AccountPositions|ConnectionDecoding)Regression$' -v .
+        - go test -count=1 ./... -v
     version: 2.0.20
     packageName: snaptrade
     outputDirectory: sdks/go
