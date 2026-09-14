@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // FutureInstrument Future instrument metadata for a V2 position.
@@ -387,29 +388,58 @@ func (o FutureInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *FutureInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varFutureInstrument := _FutureInstrument{}
-
-	if err = json.Unmarshal(bytes, &varFutureInstrument); err == nil {
-		*o = FutureInstrument(varFutureInstrument)
+func (o *FutureInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "root_symbol")
-		delete(additionalProperties, "expiration_code")
-		delete(additionalProperties, "expiration_date")
-		delete(additionalProperties, "multiplier")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "exchange")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "multiplier",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("FutureInstrument.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("FutureInstrument.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _FutureInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "root_symbol")
+	delete(additionalProperties, "expiration_code")
+	delete(additionalProperties, "expiration_date")
+	delete(additionalProperties, "multiplier")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "exchange")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = FutureInstrument(decoded)
+	return nil
 }
 
 type NullableFutureInstrument struct {

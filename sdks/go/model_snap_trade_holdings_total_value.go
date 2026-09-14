@@ -143,22 +143,23 @@ func (o SnapTradeHoldingsTotalValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *SnapTradeHoldingsTotalValue) UnmarshalJSON(bytes []byte) (err error) {
-	varSnapTradeHoldingsTotalValue := _SnapTradeHoldingsTotalValue{}
-
-	if err = json.Unmarshal(bytes, &varSnapTradeHoldingsTotalValue); err == nil {
-		*o = SnapTradeHoldingsTotalValue(varSnapTradeHoldingsTotalValue)
+func (o *SnapTradeHoldingsTotalValue) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _SnapTradeHoldingsTotalValue{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "value")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "value")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = SnapTradeHoldingsTotalValue(decoded)
+	return nil
 }
 
 type NullableSnapTradeHoldingsTotalValue struct {

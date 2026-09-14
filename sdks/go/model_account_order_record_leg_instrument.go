@@ -244,25 +244,26 @@ func (o AccountOrderRecordLegInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountOrderRecordLegInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountOrderRecordLegInstrument := _AccountOrderRecordLegInstrument{}
-
-	if err = json.Unmarshal(bytes, &varAccountOrderRecordLegInstrument); err == nil {
-		*o = AccountOrderRecordLegInstrument(varAccountOrderRecordLegInstrument)
+func (o *AccountOrderRecordLegInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _AccountOrderRecordLegInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "asset_type")
-		delete(additionalProperties, "exchange_mic_code")
-		delete(additionalProperties, "figi_code")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "asset_type")
+	delete(additionalProperties, "exchange_mic_code")
+	delete(additionalProperties, "figi_code")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountOrderRecordLegInstrument(decoded)
+	return nil
 }
 
 type NullableAccountOrderRecordLegInstrument struct {

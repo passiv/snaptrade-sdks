@@ -170,23 +170,24 @@ func (o SubPeriodReturnRate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *SubPeriodReturnRate) UnmarshalJSON(bytes []byte) (err error) {
-	varSubPeriodReturnRate := _SubPeriodReturnRate{}
-
-	if err = json.Unmarshal(bytes, &varSubPeriodReturnRate); err == nil {
-		*o = SubPeriodReturnRate(varSubPeriodReturnRate)
+func (o *SubPeriodReturnRate) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _SubPeriodReturnRate{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "periodStart")
-		delete(additionalProperties, "periodEnd")
-		delete(additionalProperties, "rateOfReturn")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "periodStart")
+	delete(additionalProperties, "periodEnd")
+	delete(additionalProperties, "rateOfReturn")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = SubPeriodReturnRate(decoded)
+	return nil
 }
 
 type NullableSubPeriodReturnRate struct {

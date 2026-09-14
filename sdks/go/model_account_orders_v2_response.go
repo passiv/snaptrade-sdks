@@ -79,21 +79,22 @@ func (o AccountOrdersV2Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountOrdersV2Response) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountOrdersV2Response := _AccountOrdersV2Response{}
-
-	if err = json.Unmarshal(bytes, &varAccountOrdersV2Response); err == nil {
-		*o = AccountOrdersV2Response(varAccountOrdersV2Response)
+func (o *AccountOrdersV2Response) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _AccountOrdersV2Response{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "orders")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "orders")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountOrdersV2Response(decoded)
+	return nil
 }
 
 type NullableAccountOrdersV2Response struct {

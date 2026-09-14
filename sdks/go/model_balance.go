@@ -179,23 +179,24 @@ func (o Balance) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Balance) UnmarshalJSON(bytes []byte) (err error) {
-	varBalance := _Balance{}
-
-	if err = json.Unmarshal(bytes, &varBalance); err == nil {
-		*o = Balance(varBalance)
+func (o *Balance) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Balance{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "cash")
-		delete(additionalProperties, "buying_power")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "cash")
+	delete(additionalProperties, "buying_power")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Balance(decoded)
+	return nil
 }
 
 type NullableBalance struct {

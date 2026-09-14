@@ -356,28 +356,29 @@ func (o OtherInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OtherInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varOtherInstrument := _OtherInstrument{}
-
-	if err = json.Unmarshal(bytes, &varOtherInstrument); err == nil {
-		*o = OtherInstrument(varOtherInstrument)
+func (o *OtherInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OtherInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "raw_symbol")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "exchange")
-		delete(additionalProperties, "figi_instrument")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "raw_symbol")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "exchange")
+	delete(additionalProperties, "figi_instrument")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OtherInstrument(decoded)
+	return nil
 }
 
 type NullableOtherInstrument struct {

@@ -160,23 +160,24 @@ func (o CurrencyNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CurrencyNullable) UnmarshalJSON(bytes []byte) (err error) {
-	varCurrencyNullable := _CurrencyNullable{}
-
-	if err = json.Unmarshal(bytes, &varCurrencyNullable); err == nil {
-		*o = CurrencyNullable(varCurrencyNullable)
+func (o *CurrencyNullable) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _CurrencyNullable{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "name")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "code")
+	delete(additionalProperties, "name")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CurrencyNullable(decoded)
+	return nil
 }
 
 type NullableCurrencyNullable struct {

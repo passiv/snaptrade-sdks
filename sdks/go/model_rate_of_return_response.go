@@ -86,21 +86,22 @@ func (o RateOfReturnResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *RateOfReturnResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varRateOfReturnResponse := _RateOfReturnResponse{}
-
-	if err = json.Unmarshal(bytes, &varRateOfReturnResponse); err == nil {
-		*o = RateOfReturnResponse(varRateOfReturnResponse)
+func (o *RateOfReturnResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _RateOfReturnResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "data")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "data")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = RateOfReturnResponse(decoded)
+	return nil
 }
 
 type NullableRateOfReturnResponse struct {

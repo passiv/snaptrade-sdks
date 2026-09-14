@@ -14,6 +14,7 @@ package snaptrade
 import (
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 // CryptocurrencyPairQuote struct for CryptocurrencyPairQuote
@@ -184,24 +185,53 @@ func (o CryptocurrencyPairQuote) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CryptocurrencyPairQuote) UnmarshalJSON(bytes []byte) (err error) {
-	varCryptocurrencyPairQuote := _CryptocurrencyPairQuote{}
-
-	if err = json.Unmarshal(bytes, &varCryptocurrencyPairQuote); err == nil {
-		*o = CryptocurrencyPairQuote(varCryptocurrencyPairQuote)
+func (o *CryptocurrencyPairQuote) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "bid")
-		delete(additionalProperties, "ask")
-		delete(additionalProperties, "mid")
-		delete(additionalProperties, "timestamp")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "bid", "ask", "mid",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("CryptocurrencyPairQuote.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("CryptocurrencyPairQuote.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _CryptocurrencyPairQuote{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "bid")
+	delete(additionalProperties, "ask")
+	delete(additionalProperties, "mid")
+	delete(additionalProperties, "timestamp")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CryptocurrencyPairQuote(decoded)
+	return nil
 }
 
 type NullableCryptocurrencyPairQuote struct {

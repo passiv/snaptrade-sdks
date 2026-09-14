@@ -379,27 +379,28 @@ func (o TaxLot) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *TaxLot) UnmarshalJSON(bytes []byte) (err error) {
-	varTaxLot := _TaxLot{}
-
-	if err = json.Unmarshal(bytes, &varTaxLot); err == nil {
-		*o = TaxLot(varTaxLot)
+func (o *TaxLot) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _TaxLot{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "original_purchase_date")
-		delete(additionalProperties, "quantity")
-		delete(additionalProperties, "purchased_price")
-		delete(additionalProperties, "cost_basis")
-		delete(additionalProperties, "current_value")
-		delete(additionalProperties, "position_type")
-		delete(additionalProperties, "lot_id")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "original_purchase_date")
+	delete(additionalProperties, "quantity")
+	delete(additionalProperties, "purchased_price")
+	delete(additionalProperties, "cost_basis")
+	delete(additionalProperties, "current_value")
+	delete(additionalProperties, "position_type")
+	delete(additionalProperties, "lot_id")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = TaxLot(decoded)
+	return nil
 }
 
 type NullableTaxLot struct {

@@ -609,34 +609,35 @@ func (o LineOfCreditAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *LineOfCreditAccount) UnmarshalJSON(bytes []byte) (err error) {
-	varLineOfCreditAccount := _LineOfCreditAccount{}
-
-	if err = json.Unmarshal(bytes, &varLineOfCreditAccount); err == nil {
-		*o = LineOfCreditAccount(varLineOfCreditAccount)
+func (o *LineOfCreditAccount) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _LineOfCreditAccount{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "connection_id")
-		delete(additionalProperties, "display_name")
-		delete(additionalProperties, "masked_account_number")
-		delete(additionalProperties, "institution_account_id")
-		delete(additionalProperties, "institution_id")
-		delete(additionalProperties, "opening_date")
-		delete(additionalProperties, "sync_status")
-		delete(additionalProperties, "raw_type")
-		delete(additionalProperties, "net_value")
-		delete(additionalProperties, "minimum_payment_amount")
-		delete(additionalProperties, "available_credit")
-		delete(additionalProperties, "next_payment_date")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "connection_id")
+	delete(additionalProperties, "display_name")
+	delete(additionalProperties, "masked_account_number")
+	delete(additionalProperties, "institution_account_id")
+	delete(additionalProperties, "institution_id")
+	delete(additionalProperties, "opening_date")
+	delete(additionalProperties, "sync_status")
+	delete(additionalProperties, "raw_type")
+	delete(additionalProperties, "net_value")
+	delete(additionalProperties, "minimum_payment_amount")
+	delete(additionalProperties, "available_credit")
+	delete(additionalProperties, "next_payment_date")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = LineOfCreditAccount(decoded)
+	return nil
 }
 
 type NullableLineOfCreditAccount struct {

@@ -187,23 +187,24 @@ func (o OptionChainInnerChainPerRootInnerChainPerStrikePriceInner) MarshalJSON()
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionChainInnerChainPerRootInnerChainPerStrikePriceInner) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionChainInnerChainPerRootInnerChainPerStrikePriceInner := _OptionChainInnerChainPerRootInnerChainPerStrikePriceInner{}
-
-	if err = json.Unmarshal(bytes, &varOptionChainInnerChainPerRootInnerChainPerStrikePriceInner); err == nil {
-		*o = OptionChainInnerChainPerRootInnerChainPerStrikePriceInner(varOptionChainInnerChainPerRootInnerChainPerStrikePriceInner)
+func (o *OptionChainInnerChainPerRootInnerChainPerStrikePriceInner) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionChainInnerChainPerRootInnerChainPerStrikePriceInner{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "strikePrice")
-		delete(additionalProperties, "callSymbolId")
-		delete(additionalProperties, "putSymbolId")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "strikePrice")
+	delete(additionalProperties, "callSymbolId")
+	delete(additionalProperties, "putSymbolId")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionChainInnerChainPerRootInnerChainPerStrikePriceInner(decoded)
+	return nil
 }
 
 type NullableOptionChainInnerChainPerRootInnerChainPerStrikePriceInner struct {

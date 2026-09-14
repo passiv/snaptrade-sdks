@@ -481,31 +481,32 @@ func (o StrategyOrderRecord) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *StrategyOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
-	varStrategyOrderRecord := _StrategyOrderRecord{}
-
-	if err = json.Unmarshal(bytes, &varStrategyOrderRecord); err == nil {
-		*o = StrategyOrderRecord(varStrategyOrderRecord)
+func (o *StrategyOrderRecord) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _StrategyOrderRecord{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "strategy")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "filled_quantity")
-		delete(additionalProperties, "open_quantity")
-		delete(additionalProperties, "closed_quantity")
-		delete(additionalProperties, "order_type")
-		delete(additionalProperties, "time_in_force")
-		delete(additionalProperties, "limit_price")
-		delete(additionalProperties, "execution_price")
-		delete(additionalProperties, "time_placed")
-		delete(additionalProperties, "time_updated")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "strategy")
+	delete(additionalProperties, "status")
+	delete(additionalProperties, "filled_quantity")
+	delete(additionalProperties, "open_quantity")
+	delete(additionalProperties, "closed_quantity")
+	delete(additionalProperties, "order_type")
+	delete(additionalProperties, "time_in_force")
+	delete(additionalProperties, "limit_price")
+	delete(additionalProperties, "execution_price")
+	delete(additionalProperties, "time_placed")
+	delete(additionalProperties, "time_updated")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = StrategyOrderRecord(decoded)
+	return nil
 }
 
 type NullableStrategyOrderRecord struct {

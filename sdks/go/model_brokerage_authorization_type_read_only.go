@@ -193,24 +193,25 @@ func (o BrokerageAuthorizationTypeReadOnly) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *BrokerageAuthorizationTypeReadOnly) UnmarshalJSON(bytes []byte) (err error) {
-	varBrokerageAuthorizationTypeReadOnly := _BrokerageAuthorizationTypeReadOnly{}
-
-	if err = json.Unmarshal(bytes, &varBrokerageAuthorizationTypeReadOnly); err == nil {
-		*o = BrokerageAuthorizationTypeReadOnly(varBrokerageAuthorizationTypeReadOnly)
+func (o *BrokerageAuthorizationTypeReadOnly) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _BrokerageAuthorizationTypeReadOnly{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "auth_type")
-		delete(additionalProperties, "brokerage")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "type")
+	delete(additionalProperties, "auth_type")
+	delete(additionalProperties, "brokerage")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = BrokerageAuthorizationTypeReadOnly(decoded)
+	return nil
 }
 
 type NullableBrokerageAuthorizationTypeReadOnly struct {

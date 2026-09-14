@@ -157,23 +157,24 @@ func (o OptionChainInnerChainPerRootInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionChainInnerChainPerRootInner) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionChainInnerChainPerRootInner := _OptionChainInnerChainPerRootInner{}
-
-	if err = json.Unmarshal(bytes, &varOptionChainInnerChainPerRootInner); err == nil {
-		*o = OptionChainInnerChainPerRootInner(varOptionChainInnerChainPerRootInner)
+func (o *OptionChainInnerChainPerRootInner) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionChainInnerChainPerRootInner{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "optionRoot")
-		delete(additionalProperties, "chainPerStrikePrice")
-		delete(additionalProperties, "multiplier")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "optionRoot")
+	delete(additionalProperties, "chainPerStrikePrice")
+	delete(additionalProperties, "multiplier")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionChainInnerChainPerRootInner(decoded)
+	return nil
 }
 
 type NullableOptionChainInnerChainPerRootInner struct {

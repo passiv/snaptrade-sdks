@@ -157,23 +157,24 @@ func (o ExchangeRatePairs) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ExchangeRatePairs) UnmarshalJSON(bytes []byte) (err error) {
-	varExchangeRatePairs := _ExchangeRatePairs{}
-
-	if err = json.Unmarshal(bytes, &varExchangeRatePairs); err == nil {
-		*o = ExchangeRatePairs(varExchangeRatePairs)
+func (o *ExchangeRatePairs) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ExchangeRatePairs{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "src")
-		delete(additionalProperties, "dst")
-		delete(additionalProperties, "exchange_rate")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "src")
+	delete(additionalProperties, "dst")
+	delete(additionalProperties, "exchange_rate")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ExchangeRatePairs(decoded)
+	return nil
 }
 
 type NullableExchangeRatePairs struct {

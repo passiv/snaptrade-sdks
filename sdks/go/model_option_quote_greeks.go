@@ -197,24 +197,25 @@ func (o OptionQuoteGreeks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionQuoteGreeks) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionQuoteGreeks := _OptionQuoteGreeks{}
-
-	if err = json.Unmarshal(bytes, &varOptionQuoteGreeks); err == nil {
-		*o = OptionQuoteGreeks(varOptionQuoteGreeks)
+func (o *OptionQuoteGreeks) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionQuoteGreeks{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "delta")
-		delete(additionalProperties, "gamma")
-		delete(additionalProperties, "theta")
-		delete(additionalProperties, "vega")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "delta")
+	delete(additionalProperties, "gamma")
+	delete(additionalProperties, "theta")
+	delete(additionalProperties, "vega")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionQuoteGreeks(decoded)
+	return nil
 }
 
 type NullableOptionQuoteGreeks struct {

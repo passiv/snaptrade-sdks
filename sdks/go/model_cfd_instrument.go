@@ -339,28 +339,29 @@ func (o CfdInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CfdInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varCfdInstrument := _CfdInstrument{}
-
-	if err = json.Unmarshal(bytes, &varCfdInstrument); err == nil {
-		*o = CfdInstrument(varCfdInstrument)
+func (o *CfdInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _CfdInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "raw_symbol")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "exchange")
-		delete(additionalProperties, "underlying_instrument")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "raw_symbol")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "exchange")
+	delete(additionalProperties, "underlying_instrument")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CfdInstrument(decoded)
+	return nil
 }
 
 type NullableCfdInstrument struct {

@@ -170,23 +170,24 @@ func (o OptionImpact) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionImpact) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionImpact := _OptionImpact{}
-
-	if err = json.Unmarshal(bytes, &varOptionImpact); err == nil {
-		*o = OptionImpact(varOptionImpact)
+func (o *OptionImpact) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionImpact{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "estimated_cash_change")
-		delete(additionalProperties, "cash_change_direction")
-		delete(additionalProperties, "estimated_fee_total")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "estimated_cash_change")
+	delete(additionalProperties, "cash_change_direction")
+	delete(additionalProperties, "estimated_fee_total")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionImpact(decoded)
+	return nil
 }
 
 type NullableOptionImpact struct {

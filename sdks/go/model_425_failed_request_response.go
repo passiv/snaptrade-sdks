@@ -123,22 +123,23 @@ func (o Model425FailedRequestResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Model425FailedRequestResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varModel425FailedRequestResponse := _Model425FailedRequestResponse{}
-
-	if err = json.Unmarshal(bytes, &varModel425FailedRequestResponse); err == nil {
-		*o = Model425FailedRequestResponse(varModel425FailedRequestResponse)
+func (o *Model425FailedRequestResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Model425FailedRequestResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "code")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "code")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Model425FailedRequestResponse(decoded)
+	return nil
 }
 
 type NullableModel425FailedRequestResponse struct {

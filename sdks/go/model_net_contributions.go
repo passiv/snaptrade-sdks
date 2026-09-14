@@ -168,23 +168,24 @@ func (o NetContributions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *NetContributions) UnmarshalJSON(bytes []byte) (err error) {
-	varNetContributions := _NetContributions{}
-
-	if err = json.Unmarshal(bytes, &varNetContributions); err == nil {
-		*o = NetContributions(varNetContributions)
+func (o *NetContributions) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _NetContributions{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "date")
-		delete(additionalProperties, "contributions")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "date")
+	delete(additionalProperties, "contributions")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = NetContributions(decoded)
+	return nil
 }
 
 type NullableNetContributions struct {

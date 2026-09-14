@@ -157,23 +157,24 @@ func (o Status) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Status) UnmarshalJSON(bytes []byte) (err error) {
-	varStatus := _Status{}
-
-	if err = json.Unmarshal(bytes, &varStatus); err == nil {
-		*o = Status(varStatus)
+func (o *Status) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Status{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "version")
-		delete(additionalProperties, "timestamp")
-		delete(additionalProperties, "online")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "version")
+	delete(additionalProperties, "timestamp")
+	delete(additionalProperties, "online")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Status(decoded)
+	return nil
 }
 
 type NullableStatus struct {

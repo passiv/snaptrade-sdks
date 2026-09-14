@@ -121,22 +121,23 @@ func (o BrokerageType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *BrokerageType) UnmarshalJSON(bytes []byte) (err error) {
-	varBrokerageType := _BrokerageType{}
-
-	if err = json.Unmarshal(bytes, &varBrokerageType); err == nil {
-		*o = BrokerageType(varBrokerageType)
+func (o *BrokerageType) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _BrokerageType{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "name")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "name")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = BrokerageType(decoded)
+	return nil
 }
 
 type NullableBrokerageType struct {

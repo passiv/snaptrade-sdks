@@ -794,38 +794,39 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Brokerage) UnmarshalJSON(bytes []byte) (err error) {
-	varBrokerage := _Brokerage{}
-
-	if err = json.Unmarshal(bytes, &varBrokerage); err == nil {
-		*o = Brokerage(varBrokerage)
+func (o *Brokerage) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Brokerage{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "slug")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "display_name")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "aws_s3_logo_url")
-		delete(additionalProperties, "aws_s3_square_logo_url")
-		delete(additionalProperties, "url")
-		delete(additionalProperties, "enabled")
-		delete(additionalProperties, "maintenance_mode")
-		delete(additionalProperties, "is_degraded")
-		delete(additionalProperties, "allows_trading")
-		delete(additionalProperties, "allows_fractional_units")
-		delete(additionalProperties, "has_reporting")
-		delete(additionalProperties, "is_real_time_connection")
-		delete(additionalProperties, "brokerage_type")
-		delete(additionalProperties, "exchanges")
-		delete(additionalProperties, "open_url")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "slug")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "display_name")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "aws_s3_logo_url")
+	delete(additionalProperties, "aws_s3_square_logo_url")
+	delete(additionalProperties, "url")
+	delete(additionalProperties, "enabled")
+	delete(additionalProperties, "maintenance_mode")
+	delete(additionalProperties, "is_degraded")
+	delete(additionalProperties, "allows_trading")
+	delete(additionalProperties, "allows_fractional_units")
+	delete(additionalProperties, "has_reporting")
+	delete(additionalProperties, "is_real_time_connection")
+	delete(additionalProperties, "brokerage_type")
+	delete(additionalProperties, "exchanges")
+	delete(additionalProperties, "open_url")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Brokerage(decoded)
+	return nil
 }
 
 type NullableBrokerage struct {

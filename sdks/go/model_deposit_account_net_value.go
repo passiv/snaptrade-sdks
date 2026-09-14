@@ -141,22 +141,23 @@ func (o DepositAccountNetValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *DepositAccountNetValue) UnmarshalJSON(bytes []byte) (err error) {
-	varDepositAccountNetValue := _DepositAccountNetValue{}
-
-	if err = json.Unmarshal(bytes, &varDepositAccountNetValue); err == nil {
-		*o = DepositAccountNetValue(varDepositAccountNetValue)
+func (o *DepositAccountNetValue) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _DepositAccountNetValue{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = DepositAccountNetValue(decoded)
+	return nil
 }
 
 type NullableDepositAccountNetValue struct {

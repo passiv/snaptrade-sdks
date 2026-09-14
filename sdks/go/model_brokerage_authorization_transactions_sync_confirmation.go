@@ -86,21 +86,22 @@ func (o BrokerageAuthorizationTransactionsSyncConfirmation) MarshalJSON() ([]byt
 	return json.Marshal(toSerialize)
 }
 
-func (o *BrokerageAuthorizationTransactionsSyncConfirmation) UnmarshalJSON(bytes []byte) (err error) {
-	varBrokerageAuthorizationTransactionsSyncConfirmation := _BrokerageAuthorizationTransactionsSyncConfirmation{}
-
-	if err = json.Unmarshal(bytes, &varBrokerageAuthorizationTransactionsSyncConfirmation); err == nil {
-		*o = BrokerageAuthorizationTransactionsSyncConfirmation(varBrokerageAuthorizationTransactionsSyncConfirmation)
+func (o *BrokerageAuthorizationTransactionsSyncConfirmation) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _BrokerageAuthorizationTransactionsSyncConfirmation{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = BrokerageAuthorizationTransactionsSyncConfirmation(decoded)
+	return nil
 }
 
 type NullableBrokerageAuthorizationTransactionsSyncConfirmation struct {

@@ -834,39 +834,40 @@ func (o PerformanceCustom) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *PerformanceCustom) UnmarshalJSON(bytes []byte) (err error) {
-	varPerformanceCustom := _PerformanceCustom{}
-
-	if err = json.Unmarshal(bytes, &varPerformanceCustom); err == nil {
-		*o = PerformanceCustom(varPerformanceCustom)
+func (o *PerformanceCustom) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _PerformanceCustom{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "totalEquityTimeframe")
-		delete(additionalProperties, "contributions")
-		delete(additionalProperties, "contributionTimeframe")
-		delete(additionalProperties, "contributionTimeframeCumulative")
-		delete(additionalProperties, "withdrawalTimeframe")
-		delete(additionalProperties, "contributionStreak")
-		delete(additionalProperties, "contributionMonthsContributed")
-		delete(additionalProperties, "contributionTotalMonths")
-		delete(additionalProperties, "dividends")
-		delete(additionalProperties, "dividendIncome")
-		delete(additionalProperties, "monthlyDividends")
-		delete(additionalProperties, "badTickers")
-		delete(additionalProperties, "dividendTimeline")
-		delete(additionalProperties, "commissions")
-		delete(additionalProperties, "forexFees")
-		delete(additionalProperties, "fees")
-		delete(additionalProperties, "rateOfReturn")
-		delete(additionalProperties, "returnRateTimeframe")
-		delete(additionalProperties, "detailedMode")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "totalEquityTimeframe")
+	delete(additionalProperties, "contributions")
+	delete(additionalProperties, "contributionTimeframe")
+	delete(additionalProperties, "contributionTimeframeCumulative")
+	delete(additionalProperties, "withdrawalTimeframe")
+	delete(additionalProperties, "contributionStreak")
+	delete(additionalProperties, "contributionMonthsContributed")
+	delete(additionalProperties, "contributionTotalMonths")
+	delete(additionalProperties, "dividends")
+	delete(additionalProperties, "dividendIncome")
+	delete(additionalProperties, "monthlyDividends")
+	delete(additionalProperties, "badTickers")
+	delete(additionalProperties, "dividendTimeline")
+	delete(additionalProperties, "commissions")
+	delete(additionalProperties, "forexFees")
+	delete(additionalProperties, "fees")
+	delete(additionalProperties, "rateOfReturn")
+	delete(additionalProperties, "returnRateTimeframe")
+	delete(additionalProperties, "detailedMode")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = PerformanceCustom(decoded)
+	return nil
 }
 
 type NullablePerformanceCustom struct {

@@ -109,22 +109,23 @@ func (o CryptoTradingInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CryptoTradingInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varCryptoTradingInstrument := _CryptoTradingInstrument{}
-
-	if err = json.Unmarshal(bytes, &varCryptoTradingInstrument); err == nil {
-		*o = CryptoTradingInstrument(varCryptoTradingInstrument)
+func (o *CryptoTradingInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _CryptoTradingInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "type")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CryptoTradingInstrument(decoded)
+	return nil
 }
 
 type NullableCryptoTradingInstrument struct {

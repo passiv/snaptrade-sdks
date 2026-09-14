@@ -123,22 +123,23 @@ func (o DeleteConnectionConfirmation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *DeleteConnectionConfirmation) UnmarshalJSON(bytes []byte) (err error) {
-	varDeleteConnectionConfirmation := _DeleteConnectionConfirmation{}
-
-	if err = json.Unmarshal(bytes, &varDeleteConnectionConfirmation); err == nil {
-		*o = DeleteConnectionConfirmation(varDeleteConnectionConfirmation)
+func (o *DeleteConnectionConfirmation) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _DeleteConnectionConfirmation{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "connection_id")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "connection_id")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = DeleteConnectionConfirmation(decoded)
+	return nil
 }
 
 type NullableDeleteConnectionConfirmation struct {

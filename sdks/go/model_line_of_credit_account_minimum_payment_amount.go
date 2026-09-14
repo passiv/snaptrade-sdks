@@ -141,22 +141,23 @@ func (o LineOfCreditAccountMinimumPaymentAmount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *LineOfCreditAccountMinimumPaymentAmount) UnmarshalJSON(bytes []byte) (err error) {
-	varLineOfCreditAccountMinimumPaymentAmount := _LineOfCreditAccountMinimumPaymentAmount{}
-
-	if err = json.Unmarshal(bytes, &varLineOfCreditAccountMinimumPaymentAmount); err == nil {
-		*o = LineOfCreditAccountMinimumPaymentAmount(varLineOfCreditAccountMinimumPaymentAmount)
+func (o *LineOfCreditAccountMinimumPaymentAmount) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _LineOfCreditAccountMinimumPaymentAmount{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = LineOfCreditAccountMinimumPaymentAmount(decoded)
+	return nil
 }
 
 type NullableLineOfCreditAccountMinimumPaymentAmount struct {

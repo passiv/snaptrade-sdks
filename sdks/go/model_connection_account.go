@@ -47,59 +47,50 @@ func LineOfCreditAccountAsConnectionAccount(v *LineOfCreditAccount) ConnectionAc
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into DepositAccount
-	err = newStrictDecoder(data).Decode(&dst.DepositAccount)
-	if err == nil {
-		jsonDepositAccount, _ := json.Marshal(dst.DepositAccount)
-		if string(jsonDepositAccount) == "{}" { // empty struct
-			dst.DepositAccount = nil
-		} else {
-			match++
+	// Select by the discriminator's wire value, not by overlapping field shapes.
+	// Clear previous members so reuse or a failed decode cannot expose an old kind.
+	*dst = ConnectionAccount{}
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return fmt.Errorf("failed to decode ConnectionAccount discriminator: %w", err)
+	}
+	if fields == nil {
+		return fmt.Errorf("ConnectionAccount cannot be null")
+	}
+	raw, present := fields["kind"]
+	if !present {
+		return fmt.Errorf("missing ConnectionAccount discriminator kind")
+	}
+	var kind *string
+	if err := json.Unmarshal(raw, &kind); err != nil {
+		return fmt.Errorf("invalid ConnectionAccount discriminator kind: %w", err)
+	}
+	if kind == nil {
+		return fmt.Errorf("null ConnectionAccount discriminator kind")
+	}
+	switch *kind {
+	case "deposit":
+		var value DepositAccount
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal ConnectionAccount as DepositAccount: %w", err)
 		}
-	} else {
-		dst.DepositAccount = nil
-	}
-
-	// try to unmarshal data into InvestmentAccount
-	err = newStrictDecoder(data).Decode(&dst.InvestmentAccount)
-	if err == nil {
-		jsonInvestmentAccount, _ := json.Marshal(dst.InvestmentAccount)
-		if string(jsonInvestmentAccount) == "{}" { // empty struct
-			dst.InvestmentAccount = nil
-		} else {
-			match++
+		dst.DepositAccount = &value
+	case "investment":
+		var value InvestmentAccount
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal ConnectionAccount as InvestmentAccount: %w", err)
 		}
-	} else {
-		dst.InvestmentAccount = nil
-	}
-
-	// try to unmarshal data into LineOfCreditAccount
-	err = newStrictDecoder(data).Decode(&dst.LineOfCreditAccount)
-	if err == nil {
-		jsonLineOfCreditAccount, _ := json.Marshal(dst.LineOfCreditAccount)
-		if string(jsonLineOfCreditAccount) == "{}" { // empty struct
-			dst.LineOfCreditAccount = nil
-		} else {
-			match++
+		dst.InvestmentAccount = &value
+	case "line_of_credit":
+		var value LineOfCreditAccount
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal ConnectionAccount as LineOfCreditAccount: %w", err)
 		}
-	} else {
-		dst.LineOfCreditAccount = nil
+		dst.LineOfCreditAccount = &value
+	default:
+		return fmt.Errorf("unknown ConnectionAccount discriminator kind: %q", *kind)
 	}
-
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.DepositAccount = nil
-		dst.InvestmentAccount = nil
-		dst.LineOfCreditAccount = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ConnectionAccount)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(ConnectionAccount)")
-	}
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

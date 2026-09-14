@@ -393,29 +393,30 @@ func (o USExchange) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *USExchange) UnmarshalJSON(bytes []byte) (err error) {
-	varUSExchange := _USExchange{}
-
-	if err = json.Unmarshal(bytes, &varUSExchange); err == nil {
-		*o = USExchange(varUSExchange)
+func (o *USExchange) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _USExchange{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "mic_code")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "timezone")
-		delete(additionalProperties, "start_time")
-		delete(additionalProperties, "close_time")
-		delete(additionalProperties, "suffix")
-		delete(additionalProperties, "allows_cryptocurrency_symbols")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "code")
+	delete(additionalProperties, "mic_code")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "timezone")
+	delete(additionalProperties, "start_time")
+	delete(additionalProperties, "close_time")
+	delete(additionalProperties, "suffix")
+	delete(additionalProperties, "allows_cryptocurrency_symbols")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = USExchange(decoded)
+	return nil
 }
 
 type NullableUSExchange struct {

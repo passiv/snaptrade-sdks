@@ -14,6 +14,7 @@ package snaptrade
 import (
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 // AccountOrderRecord Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
@@ -1162,45 +1163,74 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountOrderRecord := _AccountOrderRecord{}
-
-	if err = json.Unmarshal(bytes, &varAccountOrderRecord); err == nil {
-		*o = AccountOrderRecord(varAccountOrderRecord)
+func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "brokerage_order_id")
-		delete(additionalProperties, "brokerage_group_order_id")
-		delete(additionalProperties, "order_role")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "universal_symbol")
-		delete(additionalProperties, "option_symbol")
-		delete(additionalProperties, "quote_universal_symbol")
-		delete(additionalProperties, "quote_currency")
-		delete(additionalProperties, "action")
-		delete(additionalProperties, "total_quantity")
-		delete(additionalProperties, "open_quantity")
-		delete(additionalProperties, "canceled_quantity")
-		delete(additionalProperties, "filled_quantity")
-		delete(additionalProperties, "execution_price")
-		delete(additionalProperties, "limit_price")
-		delete(additionalProperties, "stop_price")
-		delete(additionalProperties, "trailing_stop")
-		delete(additionalProperties, "order_type")
-		delete(additionalProperties, "time_in_force")
-		delete(additionalProperties, "time_placed")
-		delete(additionalProperties, "time_updated")
-		delete(additionalProperties, "time_executed")
-		delete(additionalProperties, "expiry_date")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "child_brokerage_order_ids")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "execution_price", "limit_price", "stop_price",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("AccountOrderRecord.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("AccountOrderRecord.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _AccountOrderRecord{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "brokerage_order_id")
+	delete(additionalProperties, "brokerage_group_order_id")
+	delete(additionalProperties, "order_role")
+	delete(additionalProperties, "status")
+	delete(additionalProperties, "universal_symbol")
+	delete(additionalProperties, "option_symbol")
+	delete(additionalProperties, "quote_universal_symbol")
+	delete(additionalProperties, "quote_currency")
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "total_quantity")
+	delete(additionalProperties, "open_quantity")
+	delete(additionalProperties, "canceled_quantity")
+	delete(additionalProperties, "filled_quantity")
+	delete(additionalProperties, "execution_price")
+	delete(additionalProperties, "limit_price")
+	delete(additionalProperties, "stop_price")
+	delete(additionalProperties, "trailing_stop")
+	delete(additionalProperties, "order_type")
+	delete(additionalProperties, "time_in_force")
+	delete(additionalProperties, "time_placed")
+	delete(additionalProperties, "time_updated")
+	delete(additionalProperties, "time_executed")
+	delete(additionalProperties, "expiry_date")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "child_brokerage_order_ids")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountOrderRecord(decoded)
+	return nil
 }
 
 type NullableAccountOrderRecord struct {

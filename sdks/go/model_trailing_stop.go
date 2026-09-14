@@ -109,22 +109,23 @@ func (o TrailingStop) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *TrailingStop) UnmarshalJSON(bytes []byte) (err error) {
-	varTrailingStop := _TrailingStop{}
-
-	if err = json.Unmarshal(bytes, &varTrailingStop); err == nil {
-		*o = TrailingStop(varTrailingStop)
+func (o *TrailingStop) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _TrailingStop{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "type")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "type")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = TrailingStop(decoded)
+	return nil
 }
 
 type NullableTrailingStop struct {

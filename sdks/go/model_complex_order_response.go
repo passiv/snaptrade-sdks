@@ -133,22 +133,23 @@ func (o ComplexOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ComplexOrderResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varComplexOrderResponse := _ComplexOrderResponse{}
-
-	if err = json.Unmarshal(bytes, &varComplexOrderResponse); err == nil {
-		*o = ComplexOrderResponse(varComplexOrderResponse)
+func (o *ComplexOrderResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ComplexOrderResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "brokerage_group_order_id")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "type")
+	delete(additionalProperties, "brokerage_group_order_id")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ComplexOrderResponse(decoded)
+	return nil
 }
 
 type NullableComplexOrderResponse struct {

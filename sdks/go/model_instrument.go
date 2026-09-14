@@ -111,171 +111,104 @@ func StockInstrumentAsInstrument(v *StockInstrument) Instrument {
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *Instrument) UnmarshalJSON(data []byte) error {
-	var err error
-	match := 0
-	// try to unmarshal data into AdrInstrument
-	err = newStrictDecoder(data).Decode(&dst.AdrInstrument)
-	if err == nil {
-		jsonAdrInstrument, _ := json.Marshal(dst.AdrInstrument)
-		if string(jsonAdrInstrument) == "{}" { // empty struct
-			dst.AdrInstrument = nil
-		} else {
-			match++
+	// Select by the discriminator's wire value, not by overlapping field shapes.
+	// Clear previous members so reuse or a failed decode cannot expose an old kind.
+	*dst = Instrument{}
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(data, &fields); err != nil {
+		return fmt.Errorf("failed to decode Instrument discriminator: %w", err)
+	}
+	if fields == nil {
+		return fmt.Errorf("Instrument cannot be null")
+	}
+	raw, present := fields["kind"]
+	if !present {
+		return fmt.Errorf("missing Instrument discriminator kind")
+	}
+	var kind *string
+	if err := json.Unmarshal(raw, &kind); err != nil {
+		return fmt.Errorf("invalid Instrument discriminator kind: %w", err)
+	}
+	if kind == nil {
+		return fmt.Errorf("null Instrument discriminator kind")
+	}
+	switch *kind {
+	case "adr":
+		var value AdrInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as AdrInstrument: %w", err)
 		}
-	} else {
-		dst.AdrInstrument = nil
-	}
-
-	// try to unmarshal data into CefInstrument
-	err = newStrictDecoder(data).Decode(&dst.CefInstrument)
-	if err == nil {
-		jsonCefInstrument, _ := json.Marshal(dst.CefInstrument)
-		if string(jsonCefInstrument) == "{}" { // empty struct
-			dst.CefInstrument = nil
-		} else {
-			match++
+		dst.AdrInstrument = &value
+	case "bond":
+		var value OtherInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as OtherInstrument: %w", err)
 		}
-	} else {
-		dst.CefInstrument = nil
-	}
-
-	// try to unmarshal data into CfdInstrument
-	err = newStrictDecoder(data).Decode(&dst.CfdInstrument)
-	if err == nil {
-		jsonCfdInstrument, _ := json.Marshal(dst.CfdInstrument)
-		if string(jsonCfdInstrument) == "{}" { // empty struct
-			dst.CfdInstrument = nil
-		} else {
-			match++
+		dst.OtherInstrument = &value
+	case "cef":
+		var value CefInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as CefInstrument: %w", err)
 		}
-	} else {
-		dst.CfdInstrument = nil
-	}
-
-	// try to unmarshal data into CryptoInstrument
-	err = newStrictDecoder(data).Decode(&dst.CryptoInstrument)
-	if err == nil {
-		jsonCryptoInstrument, _ := json.Marshal(dst.CryptoInstrument)
-		if string(jsonCryptoInstrument) == "{}" { // empty struct
-			dst.CryptoInstrument = nil
-		} else {
-			match++
+		dst.CefInstrument = &value
+	case "cfd":
+		var value CfdInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as CfdInstrument: %w", err)
 		}
-	} else {
-		dst.CryptoInstrument = nil
-	}
-
-	// try to unmarshal data into EtfInstrument
-	err = newStrictDecoder(data).Decode(&dst.EtfInstrument)
-	if err == nil {
-		jsonEtfInstrument, _ := json.Marshal(dst.EtfInstrument)
-		if string(jsonEtfInstrument) == "{}" { // empty struct
-			dst.EtfInstrument = nil
-		} else {
-			match++
+		dst.CfdInstrument = &value
+	case "crypto":
+		var value CryptoInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as CryptoInstrument: %w", err)
 		}
-	} else {
-		dst.EtfInstrument = nil
-	}
-
-	// try to unmarshal data into FutureInstrument
-	err = newStrictDecoder(data).Decode(&dst.FutureInstrument)
-	if err == nil {
-		jsonFutureInstrument, _ := json.Marshal(dst.FutureInstrument)
-		if string(jsonFutureInstrument) == "{}" { // empty struct
-			dst.FutureInstrument = nil
-		} else {
-			match++
+		dst.CryptoInstrument = &value
+	case "etf":
+		var value EtfInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as EtfInstrument: %w", err)
 		}
-	} else {
-		dst.FutureInstrument = nil
-	}
-
-	// try to unmarshal data into FutureOptionInstrument
-	err = newStrictDecoder(data).Decode(&dst.FutureOptionInstrument)
-	if err == nil {
-		jsonFutureOptionInstrument, _ := json.Marshal(dst.FutureOptionInstrument)
-		if string(jsonFutureOptionInstrument) == "{}" { // empty struct
-			dst.FutureOptionInstrument = nil
-		} else {
-			match++
+		dst.EtfInstrument = &value
+	case "future":
+		var value FutureInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as FutureInstrument: %w", err)
 		}
-	} else {
-		dst.FutureOptionInstrument = nil
-	}
-
-	// try to unmarshal data into MutualFundInstrument
-	err = newStrictDecoder(data).Decode(&dst.MutualFundInstrument)
-	if err == nil {
-		jsonMutualFundInstrument, _ := json.Marshal(dst.MutualFundInstrument)
-		if string(jsonMutualFundInstrument) == "{}" { // empty struct
-			dst.MutualFundInstrument = nil
-		} else {
-			match++
+		dst.FutureInstrument = &value
+	case "future_option":
+		var value FutureOptionInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as FutureOptionInstrument: %w", err)
 		}
-	} else {
-		dst.MutualFundInstrument = nil
-	}
-
-	// try to unmarshal data into OptionInstrument
-	err = newStrictDecoder(data).Decode(&dst.OptionInstrument)
-	if err == nil {
-		jsonOptionInstrument, _ := json.Marshal(dst.OptionInstrument)
-		if string(jsonOptionInstrument) == "{}" { // empty struct
-			dst.OptionInstrument = nil
-		} else {
-			match++
+		dst.FutureOptionInstrument = &value
+	case "mutualfund":
+		var value MutualFundInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as MutualFundInstrument: %w", err)
 		}
-	} else {
-		dst.OptionInstrument = nil
-	}
-
-	// try to unmarshal data into OtherInstrument
-	err = newStrictDecoder(data).Decode(&dst.OtherInstrument)
-	if err == nil {
-		jsonOtherInstrument, _ := json.Marshal(dst.OtherInstrument)
-		if string(jsonOtherInstrument) == "{}" { // empty struct
-			dst.OtherInstrument = nil
-		} else {
-			match++
+		dst.MutualFundInstrument = &value
+	case "option":
+		var value OptionInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as OptionInstrument: %w", err)
 		}
-	} else {
-		dst.OtherInstrument = nil
-	}
-
-	// try to unmarshal data into StockInstrument
-	err = newStrictDecoder(data).Decode(&dst.StockInstrument)
-	if err == nil {
-		jsonStockInstrument, _ := json.Marshal(dst.StockInstrument)
-		if string(jsonStockInstrument) == "{}" { // empty struct
-			dst.StockInstrument = nil
-		} else {
-			match++
+		dst.OptionInstrument = &value
+	case "other":
+		var value OtherInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as OtherInstrument: %w", err)
 		}
-	} else {
-		dst.StockInstrument = nil
+		dst.OtherInstrument = &value
+	case "stock":
+		var value StockInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as StockInstrument: %w", err)
+		}
+		dst.StockInstrument = &value
+	default:
+		return fmt.Errorf("unknown Instrument discriminator kind: %q", *kind)
 	}
-
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.AdrInstrument = nil
-		dst.CefInstrument = nil
-		dst.CfdInstrument = nil
-		dst.CryptoInstrument = nil
-		dst.EtfInstrument = nil
-		dst.FutureInstrument = nil
-		dst.FutureOptionInstrument = nil
-		dst.MutualFundInstrument = nil
-		dst.OptionInstrument = nil
-		dst.OtherInstrument = nil
-		dst.StockInstrument = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(Instrument)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(Instrument)")
-	}
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON

@@ -277,26 +277,27 @@ func (o AccountHoldingsAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountHoldingsAccount) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountHoldingsAccount := _AccountHoldingsAccount{}
-
-	if err = json.Unmarshal(bytes, &varAccountHoldingsAccount); err == nil {
-		*o = AccountHoldingsAccount(varAccountHoldingsAccount)
+func (o *AccountHoldingsAccount) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _AccountHoldingsAccount{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "account")
-		delete(additionalProperties, "balances")
-		delete(additionalProperties, "positions")
-		delete(additionalProperties, "option_positions")
-		delete(additionalProperties, "orders")
-		delete(additionalProperties, "total_value")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "account")
+	delete(additionalProperties, "balances")
+	delete(additionalProperties, "positions")
+	delete(additionalProperties, "option_positions")
+	delete(additionalProperties, "orders")
+	delete(additionalProperties, "total_value")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountHoldingsAccount(decoded)
+	return nil
 }
 
 type NullableAccountHoldingsAccount struct {

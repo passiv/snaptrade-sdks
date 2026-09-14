@@ -2,3 +2,5 @@ test/getting_started_test.go
 request_hooks.go
 model_holdings_status.go
 utils.go
+test/account_positions_regression_test.go
+test/connection_decoding_regression_test.go

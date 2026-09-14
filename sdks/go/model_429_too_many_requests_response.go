@@ -160,23 +160,24 @@ func (o Model429TooManyRequestsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Model429TooManyRequestsResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varModel429TooManyRequestsResponse := _Model429TooManyRequestsResponse{}
-
-	if err = json.Unmarshal(bytes, &varModel429TooManyRequestsResponse); err == nil {
-		*o = Model429TooManyRequestsResponse(varModel429TooManyRequestsResponse)
+func (o *Model429TooManyRequestsResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Model429TooManyRequestsResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "status_code")
-		delete(additionalProperties, "code")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "status_code")
+	delete(additionalProperties, "code")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Model429TooManyRequestsResponse(decoded)
+	return nil
 }
 
 type NullableModel429TooManyRequestsResponse struct {

@@ -123,22 +123,23 @@ func (o Model402BrokerageAuthDisabledResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Model402BrokerageAuthDisabledResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varModel402BrokerageAuthDisabledResponse := _Model402BrokerageAuthDisabledResponse{}
-
-	if err = json.Unmarshal(bytes, &varModel402BrokerageAuthDisabledResponse); err == nil {
-		*o = Model402BrokerageAuthDisabledResponse(varModel402BrokerageAuthDisabledResponse)
+func (o *Model402BrokerageAuthDisabledResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Model402BrokerageAuthDisabledResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "code")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "code")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Model402BrokerageAuthDisabledResponse(decoded)
+	return nil
 }
 
 type NullableModel402BrokerageAuthDisabledResponse struct {

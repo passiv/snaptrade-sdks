@@ -356,28 +356,29 @@ func (o CefInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CefInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varCefInstrument := _CefInstrument{}
-
-	if err = json.Unmarshal(bytes, &varCefInstrument); err == nil {
-		*o = CefInstrument(varCefInstrument)
+func (o *CefInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _CefInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "raw_symbol")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "exchange")
-		delete(additionalProperties, "figi_instrument")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "raw_symbol")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "exchange")
+	delete(additionalProperties, "figi_instrument")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CefInstrument(decoded)
+	return nil
 }
 
 type NullableCefInstrument struct {

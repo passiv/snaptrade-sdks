@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // MlegTradeForm Inputs for placing a multi-leg order with the brokerage.
@@ -26,6 +27,8 @@ type MlegTradeForm struct {
 	PriceEffect NullableMlegPriceEffectStrictNullable `json:"price_effect,omitempty"`
 	Legs []MlegLeg `json:"legs"`
 }
+
+type _MlegTradeForm MlegTradeForm
 
 // NewMlegTradeForm instantiates a new MlegTradeForm object
 // This constructor will assign default values to properties that have it defined,
@@ -266,6 +269,46 @@ func (o MlegTradeForm) MarshalJSON() ([]byte, error) {
 		toSerialize["legs"] = o.Legs
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o *MlegTradeForm) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
+	}
+	for _, name := range []string{ "limit_price", "stop_price",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("MlegTradeForm.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("MlegTradeForm.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
+	}
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _MlegTradeForm{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = MlegTradeForm(decoded)
+	return nil
 }
 
 type NullableMlegTradeForm struct {

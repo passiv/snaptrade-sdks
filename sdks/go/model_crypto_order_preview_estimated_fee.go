@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // CryptoOrderPreviewEstimatedFee The estimated order fee.
@@ -108,22 +109,51 @@ func (o CryptoOrderPreviewEstimatedFee) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CryptoOrderPreviewEstimatedFee) UnmarshalJSON(bytes []byte) (err error) {
-	varCryptoOrderPreviewEstimatedFee := _CryptoOrderPreviewEstimatedFee{}
-
-	if err = json.Unmarshal(bytes, &varCryptoOrderPreviewEstimatedFee); err == nil {
-		*o = CryptoOrderPreviewEstimatedFee(varCryptoOrderPreviewEstimatedFee)
+func (o *CryptoOrderPreviewEstimatedFee) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "amount")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "amount",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("CryptoOrderPreviewEstimatedFee.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("CryptoOrderPreviewEstimatedFee.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _CryptoOrderPreviewEstimatedFee{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "amount")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CryptoOrderPreviewEstimatedFee(decoded)
+	return nil
 }
 
 type NullableCryptoOrderPreviewEstimatedFee struct {

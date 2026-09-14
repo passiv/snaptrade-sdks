@@ -117,22 +117,23 @@ func (o CancelOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CancelOrderResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varCancelOrderResponse := _CancelOrderResponse{}
-
-	if err = json.Unmarshal(bytes, &varCancelOrderResponse); err == nil {
-		*o = CancelOrderResponse(varCancelOrderResponse)
+func (o *CancelOrderResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _CancelOrderResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "brokerage_order_id")
-		delete(additionalProperties, "raw_response")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "brokerage_order_id")
+	delete(additionalProperties, "raw_response")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CancelOrderResponse(decoded)
+	return nil
 }
 
 type NullableCancelOrderResponse struct {

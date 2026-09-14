@@ -141,22 +141,23 @@ func (o LineOfCreditAccountAvailableCredit) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *LineOfCreditAccountAvailableCredit) UnmarshalJSON(bytes []byte) (err error) {
-	varLineOfCreditAccountAvailableCredit := _LineOfCreditAccountAvailableCredit{}
-
-	if err = json.Unmarshal(bytes, &varLineOfCreditAccountAvailableCredit); err == nil {
-		*o = LineOfCreditAccountAvailableCredit(varLineOfCreditAccountAvailableCredit)
+func (o *LineOfCreditAccountAvailableCredit) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _LineOfCreditAccountAvailableCredit{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = LineOfCreditAccountAvailableCredit(decoded)
+	return nil
 }
 
 type NullableLineOfCreditAccountAvailableCredit struct {

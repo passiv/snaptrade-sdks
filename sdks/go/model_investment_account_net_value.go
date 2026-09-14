@@ -141,22 +141,23 @@ func (o InvestmentAccountNetValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *InvestmentAccountNetValue) UnmarshalJSON(bytes []byte) (err error) {
-	varInvestmentAccountNetValue := _InvestmentAccountNetValue{}
-
-	if err = json.Unmarshal(bytes, &varInvestmentAccountNetValue); err == nil {
-		*o = InvestmentAccountNetValue(varInvestmentAccountNetValue)
+func (o *InvestmentAccountNetValue) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _InvestmentAccountNetValue{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = InvestmentAccountNetValue(decoded)
+	return nil
 }
 
 type NullableInvestmentAccountNetValue struct {

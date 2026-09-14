@@ -108,22 +108,23 @@ func (o MlegOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *MlegOrderResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varMlegOrderResponse := _MlegOrderResponse{}
-
-	if err = json.Unmarshal(bytes, &varMlegOrderResponse); err == nil {
-		*o = MlegOrderResponse(varMlegOrderResponse)
+func (o *MlegOrderResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _MlegOrderResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "brokerage_order_id")
-		delete(additionalProperties, "orders")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "brokerage_order_id")
+	delete(additionalProperties, "orders")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = MlegOrderResponse(decoded)
+	return nil
 }
 
 type NullableMlegOrderResponse struct {

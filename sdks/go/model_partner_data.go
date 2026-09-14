@@ -517,32 +517,33 @@ func (o PartnerData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *PartnerData) UnmarshalJSON(bytes []byte) (err error) {
-	varPartnerData := _PartnerData{}
-
-	if err = json.Unmarshal(bytes, &varPartnerData); err == nil {
-		*o = PartnerData(varPartnerData)
+func (o *PartnerData) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _PartnerData{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "slug")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "logo_url")
-		delete(additionalProperties, "allowed_brokerages")
-		delete(additionalProperties, "can_access_trades")
-		delete(additionalProperties, "can_access_holdings")
-		delete(additionalProperties, "can_access_account_history")
-		delete(additionalProperties, "can_access_reference_data")
-		delete(additionalProperties, "can_access_portfolio_management")
-		delete(additionalProperties, "can_access_orders")
-		delete(additionalProperties, "redirect_uri")
-		delete(additionalProperties, "pin_required")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "slug")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "logo_url")
+	delete(additionalProperties, "allowed_brokerages")
+	delete(additionalProperties, "can_access_trades")
+	delete(additionalProperties, "can_access_holdings")
+	delete(additionalProperties, "can_access_account_history")
+	delete(additionalProperties, "can_access_reference_data")
+	delete(additionalProperties, "can_access_portfolio_management")
+	delete(additionalProperties, "can_access_orders")
+	delete(additionalProperties, "redirect_uri")
+	delete(additionalProperties, "pin_required")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = PartnerData(decoded)
+	return nil
 }
 
 type NullablePartnerData struct {

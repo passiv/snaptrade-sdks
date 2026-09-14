@@ -85,21 +85,22 @@ func (o TakeProfit) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *TakeProfit) UnmarshalJSON(bytes []byte) (err error) {
-	varTakeProfit := _TakeProfit{}
-
-	if err = json.Unmarshal(bytes, &varTakeProfit); err == nil {
-		*o = TakeProfit(varTakeProfit)
+func (o *TakeProfit) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _TakeProfit{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "limit_price")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "limit_price")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = TakeProfit(decoded)
+	return nil
 }
 
 type NullableTakeProfit struct {
