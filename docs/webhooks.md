@@ -216,7 +216,7 @@ Example payload is below.
 
 ## CONNECTION_DELETED
 
-Sent when a user deletes an existing connection using the SnapTrade connection portal.
+Sent when a user deletes an existing connection.
 
 Example payload is below:
 
