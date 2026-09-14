@@ -86,21 +86,22 @@ func (o RecentOrdersResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *RecentOrdersResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varRecentOrdersResponse := _RecentOrdersResponse{}
-
-	if err = json.Unmarshal(bytes, &varRecentOrdersResponse); err == nil {
-		*o = RecentOrdersResponse(varRecentOrdersResponse)
+func (o *RecentOrdersResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _RecentOrdersResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "orders")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "orders")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = RecentOrdersResponse(decoded)
+	return nil
 }
 
 type NullableRecentOrdersResponse struct {

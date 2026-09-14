@@ -406,31 +406,32 @@ func (o OAuthWebhookBase) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OAuthWebhookBase) UnmarshalJSON(bytes []byte) (err error) {
-	varOAuthWebhookBase := _OAuthWebhookBase{}
-
-	if err = json.Unmarshal(bytes, &varOAuthWebhookBase); err == nil {
-		*o = OAuthWebhookBase(varOAuthWebhookBase)
+func (o *OAuthWebhookBase) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OAuthWebhookBase{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "schemaVersion")
-		delete(additionalProperties, "webhookId")
-		delete(additionalProperties, "oauthClientId")
-		delete(additionalProperties, "eventTimestamp")
-		delete(additionalProperties, "userId")
-		delete(additionalProperties, "eventType")
-		delete(additionalProperties, "accountId")
-		delete(additionalProperties, "connectionId")
-		delete(additionalProperties, "brokerageId")
-		delete(additionalProperties, "connectionAttemptedResult")
-		delete(additionalProperties, "details")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "schemaVersion")
+	delete(additionalProperties, "webhookId")
+	delete(additionalProperties, "oauthClientId")
+	delete(additionalProperties, "eventTimestamp")
+	delete(additionalProperties, "userId")
+	delete(additionalProperties, "eventType")
+	delete(additionalProperties, "accountId")
+	delete(additionalProperties, "connectionId")
+	delete(additionalProperties, "brokerageId")
+	delete(additionalProperties, "connectionAttemptedResult")
+	delete(additionalProperties, "details")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OAuthWebhookBase(decoded)
+	return nil
 }
 
 type NullableOAuthWebhookBase struct {

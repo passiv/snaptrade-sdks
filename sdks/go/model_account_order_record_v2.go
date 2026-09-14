@@ -14,6 +14,7 @@ package snaptrade
 import (
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 // AccountOrderRecordV2 Describes a single order in the standardized V2 format.
@@ -675,35 +676,64 @@ func (o AccountOrderRecordV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountOrderRecordV2) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountOrderRecordV2 := _AccountOrderRecordV2{}
-
-	if err = json.Unmarshal(bytes, &varAccountOrderRecordV2); err == nil {
-		*o = AccountOrderRecordV2(varAccountOrderRecordV2)
+func (o *AccountOrderRecordV2) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "brokerage_order_id")
-		delete(additionalProperties, "brokerage_group_order_id")
-		delete(additionalProperties, "order_role")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "order_type")
-		delete(additionalProperties, "time_in_force")
-		delete(additionalProperties, "time_placed")
-		delete(additionalProperties, "time_executed")
-		delete(additionalProperties, "price_currency")
-		delete(additionalProperties, "price_effect")
-		delete(additionalProperties, "execution_price")
-		delete(additionalProperties, "limit_price")
-		delete(additionalProperties, "stop_price")
-		delete(additionalProperties, "trailing_stop")
-		delete(additionalProperties, "legs")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "execution_price", "limit_price", "stop_price",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("AccountOrderRecordV2.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("AccountOrderRecordV2.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _AccountOrderRecordV2{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "brokerage_order_id")
+	delete(additionalProperties, "brokerage_group_order_id")
+	delete(additionalProperties, "order_role")
+	delete(additionalProperties, "status")
+	delete(additionalProperties, "order_type")
+	delete(additionalProperties, "time_in_force")
+	delete(additionalProperties, "time_placed")
+	delete(additionalProperties, "time_executed")
+	delete(additionalProperties, "price_currency")
+	delete(additionalProperties, "price_effect")
+	delete(additionalProperties, "execution_price")
+	delete(additionalProperties, "limit_price")
+	delete(additionalProperties, "stop_price")
+	delete(additionalProperties, "trailing_stop")
+	delete(additionalProperties, "legs")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountOrderRecordV2(decoded)
+	return nil
 }
 
 type NullableAccountOrderRecordV2 struct {

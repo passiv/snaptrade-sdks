@@ -227,24 +227,25 @@ func (o ConnectionAccountSyncStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ConnectionAccountSyncStatus) UnmarshalJSON(bytes []byte) (err error) {
-	varConnectionAccountSyncStatus := _ConnectionAccountSyncStatus{}
-
-	if err = json.Unmarshal(bytes, &varConnectionAccountSyncStatus); err == nil {
-		*o = ConnectionAccountSyncStatus(varConnectionAccountSyncStatus)
+func (o *ConnectionAccountSyncStatus) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ConnectionAccountSyncStatus{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "transactions")
-		delete(additionalProperties, "orders")
-		delete(additionalProperties, "positions")
-		delete(additionalProperties, "balances")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "transactions")
+	delete(additionalProperties, "orders")
+	delete(additionalProperties, "positions")
+	delete(additionalProperties, "balances")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ConnectionAccountSyncStatus(decoded)
+	return nil
 }
 
 type NullableConnectionAccountSyncStatus struct {

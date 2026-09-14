@@ -123,22 +123,23 @@ func (o Model403FeatureNotEnabledResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Model403FeatureNotEnabledResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varModel403FeatureNotEnabledResponse := _Model403FeatureNotEnabledResponse{}
-
-	if err = json.Unmarshal(bytes, &varModel403FeatureNotEnabledResponse); err == nil {
-		*o = Model403FeatureNotEnabledResponse(varModel403FeatureNotEnabledResponse)
+func (o *Model403FeatureNotEnabledResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Model403FeatureNotEnabledResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "default_code")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "default_code")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Model403FeatureNotEnabledResponse(decoded)
+	return nil
 }
 
 type NullableModel403FeatureNotEnabledResponse struct {

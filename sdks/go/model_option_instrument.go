@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // OptionInstrument Option instrument metadata for a V2 position.
@@ -335,29 +336,58 @@ func (o OptionInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionInstrument := _OptionInstrument{}
-
-	if err = json.Unmarshal(bytes, &varOptionInstrument); err == nil {
-		*o = OptionInstrument(varOptionInstrument)
+func (o *OptionInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "option_type")
-		delete(additionalProperties, "strike_price")
-		delete(additionalProperties, "expiration_date")
-		delete(additionalProperties, "multiplier")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "underlying")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "strike_price", "multiplier",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("OptionInstrument.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("OptionInstrument.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _OptionInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "option_type")
+	delete(additionalProperties, "strike_price")
+	delete(additionalProperties, "expiration_date")
+	delete(additionalProperties, "multiplier")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "underlying")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionInstrument(decoded)
+	return nil
 }
 
 type NullableOptionInstrument struct {

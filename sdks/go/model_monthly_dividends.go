@@ -122,22 +122,23 @@ func (o MonthlyDividends) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *MonthlyDividends) UnmarshalJSON(bytes []byte) (err error) {
-	varMonthlyDividends := _MonthlyDividends{}
-
-	if err = json.Unmarshal(bytes, &varMonthlyDividends); err == nil {
-		*o = MonthlyDividends(varMonthlyDividends)
+func (o *MonthlyDividends) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _MonthlyDividends{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "date")
-		delete(additionalProperties, "dividends")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "date")
+	delete(additionalProperties, "dividends")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = MonthlyDividends(decoded)
+	return nil
 }
 
 type NullableMonthlyDividends struct {

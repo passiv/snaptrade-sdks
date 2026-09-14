@@ -201,24 +201,25 @@ func (o SecurityType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *SecurityType) UnmarshalJSON(bytes []byte) (err error) {
-	varSecurityType := _SecurityType{}
-
-	if err = json.Unmarshal(bytes, &varSecurityType); err == nil {
-		*o = SecurityType(varSecurityType)
+func (o *SecurityType) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _SecurityType{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "is_supported")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "code")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "is_supported")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = SecurityType(decoded)
+	return nil
 }
 
 type NullableSecurityType struct {

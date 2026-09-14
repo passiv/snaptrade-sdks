@@ -121,22 +121,23 @@ func (o PaginatedUniversalActivity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *PaginatedUniversalActivity) UnmarshalJSON(bytes []byte) (err error) {
-	varPaginatedUniversalActivity := _PaginatedUniversalActivity{}
-
-	if err = json.Unmarshal(bytes, &varPaginatedUniversalActivity); err == nil {
-		*o = PaginatedUniversalActivity(varPaginatedUniversalActivity)
+func (o *PaginatedUniversalActivity) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _PaginatedUniversalActivity{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "data")
-		delete(additionalProperties, "pagination")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "data")
+	delete(additionalProperties, "pagination")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = PaginatedUniversalActivity(decoded)
+	return nil
 }
 
 type NullablePaginatedUniversalActivity struct {

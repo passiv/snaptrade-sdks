@@ -137,23 +137,24 @@ func (o MlegLeg) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *MlegLeg) UnmarshalJSON(bytes []byte) (err error) {
-	varMlegLeg := _MlegLeg{}
-
-	if err = json.Unmarshal(bytes, &varMlegLeg); err == nil {
-		*o = MlegLeg(varMlegLeg)
+func (o *MlegLeg) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _MlegLeg{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "instrument")
-		delete(additionalProperties, "action")
-		delete(additionalProperties, "units")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "instrument")
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "units")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = MlegLeg(decoded)
+	return nil
 }
 
 type NullableMlegLeg struct {

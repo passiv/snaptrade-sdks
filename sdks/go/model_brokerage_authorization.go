@@ -473,31 +473,32 @@ func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *BrokerageAuthorization) UnmarshalJSON(bytes []byte) (err error) {
-	varBrokerageAuthorization := _BrokerageAuthorization{}
-
-	if err = json.Unmarshal(bytes, &varBrokerageAuthorization); err == nil {
-		*o = BrokerageAuthorization(varBrokerageAuthorization)
+func (o *BrokerageAuthorization) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _BrokerageAuthorization{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "created_date")
-		delete(additionalProperties, "brokerage")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "disabled")
-		delete(additionalProperties, "disabled_date")
-		delete(additionalProperties, "meta")
-		delete(additionalProperties, "updated_date")
-		delete(additionalProperties, "is_eligible_for_payout")
-		delete(additionalProperties, "data_freshness_mode")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "created_date")
+	delete(additionalProperties, "brokerage")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "type")
+	delete(additionalProperties, "disabled")
+	delete(additionalProperties, "disabled_date")
+	delete(additionalProperties, "meta")
+	delete(additionalProperties, "updated_date")
+	delete(additionalProperties, "is_eligible_for_payout")
+	delete(additionalProperties, "data_freshness_mode")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = BrokerageAuthorization(decoded)
+	return nil
 }
 
 type NullableBrokerageAuthorization struct {

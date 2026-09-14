@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // FutureOptionInstrument Future option (option on a futures contract) instrument metadata for a V2 position.  **Beta:** currently returned only for tastytrade and Interactive Brokers connections, and only for partners it has been enabled for. This schema may change. 
@@ -446,31 +447,60 @@ func (o FutureOptionInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *FutureOptionInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varFutureOptionInstrument := _FutureOptionInstrument{}
-
-	if err = json.Unmarshal(bytes, &varFutureOptionInstrument); err == nil {
-		*o = FutureOptionInstrument(varFutureOptionInstrument)
+func (o *FutureOptionInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "option_type")
-		delete(additionalProperties, "strike_price")
-		delete(additionalProperties, "expiration_date")
-		delete(additionalProperties, "multiplier")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "exchange")
-		delete(additionalProperties, "underlying")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "strike_price", "multiplier",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("FutureOptionInstrument.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("FutureOptionInstrument.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _FutureOptionInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "kind")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "option_type")
+	delete(additionalProperties, "strike_price")
+	delete(additionalProperties, "expiration_date")
+	delete(additionalProperties, "multiplier")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "exchange")
+	delete(additionalProperties, "underlying")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = FutureOptionInstrument(decoded)
+	return nil
 }
 
 type NullableFutureOptionInstrument struct {

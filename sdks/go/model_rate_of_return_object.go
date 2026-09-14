@@ -161,23 +161,24 @@ func (o RateOfReturnObject) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *RateOfReturnObject) UnmarshalJSON(bytes []byte) (err error) {
-	varRateOfReturnObject := _RateOfReturnObject{}
-
-	if err = json.Unmarshal(bytes, &varRateOfReturnObject); err == nil {
-		*o = RateOfReturnObject(varRateOfReturnObject)
+func (o *RateOfReturnObject) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _RateOfReturnObject{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "timeframe")
-		delete(additionalProperties, "return_percent")
-		delete(additionalProperties, "created_date")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "timeframe")
+	delete(additionalProperties, "return_percent")
+	delete(additionalProperties, "created_date")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = RateOfReturnObject(decoded)
+	return nil
 }
 
 type NullableRateOfReturnObject struct {

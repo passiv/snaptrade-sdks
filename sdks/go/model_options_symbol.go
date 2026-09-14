@@ -265,27 +265,28 @@ func (o OptionsSymbol) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionsSymbol) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionsSymbol := _OptionsSymbol{}
-
-	if err = json.Unmarshal(bytes, &varOptionsSymbol); err == nil {
-		*o = OptionsSymbol(varOptionsSymbol)
+func (o *OptionsSymbol) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionsSymbol{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "ticker")
-		delete(additionalProperties, "option_type")
-		delete(additionalProperties, "strike_price")
-		delete(additionalProperties, "expiration_date")
-		delete(additionalProperties, "is_mini_option")
-		delete(additionalProperties, "underlying_symbol")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "ticker")
+	delete(additionalProperties, "option_type")
+	delete(additionalProperties, "strike_price")
+	delete(additionalProperties, "expiration_date")
+	delete(additionalProperties, "is_mini_option")
+	delete(additionalProperties, "underlying_symbol")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionsSymbol(decoded)
+	return nil
 }
 
 type NullableOptionsSymbol struct {

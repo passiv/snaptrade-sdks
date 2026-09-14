@@ -160,23 +160,24 @@ func (o Model503BrokerageRequestResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Model503BrokerageRequestResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varModel503BrokerageRequestResponse := _Model503BrokerageRequestResponse{}
-
-	if err = json.Unmarshal(bytes, &varModel503BrokerageRequestResponse); err == nil {
-		*o = Model503BrokerageRequestResponse(varModel503BrokerageRequestResponse)
+func (o *Model503BrokerageRequestResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Model503BrokerageRequestResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "status_code")
-		delete(additionalProperties, "code")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "status_code")
+	delete(additionalProperties, "code")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Model503BrokerageRequestResponse(decoded)
+	return nil
 }
 
 type NullableModel503BrokerageRequestResponse struct {

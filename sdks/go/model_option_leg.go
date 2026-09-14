@@ -158,23 +158,24 @@ func (o OptionLeg) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionLeg) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionLeg := _OptionLeg{}
-
-	if err = json.Unmarshal(bytes, &varOptionLeg); err == nil {
-		*o = OptionLeg(varOptionLeg)
+func (o *OptionLeg) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionLeg{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "action")
-		delete(additionalProperties, "option_symbol_id")
-		delete(additionalProperties, "quantity")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "option_symbol_id")
+	delete(additionalProperties, "quantity")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionLeg(decoded)
+	return nil
 }
 
 type NullableOptionLeg struct {

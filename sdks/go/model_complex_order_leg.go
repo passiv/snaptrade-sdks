@@ -319,28 +319,29 @@ func (o ComplexOrderLeg) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ComplexOrderLeg) UnmarshalJSON(bytes []byte) (err error) {
-	varComplexOrderLeg := _ComplexOrderLeg{}
-
-	if err = json.Unmarshal(bytes, &varComplexOrderLeg); err == nil {
-		*o = ComplexOrderLeg(varComplexOrderLeg)
+func (o *ComplexOrderLeg) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ComplexOrderLeg{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "order_role")
-		delete(additionalProperties, "action")
-		delete(additionalProperties, "instrument")
-		delete(additionalProperties, "order_type")
-		delete(additionalProperties, "units")
-		delete(additionalProperties, "time_in_force")
-		delete(additionalProperties, "price")
-		delete(additionalProperties, "stop")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "order_role")
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "instrument")
+	delete(additionalProperties, "order_type")
+	delete(additionalProperties, "units")
+	delete(additionalProperties, "time_in_force")
+	delete(additionalProperties, "price")
+	delete(additionalProperties, "stop")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ComplexOrderLeg(decoded)
+	return nil
 }
 
 type NullableComplexOrderLeg struct {

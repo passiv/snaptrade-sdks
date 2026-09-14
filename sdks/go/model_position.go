@@ -444,29 +444,30 @@ func (o Position) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Position) UnmarshalJSON(bytes []byte) (err error) {
-	varPosition := _Position{}
-
-	if err = json.Unmarshal(bytes, &varPosition); err == nil {
-		*o = Position(varPosition)
+func (o *Position) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Position{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "units")
-		delete(additionalProperties, "price")
-		delete(additionalProperties, "open_pnl")
-		delete(additionalProperties, "average_purchase_price")
-		delete(additionalProperties, "fractional_units")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "cash_equivalent")
-		delete(additionalProperties, "tax_lots")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "units")
+	delete(additionalProperties, "price")
+	delete(additionalProperties, "open_pnl")
+	delete(additionalProperties, "average_purchase_price")
+	delete(additionalProperties, "fractional_units")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "cash_equivalent")
+	delete(additionalProperties, "tax_lots")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Position(decoded)
+	return nil
 }
 
 type NullablePosition struct {

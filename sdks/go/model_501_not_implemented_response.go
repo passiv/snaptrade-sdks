@@ -86,21 +86,22 @@ func (o Model501NotImplementedResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Model501NotImplementedResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varModel501NotImplementedResponse := _Model501NotImplementedResponse{}
-
-	if err = json.Unmarshal(bytes, &varModel501NotImplementedResponse); err == nil {
-		*o = Model501NotImplementedResponse(varModel501NotImplementedResponse)
+func (o *Model501NotImplementedResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Model501NotImplementedResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "error")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "error")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Model501NotImplementedResponse(decoded)
+	return nil
 }
 
 type NullableModel501NotImplementedResponse struct {

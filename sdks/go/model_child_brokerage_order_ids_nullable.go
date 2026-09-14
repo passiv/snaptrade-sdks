@@ -123,22 +123,23 @@ func (o ChildBrokerageOrderIDsNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ChildBrokerageOrderIDsNullable) UnmarshalJSON(bytes []byte) (err error) {
-	varChildBrokerageOrderIDsNullable := _ChildBrokerageOrderIDsNullable{}
-
-	if err = json.Unmarshal(bytes, &varChildBrokerageOrderIDsNullable); err == nil {
-		*o = ChildBrokerageOrderIDsNullable(varChildBrokerageOrderIDsNullable)
+func (o *ChildBrokerageOrderIDsNullable) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ChildBrokerageOrderIDsNullable{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "take_profit_order_id")
-		delete(additionalProperties, "stop_loss_order_id")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "take_profit_order_id")
+	delete(additionalProperties, "stop_loss_order_id")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ChildBrokerageOrderIDsNullable(decoded)
+	return nil
 }
 
 type NullableChildBrokerageOrderIDsNullable struct {

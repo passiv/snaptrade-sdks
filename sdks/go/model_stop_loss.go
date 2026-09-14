@@ -131,22 +131,23 @@ func (o StopLoss) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *StopLoss) UnmarshalJSON(bytes []byte) (err error) {
-	varStopLoss := _StopLoss{}
-
-	if err = json.Unmarshal(bytes, &varStopLoss); err == nil {
-		*o = StopLoss(varStopLoss)
+func (o *StopLoss) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _StopLoss{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "stop_price")
-		delete(additionalProperties, "limit_price")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "stop_price")
+	delete(additionalProperties, "limit_price")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = StopLoss(decoded)
+	return nil
 }
 
 type NullableStopLoss struct {

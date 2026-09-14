@@ -108,22 +108,23 @@ func (o MlegTradingInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *MlegTradingInstrument) UnmarshalJSON(bytes []byte) (err error) {
-	varMlegTradingInstrument := _MlegTradingInstrument{}
-
-	if err = json.Unmarshal(bytes, &varMlegTradingInstrument); err == nil {
-		*o = MlegTradingInstrument(varMlegTradingInstrument)
+func (o *MlegTradingInstrument) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _MlegTradingInstrument{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "instrument_type")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "instrument_type")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = MlegTradingInstrument(decoded)
+	return nil
 }
 
 type NullableMlegTradingInstrument struct {

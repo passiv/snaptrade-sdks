@@ -365,28 +365,29 @@ func (o Exchange) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Exchange) UnmarshalJSON(bytes []byte) (err error) {
-	varExchange := _Exchange{}
-
-	if err = json.Unmarshal(bytes, &varExchange); err == nil {
-		*o = Exchange(varExchange)
+func (o *Exchange) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Exchange{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "code")
-		delete(additionalProperties, "mic_code")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "timezone")
-		delete(additionalProperties, "start_time")
-		delete(additionalProperties, "close_time")
-		delete(additionalProperties, "suffix")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "code")
+	delete(additionalProperties, "mic_code")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "timezone")
+	delete(additionalProperties, "start_time")
+	delete(additionalProperties, "close_time")
+	delete(additionalProperties, "suffix")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Exchange(decoded)
+	return nil
 }
 
 type NullableExchange struct {

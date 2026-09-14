@@ -108,22 +108,23 @@ func (o AllAccountPositionsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AllAccountPositionsResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varAllAccountPositionsResponse := _AllAccountPositionsResponse{}
-
-	if err = json.Unmarshal(bytes, &varAllAccountPositionsResponse); err == nil {
-		*o = AllAccountPositionsResponse(varAllAccountPositionsResponse)
+func (o *AllAccountPositionsResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _AllAccountPositionsResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "results")
-		delete(additionalProperties, "data_freshness")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "results")
+	delete(additionalProperties, "data_freshness")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AllAccountPositionsResponse(decoded)
+	return nil
 }
 
 type NullableAllAccountPositionsResponse struct {

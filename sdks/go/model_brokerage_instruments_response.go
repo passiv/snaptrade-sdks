@@ -85,21 +85,22 @@ func (o BrokerageInstrumentsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *BrokerageInstrumentsResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varBrokerageInstrumentsResponse := _BrokerageInstrumentsResponse{}
-
-	if err = json.Unmarshal(bytes, &varBrokerageInstrumentsResponse); err == nil {
-		*o = BrokerageInstrumentsResponse(varBrokerageInstrumentsResponse)
+func (o *BrokerageInstrumentsResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _BrokerageInstrumentsResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "instruments")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "instruments")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = BrokerageInstrumentsResponse(decoded)
+	return nil
 }
 
 type NullableBrokerageInstrumentsResponse struct {

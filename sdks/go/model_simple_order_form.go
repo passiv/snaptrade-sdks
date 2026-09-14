@@ -14,6 +14,7 @@ package snaptrade
 import (
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 // SimpleOrderForm struct for SimpleOrderForm
@@ -346,29 +347,58 @@ func (o SimpleOrderForm) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *SimpleOrderForm) UnmarshalJSON(bytes []byte) (err error) {
-	varSimpleOrderForm := _SimpleOrderForm{}
-
-	if err = json.Unmarshal(bytes, &varSimpleOrderForm); err == nil {
-		*o = SimpleOrderForm(varSimpleOrderForm)
+func (o *SimpleOrderForm) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "instrument")
-		delete(additionalProperties, "side")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "time_in_force")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "limit_price")
-		delete(additionalProperties, "stop_price")
-		delete(additionalProperties, "post_only")
-		delete(additionalProperties, "expiration_date")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "amount", "limit_price", "stop_price",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("SimpleOrderForm.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("SimpleOrderForm.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _SimpleOrderForm{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "instrument")
+	delete(additionalProperties, "side")
+	delete(additionalProperties, "type")
+	delete(additionalProperties, "time_in_force")
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "limit_price")
+	delete(additionalProperties, "stop_price")
+	delete(additionalProperties, "post_only")
+	delete(additionalProperties, "expiration_date")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = SimpleOrderForm(decoded)
+	return nil
 }
 
 type NullableSimpleOrderForm struct {

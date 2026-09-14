@@ -160,23 +160,24 @@ func (o DeleteUserResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *DeleteUserResponse) UnmarshalJSON(bytes []byte) (err error) {
-	varDeleteUserResponse := _DeleteUserResponse{}
-
-	if err = json.Unmarshal(bytes, &varDeleteUserResponse); err == nil {
-		*o = DeleteUserResponse(varDeleteUserResponse)
+func (o *DeleteUserResponse) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _DeleteUserResponse{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "detail")
-		delete(additionalProperties, "userId")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "status")
+	delete(additionalProperties, "detail")
+	delete(additionalProperties, "userId")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = DeleteUserResponse(decoded)
+	return nil
 }
 
 type NullableDeleteUserResponse struct {

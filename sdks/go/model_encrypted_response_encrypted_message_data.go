@@ -157,23 +157,24 @@ func (o EncryptedResponseEncryptedMessageData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *EncryptedResponseEncryptedMessageData) UnmarshalJSON(bytes []byte) (err error) {
-	varEncryptedResponseEncryptedMessageData := _EncryptedResponseEncryptedMessageData{}
-
-	if err = json.Unmarshal(bytes, &varEncryptedResponseEncryptedMessageData); err == nil {
-		*o = EncryptedResponseEncryptedMessageData(varEncryptedResponseEncryptedMessageData)
+func (o *EncryptedResponseEncryptedMessageData) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _EncryptedResponseEncryptedMessageData{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "encryptedMessage")
-		delete(additionalProperties, "tag")
-		delete(additionalProperties, "nonce")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "encryptedMessage")
+	delete(additionalProperties, "tag")
+	delete(additionalProperties, "nonce")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = EncryptedResponseEncryptedMessageData(decoded)
+	return nil
 }
 
 type NullableEncryptedResponseEncryptedMessageData struct {

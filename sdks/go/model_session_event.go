@@ -313,27 +313,28 @@ func (o SessionEvent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *SessionEvent) UnmarshalJSON(bytes []byte) (err error) {
-	varSessionEvent := _SessionEvent{}
-
-	if err = json.Unmarshal(bytes, &varSessionEvent); err == nil {
-		*o = SessionEvent(varSessionEvent)
+func (o *SessionEvent) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _SessionEvent{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "session_event_type")
-		delete(additionalProperties, "session_id")
-		delete(additionalProperties, "user_id")
-		delete(additionalProperties, "created_date")
-		delete(additionalProperties, "brokerage_status_code")
-		delete(additionalProperties, "brokerage_authorization_id")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "session_event_type")
+	delete(additionalProperties, "session_id")
+	delete(additionalProperties, "user_id")
+	delete(additionalProperties, "created_date")
+	delete(additionalProperties, "brokerage_status_code")
+	delete(additionalProperties, "brokerage_authorization_id")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = SessionEvent(decoded)
+	return nil
 }
 
 type NullableSessionEvent struct {

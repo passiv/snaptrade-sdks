@@ -160,23 +160,24 @@ func (o PaginationDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *PaginationDetails) UnmarshalJSON(bytes []byte) (err error) {
-	varPaginationDetails := _PaginationDetails{}
-
-	if err = json.Unmarshal(bytes, &varPaginationDetails); err == nil {
-		*o = PaginationDetails(varPaginationDetails)
+func (o *PaginationDetails) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _PaginationDetails{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "offset")
-		delete(additionalProperties, "limit")
-		delete(additionalProperties, "total")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "offset")
+	delete(additionalProperties, "limit")
+	delete(additionalProperties, "total")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = PaginationDetails(decoded)
+	return nil
 }
 
 type NullablePaginationDetails struct {

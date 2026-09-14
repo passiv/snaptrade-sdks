@@ -407,30 +407,31 @@ func (o UniversalSymbolNullable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *UniversalSymbolNullable) UnmarshalJSON(bytes []byte) (err error) {
-	varUniversalSymbolNullable := _UniversalSymbolNullable{}
-
-	if err = json.Unmarshal(bytes, &varUniversalSymbolNullable); err == nil {
-		*o = UniversalSymbolNullable(varUniversalSymbolNullable)
+func (o *UniversalSymbolNullable) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _UniversalSymbolNullable{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "raw_symbol")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "exchange")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "figi_code")
-		delete(additionalProperties, "figi_instrument")
-		delete(additionalProperties, "currencies")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "raw_symbol")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "exchange")
+	delete(additionalProperties, "type")
+	delete(additionalProperties, "figi_code")
+	delete(additionalProperties, "figi_instrument")
+	delete(additionalProperties, "currencies")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = UniversalSymbolNullable(decoded)
+	return nil
 }
 
 type NullableUniversalSymbolNullable struct {

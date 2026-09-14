@@ -167,23 +167,24 @@ func (o OptionBrokerageSymbol) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionBrokerageSymbol) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionBrokerageSymbol := _OptionBrokerageSymbol{}
-
-	if err = json.Unmarshal(bytes, &varOptionBrokerageSymbol); err == nil {
-		*o = OptionBrokerageSymbol(varOptionBrokerageSymbol)
+func (o *OptionBrokerageSymbol) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionBrokerageSymbol{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "option_symbol")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "description")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "option_symbol")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "description")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionBrokerageSymbol(decoded)
+	return nil
 }
 
 type NullableOptionBrokerageSymbol struct {

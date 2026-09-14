@@ -735,38 +735,39 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
-	varAccount := _Account{}
-
-	if err = json.Unmarshal(bytes, &varAccount); err == nil {
-		*o = Account(varAccount)
+func (o *Account) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _Account{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "brokerage_authorization")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "number")
-		delete(additionalProperties, "institution_account_id")
-		delete(additionalProperties, "institution_name")
-		delete(additionalProperties, "created_date")
-		delete(additionalProperties, "funding_date")
-		delete(additionalProperties, "opening_date")
-		delete(additionalProperties, "sync_status")
-		delete(additionalProperties, "balance")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "raw_type")
-		delete(additionalProperties, "account_category")
-		delete(additionalProperties, "meta")
-		delete(additionalProperties, "portfolio_group")
-		delete(additionalProperties, "cash_restrictions")
-		delete(additionalProperties, "is_paper")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "brokerage_authorization")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "number")
+	delete(additionalProperties, "institution_account_id")
+	delete(additionalProperties, "institution_name")
+	delete(additionalProperties, "created_date")
+	delete(additionalProperties, "funding_date")
+	delete(additionalProperties, "opening_date")
+	delete(additionalProperties, "sync_status")
+	delete(additionalProperties, "balance")
+	delete(additionalProperties, "status")
+	delete(additionalProperties, "raw_type")
+	delete(additionalProperties, "account_category")
+	delete(additionalProperties, "meta")
+	delete(additionalProperties, "portfolio_group")
+	delete(additionalProperties, "cash_restrictions")
+	delete(additionalProperties, "is_paper")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = Account(decoded)
+	return nil
 }
 
 type NullableAccount struct {

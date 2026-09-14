@@ -300,26 +300,27 @@ func (o PositionSymbol) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *PositionSymbol) UnmarshalJSON(bytes []byte) (err error) {
-	varPositionSymbol := _PositionSymbol{}
-
-	if err = json.Unmarshal(bytes, &varPositionSymbol); err == nil {
-		*o = PositionSymbol(varPositionSymbol)
+func (o *PositionSymbol) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _PositionSymbol{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "local_id")
-		delete(additionalProperties, "is_quotable")
-		delete(additionalProperties, "is_tradable")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "local_id")
+	delete(additionalProperties, "is_quotable")
+	delete(additionalProperties, "is_tradable")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = PositionSymbol(decoded)
+	return nil
 }
 
 type NullablePositionSymbol struct {

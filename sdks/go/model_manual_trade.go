@@ -361,28 +361,29 @@ func (o ManualTrade) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ManualTrade) UnmarshalJSON(bytes []byte) (err error) {
-	varManualTrade := _ManualTrade{}
-
-	if err = json.Unmarshal(bytes, &varManualTrade); err == nil {
-		*o = ManualTrade(varManualTrade)
+func (o *ManualTrade) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ManualTrade{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "account")
-		delete(additionalProperties, "order_type")
-		delete(additionalProperties, "time_in_force")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "action")
-		delete(additionalProperties, "units")
-		delete(additionalProperties, "price")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "account")
+	delete(additionalProperties, "order_type")
+	delete(additionalProperties, "time_in_force")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "units")
+	delete(additionalProperties, "price")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ManualTrade(decoded)
+	return nil
 }
 
 type NullableManualTrade struct {

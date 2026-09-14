@@ -168,23 +168,24 @@ func (o ManualTradeBalance) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ManualTradeBalance) UnmarshalJSON(bytes []byte) (err error) {
-	varManualTradeBalance := _ManualTradeBalance{}
-
-	if err = json.Unmarshal(bytes, &varManualTradeBalance); err == nil {
-		*o = ManualTradeBalance(varManualTradeBalance)
+func (o *ManualTradeBalance) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ManualTradeBalance{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "account")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "cash")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "account")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "cash")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ManualTradeBalance(decoded)
+	return nil
 }
 
 type NullableManualTradeBalance struct {

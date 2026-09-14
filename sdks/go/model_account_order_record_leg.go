@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // AccountOrderRecordLeg Describes an individual leg that makes up an order in the V2 format.
@@ -403,28 +404,57 @@ func (o AccountOrderRecordLeg) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountOrderRecordLeg) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountOrderRecordLeg := _AccountOrderRecordLeg{}
-
-	if err = json.Unmarshal(bytes, &varAccountOrderRecordLeg); err == nil {
-		*o = AccountOrderRecordLeg(varAccountOrderRecordLeg)
+func (o *AccountOrderRecordLeg) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	// Decimal strings use the existing Go numeric field types. Normalize only
+	// schema-declared decimals; other string/number mismatches must still fail.
+	var decimalFields map[string]json.RawMessage
+	if err := json.Unmarshal(bytes, &decimalFields); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "leg_id")
-		delete(additionalProperties, "instrument")
-		delete(additionalProperties, "action")
-		delete(additionalProperties, "execution_price")
-		delete(additionalProperties, "total_quantity")
-		delete(additionalProperties, "canceled_quantity")
-		delete(additionalProperties, "filled_quantity")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
+	for _, name := range []string{ "execution_price",  } {
+		raw, present := decimalFields[name]
+		if !present {
+			continue
+		}
+		var number json.Number
+		if err := json.Unmarshal(raw, &number); err != nil {
+			return fmt.Errorf("AccountOrderRecordLeg.%s: %w", name, err)
+		}
+		if number == "" { // JSON null; preserve nullable-field behavior.
+			continue
+		}
+		if _, err := number.Float64(); err != nil {
+			return fmt.Errorf("AccountOrderRecordLeg.%s: %w", name, err)
+		}
+		decimalFields[name] = json.RawMessage(number.String())
 	}
-
-	return err
+	var err error
+	typedBytes, err = json.Marshal(decimalFields)
+	if err != nil {
+		return err
+	}
+	decoded := _AccountOrderRecordLeg{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "leg_id")
+	delete(additionalProperties, "instrument")
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "execution_price")
+	delete(additionalProperties, "total_quantity")
+	delete(additionalProperties, "canceled_quantity")
+	delete(additionalProperties, "filled_quantity")
+	delete(additionalProperties, "status")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountOrderRecordLeg(decoded)
+	return nil
 }
 
 type NullableAccountOrderRecordLeg struct {

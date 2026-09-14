@@ -193,24 +193,25 @@ func (o CryptocurrencyPair) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *CryptocurrencyPair) UnmarshalJSON(bytes []byte) (err error) {
-	varCryptocurrencyPair := _CryptocurrencyPair{}
-
-	if err = json.Unmarshal(bytes, &varCryptocurrencyPair); err == nil {
-		*o = CryptocurrencyPair(varCryptocurrencyPair)
+func (o *CryptocurrencyPair) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _CryptocurrencyPair{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "base")
-		delete(additionalProperties, "quote")
-		delete(additionalProperties, "increment")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "base")
+	delete(additionalProperties, "quote")
+	delete(additionalProperties, "increment")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = CryptocurrencyPair(decoded)
+	return nil
 }
 
 type NullableCryptocurrencyPair struct {

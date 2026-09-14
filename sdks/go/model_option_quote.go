@@ -244,25 +244,26 @@ func (o OptionQuote) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *OptionQuote) UnmarshalJSON(bytes []byte) (err error) {
-	varOptionQuote := _OptionQuote{}
-
-	if err = json.Unmarshal(bytes, &varOptionQuote); err == nil {
-		*o = OptionQuote(varOptionQuote)
+func (o *OptionQuote) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionQuote{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "synthetic_price")
-		delete(additionalProperties, "implied_volatility")
-		delete(additionalProperties, "timestamp")
-		delete(additionalProperties, "greeks")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "synthetic_price")
+	delete(additionalProperties, "implied_volatility")
+	delete(additionalProperties, "timestamp")
+	delete(additionalProperties, "greeks")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionQuote(decoded)
+	return nil
 }
 
 type NullableOptionQuote struct {

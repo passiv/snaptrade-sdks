@@ -139,23 +139,24 @@ func (o TradeDetectionSubscription) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *TradeDetectionSubscription) UnmarshalJSON(bytes []byte) (err error) {
-	varTradeDetectionSubscription := _TradeDetectionSubscription{}
-
-	if err = json.Unmarshal(bytes, &varTradeDetectionSubscription); err == nil {
-		*o = TradeDetectionSubscription(varTradeDetectionSubscription)
+func (o *TradeDetectionSubscription) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _TradeDetectionSubscription{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "account_id")
-		delete(additionalProperties, "cost")
-		delete(additionalProperties, "check_interval_seconds")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "account_id")
+	delete(additionalProperties, "cost")
+	delete(additionalProperties, "check_interval_seconds")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = TradeDetectionSubscription(decoded)
+	return nil
 }
 
 type NullableTradeDetectionSubscription struct {

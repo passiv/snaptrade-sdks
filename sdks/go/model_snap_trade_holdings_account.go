@@ -347,28 +347,29 @@ func (o SnapTradeHoldingsAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *SnapTradeHoldingsAccount) UnmarshalJSON(bytes []byte) (err error) {
-	varSnapTradeHoldingsAccount := _SnapTradeHoldingsAccount{}
-
-	if err = json.Unmarshal(bytes, &varSnapTradeHoldingsAccount); err == nil {
-		*o = SnapTradeHoldingsAccount(varSnapTradeHoldingsAccount)
+func (o *SnapTradeHoldingsAccount) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _SnapTradeHoldingsAccount{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "brokerage_authorization")
-		delete(additionalProperties, "portfolio_group")
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "number")
-		delete(additionalProperties, "institution_name")
-		delete(additionalProperties, "sync_status")
-		delete(additionalProperties, "meta")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "brokerage_authorization")
+	delete(additionalProperties, "portfolio_group")
+	delete(additionalProperties, "name")
+	delete(additionalProperties, "number")
+	delete(additionalProperties, "institution_name")
+	delete(additionalProperties, "sync_status")
+	delete(additionalProperties, "meta")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = SnapTradeHoldingsAccount(decoded)
+	return nil
 }
 
 type NullableSnapTradeHoldingsAccount struct {

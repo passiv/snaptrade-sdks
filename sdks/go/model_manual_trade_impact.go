@@ -264,25 +264,26 @@ func (o ManualTradeImpact) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *ManualTradeImpact) UnmarshalJSON(bytes []byte) (err error) {
-	varManualTradeImpact := _ManualTradeImpact{}
-
-	if err = json.Unmarshal(bytes, &varManualTradeImpact); err == nil {
-		*o = ManualTradeImpact(varManualTradeImpact)
+func (o *ManualTradeImpact) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _ManualTradeImpact{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "account")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "remaining_cash")
-		delete(additionalProperties, "estimated_commission")
-		delete(additionalProperties, "forex_fees")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "account")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "remaining_cash")
+	delete(additionalProperties, "estimated_commission")
+	delete(additionalProperties, "forex_fees")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = ManualTradeImpact(decoded)
+	return nil
 }
 
 type NullableManualTradeImpact struct {

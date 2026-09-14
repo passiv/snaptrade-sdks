@@ -755,37 +755,38 @@ func (o AccountUniversalActivity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o *AccountUniversalActivity) UnmarshalJSON(bytes []byte) (err error) {
-	varAccountUniversalActivity := _AccountUniversalActivity{}
-
-	if err = json.Unmarshal(bytes, &varAccountUniversalActivity); err == nil {
-		*o = AccountUniversalActivity(varAccountUniversalActivity)
+func (o *AccountUniversalActivity) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _AccountUniversalActivity{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
 	}
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "currency_universal_symbol")
-		delete(additionalProperties, "option_symbol")
-		delete(additionalProperties, "price")
-		delete(additionalProperties, "units")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "type")
-		delete(additionalProperties, "option_type")
-		delete(additionalProperties, "description")
-		delete(additionalProperties, "trade_date")
-		delete(additionalProperties, "settlement_date")
-		delete(additionalProperties, "fee")
-		delete(additionalProperties, "fx_rate")
-		delete(additionalProperties, "institution")
-		delete(additionalProperties, "external_reference_id")
-		o.AdditionalProperties = additionalProperties
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
 	}
-
-	return err
+	delete(additionalProperties, "id")
+	delete(additionalProperties, "symbol")
+	delete(additionalProperties, "currency_universal_symbol")
+	delete(additionalProperties, "option_symbol")
+	delete(additionalProperties, "price")
+	delete(additionalProperties, "units")
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "currency")
+	delete(additionalProperties, "type")
+	delete(additionalProperties, "option_type")
+	delete(additionalProperties, "description")
+	delete(additionalProperties, "trade_date")
+	delete(additionalProperties, "settlement_date")
+	delete(additionalProperties, "fee")
+	delete(additionalProperties, "fx_rate")
+	delete(additionalProperties, "institution")
+	delete(additionalProperties, "external_reference_id")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountUniversalActivity(decoded)
+	return nil
 }
 
 type NullableAccountUniversalActivity struct {
