@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"strings"
 	"testing"
+
+	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go/v2"
 )
 
 const regressionStock = `{"kind":"stock","id":"1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324","symbol":"AAPL","raw_symbol":"AAPL","description":"Synthetic stock","currency":"USD","exchange":"XNAS"}`
@@ -49,7 +51,7 @@ func TestAccountPositionsRegression(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			var roundTrip AllAccountPositionsResponse
+			var roundTrip snaptrade.AllAccountPositionsResponse
 			if err := json.Unmarshal(encoded, &roundTrip); err != nil {
 				t.Fatal(err)
 			}

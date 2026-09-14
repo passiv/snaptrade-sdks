@@ -7,6 +7,8 @@ import (
 	"reflect"
 	"strings"
 	"testing"
+
+	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go/v2"
 )
 
 // These requests never leave the process and need no real credentials.
@@ -16,12 +18,12 @@ func (f decodingRegressionTransport) RoundTrip(r *http.Request) (*http.Response,
 	return &http.Response{StatusCode: 200, Header: http.Header{"Content-Type": {"application/json"}}, Body: ioutil.NopCloser(strings.NewReader(f.body)), Request: r}, nil
 }
 
-func decodingRegressionClient(body string) *APIClient {
-	config := NewConfiguration()
+func decodingRegressionClient(body string) *snaptrade.APIClient {
+	config := snaptrade.NewConfiguration()
 	config.HTTPClient = &http.Client{Transport: decodingRegressionTransport{body}}
 	config.SetConsumerKey("synthetic-key")
 	config.SetPartnerClientId("synthetic-client")
-	return NewAPIClient(config)
+	return snaptrade.NewAPIClient(config)
 }
 
 func assertDecodingResponseBody(t *testing.T, response *http.Response, want string) {
@@ -54,7 +56,7 @@ func TestConnectionDecodingRegression(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Run("direct", func(t *testing.T) {
-				var connection BrokerageAuthorization
+				var connection snaptrade.BrokerageAuthorization
 				err := json.Unmarshal([]byte(tc.body), &connection)
 				if (err != nil) != tc.invalid {
 					t.Fatalf("invalid=%v, error=%v", tc.invalid, err)
@@ -96,7 +98,7 @@ func TestConnectionDecodingRegression(t *testing.T) {
 	}
 	for _, body := range []string{`{}`, `{"brokerage":null,"disabled_date":null}`} {
 		t.Run("optional_fields_"+body, func(t *testing.T) {
-			var connection BrokerageAuthorization
+			var connection snaptrade.BrokerageAuthorization
 			if err := json.Unmarshal([]byte(body), &connection); err != nil {
 				t.Fatal(err)
 			}
@@ -110,7 +112,7 @@ func TestConnectionDecodingRegression(t *testing.T) {
 	})
 }
 
-func assertRegressionConnection(t *testing.T, connection BrokerageAuthorization) {
+func assertRegressionConnection(t *testing.T, connection snaptrade.BrokerageAuthorization) {
 	t.Helper()
 	if connection.GetId() != "87b24961-b51e-4db8-9226-f198f6518a89" || connection.Brokerage == nil || connection.Brokerage.GetId() != "ebf91a5b-0920-4266-9e36-f6cfe8c40946" || connection.Brokerage.GetName() != "Synthetic Brokerage" {
 		t.Fatalf("connection or brokerage data lost: %+v", connection)
@@ -125,7 +127,7 @@ func assertRegressionConnection(t *testing.T, connection BrokerageAuthorization)
 	if err != nil {
 		t.Fatal(err)
 	}
-	var roundTrip BrokerageAuthorization
+	var roundTrip snaptrade.BrokerageAuthorization
 	if err := json.Unmarshal(encoded, &roundTrip); err != nil {
 		t.Fatal(err)
 	}
