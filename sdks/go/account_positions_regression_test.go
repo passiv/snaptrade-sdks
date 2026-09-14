@@ -11,14 +11,16 @@ const regressionStock = `{"kind":"stock","id":"1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6
 const regressionBond = `{"kind":"bond","id":"b3013f9f-5842-43e6-b59a-f2af039836f9","symbol":"SYNTHETIC","description":"Synthetic bond","currency":"USD"}`
 
 func TestAccountPositionsRegression(t *testing.T) {
-	stock := `{"instrument":` + regressionStock + `,"units":12,"price":230.5,"cost_basis":180,"currency":"USD"}`
-	bond := `{"instrument":` + regressionBond + `,"units":5,"price":99.5,"cost_basis":98,"currency":"USD"}`
-	valid := `{"results":[` + stock + `,` + bond + `],"data_freshness":{"last_successful_sync":"2026-09-10T12:00:00Z"}}`
+	stock := `{"instrument":` + regressionStock + `,"units":"12","price":"230.5","cost_basis":"180","currency":"USD"}`
+	bond := `{"instrument":` + regressionBond + `,"units":"5","price":"99.5","cost_basis":"98","currency":"USD"}`
+	valid := `{"results":[` + stock + `,` + bond + `],"data_freshness":{"as_of":"2026-09-10T12:00:00Z"}}`
 	for _, tc := range []struct {
 		name, body string
 		invalid    bool
 	}{
 		{"valid", valid, false},
+		{"numeric_decimal_compatibility", strings.NewReplacer(`"12"`, `12`, `"230.5"`, `230.5`, `"180"`, `180`, `"5"`, `5`, `"99.5"`, `99.5`, `"98"`, `98`).Replace(valid), false},
+		{"invalid_decimal", strings.Replace(valid, `"230.5"`, `"not-a-number"`, 1), true},
 		{"numeric_instrument_id", strings.Replace(valid, `"1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324"`, `42`, 1), true},
 		{"missing_kind", strings.Replace(valid, `"kind":"stock",`, ``, 1), true},
 		{"unknown_kind", strings.Replace(valid, `"kind":"stock"`, `"kind":"unknown"`, 1), true},
