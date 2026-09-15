@@ -267,7 +267,7 @@ module SnapTrade
 
     # Get symbol detail
     #
-    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade's canonical dotted form: use `HBND.U.TO` (not Yahoo's `HBND-U.TO`), `FTN.PR.A.TO` (not `FTN-PA.TO`), and `ECF.PRA` (not `ECF-P-A`). Please use the ticker with the proper suffix and canonical share-class notation for the best results.
     #
     # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -278,7 +278,7 @@ module SnapTrade
 
     # Get symbol detail
     #
-    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade's canonical dotted form: use `HBND.U.TO` (not Yahoo's `HBND-U.TO`), `FTN.PR.A.TO` (not `FTN-PA.TO`), and `ECF.PRA` (not `ECF-P-A`). Please use the ticker with the proper suffix and canonical share-class notation for the best results.
     #
     # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -287,7 +287,7 @@ module SnapTrade
     end
 
     # Get symbol detail
-    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade's canonical dotted form: use `HBND.U.TO` (not Yahoo's `HBND-U.TO`), `FTN.PR.A.TO` (not `FTN-PA.TO`), and `ECF.PRA` (not `ECF-P-A`). Please use the ticker with the proper suffix and canonical share-class notation for the best results. 
     # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] opts the optional parameters
     # @return [UniversalSymbol]
@@ -297,7 +297,7 @@ module SnapTrade
     end
 
     # Get symbol detail
-    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade&#39;s canonical dotted form: use &#x60;HBND.U.TO&#x60; (not Yahoo&#39;s &#x60;HBND-U.TO&#x60;), &#x60;FTN.PR.A.TO&#x60; (not &#x60;FTN-PA.TO&#x60;), and &#x60;ECF.PRA&#x60; (not &#x60;ECF-P-A&#x60;). Please use the ticker with the proper suffix and canonical share-class notation for the best results. 
     # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] opts the optional parameters
     # @return [Array<(UniversalSymbol, Integer, Hash)>] UniversalSymbol data, response status code and response headers
