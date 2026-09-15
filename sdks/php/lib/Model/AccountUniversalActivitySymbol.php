@@ -381,7 +381,7 @@ class AccountUniversalActivitySymbol implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets symbol
      *
-     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
+     * @param string|null $symbol The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade's canonical dotted form, for example `HBND.U.TO`, `FTN.PR.A.TO`, and `ECF.PRA`.
      *
      * @return self
      */

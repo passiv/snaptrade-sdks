@@ -287,7 +287,7 @@ catch (ApiException e)
 
 
 
-Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade's canonical dotted form: use `HBND.U.TO` (not Yahoo's `HBND-U.TO`), `FTN.PR.A.TO` (not `FTN-PA.TO`), and `ECF.PRA` (not `ECF-P-A`). Please use the ticker with the proper suffix and canonical share-class notation for the best results. 
 
 ### Example
 ```csharp
