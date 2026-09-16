@@ -903,16 +903,16 @@ type ConnectionsApiListConnectionAccountsRequest struct {
 	userSecret string
 }
 
-func (r ConnectionsApiListConnectionAccountsRequest) Execute() ([]ConnectionAccount, *http.Response, error) {
+func (r ConnectionsApiListConnectionAccountsRequest) Execute() (*ConnectionAccountsResponse, *http.Response, error) {
 	return r.ApiService.ListConnectionAccountsExecute(r)
 }
 
 /*
-ListConnectionAccounts List accounts for a connection (discriminated union)
+ListConnectionAccounts List accounts
 
-Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+Returns all accounts that belong to the specified connection for the authenticated user.
 
-Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.
 
 On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -938,13 +938,13 @@ func (a *ConnectionsApiService) ListConnectionAccounts(connectionId string, user
 }
 
 // Execute executes the request
-//  @return []ConnectionAccount
-func (a *ConnectionsApiService) ListConnectionAccountsExecute(r ConnectionsApiListConnectionAccountsRequest) ([]ConnectionAccount, *http.Response, error) {
+//  @return ConnectionAccountsResponse
+func (a *ConnectionsApiService) ListConnectionAccountsExecute(r ConnectionsApiListConnectionAccountsRequest) (*ConnectionAccountsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []ConnectionAccount
+		localVarReturnValue  *ConnectionAccountsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectionsApiService.ListConnectionAccounts")

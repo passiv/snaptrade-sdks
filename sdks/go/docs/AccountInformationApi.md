@@ -14,7 +14,7 @@ Method | Path | Description
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 [**GetUserAccountReturnRates**](AccountInformationApi.md#GetUserAccountReturnRates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
 [**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List account holdings
-[**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List accounts
+[**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List user accounts
 [**UpdateUserAccount**](AccountInformationApi.md#UpdateUserAccount) | **Put** /accounts/{accountId} | Update details of an investment account
 
 
@@ -573,7 +573,7 @@ func main() {
 
 ## ListUserAccounts
 
-List accounts
+List user accounts
 
 
 

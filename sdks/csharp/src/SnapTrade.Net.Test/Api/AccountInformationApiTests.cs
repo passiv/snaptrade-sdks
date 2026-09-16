@@ -371,7 +371,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List accounts
+                // List user accounts
                 List<Account> result = client.AccountInformation.ListUserAccounts(userId, userSecret);
                 Console.WriteLine(result);
             }

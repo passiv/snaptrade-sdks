@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**DisableBrokerageAuthorization**](ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
 | [**ListBrokerageAuthorizationAccounts**](ConnectionsApi.md#listbrokerageauthorizationaccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection |
 | [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections |
-| [**ListConnectionAccounts**](ConnectionsApi.md#listconnectionaccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union) |
+| [**ListConnectionAccounts**](ConnectionsApi.md#listconnectionaccounts) | **GET** /connections/{connectionId}/accounts | List accounts |
 | [**RefreshBrokerageAuthorization**](ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**ReturnRates**](ConnectionsApi.md#returnrates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**SyncBrokerageAuthorizationTransactions**](ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection |
@@ -498,7 +498,7 @@ catch (ApiException e)
 
 
 
-Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present - - see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+Returns all accounts that belong to the specified connection for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
 
 ### Example
 ```csharp
@@ -526,8 +526,8 @@ namespace Example
             
             try
             {
-                // List accounts for a connection (discriminated union)
-                List<ConnectionAccount> result = client.Connections.ListConnectionAccounts(connectionId, userId, userSecret);
+                // List accounts
+                ConnectionAccountsResponse result = client.Connections.ListConnectionAccounts(connectionId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -553,8 +553,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List accounts for a connection (discriminated union)
-    ApiResponse<List<ConnectionAccount>> response = apiInstance.ListConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
+    // List accounts
+    ApiResponse<ConnectionAccountsResponse> response = apiInstance.ListConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -577,7 +577,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;ConnectionAccount&gt;**](ConnectionAccount.md)
+[**ConnectionAccountsResponse**](ConnectionAccountsResponse.md)
 
 
 ### HTTP response details

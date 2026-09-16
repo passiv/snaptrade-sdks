@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccounts(ApiTestMixin, unittest.TestCase):
     """
     Accounts unit test stubs
-        List accounts
+        List user accounts
     """
 
     def setUp(self):

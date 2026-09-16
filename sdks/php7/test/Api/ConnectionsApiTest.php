@@ -121,7 +121,7 @@ class ConnectionsApiTest extends TestCase
     /**
      * Test case for listConnectionAccounts
      *
-     * List accounts for a connection (discriminated union).
+     * List accounts.
      *
      */
     public function testListConnectionAccounts()

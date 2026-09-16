@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**disableBrokerageAuthorization**](ConnectionsApi.md#disableBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
 | [**listBrokerageAuthorizationAccounts**](ConnectionsApi.md#listBrokerageAuthorizationAccounts) | **GET** /authorizations/{authorizationId}/accounts | List accounts for a connection |
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all connections |
-| [**listConnectionAccounts**](ConnectionsApi.md#listConnectionAccounts) | **GET** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union) |
+| [**listConnectionAccounts**](ConnectionsApi.md#listConnectionAccounts) | **GET** /connections/{connectionId}/accounts | List accounts |
 | [**refreshBrokerageAuthorization**](ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**returnRates**](ConnectionsApi.md#returnRates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**syncBrokerageAuthorizationTransactions**](ConnectionsApi.md#syncBrokerageAuthorizationTransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection |
@@ -514,11 +514,11 @@ public class Example {
 
 <a name="listConnectionAccounts"></a>
 # **listConnectionAccounts**
-> List&lt;Object&gt; listConnectionAccounts(connectionId, userId, userSecret).execute();
+> ConnectionAccountsResponse listConnectionAccounts(connectionId, userId, userSecret).execute();
 
-List accounts for a connection (discriminated union)
+List accounts
 
-Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (&#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+Returns all accounts that belong to the specified connection for the authenticated user.  The &#x60;results&#x60; list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the &#x60;kind&#x60; discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
 
 ### Example
 ```java
@@ -546,10 +546,12 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
-      List<Object> result = client
+      ConnectionAccountsResponse result = client
               .connections
               .listConnectionAccounts(connectionId, userId, userSecret)
               .execute();
+      System.out.println(result);
+      System.out.println(result.getResults());
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#listConnectionAccounts");
       System.err.println("Status code: " + e.getStatusCode());
@@ -560,7 +562,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<Object>> response = client
+      ApiResponse<ConnectionAccountsResponse> response = client
               .connections
               .listConnectionAccounts(connectionId, userId, userSecret)
               .executeWithHttpInfo();
@@ -591,7 +593,7 @@ public class Example {
 
 ### Return type
 
-**List&lt;Object&gt;**
+[**ConnectionAccountsResponse**](ConnectionAccountsResponse.md)
 
 ### Authorization
 

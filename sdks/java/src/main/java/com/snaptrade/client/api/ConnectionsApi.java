@@ -6,6 +6,7 @@ import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
+import com.snaptrade.client.model.ConnectionAccountsResponse;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import java.util.UUID;

@@ -75,6 +75,7 @@ from snaptrade_client.model.complex_order_leg import ComplexOrderLeg
 from snaptrade_client.model.complex_order_response import ComplexOrderResponse
 from snaptrade_client.model.connection_account import ConnectionAccount
 from snaptrade_client.model.connection_account_sync_status import ConnectionAccountSyncStatus
+from snaptrade_client.model.connection_accounts_response import ConnectionAccountsResponse
 from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.crypto_order_form import CryptoOrderForm
 from snaptrade_client.model.crypto_order_preview import CryptoOrderPreview

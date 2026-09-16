@@ -1197,9 +1197,9 @@ $result = $snaptrade->connections->listBrokerageAuthorizations(
 
 ### `snaptrade.connections.listConnectionAccounts`<a id="snaptradeconnectionslistconnectionaccounts"></a>
 
-Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+Returns all accounts that belong to the specified connection for the authenticated user.
 
-Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.
 
 On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -1230,7 +1230,7 @@ $result = $snaptrade->connections->listConnectionAccounts(
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[**ConnectionAccount**](./lib/Model/ConnectionAccount.php)
+[**ConnectionAccountsResponse**](./lib/Model/ConnectionAccountsResponse.php)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestConnectionsConnectionIdAccounts(ApiTestMixin, unittest.TestCase):
     """
     ConnectionsConnectionIdAccounts unit test stubs
-        List accounts for a connection (discriminated union)
+        List accounts
     """
 
     def setUp(self):

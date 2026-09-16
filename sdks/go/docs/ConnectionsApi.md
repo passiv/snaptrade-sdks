@@ -9,7 +9,7 @@ Method | Path | Description
 [**DisableBrokerageAuthorization**](ConnectionsApi.md#DisableBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/disable | Force disable connection
 [**ListBrokerageAuthorizationAccounts**](ConnectionsApi.md#ListBrokerageAuthorizationAccounts) | **Get** /authorizations/{authorizationId}/accounts | List accounts for a connection
 [**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
-[**ListConnectionAccounts**](ConnectionsApi.md#ListConnectionAccounts) | **Get** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
+[**ListConnectionAccounts**](ConnectionsApi.md#ListConnectionAccounts) | **Get** /connections/{connectionId}/accounts | List accounts
 [**RefreshBrokerageAuthorization**](ConnectionsApi.md#RefreshBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 [**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 [**SyncBrokerageAuthorizationTransactions**](ConnectionsApi.md#SyncBrokerageAuthorizationTransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
@@ -285,7 +285,7 @@ func main() {
 
 ## ListConnectionAccounts
 
-List accounts for a connection (discriminated union)
+List accounts
 
 
 
@@ -318,24 +318,9 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.ListConnectionAccounts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `ListConnectionAccounts`: []ConnectionAccount
+    // response from `ListConnectionAccounts`: ConnectionAccountsResponse
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ListConnectionAccounts`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Kind`: %v\n", resp.Kind)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.Id`: %v\n", resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.ConnectionId`: %v\n", resp.ConnectionId)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.DisplayName`: %v\n", *resp.DisplayName)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MaskedAccountNumber`: %v\n", resp.MaskedAccountNumber)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.InstitutionId`: %v\n", *resp.InstitutionId)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.OpeningDate`: %v\n", *resp.OpeningDate)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.FundingDate`: %v\n", *resp.FundingDate)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.SyncStatus`: %v\n", resp.SyncStatus)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.RawType`: %v\n", *resp.RawType)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.IsPaper`: %v\n", resp.IsPaper)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NetValue`: %v\n", *resp.NetValue)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.MinimumPaymentAmount`: %v\n", *resp.MinimumPaymentAmount)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.AvailableCredit`: %v\n", *resp.AvailableCredit)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.ListConnectionAccounts.NextPaymentDate`: %v\n", *resp.NextPaymentDate)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccountsResponse.ListConnectionAccounts.Results`: %v\n", resp.Results)
 }
 ```
 

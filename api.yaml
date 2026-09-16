@@ -562,7 +562,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: List accounts
+      summary: List user accounts
       description: |
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
@@ -1775,11 +1775,11 @@ paths:
     get:
       tags:
         - Connections
-      summary: List accounts for a connection (discriminated union)
+      summary: List accounts
       description: |
-        Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.
+        Returns all accounts that belong to the specified connection for the authenticated user.
 
-        Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.
+        The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.
 
         On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -1809,10 +1809,7 @@ paths:
           content:
             application/json:
               schema:
-                description: List of accounts under the specified connection.
-                type: array
-                items:
-                  $ref: "#/components/schemas/ConnectionAccount"
+                $ref: "#/components/schemas/ConnectionAccountsResponse"
         "401":
           description: Unauthorized, invalid credentials for this resource
           content:
@@ -3327,6 +3324,17 @@ components:
           type: boolean
           description: Indicates whether the account is a paper (simulated) trading account.
           example: false
+    ConnectionAccountsResponse:
+      description: Accounts under the specified connection.
+      type: object
+      properties:
+        results:
+          type: array
+          description: Accounts returned for the request.
+          items:
+            $ref: "#/components/schemas/ConnectionAccount"
+      required:
+        - results
     ConnectionAccount:
       description: |
         A single account under a connection, from the `kind`-discriminated union

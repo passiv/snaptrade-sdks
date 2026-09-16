@@ -2127,7 +2127,7 @@ func (r AccountInformationApiListUserAccountsRequest) Execute() ([]Account, *htt
 }
 
 /*
-ListUserAccounts List accounts
+ListUserAccounts List user accounts
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
