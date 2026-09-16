@@ -31,6 +31,7 @@ The following brokerages support `TRADE_DETECTION` only at intervals of five min
 - Robinhood
 - Wealthsimple
 - E*Trade
+- Questrade
 
 Brokerage availability can change as brokerage capabilities change. Do not assume every brokerage supports `TRADE_DETECTION`, and feel free to ask about specific brokerage support.
 
