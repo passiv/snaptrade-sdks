@@ -55,6 +55,7 @@ export * from './complex-order-leg';
 export * from './complex-order-response';
 export * from './connection-account';
 export * from './connection-account-sync-status';
+export * from './connection-accounts-response';
 export * from './crypto-instrument';
 export * from './crypto-order-form';
 export * from './crypto-order-preview';

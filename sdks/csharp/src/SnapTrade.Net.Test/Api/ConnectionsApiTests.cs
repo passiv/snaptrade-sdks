@@ -207,8 +207,8 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List accounts for a connection (discriminated union)
-                List<ConnectionAccount> result = client.Connections.ListConnectionAccounts(connectionId, userId, userSecret);
+                // List accounts
+                ConnectionAccountsResponse result = client.Connections.ListConnectionAccounts(connectionId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

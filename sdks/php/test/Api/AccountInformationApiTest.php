@@ -181,7 +181,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for listUserAccounts
      *
-     * List accounts.
+     * List user accounts.
      *
      */
     public function testListUserAccounts()

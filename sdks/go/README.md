@@ -174,7 +174,7 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetUserAccountRecentOrders**](docs/AccountInformationApi.md#getuseraccountrecentorders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 *AccountInformationApi* | [**GetUserAccountReturnRates**](docs/AccountInformationApi.md#getuseraccountreturnrates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
 *AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **Get** /accounts/{accountId}/holdings | List account holdings
-*AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **Get** /accounts | List accounts
+*AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **Get** /accounts | List user accounts
 *AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **Put** /accounts/{accountId} | Update details of an investment account
 *APIStatusApi* | [**Check**](docs/APIStatusApi.md#check) | **Get** / | Get API Status
 *AuthenticationApi* | [**DeleteSnapTradeUser**](docs/AuthenticationApi.md#deletesnaptradeuser) | **Delete** /snapTrade/deleteUser | Delete user
@@ -187,7 +187,7 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **Post** /authorizations/{authorizationId}/disable | Force disable connection
 *ConnectionsApi* | [**ListBrokerageAuthorizationAccounts**](docs/ConnectionsApi.md#listbrokerageauthorizationaccounts) | **Get** /authorizations/{authorizationId}/accounts | List accounts for a connection
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **Get** /authorizations | List all connections
-*ConnectionsApi* | [**ListConnectionAccounts**](docs/ConnectionsApi.md#listconnectionaccounts) | **Get** /connections/{connectionId}/accounts | List accounts for a connection (discriminated union)
+*ConnectionsApi* | [**ListConnectionAccounts**](docs/ConnectionsApi.md#listconnectionaccounts) | **Get** /connections/{connectionId}/accounts | List accounts
 *ConnectionsApi* | [**RefreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshbrokerageauthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
@@ -274,6 +274,7 @@ Class | Method | HTTP request | Description
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
  - [ConnectionAccount](docs/ConnectionAccount.md)
  - [ConnectionAccountSyncStatus](docs/ConnectionAccountSyncStatus.md)
+ - [ConnectionAccountsResponse](docs/ConnectionAccountsResponse.md)
  - [CryptoInstrument](docs/CryptoInstrument.md)
  - [CryptoOrderForm](docs/CryptoOrderForm.md)
  - [CryptoOrderPreview](docs/CryptoOrderPreview.md)

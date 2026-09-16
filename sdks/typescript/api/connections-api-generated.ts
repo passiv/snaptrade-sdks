@@ -86,7 +86,7 @@ import { BrokerageAuthorizationRefreshConfirmation } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationTransactionsSyncConfirmation } from '../models';
 // @ts-ignore
-import { ConnectionAccount } from '../models';
+import { ConnectionAccountsResponse } from '../models';
 // @ts-ignore
 import { DeleteConnectionConfirmation } from '../models';
 // @ts-ignore
@@ -405,8 +405,8 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
-         * @summary List accounts for a connection (discriminated union)
+         * Returns all accounts that belong to the specified connection for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts
          * @param {string} connectionId 
          * @param {string} [userId] 
          * @param {string} [userSecret] 
@@ -712,13 +712,13 @@ export const ConnectionsApiFp = function<TAuth extends AuthMode>(configuration?:
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
-         * @summary List accounts for a connection (discriminated union)
+         * Returns all accounts that belong to the specified connection for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts
          * @param {ConnectionsApiListConnectionAccountsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ConnectionAccount>>> {
+        async listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectionAccountsResponse>> {
             const [requestParameters = {} as ConnectionsApiListConnectionAccountsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listConnectionAccounts(requestParameters.connectionId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
@@ -820,13 +820,13 @@ export const ConnectionsApiFactory = function<TAuth extends AuthMode>(configurat
             return localVarFp.listBrokerageAuthorizations(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
-         * @summary List accounts for a connection (discriminated union)
+         * Returns all accounts that belong to the specified connection for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+         * @summary List accounts
          * @param {ConnectionsApiListConnectionAccountsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>): AxiosPromise<Array<ConnectionAccount>> {
+        listConnectionAccounts(...args: ConnectionsApiListConnectionAccountsArgs<TAuth>): AxiosPromise<ConnectionAccountsResponse> {
             return localVarFp.listConnectionAccounts(...args).then((request) => request(axios, basePath));
         },
         /**
@@ -1250,8 +1250,8 @@ export class ConnectionsApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAu
     }
 
     /**
-     * Returns the accounts that belong to the specified connection for the authenticated user, using the `kind`-discriminated account shape.  Each item in the response carries a `kind` field (`investment`, `deposit`, and `line_of_credit` are implemented) that determines which additional fields are present -- see the `ConnectionAccount` schema.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
-     * @summary List accounts for a connection (discriminated union)
+     * Returns all accounts that belong to the specified connection for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * @summary List accounts
      * @param {ConnectionsApiListConnectionAccountsRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

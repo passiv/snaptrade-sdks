@@ -14,7 +14,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetUserAccountRecentOrders**](AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
 | [**GetUserAccountReturnRates**](AccountInformationApi.md#getuseraccountreturnrates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns |
 | [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings |
-| [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
+| [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List user accounts |
 | [**UpdateUserAccount**](AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
 
 
@@ -1048,7 +1048,7 @@ namespace Example
             
             try
             {
-                // List accounts
+                // List user accounts
                 List<Account> result = client.AccountInformation.ListUserAccounts(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -1075,7 +1075,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List accounts
+    // List user accounts
     ApiResponse<List<Account>> response = apiInstance.ListUserAccountsWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

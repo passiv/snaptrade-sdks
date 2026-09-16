@@ -31,6 +31,7 @@ import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationTransactionsSyncConfirmation;
+import com.snaptrade.client.model.ConnectionAccountsResponse;
 import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import java.util.UUID;
@@ -1097,16 +1098,16 @@ public class ConnectionsApiGenerated {
     }
 
 
-    private ApiResponse<List<Object>> listConnectionAccountsWithHttpInfo(UUID connectionId, String userId, String userSecret) throws ApiException {
+    private ApiResponse<ConnectionAccountsResponse> listConnectionAccountsWithHttpInfo(UUID connectionId, String userId, String userSecret) throws ApiException {
         okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(connectionId, userId, userSecret, null);
-        Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
+        Type localVarReturnType = new TypeToken<ConnectionAccountsResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listConnectionAccountsAsync(UUID connectionId, String userId, String userSecret, final ApiCallback<List<Object>> _callback) throws ApiException {
+    private okhttp3.Call listConnectionAccountsAsync(UUID connectionId, String userId, String userSecret, final ApiCallback<ConnectionAccountsResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = listConnectionAccountsValidateBeforeCall(connectionId, userId, userSecret, _callback);
-        Type localVarReturnType = new TypeToken<List<Object>>(){}.getType();
+        Type localVarReturnType = new TypeToken<ConnectionAccountsResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1140,7 +1141,7 @@ public class ConnectionsApiGenerated {
 
         /**
          * Execute listConnectionAccounts request
-         * @return List&lt;Object&gt;
+         * @return ConnectionAccountsResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1148,14 +1149,14 @@ public class ConnectionsApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
-        public List<Object> execute() throws ApiException {
-            ApiResponse<List<Object>> localVarResp = listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
+        public ConnectionAccountsResponse execute() throws ApiException {
+            ApiResponse<ConnectionAccountsResponse> localVarResp = listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute listConnectionAccounts request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;Object&gt;&gt;
+         * @return ApiResponse&lt;ConnectionAccountsResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1163,7 +1164,7 @@ public class ConnectionsApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<List<Object>> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<ConnectionAccountsResponse> executeWithHttpInfo() throws ApiException {
             return listConnectionAccountsWithHttpInfo(connectionId, userId, userSecret);
         }
 
@@ -1178,14 +1179,14 @@ public class ConnectionsApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<List<Object>> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<ConnectionAccountsResponse> _callback) throws ApiException {
             return listConnectionAccountsAsync(connectionId, userId, userSecret, _callback);
         }
     }
 
     /**
-     * List accounts for a connection (discriminated union)
-     * Returns the accounts that belong to the specified connection for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape.  Each item in the response carries a &#x60;kind&#x60; field (&#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented) that determines which additional fields are present -- see the &#x60;ConnectionAccount&#x60; schema.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * List accounts
+     * Returns all accounts that belong to the specified connection for the authenticated user.  The &#x60;results&#x60; list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the &#x60;kind&#x60; discriminator to determine the shape for each account.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
      * @param connectionId  (required)
      * @param userId  (required)
      * @param userSecret  (required)

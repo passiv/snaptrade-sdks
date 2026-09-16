@@ -762,7 +762,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
         },
         /**
          * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
-         * @summary List accounts
+         * @summary List user accounts
          * @param {string} [userId] 
          * @param {string} [userSecret] 
          * @param {*} [options] Override http request option.
@@ -1008,7 +1008,7 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
         },
         /**
          * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
-         * @summary List accounts
+         * @summary List user accounts
          * @param {AccountInformationApiListUserAccountsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1143,7 +1143,7 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
         },
         /**
          * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
-         * @summary List accounts
+         * @summary List user accounts
          * @param {AccountInformationApiListUserAccountsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1780,7 +1780,7 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
 
     /**
      * Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
-     * @summary List accounts
+     * @summary List user accounts
      * @param {AccountInformationApiListUserAccountsRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
