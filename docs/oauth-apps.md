@@ -2,8 +2,6 @@
 
 SnapTrade OAuth lets your app request access to brokerage accounts that a user already manages in [SnapTrade Personal](https://dashboard.snaptrade.com). The user signs in to SnapTrade, reviews the requested access, and grants your app permission. Your app receives OAuth tokens instead of creating a second SnapTrade user or handling a SnapTrade consumer key for that person.
 
-OAuth is a good fit for read-oriented consumer apps such as portfolio dashboards, analytics tools, tax tools, AI assistants, and personal finance apps.
-
 :::info{title="Limited-time free preview"}
 OAuth app access is free for a limited time while we work with developers to test and improve the platform. There is no per-user OAuth fee during the preview, so this is a good time to build an integration, test it with real SnapTrade Personal users, and help shape the product before paid pricing is introduced.
 
@@ -14,6 +12,7 @@ We expect the free preview to run for a few months while we learn from early int
 
 - **A shorter integration:** Your app does not register SnapTrade users, store `userSecret` values, sign API requests, or embed the Connection Portal just to access accounts the user already connected.
 - **Reusable connections:** A user can share the same SnapTrade-managed brokerage connection with multiple apps instead of creating a separate upstream connection for every app.
+- **Immediate broker access:** All brokers supported by SnapTrade Personal are available to your app immediately because Personal users manage their own connections. Your app does not need separate broker approvals or wait for broker onboarding. See the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide) for the approval steps and delays that apply to Commercial integrations.
 - **User-controlled access:** Users manage their brokerage connections in the [SnapTrade Dashboard](https://dashboard.snaptrade.com) and explicitly approve access for each app.
 - **Sign-in included:** SnapTrade is also an OpenID Connect provider, so the same authorization request that grants account access can sign the user in to your app and return a verified email address.
 - **A path to distribution:** Eligible OAuth apps may be featured to SnapTrade Personal users as SnapTrade expands app discovery and distribution.
@@ -27,24 +26,25 @@ Because OAuth apps can reuse connections that users already maintain with SnapTr
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Users have or can create a SnapTrade Personal account                 | Your app must create and own the SnapTrade user lifecycle                |
 | Users can manage their brokerage connections in SnapTrade             | Your app must fully own the brokerage connection experience              |
-| Your app needs `read` access, optionally with `webhook` notifications | Your app needs trading or another capability not available to OAuth apps |
 | You want users to grant access to existing connections                | Each connection must belong exclusively to your app's integration        |
 
-OAuth currently supports account data and connection-management workflows, optional asynchronous event notifications, and OpenID Connect sign-in. OAuth does not currently support placing, modifying, or cancelling trades. Personal API keys can support trading for an individual user's own accounts where enabled; Commercial credentials support apps that manage SnapTrade users and connections themselves.
+OAuth supports account data and connection-management workflows, optional asynchronous event notifications, and OpenID Connect sign-in. Apps with the `trade` scope enabled can also place, modify, and cancel trades where supported by the connected brokerage. Commercial credentials support apps that manage SnapTrade users and connections themselves.
 
 ## Scopes
 
-| Scope     | What the user grants                                                                            | Availability                                              |
-| --------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `read`    | View connected accounts and account data.                                                       | Every OAuth app. Required in every authorization request. |
-| `openid`  | Sign in to your app and confirm the user's SnapTrade identity, returned as a signed `id_token`. | Every OAuth app.                                          |
-| `email`   | View the email address on the user's SnapTrade account, added to the `id_token` as claims.      | Every OAuth app. Only valid together with `openid`.       |
-| `webhook` | Receive ongoing connection and account event notifications.                                     | Apps registered in the SnapTrade Dashboard.               |
+| Scope | What the user grants |
+| --- | --- |
+| `openid` | Sign in to your app and confirm the user's SnapTrade identity, returned as a signed `id_token`. |
+| `profile` | View the user's name and profile picture, returned as `name` and `picture` claims in the `id_token`. |
+| `email` | View the email address on the user's SnapTrade account, added to the `id_token` as claims. |
+| `read` | View connected accounts and account data. |
+| `trade` | Place, modify, and cancel trades where supported by the connected brokerage. |
+| `webhook` | Receive ongoing connection and account event notifications. |
 
 A few rules the authorization endpoint enforces:
 
 - Every request must include `read`. Identity-only grants are not offered.
-- `email` is only accepted alongside `openid`. Requesting `email` on its own is rejected.
+- `profile` and `email` are only accepted alongside `openid`. Requesting either without `openid` is rejected.
 - Requesting a scope your app is not approved for is rejected before the consent screen is shown.
 - Scopes are granted per authorization. Adding a scope to your app does not upgrade an existing grant: users who authorized an earlier scope set must go through the flow again.
 
@@ -61,11 +61,13 @@ The self-serve OAuth app created in the SnapTrade Dashboard is a **confidential 
 
 ## 1. Register Your App
 
-In the [SnapTrade Dashboard](https://dashboard.snaptrade.com), open **Settings**, select **OAuth App**, and add your callback URLs. Each developer account can register one OAuth app. The app name shown during consent comes from the name of your SnapTrade customer account.
+In the [SnapTrade Dashboard](https://dashboard.snaptrade.com), select **OAuth Apps** in the left sidebar, create your app, and add your callback URLs. Each developer account can register one **Test** OAuth app and one **Production** OAuth app. Test OAuth apps are limited to **5 users**. The app name shown during consent comes from the name of your SnapTrade customer account.
+
+Creating a Production OAuth app requires the same KYC approval process as Commercial production API access. Complete the [Production Access Application](https://dashboard.snaptrade.com/production-access) before registering your Production app. This is SnapTrade's production approval process; no separate broker approvals are required for your OAuth app.
 
 To receive webhooks, also configure a listener URL in the **Webhooks** section of the Dashboard. OAuth apps registered under the same SnapTrade customer use that customer's existing webhook URL, signing key, and custom headers. The `oauthClientId` in each OAuth webhook identifies the receiving app.
 
-When you create the app, SnapTrade shows the `client_id` and `client_secret`. Save the secret immediately: it is shown only once and is stored hashed. If it is lost or exposed, rotate it from the same settings page. Rotation invalidates the previous secret.
+When you create the app, SnapTrade shows the `client_id` and `client_secret`. Save the secret immediately: it is shown only once and is stored hashed. If it is lost or exposed, rotate it from the app's page in **OAuth Apps**. Rotation invalidates the previous secret.
 
 Redirect URIs must match exactly, including scheme, host, port, path, and trailing slash. You can register up to 10. For example:
 
@@ -108,7 +110,7 @@ Accept: application/json
   "authorization_endpoint": "https://dashboard.snaptrade.com/oauth/authorize",
   "token_endpoint": "https://api.snaptrade.com/oauth/token/",
   "jwks_uri": "https://api.snaptrade.com/.well-known/jwks.json",
-  "scopes_supported": ["openid", "email", "read"],
+  "scopes_supported": ["openid", "profile", "email", "read"],
   "response_types_supported": ["code"],
   "id_token_signing_alg_values_supported": ["RS256"],
   "subject_types_supported": ["public"],
@@ -124,7 +126,7 @@ SnapTrade does not expose a `userinfo` endpoint. Every identity claim your app r
 
 Generate a new high-entropy `state` and PKCE `code_verifier` for every authorization attempt. Store them in the user's server-side login session. Derive the `code_challenge` using SHA-256 and base64url encoding without padding.
 
-Add `openid` to the scope when the authorization should also sign the user in, and `email` when your app needs their email address. When you request `openid`, also generate a `nonce`: SnapTrade echoes it inside the `id_token` so your app can bind that token to this specific authorization attempt.
+Add `openid` to the scope when the authorization should also sign the user in, `profile` when your app needs their name and profile picture, and `email` when it needs their email address. Add `trade` alongside `read` when your app needs trading. When you request `openid`, also generate a `nonce`: SnapTrade echoes it inside the `id_token` so your app can bind that token to this specific authorization attempt.
 
 ```typescript
 import crypto from "node:crypto";
@@ -284,6 +286,8 @@ Cache the JWKS and refetch it when you see an unfamiliar `kid`. Never pin a sing
 | `exp`, `iat`     | always                        | Expiry and issue time                                                                      |
 | `auth_time`      | always                        | When the user authenticated to SnapTrade for this authorization                            |
 | `nonce`          | you sent a `nonce`            | The exact value you sent                                                                   |
+| `name`           | the `profile` scope was granted | The user's name on their SnapTrade account                                               |
+| `picture`        | the `profile` scope was granted | The user's profile picture URL, when available                                           |
 | `email`          | the `email` scope was granted | The email address on the user's SnapTrade account, not a brokerage email                   |
 | `email_verified` | the `email` scope was granted | Whether SnapTrade has verified that address                                                |
 
@@ -301,11 +305,46 @@ Authorization: Bearer ACCESS_TOKEN
 Accept: application/json
 ```
 
-You can then use the supported read and connection endpoints to list the user's connections, accounts, positions, balances, orders, and activities.
+You can then use the supported read and connection endpoints to list the user's connections, accounts, positions, balances, orders, and transactions.
 
 The API reference may still show Commercial authentication fields as required. Omit those fields when making a Bearer-token request.
 
-## 8. Receive Webhooks
+## 8. Trading
+
+OAuth apps can place, modify, and cancel orders where supported by the connected brokerage. Trading is currently in beta and must be enabled for your app before you request the `trade` scope.
+
+### Request Trading Permission
+
+Include `trade` alongside the required `read` scope in your authorization request:
+
+```text
+scope=read trade
+```
+
+If your app also uses sign-in, profile information, email, and webhooks, the scope set is:
+
+```text
+scope=openid profile email read trade webhook
+```
+
+Request only the scopes your app needs. Users who previously authorized your app without `trade` must go through the authorization flow again to grant trading permission. Refreshing an existing token does not add the scope.
+
+### Use a Trading-Enabled Connection
+
+The user's brokerage connection must also support trading. Granting your app the `trade` scope does not upgrade a read-only connection or enable features the brokerage does not support. Personal users manage their connections in the [SnapTrade Dashboard](https://dashboard.snaptrade.com); direct them there if they need to enable trading on a supported connection.
+
+### Submit and Track Orders
+
+Use the trading endpoints with the same Bearer access token described above. Omit Commercial authentication fields such as `clientId`, `consumerKey`, `userId`, `userSecret`, `timestamp`, and `Signature`.
+
+1. Select the user's account and validate the order details for that brokerage.
+2. Show the user the order details and available impact and fee information, then obtain their confirmation. See [Order Impact and Confirmation](https://docs.snaptrade.com/docs/order-impact-and-confirmation).
+3. Submit the order with the endpoint for the asset: :api[Trading_placeForceOrder] for equities, :api[Trading_placeMlegOrder] for options, or :api[Trading_placeCryptoOrder] for crypto.
+4. Track the order's status with :api[AccountInformation_getUserAccountRecentOrders]. A successful submission does not mean the order has filled.
+
+See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order payloads and brokerage-specific capabilities. Its Connection Portal setup instructions apply to Commercial integrations; OAuth apps use connections managed by Personal users.
+
+## 9. Receive Webhooks
 
 Request the `webhook` scope alongside `read` when you want SnapTrade to notify your app about supported connection and account events:
 
@@ -319,7 +358,7 @@ Webhooks are sent to the listener URL configured for the SnapTrade customer that
 
 OAuth webhooks use the versioned `oauth_v1` payload. In this schema, `userId` is the SnapTrade Personal user UUID (the same value as the `id_token` `sub` claim, and as the deprecated `sub.snaptrade_user_id`, from the token exchange), and `connectionId` identifies the brokerage connection. See [Webhooks](https://docs.snaptrade.com/docs/webhooks#oauth-application-webhooks) for the full schema, supported events, delivery behavior, and signature-verification example.
 
-## 9. Refresh Tokens
+## 10. Refresh Tokens
 
 Refresh shortly before the access token expires. Use the same client authentication as the initial token exchange:
 
@@ -344,7 +383,7 @@ SnapTrade rotates refresh tokens. Refreshing invalidates the token you sent and 
 
 A refresh response never contains an `id_token`, even when the grant includes `openid`. An `id_token` asserts that the user authenticated, and a refresh happens without them present, so re-issuing one there would misstate when they last signed in. Your app receives its `id_token` at the authorization code exchange. If you need a fresh authentication assertion, for example to satisfy a session policy or a `max_age` requirement, send the user through the authorization flow again.
 
-## 10. Revoke Access
+## 11. Revoke Access
 
 Let users disconnect SnapTrade from inside your app. Revoke the refresh token from your backend, then delete all locally stored SnapTrade tokens:
 
@@ -395,11 +434,10 @@ await fetch(revocationEndpoint, {
 - Replace rotated refresh tokens atomically.
 - Retry at most once after refreshing a failed API request.
 - Provide an in-app disconnect action that revokes access.
-- Request `openid` only when you sign users in, `email` only when you need the address, and `webhook` only when your app needs notifications. Handle users denying any of them.
+- Request `openid` only when you sign users in, `profile` only when you need the name or profile picture, `email` only when you need the address, `trade` only when your app needs trading, and `webhook` only when your app needs notifications. Handle users denying any of them.
 - Configure a production webhook listener and verify every webhook's `Signature` header.
 - Ask existing users to authorize again before relying on any newly requested scope, such as `openid`, `email`, or `webhook`.
 - Link users to the SnapTrade Dashboard to add, repair, or remove brokerage connections.
 - Explain what brokerage data your app uses and link to a privacy policy.
-- Do not describe OAuth as supporting trading until a trading scope is available to your app.
 
 The OAuth preview is the best time to start building: access is free, the integration is smaller than a traditional Commercial implementation, and early apps can give direct feedback on the platform. When your integration is ready, contact SnapTrade to discuss app discovery eligibility.
