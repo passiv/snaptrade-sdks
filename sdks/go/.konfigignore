@@ -1,4 +1,5 @@
 test/getting_started_test.go
+discriminator_aliases_test.go
 request_hooks.go
 model_holdings_status.go
 utils.go

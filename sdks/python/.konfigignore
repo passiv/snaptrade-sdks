@@ -1,6 +1,7 @@
 test/test_getting_started.py
 test/test_auth_modes.py
 test/test_signing.py
+test/test_discriminator_aliases.py
 snaptrade_client/request_after_hook.py
 snaptrade_client/request_before_hook.py
 mise.toml

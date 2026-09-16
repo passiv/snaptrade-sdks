@@ -1,2 +1,3 @@
 src/test/java/com/snaptrade/client/GettingStartedTest.java
+src/test/java/com/snaptrade/client/model/DiscriminatorAliasesTest.java
 src/main/java/com/snaptrade/client/ApiClientCustom.java

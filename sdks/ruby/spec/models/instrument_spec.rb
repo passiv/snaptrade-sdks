@@ -28,11 +28,22 @@ describe SnapTrade::Instrument do
   describe '.openapi_discriminator_mapping' do
     it 'returns the key/values of the "mapping" property' do
       expect(described_class.openapi_discriminator_mapping.values.uniq.sort).to eq(described_class.openapi_one_of.sort)
+      expect(described_class.openapi_discriminator_mapping[:bond]).to eq(:OtherInstrument)
+      expect(described_class.openapi_discriminator_mapping[:other]).to eq(:OtherInstrument)
     end
   end
 
   describe '.build' do
-    it 'returns the correct model' do
+    it 'builds shared discriminator aliases as the same model' do
+      payload = {
+        kind: 'bond',
+        id: '1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324',
+        symbol: 'US912810TM09',
+        raw_symbol: 'US912810TM09'
+      }
+
+      expect(described_class.build(payload)).to be_instance_of(SnapTrade::OtherInstrument)
+      expect(described_class.build(payload.merge(kind: 'other'))).to be_instance_of(SnapTrade::OtherInstrument)
     end
   end
 end

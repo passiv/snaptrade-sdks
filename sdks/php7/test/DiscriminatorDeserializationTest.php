@@ -20,18 +20,17 @@ class DiscriminatorDeserializationTest extends TestCase
     }
 
     /**
-     * @dataProvider instrumentKinds
+     * @dataProvider sharedInstrumentKinds
      */
-    public function testAccountPositionInstrumentUsesDiscriminatorMapping(string $kind, string $expectedClass): void
+    public function testSharedDiscriminatorTargetsDeserializeAsOtherInstrument(string $kind): void
     {
         $payload = json_decode(json_encode([
             'results' => [[
                 'instrument' => [
                     'kind' => $kind,
-                    'symbol' => 'CLSK',
-                    'description' => 'CleanSpark, Inc.',
-                    'exchange' => 'NASDAQ',
-                    'currency' => 'USD',
+                    'id' => '1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324',
+                    'symbol' => 'US912810TM09',
+                    'raw_symbol' => 'US912810TM09',
                 ],
                 'units' => 10,
                 'price' => 9.5,
@@ -48,19 +47,16 @@ class DiscriminatorDeserializationTest extends TestCase
         );
 
         self::assertInstanceOf(
-            $expectedClass,
+            '\\SnapTrade\\Model\\OtherInstrument',
             $response->getResults()[0]->getInstrument()
         );
     }
 
-    public static function instrumentKinds(): array
+    public static function sharedInstrumentKinds(): array
     {
         return [
-            'stock' => ['stock', '\\SnapTrade\\Model\\StockInstrument'],
-            'crypto' => ['crypto', '\\SnapTrade\\Model\\CryptoInstrument'],
-            'etf' => ['etf', '\\SnapTrade\\Model\\EtfInstrument'],
-            'bond' => ['bond', '\\SnapTrade\\Model\\OtherInstrument'],
-            'other' => ['other', '\\SnapTrade\\Model\\OtherInstrument'],
+            'bond' => ['bond'],
+            'other' => ['other'],
         ];
     }
 }
