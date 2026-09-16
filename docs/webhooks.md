@@ -461,7 +461,8 @@ Example payload is below:
                 "brokerage_order_id": "124912433123",
                 "brokerage_group_order_id": null
             }
-        ]
+        ],
+        "detection_lag_seconds": 5.276
     },
     "clientId": "PARTNERAPP",
     "webookId": "6963bc1c-8bca-4896-8faa-e84b82f8f7b2",

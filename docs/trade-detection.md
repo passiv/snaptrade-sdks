@@ -47,6 +47,7 @@ Use the order payload, not webhook delivery metadata, to determine when a trade 
 - `details.orders[]` contains the detected order records.
 - `details.orders[].time_executed` is the source of truth for when the order was executed.
 - `eventTimestamp` is when SnapTrade created the webhook event.
+- `details.detection_lag_seconds` is the delay from execution to webhook delivery in seconds.
 
 For order execution timing, prefer `details.orders[].time_executed` over `eventTimestamp`
 Brokerages usually make orders available over their API only a few seconds after execution, but can occasionally have a longer delay of a minute or two. SnapTrade has no control over these intermittent brokerage delays.
