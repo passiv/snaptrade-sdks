@@ -50,7 +50,7 @@ Use the order payload, not webhook delivery metadata, to determine when a trade 
 - `details.detection_lag_seconds` is the delay from execution to webhook delivery in seconds.
 
 For order execution timing, prefer `details.orders[].time_executed` over `eventTimestamp`
-Brokerages usually make orders available over their API only a few seconds after execution, but can occasionally have a longer delay of a minute or two. SnapTrade has no control over these intermittent brokerage delays.
+Brokerages usually make orders available over their API only a few seconds after execution, but can occasionally have a longer delay of a minute or two. SnapTrade has no control over these intermittent brokerage delays. If your handling is time sensitive, use `details.detection_lag_seconds` to check how stale a fill is before acting on it.
 
 Connection health is a separate signal. A `TRADE_DETECTION` subscription on an account does not mean the connection is currently healthy, so partners should use connection webhooks such as `CONNECTION_BROKEN` and `CONNECTION_FIXED` to keep users' brokerage connections usable.
 
