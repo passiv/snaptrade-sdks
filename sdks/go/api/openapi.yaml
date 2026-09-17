@@ -4387,6 +4387,7 @@ components:
       - results
       type: object
     ConnectionAccount:
+      additionalProperties: true
       description: |
         A single account under a connection, from the `kind`-discriminated union
         used by `Connections_listConnectionAccounts`. Use `kind` to determine
@@ -4403,6 +4404,7 @@ components:
       - $ref: '#/components/schemas/InvestmentAccount'
       - $ref: '#/components/schemas/DepositAccount'
       - $ref: '#/components/schemas/LineOfCreditAccount'
+      type: object
     InvestmentAccount:
       additionalProperties: true
       description: |
