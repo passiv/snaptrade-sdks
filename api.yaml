@@ -3342,6 +3342,7 @@ components:
         which schema is present.
 
         `investment`, `deposit`, and `line_of_credit` are implemented today.
+      type: object
       oneOf:
         - $ref: "#/components/schemas/InvestmentAccount"
         - $ref: "#/components/schemas/DepositAccount"
