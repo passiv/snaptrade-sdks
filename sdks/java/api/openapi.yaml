@@ -1363,7 +1363,7 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
@@ -7966,6 +7966,7 @@ components:
     Instrument: {}
     UnderlyingOptionInstrument: {}
     UnderlyingCfdInstrument: {}
+    UnderlyingTokenizedAssetInstrument: {}
     StockInstrument:
       additionalProperties: true
       description: Security instrument metadata for stock positions.
@@ -8089,6 +8090,49 @@ components:
       - id
       - kind
       - raw_symbol
+      - symbol
+      - underlying_instrument
+      type: object
+    TokenizedAssetInstrument:
+      additionalProperties: true
+      description: |
+        Canonical tokenized asset wrapper for a V2 position. Symbol and description
+        duplicate the listed underlying's display metadata for convenience; they
+        are not token-specific identifiers or labels. Currency and exchange metadata
+        are provided only in underlying_instrument.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - tokenized_asset
+          example: tokenized_asset
+          type: string
+          x-konfig-original-example: tokenized_asset
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-kind
+        id:
+          description: Unique identifier for the canonical tokenized asset wrapper.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-id
+        symbol:
+          description: "Display symbol of the underlying stock or ETF, not a token-specific\
+            \ ticker."
+          example: HOOD
+          type: string
+          x-konfig-original-example: HOOD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-symbol
+        description:
+          description: "Display name of the underlying stock or ETF, when available."
+          example: Robinhood Markets
+          type: string
+          x-konfig-original-example: Robinhood Markets
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-description
+        underlying_instrument: {}
+      required:
+      - id
+      - kind
       - symbol
       - underlying_instrument
       type: object
@@ -13909,6 +13953,22 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CfdInstrument-properties-exchange:
       example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-kind:
+      example: tokenized_asset
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-symbol:
+      example: HOOD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-description:
+      example: Robinhood Markets
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AdrInstrument-properties-kind:

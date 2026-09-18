@@ -225,6 +225,7 @@ from snaptrade_client.model.tax_lot import TaxLot
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.model.tokenized_asset_instrument import TokenizedAssetInstrument
 from snaptrade_client.model.trade_detection_cancel_subscription_response import TradeDetectionCancelSubscriptionResponse
 from snaptrade_client.model.trade_detection_subscription import TradeDetectionSubscription
 from snaptrade_client.model.trade_id import TradeID
@@ -237,6 +238,7 @@ from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_cfd_instrument import UnderlyingCfdInstrument
 from snaptrade_client.model.underlying_option_instrument import UnderlyingOptionInstrument
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
+from snaptrade_client.model.underlying_tokenized_asset_instrument import UnderlyingTokenizedAssetInstrument
 from snaptrade_client.model.units import Units
 from snaptrade_client.model.units_nullable import UnitsNullable
 from snaptrade_client.model.universal_activity import UniversalActivity

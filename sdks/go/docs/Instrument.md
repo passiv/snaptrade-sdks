@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Type of security instrument. | 
-**Id** | **string** | Unique identifier for the instrument. | 
-**Symbol** | **string** | The formatted trading symbol for the security. | 
+**Id** | **string** | Unique identifier for the canonical tokenized asset wrapper. | 
+**Symbol** | **string** | Display symbol of the underlying stock or ETF, not a token-specific ticker. | 
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
-**Description** | Pointer to **NullableString** | Human-readable description of the security. | [optional] 
+**Description** | Pointer to **string** | Display name of the underlying stock or ETF, when available. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the security listing. | [optional] 
 **Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the security. | [optional] 
 **FigiInstrument** | Pointer to [**NullableFigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
@@ -19,13 +19,13 @@ Name | Type | Description | Notes
 **Underlying** | [**FutureInstrument**](FutureInstrument.md) |  | 
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
-**UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
+**UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) |  | 
 
 ## Methods
 
 ### NewInstrument
 
-`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate string, multiplier NullableFloat64, underlying FutureInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingCfdInstrument, ) *Instrument`
+`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate string, multiplier NullableFloat64, underlying FutureInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingTokenizedAssetInstrument, ) *Instrument`
 
 NewInstrument instantiates a new Instrument object
 This constructor will assign default values to properties that have it defined,
@@ -145,16 +145,6 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### SetDescriptionNil
-
-`func (o *Instrument) SetDescriptionNil(b bool)`
-
- SetDescriptionNil sets the value for Description to be an explicit nil
-
-### UnsetDescription
-`func (o *Instrument) UnsetDescription()`
-
-UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetCurrency
 
 `func (o *Instrument) GetCurrency() string`
@@ -412,20 +402,20 @@ SetExpirationCode sets ExpirationCode field to given value.
 
 ### GetUnderlyingInstrument
 
-`func (o *Instrument) GetUnderlyingInstrument() UnderlyingCfdInstrument`
+`func (o *Instrument) GetUnderlyingInstrument() UnderlyingTokenizedAssetInstrument`
 
 GetUnderlyingInstrument returns the UnderlyingInstrument field if non-nil, zero value otherwise.
 
 ### GetUnderlyingInstrumentOk
 
-`func (o *Instrument) GetUnderlyingInstrumentOk() (*UnderlyingCfdInstrument, bool)`
+`func (o *Instrument) GetUnderlyingInstrumentOk() (*UnderlyingTokenizedAssetInstrument, bool)`
 
 GetUnderlyingInstrumentOk returns a tuple with the UnderlyingInstrument field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnderlyingInstrument
 
-`func (o *Instrument) SetUnderlyingInstrument(v UnderlyingCfdInstrument)`
+`func (o *Instrument) SetUnderlyingInstrument(v UnderlyingTokenizedAssetInstrument)`
 
 SetUnderlyingInstrument sets UnderlyingInstrument field to given value.
 

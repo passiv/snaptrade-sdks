@@ -6,10 +6,10 @@ Instrument metadata for a V2 position. Use `kind` to determine which schema is p
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Type of security instrument. | 
-**Id** | **string** | Unique identifier for the instrument. | 
-**Symbol** | **string** | The formatted trading symbol for the security. | 
+**Id** | **string** | Unique identifier for the canonical tokenized asset wrapper. | 
+**Symbol** | **string** | Display symbol of the underlying stock or ETF, not a token-specific ticker. | 
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
-**Description** | **string** | Human-readable description of the security. | [optional] 
+**Description** | **string** | Display name of the underlying stock or ETF, when available. | [optional] 
 **Currency** | **string** | ISO-4217 currency code for the security listing. | [optional] 
 **Exchange** | **string** | Exchange MIC code or exchange code for the security. | [optional] 
 **FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Underlying** | [**FutureInstrument**](FutureInstrument.md) |  | 
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
-**UnderlyingInstrument** | [**UnderlyingCfdInstrument**](UnderlyingCfdInstrument.md) |  | 
+**UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
