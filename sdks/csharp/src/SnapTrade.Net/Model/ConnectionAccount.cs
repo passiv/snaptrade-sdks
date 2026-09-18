@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Model
     /// </summary>
     [JsonConverter(typeof(ConnectionAccountJsonConverter))]
     [DataContract(Name = "ConnectionAccount")]
-    public partial class ConnectionAccount : AbstractOpenAPISchema, IEquatable<ConnectionAccount>, IValidatableObject
+    public partial class ConnectionAccount : AbstractOpenAPISchema, Dictionary<String, Object>, IEquatable<ConnectionAccount>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConnectionAccount" /> class

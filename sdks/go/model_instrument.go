@@ -29,6 +29,7 @@ type Instrument struct {
 	OptionInstrument *OptionInstrument
 	OtherInstrument *OtherInstrument
 	StockInstrument *StockInstrument
+	TokenizedAssetInstrument *TokenizedAssetInstrument
 }
 
 // AdrInstrumentAsInstrument is a convenience function that returns AdrInstrument wrapped in Instrument
@@ -105,6 +106,13 @@ func OtherInstrumentAsInstrument(v *OtherInstrument) Instrument {
 func StockInstrumentAsInstrument(v *StockInstrument) Instrument {
 	return Instrument{
 		StockInstrument: v,
+	}
+}
+
+// TokenizedAssetInstrumentAsInstrument is a convenience function that returns TokenizedAssetInstrument wrapped in Instrument
+func TokenizedAssetInstrumentAsInstrument(v *TokenizedAssetInstrument) Instrument {
+	return Instrument{
+		TokenizedAssetInstrument: v,
 	}
 }
 
@@ -205,6 +213,12 @@ func (dst *Instrument) UnmarshalJSON(data []byte) error {
 			return fmt.Errorf("failed to unmarshal Instrument as StockInstrument: %w", err)
 		}
 		dst.StockInstrument = &value
+	case "tokenized_asset":
+		var value TokenizedAssetInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as TokenizedAssetInstrument: %w", err)
+		}
+		dst.TokenizedAssetInstrument = &value
 	default:
 		return fmt.Errorf("unknown Instrument discriminator kind: %q", *kind)
 	}
@@ -257,6 +271,10 @@ func (src Instrument) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.StockInstrument)
 	}
 
+	if src.TokenizedAssetInstrument != nil {
+		return json.Marshal(&src.TokenizedAssetInstrument)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -307,6 +325,10 @@ func (obj *Instrument) GetActualInstance() (interface{}) {
 
 	if obj.StockInstrument != nil {
 		return obj.StockInstrument
+	}
+
+	if obj.TokenizedAssetInstrument != nil {
+		return obj.TokenizedAssetInstrument
 	}
 
 	// all schemas are nil

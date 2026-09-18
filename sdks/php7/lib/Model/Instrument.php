@@ -56,6 +56,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'option' => \SnapTrade\Model\OptionInstrument::class,
         'other' => \SnapTrade\Model\OtherInstrument::class,
         'stock' => \SnapTrade\Model\StockInstrument::class,
+        'tokenized_asset' => \SnapTrade\Model\TokenizedAssetInstrument::class,
     ];
 
     /**
@@ -86,7 +87,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => '\SnapTrade\Model\FutureInstrument',
         'root_symbol' => 'string',
         'expiration_code' => 'string',
-        'underlying_instrument' => '\SnapTrade\Model\UnderlyingCfdInstrument'
+        'underlying_instrument' => '\SnapTrade\Model\UnderlyingTokenizedAssetInstrument'
     ];
 
     /**
@@ -125,7 +126,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
-		'description' => true,
+		'description' => false,
 		'currency' => true,
 		'exchange' => true,
 		'figi_instrument' => true,
@@ -332,8 +333,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const KIND_BOND = 'bond';
-    public const KIND_OTHER = 'other';
+    public const KIND_TOKENIZED_ASSET = 'tokenized_asset';
     public const OPTION_TYPE_CALL = 'CALL';
     public const OPTION_TYPE_PUT = 'PUT';
 
@@ -345,8 +345,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_BOND,
-            self::KIND_OTHER,
+            self::KIND_TOKENIZED_ASSET,
         ];
     }
 
@@ -547,7 +546,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id Unique identifier for the instrument.
+     * @param string $id Unique identifier for the canonical tokenized asset wrapper.
      *
      * @return self
      */
@@ -576,7 +575,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param string $symbol The formatted trading symbol for the security.
+     * @param string $symbol Display symbol of the underlying stock or ETF, not a token-specific ticker.
      *
      * @return self
      */
@@ -634,7 +633,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description Human-readable description of the security.
+     * @param string|null $description Display name of the underlying stock or ETF, when available.
      *
      * @return self
      */
@@ -642,14 +641,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($description)) {
-            array_push($this->openAPINullablesSetToNull, 'description');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
 
         $this->container['description'] = $description;
@@ -988,7 +980,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets underlying_instrument
      *
-     * @return \SnapTrade\Model\UnderlyingCfdInstrument
+     * @return \SnapTrade\Model\UnderlyingTokenizedAssetInstrument
      */
     public function getUnderlyingInstrument()
     {
@@ -998,7 +990,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets underlying_instrument
      *
-     * @param \SnapTrade\Model\UnderlyingCfdInstrument $underlying_instrument underlying_instrument
+     * @param \SnapTrade\Model\UnderlyingTokenizedAssetInstrument $underlying_instrument underlying_instrument
      *
      * @return self
      */
