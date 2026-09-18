@@ -729,7 +729,7 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, and CFD positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
@@ -3342,6 +3342,7 @@ components:
         which schema is present.
 
         `investment`, `deposit`, and `line_of_credit` are implemented today.
+      type: object
       oneOf:
         - $ref: "#/components/schemas/InvestmentAccount"
         - $ref: "#/components/schemas/DepositAccount"
@@ -4952,6 +4953,7 @@ components:
         - $ref: "#/components/schemas/AdrInstrument"
         - $ref: "#/components/schemas/CfdInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
+        - $ref: "#/components/schemas/TokenizedAssetInstrument"
       discriminator:
         propertyName: kind
         mapping:
@@ -4967,6 +4969,7 @@ components:
           cfd: "#/components/schemas/CfdInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
+          tokenized_asset: "#/components/schemas/TokenizedAssetInstrument"
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
       oneOf:
@@ -5009,6 +5012,16 @@ components:
           adr: "#/components/schemas/AdrInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
+    UnderlyingTokenizedAssetInstrument:
+      description: The listed stock or ETF underlying a tokenized asset.
+      oneOf:
+        - $ref: "#/components/schemas/StockInstrument"
+        - $ref: "#/components/schemas/EtfInstrument"
+      discriminator:
+        propertyName: kind
+        mapping:
+          stock: "#/components/schemas/StockInstrument"
+          etf: "#/components/schemas/EtfInstrument"
     StockInstrument:
       description: Security instrument metadata for stock positions.
       type: object
@@ -5101,6 +5114,40 @@ components:
         - id
         - symbol
         - raw_symbol
+        - underlying_instrument
+    TokenizedAssetInstrument:
+      description: |
+        Canonical tokenized asset wrapper for a V2 position. Symbol and description
+        duplicate the listed underlying's display metadata for convenience; they
+        are not token-specific identifiers or labels. Currency and exchange metadata
+        are provided only in underlying_instrument.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - tokenized_asset
+          example: tokenized_asset
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the canonical tokenized asset wrapper.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: Display symbol of the underlying stock or ETF, not a token-specific ticker.
+          example: HOOD
+        description:
+          type: string
+          description: Display name of the underlying stock or ETF, when available.
+          example: Robinhood Markets
+        underlying_instrument:
+          $ref: "#/components/schemas/UnderlyingTokenizedAssetInstrument"
+      required:
+        - kind
+        - id
+        - symbol
         - underlying_instrument
     AdrInstrument:
       description: Security instrument metadata for ADR positions.
