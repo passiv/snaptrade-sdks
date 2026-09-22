@@ -317,6 +317,13 @@ paths:
                 $ref: '#/components/schemas/401FailedRequestResponse'
           description: "Failed authentication. Wrong clientId, userId or userSecret\
             \ provided"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: Forbidden. The user's secret is managed by a first-party app
+            and cannot be reset here
         "500":
           content:
             application/json:
@@ -1531,7 +1538,7 @@ paths:
   /accounts/{accountId}/balanceHistory:
     get:
       description: |
-        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)
+        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)
       operationId: AccountInformation_getAccountBalanceHistory
       parameters:
       - explode: true
@@ -4387,7 +4394,6 @@ components:
       - results
       type: object
     ConnectionAccount:
-      additionalProperties: true
       description: |
         A single account under a connection, from the `kind`-discriminated union
         used by `Connections_listConnectionAccounts`. Use `kind` to determine
@@ -4404,7 +4410,6 @@ components:
       - $ref: '#/components/schemas/InvestmentAccount'
       - $ref: '#/components/schemas/DepositAccount'
       - $ref: '#/components/schemas/LineOfCreditAccount'
-      type: object
     InvestmentAccount:
       additionalProperties: true
       description: |

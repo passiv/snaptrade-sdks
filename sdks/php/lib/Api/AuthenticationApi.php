@@ -1892,7 +1892,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
+     * @return \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse
      */
     public function resetSnapTradeUserSecret(
 
@@ -1922,7 +1922,7 @@ class AuthenticationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\UserIDandSecret|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model403FailedRequestResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function resetSnapTradeUserSecretWithHttpInfo($user_i_dand_secret, string $contentType = self::contentTypes['resetSnapTradeUserSecret'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2024,6 +2024,21 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 403:
+                    if ('\SnapTrade\Model\Model403FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model403FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model403FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 500:
                     if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2079,6 +2094,14 @@ class AuthenticationApi extends \SnapTrade\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\Model401FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model403FailedRequestResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
