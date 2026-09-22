@@ -39,11 +39,13 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.model401_failed_request_response import Model401FailedRequestResponse as Model401FailedRequestResponseSchema
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret as UserIDandSecretSchema
+from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.user_i_dand_secret import UserIDandSecret
 from snaptrade_client.type.model401_failed_request_response import Model401FailedRequestResponse
+from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 
 from . import path
@@ -148,6 +150,27 @@ _response_for_401 = api_client.OpenApiResponse(
             schema=SchemaFor401ResponseBodyApplicationJson),
     },
 )
+SchemaFor403ResponseBodyApplicationJson = Model403FailedRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor403(api_client.ApiResponse):
+    body: Model403FailedRequestResponse
+
+
+@dataclass
+class ApiResponseFor403Async(api_client.AsyncApiResponse):
+    body: Model403FailedRequestResponse
+
+
+_response_for_403 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor403,
+    response_cls_async=ApiResponseFor403Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor403ResponseBodyApplicationJson),
+    },
+)
 SchemaFor500ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
@@ -173,6 +196,7 @@ _status_code_to_response = {
     '200': _response_for_200,
     '400': _response_for_400,
     '401': _response_for_401,
+    '403': _response_for_403,
     '500': _response_for_500,
 }
 _all_accept_content_types = (

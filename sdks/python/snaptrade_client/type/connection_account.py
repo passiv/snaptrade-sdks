@@ -20,4 +20,3 @@ from snaptrade_client.type.investment_account import InvestmentAccount
 from snaptrade_client.type.line_of_credit_account import LineOfCreditAccount
 
 ConnectionAccount = typing.Union[InvestmentAccount,DepositAccount,LineOfCreditAccount]
-ConnectionAccount = dict

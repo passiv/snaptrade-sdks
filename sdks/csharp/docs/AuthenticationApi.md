@@ -502,6 +502,7 @@ catch (ApiException e)
 | **200** | New user secret is generated |  -  |
 | **400** | Bad Request. Could be caused by various reasons. Error message is provided in response |  -  |
 | **401** | Failed authentication. Wrong clientId, userId or userSecret provided |  -  |
+| **403** | Forbidden. The user&#39;s secret is managed by a first-party app and cannot be reset here |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

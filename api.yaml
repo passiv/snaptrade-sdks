@@ -300,6 +300,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/401FailedRequestResponse"
+        "403":
+          description: Forbidden. The user's secret is managed by a first-party app and cannot be reset here
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected error
           content:
@@ -920,7 +926,7 @@ paths:
       summary: List historical account total value
       operationId: AccountInformation_getAccountBalanceHistory
       description: |
-        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)
+        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)
       parameters:
         - in: query
           required: true
@@ -3342,7 +3348,6 @@ components:
         which schema is present.
 
         `investment`, `deposit`, and `line_of_credit` are implemented today.
-      type: object
       oneOf:
         - $ref: "#/components/schemas/InvestmentAccount"
         - $ref: "#/components/schemas/DepositAccount"
