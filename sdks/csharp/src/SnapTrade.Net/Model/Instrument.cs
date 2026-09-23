@@ -157,10 +157,10 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Instrument" /> class
-        /// with the <see cref="OtherInstrument" /> class
+        /// with the <see cref="TokenizedAssetInstrument" /> class
         /// </summary>
-        /// <param name="actualInstance">An instance of OtherInstrument.</param>
-        public Instrument(OtherInstrument actualInstance)
+        /// <param name="actualInstance">An instance of TokenizedAssetInstrument.</param>
+        public Instrument(TokenizedAssetInstrument actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -169,10 +169,10 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Instrument" /> class
-        /// with the <see cref="TokenizedAssetInstrument" /> class
+        /// with the <see cref="OtherInstrument" /> class
         /// </summary>
-        /// <param name="actualInstance">An instance of TokenizedAssetInstrument.</param>
-        public Instrument(TokenizedAssetInstrument actualInstance)
+        /// <param name="actualInstance">An instance of OtherInstrument.</param>
+        public Instrument(OtherInstrument actualInstance)
         {
             this.IsNullable = false;
             this.SchemaType= "oneOf";
@@ -349,16 +349,6 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Get the actual instance of `OtherInstrument`. If the actual instance is not `OtherInstrument`,
-        /// the InvalidClassException will be thrown
-        /// </summary>
-        /// <returns>An instance of OtherInstrument</returns>
-        public OtherInstrument GetOtherInstrument()
-        {
-            return (OtherInstrument)this.ActualInstance;
-        }
-
-        /// <summary>
         /// Get the actual instance of `TokenizedAssetInstrument`. If the actual instance is not `TokenizedAssetInstrument`,
         /// the InvalidClassException will be thrown
         /// </summary>
@@ -366,6 +356,16 @@ namespace SnapTrade.Net.Model
         public TokenizedAssetInstrument GetTokenizedAssetInstrument()
         {
             return (TokenizedAssetInstrument)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `OtherInstrument`. If the actual instance is not `OtherInstrument`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of OtherInstrument</returns>
+        public OtherInstrument GetOtherInstrument()
+        {
+            return (OtherInstrument)this.ActualInstance;
         }
 
         /// <summary>

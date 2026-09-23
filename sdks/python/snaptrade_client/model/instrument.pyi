@@ -89,8 +89,8 @@ class Instrument(
                 CefInstrument,
                 AdrInstrument,
                 CfdInstrument,
-                OtherInstrument,
                 TokenizedAssetInstrument,
+                OtherInstrument,
             ]
 
 

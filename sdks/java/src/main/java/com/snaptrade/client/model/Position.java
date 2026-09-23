@@ -392,11 +392,11 @@ public class Position {
   }
 
    /**
-   * List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
+   * List of tax lots for the given position. Disabled by default, only available on paid plans, enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
    * @return taxLots
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)")
+  @ApiModelProperty(value = "List of tax lots for the given position. Disabled by default, only available on paid plans, enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)")
 
   public List<TaxLot> getTaxLots() {
     return taxLots;

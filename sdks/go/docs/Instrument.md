@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Type of security instrument. | 
-**Id** | **string** | Unique identifier for the canonical tokenized asset wrapper. | 
-**Symbol** | **string** | Display symbol of the underlying stock or ETF, not a token-specific ticker. | 
+**Id** | **string** | Unique identifier for the instrument. | 
+**Symbol** | **string** | The formatted trading symbol for the security. | 
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
-**Description** | Pointer to **string** | Display name of the underlying stock or ETF, when available. | [optional] 
+**Description** | Pointer to **NullableString** | Human-readable description of the security. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the security listing. | [optional] 
 **Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the security. | [optional] 
 **FigiInstrument** | Pointer to [**NullableFigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
@@ -145,6 +145,16 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### SetDescriptionNil
+
+`func (o *Instrument) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *Instrument) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetCurrency
 
 `func (o *Instrument) GetCurrency() string`

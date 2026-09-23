@@ -47,7 +47,7 @@ class OptionalPosition(TypedDict, total=False):
     # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
     cash_equivalent: typing.Optional[bool]
 
-    # List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
+    # List of tax lots for the given position. Disabled by default, only available on paid plans, enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
     tax_lots: typing.List[TaxLot]
 
 class Position(RequiredPosition, OptionalPosition):
