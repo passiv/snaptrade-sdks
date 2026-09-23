@@ -926,7 +926,7 @@ paths:
       summary: List historical account total value
       operationId: AccountInformation_getAccountBalanceHistory
       description: |
-        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the Add-on section of the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)
+        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
       parameters:
         - in: query
           required: true
@@ -4838,7 +4838,7 @@ components:
           description: If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
         tax_lots:
           type: array
-          description: List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
+          description: List of tax lots for the given position. Disabled by default, only available on paid plans, enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
           items:
             $ref: "#/components/schemas/TaxLot"
     TaxLot:
@@ -4957,8 +4957,8 @@ components:
         - $ref: "#/components/schemas/CefInstrument"
         - $ref: "#/components/schemas/AdrInstrument"
         - $ref: "#/components/schemas/CfdInstrument"
-        - $ref: "#/components/schemas/OtherInstrument"
         - $ref: "#/components/schemas/TokenizedAssetInstrument"
+        - $ref: "#/components/schemas/OtherInstrument"
       discriminator:
         propertyName: kind
         mapping:
@@ -4972,9 +4972,9 @@ components:
           cef: "#/components/schemas/CefInstrument"
           adr: "#/components/schemas/AdrInstrument"
           cfd: "#/components/schemas/CfdInstrument"
+          tokenized_asset: "#/components/schemas/TokenizedAssetInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
-          tokenized_asset: "#/components/schemas/TokenizedAssetInstrument"
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
       oneOf:

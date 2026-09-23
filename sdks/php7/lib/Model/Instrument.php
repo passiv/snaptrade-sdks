@@ -126,7 +126,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'id' => false,
 		'symbol' => false,
 		'raw_symbol' => false,
-		'description' => false,
+		'description' => true,
 		'currency' => true,
 		'exchange' => true,
 		'figi_instrument' => true,
@@ -333,7 +333,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const KIND_TOKENIZED_ASSET = 'tokenized_asset';
+    public const KIND_BOND = 'bond';
+    public const KIND_OTHER = 'other';
     public const OPTION_TYPE_CALL = 'CALL';
     public const OPTION_TYPE_PUT = 'PUT';
 
@@ -345,7 +346,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_TOKENIZED_ASSET,
+            self::KIND_BOND,
+            self::KIND_OTHER,
         ];
     }
 
@@ -546,7 +548,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string $id Unique identifier for the canonical tokenized asset wrapper.
+     * @param string $id Unique identifier for the instrument.
      *
      * @return self
      */
@@ -575,7 +577,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets symbol
      *
-     * @param string $symbol Display symbol of the underlying stock or ETF, not a token-specific ticker.
+     * @param string $symbol The formatted trading symbol for the security.
      *
      * @return self
      */
@@ -633,7 +635,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets description
      *
-     * @param string|null $description Display name of the underlying stock or ETF, when available.
+     * @param string|null $description Human-readable description of the security.
      *
      * @return self
      */
@@ -641,7 +643,14 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     {
 
         if (is_null($description)) {
-            throw new \InvalidArgumentException('non-nullable description cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['description'] = $description;

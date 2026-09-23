@@ -6,10 +6,10 @@ Instrument metadata for a V2 position. Use `kind` to determine which schema is p
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** | Type of security instrument. | 
-**Id** | **string** | Unique identifier for the canonical tokenized asset wrapper. | 
-**Symbol** | **string** | Display symbol of the underlying stock or ETF, not a token-specific ticker. | 
+**Id** | **string** | Unique identifier for the instrument. | 
+**Symbol** | **string** | The formatted trading symbol for the security. | 
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
-**Description** | **string** | Display name of the underlying stock or ETF, when available. | [optional] 
+**Description** | **string** | Human-readable description of the security. | [optional] 
 **Currency** | **string** | ISO-4217 currency code for the security listing. | [optional] 
 **Exchange** | **string** | Exchange MIC code or exchange code for the security. | [optional] 
 **FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
