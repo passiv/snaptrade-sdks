@@ -108,6 +108,17 @@ describe 'ReferenceDataApi' do
     end
   end
 
+  # unit tests for list_institutions
+  # List institutions
+  # Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use &#x60;GET /brokerages&#x60; instead.  A &#x60;null&#x60; field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don&#39;t recognize. 
+  # @param [Hash] opts the optional parameters
+  # @return [Array<Institution>]
+  describe 'list_institutions test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for symbol_search_user_account
   # Search account symbols
   # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 

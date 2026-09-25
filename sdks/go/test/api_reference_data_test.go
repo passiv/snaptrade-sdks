@@ -125,6 +125,19 @@ func Test_snaptrade_ReferenceDataApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test ReferenceDataApiService ListInstitutions", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.ReferenceDataApi.ListInstitutions(
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test ReferenceDataApiService SymbolSearchUserAccount", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         

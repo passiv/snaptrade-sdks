@@ -362,7 +362,7 @@ paths:
   /authorizations/{authorizationId}/returnRates:
     get:
       description: |
-        Returns a list of rate of return percents for a given connection.
+        DEPRECATED. Returns a list of rate of return percents for a given connection.
       operationId: Connections_returnRates
       parameters:
       - explode: true
@@ -1793,7 +1793,7 @@ paths:
   /accounts/{accountId}/returnRates:
     get:
       description: |
-        Returns a list of rate of return percents for a given account.
+        DEPRECATED. Returns a list of rate of return percents for a given account.
       operationId: AccountInformation_getUserAccountReturnRates
       parameters:
       - explode: true
@@ -3598,6 +3598,34 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--brokerages
+      x-accepts: application/json
+  /institutions:
+    get:
+      description: |
+        Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.
+
+        A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize.
+      operationId: ReferenceData_listInstitutions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Institution'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: "Enabled institutions that are generally available or in beta,\
+            \ sorted by display name. Paper-trading and simulated-trading variants\
+            \ are not listed."
+        default:
+          description: Unexpected error.
+      security: []
+      summary: List institutions
+      tags:
+      - Reference Data
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--institutions
       x-accepts: application/json
   /brokerages/{slug}/instruments:
     get:
@@ -9206,6 +9234,178 @@ components:
           nullable: true
           type: string
       type: object
+    Institution:
+      additionalProperties: true
+      description: An institution in SnapTrade's public catalog and what it supports.
+        A `null` field means the information is not documented yet.
+      example:
+        square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo-square.png
+        website: https://alpaca.markets/
+        release_stage: GENERALLY_AVAILABLE
+        regions:
+        - US
+        logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo.png
+        name: Alpaca
+        description: Alpaca is a commission-free API-first brokerage servicing the
+          USA and beyond.
+        connection:
+          methods:
+          - OAUTH
+          scopes:
+          - READ
+          - TRADE
+        display_name: Alpaca
+        slug: ALPACA
+      properties:
+        slug:
+          description: "A short, unique identifier for the institution. It is usually\
+            \ the name in capital letters and will never change. It matches the `slug`\
+            \ of the same brokerage in `GET /brokerages`."
+          example: ALPACA
+          type: string
+          x-konfig-original-example: ALPACA
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-slug
+        name:
+          description: Full name of the institution.
+          example: Alpaca
+          type: string
+          x-konfig-original-example: Alpaca
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-name
+        display_name:
+          description: A display-friendly name of the institution.
+          example: Alpaca
+          type: string
+          x-konfig-original-example: Alpaca
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-display_name
+        description:
+          description: A brief description of the institution.
+          example: Alpaca is a commission-free API-first brokerage servicing the USA
+            and beyond.
+          nullable: true
+          type: string
+          x-konfig-original-example: Alpaca is a commission-free API-first brokerage
+            servicing the USA and beyond.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-description
+        website:
+          description: URL of the institution's website.
+          example: https://alpaca.markets/
+          format: url
+          nullable: true
+          type: string
+          x-konfig-original-example: https://alpaca.markets/
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-website
+        logo_url:
+          description: URL of the institution's rectangular logo.
+          example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo.png
+          format: url
+          type: string
+          x-konfig-original-example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo.png
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-logo_url
+        square_logo_url:
+          description: URL of the institution's square logo.
+          example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo-square.png
+          format: url
+          nullable: true
+          type: string
+          x-konfig-original-example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo-square.png
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-square_logo_url
+        release_stage:
+          description: |
+            How mature the integration is.
+            - `GENERALLY_AVAILABLE`: fully supported and validated for production use.
+            - `BETA`: production-ready, with ongoing validation and improvements.
+          enum:
+          - GENERALLY_AVAILABLE
+          - BETA
+          example: GENERALLY_AVAILABLE
+          type: string
+          x-konfig-original-example: GENERALLY_AVAILABLE
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-release_stage
+        regions:
+          description: |
+            Regions where end users can connect to this institution.
+            - `US`: United States
+            - `CA`: Canada
+            - `EUROPE`: Europe, including the United Kingdom
+            - `AU`: Australia
+            - `IN`: India
+          example:
+          - US
+          items:
+            enum:
+            - US
+            - CA
+            - EUROPE
+            - AU
+            - IN
+            type: string
+          nullable: true
+          type: array
+          x-konfig-original-example:
+          - US
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Institution-properties-regions
+        connection:
+          $ref: '#/components/schemas/InstitutionConnectionNullable'
+      required:
+      - connection
+      - description
+      - display_name
+      - logo_url
+      - name
+      - regions
+      - release_stage
+      - slug
+      - square_logo_url
+      - website
+      type: object
+      x-konfig-properties:
+        connection:
+          nullable: true
+    InstitutionConnection:
+      additionalProperties: true
+      description: How end users connect to the institution and what the connection
+        allows.
+      properties:
+        methods:
+          description: |
+            Ways an end user can connect.
+            - `OAUTH`: the user signs in on the institution's own site and approves access.
+            - `CREDENTIALS`: the user enters their login details in the SnapTrade Connection Portal.
+            - `API_KEY`: the user creates an API key at the institution and pastes it in.
+          example:
+          - OAUTH
+          items:
+            enum:
+            - OAUTH
+            - CREDENTIALS
+            - API_KEY
+            type: string
+          type: array
+          x-konfig-original-example:
+          - OAUTH
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InstitutionConnection-properties-methods
+        scopes:
+          description: |
+            What a connection can do. `READ` is always present.
+            - `READ`: read accounts, balances, positions and activity.
+            - `TRADE`: place orders.
+          example:
+          - READ
+          - TRADE
+          items:
+            enum:
+            - READ
+            - TRADE
+            type: string
+          type: array
+          x-konfig-original-example:
+          - READ
+          - TRADE
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InstitutionConnection-properties-scopes
+      required:
+      - methods
+      - scopes
+      type: object
     BrokerageAuthorization:
       additionalProperties: true
       description: |
@@ -14404,6 +14604,64 @@ components:
         type: string
       type: array
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-slug:
+      example: ALPACA
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-name:
+      example: Alpaca
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-display_name:
+      example: Alpaca
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-description:
+      example: Alpaca is a commission-free API-first brokerage servicing the USA and
+        beyond.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-website:
+      example: https://alpaca.markets/
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-logo_url:
+      example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo.png
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-square_logo_url:
+      example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/alpaca-logo-square.png
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-release_stage:
+      example: GENERALLY_AVAILABLE
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Institution-properties-regions:
+      example:
+      - US
+      items:
+        example: US
+        type: string
+      type: array
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-InstitutionConnection-properties-methods:
+      example:
+      - OAUTH
+      items:
+        example: OAUTH
+        type: string
+      type: array
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-InstitutionConnection-properties-scopes:
+      example:
+      - READ
+      - TRADE
+      items:
+        example: READ
+        type: string
+      type: array
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date:
       example: 2024-08-20T21:56:19.123Z
       type: string
@@ -16622,6 +16880,12 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--institutions:
+      additionalProperties: true
+      properties: {}
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter: []
     konfig-generated-schema-single-parameter-schema-get--brokerages-slug-instruments:
       additionalProperties: true
       properties:
@@ -17246,6 +17510,58 @@ components:
           type: string
           x-konfig-original-example: BBG001S5N8V8
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-FigiInstrument-properties-figi_share_class
+      type: object
+    InstitutionConnectionNullable:
+      additionalProperties: true
+      description: How end users connect to the institution and what the connection
+        allows.
+      example:
+        methods:
+        - OAUTH
+        scopes:
+        - READ
+        - TRADE
+      nullable: true
+      properties:
+        methods:
+          description: |
+            Ways an end user can connect.
+            - `OAUTH`: the user signs in on the institution's own site and approves access.
+            - `CREDENTIALS`: the user enters their login details in the SnapTrade Connection Portal.
+            - `API_KEY`: the user creates an API key at the institution and pastes it in.
+          example:
+          - OAUTH
+          items:
+            enum:
+            - OAUTH
+            - CREDENTIALS
+            - API_KEY
+            type: string
+          type: array
+          x-konfig-original-example:
+          - OAUTH
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InstitutionConnection-properties-methods
+        scopes:
+          description: |
+            What a connection can do. `READ` is always present.
+            - `READ`: read accounts, balances, positions and activity.
+            - `TRADE`: place orders.
+          example:
+          - READ
+          - TRADE
+          items:
+            enum:
+            - READ
+            - TRADE
+            type: string
+          type: array
+          x-konfig-original-example:
+          - READ
+          - TRADE
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InstitutionConnection-properties-scopes
+      required:
+      - methods
+      - scopes
       type: object
     UnitsNullable:
       description: Number of shares for the order. This can be a decimal for fractional

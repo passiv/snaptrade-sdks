@@ -11,6 +11,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
 | [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments |
 | [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
+| [**listInstitutions**](ReferenceDataApi.md#listInstitutions) | **GET** /institutions | List institutions |
 | [**symbolSearchUserAccount**](ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search account symbols |
 
 
@@ -677,6 +678,94 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | A list of all defined Brokerage objects. |  -  |
+| **0** | Unexpected error. |  -  |
+
+<a name="listInstitutions"></a>
+# **listInstitutions**
+> List&lt;Institution&gt; listInstitutions().execute();
+
+List institutions
+
+Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use &#x60;GET /brokerages&#x60; instead.  A &#x60;null&#x60; field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don&#39;t recognize. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ReferenceDataApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    try {
+      List<Institution> result = client
+              .referenceData
+              .listInstitutions()
+              .execute();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listInstitutions");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<List<Institution>> response = client
+              .referenceData
+              .listInstitutions()
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ReferenceDataApi#listInstitutions");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;Institution&gt;**](Institution.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="symbolSearchUserAccount"></a>

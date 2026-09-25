@@ -4079,7 +4079,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account rate of returns
      *
-     * Returns a list of rate of return percents for a given account.
+     * DEPRECATED. Returns a list of rate of return percents for a given account.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -4110,7 +4110,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account rate of returns
      *
-     * Returns a list of rate of return percents for a given account.
+     * DEPRECATED. Returns a list of rate of return percents for a given account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -4325,7 +4325,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account rate of returns
      *
-     * Returns a list of rate of return percents for a given account.
+     * DEPRECATED. Returns a list of rate of return percents for a given account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -4359,7 +4359,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account rate of returns
      *
-     * Returns a list of rate of return percents for a given account.
+     * DEPRECATED. Returns a list of rate of return percents for a given account.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

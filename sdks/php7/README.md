@@ -118,6 +118,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
   * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
+  * [`snaptrade.referenceData.listInstitutions`](#snaptradereferencedatalistinstitutions)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
@@ -594,7 +595,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.accountInformation.getUserAccountReturnRates`<a id="snaptradeaccountinformationgetuseraccountreturnrates"></a>
 
-Returns a list of rate of return percents for a given account.
+DEPRECATED. Returns a list of rate of return percents for a given account.
 
 
 
@@ -1285,7 +1286,7 @@ $result = $snaptrade->connections->refreshBrokerageAuthorization(
 
 ### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
 
-Returns a list of rate of return percents for a given connection.
+DEPRECATED. Returns a list of rate of return percents for a given connection.
 
 
 
@@ -1820,6 +1821,34 @@ $result = $snaptrade->referenceData->listAllBrokerages();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerages` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.referenceData.listInstitutions`<a id="snaptradereferencedatalistinstitutions"></a>
+
+Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.
+
+A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->referenceData->listInstitutions();
+```
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**Institution**](./lib/Model/Institution.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/institutions` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -333,6 +333,10 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
         ]
     },
+    '/institutions-GET': {
+        parameters: [
+        ]
+    },
     '/accounts/{accountId}/symbols-POST': {
         parameters: [
             {

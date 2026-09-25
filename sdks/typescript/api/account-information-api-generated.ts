@@ -639,7 +639,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns a list of rate of return percents for a given account. 
+         * DEPRECATED. Returns a list of rate of return percents for a given account. 
          * @summary List account rate of returns
          * @param {string} accountId 
          * @param {string} [timeframes] Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
@@ -982,7 +982,7 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns a list of rate of return percents for a given account. 
+         * DEPRECATED. Returns a list of rate of return percents for a given account. 
          * @summary List account rate of returns
          * @param {AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1121,7 +1121,7 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
             return localVarFp.getUserAccountRecentOrders(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of rate of return percents for a given account. 
+         * DEPRECATED. Returns a list of rate of return percents for a given account. 
          * @summary List account rate of returns
          * @param {AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1752,7 +1752,7 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
     }
 
     /**
-     * Returns a list of rate of return percents for a given account. 
+     * DEPRECATED. Returns a list of rate of return percents for a given account. 
      * @summary List account rate of returns
      * @param {AccountInformationApiGetUserAccountReturnRatesRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
