@@ -712,7 +712,7 @@ public class Example {
 
 List connection rate of returns
 
-Returns a list of rate of return percents for a given connection. 
+DEPRECATED. Returns a list of rate of return percents for a given connection. 
 
 ### Example
 ```java

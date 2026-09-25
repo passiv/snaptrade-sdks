@@ -612,7 +612,7 @@ class ReturnRates(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of rate of return percents for a given connection.  """
+        """ DEPRECATED. Returns a list of rate of return percents for a given connection.  """
         args = self._return_rates_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -673,7 +673,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of rate of return percents for a given connection.  """
+        """ DEPRECATED. Returns a list of rate of return percents for a given connection.  """
         args = self._return_rates_mapped_args(
             query_params=query_params,
             path_params=path_params,

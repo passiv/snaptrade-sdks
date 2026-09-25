@@ -16,6 +16,7 @@ from snaptrade_client.paths.symbols_query.get import GetSymbolsByTicker
 from snaptrade_client.paths.brokerage_authorization_types.get import ListAllBrokerageAuthorizationType
 from snaptrade_client.paths.brokerages_slug_instruments.get import ListAllBrokerageInstruments
 from snaptrade_client.paths.brokerages.get import ListAllBrokerages
+from snaptrade_client.paths.institutions.get import ListInstitutions
 from snaptrade_client.paths.accounts_account_id_symbols.post import SymbolSearchUserAccount
 import typing
 from snaptrade_client.auth import AuthMode
@@ -31,6 +32,7 @@ class ReferenceDataApiGenerated(
     ListAllBrokerageAuthorizationType[TAuth],
     ListAllBrokerageInstruments[TAuth],
     ListAllBrokerages[TAuth],
+    ListInstitutions[TAuth],
     SymbolSearchUserAccount[TAuth],
 ):
     """NOTE:

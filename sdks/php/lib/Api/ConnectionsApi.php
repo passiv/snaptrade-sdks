@@ -3251,7 +3251,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * List connection rate of returns
      *
-     * Returns a list of rate of return percents for a given connection.
+     * DEPRECATED. Returns a list of rate of return percents for a given connection.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -3282,7 +3282,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * List connection rate of returns
      *
-     * Returns a list of rate of return percents for a given connection.
+     * DEPRECATED. Returns a list of rate of return percents for a given connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3497,7 +3497,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * List connection rate of returns
      *
-     * Returns a list of rate of return percents for a given connection.
+     * DEPRECATED. Returns a list of rate of return percents for a given connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -3531,7 +3531,7 @@ class ConnectionsApi extends \SnapTrade\CustomApi
      *
      * List connection rate of returns
      *
-     * Returns a list of rate of return percents for a given connection.
+     * DEPRECATED. Returns a list of rate of return percents for a given connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

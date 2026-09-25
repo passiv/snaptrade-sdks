@@ -204,6 +204,7 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
 *ReferenceDataApi* | [**ListAllBrokerageInstruments**](docs/ReferenceDataApi.md#listallbrokerageinstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 *ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **Get** /brokerages | Get brokerages
+*ReferenceDataApi* | [**ListInstitutions**](docs/ReferenceDataApi.md#listinstitutions) | **Get** /institutions | List institutions
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **Post** /accounts/{accountId}/symbols | Search account symbols
 *TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
 *TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
@@ -300,6 +301,9 @@ Class | Method | HTTP request | Description
  - [FutureInstrument](docs/FutureInstrument.md)
  - [FutureOptionInstrument](docs/FutureOptionInstrument.md)
  - [HoldingsStatus](docs/HoldingsStatus.md)
+ - [Institution](docs/Institution.md)
+ - [InstitutionConnection](docs/InstitutionConnection.md)
+ - [InstitutionConnectionNullable](docs/InstitutionConnectionNullable.md)
  - [Instrument](docs/Instrument.md)
  - [InvestmentAccount](docs/InvestmentAccount.md)
  - [InvestmentAccountNetValue](docs/InvestmentAccountNetValue.md)

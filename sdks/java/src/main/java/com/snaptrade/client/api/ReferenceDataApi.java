@@ -5,6 +5,7 @@ import com.snaptrade.client.model.Brokerage;
 import com.snaptrade.client.model.BrokerageAuthorizationTypeReadOnly;
 import com.snaptrade.client.model.BrokerageInstrumentsResponse;
 import com.snaptrade.client.model.Exchange;
+import com.snaptrade.client.model.Institution;
 import com.snaptrade.client.model.PartnerData;
 import com.snaptrade.client.model.SymbolQuery;
 import java.util.UUID;
@@ -51,6 +52,11 @@ public class ReferenceDataApi extends ReferenceDataApiGenerated {
     }
     public class ListAllBrokeragesRequestBuilder extends ListAllBrokeragesRequestBuilderGenerated {
         public ListAllBrokeragesRequestBuilder() {
+            super();
+        }
+    }
+    public class ListInstitutionsRequestBuilder extends ListInstitutionsRequestBuilderGenerated {
+        public ListInstitutionsRequestBuilder() {
             super();
         }
     }

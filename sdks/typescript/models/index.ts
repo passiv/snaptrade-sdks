@@ -79,6 +79,8 @@ export * from './figi-instrument';
 export * from './future-instrument';
 export * from './future-option-instrument';
 export * from './holdings-status';
+export * from './institution';
+export * from './institution-connection';
 export * from './instrument';
 export * from './investment-account';
 export * from './investment-account-net-value';
