@@ -84,7 +84,7 @@ export interface LineOfCreditAccountSyncStatus {
      */
     'transactions'?: TransactionsStatus;
     /**
-     * The last time balances were successfully synced by SnapTrade.
+     * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      * @type {string}
      * @memberof LineOfCreditAccountSyncStatus
      */

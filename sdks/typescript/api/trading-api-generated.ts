@@ -104,8 +104,6 @@ import { ManualTradeForm } from '../models';
 // @ts-ignore
 import { ManualTradeFormComplex } from '../models';
 // @ts-ignore
-import { ManualTradeFormNotionalValue } from '../models';
-// @ts-ignore
 import { ManualTradeFormWithOptions } from '../models';
 // @ts-ignore
 import { ManualTradePlaceTimeInForceStrict } from '../models';
@@ -118,7 +116,7 @@ import { MlegOrderResponse } from '../models';
 // @ts-ignore
 import { MlegOrderTypeStrict } from '../models';
 // @ts-ignore
-import { MlegPriceEffectStrict } from '../models';
+import { MlegPriceEffectStrictNullable } from '../models';
 // @ts-ignore
 import { MlegTradeForm } from '../models';
 // @ts-ignore
@@ -131,6 +129,8 @@ import { Model404FailedRequestResponse } from '../models';
 import { Model429TooManyRequestsResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
+import { NotionalValueNullable } from '../models';
 // @ts-ignore
 import { OptionImpact } from '../models';
 // @ts-ignore

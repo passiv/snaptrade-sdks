@@ -72,13 +72,13 @@ import { CefInstrument } from './cef-instrument';
 import { CfdInstrument } from './cfd-instrument';
 import { CryptoInstrument } from './crypto-instrument';
 import { EtfInstrument } from './etf-instrument';
+import { FigiInstrumentNullable } from './figi-instrument-nullable';
 import { FutureInstrument } from './future-instrument';
 import { FutureOptionInstrument } from './future-option-instrument';
 import { MutualFundInstrument } from './mutual-fund-instrument';
 import { OptionInstrument } from './option-instrument';
 import { OtherInstrument } from './other-instrument';
 import { StockInstrument } from './stock-instrument';
-import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrument';
 import { TokenizedAssetInstrument } from './tokenized-asset-instrument';
 import { UnderlyingTokenizedAssetInstrument } from './underlying-tokenized-asset-instrument';
 

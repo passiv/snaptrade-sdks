@@ -69,7 +69,7 @@ import type * as buffer from "buffer"
 
 import { MlegLeg } from './mleg-leg';
 import { MlegOrderTypeStrict } from './mleg-order-type-strict';
-import { MlegPriceEffectStrict } from './mleg-price-effect-strict';
+import { MlegPriceEffectStrictNullable } from './mleg-price-effect-strict-nullable';
 import { TimeInForceStrict } from './time-in-force-strict';
 
 /**
@@ -104,10 +104,10 @@ export interface MlegTradeForm {
     'stop_price'?: string | null;
     /**
      * 
-     * @type {MlegPriceEffectStrict}
+     * @type {MlegPriceEffectStrictNullable}
      * @memberof MlegTradeForm
      */
-    'price_effect'?: MlegPriceEffectStrict | null;
+    'price_effect'?: MlegPriceEffectStrictNullable | null;
     /**
      * 
      * @type {Array<MlegLeg>}

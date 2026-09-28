@@ -2726,7 +2726,7 @@ The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unles
 
 The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
-##### price_effect: [`MlegPriceEffectStrict`](./models/mleg-price-effect-strict.ts)<a id="price_effect-mlegpriceeffectstrictmodelsmleg-price-effect-strictts"></a>
+##### price_effect:<a id="price_effect"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2822,9 +2822,11 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+##### units: `number`<a id="units-number"></a>
 
-##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+##### notional_value: [`NotionalValueNullable`](./models/notional-value-nullable.ts)<a id="notional_value-notionalvaluenullablemodelsnotional-value-nullablets"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3079,7 +3081,9 @@ The orders that make up the complex order. Required counts and roles per type: -
 
 The ID of the account to execute the trade on.
 
-##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
+##### client_order_id: `string`<a id="client_order_id-string"></a>
+
+Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3288,9 +3292,9 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. 
 
-##### universal_symbol_id: [`string`](./models/model-string.ts)<a id="universal_symbol_id-stringmodelsmodel-stringts"></a>
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-The universal symbol ID of the security to trade. Must be \\\'null\\\' if `symbol` is provided, otherwise must be provided.
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 
 ##### symbol: `string`<a id="symbol-string"></a>
 
@@ -3312,13 +3316,15 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+##### units: `number`<a id="units-number"></a>
 
-For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
-##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
+##### notional_value: [`NotionalValueNullable`](./models/notional-value-nullable.ts)<a id="notional_value-notionalvaluenullablemodelsnotional-value-nullablets"></a>
 
-##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
+##### client_order_id: `string`<a id="client_order_id-string"></a>
+
+Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3421,7 +3427,7 @@ The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unles
 
 The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
-##### price_effect: [`MlegPriceEffectStrict`](./models/mleg-price-effect-strict.ts)<a id="price_effect-mlegpriceeffectstrictmodelsmleg-price-effect-strictts"></a>
+##### price_effect:<a id="price_effect"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3694,7 +3700,9 @@ The security\\\'s trading ticker symbol. Use the OCC symbol to replace an option
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+##### units: `number`<a id="units-number"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

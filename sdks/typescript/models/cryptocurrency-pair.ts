@@ -95,7 +95,7 @@ export interface CryptocurrencyPair {
      */
     'quote': string;
     /**
-     * 
+     * The precision or smallest price incremental step available for this cryptocurrency pair 
      * @type {string}
      * @memberof CryptocurrencyPair
      */

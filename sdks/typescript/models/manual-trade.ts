@@ -117,7 +117,7 @@ export interface ManualTrade {
      */
     'action'?: ActionStrict;
     /**
-     * 
+     * Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
      * @type {number}
      * @memberof ManualTrade
      */

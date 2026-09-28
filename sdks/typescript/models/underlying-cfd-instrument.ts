@@ -71,10 +71,10 @@ import { AdrInstrument } from './adr-instrument';
 import { CefInstrument } from './cef-instrument';
 import { CryptoInstrument } from './crypto-instrument';
 import { EtfInstrument } from './etf-instrument';
+import { FigiInstrumentNullable } from './figi-instrument-nullable';
 import { MutualFundInstrument } from './mutual-fund-instrument';
 import { OtherInstrument } from './other-instrument';
 import { StockInstrument } from './stock-instrument';
-import { StockInstrumentFigiInstrument } from './stock-instrument-figi-instrument';
 
 /**
  * @type UnderlyingCfdInstrument
