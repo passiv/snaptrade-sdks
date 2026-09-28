@@ -84,19 +84,19 @@ export interface ConnectionAccountSyncStatus {
      */
     'transactions'?: TransactionsStatus;
     /**
-     * The last time orders were successfully synced by SnapTrade.
+     * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      * @type {string}
      * @memberof ConnectionAccountSyncStatus
      */
     'orders'?: string | null;
     /**
-     * The last time positions were successfully synced by SnapTrade.
+     * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      * @type {string}
      * @memberof ConnectionAccountSyncStatus
      */
     'positions'?: string | null;
     /**
-     * The last time balances were successfully synced by SnapTrade.
+     * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      * @type {string}
      * @memberof ConnectionAccountSyncStatus
      */

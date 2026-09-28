@@ -1910,7 +1910,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account rate of returns
-     * Returns a list of rate of return percents for a given account. 
+     * DEPRECATED. Returns a list of rate of return percents for a given account. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)

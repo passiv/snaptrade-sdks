@@ -69,8 +69,8 @@ import type * as buffer from "buffer"
 
 import { AccountOrderRecordLeg } from './account-order-record-leg';
 import { AccountOrderRecordStatus } from './account-order-record-status';
-import { AccountOrderRecordTrailingStop } from './account-order-record-trailing-stop';
-import { AccountOrderRecordV2OrderRole } from './account-order-record-v2-order-role';
+import { AccountOrderRecordV2OrderRoleNullable } from './account-order-record-v2-order-role-nullable';
+import { TrailingStopNullable } from './trailing-stop-nullable';
 
 /**
  * Describes a single order in the standardized V2 format.
@@ -93,11 +93,11 @@ export interface AccountOrderRecordV2 {
      */
     'brokerage_group_order_id'?: string | null;
     /**
-     * The role of this order within a complex order group (OCO, OTO, OTOCO). Null for non-complex orders. 
-     * @type {AccountOrderRecordV2OrderRole}
+     * 
+     * @type {AccountOrderRecordV2OrderRoleNullable}
      * @memberof AccountOrderRecordV2
      */
-    'order_role'?: AccountOrderRecordV2OrderRole | null;
+    'order_role'?: AccountOrderRecordV2OrderRoleNullable | null;
     /**
      * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
      * @type {AccountOrderRecordStatus}
@@ -160,10 +160,10 @@ export interface AccountOrderRecordV2 {
     'stop_price'?: string | null;
     /**
      * 
-     * @type {AccountOrderRecordTrailingStop}
+     * @type {TrailingStopNullable}
      * @memberof AccountOrderRecordV2
      */
-    'trailing_stop'?: AccountOrderRecordTrailingStop | null;
+    'trailing_stop'?: TrailingStopNullable | null;
     /**
      * List of legs that make up the order.
      * @type {Array<AccountOrderRecordLeg>}

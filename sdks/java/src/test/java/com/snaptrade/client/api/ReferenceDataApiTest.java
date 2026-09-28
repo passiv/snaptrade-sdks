@@ -20,6 +20,7 @@ import com.snaptrade.client.model.Brokerage;
 import com.snaptrade.client.model.BrokerageAuthorizationTypeReadOnly;
 import com.snaptrade.client.model.BrokerageInstrumentsResponse;
 import com.snaptrade.client.model.Exchange;
+import com.snaptrade.client.model.Institution;
 import com.snaptrade.client.model.PartnerData;
 import com.snaptrade.client.model.SymbolQuery;
 import java.util.UUID;
@@ -148,6 +149,20 @@ public class ReferenceDataApiTest {
     @Test
     public void listAllBrokeragesTest() throws ApiException {
         List<Brokerage> response = api.listAllBrokerages()
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List institutions
+     *
+     * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use &#x60;GET /brokerages&#x60; instead.  A &#x60;null&#x60; field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don&#39;t recognize. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listInstitutionsTest() throws ApiException {
+        List<Institution> response = api.listInstitutions()
                 .execute();
         // TODO: test validations
     }

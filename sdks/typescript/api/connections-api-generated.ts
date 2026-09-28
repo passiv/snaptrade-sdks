@@ -521,7 +521,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns a list of rate of return percents for a given connection. 
+         * DEPRECATED. Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {string} authorizationId 
          * @param {string} [timeframes] Optional comma separated list of rate-of-return timeframes to return. Supported values are &#x60;ALL&#x60;, &#x60;1Y&#x60;, &#x60;YTD&#x60;, &#x60;1M&#x60;, &#x60;1W&#x60;, and &#x60;1D&#x60;. If omitted, SnapTrade returns all six supported timeframes.
@@ -736,7 +736,7 @@ export const ConnectionsApiFp = function<TAuth extends AuthMode>(configuration?:
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns a list of rate of return percents for a given connection. 
+         * DEPRECATED. Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -840,7 +840,7 @@ export const ConnectionsApiFactory = function<TAuth extends AuthMode>(configurat
             return localVarFp.refreshBrokerageAuthorization(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of rate of return percents for a given connection. 
+         * DEPRECATED. Returns a list of rate of return percents for a given connection. 
          * @summary List connection rate of returns
          * @param {ConnectionsApiReturnRatesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1276,7 +1276,7 @@ export class ConnectionsApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAu
     }
 
     /**
-     * Returns a list of rate of return percents for a given connection. 
+     * DEPRECATED. Returns a list of rate of return percents for a given connection. 
      * @summary List connection rate of returns
      * @param {ConnectionsApiReturnRatesRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

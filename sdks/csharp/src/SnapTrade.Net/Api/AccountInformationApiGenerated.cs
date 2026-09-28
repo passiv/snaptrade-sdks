@@ -265,7 +265,7 @@ namespace SnapTrade.Net.Api
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -280,7 +280,7 @@ namespace SnapTrade.Net.Api
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -634,7 +634,7 @@ namespace SnapTrade.Net.Api
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -650,7 +650,7 @@ namespace SnapTrade.Net.Api
         /// List account rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given account. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2665,7 +2665,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. 
+        /// List account rate of returns DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2681,7 +2681,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. 
+        /// List account rate of returns DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2774,7 +2774,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. 
+        /// List account rate of returns DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2791,7 +2791,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account rate of returns Returns a list of rate of return percents for a given account. 
+        /// List account rate of returns DEPRECATED. Returns a list of rate of return percents for a given account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

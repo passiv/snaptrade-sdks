@@ -118,6 +118,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
   * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
+  * [`snaptrade.referenceData.listInstitutions`](#snaptradereferencedatalistinstitutions)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
@@ -820,7 +821,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.accountInformation.getUserAccountReturnRates`<a id="snaptradeaccountinformationgetuseraccountreturnrates"></a>
 
-Returns a list of rate of return percents for a given account.
+DEPRECATED. Returns a list of rate of return percents for a given account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1698,7 +1699,7 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 ### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
 
-Returns a list of rate of return percents for a given connection.
+DEPRECATED. Returns a list of rate of return percents for a given connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2434,6 +2435,33 @@ const listAllBrokeragesResponse =
 ---
 
 
+### `snaptrade.referenceData.listInstitutions`<a id="snaptradereferencedatalistinstitutions"></a>
+
+Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.
+
+A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const listInstitutionsResponse =
+  await snaptrade.referenceData.listInstitutions();
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[Institution](./models/institution.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/institutions` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
 Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
@@ -2698,7 +2726,7 @@ The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unles
 
 The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
-##### price_effect: [`MlegPriceEffectStrict`](./models/mleg-price-effect-strict.ts)<a id="price_effect-mlegpriceeffectstrictmodelsmleg-price-effect-strictts"></a>
+##### price_effect:<a id="price_effect"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2794,9 +2822,11 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+##### units: `number`<a id="units-number"></a>
 
-##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+##### notional_value: [`NotionalValueNullable`](./models/notional-value-nullable.ts)<a id="notional_value-notionalvaluenullablemodelsnotional-value-nullablets"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3051,7 +3081,9 @@ The orders that make up the complex order. Required counts and roles per type: -
 
 The ID of the account to execute the trade on.
 
-##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
+##### client_order_id: `string`<a id="client_order_id-string"></a>
+
+Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3260,9 +3292,9 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until `expiry_date`, which is required. Not available for market orders. GTD orders are only available on certain brokerages. Visit https://support.snaptrade.com/brokerages for brokerage support. 
 
-##### universal_symbol_id: [`string`](./models/model-string.ts)<a id="universal_symbol_id-stringmodelsmodel-stringts"></a>
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-The universal symbol ID of the security to trade. Must be \\\'null\\\' if `symbol` is provided, otherwise must be provided.
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 
 ##### symbol: `string`<a id="symbol-string"></a>
 
@@ -3284,13 +3316,15 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+##### units: `number`<a id="units-number"></a>
 
-For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
-##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
+##### notional_value: [`NotionalValueNullable`](./models/notional-value-nullable.ts)<a id="notional_value-notionalvaluenullablemodelsnotional-value-nullablets"></a>
 
-##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
+##### client_order_id: `string`<a id="client_order_id-string"></a>
+
+Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3393,7 +3427,7 @@ The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unles
 
 The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
 
-##### price_effect: [`MlegPriceEffectStrict`](./models/mleg-price-effect-strict.ts)<a id="price_effect-mlegpriceeffectstrictmodelsmleg-price-effect-strictts"></a>
+##### price_effect:<a id="price_effect"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3666,7 +3700,9 @@ The security\\\'s trading ticker symbol. Use the OCC symbol to replace an option
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+##### units: `number`<a id="units-number"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

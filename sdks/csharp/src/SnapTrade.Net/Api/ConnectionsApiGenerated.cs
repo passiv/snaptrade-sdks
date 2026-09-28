@@ -218,7 +218,7 @@ namespace SnapTrade.Net.Api
         /// List connection rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given connection. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -233,7 +233,7 @@ namespace SnapTrade.Net.Api
         /// List connection rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given connection. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -484,7 +484,7 @@ namespace SnapTrade.Net.Api
         /// List connection rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given connection. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -500,7 +500,7 @@ namespace SnapTrade.Net.Api
         /// List connection rate of returns
         /// </summary>
         /// <remarks>
-        /// Returns a list of rate of return percents for a given connection. 
+        /// DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2113,7 +2113,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List connection rate of returns Returns a list of rate of return percents for a given connection. 
+        /// List connection rate of returns DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2129,7 +2129,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List connection rate of returns Returns a list of rate of return percents for a given connection. 
+        /// List connection rate of returns DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2222,7 +2222,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List connection rate of returns Returns a list of rate of return percents for a given connection. 
+        /// List connection rate of returns DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2239,7 +2239,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List connection rate of returns Returns a list of rate of return percents for a given connection. 
+        /// List connection rate of returns DEPRECATED. Returns a list of rate of return percents for a given connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

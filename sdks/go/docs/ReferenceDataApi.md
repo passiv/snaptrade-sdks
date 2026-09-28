@@ -11,6 +11,7 @@ Method | Path | Description
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
 [**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
+[**ListInstitutions**](ReferenceDataApi.md#ListInstitutions) | **Get** /institutions | List institutions
 [**SymbolSearchUserAccount**](ReferenceDataApi.md#SymbolSearchUserAccount) | **Post** /accounts/{accountId}/symbols | Search account symbols
 
 
@@ -372,6 +373,58 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.BrokerageType`: %v\n", *resp.BrokerageType)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Exchanges`: %v\n", *resp.Exchanges)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.OpenUrl`: %v\n", *resp.OpenUrl)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListInstitutions
+
+List institutions
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ReferenceDataApi.ListInstitutions(
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.ListInstitutions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ListInstitutions`: []Institution
+    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.ListInstitutions`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Slug`: %v\n", resp.Slug)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Name`: %v\n", resp.Name)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.DisplayName`: %v\n", resp.DisplayName)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Description`: %v\n", resp.Description)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Website`: %v\n", resp.Website)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.LogoUrl`: %v\n", resp.LogoUrl)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.SquareLogoUrl`: %v\n", resp.SquareLogoUrl)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.ReleaseStage`: %v\n", resp.ReleaseStage)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Regions`: %v\n", resp.Regions)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Connection`: %v\n", resp.Connection)
 }
 ```
 

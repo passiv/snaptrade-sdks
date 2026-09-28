@@ -88,7 +88,7 @@ export interface ManualTradeFormComplex {
      */
     'orders': Array<ComplexOrderLeg>;
     /**
-     * 
+     * Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
      * @type {string}
      * @memberof ManualTradeFormComplex
      */

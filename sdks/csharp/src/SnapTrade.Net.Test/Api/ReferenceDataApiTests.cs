@@ -244,6 +244,33 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test ListInstitutions
+        /// </summary>
+        [Fact]
+        public void ListInstitutionsTest()
+        {
+            
+            try
+            {
+                // List institutions
+                List<Institution> result = client.ReferenceData.ListInstitutions();
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ReferenceDataApi.ListInstitutions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test SymbolSearchUserAccount
         /// </summary>
         [Fact]

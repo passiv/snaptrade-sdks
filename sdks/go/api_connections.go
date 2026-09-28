@@ -1324,7 +1324,7 @@ func (r ConnectionsApiReturnRatesRequest) Execute() (*RateOfReturnResponse, *htt
 /*
 ReturnRates List connection rate of returns
 
-Returns a list of rate of return percents for a given connection.
+DEPRECATED. Returns a list of rate of return percents for a given connection.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

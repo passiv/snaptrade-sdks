@@ -782,7 +782,7 @@ module SnapTrade
 
     # List connection rate of returns
     #
-    # Returns a list of rate of return percents for a given connection.
+    # DEPRECATED. Returns a list of rate of return percents for a given connection.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -797,7 +797,7 @@ module SnapTrade
 
     # List connection rate of returns
     #
-    # Returns a list of rate of return percents for a given connection.
+    # DEPRECATED. Returns a list of rate of return percents for a given connection.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -810,7 +810,7 @@ module SnapTrade
     end
 
     # List connection rate of returns
-    # Returns a list of rate of return percents for a given connection. 
+    # DEPRECATED. Returns a list of rate of return percents for a given connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 
@@ -823,7 +823,7 @@ module SnapTrade
     end
 
     # List connection rate of returns
-    # Returns a list of rate of return percents for a given connection. 
+    # DEPRECATED. Returns a list of rate of return percents for a given connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param authorization_id [String] 

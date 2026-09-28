@@ -122,6 +122,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.reference_data.list_all_brokerage_authorization_type`](#snaptradereference_datalist_all_brokerage_authorization_type)
   * [`snaptrade.reference_data.list_all_brokerage_instruments`](#snaptradereference_datalist_all_brokerage_instruments)
   * [`snaptrade.reference_data.list_all_brokerages`](#snaptradereference_datalist_all_brokerages)
+  * [`snaptrade.reference_data.list_institutions`](#snaptradereference_datalist_institutions)
   * [`snaptrade.reference_data.symbol_search_user_account`](#snaptradereference_datasymbol_search_user_account)
   * [`snaptrade.trading.cancel_order`](#snaptradetradingcancel_order)
   * [`snaptrade.trading.get_cryptocurrency_pair_quote`](#snaptradetradingget_cryptocurrency_pair_quote)
@@ -836,7 +837,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 ### `snaptrade.account_information.get_user_account_return_rates`<a id="snaptradeaccount_informationget_user_account_return_rates"></a>
 
-Returns a list of rate of return percents for a given account.
+DEPRECATED. Returns a list of rate of return percents for a given account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1730,7 +1731,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 ### `snaptrade.connections.return_rates`<a id="snaptradeconnectionsreturn_rates"></a>
 
-Returns a list of rate of return percents for a given connection.
+DEPRECATED. Returns a list of rate of return percents for a given connection.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2465,6 +2466,31 @@ list_all_brokerages_response = (
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerages` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.reference_data.list_institutions`<a id="snaptradereference_datalist_institutions"></a>
+
+Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.
+
+A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+list_institutions_response = snaptrade.reference_data.list_institutions()
+```
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`Institution`](./snaptrade_client/type/institution.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/institutions` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

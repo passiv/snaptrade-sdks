@@ -596,6 +596,87 @@ module SnapTrade
     end
 
 
+    # List institutions
+    #
+    # Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.
+    # 
+    # A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize.
+    #
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_institutions(extra: {})
+      data, _status_code, _headers = list_institutions_with_http_info_impl(extra)
+      data
+    end
+
+    # List institutions
+    #
+    # Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.
+    # 
+    # A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize.
+    #
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def list_institutions_with_http_info(extra: {})
+      list_institutions_with_http_info_impl(extra)
+    end
+
+    # List institutions
+    # Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.  A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don't recognize. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<Institution>]
+    private def list_institutions_impl(opts = {})
+      data, _status_code, _headers = list_institutions_with_http_info(opts)
+      data
+    end
+
+    # List institutions
+    # Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use &#x60;GET /brokerages&#x60; instead.  A &#x60;null&#x60; field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don&#39;t recognize. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Array<Institution>, Integer, Hash)>] Array<Institution> data, response status code and response headers
+    private def list_institutions_with_http_info_impl(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ReferenceDataApi.list_institutions ...'
+      end
+      # resource path
+      local_var_path = '/institutions'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<Institution>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"ReferenceDataApi.list_institutions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ReferenceDataApi#list_institutions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Search account symbols
     #
     # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.

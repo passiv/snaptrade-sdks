@@ -327,6 +327,10 @@ operation_parameter_map = {
         'parameters': [
         ]
     },
+    '/institutions-GET': {
+        'parameters': [
+        ]
+    },
     '/accounts/{accountId}/symbols-POST': {
         'parameters': [
             {

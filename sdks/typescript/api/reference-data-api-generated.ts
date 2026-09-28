@@ -84,6 +84,8 @@ import { BrokerageInstrumentsResponse } from '../models';
 // @ts-ignore
 import { Exchange } from '../models';
 // @ts-ignore
+import { Institution } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
@@ -460,6 +462,46 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.  A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don\'t recognize. 
+         * @summary List institutions
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listInstitutions: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/institutions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["public"] }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/institutions',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
          * @summary Search account symbols
          * @param {string} accountId 
@@ -618,6 +660,16 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.  A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don\'t recognize. 
+         * @summary List institutions
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listInstitutions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Institution>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listInstitutions(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["public"] });
+        },
+        /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
          * @summary Search account symbols
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest<TAuth>} requestParameters Request parameters.
@@ -708,6 +760,15 @@ export const ReferenceDataApiFactory = function<TAuth extends AuthMode>(configur
          */
         listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): AxiosPromise<Array<Brokerage>> {
             return localVarFp.listAllBrokerages(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.  A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don\'t recognize. 
+         * @summary List institutions
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listInstitutions(options?: AxiosRequestConfig): AxiosPromise<Array<Institution>> {
+            return localVarFp.listInstitutions(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
@@ -964,6 +1025,17 @@ export class ReferenceDataApiGenerated<TAuth extends AuthMode> extends BaseAPI<T
      */
     public listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
         return ReferenceDataApiFp(this.configuration).listAllBrokerages(...args).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.  A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don\'t recognize. 
+     * @summary List institutions
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApiGenerated
+     */
+    public listInstitutions(options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).listInstitutions(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

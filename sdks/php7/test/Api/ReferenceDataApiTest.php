@@ -143,6 +143,18 @@ class ReferenceDataApiTest extends TestCase
     }
 
     /**
+     * Test case for listInstitutions
+     *
+     * List institutions.
+     *
+     */
+    public function testListInstitutions()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for symbolSearchUserAccount
      *
      * Search account symbols.

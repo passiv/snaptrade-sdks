@@ -35,7 +35,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'institution' => :'Institution',
+        :'institution' => :'BrokerageAuthorizationInstitution',
         :'snaptrade' => :'Snaptrade'
       }
     end

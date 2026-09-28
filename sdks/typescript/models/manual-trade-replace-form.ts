@@ -120,7 +120,7 @@ export interface ManualTradeReplaceForm {
      */
     'stop'?: number | null;
     /**
-     * 
+     * Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
      * @type {number}
      * @memberof ManualTradeReplaceForm
      */

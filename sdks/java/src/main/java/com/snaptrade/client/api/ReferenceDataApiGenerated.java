@@ -30,6 +30,7 @@ import com.snaptrade.client.model.Brokerage;
 import com.snaptrade.client.model.BrokerageAuthorizationTypeReadOnly;
 import com.snaptrade.client.model.BrokerageInstrumentsResponse;
 import com.snaptrade.client.model.Exchange;
+import com.snaptrade.client.model.Institution;
 import com.snaptrade.client.model.PartnerData;
 import com.snaptrade.client.model.SymbolQuery;
 import java.util.UUID;
@@ -1176,6 +1177,155 @@ public class ReferenceDataApiGenerated {
      */
     public ReferenceDataApi.ListAllBrokeragesRequestBuilder listAllBrokerages() throws IllegalArgumentException {
         return ((ReferenceDataApi) this).new ListAllBrokeragesRequestBuilder();
+    }
+    private okhttp3.Call listInstitutionsCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/institutions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listInstitutionsValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return listInstitutionsCall(_callback);
+
+    }
+
+
+    private ApiResponse<List<Institution>> listInstitutionsWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = listInstitutionsValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<List<Institution>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call listInstitutionsAsync(final ApiCallback<List<Institution>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listInstitutionsValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<List<Institution>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ListInstitutionsRequestBuilderGenerated {
+
+        public ListInstitutionsRequestBuilderGenerated() {
+        }
+
+        /**
+         * Build call for listInstitutions
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listInstitutionsCall(_callback);
+        }
+
+
+        /**
+         * Execute listInstitutions request
+         * @return List&lt;Institution&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<Institution> execute() throws ApiException {
+            ApiResponse<List<Institution>> localVarResp = listInstitutionsWithHttpInfo();
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listInstitutions request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;Institution&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<Institution>> executeWithHttpInfo() throws ApiException {
+            return listInstitutionsWithHttpInfo();
+        }
+
+        /**
+         * Execute listInstitutions request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<Institution>> _callback) throws ApiException {
+            return listInstitutionsAsync(_callback);
+        }
+    }
+
+    /**
+     * List institutions
+     * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use &#x60;GET /brokerages&#x60; instead.  A &#x60;null&#x60; field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don&#39;t recognize. 
+     * @return ListInstitutionsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ReferenceDataApi.ListInstitutionsRequestBuilder listInstitutions() throws IllegalArgumentException {
+        return ((ReferenceDataApi) this).new ListInstitutionsRequestBuilder();
     }
     private okhttp3.Call symbolSearchUserAccountCall(String userId, String userSecret, UUID accountId, SymbolQuery symbolQuery, final ApiCallback _callback) throws ApiException {
         String basePath = null;

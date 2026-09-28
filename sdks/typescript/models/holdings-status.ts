@@ -81,7 +81,7 @@ export interface HoldingsStatus {
      */
     'initial_sync_completed'?: boolean;
     /**
-     * The last time holdings were successfully synced by SnapTrade.
+     * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      * @type {string}
      * @memberof HoldingsStatus
      */

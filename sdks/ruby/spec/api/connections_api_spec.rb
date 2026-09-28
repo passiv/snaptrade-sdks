@@ -126,7 +126,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for return_rates
   # List connection rate of returns
-  # Returns a list of rate of return percents for a given connection. 
+  # DEPRECATED. Returns a list of rate of return percents for a given connection. 
   # @param user_id 
   # @param user_secret 
   # @param authorization_id 

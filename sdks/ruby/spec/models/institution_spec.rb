@@ -20,4 +20,68 @@ describe SnapTrade::Institution do
       expect(instance).to be_instance_of(SnapTrade::Institution)
     end
   end
+  describe 'test attribute "slug"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "name"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "display_name"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "description"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "website"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "logo_url"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "square_logo_url"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "release_stage"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "regions"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('Array<String>', ["US", "CA", "EUROPE", "AU", "IN"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.regions = value }.not_to raise_error
+      # end
+    end
+  end
+
+  describe 'test attribute "connection"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

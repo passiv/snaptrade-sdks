@@ -81,13 +81,13 @@ export interface TransactionsStatus {
      */
     'initial_sync_completed'?: boolean;
     /**
-     * All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
+     * Date in YYYY-MM-DD format or null
      * @type {string}
      * @memberof TransactionsStatus
      */
     'last_successful_sync'?: string | null;
     /**
-     * The date of the first transaction in the account known to SnapTrade. It\'s possible that the account has transactions before this date, but they are not known to SnapTrade.
+     * Date in YYYY-MM-DD format or null
      * @type {string}
      * @memberof TransactionsStatus
      */

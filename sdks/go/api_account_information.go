@@ -1697,7 +1697,7 @@ func (r AccountInformationApiGetUserAccountReturnRatesRequest) Execute() (*RateO
 /*
 GetUserAccountReturnRates List account rate of returns
 
-Returns a list of rate of return percents for a given account.
+DEPRECATED. Returns a list of rate of return percents for a given account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

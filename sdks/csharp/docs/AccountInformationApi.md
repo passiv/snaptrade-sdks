@@ -821,7 +821,7 @@ catch (ApiException e)
 
 
 
-Returns a list of rate of return percents for a given account. 
+DEPRECATED. Returns a list of rate of return percents for a given account. 
 
 ### Example
 ```csharp
