@@ -162,7 +162,7 @@ public class TokenizedAssetInstrument {
    * @return id
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324", required = true, value = "Unique identifier for the canonical tokenized asset wrapper.")
+  @ApiModelProperty(example = "95a57747-46c6-4c9a-a6cc-b79a491fb95a", required = true, value = "Unique identifier for the canonical tokenized asset wrapper.")
 
   public UUID getId() {
     return id;
@@ -191,7 +191,7 @@ public class TokenizedAssetInstrument {
    * @return symbol
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "HOOD", required = true, value = "Display symbol of the underlying stock or ETF, not a token-specific ticker.")
+  @ApiModelProperty(example = "AAPL", required = true, value = "Display symbol of the underlying stock or ETF, not a token-specific ticker.")
 
   public String getSymbol() {
     return symbol;
@@ -220,7 +220,7 @@ public class TokenizedAssetInstrument {
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Robinhood Markets", value = "Display name of the underlying stock or ETF, when available.")
+  @ApiModelProperty(example = "Apple Inc.", value = "Display name of the underlying stock or ETF, when available.")
 
   public String getDescription() {
     return description;

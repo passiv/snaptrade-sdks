@@ -5110,7 +5110,7 @@ components:
           type: string
           format: uuid
           description: Unique identifier for the canonical CFD instrument wrapper.
-          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          example: 8cbb2a60-236e-4b67-9e25-a8cf299839f5
         symbol:
           type: string
           description: Formatted symbol of the instrument underlying the CFD wrapper.
@@ -5160,15 +5160,15 @@ components:
           type: string
           format: uuid
           description: Unique identifier for the canonical tokenized asset wrapper.
-          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          example: 95a57747-46c6-4c9a-a6cc-b79a491fb95a
         symbol:
           type: string
           description: Display symbol of the underlying stock or ETF, not a token-specific ticker.
-          example: HOOD
+          example: AAPL
         description:
           type: string
           description: Display name of the underlying stock or ETF, when available.
-          example: Robinhood Markets
+          example: Apple Inc.
         underlying_instrument:
           $ref: "#/components/schemas/UnderlyingTokenizedAssetInstrument"
       required:
