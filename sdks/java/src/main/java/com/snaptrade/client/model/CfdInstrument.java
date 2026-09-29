@@ -175,7 +175,7 @@ public class CfdInstrument {
    * @return id
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324", required = true, value = "Unique identifier for the canonical CFD instrument wrapper.")
+  @ApiModelProperty(example = "8cbb2a60-236e-4b67-9e25-a8cf299839f5", required = true, value = "Unique identifier for the canonical CFD instrument wrapper.")
 
   public UUID getId() {
     return id;

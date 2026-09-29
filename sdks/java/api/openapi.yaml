@@ -8081,10 +8081,10 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-kind
         id:
           description: Unique identifier for the canonical CFD instrument wrapper.
-          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          example: 8cbb2a60-236e-4b67-9e25-a8cf299839f5
           format: uuid
           type: string
-          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-original-example: 8cbb2a60-236e-4b67-9e25-a8cf299839f5
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CfdInstrument-properties-id
         symbol:
           description: Formatted symbol of the instrument underlying the CFD wrapper.
@@ -8148,23 +8148,23 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-kind
         id:
           description: Unique identifier for the canonical tokenized asset wrapper.
-          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          example: 95a57747-46c6-4c9a-a6cc-b79a491fb95a
           format: uuid
           type: string
-          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-original-example: 95a57747-46c6-4c9a-a6cc-b79a491fb95a
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-id
         symbol:
           description: "Display symbol of the underlying stock or ETF, not a token-specific\
             \ ticker."
-          example: HOOD
+          example: AAPL
           type: string
-          x-konfig-original-example: HOOD
+          x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-symbol
         description:
           description: "Display name of the underlying stock or ETF, when available."
-          example: Robinhood Markets
+          example: Apple Inc.
           type: string
-          x-konfig-original-example: Robinhood Markets
+          x-konfig-original-example: Apple Inc.
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-description
         underlying_instrument: {}
       required:
@@ -14141,7 +14141,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CfdInstrument-properties-id:
-      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      example: 8cbb2a60-236e-4b67-9e25-a8cf299839f5
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CfdInstrument-properties-symbol:
@@ -14169,15 +14169,15 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-id:
-      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      example: 95a57747-46c6-4c9a-a6cc-b79a491fb95a
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-symbol:
-      example: HOOD
+      example: AAPL
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-description:
-      example: Robinhood Markets
+      example: Apple Inc.
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AdrInstrument-properties-kind:
