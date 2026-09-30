@@ -106,6 +106,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **400** | Bad Request |  -  |
+| **403** | OAuth applications cannot delete personal connections. |  -  |
 | **404** | Not Found |  -  |
 | **0** | Unexpected error |  -  |
 

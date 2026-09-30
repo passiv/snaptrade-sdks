@@ -153,6 +153,22 @@ _response_for_400 = api_client.OpenApiResponse(
 
 
 @dataclass
+class ApiResponseFor403(api_client.ApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+@dataclass
+class ApiResponseFor403Async(api_client.AsyncApiResponse):
+    body: schemas.Unset = schemas.unset
+
+
+_response_for_403 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor403,
+    response_cls_async=ApiResponseFor403Async,
+)
+
+
+@dataclass
 class ApiResponseFor404(api_client.ApiResponse):
     body: schemas.Unset = schemas.unset
 
@@ -184,6 +200,7 @@ _response_for_default = api_client.OpenApiResponse(
 _status_code_to_response = {
     '200': _response_for_200,
     '400': _response_for_400,
+    '403': _response_for_403,
     '404': _response_for_404,
     'default': _response_for_default,
 }

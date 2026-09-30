@@ -1555,6 +1555,8 @@ paths:
                 $ref: "#/components/schemas/DeleteConnectionConfirmation"
         "400":
           description: Bad Request
+        "403":
+          description: OAuth applications cannot delete personal connections.
         "404":
           description: Not Found
         default:
