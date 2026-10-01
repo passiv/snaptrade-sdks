@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go/v2"
 )
 
 func main() {
