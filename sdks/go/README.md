@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v2.0.29)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go/v2)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go/v2@v2.0.29)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -73,7 +73,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 Add to your project:
 
 ```shell
-go get github.com/passiv/snaptrade-sdks/sdks/go
+go get github.com/passiv/snaptrade-sdks/sdks/go/v2
 ```
 
 ## Getting Started
@@ -88,7 +88,7 @@ import (
 	"fmt"
 	"os"
 
-	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go/v2"
 )
 
 func main() {
