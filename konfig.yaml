@@ -203,6 +203,8 @@ portal:
       get: true
     /authorizations/{authorizationId}/accounts:
       get: true
+    /institutions:
+      get: true
   hideTags:
     - Experimental endpoints
   hideSecurity:
