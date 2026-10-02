@@ -193,9 +193,11 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **Post** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 *ExperimentalEndpointsApi* | [**AddSubscription**](docs/ExperimentalEndpointsApi.md#addsubscription) | **Post** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**CancelSubscription**](docs/ExperimentalEndpointsApi.md#cancelsubscription) | **Post** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
+*ExperimentalEndpointsApi* | [**GetAccountDetails**](docs/ExperimentalEndpointsApi.md#getaccountdetails) | **Get** /accounts/{accountId}/details | Get account details
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
+*ExperimentalEndpointsApi* | [**ListAllUserAccounts**](docs/ExperimentalEndpointsApi.md#listalluseraccounts) | **Get** /accounts/all | List all user accounts
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **Get** /exchanges | Get exchanges
@@ -252,6 +254,7 @@ Class | Method | HTTP request | Description
  - [AdrInstrument](docs/AdrInstrument.md)
  - [AllAccountPositionsResponse](docs/AllAccountPositionsResponse.md)
  - [AllAccountPositionsResponseDataFreshness](docs/AllAccountPositionsResponseDataFreshness.md)
+ - [AllUserAccountsResponse](docs/AllUserAccountsResponse.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
  - [BalanceCurrency](docs/BalanceCurrency.md)

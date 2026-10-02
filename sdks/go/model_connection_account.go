@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, and `line_of_credit` are implemented today. 
+// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, and `line_of_credit` are implemented today. 
 type ConnectionAccount struct {
 	DepositAccount *DepositAccount
 	InvestmentAccount *InvestmentAccount

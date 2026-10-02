@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan - - see &#x60;Connections_listConnectionAccounts&#x60;. 
+    /// An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan - - see &#x60;Connections_listConnectionAccounts&#x60; - - and always cached on &#x60;AccountInformation_listAllUserAccounts&#x60;. 
     /// </summary>
     [DataContract(Name = "InvestmentAccount")]
     public partial class InvestmentAccount : IEquatable<InvestmentAccount>, IValidatableObject

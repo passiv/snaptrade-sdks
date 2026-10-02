@@ -107,9 +107,11 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
+  * [`snaptrade.experimentalEndpoints.getAccountDetails`](#snaptradeexperimentalendpointsgetaccountdetails)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
+  * [`snaptrade.experimentalEndpoints.listAllUserAccounts`](#snaptradeexperimentalendpointslistalluseraccounts)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
@@ -1920,6 +1922,69 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 ---
 
 
+### `snaptrade.experimentalEndpoints.getAccountDetails`<a id="snaptradeexperimentalendpointsgetaccountdetails"></a>
+
+Experimental and subject to change without notice.
+
+Returns the specified account for the authenticated user, using the `kind`-discriminated account shape. Use the `kind` discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.
+
+On Pay as you Go / Real-time, this endpoint refreshes the account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
+
+On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const getAccountDetailsResponse =
+  await commercialApiKeyClient.experimentalEndpoints.getAccountDetails({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAccountDetailsResponse =
+  await personalApiKeyClient.experimentalEndpoints.getAccountDetails({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ConnectionAccount](./models/connection-account.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/details` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`<a id="snaptradeexperimentalendpointsgetuseraccountorderdetailv2"></a>
 
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
@@ -2116,6 +2181,58 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.listAllUserAccounts`<a id="snaptradeexperimentalendpointslistalluseraccounts"></a>
+
+Experimental and subject to change without notice.
+
+Returns all accounts across all connections known to SnapTrade for the authenticated user.
+
+The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.
+
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const listAllUserAccountsResponse =
+  await commercialApiKeyClient.experimentalEndpoints.listAllUserAccounts({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const listAllUserAccountsResponse =
+  await personalApiKeyClient.experimentalEndpoints.listAllUserAccounts();
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllUserAccountsResponse](./models/all-user-accounts-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/all` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
