@@ -1,6 +1,6 @@
 <?php
 /**
- * InvestmentAccountTest
+ * TradingGetUserAccountOptionQuotes410ResponseTest
  *
  * PHP version 7.4
  *
@@ -26,13 +26,13 @@ namespace SnapTrade\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * InvestmentAccountTest Class Doc Comment
+ * TradingGetUserAccountOptionQuotes410ResponseTest Class Doc Comment
  *
  * @category    Class
- * @description An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan -- see &#x60;Connections_listConnectionAccounts&#x60;.
+ * @description TradingGetUserAccountOptionQuotes410Response
  * @package     SnapTrade
  */
-class InvestmentAccountTest extends TestCase
+class TradingGetUserAccountOptionQuotes410ResponseTest extends TestCase
 {
 
     /**
@@ -64,135 +64,18 @@ class InvestmentAccountTest extends TestCase
     }
 
     /**
-     * Test "InvestmentAccount"
+     * Test "TradingGetUserAccountOptionQuotes410Response"
      */
-    public function testInvestmentAccount()
+    public function testTradingGetUserAccountOptionQuotes410Response()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "kind"
+     * Test attribute "detail"
      */
-    public function testPropertyKind()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "connection_id"
-     */
-    public function testPropertyConnectionId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "display_name"
-     */
-    public function testPropertyDisplayName()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "masked_account_number"
-     */
-    public function testPropertyMaskedAccountNumber()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "institution_account_id"
-     */
-    public function testPropertyInstitutionAccountId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "institution_id"
-     */
-    public function testPropertyInstitutionId()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "opening_date"
-     */
-    public function testPropertyOpeningDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "funding_date"
-     */
-    public function testPropertyFundingDate()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "sync_status"
-     */
-    public function testPropertySyncStatus()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "raw_type"
-     */
-    public function testPropertyRawType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "account_type"
-     */
-    public function testPropertyAccountType()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "is_paper"
-     */
-    public function testPropertyIsPaper()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "net_value"
-     */
-    public function testPropertyNetValue()
+    public function testPropertyDetail()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

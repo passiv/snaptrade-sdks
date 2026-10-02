@@ -73,6 +73,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'funding_date' => '\DateTime',
         'sync_status' => '\SnapTrade\Model\LineOfCreditAccountSyncStatus',
         'raw_type' => 'string',
+        'account_type' => 'string',
         'is_paper' => 'bool',
         'net_value' => '\SnapTrade\Model\LineOfCreditAccountNetValue',
         'minimum_payment_amount' => '\SnapTrade\Model\LineOfCreditAccountMinimumPaymentAmount',
@@ -99,6 +100,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'funding_date' => 'date-time',
         'sync_status' => null,
         'raw_type' => null,
+        'account_type' => null,
         'is_paper' => null,
         'net_value' => null,
         'minimum_payment_amount' => null,
@@ -123,6 +125,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
 		'funding_date' => true,
 		'sync_status' => false,
 		'raw_type' => true,
+		'account_type' => false,
 		'is_paper' => false,
 		'net_value' => true,
 		'minimum_payment_amount' => true,
@@ -227,6 +230,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'funding_date' => 'funding_date',
         'sync_status' => 'sync_status',
         'raw_type' => 'raw_type',
+        'account_type' => 'account_type',
         'is_paper' => 'is_paper',
         'net_value' => 'net_value',
         'minimum_payment_amount' => 'minimum_payment_amount',
@@ -251,6 +255,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'funding_date' => 'setFundingDate',
         'sync_status' => 'setSyncStatus',
         'raw_type' => 'setRawType',
+        'account_type' => 'setAccountType',
         'is_paper' => 'setIsPaper',
         'net_value' => 'setNetValue',
         'minimum_payment_amount' => 'setMinimumPaymentAmount',
@@ -275,6 +280,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'funding_date' => 'getFundingDate',
         'sync_status' => 'getSyncStatus',
         'raw_type' => 'getRawType',
+        'account_type' => 'getAccountType',
         'is_paper' => 'getIsPaper',
         'net_value' => 'getNetValue',
         'minimum_payment_amount' => 'getMinimumPaymentAmount',
@@ -324,6 +330,9 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     }
 
     public const KIND_LINE_OF_CREDIT = 'line_of_credit';
+    public const ACCOUNT_TYPE_CASH = 'cash';
+    public const ACCOUNT_TYPE_MARGIN = 'margin';
+    public const ACCOUNT_TYPE_UNKNOWN = 'unknown';
 
     /**
      * Gets allowable values of the enum
@@ -334,6 +343,20 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         return [
             self::KIND_LINE_OF_CREDIT,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAccountTypeAllowableValues()
+    {
+        return [
+            self::ACCOUNT_TYPE_CASH,
+            self::ACCOUNT_TYPE_MARGIN,
+            self::ACCOUNT_TYPE_UNKNOWN,
         ];
     }
 
@@ -363,6 +386,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('funding_date', $data ?? [], null);
         $this->setIfExists('sync_status', $data ?? [], null);
         $this->setIfExists('raw_type', $data ?? [], null);
+        $this->setIfExists('account_type', $data ?? [], null);
         $this->setIfExists('is_paper', $data ?? [], null);
         $this->setIfExists('net_value', $data ?? [], null);
         $this->setIfExists('minimum_payment_amount', $data ?? [], null);
@@ -424,6 +448,15 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         if ($this->container['sync_status'] === null) {
             $invalidProperties[] = "'sync_status' can't be null";
         }
+        $allowedValues = $this->getAccountTypeAllowableValues();
+        if (!is_null($this->container['account_type']) && !in_array($this->container['account_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'account_type', must be one of '%s'",
+                $this->container['account_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['is_paper'] === null) {
             $invalidProperties[] = "'is_paper' can't be null";
         }
@@ -802,6 +835,45 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['raw_type'] = $raw_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets account_type
+     *
+     * @return string|null
+     */
+    public function getAccountType()
+    {
+        return $this->container['account_type'];
+    }
+
+    /**
+     * Sets account_type
+     *
+     * @param string|null $account_type Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise.
+     *
+     * @return self
+     */
+    public function setAccountType($account_type)
+    {
+        $allowedValues = $this->getAccountTypeAllowableValues();
+        if (!is_null($account_type) && !in_array($account_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'account_type', must be one of '%s'",
+                    $account_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+        if (is_null($account_type)) {
+            throw new \InvalidArgumentException('non-nullable account_type cannot be null');
+        }
+
+        $this->container['account_type'] = $account_type;
 
         return $this;
     }

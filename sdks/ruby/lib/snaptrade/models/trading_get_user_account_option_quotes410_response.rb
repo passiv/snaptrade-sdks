@@ -11,65 +11,13 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts`. 
-  class InvestmentAccount
-    # Discriminator for the account kind.
-    attr_accessor :kind
-
-    # Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
-    attr_accessor :id
-
-    # Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
-    attr_accessor :connection_id
-
-    # A display name for the account. Either assigned by the user or by the institution itself.
-    attr_accessor :display_name
-
-    # The account number assigned by the institution, masked to the last 4 characters (e.g. `****8443`).
-    attr_accessor :masked_account_number
-
-    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
-    attr_accessor :institution_account_id
-
-    # Unique identifier for the institution that holds the account.
-    attr_accessor :institution_id
-
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
-    attr_accessor :opening_date
-
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; `null` for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list.
-    attr_accessor :funding_date
-
-    attr_accessor :sync_status
-
-    # The account type as provided by the institution.
-    attr_accessor :raw_type
-
-    # Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
-    attr_accessor :account_type
-
-    # Indicates whether the account is a paper (simulated) trading account.
-    attr_accessor :is_paper
-
-    attr_accessor :net_value
+  class TradingGetUserAccountOptionQuotes410Response
+    attr_accessor :detail
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'kind' => :'kind',
-        :'id' => :'id',
-        :'connection_id' => :'connection_id',
-        :'display_name' => :'display_name',
-        :'masked_account_number' => :'masked_account_number',
-        :'institution_account_id' => :'institution_account_id',
-        :'institution_id' => :'institution_id',
-        :'opening_date' => :'opening_date',
-        :'funding_date' => :'funding_date',
-        :'sync_status' => :'sync_status',
-        :'raw_type' => :'raw_type',
-        :'account_type' => :'account_type',
-        :'is_paper' => :'is_paper',
-        :'net_value' => :'net_value'
+        :'detail' => :'detail'
       }
     end
 
@@ -81,32 +29,13 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'kind' => :'Kind',
-        :'id' => :'String',
-        :'connection_id' => :'String',
-        :'display_name' => :'String',
-        :'masked_account_number' => :'String',
-        :'institution_account_id' => :'String',
-        :'institution_id' => :'String',
-        :'opening_date' => :'Time',
-        :'funding_date' => :'Time',
-        :'sync_status' => :'ConnectionAccountSyncStatus',
-        :'raw_type' => :'String',
-        :'account_type' => :'AccountType',
-        :'is_paper' => :'Boolean',
-        :'net_value' => :'InvestmentAccountNetValue'
+        :'detail' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'display_name',
-        :'institution_account_id',
-        :'opening_date',
-        :'funding_date',
-        :'raw_type',
-        :'net_value'
       ])
     end
 
@@ -114,71 +43,19 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::InvestmentAccount` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::TradingGetUserAccountOptionQuotes410Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::InvestmentAccount`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::TradingGetUserAccountOptionQuotes410Response`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'kind')
-        self.kind = attributes[:'kind']
-      end
-
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'connection_id')
-        self.connection_id = attributes[:'connection_id']
-      end
-
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
-      end
-
-      if attributes.key?(:'masked_account_number')
-        self.masked_account_number = attributes[:'masked_account_number']
-      end
-
-      if attributes.key?(:'institution_account_id')
-        self.institution_account_id = attributes[:'institution_account_id']
-      end
-
-      if attributes.key?(:'institution_id')
-        self.institution_id = attributes[:'institution_id']
-      end
-
-      if attributes.key?(:'opening_date')
-        self.opening_date = attributes[:'opening_date']
-      end
-
-      if attributes.key?(:'funding_date')
-        self.funding_date = attributes[:'funding_date']
-      end
-
-      if attributes.key?(:'sync_status')
-        self.sync_status = attributes[:'sync_status']
-      end
-
-      if attributes.key?(:'raw_type')
-        self.raw_type = attributes[:'raw_type']
-      end
-
-      if attributes.key?(:'account_type')
-        self.account_type = attributes[:'account_type']
-      end
-
-      if attributes.key?(:'is_paper')
-        self.is_paper = attributes[:'is_paper']
-      end
-
-      if attributes.key?(:'net_value')
-        self.net_value = attributes[:'net_value']
+      if attributes.key?(:'detail')
+        self.detail = attributes[:'detail']
       end
     end
 
@@ -186,42 +63,12 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @kind.nil?
-        invalid_properties.push('invalid value for "kind", kind cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @connection_id.nil?
-        invalid_properties.push('invalid value for "connection_id", connection_id cannot be nil.')
-      end
-
-      if @masked_account_number.nil?
-        invalid_properties.push('invalid value for "masked_account_number", masked_account_number cannot be nil.')
-      end
-
-      if @sync_status.nil?
-        invalid_properties.push('invalid value for "sync_status", sync_status cannot be nil.')
-      end
-
-      if @is_paper.nil?
-        invalid_properties.push('invalid value for "is_paper", is_paper cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @kind.nil?
-      return false if @id.nil?
-      return false if @connection_id.nil?
-      return false if @masked_account_number.nil?
-      return false if @sync_status.nil?
-      return false if @is_paper.nil?
       true
     end
 
@@ -230,20 +77,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          kind == o.kind &&
-          id == o.id &&
-          connection_id == o.connection_id &&
-          display_name == o.display_name &&
-          masked_account_number == o.masked_account_number &&
-          institution_account_id == o.institution_account_id &&
-          institution_id == o.institution_id &&
-          opening_date == o.opening_date &&
-          funding_date == o.funding_date &&
-          sync_status == o.sync_status &&
-          raw_type == o.raw_type &&
-          account_type == o.account_type &&
-          is_paper == o.is_paper &&
-          net_value == o.net_value
+          detail == o.detail
     end
 
     # @see the `==` method
@@ -255,7 +89,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, masked_account_number, institution_account_id, institution_id, opening_date, funding_date, sync_status, raw_type, account_type, is_paper, net_value].hash
+      [detail].hash
     end
 
     # Builds the object from hash

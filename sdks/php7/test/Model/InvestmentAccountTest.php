@@ -172,6 +172,15 @@ class InvestmentAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "account_type"
+     */
+    public function testPropertyAccountType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "is_paper"
      */
     public function testPropertyIsPaper()

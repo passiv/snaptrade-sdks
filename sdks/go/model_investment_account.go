@@ -39,6 +39,8 @@ type InvestmentAccount struct {
 	SyncStatus ConnectionAccountSyncStatus `json:"sync_status"`
 	// The account type as provided by the institution.
 	RawType NullableString `json:"raw_type,omitempty"`
+	// Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+	AccountType *string `json:"account_type,omitempty"`
 	// Indicates whether the account is a paper (simulated) trading account.
 	IsPaper bool `json:"is_paper"`
 	NetValue NullableInvestmentAccountNetValue `json:"net_value,omitempty"`
@@ -432,6 +434,38 @@ func (o *InvestmentAccount) UnsetRawType() {
 	o.RawType.Unset()
 }
 
+// GetAccountType returns the AccountType field value if set, zero value otherwise.
+func (o *InvestmentAccount) GetAccountType() string {
+	if o == nil || isNil(o.AccountType) {
+		var ret string
+		return ret
+	}
+	return *o.AccountType
+}
+
+// GetAccountTypeOk returns a tuple with the AccountType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InvestmentAccount) GetAccountTypeOk() (*string, bool) {
+	if o == nil || isNil(o.AccountType) {
+    return nil, false
+	}
+	return o.AccountType, true
+}
+
+// HasAccountType returns a boolean if a field has been set.
+func (o *InvestmentAccount) HasAccountType() bool {
+	if o != nil && !isNil(o.AccountType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountType gets a reference to the given string and assigns it to the AccountType field.
+func (o *InvestmentAccount) SetAccountType(v string) {
+	o.AccountType = &v
+}
+
 // GetIsPaper returns the IsPaper field value
 func (o *InvestmentAccount) GetIsPaper() bool {
 	if o == nil {
@@ -533,6 +567,9 @@ func (o InvestmentAccount) MarshalJSON() ([]byte, error) {
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
+	if !isNil(o.AccountType) {
+		toSerialize["account_type"] = o.AccountType
+	}
 	if true {
 		toSerialize["is_paper"] = o.IsPaper
 	}
@@ -568,6 +605,7 @@ func (o *InvestmentAccount) UnmarshalJSON(bytes []byte) error {
 	delete(additionalProperties, "funding_date")
 	delete(additionalProperties, "sync_status")
 	delete(additionalProperties, "raw_type")
+	delete(additionalProperties, "account_type")
 	delete(additionalProperties, "is_paper")
 	delete(additionalProperties, "net_value")
 	decoded.AdditionalProperties = additionalProperties

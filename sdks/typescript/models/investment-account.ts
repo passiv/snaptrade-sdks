@@ -145,6 +145,12 @@ export interface InvestmentAccount {
      */
     'raw_type'?: string | null;
     /**
+     * Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+     * @type {string}
+     * @memberof InvestmentAccount
+     */
+    'account_type'?: InvestmentAccountAccountTypeEnum;
+    /**
      * Indicates whether the account is a paper (simulated) trading account.
      * @type {boolean}
      * @memberof InvestmentAccount
@@ -159,5 +165,6 @@ export interface InvestmentAccount {
 }
 
 type InvestmentAccountKindEnum = 'investment'
+type InvestmentAccountAccountTypeEnum = 'cash' | 'margin' | 'unknown'
 
 

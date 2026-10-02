@@ -408,6 +408,7 @@ Class | Method | HTTP request | Description
  - [TradeDetectionCancelSubscriptionRequest](docs/TradeDetectionCancelSubscriptionRequest.md)
  - [TradeDetectionCancelSubscriptionResponse](docs/TradeDetectionCancelSubscriptionResponse.md)
  - [TradeDetectionSubscription](docs/TradeDetectionSubscription.md)
+ - [TradingGetUserAccountOptionQuotes410Response](docs/TradingGetUserAccountOptionQuotes410Response.md)
  - [TradingInstrument](docs/TradingInstrument.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TradingSession](docs/TradingSession.md)

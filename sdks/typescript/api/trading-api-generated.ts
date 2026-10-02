@@ -144,6 +144,8 @@ import { SymbolsQuotesInner } from '../models';
 // @ts-ignore
 import { TimeInForceStrict } from '../models';
 // @ts-ignore
+import { TradingGetUserAccountOptionQuotes410Response } from '../models';
+// @ts-ignore
 import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
 // @ts-ignore
 import { TradingSession } from '../models';
@@ -415,7 +417,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
+         * **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
          * @summary Get option quote
          * @param {string} accountId 
          * @param {string} symbol The OCC-formatted option symbol.
@@ -1155,7 +1157,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
+         * **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
          * @summary Get option quote
          * @param {TradingApiGetUserAccountOptionQuotesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1389,7 +1391,7 @@ export const TradingApiFactory = function<TAuth extends AuthMode>(configuration?
             return localVarFp.getOrderImpact(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
+         * **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
          * @summary Get option quote
          * @param {TradingApiGetUserAccountOptionQuotesRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2070,7 +2072,7 @@ export class TradingApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> 
     }
 
     /**
-     * Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
+     * **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
      * @summary Get option quote
      * @param {TradingApiGetUserAccountOptionQuotesRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

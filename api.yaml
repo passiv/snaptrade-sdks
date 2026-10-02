@@ -1366,10 +1366,10 @@ paths:
       summary: Get option quote
       deprecated: true
       description: |
+        **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.
+
         Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
         **Note:** These are derived values and are not suitable for trading purposes.
-
-        **This Endpoint is deprecated and will cease to return data as of October 1, 2026**
       operationId: Trading_getUserAccountOptionQuotes
       parameters:
         - in: query
@@ -1407,6 +1407,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/404FailedRequestResponse"
+        "410":
+          description: Endpoint is no longer available
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: This endpoint is no longer available.
         "429":
           description: Rate limit exceeded
           content:
@@ -3446,6 +3456,20 @@ components:
           nullable: true
           description: The account type as provided by the institution.
           example: Margin
+        account_type:
+          type: string
+          description: |
+            Whether the institution reports the account as a cash or margin account, normalized across institutions.
+            - `cash`: A cash account. The account cannot borrow on margin.
+            - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts.
+            - `unknown`: The institution does not report whether the account is cash or margin.
+
+            **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise.
+          enum:
+            - cash
+            - margin
+            - unknown
+          example: margin
         is_paper:
           type: boolean
           description: Indicates whether the account is a paper (simulated) trading account.

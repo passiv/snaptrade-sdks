@@ -454,7 +454,7 @@ catch (ApiException e)
 
 
 
-Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026** 
+**Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
 
 ### Example
 ```csharp
@@ -543,6 +543,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **404** | Option contract not found |  -  |
+| **410** | Endpoint is no longer available |  -  |
 | **429** | Rate limit exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
