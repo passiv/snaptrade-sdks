@@ -80,6 +80,10 @@ import { AccountOrderRecordV2 } from '../models';
 // @ts-ignore
 import { AccountOrdersV2Response } from '../models';
 // @ts-ignore
+import { AllUserAccountsResponse } from '../models';
+// @ts-ignore
+import { ConnectionAccount } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
@@ -221,6 +225,64 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 operationAuth: localVarOperationAuth
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradeDetectionCancelSubscriptionRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the `kind`-discriminated account shape. Use the `kind` discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary Get account details
+         * @param {string} accountId 
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountDetails: async (accountId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAccountDetails', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/details`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/details',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -422,6 +484,60 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
             };
         },
         /**
+         * Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+         * @summary List all user accounts
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllUserAccounts: async (userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/all`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/all',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
          * @summary List active Trade Detection subscriptions
          * @param {*} [options] Override http request option.
@@ -511,6 +627,18 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the `kind`-discriminated account shape. Use the `kind` discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary Get account details
+         * @param {ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountDetails(...args: ExperimentalEndpointsApiGetAccountDetailsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectionAccount>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountDetails(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
          * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail (V2)
          * @param {ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>} requestParameters Request parameters.
@@ -544,6 +672,18 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
         async getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrdersV2Response>> {
             const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrdersV2(requestParameters.accountId, requestParameters.onlyExecuted, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
+         * Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+         * @summary List all user accounts
+         * @param {ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAllUserAccounts(...args: ExperimentalEndpointsApiListAllUserAccountsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AllUserAccountsResponse>> {
+            const [requestParameters = {} as ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllUserAccounts(requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
@@ -588,6 +728,16 @@ export const ExperimentalEndpointsApiFactory = function<TAuth extends AuthMode>(
             return localVarFp.cancelSubscription(...args).then((request) => request(axios, basePath));
         },
         /**
+         * Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the `kind`-discriminated account shape. Use the `kind` discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary Get account details
+         * @param {ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountDetails(...args: ExperimentalEndpointsApiGetAccountDetailsArgs<TAuth>): AxiosPromise<ConnectionAccount> {
+            return localVarFp.getAccountDetails(...args).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail (V2)
          * @param {ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>} requestParameters Request parameters.
@@ -616,6 +766,16 @@ export const ExperimentalEndpointsApiFactory = function<TAuth extends AuthMode>(
          */
         getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>): AxiosPromise<AccountOrdersV2Response> {
             return localVarFp.getUserAccountRecentOrdersV2(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+         * @summary List all user accounts
+         * @param {ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllUserAccounts(...args: ExperimentalEndpointsApiListAllUserAccountsArgs<TAuth>): AxiosPromise<AllUserAccountsResponse> {
+            return localVarFp.listAllUserAccounts(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
@@ -680,6 +840,41 @@ export type ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth extends AuthMod
     TAuth["mode"] extends never
         ? [requestParameters?: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
+ * Request parameters for getAccountDetails operation in ExperimentalEndpointsApi.
+ * @export
+ */
+export type ExperimentalEndpointsApiGetAccountDetailsBaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ExperimentalEndpointsApiGetAccountDetails
+    */
+    readonly accountId: string
+    
+}
+export type ExperimentalEndpointsApiGetAccountDetailscommercialApiKeyRequest = ExperimentalEndpointsApiGetAccountDetailsBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type ExperimentalEndpointsApiGetAccountDetailspersonalApiKeyRequest = ExperimentalEndpointsApiGetAccountDetailsBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type ExperimentalEndpointsApiGetAccountDetailsRequestByAuthMode = {
+    "commercialApiKey": ExperimentalEndpointsApiGetAccountDetailscommercialApiKeyRequest;
+    "personalApiKey": ExperimentalEndpointsApiGetAccountDetailspersonalApiKeyRequest;
+}
+export type ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth extends AuthMode> =
+    ExperimentalEndpointsApiGetAccountDetailsRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetAccountDetailsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiGetAccountDetailsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountOrderDetailV2 operation in ExperimentalEndpointsApi.
@@ -815,6 +1010,34 @@ export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth exten
         : [requestParameters: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, options?: AxiosRequestConfig];
 
 /**
+ * Request parameters for listAllUserAccounts operation in ExperimentalEndpointsApi.
+ * @export
+ */
+export type ExperimentalEndpointsApiListAllUserAccountsBaseRequest = {
+    
+}
+export type ExperimentalEndpointsApiListAllUserAccountscommercialApiKeyRequest = ExperimentalEndpointsApiListAllUserAccountsBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type ExperimentalEndpointsApiListAllUserAccountspersonalApiKeyRequest = ExperimentalEndpointsApiListAllUserAccountsBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type ExperimentalEndpointsApiListAllUserAccountsRequestByAuthMode = {
+    "commercialApiKey": ExperimentalEndpointsApiListAllUserAccountscommercialApiKeyRequest;
+    "personalApiKey": ExperimentalEndpointsApiListAllUserAccountspersonalApiKeyRequest;
+}
+export type ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth extends AuthMode> =
+    ExperimentalEndpointsApiListAllUserAccountsRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiListAllUserAccountsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ExperimentalEndpointsApiListAllUserAccountsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "personalApiKey"
+        ? [requestParameters?: ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
  * ExperimentalEndpointsApiGenerated - object-oriented interface
  * @export
  * @class ExperimentalEndpointsApiGenerated
@@ -844,6 +1067,19 @@ export class ExperimentalEndpointsApiGenerated<TAuth extends AuthMode> extends B
      */
     public cancelSubscription(...args: ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth>) {
         return ExperimentalEndpointsApiFp(this.configuration).cancelSubscription(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the `kind`-discriminated account shape. Use the `kind` discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * @summary Get account details
+     * @param {ExperimentalEndpointsApiGetAccountDetailsRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExperimentalEndpointsApiGenerated
+     */
+    public getAccountDetails(...args: ExperimentalEndpointsApiGetAccountDetailsArgs<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).getAccountDetails(...args).then((request) => request(this.axios, this.basePath));
 
     }
 
@@ -883,6 +1119,19 @@ export class ExperimentalEndpointsApiGenerated<TAuth extends AuthMode> extends B
      */
     public getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>) {
         return ExperimentalEndpointsApiFp(this.configuration).getUserAccountRecentOrdersV2(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer\'s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user\'s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+     * @summary List all user accounts
+     * @param {ExperimentalEndpointsApiListAllUserAccountsRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExperimentalEndpointsApiGenerated
+     */
+    public listAllUserAccounts(...args: ExperimentalEndpointsApiListAllUserAccountsArgs<TAuth>) {
+        return ExperimentalEndpointsApiFp(this.configuration).listAllUserAccounts(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

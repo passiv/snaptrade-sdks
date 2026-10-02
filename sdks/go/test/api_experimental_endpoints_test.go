@@ -67,6 +67,22 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test ExperimentalEndpointsApiService GetAccountDetails", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.ExperimentalEndpointsApi.GetAccountDetails(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test ExperimentalEndpointsApiService GetUserAccountOrderDetailV2", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetUserAccountOrderDetailV2(
@@ -110,6 +126,21 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.OnlyExecuted(true)
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test ExperimentalEndpointsApiService ListAllUserAccounts", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.ExperimentalEndpointsApi.ListAllUserAccounts(
+            "userId_example",
+            "userSecret_example",
+        )
         
         resp, httpRes, err := request.Execute()
 

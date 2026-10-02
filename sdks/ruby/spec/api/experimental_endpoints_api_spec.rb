@@ -53,6 +53,20 @@ describe 'ExperimentalEndpointsApi' do
     end
   end
 
+  # unit tests for get_account_details
+  # Get account details
+  # Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape. Use the &#x60;kind&#x60; discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [ConnectionAccount]
+  describe 'get_account_details test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_user_account_order_detail_v2
   # Get account order detail (V2)
   # Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
@@ -94,6 +108,19 @@ describe 'ExperimentalEndpointsApi' do
   # @option opts [Boolean] :only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
   # @return [AccountOrdersV2Response]
   describe 'get_user_account_recent_orders_v2 test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for list_all_user_accounts
+  # List all user accounts
+  # Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The &#x60;results&#x60; list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the &#x60;kind&#x60; discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [AllUserAccountsResponse]
+  describe 'list_all_user_accounts test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

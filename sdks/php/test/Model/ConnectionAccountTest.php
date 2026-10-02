@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * ConnectionAccountTest Class Doc Comment
  *
  * @category    Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
+ * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
  * @package     SnapTrade
  */
 class ConnectionAccountTest extends TestCase

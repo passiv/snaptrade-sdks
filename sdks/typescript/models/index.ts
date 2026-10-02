@@ -26,6 +26,7 @@ export * from './action-strict-with-options';
 export * from './adr-instrument';
 export * from './all-account-positions-response';
 export * from './all-account-positions-response-data-freshness';
+export * from './all-user-accounts-response';
 export * from './authentication-login-snap-trade-user200-response';
 export * from './balance';
 export * from './balance-currency';

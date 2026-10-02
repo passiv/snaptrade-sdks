@@ -77,7 +77,7 @@ import { LineOfCreditAccountSyncStatus } from './line-of-credit-account-sync-sta
 
 /**
  * @type ConnectionAccount
- * A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, and `line_of_credit` are implemented today. 
+ * A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, and `line_of_credit` are implemented today. 
  * @export
  */
 export type ConnectionAccount = { kind: 'deposit' } & DepositAccount | { kind: 'investment' } & InvestmentAccount | { kind: 'line_of_credit' } & LineOfCreditAccount;

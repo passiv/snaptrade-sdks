@@ -6,9 +6,11 @@ All URIs are relative to *https://api.snaptrade.com*
 |------------- | ------------- | -------------|
 | [**addSubscription**](ExperimentalEndpointsApi.md#addSubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription |
 | [**cancelSubscription**](ExperimentalEndpointsApi.md#cancelSubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription |
+| [**getAccountDetails**](ExperimentalEndpointsApi.md#getAccountDetails) | **GET** /accounts/{accountId}/details | Get account details |
 | [**getUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getUserAccountOrderDetailV2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**getUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountOrdersV2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**getUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountRecentOrdersV2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
+| [**listAllUserAccounts**](ExperimentalEndpointsApi.md#listAllUserAccounts) | **GET** /accounts/all | List all user accounts |
 | [**listSubscriptions**](ExperimentalEndpointsApi.md#listSubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
 
 
@@ -207,6 +209,101 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Cancelled the Trade Detection subscription, or it was already cancelled |  -  |
 | **500** | Unexpected Error |  -  |
+
+<a name="getAccountDetails"></a>
+# **getAccountDetails**
+> Object getAccountDetails(userId, userSecret, accountId).execute();
+
+Get account details
+
+Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape. Use the &#x60;kind&#x60; discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ExperimentalEndpointsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    try {
+      Object result = client
+              .experimentalEndpoints
+              .getAccountDetails(userId, userSecret, accountId)
+              .execute();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountDetails");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<Object> response = client
+              .experimentalEndpoints
+              .getAccountDetails(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountDetails");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="getUserAccountOrderDetailV2"></a>
 # **getUserAccountOrderDetailV2**
@@ -512,6 +609,101 @@ public class Example {
 ### Return type
 
 [**AccountOrdersV2Response**](AccountOrdersV2Response.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+<a name="listAllUserAccounts"></a>
+# **listAllUserAccounts**
+> AllUserAccountsResponse listAllUserAccounts(userId, userSecret).execute();
+
+List all user accounts
+
+Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The &#x60;results&#x60; list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the &#x60;kind&#x60; discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ExperimentalEndpointsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    try {
+      AllUserAccountsResponse result = client
+              .experimentalEndpoints
+              .listAllUserAccounts(userId, userSecret)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getResults());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#listAllUserAccounts");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AllUserAccountsResponse> response = client
+              .experimentalEndpoints
+              .listAllUserAccounts(userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#listAllUserAccounts");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+[**AllUserAccountsResponse**](AllUserAccountsResponse.md)
 
 ### Authorization
 

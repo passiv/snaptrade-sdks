@@ -256,6 +256,13 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/details-GET': {
+        parameters: [
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         parameters: [
             {
@@ -287,6 +294,10 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'only_executed'
             },
+        ]
+    },
+    '/accounts/all-GET': {
+        parameters: [
         ]
     },
     '/snapTrade/tradeDetection/subscriptions-GET': {
