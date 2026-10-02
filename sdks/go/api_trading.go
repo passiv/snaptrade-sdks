@@ -767,10 +767,10 @@ func (r TradingApiGetUserAccountOptionQuotesRequest) Execute() (*OptionQuote, *h
 /*
 GetUserAccountOptionQuotes Get option quote
 
+**Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.
+
 Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 **Note:** These are derived values and are not suitable for trading purposes.
-
-**This Endpoint is deprecated and will cease to return data as of October 1, 2026**
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -908,6 +908,17 @@ func (a *TradingApiService) GetUserAccountOptionQuotesExecute(r TradingApiGetUse
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 410 {
+			var v TradingGetUserAccountOptionQuotes410Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

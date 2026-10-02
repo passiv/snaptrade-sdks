@@ -144,6 +144,59 @@ public class InvestmentAccount {
   @SerializedName(SERIALIZED_NAME_RAW_TYPE)
   private String rawType;
 
+  /**
+   * Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+   */
+  @JsonAdapter(AccountTypeEnum.Adapter.class)
+ public enum AccountTypeEnum {
+    CASH("cash"),
+    
+    MARGIN("margin"),
+    
+    UNKNOWN("unknown");
+
+    private String value;
+
+    AccountTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static AccountTypeEnum fromValue(String value) {
+      for (AccountTypeEnum b : AccountTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<AccountTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final AccountTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public AccountTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return AccountTypeEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ACCOUNT_TYPE = "account_type";
+  @SerializedName(SERIALIZED_NAME_ACCOUNT_TYPE)
+  private AccountTypeEnum accountType;
+
   public static final String SERIALIZED_NAME_IS_PAPER = "is_paper";
   @SerializedName(SERIALIZED_NAME_IS_PAPER)
   private Boolean isPaper;
@@ -474,6 +527,35 @@ public class InvestmentAccount {
   }
 
 
+  public InvestmentAccount accountType(AccountTypeEnum accountType) {
+    
+    
+    
+    
+    this.accountType = accountType;
+    return this;
+  }
+
+   /**
+   * Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+   * @return accountType
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "MARGIN", value = "Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. ")
+
+  public AccountTypeEnum getAccountType() {
+    return accountType;
+  }
+
+
+  public void setAccountType(AccountTypeEnum accountType) {
+    
+    
+    
+    this.accountType = accountType;
+  }
+
+
   public InvestmentAccount isPaper(Boolean isPaper) {
     
     
@@ -597,6 +679,7 @@ public class InvestmentAccount {
         Objects.equals(this.fundingDate, investmentAccount.fundingDate) &&
         Objects.equals(this.syncStatus, investmentAccount.syncStatus) &&
         Objects.equals(this.rawType, investmentAccount.rawType) &&
+        Objects.equals(this.accountType, investmentAccount.accountType) &&
         Objects.equals(this.isPaper, investmentAccount.isPaper) &&
         Objects.equals(this.netValue, investmentAccount.netValue)&&
         Objects.equals(this.additionalProperties, investmentAccount.additionalProperties);
@@ -608,7 +691,7 @@ public class InvestmentAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, connectionId, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, fundingDate, syncStatus, rawType, isPaper, netValue, additionalProperties);
+    return Objects.hash(kind, id, connectionId, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, fundingDate, syncStatus, rawType, accountType, isPaper, netValue, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -633,6 +716,7 @@ public class InvestmentAccount {
     sb.append("    fundingDate: ").append(toIndentedString(fundingDate)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
+    sb.append("    accountType: ").append(toIndentedString(accountType)).append("\n");
     sb.append("    isPaper: ").append(toIndentedString(isPaper)).append("\n");
     sb.append("    netValue: ").append(toIndentedString(netValue)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -669,6 +753,7 @@ public class InvestmentAccount {
     openapiFields.add("funding_date");
     openapiFields.add("sync_status");
     openapiFields.add("raw_type");
+    openapiFields.add("account_type");
     openapiFields.add("is_paper");
     openapiFields.add("net_value");
 
@@ -723,6 +808,9 @@ public class InvestmentAccount {
       ConnectionAccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
+      }
+      if ((jsonObj.get("account_type") != null && !jsonObj.get("account_type").isJsonNull()) && !jsonObj.get("account_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `account_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("account_type").toString()));
       }
       // validate the optional field `net_value`
       if (jsonObj.get("net_value") != null && !jsonObj.get("net_value").isJsonNull()) {

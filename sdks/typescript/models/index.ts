@@ -182,6 +182,7 @@ export * from './trade-detection-add-subscription-request';
 export * from './trade-detection-cancel-subscription-request';
 export * from './trade-detection-cancel-subscription-response';
 export * from './trade-detection-subscription';
+export * from './trading-get-user-account-option-quotes410-response';
 export * from './trading-instrument';
 export * from './trading-search-cryptocurrency-pair-instruments200-response';
 export * from './trading-session';

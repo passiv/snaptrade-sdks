@@ -188,6 +188,75 @@ _response_for_404 = api_client.OpenApiResponse(
             schema=SchemaFor404ResponseBodyApplicationJson),
     },
 )
+
+
+class SchemaFor410ResponseBodyApplicationJson(
+    schemas.DictSchema
+):
+
+
+    class MetaOapg:
+        
+        class properties:
+            detail = schemas.StrSchema
+            __annotations__ = {
+                "detail": detail,
+            }
+        additional_properties = schemas.AnyTypeSchema
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["detail"]) -> MetaOapg.properties.detail: ...
+    
+    @typing.overload
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
+    
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["detail"], str, ]):
+        # dict_instance[name] accessor
+        return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["detail"]) -> typing.Union[MetaOapg.properties.detail, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
+    
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["detail"], str, ]):
+        return super().get_item_oapg(name)
+
+    def __new__(
+        cls,
+        *args: typing.Union[dict, frozendict.frozendict, ],
+        detail: typing.Union[MetaOapg.properties.detail, str, schemas.Unset] = schemas.unset,
+        _configuration: typing.Optional[schemas.Configuration] = None,
+        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+    ) -> 'SchemaFor410ResponseBodyApplicationJson':
+        return super().__new__(
+            cls,
+            *args,
+            detail=detail,
+            _configuration=_configuration,
+            **kwargs,
+        )
+
+
+@dataclass
+class ApiResponseFor410(api_client.ApiResponse):
+    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+
+
+@dataclass
+class ApiResponseFor410Async(api_client.AsyncApiResponse):
+    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+
+
+_response_for_410 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor410,
+    response_cls_async=ApiResponseFor410Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor410ResponseBodyApplicationJson),
+    },
+)
 SchemaFor429ResponseBodyApplicationJson = Model500UnexpectedExceptionResponseSchema
 
 
@@ -212,6 +281,7 @@ _response_for_429 = api_client.OpenApiResponse(
 _status_code_to_response = {
     '200': _response_for_200,
     '404': _response_for_404,
+    '410': _response_for_410,
     '429': _response_for_429,
 }
 _all_accept_content_types = (
@@ -567,7 +637,7 @@ class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**  """
+        """ **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  """
         args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -630,7 +700,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  **This Endpoint is deprecated and will cease to return data as of October 1, 2026**  """
+        """ **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes.  """
         args = self._get_user_account_option_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,

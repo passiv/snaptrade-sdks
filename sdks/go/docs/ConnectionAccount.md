@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list. | [optional] 
 **SyncStatus** | [**LineOfCreditAccountSyncStatus**](LineOfCreditAccountSyncStatus.md) |  | 
 **RawType** | Pointer to **NullableString** | The account type as provided by the institution. | [optional] 
+**AccountType** | Pointer to **string** | Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise.  | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 **NetValue** | Pointer to [**NullableLineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  | [optional] 
 **MinimumPaymentAmount** | Pointer to [**NullableLineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  | [optional] 
@@ -340,6 +341,31 @@ HasRawType returns a boolean if a field has been set.
 `func (o *ConnectionAccount) UnsetRawType()`
 
 UnsetRawType ensures that no value is present for RawType, not even an explicit nil
+### GetAccountType
+
+`func (o *ConnectionAccount) GetAccountType() string`
+
+GetAccountType returns the AccountType field if non-nil, zero value otherwise.
+
+### GetAccountTypeOk
+
+`func (o *ConnectionAccount) GetAccountTypeOk() (*string, bool)`
+
+GetAccountTypeOk returns a tuple with the AccountType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountType
+
+`func (o *ConnectionAccount) SetAccountType(v string)`
+
+SetAccountType sets AccountType field to given value.
+
+### HasAccountType
+
+`func (o *ConnectionAccount) HasAccountType() bool`
+
+HasAccountType returns a boolean if a field has been set.
+
 ### GetIsPaper
 
 `func (o *ConnectionAccount) GetIsPaper() bool`

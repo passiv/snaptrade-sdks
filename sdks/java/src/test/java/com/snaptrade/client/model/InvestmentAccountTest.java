@@ -132,6 +132,14 @@ public class InvestmentAccountTest {
     }
 
     /**
+     * Test the property 'accountType'
+     */
+    @Test
+    public void accountTypeTest() {
+        // TODO: test accountType
+    }
+
+    /**
      * Test the property 'isPaper'
      */
     @Test
