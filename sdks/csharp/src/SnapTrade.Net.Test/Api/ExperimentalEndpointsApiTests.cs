@@ -115,6 +115,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetAccountDetails
+        /// </summary>
+        [Fact]
+        public void GetAccountDetailsTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            
+            try
+            {
+                // Get account details
+                ConnectionAccount result = client.ExperimentalEndpoints.GetAccountDetails(userId, userSecret, accountId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAccountDetails: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetUserAccountOrderDetailV2
         /// </summary>
         [Fact]
@@ -197,6 +227,35 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test ListAllUserAccounts
+        /// </summary>
+        [Fact]
+        public void ListAllUserAccountsTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // List all user accounts
+                AllUserAccountsResponse result = client.ExperimentalEndpoints.ListAllUserAccounts(userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.ListAllUserAccounts: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

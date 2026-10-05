@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// InvestmentAccount An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts`. 
+// InvestmentAccount An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan -- see `Connections_listConnectionAccounts` -- and always cached on `AccountInformation_listAllUserAccounts`. 
 type InvestmentAccount struct {
 	// Discriminator for the account kind.
 	Kind string `json:"kind"`

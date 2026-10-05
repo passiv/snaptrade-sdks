@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * InvestmentAccount Class Doc Comment
  *
  * @category Class
- * @description An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan -- see &#x60;Connections_listConnectionAccounts&#x60;.
+ * @description An investment account under a connection. &#x60;opening_date&#x60;, &#x60;funding_date&#x60;, and &#x60;net_value&#x60; are real-time or cached depending on the caller&#39;s plan -- see &#x60;Connections_listConnectionAccounts&#x60; -- and always cached on &#x60;AccountInformation_listAllUserAccounts&#x60;.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */

@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.InvestmentAccount
-An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan - - see `Connections_listConnectionAccounts`. 
+An investment account under a connection. `opening_date`, `funding_date`, and `net_value` are real-time or cached depending on the caller's plan - - see `Connections_listConnectionAccounts` - - and always cached on `AccountInformation_listAllUserAccounts`. 
 
 ## Properties
 

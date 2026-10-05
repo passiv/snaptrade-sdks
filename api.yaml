@@ -597,6 +597,44 @@ paths:
                   $ref: "#/components/schemas/Account"
         default:
           description: Unexpected error.
+  /accounts/all:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List all user accounts
+      description: |
+        Experimental and subject to change without notice.
+
+        Returns all accounts across all connections known to SnapTrade for the authenticated user.
+
+        The `results` list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the shape for each account.
+
+        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+      operationId: AccountInformation_listAllUserAccounts
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllUserAccountsResponse"
+        "401":
+          description: Unauthorized, invalid credentials for this resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
   "/accounts/{accountId}":
     get:
       tags:
@@ -674,6 +712,62 @@ paths:
                   $ref: "#/components/schemas/Account"
         default:
           description: Unexpected error
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+  /accounts/{accountId}/details:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: Get account details
+      description: |
+        Experimental and subject to change without notice.
+
+        Returns the specified account for the authenticated user, using the `kind`-discriminated account shape. Use the `kind` discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.
+
+        On Pay as you Go / Real-time, this endpoint refreshes the account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
+
+        On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.
+
+        If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      operationId: AccountInformation_getAccountDetails
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectionAccount"
+        "401":
+          description: Unauthorized, invalid credentials for this resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "404":
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
         "429":
           $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/balances:
@@ -3375,10 +3469,22 @@ components:
             $ref: "#/components/schemas/ConnectionAccount"
       required:
         - results
+    AllUserAccountsResponse:
+      description: Accounts across all of the user's connections.
+      type: object
+      properties:
+        results:
+          type: array
+          description: Accounts returned for the request.
+          items:
+            $ref: "#/components/schemas/ConnectionAccount"
+      required:
+        - results
     ConnectionAccount:
       description: |
         A single account under a connection, from the `kind`-discriminated union
-        used by `Connections_listConnectionAccounts`. Use `kind` to determine
+        used by `Connections_listConnectionAccounts` and
+        `AccountInformation_listAllUserAccounts`. Use `kind` to determine
         which schema is present.
 
         `investment`, `deposit`, and `line_of_credit` are implemented today.
@@ -3396,7 +3502,8 @@ components:
       description: |
         An investment account under a connection. `opening_date`,
         `funding_date`, and `net_value` are real-time or cached depending
-        on the caller's plan -- see `Connections_listConnectionAccounts`.
+        on the caller's plan -- see `Connections_listConnectionAccounts` --
+        and always cached on `AccountInformation_listAllUserAccounts`.
       type: object
       required:
         - kind
