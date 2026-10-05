@@ -3352,13 +3352,15 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - explode: false
+      - example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        explode: false
         in: path
         name: accountId
         required: true
         schema:
           $ref: '#/components/schemas/AccountID'
         style: simple
+        x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       responses:
         "200":
           content:
