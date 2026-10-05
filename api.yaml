@@ -746,6 +746,7 @@ paths:
         - in: path
           required: true
           name: accountId
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           schema:
             $ref: "#/components/schemas/AccountID"
       responses:
