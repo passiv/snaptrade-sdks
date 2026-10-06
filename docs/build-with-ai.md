@@ -22,7 +22,7 @@ This guide is for a **SnapTrade Personal** user building an application for thei
 | --- | --- |
 | Ask ChatGPT, Claude, or another assistant questions about your accounts | [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server) |
 | Build a private dashboard or automation for your own accounts | Personal API key and this guide |
-| Build a read-only app that other SnapTrade Personal users can authorize | [SnapTrade OAuth](https://docs.snaptrade.com/docs/oauth-apps) |
+| Build an app that other SnapTrade Personal users can authorize | [SnapTrade OAuth](https://docs.snaptrade.com/docs/oauth-apps) |
 | Build a product that creates and manages brokerage connections for its own users | [SnapTrade Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial) |
 
 A Personal API key represents you. It is appropriate for software you operate for yourself, but it must not be distributed in an app or shared with other people.

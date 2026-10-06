@@ -20,7 +20,7 @@ Personal users can share their connected brokerage data with OAuth-enabled apps 
 | Access methods | OAuth for sharing data, or a Personal API key for direct access | A Commercial API key |
 | User identity | Your signed-in SnapTrade account identifies you | Each app user has a SnapTrade `userId` and `userSecret` |
 | User registration | Not required | Required before connecting a brokerage |
-| Trading | Available through Personal API keys where enabled; OAuth is currently read-only | Available for app users where enabled |
+| Trading | Available through Personal API keys where enabled; OAuth trading is in beta | Available for app users where enabled |
 | Webhooks | Available for Personal API keys | Available |
 
 - [Follow the Personal quickstart](#personal-quickstart)
@@ -63,9 +63,9 @@ Most Personal users connect their brokerage accounts in the SnapTrade Dashboard 
 
 1. Connect and manage your brokerage accounts in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
 2. In an OAuth-enabled app or AI assistant, choose SnapTrade as a data source.
-3. Sign in to SnapTrade and approve the app's requested read access.
+3. Sign in to SnapTrade and approve the access the app requests.
 
-The app receives a scoped OAuth token instead of your Personal API credentials. Do not give an app your `consumerKey`. OAuth currently supports reading account data and managing connections, but it does not support trading.
+The app receives a scoped OAuth token instead of your Personal API credentials. Do not give an app your `consumerKey`. OAuth supports reading account data and managing connections. Trading through OAuth is in beta: an app that requests the `trade` permission can place, modify, and cancel orders in accounts where your brokerage connection supports trading.
 
 To share data with an AI assistant, see the [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server). Developers building an app that receives shared data should see [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
 

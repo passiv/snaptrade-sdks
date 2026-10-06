@@ -28,7 +28,7 @@ Because OAuth apps can reuse connections that users already maintain with SnapTr
 | Users can manage their brokerage connections in SnapTrade             | Your app must fully own the brokerage connection experience              |
 | You want users to grant access to existing connections                | Each connection must belong exclusively to your app's integration        |
 
-OAuth supports account data and connection-management workflows, optional asynchronous event notifications, and OpenID Connect sign-in. Apps with the `trade` scope enabled can also place, modify, and cancel trades where supported by the connected brokerage. Commercial credentials support apps that manage SnapTrade users and connections themselves.
+OAuth supports account data and connection-management workflows, optional asynchronous event notifications, and OpenID Connect sign-in. Apps that request the `trade` scope can also place, modify, and cancel trades where supported by the connected brokerage. Trading is currently in beta. Commercial credentials support apps that manage SnapTrade users and connections themselves.
 
 ## Scopes
 
@@ -311,7 +311,7 @@ The API reference may still show Commercial authentication fields as required. O
 
 ## 8. Trading
 
-OAuth apps can place, modify, and cancel orders where supported by the connected brokerage. Trading is currently in beta and must be enabled for your app before you request the `trade` scope.
+OAuth apps can place, modify, and cancel orders where supported by the connected brokerage. Trading is currently in beta.
 
 ### Request Trading Permission
 
