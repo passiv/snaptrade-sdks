@@ -166,7 +166,7 @@ Test OAuth apps are limited to 5 users. To test the consent flow, use a SnapTrad
 
 1. Read the authorization server metadata from `https://api.snaptrade.com/.well-known/oauth-authorization-server` to find the authorization, token, and revocation endpoints.
 2. Generate a fresh `state` and PKCE `code_verifier` for the attempt, and derive an `S256` `code_challenge`.
-3. Redirect the user to the authorization endpoint with `response_type=code`, your `client_id`, `redirect_uri`, `state`, `code_challenge`, and `scope=read`. Add `trade` if your app places orders and `webhook` if it needs event notifications.
+3. Redirect the user to the authorization endpoint with `response_type=code`, your `client_id`, `redirect_uri`, `state`, `code_challenge`, `code_challenge_method=S256`, and `scope=read`. Add `trade` if your app places orders and `webhook` if it needs event notifications.
 
 The user signs in to SnapTrade, reviews the requested access, and approves or denies your app.
 
