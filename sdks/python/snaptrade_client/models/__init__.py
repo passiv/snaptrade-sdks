@@ -209,6 +209,11 @@ from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.security_type_id import SecurityTypeID
 from snaptrade_client.model.session_event import SessionEvent
 from snaptrade_client.model.simple_order_form import SimpleOrderForm
+from snaptrade_client.model.simple_trade_decimal import SimpleTradeDecimal
+from snaptrade_client.model.simple_trade_form import SimpleTradeForm
+from snaptrade_client.model.simple_trade_instrument import SimpleTradeInstrument
+from snaptrade_client.model.simple_trade_leg import SimpleTradeLeg
+from snaptrade_client.model.simple_trade_response import SimpleTradeResponse
 from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount
 from snaptrade_client.model.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue

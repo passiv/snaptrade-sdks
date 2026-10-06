@@ -31,7 +31,7 @@ type Institution struct {
 	LogoUrl string `json:"logo_url"`
 	// URL of the institution's square logo.
 	SquareLogoUrl NullableString `json:"square_logo_url"`
-	// How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. 
+	// How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. 
 	ReleaseStage string `json:"release_stage"`
 	// Regions where end users can connect to this institution. - `US`: United States - `CA`: Canada - `EUROPE`: Europe, including the United Kingdom - `AU`: Australia - `IN`: India 
 	Regions []string `json:"regions"`

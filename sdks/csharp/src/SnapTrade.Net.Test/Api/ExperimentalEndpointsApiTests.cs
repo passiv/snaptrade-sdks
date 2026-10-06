@@ -52,8 +52,8 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void AddSubscriptionTest()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var checkIntervalSeconds = 300; // How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
             
@@ -120,8 +120,8 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetAccountDetailsTest()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             
             try
@@ -150,10 +150,10 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetUserAccountOrderDetailV2Test()
         {
-            var accountId = "accountId_example";
-            var brokerageOrderId = "brokerageOrderId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -181,9 +181,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetUserAccountOrdersV2Test()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var state = "all"; // defaults to \"all\" (optional) 
             var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional) 
             
@@ -213,9 +213,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetUserAccountRecentOrdersV2Test()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional) 
             
             try
@@ -244,8 +244,8 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void ListAllUserAccountsTest()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -283,6 +283,59 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ExperimentalEndpointsApi.ListSubscriptions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test PlaceSimpleOrder
+        /// </summary>
+        [Fact]
+        public void PlaceSimpleOrderTest()
+        {
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to execute the trade on.
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var orderType = SimpleTradeForm.OrderTypeEnum.StopLimit;
+            var timeInForce = SimpleTradeForm.TimeInForceEnum.Day; // Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+            var legs = new List<SimpleTradeLeg>(); // Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+            var limitPrice = null;
+            var stopPrice = null;
+            var priceEffect = SimpleTradeForm.PriceEffectEnum.Debit; // Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+            var expiryDate = DateTime.Now; // ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+            var notionalValue = null;
+            var tradingSession = SimpleTradeForm.TradingSessionEnum.Regular; // extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+            
+            var simpleTradeForm = new SimpleTradeForm(
+                orderType,
+                timeInForce,
+                legs,
+                limitPrice,
+                stopPrice,
+                priceEffect,
+                clientOrderId,
+                expiryDate,
+                notionalValue,
+                tradingSession
+            );
+            
+            try
+            {
+                // Place a simple order (beta)
+                SimpleTradeResponse result = client.ExperimentalEndpoints.PlaceSimpleOrder(accountId, userId, userSecret, simpleTradeForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.PlaceSimpleOrder: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

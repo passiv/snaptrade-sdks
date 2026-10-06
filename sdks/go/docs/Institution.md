@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Website** | **NullableString** | URL of the institution&#39;s website. | 
 **LogoUrl** | **string** | URL of the institution&#39;s rectangular logo. | 
 **SquareLogoUrl** | **NullableString** | URL of the institution&#39;s square logo. | 
-**ReleaseStage** | **string** | How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements.  | 
+**ReleaseStage** | **string** | How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality.  | 
 **Regions** | **[]string** | Regions where end users can connect to this institution. - &#x60;US&#x60;: United States - &#x60;CA&#x60;: Canada - &#x60;EUROPE&#x60;: Europe, including the United Kingdom - &#x60;AU&#x60;: Australia - &#x60;IN&#x60;: India  | 
 **Connection** | [**NullableInstitutionConnectionNullable**](InstitutionConnectionNullable.md) |  | 
 

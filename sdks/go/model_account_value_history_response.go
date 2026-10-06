@@ -17,7 +17,7 @@ import (
 
 // AccountValueHistoryResponse The response to the account value history endpoint, containing a list of estimated account values at different points in time.
 type AccountValueHistoryResponse struct {
-	// List of estimated account values over time returned by the endpoint.
+	// List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.
 	History []AccountValueHistoryItem `json:"history,omitempty"`
 	// The ISO-4217 currency code for the account values.
 	Currency *string `json:"currency,omitempty"`

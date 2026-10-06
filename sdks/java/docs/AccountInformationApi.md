@@ -48,11 +48,11 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID accountId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    LocalDate startDate = LocalDate.now(); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
-    LocalDate endDate = LocalDate.now(); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    LocalDate startDate = LocalDate.parse("Mon Jan 24 00:00:00 UTC 2022"); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    LocalDate endDate = LocalDate.parse("Mon Jan 24 00:00:00 UTC 2022"); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     Integer offset = 56; // An integer that specifies the starting point of the paginated results. Default is 0.
     Integer limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000.
     String type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
@@ -143,7 +143,7 @@ public class Example {
 
 List historical account total value
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons) 
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)  The data may contain gaps and is best used for charting account value trends. It should not be relied on as a complete or exact record of historical account values. 
 
 ### Example
 ```java
@@ -167,9 +167,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     try {
       AccountValueHistoryResponse result = client
               .accountInformation
@@ -265,9 +265,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     try {
       AllAccountPositionsResponse result = client
               .accountInformation
@@ -364,9 +364,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     try {
       List<Balance> result = client
               .accountInformation
@@ -461,9 +461,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     try {
       Account result = client
               .accountInformation
@@ -577,9 +577,9 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    UUID accountId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       AccountOrderRecord result = client
               .accountInformation
@@ -699,9 +699,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     String state = "all"; // defaults to \"all\"
     Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     try {
@@ -803,9 +803,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     Boolean onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     try {
       RecentOrdersResponse result = client
@@ -904,9 +904,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     String timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     try {
       RateOfReturnResponse result = client
@@ -1005,9 +1005,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID accountId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       AccountHoldingsAccount result = client
               .accountInformation
@@ -1108,8 +1108,8 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       List<Account> result = client
               .accountInformation
@@ -1203,8 +1203,8 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     UUID accountId = UUID.randomUUID(); // The ID of the account to update.
     try {
       List<Account> result = client

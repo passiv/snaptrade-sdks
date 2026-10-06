@@ -924,6 +924,182 @@ module SnapTrade
       end
       return data, status_code, headers, response
     end
+
+
+    # Place a simple order (beta)
+    #
+    # **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
+    # 
+    # Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+    # 
+    # An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+    # 
+    # All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.
+    # 
+    # A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+    #
+    # @param order_type [SimpleTradeFormOrderType] 
+    # @param time_in_force [SimpleTradeFormTimeInForce] Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+    # @param legs [Array<SimpleTradeLeg>] Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param limit_price [SimpleTradeFormLimitPrice] 
+    # @param stop_price [SimpleTradeFormStopPrice] 
+    # @param price_effect [SimpleTradeFormPriceEffect] Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+    # @param client_order_id [String] Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+    # @param expiry_date [Time] ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+    # @param notional_value [SimpleTradeFormNotionalValue] 
+    # @param trading_session [SimpleTradeFormTradingSession] extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+    # @param body [SimpleTradeForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_simple_order(order_type:, time_in_force:, legs:, account_id:, user_id:, user_secret:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, client_order_id: SENTINEL, expiry_date: SENTINEL, notional_value: SENTINEL, trading_session: 'regular', extra: {})
+      _body = {}
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:legs] = legs if legs != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:price_effect] = price_effect if price_effect != SENTINEL
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
+      _body[:expiry_date] = expiry_date if expiry_date != SENTINEL
+      _body[:notional_value] = notional_value if notional_value != SENTINEL
+      _body[:trading_session] = trading_session if trading_session != SENTINEL
+      simple_trade_form = _body
+      data, _status_code, _headers = place_simple_order_with_http_info_impl(account_id, user_id, user_secret, simple_trade_form, extra)
+      data
+    end
+
+    # Place a simple order (beta)
+    #
+    # **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
+    # 
+    # Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+    # 
+    # An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+    # 
+    # All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.
+    # 
+    # A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+    #
+    # @param order_type [SimpleTradeFormOrderType] 
+    # @param time_in_force [SimpleTradeFormTimeInForce] Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+    # @param legs [Array<SimpleTradeLeg>] Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param limit_price [SimpleTradeFormLimitPrice] 
+    # @param stop_price [SimpleTradeFormStopPrice] 
+    # @param price_effect [SimpleTradeFormPriceEffect] Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+    # @param client_order_id [String] Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+    # @param expiry_date [Time] ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+    # @param notional_value [SimpleTradeFormNotionalValue] 
+    # @param trading_session [SimpleTradeFormTradingSession] extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+    # @param body [SimpleTradeForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_simple_order_with_http_info(order_type:, time_in_force:, legs:, account_id:, user_id:, user_secret:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, client_order_id: SENTINEL, expiry_date: SENTINEL, notional_value: SENTINEL, trading_session: 'regular', extra: {})
+      _body = {}
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:legs] = legs if legs != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:price_effect] = price_effect if price_effect != SENTINEL
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
+      _body[:expiry_date] = expiry_date if expiry_date != SENTINEL
+      _body[:notional_value] = notional_value if notional_value != SENTINEL
+      _body[:trading_session] = trading_session if trading_session != SENTINEL
+      simple_trade_form = _body
+      place_simple_order_with_http_info_impl(account_id, user_id, user_secret, simple_trade_form, extra)
+    end
+
+    # Place a simple order (beta)
+    # **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param simple_trade_form [SimpleTradeForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [SimpleTradeResponse]
+    private def place_simple_order_impl(account_id, user_id, user_secret, simple_trade_form, opts = {})
+      data, _status_code, _headers = place_simple_order_with_http_info(account_id, user_id, user_secret, simple_trade_form, opts)
+      data
+    end
+
+    # Place a simple order (beta)
+    # **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param simple_trade_form [SimpleTradeForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SimpleTradeResponse, Integer, Hash)>] SimpleTradeResponse data, response status code and response headers
+    private def place_simple_order_with_http_info_impl(account_id, user_id, user_secret, simple_trade_form, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.place_simple_order ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ExperimentalEndpointsApi.place_simple_order"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.place_simple_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.place_simple_order"
+      end
+      # verify the required parameter 'simple_trade_form' is set
+      if @api_client.config.client_side_validation && simple_trade_form.nil?
+        fail ArgumentError, "Missing the required parameter 'simple_trade_form' when calling ExperimentalEndpointsApi.place_simple_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/simple'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_trade_form)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SimpleTradeResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.place_simple_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#place_simple_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
   end
 
   # top-level client access to avoid having the user to insantiate their own API instances

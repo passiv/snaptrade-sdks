@@ -199,6 +199,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *ExperimentalEndpointsApi* | [**ListAllUserAccounts**](docs/ExperimentalEndpointsApi.md#listalluseraccounts) | **Get** /accounts/all | List all user accounts
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
+*ExperimentalEndpointsApi* | [**PlaceSimpleOrder**](docs/ExperimentalEndpointsApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **Get** /exchanges | Get exchanges
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **Post** /symbols | Search symbols
@@ -386,6 +387,15 @@ Class | Method | HTTP request | Description
  - [SecurityType](docs/SecurityType.md)
  - [SessionEvent](docs/SessionEvent.md)
  - [SimpleOrderForm](docs/SimpleOrderForm.md)
+ - [SimpleTradeDecimal](docs/SimpleTradeDecimal.md)
+ - [SimpleTradeForm](docs/SimpleTradeForm.md)
+ - [SimpleTradeFormLimitPrice](docs/SimpleTradeFormLimitPrice.md)
+ - [SimpleTradeFormNotionalValue](docs/SimpleTradeFormNotionalValue.md)
+ - [SimpleTradeFormStopPrice](docs/SimpleTradeFormStopPrice.md)
+ - [SimpleTradeInstrument](docs/SimpleTradeInstrument.md)
+ - [SimpleTradeLeg](docs/SimpleTradeLeg.md)
+ - [SimpleTradeLegUnits](docs/SimpleTradeLegUnits.md)
+ - [SimpleTradeResponse](docs/SimpleTradeResponse.md)
  - [SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
  - [SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
  - [SnapTradeLoginUserRequestBody](docs/SnapTradeLoginUserRequestBody.md)

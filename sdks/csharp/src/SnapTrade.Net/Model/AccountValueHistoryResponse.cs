@@ -35,7 +35,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountValueHistoryResponse" /> class.
         /// </summary>
-        /// <param name="history">List of estimated account values over time returned by the endpoint..</param>
+        /// <param name="history">List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values..</param>
         /// <param name="currency">The ISO-4217 currency code for the account values..</param>
         public AccountValueHistoryResponse(List<AccountValueHistoryItem> history = default(List<AccountValueHistoryItem>), string currency = default(string)) : base()
         {
@@ -45,9 +45,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// List of estimated account values over time returned by the endpoint.
+        /// List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.
         /// </summary>
-        /// <value>List of estimated account values over time returned by the endpoint.</value>
+        /// <value>List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.</value>
         [DataMember(Name = "history", EmitDefaultValue = false)]
         public List<AccountValueHistoryItem> History { get; set; }
 
