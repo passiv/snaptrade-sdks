@@ -746,7 +746,6 @@ paths:
         - in: path
           required: true
           name: accountId
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           schema:
             $ref: "#/components/schemas/AccountID"
       responses:
@@ -1967,7 +1966,7 @@ paths:
       security: []
       responses:
         "200":
-          description: Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed.
+          description: Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed.
           content:
             application/json:
               schema:
@@ -6090,10 +6089,12 @@ components:
             How mature the integration is.
             - `GENERALLY_AVAILABLE`: fully supported and validated for production use.
             - `BETA`: production-ready, with ongoing validation and improvements.
+            - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality.
           type: string
           enum:
             - GENERALLY_AVAILABLE
             - BETA
+            - ALPHA
           example: GENERALLY_AVAILABLE
         regions:
           description: |
