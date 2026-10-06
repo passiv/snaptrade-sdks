@@ -765,7 +765,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. |  -  |
+| **200** | Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="symbolSearchUserAccount"></a>
@@ -798,9 +798,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     String substring = "substring_example"; // The search query for symbols.
     try {
       List<UniversalSymbol> result = client

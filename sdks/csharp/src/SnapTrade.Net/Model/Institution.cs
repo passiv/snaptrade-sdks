@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class Institution : IEquatable<Institution>, IValidatableObject
     {
         /// <summary>
-        /// How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. 
+        /// How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality. 
         /// </summary>
-        /// <value>How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. </value>
+        /// <value>How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality. </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ReleaseStageEnum
         {
@@ -49,15 +49,21 @@ namespace SnapTrade.Net.Model
             /// Enum BETA for value: BETA
             /// </summary>
             [EnumMember(Value = "BETA")]
-            BETA = 2
+            BETA = 2,
+
+            /// <summary>
+            /// Enum ALPHA for value: ALPHA
+            /// </summary>
+            [EnumMember(Value = "ALPHA")]
+            ALPHA = 3
 
         }
 
 
         /// <summary>
-        /// How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. 
+        /// How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality. 
         /// </summary>
-        /// <value>How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. </value>
+        /// <value>How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality. </value>
         [DataMember(Name = "release_stage", IsRequired = true, EmitDefaultValue = true)]
         public ReleaseStageEnum ReleaseStage { get; set; }
         /// <summary>
@@ -116,7 +122,7 @@ namespace SnapTrade.Net.Model
         /// <param name="website">URL of the institution&#39;s website. (required).</param>
         /// <param name="logoUrl">URL of the institution&#39;s rectangular logo. (required).</param>
         /// <param name="squareLogoUrl">URL of the institution&#39;s square logo. (required).</param>
-        /// <param name="releaseStage">How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements.  (required).</param>
+        /// <param name="releaseStage">How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality.  (required).</param>
         /// <param name="regions">Regions where end users can connect to this institution. - &#x60;US&#x60;: United States - &#x60;CA&#x60;: Canada - &#x60;EUROPE&#x60;: Europe, including the United Kingdom - &#x60;AU&#x60;: Australia - &#x60;IN&#x60;: India  (required).</param>
         /// <param name="connection">connection (required).</param>
         public Institution(string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string website = default(string), string logoUrl = default(string), string squareLogoUrl = default(string), ReleaseStageEnum releaseStage = default(ReleaseStageEnum), List<RegionsEnum> regions = default(List<RegionsEnum>), InstitutionConnectionNullable connection = default(InstitutionConnectionNullable)) : base()

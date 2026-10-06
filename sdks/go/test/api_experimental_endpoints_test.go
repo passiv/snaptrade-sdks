@@ -35,8 +35,8 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
         )
         
         request := client.ExperimentalEndpointsApi.AddSubscription(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
             tradeDetectionAddSubscriptionRequest,
         )
         
@@ -70,9 +70,9 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     t.Run("Test ExperimentalEndpointsApiService GetAccountDetails", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetAccountDetails(
-            "userId_example",
-            "userSecret_example",
-            ""917c8734-8470-4a3e-a18f-57c3f2ee6631"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
         
         resp, httpRes, err := request.Execute()
@@ -86,10 +86,10 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     t.Run("Test ExperimentalEndpointsApiService GetUserAccountOrderDetailV2", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetUserAccountOrderDetailV2(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "brokerageOrderId_example",
-            "userId_example",
-            "userSecret_example",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""66a033fa-da74-4fcf-b527-feefdec9257e"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -103,9 +103,9 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     t.Run("Test ExperimentalEndpointsApiService GetUserAccountOrdersV2", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetUserAccountOrdersV2(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
         request.State("state_example")
         request.Days(30)
@@ -121,9 +121,9 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     t.Run("Test ExperimentalEndpointsApiService GetUserAccountRecentOrdersV2", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
         request.OnlyExecuted(true)
         
@@ -138,8 +138,8 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     t.Run("Test ExperimentalEndpointsApiService ListAllUserAccounts", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.ListAllUserAccounts(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()

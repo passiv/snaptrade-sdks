@@ -3352,15 +3352,13 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
           $ref: '#/components/schemas/AccountID'
         style: simple
-        x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       responses:
         "200":
           content:
@@ -3781,9 +3779,9 @@ paths:
                   $ref: '#/components/schemas/Institution'
                 type: array
                 x-konfig-is-used-in-successful-response: true
-          description: "Enabled institutions that are generally available or in beta,\
-            \ sorted by display name. Paper-trading and simulated-trading variants\
-            \ are not listed."
+          description: "Enabled institutions that are generally available, in beta\
+            \ or in alpha, sorted by display name. Paper-trading and simulated-trading\
+            \ variants are not listed."
         default:
           description: Unexpected error.
       security: []
@@ -9514,9 +9512,11 @@ components:
             How mature the integration is.
             - `GENERALLY_AVAILABLE`: fully supported and validated for production use.
             - `BETA`: production-ready, with ongoing validation and improvements.
+            - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality.
           enum:
           - GENERALLY_AVAILABLE
           - BETA
+          - ALPHA
           example: GENERALLY_AVAILABLE
           type: string
           x-konfig-original-example: GENERALLY_AVAILABLE
