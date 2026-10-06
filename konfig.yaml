@@ -151,6 +151,8 @@ portal:
     /accounts/{accountId}/balanceHistory:
       get: true
   hideOperations:
+    /accounts/{accountId}/trading/simple:
+      post: true
     /accounts/{accountId}/positions:
       get: true
     /accounts/{accountId}/options:
