@@ -12,15 +12,15 @@ The [interactive Getting Started Demo](https://docs.snaptrade.com/demo/getting-s
 
 ## Choose a Customer Model
 
-Personal users can share their connected brokerage data with OAuth-enabled apps or access it directly with a Personal API key. Commercial integrations use an API key to manage brokerage accounts for their end users.
+Personal users can share their connected brokerage data with OAuth-enabled apps or access it directly with a Personal API key. Commercial integrations either use an API key to manage brokerage accounts for their end users or register an OAuth app that end users authorize to access the accounts they manage in SnapTrade Personal.
 
 | | Personal | Commercial |
 | --- | --- | --- |
 | Use when | You are accessing your own brokerage accounts | Your application manages brokerage accounts for its end users |
-| Access methods | OAuth for sharing data, or a Personal API key for direct access | A Commercial API key |
-| User identity | Your signed-in SnapTrade account identifies you | Each app user has a SnapTrade `userId` and `userSecret` |
-| User registration | Not required | Required before connecting a brokerage |
-| Trading | Available through Personal API keys where enabled; OAuth trading is in beta | Available for app users where enabled |
+| Access methods | OAuth for sharing data, or a Personal API key for direct access | An OAuth app, or a Commercial API key |
+| User identity | Your signed-in SnapTrade account identifies you | OAuth: each app user's access token. API key: each app user has a SnapTrade `userId` and `userSecret` |
+| User registration | Not required | OAuth: not required. API key: required before connecting a brokerage |
+| Trading | Available through Personal API keys where enabled; OAuth trading is in beta | Available through Commercial API keys where enabled; OAuth trading is in beta |
 | Webhooks | Available for Personal API keys | Available |
 
 - [Follow the Personal quickstart](#personal-quickstart)
@@ -130,11 +130,91 @@ For order types, brokerage support, and other asset classes, see [Trading with S
 
 ## Commercial Quickstart
 
-Use this path when you are building an application that manages brokerage connections for its own end users.
+Use this path when you are building an application for your own end users. Choose how your app accesses their brokerage data:
+
+| | OAuth app | Commercial API key |
+| --- | --- | --- |
+| End users | Sign in with their SnapTrade account | Your app registers a SnapTrade user for each one |
+| Brokerage connections | Already connected in SnapTrade; users grant your app access | Your app builds the connection flow with the Connection Portal |
+| Broker access | All brokers supported by SnapTrade Personal, available immediately | Some brokers require separate approval before launch; see the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide) |
+| Per-user credentials | Tokens issued when the user approves access | A `userId` and `userSecret` your app stores for each user |
+| Request authentication | Standard Bearer token | Each request signed with your `consumerKey` |
+| Trading | In beta, with the `trade` scope | Available where enabled |
+| Pricing | Free during the limited-time OAuth preview | Per-user pricing; see [Billing](https://docs.snaptrade.com/docs/billing) |
+
+- [Build with OAuth](#commercial-oauth-quickstart)
+- [Build with a Commercial API key](#commercial-api-key-quickstart)
+
+<a id="commercial-oauth-quickstart"></a>
+
+### Option 1: Build With OAuth
+
+With OAuth, users bring the brokerage accounts they already manage in SnapTrade, and a single connection can be shared with every app they use. Your app does not register SnapTrade users, store `userSecret` values, sign requests, or embed the Connection Portal.
+
+<!-- Add the OAuth app -> user consent -> tokens -> accounts diagram here. -->
+
+#### 1. Register an OAuth App
+
+1. Create a Commercial account in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
+2. Select **OAuth Apps** in the left sidebar, create a **Test** app, and add your redirect URIs. Production redirects must use HTTPS; local testing can use a loopback address such as `http://127.0.0.1`.
+3. Save the `client_id` and `client_secret` on a secure backend. The secret is shown only once.
+4. When you are ready for production, complete the [Production Access Application](https://dashboard.snaptrade.com/production-access) and register a **Production** app.
+
+Test OAuth apps are limited to 5 users. To test the consent flow, use a SnapTrade Personal account with at least one brokerage connection.
+
+#### 2. Send the User Through Authorization
+
+1. Read the authorization server metadata from `https://api.snaptrade.com/.well-known/oauth-authorization-server` to find the authorization, token, and revocation endpoints.
+2. Generate a fresh `state` and PKCE `code_verifier` for the attempt, and derive an `S256` `code_challenge`.
+3. Redirect the user to the authorization endpoint with `response_type=code`, your `client_id`, `redirect_uri`, `state`, `code_challenge`, `code_challenge_method=S256`, and `scope=read`. Add `trade` if your app places orders and `webhook` if it needs event notifications.
+
+The user signs in to SnapTrade, reviews the requested access, and approves or denies your app.
+
+#### 3. Exchange the Code for Tokens
+
+1. In your callback, reject the response if `state` does not match, and handle any `error` without exchanging a code.
+2. From your backend, exchange the `code` and `code_verifier` at the token endpoint using HTTP Basic client authentication.
+3. Store the returned `access_token` and `refresh_token` encrypted and associated with the signed-in user.
+
+Access tokens are valid for 10 hours. Refresh tokens rotate: each successful refresh returns a new refresh token that replaces the old one.
+
+#### 4. Retrieve Accounts and Positions
+
+Send the access token as a Bearer token. Do not include `clientId`, `consumerKey`, `userId`, `userSecret`, `timestamp`, or `Signature` on OAuth requests.
+
+```http
+GET https://api.snaptrade.com/accounts
+Authorization: Bearer ACCESS_TOKEN
+Accept: application/json
+```
+
+1. Call :api[AccountInformation_listUserAccounts] to list the accounts the user shared.
+2. Choose the `accountId` for the account you want to inspect.
+3. Call :api[AccountInformation_getAllAccountPositions] with the `accountId`.
+
+You can also retrieve balances with :api[AccountInformation_getUserAccountBalance] and orders with :api[AccountInformation_getUserAccountOrders]. Users add, repair, and remove brokerage connections in the [SnapTrade Dashboard](https://dashboard.snaptrade.com).
+
+#### 5. Place an Equity Trade
+
+OAuth trading is in beta. Your app can trade when the user granted the `trade` scope and their brokerage connection supports trading.
+
+1. Build the order using the account ID and the brokerage ticker in the `symbol` field.
+2. Show the user the order details and have them confirm it.
+3. Call :api[Trading_placeForceOrder] with the Bearer token to submit the order to the brokerage.
+
+Users who authorized your app without `trade` must go through the authorization flow again to grant it.
+
+For token refresh, revocation, OpenID Connect sign-in, webhooks, and a production checklist, see [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
+
+<a id="commercial-api-key-quickstart"></a>
+
+### Option 2: Build With a Commercial API Key
+
+Use a Commercial API key when your app needs to create and manage SnapTrade users and their brokerage connections itself.
 
 <!-- Add the Commercial API key -> users -> connections -> accounts diagram here. -->
 
-### 1. Create a Commercial API Key
+#### 1. Create a Commercial API Key
 
 1. Create a Commercial account in the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
 2. Verify your email.
@@ -147,7 +227,7 @@ For plan limits and production requirements, see [Billing](https://docs.snaptrad
 
 <a id="getting-started-users"></a>
 
-### 2. Register a SnapTrade User
+#### 2. Register a SnapTrade User
 
 A Commercial integration creates one SnapTrade `user` for each end user in the application.
 
@@ -156,7 +236,7 @@ A Commercial integration creates one SnapTrade `user` for each end user in the a
 
 The `userId` and `userSecret` identify this app user in subsequent user-scoped requests.
 
-### 3. Connect a Brokerage
+#### 3. Connect a Brokerage
 
 1. Call :api[Authentication_loginSnapTradeUser] using **Commercial API Key** authentication.
 2. Provide the app user's `userId` and `userSecret`.
@@ -167,7 +247,7 @@ After the user completes the flow, the connection and its brokerage accounts are
 
 For more ways to open and configure the portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal).
 
-### 4. Retrieve Accounts and Positions
+#### 4. Retrieve Accounts and Positions
 
 1. Call :api[AccountInformation_listUserAccounts] with the user's `userId` and `userSecret`.
 2. Choose the `accountId` for the account you want to inspect.
@@ -175,7 +255,7 @@ For more ways to open and configure the portal, see [Methods to Integrate the Co
 
 You can also retrieve balances with :api[AccountInformation_getUserAccountBalance] and orders with :api[AccountInformation_getUserAccountOrders].
 
-### 5. Place an Equity Trade
+#### 5. Place an Equity Trade
 
 Commercial integrations can trade when trading is enabled for the API key, brokerage, connection, and account.
 
@@ -189,6 +269,7 @@ For order types, brokerage support, and other asset classes, see [Trading with S
 
 ### Commercial Next Steps
 
+- Complete your OAuth integration with [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
 - Configure [Webhooks](https://docs.snaptrade.com/docs/webhooks).
 - Finish integrating the [Connection Portal](https://docs.snaptrade.com/docs/implement-connection-portal).
 - Prepare your integration for production with [Launching Your Application](https://docs.snaptrade.com/docs/launching-your-application).

@@ -64,12 +64,11 @@ For details on what data the connector accesses and how it is handled, see the [
 
 ## Set up the SnapTrade app in ChatGPT
 
-1. In ChatGPT, go to **Settings → Security and login → Developer mode** and turn on **Developer mode**.
-2. Go to **Settings → Plugins → Browse plugins** and click **+** to create a developer-mode app.
-3. Enter a name (for example, `SnapTrade`) and the MCP server URL: `https://mcp.snaptrade.com/mcp`.
-4. Set authentication to **OAuth**, then create the app.
-5. Complete the SnapTrade login flow if prompted and approve **read** access.
-6. In a new chat, mention SnapTrade or tag **@SnapTrade** to access your SnapTrade data through MCP.
+1. Go to [chatgpt.com/plugins](https://chatgpt.com/plugins), click **+**, then **Add custom MCP server**.
+2. Enter a name (for example, `SnapTrade`), a short description, and the MCP server URL: `https://mcp.snaptrade.com/mcp`.
+3. Set authentication to **OAuth**, review the warning and select **I understand and want to continue**.
+4. Select **Create as a plugin**, then sign in to SnapTrade and approve **read** access when prompted.
+5. In a new chat, type **@** and pick **SnapTrade** to use your portfolio data.
 
 ## Example prompts
 
