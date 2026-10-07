@@ -729,20 +729,8 @@ public class SimpleTradeForm {
       for (int i = 0; i < jsonArraylegs.size(); i++) {
         SimpleTradeLeg.validateJsonObject(jsonArraylegs.get(i).getAsJsonObject());
       };
-      // validate the optional field `limit_price`
-      if (jsonObj.get("limit_price") != null && !jsonObj.get("limit_price").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("limit_price"));
-      }
-      // validate the optional field `stop_price`
-      if (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("stop_price"));
-      }
       if (!jsonObj.get("price_effect").isJsonNull() && (jsonObj.get("price_effect") != null && !jsonObj.get("price_effect").isJsonNull()) && !jsonObj.get("price_effect").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));
-      }
-      // validate the optional field `notional_value`
-      if (jsonObj.get("notional_value") != null && !jsonObj.get("notional_value").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("notional_value"));
       }
       if ((jsonObj.get("trading_session") != null && !jsonObj.get("trading_session").isJsonNull()) && !jsonObj.get("trading_session").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `trading_session` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trading_session").toString()));

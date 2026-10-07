@@ -337,10 +337,6 @@ public class SimpleTradeLeg {
       if (!jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
       }
-      // validate the optional field `units`
-      if (jsonObj.get("units") != null && !jsonObj.get("units").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("units"));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
