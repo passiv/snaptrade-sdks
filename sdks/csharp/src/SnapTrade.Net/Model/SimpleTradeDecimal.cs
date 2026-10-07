@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleTradeDecimal" /> class
-        /// with the <see cref="decimal?" /> class
+        /// with the <see cref="decimal" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of decimal?.</param>
         public SimpleTradeDecimal(decimal? actualInstance)
@@ -57,7 +57,7 @@ namespace SnapTrade.Net.Model
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleTradeDecimal" /> class
-        /// with the <see cref="double?" /> class
+        /// with the <see cref="double" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of double?.</param>
         public SimpleTradeDecimal(double? actualInstance)
@@ -81,11 +81,20 @@ namespace SnapTrade.Net.Model
             }
             set
             {
-                if (value.GetType() == typeof(decimal?))
+                if (value == null)
+                {
+                    if (!this.IsNullable)
+                    {
+                        throw new ArgumentException("Invalid instance found. Must not be null.");
+                    }
+                    this._actualInstance = null;
+                    return;
+                }
+                if (value.GetType() == (Nullable.GetUnderlyingType(typeof(decimal?)) ?? typeof(decimal?)))
                 {
                     this._actualInstance = value;
                 }
-                else if (value.GetType() == typeof(double?))
+                else if (value.GetType() == (Nullable.GetUnderlyingType(typeof(double?)) ?? typeof(double?)))
                 {
                     this._actualInstance = value;
                 }
@@ -101,7 +110,7 @@ namespace SnapTrade.Net.Model
         /// the InvalidClassException will be thrown
         /// </summary>
         /// <returns>An instance of decimal?</returns>
-        public decimal? GetDecimal?()
+        public decimal? GetDecimal()
         {
             return (decimal?)this.ActualInstance;
         }
@@ -111,7 +120,7 @@ namespace SnapTrade.Net.Model
         /// the InvalidClassException will be thrown
         /// </summary>
         /// <returns>An instance of double?</returns>
-        public double? GetDouble?()
+        public double? GetDouble()
         {
             return (double?)this.ActualInstance;
         }
@@ -200,7 +209,7 @@ namespace SnapTrade.Net.Model
             if (input == null)
                 return false;
 
-            return this.ActualInstance.Equals(input.ActualInstance);
+            return Object.Equals(this.ActualInstance, input.ActualInstance);
         }
 
         /// <summary>
@@ -272,4 +281,5 @@ namespace SnapTrade.Net.Model
             return false;
         }
     }
+
 }
