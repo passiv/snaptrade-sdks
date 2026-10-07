@@ -4,7 +4,7 @@
 
 A tax lot represents a specific acquisition of a security. When a position was built through multiple purchases, its tax lots can provide the purchase date, quantity, purchase price, cost basis, current value, and position type for each acquisition.
 
-When enabled, tax lots are returned in the `tax_lots` field of supported stock, ETF, and mutual fund positions from the [List all account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountPositions) endpoint. Tax lot data is not available for every brokerage or every account.
+When enabled, tax lots are returned in the `tax_lots` field of supported stock, ETF, and mutual fund positions from the [List all account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountPositions) endpoint. Tax lot data is not available for every brokerage, account or position. Positions that do not have tax lot data will return an empty list.
 
 ## Brokerage support
 
@@ -14,7 +14,7 @@ Brokerage capabilities may change, so check this page before relying on tax lot 
 
 ## Enabling tax lots
 
-Tax lots are an optional paid feature and are disabled by default. You can enable them for an additional cost from the [SnapTrade Dashboard billing settings](https://dashboard.snaptrade.com/settings/billing).
+Tax lots are an optional paid feature and are disabled by default. You can enable them for an additional cost from the [SnapTrade Dashboard add-ons page](https://dashboard.snaptrade.com/add-ons).
 
 After enabling the feature, request the account's positions as usual and read the `tax_lots` array when it is present. Your integration should handle positions without tax lots, since the underlying brokerage may not support the feature or may not return lot-level data for a particular position.
 
