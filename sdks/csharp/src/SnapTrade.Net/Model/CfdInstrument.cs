@@ -72,7 +72,7 @@ namespace SnapTrade.Net.Model
         /// <param name="description">Human-readable description of the instrument underlying the CFD wrapper..</param>
         /// <param name="currency">ISO-4217 currency code for the instrument underlying the CFD wrapper..</param>
         /// <param name="exchange">Exchange MIC code or exchange code for the instrument underlying the CFD wrapper..</param>
-        /// <param name="underlyingInstrument">underlyingInstrument (required).</param>
+        /// <param name="underlyingInstrument">The underlying instrument referenced by a CFD contract. (required).</param>
         public CfdInstrument(KindEnum kind = default(KindEnum), string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), string currency = default(string), string exchange = default(string), UnderlyingCfdInstrument underlyingInstrument = default(UnderlyingCfdInstrument)) : base()
         {
             this.Kind = kind;
@@ -149,8 +149,9 @@ namespace SnapTrade.Net.Model
         public string Exchange { get; set; }
 
         /// <summary>
-        /// Gets or Sets UnderlyingInstrument
+        /// The underlying instrument referenced by a CFD contract.
         /// </summary>
+        /// <value>The underlying instrument referenced by a CFD contract.</value>
         [DataMember(Name = "underlying_instrument", IsRequired = true, EmitDefaultValue = true)]
         public UnderlyingCfdInstrument UnderlyingInstrument { get; set; }
 

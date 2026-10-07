@@ -133,6 +133,7 @@ class Institution(
                     enum_value_to_name = {
                         "GENERALLY_AVAILABLE": "GENERALLY_AVAILABLE",
                         "BETA": "BETA",
+                        "ALPHA": "ALPHA",
                     }
                 
                 @schemas.classproperty
@@ -142,6 +143,10 @@ class Institution(
                 @schemas.classproperty
                 def BETA(cls):
                     return cls("BETA")
+                
+                @schemas.classproperty
+                def ALPHA(cls):
+                    return cls("ALPHA")
         
             @staticmethod
             def regions() -> typing.Type['InstitutionRegions']:

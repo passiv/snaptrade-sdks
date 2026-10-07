@@ -51,9 +51,9 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     try {
       CancelOrderResponse result = client
               .trading
@@ -151,10 +151,10 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    String instrumentSymbol = "instrumentSymbol_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String instrumentSymbol = "BTC-USD";
     try {
       CryptocurrencyPairQuote result = client
               .trading
@@ -257,9 +257,9 @@ public class Example {
     MlegOrderTypeStrict orderType = MlegOrderTypeStrict.fromValue("MARKET");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     List<MlegLeg> legs = Arrays.asList();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
@@ -372,8 +372,8 @@ public class Example {
     UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
@@ -483,9 +483,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     String symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
     try {
       OptionQuote result = client
@@ -586,10 +586,10 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     String symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
-    UUID accountId = UUID.randomUUID();
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     Boolean useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     try {
       List<SymbolsQuotesInner> result = client
@@ -690,9 +690,9 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String type = "OCO"; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
     List<ComplexOrderLeg> orders = Arrays.asList(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
-    UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to execute the trade on.
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     UUID clientOrderId = UUID.randomUUID(); // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
     try {
       ComplexOrderResponse result = client
@@ -798,9 +798,9 @@ public class Example {
     String type = "MARKET"; // The type of order to place.
     String timeInForce = "GTC"; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
     BigDecimal amount = new BigDecimal(78); // The amount of the base currency to buy or sell.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
     Boolean postOnly = true; // Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
@@ -914,8 +914,8 @@ public class Example {
     ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     ManualTradePlaceTimeInForceStrict timeInForce = ManualTradePlaceTimeInForceStrict.fromValue("FOK");
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     String symbol = "symbol_example"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     TradingSession tradingSession = TradingSession.fromValue("REGULAR");
@@ -1065,9 +1065,9 @@ public class Example {
     MlegOrderTypeStrict orderType = MlegOrderTypeStrict.fromValue("MARKET");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     List<MlegLeg> legs = Arrays.asList();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
@@ -1174,9 +1174,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID tradeId = UUID.randomUUID(); // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID tradeId = UUID.fromString("139e307a-82f7-4402-b39e-4da7baa87758"); // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     Boolean waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
     try {
       AccountOrderRecord result = client
@@ -1305,9 +1305,9 @@ public class Example {
     String type = "MARKET"; // The type of order to place.
     String timeInForce = "GTC"; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
     BigDecimal amount = new BigDecimal(78); // The amount of the base currency to buy or sell.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT` or `TAKE_PROFIT_LIMIT`.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT_MARKET` or `TAKE_PROFIT_LIMIT`.
     Boolean postOnly = true; // Valid and required only for order type `LIMIT`. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
@@ -1420,9 +1420,9 @@ public class Example {
     ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
-    UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID accountId = UUID.fromString("2bcd7cc3-e922-4976-bce1-9858296801c3"); // The ID of the account to execute the trade on.
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     String symbol = "symbol_example"; // The security's trading ticker symbol. Use the OCC symbol to replace an option order.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
@@ -1555,11 +1555,11 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    String base = "base_example";
-    String quote = "quote_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String base = "BTC";
+    String quote = "USD";
     try {
       TradingSearchCryptocurrencyPairInstruments200Response result = client
               .trading

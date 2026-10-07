@@ -12,6 +12,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**getUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountRecentOrdersV2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
 | [**listAllUserAccounts**](ExperimentalEndpointsApi.md#listAllUserAccounts) | **GET** /accounts/all | List all user accounts |
 | [**listSubscriptions**](ExperimentalEndpointsApi.md#listSubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
+| [**placeSimpleOrder**](ExperimentalEndpointsApi.md#placeSimpleOrder) | **POST** /accounts/{accountId}/trading/simple | Place a simple order (beta) |
 
 
 <a name="addSubscription"></a>
@@ -46,8 +47,8 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     Integer checkIntervalSeconds = 56; // How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       TradeDetectionSubscription result = client
               .experimentalEndpoints
@@ -240,8 +241,8 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     try {
       Object result = client
@@ -335,10 +336,10 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example";
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       AccountOrderRecordV2 result = client
               .experimentalEndpoints
@@ -448,9 +449,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     String state = "all"; // defaults to \"all\"
     Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
     try {
@@ -553,9 +554,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
     Boolean onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     try {
       AccountOrdersV2Response result = client
@@ -654,8 +655,8 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       AllUserAccountsResponse result = client
               .experimentalEndpoints
@@ -807,4 +808,127 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | Active Trade Detection subscriptions |  -  |
 | **500** | Unexpected Error |  -  |
+
+<a name="placeSimpleOrder"></a>
+# **placeSimpleOrder**
+> SimpleTradeResponse placeSimpleOrder(accountId, userId, userSecret, simpleTradeForm).execute();
+
+Place a simple order (beta)
+
+**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ExperimentalEndpointsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String orderType = "limit";
+    String timeInForce = "day"; // Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+    List<SimpleTradeLeg> legs = Arrays.asList(); // Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to execute the trade on.
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    BigDecimal limitPrice = new BigDecimal(78); // Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+    BigDecimal stopPrice = new BigDecimal(78); // Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+    String priceEffect = "credit"; // Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+    UUID clientOrderId = UUID.randomUUID(); // Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+    OffsetDateTime expiryDate = OffsetDateTime.now(); // ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+    BigDecimal notionalValue = new BigDecimal(78); // Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+    String tradingSession = "regular"; // extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+    try {
+      SimpleTradeResponse result = client
+              .experimentalEndpoints
+              .placeSimpleOrder(orderType, timeInForce, legs, accountId, userId, userSecret)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .clientOrderId(clientOrderId)
+              .expiryDate(expiryDate)
+              .notionalValue(notionalValue)
+              .tradingSession(tradingSession)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#placeSimpleOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<SimpleTradeResponse> response = client
+              .experimentalEndpoints
+              .placeSimpleOrder(orderType, timeInForce, legs, accountId, userId, userSecret)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .clientOrderId(clientOrderId)
+              .expiryDate(expiryDate)
+              .notionalValue(notionalValue)
+              .tradingSession(tradingSession)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#placeSimpleOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**| The ID of the account to execute the trade on. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **simpleTradeForm** | [**SimpleTradeForm**](SimpleTradeForm.md)|  | |
+
+### Return type
+
+[**SimpleTradeResponse**](SimpleTradeResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order placed |  -  |
+| **500** | Unexpected error |  -  |
 

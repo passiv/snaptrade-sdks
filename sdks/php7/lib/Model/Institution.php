@@ -278,6 +278,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const RELEASE_STAGE_GENERALLY_AVAILABLE = 'GENERALLY_AVAILABLE';
     public const RELEASE_STAGE_BETA = 'BETA';
+    public const RELEASE_STAGE_ALPHA = 'ALPHA';
     public const REGIONS_US = 'US';
     public const REGIONS_CA = 'CA';
     public const REGIONS_EUROPE = 'EUROPE';
@@ -294,6 +295,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::RELEASE_STAGE_GENERALLY_AVAILABLE,
             self::RELEASE_STAGE_BETA,
+            self::RELEASE_STAGE_ALPHA,
         ];
     }
 
@@ -658,7 +660,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets release_stage
      *
-     * @param string $release_stage How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements.
+     * @param string $release_stage How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality.
      *
      * @return self
      */

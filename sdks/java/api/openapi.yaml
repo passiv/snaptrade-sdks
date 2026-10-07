@@ -1621,6 +1621,8 @@ paths:
     get:
       description: |
         An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
+
+        The data may contain gaps and is best used for charting account value trends. It should not be relied on as a complete or exact record of historical account values.
       operationId: AccountInformation_getAccountBalanceHistory
       parameters:
       - explode: true
@@ -3352,15 +3354,13 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
           $ref: '#/components/schemas/AccountID'
         style: simple
-        x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       responses:
         "200":
           content:
@@ -3781,9 +3781,9 @@ paths:
                   $ref: '#/components/schemas/Institution'
                 type: array
                 x-konfig-is-used-in-successful-response: true
-          description: "Enabled institutions that are generally available or in beta,\
-            \ sorted by display name. Paper-trading and simulated-trading variants\
-            \ are not listed."
+          description: "Enabled institutions that are generally available, in beta\
+            \ or in alpha, sorted by display name. Paper-trading and simulated-trading\
+            \ variants are not listed."
         default:
           description: Unexpected error.
       security: []
@@ -3949,6 +3949,130 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
+      x-accepts: application/json
+  /accounts/{accountId}/trading/simple:
+    post:
+      description: |
+        **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
+
+        Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+        An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.
+
+        A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+      operationId: Trading_placeSimpleOrder
+      parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              futureStopLimit:
+                summary: Single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: day
+                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: /ESZ6
+                    action: buy
+                    units: "1"
+              optionSpread:
+                summary: Equity-option debit spread
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "1.25"
+                  price_effect: debit
+                  legs:
+                  - instrument:
+                      kind: option
+                      symbol: AAPL  261218C00200000
+                    action: buy_to_open
+                    units: "1"
+                  - instrument:
+                      kind: option
+                      symbol: AAPL  261218C00210000
+                    action: sell_to_open
+                    units: "1"
+              notionalEquity:
+                summary: Equity market order by dollar value
+                value:
+                  order_type: market
+                  time_in_force: day
+                  notional_value: "100.00"
+                  legs:
+                  - instrument:
+                      kind: equity
+                      symbol: AAPL
+                    action: buy
+            schema:
+              $ref: '#/components/schemas/SimpleTradeForm'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleTradeResponse'
+          description: Order placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: "Invalid request, unsupported trading feature, or brokerage\
+            \ rejection"
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Account not found
+          x-do-not-generate: true
+        "500":
+          description: Unexpected error
+      summary: Place a simple order (beta)
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
+      x-content-type: application/json
       x-accepts: application/json
   /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
     get:
@@ -4924,7 +5048,7 @@ components:
           type: string
           x-konfig-original-example: Margin
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type
-        account_type:
+        cash_or_margin:
           description: |
             Whether the institution reports the account as a cash or margin account, normalized across institutions.
             - `cash`: A cash account. The account cannot borrow on margin.
@@ -4939,7 +5063,7 @@ components:
           example: margin
           type: string
           x-konfig-original-example: margin
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-account_type
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-cash_or_margin
         is_paper:
           description: Indicates whether the account is a paper (simulated) trading
             account.
@@ -6458,8 +6582,9 @@ components:
           total_value: "15363.23"
       properties:
         history:
-          description: List of estimated account values over time returned by the
-            endpoint.
+          description: "List of estimated account values over time returned by the\
+            \ endpoint. The data may contain gaps and is best used for charting trends,\
+            \ rather than as a complete or exact record of historical account values."
           items:
             $ref: '#/components/schemas/AccountValueHistoryItem'
           type: array
@@ -7988,8 +8113,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-cash_equivalent
         tax_lots:
           description: "List of tax lots for the given position. Disabled by default,\
-            \ only available on paid plans, enable this feature in the [Add-on page\
-            \ of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)"
+            \ enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)"
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
@@ -8192,8 +8316,12 @@ components:
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountPosition-properties-cash_equivalent
         tax_lots:
-          description: "List of tax lots for the given position (disabled by default,\
-            \ only available on paid plans, contact support if needed)"
+          description: "List of tax lots for the given position. Disabled by default;\
+            \ enable via the Customer Dashboard Add-ons page. When enabled, this field\
+            \ is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions.\
+            \ For these positions, an empty list means no tax lot data is available.\
+            \ Availability varies by brokerage and position. This field is omitted\
+            \ for all other instrument kinds or when the feature is disabled."
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
@@ -9514,9 +9642,11 @@ components:
             How mature the integration is.
             - `GENERALLY_AVAILABLE`: fully supported and validated for production use.
             - `BETA`: production-ready, with ongoing validation and improvements.
+            - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality.
           enum:
           - GENERALLY_AVAILABLE
           - BETA
+          - ALPHA
           example: GENERALLY_AVAILABLE
           type: string
           x-konfig-original-example: GENERALLY_AVAILABLE
@@ -10649,6 +10779,224 @@ components:
           type: string
           x-konfig-original-example: "0.50"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_fee_total
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    SimpleTradeDecimal:
+      description: "A finite decimal, supplied as a decimal string to preserve precision."
+      example: "1.25"
+      format: decimal
+      nullable: true
+      type: string
+      x-konfig-original-example: "1.25"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeDecimal
+    SimpleTradeInstrument:
+      additionalProperties: true
+      example:
+        symbol: /ESZ6
+        kind: future
+      properties:
+        kind:
+          enum:
+          - equity
+          - option
+          - future
+          - future_option
+          example: future
+          type: string
+          x-konfig-original-example: future
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-kind
+        symbol:
+          description: "Equity ticker, OCC equity-option symbol, or exact tastytrade\
+            \ BrokerageInstrument ticker for a future or future option. Future tickers\
+            \ begin with `/`; future-option tickers begin with `./`. Preserve spaces\
+            \ and punctuation. Universal symbol IDs are not accepted."
+          example: /ESZ6
+          minLength: 1
+          type: string
+          x-konfig-original-example: /ESZ6
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-symbol
+      required:
+      - kind
+      - symbol
+      type: object
+    SimpleTradeLeg:
+      additionalProperties: true
+      example:
+        action: buy
+        instrument:
+          symbol: /ESZ6
+          kind: future
+        units: ""
+      properties:
+        instrument:
+          $ref: '#/components/schemas/SimpleTradeInstrument'
+        action:
+          description: "Equities and futures require buy or sell. Equity options and\
+            \ future options require buy_to_open, buy_to_close, sell_to_open, or sell_to_close."
+          enum:
+          - buy
+          - sell
+          - buy_to_open
+          - buy_to_close
+          - sell_to_open
+          - sell_to_close
+          example: buy
+          type: string
+          x-konfig-original-example: buy
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeLeg-properties-action
+        units:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive shares or contracts for this leg. Required unless\
+            \ the order is a single-equity market order using notional_value, in which\
+            \ case omit or set to null. Fractional units are supported only for single-equity\
+            \ orders on eligible brokerages; all other legs require whole units. Quantities\
+            \ are absolute units per leg, not strategy ratios."
+      required:
+      - action
+      - instrument
+      type: object
+    SimpleTradeForm:
+      additionalProperties: false
+      example:
+        time_in_force: day
+        client_order_id: ""
+        stop_price: ""
+        price_effect: debit
+        notional_value: ""
+        trading_session: regular
+        legs:
+        - action: buy
+          instrument:
+            symbol: /ESZ6
+            kind: future
+          units: ""
+        - action: buy
+          instrument:
+            symbol: /ESZ6
+            kind: future
+          units: ""
+        expiry_date: 2026-12-18T20:00:00Z
+        order_type: stop_limit
+        limit_price: ""
+      properties:
+        order_type:
+          enum:
+          - limit
+          - market
+          - stop
+          - stop_limit
+          example: stop_limit
+          type: string
+          x-konfig-original-example: stop_limit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type
+        time_in_force:
+          description: "Order duration, subject to brokerage and execution-path support.\
+            \ gtd requires expiry_date and a non-market single-leg equity/option order.\
+            \ Existing single-leg option routing does not support ioc. Futures and\
+            \ multi-leg orders do not support gtd through this endpoint."
+          enum:
+          - day
+          - gtc
+          - gtd
+          - fok
+          - ioc
+          example: day
+          type: string
+          x-konfig-original-example: day
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force
+        legs:
+          description: "Legs of one brokerage order. Use equity/option legs or future/future_option\
+            \ legs, without mixing the two families. Brokerage strategy and leg-count\
+            \ limits apply."
+          items:
+            $ref: '#/components/schemas/SimpleTradeLeg'
+          minItems: 1
+          type: array
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Required for limit and stop_limit orders, except that multi-leg\
+            \ price_effect even implies zero. Must be omitted or null for market and\
+            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
+            \ prices are accepted only for futures-family orders, subject to brokerage\
+            \ support."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: Required for stop and stop_limit orders. Must be omitted or
+            null for market and limit orders. Must be positive for equity/option orders;
+            futures-family trigger prices are subject to brokerage support.
+        price_effect:
+          description: "Only applicable to multi-leg limit and stop_limit orders.\
+            \ Requirements and supported values depend on the brokerage; tastytrade\
+            \ requires credit or debit. even implies a zero limit_price, which may\
+            \ be omitted and must be zero if supplied. Single-leg price effects are\
+            \ derived from the action."
+          enum:
+          - credit
+          - debit
+          - even
+          example: debit
+          nullable: true
+          type: string
+          x-konfig-original-example: debit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect
+        client_order_id:
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
+          description: "Optional canonical UUID, forwarded where the existing execution\
+            \ path supports it and for tastytrade futures orders. Requires the existing\
+            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
+            \ behavior on duplicates varies; SnapTrade does not enforce uniqueness.\
+            \ Tastytrade uses this as external-identifier for correlation and does\
+            \ not deduplicate submissions."
+        expiry_date:
+          description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
+            \ other durations. A missing timezone is treated as UTC. Supported only\
+            \ through existing single-leg Public and Sandbox execution paths."
+          example: 2026-12-18T20:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-12-18T20:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
+        notional_value:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive order value, supported only for a single-equity market\
+            \ order on eligible brokerages and partners. Mutually exclusive with leg\
+            \ units. Omit or set units to null when supplied."
+        trading_session:
+          default: regular
+          description: extended uses existing single-leg equity/option brokerage support
+            and requires extended-hours enablement. Futures and multi-leg orders only
+            accept regular.
+          enum:
+          - regular
+          - extended
+          example: regular
+          type: string
+          x-konfig-original-example: regular
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session
+      required:
+      - legs
+      - order_type
+      - time_in_force
+      type: object
+    SimpleTradeResponse:
+      additionalProperties: true
+      example:
+        brokerage_order_id: "123456"
+      properties:
+        brokerage_order_id:
+          description: The brokerage-assigned ID of the submitted order.
+          example: "123456"
+          type: string
+          x-konfig-original-example: "123456"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeResponse-properties-brokerage_order_id
+      required:
+      - brokerage_order_id
       type: object
       x-konfig-is-used-in-successful-response: true
     MlegTradeForm:
@@ -13516,7 +13864,7 @@ components:
       example: Margin
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-InvestmentAccount-properties-account_type:
+    konfig-generated-schema-components-schemas-InvestmentAccount-properties-cash_or_margin:
       example: margin
       type: string
       x-do-not-generate: true
@@ -15177,6 +15525,46 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_fee_total:
       example: "0.50"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeDecimal:
+      example: "1.25"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-kind:
+      example: future
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-symbol:
+      example: /ESZ6
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeLeg-properties-action:
+      example: buy
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type:
+      example: stop_limit
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force:
+      example: day
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect:
+      example: debit
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date:
+      example: 2026-12-18T20:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session:
+      example: regular
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleTradeResponse-properties-brokerage_order_id:
+      example: "123456"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price:
@@ -17183,6 +17571,127 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        order_type:
+          enum:
+          - limit
+          - market
+          - stop
+          - stop_limit
+          example: stop_limit
+          type: string
+          x-konfig-original-example: stop_limit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type
+        time_in_force:
+          description: "Order duration, subject to brokerage and execution-path support.\
+            \ gtd requires expiry_date and a non-market single-leg equity/option order.\
+            \ Existing single-leg option routing does not support ioc. Futures and\
+            \ multi-leg orders do not support gtd through this endpoint."
+          enum:
+          - day
+          - gtc
+          - gtd
+          - fok
+          - ioc
+          example: day
+          type: string
+          x-konfig-original-example: day
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force
+        legs:
+          description: "Legs of one brokerage order. Use equity/option legs or future/future_option\
+            \ legs, without mixing the two families. Brokerage strategy and leg-count\
+            \ limits apply."
+          items:
+            $ref: '#/components/schemas/SimpleTradeLeg'
+          minItems: 1
+          type: array
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Required for limit and stop_limit orders, except that multi-leg\
+            \ price_effect even implies zero. Must be omitted or null for market and\
+            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
+            \ prices are accepted only for futures-family orders, subject to brokerage\
+            \ support."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: Required for stop and stop_limit orders. Must be omitted or
+            null for market and limit orders. Must be positive for equity/option orders;
+            futures-family trigger prices are subject to brokerage support.
+        price_effect:
+          description: "Only applicable to multi-leg limit and stop_limit orders.\
+            \ Requirements and supported values depend on the brokerage; tastytrade\
+            \ requires credit or debit. even implies a zero limit_price, which may\
+            \ be omitted and must be zero if supplied. Single-leg price effects are\
+            \ derived from the action."
+          enum:
+          - credit
+          - debit
+          - even
+          example: debit
+          nullable: true
+          type: string
+          x-konfig-original-example: debit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect
+        client_order_id:
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
+          description: "Optional canonical UUID, forwarded where the existing execution\
+            \ path supports it and for tastytrade futures orders. Requires the existing\
+            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
+            \ behavior on duplicates varies; SnapTrade does not enforce uniqueness.\
+            \ Tastytrade uses this as external-identifier for correlation and does\
+            \ not deduplicate submissions."
+        expiry_date:
+          description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
+            \ other durations. A missing timezone is treated as UTC. Supported only\
+            \ through existing single-leg Public and Sandbox execution paths."
+          example: 2026-12-18T20:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-12-18T20:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
+        notional_value:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive order value, supported only for a single-equity market\
+            \ order on eligible brokerages and partners. Mutually exclusive with leg\
+            \ units. Omit or set units to null when supplied."
+        trading_session:
+          default: regular
+          description: extended uses existing single-leg equity/option brokerage support
+            and requires extended-hours enablement. Futures and multi-leg orders only
+            accept regular.
+          enum:
+          - regular
+          - extended
+          example: regular
+          type: string
+          x-konfig-original-example: regular
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session
+      required:
+      - accountId
+      - legs
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-details-v2-brokerageOrderId:
       additionalProperties: true
       properties:

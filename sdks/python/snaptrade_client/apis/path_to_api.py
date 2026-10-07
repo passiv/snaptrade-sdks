@@ -56,6 +56,7 @@ from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageA
 from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
 from snaptrade_client.apis.paths.accounts_account_id_orders_details_v2_brokerage_order_id import AccountsAccountIdOrdersDetailsV2BrokerageOrderId
 
 PathToApi = typing_extensions.TypedDict(
@@ -116,6 +117,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.EXCHANGES: Exchanges,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersDetailsV2BrokerageOrderId,
     }
 )
@@ -177,6 +179,7 @@ path_to_api = PathToApi(
         PathValues.EXCHANGES: Exchanges,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersDetailsV2BrokerageOrderId,
     }
 )

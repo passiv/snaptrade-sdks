@@ -14,9 +14,10 @@ module SnapTrade
   class ReleaseStage
     GENERALLY_AVAILABLE = "GENERALLY_AVAILABLE".freeze
     BETA = "BETA".freeze
+    ALPHA = "ALPHA".freeze
 
     def self.all_vars
-      @all_vars ||= [GENERALLY_AVAILABLE, BETA].freeze
+      @all_vars ||= [GENERALLY_AVAILABLE, BETA, ALPHA].freeze
     end
 
     # Builds the enum from string

@@ -57,7 +57,7 @@ class OptionalInvestmentAccount(TypedDict, total=False):
     raw_type: typing.Optional[str]
 
     # Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
-    account_type: Literal["cash", "margin", "unknown"]
+    cash_or_margin: Literal["cash", "margin", "unknown"]
 
     net_value: typing.Optional[InvestmentAccountNetValue]
 

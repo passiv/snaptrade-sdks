@@ -113,6 +113,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
   * [`snaptrade.experimentalEndpoints.listAllUserAccounts`](#snaptradeexperimentalendpointslistalluseraccounts)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
+  * [`snaptrade.experimentalEndpoints.placeSimpleOrder`](#snaptradeexperimentalendpointsplacesimpleorder)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
@@ -277,6 +278,8 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 ### `snaptrade.accountInformation.getAccountBalanceHistory`<a id="snaptradeaccountinformationgetaccountbalancehistory"></a>
 
 An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
+
+The data may contain gaps and is best used for charting account value trends. It should not be relied on as a complete or exact record of historical account values.
 
 
 
@@ -1703,6 +1706,111 @@ $result = $snaptrade->experimentalEndpoints->listSubscriptions();
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/tradeDetection/subscriptions` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.placeSimpleOrder`<a id="snaptradeexperimentalendpointsplacesimpleorder"></a>
+
+**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
+
+Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.
+
+A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->experimentalEndpoints->placeSimpleOrder(
+    order_type: "stop_limit", 
+    time_in_force: "day", 
+    legs: [
+        [
+            "instrument" => [
+                "kind" => "future",
+                "symbol" => "/ESZ6",
+            ],
+            "action" => "buy",
+            "units" => "1.25",
+        ]
+    ], 
+    account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    user_id: "snaptrade-user-123", 
+    user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
+    limit_price: "1.25", 
+    stop_price: "1.25", 
+    price_effect: "debit", 
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000", 
+    expiry_date: "2026-12-18T20:00:00Z", 
+    notional_value: "1.25", 
+    trading_session: "regular"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: `string`<a id="order_type-string"></a>
+
+##### time_in_force: `string`<a id="time_in_force-string"></a>
+
+Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+
+##### legs: [`SimpleTradeLeg`](./lib/Model/SimpleTradeLeg.php)[]<a id="legs-simpletradeleglibmodelsimpletradelegphp"></a>
+
+Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+The ID of the account to execute the trade on.
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+##### limit_price: [`float`](./lib/Model/float.php)<a id="limit_price-floatlibmodelfloatphp"></a>
+
+Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+
+##### stop_price: [`float`](./lib/Model/float.php)<a id="stop_price-floatlibmodelfloatphp"></a>
+
+Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+
+##### price_effect: `string`<a id="price_effect-string"></a>
+
+Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+
+##### client_order_id: [`string`](./lib/Model/string.php)<a id="client_order_id-stringlibmodelstringphp"></a>
+
+Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+
+##### expiry_date: `\DateTime`<a id="expiry_date-datetime"></a>
+
+ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+
+##### notional_value: [`float`](./lib/Model/float.php)<a id="notional_value-floatlibmodelfloatphp"></a>
+
+Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+
+##### trading_session: `string`<a id="trading_session-string"></a>
+
+extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**SimpleTradeResponse**](./lib/Model/SimpleTradeResponse.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

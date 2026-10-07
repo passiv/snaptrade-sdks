@@ -239,6 +239,35 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;TradeDetectionSubscription&gt;</returns>
         ApiResponse<List<TradeDetectionSubscription>> ListSubscriptionsWithHttpInfo(int operationIndex = 0);
+        /// <summary>
+        /// Place a simple order (beta)
+        /// </summary>
+        /// <remarks>
+        /// **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SimpleTradeResponse</returns>
+        SimpleTradeResponse PlaceSimpleOrder(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0);
+
+        /// <summary>
+        /// Place a simple order (beta)
+        /// </summary>
+        /// <remarks>
+        /// **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SimpleTradeResponse</returns>
+        ApiResponse<SimpleTradeResponse> PlaceSimpleOrderWithHttpInfo(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -476,6 +505,37 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;TradeDetectionSubscription&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<TradeDetectionSubscription>>> ListSubscriptionsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Place a simple order (beta)
+        /// </summary>
+        /// <remarks>
+        /// **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SimpleTradeResponse</returns>
+        System.Threading.Tasks.Task<SimpleTradeResponse> PlaceSimpleOrderAsync(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Place a simple order (beta)
+        /// </summary>
+        /// <remarks>
+        /// **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SimpleTradeResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SimpleTradeResponse>> PlaceSimpleOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -2217,6 +2277,236 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListSubscriptions", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Place a simple order (beta) **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>SimpleTradeResponse</returns>
+        public SimpleTradeResponse PlaceSimpleOrder(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<SimpleTradeResponse> localVarResponse = PlaceSimpleOrderWithHttpInfo(accountId, userId, userSecret, simpleTradeForm);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Place a simple order (beta) **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of SimpleTradeResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<SimpleTradeResponse> PlaceSimpleOrderWithHttpInfo(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0)
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            // verify the required parameter 'simpleTradeForm' is set
+            if (simpleTradeForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleTradeForm' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = simpleTradeForm;
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.PlaceSimpleOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<SimpleTradeResponse>("/accounts/{accountId}/trading/simple", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("PlaceSimpleOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Place a simple order (beta) **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of SimpleTradeResponse</returns>
+        public async System.Threading.Tasks.Task<SimpleTradeResponse> PlaceSimpleOrderAsync(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<SimpleTradeResponse> localVarResponse = await PlaceSimpleOrderWithHttpInfoAsync(accountId, userId, userSecret, simpleTradeForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Place a simple order (beta) **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="simpleTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (SimpleTradeResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SimpleTradeResponse>> PlaceSimpleOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, SimpleTradeForm simpleTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+            // verify the required parameter 'simpleTradeForm' is set
+            if (simpleTradeForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleTradeForm' when calling ExperimentalEndpointsApi->PlaceSimpleOrder");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = simpleTradeForm;
+
+            localVarRequestOptions.Operation = "ExperimentalEndpointsApi.PlaceSimpleOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<SimpleTradeResponse>("/accounts/{accountId}/trading/simple", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("PlaceSimpleOrder", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

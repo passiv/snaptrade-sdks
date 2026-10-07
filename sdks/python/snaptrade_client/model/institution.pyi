@@ -135,6 +135,10 @@ class Institution(
                 @schemas.classproperty
                 def BETA(cls):
                     return cls("BETA")
+                
+                @schemas.classproperty
+                def ALPHA(cls):
+                    return cls("ALPHA")
         
             @staticmethod
             def regions() -> typing.Type['InstitutionRegions']:

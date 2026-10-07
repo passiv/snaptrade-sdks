@@ -21,7 +21,7 @@ class RequiredAccountValueHistoryResponse(TypedDict):
     pass
 
 class OptionalAccountValueHistoryResponse(TypedDict, total=False):
-    # List of estimated account values over time returned by the endpoint.
+    # List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.
     history: typing.List[AccountValueHistoryItem]
 
     # The ISO-4217 currency code for the account values.

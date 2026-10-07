@@ -38,7 +38,7 @@ class OptionalAccountPosition(TypedDict, total=False):
     # Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
     cash_equivalent: bool
 
-    # List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
+    # List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions. For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for all other instrument kinds or when the feature is disabled.
     tax_lots: typing.List[TaxLot]
 
 class AccountPosition(RequiredAccountPosition, OptionalAccountPosition):

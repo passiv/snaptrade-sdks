@@ -82,13 +82,15 @@ public class Institution {
   private String squareLogoUrl;
 
   /**
-   * How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. 
+   * How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality. 
    */
   @JsonAdapter(ReleaseStageEnum.Adapter.class)
  public enum ReleaseStageEnum {
     GENERALLY_AVAILABLE("GENERALLY_AVAILABLE"),
     
-    BETA("BETA");
+    BETA("BETA"),
+    
+    ALPHA("ALPHA");
 
     private String value;
 
@@ -409,11 +411,11 @@ public class Institution {
   }
 
    /**
-   * How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. 
+   * How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality. 
    * @return releaseStage
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "GENERALLY_AVAILABLE", required = true, value = "How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. ")
+  @ApiModelProperty(example = "GENERALLY_AVAILABLE", required = true, value = "How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. ")
 
   public ReleaseStageEnum getReleaseStage() {
     return releaseStage;

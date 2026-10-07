@@ -12,6 +12,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
 | [**ListAllUserAccounts**](ExperimentalEndpointsApi.md#listalluseraccounts) | **GET** /accounts/all | List all user accounts |
 | [**ListSubscriptions**](ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions |
+| [**PlaceSimpleOrder**](ExperimentalEndpointsApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place a simple order (beta) |
 
 
 # **AddSubscription**
@@ -40,8 +41,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var checkIntervalSeconds = 300; // How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
             
@@ -245,8 +246,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             
             try
@@ -342,10 +343,10 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var accountId = "accountId_example";
-            var brokerageOrderId = "brokerageOrderId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -442,9 +443,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var state = "all"; // defaults to \"all\" (optional) 
             var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional) 
             
@@ -543,9 +544,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional) 
             
             try
@@ -643,8 +644,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -796,6 +797,128 @@ This endpoint does not need any parameter.
 | **403** | Feature not enabled |  -  |
 | **404** | Not Found |  -  |
 | **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **PlaceSimpleOrder**
+
+
+
+**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class PlaceSimpleOrderExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to execute the trade on.
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var orderType = SimpleTradeForm.OrderTypeEnum.StopLimit;
+            var timeInForce = SimpleTradeForm.TimeInForceEnum.Day; // Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+            var legs = new List<SimpleTradeLeg>(); // Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+            var limitPrice = 1.25M; // Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+            var stopPrice = 1.25M; // Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+            var priceEffect = SimpleTradeForm.PriceEffectEnum.Debit; // Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+            var expiryDate = DateTime.Now; // ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+            var notionalValue = 1.25M; // Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+            var tradingSession = SimpleTradeForm.TradingSessionEnum.Regular; // extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+            
+            var simpleTradeForm = new SimpleTradeForm(
+                orderType,
+                timeInForce,
+                legs,
+                limitPrice,
+                stopPrice,
+                priceEffect,
+                clientOrderId,
+                expiryDate,
+                notionalValue,
+                tradingSession
+            );
+            
+            try
+            {
+                // Place a simple order (beta)
+                SimpleTradeResponse result = client.ExperimentalEndpoints.PlaceSimpleOrder(accountId, userId, userSecret, simpleTradeForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.PlaceSimpleOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the PlaceSimpleOrderWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Place a simple order (beta)
+    ApiResponse<SimpleTradeResponse> response = apiInstance.PlaceSimpleOrderWithHttpInfo(accountId, userId, userSecret, simpleTradeForm);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ExperimentalEndpointsApi.PlaceSimpleOrderWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **accountId** | **string** | The ID of the account to execute the trade on. |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **simpleTradeForm** | [**SimpleTradeForm**](SimpleTradeForm.md) |  |  |
+
+### Return type
+
+[**SimpleTradeResponse**](SimpleTradeResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order placed |  -  |
+| **400** | Invalid request, unsupported trading feature, or brokerage rejection |  -  |
+| **403** | User does not have permissions to place trades |  -  |
+| **404** | Account not found |  -  |
+| **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -461,9 +461,9 @@ func main() {
     symbolQuery.SetSubstring("AAPL")
     
     request := client.ReferenceDataApi.SymbolSearchUserAccount(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     request.SymbolQuery(symbolQuery)
     

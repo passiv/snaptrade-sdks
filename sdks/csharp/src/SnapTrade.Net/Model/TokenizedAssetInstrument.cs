@@ -69,7 +69,7 @@ namespace SnapTrade.Net.Model
         /// <param name="id">Unique identifier for the canonical tokenized asset wrapper. (required).</param>
         /// <param name="symbol">Display symbol of the underlying stock or ETF, not a token-specific ticker. (required).</param>
         /// <param name="description">Display name of the underlying stock or ETF, when available..</param>
-        /// <param name="underlyingInstrument">underlyingInstrument (required).</param>
+        /// <param name="underlyingInstrument">The listed stock or ETF underlying a tokenized asset. (required).</param>
         public TokenizedAssetInstrument(KindEnum kind = default(KindEnum), string id = default(string), string symbol = default(string), string description = default(string), UnderlyingTokenizedAssetInstrument underlyingInstrument = default(UnderlyingTokenizedAssetInstrument)) : base()
         {
             this.Kind = kind;
@@ -117,8 +117,9 @@ namespace SnapTrade.Net.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets UnderlyingInstrument
+        /// The listed stock or ETF underlying a tokenized asset.
         /// </summary>
+        /// <value>The listed stock or ETF underlying a tokenized asset.</value>
         [DataMember(Name = "underlying_instrument", IsRequired = true, EmitDefaultValue = true)]
         public UnderlyingTokenizedAssetInstrument UnderlyingInstrument { get; set; }
 

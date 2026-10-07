@@ -34,9 +34,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         )
         
         request := client.TradingApi.CancelOrder(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             accountInformationGetUserAccountOrderDetailRequest,
         )
         
@@ -51,10 +51,10 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
     t.Run("Test TradingApiService GetCryptocurrencyPairQuote", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.TradingApi.GetCryptocurrencyPairQuote(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "instrumentSymbol_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""BTC-USD"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -78,9 +78,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         mlegTradeForm.SetPriceEffect(DEBIT)
         
         request := client.TradingApi.GetOptionImpact(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             mlegTradeForm,
         )
         
@@ -109,8 +109,8 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeForm.SetNotionalValue(notionalValue)
         
         request := client.TradingApi.GetOrderImpact(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
             manualTradeForm,
         )
         
@@ -125,9 +125,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
     t.Run("Test TradingApiService GetUserAccountOptionQuotes", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.TradingApi.GetUserAccountOptionQuotes(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             ""AAPL  251219C00150000"",
         )
         
@@ -142,10 +142,10 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
     t.Run("Test TradingApiService GetUserAccountQuotes", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.TradingApi.GetUserAccountQuotes(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
             "symbols_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
         request.UseTicker(true)
         
@@ -167,9 +167,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeFormComplex.SetClientOrderId("550e8400-e29b-41d4-a716-446655440000")
         
         request := client.TradingApi.PlaceComplexOrder(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
             manualTradeFormComplex,
         )
         
@@ -198,9 +198,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         cryptoOrderForm.SetExpirationDate(2024-01-01T00:00Z)
         
         request := client.TradingApi.PlaceCryptoOrder(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             cryptoOrderForm,
         )
         
@@ -233,8 +233,8 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeFormWithOptions.SetClientOrderId("550e8400-e29b-41d4-a716-446655440000")
         
         request := client.TradingApi.PlaceForceOrder(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
             manualTradeFormWithOptions,
         )
         
@@ -259,9 +259,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         mlegTradeForm.SetPriceEffect(DEBIT)
         
         request := client.TradingApi.PlaceMlegOrder(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             mlegTradeForm,
         )
         
@@ -280,9 +280,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         validatedTradeBody.SetWaitToConfirm(true)
         
         request := client.TradingApi.PlaceOrder(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "139e307a-82f7-4402-b39e-4da7baa87758",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         request.ValidatedTradeBody(validatedTradeBody)
         
@@ -311,9 +311,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         cryptoOrderForm.SetExpirationDate(2024-01-01T00:00Z)
         
         request := client.TradingApi.PreviewCryptoOrder(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             cryptoOrderForm,
         )
         
@@ -340,9 +340,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeReplaceForm.SetUnits(10.5)
         
         request := client.TradingApi.ReplaceOrder(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
             manualTradeReplaceForm,
         )
         
@@ -357,12 +357,12 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
     t.Run("Test TradingApiService SearchCryptocurrencyPairInstruments", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.TradingApi.SearchCryptocurrencyPairInstruments(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         )
-        request.Base("base_example")
-        request.Quote("quote_example")
+        request.Base(""BTC"")
+        request.Quote(""USD"")
         
         resp, httpRes, err := request.Execute()
 
