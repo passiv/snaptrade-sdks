@@ -6855,15 +6855,11 @@ components:
           type: string
           example: "0.50"
     SimpleTradeDecimal:
-      description: A finite decimal, supplied as a decimal string or JSON number. Decimal strings are recommended to preserve precision.
-      anyOf:
-        - type: string
-          format: decimal
-          nullable: true
-          example: "1.25"
-        - type: number
-          nullable: true
-          example: 1.25
+      description: A finite decimal, supplied as a decimal string to preserve precision.
+      type: string
+      format: decimal
+      nullable: true
+      example: "1.25"
     SimpleTradeInstrument:
       type: object
       additionalProperties: false
