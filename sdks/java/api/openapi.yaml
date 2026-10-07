@@ -10778,7 +10778,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_fee_total
       type: object
       x-konfig-is-used-in-successful-response: true
-    SimpleTradeDecimal: {}
+    SimpleTradeDecimal:
+      description: "A finite decimal, supplied as a decimal string to preserve precision."
+      example: "1.25"
+      format: decimal
+      nullable: true
+      type: string
+      x-konfig-original-example: "1.25"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeDecimal
     SimpleTradeInstrument:
       additionalProperties: true
       example:
@@ -15517,13 +15524,9 @@ components:
       example: "0.50"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SimpleTradeDecimal-anyOf-0:
+    konfig-generated-schema-components-schemas-SimpleTradeDecimal:
       example: "1.25"
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SimpleTradeDecimal-anyOf-1:
-      example: 1.25
-      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-kind:
       example: future

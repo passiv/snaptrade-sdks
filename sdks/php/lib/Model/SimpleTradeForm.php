@@ -53,12 +53,12 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => 'string',
         'time_in_force' => 'string',
         'legs' => '\SnapTrade\Model\SimpleTradeLeg[]',
-        'limit_price' => '\SnapTrade\Model\SimpleTradeFormLimitPrice',
-        'stop_price' => '\SnapTrade\Model\SimpleTradeFormStopPrice',
+        'limit_price' => 'float',
+        'stop_price' => 'float',
         'price_effect' => 'string',
         'client_order_id' => 'string',
         'expiry_date' => '\DateTime',
-        'notional_value' => '\SnapTrade\Model\SimpleTradeFormNotionalValue',
+        'notional_value' => 'float',
         'trading_session' => 'string'
     ];
 
@@ -581,7 +581,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets limit_price
      *
-     * @return \SnapTrade\Model\SimpleTradeFormLimitPrice|null
+     * @return float|null
      */
     public function getLimitPrice()
     {
@@ -591,7 +591,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets limit_price
      *
-     * @param \SnapTrade\Model\SimpleTradeFormLimitPrice|null $limit_price limit_price
+     * @param float|null $limit_price Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
      *
      * @return self
      */
@@ -610,7 +610,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets stop_price
      *
-     * @return \SnapTrade\Model\SimpleTradeFormStopPrice|null
+     * @return float|null
      */
     public function getStopPrice()
     {
@@ -620,7 +620,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets stop_price
      *
-     * @param \SnapTrade\Model\SimpleTradeFormStopPrice|null $stop_price stop_price
+     * @param float|null $stop_price Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
      *
      * @return self
      */
@@ -750,7 +750,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets notional_value
      *
-     * @return \SnapTrade\Model\SimpleTradeFormNotionalValue|null
+     * @return float|null
      */
     public function getNotionalValue()
     {
@@ -760,7 +760,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets notional_value
      *
-     * @param \SnapTrade\Model\SimpleTradeFormNotionalValue|null $notional_value notional_value
+     * @param float|null $notional_value Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
      *
      * @return self
      */

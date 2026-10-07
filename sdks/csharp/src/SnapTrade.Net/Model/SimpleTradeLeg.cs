@@ -97,8 +97,8 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="instrument">instrument (required).</param>
         /// <param name="action">Equities and futures require buy or sell. Equity options and future options require buy_to_open, buy_to_close, sell_to_open, or sell_to_close. (required).</param>
-        /// <param name="units">units.</param>
-        public SimpleTradeLeg(SimpleTradeInstrument instrument = default(SimpleTradeInstrument), ActionEnum action = default(ActionEnum), SimpleTradeLegUnits units = default(SimpleTradeLegUnits)) : base()
+        /// <param name="units">Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios..</param>
+        public SimpleTradeLeg(SimpleTradeInstrument instrument = default(SimpleTradeInstrument), ActionEnum action = default(ActionEnum), decimal units = default(decimal)) : base()
         {
             // to ensure "instrument" is required (not null)
             if (instrument == null)
@@ -118,10 +118,11 @@ namespace SnapTrade.Net.Model
         public SimpleTradeInstrument Instrument { get; set; }
 
         /// <summary>
-        /// Gets or Sets Units
+        /// Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.
         /// </summary>
+        /// <value>Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
-        public SimpleTradeLegUnits Units { get; set; }
+        public decimal Units { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -188,8 +189,7 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
-                    (this.Units != null &&
-                    this.Units.Equals(input.Units))
+                    this.Units.Equals(input.Units)
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -208,10 +208,7 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Instrument.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
-                if (this.Units != null)
-                {
-                    hashCode = (hashCode * 59) + this.Units.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.Units.GetHashCode();
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

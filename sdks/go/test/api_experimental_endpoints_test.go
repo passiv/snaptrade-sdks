@@ -165,10 +165,10 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
 
     t.Run("Test ExperimentalEndpointsApiService PlaceSimpleOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        limitPrice := *snaptrade.NewSimpleTradeFormLimitPrice()
-        stopPrice := *snaptrade.NewSimpleTradeFormStopPrice()
+        limitPrice := *snaptrade.Newfloat64()
+        stopPrice := *snaptrade.Newfloat64()
         clientOrderId := *snaptrade.Newstring()
-        notionalValue := *snaptrade.NewSimpleTradeFormNotionalValue()
+        notionalValue := *snaptrade.Newfloat64()
         
         simpleTradeForm := *snaptrade.NewSimpleTradeForm(
             "STOP_LIMIT",

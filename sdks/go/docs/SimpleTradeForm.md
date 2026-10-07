@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **OrderType** | **string** |  | 
 **TimeInForce** | **string** | Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. | 
 **Legs** | [**[]SimpleTradeLeg**](SimpleTradeLeg.md) | Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply. | 
-**LimitPrice** | Pointer to [**SimpleTradeFormLimitPrice**](SimpleTradeFormLimitPrice.md) |  | [optional] 
-**StopPrice** | Pointer to [**SimpleTradeFormStopPrice**](SimpleTradeFormStopPrice.md) |  | [optional] 
+**LimitPrice** | Pointer to **float64** | Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support. | [optional] 
+**StopPrice** | Pointer to **float64** | Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support. | [optional] 
 **PriceEffect** | Pointer to **NullableString** | Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action. | [optional] 
 **ClientOrderId** | Pointer to **string** | Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. | [optional] 
 **ExpiryDate** | Pointer to **NullableTime** | ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths. | [optional] 
-**NotionalValue** | Pointer to [**SimpleTradeFormNotionalValue**](SimpleTradeFormNotionalValue.md) |  | [optional] 
+**NotionalValue** | Pointer to **float64** | Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied. | [optional] 
 **TradingSession** | Pointer to **string** | extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular. | [optional] [default to "regular"]
 
 ## Methods
@@ -96,20 +96,20 @@ SetLegs sets Legs field to given value.
 
 ### GetLimitPrice
 
-`func (o *SimpleTradeForm) GetLimitPrice() SimpleTradeFormLimitPrice`
+`func (o *SimpleTradeForm) GetLimitPrice() float64`
 
 GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
 
 ### GetLimitPriceOk
 
-`func (o *SimpleTradeForm) GetLimitPriceOk() (*SimpleTradeFormLimitPrice, bool)`
+`func (o *SimpleTradeForm) GetLimitPriceOk() (*float64, bool)`
 
 GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitPrice
 
-`func (o *SimpleTradeForm) SetLimitPrice(v SimpleTradeFormLimitPrice)`
+`func (o *SimpleTradeForm) SetLimitPrice(v float64)`
 
 SetLimitPrice sets LimitPrice field to given value.
 
@@ -121,20 +121,20 @@ HasLimitPrice returns a boolean if a field has been set.
 
 ### GetStopPrice
 
-`func (o *SimpleTradeForm) GetStopPrice() SimpleTradeFormStopPrice`
+`func (o *SimpleTradeForm) GetStopPrice() float64`
 
 GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
 
 ### GetStopPriceOk
 
-`func (o *SimpleTradeForm) GetStopPriceOk() (*SimpleTradeFormStopPrice, bool)`
+`func (o *SimpleTradeForm) GetStopPriceOk() (*float64, bool)`
 
 GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopPrice
 
-`func (o *SimpleTradeForm) SetStopPrice(v SimpleTradeFormStopPrice)`
+`func (o *SimpleTradeForm) SetStopPrice(v float64)`
 
 SetStopPrice sets StopPrice field to given value.
 
@@ -241,20 +241,20 @@ HasExpiryDate returns a boolean if a field has been set.
 UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
 ### GetNotionalValue
 
-`func (o *SimpleTradeForm) GetNotionalValue() SimpleTradeFormNotionalValue`
+`func (o *SimpleTradeForm) GetNotionalValue() float64`
 
 GetNotionalValue returns the NotionalValue field if non-nil, zero value otherwise.
 
 ### GetNotionalValueOk
 
-`func (o *SimpleTradeForm) GetNotionalValueOk() (*SimpleTradeFormNotionalValue, bool)`
+`func (o *SimpleTradeForm) GetNotionalValueOk() (*float64, bool)`
 
 GetNotionalValueOk returns a tuple with the NotionalValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotionalValue
 
-`func (o *SimpleTradeForm) SetNotionalValue(v SimpleTradeFormNotionalValue)`
+`func (o *SimpleTradeForm) SetNotionalValue(v float64)`
 
 SetNotionalValue sets NotionalValue field to given value.
 

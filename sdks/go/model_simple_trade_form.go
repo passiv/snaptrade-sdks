@@ -23,15 +23,18 @@ type SimpleTradeForm struct {
 	TimeInForce string `json:"time_in_force"`
 	// Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
 	Legs []SimpleTradeLeg `json:"legs"`
-	LimitPrice *SimpleTradeFormLimitPrice `json:"limit_price,omitempty"`
-	StopPrice *SimpleTradeFormStopPrice `json:"stop_price,omitempty"`
+	// Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+	LimitPrice *float64 `json:"limit_price,omitempty"`
+	// Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+	StopPrice *float64 `json:"stop_price,omitempty"`
 	// Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
 	PriceEffect NullableString `json:"price_effect,omitempty"`
 	// Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
 	ClientOrderId *string `json:"client_order_id,omitempty"`
 	// ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
 	ExpiryDate NullableTime `json:"expiry_date,omitempty"`
-	NotionalValue *SimpleTradeFormNotionalValue `json:"notional_value,omitempty"`
+	// Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+	NotionalValue *float64 `json:"notional_value,omitempty"`
 	// extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
 	TradingSession *string `json:"trading_session,omitempty"`
 }
@@ -133,9 +136,9 @@ func (o *SimpleTradeForm) SetLegs(v []SimpleTradeLeg) {
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise.
-func (o *SimpleTradeForm) GetLimitPrice() SimpleTradeFormLimitPrice {
+func (o *SimpleTradeForm) GetLimitPrice() float64 {
 	if o == nil || isNil(o.LimitPrice) {
-		var ret SimpleTradeFormLimitPrice
+		var ret float64
 		return ret
 	}
 	return *o.LimitPrice
@@ -143,7 +146,7 @@ func (o *SimpleTradeForm) GetLimitPrice() SimpleTradeFormLimitPrice {
 
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleTradeForm) GetLimitPriceOk() (*SimpleTradeFormLimitPrice, bool) {
+func (o *SimpleTradeForm) GetLimitPriceOk() (*float64, bool) {
 	if o == nil || isNil(o.LimitPrice) {
     return nil, false
 	}
@@ -159,15 +162,15 @@ func (o *SimpleTradeForm) HasLimitPrice() bool {
 	return false
 }
 
-// SetLimitPrice gets a reference to the given SimpleTradeFormLimitPrice and assigns it to the LimitPrice field.
-func (o *SimpleTradeForm) SetLimitPrice(v SimpleTradeFormLimitPrice) {
+// SetLimitPrice gets a reference to the given float64 and assigns it to the LimitPrice field.
+func (o *SimpleTradeForm) SetLimitPrice(v float64) {
 	o.LimitPrice = &v
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise.
-func (o *SimpleTradeForm) GetStopPrice() SimpleTradeFormStopPrice {
+func (o *SimpleTradeForm) GetStopPrice() float64 {
 	if o == nil || isNil(o.StopPrice) {
-		var ret SimpleTradeFormStopPrice
+		var ret float64
 		return ret
 	}
 	return *o.StopPrice
@@ -175,7 +178,7 @@ func (o *SimpleTradeForm) GetStopPrice() SimpleTradeFormStopPrice {
 
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleTradeForm) GetStopPriceOk() (*SimpleTradeFormStopPrice, bool) {
+func (o *SimpleTradeForm) GetStopPriceOk() (*float64, bool) {
 	if o == nil || isNil(o.StopPrice) {
     return nil, false
 	}
@@ -191,8 +194,8 @@ func (o *SimpleTradeForm) HasStopPrice() bool {
 	return false
 }
 
-// SetStopPrice gets a reference to the given SimpleTradeFormStopPrice and assigns it to the StopPrice field.
-func (o *SimpleTradeForm) SetStopPrice(v SimpleTradeFormStopPrice) {
+// SetStopPrice gets a reference to the given float64 and assigns it to the StopPrice field.
+func (o *SimpleTradeForm) SetStopPrice(v float64) {
 	o.StopPrice = &v
 }
 
@@ -313,9 +316,9 @@ func (o *SimpleTradeForm) UnsetExpiryDate() {
 }
 
 // GetNotionalValue returns the NotionalValue field value if set, zero value otherwise.
-func (o *SimpleTradeForm) GetNotionalValue() SimpleTradeFormNotionalValue {
+func (o *SimpleTradeForm) GetNotionalValue() float64 {
 	if o == nil || isNil(o.NotionalValue) {
-		var ret SimpleTradeFormNotionalValue
+		var ret float64
 		return ret
 	}
 	return *o.NotionalValue
@@ -323,7 +326,7 @@ func (o *SimpleTradeForm) GetNotionalValue() SimpleTradeFormNotionalValue {
 
 // GetNotionalValueOk returns a tuple with the NotionalValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleTradeForm) GetNotionalValueOk() (*SimpleTradeFormNotionalValue, bool) {
+func (o *SimpleTradeForm) GetNotionalValueOk() (*float64, bool) {
 	if o == nil || isNil(o.NotionalValue) {
     return nil, false
 	}
@@ -339,8 +342,8 @@ func (o *SimpleTradeForm) HasNotionalValue() bool {
 	return false
 }
 
-// SetNotionalValue gets a reference to the given SimpleTradeFormNotionalValue and assigns it to the NotionalValue field.
-func (o *SimpleTradeForm) SetNotionalValue(v SimpleTradeFormNotionalValue) {
+// SetNotionalValue gets a reference to the given float64 and assigns it to the NotionalValue field.
+func (o *SimpleTradeForm) SetNotionalValue(v float64) {
 	o.NotionalValue = &v
 }
 

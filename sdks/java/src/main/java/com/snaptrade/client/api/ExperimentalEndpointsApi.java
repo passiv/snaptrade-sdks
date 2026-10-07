@@ -4,6 +4,7 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllUserAccountsResponse;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import com.snaptrade.client.model.SimpleTradeForm;
 import com.snaptrade.client.model.SimpleTradeLeg;

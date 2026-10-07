@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountPosition" /> class.
         /// </summary>
-        /// <param name="instrument">instrument (required).</param>
+        /// <param name="instrument">Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present. (required).</param>
         /// <param name="units">The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions..</param>
         /// <param name="price">Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
         /// <param name="costBasis">Book price or average purchase price for the position. For options, this is per-share..</param>
@@ -68,8 +68,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Instrument
+        /// Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.
         /// </summary>
+        /// <value>Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.</value>
         [DataMember(Name = "instrument", IsRequired = true, EmitDefaultValue = true)]
         public Instrument Instrument { get; set; }
 

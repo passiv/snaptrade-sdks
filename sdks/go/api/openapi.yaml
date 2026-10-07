@@ -10617,20 +10617,13 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_fee_total
       type: object
     SimpleTradeDecimal:
-      anyOf:
-      - example: "1.25"
-        format: decimal
-        nullable: true
-        type: string
-        x-konfig-original-example: "1.25"
-        x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeDecimal-anyOf-0
-      - example: 1.25
-        nullable: true
-        type: number
-        x-konfig-original-example: 1.25
-        x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeDecimal-anyOf-1
-      description: "A finite decimal, supplied as a decimal string or JSON number.\
-        \ Decimal strings are recommended to preserve precision."
+      description: "A finite decimal, supplied as a decimal string to preserve precision."
+      example: "1.25"
+      format: decimal
+      nullable: true
+      type: string
+      x-konfig-original-example: "1.25"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeDecimal
     SimpleTradeInstrument:
       additionalProperties: true
       example:
@@ -10668,7 +10661,7 @@ components:
         instrument:
           symbol: /ESZ6
           kind: future
-        units: null
+        units: ""
       properties:
         instrument:
           $ref: '#/components/schemas/SimpleTradeInstrument'
@@ -10687,7 +10680,13 @@ components:
           x-konfig-original-example: buy
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeLeg-properties-action
         units:
-          $ref: '#/components/schemas/SimpleTradeLeg_units'
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive shares or contracts for this leg. Required unless\
+            \ the order is a single-equity market order using notional_value, in which\
+            \ case omit or set to null. Fractional units are supported only for single-equity\
+            \ orders on eligible brokerages; all other legs require whole units. Quantities\
+            \ are absolute units per leg, not strategy ratios."
       required:
       - action
       - instrument
@@ -10697,24 +10696,24 @@ components:
       example:
         time_in_force: day
         client_order_id: ""
-        stop_price: null
+        stop_price: ""
         price_effect: debit
-        notional_value: null
+        notional_value: ""
         trading_session: regular
         legs:
         - action: buy
           instrument:
             symbol: /ESZ6
             kind: future
-          units: null
+          units: ""
         - action: buy
           instrument:
             symbol: /ESZ6
             kind: future
-          units: null
+          units: ""
         expiry_date: 2026-12-18T20:00:00Z
         order_type: stop_limit
-        limit_price: null
+        limit_price: ""
       properties:
         order_type:
           enum:
@@ -10750,9 +10749,19 @@ components:
           minItems: 1
           type: array
         limit_price:
-          $ref: '#/components/schemas/SimpleTradeForm_limit_price'
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Required for limit and stop_limit orders, except that multi-leg\
+            \ price_effect even implies zero. Must be omitted or null for market and\
+            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
+            \ prices are accepted only for futures-family orders, subject to brokerage\
+            \ support."
         stop_price:
-          $ref: '#/components/schemas/SimpleTradeForm_stop_price'
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: Required for stop and stop_limit orders. Must be omitted or
+            null for market and limit orders. Must be positive for equity/option orders;
+            futures-family trigger prices are subject to brokerage support.
         price_effect:
           description: "Only applicable to multi-leg limit and stop_limit orders.\
             \ Requirements and supported values depend on the brokerage; tastytrade\
@@ -10788,7 +10797,11 @@ components:
           x-konfig-original-example: 2026-12-18T20:00:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
         notional_value:
-          $ref: '#/components/schemas/SimpleTradeForm_notional_value'
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive order value, supported only for a single-equity market\
+            \ order on eligible brokerages and partners. Mutually exclusive with leg\
+            \ units. Omit or set units to null when supplied."
         trading_session:
           default: regular
           description: extended uses existing single-leg equity/option brokerage support
@@ -15350,13 +15363,9 @@ components:
       example: "0.50"
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SimpleTradeDecimal-anyOf-0:
+    konfig-generated-schema-components-schemas-SimpleTradeDecimal:
       example: "1.25"
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SimpleTradeDecimal-anyOf-1:
-      example: 1.25
-      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-kind:
       example: future
@@ -19153,33 +19162,6 @@ components:
           type: number
           x-konfig-original-example: 344
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
-    SimpleTradeLeg_units:
-      allOf:
-      - $ref: '#/components/schemas/SimpleTradeDecimal'
-      description: "Positive shares or contracts for this leg. Required unless the\
-        \ order is a single-equity market order using notional_value, in which case\
-        \ omit or set to null. Fractional units are supported only for single-equity\
-        \ orders on eligible brokerages; all other legs require whole units. Quantities\
-        \ are absolute units per leg, not strategy ratios."
-    SimpleTradeForm_limit_price:
-      allOf:
-      - $ref: '#/components/schemas/SimpleTradeDecimal'
-      description: "Required for limit and stop_limit orders, except that multi-leg\
-        \ price_effect even implies zero. Must be omitted or null for market and stop\
-        \ orders. For multi-leg orders this is the net strategy price. Negative prices\
-        \ are accepted only for futures-family orders, subject to brokerage support."
-    SimpleTradeForm_stop_price:
-      allOf:
-      - $ref: '#/components/schemas/SimpleTradeDecimal'
-      description: Required for stop and stop_limit orders. Must be omitted or null
-        for market and limit orders. Must be positive for equity/option orders; futures-family
-        trigger prices are subject to brokerage support.
-    SimpleTradeForm_notional_value:
-      allOf:
-      - $ref: '#/components/schemas/SimpleTradeDecimal'
-      description: "Positive order value, supported only for a single-equity market\
-        \ order on eligible brokerages and partners. Mutually exclusive with leg units.\
-        \ Omit or set units to null when supplied."
     CryptoOrderPreview_estimated_fee:
       additionalProperties: true
       description: The estimated order fee.

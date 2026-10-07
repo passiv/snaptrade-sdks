@@ -19,6 +19,7 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllUserAccountsResponse;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import com.snaptrade.client.model.SimpleTradeForm;
 import com.snaptrade.client.model.SimpleTradeLeg;
@@ -205,12 +206,12 @@ public class ExperimentalEndpointsApiTest {
         UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        Object limitPrice = null;
-        Object stopPrice = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
         String priceEffect = null;
         UUID clientOrderId = null;
         OffsetDateTime expiryDate = null;
-        Object notionalValue = null;
+        BigDecimal notionalValue = null;
         String tradingSession = null;
         SimpleTradeResponse response = api.placeSimpleOrder(orderType, timeInForce, legs, accountId, userId, userSecret)
                 .limitPrice(limitPrice)

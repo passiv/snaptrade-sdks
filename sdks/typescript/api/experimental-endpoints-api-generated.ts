@@ -102,12 +102,6 @@ import { Model503BrokerageRequestResponse } from '../models';
 // @ts-ignore
 import { SimpleTradeForm } from '../models';
 // @ts-ignore
-import { SimpleTradeFormLimitPrice } from '../models';
-// @ts-ignore
-import { SimpleTradeFormNotionalValue } from '../models';
-// @ts-ignore
-import { SimpleTradeFormStopPrice } from '../models';
-// @ts-ignore
 import { SimpleTradeLeg } from '../models';
 // @ts-ignore
 import { SimpleTradeResponse } from '../models';

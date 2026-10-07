@@ -52,7 +52,7 @@ class SimpleTradeLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'instrument' => '\SnapTrade\Model\SimpleTradeInstrument',
         'action' => 'string',
-        'units' => '\SnapTrade\Model\SimpleTradeLegUnits'
+        'units' => 'float'
     ];
 
     /**
@@ -405,7 +405,7 @@ class SimpleTradeLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets units
      *
-     * @return \SnapTrade\Model\SimpleTradeLegUnits|null
+     * @return float|null
      */
     public function getUnits()
     {
@@ -415,7 +415,7 @@ class SimpleTradeLeg implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param \SnapTrade\Model\SimpleTradeLegUnits|null $units units
+     * @param float|null $units Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.
      *
      * @return self
      */

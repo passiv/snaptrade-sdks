@@ -42,6 +42,7 @@ from snaptrade_client.model.simple_trade_form import SimpleTradeForm as SimpleTr
 from snaptrade_client.model.simple_trade_leg import SimpleTradeLeg as SimpleTradeLegSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
+from snaptrade_client.model.client_order_id import ClientOrderID as ClientOrderIDSchema
 from snaptrade_client.model.simple_trade_decimal import SimpleTradeDecimal as SimpleTradeDecimalSchema
 
 from snaptrade_client.type.simple_trade_response import SimpleTradeResponse
@@ -51,6 +52,7 @@ from snaptrade_client.type.simple_trade_form import SimpleTradeForm
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
+from snaptrade_client.type.client_order_id import ClientOrderID
 
 from . import path
 

@@ -5,7 +5,7 @@ Describes a single position.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Instrument** | [**Instrument**](Instrument.md) |  | 
+**Instrument** | [**Instrument**](Instrument.md) | Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present. | 
 **Units** | **decimal?** | The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions. | [optional] 
 **Price** | **decimal?** | Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices. | [optional] 
 **CostBasis** | **decimal?** | Book price or average purchase price for the position. For options, this is per-share. | [optional] 

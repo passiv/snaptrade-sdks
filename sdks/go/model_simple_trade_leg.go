@@ -20,7 +20,8 @@ type SimpleTradeLeg struct {
 	Instrument SimpleTradeInstrument `json:"instrument"`
 	// Equities and futures require buy or sell. Equity options and future options require buy_to_open, buy_to_close, sell_to_open, or sell_to_close.
 	Action string `json:"action"`
-	Units *SimpleTradeLegUnits `json:"units,omitempty"`
+	// Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.
+	Units *float64 `json:"units,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -94,9 +95,9 @@ func (o *SimpleTradeLeg) SetAction(v string) {
 }
 
 // GetUnits returns the Units field value if set, zero value otherwise.
-func (o *SimpleTradeLeg) GetUnits() SimpleTradeLegUnits {
+func (o *SimpleTradeLeg) GetUnits() float64 {
 	if o == nil || isNil(o.Units) {
-		var ret SimpleTradeLegUnits
+		var ret float64
 		return ret
 	}
 	return *o.Units
@@ -104,7 +105,7 @@ func (o *SimpleTradeLeg) GetUnits() SimpleTradeLegUnits {
 
 // GetUnitsOk returns a tuple with the Units field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleTradeLeg) GetUnitsOk() (*SimpleTradeLegUnits, bool) {
+func (o *SimpleTradeLeg) GetUnitsOk() (*float64, bool) {
 	if o == nil || isNil(o.Units) {
     return nil, false
 	}
@@ -120,8 +121,8 @@ func (o *SimpleTradeLeg) HasUnits() bool {
 	return false
 }
 
-// SetUnits gets a reference to the given SimpleTradeLegUnits and assigns it to the Units field.
-func (o *SimpleTradeLeg) SetUnits(v SimpleTradeLegUnits) {
+// SetUnits gets a reference to the given float64 and assigns it to the Units field.
+func (o *SimpleTradeLeg) SetUnits(v float64) {
 	o.Units = &v
 }
 

@@ -17,6 +17,7 @@ module SnapTrade
     # Equities and futures require buy or sell. Equity options and future options require buy_to_open, buy_to_close, sell_to_open, or sell_to_close.
     attr_accessor :action
 
+    # Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.
     attr_accessor :units
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -38,7 +39,7 @@ module SnapTrade
       {
         :'instrument' => :'SimpleTradeInstrument',
         :'action' => :'SimpleTradeLegAction',
-        :'units' => :'SimpleTradeLegUnits'
+        :'units' => :'Float'
       }
     end
 

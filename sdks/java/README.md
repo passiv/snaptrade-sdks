@@ -1776,11 +1776,11 @@ The ID of the account to execute the trade on.
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### limit_price: [`Object`](./src/main/java/com/snaptrade/client/model/ModelObject.java)<a id="limit_price-objectsrcmainjavacomsnaptradeclientmodelmodelobjectjava"></a>
+##### limit_price: [`BigDecimal`](./src/main/java/com/snaptrade/client/model/BigDecimal.java)<a id="limit_price-bigdecimalsrcmainjavacomsnaptradeclientmodelbigdecimaljava"></a>
 
 Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
 
-##### stop_price: [`Object`](./src/main/java/com/snaptrade/client/model/ModelObject.java)<a id="stop_price-objectsrcmainjavacomsnaptradeclientmodelmodelobjectjava"></a>
+##### stop_price: [`BigDecimal`](./src/main/java/com/snaptrade/client/model/BigDecimal.java)<a id="stop_price-bigdecimalsrcmainjavacomsnaptradeclientmodelbigdecimaljava"></a>
 
 Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
 
@@ -1796,7 +1796,7 @@ Optional canonical UUID, forwarded where the existing execution path supports it
 
 ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
 
-##### notional_value: [`Object`](./src/main/java/com/snaptrade/client/model/ModelObject.java)<a id="notional_value-objectsrcmainjavacomsnaptradeclientmodelmodelobjectjava"></a>
+##### notional_value: [`BigDecimal`](./src/main/java/com/snaptrade/client/model/BigDecimal.java)<a id="notional_value-bigdecimalsrcmainjavacomsnaptradeclientmodelbigdecimaljava"></a>
 
 Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
 

@@ -23,6 +23,7 @@ import com.snaptrade.client.model.SimpleTradeInstrument;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -115,7 +116,7 @@ public class SimpleTradeLeg {
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
-  private Object units;
+  private BigDecimal units;
 
   public SimpleTradeLeg() {
   }
@@ -178,7 +179,7 @@ public class SimpleTradeLeg {
   }
 
 
-  public SimpleTradeLeg units(Object units) {
+  public SimpleTradeLeg units(BigDecimal units) {
     
     
     
@@ -194,12 +195,12 @@ public class SimpleTradeLeg {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.")
 
-  public Object getUnits() {
+  public BigDecimal getUnits() {
     return units;
   }
 
 
-  public void setUnits(Object units) {
+  public void setUnits(BigDecimal units) {
     
     
     
@@ -335,6 +336,10 @@ public class SimpleTradeLeg {
       SimpleTradeInstrument.validateJsonObject(jsonObj.getAsJsonObject("instrument"));
       if (!jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
+      }
+      // validate the optional field `units`
+      if (jsonObj.get("units") != null && !jsonObj.get("units").isJsonNull()) {
+        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("units"));
       }
   }
 

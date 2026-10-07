@@ -23,6 +23,7 @@ import com.snaptrade.client.model.SimpleTradeLeg;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -173,11 +174,11 @@ public class SimpleTradeForm {
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
-  private Object limitPrice;
+  private BigDecimal limitPrice;
 
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
-  private Object stopPrice;
+  private BigDecimal stopPrice;
 
   /**
    * Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
@@ -242,7 +243,7 @@ public class SimpleTradeForm {
 
   public static final String SERIALIZED_NAME_NOTIONAL_VALUE = "notional_value";
   @SerializedName(SERIALIZED_NAME_NOTIONAL_VALUE)
-  private Object notionalValue;
+  private BigDecimal notionalValue;
 
   /**
    * extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
@@ -390,7 +391,7 @@ public class SimpleTradeForm {
   }
 
 
-  public SimpleTradeForm limitPrice(Object limitPrice) {
+  public SimpleTradeForm limitPrice(BigDecimal limitPrice) {
     
     
     
@@ -406,12 +407,12 @@ public class SimpleTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.")
 
-  public Object getLimitPrice() {
+  public BigDecimal getLimitPrice() {
     return limitPrice;
   }
 
 
-  public void setLimitPrice(Object limitPrice) {
+  public void setLimitPrice(BigDecimal limitPrice) {
     
     
     
@@ -419,7 +420,7 @@ public class SimpleTradeForm {
   }
 
 
-  public SimpleTradeForm stopPrice(Object stopPrice) {
+  public SimpleTradeForm stopPrice(BigDecimal stopPrice) {
     
     
     
@@ -435,12 +436,12 @@ public class SimpleTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.")
 
-  public Object getStopPrice() {
+  public BigDecimal getStopPrice() {
     return stopPrice;
   }
 
 
-  public void setStopPrice(Object stopPrice) {
+  public void setStopPrice(BigDecimal stopPrice) {
     
     
     
@@ -535,7 +536,7 @@ public class SimpleTradeForm {
   }
 
 
-  public SimpleTradeForm notionalValue(Object notionalValue) {
+  public SimpleTradeForm notionalValue(BigDecimal notionalValue) {
     
     
     
@@ -551,12 +552,12 @@ public class SimpleTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.")
 
-  public Object getNotionalValue() {
+  public BigDecimal getNotionalValue() {
     return notionalValue;
   }
 
 
-  public void setNotionalValue(Object notionalValue) {
+  public void setNotionalValue(BigDecimal notionalValue) {
     
     
     
@@ -728,8 +729,20 @@ public class SimpleTradeForm {
       for (int i = 0; i < jsonArraylegs.size(); i++) {
         SimpleTradeLeg.validateJsonObject(jsonArraylegs.get(i).getAsJsonObject());
       };
+      // validate the optional field `limit_price`
+      if (jsonObj.get("limit_price") != null && !jsonObj.get("limit_price").isJsonNull()) {
+        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("limit_price"));
+      }
+      // validate the optional field `stop_price`
+      if (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) {
+        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("stop_price"));
+      }
       if (!jsonObj.get("price_effect").isJsonNull() && (jsonObj.get("price_effect") != null && !jsonObj.get("price_effect").isJsonNull()) && !jsonObj.get("price_effect").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));
+      }
+      // validate the optional field `notional_value`
+      if (jsonObj.get("notional_value") != null && !jsonObj.get("notional_value").isJsonNull()) {
+        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("notional_value"));
       }
       if ((jsonObj.get("trading_session") != null && !jsonObj.get("trading_session").isJsonNull()) && !jsonObj.get("trading_session").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `trading_session` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trading_session").toString()));

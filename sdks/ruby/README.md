@@ -1639,17 +1639,18 @@ result = snaptrade.experimental_endpoints.place_simple_order(
                 "symbol" => "/ESZ6",
             },
             "action" => "buy",
+            "units" => "1.25",
         }
     ],
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  limit_price: "string_example",
-  stop_price: "string_example",
+  limit_price: "1.25",
+  stop_price: "1.25",
   price_effect: "debit",
   client_order_id: "550e8400-e29b-41d4-a716-446655440000",
   expiry_date: "2026-12-18T20:00:00Z",
-  notional_value: "string_example",
+  notional_value: "1.25",
   trading_session: "regular",
 )
 p result
@@ -1674,8 +1675,17 @@ The ID of the account to execute the trade on.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
-##### limit_price: [`SimpleTradeFormLimitPrice`](./lib/snaptrade/models/simple_trade_form_limit_price.rb)<a id="limit_price-simpletradeformlimitpricelibsnaptrademodelssimple_trade_form_limit_pricerb"></a>
-##### stop_price: [`SimpleTradeFormStopPrice`](./lib/snaptrade/models/simple_trade_form_stop_price.rb)<a id="stop_price-simpletradeformstoppricelibsnaptrademodelssimple_trade_form_stop_pricerb"></a>
+##### limit_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="limit_price-floatlibsnaptrademodelsfloatrb"></a>
+Required for limit and stop_limit orders, except that multi-leg price_effect
+even implies zero. Must be omitted or null for market and stop orders. For
+multi-leg orders this is the net strategy price. Negative prices are accepted
+only for futures-family orders, subject to brokerage support.
+
+##### stop_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="stop_price-floatlibsnaptrademodelsfloatrb"></a>
+Required for stop and stop_limit orders. Must be omitted or null for market and
+limit orders. Must be positive for equity/option orders; futures-family trigger
+prices are subject to brokerage support.
+
 ##### price_effect: [`SimpleTradeFormPriceEffect`](./lib/snaptrade/models/simple_trade_form_price_effect.rb)<a id="price_effect-simpletradeformpriceeffectlibsnaptrademodelssimple_trade_form_price_effectrb"></a>
 Only applicable to multi-leg limit and stop_limit orders. Requirements and
 supported values depend on the brokerage; tastytrade requires credit or debit.
@@ -1694,7 +1704,11 @@ ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A
 missing timezone is treated as UTC. Supported only through existing single-leg
 Public and Sandbox execution paths.
 
-##### notional_value: [`SimpleTradeFormNotionalValue`](./lib/snaptrade/models/simple_trade_form_notional_value.rb)<a id="notional_value-simpletradeformnotionalvaluelibsnaptrademodelssimple_trade_form_notional_valuerb"></a>
+##### notional_value: [`Float`](./lib/snaptrade/models/float.rb)<a id="notional_value-floatlibsnaptrademodelsfloatrb"></a>
+Positive order value, supported only for a single-equity market order on
+eligible brokerages and partners. Mutually exclusive with leg units. Omit or set
+units to null when supplied.
+
 ##### trading_session: [`SimpleTradeFormTradingSession`](./lib/snaptrade/models/simple_trade_form_trading_session.rb)<a id="trading_session-simpletradeformtradingsessionlibsnaptrademodelssimple_trade_form_trading_sessionrb"></a>
 extended uses existing single-leg equity/option brokerage support and requires
 extended-hours enablement. Futures and multi-leg orders only accept regular.

@@ -20,8 +20,10 @@ module SnapTrade
     # Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
     attr_accessor :legs
 
+    # Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
     attr_accessor :limit_price
 
+    # Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
     attr_accessor :stop_price
 
     # Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
@@ -33,6 +35,7 @@ module SnapTrade
     # ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
     attr_accessor :expiry_date
 
+    # Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
     attr_accessor :notional_value
 
     # extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
@@ -65,12 +68,12 @@ module SnapTrade
         :'order_type' => :'SimpleTradeFormOrderType',
         :'time_in_force' => :'SimpleTradeFormTimeInForce',
         :'legs' => :'Array<SimpleTradeLeg>',
-        :'limit_price' => :'SimpleTradeFormLimitPrice',
-        :'stop_price' => :'SimpleTradeFormStopPrice',
+        :'limit_price' => :'Float',
+        :'stop_price' => :'Float',
         :'price_effect' => :'SimpleTradeFormPriceEffect',
         :'client_order_id' => :'String',
         :'expiry_date' => :'Time',
-        :'notional_value' => :'SimpleTradeFormNotionalValue',
+        :'notional_value' => :'Float',
         :'trading_session' => :'SimpleTradeFormTradingSession'
       }
     end

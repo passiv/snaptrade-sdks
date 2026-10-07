@@ -2305,15 +2305,16 @@ const placeSimpleOrderResponse =
           symbol: "/ESZ6",
         },
         action: "buy",
+        units: "1.25",
       },
     ],
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price: "string_example",
-    stop_price: "string_example",
+    limit_price: "1.25",
+    stop_price: "1.25",
     price_effect: "debit",
     client_order_id: "550e8400-e29b-41d4-a716-446655440000",
     expiry_date: "2026-12-18T20:00:00.000Z",
-    notional_value: "string_example",
+    notional_value: "1.25",
     trading_session: "regular",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -2340,15 +2341,16 @@ const placeSimpleOrderResponse =
           symbol: "/ESZ6",
         },
         action: "buy",
+        units: "1.25",
       },
     ],
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price: "string_example",
-    stop_price: "string_example",
+    limit_price: "1.25",
+    stop_price: "1.25",
     price_effect: "debit",
     client_order_id: "550e8400-e29b-41d4-a716-446655440000",
     expiry_date: "2026-12-18T20:00:00.000Z",
-    notional_value: "string_example",
+    notional_value: "1.25",
     trading_session: "regular",
   });
 ```
@@ -2372,9 +2374,13 @@ Legs of one brokerage order. Use equity/option legs or future/future_option legs
 
 The ID of the account to execute the trade on.
 
-##### limit_price: [`SimpleTradeFormLimitPrice`](./models/simple-trade-form-limit-price.ts)<a id="limit_price-simpletradeformlimitpricemodelssimple-trade-form-limit-pricets"></a>
+##### limit_price: [`string`](./models/model-string.ts)<a id="limit_price-stringmodelsmodel-stringts"></a>
 
-##### stop_price: [`SimpleTradeFormStopPrice`](./models/simple-trade-form-stop-price.ts)<a id="stop_price-simpletradeformstoppricemodelssimple-trade-form-stop-pricets"></a>
+Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+
+##### stop_price: [`string`](./models/model-string.ts)<a id="stop_price-stringmodelsmodel-stringts"></a>
+
+Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
 
 ##### price_effect: `string`<a id="price_effect-string"></a>
 
@@ -2388,7 +2394,9 @@ Optional canonical UUID, forwarded where the existing execution path supports it
 
 ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
 
-##### notional_value: [`SimpleTradeFormNotionalValue`](./models/simple-trade-form-notional-value.ts)<a id="notional_value-simpletradeformnotionalvaluemodelssimple-trade-form-notional-valuets"></a>
+##### notional_value: [`string`](./models/model-string.ts)<a id="notional_value-stringmodelsmodel-stringts"></a>
+
+Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
 
 ##### trading_session: `string`<a id="trading_session-string"></a>
 

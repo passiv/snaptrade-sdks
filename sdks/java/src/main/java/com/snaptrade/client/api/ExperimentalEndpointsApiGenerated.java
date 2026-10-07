@@ -29,6 +29,7 @@ import java.io.IOException;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllUserAccountsResponse;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import com.snaptrade.client.model.SimpleTradeForm;
 import com.snaptrade.client.model.SimpleTradeLeg;
@@ -1688,12 +1689,12 @@ public class ExperimentalEndpointsApiGenerated {
         final UUID accountId;
         final String userId;
         final String userSecret;
-        Object limitPrice;
-        Object stopPrice;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
         String priceEffect;
         UUID clientOrderId;
         OffsetDateTime expiryDate;
-        Object notionalValue;
+        BigDecimal notionalValue;
         String tradingSession;
 
         public PlaceSimpleOrderRequestBuilderGenerated(String orderType, String timeInForce, List<SimpleTradeLeg> legs, UUID accountId, String userId, String userSecret) {
@@ -1710,7 +1711,7 @@ public class ExperimentalEndpointsApiGenerated {
          * @param limitPrice Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support. (optional)
          * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
          */
-        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder limitPrice(Object limitPrice) {
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
             this.limitPrice = limitPrice;
             return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
         }
@@ -1720,7 +1721,7 @@ public class ExperimentalEndpointsApiGenerated {
          * @param stopPrice Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support. (optional)
          * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
          */
-        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder stopPrice(Object stopPrice) {
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
             this.stopPrice = stopPrice;
             return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
         }
@@ -1760,7 +1761,7 @@ public class ExperimentalEndpointsApiGenerated {
          * @param notionalValue Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied. (optional)
          * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
          */
-        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder notionalValue(Object notionalValue) {
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder notionalValue(BigDecimal notionalValue) {
             this.notionalValue = notionalValue;
             return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
         }

@@ -1739,17 +1739,18 @@ $result = $snaptrade->experimentalEndpoints->placeSimpleOrder(
                 "symbol" => "/ESZ6",
             ],
             "action" => "buy",
+            "units" => "1.25",
         ]
     ], 
     account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
     user_id: "snaptrade-user-123", 
     user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61", 
-    limit_price: "string_example", 
-    stop_price: "string_example", 
+    limit_price: "1.25", 
+    stop_price: "1.25", 
     price_effect: "debit", 
     client_order_id: "550e8400-e29b-41d4-a716-446655440000", 
     expiry_date: "2026-12-18T20:00:00Z", 
-    notional_value: "string_example", 
+    notional_value: "1.25", 
     trading_session: "regular"
 );
 ```
@@ -1774,9 +1775,13 @@ The ID of the account to execute the trade on.
 
 ##### user_secret: `string`<a id="user_secret-string"></a>
 
-##### limit_price: [`SimpleTradeFormLimitPrice`](./lib/Model/SimpleTradeFormLimitPrice.php)<a id="limit_price-simpletradeformlimitpricelibmodelsimpletradeformlimitpricephp"></a>
+##### limit_price: [`float`](./lib/Model/float.php)<a id="limit_price-floatlibmodelfloatphp"></a>
 
-##### stop_price: [`SimpleTradeFormStopPrice`](./lib/Model/SimpleTradeFormStopPrice.php)<a id="stop_price-simpletradeformstoppricelibmodelsimpletradeformstoppricephp"></a>
+Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+
+##### stop_price: [`float`](./lib/Model/float.php)<a id="stop_price-floatlibmodelfloatphp"></a>
+
+Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
 
 ##### price_effect: `string`<a id="price_effect-string"></a>
 
@@ -1790,7 +1795,9 @@ Optional canonical UUID, forwarded where the existing execution path supports it
 
 ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
 
-##### notional_value: [`SimpleTradeFormNotionalValue`](./lib/Model/SimpleTradeFormNotionalValue.php)<a id="notional_value-simpletradeformnotionalvaluelibmodelsimpletradeformnotionalvaluephp"></a>
+##### notional_value: [`float`](./lib/Model/float.php)<a id="notional_value-floatlibmodelfloatphp"></a>
+
+Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
 
 ##### trading_session: `string`<a id="trading_session-string"></a>
 

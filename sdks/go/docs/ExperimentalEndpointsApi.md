@@ -450,10 +450,10 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    limitPrice := *snaptrade.NewSimpleTradeFormLimitPrice()
-    stopPrice := *snaptrade.NewSimpleTradeFormStopPrice()
+    limitPrice := *snaptrade.Newfloat64()
+    stopPrice := *snaptrade.Newfloat64()
     clientOrderId := *snaptrade.Newstring()
-    notionalValue := *snaptrade.NewSimpleTradeFormNotionalValue()
+    notionalValue := *snaptrade.Newfloat64()
     
     simpleTradeForm := *snaptrade.NewSimpleTradeForm(
         "STOP_LIMIT",

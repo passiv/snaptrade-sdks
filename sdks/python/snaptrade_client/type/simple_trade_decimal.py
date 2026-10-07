@@ -16,4 +16,4 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-SimpleTradeDecimal = typing.Union[typing.Optional[str],typing.Optional[typing.Union[int, float]]]
+SimpleTradeDecimal = str

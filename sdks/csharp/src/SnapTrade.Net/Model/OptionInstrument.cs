@@ -101,7 +101,7 @@ namespace SnapTrade.Net.Model
         /// <param name="expirationDate">Expiration date of the option contract. (required).</param>
         /// <param name="multiplier">Number of underlying shares per contract. Standard options are 100, mini options are 10. (required).</param>
         /// <param name="description">Human-readable description of the option contract..</param>
-        /// <param name="underlying">underlying (required).</param>
+        /// <param name="underlying">The underlying instrument for an option. (required).</param>
         public OptionInstrument(KindEnum kind = default(KindEnum), string id = default(string), string symbol = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), decimal strikePrice = default(decimal), DateTime expirationDate = default(DateTime), decimal multiplier = default(decimal), string description = default(string), UnderlyingOptionInstrument underlying = default(UnderlyingOptionInstrument)) : base()
         {
             this.Kind = kind;
@@ -177,8 +177,9 @@ namespace SnapTrade.Net.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets Underlying
+        /// The underlying instrument for an option.
         /// </summary>
+        /// <value>The underlying instrument for an option.</value>
         [DataMember(Name = "underlying", IsRequired = true, EmitDefaultValue = true)]
         public UnderlyingOptionInstrument Underlying { get; set; }
 
