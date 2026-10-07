@@ -35,15 +35,24 @@ namespace SnapTrade.Net.Model
     public partial class SimpleTradeDecimal : AbstractOpenAPISchema, IEquatable<SimpleTradeDecimal>, IValidatableObject
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="SimpleTradeDecimal" /> class.
+        /// </summary>
+        public SimpleTradeDecimal()
+        {
+            this.IsNullable = true;
+            this.SchemaType= "anyOf";
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SimpleTradeDecimal" /> class
         /// with the <see cref="decimal?" /> class
         /// </summary>
         /// <param name="actualInstance">An instance of decimal?.</param>
         public SimpleTradeDecimal(decimal? actualInstance)
         {
-            this.IsNullable = false;
+            this.IsNullable = true;
             this.SchemaType= "anyOf";
-            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+            this.ActualInstance = actualInstance;
         }
 
         /// <summary>
@@ -53,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// <param name="actualInstance">An instance of double?.</param>
         public SimpleTradeDecimal(double? actualInstance)
         {
-            this.IsNullable = false;
+            this.IsNullable = true;
             this.SchemaType= "anyOf";
             this.ActualInstance = actualInstance;
         }
