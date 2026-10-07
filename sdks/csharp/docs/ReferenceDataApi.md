@@ -724,7 +724,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed. |  -  |
+| **200** | Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -756,9 +756,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var substring = "AAPL"; // The search query for symbols.
             
             var symbolQuery = new SymbolQuery(

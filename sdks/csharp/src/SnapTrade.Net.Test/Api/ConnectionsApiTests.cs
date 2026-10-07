@@ -52,9 +52,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void DeleteConnectionTest()
         {
-            var connectionId = "connectionId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var connectionId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -82,9 +82,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void DetailBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var authorizationId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -112,9 +112,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void DisableBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var authorizationId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -142,9 +142,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void ListBrokerageAuthorizationAccountsTest()
         {
-            var authorizationId = "authorizationId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var authorizationId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -172,8 +172,8 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void ListBrokerageAuthorizationsTest()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -201,9 +201,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void ListConnectionAccountsTest()
         {
-            var connectionId = "connectionId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var connectionId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -231,9 +231,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void RefreshBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var authorizationId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -261,9 +261,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void ReturnRatesTest()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var authorizationId = "authorizationId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var authorizationId = "87b24961-b51e-4db8-9226-f198f6518a89";
             var timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes. (optional) 
             
             try
@@ -292,9 +292,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void SyncBrokerageAuthorizationTransactionsTest()
         {
-            var authorizationId = "authorizationId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var authorizationId = "87b24961-b51e-4db8-9226-f198f6518a89";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {

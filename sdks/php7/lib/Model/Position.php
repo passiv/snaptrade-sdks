@@ -628,7 +628,7 @@ class Position implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tax_lots
      *
-     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position. Disabled by default, only available on paid plans, enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
+     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position. Disabled by default, enable this feature in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
      *
      * @return self
      */

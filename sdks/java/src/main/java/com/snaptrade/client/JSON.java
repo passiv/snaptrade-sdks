@@ -239,6 +239,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SecurityType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SessionEvent.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SimpleOrderForm.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SimpleTradeForm.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SimpleTradeInstrument.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SimpleTradeLeg.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SimpleTradeResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SnapTradeHoldingsAccount.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SnapTradeHoldingsTotalValue.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.SnapTradeLoginUserRequestBody.CustomTypeAdapterFactory());

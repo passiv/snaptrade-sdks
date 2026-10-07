@@ -59,7 +59,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. </value>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum AccountTypeEnum
+        public enum CashOrMarginEnum
         {
             /// <summary>
             /// Enum Cash for value: cash
@@ -86,8 +86,8 @@ namespace SnapTrade.Net.Model
         /// Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
         /// </summary>
         /// <value>Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. </value>
-        [DataMember(Name = "account_type", EmitDefaultValue = false)]
-        public AccountTypeEnum? AccountType { get; set; }
+        [DataMember(Name = "cash_or_margin", EmitDefaultValue = false)]
+        public CashOrMarginEnum? CashOrMargin { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="InvestmentAccount" /> class.
         /// </summary>
@@ -110,10 +110,10 @@ namespace SnapTrade.Net.Model
         /// <param name="fundingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list..</param>
         /// <param name="syncStatus">syncStatus (required).</param>
         /// <param name="rawType">The account type as provided by the institution..</param>
-        /// <param name="accountType">Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. .</param>
+        /// <param name="cashOrMargin">Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. .</param>
         /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
         /// <param name="netValue">netValue.</param>
-        public InvestmentAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string maskedAccountNumber = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), DateTime? fundingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), AccountTypeEnum? accountType = default(AccountTypeEnum?), bool isPaper = default(bool), InvestmentAccountNetValue netValue = default(InvestmentAccountNetValue)) : base()
+        public InvestmentAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string maskedAccountNumber = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), DateTime? fundingDate = default(DateTime?), ConnectionAccountSyncStatus syncStatus = default(ConnectionAccountSyncStatus), string rawType = default(string), CashOrMarginEnum? cashOrMargin = default(CashOrMarginEnum?), bool isPaper = default(bool), InvestmentAccountNetValue netValue = default(InvestmentAccountNetValue)) : base()
         {
             this.Kind = kind;
             // to ensure "id" is required (not null)
@@ -147,7 +147,7 @@ namespace SnapTrade.Net.Model
             this.OpeningDate = openingDate;
             this.FundingDate = fundingDate;
             this.RawType = rawType;
-            this.AccountType = accountType;
+            this.CashOrMargin = cashOrMargin;
             this.NetValue = netValue;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -260,7 +260,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  FundingDate: ").Append(FundingDate).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  RawType: ").Append(RawType).Append("\n");
-            sb.Append("  AccountType: ").Append(AccountType).Append("\n");
+            sb.Append("  CashOrMargin: ").Append(CashOrMargin).Append("\n");
             sb.Append("  IsPaper: ").Append(IsPaper).Append("\n");
             sb.Append("  NetValue: ").Append(NetValue).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -354,8 +354,8 @@ namespace SnapTrade.Net.Model
                     this.RawType.Equals(input.RawType))
                 ) && base.Equals(input) && 
                 (
-                    this.AccountType == input.AccountType ||
-                    this.AccountType.Equals(input.AccountType)
+                    this.CashOrMargin == input.CashOrMargin ||
+                    this.CashOrMargin.Equals(input.CashOrMargin)
                 ) && base.Equals(input) && 
                 (
                     this.IsPaper == input.IsPaper ||
@@ -419,7 +419,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.RawType.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.AccountType.GetHashCode();
+                hashCode = (hashCode * 59) + this.CashOrMargin.GetHashCode();
                 hashCode = (hashCode * 59) + this.IsPaper.GetHashCode();
                 if (this.NetValue != null)
                 {

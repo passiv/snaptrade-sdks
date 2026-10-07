@@ -41,7 +41,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
+    String userId = "snaptrade-user-123";
     try {
       DeleteUserResponse result = client
               .authentication
@@ -224,8 +224,8 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
     Boolean immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.

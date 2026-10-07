@@ -82,11 +82,11 @@ public class AccountValueHistoryResponse {
   }
 
    /**
-   * List of estimated account values over time returned by the endpoint.
+   * List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.
    * @return history
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "List of estimated account values over time returned by the endpoint.")
+  @ApiModelProperty(value = "List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.")
 
   public List<AccountValueHistoryItem> getHistory() {
     return history;

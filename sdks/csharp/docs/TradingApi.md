@@ -46,9 +46,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
             var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
@@ -148,10 +148,10 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
-            var instrumentSymbol = "instrumentSymbol_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var instrumentSymbol = "BTC-USD";
             
             try
             {
@@ -246,9 +246,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var orderType = MlegOrderTypeStrict.MARKET;
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = 8.9M; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
@@ -359,8 +359,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrict.BUY;
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
@@ -369,7 +369,7 @@ namespace Example
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-            var notionalValue = new NotionalValueNullable(100);
+            var notionalValue = new NotionalValueNullable(100); // Total notional amount for the order. Must be `null` if `units` is provided. Can only work with `Market` for `order_type` and `Day` for `time_in_force`. This is only available for certain brokerages. Please check the [integrations doc](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for more information.
             
             var manualTradeForm = new ManualTradeForm(
                 accountId,
@@ -476,9 +476,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
             
             try
@@ -575,10 +575,10 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator. Maximum of 10 values allowed
-            var accountId = "accountId_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided. (optional) 
             
             try
@@ -675,9 +675,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to execute the trade on.
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var type = ManualTradeFormComplex.TypeEnum.OTO; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
             var orders = new List<ComplexOrderLeg>(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
             var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
@@ -782,9 +782,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var instrument = new CryptoTradingInstrument();
             var side = ActionStrict.BUY;
             var type = CryptoOrderForm.TypeEnum.MARKET; // The type of order to place.
@@ -900,8 +900,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrictWithOptions.BUY;
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
@@ -913,7 +913,7 @@ namespace Example
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
-            var notionalValue = new NotionalValueNullable(100);
+            var notionalValue = new NotionalValueNullable(100); // Total notional amount for the order. Must be `null` if `units` is provided. Can only work with `Market` for `order_type` and `Day` for `time_in_force`. This is only available for certain brokerages. Please check the [integrations doc](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for more information.
             var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
             
             var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
@@ -1025,9 +1025,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var orderType = MlegOrderTypeStrict.MARKET;
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = 8.9M; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
@@ -1137,9 +1137,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var tradeId = "tradeId_example"; // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var tradeId = "139e307a-82f7-4402-b39e-4da7baa87758"; // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
             
             var validatedTradeBody = new ValidatedTradeBody(
@@ -1239,9 +1239,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var instrument = new CryptoTradingInstrument();
             var side = ActionStrict.BUY;
             var type = CryptoOrderForm.TypeEnum.MARKET; // The type of order to place.
@@ -1357,9 +1357,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // The ID of the account to execute the trade on.
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             var action = ActionStrictWithOptions.BUY;
             var orderType = OrderTypeStrict.Limit;
@@ -1474,11 +1474,11 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
-            var _base = "_base_example";
-            var quote = "quote_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var _base = "BTC";
+            var quote = "USD";
             
             try
             {

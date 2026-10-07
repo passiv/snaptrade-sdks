@@ -153,4 +153,16 @@ class ExperimentalEndpointsApiTest extends TestCase
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for placeSimpleOrder
+     *
+     * Place a simple order (beta).
+     *
+     */
+    public function testPlaceSimpleOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
 }

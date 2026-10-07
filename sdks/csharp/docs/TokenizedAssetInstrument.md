@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the canonical tokenized asset wrapper. | 
 **Symbol** | **string** | Display symbol of the underlying stock or ETF, not a token-specific ticker. | 
 **Description** | **string** | Display name of the underlying stock or ETF, when available. | [optional] 
-**UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) |  | 
+**UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) | The listed stock or ETF underlying a tokenized asset. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

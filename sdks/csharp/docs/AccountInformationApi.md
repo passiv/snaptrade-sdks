@@ -44,11 +44,11 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var accountId = "accountId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var startDate = DateTime.Parse("2013-10-20"); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`. (optional) 
-            var endDate = DateTime.Parse("2013-10-20"); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`. (optional) 
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var startDate = DateTime.Parse("2022-01-24"); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`. (optional) 
+            var endDate = DateTime.Parse("2022-01-24"); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`. (optional) 
             var offset = 56; // An integer that specifies the starting point of the paginated results. Default is 0. (optional) 
             var limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000. (optional) 
             var type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split.  (optional) 
@@ -128,7 +128,7 @@ catch (ApiException e)
 
 
 
-An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons) 
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)  The data may contain gaps and is best used for charting account value trends. It should not be relied on as a complete or exact record of historical account values. 
 
 ### Example
 ```csharp
@@ -150,9 +150,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             
             try
             {
@@ -245,9 +245,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             
             try
             {
@@ -342,9 +342,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             
             try
             {
@@ -439,9 +439,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             
             try
             {
@@ -535,9 +535,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var accountId = "accountId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
             var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
@@ -640,9 +640,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var state = "all"; // defaults to \"all\" (optional) 
             var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional) 
             
@@ -742,9 +742,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional) 
             
             try
@@ -843,9 +843,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes. (optional) 
             
             try
@@ -943,9 +943,9 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var accountId = "accountId_example";
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -1043,8 +1043,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             
             try
             {
@@ -1136,8 +1136,8 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "accountId_example"; // The ID of the account to update.
             
             try

@@ -44,12 +44,12 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetAccountActivities(
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "userId_example",
-        "userSecret_example",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
     )
-    request.StartDate(2013-10-20)
-    request.EndDate(2013-10-20)
+    request.StartDate(Mon Jan 24 00:00:00 UTC 2022)
+    request.EndDate(Mon Jan 24 00:00:00 UTC 2022)
     request.Offset(56)
     request.Limit(56)
     request.Type(""BUY,SELL,DIVIDEND"")
@@ -96,9 +96,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetAccountBalanceHistory(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     
     resp, httpRes, err := request.Execute()
@@ -143,9 +143,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetAllAccountPositions(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     
     resp, httpRes, err := request.Execute()
@@ -190,9 +190,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountBalance(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     
     resp, httpRes, err := request.Execute()
@@ -238,9 +238,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountDetails(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     
     resp, httpRes, err := request.Execute()
@@ -306,9 +306,9 @@ func main() {
     )
     
     request := client.AccountInformationApi.GetUserAccountOrderDetail(
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "userId_example",
-        "userSecret_example",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         accountInformationGetUserAccountOrderDetailRequest,
     )
     
@@ -377,9 +377,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountOrders(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     request.State("state_example")
     request.Days(30)
@@ -449,9 +449,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountRecentOrders(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     request.OnlyExecuted(true)
     
@@ -496,9 +496,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountReturnRates(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
     request.Timeframes(""ALL,1Y"")
     
@@ -544,9 +544,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserHoldings(
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "userId_example",
-        "userSecret_example",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
     )
     
     resp, httpRes, err := request.Execute()
@@ -595,8 +595,8 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.ListUserAccounts(
-        "userId_example",
-        "userSecret_example",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
     )
     
     resp, httpRes, err := request.Execute()
@@ -657,8 +657,8 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.UpdateUserAccount(
-        "userId_example",
-        "userSecret_example",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
     )
     

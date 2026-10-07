@@ -29,6 +29,11 @@ import java.io.IOException;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllUserAccountsResponse;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import com.snaptrade.client.model.SimpleTradeForm;
+import com.snaptrade.client.model.SimpleTradeLeg;
+import com.snaptrade.client.model.SimpleTradeResponse;
 import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
@@ -1581,5 +1586,315 @@ public class ExperimentalEndpointsApiGenerated {
      */
     public ExperimentalEndpointsApi.ListSubscriptionsRequestBuilder listSubscriptions() throws IllegalArgumentException {
         return ((ExperimentalEndpointsApi) this).new ListSubscriptionsRequestBuilder();
+    }
+    private okhttp3.Call placeSimpleOrderCall(UUID accountId, String userId, String userSecret, SimpleTradeForm simpleTradeForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = simpleTradeForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/simple"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeSimpleOrderValidateBeforeCall(UUID accountId, String userId, String userSecret, SimpleTradeForm simpleTradeForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'simpleTradeForm' is set
+        if (simpleTradeForm == null) {
+            throw new ApiException("Missing the required parameter 'simpleTradeForm' when calling placeSimpleOrder(Async)");
+        }
+
+        return placeSimpleOrderCall(accountId, userId, userSecret, simpleTradeForm, _callback);
+
+    }
+
+
+    private ApiResponse<SimpleTradeResponse> placeSimpleOrderWithHttpInfo(UUID accountId, String userId, String userSecret, SimpleTradeForm simpleTradeForm) throws ApiException {
+        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(accountId, userId, userSecret, simpleTradeForm, null);
+        Type localVarReturnType = new TypeToken<SimpleTradeResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call placeSimpleOrderAsync(UUID accountId, String userId, String userSecret, SimpleTradeForm simpleTradeForm, final ApiCallback<SimpleTradeResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(accountId, userId, userSecret, simpleTradeForm, _callback);
+        Type localVarReturnType = new TypeToken<SimpleTradeResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PlaceSimpleOrderRequestBuilderGenerated {
+        final String orderType;
+        final String timeInForce;
+        final List<SimpleTradeLeg> legs;
+        final UUID accountId;
+        final String userId;
+        final String userSecret;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
+        String priceEffect;
+        UUID clientOrderId;
+        OffsetDateTime expiryDate;
+        BigDecimal notionalValue;
+        String tradingSession;
+
+        public PlaceSimpleOrderRequestBuilderGenerated(String orderType, String timeInForce, List<SimpleTradeLeg> legs, UUID accountId, String userId, String userSecret) {
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.legs = legs;
+            this.accountId = accountId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set limitPrice
+         * @param limitPrice Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support. (optional)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+            this.limitPrice = limitPrice;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopPrice
+         * @param stopPrice Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support. (optional)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+            this.stopPrice = stopPrice;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set priceEffect
+         * @param priceEffect Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action. (optional)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder priceEffect(String priceEffect) {
+            this.priceEffect = priceEffect;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set clientOrderId
+         * @param clientOrderId Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. (optional)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder clientOrderId(UUID clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set expiryDate
+         * @param expiryDate ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths. (optional)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder expiryDate(OffsetDateTime expiryDate) {
+            this.expiryDate = expiryDate;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set notionalValue
+         * @param notionalValue Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied. (optional)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder notionalValue(BigDecimal notionalValue) {
+            this.notionalValue = notionalValue;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set tradingSession
+         * @param tradingSession extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular. (optional, default to regular)
+         * @return ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder
+         */
+        public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder tradingSession(String tradingSession) {
+            this.tradingSession = tradingSession;
+            return (ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for placeSimpleOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SimpleTradeForm simpleTradeForm = buildBodyParams();
+            return placeSimpleOrderCall(accountId, userId, userSecret, simpleTradeForm, _callback);
+        }
+
+        private SimpleTradeForm buildBodyParams() {
+            SimpleTradeForm simpleTradeForm = new SimpleTradeForm();
+            if (this.orderType != null)
+            simpleTradeForm.orderType(SimpleTradeForm.OrderTypeEnum.fromValue(this.orderType));
+            if (this.timeInForce != null)
+            simpleTradeForm.timeInForce(SimpleTradeForm.TimeInForceEnum.fromValue(this.timeInForce));
+            simpleTradeForm.legs(this.legs);
+            simpleTradeForm.limitPrice(this.limitPrice);
+            simpleTradeForm.stopPrice(this.stopPrice);
+            if (this.priceEffect != null)
+            simpleTradeForm.priceEffect(SimpleTradeForm.PriceEffectEnum.fromValue(this.priceEffect));
+            simpleTradeForm.clientOrderId(this.clientOrderId);
+            simpleTradeForm.expiryDate(this.expiryDate);
+            simpleTradeForm.notionalValue(this.notionalValue);
+            if (this.tradingSession != null)
+            simpleTradeForm.tradingSession(SimpleTradeForm.TradingSessionEnum.fromValue(this.tradingSession));
+            return simpleTradeForm;
+        }
+
+        /**
+         * Execute placeSimpleOrder request
+         * @return SimpleTradeResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public SimpleTradeResponse execute() throws ApiException {
+            SimpleTradeForm simpleTradeForm = buildBodyParams();
+            ApiResponse<SimpleTradeResponse> localVarResp = placeSimpleOrderWithHttpInfo(accountId, userId, userSecret, simpleTradeForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeSimpleOrder request with HTTP info returned
+         * @return ApiResponse&lt;SimpleTradeResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SimpleTradeResponse> executeWithHttpInfo() throws ApiException {
+            SimpleTradeForm simpleTradeForm = buildBodyParams();
+            return placeSimpleOrderWithHttpInfo(accountId, userId, userSecret, simpleTradeForm);
+        }
+
+        /**
+         * Execute placeSimpleOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Order placed </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SimpleTradeResponse> _callback) throws ApiException {
+            SimpleTradeForm simpleTradeForm = buildBodyParams();
+            return placeSimpleOrderAsync(accountId, userId, userSecret, simpleTradeForm, _callback);
+        }
+    }
+
+    /**
+     * Place a simple order (beta)
+     * **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+     * @param accountId The ID of the account to execute the trade on. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param simpleTradeForm  (required)
+     * @return PlaceSimpleOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Order placed </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ExperimentalEndpointsApi.PlaceSimpleOrderRequestBuilder placeSimpleOrder(String orderType, String timeInForce, List<SimpleTradeLeg> legs, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+            
+
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+            
+
+        if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ExperimentalEndpointsApi) this).new PlaceSimpleOrderRequestBuilder(orderType, timeInForce, legs, accountId, userId, userSecret);
     }
 }

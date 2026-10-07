@@ -137,4 +137,19 @@ describe 'ExperimentalEndpointsApi' do
     end
   end
 
+  # unit tests for place_simple_order
+  # Place a simple order (beta)
+  # **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+  # @param account_id The ID of the account to execute the trade on.
+  # @param user_id 
+  # @param user_secret 
+  # @param simple_trade_form 
+  # @param [Hash] opts the optional parameters
+  # @return [SimpleTradeResponse]
+  describe 'place_simple_order test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

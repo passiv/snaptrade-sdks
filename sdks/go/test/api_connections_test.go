@@ -29,9 +29,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService DeleteConnection", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.DeleteConnection(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -45,9 +45,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService DetailBrokerageAuthorization", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.DetailBrokerageAuthorization(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -61,9 +61,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService DisableBrokerageAuthorization", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.DisableBrokerageAuthorization(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -77,9 +77,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService ListBrokerageAuthorizationAccounts", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.ListBrokerageAuthorizationAccounts(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -93,8 +93,8 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService ListBrokerageAuthorizations", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.ListBrokerageAuthorizations(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -108,9 +108,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService ListConnectionAccounts", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.ListConnectionAccounts(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -124,9 +124,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService RefreshBrokerageAuthorization", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.RefreshBrokerageAuthorization(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -140,9 +140,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService ReturnRates", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.ReturnRates(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
         )
         request.Timeframes(""ALL,1Y"")
         
@@ -157,9 +157,9 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     t.Run("Test ConnectionsApiService SyncBrokerageAuthorizationTransactions", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ConnectionsApi.SyncBrokerageAuthorizationTransactions(
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            "userId_example",
-            "userSecret_example",
+            "87b24961-b51e-4db8-9226-f198f6518a89",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         
         resp, httpRes, err := request.Execute()

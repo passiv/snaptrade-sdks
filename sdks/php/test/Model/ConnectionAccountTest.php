@@ -172,9 +172,9 @@ class ConnectionAccountTest extends TestCase
     }
 
     /**
-     * Test attribute "account_type"
+     * Test attribute "cash_or_margin"
      */
-    public function testPropertyAccountType()
+    public function testPropertyCashOrMargin()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

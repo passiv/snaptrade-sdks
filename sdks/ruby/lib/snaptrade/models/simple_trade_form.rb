@@ -1,0 +1,346 @@
+=begin
+#SnapTrade
+
+#Connect brokerage accounts to your app for live positions and trading.  ## Rate limiting  Two limits apply to requests signed with your `clientId`. The stricter one wins, and exceeding either returns `429 Too Many Requests`.  - **Customer-level** — 250 requests/minute by default, scoped to your   `clientId` and applied across all endpoints. Reported in   `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`. - **Account-level** — 10 requests/minute per account, scoped to   (`clientId`, `accountId`). All covered operations for one account draw on   the same bucket — reading balances and reading positions share it — and   enforcement does not depend on the HTTP method, so updating an account   consumes the same bucket as reading it. Only enforced for Personal users,   and only for integrations it has been rolled out to — it is not yet in   force for every Personal integration. It also does not apply on every   operation that documents a 429 below. Where it applies it is reported in   `X-RateLimit-Account-Limit`, `X-RateLimit-Account-Remaining` and   `X-RateLimit-Account-Reset`. Do not read the absence of those headers as   proof the limit is off — some configurations omit the rate limit headers   while still enforcing the limit, so header absence tells you nothing   about your allowance.  On a 429, `X-RateLimit-Remaining: 0` means you hit the customer-level limit and `X-RateLimit-Account-Remaining: 0` means the account-level one. Wait for the corresponding `*-Reset` value (seconds) before retrying, or fall back to exponential backoff with jitter.  Not every 429 is explained by those headers. A separate per-authenticated-user limit, reported in no `X-RateLimit-*` header, covers OAuth-authenticated requests and signed requests in configurations where the customer-level limit is not in effect — on the operations that use the default throttles. A few operations override those and are governed by the customer-level limit alone. The two do not stack: a signed request governed by the customer-level limit above is not additionally subject to the per-user one. If a 429 arrives with no header at zero — or with no `X-RateLimit-*` headers at all — honour `Retry-After` and back off. Treat the remaining counts as a hint, not a guarantee that the next request will succeed.  Because the customer-level limit applies everywhere, any signed request can return 429.  **OAuth-authenticated requests are an exception.** They are not subject to the customer-level limit and do not receive `X-RateLimit-Limit`, `X-RateLimit-Remaining` or `X-RateLimit-Reset` — do not wait on those headers or design around a customer-level allowance on this path. The account-level limit still applies to them on the account-data endpoints above, reported in the `X-RateLimit-Account-*` headers. On operations using the default throttles the per-user limit above applies to them as well, so an OAuth request can be rejected while the account headers still show capacity; on the few operations that override those throttles, OAuth callers have no per-user ceiling at all. Drive retries from `Retry-After` and exponential backoff with jitter rather than from the headers.  See https://docs.snaptrade.com/docs/ratelimiting. 
+
+The version of the OpenAPI document: 1.0.0
+Contact: api@snaptrade.com
+=end
+
+require 'date'
+require 'time'
+
+module SnapTrade
+  class SimpleTradeForm
+    attr_accessor :order_type
+
+    # Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+    attr_accessor :time_in_force
+
+    # Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+    attr_accessor :legs
+
+    # Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+    attr_accessor :limit_price
+
+    # Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+    attr_accessor :stop_price
+
+    # Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+    attr_accessor :price_effect
+
+    # Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+    attr_accessor :client_order_id
+
+    # ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+    attr_accessor :expiry_date
+
+    # Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+    attr_accessor :notional_value
+
+    # extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+    attr_accessor :trading_session
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    def self.attribute_map
+      {
+        :'order_type' => :'order_type',
+        :'time_in_force' => :'time_in_force',
+        :'legs' => :'legs',
+        :'limit_price' => :'limit_price',
+        :'stop_price' => :'stop_price',
+        :'price_effect' => :'price_effect',
+        :'client_order_id' => :'client_order_id',
+        :'expiry_date' => :'expiry_date',
+        :'notional_value' => :'notional_value',
+        :'trading_session' => :'trading_session'
+      }
+    end
+
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
+    # Attribute type mapping.
+    def self.openapi_types
+      {
+        :'order_type' => :'SimpleTradeFormOrderType',
+        :'time_in_force' => :'SimpleTradeFormTimeInForce',
+        :'legs' => :'Array<SimpleTradeLeg>',
+        :'limit_price' => :'Float',
+        :'stop_price' => :'Float',
+        :'price_effect' => :'SimpleTradeFormPriceEffect',
+        :'client_order_id' => :'String',
+        :'expiry_date' => :'Time',
+        :'notional_value' => :'Float',
+        :'trading_session' => :'SimpleTradeFormTradingSession'
+      }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+        :'price_effect',
+        :'expiry_date',
+      ])
+    end
+
+    # Initializes the object
+    # @param [Hash] attributes Model attributes in the form of hash
+    def initialize(attributes = {})
+      if (!attributes.is_a?(Hash))
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::SimpleTradeForm` initialize method"
+      end
+
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        if (!self.class.attribute_map.key?(k.to_sym))
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::SimpleTradeForm`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+        end
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'order_type')
+        self.order_type = attributes[:'order_type']
+      end
+
+      if attributes.key?(:'time_in_force')
+        self.time_in_force = attributes[:'time_in_force']
+      end
+
+      if attributes.key?(:'legs')
+        if (value = attributes[:'legs']).is_a?(Array)
+          self.legs = value
+        end
+      end
+
+      if attributes.key?(:'limit_price')
+        self.limit_price = attributes[:'limit_price']
+      end
+
+      if attributes.key?(:'stop_price')
+        self.stop_price = attributes[:'stop_price']
+      end
+
+      if attributes.key?(:'price_effect')
+        self.price_effect = attributes[:'price_effect']
+      end
+
+      if attributes.key?(:'client_order_id')
+        self.client_order_id = attributes[:'client_order_id']
+      end
+
+      if attributes.key?(:'expiry_date')
+        self.expiry_date = attributes[:'expiry_date']
+      end
+
+      if attributes.key?(:'notional_value')
+        self.notional_value = attributes[:'notional_value']
+      end
+
+      if attributes.key?(:'trading_session')
+        self.trading_session = attributes[:'trading_session']
+      else
+        self.trading_session = 'regular'
+      end
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properties with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      if @order_type.nil?
+        invalid_properties.push('invalid value for "order_type", order_type cannot be nil.')
+      end
+
+      if @time_in_force.nil?
+        invalid_properties.push('invalid value for "time_in_force", time_in_force cannot be nil.')
+      end
+
+      if @legs.nil?
+        invalid_properties.push('invalid value for "legs", legs cannot be nil.')
+      end
+
+      if @legs.length < 1
+        invalid_properties.push('invalid value for "legs", number of items must be greater than or equal to 1.')
+      end
+
+      invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return false if @order_type.nil?
+      return false if @time_in_force.nil?
+      return false if @legs.nil?
+      return false if @legs.length < 1
+      true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] legs Value to be assigned
+    def legs=(legs)
+      if legs.nil?
+        fail ArgumentError, 'legs cannot be nil'
+      end
+
+      if legs.length < 1
+        fail ArgumentError, 'invalid value for "legs", number of items must be greater than or equal to 1.'
+      end
+
+      @legs = legs
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param [Object] Object to be compared
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          order_type == o.order_type &&
+          time_in_force == o.time_in_force &&
+          legs == o.legs &&
+          limit_price == o.limit_price &&
+          stop_price == o.stop_price &&
+          price_effect == o.price_effect &&
+          client_order_id == o.client_order_id &&
+          expiry_date == o.expiry_date &&
+          notional_value == o.notional_value &&
+          trading_session == o.trading_session
+    end
+
+    # @see the `==` method
+    # @param [Object] Object to be compared
+    def eql?(o)
+      self == o
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    def hash
+      [order_type, time_in_force, legs, limit_price, stop_price, price_effect, client_order_id, expiry_date, notional_value, trading_session].hash
+    end
+
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
+    def self.build_from_hash(attributes)
+      new.build_from_hash(attributes)
+    end
+
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
+    def build_from_hash(attributes)
+      return nil unless attributes.is_a?(Hash)
+      attributes = attributes.transform_keys(&:to_sym)
+      self.class.openapi_types.each_pair do |key, type|
+        if attributes[self.class.attribute_map[key]].nil? && self.class.openapi_nullable.include?(key)
+          self.send("#{key}=", nil)
+        elsif type =~ /\AArray<(.*)>/i
+          # check to ensure the input is an array given that the attribute
+          # is documented as an array but the input is not
+          if attributes[self.class.attribute_map[key]].is_a?(Array)
+            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          end
+        elsif !attributes[self.class.attribute_map[key]].nil?
+          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        end
+      end
+
+      self
+    end
+
+    # Deserializes the data based on type
+    # @param string type Data type
+    # @param string value Value to be deserialized
+    # @return [Object] Deserialized data
+    def _deserialize(type, value)
+      case type.to_sym
+      when :Time
+        Time.parse(value)
+      when :Date
+        Date.parse(value)
+      when :String
+        value.to_s
+      when :Integer
+        value.to_i
+      when :Float
+        value.to_f
+      when :Boolean
+        if value.to_s =~ /\A(true|t|yes|y|1)\z/i
+          true
+        else
+          false
+        end
+      when :Object
+        # generic object (usually a Hash), return directly
+        value
+      when /\AArray<(?<inner_type>.+)>\z/
+        inner_type = Regexp.last_match[:inner_type]
+        value.map { |v| _deserialize(inner_type, v) }
+      when /\AHash<(?<k_type>.+?), (?<v_type>.+)>\z/
+        k_type = Regexp.last_match[:k_type]
+        v_type = Regexp.last_match[:v_type]
+        {}.tap do |hash|
+          value.each do |k, v|
+            hash[_deserialize(k_type, k)] = _deserialize(v_type, v)
+          end
+        end
+      else # model
+        # models (e.g. Pet) or oneOf
+        klass = SnapTrade.const_get(type)
+        klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
+      end
+    end
+
+    # Returns the string representation of the object
+    # @return [String] String presentation of the object
+    def to_s
+      to_hash.to_s
+    end
+
+    # to_body is an alias to to_hash (backward compatibility)
+    # @return [Hash] Returns the object in the form of hash
+    def to_body
+      to_hash
+    end
+
+    # Returns the object in the form of hash
+    # @return [Hash] Returns the object in the form of hash
+    def to_hash
+      hash = {}
+      self.class.attribute_map.each_pair do |attr, param|
+        value = self.send(attr)
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
+        hash[param] = _to_hash(value)
+      end
+      hash
+    end
+
+    # Outputs non-array value in the form of hash
+    # For object, use to_hash. Otherwise, just return the value
+    # @param [Object] value Any valid value
+    # @return [Hash] Returns the value in the form of hash
+    def _to_hash(value)
+      if value.is_a?(Array)
+        value.compact.map { |v| _to_hash(v) }
+      elsif value.is_a?(Hash)
+        {}.tap do |hash|
+          value.each { |k, v| hash[k] = _to_hash(v) }
+        end
+      elsif value.respond_to? :to_hash
+        value.to_hash
+      else
+        value
+      end
+    end
+
+  end
+
+end

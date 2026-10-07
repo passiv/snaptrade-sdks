@@ -36,7 +36,7 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AuthenticationApi.DeleteSnapTradeUser(
-        "userId_example",
+        ""snaptrade-user-123"",
     )
     
     resp, httpRes, err := request.Execute()
@@ -136,8 +136,8 @@ func main() {
     snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
     
     request := client.AuthenticationApi.LoginSnapTradeUser(
-        "userId_example",
-        "userSecret_example",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
     )
     request.SnapTradeLoginUserRequestBody(snapTradeLoginUserRequestBody)
     

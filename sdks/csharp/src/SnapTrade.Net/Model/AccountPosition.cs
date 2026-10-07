@@ -43,13 +43,13 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountPosition" /> class.
         /// </summary>
-        /// <param name="instrument">instrument (required).</param>
+        /// <param name="instrument">Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present. (required).</param>
         /// <param name="units">The number of units held in the position. Positive numbers indicate long positions and negative numbers indicate short positions..</param>
         /// <param name="price">Last known market price _per share_. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
         /// <param name="costBasis">Book price or average purchase price for the position. For options, this is per-share..</param>
         /// <param name="currency">ISO-4217 currency code for the position &#x60;price&#x60; and &#x60;cost_basis&#x60;..</param>
         /// <param name="cashEquivalent">Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power..</param>
-        /// <param name="taxLots">List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed).</param>
+        /// <param name="taxLots">List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions. For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for all other instrument kinds or when the feature is disabled..</param>
         public AccountPosition(Instrument instrument = default(Instrument), decimal? units = default(decimal?), decimal? price = default(decimal?), decimal? costBasis = default(decimal?), string currency = default(string), bool cashEquivalent = default(bool), List<TaxLot> taxLots = default(List<TaxLot>)) : base()
         {
             // to ensure "instrument" is required (not null)
@@ -68,8 +68,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Instrument
+        /// Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.
         /// </summary>
+        /// <value>Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.</value>
         [DataMember(Name = "instrument", IsRequired = true, EmitDefaultValue = true)]
         public Instrument Instrument { get; set; }
 
@@ -112,9 +113,9 @@ namespace SnapTrade.Net.Model
         public bool CashEquivalent { get; set; }
 
         /// <summary>
-        /// List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)
+        /// List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions. For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for all other instrument kinds or when the feature is disabled.
         /// </summary>
-        /// <value>List of tax lots for the given position (disabled by default, only available on paid plans, contact support if needed)</value>
+        /// <value>List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions. For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for all other instrument kinds or when the feature is disabled.</value>
         [DataMember(Name = "tax_lots", EmitDefaultValue = false)]
         public List<TaxLot> TaxLots { get; set; }
 

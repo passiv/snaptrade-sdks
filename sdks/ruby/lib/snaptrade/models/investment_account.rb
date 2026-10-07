@@ -46,7 +46,7 @@ module SnapTrade
     attr_accessor :raw_type
 
     # Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
-    attr_accessor :account_type
+    attr_accessor :cash_or_margin
 
     # Indicates whether the account is a paper (simulated) trading account.
     attr_accessor :is_paper
@@ -67,7 +67,7 @@ module SnapTrade
         :'funding_date' => :'funding_date',
         :'sync_status' => :'sync_status',
         :'raw_type' => :'raw_type',
-        :'account_type' => :'account_type',
+        :'cash_or_margin' => :'cash_or_margin',
         :'is_paper' => :'is_paper',
         :'net_value' => :'net_value'
       }
@@ -92,7 +92,7 @@ module SnapTrade
         :'funding_date' => :'Time',
         :'sync_status' => :'ConnectionAccountSyncStatus',
         :'raw_type' => :'String',
-        :'account_type' => :'AccountType',
+        :'cash_or_margin' => :'CashOrMargin',
         :'is_paper' => :'Boolean',
         :'net_value' => :'InvestmentAccountNetValue'
       }
@@ -169,8 +169,8 @@ module SnapTrade
         self.raw_type = attributes[:'raw_type']
       end
 
-      if attributes.key?(:'account_type')
-        self.account_type = attributes[:'account_type']
+      if attributes.key?(:'cash_or_margin')
+        self.cash_or_margin = attributes[:'cash_or_margin']
       end
 
       if attributes.key?(:'is_paper')
@@ -241,7 +241,7 @@ module SnapTrade
           funding_date == o.funding_date &&
           sync_status == o.sync_status &&
           raw_type == o.raw_type &&
-          account_type == o.account_type &&
+          cash_or_margin == o.cash_or_margin &&
           is_paper == o.is_paper &&
           net_value == o.net_value
     end
@@ -255,7 +255,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, masked_account_number, institution_account_id, institution_id, opening_date, funding_date, sync_status, raw_type, account_type, is_paper, net_value].hash
+      [kind, id, connection_id, display_name, masked_account_number, institution_account_id, institution_id, opening_date, funding_date, sync_status, raw_type, cash_or_margin, is_paper, net_value].hash
     end
 
     # Builds the object from hash

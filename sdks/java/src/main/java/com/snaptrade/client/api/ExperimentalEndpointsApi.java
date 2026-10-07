@@ -4,6 +4,11 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllUserAccountsResponse;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import com.snaptrade.client.model.SimpleTradeForm;
+import com.snaptrade.client.model.SimpleTradeLeg;
+import com.snaptrade.client.model.SimpleTradeResponse;
 import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
@@ -57,6 +62,11 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
     public class ListSubscriptionsRequestBuilder extends ListSubscriptionsRequestBuilderGenerated {
         public ListSubscriptionsRequestBuilder() {
             super();
+        }
+    }
+    public class PlaceSimpleOrderRequestBuilder extends PlaceSimpleOrderRequestBuilderGenerated {
+        public PlaceSimpleOrderRequestBuilder(String orderType, String timeInForce, List<SimpleTradeLeg> legs, UUID accountId, String userId, String userSecret) {
+            super(orderType, timeInForce, legs, accountId, userId, userSecret);
         }
     }
 }
