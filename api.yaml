@@ -512,6 +512,8 @@ paths:
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
+        Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
+
       operationId: AccountInformation_getUserHoldings
       parameters:
         - in: path
@@ -536,6 +538,22 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AccountHoldingsAccount"
+        "409":
+          description: A holdings request for this account is already in flight. Wait for it to complete before retrying.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: A holdings request for this account is already in flight. Please wait for it to complete before retrying.
+                  status_code:
+                    type: integer
+                    example: 409
+                  code:
+                    type: string
+                    example: "1166"
         "400":
           description: Bad Request
           content:
