@@ -120,7 +120,7 @@ export interface Institution {
      */
     'square_logo_url': string | null;
     /**
-     * How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. 
+     * How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. 
      * @type {string}
      * @memberof Institution
      */
@@ -139,7 +139,7 @@ export interface Institution {
     'connection': InstitutionConnectionNullable | null;
 }
 
-type InstitutionReleaseStageEnum = 'GENERALLY_AVAILABLE' | 'BETA'
+type InstitutionReleaseStageEnum = 'GENERALLY_AVAILABLE' | 'BETA' | 'ALPHA'
 type InstitutionRegionsEnum = 'US' | 'CA' | 'EUROPE' | 'AU' | 'IN'
 
 

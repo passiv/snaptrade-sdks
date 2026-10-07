@@ -40,7 +40,7 @@ type InvestmentAccount struct {
 	// The account type as provided by the institution.
 	RawType NullableString `json:"raw_type,omitempty"`
 	// Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
-	AccountType *string `json:"account_type,omitempty"`
+	CashOrMargin *string `json:"cash_or_margin,omitempty"`
 	// Indicates whether the account is a paper (simulated) trading account.
 	IsPaper bool `json:"is_paper"`
 	NetValue NullableInvestmentAccountNetValue `json:"net_value,omitempty"`
@@ -434,36 +434,36 @@ func (o *InvestmentAccount) UnsetRawType() {
 	o.RawType.Unset()
 }
 
-// GetAccountType returns the AccountType field value if set, zero value otherwise.
-func (o *InvestmentAccount) GetAccountType() string {
-	if o == nil || isNil(o.AccountType) {
+// GetCashOrMargin returns the CashOrMargin field value if set, zero value otherwise.
+func (o *InvestmentAccount) GetCashOrMargin() string {
+	if o == nil || isNil(o.CashOrMargin) {
 		var ret string
 		return ret
 	}
-	return *o.AccountType
+	return *o.CashOrMargin
 }
 
-// GetAccountTypeOk returns a tuple with the AccountType field value if set, nil otherwise
+// GetCashOrMarginOk returns a tuple with the CashOrMargin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InvestmentAccount) GetAccountTypeOk() (*string, bool) {
-	if o == nil || isNil(o.AccountType) {
+func (o *InvestmentAccount) GetCashOrMarginOk() (*string, bool) {
+	if o == nil || isNil(o.CashOrMargin) {
     return nil, false
 	}
-	return o.AccountType, true
+	return o.CashOrMargin, true
 }
 
-// HasAccountType returns a boolean if a field has been set.
-func (o *InvestmentAccount) HasAccountType() bool {
-	if o != nil && !isNil(o.AccountType) {
+// HasCashOrMargin returns a boolean if a field has been set.
+func (o *InvestmentAccount) HasCashOrMargin() bool {
+	if o != nil && !isNil(o.CashOrMargin) {
 		return true
 	}
 
 	return false
 }
 
-// SetAccountType gets a reference to the given string and assigns it to the AccountType field.
-func (o *InvestmentAccount) SetAccountType(v string) {
-	o.AccountType = &v
+// SetCashOrMargin gets a reference to the given string and assigns it to the CashOrMargin field.
+func (o *InvestmentAccount) SetCashOrMargin(v string) {
+	o.CashOrMargin = &v
 }
 
 // GetIsPaper returns the IsPaper field value
@@ -567,8 +567,8 @@ func (o InvestmentAccount) MarshalJSON() ([]byte, error) {
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
-	if !isNil(o.AccountType) {
-		toSerialize["account_type"] = o.AccountType
+	if !isNil(o.CashOrMargin) {
+		toSerialize["cash_or_margin"] = o.CashOrMargin
 	}
 	if true {
 		toSerialize["is_paper"] = o.IsPaper
@@ -605,7 +605,7 @@ func (o *InvestmentAccount) UnmarshalJSON(bytes []byte) error {
 	delete(additionalProperties, "funding_date")
 	delete(additionalProperties, "sync_status")
 	delete(additionalProperties, "raw_type")
-	delete(additionalProperties, "account_type")
+	delete(additionalProperties, "cash_or_margin")
 	delete(additionalProperties, "is_paper")
 	delete(additionalProperties, "net_value")
 	decoded.AdditionalProperties = additionalProperties

@@ -19,6 +19,10 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllUserAccountsResponse;
+import java.time.OffsetDateTime;
+import com.snaptrade.client.model.SimpleTradeForm;
+import com.snaptrade.client.model.SimpleTradeLeg;
+import com.snaptrade.client.model.SimpleTradeResponse;
 import com.snaptrade.client.model.TradeDetectionAddSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionRequest;
 import com.snaptrade.client.model.TradeDetectionCancelSubscriptionResponse;
@@ -182,6 +186,40 @@ public class ExperimentalEndpointsApiTest {
     @Test
     public void listSubscriptionsTest() throws ApiException {
         List<TradeDetectionSubscription> response = api.listSubscriptions()
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Place a simple order (beta)
+     *
+     * **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeSimpleOrderTest() throws ApiException {
+        String orderType = null;
+        String timeInForce = null;
+        List<SimpleTradeLeg> legs = null;
+        UUID accountId = null;
+        String userId = null;
+        String userSecret = null;
+        Object limitPrice = null;
+        Object stopPrice = null;
+        String priceEffect = null;
+        UUID clientOrderId = null;
+        OffsetDateTime expiryDate = null;
+        Object notionalValue = null;
+        String tradingSession = null;
+        SimpleTradeResponse response = api.placeSimpleOrder(orderType, timeInForce, legs, accountId, userId, userSecret)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
+                .priceEffect(priceEffect)
+                .clientOrderId(clientOrderId)
+                .expiryDate(expiryDate)
+                .notionalValue(notionalValue)
+                .tradingSession(tradingSession)
                 .execute();
         // TODO: test validations
     }

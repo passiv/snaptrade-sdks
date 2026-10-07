@@ -19,7 +19,7 @@ An investment account under a connection. `opening_date`, `funding_date`, and `n
 |**fundingDate** | **OffsetDateTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list. |  [optional] |
 |**syncStatus** | [**ConnectionAccountSyncStatus**](ConnectionAccountSyncStatus.md) |  |  |
 |**rawType** | **String** | The account type as provided by the institution. |  [optional] |
-|**accountType** | [**AccountTypeEnum**](#AccountTypeEnum) | Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise.  |  [optional] |
+|**cashOrMargin** | [**CashOrMarginEnum**](#CashOrMarginEnum) | Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise.  |  [optional] |
 |**isPaper** | **Boolean** | Indicates whether the account is a paper (simulated) trading account. |  |
 |**netValue** | [**InvestmentAccountNetValue**](InvestmentAccountNetValue.md) |  |  [optional] |
 
@@ -33,7 +33,7 @@ An investment account under a connection. `opening_date`, `funding_date`, and `n
 
 
 
-## Enum: AccountTypeEnum
+## Enum: CashOrMarginEnum
 
 | Name | Value |
 |---- | -----|

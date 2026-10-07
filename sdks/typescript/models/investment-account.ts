@@ -149,7 +149,7 @@ export interface InvestmentAccount {
      * @type {string}
      * @memberof InvestmentAccount
      */
-    'account_type'?: InvestmentAccountAccountTypeEnum;
+    'cash_or_margin'?: InvestmentAccountCashOrMarginEnum;
     /**
      * Indicates whether the account is a paper (simulated) trading account.
      * @type {boolean}
@@ -165,6 +165,6 @@ export interface InvestmentAccount {
 }
 
 type InvestmentAccountKindEnum = 'investment'
-type InvestmentAccountAccountTypeEnum = 'cash' | 'margin' | 'unknown'
+type InvestmentAccountCashOrMarginEnum = 'cash' | 'margin' | 'unknown'
 
 

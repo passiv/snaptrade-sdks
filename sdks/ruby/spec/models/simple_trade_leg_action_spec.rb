@@ -7,32 +7,17 @@ The version of the OpenAPI document: 1.0.0
 Contact: api@snaptrade.com
 =end
 
+require 'spec_helper'
+require 'json'
 require 'date'
-require 'time'
 
-module SnapTrade
-  class AccountType
-    CASH = "cash".freeze
-    MARGIN = "margin".freeze
-    UNKNOWN = "unknown".freeze
+# Unit tests for SnapTrade::SimpleTradeLegAction
+describe SnapTrade::SimpleTradeLegAction do
+  let(:instance) { SnapTrade::SimpleTradeLegAction.new }
 
-    def self.all_vars
-      @all_vars ||= [CASH, MARGIN, UNKNOWN].freeze
-    end
-
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def self.build_from_hash(value)
-      new.build_from_hash(value)
-    end
-
-    # Builds the enum from string
-    # @param [String] The enum value in the form of the string
-    # @return [String] The enum value
-    def build_from_hash(value)
-      return value if AccountType.all_vars.include?(value)
-      raise "Invalid ENUM value #{value} for class #AccountType"
+  describe 'test an instance of SimpleTradeLegAction' do
+    it 'should create an instance of SimpleTradeLegAction' do
+      expect(instance).to be_instance_of(SnapTrade::SimpleTradeLegAction)
     end
   end
 end

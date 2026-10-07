@@ -146,12 +146,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'RawType'
         }
         /// <summary>
-        /// Test the property 'AccountType'
+        /// Test the property 'CashOrMargin'
         /// </summary>
         [Fact]
-        public void AccountTypeTest()
+        public void CashOrMarginTest()
         {
-            // TODO unit test for the property 'AccountType'
+            // TODO unit test for the property 'CashOrMargin'
         }
         /// <summary>
         /// Test the property 'IsPaper'

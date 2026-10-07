@@ -132,11 +132,11 @@ public class InvestmentAccountTest {
     }
 
     /**
-     * Test the property 'accountType'
+     * Test the property 'cashOrMargin'
      */
     @Test
-    public void accountTypeTest() {
-        // TODO: test accountType
+    public void cashOrMarginTest() {
+        // TODO: test cashOrMargin
     }
 
     /**

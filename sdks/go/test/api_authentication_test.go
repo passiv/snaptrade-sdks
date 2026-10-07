@@ -29,7 +29,7 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
     t.Run("Test AuthenticationApiService DeleteSnapTradeUser", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AuthenticationApi.DeleteSnapTradeUser(
-            "userId_example",
+            ""snaptrade-user-123"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -68,8 +68,8 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
         snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
         
         request := client.AuthenticationApi.LoginSnapTradeUser(
-            "userId_example",
-            "userSecret_example",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )
         request.SnapTradeLoginUserRequestBody(snapTradeLoginUserRequestBody)
         

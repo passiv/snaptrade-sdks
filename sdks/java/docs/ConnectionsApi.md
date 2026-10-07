@@ -45,9 +45,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID connectionId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID connectionId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       DeleteConnectionConfirmation result = client
               .connections
@@ -147,9 +147,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID authorizationId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       BrokerageAuthorization result = client
               .connections
@@ -255,9 +255,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID authorizationId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       BrokerageAuthorizationDisabledConfirmation result = client
               .connections
@@ -352,9 +352,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID authorizationId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       List<Account> result = client
               .connections
@@ -448,8 +448,8 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       List<BrokerageAuthorization> result = client
               .connections
@@ -543,9 +543,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID connectionId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID connectionId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       ConnectionAccountsResponse result = client
               .connections
@@ -640,9 +640,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID authorizationId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       BrokerageAuthorizationRefreshConfirmation result = client
               .connections
@@ -737,9 +737,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    UUID authorizationId = UUID.randomUUID();
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID authorizationId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
     String timeframes = "ALL,1Y"; // Optional comma separated list of rate-of-return timeframes to return. Supported values are `ALL`, `1Y`, `YTD`, `1M`, `1W`, and `1D`. If omitted, SnapTrade returns all six supported timeframes.
     try {
       RateOfReturnResponse result = client
@@ -838,9 +838,9 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID();
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
+    UUID authorizationId = UUID.fromString("87b24961-b51e-4db8-9226-f198f6518a89");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     try {
       BrokerageAuthorizationTransactionsSyncConfirmation result = client
               .connections

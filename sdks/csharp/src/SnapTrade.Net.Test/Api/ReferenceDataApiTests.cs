@@ -276,9 +276,9 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void SymbolSearchUserAccountTest()
         {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
             var substring = "AAPL"; // The search query for symbols.
             
             var symbolQuery = new SymbolQuery(

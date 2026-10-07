@@ -40,8 +40,8 @@ class RequiredInstitution(TypedDict):
     # URL of the institution's square logo.
     square_logo_url: typing.Optional[str]
 
-    # How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. 
-    release_stage: Literal["GENERALLY_AVAILABLE", "BETA"]
+    # How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. 
+    release_stage: Literal["GENERALLY_AVAILABLE", "BETA", "ALPHA"]
 
     regions: typing.Optional[InstitutionRegions]
 
