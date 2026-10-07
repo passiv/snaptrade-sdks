@@ -1917,6 +1917,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
+Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId
@@ -2061,6 +2063,17 @@ func (a *AccountInformationApiService) GetUserHoldingsExecute(r AccountInformati
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Model403FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v AccountInformationGetUserHoldings409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
