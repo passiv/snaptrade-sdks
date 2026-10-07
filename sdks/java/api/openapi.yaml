@@ -967,6 +967,8 @@ paths:
           - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+        Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
       operationId: AccountInformation_getUserHoldings
       parameters:
       - explode: false
@@ -1010,6 +1012,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
+          x-do-not-generate: true
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInformation_getUserHoldings_409_response'
+          description: A holdings request for this account is already in flight. Wait
+            for it to complete before retrying.
           x-do-not-generate: true
         "425":
           content:
@@ -13681,6 +13691,19 @@ components:
       example: "ALL,1Y"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-holdings-get-responses-409-content-application-json-schema-properties-detail:
+      example: A holdings request for this account is already in flight. Please wait
+        for it to complete before retrying.
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-holdings-get-responses-409-content-application-json-schema-properties-status_code
+    : example: 409
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-holdings-get-responses-409-content-application-json-schema-properties-code:
+      example: "1166"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema:
       example: 30
       type: number
@@ -18767,6 +18790,29 @@ components:
       x-konfig-properties:
         figi_instrument:
           nullable: true
+    AccountInformation_getUserHoldings_409_response:
+      additionalProperties: true
+      properties:
+        detail:
+          example: A holdings request for this account is already in flight. Please
+            wait for it to complete before retrying.
+          type: string
+          x-konfig-original-example: A holdings request for this account is already
+            in flight. Please wait for it to complete before retrying.
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-responses-409-content-application-json-schema-properties-detail
+        status_code:
+          example: 409
+          type: integer
+          x-konfig-original-example: 409
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-responses-409-content-application-json-schema-properties-status_code
+        code:
+          example: "1166"
+          type: string
+          x-konfig-original-example: "1166"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-responses-409-content-application-json-schema-properties-code
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
     AccountInformation_getUserAccountOrderDetail_request:
       properties:
         brokerage_order_id:

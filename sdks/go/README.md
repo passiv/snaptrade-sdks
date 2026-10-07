@@ -233,6 +233,7 @@ Class | Method | HTTP request | Description
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountInformationGetUserAccountOrderDetailRequest](docs/AccountInformationGetUserAccountOrderDetailRequest.md)
+ - [AccountInformationGetUserHoldings409Response](docs/AccountInformationGetUserHoldings409Response.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordLeg](docs/AccountOrderRecordLeg.md)
  - [AccountOrderRecordLegInstrument](docs/AccountOrderRecordLegInstrument.md)

@@ -915,6 +915,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
+Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
