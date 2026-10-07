@@ -746,7 +746,6 @@ paths:
         - in: path
           required: true
           name: accountId
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           schema:
             $ref: "#/components/schemas/AccountID"
       responses:
@@ -1021,6 +1020,8 @@ paths:
       operationId: AccountInformation_getAccountBalanceHistory
       description: |
         An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and has a maximum lookback of 1 year. Because the data is dynamically generated, we recommend replacing your dataset with each request as opposed to combining data from multiple requests. Enable this feature for free in the [Add-on page of the Customer Dashboard](https://dashboard.snaptrade.com/add-ons)
+
+        The data may contain gaps and is best used for charting account value trends. It should not be relied on as a complete or exact record of historical account values.
       parameters:
         - in: query
           required: true
@@ -1967,7 +1968,7 @@ paths:
       security: []
       responses:
         "200":
-          description: Enabled institutions that are generally available or in beta, sorted by display name. Paper-trading and simulated-trading variants are not listed.
+          description: Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed.
           content:
             application/json:
               schema:
@@ -2145,6 +2146,116 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /accounts/{accountId}/trading/simple:
+    post:
+      tags:
+        - Experimental endpoints
+      summary: Place a simple order (beta)
+      description: |
+        **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
+
+        Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+        An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.
+
+        A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+      operationId: Trading_placeSimpleOrder
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account to execute the trade on.
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          name: userSecret
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimpleTradeForm"
+            examples:
+              futureStopLimit:
+                summary: Single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: day
+                  client_order_id: "3e8b682d-c901-4b2d-a67f-70f73b04a29e"
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                    - instrument:
+                        kind: future
+                        symbol: /ESZ6
+                      action: buy
+                      units: "1"
+              optionSpread:
+                summary: Equity-option debit spread
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "1.25"
+                  price_effect: debit
+                  legs:
+                    - instrument:
+                        kind: option
+                        symbol: "AAPL  261218C00200000"
+                      action: buy_to_open
+                      units: "1"
+                    - instrument:
+                        kind: option
+                        symbol: "AAPL  261218C00210000"
+                      action: sell_to_open
+                      units: "1"
+              notionalEquity:
+                summary: Equity market order by dollar value
+                value:
+                  order_type: market
+                  time_in_force: day
+                  notional_value: "100.00"
+                  legs:
+                    - instrument:
+                        kind: equity
+                        symbol: AAPL
+                      action: buy
+      responses:
+        "200":
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleTradeResponse"
+        "400":
+          description: Invalid request, unsupported trading feature, or brokerage rejection
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected error
   /accounts/{accountId}/trading/complex:
     post:
       tags:
@@ -3563,7 +3674,7 @@ components:
           nullable: true
           description: The account type as provided by the institution.
           example: Margin
-        account_type:
+        cash_or_margin:
           type: string
           description: |
             Whether the institution reports the account as a cash or margin account, normalized across institutions.
@@ -4132,7 +4243,7 @@ components:
       properties:
         history:
           type: array
-          description: List of estimated account values over time returned by the endpoint.
+          description: List of estimated account values over time returned by the endpoint. The data may contain gaps and is best used for charting trends, rather than as a complete or exact record of historical account values.
           items:
             $ref: "#/components/schemas/AccountValueHistoryItem"
         currency:
@@ -6090,10 +6201,12 @@ components:
             How mature the integration is.
             - `GENERALLY_AVAILABLE`: fully supported and validated for production use.
             - `BETA`: production-ready, with ongoing validation and improvements.
+            - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality.
           type: string
           enum:
             - GENERALLY_AVAILABLE
             - BETA
+            - ALPHA
           example: GENERALLY_AVAILABLE
         regions:
           description: |
@@ -6741,6 +6854,113 @@ components:
           description: Estimated total transaction fees and commissions for the order.
           type: string
           example: "0.50"
+    SimpleTradeDecimal:
+      description: A finite decimal, supplied as a decimal string to preserve precision.
+      type: string
+      format: decimal
+      nullable: true
+      example: "1.25"
+    SimpleTradeInstrument:
+      type: object
+      additionalProperties: false
+      required:
+        - kind
+        - symbol
+      properties:
+        kind:
+          type: string
+          enum: [equity, option, future, future_option]
+          example: future
+        symbol:
+          type: string
+          minLength: 1
+          description: Equity ticker, OCC equity-option symbol, or exact tastytrade BrokerageInstrument ticker for a future or future option. Future tickers begin with `/`; future-option tickers begin with `./`. Preserve spaces and punctuation. Universal symbol IDs are not accepted.
+          example: /ESZ6
+    SimpleTradeLeg:
+      type: object
+      additionalProperties: false
+      required:
+        - instrument
+        - action
+      properties:
+        instrument:
+          $ref: "#/components/schemas/SimpleTradeInstrument"
+        action:
+          type: string
+          enum: [buy, sell, buy_to_open, buy_to_close, sell_to_open, sell_to_close]
+          description: Equities and futures require buy or sell. Equity options and future options require buy_to_open, buy_to_close, sell_to_open, or sell_to_close.
+          example: buy
+        units:
+          description: Positive shares or contracts for this leg. Required unless the order is a single-equity market order using notional_value, in which case omit or set to null. Fractional units are supported only for single-equity orders on eligible brokerages; all other legs require whole units. Quantities are absolute units per leg, not strategy ratios.
+          allOf:
+            - $ref: "#/components/schemas/SimpleTradeDecimal"
+    SimpleTradeForm:
+      type: object
+      additionalProperties: false
+      required:
+        - order_type
+        - time_in_force
+        - legs
+      properties:
+        order_type:
+          type: string
+          enum: [limit, market, stop, stop_limit]
+          example: stop_limit
+        time_in_force:
+          type: string
+          enum: [day, gtc, gtd, fok, ioc]
+          description: Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+          example: day
+        legs:
+          type: array
+          minItems: 1
+          description: Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+          items:
+            $ref: "#/components/schemas/SimpleTradeLeg"
+        limit_price:
+          description: Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+          allOf:
+            - $ref: "#/components/schemas/SimpleTradeDecimal"
+        stop_price:
+          description: Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+          allOf:
+            - $ref: "#/components/schemas/SimpleTradeDecimal"
+        price_effect:
+          type: string
+          nullable: true
+          enum: [credit, debit, even]
+          description: Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+          example: debit
+        client_order_id:
+          allOf:
+            - $ref: "#/components/schemas/ClientOrderID"
+          description: Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+        expiry_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+          example: "2026-12-18T20:00:00Z"
+        notional_value:
+          description: Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+          allOf:
+            - $ref: "#/components/schemas/SimpleTradeDecimal"
+        trading_session:
+          type: string
+          enum: [regular, extended]
+          default: regular
+          description: extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+          example: regular
+    SimpleTradeResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - brokerage_order_id
+      properties:
+        brokerage_order_id:
+          type: string
+          description: The brokerage-assigned ID of the submitted order.
+          example: "123456"
     MlegTradeForm:
       description: Inputs for placing a multi-leg order with the brokerage.
       type: object
