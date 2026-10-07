@@ -64,7 +64,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v13.0.32-blue)](https://pypi.org/project/snaptrade-python-sdk/13.0.32)
+[![PyPI](https://img.shields.io/badge/PyPI-v13.0.33-blue)](https://pypi.org/project/snaptrade-python-sdk/13.0.33)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -151,7 +151,7 @@ Python >=3.8
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==13.0.32
+pip install snaptrade-python-sdk==13.0.33
 ```
 
 ## Authentication<a id="authentication"></a>
@@ -914,6 +914,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

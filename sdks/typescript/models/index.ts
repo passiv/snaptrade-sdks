@@ -4,6 +4,7 @@ export * from './account-balance-total';
 export * from './account-holdings';
 export * from './account-holdings-account';
 export * from './account-information-get-user-account-order-detail-request';
+export * from './account-information-get-user-holdings409-response';
 export * from './account-order-record';
 export * from './account-order-record-leg';
 export * from './account-order-record-leg-instrument';

@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Packagist](https://img.shields.io/badge/Packagist-v3.0.31-blue)](https://packagist.org/packages/konfig/snaptrade-php-7-sdk)
+[![Packagist](https://img.shields.io/badge/Packagist-v3.0.32-blue)](https://packagist.org/packages/konfig/snaptrade-php-7-sdk)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -159,7 +159,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "konfig/snaptrade-php-7-sdk": "3.0.31"
+    "konfig/snaptrade-php-7-sdk": "3.0.32"
   }
 }
 ```
@@ -655,6 +655,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
 
 
 

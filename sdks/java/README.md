@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v6.0.31-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/6.0.31)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v6.0.32-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/6.0.32)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -177,7 +177,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.snaptrade</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>6.0.31</version>
+  <version>6.0.32</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -193,7 +193,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.snaptrade:snaptrade-java-sdk:6.0.31"
+   implementation "com.snaptrade:snaptrade-java-sdk:6.0.32"
 }
 ```
 
@@ -230,7 +230,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-6.0.31.jar`
+* `target/snaptrade-java-sdk-6.0.32.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
@@ -737,6 +737,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
