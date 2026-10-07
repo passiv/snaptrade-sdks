@@ -247,7 +247,7 @@ async function wrapAxiosRequest<R>(makeRequest: () => Promise<R>): Promise<R> {
  * @export
  */
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration<AuthMode>, operationAuth?: any) {
-    return async <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+    return async <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH): ReturnType<typeof globalAxios.request<T, R>> => {
         requestBeforeUrlHook({axiosArgs, basePath, configuration})
         const url = (configuration?.basePath || basePath) + axiosArgs.url
         await requestAfterHook({axiosArgs, basePath, url, configuration, operationAuth: operationAuth ? { ...operationAuth, selectedAuthMode: configuration?.authMode } : undefined})
