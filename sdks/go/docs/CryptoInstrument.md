@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
 **Description** | Pointer to **NullableString** | Human-readable description of the security. | [optional] 
 **Currency** | Pointer to **NullableString** | ISO-4217 currency code for the security listing. | [optional] 
-**Exchange** | Pointer to **NullableString** | Exchange MIC code or exchange code for the security. | [optional] 
+**Exchange** | Pointer to **NullableString** | Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version. | [optional] 
 **FigiInstrument** | Pointer to [**NullableFigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
 
 ## Methods

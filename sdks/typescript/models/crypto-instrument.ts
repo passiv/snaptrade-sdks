@@ -114,9 +114,10 @@ export interface CryptoInstrument {
      */
     'currency'?: string | null;
     /**
-     * Exchange MIC code or exchange code for the security.
+     * Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
      * @type {string}
      * @memberof CryptoInstrument
+     * @deprecated
      */
     'exchange'?: string | null;
     /**

@@ -568,6 +568,7 @@ class CryptoInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets exchange
      *
      * @return string|null
+     * @deprecated
      */
     public function getExchange()
     {
@@ -577,9 +578,10 @@ class CryptoInstrument implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exchange
      *
-     * @param string|null $exchange Exchange MIC code or exchange code for the security.
+     * @param string|null $exchange Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
      *
      * @return self
+     * @deprecated
      */
     public function setExchange($exchange)
     {

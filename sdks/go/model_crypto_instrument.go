@@ -29,7 +29,8 @@ type CryptoInstrument struct {
 	Description NullableString `json:"description,omitempty"`
 	// ISO-4217 currency code for the security listing.
 	Currency NullableString `json:"currency,omitempty"`
-	// Exchange MIC code or exchange code for the security.
+	// Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
+	// Deprecated
 	Exchange NullableString `json:"exchange,omitempty"`
 	FigiInstrument NullableFigiInstrumentNullable `json:"figi_instrument,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -239,6 +240,7 @@ func (o *CryptoInstrument) UnsetCurrency() {
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *CryptoInstrument) GetExchange() string {
 	if o == nil || isNil(o.Exchange.Get()) {
 		var ret string
@@ -250,6 +252,7 @@ func (o *CryptoInstrument) GetExchange() string {
 // GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *CryptoInstrument) GetExchangeOk() (*string, bool) {
 	if o == nil {
     return nil, false
@@ -267,6 +270,7 @@ func (o *CryptoInstrument) HasExchange() bool {
 }
 
 // SetExchange gets a reference to the given NullableString and assigns it to the Exchange field.
+// Deprecated
 func (o *CryptoInstrument) SetExchange(v string) {
 	o.Exchange.Set(&v)
 }

@@ -5662,8 +5662,8 @@ components:
         exchange:
           type: string
           nullable: true
-          description: Exchange MIC code or exchange code for the security.
-          example: XNAS
+          deprecated: true
+          description: Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
         figi_instrument:
           nullable: true
           allOf:

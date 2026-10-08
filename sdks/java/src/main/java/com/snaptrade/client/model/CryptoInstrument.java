@@ -317,11 +317,13 @@ public class CryptoInstrument {
   }
 
    /**
-   * Exchange MIC code or exchange code for the security.
+   * Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
    * @return exchange
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "XNAS", value = "Exchange MIC code or exchange code for the security.")
+  @ApiModelProperty(value = "Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.")
 
   public String getExchange() {
     return exchange;

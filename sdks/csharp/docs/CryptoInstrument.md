@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
 **Description** | **string** | Human-readable description of the security. | [optional] 
 **Currency** | **string** | ISO-4217 currency code for the security listing. | [optional] 
-**Exchange** | **string** | Exchange MIC code or exchange code for the security. | [optional] 
+**Exchange** | **string** | Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version. | [optional] 
 **FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
