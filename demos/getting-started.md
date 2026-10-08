@@ -16,13 +16,15 @@ You can get your SnapTrade `clientId` and `consumerKey` by [registering for a ne
 
 ```python
 import json
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, SnapTradeAuth
 import uuid
 import os
 
 snaptrade = SnapTrade(
-consumer_key=SNAPTRADE_CONSUMER_KEY,
-client_id=SNAPTRADE_CLIENT_ID,
+    auth=SnapTradeAuth.commercial_api_key(
+        consumer_key=SNAPTRADE_CONSUMER_KEY,
+        client_id=SNAPTRADE_CLIENT_ID,
+    ),
 )
 
 print("Successfully initiated client")

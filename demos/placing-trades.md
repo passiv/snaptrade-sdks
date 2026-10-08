@@ -25,14 +25,16 @@ Please copy the values from the [Getting Started](https://docs.snaptrade.com/dem
 ::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
 
 ```python
-from snaptrade_client import SnapTrade
+from snaptrade_client import SnapTrade, SnapTradeAuth
 import json
 import uuid
 import os
 
 snaptrade = SnapTrade(
-  consumer_key=SNAPTRADE_CONSUMER_KEY,
-  client_id=SNAPTRADE_CLIENT_ID,
+    auth=SnapTradeAuth.commercial_api_key(
+        consumer_key=SNAPTRADE_CONSUMER_KEY,
+        client_id=SNAPTRADE_CLIENT_ID,
+    ),
 )
 
 user_id = USER_ID
