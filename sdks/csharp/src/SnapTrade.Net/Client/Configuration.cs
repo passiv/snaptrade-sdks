@@ -33,7 +33,7 @@ namespace SnapTrade.Net.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "6.0.32";
+        public const string Version = "6.0.33";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -116,7 +116,7 @@ namespace SnapTrade.Net.Client
         public Configuration()
         {
             Proxy = null;
-            UserAgent = "Konfig/6.0.32/csharp";
+            UserAgent = "Konfig/6.0.33/csharp";
             BasePath = "https://api.snaptrade.com";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
@@ -522,7 +522,7 @@ namespace SnapTrade.Net.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
             report += "    Version of the API: 1.0.0\n";
-            report += "    SDK Package Version: 6.0.32\n";
+            report += "    SDK Package Version: 6.0.33\n";
 
             return report;
         }
