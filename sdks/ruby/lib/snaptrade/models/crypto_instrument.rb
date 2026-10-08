@@ -31,7 +31,7 @@ module SnapTrade
     # ISO-4217 currency code for the security listing.
     attr_accessor :currency
 
-    # Exchange MIC code or exchange code for the security.
+    # Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
     attr_accessor :exchange
 
     attr_accessor :figi_instrument

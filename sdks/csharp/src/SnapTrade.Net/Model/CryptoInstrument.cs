@@ -71,7 +71,7 @@ namespace SnapTrade.Net.Model
         /// <param name="rawSymbol">The raw symbol without any exchange suffix. (required).</param>
         /// <param name="description">Human-readable description of the security..</param>
         /// <param name="currency">ISO-4217 currency code for the security listing..</param>
-        /// <param name="exchange">Exchange MIC code or exchange code for the security..</param>
+        /// <param name="exchange">Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version..</param>
         /// <param name="figiInstrument">figiInstrument.</param>
         public CryptoInstrument(KindEnum kind = default(KindEnum), string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), string currency = default(string), string exchange = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable)) : base()
         {
@@ -137,10 +137,11 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Exchange MIC code or exchange code for the security.
+        /// Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.
         /// </summary>
-        /// <value>Exchange MIC code or exchange code for the security.</value>
+        /// <value>Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version.</value>
         [DataMember(Name = "exchange", EmitDefaultValue = true)]
+        [Obsolete]
         public string Exchange { get; set; }
 
         /// <summary>

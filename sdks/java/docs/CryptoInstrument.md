@@ -14,7 +14,7 @@ Security instrument metadata for crypto positions.
 |**rawSymbol** | **String** | The raw symbol without any exchange suffix. |  |
 |**description** | **String** | Human-readable description of the security. |  [optional] |
 |**currency** | **String** | ISO-4217 currency code for the security listing. |  [optional] |
-|**exchange** | **String** | Exchange MIC code or exchange code for the security. |  [optional] |
+|**exchange** | **String** | Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version. |  [optional] |
 |**figiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  |  [optional] |
 
 
