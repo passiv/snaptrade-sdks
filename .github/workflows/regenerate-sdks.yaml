@@ -279,6 +279,39 @@ jobs:
       - name: Run Cloudflare Workers compatibility test
         run: .github/tests/typescript-edge/run.sh
 
+  audit-typescript:
+    name: Audit TypeScript SDK runtime dependencies
+    needs: regenerate
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.regenerate.outputs.generated_sha }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 8
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: sdks/typescript/pnpm-lock.yaml
+
+      - name: Install locked runtime dependencies
+        run: pnpm --dir sdks/typescript install --prod --frozen-lockfile --ignore-scripts
+
+      # Fail on any runtime advisory. Existing development-tool findings are
+      # tracked separately in SNAP-9908 and must not block SDK regeneration.
+      - name: Audit runtime dependencies
+        run: pnpm --dir sdks/typescript audit --prod
+
   merge:
     name: Merge regenerated SDKs
     if: github.event_name != 'workflow_dispatch'
@@ -288,6 +321,7 @@ jobs:
       - test
       - test-ruby
       - test-typescript-edge
+      - audit-typescript
     runs-on: blacksmith-2vcpu-ubuntu-2404
     environment:
       name: ${{ needs.prepare.outputs.merge_environment }}
