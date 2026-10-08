@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go/v2)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go/v2@v2.0.33)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go/v2)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go/v2@v2.0.34)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
