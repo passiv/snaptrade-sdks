@@ -18,7 +18,6 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
-import com.snaptrade.client.model.AllUserAccountsResponse;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import com.snaptrade.client.model.SimpleTradeForm;
@@ -87,23 +86,6 @@ public class ExperimentalEndpointsApiTest {
     }
 
     /**
-     * Get account details
-     *
-     * Experimental and subject to change without notice.  Returns the specified account for the authenticated user, using the &#x60;kind&#x60;-discriminated account shape. Use the &#x60;kind&#x60; discriminator to determine the shape of the account, which can be an investment, deposit, or line of credit account.  On Pay as you Go / Real-time, this endpoint refreshes the account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getAccountDetailsTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        Object response = api.getAccountDetails(userId, userSecret, accountId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * Get account order detail (V2)
      *
      * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
@@ -157,22 +139,6 @@ public class ExperimentalEndpointsApiTest {
         Boolean onlyExecuted = null;
         AccountOrdersV2Response response = api.getUserAccountRecentOrdersV2(userId, userSecret, accountId)
                 .onlyExecuted(onlyExecuted)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * List all user accounts
-     *
-     * Experimental and subject to change without notice.  Returns all accounts across all connections known to SnapTrade for the authenticated user.  The &#x60;results&#x60; list can contain multiple account kinds in the same response, including investment, deposit, and line of credit accounts. Use the &#x60;kind&#x60; discriminator to determine the shape for each account.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void listAllUserAccountsTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        AllUserAccountsResponse response = api.listAllUserAccounts(userId, userSecret)
                 .execute();
         // TODO: test validations
     }

@@ -37,6 +37,9 @@ module SnapTrade
     # How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. 
     attr_accessor :release_stage
 
+    # Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+    attr_accessor :is_paper
+
     # Regions where end users can connect to this institution. - `US`: United States - `CA`: Canada - `EUROPE`: Europe, including the United Kingdom - `AU`: Australia - `IN`: India 
     attr_accessor :regions
 
@@ -75,6 +78,7 @@ module SnapTrade
         :'logo_url' => :'logo_url',
         :'square_logo_url' => :'square_logo_url',
         :'release_stage' => :'release_stage',
+        :'is_paper' => :'is_paper',
         :'regions' => :'regions',
         :'connection' => :'connection'
       }
@@ -96,6 +100,7 @@ module SnapTrade
         :'logo_url' => :'String',
         :'square_logo_url' => :'String',
         :'release_stage' => :'ReleaseStage',
+        :'is_paper' => :'Boolean',
         :'regions' => :'Array<String>',
         :'connection' => :'InstitutionConnection'
       }
@@ -159,6 +164,10 @@ module SnapTrade
         self.release_stage = attributes[:'release_stage']
       end
 
+      if attributes.key?(:'is_paper')
+        self.is_paper = attributes[:'is_paper']
+      end
+
       if attributes.key?(:'regions')
         if (value = attributes[:'regions']).is_a?(Array)
           self.regions = value
@@ -194,6 +203,10 @@ module SnapTrade
         invalid_properties.push('invalid value for "release_stage", release_stage cannot be nil.')
       end
 
+      if @is_paper.nil?
+        invalid_properties.push('invalid value for "is_paper", is_paper cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -205,6 +218,7 @@ module SnapTrade
       return false if @display_name.nil?
       return false if @logo_url.nil?
       return false if @release_stage.nil?
+      return false if @is_paper.nil?
       true
     end
 
@@ -221,6 +235,7 @@ module SnapTrade
           logo_url == o.logo_url &&
           square_logo_url == o.square_logo_url &&
           release_stage == o.release_stage &&
+          is_paper == o.is_paper &&
           regions == o.regions &&
           connection == o.connection
     end
@@ -234,7 +249,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [slug, name, display_name, description, website, logo_url, square_logo_url, release_stage, regions, connection].hash
+      [slug, name, display_name, description, website, logo_url, square_logo_url, release_stage, is_paper, regions, connection].hash
     end
 
     # Builds the object from hash

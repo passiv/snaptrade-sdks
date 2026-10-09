@@ -106,6 +106,14 @@ public class InstitutionTest {
     }
 
     /**
+     * Test the property 'isPaper'
+     */
+    @Test
+    public void isPaperTest() {
+        // TODO: test isPaper
+    }
+
+    /**
      * Test the property 'regions'
      */
     @Test

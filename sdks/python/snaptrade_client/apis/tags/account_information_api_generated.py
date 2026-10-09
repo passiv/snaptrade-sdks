@@ -11,6 +11,7 @@
 
 from snaptrade_client.paths.accounts_account_id_activities.get import GetAccountActivities
 from snaptrade_client.paths.accounts_account_id_balance_history.get import GetAccountBalanceHistory
+from snaptrade_client.paths.accounts_account_id_details.get import GetAccountDetails
 from snaptrade_client.paths.accounts_account_id_positions_all.get import GetAllAccountPositions
 from snaptrade_client.paths.accounts_account_id_balances.get import GetUserAccountBalance
 from snaptrade_client.paths.accounts_account_id.get import GetUserAccountDetails
@@ -19,6 +20,7 @@ from snaptrade_client.paths.accounts_account_id_orders.get import GetUserAccount
 from snaptrade_client.paths.accounts_account_id_recent_orders.get import GetUserAccountRecentOrders
 from snaptrade_client.paths.accounts_account_id_return_rates.get import GetUserAccountReturnRates
 from snaptrade_client.paths.accounts_account_id_holdings.get import GetUserHoldings
+from snaptrade_client.paths.accounts_all.get import ListAllUserAccounts
 from snaptrade_client.paths.accounts.get import ListUserAccounts
 from snaptrade_client.paths.accounts_account_id.put import UpdateUserAccount
 import typing
@@ -30,6 +32,7 @@ TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 class AccountInformationApiGenerated(
     GetAccountActivities[TAuth],
     GetAccountBalanceHistory[TAuth],
+    GetAccountDetails[TAuth],
     GetAllAccountPositions[TAuth],
     GetUserAccountBalance[TAuth],
     GetUserAccountDetails[TAuth],
@@ -38,6 +41,7 @@ class AccountInformationApiGenerated(
     GetUserAccountRecentOrders[TAuth],
     GetUserAccountReturnRates[TAuth],
     GetUserHoldings[TAuth],
+    ListAllUserAccounts[TAuth],
     ListUserAccounts[TAuth],
     UpdateUserAccount[TAuth],
 ):

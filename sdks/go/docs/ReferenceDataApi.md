@@ -423,6 +423,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.LogoUrl`: %v\n", resp.LogoUrl)
     fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.SquareLogoUrl`: %v\n", resp.SquareLogoUrl)
     fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.ReleaseStage`: %v\n", resp.ReleaseStage)
+    fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.IsPaper`: %v\n", resp.IsPaper)
     fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Regions`: %v\n", resp.Regions)
     fmt.Fprintf(os.Stdout, "Response from `Institution.ListInstitutions.Connection`: %v\n", resp.Connection)
 }

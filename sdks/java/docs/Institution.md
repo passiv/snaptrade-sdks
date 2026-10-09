@@ -16,6 +16,7 @@ An institution in SnapTrade's public catalog and what it supports. A `null` fiel
 |**logoUrl** | **String** | URL of the institution&#39;s rectangular logo. |  |
 |**squareLogoUrl** | **String** | URL of the institution&#39;s square logo. |  |
 |**releaseStage** | [**ReleaseStageEnum**](#ReleaseStageEnum) | How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality.  |  |
+|**isPaper** | **Boolean** | Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only. |  |
 |**regions** | [**List&lt;RegionsEnum&gt;**](#List&lt;RegionsEnum&gt;) | Regions where end users can connect to this institution. - &#x60;US&#x60;: United States - &#x60;CA&#x60;: Canada - &#x60;EUROPE&#x60;: Europe, including the United Kingdom - &#x60;AU&#x60;: Australia - &#x60;IN&#x60;: India  |  |
 |**connection** | [**InstitutionConnectionNullable**](InstitutionConnectionNullable.md) |  |  |
 

@@ -122,6 +122,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ReleaseStage'
         }
         /// <summary>
+        /// Test the property 'IsPaper'
+        /// </summary>
+        [Fact]
+        public void IsPaperTest()
+        {
+            // TODO unit test for the property 'IsPaper'
+        }
+        /// <summary>
         /// Test the property 'Regions'
         /// </summary>
         [Fact]

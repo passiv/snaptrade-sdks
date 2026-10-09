@@ -83,18 +83,6 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for getAccountDetails
-     *
-     * Get account details.
-     *
-     */
-    public function testGetAccountDetails()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getUserAccountOrderDetailV2
      *
      * Get account order detail (V2).
@@ -125,18 +113,6 @@ class ExperimentalEndpointsApiTest extends TestCase
      *
      */
     public function testGetUserAccountRecentOrdersV2()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listAllUserAccounts
-     *
-     * List all user accounts.
-     *
-     */
-    public function testListAllUserAccounts()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

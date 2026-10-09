@@ -112,6 +112,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetAccountDetails
+        /// </summary>
+        [Fact]
+        public void GetAccountDetailsTest()
+        {
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            
+            try
+            {
+                // Get account details
+                ConnectionAccount result = client.AccountInformation.GetAccountDetails(userId, userSecret, accountId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling AccountInformationApi.GetAccountDetails: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetAllAccountPositions
         /// </summary>
         [Fact]
@@ -349,6 +379,35 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling AccountInformationApi.GetUserHoldings: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test ListAllUserAccounts
+        /// </summary>
+        [Fact]
+        public void ListAllUserAccountsTest()
+        {
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            
+            try
+            {
+                // List all user accounts
+                AllUserAccountsResponse result = client.AccountInformation.ListAllUserAccounts(userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling AccountInformationApi.ListAllUserAccounts: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

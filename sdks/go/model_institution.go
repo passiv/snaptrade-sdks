@@ -33,6 +33,8 @@ type Institution struct {
 	SquareLogoUrl NullableString `json:"square_logo_url"`
 	// How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. 
 	ReleaseStage string `json:"release_stage"`
+	// Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+	IsPaper bool `json:"is_paper"`
 	// Regions where end users can connect to this institution. - `US`: United States - `CA`: Canada - `EUROPE`: Europe, including the United Kingdom - `AU`: Australia - `IN`: India 
 	Regions []string `json:"regions"`
 	Connection NullableInstitutionConnectionNullable `json:"connection"`
@@ -45,7 +47,7 @@ type _Institution Institution
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstitution(slug string, name string, displayName string, description NullableString, website NullableString, logoUrl string, squareLogoUrl NullableString, releaseStage string, regions []string, connection NullableInstitutionConnectionNullable) *Institution {
+func NewInstitution(slug string, name string, displayName string, description NullableString, website NullableString, logoUrl string, squareLogoUrl NullableString, releaseStage string, isPaper bool, regions []string, connection NullableInstitutionConnectionNullable) *Institution {
 	this := Institution{}
 	this.Slug = slug
 	this.Name = name
@@ -55,6 +57,7 @@ func NewInstitution(slug string, name string, displayName string, description Nu
 	this.LogoUrl = logoUrl
 	this.SquareLogoUrl = squareLogoUrl
 	this.ReleaseStage = releaseStage
+	this.IsPaper = isPaper
 	this.Regions = regions
 	this.Connection = connection
 	return &this
@@ -266,6 +269,30 @@ func (o *Institution) SetReleaseStage(v string) {
 	o.ReleaseStage = v
 }
 
+// GetIsPaper returns the IsPaper field value
+func (o *Institution) GetIsPaper() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsPaper
+}
+
+// GetIsPaperOk returns a tuple with the IsPaper field value
+// and a boolean to check if the value has been set.
+func (o *Institution) GetIsPaperOk() (*bool, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.IsPaper, true
+}
+
+// SetIsPaper sets field value
+func (o *Institution) SetIsPaper(v bool) {
+	o.IsPaper = v
+}
+
 // GetRegions returns the Regions field value
 // If the value is explicit nil, the zero value for []string will be returned
 func (o *Institution) GetRegions() []string {
@@ -344,6 +371,9 @@ func (o Institution) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["release_stage"] = o.ReleaseStage
 	}
+	if true {
+		toSerialize["is_paper"] = o.IsPaper
+	}
 	if o.Regions != nil {
 		toSerialize["regions"] = o.Regions
 	}
@@ -376,6 +406,7 @@ func (o *Institution) UnmarshalJSON(bytes []byte) error {
 	delete(additionalProperties, "logo_url")
 	delete(additionalProperties, "square_logo_url")
 	delete(additionalProperties, "release_stage")
+	delete(additionalProperties, "is_paper")
 	delete(additionalProperties, "regions")
 	delete(additionalProperties, "connection")
 	decoded.AdditionalProperties = additionalProperties

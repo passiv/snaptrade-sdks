@@ -126,6 +126,12 @@ export interface Institution {
      */
     'release_stage': InstitutionReleaseStageEnum;
     /**
+     * Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+     * @type {boolean}
+     * @memberof Institution
+     */
+    'is_paper': boolean;
+    /**
      * Regions where end users can connect to this institution. - `US`: United States - `CA`: Canada - `EUROPE`: Europe, including the United Kingdom - `AU`: Australia - `IN`: India 
      * @type {Array<string>}
      * @memberof Institution

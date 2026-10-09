@@ -123,9 +123,10 @@ namespace SnapTrade.Net.Model
         /// <param name="logoUrl">URL of the institution&#39;s rectangular logo. (required).</param>
         /// <param name="squareLogoUrl">URL of the institution&#39;s square logo. (required).</param>
         /// <param name="releaseStage">How mature the integration is. - &#x60;GENERALLY_AVAILABLE&#x60;: fully supported and validated for production use. - &#x60;BETA&#x60;: production-ready, with ongoing validation and improvements. - &#x60;ALPHA&#x60;: early access with limited validation. Expect issues and incomplete functionality.  (required).</param>
+        /// <param name="isPaper">Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only. (required).</param>
         /// <param name="regions">Regions where end users can connect to this institution. - &#x60;US&#x60;: United States - &#x60;CA&#x60;: Canada - &#x60;EUROPE&#x60;: Europe, including the United Kingdom - &#x60;AU&#x60;: Australia - &#x60;IN&#x60;: India  (required).</param>
         /// <param name="connection">connection (required).</param>
-        public Institution(string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string website = default(string), string logoUrl = default(string), string squareLogoUrl = default(string), ReleaseStageEnum releaseStage = default(ReleaseStageEnum), List<RegionsEnum> regions = default(List<RegionsEnum>), InstitutionConnectionNullable connection = default(InstitutionConnectionNullable)) : base()
+        public Institution(string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string website = default(string), string logoUrl = default(string), string squareLogoUrl = default(string), ReleaseStageEnum releaseStage = default(ReleaseStageEnum), bool isPaper = default(bool), List<RegionsEnum> regions = default(List<RegionsEnum>), InstitutionConnectionNullable connection = default(InstitutionConnectionNullable)) : base()
         {
             // to ensure "slug" is required (not null)
             if (slug == null)
@@ -170,6 +171,7 @@ namespace SnapTrade.Net.Model
             }
             this.SquareLogoUrl = squareLogoUrl;
             this.ReleaseStage = releaseStage;
+            this.IsPaper = isPaper;
             // to ensure "regions" is required (not null)
             if (regions == null)
             {
@@ -235,6 +237,13 @@ namespace SnapTrade.Net.Model
         public string SquareLogoUrl { get; set; }
 
         /// <summary>
+        /// Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+        /// </summary>
+        /// <value>Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.</value>
+        [DataMember(Name = "is_paper", IsRequired = true, EmitDefaultValue = true)]
+        public bool IsPaper { get; set; }
+
+        /// <summary>
         /// Regions where end users can connect to this institution. - &#x60;US&#x60;: United States - &#x60;CA&#x60;: Canada - &#x60;EUROPE&#x60;: Europe, including the United Kingdom - &#x60;AU&#x60;: Australia - &#x60;IN&#x60;: India 
         /// </summary>
         /// <value>Regions where end users can connect to this institution. - &#x60;US&#x60;: United States - &#x60;CA&#x60;: Canada - &#x60;EUROPE&#x60;: Europe, including the United Kingdom - &#x60;AU&#x60;: Australia - &#x60;IN&#x60;: India </value>
@@ -270,6 +279,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  LogoUrl: ").Append(LogoUrl).Append("\n");
             sb.Append("  SquareLogoUrl: ").Append(SquareLogoUrl).Append("\n");
             sb.Append("  ReleaseStage: ").Append(ReleaseStage).Append("\n");
+            sb.Append("  IsPaper: ").Append(IsPaper).Append("\n");
             sb.Append("  Regions: ").Append(Regions).Append("\n");
             sb.Append("  Connection: ").Append(Connection).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -348,6 +358,10 @@ namespace SnapTrade.Net.Model
                     this.ReleaseStage.Equals(input.ReleaseStage)
                 ) && base.Equals(input) && 
                 (
+                    this.IsPaper == input.IsPaper ||
+                    this.IsPaper.Equals(input.IsPaper)
+                ) && base.Equals(input) && 
+                (
                     this.Regions == input.Regions ||
                     this.Regions != null &&
                     input.Regions != null &&
@@ -399,6 +413,7 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.SquareLogoUrl.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.ReleaseStage.GetHashCode();
+                hashCode = (hashCode * 59) + this.IsPaper.GetHashCode();
                 if (this.Regions != null)
                 {
                     hashCode = (hashCode * 59) + this.Regions.GetHashCode();

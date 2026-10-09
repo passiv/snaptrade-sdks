@@ -724,7 +724,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. |  -  |
+| **200** | Enabled institutions that are generally available, in beta or in alpha, sorted by display name, including paper-trading and simulated-trading variants (&#x60;is_paper&#x60;). |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

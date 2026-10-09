@@ -145,6 +145,15 @@ class InstitutionTest extends TestCase
     }
 
     /**
+     * Test attribute "is_paper"
+     */
+    public function testPropertyIsPaper()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "regions"
      */
     public function testPropertyRegions()
