@@ -17,7 +17,7 @@ You have read the [SnapTrade Compliance Policy](https://snaptrade.com/compliance
 
 ### 2. API polling patterns
 
-You don't call the Holdings API more than 4 times per day per user in the background, or more frequently than once per end-user login and at set intervals while the user is actively using your app.
+You shouldn't call the Balances, Positions and Orders endpoint more than 4 times per day per user in the background, or more frequently than once per end-user login and at set intervals while the user is actively using your app.
 
 You don't call the activities (transactions) endpoint more than once per account every 24 hours for an account.
 
