@@ -6,11 +6,9 @@ Method | Path | Description
 ------------- | ------------- | -------------
 [**AddSubscription**](ExperimentalEndpointsApi.md#AddSubscription) | **Post** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 [**CancelSubscription**](ExperimentalEndpointsApi.md#CancelSubscription) | **Post** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
-[**GetAccountDetails**](ExperimentalEndpointsApi.md#GetAccountDetails) | **Get** /accounts/{accountId}/details | Get account details
 [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
-[**ListAllUserAccounts**](ExperimentalEndpointsApi.md#ListAllUserAccounts) | **Get** /accounts/all | List all user accounts
 [**ListSubscriptions**](ExperimentalEndpointsApi.md#ListSubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 [**PlaceSimpleOrder**](ExperimentalEndpointsApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
 
@@ -111,68 +109,6 @@ func main() {
     // response from `CancelSubscription`: TradeDetectionCancelSubscriptionResponse
     fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.CancelSubscription`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `TradeDetectionCancelSubscriptionResponse.CancelSubscription.Success`: %v\n", resp.Success)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAccountDetails
-
-Get account details
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ExperimentalEndpointsApi.GetAccountDetails(
-        ""snaptrade-user-123"",
-        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.GetAccountDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetAccountDetails`: ConnectionAccount
-    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetAccountDetails`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.Kind`: %v\n", resp.Kind)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.Id`: %v\n", resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.ConnectionId`: %v\n", resp.ConnectionId)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.DisplayName`: %v\n", *resp.DisplayName)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.MaskedAccountNumber`: %v\n", resp.MaskedAccountNumber)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.InstitutionId`: %v\n", *resp.InstitutionId)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.OpeningDate`: %v\n", *resp.OpeningDate)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.FundingDate`: %v\n", *resp.FundingDate)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.SyncStatus`: %v\n", resp.SyncStatus)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.RawType`: %v\n", *resp.RawType)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.CashOrMargin`: %v\n", *resp.CashOrMargin)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.IsPaper`: %v\n", resp.IsPaper)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.NetValue`: %v\n", *resp.NetValue)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.MinimumPaymentAmount`: %v\n", *resp.MinimumPaymentAmount)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.AvailableCredit`: %v\n", *resp.AvailableCredit)
-    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.NextPaymentDate`: %v\n", *resp.NextPaymentDate)
 }
 ```
 
@@ -329,51 +265,6 @@ func main() {
     // response from `GetUserAccountRecentOrdersV2`: AccountOrdersV2Response
     fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrdersV2Response.GetUserAccountRecentOrdersV2.Orders`: %v\n", resp.Orders)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListAllUserAccounts
-
-List all user accounts
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    request := client.ExperimentalEndpointsApi.ListAllUserAccounts(
-        ""snaptrade-user-123"",
-        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.ListAllUserAccounts``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `ListAllUserAccounts`: AllUserAccountsResponse
-    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.ListAllUserAccounts`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AllUserAccountsResponse.ListAllUserAccounts.Results`: %v\n", resp.Results)
 }
 ```
 

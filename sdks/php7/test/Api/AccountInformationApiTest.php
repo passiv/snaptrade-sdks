@@ -83,6 +83,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getAccountDetails
+     *
+     * Get account details.
+     *
+     */
+    public function testGetAccountDetails()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAllAccountPositions
      *
      * List all account positions.
@@ -173,6 +185,18 @@ class AccountInformationApiTest extends TestCase
      *
      */
     public function testGetUserHoldings()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAllUserAccounts
+     *
+     * List all user accounts.
+     *
+     */
+    public function testListAllUserAccounts()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -28,6 +28,13 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/details-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/positions/all-GET': {
         'parameters': [
             {
@@ -97,6 +104,10 @@ operation_parameter_map = {
             {
                 'name': 'accountId'
             },
+        ]
+    },
+    '/accounts/all-GET': {
+        'parameters': [
         ]
     },
     '/accounts-GET': {
@@ -250,13 +261,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/details-GET': {
-        'parameters': [
-            {
-                'name': 'accountId'
-            },
-        ]
-    },
     '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         'parameters': [
             {
@@ -288,10 +292,6 @@ operation_parameter_map = {
             {
                 'name': 'only_executed'
             },
-        ]
-    },
-    '/accounts/all-GET': {
-        'parameters': [
         ]
     },
     '/snapTrade/tradeDetection/subscriptions-GET': {

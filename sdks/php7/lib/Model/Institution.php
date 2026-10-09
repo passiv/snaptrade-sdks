@@ -59,6 +59,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         'logo_url' => 'string',
         'square_logo_url' => 'string',
         'release_stage' => 'string',
+        'is_paper' => 'bool',
         'regions' => 'string[]',
         'connection' => '\SnapTrade\Model\InstitutionConnection'
     ];
@@ -79,6 +80,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         'logo_url' => 'url',
         'square_logo_url' => 'url',
         'release_stage' => null,
+        'is_paper' => null,
         'regions' => null,
         'connection' => null
     ];
@@ -97,6 +99,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
 		'logo_url' => false,
 		'square_logo_url' => true,
 		'release_stage' => false,
+		'is_paper' => false,
 		'regions' => true,
 		'connection' => true
     ];
@@ -195,6 +198,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         'logo_url' => 'logo_url',
         'square_logo_url' => 'square_logo_url',
         'release_stage' => 'release_stage',
+        'is_paper' => 'is_paper',
         'regions' => 'regions',
         'connection' => 'connection'
     ];
@@ -213,6 +217,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         'logo_url' => 'setLogoUrl',
         'square_logo_url' => 'setSquareLogoUrl',
         'release_stage' => 'setReleaseStage',
+        'is_paper' => 'setIsPaper',
         'regions' => 'setRegions',
         'connection' => 'setConnection'
     ];
@@ -231,6 +236,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         'logo_url' => 'getLogoUrl',
         'square_logo_url' => 'getSquareLogoUrl',
         'release_stage' => 'getReleaseStage',
+        'is_paper' => 'getIsPaper',
         'regions' => 'getRegions',
         'connection' => 'getConnection'
     ];
@@ -338,6 +344,7 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('logo_url', $data ?? [], null);
         $this->setIfExists('square_logo_url', $data ?? [], null);
         $this->setIfExists('release_stage', $data ?? [], null);
+        $this->setIfExists('is_paper', $data ?? [], null);
         $this->setIfExists('regions', $data ?? [], null);
         $this->setIfExists('connection', $data ?? [], null);
     }
@@ -402,6 +409,9 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
+        if ($this->container['is_paper'] === null) {
+            $invalidProperties[] = "'is_paper' can't be null";
+        }
         if ($this->container['regions'] === null) {
             $invalidProperties[] = "'regions' can't be null";
         }
@@ -682,6 +692,35 @@ class Institution implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['release_stage'] = $release_stage;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_paper
+     *
+     * @return bool
+     */
+    public function getIsPaper()
+    {
+        return $this->container['is_paper'];
+    }
+
+    /**
+     * Sets is_paper
+     *
+     * @param bool $is_paper Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+     *
+     * @return self
+     */
+    public function setIsPaper($is_paper)
+    {
+
+        if (is_null($is_paper)) {
+            throw new \InvalidArgumentException('non-nullable is_paper cannot be null');
+        }
+
+        $this->container['is_paper'] = $is_paper;
 
         return $this;
     }

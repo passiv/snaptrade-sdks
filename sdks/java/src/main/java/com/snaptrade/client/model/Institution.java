@@ -134,6 +134,10 @@ public class Institution {
   @SerializedName(SERIALIZED_NAME_RELEASE_STAGE)
   private ReleaseStageEnum releaseStage;
 
+  public static final String SERIALIZED_NAME_IS_PAPER = "is_paper";
+  @SerializedName(SERIALIZED_NAME_IS_PAPER)
+  private Boolean isPaper;
+
   /**
    * Gets or Sets regions
    */
@@ -430,6 +434,35 @@ public class Institution {
   }
 
 
+  public Institution isPaper(Boolean isPaper) {
+    
+    
+    
+    
+    this.isPaper = isPaper;
+    return this;
+  }
+
+   /**
+   * Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+   * @return isPaper
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "false", required = true, value = "Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.")
+
+  public Boolean getIsPaper() {
+    return isPaper;
+  }
+
+
+  public void setIsPaper(Boolean isPaper) {
+    
+    
+    
+    this.isPaper = isPaper;
+  }
+
+
   public Institution regions(List<RegionsEnum> regions) {
     
     
@@ -555,6 +588,7 @@ public class Institution {
         Objects.equals(this.logoUrl, institution.logoUrl) &&
         Objects.equals(this.squareLogoUrl, institution.squareLogoUrl) &&
         Objects.equals(this.releaseStage, institution.releaseStage) &&
+        Objects.equals(this.isPaper, institution.isPaper) &&
         Objects.equals(this.regions, institution.regions) &&
         Objects.equals(this.connection, institution.connection)&&
         Objects.equals(this.additionalProperties, institution.additionalProperties);
@@ -562,7 +596,7 @@ public class Institution {
 
   @Override
   public int hashCode() {
-    return Objects.hash(slug, name, displayName, description, website, logoUrl, squareLogoUrl, releaseStage, regions, connection, additionalProperties);
+    return Objects.hash(slug, name, displayName, description, website, logoUrl, squareLogoUrl, releaseStage, isPaper, regions, connection, additionalProperties);
   }
 
   @Override
@@ -577,6 +611,7 @@ public class Institution {
     sb.append("    logoUrl: ").append(toIndentedString(logoUrl)).append("\n");
     sb.append("    squareLogoUrl: ").append(toIndentedString(squareLogoUrl)).append("\n");
     sb.append("    releaseStage: ").append(toIndentedString(releaseStage)).append("\n");
+    sb.append("    isPaper: ").append(toIndentedString(isPaper)).append("\n");
     sb.append("    regions: ").append(toIndentedString(regions)).append("\n");
     sb.append("    connection: ").append(toIndentedString(connection)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -610,6 +645,7 @@ public class Institution {
     openapiFields.add("logo_url");
     openapiFields.add("square_logo_url");
     openapiFields.add("release_stage");
+    openapiFields.add("is_paper");
     openapiFields.add("regions");
     openapiFields.add("connection");
 
@@ -623,6 +659,7 @@ public class Institution {
     openapiRequiredFields.add("logo_url");
     openapiRequiredFields.add("square_logo_url");
     openapiRequiredFields.add("release_stage");
+    openapiRequiredFields.add("is_paper");
     openapiRequiredFields.add("regions");
     openapiRequiredFields.add("connection");
   }

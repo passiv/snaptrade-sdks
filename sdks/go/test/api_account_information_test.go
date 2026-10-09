@@ -63,6 +63,22 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test AccountInformationApiService GetAccountDetails", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.AccountInformationApi.GetAccountDetails(
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test AccountInformationApiService GetAllAccountPositions", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetAllAccountPositions(
@@ -189,6 +205,21 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetUserHoldings(
             "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test AccountInformationApiService ListAllUserAccounts", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.AccountInformationApi.ListAllUserAccounts(
             ""snaptrade-user-123"",
             ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
         )

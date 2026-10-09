@@ -44,6 +44,7 @@ class Institution(
             "name",
             "description",
             "connection",
+            "is_paper",
             "display_name",
             "slug",
         }
@@ -147,6 +148,7 @@ class Institution(
                 @schemas.classproperty
                 def ALPHA(cls):
                     return cls("ALPHA")
+            is_paper = schemas.BoolSchema
         
             @staticmethod
             def regions() -> typing.Type['InstitutionRegions']:
@@ -164,6 +166,7 @@ class Institution(
                 "logo_url": logo_url,
                 "square_logo_url": square_logo_url,
                 "release_stage": release_stage,
+                "is_paper": is_paper,
                 "regions": regions,
                 "connection": connection,
             }
@@ -177,6 +180,7 @@ class Institution(
     name: MetaOapg.properties.name
     description: MetaOapg.properties.description
     connection: 'InstitutionConnectionNullable'
+    is_paper: MetaOapg.properties.is_paper
     display_name: MetaOapg.properties.display_name
     slug: MetaOapg.properties.slug
     
@@ -205,6 +209,9 @@ class Institution(
     def __getitem__(self, name: typing_extensions.Literal["connection"]) -> 'InstitutionConnectionNullable': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["is_paper"]) -> MetaOapg.properties.is_paper: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["display_name"]) -> MetaOapg.properties.display_name: ...
     
     @typing.overload
@@ -213,7 +220,7 @@ class Institution(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["square_logo_url"], typing_extensions.Literal["website"], typing_extensions.Literal["regions"], typing_extensions.Literal["release_stage"], typing_extensions.Literal["logo_url"], typing_extensions.Literal["name"], typing_extensions.Literal["description"], typing_extensions.Literal["connection"], typing_extensions.Literal["display_name"], typing_extensions.Literal["slug"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["square_logo_url"], typing_extensions.Literal["website"], typing_extensions.Literal["regions"], typing_extensions.Literal["release_stage"], typing_extensions.Literal["logo_url"], typing_extensions.Literal["name"], typing_extensions.Literal["description"], typing_extensions.Literal["connection"], typing_extensions.Literal["is_paper"], typing_extensions.Literal["display_name"], typing_extensions.Literal["slug"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -242,6 +249,9 @@ class Institution(
     def get_item_oapg(self, name: typing_extensions.Literal["connection"]) -> 'InstitutionConnectionNullable': ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["is_paper"]) -> MetaOapg.properties.is_paper: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["display_name"]) -> MetaOapg.properties.display_name: ...
     
     @typing.overload
@@ -250,7 +260,7 @@ class Institution(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["square_logo_url"], typing_extensions.Literal["website"], typing_extensions.Literal["regions"], typing_extensions.Literal["release_stage"], typing_extensions.Literal["logo_url"], typing_extensions.Literal["name"], typing_extensions.Literal["description"], typing_extensions.Literal["connection"], typing_extensions.Literal["display_name"], typing_extensions.Literal["slug"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["square_logo_url"], typing_extensions.Literal["website"], typing_extensions.Literal["regions"], typing_extensions.Literal["release_stage"], typing_extensions.Literal["logo_url"], typing_extensions.Literal["name"], typing_extensions.Literal["description"], typing_extensions.Literal["connection"], typing_extensions.Literal["is_paper"], typing_extensions.Literal["display_name"], typing_extensions.Literal["slug"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -264,6 +274,7 @@ class Institution(
         name: typing.Union[MetaOapg.properties.name, str, ],
         description: typing.Union[MetaOapg.properties.description, None, str, ],
         connection: 'InstitutionConnectionNullable',
+        is_paper: typing.Union[MetaOapg.properties.is_paper, bool, ],
         display_name: typing.Union[MetaOapg.properties.display_name, str, ],
         slug: typing.Union[MetaOapg.properties.slug, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -280,6 +291,7 @@ class Institution(
             name=name,
             description=description,
             connection=connection,
+            is_paper=is_paper,
             display_name=display_name,
             slug=slug,
             _configuration=_configuration,

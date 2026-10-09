@@ -1256,7 +1256,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name, including paper-trading and simulated-trading variants (&#x60;is_paper&#x60;). </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1272,7 +1272,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name, including paper-trading and simulated-trading variants (&#x60;is_paper&#x60;). </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1288,7 +1288,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name, including paper-trading and simulated-trading variants (&#x60;is_paper&#x60;). </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1304,7 +1304,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name, including paper-trading and simulated-trading variants (&#x60;is_paper&#x60;). </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1320,7 +1320,7 @@ public class ReferenceDataApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name. Paper-trading and simulated-trading variants are not listed. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Enabled institutions that are generally available, in beta or in alpha, sorted by display name, including paper-trading and simulated-trading variants (&#x60;is_paper&#x60;). </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */

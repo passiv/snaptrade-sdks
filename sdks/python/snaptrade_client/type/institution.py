@@ -43,6 +43,9 @@ class RequiredInstitution(TypedDict):
     # How mature the integration is. - `GENERALLY_AVAILABLE`: fully supported and validated for production use. - `BETA`: production-ready, with ongoing validation and improvements. - `ALPHA`: early access with limited validation. Expect issues and incomplete functionality. 
     release_stage: Literal["GENERALLY_AVAILABLE", "BETA", "ALPHA"]
 
+    # Whether this is a paper-trading, practice or simulated-trading variant of a brokerage rather than real accounts. Filter these out to list real brokerages only.
+    is_paper: bool
+
     regions: typing.Optional[InstitutionRegions]
 
     connection: typing.Optional[InstitutionConnectionNullable]
