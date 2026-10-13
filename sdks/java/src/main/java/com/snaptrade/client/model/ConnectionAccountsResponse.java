@@ -178,6 +178,7 @@ public class ConnectionAccountsResponse {
   }
 
 
+
   public static HashSet<String> openapiFields;
   public static HashSet<String> openapiRequiredFields;
 

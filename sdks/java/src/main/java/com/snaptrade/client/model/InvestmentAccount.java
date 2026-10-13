@@ -145,7 +145,7 @@ public class InvestmentAccount {
   private String rawType;
 
   /**
-   * Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+   * Whether the account is a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: The account cannot borrow on margin. Includes registered, retirement and employer plan accounts that can&#39;t use margin (for example TFSA, RRSP, 401(k) or ISA). - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: SnapTrade doesn&#39;t have enough information to tell, or the distinction doesn&#39;t apply to the account (for example crypto accounts).  Coverage is limited for Fidelity because its API doesn&#39;t report it for every account; Fidelity accounts default to &#x60;unknown&#x60; where it can&#39;t be determined. 
    */
   @JsonAdapter(CashOrMarginEnum.Adapter.class)
  public enum CashOrMarginEnum {
@@ -537,11 +537,11 @@ public class InvestmentAccount {
   }
 
    /**
-   * Whether the institution reports the account as a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: A cash account. The account cannot borrow on margin. - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+   * Whether the account is a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: The account cannot borrow on margin. Includes registered, retirement and employer plan accounts that can&#39;t use margin (for example TFSA, RRSP, 401(k) or ISA). - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: SnapTrade doesn&#39;t have enough information to tell, or the distinction doesn&#39;t apply to the account (for example crypto accounts).  Coverage is limited for Fidelity because its API doesn&#39;t report it for every account; Fidelity accounts default to &#x60;unknown&#x60; where it can&#39;t be determined. 
    * @return cashOrMargin
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "MARGIN", value = "Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. ")
+  @ApiModelProperty(example = "MARGIN", value = "Whether the account is a cash or margin account, normalized across institutions. - `cash`: The account cannot borrow on margin. Includes registered, retirement and employer plan accounts that can't use margin (for example TFSA, RRSP, 401(k) or ISA). - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply to the account (for example crypto accounts).  Coverage is limited for Fidelity because its API doesn't report it for every account; Fidelity accounts default to `unknown` where it can't be determined. ")
 
   public CashOrMarginEnum getCashOrMargin() {
     return cashOrMargin;
@@ -734,6 +734,7 @@ public class InvestmentAccount {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
 
 
   public static HashSet<String> openapiFields;

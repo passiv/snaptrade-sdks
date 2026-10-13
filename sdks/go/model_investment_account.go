@@ -39,7 +39,7 @@ type InvestmentAccount struct {
 	SyncStatus ConnectionAccountSyncStatus `json:"sync_status"`
 	// The account type as provided by the institution.
 	RawType NullableString `json:"raw_type,omitempty"`
-	// Whether the institution reports the account as a cash or margin account, normalized across institutions. - `cash`: A cash account. The account cannot borrow on margin. - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: The institution does not report whether the account is cash or margin.  **Beta:** only returned for some institutions and partners it has been enabled for. Omitted otherwise. 
+	// Whether the account is a cash or margin account, normalized across institutions. - `cash`: The account cannot borrow on margin. Includes registered, retirement and employer plan accounts that can't use margin (for example TFSA, RRSP, 401(k) or ISA). - `margin`: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply to the account (for example crypto accounts).  Coverage is limited for Fidelity because its API doesn't report it for every account; Fidelity accounts default to `unknown` where it can't be determined. 
 	CashOrMargin *string `json:"cash_or_margin,omitempty"`
 	// Indicates whether the account is a paper (simulated) trading account.
 	IsPaper bool `json:"is_paper"`

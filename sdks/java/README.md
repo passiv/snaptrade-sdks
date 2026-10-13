@@ -76,7 +76,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 - [Installation](#installation)
   * [Maven users](#maven-users)
   * [Gradle users](#gradle-users)
-  * [Android users](#android-users)
   * [Others](#others)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
@@ -149,10 +148,6 @@ Building the API client library requires:
 1. Java 1.8+
 2. Maven (3.8.3+)/Gradle (7.2+)
 
-If you are adding this library to an Android Application or Library:
-
-3. Android 8.0+ (API Level 26+)
-
 ## Installation<a id="installation"></a>
 
 To install the API client library to your local Maven repository, simply execute:
@@ -195,29 +190,6 @@ repositories {
 dependencies {
    implementation "com.snaptrade:snaptrade-java-sdk:6.0.35"
 }
-```
-
-### Android users<a id="android-users"></a>
-
-Make sure your `build.gradle` file as a `minSdk` version of at least 26:
-```groovy
-// build.gradle
-android {
-    defaultConfig {
-        minSdk 26
-    }
-}
-```
-
-Also make sure your library or application has internet permissions in your `AndroidManifest.xml`:
-
-```xml
-<!--AndroidManifest.xml-->
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
-</manifest>
 ```
 
 ### Others<a id="others"></a>
