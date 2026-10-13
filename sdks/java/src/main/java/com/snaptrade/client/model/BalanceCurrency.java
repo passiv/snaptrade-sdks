@@ -242,6 +242,7 @@ public class BalanceCurrency {
   }
 
 
+
   public static HashSet<String> openapiFields;
   public static HashSet<String> openapiRequiredFields;
 

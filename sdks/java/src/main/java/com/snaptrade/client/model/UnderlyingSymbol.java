@@ -516,6 +516,7 @@ public class UnderlyingSymbol {
   }
 
 
+
   public static HashSet<String> openapiFields;
   public static HashSet<String> openapiRequiredFields;
 

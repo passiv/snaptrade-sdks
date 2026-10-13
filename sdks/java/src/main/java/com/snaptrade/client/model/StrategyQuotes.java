@@ -395,6 +395,7 @@ public class StrategyQuotes {
   }
 
 
+
   public static HashSet<String> openapiFields;
   public static HashSet<String> openapiRequiredFields;
 

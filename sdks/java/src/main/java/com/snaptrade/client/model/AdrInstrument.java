@@ -475,6 +475,7 @@ public class AdrInstrument {
   }
 
 
+
   public static HashSet<String> openapiFields;
   public static HashSet<String> openapiRequiredFields;
 

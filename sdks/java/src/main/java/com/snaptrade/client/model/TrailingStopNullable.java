@@ -253,6 +253,7 @@ public class TrailingStopNullable {
   }
 
 
+
   public static HashSet<String> openapiFields;
   public static HashSet<String> openapiRequiredFields;
 
