@@ -79,7 +79,7 @@ import { UnderlyingSymbolType } from './underlying-symbol-type';
  * @interface UnderlyingSymbol
  */
 export interface UnderlyingSymbol {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.

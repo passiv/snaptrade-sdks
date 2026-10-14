@@ -74,25 +74,25 @@ import type * as buffer from "buffer"
  * @interface Model500UnexpectedExceptionResponse
  */
 export interface Model500UnexpectedExceptionResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model500UnexpectedExceptionResponse
      */
-    'detail'?: any;
+    'detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof Model500UnexpectedExceptionResponse
      */
-    'status_code'?: any;
+    'status_code'?: number;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model500UnexpectedExceptionResponse
      */
-    'code'?: any;
+    'code'?: string;
 }
 

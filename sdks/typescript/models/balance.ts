@@ -75,7 +75,7 @@ import { BalanceCurrency } from './balance-currency';
  * @interface Balance
  */
 export interface Balance {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

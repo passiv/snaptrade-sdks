@@ -15,13 +15,13 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.account_balance_total import AccountBalanceTotal
 
 class RequiredAccountBalance(TypedDict):
     pass
 
 class OptionalAccountBalance(TypedDict, total=False):
-    # Total market value of this account (includes cash, equity, fixed income, etc). This value is directly obtained from the brokerage and should reflect the most accurate value of the account.
-    total: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    total: typing.Optional[AccountBalanceTotal]
 
 class AccountBalance(RequiredAccountBalance, OptionalAccountBalance):
     pass

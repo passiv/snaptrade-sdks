@@ -114,7 +114,7 @@ module SnapTrade
         :'has_reporting' => :'Boolean',
         :'is_real_time_connection' => :'Boolean',
         :'brokerage_type' => :'BrokerageType',
-        :'exchanges' => :'Array<Object>',
+        :'exchanges' => :'Array<String>',
         :'open_url' => :'String'
       }
     end

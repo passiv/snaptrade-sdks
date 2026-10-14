@@ -5,7 +5,7 @@ Example for a response where the endpoint is not implemented for the brokerage
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Error** | **Object** |  | [optional] 
+**Error** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

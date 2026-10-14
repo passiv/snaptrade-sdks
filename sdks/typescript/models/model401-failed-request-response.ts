@@ -74,19 +74,19 @@ import type * as buffer from "buffer"
  * @interface Model401FailedRequestResponse
  */
 export interface Model401FailedRequestResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model401FailedRequestResponse
      */
-    'default_detail'?: any;
+    'default_detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model401FailedRequestResponse
      */
-    'default_code'?: any;
+    'default_code'?: string;
 }
 

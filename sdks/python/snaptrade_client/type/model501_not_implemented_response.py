@@ -20,7 +20,7 @@ class RequiredModel501NotImplementedResponse(TypedDict):
     pass
 
 class OptionalModel501NotImplementedResponse(TypedDict, total=False):
-    error: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    error: str
 
 class Model501NotImplementedResponse(RequiredModel501NotImplementedResponse, OptionalModel501NotImplementedResponse):
     pass

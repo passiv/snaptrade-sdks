@@ -13,6 +13,7 @@
 
 from snaptrade_client.model.account import Account
 from snaptrade_client.model.account_balance import AccountBalance
+from snaptrade_client.model.account_balance_total import AccountBalanceTotal
 from snaptrade_client.model.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.model.account_holdings import AccountHoldings
 from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
@@ -182,6 +183,7 @@ from snaptrade_client.model.option_quote import OptionQuote
 from snaptrade_client.model.option_quote_greeks import OptionQuoteGreeks
 from snaptrade_client.model.option_strategy import OptionStrategy
 from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs
+from snaptrade_client.model.option_strategy_legs_item import OptionStrategyLegsItem
 from snaptrade_client.model.option_symbol_id import OptionSymbolID
 from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.options_symbol import OptionsSymbol
@@ -230,6 +232,7 @@ from snaptrade_client.model.symbol import Symbol
 from snaptrade_client.model.symbol_nullable import SymbolNullable
 from snaptrade_client.model.symbol_query import SymbolQuery
 from snaptrade_client.model.symbols_quotes import SymbolsQuotes
+from snaptrade_client.model.symbols_quotes_item import SymbolsQuotesItem
 from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.sync_status_date_nullable import SyncStatusDateNullable
 from snaptrade_client.model.take_profit import TakeProfit

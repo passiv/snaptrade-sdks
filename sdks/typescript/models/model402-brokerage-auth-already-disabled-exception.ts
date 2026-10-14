@@ -74,19 +74,19 @@ import type * as buffer from "buffer"
  * @interface Model402BrokerageAuthAlreadyDisabledException
  */
 export interface Model402BrokerageAuthAlreadyDisabledException {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model402BrokerageAuthAlreadyDisabledException
      */
-    'detail'?: any;
+    'detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model402BrokerageAuthAlreadyDisabledException
      */
-    'code'?: any;
+    'code'?: string;
 }
 

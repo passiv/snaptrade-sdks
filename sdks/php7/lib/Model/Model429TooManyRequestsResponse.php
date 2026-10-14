@@ -51,9 +51,9 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'detail' => 'mixed',
-        'status_code' => 'mixed',
-        'code' => 'mixed'
+        'detail' => 'string',
+        'status_code' => 'int',
+        'code' => 'string'
     ];
 
     /**
@@ -75,9 +75,9 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static $openAPINullables = [
-        'detail' => true,
-		'status_code' => true,
-		'code' => true
+        'detail' => false,
+		'status_code' => false,
+		'code' => false
     ];
 
     /**
@@ -300,7 +300,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     /**
      * Gets detail
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getDetail()
     {
@@ -310,7 +310,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     /**
      * Sets detail
      *
-     * @param mixed|null $detail detail
+     * @param string|null $detail detail
      *
      * @return self
      */
@@ -318,14 +318,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     {
 
         if (is_null($detail)) {
-            array_push($this->openAPINullablesSetToNull, 'detail');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('detail', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable detail cannot be null');
         }
 
         $this->container['detail'] = $detail;
@@ -336,7 +329,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     /**
      * Gets status_code
      *
-     * @return mixed|null
+     * @return int|null
      */
     public function getStatusCode()
     {
@@ -346,7 +339,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     /**
      * Sets status_code
      *
-     * @param mixed|null $status_code status_code
+     * @param int|null $status_code status_code
      *
      * @return self
      */
@@ -354,14 +347,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     {
 
         if (is_null($status_code)) {
-            array_push($this->openAPINullablesSetToNull, 'status_code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('status_code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable status_code cannot be null');
         }
 
         $this->container['status_code'] = $status_code;
@@ -372,7 +358,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     /**
      * Gets code
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getCode()
     {
@@ -382,7 +368,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     /**
      * Sets code
      *
-     * @param mixed|null $code code
+     * @param string|null $code code
      *
      * @return self
      */
@@ -390,14 +376,7 @@ class Model429TooManyRequestsResponse implements ModelInterface, ArrayAccess, \J
     {
 
         if (is_null($code)) {
-            array_push($this->openAPINullablesSetToNull, 'code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
         $this->container['code'] = $code;

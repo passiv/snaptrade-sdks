@@ -75,7 +75,7 @@ import { TransactionsStatus } from './transactions-status';
  * @interface LineOfCreditAccountSyncStatus
  */
 export interface LineOfCreditAccountSyncStatus {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

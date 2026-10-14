@@ -34,90 +34,13 @@ class OptionStrategyLegs(
 
     class MetaOapg:
         
-        
-        class items(
-            schemas.AnyTypeSchema,
-        ):
-        
-        
-            class MetaOapg:
-                
-                class properties:
-                    option_symbol_id = schemas.StrSchema
-                    index = schemas.NumberSchema
-                    action = schemas.StrSchema
-                    quantity = schemas.NumberSchema
-                    __annotations__ = {
-                        "option_symbol_id": option_symbol_id,
-                        "index": index,
-                        "action": action,
-                        "quantity": quantity,
-                    }
-        
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["option_symbol_id"]) -> MetaOapg.properties.option_symbol_id: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["index"]) -> MetaOapg.properties.index: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["action"]) -> MetaOapg.properties.action: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["quantity"]) -> MetaOapg.properties.quantity: ...
-            
-            @typing.overload
-            def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
-            
-            def __getitem__(self, name: typing.Union[typing_extensions.Literal["option_symbol_id", "index", "action", "quantity", ], str]):
-                # dict_instance[name] accessor
-                return super().__getitem__(name)
-            
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["option_symbol_id"]) -> typing.Union[MetaOapg.properties.option_symbol_id, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["index"]) -> typing.Union[MetaOapg.properties.index, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union[MetaOapg.properties.action, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["quantity"]) -> typing.Union[MetaOapg.properties.quantity, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
-            
-            def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["option_symbol_id", "index", "action", "quantity", ], str]):
-                return super().get_item_oapg(name)
-            
-        
-            def __new__(
-                cls,
-                *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                option_symbol_id: typing.Union[MetaOapg.properties.option_symbol_id, str, schemas.Unset] = schemas.unset,
-                index: typing.Union[MetaOapg.properties.index, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
-                quantity: typing.Union[MetaOapg.properties.quantity, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                _configuration: typing.Optional[schemas.Configuration] = None,
-                **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-            ) -> 'items':
-                return super().__new__(
-                    cls,
-                    *args,
-                    option_symbol_id=option_symbol_id,
-                    index=index,
-                    action=action,
-                    quantity=quantity,
-                    _configuration=_configuration,
-                    **kwargs,
-                )
+        @staticmethod
+        def items() -> typing.Type['OptionStrategyLegsItem']:
+            return OptionStrategyLegsItem
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]], typing.List[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]]],
+        arg: typing.Union[typing.Tuple['OptionStrategyLegsItem'], typing.List['OptionStrategyLegsItem']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'OptionStrategyLegs':
         return super().__new__(
@@ -126,5 +49,7 @@ class OptionStrategyLegs(
             _configuration=_configuration,
         )
 
-    def __getitem__(self, i: int) -> MetaOapg.items:
+    def __getitem__(self, i: int) -> 'OptionStrategyLegsItem':
         return super().__getitem__(i)
+
+from snaptrade_client.model.option_strategy_legs_item import OptionStrategyLegsItem

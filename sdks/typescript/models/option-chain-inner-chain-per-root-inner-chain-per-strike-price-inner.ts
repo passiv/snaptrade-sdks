@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface OptionChainInnerChainPerRootInnerChainPerStrikePriceInner
  */
 export interface OptionChainInnerChainPerRootInnerChainPerStrikePriceInner {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

@@ -75,7 +75,7 @@ import { ConnectionAccount } from './connection-account';
  * @interface AllUserAccountsResponse
  */
 export interface AllUserAccountsResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Accounts returned for the request.

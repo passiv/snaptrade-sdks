@@ -75,7 +75,7 @@ import { FigiInstrumentNullable } from './figi-instrument-nullable';
  * @interface MutualFundInstrument
  */
 export interface MutualFundInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

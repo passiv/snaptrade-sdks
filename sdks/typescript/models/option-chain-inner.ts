@@ -75,7 +75,7 @@ import { OptionChainInnerChainPerRootInner } from './option-chain-inner-chain-pe
  * @interface OptionChainInner
  */
 export interface OptionChainInner {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

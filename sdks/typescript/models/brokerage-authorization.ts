@@ -76,7 +76,7 @@ import { BrokerageAuthorizationDataFreshnessMode } from './brokerage-authorizati
  * @interface BrokerageAuthorization
  */
 export interface BrokerageAuthorization {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
@@ -122,11 +122,11 @@ export interface BrokerageAuthorization {
     'disabled_date'?: string | null;
     /**
      * Additional data about the connection. This information is specific to the brokerage and there\'s no standard format for this data. This field is deprecated and subject to removal in a future version.
-     * @type {{ [key: string]: any; }}
+     * @type {{ [key: string]: unknown; }}
      * @memberof BrokerageAuthorization
      * @deprecated
      */
-    'meta'?: { [key: string]: any; };
+    'meta'?: { [key: string]: unknown; };
     /**
      * Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
      * @type {string}

@@ -37,7 +37,7 @@ class Model501NotImplementedResponse(
     class MetaOapg:
         
         class properties:
-            error = schemas.AnyTypeSchema
+            error = schemas.StrSchema
             __annotations__ = {
                 "error": error,
             }
@@ -65,7 +65,7 @@ class Model501NotImplementedResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        error: typing.Union[MetaOapg.properties.error, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        error: typing.Union[MetaOapg.properties.error, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Model501NotImplementedResponse':

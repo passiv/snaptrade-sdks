@@ -75,7 +75,7 @@ import { FutureInstrument } from './future-instrument';
  * @interface FutureOptionInstrument
  */
 export interface FutureOptionInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

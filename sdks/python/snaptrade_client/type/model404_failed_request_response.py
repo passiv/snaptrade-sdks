@@ -20,9 +20,9 @@ class RequiredModel404FailedRequestResponse(TypedDict):
     pass
 
 class OptionalModel404FailedRequestResponse(TypedDict, total=False):
-    default_detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    default_detail: str
 
-    default_code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    default_code: str
 
 class Model404FailedRequestResponse(RequiredModel404FailedRequestResponse, OptionalModel404FailedRequestResponse):
     pass

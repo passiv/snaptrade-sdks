@@ -78,7 +78,7 @@ import { TradingInstrument } from './trading-instrument';
  * @interface ComplexOrderLeg
  */
 export interface ComplexOrderLeg {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The role of this leg within the complex order.

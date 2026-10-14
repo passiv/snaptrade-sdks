@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface FutureInstrument
  */
 export interface FutureInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

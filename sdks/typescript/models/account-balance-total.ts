@@ -74,6 +74,8 @@ import type * as buffer from "buffer"
  * @interface AccountBalanceTotal
  */
 export interface AccountBalanceTotal {
+    [key: string]: unknown;
+
     /**
      * Total value denominated in the currency of the `currency` field.
      * @type {number}

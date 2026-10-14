@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageAuthorizationDataFreshnessMode
  */
 export interface BrokerageAuthorizationDataFreshnessMode {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Indicates the freshness of the data provided by the institution. `realtime` means the institution provides current data; `delayed` means the institution itself does not allow intra-day data updates. 

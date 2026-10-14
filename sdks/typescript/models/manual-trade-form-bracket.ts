@@ -80,7 +80,7 @@ import { TradingInstrument } from './trading-instrument';
  * @interface ManualTradeFormBracket
  */
 export interface ManualTradeFormBracket {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.

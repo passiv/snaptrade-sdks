@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface SubPeriodReturnRate
  */
 export interface SubPeriodReturnRate {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.

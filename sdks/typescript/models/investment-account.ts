@@ -76,7 +76,7 @@ import { InvestmentAccountNetValue } from './investment-account-net-value';
  * @interface InvestmentAccount
  */
 export interface InvestmentAccount {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Discriminator for the account kind.

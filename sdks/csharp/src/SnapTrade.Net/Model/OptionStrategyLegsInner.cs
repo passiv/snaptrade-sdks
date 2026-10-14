@@ -39,12 +39,13 @@ namespace SnapTrade.Net.Model
         /// <param name="index">index.</param>
         /// <param name="action">action.</param>
         /// <param name="quantity">quantity.</param>
-        public OptionStrategyLegsInner(string optionSymbolId = default(string), double index = default(double), string action = default(string), double quantity = default(double))
+        public OptionStrategyLegsInner(string optionSymbolId = default(string), double index = default(double), string action = default(string), double quantity = default(double)) : base()
         {
             this.OptionSymbolId = optionSymbolId;
             this.Index = index;
             this._Action = action;
             this.Quantity = quantity;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -72,6 +73,12 @@ namespace SnapTrade.Net.Model
         public double Quantity { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -79,10 +86,12 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class OptionStrategyLegsInner {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  OptionSymbolId: ").Append(OptionSymbolId).Append("\n");
             sb.Append("  Index: ").Append(Index).Append("\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +100,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -117,25 +126,26 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.OptionSymbolId == input.OptionSymbolId ||
                     (this.OptionSymbolId != null &&
                     this.OptionSymbolId.Equals(input.OptionSymbolId))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Index == input.Index ||
                     this.Index.Equals(input.Index)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this._Action == input._Action ||
                     (this._Action != null &&
                     this._Action.Equals(input._Action))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Quantity == input.Quantity ||
                     this.Quantity.Equals(input.Quantity)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -146,7 +156,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.OptionSymbolId != null)
                 {
                     hashCode = (hashCode * 59) + this.OptionSymbolId.GetHashCode();
@@ -157,6 +167,10 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Quantity.GetHashCode();
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
+                }
                 return hashCode;
             }
         }

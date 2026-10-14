@@ -76,7 +76,7 @@ import { AllAccountPositionsResponseDataFreshness } from './all-account-position
  * @interface AllAccountPositionsResponse
  */
 export interface AllAccountPositionsResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Positions returned for the request.

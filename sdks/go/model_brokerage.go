@@ -53,7 +53,7 @@ type Brokerage struct {
 	BrokerageType *BrokerageType `json:"brokerage_type,omitempty"`
 	// This field is deprecated. Please contact us if you have a valid use case for it.
 	// Deprecated
-	Exchanges []interface{} `json:"exchanges,omitempty"`
+	Exchanges []string `json:"exchanges,omitempty"`
 	// This field is deprecated.
 	// Deprecated
 	OpenUrl NullableString `json:"open_url,omitempty"`
@@ -652,9 +652,9 @@ func (o *Brokerage) SetBrokerageType(v BrokerageType) {
 
 // GetExchanges returns the Exchanges field value if set, zero value otherwise.
 // Deprecated
-func (o *Brokerage) GetExchanges() []interface{} {
+func (o *Brokerage) GetExchanges() []string {
 	if o == nil || isNil(o.Exchanges) {
-		var ret []interface{}
+		var ret []string
 		return ret
 	}
 	return o.Exchanges
@@ -663,7 +663,7 @@ func (o *Brokerage) GetExchanges() []interface{} {
 // GetExchangesOk returns a tuple with the Exchanges field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *Brokerage) GetExchangesOk() ([]interface{}, bool) {
+func (o *Brokerage) GetExchangesOk() ([]string, bool) {
 	if o == nil || isNil(o.Exchanges) {
     return nil, false
 	}
@@ -679,9 +679,9 @@ func (o *Brokerage) HasExchanges() bool {
 	return false
 }
 
-// SetExchanges gets a reference to the given []interface{} and assigns it to the Exchanges field.
+// SetExchanges gets a reference to the given []string and assigns it to the Exchanges field.
 // Deprecated
-func (o *Brokerage) SetExchanges(v []interface{}) {
+func (o *Brokerage) SetExchanges(v []string) {
 	o.Exchanges = v
 }
 

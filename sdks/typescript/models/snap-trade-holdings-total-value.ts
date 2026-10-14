@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface SnapTradeHoldingsTotalValue
  */
 export interface SnapTradeHoldingsTotalValue {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Total value denominated in the currency of the `currency` field.

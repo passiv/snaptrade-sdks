@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface CryptoTradingInstrument
  */
 export interface CryptoTradingInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The instrument\'s trading ticker symbol

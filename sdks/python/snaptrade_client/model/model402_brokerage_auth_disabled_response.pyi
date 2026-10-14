@@ -37,8 +37,8 @@ class Model402BrokerageAuthDisabledResponse(
     class MetaOapg:
         
         class properties:
-            detail = schemas.AnyTypeSchema
-            code = schemas.AnyTypeSchema
+            detail = schemas.StrSchema
+            code = schemas.StrSchema
             __annotations__ = {
                 "detail": detail,
                 "code": code,
@@ -73,8 +73,8 @@ class Model402BrokerageAuthDisabledResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        detail: typing.Union[MetaOapg.properties.detail, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
-        code: typing.Union[MetaOapg.properties.code, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        detail: typing.Union[MetaOapg.properties.detail, str, schemas.Unset] = schemas.unset,
+        code: typing.Union[MetaOapg.properties.code, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Model402BrokerageAuthDisabledResponse':

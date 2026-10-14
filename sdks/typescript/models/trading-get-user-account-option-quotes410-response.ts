@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface TradingGetUserAccountOptionQuotes410Response
  */
 export interface TradingGetUserAccountOptionQuotes410Response {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

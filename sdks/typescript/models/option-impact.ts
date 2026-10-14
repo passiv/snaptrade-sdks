@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface OptionImpact
  */
 export interface OptionImpact {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Estimated cash change for the order, before fees.

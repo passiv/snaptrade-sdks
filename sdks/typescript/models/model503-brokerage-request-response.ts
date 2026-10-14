@@ -74,25 +74,25 @@ import type * as buffer from "buffer"
  * @interface Model503BrokerageRequestResponse
  */
 export interface Model503BrokerageRequestResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model503BrokerageRequestResponse
      */
-    'detail'?: any;
+    'detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof Model503BrokerageRequestResponse
      */
-    'status_code'?: any;
+    'status_code'?: number;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model503BrokerageRequestResponse
      */
-    'code'?: any;
+    'code'?: string;
 }
 

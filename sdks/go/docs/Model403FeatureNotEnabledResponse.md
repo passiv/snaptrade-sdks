@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Detail** | Pointer to **interface{}** |  | [optional] 
-**DefaultCode** | Pointer to **interface{}** |  | [optional] 
+**Detail** | Pointer to **string** |  | [optional] 
+**DefaultCode** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDetail
 
-`func (o *Model403FeatureNotEnabledResponse) GetDetail() interface{}`
+`func (o *Model403FeatureNotEnabledResponse) GetDetail() string`
 
 GetDetail returns the Detail field if non-nil, zero value otherwise.
 
 ### GetDetailOk
 
-`func (o *Model403FeatureNotEnabledResponse) GetDetailOk() (*interface{}, bool)`
+`func (o *Model403FeatureNotEnabledResponse) GetDetailOk() (*string, bool)`
 
 GetDetailOk returns a tuple with the Detail field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDetail
 
-`func (o *Model403FeatureNotEnabledResponse) SetDetail(v interface{})`
+`func (o *Model403FeatureNotEnabledResponse) SetDetail(v string)`
 
 SetDetail sets Detail field to given value.
 
@@ -51,32 +51,22 @@ SetDetail sets Detail field to given value.
 
 HasDetail returns a boolean if a field has been set.
 
-### SetDetailNil
-
-`func (o *Model403FeatureNotEnabledResponse) SetDetailNil(b bool)`
-
- SetDetailNil sets the value for Detail to be an explicit nil
-
-### UnsetDetail
-`func (o *Model403FeatureNotEnabledResponse) UnsetDetail()`
-
-UnsetDetail ensures that no value is present for Detail, not even an explicit nil
 ### GetDefaultCode
 
-`func (o *Model403FeatureNotEnabledResponse) GetDefaultCode() interface{}`
+`func (o *Model403FeatureNotEnabledResponse) GetDefaultCode() string`
 
 GetDefaultCode returns the DefaultCode field if non-nil, zero value otherwise.
 
 ### GetDefaultCodeOk
 
-`func (o *Model403FeatureNotEnabledResponse) GetDefaultCodeOk() (*interface{}, bool)`
+`func (o *Model403FeatureNotEnabledResponse) GetDefaultCodeOk() (*string, bool)`
 
 GetDefaultCodeOk returns a tuple with the DefaultCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDefaultCode
 
-`func (o *Model403FeatureNotEnabledResponse) SetDefaultCode(v interface{})`
+`func (o *Model403FeatureNotEnabledResponse) SetDefaultCode(v string)`
 
 SetDefaultCode sets DefaultCode field to given value.
 
@@ -86,16 +76,6 @@ SetDefaultCode sets DefaultCode field to given value.
 
 HasDefaultCode returns a boolean if a field has been set.
 
-### SetDefaultCodeNil
-
-`func (o *Model403FeatureNotEnabledResponse) SetDefaultCodeNil(b bool)`
-
- SetDefaultCodeNil sets the value for DefaultCode to be an explicit nil
-
-### UnsetDefaultCode
-`func (o *Model403FeatureNotEnabledResponse) UnsetDefaultCode()`
-
-UnsetDefaultCode ensures that no value is present for DefaultCode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

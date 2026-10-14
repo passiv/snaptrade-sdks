@@ -75,7 +75,7 @@ import { AccountOrderRecord } from './account-order-record';
  * @interface MlegOrderResponse
  */
 export interface MlegOrderResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.

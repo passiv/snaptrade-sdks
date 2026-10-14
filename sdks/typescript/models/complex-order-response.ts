@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface ComplexOrderResponse
  */
 export interface ComplexOrderResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The complex order type that was placed.

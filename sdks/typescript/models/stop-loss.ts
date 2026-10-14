@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface StopLoss
  */
 export interface StopLoss {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

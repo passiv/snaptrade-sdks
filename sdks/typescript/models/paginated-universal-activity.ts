@@ -76,7 +76,7 @@ import { PaginationDetails } from './pagination-details';
  * @interface PaginatedUniversalActivity
  */
 export interface PaginatedUniversalActivity {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

@@ -78,7 +78,7 @@ import { LineOfCreditAccountSyncStatus } from './line-of-credit-account-sync-sta
  * @interface LineOfCreditAccount
  */
 export interface LineOfCreditAccount {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Discriminator for the account kind.

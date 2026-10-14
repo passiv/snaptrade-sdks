@@ -76,7 +76,7 @@ import { AccountOrderRecordStatusV2Nullable } from './account-order-record-statu
  * @interface AccountOrderRecordLeg
  */
 export interface AccountOrderRecordLeg {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Brokerage order identifier for this leg, if available.

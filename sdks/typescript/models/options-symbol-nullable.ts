@@ -75,7 +75,7 @@ import { UnderlyingSymbol } from './underlying-symbol';
  * @interface OptionsSymbolNullable
  */
 export interface OptionsSymbolNullable {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.

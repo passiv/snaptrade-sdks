@@ -51,8 +51,8 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
       * @var string[]
       */
     protected static $openAPITypes = [
-        'detail' => 'mixed',
-        'code' => 'mixed'
+        'detail' => 'string',
+        'code' => 'string'
     ];
 
     /**
@@ -73,8 +73,8 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'detail' => true,
-		'code' => true
+        'detail' => false,
+		'code' => false
     ];
 
     /**
@@ -293,7 +293,7 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
     /**
      * Gets detail
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getDetail()
     {
@@ -303,7 +303,7 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
     /**
      * Sets detail
      *
-     * @param mixed|null $detail detail
+     * @param string|null $detail detail
      *
      * @return self
      */
@@ -311,14 +311,7 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
     {
 
         if (is_null($detail)) {
-            array_push($this->openAPINullablesSetToNull, 'detail');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('detail', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable detail cannot be null');
         }
 
         $this->container['detail'] = $detail;
@@ -329,7 +322,7 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
     /**
      * Gets code
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getCode()
     {
@@ -339,7 +332,7 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
     /**
      * Sets code
      *
-     * @param mixed|null $code code
+     * @param string|null $code code
      *
      * @return self
      */
@@ -347,14 +340,7 @@ class Model402BrokerageAuthDisabledResponse implements ModelInterface, ArrayAcce
     {
 
         if (is_null($code)) {
-            array_push($this->openAPINullablesSetToNull, 'code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
 
         $this->container['code'] = $code;

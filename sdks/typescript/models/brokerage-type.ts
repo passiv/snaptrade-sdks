@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageType
  */
 export interface BrokerageType {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

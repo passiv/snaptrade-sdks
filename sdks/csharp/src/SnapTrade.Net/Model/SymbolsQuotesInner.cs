@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="askPrice">The most recent price from the brokerage..</param>
         /// <param name="bidSize">The most recent bid size from the brokerage..</param>
         /// <param name="askSize">The most recent ask size from the brokerage..</param>
-        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), double lastTradePrice = default(double), double bidPrice = default(double), double askPrice = default(double), double bidSize = default(double), double askSize = default(double))
+        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), double lastTradePrice = default(double), double bidPrice = default(double), double askPrice = default(double), double bidSize = default(double), double askSize = default(double)) : base()
         {
             this.Symbol = symbol;
             this.LastTradePrice = lastTradePrice;
@@ -49,6 +49,7 @@ namespace SnapTrade.Net.Model
             this.AskPrice = askPrice;
             this.BidSize = bidSize;
             this.AskSize = askSize;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -93,6 +94,12 @@ namespace SnapTrade.Net.Model
         public double AskSize { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -100,12 +107,14 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class SymbolsQuotesInner {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  LastTradePrice: ").Append(LastTradePrice).Append("\n");
             sb.Append("  BidPrice: ").Append(BidPrice).Append("\n");
             sb.Append("  AskPrice: ").Append(AskPrice).Append("\n");
             sb.Append("  BidSize: ").Append(BidSize).Append("\n");
             sb.Append("  AskSize: ").Append(AskSize).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -114,7 +123,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -140,32 +149,33 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LastTradePrice == input.LastTradePrice ||
                     this.LastTradePrice.Equals(input.LastTradePrice)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BidPrice == input.BidPrice ||
                     this.BidPrice.Equals(input.BidPrice)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AskPrice == input.AskPrice ||
                     this.AskPrice.Equals(input.AskPrice)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BidSize == input.BidSize ||
                     this.BidSize.Equals(input.BidSize)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AskSize == input.AskSize ||
                     this.AskSize.Equals(input.AskSize)
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -176,7 +186,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
@@ -186,6 +196,10 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.AskPrice.GetHashCode();
                 hashCode = (hashCode * 59) + this.BidSize.GetHashCode();
                 hashCode = (hashCode * 59) + this.AskSize.GetHashCode();
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
+                }
                 return hashCode;
             }
         }

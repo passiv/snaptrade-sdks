@@ -75,7 +75,7 @@ import { RateOfReturnObject } from './rate-of-return-object';
  * @interface RateOfReturnResponse
  */
 export interface RateOfReturnResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * List of return percentages

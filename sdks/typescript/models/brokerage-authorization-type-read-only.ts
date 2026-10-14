@@ -75,7 +75,7 @@ import { BrokerageAuthorizationTypeReadOnlyBrokerage } from './brokerage-authori
  * @interface BrokerageAuthorizationTypeReadOnly
  */
 export interface BrokerageAuthorizationTypeReadOnly {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

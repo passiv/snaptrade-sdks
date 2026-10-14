@@ -30,14 +30,13 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'Object'
+        :'error' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'error'
       ])
     end
 

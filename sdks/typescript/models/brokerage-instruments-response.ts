@@ -75,7 +75,7 @@ import { BrokerageInstrument } from './brokerage-instrument';
  * @interface BrokerageInstrumentsResponse
  */
 export interface BrokerageInstrumentsResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

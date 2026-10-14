@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DefaultDetail** | Pointer to **interface{}** |  | [optional] 
-**DefaultCode** | Pointer to **interface{}** |  | [optional] 
+**DefaultDetail** | Pointer to **string** |  | [optional] 
+**DefaultCode** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDefaultDetail
 
-`func (o *Model404FailedRequestResponse) GetDefaultDetail() interface{}`
+`func (o *Model404FailedRequestResponse) GetDefaultDetail() string`
 
 GetDefaultDetail returns the DefaultDetail field if non-nil, zero value otherwise.
 
 ### GetDefaultDetailOk
 
-`func (o *Model404FailedRequestResponse) GetDefaultDetailOk() (*interface{}, bool)`
+`func (o *Model404FailedRequestResponse) GetDefaultDetailOk() (*string, bool)`
 
 GetDefaultDetailOk returns a tuple with the DefaultDetail field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDefaultDetail
 
-`func (o *Model404FailedRequestResponse) SetDefaultDetail(v interface{})`
+`func (o *Model404FailedRequestResponse) SetDefaultDetail(v string)`
 
 SetDefaultDetail sets DefaultDetail field to given value.
 
@@ -51,32 +51,22 @@ SetDefaultDetail sets DefaultDetail field to given value.
 
 HasDefaultDetail returns a boolean if a field has been set.
 
-### SetDefaultDetailNil
-
-`func (o *Model404FailedRequestResponse) SetDefaultDetailNil(b bool)`
-
- SetDefaultDetailNil sets the value for DefaultDetail to be an explicit nil
-
-### UnsetDefaultDetail
-`func (o *Model404FailedRequestResponse) UnsetDefaultDetail()`
-
-UnsetDefaultDetail ensures that no value is present for DefaultDetail, not even an explicit nil
 ### GetDefaultCode
 
-`func (o *Model404FailedRequestResponse) GetDefaultCode() interface{}`
+`func (o *Model404FailedRequestResponse) GetDefaultCode() string`
 
 GetDefaultCode returns the DefaultCode field if non-nil, zero value otherwise.
 
 ### GetDefaultCodeOk
 
-`func (o *Model404FailedRequestResponse) GetDefaultCodeOk() (*interface{}, bool)`
+`func (o *Model404FailedRequestResponse) GetDefaultCodeOk() (*string, bool)`
 
 GetDefaultCodeOk returns a tuple with the DefaultCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDefaultCode
 
-`func (o *Model404FailedRequestResponse) SetDefaultCode(v interface{})`
+`func (o *Model404FailedRequestResponse) SetDefaultCode(v string)`
 
 SetDefaultCode sets DefaultCode field to given value.
 
@@ -86,16 +76,6 @@ SetDefaultCode sets DefaultCode field to given value.
 
 HasDefaultCode returns a boolean if a field has been set.
 
-### SetDefaultCodeNil
-
-`func (o *Model404FailedRequestResponse) SetDefaultCodeNil(b bool)`
-
- SetDefaultCodeNil sets the value for DefaultCode to be an explicit nil
-
-### UnsetDefaultCode
-`func (o *Model404FailedRequestResponse) UnsetDefaultCode()`
-
-UnsetDefaultCode ensures that no value is present for DefaultCode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface LineOfCreditAccountMinimumPaymentAmount
  */
 export interface LineOfCreditAccountMinimumPaymentAmount {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

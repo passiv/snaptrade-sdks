@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface RateOfReturnObject
  */
 export interface RateOfReturnObject {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The timeframe this return percent is reflecting

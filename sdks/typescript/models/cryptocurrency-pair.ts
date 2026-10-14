@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface CryptocurrencyPair
  */
 export interface CryptocurrencyPair {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Cryptocurrency pair instrument symbol

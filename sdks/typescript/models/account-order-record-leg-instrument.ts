@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface AccountOrderRecordLegInstrument
  */
 export interface AccountOrderRecordLegInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The symbol or ticker for the security.

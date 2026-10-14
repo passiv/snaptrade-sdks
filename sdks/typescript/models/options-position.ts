@@ -76,7 +76,7 @@ import { OptionBrokerageSymbol } from './option-brokerage-symbol';
  * @interface OptionsPosition
  */
 export interface OptionsPosition {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

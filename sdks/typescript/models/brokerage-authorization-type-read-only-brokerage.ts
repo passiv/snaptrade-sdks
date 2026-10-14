@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageAuthorizationTypeReadOnlyBrokerage
  */
 export interface BrokerageAuthorizationTypeReadOnlyBrokerage {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

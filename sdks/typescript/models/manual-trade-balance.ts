@@ -76,7 +76,7 @@ import { Currency } from './currency';
  * @interface ManualTradeBalance
  */
 export interface ManualTradeBalance {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

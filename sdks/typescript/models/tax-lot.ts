@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface TaxLot
  */
 export interface TaxLot {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The date and time of the purchase.
