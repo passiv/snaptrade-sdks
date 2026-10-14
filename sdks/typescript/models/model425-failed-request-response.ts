@@ -78,15 +78,15 @@ export interface Model425FailedRequestResponse {
 
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model425FailedRequestResponse
      */
-    'detail'?: string;
+    'detail'?: any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model425FailedRequestResponse
      */
-    'code'?: string;
+    'code'?: any;
 }
 

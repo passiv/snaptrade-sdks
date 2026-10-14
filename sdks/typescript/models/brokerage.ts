@@ -178,11 +178,11 @@ export interface Brokerage {
     'brokerage_type'?: BrokerageType;
     /**
      * This field is deprecated. Please contact us if you have a valid use case for it.
-     * @type {Array<string>}
+     * @type {Array<any>}
      * @memberof Brokerage
      * @deprecated
      */
-    'exchanges'?: Array<string>;
+    'exchanges'?: Array<any>;
     /**
      * This field is deprecated.
      * @type {string}

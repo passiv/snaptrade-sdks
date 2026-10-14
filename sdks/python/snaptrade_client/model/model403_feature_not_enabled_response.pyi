@@ -37,8 +37,8 @@ class Model403FeatureNotEnabledResponse(
     class MetaOapg:
         
         class properties:
-            detail = schemas.StrSchema
-            default_code = schemas.StrSchema
+            detail = schemas.AnyTypeSchema
+            default_code = schemas.AnyTypeSchema
             __annotations__ = {
                 "detail": detail,
                 "default_code": default_code,
@@ -73,8 +73,8 @@ class Model403FeatureNotEnabledResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        detail: typing.Union[MetaOapg.properties.detail, str, schemas.Unset] = schemas.unset,
-        default_code: typing.Union[MetaOapg.properties.default_code, str, schemas.Unset] = schemas.unset,
+        detail: typing.Union[MetaOapg.properties.detail, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        default_code: typing.Union[MetaOapg.properties.default_code, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Model403FeatureNotEnabledResponse':

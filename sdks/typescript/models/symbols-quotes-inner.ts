@@ -75,8 +75,6 @@ import { UniversalSymbol } from './universal-symbol';
  * @interface SymbolsQuotesInner
  */
 export interface SymbolsQuotesInner {
-    [key: string]: unknown;
-
     /**
      * 
      * @type {UniversalSymbol}

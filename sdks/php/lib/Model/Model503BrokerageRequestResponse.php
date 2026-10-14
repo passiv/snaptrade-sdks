@@ -51,9 +51,9 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'detail' => 'string',
-        'status_code' => 'int',
-        'code' => 'string'
+        'detail' => 'mixed',
+        'status_code' => 'mixed',
+        'code' => 'mixed'
     ];
 
     /**
@@ -75,9 +75,9 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'detail' => false,
-		'status_code' => false,
-		'code' => false
+        'detail' => true,
+		'status_code' => true,
+		'code' => true
     ];
 
     /**
@@ -300,7 +300,7 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     /**
      * Gets detail
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getDetail()
     {
@@ -310,7 +310,7 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     /**
      * Sets detail
      *
-     * @param string|null $detail detail
+     * @param mixed|null $detail detail
      *
      * @return self
      */
@@ -318,7 +318,14 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     {
 
         if (is_null($detail)) {
-            throw new \InvalidArgumentException('non-nullable detail cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['detail'] = $detail;
@@ -329,7 +336,7 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     /**
      * Gets status_code
      *
-     * @return int|null
+     * @return mixed|null
      */
     public function getStatusCode()
     {
@@ -339,7 +346,7 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     /**
      * Sets status_code
      *
-     * @param int|null $status_code status_code
+     * @param mixed|null $status_code status_code
      *
      * @return self
      */
@@ -347,7 +354,14 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     {
 
         if (is_null($status_code)) {
-            throw new \InvalidArgumentException('non-nullable status_code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'status_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['status_code'] = $status_code;
@@ -358,7 +372,7 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     /**
      * Gets code
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getCode()
     {
@@ -368,7 +382,7 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     /**
      * Sets code
      *
-     * @param string|null $code code
+     * @param mixed|null $code code
      *
      * @return self
      */
@@ -376,7 +390,14 @@ class Model503BrokerageRequestResponse implements ModelInterface, ArrayAccess, \
     {
 
         if (is_null($code)) {
-            throw new \InvalidArgumentException('non-nullable code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['code'] = $code;

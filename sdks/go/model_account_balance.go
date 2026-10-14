@@ -18,10 +18,7 @@ import (
 // AccountBalance Contains balance related information for the account.
 type AccountBalance struct {
 	Total NullableAccountBalanceTotal `json:"total,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
-
-type _AccountBalance AccountBalance
 
 // NewAccountBalance instantiates a new AccountBalance object
 // This constructor will assign default values to properties that have it defined,
@@ -87,30 +84,7 @@ func (o AccountBalance) MarshalJSON() ([]byte, error) {
 	if o.Total.IsSet() {
 		toSerialize["total"] = o.Total.Get()
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return json.Marshal(toSerialize)
-}
-
-func (o *AccountBalance) UnmarshalJSON(bytes []byte) error {
-	typedBytes := bytes
-	decoded := _AccountBalance{}
-	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
-		return err
-	}
-	var additionalProperties map[string]interface{}
-	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
-		return err
-	}
-	delete(additionalProperties, "total")
-	decoded.AdditionalProperties = additionalProperties
-	// Commit the complete result only after typed fields and additional properties
-	// succeed; a failed decode must not partially replace an existing value.
-	*o = AccountBalance(decoded)
-	return nil
 }
 
 type NullableAccountBalance struct {

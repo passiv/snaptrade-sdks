@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="detail">detail.</param>
         /// <param name="code">code.</param>
-        public Model402BrokerageAuthAlreadyDisabledException(string detail = default(string), string code = default(string)) : base()
+        public Model402BrokerageAuthAlreadyDisabledException(Object detail = default(Object), Object code = default(Object)) : base()
         {
             this.Detail = detail;
             this.Code = code;
@@ -47,14 +47,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Detail
         /// </summary>
-        [DataMember(Name = "detail", EmitDefaultValue = false)]
-        public string Detail { get; set; }
+        [DataMember(Name = "detail", EmitDefaultValue = true)]
+        public Object Detail { get; set; }
 
         /// <summary>
         /// Gets or Sets Code
         /// </summary>
-        [DataMember(Name = "code", EmitDefaultValue = false)]
-        public string Code { get; set; }
+        [DataMember(Name = "code", EmitDefaultValue = true)]
+        public Object Code { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

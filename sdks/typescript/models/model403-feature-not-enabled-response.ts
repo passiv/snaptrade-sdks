@@ -78,15 +78,15 @@ export interface Model403FeatureNotEnabledResponse {
 
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model403FeatureNotEnabledResponse
      */
-    'detail'?: string;
+    'detail'?: any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model403FeatureNotEnabledResponse
      */
-    'default_code'?: string;
+    'default_code'?: any;
 }
 

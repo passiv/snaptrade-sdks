@@ -37,8 +37,8 @@ class Model402BrokerageAuthAlreadyDisabledException(
     class MetaOapg:
         
         class properties:
-            detail = schemas.StrSchema
-            code = schemas.StrSchema
+            detail = schemas.AnyTypeSchema
+            code = schemas.AnyTypeSchema
             __annotations__ = {
                 "detail": detail,
                 "code": code,
@@ -73,8 +73,8 @@ class Model402BrokerageAuthAlreadyDisabledException(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        detail: typing.Union[MetaOapg.properties.detail, str, schemas.Unset] = schemas.unset,
-        code: typing.Union[MetaOapg.properties.code, str, schemas.Unset] = schemas.unset,
+        detail: typing.Union[MetaOapg.properties.detail, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        code: typing.Union[MetaOapg.properties.code, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Model402BrokerageAuthAlreadyDisabledException':

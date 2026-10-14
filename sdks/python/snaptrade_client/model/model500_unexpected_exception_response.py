@@ -37,9 +37,9 @@ class Model500UnexpectedExceptionResponse(
     class MetaOapg:
         
         class properties:
-            detail = schemas.StrSchema
-            status_code = schemas.IntSchema
-            code = schemas.StrSchema
+            detail = schemas.AnyTypeSchema
+            status_code = schemas.AnyTypeSchema
+            code = schemas.AnyTypeSchema
             __annotations__ = {
                 "detail": detail,
                 "status_code": status_code,
@@ -81,9 +81,9 @@ class Model500UnexpectedExceptionResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        detail: typing.Union[MetaOapg.properties.detail, str, schemas.Unset] = schemas.unset,
-        status_code: typing.Union[MetaOapg.properties.status_code, decimal.Decimal, int, schemas.Unset] = schemas.unset,
-        code: typing.Union[MetaOapg.properties.code, str, schemas.Unset] = schemas.unset,
+        detail: typing.Union[MetaOapg.properties.detail, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        status_code: typing.Union[MetaOapg.properties.status_code, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        code: typing.Union[MetaOapg.properties.code, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Model500UnexpectedExceptionResponse':

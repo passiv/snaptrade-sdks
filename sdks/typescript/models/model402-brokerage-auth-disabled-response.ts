@@ -78,15 +78,15 @@ export interface Model402BrokerageAuthDisabledResponse {
 
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model402BrokerageAuthDisabledResponse
      */
-    'detail'?: string;
+    'detail'?: any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model402BrokerageAuthDisabledResponse
      */
-    'code'?: string;
+    'code'?: any;
 }
 

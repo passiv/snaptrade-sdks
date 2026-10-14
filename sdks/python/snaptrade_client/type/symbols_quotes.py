@@ -15,6 +15,6 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.symbols_quotes_item import SymbolsQuotesItem
+from snaptrade_client.type.universal_symbol import UniversalSymbol
 
-SymbolsQuotes = typing.List[SymbolsQuotesItem]
+SymbolsQuotes = typing.List[typing.Union[bool, date, datetime, dict, float, int, list, str, None]]

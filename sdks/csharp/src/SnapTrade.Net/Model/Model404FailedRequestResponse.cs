@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="defaultDetail">defaultDetail.</param>
         /// <param name="defaultCode">defaultCode.</param>
-        public Model404FailedRequestResponse(string defaultDetail = default(string), string defaultCode = default(string)) : base()
+        public Model404FailedRequestResponse(Object defaultDetail = default(Object), Object defaultCode = default(Object)) : base()
         {
             this.DefaultDetail = defaultDetail;
             this.DefaultCode = defaultCode;
@@ -47,14 +47,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets DefaultDetail
         /// </summary>
-        [DataMember(Name = "default_detail", EmitDefaultValue = false)]
-        public string DefaultDetail { get; set; }
+        [DataMember(Name = "default_detail", EmitDefaultValue = true)]
+        public Object DefaultDetail { get; set; }
 
         /// <summary>
         /// Gets or Sets DefaultCode
         /// </summary>
-        [DataMember(Name = "default_code", EmitDefaultValue = false)]
-        public string DefaultCode { get; set; }
+        [DataMember(Name = "default_code", EmitDefaultValue = true)]
+        public Object DefaultCode { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

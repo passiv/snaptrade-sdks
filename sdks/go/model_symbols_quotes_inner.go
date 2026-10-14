@@ -28,10 +28,7 @@ type SymbolsQuotesInner struct {
 	BidSize *float32 `json:"bid_size,omitempty"`
 	// The most recent ask size from the brokerage.
 	AskSize *float32 `json:"ask_size,omitempty"`
-	AdditionalProperties map[string]interface{}
 }
-
-type _SymbolsQuotesInner SymbolsQuotesInner
 
 // NewSymbolsQuotesInner instantiates a new SymbolsQuotesInner object
 // This constructor will assign default values to properties that have it defined,
@@ -262,35 +259,7 @@ func (o SymbolsQuotesInner) MarshalJSON() ([]byte, error) {
 	if !isNil(o.AskSize) {
 		toSerialize["ask_size"] = o.AskSize
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
 	return json.Marshal(toSerialize)
-}
-
-func (o *SymbolsQuotesInner) UnmarshalJSON(bytes []byte) error {
-	typedBytes := bytes
-	decoded := _SymbolsQuotesInner{}
-	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
-		return err
-	}
-	var additionalProperties map[string]interface{}
-	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
-		return err
-	}
-	delete(additionalProperties, "symbol")
-	delete(additionalProperties, "last_trade_price")
-	delete(additionalProperties, "bid_price")
-	delete(additionalProperties, "ask_price")
-	delete(additionalProperties, "bid_size")
-	delete(additionalProperties, "ask_size")
-	decoded.AdditionalProperties = additionalProperties
-	// Commit the complete result only after typed fields and additional properties
-	// succeed; a failed decode must not partially replace an existing value.
-	*o = SymbolsQuotesInner(decoded)
-	return nil
 }
 
 type NullableSymbolsQuotesInner struct {

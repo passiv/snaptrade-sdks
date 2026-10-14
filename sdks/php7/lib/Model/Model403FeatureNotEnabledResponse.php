@@ -51,8 +51,8 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'detail' => 'string',
-        'default_code' => 'string'
+        'detail' => 'mixed',
+        'default_code' => 'mixed'
     ];
 
     /**
@@ -73,8 +73,8 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
       * @var boolean[]
       */
     protected static $openAPINullables = [
-        'detail' => false,
-		'default_code' => false
+        'detail' => true,
+		'default_code' => true
     ];
 
     /**
@@ -293,7 +293,7 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
     /**
      * Gets detail
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getDetail()
     {
@@ -303,7 +303,7 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
     /**
      * Sets detail
      *
-     * @param string|null $detail detail
+     * @param mixed|null $detail detail
      *
      * @return self
      */
@@ -311,7 +311,14 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
     {
 
         if (is_null($detail)) {
-            throw new \InvalidArgumentException('non-nullable detail cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['detail'] = $detail;
@@ -322,7 +329,7 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
     /**
      * Gets default_code
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getDefaultCode()
     {
@@ -332,7 +339,7 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
     /**
      * Sets default_code
      *
-     * @param string|null $default_code default_code
+     * @param mixed|null $default_code default_code
      *
      * @return self
      */
@@ -340,7 +347,14 @@ class Model403FeatureNotEnabledResponse implements ModelInterface, ArrayAccess, 
     {
 
         if (is_null($default_code)) {
-            throw new \InvalidArgumentException('non-nullable default_code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'default_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('default_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['default_code'] = $default_code;

@@ -20,9 +20,9 @@ class RequiredModel403FeatureNotEnabledResponse(TypedDict):
     pass
 
 class OptionalModel403FeatureNotEnabledResponse(TypedDict, total=False):
-    detail: str
+    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
-    default_code: str
+    default_code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
 class Model403FeatureNotEnabledResponse(RequiredModel403FeatureNotEnabledResponse, OptionalModel403FeatureNotEnabledResponse):
     pass

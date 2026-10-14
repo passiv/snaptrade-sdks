@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **HasReporting** | **bool?** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **IsRealTimeConnection** | **bool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **BrokerageType** | [**BrokerageType**](BrokerageType.md) |  | [optional] 
-**Exchanges** | **List&lt;string&gt;** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**Exchanges** | **List&lt;Object&gt;** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **OpenUrl** | **string** | This field is deprecated. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
