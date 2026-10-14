@@ -79,7 +79,7 @@ import { SubPeriodReturnRate } from './sub-period-return-rate';
  * @interface PerformanceCustom
  */
 export interface PerformanceCustom {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

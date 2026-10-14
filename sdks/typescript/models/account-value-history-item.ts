@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface AccountValueHistoryItem
  */
 export interface AccountValueHistoryItem {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The date of the estimated account value

@@ -77,7 +77,7 @@ import { ManualTradeImpact } from './manual-trade-impact';
  * @interface ManualTradeAndImpact
  */
 export interface ManualTradeAndImpact {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface OAuthWebhookBase
  */
 export interface OAuthWebhookBase {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
@@ -138,10 +138,10 @@ export interface OAuthWebhookBase {
     'connectionAttemptedResult'?: string;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {{ [key: string]: unknown; }}
      * @memberof OAuthWebhookBase
      */
-    'details'?: { [key: string]: any; };
+    'details'?: { [key: string]: unknown; };
 }
 
 type OAuthWebhookBaseSchemaVersionEnum = 'oauth_v1'

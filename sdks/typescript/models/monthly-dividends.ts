@@ -75,7 +75,7 @@ import { DividendAtDate } from './dividend-at-date';
  * @interface MonthlyDividends
  */
 export interface MonthlyDividends {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.

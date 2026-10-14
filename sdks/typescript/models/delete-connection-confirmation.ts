@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface DeleteConnectionConfirmation
  */
 export interface DeleteConnectionConfirmation {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Connection queued for deletion; please wait for webhook for confirmation.

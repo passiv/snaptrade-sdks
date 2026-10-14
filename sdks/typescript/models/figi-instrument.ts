@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface FigiInstrument
  */
 export interface FigiInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.

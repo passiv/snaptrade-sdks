@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface PaginationDetails
  */
 export interface PaginationDetails {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The starting point of the paginated results.

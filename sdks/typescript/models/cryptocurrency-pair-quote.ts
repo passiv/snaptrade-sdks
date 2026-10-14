@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface CryptocurrencyPairQuote
  */
 export interface CryptocurrencyPairQuote {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The highest price a buyer is willing to pay.

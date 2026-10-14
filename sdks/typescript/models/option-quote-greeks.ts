@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface OptionQuoteGreeks
  */
 export interface OptionQuoteGreeks {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Delta represents the rate of change between the option\'s price and a $1 change in the underlying asset\'s price.

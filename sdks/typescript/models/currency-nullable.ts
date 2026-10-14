@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface CurrencyNullable
  */
 export interface CurrencyNullable {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.

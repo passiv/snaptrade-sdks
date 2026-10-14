@@ -78,7 +78,7 @@ import { SnapTradeHoldingsTotalValue } from './snap-trade-holdings-total-value';
  * @interface AccountHoldings
  */
 export interface AccountHoldings {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

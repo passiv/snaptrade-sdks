@@ -79,7 +79,7 @@ import { SymbolExchange } from './symbol-exchange';
  * @interface UniversalSymbolNullable
  */
 export interface UniversalSymbolNullable {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.

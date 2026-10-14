@@ -76,7 +76,7 @@ import { AccountSyncStatus } from './account-sync-status';
  * @interface Account
  */
 export interface Account {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
@@ -164,11 +164,11 @@ export interface Account {
     'account_category'?: AccountAccountCategoryEnum;
     /**
      * Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there\'s no standard format for this data. This field is deprecated and subject to removal in a future version.
-     * @type {{ [key: string]: any; }}
+     * @type {{ [key: string]: unknown; }}
      * @memberof Account
      * @deprecated
      */
-    'meta'?: { [key: string]: any; };
+    'meta'?: { [key: string]: unknown; };
     /**
      * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
      * @type {string}

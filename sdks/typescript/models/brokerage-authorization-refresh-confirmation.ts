@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageAuthorizationRefreshConfirmation
  */
 export interface BrokerageAuthorizationRefreshConfirmation {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Refresh confirmation details

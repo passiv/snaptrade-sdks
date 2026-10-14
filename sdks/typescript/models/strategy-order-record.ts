@@ -75,7 +75,7 @@ import { OptionStrategy } from './option-strategy';
  * @interface StrategyOrderRecord
  */
 export interface StrategyOrderRecord {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

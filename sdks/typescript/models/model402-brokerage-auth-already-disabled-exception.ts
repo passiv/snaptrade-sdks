@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Model402BrokerageAuthAlreadyDisabledException
  */
 export interface Model402BrokerageAuthAlreadyDisabledException {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

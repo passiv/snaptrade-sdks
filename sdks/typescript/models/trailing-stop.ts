@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface TrailingStop
  */
 export interface TrailingStop {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The trail amount. Interpreted as dollars if `type` is `DOLLAR`, or a percentage if `type` is `PERCENT`.

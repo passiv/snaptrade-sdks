@@ -75,7 +75,7 @@ import { UnderlyingTokenizedAssetInstrument } from './underlying-tokenized-asset
  * @interface TokenizedAssetInstrument
  */
 export interface TokenizedAssetInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

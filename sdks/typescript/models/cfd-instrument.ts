@@ -75,7 +75,7 @@ import { UnderlyingCfdInstrument } from './underlying-cfd-instrument';
  * @interface CfdInstrument
  */
 export interface CfdInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

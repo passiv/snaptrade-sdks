@@ -75,7 +75,7 @@ import { CryptoOrderPreviewEstimatedFee } from './crypto-order-preview-estimated
  * @interface CryptoOrderPreview
  */
 export interface CryptoOrderPreview {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface ChildBrokerageOrderIDsNullable
  */
 export interface ChildBrokerageOrderIDsNullable {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The brokerage order ID for the take profit leg of the bracket order

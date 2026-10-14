@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Model503BrokerageRequestResponse
  */
 export interface Model503BrokerageRequestResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Model500UnexpectedExceptionResponse
  */
 export interface Model500UnexpectedExceptionResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

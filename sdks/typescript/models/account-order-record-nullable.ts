@@ -80,7 +80,7 @@ import { UniversalSymbolNullable } from './universal-symbol-nullable';
  * @interface AccountOrderRecordNullable
  */
 export interface AccountOrderRecordNullable {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.

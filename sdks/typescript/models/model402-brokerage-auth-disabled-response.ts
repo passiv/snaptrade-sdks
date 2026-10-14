@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Model402BrokerageAuthDisabledResponse
  */
 export interface Model402BrokerageAuthDisabledResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

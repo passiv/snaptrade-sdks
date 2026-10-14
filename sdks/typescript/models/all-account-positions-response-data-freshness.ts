@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface AllAccountPositionsResponseDataFreshness
  */
 export interface AllAccountPositionsResponseDataFreshness {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The time the returned positions data was fetched from the brokerage.

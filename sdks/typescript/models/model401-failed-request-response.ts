@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Model401FailedRequestResponse
  */
 export interface Model401FailedRequestResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

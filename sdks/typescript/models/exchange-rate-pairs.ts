@@ -75,7 +75,7 @@ import { Currency } from './currency';
  * @interface ExchangeRatePairs
  */
 export interface ExchangeRatePairs {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

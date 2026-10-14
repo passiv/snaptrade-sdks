@@ -75,7 +75,7 @@ import { AccountOrderRecordV2 } from './account-order-record-v2';
  * @interface AccountOrdersV2Response
  */
 export interface AccountOrdersV2Response {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * List of orders returned by the endpoint.

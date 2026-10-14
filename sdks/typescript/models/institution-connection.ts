@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface InstitutionConnection
  */
 export interface InstitutionConnection {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Ways an end user can connect. - `OAUTH`: the user signs in on the institution\'s own site and approves access. - `CREDENTIALS`: the user enters their login details in the SnapTrade Connection Portal. - `API_KEY`: the user creates an API key at the institution and pastes it in. 

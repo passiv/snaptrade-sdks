@@ -75,7 +75,7 @@ import { BrokerageType } from './brokerage-type';
  * @interface Brokerage
  */
 export interface Brokerage {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.

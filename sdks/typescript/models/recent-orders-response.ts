@@ -75,7 +75,7 @@ import { AccountOrderRecord } from './account-order-record';
  * @interface RecentOrdersResponse
  */
 export interface RecentOrdersResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * List of orders executed in the last 24 hours

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Model403FeatureNotEnabledResponse
  */
 export interface Model403FeatureNotEnabledResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

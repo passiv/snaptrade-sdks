@@ -76,7 +76,7 @@ import { UniversalSymbol } from './universal-symbol';
  * @interface OptionStrategy
  */
 export interface OptionStrategy {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

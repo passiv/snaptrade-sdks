@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Status
  */
 export interface Status {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

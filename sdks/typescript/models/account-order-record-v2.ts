@@ -78,7 +78,7 @@ import { TrailingStopNullable } from './trailing-stop-nullable';
  * @interface AccountOrderRecordV2
  */
 export interface AccountOrderRecordV2 {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.

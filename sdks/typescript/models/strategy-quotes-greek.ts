@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface StrategyQuotesGreek
  */
 export interface StrategyQuotesGreek {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

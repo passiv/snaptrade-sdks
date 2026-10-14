@@ -76,7 +76,7 @@ import { MlegTradingInstrument } from './mleg-trading-instrument';
  * @interface MlegLeg
  */
 export interface MlegLeg {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

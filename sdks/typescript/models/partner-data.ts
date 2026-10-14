@@ -75,7 +75,7 @@ import { Brokerage } from './brokerage';
  * @interface PartnerData
  */
 export interface PartnerData {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * A short, unique identifier for your company or product.

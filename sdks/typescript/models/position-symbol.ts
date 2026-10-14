@@ -75,7 +75,7 @@ import { UniversalSymbol } from './universal-symbol';
  * @interface PositionSymbol
  */
 export interface PositionSymbol {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

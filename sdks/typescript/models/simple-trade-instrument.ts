@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface SimpleTradeInstrument
  */
 export interface SimpleTradeInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

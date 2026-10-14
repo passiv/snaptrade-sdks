@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageInstrument
  */
 export interface BrokerageInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The instrument\'s trading symbol / ticker.

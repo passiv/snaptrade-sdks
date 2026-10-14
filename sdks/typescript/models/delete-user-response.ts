@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface DeleteUserResponse
  */
 export interface DeleteUserResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * This is always `deleted` when a user is queued for deletion.

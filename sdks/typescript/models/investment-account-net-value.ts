@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface InvestmentAccountNetValue
  */
 export interface InvestmentAccountNetValue {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
