@@ -53,7 +53,7 @@ namespace SnapTrade.Net.Model
         /// <param name="brokerageType">brokerageType.</param>
         /// <param name="exchanges">This field is deprecated. Please contact us if you have a valid use case for it..</param>
         /// <param name="openUrl">This field is deprecated..</param>
-        public Brokerage(string id = default(string), string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool isDegraded = default(bool), bool? allowsTrading = default(bool?), bool? allowsFractionalUnits = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>), string openUrl = default(string)) : base()
+        public Brokerage(string id = default(string), string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool isDegraded = default(bool), bool? allowsTrading = default(bool?), bool? allowsFractionalUnits = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), BrokerageType brokerageType = default(BrokerageType), List<string> exchanges = default(List<string>), string openUrl = default(string)) : base()
         {
             this.Id = id;
             this.Slug = slug;
@@ -196,7 +196,7 @@ namespace SnapTrade.Net.Model
         /// <value>This field is deprecated. Please contact us if you have a valid use case for it.</value>
         [DataMember(Name = "exchanges", EmitDefaultValue = false)]
         [Obsolete]
-        public List<Object> Exchanges { get; set; }
+        public List<string> Exchanges { get; set; }
 
         /// <summary>
         /// This field is deprecated.

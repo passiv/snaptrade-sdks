@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface CryptoOrderPreviewEstimatedFee
  */
 export interface CryptoOrderPreviewEstimatedFee {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.

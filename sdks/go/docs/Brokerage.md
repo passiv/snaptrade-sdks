@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **HasReporting** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **IsRealTimeConnection** | Pointer to **bool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **BrokerageType** | Pointer to [**BrokerageType**](BrokerageType.md) |  | [optional] 
-**Exchanges** | Pointer to **[]interface{}** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**Exchanges** | Pointer to **[]string** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **OpenUrl** | Pointer to **NullableString** | This field is deprecated. | [optional] 
 
 ## Methods
@@ -494,20 +494,20 @@ HasBrokerageType returns a boolean if a field has been set.
 
 ### GetExchanges
 
-`func (o *Brokerage) GetExchanges() []interface{}`
+`func (o *Brokerage) GetExchanges() []string`
 
 GetExchanges returns the Exchanges field if non-nil, zero value otherwise.
 
 ### GetExchangesOk
 
-`func (o *Brokerage) GetExchangesOk() (*[]interface{}, bool)`
+`func (o *Brokerage) GetExchangesOk() (*[]string, bool)`
 
 GetExchangesOk returns a tuple with the Exchanges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExchanges
 
-`func (o *Brokerage) SetExchanges(v []interface{})`
+`func (o *Brokerage) SetExchanges(v []string)`
 
 SetExchanges sets Exchanges field to given value.
 

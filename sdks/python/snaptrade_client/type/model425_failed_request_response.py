@@ -20,9 +20,9 @@ class RequiredModel425FailedRequestResponse(TypedDict):
     pass
 
 class OptionalModel425FailedRequestResponse(TypedDict, total=False):
-    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    detail: str
 
-    code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    code: str
 
 class Model425FailedRequestResponse(RequiredModel425FailedRequestResponse, OptionalModel425FailedRequestResponse):
     pass

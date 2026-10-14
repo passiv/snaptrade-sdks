@@ -20,11 +20,11 @@ class RequiredModel429TooManyRequestsResponse(TypedDict):
     pass
 
 class OptionalModel429TooManyRequestsResponse(TypedDict, total=False):
-    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    detail: str
 
-    status_code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    status_code: int
 
-    code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    code: str
 
 class Model429TooManyRequestsResponse(RequiredModel429TooManyRequestsResponse, OptionalModel429TooManyRequestsResponse):
     pass

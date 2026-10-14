@@ -76,7 +76,7 @@ import { TaxLot } from './tax-lot';
  * @interface AccountPosition
  */
 export interface AccountPosition {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

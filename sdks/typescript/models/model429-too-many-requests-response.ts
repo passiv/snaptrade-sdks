@@ -74,25 +74,25 @@ import type * as buffer from "buffer"
  * @interface Model429TooManyRequestsResponse
  */
 export interface Model429TooManyRequestsResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model429TooManyRequestsResponse
      */
-    'detail'?: any;
+    'detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {number}
      * @memberof Model429TooManyRequestsResponse
      */
-    'status_code'?: any;
+    'status_code'?: number;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model429TooManyRequestsResponse
      */
-    'code'?: any;
+    'code'?: string;
 }
 

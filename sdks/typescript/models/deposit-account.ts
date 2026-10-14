@@ -76,7 +76,7 @@ import { DepositAccountSyncStatus } from './deposit-account-sync-status';
  * @interface DepositAccount
  */
 export interface DepositAccount {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Discriminator for the account kind.

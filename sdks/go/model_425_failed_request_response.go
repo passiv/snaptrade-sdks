@@ -17,8 +17,8 @@ import (
 
 // Model425FailedRequestResponse Example for failed request response
 type Model425FailedRequestResponse struct {
-	Detail interface{} `json:"detail,omitempty"`
-	Code interface{} `json:"code,omitempty"`
+	Detail *string `json:"detail,omitempty"`
+	Code *string `json:"code,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,78 +41,76 @@ func NewModel425FailedRequestResponseWithDefaults() *Model425FailedRequestRespon
 	return &this
 }
 
-// GetDetail returns the Detail field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Model425FailedRequestResponse) GetDetail() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetDetail returns the Detail field value if set, zero value otherwise.
+func (o *Model425FailedRequestResponse) GetDetail() string {
+	if o == nil || isNil(o.Detail) {
+		var ret string
 		return ret
 	}
-	return o.Detail
+	return *o.Detail
 }
 
 // GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Model425FailedRequestResponse) GetDetailOk() (*interface{}, bool) {
+func (o *Model425FailedRequestResponse) GetDetailOk() (*string, bool) {
 	if o == nil || isNil(o.Detail) {
     return nil, false
 	}
-	return &o.Detail, true
+	return o.Detail, true
 }
 
 // HasDetail returns a boolean if a field has been set.
 func (o *Model425FailedRequestResponse) HasDetail() bool {
-	if o != nil && isNil(o.Detail) {
+	if o != nil && !isNil(o.Detail) {
 		return true
 	}
 
 	return false
 }
 
-// SetDetail gets a reference to the given interface{} and assigns it to the Detail field.
-func (o *Model425FailedRequestResponse) SetDetail(v interface{}) {
-	o.Detail = v
+// SetDetail gets a reference to the given string and assigns it to the Detail field.
+func (o *Model425FailedRequestResponse) SetDetail(v string) {
+	o.Detail = &v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Model425FailedRequestResponse) GetCode() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetCode returns the Code field value if set, zero value otherwise.
+func (o *Model425FailedRequestResponse) GetCode() string {
+	if o == nil || isNil(o.Code) {
+		var ret string
 		return ret
 	}
-	return o.Code
+	return *o.Code
 }
 
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Model425FailedRequestResponse) GetCodeOk() (*interface{}, bool) {
+func (o *Model425FailedRequestResponse) GetCodeOk() (*string, bool) {
 	if o == nil || isNil(o.Code) {
     return nil, false
 	}
-	return &o.Code, true
+	return o.Code, true
 }
 
 // HasCode returns a boolean if a field has been set.
 func (o *Model425FailedRequestResponse) HasCode() bool {
-	if o != nil && isNil(o.Code) {
+	if o != nil && !isNil(o.Code) {
 		return true
 	}
 
 	return false
 }
 
-// SetCode gets a reference to the given interface{} and assigns it to the Code field.
-func (o *Model425FailedRequestResponse) SetCode(v interface{}) {
-	o.Code = v
+// SetCode gets a reference to the given string and assigns it to the Code field.
+func (o *Model425FailedRequestResponse) SetCode(v string) {
+	o.Code = &v
 }
 
 func (o Model425FailedRequestResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Detail != nil {
+	if !isNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
-	if o.Code != nil {
+	if !isNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
 

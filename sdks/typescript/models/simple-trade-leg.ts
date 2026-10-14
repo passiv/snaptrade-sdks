@@ -75,7 +75,7 @@ import { SimpleTradeInstrument } from './simple-trade-instrument';
  * @interface SimpleTradeLeg
  */
 export interface SimpleTradeLeg {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

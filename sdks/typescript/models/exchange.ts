@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface Exchange
  */
 export interface Exchange {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique ID for the exchange in SnapTrade.

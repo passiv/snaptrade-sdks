@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface ManualTradeImpact
  */
 export interface ManualTradeImpact {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.

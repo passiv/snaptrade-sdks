@@ -36,9 +36,10 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountBalance" /> class.
         /// </summary>
         /// <param name="total">total.</param>
-        public AccountBalance(AccountBalanceTotal total = default(AccountBalanceTotal))
+        public AccountBalance(AccountBalanceTotal total = default(AccountBalanceTotal)) : base()
         {
             this.Total = total;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -48,6 +49,12 @@ namespace SnapTrade.Net.Model
         public AccountBalanceTotal Total { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -55,7 +62,9 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AccountBalance {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Total: ").Append(Total).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +73,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -90,12 +99,13 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.Total == input.Total ||
                     (this.Total != null &&
                     this.Total.Equals(input.Total))
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -106,10 +116,14 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Total != null)
                 {
                     hashCode = (hashCode * 59) + this.Total.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

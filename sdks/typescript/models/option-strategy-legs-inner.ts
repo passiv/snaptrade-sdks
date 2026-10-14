@@ -74,6 +74,8 @@ import type * as buffer from "buffer"
  * @interface OptionStrategyLegsInner
  */
 export interface OptionStrategyLegsInner {
+    [key: string]: unknown;
+
     /**
      * 
      * @type {string}

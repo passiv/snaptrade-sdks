@@ -20,9 +20,9 @@ class RequiredModel402BrokerageAuthDisabledResponse(TypedDict):
     pass
 
 class OptionalModel402BrokerageAuthDisabledResponse(TypedDict, total=False):
-    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    detail: str
 
-    code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    code: str
 
 class Model402BrokerageAuthDisabledResponse(RequiredModel402BrokerageAuthDisabledResponse, OptionalModel402BrokerageAuthDisabledResponse):
     pass

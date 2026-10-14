@@ -74,13 +74,13 @@ import type * as buffer from "buffer"
  * @interface Model501NotImplementedResponse
  */
 export interface Model501NotImplementedResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model501NotImplementedResponse
      */
-    'error'?: any;
+    'error'?: string;
 }
 

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface SecurityType
  */
 export interface SecurityType {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.

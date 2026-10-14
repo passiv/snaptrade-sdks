@@ -67,7 +67,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_reporting' => 'bool',
         'is_real_time_connection' => 'bool',
         'brokerage_type' => '\SnapTrade\Model\BrokerageType',
-        'exchanges' => 'mixed[]',
+        'exchanges' => 'string[]',
         'open_url' => 'string'
     ];
 
@@ -95,7 +95,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
         'has_reporting' => null,
         'is_real_time_connection' => null,
         'brokerage_type' => null,
-        'exchanges' => null,
+        'exchanges' => 'uuid',
         'open_url' => 'url'
     ];
 
@@ -910,7 +910,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets exchanges
      *
-     * @return mixed[]|null
+     * @return string[]|null
      * @deprecated
      */
     public function getExchanges()
@@ -921,7 +921,7 @@ class Brokerage implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets exchanges
      *
-     * @param mixed[]|null $exchanges This field is deprecated. Please contact us if you have a valid use case for it.
+     * @param string[]|null $exchanges This field is deprecated. Please contact us if you have a valid use case for it.
      *
      * @return self
      * @deprecated

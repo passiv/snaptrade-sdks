@@ -21,7 +21,10 @@ type AccountBalanceTotal struct {
 	Amount *float32 `json:"amount,omitempty"`
 	// The ISO-4217 currency code for the amount.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AccountBalanceTotal AccountBalanceTotal
 
 // NewAccountBalanceTotal instantiates a new AccountBalanceTotal object
 // This constructor will assign default values to properties that have it defined,
@@ -112,7 +115,31 @@ func (o AccountBalanceTotal) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
+}
+
+func (o *AccountBalanceTotal) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _AccountBalanceTotal{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "amount")
+	delete(additionalProperties, "currency")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = AccountBalanceTotal(decoded)
+	return nil
 }
 
 type NullableAccountBalanceTotal struct {

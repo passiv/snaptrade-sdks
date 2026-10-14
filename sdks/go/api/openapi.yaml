@@ -4241,10 +4241,14 @@ components:
       properties:
         default_detail:
           example: Unable to verify data sent
+          type: string
           x-konfig-original-example: Unable to verify data sent
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-400FailedRequestResponse-properties-default_detail
         default_code:
-          example: 1076
-          x-konfig-original-example: 1076
+          example: "1076"
+          type: string
+          x-konfig-original-example: "1076"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-400FailedRequestResponse-properties-default_code
       type: object
     "401FailedRequestResponse":
       additionalProperties: true
@@ -4252,10 +4256,14 @@ components:
       properties:
         default_detail:
           example: Unable to verify signature sent
+          type: string
           x-konfig-original-example: Unable to verify signature sent
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-401FailedRequestResponse-properties-default_detail
         default_code:
-          example: 1076
-          x-konfig-original-example: 1076
+          example: "1076"
+          type: string
+          x-konfig-original-example: "1076"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-401FailedRequestResponse-properties-default_code
       type: object
     "402BrokerageAuthDisabledResponse":
       additionalProperties: true
@@ -4264,11 +4272,15 @@ components:
         detail:
           example: Unable to sync with brokerage account because the connection is
             disabled.
+          type: string
           x-konfig-original-example: Unable to sync with brokerage account because
             the connection is disabled.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-402BrokerageAuthDisabledResponse-properties-detail
         code:
-          example: 3003
-          x-konfig-original-example: 3003
+          example: "3003"
+          type: string
+          x-konfig-original-example: "3003"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-402BrokerageAuthDisabledResponse-properties-code
       type: object
     "402BrokerageAuthAlreadyDisabledException":
       additionalProperties: true
@@ -4276,10 +4288,14 @@ components:
       properties:
         detail:
           example: This connection is already disabled.
+          type: string
           x-konfig-original-example: This connection is already disabled.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-402BrokerageAuthAlreadyDisabledException-properties-detail
         code:
-          example: 3011
-          x-konfig-original-example: 3011
+          example: "3011"
+          type: string
+          x-konfig-original-example: "3011"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-402BrokerageAuthAlreadyDisabledException-properties-code
       type: object
     "403FailedRequestResponse":
       additionalProperties: true
@@ -4287,11 +4303,15 @@ components:
       properties:
         default_detail:
           example: User does not have permission to access this resource
+          type: string
           x-konfig-original-example: User does not have permission to access this
             resource
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-403FailedRequestResponse-properties-default_detail
         default_code:
-          example: 1066
-          x-konfig-original-example: 1066
+          example: "1066"
+          type: string
+          x-konfig-original-example: "1066"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-403FailedRequestResponse-properties-default_code
       type: object
     "403FeatureNotEnabledResponse":
       additionalProperties: true
@@ -4299,11 +4319,15 @@ components:
       properties:
         detail:
           example: Feature is not enabled for this customer or this connection
+          type: string
           x-konfig-original-example: Feature is not enabled for this customer or this
             connection
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-403FeatureNotEnabledResponse-properties-detail
         default_code:
-          example: 1141
-          x-konfig-original-example: 1141
+          example: "1141"
+          type: string
+          x-konfig-original-example: "1141"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-403FeatureNotEnabledResponse-properties-default_code
       type: object
     "404FailedRequestResponse":
       additionalProperties: true
@@ -4311,10 +4335,14 @@ components:
       properties:
         default_detail:
           example: The requested resource does not exist.
+          type: string
           x-konfig-original-example: The requested resource does not exist.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-404FailedRequestResponse-properties-default_detail
         default_code:
-          example: 1011
-          x-konfig-original-example: 1011
+          example: "1011"
+          type: string
+          x-konfig-original-example: "1011"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-404FailedRequestResponse-properties-default_code
       type: object
     "425FailedRequestResponse":
       additionalProperties: true
@@ -4322,11 +4350,15 @@ components:
       properties:
         detail:
           example: The resource is currently being populated. Please try again later.
+          type: string
           x-konfig-original-example: The resource is currently being populated. Please
             try again later.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-425FailedRequestResponse-properties-detail
         code:
-          example: 3012
-          x-konfig-original-example: 3012
+          example: "3012"
+          type: string
+          x-konfig-original-example: "3012"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-425FailedRequestResponse-properties-code
       type: object
     "429TooManyRequestsResponse":
       additionalProperties: true
@@ -4334,14 +4366,20 @@ components:
       properties:
         detail:
           example: Connection refreshed too recently. Please try again later.
+          type: string
           x-konfig-original-example: Connection refreshed too recently. Please try
             again later.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-429TooManyRequestsResponse-properties-detail
         status_code:
           example: 429
+          type: integer
           x-konfig-original-example: 429
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-429TooManyRequestsResponse-properties-status_code
         code:
           example: throttled
+          type: string
           x-konfig-original-example: throttled
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-429TooManyRequestsResponse-properties-code
       type: object
     "500UnexpectedExceptionResponse":
       additionalProperties: true
@@ -4349,13 +4387,19 @@ components:
       properties:
         detail:
           example: Encountered an unexpected exception.
+          type: string
           x-konfig-original-example: Encountered an unexpected exception.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-500UnexpectedExceptionResponse-properties-detail
         status_code:
           example: 500
+          type: integer
           x-konfig-original-example: 500
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-500UnexpectedExceptionResponse-properties-status_code
         code:
-          example: 1000
-          x-konfig-original-example: 1000
+          example: "1000"
+          type: string
+          x-konfig-original-example: "1000"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-500UnexpectedExceptionResponse-properties-code
       type: object
     "501NotImplementedResponse":
       additionalProperties: true
@@ -4364,8 +4408,10 @@ components:
       properties:
         error:
           example: The orders endpoint is not yet implemented for brokerage some-brokerage
+          type: string
           x-konfig-original-example: The orders endpoint is not yet implemented for
             brokerage some-brokerage
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-501NotImplementedResponse-properties-error
       type: object
     "503BrokerageRequestResponse":
       additionalProperties: true
@@ -4375,14 +4421,20 @@ components:
         detail:
           example: Unable to sync with brokerage account. Invalid response from Brokerage
             API.
+          type: string
           x-konfig-original-example: Unable to sync with brokerage account. Invalid
             response from Brokerage API.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-503BrokerageRequestResponse-properties-detail
         status_code:
           example: 503
+          type: integer
           x-konfig-original-example: 503
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-503BrokerageRequestResponse-properties-status_code
         code:
-          example: 3002
-          x-konfig-original-example: 3002
+          example: "3002"
+          type: string
+          x-konfig-original-example: "3002"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-503BrokerageRequestResponse-properties-code
       type: object
     AccountSyncStatus:
       description: Contains status update for the account sync process between SnapTrade
@@ -4475,6 +4527,7 @@ components:
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsStatus-properties-holdings_unavailable
     AccountBalance:
+      additionalProperties: true
       description: Contains balance related information for the account.
       example:
         total:
@@ -4483,6 +4536,7 @@ components:
       properties:
         total:
           $ref: '#/components/schemas/AccountBalance_total'
+      type: object
     Account:
       additionalProperties: true
       description: A single account at a brokerage.
@@ -9406,7 +9460,9 @@ components:
           example:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
-          items: {}
+          items:
+            format: uuid
+            type: string
           type: array
           x-konfig-original-example:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -13617,6 +13673,111 @@ components:
     ? konfig-generated-schema-components-requestBodies-CreateTradeDetectionSubscriptionRequestBody-content-application-json-schema-properties-check_interval_seconds
     : example: 300
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-400FailedRequestResponse-properties-default_detail:
+      example: Unable to verify data sent
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-400FailedRequestResponse-properties-default_code:
+      example: "1076"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-401FailedRequestResponse-properties-default_detail:
+      example: Unable to verify signature sent
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-401FailedRequestResponse-properties-default_code:
+      example: "1076"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-402BrokerageAuthDisabledResponse-properties-detail:
+      example: Unable to sync with brokerage account because the connection is disabled.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-402BrokerageAuthDisabledResponse-properties-code:
+      example: "3003"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-402BrokerageAuthAlreadyDisabledException-properties-detail:
+      example: This connection is already disabled.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-402BrokerageAuthAlreadyDisabledException-properties-code:
+      example: "3011"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-403FailedRequestResponse-properties-default_detail:
+      example: User does not have permission to access this resource
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-403FailedRequestResponse-properties-default_code:
+      example: "1066"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-403FeatureNotEnabledResponse-properties-detail:
+      example: Feature is not enabled for this customer or this connection
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-403FeatureNotEnabledResponse-properties-default_code:
+      example: "1141"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-404FailedRequestResponse-properties-default_detail:
+      example: The requested resource does not exist.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-404FailedRequestResponse-properties-default_code:
+      example: "1011"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-425FailedRequestResponse-properties-detail:
+      example: The resource is currently being populated. Please try again later.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-425FailedRequestResponse-properties-code:
+      example: "3012"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-429TooManyRequestsResponse-properties-detail:
+      example: Connection refreshed too recently. Please try again later.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-429TooManyRequestsResponse-properties-status_code:
+      example: 429
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-429TooManyRequestsResponse-properties-code:
+      example: throttled
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-500UnexpectedExceptionResponse-properties-detail:
+      example: Encountered an unexpected exception.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-500UnexpectedExceptionResponse-properties-status_code:
+      example: 500
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-500UnexpectedExceptionResponse-properties-code:
+      example: "1000"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-501NotImplementedResponse-properties-error:
+      example: The orders endpoint is not yet implemented for brokerage some-brokerage
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-503BrokerageRequestResponse-properties-detail:
+      example: Unable to sync with brokerage account. Invalid response from Brokerage
+        API.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-503BrokerageRequestResponse-properties-status_code:
+      example: 503
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-503BrokerageRequestResponse-properties-code:
+      example: "3002"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
       example: true
@@ -18752,6 +18913,7 @@ components:
       - account_id
       type: object
     AccountBalance_total:
+      additionalProperties: true
       description: "Total market value of this account (includes cash, equity, fixed\
         \ income, etc). This value is directly obtained from the brokerage and should\
         \ reflect the most accurate value of the account."
@@ -18772,6 +18934,7 @@ components:
           type: string
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-currency
+      type: object
     InvestmentAccount_net_value:
       additionalProperties: true
       description: "Net value of the account -- total market value for investment\
@@ -18937,6 +19100,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-greeks-properties-vega
       type: object
     OptionStrategy_legs_inner:
+      additionalProperties: true
       properties:
         option_symbol_id:
           example: AAPLC20221111
@@ -18958,6 +19122,7 @@ components:
           type: number
           x-konfig-original-example: 10
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionStrategy-properties-legs-items-properties-quantity
+      type: object
     StrategyQuotes_greek:
       additionalProperties: true
       properties:
@@ -19158,6 +19323,7 @@ components:
           type: array
       type: object
     SymbolsQuotes_inner:
+      additionalProperties: true
       example:
         symbol:
           figi_code: BBG000B9XRY4
@@ -19220,6 +19386,7 @@ components:
           type: number
           x-konfig-original-example: 344
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
+      type: object
     CryptoOrderPreview_estimated_fee:
       additionalProperties: true
       description: The estimated order fee.

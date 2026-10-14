@@ -75,7 +75,7 @@ import { OptionChainInnerChainPerRootInnerChainPerStrikePriceInner } from './opt
  * @interface OptionChainInnerChainPerRootInner
  */
 export interface OptionChainInnerChainPerRootInner {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

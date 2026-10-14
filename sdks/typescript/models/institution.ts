@@ -75,7 +75,7 @@ import { InstitutionConnectionNullable } from './institution-connection-nullable
  * @interface Institution
  */
 export interface Institution {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * A short, unique identifier for the institution. It is usually the name in capital letters and will never change. It matches the `slug` of the same brokerage in `GET /brokerages`.

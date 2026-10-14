@@ -75,7 +75,7 @@ import { BrokerageType } from './brokerage-type';
  * @interface Brokerage
  */
 export interface Brokerage {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
@@ -178,11 +178,11 @@ export interface Brokerage {
     'brokerage_type'?: BrokerageType;
     /**
      * This field is deprecated. Please contact us if you have a valid use case for it.
-     * @type {Array<any>}
+     * @type {Array<string>}
      * @memberof Brokerage
      * @deprecated
      */
-    'exchanges'?: Array<any>;
+    'exchanges'?: Array<string>;
     /**
      * This field is deprecated.
      * @type {string}

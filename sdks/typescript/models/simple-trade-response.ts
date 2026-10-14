@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface SimpleTradeResponse
  */
 export interface SimpleTradeResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The brokerage-assigned ID of the submitted order.

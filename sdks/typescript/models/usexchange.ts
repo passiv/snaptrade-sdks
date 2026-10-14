@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface USExchange
  */
 export interface USExchange {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

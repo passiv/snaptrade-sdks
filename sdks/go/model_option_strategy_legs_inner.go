@@ -21,7 +21,10 @@ type OptionStrategyLegsInner struct {
 	Index *float32 `json:"index,omitempty"`
 	Action *string `json:"action,omitempty"`
 	Quantity *float32 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OptionStrategyLegsInner OptionStrategyLegsInner
 
 // NewOptionStrategyLegsInner instantiates a new OptionStrategyLegsInner object
 // This constructor will assign default values to properties that have it defined,
@@ -182,7 +185,33 @@ func (o OptionStrategyLegsInner) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
+}
+
+func (o *OptionStrategyLegsInner) UnmarshalJSON(bytes []byte) error {
+	typedBytes := bytes
+	decoded := _OptionStrategyLegsInner{}
+	if err := json.Unmarshal(typedBytes, &decoded); err != nil {
+		return err
+	}
+	var additionalProperties map[string]interface{}
+	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
+		return err
+	}
+	delete(additionalProperties, "option_symbol_id")
+	delete(additionalProperties, "index")
+	delete(additionalProperties, "action")
+	delete(additionalProperties, "quantity")
+	decoded.AdditionalProperties = additionalProperties
+	// Commit the complete result only after typed fields and additional properties
+	// succeed; a failed decode must not partially replace an existing value.
+	*o = OptionStrategyLegsInner(decoded)
+	return nil
 }
 
 type NullableOptionStrategyLegsInner struct {

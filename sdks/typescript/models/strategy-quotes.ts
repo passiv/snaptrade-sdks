@@ -76,7 +76,7 @@ import { StrategyQuotesGreek } from './strategy-quotes-greek';
  * @interface StrategyQuotes
  */
 export interface StrategyQuotes {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

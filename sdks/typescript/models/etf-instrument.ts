@@ -75,7 +75,7 @@ import { FigiInstrumentNullable } from './figi-instrument-nullable';
  * @interface EtfInstrument
  */
 export interface EtfInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

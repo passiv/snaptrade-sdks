@@ -75,6 +75,8 @@ import { AccountBalanceTotal } from './account-balance-total';
  * @interface AccountBalance
  */
 export interface AccountBalance {
+    [key: string]: unknown;
+
     /**
      * 
      * @type {AccountBalanceTotal}

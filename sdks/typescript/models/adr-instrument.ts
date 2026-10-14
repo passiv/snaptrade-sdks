@@ -75,7 +75,7 @@ import { FigiInstrumentNullable } from './figi-instrument-nullable';
  * @interface AdrInstrument
  */
 export interface AdrInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

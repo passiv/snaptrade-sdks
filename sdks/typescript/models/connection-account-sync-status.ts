@@ -75,7 +75,7 @@ import { TransactionsStatus } from './transactions-status';
  * @interface ConnectionAccountSyncStatus
  */
 export interface ConnectionAccountSyncStatus {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

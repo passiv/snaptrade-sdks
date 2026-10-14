@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageAuthorizationDisabledConfirmation
  */
 export interface BrokerageAuthorizationDisabledConfirmation {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Connection disabled confirmation

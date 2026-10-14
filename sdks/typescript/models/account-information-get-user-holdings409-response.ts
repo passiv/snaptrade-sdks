@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface AccountInformationGetUserHoldings409Response
  */
 export interface AccountInformationGetUserHoldings409Response {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

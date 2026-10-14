@@ -76,7 +76,7 @@ import { BrokerageAuthorization } from './brokerage-authorization';
  * @interface SnapTradeHoldingsAccount
  */
 export interface SnapTradeHoldingsAccount {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
@@ -122,9 +122,9 @@ export interface SnapTradeHoldingsAccount {
     'sync_status'?: AccountSyncStatus;
     /**
      * 
-     * @type {{ [key: string]: any; }}
+     * @type {{ [key: string]: unknown; }}
      * @memberof SnapTradeHoldingsAccount
      */
-    'meta'?: { [key: string]: any; };
+    'meta'?: { [key: string]: unknown; };
 }
 

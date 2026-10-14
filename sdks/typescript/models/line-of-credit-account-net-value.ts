@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface LineOfCreditAccountNetValue
  */
 export interface LineOfCreditAccountNetValue {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

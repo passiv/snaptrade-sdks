@@ -75,7 +75,7 @@ import { UnderlyingOptionInstrument } from './underlying-option-instrument';
  * @interface OptionInstrument
  */
 export interface OptionInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

@@ -36,113 +36,13 @@ class SymbolsQuotes(
 
     class MetaOapg:
         
-        
-        class items(
-            schemas.AnyTypeSchema,
-        ):
-        
-        
-            class MetaOapg:
-                
-                class properties:
-                
-                    @staticmethod
-                    def symbol() -> typing.Type['UniversalSymbol']:
-                        return UniversalSymbol
-                    last_trade_price = schemas.NumberSchema
-                    bid_price = schemas.NumberSchema
-                    ask_price = schemas.NumberSchema
-                    bid_size = schemas.NumberSchema
-                    ask_size = schemas.NumberSchema
-                    __annotations__ = {
-                        "symbol": symbol,
-                        "last_trade_price": last_trade_price,
-                        "bid_price": bid_price,
-                        "ask_price": ask_price,
-                        "bid_size": bid_size,
-                        "ask_size": ask_size,
-                    }
-        
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'UniversalSymbol': ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["last_trade_price"]) -> MetaOapg.properties.last_trade_price: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["bid_price"]) -> MetaOapg.properties.bid_price: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["ask_price"]) -> MetaOapg.properties.ask_price: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["bid_size"]) -> MetaOapg.properties.bid_size: ...
-            
-            @typing.overload
-            def __getitem__(self, name: typing_extensions.Literal["ask_size"]) -> MetaOapg.properties.ask_size: ...
-            
-            @typing.overload
-            def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
-            
-            def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol", "last_trade_price", "bid_price", "ask_price", "bid_size", "ask_size", ], str]):
-                # dict_instance[name] accessor
-                return super().__getitem__(name)
-            
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['UniversalSymbol', schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["last_trade_price"]) -> typing.Union[MetaOapg.properties.last_trade_price, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["bid_price"]) -> typing.Union[MetaOapg.properties.bid_price, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["ask_price"]) -> typing.Union[MetaOapg.properties.ask_price, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["bid_size"]) -> typing.Union[MetaOapg.properties.bid_size, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: typing_extensions.Literal["ask_size"]) -> typing.Union[MetaOapg.properties.ask_size, schemas.Unset]: ...
-            
-            @typing.overload
-            def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
-            
-            def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol", "last_trade_price", "bid_price", "ask_price", "bid_size", "ask_size", ], str]):
-                return super().get_item_oapg(name)
-            
-        
-            def __new__(
-                cls,
-                *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                symbol: typing.Union['UniversalSymbol', schemas.Unset] = schemas.unset,
-                last_trade_price: typing.Union[MetaOapg.properties.last_trade_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                bid_price: typing.Union[MetaOapg.properties.bid_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                ask_price: typing.Union[MetaOapg.properties.ask_price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                bid_size: typing.Union[MetaOapg.properties.bid_size, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                ask_size: typing.Union[MetaOapg.properties.ask_size, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-                _configuration: typing.Optional[schemas.Configuration] = None,
-                **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-            ) -> 'items':
-                return super().__new__(
-                    cls,
-                    *args,
-                    symbol=symbol,
-                    last_trade_price=last_trade_price,
-                    bid_price=bid_price,
-                    ask_price=ask_price,
-                    bid_size=bid_size,
-                    ask_size=ask_size,
-                    _configuration=_configuration,
-                    **kwargs,
-                )
+        @staticmethod
+        def items() -> typing.Type['SymbolsQuotesItem']:
+            return SymbolsQuotesItem
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]], typing.List[typing.Union[MetaOapg.items, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ]]],
+        arg: typing.Union[typing.Tuple['SymbolsQuotesItem'], typing.List['SymbolsQuotesItem']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SymbolsQuotes':
         return super().__new__(
@@ -151,7 +51,7 @@ class SymbolsQuotes(
             _configuration=_configuration,
         )
 
-    def __getitem__(self, i: int) -> MetaOapg.items:
+    def __getitem__(self, i: int) -> 'SymbolsQuotesItem':
         return super().__getitem__(i)
 
-from snaptrade_client.model.universal_symbol import UniversalSymbol
+from snaptrade_client.model.symbols_quotes_item import SymbolsQuotesItem

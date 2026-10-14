@@ -75,7 +75,7 @@ import { CryptocurrencyPair } from './cryptocurrency-pair';
  * @interface TradingSearchCryptocurrencyPairInstruments200Response
  */
 export interface TradingSearchCryptocurrencyPairInstruments200Response {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

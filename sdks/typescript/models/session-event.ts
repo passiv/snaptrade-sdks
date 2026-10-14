@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface SessionEvent
  */
 export interface SessionEvent {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

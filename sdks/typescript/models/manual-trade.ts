@@ -78,7 +78,7 @@ import { TimeInForceStrict } from './time-in-force-strict';
  * @interface ManualTrade
  */
 export interface ManualTrade {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the submitted order through SnapTrade.

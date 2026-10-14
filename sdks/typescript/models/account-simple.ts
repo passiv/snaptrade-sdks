@@ -75,7 +75,7 @@ import { AccountSyncStatus } from './account-sync-status';
  * @interface AccountSimple
  */
 export interface AccountSimple {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface DividendAtDate
  */
 export interface DividendAtDate {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The ticker of the symbol that the dividend came from

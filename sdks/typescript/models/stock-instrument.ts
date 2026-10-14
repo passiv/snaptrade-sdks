@@ -75,7 +75,7 @@ import { FigiInstrumentNullable } from './figi-instrument-nullable';
  * @interface StockInstrument
  */
 export interface StockInstrument {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Type of security instrument.

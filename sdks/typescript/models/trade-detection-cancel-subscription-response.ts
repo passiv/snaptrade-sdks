@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface TradeDetectionCancelSubscriptionResponse
  */
 export interface TradeDetectionCancelSubscriptionResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

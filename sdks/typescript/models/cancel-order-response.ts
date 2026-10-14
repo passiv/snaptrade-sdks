@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface CancelOrderResponse
  */
 export interface CancelOrderResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
@@ -84,9 +84,9 @@ export interface CancelOrderResponse {
     'brokerage_order_id': string;
     /**
      * The raw response from the brokerage.
-     * @type {{ [key: string]: any; }}
+     * @type {{ [key: string]: unknown; }}
      * @memberof CancelOrderResponse
      */
-    'raw_response'?: { [key: string]: any; } | null;
+    'raw_response'?: { [key: string]: unknown; } | null;
 }
 

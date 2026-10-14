@@ -74,19 +74,19 @@ import type * as buffer from "buffer"
  * @interface Model402BrokerageAuthDisabledResponse
  */
 export interface Model402BrokerageAuthDisabledResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model402BrokerageAuthDisabledResponse
      */
-    'detail'?: any;
+    'detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model402BrokerageAuthDisabledResponse
      */
-    'code'?: any;
+    'code'?: string;
 }
 

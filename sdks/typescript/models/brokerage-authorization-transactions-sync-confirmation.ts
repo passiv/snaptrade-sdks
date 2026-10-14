@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface BrokerageAuthorizationTransactionsSyncConfirmation
  */
 export interface BrokerageAuthorizationTransactionsSyncConfirmation {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * Transactions sync confirmation details

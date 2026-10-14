@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface OptionLeg
  */
 export interface OptionLeg {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

@@ -74,7 +74,7 @@ import type * as buffer from "buffer"
  * @interface TakeProfit
  */
 export interface TakeProfit {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 

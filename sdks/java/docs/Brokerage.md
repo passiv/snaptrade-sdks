@@ -24,7 +24,7 @@ Describes a brokerage that SnapTrade supports.
 |**hasReporting** | **Boolean** | This field is deprecated. Please contact us if you have a valid use case for it. |  [optional] |
 |**isRealTimeConnection** | **Boolean** | This field is deprecated. Please contact us if you have a valid use case for it. |  [optional] |
 |**brokerageType** | [**BrokerageType**](BrokerageType.md) |  |  [optional] |
-|**exchanges** | **List&lt;Object&gt;** | This field is deprecated. Please contact us if you have a valid use case for it. |  [optional] |
+|**exchanges** | **List&lt;UUID&gt;** | This field is deprecated. Please contact us if you have a valid use case for it. |  [optional] |
 |**openUrl** | **String** | This field is deprecated. |  [optional] |
 
 

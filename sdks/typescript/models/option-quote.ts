@@ -75,7 +75,7 @@ import { OptionQuoteGreeks } from './option-quote-greeks';
  * @interface OptionQuote
  */
 export interface OptionQuote {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * The OCC-formatted option symbol.

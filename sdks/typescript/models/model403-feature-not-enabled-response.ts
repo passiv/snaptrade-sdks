@@ -74,19 +74,19 @@ import type * as buffer from "buffer"
  * @interface Model403FeatureNotEnabledResponse
  */
 export interface Model403FeatureNotEnabledResponse {
-    [key: string]: any;
+    [key: string]: unknown;
 
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model403FeatureNotEnabledResponse
      */
-    'detail'?: any;
+    'detail'?: string;
     /**
      * 
-     * @type {any}
+     * @type {string}
      * @memberof Model403FeatureNotEnabledResponse
      */
-    'default_code'?: any;
+    'default_code'?: string;
 }
 

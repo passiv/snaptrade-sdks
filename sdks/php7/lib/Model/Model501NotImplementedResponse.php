@@ -51,7 +51,7 @@ class Model501NotImplementedResponse implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
-        'error' => 'mixed'
+        'error' => 'string'
     ];
 
     /**
@@ -71,7 +71,7 @@ class Model501NotImplementedResponse implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static $openAPINullables = [
-        'error' => true
+        'error' => false
     ];
 
     /**
@@ -286,7 +286,7 @@ class Model501NotImplementedResponse implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets error
      *
-     * @return mixed|null
+     * @return string|null
      */
     public function getError()
     {
@@ -296,7 +296,7 @@ class Model501NotImplementedResponse implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets error
      *
-     * @param mixed|null $error error
+     * @param string|null $error error
      *
      * @return self
      */
@@ -304,14 +304,7 @@ class Model501NotImplementedResponse implements ModelInterface, ArrayAccess, \Js
     {
 
         if (is_null($error)) {
-            array_push($this->openAPINullablesSetToNull, 'error');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('error', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable error cannot be null');
         }
 
         $this->container['error'] = $error;
