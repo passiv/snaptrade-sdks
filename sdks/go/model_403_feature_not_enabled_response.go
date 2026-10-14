@@ -17,8 +17,8 @@ import (
 
 // Model403FeatureNotEnabledResponse Example for failed request response
 type Model403FeatureNotEnabledResponse struct {
-	Detail *string `json:"detail,omitempty"`
-	DefaultCode *string `json:"default_code,omitempty"`
+	Detail interface{} `json:"detail,omitempty"`
+	DefaultCode interface{} `json:"default_code,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,76 +41,78 @@ func NewModel403FeatureNotEnabledResponseWithDefaults() *Model403FeatureNotEnabl
 	return &this
 }
 
-// GetDetail returns the Detail field value if set, zero value otherwise.
-func (o *Model403FeatureNotEnabledResponse) GetDetail() string {
-	if o == nil || isNil(o.Detail) {
-		var ret string
+// GetDetail returns the Detail field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model403FeatureNotEnabledResponse) GetDetail() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Detail
+	return o.Detail
 }
 
 // GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model403FeatureNotEnabledResponse) GetDetailOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model403FeatureNotEnabledResponse) GetDetailOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Detail) {
     return nil, false
 	}
-	return o.Detail, true
+	return &o.Detail, true
 }
 
 // HasDetail returns a boolean if a field has been set.
 func (o *Model403FeatureNotEnabledResponse) HasDetail() bool {
-	if o != nil && !isNil(o.Detail) {
+	if o != nil && isNil(o.Detail) {
 		return true
 	}
 
 	return false
 }
 
-// SetDetail gets a reference to the given string and assigns it to the Detail field.
-func (o *Model403FeatureNotEnabledResponse) SetDetail(v string) {
-	o.Detail = &v
+// SetDetail gets a reference to the given interface{} and assigns it to the Detail field.
+func (o *Model403FeatureNotEnabledResponse) SetDetail(v interface{}) {
+	o.Detail = v
 }
 
-// GetDefaultCode returns the DefaultCode field value if set, zero value otherwise.
-func (o *Model403FeatureNotEnabledResponse) GetDefaultCode() string {
-	if o == nil || isNil(o.DefaultCode) {
-		var ret string
+// GetDefaultCode returns the DefaultCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model403FeatureNotEnabledResponse) GetDefaultCode() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.DefaultCode
+	return o.DefaultCode
 }
 
 // GetDefaultCodeOk returns a tuple with the DefaultCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model403FeatureNotEnabledResponse) GetDefaultCodeOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model403FeatureNotEnabledResponse) GetDefaultCodeOk() (*interface{}, bool) {
 	if o == nil || isNil(o.DefaultCode) {
     return nil, false
 	}
-	return o.DefaultCode, true
+	return &o.DefaultCode, true
 }
 
 // HasDefaultCode returns a boolean if a field has been set.
 func (o *Model403FeatureNotEnabledResponse) HasDefaultCode() bool {
-	if o != nil && !isNil(o.DefaultCode) {
+	if o != nil && isNil(o.DefaultCode) {
 		return true
 	}
 
 	return false
 }
 
-// SetDefaultCode gets a reference to the given string and assigns it to the DefaultCode field.
-func (o *Model403FeatureNotEnabledResponse) SetDefaultCode(v string) {
-	o.DefaultCode = &v
+// SetDefaultCode gets a reference to the given interface{} and assigns it to the DefaultCode field.
+func (o *Model403FeatureNotEnabledResponse) SetDefaultCode(v interface{}) {
+	o.DefaultCode = v
 }
 
 func (o Model403FeatureNotEnabledResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Detail) {
+	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
 	}
-	if !isNil(o.DefaultCode) {
+	if o.DefaultCode != nil {
 		toSerialize["default_code"] = o.DefaultCode
 	}
 

@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="detail">detail.</param>
         /// <param name="statusCode">statusCode.</param>
         /// <param name="code">code.</param>
-        public Model503BrokerageRequestResponse(string detail = default(string), int statusCode = default(int), string code = default(string)) : base()
+        public Model503BrokerageRequestResponse(Object detail = default(Object), Object statusCode = default(Object), Object code = default(Object)) : base()
         {
             this.Detail = detail;
             this.StatusCode = statusCode;
@@ -49,20 +49,20 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Detail
         /// </summary>
-        [DataMember(Name = "detail", EmitDefaultValue = false)]
-        public string Detail { get; set; }
+        [DataMember(Name = "detail", EmitDefaultValue = true)]
+        public Object Detail { get; set; }
 
         /// <summary>
         /// Gets or Sets StatusCode
         /// </summary>
-        [DataMember(Name = "status_code", EmitDefaultValue = false)]
-        public int StatusCode { get; set; }
+        [DataMember(Name = "status_code", EmitDefaultValue = true)]
+        public Object StatusCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Code
         /// </summary>
-        [DataMember(Name = "code", EmitDefaultValue = false)]
-        public string Code { get; set; }
+        [DataMember(Name = "code", EmitDefaultValue = true)]
+        public Object Code { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -125,7 +125,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.StatusCode == input.StatusCode ||
-                    this.StatusCode.Equals(input.StatusCode)
+                    (this.StatusCode != null &&
+                    this.StatusCode.Equals(input.StatusCode))
                 ) && base.Equals(input) && 
                 (
                     this.Code == input.Code ||
@@ -148,7 +149,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Detail.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.StatusCode.GetHashCode();
+                if (this.StatusCode != null)
+                {
+                    hashCode = (hashCode * 59) + this.StatusCode.GetHashCode();
+                }
                 if (this.Code != null)
                 {
                     hashCode = (hashCode * 59) + this.Code.GetHashCode();

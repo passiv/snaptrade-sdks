@@ -17,8 +17,8 @@ import (
 
 // Model401FailedRequestResponse Example for failed request response
 type Model401FailedRequestResponse struct {
-	DefaultDetail *string `json:"default_detail,omitempty"`
-	DefaultCode *string `json:"default_code,omitempty"`
+	DefaultDetail interface{} `json:"default_detail,omitempty"`
+	DefaultCode interface{} `json:"default_code,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,76 +41,78 @@ func NewModel401FailedRequestResponseWithDefaults() *Model401FailedRequestRespon
 	return &this
 }
 
-// GetDefaultDetail returns the DefaultDetail field value if set, zero value otherwise.
-func (o *Model401FailedRequestResponse) GetDefaultDetail() string {
-	if o == nil || isNil(o.DefaultDetail) {
-		var ret string
+// GetDefaultDetail returns the DefaultDetail field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model401FailedRequestResponse) GetDefaultDetail() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.DefaultDetail
+	return o.DefaultDetail
 }
 
 // GetDefaultDetailOk returns a tuple with the DefaultDetail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model401FailedRequestResponse) GetDefaultDetailOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model401FailedRequestResponse) GetDefaultDetailOk() (*interface{}, bool) {
 	if o == nil || isNil(o.DefaultDetail) {
     return nil, false
 	}
-	return o.DefaultDetail, true
+	return &o.DefaultDetail, true
 }
 
 // HasDefaultDetail returns a boolean if a field has been set.
 func (o *Model401FailedRequestResponse) HasDefaultDetail() bool {
-	if o != nil && !isNil(o.DefaultDetail) {
+	if o != nil && isNil(o.DefaultDetail) {
 		return true
 	}
 
 	return false
 }
 
-// SetDefaultDetail gets a reference to the given string and assigns it to the DefaultDetail field.
-func (o *Model401FailedRequestResponse) SetDefaultDetail(v string) {
-	o.DefaultDetail = &v
+// SetDefaultDetail gets a reference to the given interface{} and assigns it to the DefaultDetail field.
+func (o *Model401FailedRequestResponse) SetDefaultDetail(v interface{}) {
+	o.DefaultDetail = v
 }
 
-// GetDefaultCode returns the DefaultCode field value if set, zero value otherwise.
-func (o *Model401FailedRequestResponse) GetDefaultCode() string {
-	if o == nil || isNil(o.DefaultCode) {
-		var ret string
+// GetDefaultCode returns the DefaultCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model401FailedRequestResponse) GetDefaultCode() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.DefaultCode
+	return o.DefaultCode
 }
 
 // GetDefaultCodeOk returns a tuple with the DefaultCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model401FailedRequestResponse) GetDefaultCodeOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model401FailedRequestResponse) GetDefaultCodeOk() (*interface{}, bool) {
 	if o == nil || isNil(o.DefaultCode) {
     return nil, false
 	}
-	return o.DefaultCode, true
+	return &o.DefaultCode, true
 }
 
 // HasDefaultCode returns a boolean if a field has been set.
 func (o *Model401FailedRequestResponse) HasDefaultCode() bool {
-	if o != nil && !isNil(o.DefaultCode) {
+	if o != nil && isNil(o.DefaultCode) {
 		return true
 	}
 
 	return false
 }
 
-// SetDefaultCode gets a reference to the given string and assigns it to the DefaultCode field.
-func (o *Model401FailedRequestResponse) SetDefaultCode(v string) {
-	o.DefaultCode = &v
+// SetDefaultCode gets a reference to the given interface{} and assigns it to the DefaultCode field.
+func (o *Model401FailedRequestResponse) SetDefaultCode(v interface{}) {
+	o.DefaultCode = v
 }
 
 func (o Model401FailedRequestResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.DefaultDetail) {
+	if o.DefaultDetail != nil {
 		toSerialize["default_detail"] = o.DefaultDetail
 	}
-	if !isNil(o.DefaultCode) {
+	if o.DefaultCode != nil {
 		toSerialize["default_code"] = o.DefaultCode
 	}
 

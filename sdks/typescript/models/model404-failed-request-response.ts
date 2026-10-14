@@ -78,15 +78,15 @@ export interface Model404FailedRequestResponse {
 
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model404FailedRequestResponse
      */
-    'default_detail'?: string;
+    'default_detail'?: any;
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model404FailedRequestResponse
      */
-    'default_code'?: string;
+    'default_code'?: any;
 }
 

@@ -37,11 +37,10 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="amount">Total value denominated in the currency of the &#x60;currency&#x60; field..</param>
         /// <param name="currency">The ISO-4217 currency code for the amount..</param>
-        public AccountBalanceTotal(double amount = default(double), string currency = default(string)) : base()
+        public AccountBalanceTotal(double amount = default(double), string currency = default(string))
         {
             this.Amount = amount;
             this.Currency = currency;
-            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -59,12 +58,6 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Gets or Sets additional properties
-        /// </summary>
-        [JsonExtensionData]
-        public IDictionary<string, object> AdditionalProperties { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -72,10 +65,8 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AccountBalanceTotal {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
-            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +75,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public virtual string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -110,17 +101,16 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return base.Equals(input) && 
+            return 
                 (
                     this.Amount == input.Amount ||
                     this.Amount.Equals(input.Amount)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Currency == input.Currency ||
                     (this.Currency != null &&
                     this.Currency.Equals(input.Currency))
-                )
-                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
+                );
         }
 
         /// <summary>
@@ -131,15 +121,11 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 hashCode = (hashCode * 59) + this.Amount.GetHashCode();
                 if (this.Currency != null)
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();
-                }
-                if (this.AdditionalProperties != null)
-                {
-                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

@@ -51,8 +51,8 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'default_detail' => 'string',
-        'default_code' => 'string'
+        'default_detail' => 'mixed',
+        'default_code' => 'mixed'
     ];
 
     /**
@@ -73,8 +73,8 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
       * @var boolean[]
       */
     protected static $openAPINullables = [
-        'default_detail' => false,
-		'default_code' => false
+        'default_detail' => true,
+		'default_code' => true
     ];
 
     /**
@@ -293,7 +293,7 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets default_detail
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getDefaultDetail()
     {
@@ -303,7 +303,7 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets default_detail
      *
-     * @param string|null $default_detail default_detail
+     * @param mixed|null $default_detail default_detail
      *
      * @return self
      */
@@ -311,7 +311,14 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
     {
 
         if (is_null($default_detail)) {
-            throw new \InvalidArgumentException('non-nullable default_detail cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'default_detail');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('default_detail', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['default_detail'] = $default_detail;
@@ -322,7 +329,7 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets default_code
      *
-     * @return string|null
+     * @return mixed|null
      */
     public function getDefaultCode()
     {
@@ -332,7 +339,7 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets default_code
      *
-     * @param string|null $default_code default_code
+     * @param mixed|null $default_code default_code
      *
      * @return self
      */
@@ -340,7 +347,14 @@ class Model403FailedRequestResponse implements ModelInterface, ArrayAccess, \Jso
     {
 
         if (is_null($default_code)) {
-            throw new \InvalidArgumentException('non-nullable default_code cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'default_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('default_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['default_code'] = $default_code;

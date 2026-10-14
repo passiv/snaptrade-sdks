@@ -15,6 +15,5 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.option_strategy_legs_item import OptionStrategyLegsItem
 
-OptionStrategyLegs = typing.List[OptionStrategyLegsItem]
+OptionStrategyLegs = typing.List[typing.Union[bool, date, datetime, dict, float, int, list, str, None]]

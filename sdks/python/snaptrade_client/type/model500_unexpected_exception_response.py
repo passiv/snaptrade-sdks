@@ -20,11 +20,11 @@ class RequiredModel500UnexpectedExceptionResponse(TypedDict):
     pass
 
 class OptionalModel500UnexpectedExceptionResponse(TypedDict, total=False):
-    detail: str
+    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
-    status_code: int
+    status_code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
-    code: str
+    code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
 class Model500UnexpectedExceptionResponse(RequiredModel500UnexpectedExceptionResponse, OptionalModel500UnexpectedExceptionResponse):
     pass

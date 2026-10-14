@@ -5,8 +5,8 @@ Cannot perform action because connection is disabled
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Detail** | **string** |  | [optional] 
-**Code** | **string** |  | [optional] 
+**Detail** | **Object** |  | [optional] 
+**Code** | **Object** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

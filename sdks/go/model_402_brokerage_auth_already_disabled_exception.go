@@ -17,8 +17,8 @@ import (
 
 // Model402BrokerageAuthAlreadyDisabledException This connection is already disabled.
 type Model402BrokerageAuthAlreadyDisabledException struct {
-	Detail *string `json:"detail,omitempty"`
-	Code *string `json:"code,omitempty"`
+	Detail interface{} `json:"detail,omitempty"`
+	Code interface{} `json:"code,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,76 +41,78 @@ func NewModel402BrokerageAuthAlreadyDisabledExceptionWithDefaults() *Model402Bro
 	return &this
 }
 
-// GetDetail returns the Detail field value if set, zero value otherwise.
-func (o *Model402BrokerageAuthAlreadyDisabledException) GetDetail() string {
-	if o == nil || isNil(o.Detail) {
-		var ret string
+// GetDetail returns the Detail field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model402BrokerageAuthAlreadyDisabledException) GetDetail() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Detail
+	return o.Detail
 }
 
 // GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model402BrokerageAuthAlreadyDisabledException) GetDetailOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model402BrokerageAuthAlreadyDisabledException) GetDetailOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Detail) {
     return nil, false
 	}
-	return o.Detail, true
+	return &o.Detail, true
 }
 
 // HasDetail returns a boolean if a field has been set.
 func (o *Model402BrokerageAuthAlreadyDisabledException) HasDetail() bool {
-	if o != nil && !isNil(o.Detail) {
+	if o != nil && isNil(o.Detail) {
 		return true
 	}
 
 	return false
 }
 
-// SetDetail gets a reference to the given string and assigns it to the Detail field.
-func (o *Model402BrokerageAuthAlreadyDisabledException) SetDetail(v string) {
-	o.Detail = &v
+// SetDetail gets a reference to the given interface{} and assigns it to the Detail field.
+func (o *Model402BrokerageAuthAlreadyDisabledException) SetDetail(v interface{}) {
+	o.Detail = v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
-func (o *Model402BrokerageAuthAlreadyDisabledException) GetCode() string {
-	if o == nil || isNil(o.Code) {
-		var ret string
+// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model402BrokerageAuthAlreadyDisabledException) GetCode() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Code
+	return o.Code
 }
 
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model402BrokerageAuthAlreadyDisabledException) GetCodeOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model402BrokerageAuthAlreadyDisabledException) GetCodeOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Code) {
     return nil, false
 	}
-	return o.Code, true
+	return &o.Code, true
 }
 
 // HasCode returns a boolean if a field has been set.
 func (o *Model402BrokerageAuthAlreadyDisabledException) HasCode() bool {
-	if o != nil && !isNil(o.Code) {
+	if o != nil && isNil(o.Code) {
 		return true
 	}
 
 	return false
 }
 
-// SetCode gets a reference to the given string and assigns it to the Code field.
-func (o *Model402BrokerageAuthAlreadyDisabledException) SetCode(v string) {
-	o.Code = &v
+// SetCode gets a reference to the given interface{} and assigns it to the Code field.
+func (o *Model402BrokerageAuthAlreadyDisabledException) SetCode(v interface{}) {
+	o.Code = v
 }
 
 func (o Model402BrokerageAuthAlreadyDisabledException) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Detail) {
+	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
 	}
-	if !isNil(o.Code) {
+	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
 

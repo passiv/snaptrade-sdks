@@ -37,8 +37,8 @@ class Model401FailedRequestResponse(
     class MetaOapg:
         
         class properties:
-            default_detail = schemas.StrSchema
-            default_code = schemas.StrSchema
+            default_detail = schemas.AnyTypeSchema
+            default_code = schemas.AnyTypeSchema
             __annotations__ = {
                 "default_detail": default_detail,
                 "default_code": default_code,
@@ -73,8 +73,8 @@ class Model401FailedRequestResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        default_detail: typing.Union[MetaOapg.properties.default_detail, str, schemas.Unset] = schemas.unset,
-        default_code: typing.Union[MetaOapg.properties.default_code, str, schemas.Unset] = schemas.unset,
+        default_detail: typing.Union[MetaOapg.properties.default_detail, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        default_code: typing.Union[MetaOapg.properties.default_code, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Model401FailedRequestResponse':

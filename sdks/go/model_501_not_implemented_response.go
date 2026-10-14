@@ -17,7 +17,7 @@ import (
 
 // Model501NotImplementedResponse Example for a response where the endpoint is not implemented for the brokerage
 type Model501NotImplementedResponse struct {
-	Error *string `json:"error,omitempty"`
+	Error interface{} `json:"error,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,41 +40,42 @@ func NewModel501NotImplementedResponseWithDefaults() *Model501NotImplementedResp
 	return &this
 }
 
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *Model501NotImplementedResponse) GetError() string {
-	if o == nil || isNil(o.Error) {
-		var ret string
+// GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model501NotImplementedResponse) GetError() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Error
+	return o.Error
 }
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model501NotImplementedResponse) GetErrorOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model501NotImplementedResponse) GetErrorOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Error) {
     return nil, false
 	}
-	return o.Error, true
+	return &o.Error, true
 }
 
 // HasError returns a boolean if a field has been set.
 func (o *Model501NotImplementedResponse) HasError() bool {
-	if o != nil && !isNil(o.Error) {
+	if o != nil && isNil(o.Error) {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given string and assigns it to the Error field.
-func (o *Model501NotImplementedResponse) SetError(v string) {
-	o.Error = &v
+// SetError gets a reference to the given interface{} and assigns it to the Error field.
+func (o *Model501NotImplementedResponse) SetError(v interface{}) {
+	o.Error = v
 }
 
 func (o Model501NotImplementedResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Error) {
+	if o.Error != nil {
 		toSerialize["error"] = o.Error
 	}
 

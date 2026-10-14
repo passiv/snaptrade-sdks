@@ -3323,127 +3323,101 @@ components:
       type: object
       properties:
         default_detail:
-          type: string
           example: Unable to verify data sent
         default_code:
-          type: string
-          example: "1076"
+          example: 1076
     401FailedRequestResponse:
       description: Example for failed request response
       type: object
       properties:
         default_detail:
-          type: string
           example: Unable to verify signature sent
         default_code:
-          type: string
-          example: "1076"
+          example: 1076
     402BrokerageAuthDisabledResponse:
       description: Cannot perform action because connection is disabled
       type: object
       properties:
         detail:
-          type: string
           example: Unable to sync with brokerage account because the connection is disabled.
         code:
-          type: string
-          example: "3003"
+          example: 3003
     402BrokerageAuthAlreadyDisabledException:
       description: This connection is already disabled.
       type: object
       properties:
         detail:
-          type: string
           example: This connection is already disabled.
         code:
-          type: string
-          example: "3011"
+          example: 3011
     403FailedRequestResponse:
       description: Example for failed request response
       type: object
       properties:
         default_detail:
-          type: string
           example: User does not have permission to access this resource
         default_code:
-          type: string
-          example: "1066"
+          example: 1066
     403FeatureNotEnabledResponse:
       description: Example for failed request response
       type: object
       properties:
         detail:
-          type: string
           example: Feature is not enabled for this customer or this connection
         default_code:
-          type: string
-          example: "1141"
+          example: 1141
     404FailedRequestResponse:
       description: Example for failed request response
       type: object
       properties:
         default_detail:
-          type: string
           example: The requested resource does not exist.
         default_code:
-          type: string
-          example: "1011"
+          example: 1011
     425FailedRequestResponse:
       description: Example for failed request response
       type: object
       properties:
         detail:
-          type: string
           example: The resource is currently being populated. Please try again later.
         code:
-          type: string
-          example: "3012"
+          example: 3012
     429TooManyRequestsResponse:
       description: Example for a rate-limited request response
       type: object
       properties:
         detail:
-          type: string
           example: Connection refreshed too recently. Please try again later.
         status_code:
-          type: integer
           example: 429
         code:
-          type: string
           example: throttled
     500UnexpectedExceptionResponse:
       description: Example for a response that failed for unexpected reasons
       type: object
       properties:
         detail:
-          type: string
           example: Encountered an unexpected exception.
         status_code:
-          type: integer
           example: 500
         code:
-          type: string
-          example: "1000"
+          example: 1000
     501NotImplementedResponse:
       description: Example for a response where the endpoint is not implemented for the brokerage
       type: object
       properties:
         error:
-          type: string
           example: The orders endpoint is not yet implemented for brokerage some-brokerage
     503BrokerageRequestResponse:
       description: Example for a response that failed because of an upstream brokerage API failure
       type: object
       properties:
         detail:
-          type: string
           example: Unable to sync with brokerage account. Invalid response from Brokerage API.
         status_code:
-          type: integer
           example: 503
         code:
-          type: string
-          example: "3002"
+          example: 3002
     AccountSyncStatus:
       description: Contains status update for the account sync process between SnapTrade and the brokerage.
       properties:
@@ -3499,11 +3473,9 @@ components:
           type: boolean
           example: true
     AccountBalance:
-      type: object
       description: Contains balance related information for the account.
       properties:
         total:
-          type: object
           description: Total market value of this account (includes cash, equity, fixed income, etc). This value is directly obtained from the brokerage and should reflect the most accurate value of the account.
           nullable: true
           properties:
@@ -4654,7 +4626,6 @@ components:
         legs:
           type: array
           items:
-            type: object
             properties:
               option_symbol_id:
                 type: string
@@ -6186,9 +6157,7 @@ components:
           deprecated: true
           description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: array
-          items:
-            type: string
-            format: uuid
+          items: {}
           example:
             - 2bcd7cc3-e922-4976-bce1-9858296801c3
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
@@ -6832,7 +6801,6 @@ components:
       description: List of symbols with the latest quotes from the brokerage.
       type: array
       items:
-        type: object
         properties:
           symbol:
             $ref: "#/components/schemas/UniversalSymbol"

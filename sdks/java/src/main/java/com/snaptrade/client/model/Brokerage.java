@@ -121,7 +121,7 @@ public class Brokerage {
 
   public static final String SERIALIZED_NAME_EXCHANGES = "exchanges";
   @SerializedName(SERIALIZED_NAME_EXCHANGES)
-  private List<UUID> exchanges = null;
+  private List<Object> exchanges = null;
 
   public static final String SERIALIZED_NAME_OPEN_URL = "open_url";
   @SerializedName(SERIALIZED_NAME_OPEN_URL)
@@ -600,7 +600,7 @@ public class Brokerage {
   }
 
 
-  public Brokerage exchanges(List<UUID> exchanges) {
+  public Brokerage exchanges(List<Object> exchanges) {
     
     
     
@@ -609,7 +609,7 @@ public class Brokerage {
     return this;
   }
 
-  public Brokerage addExchangesItem(UUID exchangesItem) {
+  public Brokerage addExchangesItem(Object exchangesItem) {
     if (this.exchanges == null) {
       this.exchanges = new ArrayList<>();
     }
@@ -626,12 +626,12 @@ public class Brokerage {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "[\"2bcd7cc3-e922-4976-bce1-9858296801c3\",\"4bcd8cc3-c122-4974-dc21-1858296801f4\"]", value = "This field is deprecated. Please contact us if you have a valid use case for it.")
 
-  public List<UUID> getExchanges() {
+  public List<Object> getExchanges() {
     return exchanges;
   }
 
 
-  public void setExchanges(List<UUID> exchanges) {
+  public void setExchanges(List<Object> exchanges) {
     
     
     

@@ -17,9 +17,9 @@ import (
 
 // Model429TooManyRequestsResponse Example for a rate-limited request response
 type Model429TooManyRequestsResponse struct {
-	Detail *string `json:"detail,omitempty"`
-	StatusCode *int32 `json:"status_code,omitempty"`
-	Code *string `json:"code,omitempty"`
+	Detail interface{} `json:"detail,omitempty"`
+	StatusCode interface{} `json:"status_code,omitempty"`
+	Code interface{} `json:"code,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,111 +42,114 @@ func NewModel429TooManyRequestsResponseWithDefaults() *Model429TooManyRequestsRe
 	return &this
 }
 
-// GetDetail returns the Detail field value if set, zero value otherwise.
-func (o *Model429TooManyRequestsResponse) GetDetail() string {
-	if o == nil || isNil(o.Detail) {
-		var ret string
+// GetDetail returns the Detail field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model429TooManyRequestsResponse) GetDetail() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Detail
+	return o.Detail
 }
 
 // GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model429TooManyRequestsResponse) GetDetailOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model429TooManyRequestsResponse) GetDetailOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Detail) {
     return nil, false
 	}
-	return o.Detail, true
+	return &o.Detail, true
 }
 
 // HasDetail returns a boolean if a field has been set.
 func (o *Model429TooManyRequestsResponse) HasDetail() bool {
-	if o != nil && !isNil(o.Detail) {
+	if o != nil && isNil(o.Detail) {
 		return true
 	}
 
 	return false
 }
 
-// SetDetail gets a reference to the given string and assigns it to the Detail field.
-func (o *Model429TooManyRequestsResponse) SetDetail(v string) {
-	o.Detail = &v
+// SetDetail gets a reference to the given interface{} and assigns it to the Detail field.
+func (o *Model429TooManyRequestsResponse) SetDetail(v interface{}) {
+	o.Detail = v
 }
 
-// GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *Model429TooManyRequestsResponse) GetStatusCode() int32 {
-	if o == nil || isNil(o.StatusCode) {
-		var ret int32
+// GetStatusCode returns the StatusCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model429TooManyRequestsResponse) GetStatusCode() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.StatusCode
+	return o.StatusCode
 }
 
 // GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model429TooManyRequestsResponse) GetStatusCodeOk() (*int32, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model429TooManyRequestsResponse) GetStatusCodeOk() (*interface{}, bool) {
 	if o == nil || isNil(o.StatusCode) {
     return nil, false
 	}
-	return o.StatusCode, true
+	return &o.StatusCode, true
 }
 
 // HasStatusCode returns a boolean if a field has been set.
 func (o *Model429TooManyRequestsResponse) HasStatusCode() bool {
-	if o != nil && !isNil(o.StatusCode) {
+	if o != nil && isNil(o.StatusCode) {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
-func (o *Model429TooManyRequestsResponse) SetStatusCode(v int32) {
-	o.StatusCode = &v
+// SetStatusCode gets a reference to the given interface{} and assigns it to the StatusCode field.
+func (o *Model429TooManyRequestsResponse) SetStatusCode(v interface{}) {
+	o.StatusCode = v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
-func (o *Model429TooManyRequestsResponse) GetCode() string {
-	if o == nil || isNil(o.Code) {
-		var ret string
+// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Model429TooManyRequestsResponse) GetCode() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.Code
+	return o.Code
 }
 
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Model429TooManyRequestsResponse) GetCodeOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Model429TooManyRequestsResponse) GetCodeOk() (*interface{}, bool) {
 	if o == nil || isNil(o.Code) {
     return nil, false
 	}
-	return o.Code, true
+	return &o.Code, true
 }
 
 // HasCode returns a boolean if a field has been set.
 func (o *Model429TooManyRequestsResponse) HasCode() bool {
-	if o != nil && !isNil(o.Code) {
+	if o != nil && isNil(o.Code) {
 		return true
 	}
 
 	return false
 }
 
-// SetCode gets a reference to the given string and assigns it to the Code field.
-func (o *Model429TooManyRequestsResponse) SetCode(v string) {
-	o.Code = &v
+// SetCode gets a reference to the given interface{} and assigns it to the Code field.
+func (o *Model429TooManyRequestsResponse) SetCode(v interface{}) {
+	o.Code = v
 }
 
 func (o Model429TooManyRequestsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Detail) {
+	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
 	}
-	if !isNil(o.StatusCode) {
+	if o.StatusCode != nil {
 		toSerialize["status_code"] = o.StatusCode
 	}
-	if !isNil(o.Code) {
+	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
 

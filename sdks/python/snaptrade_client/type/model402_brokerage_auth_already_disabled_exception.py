@@ -20,9 +20,9 @@ class RequiredModel402BrokerageAuthAlreadyDisabledException(TypedDict):
     pass
 
 class OptionalModel402BrokerageAuthAlreadyDisabledException(TypedDict, total=False):
-    detail: str
+    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
-    code: str
+    code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
 class Model402BrokerageAuthAlreadyDisabledException(RequiredModel402BrokerageAuthAlreadyDisabledException, OptionalModel402BrokerageAuthAlreadyDisabledException):
     pass

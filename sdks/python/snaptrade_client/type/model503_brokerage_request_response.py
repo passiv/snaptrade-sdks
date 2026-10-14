@@ -20,11 +20,11 @@ class RequiredModel503BrokerageRequestResponse(TypedDict):
     pass
 
 class OptionalModel503BrokerageRequestResponse(TypedDict, total=False):
-    detail: str
+    detail: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
-    status_code: int
+    status_code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
-    code: str
+    code: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
 
 class Model503BrokerageRequestResponse(RequiredModel503BrokerageRequestResponse, OptionalModel503BrokerageRequestResponse):
     pass

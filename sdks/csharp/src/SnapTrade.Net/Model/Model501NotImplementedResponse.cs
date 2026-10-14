@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Model501NotImplementedResponse" /> class.
         /// </summary>
         /// <param name="error">error.</param>
-        public Model501NotImplementedResponse(string error = default(string)) : base()
+        public Model501NotImplementedResponse(Object error = default(Object)) : base()
         {
             this.Error = error;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -45,8 +45,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
-        [DataMember(Name = "error", EmitDefaultValue = false)]
-        public string Error { get; set; }
+        [DataMember(Name = "error", EmitDefaultValue = true)]
+        public Object Error { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

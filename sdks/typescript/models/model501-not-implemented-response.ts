@@ -78,9 +78,9 @@ export interface Model501NotImplementedResponse {
 
     /**
      * 
-     * @type {string}
+     * @type {any}
      * @memberof Model501NotImplementedResponse
      */
-    'error'?: string;
+    'error'?: any;
 }
 

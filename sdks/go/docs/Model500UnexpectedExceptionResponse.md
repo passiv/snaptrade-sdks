@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Detail** | Pointer to **string** |  | [optional] 
-**StatusCode** | Pointer to **int32** |  | [optional] 
-**Code** | Pointer to **string** |  | [optional] 
+**Detail** | Pointer to **interface{}** |  | [optional] 
+**StatusCode** | Pointer to **interface{}** |  | [optional] 
+**Code** | Pointer to **interface{}** |  | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDetail
 
-`func (o *Model500UnexpectedExceptionResponse) GetDetail() string`
+`func (o *Model500UnexpectedExceptionResponse) GetDetail() interface{}`
 
 GetDetail returns the Detail field if non-nil, zero value otherwise.
 
 ### GetDetailOk
 
-`func (o *Model500UnexpectedExceptionResponse) GetDetailOk() (*string, bool)`
+`func (o *Model500UnexpectedExceptionResponse) GetDetailOk() (*interface{}, bool)`
 
 GetDetailOk returns a tuple with the Detail field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDetail
 
-`func (o *Model500UnexpectedExceptionResponse) SetDetail(v string)`
+`func (o *Model500UnexpectedExceptionResponse) SetDetail(v interface{})`
 
 SetDetail sets Detail field to given value.
 
@@ -52,22 +52,32 @@ SetDetail sets Detail field to given value.
 
 HasDetail returns a boolean if a field has been set.
 
+### SetDetailNil
+
+`func (o *Model500UnexpectedExceptionResponse) SetDetailNil(b bool)`
+
+ SetDetailNil sets the value for Detail to be an explicit nil
+
+### UnsetDetail
+`func (o *Model500UnexpectedExceptionResponse) UnsetDetail()`
+
+UnsetDetail ensures that no value is present for Detail, not even an explicit nil
 ### GetStatusCode
 
-`func (o *Model500UnexpectedExceptionResponse) GetStatusCode() int32`
+`func (o *Model500UnexpectedExceptionResponse) GetStatusCode() interface{}`
 
 GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
 
 ### GetStatusCodeOk
 
-`func (o *Model500UnexpectedExceptionResponse) GetStatusCodeOk() (*int32, bool)`
+`func (o *Model500UnexpectedExceptionResponse) GetStatusCodeOk() (*interface{}, bool)`
 
 GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatusCode
 
-`func (o *Model500UnexpectedExceptionResponse) SetStatusCode(v int32)`
+`func (o *Model500UnexpectedExceptionResponse) SetStatusCode(v interface{})`
 
 SetStatusCode sets StatusCode field to given value.
 
@@ -77,22 +87,32 @@ SetStatusCode sets StatusCode field to given value.
 
 HasStatusCode returns a boolean if a field has been set.
 
+### SetStatusCodeNil
+
+`func (o *Model500UnexpectedExceptionResponse) SetStatusCodeNil(b bool)`
+
+ SetStatusCodeNil sets the value for StatusCode to be an explicit nil
+
+### UnsetStatusCode
+`func (o *Model500UnexpectedExceptionResponse) UnsetStatusCode()`
+
+UnsetStatusCode ensures that no value is present for StatusCode, not even an explicit nil
 ### GetCode
 
-`func (o *Model500UnexpectedExceptionResponse) GetCode() string`
+`func (o *Model500UnexpectedExceptionResponse) GetCode() interface{}`
 
 GetCode returns the Code field if non-nil, zero value otherwise.
 
 ### GetCodeOk
 
-`func (o *Model500UnexpectedExceptionResponse) GetCodeOk() (*string, bool)`
+`func (o *Model500UnexpectedExceptionResponse) GetCodeOk() (*interface{}, bool)`
 
 GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCode
 
-`func (o *Model500UnexpectedExceptionResponse) SetCode(v string)`
+`func (o *Model500UnexpectedExceptionResponse) SetCode(v interface{})`
 
 SetCode sets Code field to given value.
 
@@ -102,6 +122,16 @@ SetCode sets Code field to given value.
 
 HasCode returns a boolean if a field has been set.
 
+### SetCodeNil
+
+`func (o *Model500UnexpectedExceptionResponse) SetCodeNil(b bool)`
+
+ SetCodeNil sets the value for Code to be an explicit nil
+
+### UnsetCode
+`func (o *Model500UnexpectedExceptionResponse) UnsetCode()`
+
+UnsetCode ensures that no value is present for Code, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
