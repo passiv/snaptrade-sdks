@@ -155,7 +155,7 @@ export class Configuration<TAuth extends AuthMode> {
         }
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
-        this.userAgent = param.userAgent === undefined ? "Konfig/13.0.0/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/13.0.1/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 
