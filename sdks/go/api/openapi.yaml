@@ -857,16 +857,15 @@ paths:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--connections-connectionId-accounts
-  /accounts:
+  /accounts/all:
     get:
-      deprecated: true
       description: |
-        **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, and line of credit accounts.
+        Returns all accounts across all connections known to SnapTrade for the authenticated user.
 
-        Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
+        The `results` list can contain multiple account types in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the schema for each account.
 
-        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
-      operationId: AccountInformation_listUserAccounts
+        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+      operationId: AccountInformation_listAllUserAccounts
       parameters:
       - explode: true
         in: query
@@ -887,18 +886,19 @@ paths:
           content:
             application/json:
               schema:
-                description: List of brokerage accounts across all connections.
-                items:
-                  $ref: '#/components/schemas/Account'
-                type: array
+                $ref: '#/components/schemas/AllUserAccountsResponse'
           description: OK
-        default:
-          description: Unexpected error.
-      summary: List user accounts
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Unauthorized, invalid credentials for this resource"
+      summary: List all user accounts
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-all
   /accounts/{accountId}/holdings:
     get:
       deprecated: true
@@ -1030,15 +1030,16 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-holdings
-  /accounts/all:
+  /accounts:
     get:
+      deprecated: true
       description: |
-        Returns all accounts across all connections known to SnapTrade for the authenticated user.
+        **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, and line of credit accounts.
 
-        The `results` list can contain multiple account types in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the schema for each account.
+        Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
-      operationId: AccountInformation_listAllUserAccounts
+        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+      operationId: AccountInformation_listUserAccounts
       parameters:
       - explode: true
         in: query
@@ -1059,19 +1060,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AllUserAccountsResponse'
+                description: List of brokerage accounts across all connections.
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
           description: OK
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/401FailedRequestResponse'
-          description: "Unauthorized, invalid credentials for this resource"
-      summary: List all user accounts
+        default:
+          description: Unexpected error.
+      summary: List user accounts
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-all
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts
   /accounts/{accountId}:
     get:
       deprecated: true
@@ -16284,7 +16284,7 @@ components:
       - connectionId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-get--accounts:
+    konfig-generated-schema-single-parameter-schema-get--accounts-all:
       additionalProperties: true
       properties:
         userId:
@@ -16318,7 +16318,7 @@ components:
       - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-get--accounts-all:
+    konfig-generated-schema-single-parameter-schema-get--accounts:
       additionalProperties: true
       properties:
         userId:
