@@ -9,7 +9,7 @@ order:
   - tag: Connections
   - tag: Account Information
     operations:
-      - path: /accounts
+      - path: /accounts/all
         method: get
   - tag: Options
   - tag: Transactions And Reporting
@@ -163,6 +163,7 @@ portal:
       get: true
     /accounts/{accountId}:
       put: true
+      get: true
     /sessionEvents:
       get: true
     /snapTrade/listUserErrors:
@@ -206,6 +207,8 @@ portal:
     /authorizations/{authorizationId}/accounts:
       get: true
     /institutions:
+      get: true
+    /accounts/:
       get: true
   hideTags:
     - Experimental endpoints

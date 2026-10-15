@@ -72,7 +72,7 @@ If you don't have a live brokerage account to test with, you can create a Paper 
 
 ## 3. List connected accounts
 
-Once the end user makes a successful connection, SnapTrade will retrieve all the brokerage accounts that the user has granted access to. You can use the <a href="https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listUserAccounts" target="_blank">List Accounts</a> endpoint to retrieve all connected accounts. For each account, the `id` field uniquely identifies the account within SnapTrade and needs to be passed in for all subsequent account-related API calls.
+Once the end user makes a successful connection, SnapTrade will retrieve all the brokerage accounts that the user has granted access to. You can use the <a href="https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listAllUserAccounts" target="_blank">List Accounts</a> endpoint to retrieve all connected accounts. For each account, the `id` field uniquely identifies the account within SnapTrade and needs to be passed in for all subsequent account-related API calls.
 
 :::form
 
