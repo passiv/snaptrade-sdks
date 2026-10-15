@@ -78,21 +78,21 @@ export interface Model503BrokerageRequestResponse {
 
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model503BrokerageRequestResponse
      */
-    'detail'?: any;
+    'detail'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model503BrokerageRequestResponse
      */
-    'status_code'?: any;
+    'status_code'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model503BrokerageRequestResponse
      */
-    'code'?: any;
+    'code'?: unknown;
 }
 

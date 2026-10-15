@@ -78,15 +78,15 @@ export interface Model402BrokerageAuthAlreadyDisabledException {
 
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model402BrokerageAuthAlreadyDisabledException
      */
-    'detail'?: any;
+    'detail'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model402BrokerageAuthAlreadyDisabledException
      */
-    'code'?: any;
+    'code'?: unknown;
 }
 

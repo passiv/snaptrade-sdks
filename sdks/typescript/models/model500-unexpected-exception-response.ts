@@ -78,21 +78,21 @@ export interface Model500UnexpectedExceptionResponse {
 
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model500UnexpectedExceptionResponse
      */
-    'detail'?: any;
+    'detail'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model500UnexpectedExceptionResponse
      */
-    'status_code'?: any;
+    'status_code'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model500UnexpectedExceptionResponse
      */
-    'code'?: any;
+    'code'?: unknown;
 }
 

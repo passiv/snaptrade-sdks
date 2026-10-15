@@ -78,21 +78,21 @@ export interface Model429TooManyRequestsResponse {
 
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model429TooManyRequestsResponse
      */
-    'detail'?: any;
+    'detail'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model429TooManyRequestsResponse
      */
-    'status_code'?: any;
+    'status_code'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model429TooManyRequestsResponse
      */
-    'code'?: any;
+    'code'?: unknown;
 }
 

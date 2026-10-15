@@ -78,15 +78,15 @@ export interface Model401FailedRequestResponse {
 
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model401FailedRequestResponse
      */
-    'default_detail'?: any;
+    'default_detail'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model401FailedRequestResponse
      */
-    'default_code'?: any;
+    'default_code'?: unknown;
 }
 

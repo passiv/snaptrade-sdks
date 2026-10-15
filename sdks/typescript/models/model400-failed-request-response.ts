@@ -78,15 +78,15 @@ export interface Model400FailedRequestResponse {
 
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model400FailedRequestResponse
      */
-    'default_detail'?: any;
+    'default_detail'?: unknown;
     /**
      * 
-     * @type {any}
+     * @type {unknown}
      * @memberof Model400FailedRequestResponse
      */
-    'default_code'?: any;
+    'default_code'?: unknown;
 }
 
