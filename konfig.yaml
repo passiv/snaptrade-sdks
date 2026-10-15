@@ -208,7 +208,7 @@ portal:
       get: true
     /institutions:
       get: true
-    /accounts/:
+    /accounts:
       get: true
   hideTags:
     - Experimental endpoints
