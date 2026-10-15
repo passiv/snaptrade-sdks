@@ -16,9 +16,9 @@ from snaptrade_client.apis.paths.authorizations_authorization_id_transactions_sy
 from snaptrade_client.apis.paths.authorizations_authorization_id_disable import AuthorizationsAuthorizationIdDisable
 from snaptrade_client.apis.paths.authorizations_authorization_id_accounts import AuthorizationsAuthorizationIdAccounts
 from snaptrade_client.apis.paths.connections_connection_id_accounts import ConnectionsConnectionIdAccounts
-from snaptrade_client.apis.paths.accounts import Accounts
-from snaptrade_client.apis.paths.accounts_account_id_holdings import AccountsAccountIdHoldings
 from snaptrade_client.apis.paths.accounts_all import AccountsAll
+from snaptrade_client.apis.paths.accounts_account_id_holdings import AccountsAccountIdHoldings
+from snaptrade_client.apis.paths.accounts import Accounts
 from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_details import AccountsAccountIdDetails
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
@@ -77,9 +77,9 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
         PathValues.CONNECTIONS_CONNECTION_ID_ACCOUNTS: ConnectionsConnectionIdAccounts,
-        PathValues.ACCOUNTS: Accounts,
-        PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
         PathValues.ACCOUNTS_ALL: AccountsAll,
+        PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
+        PathValues.ACCOUNTS: Accounts,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_DETAILS: AccountsAccountIdDetails,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
@@ -139,9 +139,9 @@ path_to_api = PathToApi(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_ACCOUNTS: AuthorizationsAuthorizationIdAccounts,
         PathValues.CONNECTIONS_CONNECTION_ID_ACCOUNTS: ConnectionsConnectionIdAccounts,
-        PathValues.ACCOUNTS: Accounts,
-        PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
         PathValues.ACCOUNTS_ALL: AccountsAll,
+        PathValues.ACCOUNTS_ACCOUNT_ID_HOLDINGS: AccountsAccountIdHoldings,
+        PathValues.ACCOUNTS: Accounts,
         PathValues.ACCOUNTS_ACCOUNT_ID: AccountsAccountId,
         PathValues.ACCOUNTS_ACCOUNT_ID_DETAILS: AccountsAccountIdDetails,
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
