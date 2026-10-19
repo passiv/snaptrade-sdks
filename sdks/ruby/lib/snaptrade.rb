@@ -167,6 +167,7 @@ require 'snaptrade/models/model429_too_many_requests_response'
 require 'snaptrade/models/model500_unexpected_exception_response'
 require 'snaptrade/models/model501_not_implemented_response'
 require 'snaptrade/models/model503_brokerage_request_response'
+require 'snaptrade/models/model503_currency_conversion_unavailable_response'
 require 'snaptrade/models/monthly_dividends'
 require 'snaptrade/models/mutual_fund_instrument'
 require 'snaptrade/models/mutual_fund_instrument_kind'
@@ -202,6 +203,7 @@ require 'snaptrade/models/other_instrument_kind'
 require 'snaptrade/models/paginated_universal_activity'
 require 'snaptrade/models/pagination_details'
 require 'snaptrade/models/partner_data'
+require 'snaptrade/models/partner_stats'
 require 'snaptrade/models/past_value'
 require 'snaptrade/models/performance_custom'
 require 'snaptrade/models/position'
@@ -286,6 +288,7 @@ require 'snaptrade/api/api_status_api'
 require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
 require 'snaptrade/api/experimental_endpoints_api'
+require 'snaptrade/api/management_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
 
@@ -358,6 +361,7 @@ module SnapTrade
     attr_reader :authentication
     attr_reader :connections
     attr_reader :experimental_endpoints
+    attr_reader :management
     attr_reader :reference_data
     attr_reader :trading
 
@@ -368,6 +372,7 @@ module SnapTrade
       @authentication = SnapTrade::AuthenticationApi.new(@api_client)
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
       @experimental_endpoints = SnapTrade::ExperimentalEndpointsApi.new(@api_client)
+      @management = SnapTrade::ManagementApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)
     end

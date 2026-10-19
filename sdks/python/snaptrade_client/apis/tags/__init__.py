@@ -12,4 +12,5 @@ class TagValues(str, enum.Enum):
     ACCOUNT_INFORMATION = "Account Information"
     TRADING = "Trading"
     REFERENCE_DATA = "Reference Data"
+    MANAGEMENT = "Management"
     EXPERIMENTAL_ENDPOINTS = "Experimental endpoints"

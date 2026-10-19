@@ -22,6 +22,7 @@ from snaptrade_client.apis.tags.api_status_api import APIStatusApi
 from snaptrade_client.apis.tags.authentication_api import AuthenticationApi
 from snaptrade_client.apis.tags.connections_api import ConnectionsApi
 from snaptrade_client.apis.tags.experimental_endpoints_api import ExperimentalEndpointsApi
+from snaptrade_client.apis.tags.management_api import ManagementApi
 from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
 
@@ -60,5 +61,6 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         self.authentication: AuthenticationApi[TAuth] = AuthenticationApi(api_client)
         self.connections: ConnectionsApi[TAuth] = ConnectionsApi(api_client)
         self.experimental_endpoints: ExperimentalEndpointsApi[TAuth] = ExperimentalEndpointsApi(api_client)
+        self.management: ManagementApi[TAuth] = ManagementApi(api_client)
         self.reference_data: ReferenceDataApi[TAuth] = ReferenceDataApi(api_client)
         self.trading: TradingApi[TAuth] = TradingApi(api_client)
