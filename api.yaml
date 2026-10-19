@@ -87,6 +87,8 @@ tags:
     description: Manage orders on user accounts.
   - name: Reference Data
     description: Retrieve basic information for API use, such as supported brokerages, exchanges, currencies, etc.
+  - name: Management
+    description: Retrieve usage information about your SnapTrade Client ID.
   - name: Webhooks
     description: Reach out directly to SnapTrade to enable webhooks in order to be notified when certain events occur.
   - name: Experimental endpoints
@@ -493,6 +495,61 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /snapTrade/stats:
+    get:
+      tags:
+        - Management
+      summary: Get usage stats
+      description: |
+        Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+
+        User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+      operationId: Management_getStats
+      parameters:
+        - in: query
+          required: false
+          name: currency
+          description: ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+          schema:
+            type: string
+            example: USD
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerStats"
+        "400":
+          description: Unsupported currency
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/429TooManyRequestsResponse"
+        "500":
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Exchange rates for the requested currency are temporarily unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503CurrencyConversionUnavailableResponse"
   /accounts/{accountId}/holdings:
     get:
       tags:
@@ -3418,6 +3475,16 @@ components:
           example: 503
         code:
           example: 3002
+    503CurrencyConversionUnavailableResponse:
+      description: Example for a response that failed because exchange rates for the requested currency are unavailable
+      type: object
+      properties:
+        detail:
+          example: Exchange rates for the requested currency are temporarily unavailable. Please try again later.
+        status_code:
+          example: 503
+        code:
+          example: 1167
     AccountSyncStatus:
       description: Contains status update for the account sync process between SnapTrade and the brokerage.
       properties:
@@ -5022,6 +5089,95 @@ components:
           type: string
           example: CAD
           description: The currency of the amount
+    PartnerStats:
+      description: User, connection, and connected asset totals for your SnapTrade Client ID.
+      type: object
+      required:
+        - total_users
+        - total_connected_users
+        - total_active_connections
+        - total_disabled_connections
+        - oauth_total_users
+        - oauth_total_connected_users
+        - oauth_total_active_connections
+        - oauth_total_disabled_connections
+        - assets_under_management
+        - disabled_assets_under_management
+        - oauth_assets_under_management
+        - oauth_disabled_assets_under_management
+        - assets_under_management_currency
+        - assets_under_management_calculated_at
+      properties:
+        total_users:
+          type: integer
+          description: Number of users registered with your Client ID.
+          example: 19528
+        total_connected_users:
+          type: integer
+          description: Number of users registered with your Client ID that have at least one connection, active or disabled.
+          example: 2681
+        total_active_connections:
+          type: integer
+          description: Number of active connections across users registered with your Client ID.
+          example: 2265
+        total_disabled_connections:
+          type: integer
+          description: Number of disabled connections across users registered with your Client ID.
+          example: 708
+        oauth_total_users:
+          type: integer
+          nullable: true
+          description: Number of users who have authorized your OAuth application. `null` if your Client ID has no OAuth application.
+          example: null
+        oauth_total_connected_users:
+          type: integer
+          nullable: true
+          description: Number of users who have authorized your OAuth application and have at least one connection, active or disabled. `null` if your Client ID has no OAuth application.
+          example: null
+        oauth_total_active_connections:
+          type: integer
+          nullable: true
+          description: Number of active connections across users who have authorized your OAuth application. `null` if your Client ID has no OAuth application.
+          example: null
+        oauth_total_disabled_connections:
+          type: integer
+          nullable: true
+          description: Number of disabled connections across users who have authorized your OAuth application. `null` if your Client ID has no OAuth application.
+          example: null
+        assets_under_management:
+          type: number
+          format: double
+          nullable: true
+          description: Total latest account value across active connections of users registered with your Client ID, in `assets_under_management_currency`. `null` until the first daily snapshot has been calculated.
+          example: 104900000.0
+        disabled_assets_under_management:
+          type: number
+          format: double
+          nullable: true
+          description: Total account value across disabled connections of users registered with your Client ID, as of each connection's last sync, in `assets_under_management_currency`. `null` until the first daily snapshot has been calculated.
+          example: 159300000.0
+        oauth_assets_under_management:
+          type: number
+          format: double
+          nullable: true
+          description: Total latest account value across active connections of users who have authorized your OAuth application, in `assets_under_management_currency`. `null` if your Client ID has no OAuth application, or until the first daily snapshot after it was added.
+          example: null
+        oauth_disabled_assets_under_management:
+          type: number
+          format: double
+          nullable: true
+          description: Total account value across disabled connections of users who have authorized your OAuth application, as of each connection's last sync, in `assets_under_management_currency`. `null` if your Client ID has no OAuth application, or until the first daily snapshot after it was added.
+          example: null
+        assets_under_management_currency:
+          type: string
+          description: ISO 4217 currency code the asset values are expressed in.
+          example: USD
+        assets_under_management_calculated_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the connected asset values were last calculated. `null` until the first daily snapshot has been calculated.
+          example: 2026-10-08T02:47:00.000000Z
     PartnerData:
       description: Configurations for your SnapTrade Client ID, including allowed brokerages and data access.
       type: object
