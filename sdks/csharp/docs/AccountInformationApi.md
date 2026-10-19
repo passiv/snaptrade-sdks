@@ -6,6 +6,7 @@ All URIs are relative to *https://api.snaptrade.com*
 |--------|--------------|-------------|
 | [**GetAccountActivities**](AccountInformationApi.md#getaccountactivities) | **GET** /accounts/{accountId}/activities | List account activities |
 | [**GetAccountBalanceHistory**](AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
+| [**GetAccountBalancesV2**](AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | Get account balances |
 | [**GetAccountDetails**](AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details |
 | [**GetAllAccountPositions**](AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
 | [**GetUserAccountBalance**](AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances |
@@ -217,6 +218,105 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **GetAccountBalancesV2**
+
+
+
+Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  `data_freshness.as_of` is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class GetAccountBalancesV2Example
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            
+            try
+            {
+                // Get account balances
+                AccountBalancesV2Response result = client.AccountInformation.GetAccountBalancesV2(userId, userSecret, accountId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling AccountInformationApi.GetAccountBalancesV2: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetAccountBalancesV2WithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get account balances
+    ApiResponse<AccountBalancesV2Response> response = apiInstance.GetAccountBalancesV2WithHttpInfo(userId, userSecret, accountId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AccountInformationApi.GetAccountBalancesV2WithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
+
+### Return type
+
+[**AccountBalancesV2Response**](AccountBalancesV2Response.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized, invalid credentials for this resource |  -  |
+| **403** | Feature not enabled |  -  |
+| **404** | The requested resource does not exist. |  -  |
+| **429** | Rate limit exceeded. Check &#x60;X-RateLimit-Remaining&#x60; (customer-level) and &#x60;X-RateLimit-Account-Remaining&#x60; (account-level) to see which limit you hit, then wait for the matching &#x60;*-Reset&#x60; value before retrying.  Not every header listed below appears on every operation. The &#x60;X-RateLimit-Account-*&#x60; headers are sent only where the per-account limit is enforced, and OAuth-authenticated requests never receive the customer-level &#x60;X-RateLimit-Limit&#x60;, &#x60;X-RateLimit-Remaining&#x60; or &#x60;X-RateLimit-Reset&#x60;.  A separate per-authenticated-user limit, reported in no &#x60;X-RateLimit-*&#x60; header, covers OAuth-authenticated requests and signed requests not governed by the customer-level limit; it does not stack on top of that limit. So a 429 can arrive with every reported counter above zero — or with no &#x60;X-RateLimit-*&#x60; headers at all. Honour &#x60;Retry-After&#x60; in that case.  |  * Retry-After - Seconds to wait before retrying. <br>  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  * X-RateLimit-Account-Limit -  <br>  * X-RateLimit-Account-Remaining -  <br>  * X-RateLimit-Account-Reset -  <br>  |
+| **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

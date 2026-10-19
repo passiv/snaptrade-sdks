@@ -34,6 +34,13 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/balances/v2-GET': {
+        parameters: [
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/details-GET': {
         parameters: [
             {

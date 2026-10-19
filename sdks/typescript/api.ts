@@ -91,6 +91,15 @@ export type {
 } from './api/account-information-api';
 
 export type {
+    AccountInformationApiGetAccountBalancesV2BaseRequest,
+    AccountInformationApiGetAccountBalancesV2commercialApiKeyRequest,
+    AccountInformationApiGetAccountBalancesV2personalApiKeyRequest,
+    AccountInformationApiGetAccountBalancesV2RequestByAuthMode,
+    AccountInformationApiGetAccountBalancesV2Request,
+    AccountInformationApiGetAccountBalancesV2Args,
+} from './api/account-information-api';
+
+export type {
     AccountInformationApiGetAccountDetailsBaseRequest,
     AccountInformationApiGetAccountDetailscommercialApiKeyRequest,
     AccountInformationApiGetAccountDetailspersonalApiKeyRequest,

@@ -79,6 +79,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { Account } from '../models';
 // @ts-ignore
+import { AccountBalancesV2Response } from '../models';
+// @ts-ignore
 import { AccountHoldingsAccount } from '../models';
 // @ts-ignore
 import { AccountInformationGetUserAccountOrderDetailRequest } from '../models';
@@ -266,6 +268,64 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/balanceHistory',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the account\'s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn\'t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  `data_freshness.as_of` is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary Get account balances
+         * @param {string} accountId 
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountBalancesV2: async (accountId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAccountBalancesV2', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/balances/v2`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/balances/v2',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -1030,6 +1090,18 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * Returns the account\'s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn\'t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  `data_freshness.as_of` is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary Get account balances
+         * @param {AccountInformationApiGetAccountBalancesV2Request<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountBalancesV2(...args: AccountInformationApiGetAccountBalancesV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountBalancesV2Response, unknown>>> {
+            const [requestParameters = {} as AccountInformationApiGetAccountBalancesV2Request<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountBalancesV2(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
          * Returns the specified account for the authenticated user. The account can be an investment, deposit, or line of credit account. Use the `kind` discriminator to determine the schema for the account.  On Pay as you Go / Real-time, this endpoint refreshes the account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary Get account details
          * @param {AccountInformationApiGetAccountDetailsRequest<TAuth>} requestParameters Request parameters.
@@ -1208,6 +1280,16 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
          */
         getAccountBalanceHistory(...args: AccountInformationApiGetAccountBalanceHistoryArgs<TAuth>): Promise<AxiosResponse<AccountValueHistoryResponse, unknown>> {
             return localVarFp.getAccountBalanceHistory(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the account\'s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn\'t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  `data_freshness.as_of` is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary Get account balances
+         * @param {AccountInformationApiGetAccountBalancesV2Request<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountBalancesV2(...args: AccountInformationApiGetAccountBalancesV2Args<TAuth>): Promise<AxiosResponse<AccountBalancesV2Response, unknown>> {
+            return localVarFp.getAccountBalancesV2(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns the specified account for the authenticated user. The account can be an investment, deposit, or line of credit account. Use the `kind` discriminator to determine the schema for the account.  On Pay as you Go / Real-time, this endpoint refreshes the account\'s opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1439,6 +1521,41 @@ export type AccountInformationApiGetAccountBalanceHistoryArgs<TAuth extends Auth
     TAuth["mode"] extends never
         ? [requestParameters?: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: AccountInformationApiGetAccountBalanceHistoryRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
+ * Request parameters for getAccountBalancesV2 operation in AccountInformationApi.
+ * @export
+ */
+export type AccountInformationApiGetAccountBalancesV2BaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountBalancesV2
+    */
+    readonly accountId: string
+    
+}
+export type AccountInformationApiGetAccountBalancesV2commercialApiKeyRequest = AccountInformationApiGetAccountBalancesV2BaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type AccountInformationApiGetAccountBalancesV2personalApiKeyRequest = AccountInformationApiGetAccountBalancesV2BaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type AccountInformationApiGetAccountBalancesV2RequestByAuthMode = {
+    "commercialApiKey": AccountInformationApiGetAccountBalancesV2commercialApiKeyRequest;
+    "personalApiKey": AccountInformationApiGetAccountBalancesV2personalApiKeyRequest;
+}
+export type AccountInformationApiGetAccountBalancesV2Request<TAuth extends AuthMode> =
+    AccountInformationApiGetAccountBalancesV2RequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAccountBalancesV2RequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAccountBalancesV2Args<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAccountBalancesV2Request<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAccountBalancesV2Request<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getAccountDetails operation in AccountInformationApi.
@@ -1904,6 +2021,19 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
      */
     public getAccountBalanceHistory(...args: AccountInformationApiGetAccountBalanceHistoryArgs<TAuth>) {
         return AccountInformationApiFp(this.configuration).getAccountBalanceHistory(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * Returns the account\'s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn\'t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  `data_freshness.as_of` is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * @summary Get account balances
+     * @param {AccountInformationApiGetAccountBalancesV2Request<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAccountBalancesV2(...args: AccountInformationApiGetAccountBalancesV2Args<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAccountBalancesV2(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

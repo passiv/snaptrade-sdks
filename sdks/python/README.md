@@ -84,6 +84,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 - [Reference](#reference)
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
   * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
+  * [`snaptrade.account_information.get_account_balances_v2`](#snaptradeaccount_informationget_account_balances_v2)
   * [`snaptrade.account_information.get_account_details`](#snaptradeaccount_informationget_account_details)
   * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
@@ -450,6 +451,70 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balanceHistory` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.account_information.get_account_balances_v2`<a id="snaptradeaccount_informationget_account_balances_v2"></a>
+
+Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.
+
+**Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+`data_freshness.as_of` is the time the returned data was fetched from the institution.
+
+If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_account_balances_v2_response = (
+    commercial_api_key_client.account_information.get_account_balances_v2(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_account_balances_v2_response = (
+    personal_api_key_client.account_information.get_account_balances_v2(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountBalancesV2Response`](./snaptrade_client/type/account_balances_v2_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/balances/v2` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

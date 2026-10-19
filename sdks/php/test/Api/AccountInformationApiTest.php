@@ -83,6 +83,18 @@ class AccountInformationApiTest extends TestCase
     }
 
     /**
+     * Test case for getAccountBalancesV2
+     *
+     * Get account balances.
+     *
+     */
+    public function testGetAccountBalancesV2()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAccountDetails
      *
      * Get account details.

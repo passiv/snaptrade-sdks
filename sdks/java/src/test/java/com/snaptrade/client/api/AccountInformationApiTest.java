@@ -17,6 +17,7 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.Account;
+import com.snaptrade.client.model.AccountBalancesV2Response;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -93,6 +94,23 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         AccountValueHistoryResponse response = api.getAccountBalanceHistory(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Get account balances
+     *
+     * Returns the account&#39;s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is &#x60;null&#x60; when the institution doesn&#39;t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  &#x60;data_freshness.as_of&#x60; is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountBalancesV2Test() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        AccountBalancesV2Response response = api.getAccountBalancesV2(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }
