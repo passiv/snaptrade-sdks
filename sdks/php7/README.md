@@ -114,6 +114,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
   * [`snaptrade.experimentalEndpoints.placeSimpleOrder`](#snaptradeexperimentalendpointsplacesimpleorder)
+  * [`snaptrade.management.getStats`](#snaptrademanagementgetstats)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
@@ -1815,6 +1816,42 @@ extended uses existing single-leg equity/option brokerage support and requires e
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.management.getStats`<a id="snaptrademanagementgetstats"></a>
+
+Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+
+User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->management->getStats(
+    "USD"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### currency: `string`<a id="currency-string"></a>
+
+ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**PartnerStats**](./lib/Model/PartnerStats.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/snapTrade/stats` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -379,6 +379,18 @@ export type {
 } from './api/experimental-endpoints-api';
 
 
+export { ManagementApi, ManagementApiAxiosParamCreator, ManagementApiFp, ManagementApiFactory, ManagementApiGenerated } from './api/management-api';
+
+export type {
+    ManagementApiGetStatsBaseRequest,
+    ManagementApiGetStatscommercialApiKeyRequest,
+    ManagementApiGetStatspersonalApiKeyRequest,
+    ManagementApiGetStatsRequestByAuthMode,
+    ManagementApiGetStatsRequest,
+    ManagementApiGetStatsArgs,
+} from './api/management-api';
+
+
 export { ReferenceDataApi, ReferenceDataApiAxiosParamCreator, ReferenceDataApiFp, ReferenceDataApiFactory, ReferenceDataApiGenerated } from './api/reference-data-api';
 
 export type {

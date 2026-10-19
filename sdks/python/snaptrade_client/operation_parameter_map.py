@@ -335,6 +335,13 @@ operation_parameter_map = {
             },
         ]
     },
+    '/snapTrade/stats-GET': {
+        'parameters': [
+            {
+                'name': 'currency'
+            },
+        ]
+    },
     '/snapTrade/partners-GET': {
         'parameters': [
         ]

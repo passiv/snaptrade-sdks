@@ -191,6 +191,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *ExperimentalEndpointsApi* | [**PlaceSimpleOrder**](docs/ExperimentalEndpointsApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place a simple order (beta)
+*ManagementApi* | [**GetStats**](docs/ManagementApi.md#getstats) | **GET** /snapTrade/stats | Get usage stats
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols
@@ -341,6 +342,7 @@ Class | Method | HTTP request | Description
  - [Model500UnexpectedExceptionResponse](docs/Model500UnexpectedExceptionResponse.md)
  - [Model501NotImplementedResponse](docs/Model501NotImplementedResponse.md)
  - [Model503BrokerageRequestResponse](docs/Model503BrokerageRequestResponse.md)
+ - [Model503CurrencyConversionUnavailableResponse](docs/Model503CurrencyConversionUnavailableResponse.md)
  - [MonthlyDividends](docs/MonthlyDividends.md)
  - [MutualFundInstrument](docs/MutualFundInstrument.md)
  - [NetContributions](docs/NetContributions.md)
@@ -368,6 +370,7 @@ Class | Method | HTTP request | Description
  - [PaginatedUniversalActivity](docs/PaginatedUniversalActivity.md)
  - [PaginationDetails](docs/PaginationDetails.md)
  - [PartnerData](docs/PartnerData.md)
+ - [PartnerStats](docs/PartnerStats.md)
  - [PastValue](docs/PastValue.md)
  - [PerformanceCustom](docs/PerformanceCustom.md)
  - [Position](docs/Position.md)

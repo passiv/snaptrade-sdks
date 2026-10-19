@@ -7,6 +7,7 @@ from snaptrade_client.apis.tags.connections_api import ConnectionsApi
 from snaptrade_client.apis.tags.account_information_api import AccountInformationApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
 from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
+from snaptrade_client.apis.tags.management_api import ManagementApi
 from snaptrade_client.apis.tags.experimental_endpoints_api import ExperimentalEndpointsApi
 
 TagToApi = typing_extensions.TypedDict(
@@ -18,6 +19,7 @@ TagToApi = typing_extensions.TypedDict(
         TagValues.ACCOUNT_INFORMATION: AccountInformationApi,
         TagValues.TRADING: TradingApi,
         TagValues.REFERENCE_DATA: ReferenceDataApi,
+        TagValues.MANAGEMENT: ManagementApi,
         TagValues.EXPERIMENTAL_ENDPOINTS: ExperimentalEndpointsApi,
     }
 )
@@ -30,6 +32,7 @@ tag_to_api = TagToApi(
         TagValues.ACCOUNT_INFORMATION: AccountInformationApi,
         TagValues.TRADING: TradingApi,
         TagValues.REFERENCE_DATA: ReferenceDataApi,
+        TagValues.MANAGEMENT: ManagementApi,
         TagValues.EXPERIMENTAL_ENDPOINTS: ExperimentalEndpointsApi,
     }
 )
