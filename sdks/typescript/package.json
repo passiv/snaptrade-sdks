@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "13.1.1",
+  "version": "13.1.2",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
