@@ -453,11 +453,11 @@ public class AccountUniversalActivity {
   }
 
    /**
-   * A human-readable description of the transaction. This is usually the brokerage&#39;s description of the transaction.
+   * A human-readable description of the transaction. This is usually the brokerage&#39;s description of the transaction. When a transaction has an otherwise unresolved brokerage symbol with a long name, SnapTrade appends that name to make the activity identifiable.
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22", value = "A human-readable description of the transaction. This is usually the brokerage's description of the transaction.")
+  @ApiModelProperty(example = "WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22", value = "A human-readable description of the transaction. This is usually the brokerage's description of the transaction. When a transaction has an otherwise unresolved brokerage symbol with a long name, SnapTrade appends that name to make the activity identifiable.")
 
   public String getDescription() {
     return description;
