@@ -34,7 +34,7 @@ type AccountUniversalActivity struct {
 	Type *string `json:"type,omitempty"`
 	// If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE 
 	OptionType *string `json:"option_type,omitempty"`
-	// A human-readable description of the transaction. This is usually the brokerage's description of the transaction.
+	// A human-readable description of the transaction. This is usually the brokerage's description of the transaction. When a transaction has an otherwise unresolved brokerage symbol with a long name, SnapTrade appends that name to make the activity identifiable.
 	Description *string `json:"description,omitempty"`
 	// The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://support.snaptrade.com/brokerages-table?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
 	TradeDate NullableTime `json:"trade_date,omitempty"`

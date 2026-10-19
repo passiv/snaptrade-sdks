@@ -733,7 +733,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets description
      *
-     * @param string|null $description A human-readable description of the transaction. This is usually the brokerage's description of the transaction.
+     * @param string|null $description A human-readable description of the transaction. This is usually the brokerage's description of the transaction. When a transaction has an otherwise unresolved brokerage symbol with a long name, SnapTrade appends that name to make the activity identifiable.
      *
      * @return self
      */

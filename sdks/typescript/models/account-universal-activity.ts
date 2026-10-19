@@ -140,7 +140,7 @@ export interface AccountUniversalActivity {
      */
     'option_type'?: string;
     /**
-     * A human-readable description of the transaction. This is usually the brokerage\'s description of the transaction.
+     * A human-readable description of the transaction. This is usually the brokerage\'s description of the transaction. When a transaction has an otherwise unresolved brokerage symbol with a long name, SnapTrade appends that name to make the activity identifiable.
      * @type {string}
      * @memberof AccountUniversalActivity
      */
