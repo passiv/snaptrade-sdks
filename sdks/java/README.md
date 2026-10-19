@@ -81,6 +81,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
+  * [`snaptrade.accountInformation.getAccountBalancesV2`](#snaptradeaccountinformationgetaccountbalancesv2)
   * [`snaptrade.accountInformation.getAccountDetails`](#snaptradeaccountinformationgetaccountdetails)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
@@ -386,6 +387,51 @@ AccountValueHistoryResponse result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balanceHistory` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAccountBalancesV2`<a id="snaptradeaccountinformationgetaccountbalancesv2"></a>
+
+Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.
+
+**Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.
+
+Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+  - If you do, this endpoint returns real-time data.
+  - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+`data_freshness.as_of` is the time the returned data was fetched from the institution.
+
+If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AccountBalancesV2Response result = client
+        .accountInformation
+        .getAccountBalancesV2(userId, userSecret, accountId)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountBalancesV2Response](./src/main/java/com/snaptrade/client/model/AccountBalancesV2Response.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/balances/v2` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -290,6 +290,129 @@ module SnapTrade
     end
 
 
+    # Get account balances
+    #
+    # Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.
+    # 
+    # **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+    #   - If you do, this endpoint returns real-time data.
+    #   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+    # 
+    # `data_freshness.as_of` is the time the returned data was fetched from the institution.
+    # 
+    # If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_balances_v2(user_id:, user_secret:, account_id:, extra: {})
+      data, _status_code, _headers = get_account_balances_v2_with_http_info_impl(user_id, user_secret, account_id, extra)
+      data
+    end
+
+    # Get account balances
+    #
+    # Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.
+    # 
+    # **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.
+    # 
+    # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+    #   - If you do, this endpoint returns real-time data.
+    #   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+    # 
+    # `data_freshness.as_of` is the time the returned data was fetched from the institution.
+    # 
+    # If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_balances_v2_with_http_info(user_id:, user_secret:, account_id:, extra: {})
+      get_account_balances_v2_with_http_info_impl(user_id, user_secret, account_id, extra)
+    end
+
+    # Get account balances
+    # Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  `data_freshness.as_of` is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [AccountBalancesV2Response]
+    private def get_account_balances_v2_impl(user_id, user_secret, account_id, opts = {})
+      data, _status_code, _headers = get_account_balances_v2_with_http_info(user_id, user_secret, account_id, opts)
+      data
+    end
+
+    # Get account balances
+    # Returns the account&#39;s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is &#x60;null&#x60; when the institution doesn&#39;t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  &#x60;data_freshness.as_of&#x60; is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AccountBalancesV2Response, Integer, Hash)>] AccountBalancesV2Response data, response status code and response headers
+    private def get_account_balances_v2_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_account_balances_v2 ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling AccountInformationApi.get_account_balances_v2"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling AccountInformationApi.get_account_balances_v2"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountInformationApi.get_account_balances_v2"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/balances/v2'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountBalancesV2Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"AccountInformationApi.get_account_balances_v2",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountInformationApi#get_account_balances_v2\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get account details
     #
     # Returns the specified account for the authenticated user. The account can be an investment, deposit, or line of credit account. Use the `kind` discriminator to determine the schema for the account.

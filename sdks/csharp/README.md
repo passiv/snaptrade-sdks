@@ -157,6 +157,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountInformationApi* | [**GetAccountActivities**](docs/AccountInformationApi.md#getaccountactivities) | **GET** /accounts/{accountId}/activities | List account activities
 *AccountInformationApi* | [**GetAccountBalanceHistory**](docs/AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value
+*AccountInformationApi* | [**GetAccountBalancesV2**](docs/AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | Get account balances
 *AccountInformationApi* | [**GetAccountDetails**](docs/AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details
 *AccountInformationApi* | [**GetAllAccountPositions**](docs/AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
@@ -222,6 +223,12 @@ Class | Method | HTTP request | Description
  - [Account](docs/Account.md)
  - [AccountBalance](docs/AccountBalance.md)
  - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
+ - [AccountBalancesV2Response](docs/AccountBalancesV2Response.md)
+ - [AccountBalancesV2ResponseBuyingPowerInner](docs/AccountBalancesV2ResponseBuyingPowerInner.md)
+ - [AccountBalancesV2ResponseCashInner](docs/AccountBalancesV2ResponseCashInner.md)
+ - [AccountBalancesV2ResponseDataFreshness](docs/AccountBalancesV2ResponseDataFreshness.md)
+ - [AccountBalancesV2ResponseMargin](docs/AccountBalancesV2ResponseMargin.md)
+ - [AccountBalancesV2ResponseNetValue](docs/AccountBalancesV2ResponseNetValue.md)
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountInformationGetUserAccountOrderDetailRequest](docs/AccountInformationGetUserAccountOrderDetailRequest.md)
@@ -252,6 +259,8 @@ Class | Method | HTTP request | Description
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
  - [BalanceCurrency](docs/BalanceCurrency.md)
+ - [BalanceV2CurrencyAmount](docs/BalanceV2CurrencyAmount.md)
+ - [BalanceV2Money](docs/BalanceV2Money.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
  - [BrokerageAuthorizationDataFreshnessMode](docs/BrokerageAuthorizationDataFreshnessMode.md)

@@ -60,6 +60,20 @@ describe 'AccountInformationApi' do
     end
   end
 
+  # unit tests for get_account_balances_v2
+  # Get account balances
+  # Returns the account&#39;s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is &#x60;null&#x60; when the institution doesn&#39;t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  &#x60;data_freshness.as_of&#x60; is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @return [AccountBalancesV2Response]
+  describe 'get_account_balances_v2 test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_account_details
   # Get account details
   # Returns the specified account for the authenticated user. The account can be an investment, deposit, or line of credit account. Use the &#x60;kind&#x60; discriminator to determine the schema for the account.  On Pay as you Go / Real-time, this endpoint refreshes the account&#39;s opening date and total net value (&#x60;net_value&#x60;) live from the institution on each call, along with funding date for &#x60;investment&#x60; accounts.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 

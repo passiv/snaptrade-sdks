@@ -6,6 +6,7 @@ All URIs are relative to *https://api.snaptrade.com*
 |------------- | ------------- | -------------|
 | [**getAccountActivities**](AccountInformationApi.md#getAccountActivities) | **GET** /accounts/{accountId}/activities | List account activities |
 | [**getAccountBalanceHistory**](AccountInformationApi.md#getAccountBalanceHistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
+| [**getAccountBalancesV2**](AccountInformationApi.md#getAccountBalancesV2) | **GET** /accounts/{accountId}/balances/v2 | Get account balances |
 | [**getAccountDetails**](AccountInformationApi.md#getAccountDetails) | **GET** /accounts/{accountId}/details | Get account details |
 | [**getAllAccountPositions**](AccountInformationApi.md#getAllAccountPositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
@@ -222,6 +223,109 @@ public class Example {
 ### Return type
 
 [**AccountValueHistoryResponse**](AccountValueHistoryResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+<a name="getAccountBalancesV2"></a>
+# **getAccountBalancesV2**
+> AccountBalancesV2Response getAccountBalancesV2(userId, userSecret, accountId).execute();
+
+Get account balances
+
+Returns the account&#39;s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is &#x60;null&#x60; when the institution doesn&#39;t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  &#x60;data_freshness.as_of&#x60; is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    try {
+      AccountBalancesV2Response result = client
+              .accountInformation
+              .getAccountBalancesV2(userId, userSecret, accountId)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getAccountId());
+      System.out.println(result.getCashOrMargin());
+      System.out.println(result.getNetValue());
+      System.out.println(result.getCash());
+      System.out.println(result.getBuyingPower());
+      System.out.println(result.getMargin());
+      System.out.println(result.getDataFreshness());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getAccountBalancesV2");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountBalancesV2Response> response = client
+              .accountInformation
+              .getAccountBalancesV2(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getAccountBalancesV2");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+
+### Return type
+
+[**AccountBalancesV2Response**](AccountBalancesV2Response.md)
 
 ### Authorization
 

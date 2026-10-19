@@ -6,6 +6,7 @@ Method | Path | Description
 ------------- | ------------- | -------------
 [**GetAccountActivities**](AccountInformationApi.md#GetAccountActivities) | **Get** /accounts/{accountId}/activities | List account activities
 [**GetAccountBalanceHistory**](AccountInformationApi.md#GetAccountBalanceHistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
+[**GetAccountBalancesV2**](AccountInformationApi.md#GetAccountBalancesV2) | **Get** /accounts/{accountId}/balances/v2 | Get account balances
 [**GetAccountDetails**](AccountInformationApi.md#GetAccountDetails) | **Get** /accounts/{accountId}/details | Get account details
 [**GetAllAccountPositions**](AccountInformationApi.md#GetAllAccountPositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
@@ -113,6 +114,58 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountBalanceHistory`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountValueHistoryResponse.GetAccountBalanceHistory.History`: %v\n", *resp.History)
     fmt.Fprintf(os.Stdout, "Response from `AccountValueHistoryResponse.GetAccountBalanceHistory.Currency`: %v\n", *resp.Currency)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAccountBalancesV2
+
+Get account balances
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAccountBalancesV2(
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountBalancesV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAccountBalancesV2`: AccountBalancesV2Response
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountBalancesV2`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.AccountId`: %v\n", resp.AccountId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.CashOrMargin`: %v\n", resp.CashOrMargin)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.NetValue`: %v\n", resp.NetValue)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.Cash`: %v\n", resp.Cash)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.BuyingPower`: %v\n", resp.BuyingPower)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.Margin`: %v\n", resp.Margin)
+    fmt.Fprintf(os.Stdout, "Response from `AccountBalancesV2Response.GetAccountBalancesV2.DataFreshness`: %v\n", resp.DataFreshness)
 }
 ```
 

@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 import com.snaptrade.client.model.Account;
+import com.snaptrade.client.model.AccountBalancesV2Response;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecord;
@@ -535,6 +536,192 @@ public class AccountInformationApiGenerated {
             
 
         return ((AccountInformationApi) this).new GetAccountBalanceHistoryRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getAccountBalancesV2Call(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/balances/v2"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAccountBalancesV2ValidateBeforeCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getAccountBalancesV2(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getAccountBalancesV2(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getAccountBalancesV2(Async)");
+        }
+
+        return getAccountBalancesV2Call(userId, userSecret, accountId, _callback);
+
+    }
+
+
+    private ApiResponse<AccountBalancesV2Response> getAccountBalancesV2WithHttpInfo(String userId, String userSecret, UUID accountId) throws ApiException {
+        okhttp3.Call localVarCall = getAccountBalancesV2ValidateBeforeCall(userId, userSecret, accountId, null);
+        Type localVarReturnType = new TypeToken<AccountBalancesV2Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getAccountBalancesV2Async(String userId, String userSecret, UUID accountId, final ApiCallback<AccountBalancesV2Response> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAccountBalancesV2ValidateBeforeCall(userId, userSecret, accountId, _callback);
+        Type localVarReturnType = new TypeToken<AccountBalancesV2Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetAccountBalancesV2RequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+
+        public GetAccountBalancesV2RequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for getAccountBalancesV2
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getAccountBalancesV2Call(userId, userSecret, accountId, _callback);
+        }
+
+
+        /**
+         * Execute getAccountBalancesV2 request
+         * @return AccountBalancesV2Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountBalancesV2Response execute() throws ApiException {
+            ApiResponse<AccountBalancesV2Response> localVarResp = getAccountBalancesV2WithHttpInfo(userId, userSecret, accountId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getAccountBalancesV2 request with HTTP info returned
+         * @return ApiResponse&lt;AccountBalancesV2Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountBalancesV2Response> executeWithHttpInfo() throws ApiException {
+            return getAccountBalancesV2WithHttpInfo(userId, userSecret, accountId);
+        }
+
+        /**
+         * Execute getAccountBalancesV2 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountBalancesV2Response> _callback) throws ApiException {
+            return getAccountBalancesV2Async(userId, userSecret, accountId, _callback);
+        }
+    }
+
+    /**
+     * Get account balances
+     * Returns the account&#39;s balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is &#x60;null&#x60; when the institution doesn&#39;t report it.  **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  &#x60;data_freshness.as_of&#x60; is the time the returned data was fetched from the institution.  If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @return GetAccountBalancesV2RequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public AccountInformationApi.GetAccountBalancesV2RequestBuilder getAccountBalancesV2(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((AccountInformationApi) this).new GetAccountBalancesV2RequestBuilder(userId, userSecret, accountId);
     }
     private okhttp3.Call getAccountDetailsCall(String userId, String userSecret, UUID accountId, final ApiCallback _callback) throws ApiException {
         String basePath = null;

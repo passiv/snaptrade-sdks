@@ -11,6 +11,7 @@
 
 from snaptrade_client.paths.accounts_account_id_activities.get import GetAccountActivities
 from snaptrade_client.paths.accounts_account_id_balance_history.get import GetAccountBalanceHistory
+from snaptrade_client.paths.accounts_account_id_balances_v2.get import GetAccountBalancesV2
 from snaptrade_client.paths.accounts_account_id_details.get import GetAccountDetails
 from snaptrade_client.paths.accounts_account_id_positions_all.get import GetAllAccountPositions
 from snaptrade_client.paths.accounts_account_id_balances.get import GetUserAccountBalance
@@ -32,6 +33,7 @@ TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 class AccountInformationApiGenerated(
     GetAccountActivities[TAuth],
     GetAccountBalanceHistory[TAuth],
+    GetAccountBalancesV2[TAuth],
     GetAccountDetails[TAuth],
     GetAllAccountPositions[TAuth],
     GetUserAccountBalance[TAuth],

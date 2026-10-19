@@ -896,6 +896,73 @@ paths:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
         "429":
           $ref: "#/components/responses/TooManyRequests"
+  /accounts/{accountId}/balances/v2:
+    get:
+      tags:
+        - Account Information
+      summary: Get account balances
+      operationId: AccountInformation_getAccountBalancesV2
+      description: |
+        Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.
+
+        **Beta:** this endpoint is only available for partners it has been enabled for. Please contact the SnapTrade team to enable it. The response schema may change.
+
+        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+          - If you do, this endpoint returns real-time data.
+          - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by institution. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+
+        `data_freshness.as_of` is the time the returned data was fetched from the institution.
+
+        If the connection has become disabled, it can no longer access the latest data from the institution, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountBalancesV2Response"
+        "401":
+          description: Unauthorized, invalid credentials for this resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "403":
+          description: Feature not enabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable, and no cached fallback was available. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/positions/all:
     get:
       tags:
@@ -5323,6 +5390,154 @@ components:
           type: string
           description: The unique id for this specific tax lot
           example: "12345678"
+    BalanceV2Money:
+      type: object
+      nullable: true
+      description: A monetary amount. Null when the institution doesn't report it.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: decimal
+          example: "520692.19"
+        currency:
+          type: string
+          description: ISO-4217 currency code.
+          example: CAD
+    BalanceV2CurrencyAmount:
+      type: object
+      required:
+        - currency
+        - amount
+      properties:
+        currency:
+          type: string
+          description: ISO-4217 currency code.
+          example: USD
+        amount:
+          type: string
+          format: decimal
+          example: "72658.27"
+    AccountBalancesV2Response:
+      description: Balances for a single account, fetched together as one snapshot.
+      type: object
+      required:
+        - account_id
+        - cash_or_margin
+        - net_value
+        - cash
+        - buying_power
+        - margin
+        - data_freshness
+      properties:
+        account_id:
+          $ref: "#/components/schemas/AccountID"
+        cash_or_margin:
+          type: string
+          description: Whether the account is a cash or margin account. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+          enum:
+            - cash
+            - margin
+            - unknown
+          example: margin
+        net_value:
+          allOf:
+            - $ref: "#/components/schemas/BalanceV2Money"
+          description: Total value of the account as reported by the institution, in the account's currency.
+        cash:
+          type: array
+          description: Cash held in the account, one entry per currency. Some institutions allow holding multiple currencies in the same account.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/BalanceV2CurrencyAmount"
+            description: Cash balance in this currency as reported by the institution. May include proceeds from trades that haven't settled yet. Can be negative, for example on a margin account that is borrowing in this currency.
+        buying_power:
+          type: array
+          nullable: true
+          description: |
+            How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined.
+            - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`.
+            - **Margin accounts:** usually a single entry: the institution's buying power for positions held overnight, based on the account's total equity. Buying power for trades opened and closed on the same day can be higher and isn't included.
+          items:
+            type: object
+            required:
+              - currency
+              - amount
+              - basis
+            properties:
+              currency:
+                type: string
+                description: ISO-4217 currency code.
+                example: CAD
+              amount:
+                type: string
+                format: decimal
+                description: Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement.
+                example: "1208463.36"
+              basis:
+                type: string
+                description: |
+                  What the amount may include.
+                  - `settled`: settled cash only. Excludes proceeds from sales that haven't settled and cash already committed to purchases that haven't settled, so spending it won't cause a good-faith violation.
+                  - `cash`: may include proceeds from trades that haven't settled.
+                  - `margin`: may include money borrowed on margin.
+
+                  To avoid good-faith violations on cash accounts, only treat the amount as safe to spend when `basis` is `settled`.
+                enum:
+                  - settled
+                  - cash
+                  - margin
+                example: margin
+        margin:
+          type: object
+          nullable: true
+          description: Margin details. Null when `cash_or_margin` is `cash`; present for `margin` and `unknown` accounts.
+          required:
+            - loan_balances
+          properties:
+            loan_balances:
+              type: array
+              nullable: true
+              description: |
+                The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.
+
+                An empty list means the account isn't borrowing. Null when the institution doesn't report it.
+              items:
+                $ref: "#/components/schemas/BalanceV2CurrencyAmount"
+        data_freshness:
+          type: object
+          description: Metadata describing freshness of the returned balances.
+          required:
+            - as_of
+          properties:
+            as_of:
+              type: string
+              format: date-time
+              description: The time the returned data was fetched from the institution.
+              example: 2026-10-15T11:03:35Z
+      example:
+        account_id: 378eb9a5-448b-4fbc-ab61-29d2bcf0ec09
+        cash_or_margin: margin
+        net_value:
+          amount: "520692.19"
+          currency: CAD
+        cash:
+          - currency: CAD
+            amount: "121610.45"
+          - currency: USD
+            amount: "-72658.27"
+        buying_power:
+          - currency: CAD
+            amount: "1208463.36"
+            basis: margin
+        margin:
+          loan_balances:
+            - currency: USD
+              amount: "72658.27"
+        data_freshness:
+          as_of: 2026-10-15T11:03:35Z
     AllAccountPositionsResponse:
       description: Information about all account positions.
       type: object
