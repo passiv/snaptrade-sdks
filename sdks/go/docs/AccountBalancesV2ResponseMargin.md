@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LoanBalances** | [**[]BalanceV2CurrencyAmount**](BalanceV2CurrencyAmount.md) | The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Null when the institution doesn&#39;t report it.  | 
+**LoanBalances** | [**[]BalanceV2CurrencyAmount**](BalanceV2CurrencyAmount.md) | The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn&#39;t report it.  | 
 
 ## Methods
 

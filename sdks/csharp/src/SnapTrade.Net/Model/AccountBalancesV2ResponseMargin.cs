@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountBalancesV2ResponseMargin" /> class.
         /// </summary>
-        /// <param name="loanBalances">The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Null when the institution doesn&#39;t report it.  (required).</param>
+        /// <param name="loanBalances">The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn&#39;t report it.  (required).</param>
         public AccountBalancesV2ResponseMargin(List<BalanceV2CurrencyAmount> loanBalances = default(List<BalanceV2CurrencyAmount>)) : base()
         {
             // to ensure "loanBalances" is required (not null)
@@ -56,9 +56,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Null when the institution doesn&#39;t report it. 
+        /// The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn&#39;t report it. 
         /// </summary>
-        /// <value>The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Null when the institution doesn&#39;t report it. </value>
+        /// <value>The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn&#39;t report it. </value>
         [DataMember(Name = "loan_balances", IsRequired = true, EmitDefaultValue = true)]
         public List<BalanceV2CurrencyAmount> LoanBalances { get; set; }
 

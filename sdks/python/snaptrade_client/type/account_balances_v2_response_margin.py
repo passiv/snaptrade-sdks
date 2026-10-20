@@ -18,7 +18,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from snaptrade_client.type.balance_v2_currency_amount import BalanceV2CurrencyAmount
 
 class RequiredAccountBalancesV2ResponseMargin(TypedDict):
-    # The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Null when the institution doesn't report it. 
+    # The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn't report it. 
     loan_balances: typing.Optional[typing.List[BalanceV2CurrencyAmount]]
 
 class OptionalAccountBalancesV2ResponseMargin(TypedDict, total=False):
