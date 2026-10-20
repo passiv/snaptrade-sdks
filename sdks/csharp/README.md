@@ -192,7 +192,8 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **GET** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *ExperimentalEndpointsApi* | [**PlaceSimpleOrder**](docs/ExperimentalEndpointsApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place a simple order (beta)
-*ManagementApi* | [**GetStats**](docs/ManagementApi.md#getstats) | **GET** /snapTrade/stats | Get usage stats
+*ManagementApi* | [**GetStats**](docs/ManagementApi.md#getstats) | **GET** /management/stats | Get usage stats (beta)
+*ManagementApi* | [**GetStatsLegacy**](docs/ManagementApi.md#getstatslegacy) | **GET** /snapTrade/stats | Get usage stats (deprecated)
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols
@@ -279,6 +280,7 @@ Class | Method | HTTP request | Description
  - [ChildBrokerageOrderIDsNullable](docs/ChildBrokerageOrderIDsNullable.md)
  - [ComplexOrderLeg](docs/ComplexOrderLeg.md)
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
+ - [ConnectedAssetPartnerStats](docs/ConnectedAssetPartnerStats.md)
  - [ConnectionAccount](docs/ConnectionAccount.md)
  - [ConnectionAccountSyncStatus](docs/ConnectionAccountSyncStatus.md)
  - [ConnectionAccountsResponse](docs/ConnectionAccountsResponse.md)

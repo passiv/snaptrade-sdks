@@ -57,6 +57,7 @@ export * from './child-brokerage-order-ids';
 export * from './child-brokerage-order-ids-nullable';
 export * from './complex-order-leg';
 export * from './complex-order-response';
+export * from './connected-asset-partner-stats';
 export * from './connection-account';
 export * from './connection-account-sync-status';
 export * from './connection-accounts-response';

@@ -116,6 +116,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimentalEndpoints.listSubscriptions`](#snaptradeexperimentalendpointslistsubscriptions)
   * [`snaptrade.experimentalEndpoints.placeSimpleOrder`](#snaptradeexperimentalendpointsplacesimpleorder)
   * [`snaptrade.management.getStats`](#snaptrademanagementgetstats)
+  * [`snaptrade.management.getStatsLegacy`](#snaptrademanagementgetstatslegacy)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
@@ -2486,9 +2487,11 @@ extended uses existing single-leg equity/option brokerage support and requires e
 
 ### `snaptrade.management.getStats`<a id="snaptrademanagementgetstats"></a>
 
+**Beta.** This endpoint and its response schema may change.
+
 Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
 
-User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2507,6 +2510,56 @@ const getStatsResponse = await commercialApiKeyClient.management.getStats({
 const getStatsResponse = await personalApiKeyClient.management.getStats({
   currency: "USD",
 });
+```
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### currency: `string`<a id="currency-string"></a>
+
+ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[ConnectedAssetPartnerStats](./models/connected-asset-partner-stats.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/management/stats` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.management.getStatsLegacy`<a id="snaptrademanagementgetstatslegacy"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.
+
+Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+
+User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const getStatsLegacyResponse =
+  await commercialApiKeyClient.management.getStatsLegacy({
+    currency: "USD",
+  });
+```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getStatsLegacyResponse =
+  await personalApiKeyClient.management.getStatsLegacy({
+    currency: "USD",
+  });
 ```
 
 

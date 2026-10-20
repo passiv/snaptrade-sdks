@@ -399,6 +399,15 @@ export type {
     ManagementApiGetStatsArgs,
 } from './api/management-api';
 
+export type {
+    ManagementApiGetStatsLegacyBaseRequest,
+    ManagementApiGetStatsLegacycommercialApiKeyRequest,
+    ManagementApiGetStatsLegacypersonalApiKeyRequest,
+    ManagementApiGetStatsLegacyRequestByAuthMode,
+    ManagementApiGetStatsLegacyRequest,
+    ManagementApiGetStatsLegacyArgs,
+} from './api/management-api';
+
 
 export { ReferenceDataApi, ReferenceDataApiAxiosParamCreator, ReferenceDataApiFp, ReferenceDataApiFactory, ReferenceDataApiGenerated } from './api/reference-data-api';
 

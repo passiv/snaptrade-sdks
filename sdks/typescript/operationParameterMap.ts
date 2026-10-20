@@ -348,6 +348,13 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/management/stats-GET': {
+        parameters: [
+            {
+                name: 'currency'
+            },
+        ]
+    },
     '/snapTrade/stats-GET': {
         parameters: [
             {

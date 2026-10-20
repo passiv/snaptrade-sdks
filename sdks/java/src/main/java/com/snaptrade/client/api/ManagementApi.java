@@ -1,6 +1,7 @@
 package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.model.ConnectedAssetPartnerStats;
 import com.snaptrade.client.model.PartnerStats;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,11 @@ public class ManagementApi extends ManagementApiGenerated {
     }
     public class GetStatsRequestBuilder extends GetStatsRequestBuilderGenerated {
         public GetStatsRequestBuilder() {
+            super();
+        }
+    }
+    public class GetStatsLegacyRequestBuilder extends GetStatsLegacyRequestBuilderGenerated {
+        public GetStatsLegacyRequestBuilder() {
             super();
         }
     }

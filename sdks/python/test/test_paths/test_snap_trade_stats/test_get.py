@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeStats(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeStats unit test stubs
-        Get usage stats
+        Get usage stats (deprecated)
     """
 
     def setUp(self):

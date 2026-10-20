@@ -40,4 +40,18 @@ func Test_snaptrade_ManagementApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test ManagementApiService GetStatsLegacy", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.ManagementApi.GetStatsLegacy(
+        )
+        request.Currency(""USD"")
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
 }

@@ -16,6 +16,7 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
+import com.snaptrade.client.model.ConnectedAssetPartnerStats;
 import com.snaptrade.client.model.PartnerStats;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -42,16 +43,32 @@ public class ManagementApiTest {
     }
 
     /**
-     * Get usage stats
+     * Get usage stats (beta)
      *
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void getStatsTest() throws ApiException {
         String currency = null;
-        PartnerStats response = api.getStats()
+        ConnectedAssetPartnerStats response = api.getStats()
+                .currency(currency)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Get usage stats (deprecated)
+     *
+     * **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getStatsLegacyTest() throws ApiException {
+        String currency = null;
+        PartnerStats response = api.getStatsLegacy()
                 .currency(currency)
                 .execute();
         // TODO: test validations

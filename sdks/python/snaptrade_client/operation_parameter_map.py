@@ -342,6 +342,13 @@ operation_parameter_map = {
             },
         ]
     },
+    '/management/stats-GET': {
+        'parameters': [
+            {
+                'name': 'currency'
+            },
+        ]
+    },
     '/snapTrade/stats-GET': {
         'parameters': [
             {

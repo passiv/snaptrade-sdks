@@ -65,6 +65,9 @@ class ManagementApi extends \SnapTrade\CustomApi
         'getStats' => [
             'application/json',
         ],
+        'getStatsLegacy' => [
+            'application/json',
+        ],
     ];
 
 /**
@@ -138,16 +141,16 @@ class ManagementApi extends \SnapTrade\CustomApi
     /**
      * Operation getStats
      *
-     * Get usage stats
+     * Get usage stats (beta)
      *
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated.
      *
      * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\PartnerStats|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse
+     * @return \SnapTrade\Model\ConnectedAssetPartnerStats|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse
      */
     public function getStats(
         $currency = SENTINEL_VALUE,
@@ -163,9 +166,9 @@ class ManagementApi extends \SnapTrade\CustomApi
     /**
      * Operation getStatsWithHttpInfo
      *
-     * Get usage stats
+     * Get usage stats (beta)
      *
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated.
      *
      * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
@@ -173,7 +176,7 @@ class ManagementApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\PartnerStats|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\ConnectedAssetPartnerStats|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getStatsWithHttpInfo($currency = null, string $contentType = self::contentTypes['getStats'][0], \SnapTrade\RequestOptions $requestOptions = null)
     {
@@ -194,6 +197,468 @@ class ManagementApi extends \SnapTrade\CustomApi
                     $requestOptions->shouldRetryOAuth()
                 ) {
                     return $this->getStatsWithHttpInfo(
+                        $currency,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\ConnectedAssetPartnerStats' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\ConnectedAssetPartnerStats' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\ConnectedAssetPartnerStats', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\SnapTrade\Model\Model400FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model400FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model400FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\SnapTrade\Model\Model401FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model401FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model401FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\SnapTrade\Model\Model429TooManyRequestsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model429TooManyRequestsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model429TooManyRequestsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 503:
+                    if ('\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\ConnectedAssetPartnerStats';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\ConnectedAssetPartnerStats',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model400FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model401FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model429TooManyRequestsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 503:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getStatsAsync
+     *
+     * Get usage stats (beta)
+     *
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated.
+     *
+     * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
+     * @param  \SnapTrade\RequestOptions $requestOptions
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getStatsAsync(
+        $currency = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getStats'][0]
+    )
+    {
+
+        return $this->getStatsAsyncWithHttpInfo($currency, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getStatsAsyncWithHttpInfo
+     *
+     * Get usage stats (beta)
+     *
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated.
+     *
+     * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getStatsAsyncWithHttpInfo($currency = null, string $contentType = self::contentTypes['getStats'][0], $requestOptions = null)
+    {
+        if ($requestOptions == null) $requestOptions = new \SnapTrade\RequestOptions();
+        $returnType = '\SnapTrade\Model\ConnectedAssetPartnerStats';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getStatsRequest($currency, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getStats'
+     *
+     * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getStatsRequest($currency = SENTINEL_VALUE, string $contentType = self::contentTypes['getStats'][0])
+    {
+
+        // Check if $currency is a string
+        if ($currency !== SENTINEL_VALUE && !is_string($currency)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($currency, true), gettype($currency)));
+        }
+
+
+        $resourcePath = '/management/stats';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($currency !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $currency,
+                'currency', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getStatsLegacy
+     *
+     * Get usage stats (deprecated)
+     *
+     * **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
+     *
+     * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatsLegacy'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\PartnerStats|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse
+     * @deprecated
+     */
+    public function getStatsLegacy(
+        $currency = SENTINEL_VALUE,
+
+        string $contentType = self::contentTypes['getStatsLegacy'][0]
+    )
+    {
+
+        list($response) = $this->getStatsLegacyWithHttpInfo($currency, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getStatsLegacyWithHttpInfo
+     *
+     * Get usage stats (deprecated)
+     *
+     * **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
+     *
+     * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatsLegacy'] to see the possible values for this operation
+     * @param  \SnapTrade\RequestOptions $requestOptions
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\PartnerStats|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\Model401FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503CurrencyConversionUnavailableResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
+     */
+    public function getStatsLegacyWithHttpInfo($currency = null, string $contentType = self::contentTypes['getStatsLegacy'][0], \SnapTrade\RequestOptions $requestOptions = null)
+    {
+        if ($requestOptions == null) $requestOptions = new \SnapTrade\RequestOptions();
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getStatsLegacyRequest($currency, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getStatsLegacyWithHttpInfo(
                         $currency,
                         $contentType,
                         $requestOptions->setRetryOAuth(false)
@@ -395,27 +860,28 @@ class ManagementApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation getStatsAsync
+     * Operation getStatsLegacyAsync
      *
-     * Get usage stats
+     * Get usage stats (deprecated)
      *
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
+     * **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
      *
      * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatsLegacy'] to see the possible values for this operation
      * @param  \SnapTrade\RequestOptions $requestOptions
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
-    public function getStatsAsync(
+    public function getStatsLegacyAsync(
         $currency = SENTINEL_VALUE,
 
-        string $contentType = self::contentTypes['getStats'][0]
+        string $contentType = self::contentTypes['getStatsLegacy'][0]
     )
     {
 
-        return $this->getStatsAsyncWithHttpInfo($currency, $contentType)
+        return $this->getStatsLegacyAsyncWithHttpInfo($currency, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -424,23 +890,24 @@ class ManagementApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Operation getStatsAsyncWithHttpInfo
+     * Operation getStatsLegacyAsyncWithHttpInfo
      *
-     * Get usage stats
+     * Get usage stats (deprecated)
      *
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
+     * **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated.
      *
      * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatsLegacy'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
-    public function getStatsAsyncWithHttpInfo($currency = null, string $contentType = self::contentTypes['getStats'][0], $requestOptions = null)
+    public function getStatsLegacyAsyncWithHttpInfo($currency = null, string $contentType = self::contentTypes['getStatsLegacy'][0], $requestOptions = null)
     {
         if ($requestOptions == null) $requestOptions = new \SnapTrade\RequestOptions();
         $returnType = '\SnapTrade\Model\PartnerStats';
-        ["request" => $request, "serializedBody" => $serializedBody] = $this->getStatsRequest($currency, $contentType);
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getStatsLegacyRequest($currency, $contentType);
 
         // Customization hook
         $this->beforeSendHook($request, $requestOptions, $this->config);
@@ -482,15 +949,16 @@ class ManagementApi extends \SnapTrade\CustomApi
     }
 
     /**
-     * Create request for operation 'getStats'
+     * Create request for operation 'getStatsLegacy'
      *
      * @param  string $currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStats'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getStatsLegacy'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
-    public function getStatsRequest($currency = SENTINEL_VALUE, string $contentType = self::contentTypes['getStats'][0])
+    public function getStatsLegacyRequest($currency = SENTINEL_VALUE, string $contentType = self::contentTypes['getStatsLegacy'][0])
     {
 
         // Check if $currency is a string
