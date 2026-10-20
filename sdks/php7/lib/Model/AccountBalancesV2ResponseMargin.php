@@ -299,7 +299,7 @@ class AccountBalancesV2ResponseMargin implements ModelInterface, ArrayAccess, \J
     /**
      * Sets loan_balances
      *
-     * @param \SnapTrade\Model\BalanceV2CurrencyAmount[] $loan_balances The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Null when the institution doesn't report it.
+     * @param \SnapTrade\Model\BalanceV2CurrencyAmount[] $loan_balances The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn't report it.
      *
      * @return self
      */

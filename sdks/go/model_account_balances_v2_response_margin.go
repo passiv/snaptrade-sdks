@@ -17,7 +17,7 @@ import (
 
 // AccountBalancesV2ResponseMargin Margin details. Null when `cash_or_margin` is `cash`; present for `margin` and `unknown` accounts.
 type AccountBalancesV2ResponseMargin struct {
-	// The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Null when the institution doesn't report it. 
+	// The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn't report it. 
 	LoanBalances []BalanceV2CurrencyAmount `json:"loan_balances"`
 	AdditionalProperties map[string]interface{}
 }

@@ -75,11 +75,11 @@ public class AccountBalancesV2ResponseMargin {
   }
 
    /**
-   * The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Null when the institution doesn&#39;t report it. 
+   * The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency&#39;s debit.  An empty list means the account isn&#39;t borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn&#39;t report it. 
    * @return loanBalances
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(required = true, value = "The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Null when the institution doesn't report it. ")
+  @ApiModelProperty(required = true, value = "The margin debit the institution is charging interest on, one entry per currency owed, as positive amounts. Debits in different currencies are listed separately and are never netted against cash in another currency, because institutions charge interest on each currency's debit.  An empty list means the account isn't borrowing. Debits under 0.01 are left out as rounding leftovers. Null when the institution doesn't report it. ")
 
   public List<BalanceV2CurrencyAmount> getLoanBalances() {
     return loanBalances;
