@@ -1,6 +1,6 @@
 {
   "name": "snaptrade-typescript-sdk",
-  "version": "13.1.4",
+  "version": "13.1.5",
   "description": "Client for SnapTrade",
   "author": "Konfig",
   "engines": {
@@ -50,6 +50,7 @@
     "axios": "1.20.0"
   },
   "resolutions": {
+    "follow-redirects": "^1.16.1",
     "semver": "^7.5.2",
     "@babel/traverse": "^7.23.2"
   },
