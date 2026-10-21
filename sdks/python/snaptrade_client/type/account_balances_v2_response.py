@@ -16,22 +16,23 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_balances_v2_response_buying_power import AccountBalancesV2ResponseBuyingPower
-from snaptrade_client.type.account_balances_v2_response_cash import AccountBalancesV2ResponseCash
 from snaptrade_client.type.account_balances_v2_response_data_freshness import AccountBalancesV2ResponseDataFreshness
 from snaptrade_client.type.account_balances_v2_response_margin import AccountBalancesV2ResponseMargin
+from snaptrade_client.type.balance_v2_currency_amount import BalanceV2CurrencyAmount
 from snaptrade_client.type.balance_v2_money import BalanceV2Money
 
 class RequiredAccountBalancesV2Response(TypedDict):
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     account_id: str
 
-    # Whether the account is a cash or margin account. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+    # Whether the account is a cash or margin account, normalized across institutions. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint. - `cash`: the account can't borrow on margin. - `margin`: the account can borrow on margin. - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply (for example crypto accounts). 
     cash_or_margin: Literal["cash", "margin", "unknown"]
 
     # Total value of the account as reported by the institution, in the account's currency.
     net_value: BalanceV2Money
 
-    cash: AccountBalancesV2ResponseCash
+    # Cash held in the account, one entry per currency, as reported by the institution. Some institutions allow holding multiple currencies in the same account. May include proceeds from trades that haven't settled yet. Can be negative, for example on a margin account that is borrowing in a currency.
+    cash: typing.List[BalanceV2CurrencyAmount]
 
     buying_power: typing.Optional[AccountBalancesV2ResponseBuyingPower]
 

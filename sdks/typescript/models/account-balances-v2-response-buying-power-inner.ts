@@ -83,7 +83,7 @@ export interface AccountBalancesV2ResponseBuyingPowerInner {
      */
     'currency': string;
     /**
-     * Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement.
+     * Buying power in this currency, rounded to 2 decimal places. Can be negative, for example on a margin account that has exceeded its margin requirement.
      * @type {string}
      * @memberof AccountBalancesV2ResponseBuyingPowerInner
      */

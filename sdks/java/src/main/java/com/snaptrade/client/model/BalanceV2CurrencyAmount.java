@@ -100,11 +100,11 @@ public class BalanceV2CurrencyAmount {
   }
 
    /**
-   * Get amount
+   * Rounded to 2 decimal places.
    * @return amount
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "72658.27", required = true, value = "")
+  @ApiModelProperty(example = "72658.27", required = true, value = "Rounded to 2 decimal places.")
 
   public BigDecimal getAmount() {
     return amount;

@@ -78,7 +78,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountBalancesV2ResponseBuyingPowerInner" /> class.
         /// </summary>
         /// <param name="currency">ISO-4217 currency code. (required).</param>
-        /// <param name="amount">Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement. (required).</param>
+        /// <param name="amount">Buying power in this currency, rounded to 2 decimal places. Can be negative, for example on a margin account that has exceeded its margin requirement. (required).</param>
         /// <param name="basis">What the amount may include. - &#x60;settled&#x60;: settled cash only. Excludes proceeds from sales that haven&#39;t settled and cash already committed to purchases that haven&#39;t settled, so spending it won&#39;t cause a good-faith violation. - &#x60;cash&#x60;: may include proceeds from trades that haven&#39;t settled. - &#x60;margin&#x60;: may include money borrowed on margin.  To avoid good-faith violations on cash accounts, only treat the amount as safe to spend when &#x60;basis&#x60; is &#x60;settled&#x60;.  (required).</param>
         public AccountBalancesV2ResponseBuyingPowerInner(string currency = default(string), decimal amount = default(decimal), BasisEnum basis = default(BasisEnum)) : base()
         {
@@ -101,9 +101,9 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement.
+        /// Buying power in this currency, rounded to 2 decimal places. Can be negative, for example on a margin account that has exceeded its margin requirement.
         /// </summary>
-        /// <value>Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement.</value>
+        /// <value>Buying power in this currency, rounded to 2 decimal places. Can be negative, for example on a margin account that has exceeded its margin requirement.</value>
         [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
         [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Amount { get; set; }

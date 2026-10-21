@@ -373,7 +373,7 @@ class AccountBalancesV2ResponseBuyingPowerInner implements ModelInterface, Array
     /**
      * Sets amount
      *
-     * @param float $amount Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement.
+     * @param float $amount Buying power in this currency, rounded to 2 decimal places. Can be negative, for example on a margin account that has exceeded its margin requirement.
      *
      * @return self
      */

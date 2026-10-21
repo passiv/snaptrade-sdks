@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | ISO-4217 currency code. | 
-**Amount** | **float64** |  | 
+**Amount** | **float64** | Rounded to 2 decimal places. | 
 
 ## Methods
 

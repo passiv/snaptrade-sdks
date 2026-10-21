@@ -83,7 +83,7 @@ export interface BalanceV2CurrencyAmount {
      */
     'currency': string;
     /**
-     * 
+     * Rounded to 2 decimal places.
      * @type {string}
      * @memberof BalanceV2CurrencyAmount
      */

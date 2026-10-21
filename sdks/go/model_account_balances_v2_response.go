@@ -19,12 +19,12 @@ import (
 type AccountBalancesV2Response struct {
 	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 	AccountId string `json:"account_id"`
-	// Whether the account is a cash or margin account. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+	// Whether the account is a cash or margin account, normalized across institutions. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint. - `cash`: the account can't borrow on margin. - `margin`: the account can borrow on margin. - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply (for example crypto accounts). 
 	CashOrMargin string `json:"cash_or_margin"`
 	NetValue AccountBalancesV2ResponseNetValue `json:"net_value"`
-	// Cash held in the account, one entry per currency. Some institutions allow holding multiple currencies in the same account.
-	Cash []AccountBalancesV2ResponseCashInner `json:"cash"`
-	// How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined. - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`. - **Margin accounts:** a single entry with the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. 
+	// Cash held in the account, one entry per currency, as reported by the institution. Some institutions allow holding multiple currencies in the same account. May include proceeds from trades that haven't settled yet. Can be negative, for example on a margin account that is borrowing in a currency.
+	Cash []BalanceV2CurrencyAmount `json:"cash"`
+	// How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined. - **Cash accounts:** one entry per currency held, each covering purchases in that currency and never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`. - **Margin accounts:** a single entry for the whole account, covering purchases in any currency. It's usually in the account's main currency (the currency of `net_value`). It's the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. 
 	BuyingPower []AccountBalancesV2ResponseBuyingPowerInner `json:"buying_power"`
 	Margin NullableAccountBalancesV2ResponseMargin `json:"margin"`
 	DataFreshness AccountBalancesV2ResponseDataFreshness `json:"data_freshness"`
@@ -37,7 +37,7 @@ type _AccountBalancesV2Response AccountBalancesV2Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountBalancesV2Response(accountId string, cashOrMargin string, netValue AccountBalancesV2ResponseNetValue, cash []AccountBalancesV2ResponseCashInner, buyingPower []AccountBalancesV2ResponseBuyingPowerInner, margin NullableAccountBalancesV2ResponseMargin, dataFreshness AccountBalancesV2ResponseDataFreshness) *AccountBalancesV2Response {
+func NewAccountBalancesV2Response(accountId string, cashOrMargin string, netValue AccountBalancesV2ResponseNetValue, cash []BalanceV2CurrencyAmount, buyingPower []AccountBalancesV2ResponseBuyingPowerInner, margin NullableAccountBalancesV2ResponseMargin, dataFreshness AccountBalancesV2ResponseDataFreshness) *AccountBalancesV2Response {
 	this := AccountBalancesV2Response{}
 	this.AccountId = accountId
 	this.CashOrMargin = cashOrMargin
@@ -130,9 +130,9 @@ func (o *AccountBalancesV2Response) SetNetValue(v AccountBalancesV2ResponseNetVa
 }
 
 // GetCash returns the Cash field value
-func (o *AccountBalancesV2Response) GetCash() []AccountBalancesV2ResponseCashInner {
+func (o *AccountBalancesV2Response) GetCash() []BalanceV2CurrencyAmount {
 	if o == nil {
-		var ret []AccountBalancesV2ResponseCashInner
+		var ret []BalanceV2CurrencyAmount
 		return ret
 	}
 
@@ -141,7 +141,7 @@ func (o *AccountBalancesV2Response) GetCash() []AccountBalancesV2ResponseCashInn
 
 // GetCashOk returns a tuple with the Cash field value
 // and a boolean to check if the value has been set.
-func (o *AccountBalancesV2Response) GetCashOk() ([]AccountBalancesV2ResponseCashInner, bool) {
+func (o *AccountBalancesV2Response) GetCashOk() ([]BalanceV2CurrencyAmount, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -149,7 +149,7 @@ func (o *AccountBalancesV2Response) GetCashOk() ([]AccountBalancesV2ResponseCash
 }
 
 // SetCash sets field value
-func (o *AccountBalancesV2Response) SetCash(v []AccountBalancesV2ResponseCashInner) {
+func (o *AccountBalancesV2Response) SetCash(v []BalanceV2CurrencyAmount) {
 	o.Cash = v
 }
 

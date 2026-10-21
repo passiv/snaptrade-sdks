@@ -16,15 +16,15 @@ module SnapTrade
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :account_id
 
-    # Whether the account is a cash or margin account. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+    # Whether the account is a cash or margin account, normalized across institutions. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint. - `cash`: the account can't borrow on margin. - `margin`: the account can borrow on margin. - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply (for example crypto accounts). 
     attr_accessor :cash_or_margin
 
     attr_accessor :net_value
 
-    # Cash held in the account, one entry per currency. Some institutions allow holding multiple currencies in the same account.
+    # Cash held in the account, one entry per currency, as reported by the institution. Some institutions allow holding multiple currencies in the same account. May include proceeds from trades that haven't settled yet. Can be negative, for example on a margin account that is borrowing in a currency.
     attr_accessor :cash
 
-    # How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined. - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`. - **Margin accounts:** a single entry with the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. 
+    # How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined. - **Cash accounts:** one entry per currency held, each covering purchases in that currency and never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`. - **Margin accounts:** a single entry for the whole account, covering purchases in any currency. It's usually in the account's main currency (the currency of `net_value`). It's the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. 
     attr_accessor :buying_power
 
     attr_accessor :margin
@@ -55,7 +55,7 @@ module SnapTrade
         :'account_id' => :'String',
         :'cash_or_margin' => :'AccountBalancesV2ResponseCashOrMargin',
         :'net_value' => :'AccountBalancesV2ResponseNetValue',
-        :'cash' => :'Array<AccountBalancesV2ResponseCashInner>',
+        :'cash' => :'Array<BalanceV2CurrencyAmount>',
         :'buying_power' => :'Array<AccountBalancesV2ResponseBuyingPowerInner>',
         :'margin' => :'AccountBalancesV2ResponseMargin',
         :'data_freshness' => :'AccountBalancesV2ResponseDataFreshness'

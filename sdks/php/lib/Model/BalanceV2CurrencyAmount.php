@@ -337,7 +337,7 @@ class BalanceV2CurrencyAmount implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets amount
      *
-     * @param float $amount amount
+     * @param float $amount Rounded to 2 decimal places.
      *
      * @return self
      */

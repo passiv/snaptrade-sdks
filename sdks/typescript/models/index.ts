@@ -3,7 +3,6 @@ export * from './account-balance';
 export * from './account-balance-total';
 export * from './account-balances-v2-response';
 export * from './account-balances-v2-response-buying-power-inner';
-export * from './account-balances-v2-response-cash-inner';
 export * from './account-balances-v2-response-data-freshness';
 export * from './account-balances-v2-response-margin';
 export * from './account-balances-v2-response-net-value';
