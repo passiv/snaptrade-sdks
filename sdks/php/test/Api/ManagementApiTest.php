@@ -61,10 +61,22 @@ class ManagementApiTest extends TestCase
     /**
      * Test case for getStats
      *
-     * Get usage stats.
+     * Get usage stats (beta).
      *
      */
     public function testGetStats()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getStatsLegacy
+     *
+     * Get usage stats (deprecated).
+     *
+     */
+    public function testGetStatsLegacy()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

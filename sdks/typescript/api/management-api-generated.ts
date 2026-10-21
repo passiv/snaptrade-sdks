@@ -77,6 +77,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { ConnectedAssetPartnerStats } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
@@ -98,13 +100,67 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ManagementApiAxiosParamCreator = function (configuration?: Configuration<AuthMode>) {
     return {
         /**
-         * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
-         * @summary Get usage stats
+         * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
+         * @summary Get usage stats (beta)
          * @param {string} [currency] ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         getStats: async (currency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/management/stats`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+            if (currency !== undefined) {
+                localVarQueryParameter['currency'] = currency;
+            }
+
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/management/stats',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
+         * @summary Get usage stats (deprecated)
+         * @param {string} [currency] ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;.
+         * @param {*} [options] Override http request option.
+         * @deprecated
+         * @throws {RequiredError}
+         */
+        getStatsLegacy: async (currency?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/snapTrade/stats`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -161,15 +217,28 @@ export const ManagementApiFp = function<TAuth extends AuthMode>(configuration?: 
     const localVarAxiosParamCreator = ManagementApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
-         * @summary Get usage stats
+         * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
+         * @summary Get usage stats (beta)
          * @param {ManagementApiGetStatsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStats(...args: ManagementApiGetStatsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PartnerStats, unknown>>> {
+        async getStats(...args: ManagementApiGetStatsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ConnectedAssetPartnerStats, unknown>>> {
             const [requestParameters = {} as ManagementApiGetStatsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStats(requestParameters.currency, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
+         * **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
+         * @summary Get usage stats (deprecated)
+         * @param {ManagementApiGetStatsLegacyRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @deprecated
+         * @throws {RequiredError}
+         */
+        async getStatsLegacy(...args: ManagementApiGetStatsLegacyArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PartnerStats, unknown>>> {
+            const [requestParameters = {} as ManagementApiGetStatsLegacyRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getStatsLegacy(requestParameters.currency, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
     }
@@ -183,14 +252,25 @@ export const ManagementApiFactory = function<TAuth extends AuthMode>(configurati
     const localVarFp = ManagementApiFp(configuration)
     return {
         /**
-         * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
-         * @summary Get usage stats
+         * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
+         * @summary Get usage stats (beta)
          * @param {ManagementApiGetStatsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStats(...args: ManagementApiGetStatsArgs<TAuth>): Promise<AxiosResponse<PartnerStats, unknown>> {
+        getStats(...args: ManagementApiGetStatsArgs<TAuth>): Promise<AxiosResponse<ConnectedAssetPartnerStats, unknown>> {
             return localVarFp.getStats(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
+         * @summary Get usage stats (deprecated)
+         * @param {ManagementApiGetStatsLegacyRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @deprecated
+         * @throws {RequiredError}
+         */
+        getStatsLegacy(...args: ManagementApiGetStatsLegacyArgs<TAuth>): Promise<AxiosResponse<PartnerStats, unknown>> {
+            return localVarFp.getStatsLegacy(...args).then((request) => request(axios, basePath));
         },
     };
 };
@@ -227,6 +307,37 @@ export type ManagementApiGetStatsArgs<TAuth extends AuthMode> =
         : [requestParameters: ManagementApiGetStatsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
+ * Request parameters for getStatsLegacy operation in ManagementApi.
+ * @export
+ */
+export type ManagementApiGetStatsLegacyBaseRequest = {
+    
+    /**
+    * ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+    * @type {string}
+    * @memberof ManagementApiGetStatsLegacy
+    */
+    readonly currency?: string
+    
+}
+export type ManagementApiGetStatsLegacycommercialApiKeyRequest = ManagementApiGetStatsLegacyBaseRequest & {
+}
+export type ManagementApiGetStatsLegacypersonalApiKeyRequest = ManagementApiGetStatsLegacyBaseRequest & {
+}
+export type ManagementApiGetStatsLegacyRequestByAuthMode = {
+    "commercialApiKey": ManagementApiGetStatsLegacycommercialApiKeyRequest;
+    "personalApiKey": ManagementApiGetStatsLegacypersonalApiKeyRequest;
+}
+export type ManagementApiGetStatsLegacyRequest<TAuth extends AuthMode> =
+    ManagementApiGetStatsLegacyRequestByAuthMode[TAuth["mode"] & keyof ManagementApiGetStatsLegacyRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type ManagementApiGetStatsLegacyArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends "commercialApiKey" | "personalApiKey"
+        ? [requestParameters?: ManagementApiGetStatsLegacyRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: ManagementApiGetStatsLegacyRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
  * ManagementApiGenerated - object-oriented interface
  * @export
  * @class ManagementApiGenerated
@@ -234,8 +345,8 @@ export type ManagementApiGetStatsArgs<TAuth extends AuthMode> =
  */
 export class ManagementApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> {
     /**
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
-     * @summary Get usage stats
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
+     * @summary Get usage stats (beta)
      * @param {ManagementApiGetStatsRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -243,6 +354,20 @@ export class ManagementApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAut
      */
     public getStats(...args: ManagementApiGetStatsArgs<TAuth>) {
         return ManagementApiFp(this.configuration).getStats(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
+     * @summary Get usage stats (deprecated)
+     * @param {ManagementApiGetStatsLegacyRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @deprecated
+     * @throws {RequiredError}
+     * @memberof ManagementApiGenerated
+     */
+    public getStatsLegacy(...args: ManagementApiGetStatsLegacyArgs<TAuth>) {
+        return ManagementApiFp(this.configuration).getStatsLegacy(...args).then((request) => request(this.axios, this.basePath));
 
     }
 }

@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.snaptrade.client.model.ConnectedAssetPartnerStats;
 import com.snaptrade.client.model.PartnerStats;
 
 import java.lang.reflect.Type;
@@ -89,7 +90,7 @@ public class ManagementApiGenerated {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/snapTrade/stats";
+        String localVarPath = "/management/stats";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -127,16 +128,16 @@ public class ManagementApiGenerated {
     }
 
 
-    private ApiResponse<PartnerStats> getStatsWithHttpInfo(String currency) throws ApiException {
+    private ApiResponse<ConnectedAssetPartnerStats> getStatsWithHttpInfo(String currency) throws ApiException {
         okhttp3.Call localVarCall = getStatsValidateBeforeCall(currency, null);
-        Type localVarReturnType = new TypeToken<PartnerStats>(){}.getType();
+        Type localVarReturnType = new TypeToken<ConnectedAssetPartnerStats>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getStatsAsync(String currency, final ApiCallback<PartnerStats> _callback) throws ApiException {
+    private okhttp3.Call getStatsAsync(String currency, final ApiCallback<ConnectedAssetPartnerStats> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getStatsValidateBeforeCall(currency, _callback);
-        Type localVarReturnType = new TypeToken<PartnerStats>(){}.getType();
+        Type localVarReturnType = new TypeToken<ConnectedAssetPartnerStats>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -175,7 +176,7 @@ public class ManagementApiGenerated {
 
         /**
          * Execute getStats request
-         * @return PartnerStats
+         * @return ConnectedAssetPartnerStats
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -183,14 +184,14 @@ public class ManagementApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
-        public PartnerStats execute() throws ApiException {
-            ApiResponse<PartnerStats> localVarResp = getStatsWithHttpInfo(currency);
+        public ConnectedAssetPartnerStats execute() throws ApiException {
+            ApiResponse<ConnectedAssetPartnerStats> localVarResp = getStatsWithHttpInfo(currency);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute getStats request with HTTP info returned
-         * @return ApiResponse&lt;PartnerStats&gt;
+         * @return ApiResponse&lt;ConnectedAssetPartnerStats&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -198,7 +199,7 @@ public class ManagementApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<PartnerStats> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<ConnectedAssetPartnerStats> executeWithHttpInfo() throws ApiException {
             return getStatsWithHttpInfo(currency);
         }
 
@@ -213,14 +214,14 @@ public class ManagementApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<PartnerStats> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<ConnectedAssetPartnerStats> _callback) throws ApiException {
             return getStatsAsync(currency, _callback);
         }
     }
 
     /**
-     * Get usage stats
-     * Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+     * Get usage stats (beta)
+     * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
      * @return GetStatsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -230,5 +231,175 @@ public class ManagementApiGenerated {
      */
     public ManagementApi.GetStatsRequestBuilder getStats() throws IllegalArgumentException {
         return ((ManagementApi) this).new GetStatsRequestBuilder();
+    }
+    private okhttp3.Call getStatsLegacyCall(String currency, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/snapTrade/stats";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (currency != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("currency", currency));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @Deprecated
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getStatsLegacyValidateBeforeCall(String currency, final ApiCallback _callback) throws ApiException {
+        return getStatsLegacyCall(currency, _callback);
+
+    }
+
+
+    private ApiResponse<PartnerStats> getStatsLegacyWithHttpInfo(String currency) throws ApiException {
+        okhttp3.Call localVarCall = getStatsLegacyValidateBeforeCall(currency, null);
+        Type localVarReturnType = new TypeToken<PartnerStats>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getStatsLegacyAsync(String currency, final ApiCallback<PartnerStats> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getStatsLegacyValidateBeforeCall(currency, _callback);
+        Type localVarReturnType = new TypeToken<PartnerStats>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetStatsLegacyRequestBuilderGenerated {
+        String currency;
+
+        public GetStatsLegacyRequestBuilderGenerated() {
+        }
+
+        /**
+         * Set currency
+         * @param currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)
+         * @return ManagementApi.GetStatsLegacyRequestBuilder
+         */
+        public ManagementApi.GetStatsLegacyRequestBuilder currency(String currency) {
+            this.currency = currency;
+            return (ManagementApi.GetStatsLegacyRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for getStatsLegacy
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         * @deprecated
+         */
+        @Deprecated
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getStatsLegacyCall(currency, _callback);
+        }
+
+
+        /**
+         * Execute getStatsLegacy request
+         * @return PartnerStats
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         * @deprecated
+         */
+        @Deprecated
+        public PartnerStats execute() throws ApiException {
+            ApiResponse<PartnerStats> localVarResp = getStatsLegacyWithHttpInfo(currency);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getStatsLegacy request with HTTP info returned
+         * @return ApiResponse&lt;PartnerStats&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         * @deprecated
+         */
+        @Deprecated
+        public ApiResponse<PartnerStats> executeWithHttpInfo() throws ApiException {
+            return getStatsLegacyWithHttpInfo(currency);
+        }
+
+        /**
+         * Execute getStatsLegacy request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         * @deprecated
+         */
+        @Deprecated
+        public okhttp3.Call executeAsync(final ApiCallback<PartnerStats> _callback) throws ApiException {
+            return getStatsLegacyAsync(currency, _callback);
+        }
+    }
+
+    /**
+     * Get usage stats (deprecated)
+     * **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+     * @return GetStatsLegacyRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     * @deprecated
+     */
+    @Deprecated
+    public ManagementApi.GetStatsLegacyRequestBuilder getStatsLegacy() throws IllegalArgumentException {
+        return ((ManagementApi) this).new GetStatsLegacyRequestBuilder();
     }
 }

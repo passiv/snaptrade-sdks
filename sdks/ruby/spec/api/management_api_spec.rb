@@ -28,12 +28,24 @@ describe 'ManagementApi' do
   end
 
   # unit tests for get_stats
-  # Get usage stats
-  # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+  # Get usage stats (beta)
+  # **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;.
+  # @return [ConnectedAssetPartnerStats]
+  describe 'get_stats test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_stats_legacy
+  # Get usage stats (deprecated)
+  # **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;.
   # @return [PartnerStats]
-  describe 'get_stats test' do
+  describe 'get_stats_legacy test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

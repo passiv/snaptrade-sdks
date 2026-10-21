@@ -3572,13 +3572,86 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-tradeDetection-subscriptions-cancel
       x-content-type: application/json
       x-accepts: application/json
-  /snapTrade/stats:
+  /management/stats:
     get:
       description: |
+        **Beta.** This endpoint and its response schema may change.
+
+        Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+
+        User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated.
+      operationId: Management_getStats
+      parameters:
+      - description: ISO 4217 currency code to express connected asset values in.
+          Defaults to `USD`.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-paths--management-stats-get-parameters-0-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedAssetPartnerStats'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Unsupported currency
+          x-do-not-generate: true
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: Unauthorized
+          x-do-not-generate: true
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429TooManyRequestsResponse'
+          description: Rate limit exceeded
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected Error
+          x-do-not-generate: true
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503CurrencyConversionUnavailableResponse'
+          description: Exchange rates for the requested currency are temporarily unavailable
+          x-do-not-generate: true
+      summary: Get usage stats (beta)
+      tags:
+      - Management
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--management-stats
+      x-accepts: application/json
+  /snapTrade/stats:
+    get:
+      deprecated: true
+      description: |
+        **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.
+
         Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
 
         User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
-      operationId: Management_getStats
+      operationId: Management_getStatsLegacy
       parameters:
       - description: ISO 4217 currency code to express connected asset values in.
           Defaults to `USD`.
@@ -3634,7 +3707,7 @@ paths:
                 $ref: '#/components/schemas/503CurrencyConversionUnavailableResponse'
           description: Exchange rates for the requested currency are temporarily unavailable
           x-do-not-generate: true
-      summary: Get usage stats
+      summary: Get usage stats (deprecated)
       tags:
       - Management
       x-konfig-operation-can-have-single-parameter: true
@@ -8223,6 +8296,155 @@ components:
       - total_users
       type: object
       x-konfig-is-used-in-successful-response: true
+    ConnectedAssetPartnerStats:
+      additionalProperties: true
+      description: "User, connection, and connected asset totals for your SnapTrade\
+        \ Client ID."
+      example:
+        total_active_connections: 2265
+        connected_assets_currency: USD
+        total_connected_users: 2681
+        oauth_disabled_connected_assets: 2.3021358869347655
+        oauth_total_active_connections: 1
+        total_disabled_connections: 708
+        disabled_connected_assets: 159300000
+        oauth_total_users: 0
+        oauth_total_connected_users: 6
+        connected_assets: 104900000
+        oauth_total_disabled_connections: 5
+        oauth_connected_assets: 5.637376656633329
+        total_users: 19528
+        connected_assets_calculated_at: 2026-10-08T02:47:00Z
+      properties:
+        total_users:
+          description: Number of users registered with your Client ID.
+          example: 19528
+          type: integer
+          x-konfig-original-example: 19528
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_users
+        total_connected_users:
+          description: "Number of users registered with your Client ID that have at\
+            \ least one connection, active or disabled."
+          example: 2681
+          type: integer
+          x-konfig-original-example: 2681
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_connected_users
+        total_active_connections:
+          description: Number of active connections across users registered with your
+            Client ID.
+          example: 2265
+          type: integer
+          x-konfig-original-example: 2265
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_active_connections
+        total_disabled_connections:
+          description: Number of disabled connections across users registered with
+            your Client ID.
+          example: 708
+          type: integer
+          x-konfig-original-example: 708
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_disabled_connections
+        oauth_total_users:
+          description: Number of users who have authorized your OAuth application.
+            `null` if your Client ID has no OAuth application.
+          nullable: true
+          type: integer
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_users
+          example: null
+        oauth_total_connected_users:
+          description: "Number of users who have authorized your OAuth application\
+            \ and have at least one connection, active or disabled. `null` if your\
+            \ Client ID has no OAuth application."
+          nullable: true
+          type: integer
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_connected_users
+          example: null
+        oauth_total_active_connections:
+          description: Number of active connections across users who have authorized
+            your OAuth application. `null` if your Client ID has no OAuth application.
+          nullable: true
+          type: integer
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_active_connections
+          example: null
+        oauth_total_disabled_connections:
+          description: Number of disabled connections across users who have authorized
+            your OAuth application. `null` if your Client ID has no OAuth application.
+          nullable: true
+          type: integer
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_disabled_connections
+          example: null
+        connected_assets:
+          description: "Total latest account value across active connections of users\
+            \ registered with your Client ID, in `connected_assets_currency`. `null`\
+            \ until the first daily snapshot has been calculated."
+          example: 104900000
+          format: double
+          nullable: true
+          type: number
+          x-konfig-original-example: 104900000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets
+        disabled_connected_assets:
+          description: "Total account value across disabled connections of users registered\
+            \ with your Client ID, as of each connection's last sync, in `connected_assets_currency`.\
+            \ `null` until the first daily snapshot has been calculated."
+          example: 159300000
+          format: double
+          nullable: true
+          type: number
+          x-konfig-original-example: 159300000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-disabled_connected_assets
+        oauth_connected_assets:
+          description: "Total latest account value across active connections of users\
+            \ who have authorized your OAuth application, in `connected_assets_currency`.\
+            \ `null` if your Client ID has no OAuth application, or until the first\
+            \ daily snapshot after it was added."
+          format: double
+          nullable: true
+          type: number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_connected_assets
+          example: null
+        oauth_disabled_connected_assets:
+          description: "Total account value across disabled connections of users who\
+            \ have authorized your OAuth application, as of each connection's last\
+            \ sync, in `connected_assets_currency`. `null` if your Client ID has no\
+            \ OAuth application, or until the first daily snapshot after it was added."
+          format: double
+          nullable: true
+          type: number
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_disabled_connected_assets
+          example: null
+        connected_assets_currency:
+          description: ISO 4217 currency code the asset values are expressed in.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets_currency
+        connected_assets_calculated_at:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the connected asset values were last calculated.\
+            \ `null` until the first daily snapshot has been calculated."
+          example: 2026-10-08T02:47:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-10-08T02:47:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets_calculated_at
+      required:
+      - connected_assets
+      - connected_assets_calculated_at
+      - connected_assets_currency
+      - disabled_connected_assets
+      - oauth_connected_assets
+      - oauth_disabled_connected_assets
+      - oauth_total_active_connections
+      - oauth_total_connected_users
+      - oauth_total_disabled_connections
+      - oauth_total_users
+      - total_active_connections
+      - total_connected_users
+      - total_disabled_connections
+      - total_users
+      type: object
+      x-konfig-is-used-in-successful-response: true
     PartnerData:
       additionalProperties: true
       description: "Configurations for your SnapTrade Client ID, including allowed\
@@ -8655,7 +8877,7 @@ components:
           description: |
             How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined.
             - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`.
-            - **Margin accounts:** usually a single entry: the institution's buying power for positions held overnight, based on the account's total equity. Buying power for trades opened and closed on the same day can be higher and isn't included.
+            - **Margin accounts:** a single entry with the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities.
           items:
             $ref: '#/components/schemas/AccountBalancesV2Response_buying_power_inner'
           nullable: true
@@ -14240,6 +14462,10 @@ components:
     : example: This endpoint is no longer available.
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--management-stats-get-parameters-0-schema:
+      example: USD
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--snapTrade-stats-get-parameters-0-schema:
       example: USD
       type: string
@@ -15146,6 +15372,68 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerStats-properties-assets_under_management_calculated_at:
+      example: 2026-10-08T02:47:00.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_users:
+      example: 19528
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_connected_users:
+      example: 2681
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_active_connections:
+      example: 2265
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_disabled_connections:
+      example: 708
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_users:
+      nullable: true
+      type: string
+      x-konfig-null-placeholder: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_connected_users:
+      nullable: true
+      type: string
+      x-konfig-null-placeholder: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_active_connections:
+      nullable: true
+      type: string
+      x-konfig-null-placeholder: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_total_disabled_connections:
+      nullable: true
+      type: string
+      x-konfig-null-placeholder: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets:
+      example: 104900000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-disabled_connected_assets:
+      example: 159300000
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_connected_assets:
+      nullable: true
+      type: string
+      x-konfig-null-placeholder: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-oauth_disabled_connected_assets:
+      nullable: true
+      type: string
+      x-konfig-null-placeholder: true
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets_currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets_calculated_at:
       example: 2026-10-08T02:47:00.000Z
       type: string
       x-do-not-generate: true
@@ -18174,6 +18462,18 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--management-stats:
+      additionalProperties: true
+      properties:
+        currency:
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-paths--management-stats-get-parameters-0-schema
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - currency
     konfig-generated-schema-single-parameter-schema-get--snapTrade-stats:
       additionalProperties: true
       properties:

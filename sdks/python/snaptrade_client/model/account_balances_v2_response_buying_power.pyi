@@ -35,7 +35,7 @@ class AccountBalancesV2ResponseBuyingPower(
 
     How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined.
 - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`.
-- **Margin accounts:** usually a single entry: the institution's buying power for positions held overnight, based on the account's total equity. Buying power for trades opened and closed on the same day can be higher and isn't included.
+- **Margin accounts:** a single entry with the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities.
 
     """
 
