@@ -354,7 +354,7 @@ generators:
         - pnpm typecheck
         - pnpm test
         - pnpm build
-    version: 13.1.4
+    version: 13.1.5
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
