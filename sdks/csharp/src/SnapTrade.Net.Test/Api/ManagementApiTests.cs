@@ -56,13 +56,41 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get usage stats
-                PartnerStats result = client.Management.GetStats(currency);
+                // Get usage stats (beta)
+                ConnectedAssetPartnerStats result = client.Management.GetStats(currency);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling ManagementApi.GetStats: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
+        /// Test GetStatsLegacy
+        /// </summary>
+        [Fact]
+        public void GetStatsLegacyTest()
+        {
+            var currency = "USD"; // ISO 4217 currency code to express connected asset values in. Defaults to `USD`. (optional) 
+            
+            try
+            {
+                // Get usage stats (deprecated)
+                PartnerStats result = client.Management.GetStatsLegacy(currency);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ManagementApi.GetStatsLegacy: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

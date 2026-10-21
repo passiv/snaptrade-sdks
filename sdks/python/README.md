@@ -120,6 +120,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
   * [`snaptrade.experimental_endpoints.place_simple_order`](#snaptradeexperimental_endpointsplace_simple_order)
   * [`snaptrade.management.get_stats`](#snaptrademanagementget_stats)
+  * [`snaptrade.management.get_stats_legacy`](#snaptrademanagementget_stats_legacy)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
   * [`snaptrade.reference_data.get_stock_exchanges`](#snaptradereference_dataget_stock_exchanges)
   * [`snaptrade.reference_data.get_symbols`](#snaptradereference_dataget_symbols)
@@ -2526,9 +2527,11 @@ extended uses existing single-leg equity/option brokerage support and requires e
 
 ### `snaptrade.management.get_stats`<a id="snaptrademanagementget_stats"></a>
 
+**Beta.** This endpoint and its response schema may change.
+
 Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
 
-User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2545,6 +2548,53 @@ get_stats_response = commercial_api_key_client.management.get_stats(
 
 ```python
 get_stats_response = personal_api_key_client.management.get_stats(
+    currency="USD",
+)
+```
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### currency: `str`<a id="currency-str"></a>
+
+ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`ConnectedAssetPartnerStats`](./snaptrade_client/type/connected_asset_partner_stats.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/management/stats` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.management.get_stats_legacy`<a id="snaptrademanagementget_stats_legacy"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.
+
+Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+
+User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_stats_legacy_response = commercial_api_key_client.management.get_stats_legacy(
+    currency="USD",
+)
+```
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_stats_legacy_response = personal_api_key_client.management.get_stats_legacy(
     currency="USD",
 )
 ```

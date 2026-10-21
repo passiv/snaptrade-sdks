@@ -17,11 +17,13 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Get usage stats
+    # Get usage stats (beta)
     #
+    # **Beta.** This endpoint and its response schema may change.
+    # 
     # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
     # 
-    # User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+    # User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated.
     #
     # @param currency [String] ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -31,11 +33,13 @@ module SnapTrade
       data
     end
 
-    # Get usage stats
+    # Get usage stats (beta)
     #
+    # **Beta.** This endpoint and its response schema may change.
+    # 
     # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
     # 
-    # User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+    # User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated.
     #
     # @param currency [String] ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -44,24 +48,116 @@ module SnapTrade
       get_stats_with_http_info_impl(extra)
     end
 
-    # Get usage stats
-    # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
+    # Get usage stats (beta)
+    # **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
-    # @return [PartnerStats]
+    # @return [ConnectedAssetPartnerStats]
     private def get_stats_impl(opts = {})
       data, _status_code, _headers = get_stats_with_http_info(opts)
       data
     end
 
-    # Get usage stats
-    # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+    # Get usage stats (beta)
+    # **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
-    # @return [Array<(PartnerStats, Integer, Hash)>] PartnerStats data, response status code and response headers
+    # @return [Array<(ConnectedAssetPartnerStats, Integer, Hash)>] ConnectedAssetPartnerStats data, response status code and response headers
     private def get_stats_with_http_info_impl(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ManagementApi.get_stats ...'
+      end
+      # resource path
+      local_var_path = '/management/stats'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'currency'] = opts[:'currency'] if !opts[:'currency'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'ConnectedAssetPartnerStats'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ManagementApi.get_stats",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ManagementApi#get_stats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
+    # Get usage stats (deprecated)
+    #
+    # **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.
+    # 
+    # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+    # 
+    # User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+    #
+    # @param currency [String] ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_stats_legacy(currency: SENTINEL, extra: {})
+      extra[:currency] = currency if currency != SENTINEL
+      data, _status_code, _headers = get_stats_legacy_with_http_info_impl(extra)
+      data
+    end
+
+    # Get usage stats (deprecated)
+    #
+    # **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.
+    # 
+    # Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.
+    # 
+    # User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.
+    #
+    # @param currency [String] ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_stats_legacy_with_http_info(currency: SENTINEL, extra: {})
+      extra[:currency] = currency if currency != SENTINEL
+      get_stats_legacy_with_http_info_impl(extra)
+    end
+
+    # Get usage stats (deprecated)
+    # **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+    # @return [PartnerStats]
+    private def get_stats_legacy_impl(opts = {})
+      data, _status_code, _headers = get_stats_legacy_with_http_info(opts)
+      data
+    end
+
+    # Get usage stats (deprecated)
+    # **Deprecated.** Use &#x60;GET /management/stats&#x60; for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;assets_under_management_calculated_at&#x60; indicates when it was last calculated. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
+    # @return [Array<(PartnerStats, Integer, Hash)>] PartnerStats data, response status code and response headers
+    private def get_stats_legacy_with_http_info_impl(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ManagementApi.get_stats_legacy ...'
       end
       # resource path
       local_var_path = '/snapTrade/stats'
@@ -88,7 +184,7 @@ module SnapTrade
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
 
       new_options = opts.merge(
-        :operation => :"ManagementApi.get_stats",
+        :operation => :"ManagementApi.get_stats_legacy",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -99,7 +195,7 @@ module SnapTrade
 
       data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: ManagementApi#get_stats\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: ManagementApi#get_stats_legacy\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

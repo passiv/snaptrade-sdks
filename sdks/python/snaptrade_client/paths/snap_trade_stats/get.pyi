@@ -24,24 +24,24 @@ class BaseApi(api_client.Api):
     pass
 
 
-class GetStats(BaseApi, typing.Generic[TAuth]):
+class GetStatsLegacy(BaseApi, typing.Generic[TAuth]):
     @typing.overload
-    def get_stats(
-        self: "GetStats[CommercialApiKeyAuth]",
+    def get_stats_legacy(
+        self: "GetStatsLegacy[CommercialApiKeyAuth]",
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
     ) -> typing.Any: ...
     @typing.overload
-    def get_stats(
-        self: "GetStats[PersonalApiKeyAuth]",
+    def get_stats_legacy(
+        self: "GetStatsLegacy[PersonalApiKeyAuth]",
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
     ) -> typing.Any: ...
 
 
-class ApiForget(GetStats[TAuth]):
+class ApiForget(GetStatsLegacy[TAuth]):
     @typing.overload
     def get(
         self: "ApiForget[CommercialApiKeyAuth]",

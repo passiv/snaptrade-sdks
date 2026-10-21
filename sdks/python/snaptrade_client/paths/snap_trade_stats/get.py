@@ -260,7 +260,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _get_stats_mapped_args(
+    def _get_stats_legacy_mapped_args(
         self,
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -272,7 +272,7 @@ class BaseApi(api_client.Api):
         args.query = query_params if query_params else _query_params
         return args
 
-    async def _aget_stats_oapg(
+    async def _aget_stats_legacy_oapg(
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
@@ -286,7 +286,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get usage stats
+        Get usage stats (deprecated)
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -392,7 +392,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _get_stats_oapg(
+    def _get_stats_legacy_oapg(
         self,
         query_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
@@ -404,7 +404,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get usage stats
+        Get usage stats (deprecated)
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -479,10 +479,11 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class GetStats(BaseApi, typing.Generic[TAuth]):
+class GetStatsLegacy(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aget_stats(
+    @api_client.DeprecationWarningOnce(prefix="management")
+    async def aget_stats_legacy(
         self,
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -492,16 +493,17 @@ class GetStats(BaseApi, typing.Generic[TAuth]):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_stats_mapped_args(
+        args = self._get_stats_legacy_mapped_args(
             query_params=query_params,
             currency=currency,
         )
-        return await self._aget_stats_oapg(
+        return await self._aget_stats_legacy_oapg(
             query_params=args.query,
             **kwargs,
         )
     
-    def get_stats(
+    @api_client.DeprecationWarningOnce(prefix="management")
+    def get_stats_legacy(
         self,
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -509,18 +511,19 @@ class GetStats(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.  """
-        args = self._get_stats_mapped_args(
+        """ **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.  """
+        args = self._get_stats_legacy_mapped_args(
             query_params=query_params,
             currency=currency,
         )
-        return self._get_stats_oapg(
+        return self._get_stats_legacy_oapg(
             query_params=args.query,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="management")
     async def aget(
         self,
         currency: typing.Optional[str] = None,
@@ -531,15 +534,16 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_stats_mapped_args(
+        args = self._get_stats_legacy_mapped_args(
             query_params=query_params,
             currency=currency,
         )
-        return await self._aget_stats_oapg(
+        return await self._aget_stats_legacy_oapg(
             query_params=args.query,
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="management")
     def get(
         self,
         currency: typing.Optional[str] = None,
@@ -548,12 +552,12 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.  """
-        args = self._get_stats_mapped_args(
+        """ **Deprecated.** Use `GET /management/stats` for the beta response with connected asset field names.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `assets_under_management_calculated_at` indicates when it was last calculated.  """
+        args = self._get_stats_legacy_mapped_args(
             query_params=query_params,
             currency=currency,
         )
-        return self._get_stats_oapg(
+        return self._get_stats_legacy_oapg(
             query_params=args.query,
         )
 
