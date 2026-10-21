@@ -15,6 +15,7 @@ module SnapTrade
     # ISO-4217 currency code.
     attr_accessor :currency
 
+    # Rounded to 2 decimal places.
     attr_accessor :amount
 
     # Attribute mapping from ruby-style variable name to JSON key.

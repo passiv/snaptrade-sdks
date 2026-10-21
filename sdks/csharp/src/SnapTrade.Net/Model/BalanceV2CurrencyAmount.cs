@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="BalanceV2CurrencyAmount" /> class.
         /// </summary>
         /// <param name="currency">ISO-4217 currency code. (required).</param>
-        /// <param name="amount">amount (required).</param>
+        /// <param name="amount">Rounded to 2 decimal places. (required).</param>
         public BalanceV2CurrencyAmount(string currency = default(string), decimal amount = default(decimal)) : base()
         {
             // to ensure "currency" is required (not null)
@@ -65,8 +65,9 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// Gets or Sets Amount
+        /// Rounded to 2 decimal places.
         /// </summary>
+        /// <value>Rounded to 2 decimal places.</value>
         [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
         [JsonConverter(typeof(SnapTrade.Net.Client.DecimalStringJsonConverter))]
         public decimal Amount { get; set; }

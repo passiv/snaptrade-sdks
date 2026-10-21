@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**currency** | **String** | ISO-4217 currency code. |  |
-|**amount** | **BigDecimal** |  |  |
+|**amount** | **BigDecimal** | Rounded to 2 decimal places. |  |
 
 
 

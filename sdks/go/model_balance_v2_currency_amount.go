@@ -20,6 +20,7 @@ import (
 type BalanceV2CurrencyAmount struct {
 	// ISO-4217 currency code.
 	Currency string `json:"currency"`
+	// Rounded to 2 decimal places.
 	Amount float64 `json:"amount"`
 	AdditionalProperties map[string]interface{}
 }

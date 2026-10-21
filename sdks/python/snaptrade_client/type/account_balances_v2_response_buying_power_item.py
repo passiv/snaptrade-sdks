@@ -20,7 +20,7 @@ class RequiredAccountBalancesV2ResponseBuyingPowerItem(TypedDict):
     # ISO-4217 currency code.
     currency: str
 
-    # Buying power in this currency. Can be negative, for example on a margin account that has exceeded its margin requirement.
+    # Buying power in this currency, rounded to 2 decimal places. Can be negative, for example on a margin account that has exceeded its margin requirement.
     amount: str
 
     # What the amount may include. - `settled`: settled cash only. Excludes proceeds from sales that haven't settled and cash already committed to purchases that haven't settled, so spending it won't cause a good-faith violation. - `cash`: may include proceeds from trades that haven't settled. - `margin`: may include money borrowed on margin.  To avoid good-faith violations on cash accounts, only treat the amount as safe to spend when `basis` is `settled`. 

@@ -115,7 +115,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalanceTotal.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalancesV2Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalancesV2ResponseBuyingPowerInner.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalancesV2ResponseCashInner.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalancesV2ResponseDataFreshness.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalancesV2ResponseMargin.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.AccountBalancesV2ResponseNetValue.CustomTypeAdapterFactory());

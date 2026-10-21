@@ -109,10 +109,32 @@ class AccountBalancesV2Response(
                         _configuration=_configuration,
                         **kwargs,
                     )
-        
-            @staticmethod
-            def cash() -> typing.Type['AccountBalancesV2ResponseCash']:
-                return AccountBalancesV2ResponseCash
+            
+            
+            class cash(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['BalanceV2CurrencyAmount']:
+                        return BalanceV2CurrencyAmount
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['BalanceV2CurrencyAmount'], typing.List['BalanceV2CurrencyAmount']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'cash':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'BalanceV2CurrencyAmount':
+                    return super().__getitem__(i)
         
             @staticmethod
             def buying_power() -> typing.Type['AccountBalancesV2ResponseBuyingPower']:
@@ -141,7 +163,7 @@ class AccountBalancesV2Response(
     account_id: MetaOapg.properties.account_id
     net_value: MetaOapg.properties.net_value
     data_freshness: 'AccountBalancesV2ResponseDataFreshness'
-    cash: 'AccountBalancesV2ResponseCash'
+    cash: MetaOapg.properties.cash
     buying_power: 'AccountBalancesV2ResponseBuyingPower'
     
     @typing.overload
@@ -160,7 +182,7 @@ class AccountBalancesV2Response(
     def __getitem__(self, name: typing_extensions.Literal["data_freshness"]) -> 'AccountBalancesV2ResponseDataFreshness': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["cash"]) -> 'AccountBalancesV2ResponseCash': ...
+    def __getitem__(self, name: typing_extensions.Literal["cash"]) -> MetaOapg.properties.cash: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["buying_power"]) -> 'AccountBalancesV2ResponseBuyingPower': ...
@@ -188,7 +210,7 @@ class AccountBalancesV2Response(
     def get_item_oapg(self, name: typing_extensions.Literal["data_freshness"]) -> 'AccountBalancesV2ResponseDataFreshness': ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["cash"]) -> 'AccountBalancesV2ResponseCash': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["cash"]) -> MetaOapg.properties.cash: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["buying_power"]) -> 'AccountBalancesV2ResponseBuyingPower': ...
@@ -207,7 +229,7 @@ class AccountBalancesV2Response(
         account_id: typing.Union[MetaOapg.properties.account_id, str, uuid.UUID, ],
         net_value: typing.Union[MetaOapg.properties.net_value, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
         data_freshness: 'AccountBalancesV2ResponseDataFreshness',
-        cash: 'AccountBalancesV2ResponseCash',
+        cash: typing.Union[MetaOapg.properties.cash, list, tuple, ],
         buying_power: 'AccountBalancesV2ResponseBuyingPower',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -227,7 +249,7 @@ class AccountBalancesV2Response(
         )
 
 from snaptrade_client.model.account_balances_v2_response_buying_power import AccountBalancesV2ResponseBuyingPower
-from snaptrade_client.model.account_balances_v2_response_cash import AccountBalancesV2ResponseCash
 from snaptrade_client.model.account_balances_v2_response_data_freshness import AccountBalancesV2ResponseDataFreshness
 from snaptrade_client.model.account_balances_v2_response_margin import AccountBalancesV2ResponseMargin
+from snaptrade_client.model.balance_v2_currency_amount import BalanceV2CurrencyAmount
 from snaptrade_client.model.balance_v2_money import BalanceV2Money

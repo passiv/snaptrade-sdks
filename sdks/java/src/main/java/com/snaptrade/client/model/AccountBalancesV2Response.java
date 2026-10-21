@@ -20,10 +20,10 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountBalancesV2ResponseBuyingPowerInner;
-import com.snaptrade.client.model.AccountBalancesV2ResponseCashInner;
 import com.snaptrade.client.model.AccountBalancesV2ResponseDataFreshness;
 import com.snaptrade.client.model.AccountBalancesV2ResponseMargin;
 import com.snaptrade.client.model.AccountBalancesV2ResponseNetValue;
+import com.snaptrade.client.model.BalanceV2CurrencyAmount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class AccountBalancesV2Response {
   private UUID accountId;
 
   /**
-   * Whether the account is a cash or margin account. Same values as &#x60;cash_or_margin&#x60; on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+   * Whether the account is a cash or margin account, normalized across institutions. Same values as &#x60;cash_or_margin&#x60; on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint. - &#x60;cash&#x60;: the account can&#39;t borrow on margin. - &#x60;margin&#x60;: the account can borrow on margin. - &#x60;unknown&#x60;: SnapTrade doesn&#39;t have enough information to tell, or the distinction doesn&#39;t apply (for example crypto accounts). 
    */
   @JsonAdapter(CashOrMarginEnum.Adapter.class)
  public enum CashOrMarginEnum {
@@ -121,7 +121,7 @@ public class AccountBalancesV2Response {
 
   public static final String SERIALIZED_NAME_CASH = "cash";
   @SerializedName(SERIALIZED_NAME_CASH)
-  private List<AccountBalancesV2ResponseCashInner> cash = new ArrayList<>();
+  private List<BalanceV2CurrencyAmount> cash = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_BUYING_POWER = "buying_power";
   @SerializedName(SERIALIZED_NAME_BUYING_POWER)
@@ -177,11 +177,11 @@ public class AccountBalancesV2Response {
   }
 
    /**
-   * Whether the account is a cash or margin account. Same values as &#x60;cash_or_margin&#x60; on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+   * Whether the account is a cash or margin account, normalized across institutions. Same values as &#x60;cash_or_margin&#x60; on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint. - &#x60;cash&#x60;: the account can&#39;t borrow on margin. - &#x60;margin&#x60;: the account can borrow on margin. - &#x60;unknown&#x60;: SnapTrade doesn&#39;t have enough information to tell, or the distinction doesn&#39;t apply (for example crypto accounts). 
    * @return cashOrMargin
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "MARGIN", required = true, value = "Whether the account is a cash or margin account. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.")
+  @ApiModelProperty(example = "MARGIN", required = true, value = "Whether the account is a cash or margin account, normalized across institutions. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint. - `cash`: the account can't borrow on margin. - `margin`: the account can borrow on margin. - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply (for example crypto accounts). ")
 
   public CashOrMarginEnum getCashOrMargin() {
     return cashOrMargin;
@@ -225,7 +225,7 @@ public class AccountBalancesV2Response {
   }
 
 
-  public AccountBalancesV2Response cash(List<AccountBalancesV2ResponseCashInner> cash) {
+  public AccountBalancesV2Response cash(List<BalanceV2CurrencyAmount> cash) {
     
     
     
@@ -234,24 +234,24 @@ public class AccountBalancesV2Response {
     return this;
   }
 
-  public AccountBalancesV2Response addCashItem(AccountBalancesV2ResponseCashInner cashItem) {
+  public AccountBalancesV2Response addCashItem(BalanceV2CurrencyAmount cashItem) {
     this.cash.add(cashItem);
     return this;
   }
 
    /**
-   * Cash held in the account, one entry per currency. Some institutions allow holding multiple currencies in the same account.
+   * Cash held in the account, one entry per currency, as reported by the institution. Some institutions allow holding multiple currencies in the same account. May include proceeds from trades that haven&#39;t settled yet. Can be negative, for example on a margin account that is borrowing in a currency.
    * @return cash
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "Cash held in the account, one entry per currency. Some institutions allow holding multiple currencies in the same account.")
+  @ApiModelProperty(required = true, value = "Cash held in the account, one entry per currency, as reported by the institution. Some institutions allow holding multiple currencies in the same account. May include proceeds from trades that haven't settled yet. Can be negative, for example on a margin account that is borrowing in a currency.")
 
-  public List<AccountBalancesV2ResponseCashInner> getCash() {
+  public List<BalanceV2CurrencyAmount> getCash() {
     return cash;
   }
 
 
-  public void setCash(List<AccountBalancesV2ResponseCashInner> cash) {
+  public void setCash(List<BalanceV2CurrencyAmount> cash) {
     
     
     
@@ -274,11 +274,11 @@ public class AccountBalancesV2Response {
   }
 
    /**
-   * How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn&#39;t be added together. Null when it can&#39;t be determined. - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it&#39;s the institution&#39;s buying power or cash, which may include proceeds from trades that haven&#39;t settled. Check &#x60;basis&#x60;. - **Margin accounts:** a single entry with the institution&#39;s buying power, typically its overnight figure (day-trading buying power isn&#39;t included). How it&#39;s calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. 
+   * How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn&#39;t be added together. Null when it can&#39;t be determined. - **Cash accounts:** one entry per currency held, each covering purchases in that currency and never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it&#39;s the institution&#39;s buying power or cash, which may include proceeds from trades that haven&#39;t settled. Check &#x60;basis&#x60;. - **Margin accounts:** a single entry for the whole account, covering purchases in any currency. It&#39;s usually in the account&#39;s main currency (the currency of &#x60;net_value&#x60;). It&#39;s the institution&#39;s buying power, typically its overnight figure (day-trading buying power isn&#39;t included). How it&#39;s calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. 
    * @return buyingPower
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(required = true, value = "How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined. - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`. - **Margin accounts:** a single entry with the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. ")
+  @ApiModelProperty(required = true, value = "How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined. - **Cash accounts:** one entry per currency held, each covering purchases in that currency and never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`. - **Margin accounts:** a single entry for the whole account, covering purchases in any currency. It's usually in the account's main currency (the currency of `net_value`). It's the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities. ")
 
   public List<AccountBalancesV2ResponseBuyingPowerInner> getBuyingPower() {
     return buyingPower;
@@ -509,7 +509,7 @@ public class AccountBalancesV2Response {
       JsonArray jsonArraycash = jsonObj.getAsJsonArray("cash");
       // validate the required field `cash` (array)
       for (int i = 0; i < jsonArraycash.size(); i++) {
-        AccountBalancesV2ResponseCashInner.validateJsonObject(jsonArraycash.get(i).getAsJsonObject());
+        BalanceV2CurrencyAmount.validateJsonObject(jsonArraycash.get(i).getAsJsonObject());
       };
       // ensure the json data is an array
       if (!jsonObj.get("buying_power").isJsonArray()) {

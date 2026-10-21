@@ -8811,6 +8811,7 @@ components:
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BalanceV2CurrencyAmount-properties-currency
         amount:
+          description: Rounded to 2 decimal places.
           example: "72658.27"
           format: decimal
           type: string
@@ -8854,9 +8855,11 @@ components:
           x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
         cash_or_margin:
-          description: "Whether the account is a cash or margin account. Same values\
-            \ as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails)\
-            \ endpoint."
+          description: |
+            Whether the account is a cash or margin account, normalized across institutions. Same values as `cash_or_margin` on the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint.
+            - `cash`: the account can't borrow on margin.
+            - `margin`: the account can borrow on margin.
+            - `unknown`: SnapTrade doesn't have enough information to tell, or the distinction doesn't apply (for example crypto accounts).
           enum:
           - cash
           - margin
@@ -8868,16 +8871,19 @@ components:
         net_value:
           $ref: '#/components/schemas/AccountBalancesV2Response_net_value'
         cash:
-          description: "Cash held in the account, one entry per currency. Some institutions\
-            \ allow holding multiple currencies in the same account."
+          description: "Cash held in the account, one entry per currency, as reported\
+            \ by the institution. Some institutions allow holding multiple currencies\
+            \ in the same account. May include proceeds from trades that haven't settled\
+            \ yet. Can be negative, for example on a margin account that is borrowing\
+            \ in a currency."
           items:
-            $ref: '#/components/schemas/AccountBalancesV2Response_cash_inner'
+            $ref: '#/components/schemas/BalanceV2CurrencyAmount'
           type: array
         buying_power:
           description: |
             How much the account can spend on new purchases, one entry per currency. Amounts are in different currencies and shouldn't be added together. Null when it can't be determined.
-            - **Cash accounts:** one entry per currency held, never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`.
-            - **Margin accounts:** a single entry with the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities.
+            - **Cash accounts:** one entry per currency held, each covering purchases in that currency and never more than the cash in that currency. Each entry is the settled cash available to spend in that currency where the institution reports it; otherwise it's the institution's buying power or cash, which may include proceeds from trades that haven't settled. Check `basis`.
+            - **Margin accounts:** a single entry for the whole account, covering purchases in any currency. It's usually in the account's main currency (the currency of `net_value`). It's the institution's buying power, typically its overnight figure (day-trading buying power isn't included). How it's calculated varies by institution, it can be negative, and it may not cover options or other non-marginable securities.
           items:
             $ref: '#/components/schemas/AccountBalancesV2Response_buying_power_inner'
           nullable: true
@@ -20184,12 +20190,6 @@ components:
       - $ref: '#/components/schemas/BalanceV2Money'
       description: "Total value of the account as reported by the institution, in\
         \ the account's currency."
-    AccountBalancesV2Response_cash_inner:
-      allOf:
-      - $ref: '#/components/schemas/BalanceV2CurrencyAmount'
-      description: "Cash balance in this currency as reported by the institution.\
-        \ May include proceeds from trades that haven't settled yet. Can be negative,\
-        \ for example on a margin account that is borrowing in this currency."
     AccountBalancesV2Response_buying_power_inner:
       additionalProperties: true
       properties:
@@ -20200,8 +20200,9 @@ components:
           x-konfig-original-example: CAD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalancesV2Response-properties-buying_power-items-properties-currency
         amount:
-          description: "Buying power in this currency. Can be negative, for example\
-            \ on a margin account that has exceeded its margin requirement."
+          description: "Buying power in this currency, rounded to 2 decimal places.\
+            \ Can be negative, for example on a margin account that has exceeded its\
+            \ margin requirement."
           example: "1208463.36"
           format: decimal
           type: string

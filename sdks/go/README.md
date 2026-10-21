@@ -235,7 +235,6 @@ Class | Method | HTTP request | Description
  - [AccountBalanceTotal](docs/AccountBalanceTotal.md)
  - [AccountBalancesV2Response](docs/AccountBalancesV2Response.md)
  - [AccountBalancesV2ResponseBuyingPowerInner](docs/AccountBalancesV2ResponseBuyingPowerInner.md)
- - [AccountBalancesV2ResponseCashInner](docs/AccountBalancesV2ResponseCashInner.md)
  - [AccountBalancesV2ResponseDataFreshness](docs/AccountBalancesV2ResponseDataFreshness.md)
  - [AccountBalancesV2ResponseMargin](docs/AccountBalancesV2ResponseMargin.md)
  - [AccountBalancesV2ResponseNetValue](docs/AccountBalancesV2ResponseNetValue.md)

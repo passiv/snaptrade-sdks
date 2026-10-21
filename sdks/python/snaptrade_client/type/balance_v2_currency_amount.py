@@ -20,6 +20,7 @@ class RequiredBalanceV2CurrencyAmount(TypedDict):
     # ISO-4217 currency code.
     currency: str
 
+    # Rounded to 2 decimal places.
     amount: str
 
 class OptionalBalanceV2CurrencyAmount(TypedDict, total=False):
