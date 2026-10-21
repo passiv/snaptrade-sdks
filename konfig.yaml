@@ -150,7 +150,11 @@ portal:
       post: true
     /accounts/{accountId}/balanceHistory:
       get: true
+    /accounts/{accountId}/balances/v2:
+      get: true
   hideOperations:
+    /accounts/{accountId}/balances/v2:
+      get: true
     /accounts/{accountId}/trading/simple:
       post: true
     /accounts/{accountId}/positions:
