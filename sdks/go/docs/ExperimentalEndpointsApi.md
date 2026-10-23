@@ -6,6 +6,7 @@ Method | Path | Description
 ------------- | ------------- | -------------
 [**AddSubscription**](ExperimentalEndpointsApi.md#AddSubscription) | **Post** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 [**CancelSubscription**](ExperimentalEndpointsApi.md#CancelSubscription) | **Post** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
+[**GetAllAccountOrders**](ExperimentalEndpointsApi.md#GetAllAccountOrders) | **Get** /accounts/{accountId}/orders/all | List all account orders
 [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
@@ -109,6 +110,55 @@ func main() {
     // response from `CancelSubscription`: TradeDetectionCancelSubscriptionResponse
     fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.CancelSubscription`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `TradeDetectionCancelSubscriptionResponse.CancelSubscription.Success`: %v\n", resp.Success)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllAccountOrders
+
+List all account orders
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ExperimentalEndpointsApi.GetAllAccountOrders(
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+    request.State("state_example")
+    request.Days(30)
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.GetAllAccountOrders``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAllAccountOrders`: AllAccountOrdersResponse
+    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.GetAllAccountOrders`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountOrdersResponse.GetAllAccountOrders.Results`: %v\n", resp.Results)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountOrdersResponse.GetAllAccountOrders.DataFreshness`: %v\n", resp.DataFreshness)
 }
 ```
 

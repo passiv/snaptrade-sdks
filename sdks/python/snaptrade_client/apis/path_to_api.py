@@ -50,6 +50,7 @@ from snaptrade_client.apis.paths.snap_trade_trade_detection_subscriptions_cancel
 from snaptrade_client.apis.paths.management_stats import ManagementStats
 from snaptrade_client.apis.paths.snap_trade_stats import SnapTradeStats
 from snaptrade_client.apis.paths.accounts_account_id_orders_v2 import AccountsAccountIdOrdersV2
+from snaptrade_client.apis.paths.accounts_account_id_orders_all import AccountsAccountIdOrdersAll
 from snaptrade_client.apis.paths.accounts_account_id_recent_orders_v2 import AccountsAccountIdRecentOrdersV2
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
@@ -114,6 +115,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.MANAGEMENT_STATS: ManagementStats,
         PathValues.SNAP_TRADE_STATS: SnapTradeStats,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
+        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_ALL: AccountsAccountIdOrdersAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -179,6 +181,7 @@ path_to_api = PathToApi(
         PathValues.MANAGEMENT_STATS: ManagementStats,
         PathValues.SNAP_TRADE_STATS: SnapTradeStats,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_V2: AccountsAccountIdOrdersV2,
+        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_ALL: AccountsAccountIdOrdersAll,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2: AccountsAccountIdRecentOrdersV2,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,

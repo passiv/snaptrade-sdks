@@ -2,12 +2,12 @@
 
 | SDK Name | Lines of Code |
 | -------- | ------------- |
-| java | 167600 |
-| ruby | 90266 |
-| python | 154395 |
-| typescript | 52337 |
-| csharp | 112610 |
-| php | 191359 |
-| go | 144565 |
-| php7 | 191548 |
-| **Total** | 1104680 |
+| java | 176130 |
+| ruby | 94846 |
+| python | 160830 |
+| typescript | 54070 |
+| csharp | 117991 |
+| php | 200772 |
+| go | 151577 |
+| php7 | 200965 |
+| **Total** | 1157181 |

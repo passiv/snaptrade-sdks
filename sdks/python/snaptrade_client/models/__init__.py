@@ -24,6 +24,10 @@ from snaptrade_client.model.account_holdings_account import AccountHoldingsAccou
 from snaptrade_client.model.account_id import AccountID
 from snaptrade_client.model.account_ids import AccountIDs
 from snaptrade_client.model.account_meta import AccountMeta
+from snaptrade_client.model.account_order import AccountOrder
+from snaptrade_client.model.account_order_group import AccountOrderGroup
+from snaptrade_client.model.account_order_group_nullable import AccountOrderGroupNullable
+from snaptrade_client.model.account_order_leg import AccountOrderLeg
 from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.account_order_record_leg import AccountOrderRecordLeg
 from snaptrade_client.model.account_order_record_leg_instrument import AccountOrderRecordLegInstrument
@@ -46,6 +50,8 @@ from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.action_strict_v2 import ActionStrictV2
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.model.adr_instrument import AdrInstrument
+from snaptrade_client.model.all_account_orders_response import AllAccountOrdersResponse
+from snaptrade_client.model.all_account_orders_response_data_freshness import AllAccountOrdersResponseDataFreshness
 from snaptrade_client.model.all_account_positions_response import AllAccountPositionsResponse
 from snaptrade_client.model.all_account_positions_response_data_freshness import AllAccountPositionsResponseDataFreshness
 from snaptrade_client.model.all_user_accounts_response import AllUserAccountsResponse
@@ -130,6 +136,7 @@ from snaptrade_client.model.institution_regions import InstitutionRegions
 from snaptrade_client.model.instrument import Instrument
 from snaptrade_client.model.investment_account import InvestmentAccount
 from snaptrade_client.model.investment_account_net_value import InvestmentAccountNetValue
+from snaptrade_client.model.limit_order_type import LimitOrderType
 from snaptrade_client.model.line_of_credit_account import LineOfCreditAccount
 from snaptrade_client.model.line_of_credit_account_available_credit import LineOfCreditAccountAvailableCredit
 from snaptrade_client.model.line_of_credit_account_minimum_payment_amount import LineOfCreditAccountMinimumPaymentAmount
@@ -147,6 +154,7 @@ from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
 from snaptrade_client.model.manual_trade_place_time_in_force_strict import ManualTradePlaceTimeInForceStrict
 from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
+from snaptrade_client.model.market_order_type import MarketOrderType
 from snaptrade_client.model.mleg_action_strict import MlegActionStrict
 from snaptrade_client.model.mleg_instrument_type import MlegInstrumentType
 from snaptrade_client.model.mleg_leg import MlegLeg
@@ -196,9 +204,11 @@ from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.order_type import OrderType
+from snaptrade_client.model.order_type_configuration import OrderTypeConfiguration
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.order_updated_response import OrderUpdatedResponse
 from snaptrade_client.model.other_instrument import OtherInstrument
+from snaptrade_client.model.other_order_type import OtherOrderType
 from snaptrade_client.model.paginated_universal_activity import PaginatedUniversalActivity
 from snaptrade_client.model.pagination_details import PaginationDetails
 from snaptrade_client.model.partner_data import PartnerData
@@ -231,7 +241,9 @@ from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeL
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.model.status import Status
 from snaptrade_client.model.stock_instrument import StockInstrument
+from snaptrade_client.model.stop_limit_order_type import StopLimitOrderType
 from snaptrade_client.model.stop_loss import StopLoss
+from snaptrade_client.model.stop_order_type import StopOrderType
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
@@ -254,7 +266,9 @@ from snaptrade_client.model.trade_id import TradeID
 from snaptrade_client.model.trading_instrument import TradingInstrument
 from snaptrade_client.model.trading_session import TradingSession
 from snaptrade_client.model.trailing_stop import TrailingStop
+from snaptrade_client.model.trailing_stop_limit_order_type import TrailingStopLimitOrderType
 from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable
+from snaptrade_client.model.trailing_stop_order_type import TrailingStopOrderType
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_cfd_instrument import UnderlyingCfdInstrument

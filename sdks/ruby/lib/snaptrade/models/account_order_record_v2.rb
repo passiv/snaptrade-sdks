@@ -57,6 +57,28 @@ module SnapTrade
     # List of legs that make up the order.
     attr_accessor :legs
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -95,7 +117,7 @@ module SnapTrade
         :'time_placed' => :'Time',
         :'time_executed' => :'Time',
         :'price_currency' => :'String',
-        :'price_effect' => :'PriceEffect',
+        :'price_effect' => :'String',
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
@@ -211,7 +233,19 @@ module SnapTrade
     # @return true if the model is valid
     def valid?
       return false if @price_effect.nil?
+      price_effect_validator = EnumAttributeValidator.new('String', ["CREDIT", "DEBIT", "EVEN", "UNKNOWN"])
+      return false unless price_effect_validator.valid?(@price_effect)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] price_effect Object to be assigned
+    def price_effect=(price_effect)
+      validator = EnumAttributeValidator.new('String', ["CREDIT", "DEBIT", "EVEN", "UNKNOWN"])
+      unless validator.valid?(price_effect)
+        fail ArgumentError, "invalid value for \"price_effect\", must be one of #{validator.allowable_values}."
+      end
+      @price_effect = price_effect
     end
 
     # Checks equality by comparing each attribute.
