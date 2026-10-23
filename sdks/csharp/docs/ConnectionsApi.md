@@ -682,7 +682,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **401** | Unauthorized, invalid credentials for this resource |  -  |
-| **402** | Unable to sync with brokerage account because the connection is disabled. |  -  |
+| **402** | The connection must be reconnected before it can be refreshed. Code &#x60;3003&#x60;: the connection is disabled. Code &#x60;3019&#x60;: the connection is still enabled, but its brokerage session has expired and only a reconnect will restore it. No refresh is scheduled and the call is not charged.  |  -  |
 | **403** | Customer or user does not have access to this feature |  -  |
 | **404** | The requested resource does not exist. |  -  |
 | **429** | The connection was refreshed too recently. Please wait before calling this endpoint again. |  -  |
