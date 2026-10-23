@@ -960,7 +960,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: Get account balances
+      summary: List account balances (V2)
       operationId: AccountInformation_getAccountBalancesV2
       description: |
         Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.

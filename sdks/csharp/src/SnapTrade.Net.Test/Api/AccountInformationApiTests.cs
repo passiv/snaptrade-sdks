@@ -123,7 +123,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get account balances
+                // List account balances (V2)
                 AccountBalancesV2Response result = client.AccountInformation.GetAccountBalancesV2(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }

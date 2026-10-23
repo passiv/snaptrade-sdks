@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdBalancesV2(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdBalancesV2 unit test stubs
-        Get account balances
+        List account balances (V2)
     """
 
     def setUp(self):
