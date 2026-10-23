@@ -8,16 +8,16 @@ Name | Type | Description | Notes
 **Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
 **DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
-**MaskedAccountNumber** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****1881&#x60;). | 
+**MaskedAccountNumber** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
 **InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 
 **InstitutionId** | Pointer to **string** | Unique identifier for the institution that holds the account. | [optional] 
 **OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. | [optional] 
 **FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list. | [optional] 
-**SyncStatus** | [**LineOfCreditAccountSyncStatus**](LineOfCreditAccountSyncStatus.md) |  | 
+**SyncStatus** | [**AnnuityAccountSyncStatus**](AnnuityAccountSyncStatus.md) |  | 
 **RawType** | Pointer to **NullableString** | The account type as provided by the institution. | [optional] 
 **CashOrMargin** | Pointer to **string** | Whether the account is a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: The account cannot borrow on margin. Includes registered, retirement and employer plan accounts that can&#39;t use margin (for example TFSA, RRSP, 401(k) or ISA). - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: SnapTrade doesn&#39;t have enough information to tell, or the distinction doesn&#39;t apply to the account (for example crypto accounts).  Coverage is limited for Fidelity because its API doesn&#39;t report it for every account; Fidelity accounts default to &#x60;unknown&#x60; where it can&#39;t be determined.  | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
-**NetValue** | Pointer to [**NullableLineOfCreditAccountNetValue**](LineOfCreditAccountNetValue.md) |  | [optional] 
+**NetValue** | Pointer to [**NullableAnnuityAccountNetValue**](AnnuityAccountNetValue.md) |  | [optional] 
 **MinimumPaymentAmount** | Pointer to [**NullableLineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  | [optional] 
 **AvailableCredit** | Pointer to [**NullableLineOfCreditAccountAvailableCredit**](LineOfCreditAccountAvailableCredit.md) |  | [optional] 
 **NextPaymentDate** | Pointer to **NullableString** | The date the account&#39;s next payment is due, in &#x60;YYYY-MM-DD&#x60; format. Omitted when no such data is available. | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewConnectionAccount
 
-`func NewConnectionAccount(kind string, id string, connectionId string, maskedAccountNumber string, syncStatus LineOfCreditAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
+`func NewConnectionAccount(kind string, id string, connectionId string, maskedAccountNumber string, syncStatus AnnuityAccountSyncStatus, isPaper bool, ) *ConnectionAccount`
 
 NewConnectionAccount instantiates a new ConnectionAccount object
 This constructor will assign default values to properties that have it defined,
@@ -288,20 +288,20 @@ HasFundingDate returns a boolean if a field has been set.
 UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
 ### GetSyncStatus
 
-`func (o *ConnectionAccount) GetSyncStatus() LineOfCreditAccountSyncStatus`
+`func (o *ConnectionAccount) GetSyncStatus() AnnuityAccountSyncStatus`
 
 GetSyncStatus returns the SyncStatus field if non-nil, zero value otherwise.
 
 ### GetSyncStatusOk
 
-`func (o *ConnectionAccount) GetSyncStatusOk() (*LineOfCreditAccountSyncStatus, bool)`
+`func (o *ConnectionAccount) GetSyncStatusOk() (*AnnuityAccountSyncStatus, bool)`
 
 GetSyncStatusOk returns a tuple with the SyncStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSyncStatus
 
-`func (o *ConnectionAccount) SetSyncStatus(v LineOfCreditAccountSyncStatus)`
+`func (o *ConnectionAccount) SetSyncStatus(v AnnuityAccountSyncStatus)`
 
 SetSyncStatus sets SyncStatus field to given value.
 
@@ -388,20 +388,20 @@ SetIsPaper sets IsPaper field to given value.
 
 ### GetNetValue
 
-`func (o *ConnectionAccount) GetNetValue() LineOfCreditAccountNetValue`
+`func (o *ConnectionAccount) GetNetValue() AnnuityAccountNetValue`
 
 GetNetValue returns the NetValue field if non-nil, zero value otherwise.
 
 ### GetNetValueOk
 
-`func (o *ConnectionAccount) GetNetValueOk() (*LineOfCreditAccountNetValue, bool)`
+`func (o *ConnectionAccount) GetNetValueOk() (*AnnuityAccountNetValue, bool)`
 
 GetNetValueOk returns a tuple with the NetValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetValue
 
-`func (o *ConnectionAccount) SetNetValue(v LineOfCreditAccountNetValue)`
+`func (o *ConnectionAccount) SetNetValue(v AnnuityAccountNetValue)`
 
 SetNetValue sets NetValue field to given value.
 

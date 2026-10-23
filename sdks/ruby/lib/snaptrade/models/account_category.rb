@@ -15,9 +15,10 @@ module SnapTrade
     INVESTMENT = "INVESTMENT".freeze
     DEPOSIT = "DEPOSIT".freeze
     LOC = "LOC".freeze
+    ANNUITY = "ANNUITY".freeze
 
     def self.all_vars
-      @all_vars ||= [INVESTMENT, DEPOSIT, LOC].freeze
+      @all_vars ||= [INVESTMENT, DEPOSIT, LOC, ANNUITY].freeze
     end
 
     # Builds the enum from string

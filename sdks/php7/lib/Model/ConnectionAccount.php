@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ConnectionAccount Class Doc Comment
  *
  * @category Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today.
+ * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, &#x60;line_of_credit&#x60;, and &#x60;annuity&#x60; are implemented today.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -44,6 +44,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var array<string, class-string<ModelInterface>>
      */
     public const DISCRIMINATOR_MAPPING = [
+        'annuity' => \SnapTrade\Model\AnnuityAccount::class,
         'deposit' => \SnapTrade\Model\DepositAccount::class,
         'investment' => \SnapTrade\Model\InvestmentAccount::class,
         'line_of_credit' => \SnapTrade\Model\LineOfCreditAccount::class,
@@ -71,11 +72,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
         'funding_date' => '\DateTime',
-        'sync_status' => '\SnapTrade\Model\LineOfCreditAccountSyncStatus',
+        'sync_status' => '\SnapTrade\Model\AnnuityAccountSyncStatus',
         'raw_type' => 'string',
         'cash_or_margin' => 'string',
         'is_paper' => 'bool',
-        'net_value' => '\SnapTrade\Model\LineOfCreditAccountNetValue',
+        'net_value' => '\SnapTrade\Model\AnnuityAccountNetValue',
         'minimum_payment_amount' => '\SnapTrade\Model\LineOfCreditAccountMinimumPaymentAmount',
         'available_credit' => '\SnapTrade\Model\LineOfCreditAccountAvailableCredit',
         'next_payment_date' => '\DateTime'
@@ -329,7 +330,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const KIND_LINE_OF_CREDIT = 'line_of_credit';
+    public const KIND_ANNUITY = 'annuity';
     public const CASH_OR_MARGIN_CASH = 'cash';
     public const CASH_OR_MARGIN_MARGIN = 'margin';
     public const CASH_OR_MARGIN_UNKNOWN = 'unknown';
@@ -342,7 +343,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_LINE_OF_CREDIT,
+            self::KIND_ANNUITY,
         ];
     }
 
@@ -621,7 +622,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets masked_account_number
      *
-     * @param string $masked_account_number The account number assigned by the institution, masked to the last 4 characters (e.g. `****1881`).
+     * @param string $masked_account_number The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
      *
      * @return self
      */
@@ -777,7 +778,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets sync_status
      *
-     * @return \SnapTrade\Model\LineOfCreditAccountSyncStatus
+     * @return \SnapTrade\Model\AnnuityAccountSyncStatus
      */
     public function getSyncStatus()
     {
@@ -787,7 +788,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets sync_status
      *
-     * @param \SnapTrade\Model\LineOfCreditAccountSyncStatus $sync_status sync_status
+     * @param \SnapTrade\Model\AnnuityAccountSyncStatus $sync_status sync_status
      *
      * @return self
      */
@@ -910,7 +911,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets net_value
      *
-     * @return \SnapTrade\Model\LineOfCreditAccountNetValue|null
+     * @return \SnapTrade\Model\AnnuityAccountNetValue|null
      */
     public function getNetValue()
     {
@@ -920,7 +921,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets net_value
      *
-     * @param \SnapTrade\Model\LineOfCreditAccountNetValue|null $net_value net_value
+     * @param \SnapTrade\Model\AnnuityAccountNetValue|null $net_value net_value
      *
      * @return self
      */

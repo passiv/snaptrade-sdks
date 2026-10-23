@@ -331,6 +331,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     public const ACCOUNT_CATEGORY_INVESTMENT = 'INVESTMENT';
     public const ACCOUNT_CATEGORY_DEPOSIT = 'DEPOSIT';
     public const ACCOUNT_CATEGORY_LOC = 'LOC';
+    public const ACCOUNT_CATEGORY_ANNUITY = 'ANNUITY';
 
     /**
      * Gets allowable values of the enum
@@ -358,6 +359,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
             self::ACCOUNT_CATEGORY_INVESTMENT,
             self::ACCOUNT_CATEGORY_DEPOSIT,
             self::ACCOUNT_CATEGORY_LOC,
+            self::ACCOUNT_CATEGORY_ANNUITY,
         ];
     }
 
@@ -925,7 +927,7 @@ class Account implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets account_category
      *
-     * @param string|null $account_category The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account.
+     * @param string|null $account_category The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. - `ANNUITY`: An annuity contract account.
      *
      * @return self
      */

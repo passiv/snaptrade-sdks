@@ -524,7 +524,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 ### `snaptrade.account_information.get_account_details`<a id="snaptradeaccount_informationget_account_details"></a>
 
-Returns the specified account for the authenticated user. The account can be an investment, deposit, or line of credit account. Use the `kind` discriminator to determine the schema for the account.
+Returns the specified account for the authenticated user. The account can be an investment, deposit, line of credit, or annuity account. Use the `kind` discriminator to determine the schema for the account.
 
 On Pay as you Go / Real-time, this endpoint refreshes the account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -709,7 +709,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ### `snaptrade.account_information.get_user_account_details`<a id="snaptradeaccount_informationget_user_account_details"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, and line of credit accounts.
+**Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, and annuity accounts.
 
 Returns account detail known to SnapTrade for the specified account.
 
@@ -1104,7 +1104,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 Returns all accounts across all connections known to SnapTrade for the authenticated user.
 
-The `results` list can contain multiple account types in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the schema for each account.
+The `results` list can contain multiple account types in the same response, including investment, deposit, line of credit, and annuity accounts. Use the `kind` discriminator to determine the schema for each account.
 
 This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
@@ -1154,7 +1154,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ### `snaptrade.account_information.list_user_accounts`<a id="snaptradeaccount_informationlist_user_accounts"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, and line of credit accounts.
+**Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, and annuity accounts.
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
@@ -1807,7 +1807,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 Returns all accounts that belong to the specified connection for the authenticated user.
 
-The `results` list can contain multiple account types in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the schema for each account.
+The `results` list can contain multiple account types in the same response, including investment, deposit, line of credit, and annuity accounts. Use the `kind` discriminator to determine the schema for each account.
 
 On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
