@@ -1983,7 +1983,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/401FailedRequestResponse"
         "402":
-          description: Unable to sync with brokerage account because the connection is disabled.
+          description: |
+            The connection must be reconnected before it can be refreshed. Code `3003`: the connection is disabled. Code `3019`: the connection is still enabled, but its brokerage session has expired and only a reconnect will restore it. No refresh is scheduled and the call is not charged.
           content:
             application/json:
               schema:
