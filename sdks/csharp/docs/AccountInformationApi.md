@@ -6,7 +6,7 @@ All URIs are relative to *https://api.snaptrade.com*
 |--------|--------------|-------------|
 | [**GetAccountActivities**](AccountInformationApi.md#getaccountactivities) | **GET** /accounts/{accountId}/activities | List account activities |
 | [**GetAccountBalanceHistory**](AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
-| [**GetAccountBalancesV2**](AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | Get account balances |
+| [**GetAccountBalancesV2**](AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | List account balances (V2) |
 | [**GetAccountDetails**](AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details |
 | [**GetAllAccountPositions**](AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
 | [**GetUserAccountBalance**](AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances |
@@ -254,7 +254,7 @@ namespace Example
             
             try
             {
-                // Get account balances
+                // List account balances (V2)
                 AccountBalancesV2Response result = client.AccountInformation.GetAccountBalancesV2(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -281,7 +281,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get account balances
+    // List account balances (V2)
     ApiResponse<AccountBalancesV2Response> response = apiInstance.GetAccountBalancesV2WithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

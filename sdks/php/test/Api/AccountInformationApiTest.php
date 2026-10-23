@@ -85,7 +85,7 @@ class AccountInformationApiTest extends TestCase
     /**
      * Test case for getAccountBalancesV2
      *
-     * Get account balances.
+     * List account balances (V2).
      *
      */
     public function testGetAccountBalancesV2()

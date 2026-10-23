@@ -1656,7 +1656,7 @@ paths:
             \ (sync lock held) or the brokerage API is temporarily unavailable, and\
             \ no cached fallback was available. Safe to retry."
           x-do-not-generate: true
-      summary: Get account balances
+      summary: List account balances (V2)
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true

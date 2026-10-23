@@ -6,7 +6,7 @@ Method | Path | Description
 ------------- | ------------- | -------------
 [**GetAccountActivities**](AccountInformationApi.md#GetAccountActivities) | **Get** /accounts/{accountId}/activities | List account activities
 [**GetAccountBalanceHistory**](AccountInformationApi.md#GetAccountBalanceHistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
-[**GetAccountBalancesV2**](AccountInformationApi.md#GetAccountBalancesV2) | **Get** /accounts/{accountId}/balances/v2 | Get account balances
+[**GetAccountBalancesV2**](AccountInformationApi.md#GetAccountBalancesV2) | **Get** /accounts/{accountId}/balances/v2 | List account balances (V2)
 [**GetAccountDetails**](AccountInformationApi.md#GetAccountDetails) | **Get** /accounts/{accountId}/details | Get account details
 [**GetAllAccountPositions**](AccountInformationApi.md#GetAllAccountPositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
@@ -124,7 +124,7 @@ func main() {
 
 ## GetAccountBalancesV2
 
-Get account balances
+List account balances (V2)
 
 
 

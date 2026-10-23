@@ -446,7 +446,7 @@ func (r AccountInformationApiGetAccountBalancesV2Request) Execute() (*AccountBal
 }
 
 /*
-GetAccountBalancesV2 Get account balances
+GetAccountBalancesV2 List account balances (V2)
 
 Returns the account's balances in a single snapshot: total net value, cash per currency, buying power, and margin details for margin accounts. Every field is always present and is `null` when the institution doesn't report it.
 

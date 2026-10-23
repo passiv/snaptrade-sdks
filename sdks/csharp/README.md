@@ -157,7 +157,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountInformationApi* | [**GetAccountActivities**](docs/AccountInformationApi.md#getaccountactivities) | **GET** /accounts/{accountId}/activities | List account activities
 *AccountInformationApi* | [**GetAccountBalanceHistory**](docs/AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value
-*AccountInformationApi* | [**GetAccountBalancesV2**](docs/AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | Get account balances
+*AccountInformationApi* | [**GetAccountBalancesV2**](docs/AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | List account balances (V2)
 *AccountInformationApi* | [**GetAccountDetails**](docs/AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details
 *AccountInformationApi* | [**GetAllAccountPositions**](docs/AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
