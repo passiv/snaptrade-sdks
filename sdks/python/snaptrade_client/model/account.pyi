@@ -270,6 +270,7 @@ class Account(
                         "INVESTMENT": "INVESTMENT",
                         "DEPOSIT": "DEPOSIT",
                         "LOC": "LOC",
+                        "ANNUITY": "ANNUITY",
                     }
                 
                 @schemas.classproperty
@@ -283,6 +284,10 @@ class Account(
                 @schemas.classproperty
                 def LOC(cls):
                     return cls("LOC")
+                
+                @schemas.classproperty
+                def ANNUITY(cls):
+                    return cls("ANNUITY")
             
             
                 def __new__(

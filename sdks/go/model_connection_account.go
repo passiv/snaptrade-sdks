@@ -16,11 +16,19 @@ import (
 	"fmt"
 )
 
-// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, and `line_of_credit` are implemented today. 
+// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today. 
 type ConnectionAccount struct {
+	AnnuityAccount *AnnuityAccount
 	DepositAccount *DepositAccount
 	InvestmentAccount *InvestmentAccount
 	LineOfCreditAccount *LineOfCreditAccount
+}
+
+// AnnuityAccountAsConnectionAccount is a convenience function that returns AnnuityAccount wrapped in ConnectionAccount
+func AnnuityAccountAsConnectionAccount(v *AnnuityAccount) ConnectionAccount {
+	return ConnectionAccount{
+		AnnuityAccount: v,
+	}
 }
 
 // DepositAccountAsConnectionAccount is a convenience function that returns DepositAccount wrapped in ConnectionAccount
@@ -69,6 +77,12 @@ func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("null ConnectionAccount discriminator kind")
 	}
 	switch *kind {
+	case "annuity":
+		var value AnnuityAccount
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal ConnectionAccount as AnnuityAccount: %w", err)
+		}
+		dst.AnnuityAccount = &value
 	case "deposit":
 		var value DepositAccount
 		if err := json.Unmarshal(data, &value); err != nil {
@@ -95,6 +109,10 @@ func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ConnectionAccount) MarshalJSON() ([]byte, error) {
+	if src.AnnuityAccount != nil {
+		return json.Marshal(&src.AnnuityAccount)
+	}
+
 	if src.DepositAccount != nil {
 		return json.Marshal(&src.DepositAccount)
 	}
@@ -115,6 +133,10 @@ func (obj *ConnectionAccount) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.AnnuityAccount != nil {
+		return obj.AnnuityAccount
+	}
+
 	if obj.DepositAccount != nil {
 		return obj.DepositAccount
 	}

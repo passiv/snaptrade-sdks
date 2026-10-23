@@ -163,7 +163,7 @@ public class Account {
   private String rawType;
 
   /**
-   * The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account. 
+   * The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account. - &#x60;ANNUITY&#x60;: An annuity contract account. 
    */
   @JsonAdapter(AccountCategoryEnum.Adapter.class)
  public enum AccountCategoryEnum {
@@ -171,7 +171,9 @@ public class Account {
     
     DEPOSIT("DEPOSIT"),
     
-    LOC("LOC");
+    LOC("LOC"),
+    
+    ANNUITY("ANNUITY");
 
     private String value;
 
@@ -621,11 +623,11 @@ public class Account {
   }
 
    /**
-   * The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account. 
+   * The category of the account, normalized across institutions. Returns &#x60;null&#x60; if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - &#x60;INVESTMENT&#x60;: A brokerage / investment account (equities, options, crypto, etc.). - &#x60;DEPOSIT&#x60;: A bank deposit account (checking, savings). - &#x60;LOC&#x60;: A line of credit account. - &#x60;ANNUITY&#x60;: An annuity contract account. 
    * @return accountCategory
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "INVESTMENT", value = "The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. ")
+  @ApiModelProperty(example = "INVESTMENT", value = "The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. - `ANNUITY`: An annuity contract account. ")
 
   public AccountCategoryEnum getAccountCategory() {
     return accountCategory;

@@ -29,7 +29,7 @@ using System.Reflection;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, and &#x60;line_of_credit&#x60; are implemented today. 
+    /// A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, &#x60;line_of_credit&#x60;, and &#x60;annuity&#x60; are implemented today. 
     /// </summary>
     [JsonConverter(typeof(ConnectionAccountJsonConverter))]
     [DataContract(Name = "ConnectionAccount")]
@@ -71,6 +71,18 @@ namespace SnapTrade.Net.Model
             this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConnectionAccount" /> class
+        /// with the <see cref="AnnuityAccount" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of AnnuityAccount.</param>
+        public ConnectionAccount(AnnuityAccount actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
 
         private Object _actualInstance;
 
@@ -85,7 +97,11 @@ namespace SnapTrade.Net.Model
             }
             set
             {
-                if (value.GetType() == typeof(DepositAccount))
+                if (value.GetType() == typeof(AnnuityAccount))
+                {
+                    this._actualInstance = value;
+                }
+                else if (value.GetType() == typeof(DepositAccount))
                 {
                     this._actualInstance = value;
                 }
@@ -99,7 +115,7 @@ namespace SnapTrade.Net.Model
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid instance found. Must be the following types: DepositAccount, InvestmentAccount, LineOfCreditAccount");
+                    throw new ArgumentException("Invalid instance found. Must be the following types: AnnuityAccount, DepositAccount, InvestmentAccount, LineOfCreditAccount");
                 }
             }
         }
@@ -132,6 +148,16 @@ namespace SnapTrade.Net.Model
         public LineOfCreditAccount GetLineOfCreditAccount()
         {
             return (LineOfCreditAccount)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `AnnuityAccount`. If the actual instance is not `AnnuityAccount`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of AnnuityAccount</returns>
+        public AnnuityAccount GetAnnuityAccount()
+        {
+            return (AnnuityAccount)this.ActualInstance;
         }
 
         /// <summary>
@@ -171,6 +197,26 @@ namespace SnapTrade.Net.Model
             }
             int match = 0;
             List<string> matchedTypes = new List<string>();
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(AnnuityAccount).GetProperty("AdditionalProperties") == null)
+                {
+                    newConnectionAccount = new ConnectionAccount(JsonConvert.DeserializeObject<AnnuityAccount>(jsonString, ConnectionAccount.SerializerSettings));
+                }
+                else
+                {
+                    newConnectionAccount = new ConnectionAccount(JsonConvert.DeserializeObject<AnnuityAccount>(jsonString, ConnectionAccount.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("AnnuityAccount");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into AnnuityAccount: {1}", jsonString, exception.ToString()));
+            }
 
             try
             {

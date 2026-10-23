@@ -157,7 +157,7 @@ export interface Account {
      */
     'raw_type'?: string | null;
     /**
-     * The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. 
+     * The category of the account, normalized across institutions. Returns `null` if the category could not be determined. Use this field to filter out non-investment accounts if your integration only supports trading / holdings flows. See [Filtering Accounts by Category](https://docs.snaptrade.com/docs/filtering-accounts-by-category) for more information. - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.). - `DEPOSIT`: A bank deposit account (checking, savings). - `LOC`: A line of credit account. - `ANNUITY`: An annuity contract account. 
      * @type {string}
      * @memberof Account
      */
@@ -192,6 +192,6 @@ export interface Account {
 }
 
 type AccountStatusEnum = 'open' | 'closed' | 'archived' | 'unavailable'
-type AccountAccountCategoryEnum = 'INVESTMENT' | 'DEPOSIT' | 'LOC'
+type AccountAccountCategoryEnum = 'INVESTMENT' | 'DEPOSIT' | 'LOC' | 'ANNUITY'
 
 

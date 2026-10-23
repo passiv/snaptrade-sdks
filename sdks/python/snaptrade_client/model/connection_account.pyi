@@ -35,7 +35,7 @@ used by `Connections_listConnectionAccounts` and
 `AccountInformation_listAllUserAccounts`. Use `kind` to determine
 which schema is present.
 
-`investment`, `deposit`, and `line_of_credit` are implemented today.
+`investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today.
 
     """
 
@@ -46,9 +46,11 @@ which schema is present.
         def discriminator():
             return {
                 'kind': {
+                    'AnnuityAccount': AnnuityAccount,
                     'DepositAccount': DepositAccount,
                     'InvestmentAccount': InvestmentAccount,
                     'LineOfCreditAccount': LineOfCreditAccount,
+                    'annuity': AnnuityAccount,
                     'deposit': DepositAccount,
                     'investment': InvestmentAccount,
                     'line_of_credit': LineOfCreditAccount,
@@ -69,6 +71,7 @@ which schema is present.
                 InvestmentAccount,
                 DepositAccount,
                 LineOfCreditAccount,
+                AnnuityAccount,
             ]
 
 
@@ -85,6 +88,7 @@ which schema is present.
             **kwargs,
         )
 
+from snaptrade_client.model.annuity_account import AnnuityAccount
 from snaptrade_client.model.deposit_account import DepositAccount
 from snaptrade_client.model.investment_account import InvestmentAccount
 from snaptrade_client.model.line_of_credit_account import LineOfCreditAccount

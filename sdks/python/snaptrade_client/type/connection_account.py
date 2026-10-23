@@ -15,8 +15,9 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.annuity_account import AnnuityAccount
 from snaptrade_client.type.deposit_account import DepositAccount
 from snaptrade_client.type.investment_account import InvestmentAccount
 from snaptrade_client.type.line_of_credit_account import LineOfCreditAccount
 
-ConnectionAccount = typing.Union[InvestmentAccount,DepositAccount,LineOfCreditAccount]
+ConnectionAccount = typing.Union[InvestmentAccount,DepositAccount,LineOfCreditAccount,AnnuityAccount]
