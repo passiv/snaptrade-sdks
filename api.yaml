@@ -706,7 +706,7 @@ paths:
       summary: List user accounts
       deprecated: true
       description: |
-        **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, and line of credit accounts.
+        **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, and annuity accounts.
 
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
@@ -743,7 +743,7 @@ paths:
       description: |
         Returns all accounts across all connections known to SnapTrade for the authenticated user.
 
-        The `results` list can contain multiple account types in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the schema for each account.
+        The `results` list can contain multiple account types in the same response, including investment, deposit, line of credit, and annuity accounts. Use the `kind` discriminator to determine the schema for each account.
 
         This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by institution. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
       operationId: AccountInformation_listAllUserAccounts
@@ -778,7 +778,7 @@ paths:
       summary: Get account detail
       deprecated: true
       description: |
-        **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, and line of credit accounts.
+        **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, and annuity accounts.
 
         Returns account detail known to SnapTrade for the specified account.
 
@@ -859,7 +859,7 @@ paths:
         - Account Information
       summary: Get account details
       description: |
-        Returns the specified account for the authenticated user. The account can be an investment, deposit, or line of credit account. Use the `kind` discriminator to determine the schema for the account.
+        Returns the specified account for the authenticated user. The account can be an investment, deposit, line of credit, or annuity account. Use the `kind` discriminator to determine the schema for the account.
 
         On Pay as you Go / Real-time, this endpoint refreshes the account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -2168,7 +2168,7 @@ paths:
       description: |
         Returns all accounts that belong to the specified connection for the authenticated user.
 
-        The `results` list can contain multiple account types in the same response, including investment, deposit, and line of credit accounts. Use the `kind` discriminator to determine the schema for each account.
+        The `results` list can contain multiple account types in the same response, including investment, deposit, line of credit, and annuity accounts. Use the `kind` discriminator to determine the schema for each account.
 
         On Pay as you Go / Real-time, this endpoint refreshes each account's opening date and total net value (`net_value`) live from the institution on each call, along with funding date for `investment` accounts.
 
@@ -3831,7 +3831,8 @@ components:
             - `INVESTMENT`: A brokerage / investment account (equities, options, crypto, etc.).
             - `DEPOSIT`: A bank deposit account (checking, savings).
             - `LOC`: A line of credit account.
-          enum: [INVESTMENT, DEPOSIT, LOC]
+            - `ANNUITY`: An annuity contract account.
+          enum: [INVESTMENT, DEPOSIT, LOC, ANNUITY]
           nullable: true
           example: 'INVESTMENT'
         meta:
@@ -3884,17 +3885,19 @@ components:
         `AccountInformation_listAllUserAccounts`. Use `kind` to determine
         which schema is present.
 
-        `investment`, `deposit`, and `line_of_credit` are implemented today.
+        `investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today.
       oneOf:
         - $ref: "#/components/schemas/InvestmentAccount"
         - $ref: "#/components/schemas/DepositAccount"
         - $ref: "#/components/schemas/LineOfCreditAccount"
+        - $ref: "#/components/schemas/AnnuityAccount"
       discriminator:
         propertyName: kind
         mapping:
           investment: "#/components/schemas/InvestmentAccount"
           deposit: "#/components/schemas/DepositAccount"
           line_of_credit: "#/components/schemas/LineOfCreditAccount"
+          annuity: "#/components/schemas/AnnuityAccount"
     InvestmentAccount:
       description: |
         An investment account under a connection. `opening_date`,
@@ -4164,6 +4167,80 @@ components:
           nullable: true
           description: The date the account's next payment is due, in `YYYY-MM-DD` format. Omitted when no such data is available.
           example: "2026-09-25"
+    AnnuityAccount:
+      description: |
+        An annuity contract account under a connection. Akoya accounts returned in the
+        `annuityAccount` category use this kind; investment accounts holding annuity
+        products remain `investment` accounts. `net_value` is the contract's
+        surrender/cash value (`netPresentValue` from Akoya), not available cash.
+        It is real-time or cached depending on the caller's plan, and always cached
+        on `AccountInformation_listAllUserAccounts`.
+      type: object
+      required:
+        - kind
+        - id
+        - connection_id
+        - masked_account_number
+        - sync_status
+      properties:
+        kind:
+          type: string
+          description: Discriminator for the account kind.
+          enum:
+            - annuity
+          example: annuity
+        id:
+          description: Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade.
+          allOf:
+            - $ref: "#/components/schemas/AccountID"
+        connection_id:
+          $ref: "#/components/schemas/BrokerageAuthID"
+        display_name:
+          type: string
+          nullable: true
+          description: A display name for the account. Either assigned by the user or by the institution itself.
+          example: Annuity Contract
+        masked_account_number:
+          type: string
+          example: "****4821"
+          description: The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
+        institution_account_id:
+          type: string
+          nullable: true
+          example: "88213092"
+          description: A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections.
+        institution_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the institution that holds the account.
+          example: a7f0c9d1-2b3e-4f5a-8c6d-9e0f1a2b3c4d
+        opening_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; `null` for all other institutions.
+          example: 2018-06-04T00:00:00.000000Z
+        sync_status:
+          $ref: "#/components/schemas/AnnuityAccountSyncStatus"
+        raw_type:
+          type: string
+          nullable: true
+          description: The account type as provided by the institution.
+          example: ANNUITY
+        net_value:
+          type: object
+          nullable: true
+          description: Net value of the annuity contract -- its surrender/cash value, not available cash. Omitted when unknown (e.g. a real-time fetch failed and no cached value exists).
+          properties:
+            amount:
+              type: number
+              nullable: true
+            currency:
+              type: string
+              nullable: true
+          example:
+            amount: 125000.00
+            currency: USD
     ConnectionAccountSyncStatus:
       description: |
         Contains status updates for the account sync process between SnapTrade and the institution,
@@ -4223,6 +4300,19 @@ components:
           $ref: "#/components/schemas/TransactionsStatus"
         balances:
           description: The last time balances were successfully synced by SnapTrade.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/HoldingsSyncStatusDate"
+    AnnuityAccountSyncStatus:
+      description: |
+        Contains sync status for an annuity contract's value. Akoya annuity accounts
+        do not expose transactions, orders, or positions, so those fields are omitted.
+        `balances` is derived from the last successful holdings sync and is null if
+        never synced. It tracks the contract value, not available cash.
+      type: object
+      properties:
+        balances:
+          description: The last time the annuity contract value was successfully synced by SnapTrade.
           nullable: true
           allOf:
             - $ref: "#/components/schemas/HoldingsSyncStatusDate"
