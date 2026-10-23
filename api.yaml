@@ -1216,6 +1216,77 @@ paths:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
         "429":
           $ref: "#/components/responses/TooManyRequests"
+  /accounts/{accountId}/orders/all:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List all account orders
+      operationId: AccountInformation_getAllAccountOrders
+      description: |
+        Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+
+        Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+
+        `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+
+        **Experimental:** this endpoint may change without notice.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: state
+          description: defaults to "all"
+          schema:
+            type: string
+            enum:
+              - all
+              - open
+              - executed
+        - in: query
+          name: days
+          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 90
+            example: 30
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllAccountOrdersResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/balanceHistory:
     get:
       tags:
@@ -4477,6 +4548,367 @@ components:
           description: Estimate of the total market value of this account (includes cash, equity, fixed income, etc) at the given date.
           type: string
           example: "15363.23"
+    AllAccountOrdersResponse:
+      description: Orders in the `kind`-discriminated format returned by `/accounts/{accountId}/orders/all`.
+      type: object
+      properties:
+        results:
+          type: array
+          description: Orders returned for the request.
+          items:
+            $ref: "#/components/schemas/AccountOrder"
+        data_freshness:
+          type: object
+          description: Metadata describing freshness of the returned orders data.
+          properties:
+            as_of:
+              type: string
+              format: date-time
+              description: The time the returned orders data was fetched from the brokerage.
+              example: 2026-06-02T14:30:00Z
+          required:
+            - as_of
+      required:
+        - results
+        - data_freshness
+    AccountOrder:
+      description: A single order. Single-leg orders have exactly one entry in `legs`; multi-leg orders (spreads, strangles, covered calls) have one entry per leg.
+      type: object
+      required:
+        - brokerage_order_id
+        - status
+        - order_type
+        - time_in_force
+        - price_effect
+        - legs
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        status:
+          $ref: "#/components/schemas/AccountOrderRecordStatusV2"
+        order_type:
+          $ref: "#/components/schemas/OrderTypeConfiguration"
+        time_in_force:
+          description: |
+            How long the order remains active. Brokerage values that cannot be mapped to this list are returned as `OTHER`.
+              - `DAY` - valid only for the trading day on which it is placed.
+              - `GTC` - Good Til Canceled.
+              - `FOK` - Fill Or Kill.
+              - `IOC` - Immediate Or Cancel.
+              - `GTD` - Good Til Date; see `expiry_date`.
+              - `MOO` - Market On Open.
+              - `EHP` - Extended Hours P.M.
+              - `EHA` - Extended Hours A.M.
+              - `OTHER` - the brokerage reported a value outside this list.
+          type: string
+          enum:
+            - DAY
+            - GTC
+            - FOK
+            - IOC
+            - GTD
+            - MOO
+            - EHP
+            - EHA
+            - OTHER
+          example: DAY
+        expiry_date:
+          description: When the order expires, for orders with a `time_in_force` of `GTD`.
+          nullable: true
+          type: string
+          format: date-time
+          example: 2026-07-30T22:51:49Z
+        price_currency:
+          description: ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
+          nullable: true
+          type: string
+          example: USD
+        price_effect:
+          description: Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+          type: string
+          enum:
+            - CREDIT
+            - DEBIT
+            - EVEN
+            - UNKNOWN
+        total_quantity:
+          description: Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
+          nullable: true
+          type: string
+          format: decimal
+          example: "10"
+        filled_quantity:
+          description: Quantity filled so far.
+          nullable: true
+          type: string
+          format: decimal
+          example: "9"
+        canceled_quantity:
+          description: Quantity canceled.
+          nullable: true
+          type: string
+          format: decimal
+          example: "1"
+        open_quantity:
+          description: Quantity still open (not yet filled or canceled).
+          nullable: true
+          type: string
+          format: decimal
+          example: "0"
+        execution_price:
+          description: Average execution price. Per unit for single-leg orders; net price per spread for multi-leg orders.
+          nullable: true
+          type: string
+          format: decimal
+          example: "12.34"
+        time_placed:
+          description: The time the order was submitted to the brokerage, when the brokerage reports it.
+          nullable: true
+          type: string
+          format: date-time
+          example: 2026-07-30T22:51:49Z
+        time_updated:
+          description: The time the order was last updated at the brokerage, when available.
+          nullable: true
+          type: string
+          format: date-time
+          example: 2026-07-30T22:52:10Z
+        time_executed:
+          description: The time the order was executed, when available.
+          nullable: true
+          type: string
+          format: date-time
+          example: 2026-08-05T00:05:57Z
+        group:
+          description: Set when this order belongs to a complex order group (OCO, OTO, OTOCO). Null otherwise.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderGroup"
+        legs:
+          type: array
+          description: The legs that make up the order. Always has at least one entry.
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/AccountOrderLeg"
+    AccountOrderGroup:
+      description: Links the orders that make up a complex order (OCO, OTO, OTOCO).
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          description: Brokerage-assigned identifier shared by every order in the group.
+          type: string
+          example: "1234567890"
+        role:
+          description: This order's role within the group, when the brokerage reports it.
+          # Konfig drops nullability for inline enums; keep this as a nullable schema reference.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecordV2OrderRole"
+    AccountOrderLeg:
+      description: One leg of an order.
+      type: object
+      required:
+        - instrument
+        - action
+      properties:
+        leg_id:
+          description: Brokerage identifier for this leg, when the brokerage assigns one.
+          nullable: true
+          type: string
+        instrument:
+          $ref: "#/components/schemas/Instrument"
+        action:
+          $ref: "#/components/schemas/ActionStrictV2"
+        total_quantity:
+          description: Total number of shares or contracts for this leg. Can be a decimal for fractional orders.
+          nullable: true
+          type: string
+          format: decimal
+          example: "10"
+        filled_quantity:
+          description: Number of shares or contracts filled for this leg.
+          nullable: true
+          type: string
+          format: decimal
+          example: "9"
+        canceled_quantity:
+          description: Number of shares or contracts canceled for this leg.
+          nullable: true
+          type: string
+          format: decimal
+          example: "1"
+        execution_price:
+          description: Average execution price for this leg, when available.
+          nullable: true
+          type: string
+          format: decimal
+          example: "12.34"
+        status:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecordStatusV2"
+    OrderTypeConfiguration:
+      description: The order type and the prices that belong to it. Use `kind` to determine which fields are present.
+      oneOf:
+        - $ref: "#/components/schemas/MarketOrderType"
+        - $ref: "#/components/schemas/LimitOrderType"
+        - $ref: "#/components/schemas/StopOrderType"
+        - $ref: "#/components/schemas/StopLimitOrderType"
+        - $ref: "#/components/schemas/TrailingStopOrderType"
+        - $ref: "#/components/schemas/TrailingStopLimitOrderType"
+        - $ref: "#/components/schemas/OtherOrderType"
+      discriminator:
+        propertyName: kind
+        mapping:
+          market: "#/components/schemas/MarketOrderType"
+          limit: "#/components/schemas/LimitOrderType"
+          stop: "#/components/schemas/StopOrderType"
+          stop_limit: "#/components/schemas/StopLimitOrderType"
+          trailing_stop: "#/components/schemas/TrailingStopOrderType"
+          trailing_stop_limit: "#/components/schemas/TrailingStopLimitOrderType"
+          other: "#/components/schemas/OtherOrderType"
+    MarketOrderType:
+      description: A market order. Executes at the best available price.
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - market
+          example: market
+    LimitOrderType:
+      description: A limit order. For multi-leg orders `limit_price` is the net price per spread; see `price_effect` for its direction.
+      type: object
+      required:
+        - kind
+        - limit_price
+      properties:
+        kind:
+          type: string
+          enum:
+            - limit
+          example: limit
+        limit_price:
+          description: The maximum price to pay for a buy, or the minimum price to accept for a sell.
+          type: string
+          format: decimal
+          example: "12.34"
+    StopOrderType:
+      description: A stop order. Becomes a market order once `stop_price` is reached.
+      type: object
+      required:
+        - kind
+        - stop_price
+      properties:
+        kind:
+          type: string
+          enum:
+            - stop
+          example: stop
+        stop_price:
+          description: The price at which the order is triggered.
+          type: string
+          format: decimal
+          example: "12.50"
+    StopLimitOrderType:
+      description: A stop-limit order. Becomes a limit order at `limit_price` once `stop_price` is reached.
+      type: object
+      required:
+        - kind
+        - stop_price
+        - limit_price
+      properties:
+        kind:
+          type: string
+          enum:
+            - stop_limit
+          example: stop_limit
+        stop_price:
+          description: The price at which the order is triggered.
+          type: string
+          format: decimal
+          example: "12.50"
+        limit_price:
+          description: The limit price that applies once triggered.
+          type: string
+          format: decimal
+          example: "12.34"
+    TrailingStopOrderType:
+      description: A trailing stop order. The stop price trails the market price by `trail`.
+      type: object
+      required:
+        - kind
+        - trail
+      properties:
+        kind:
+          type: string
+          enum:
+            - trailing_stop
+          example: trailing_stop
+        trail:
+          $ref: "#/components/schemas/TrailingStop"
+        stop_price:
+          description: The current trigger price, when the brokerage reports it.
+          nullable: true
+          type: string
+          format: decimal
+          example: "20.82"
+    TrailingStopLimitOrderType:
+      description: A trailing stop-limit order. The stop price trails the market price by `trail`; once triggered, a limit order at `limit_price` is placed.
+      type: object
+      required:
+        - kind
+        - trail
+        - limit_price
+      properties:
+        kind:
+          type: string
+          enum:
+            - trailing_stop_limit
+          example: trailing_stop_limit
+        trail:
+          $ref: "#/components/schemas/TrailingStop"
+        limit_price:
+          description: The limit price that applies once triggered.
+          type: string
+          format: decimal
+          example: "12.34"
+        stop_price:
+          description: The current trigger price, when the brokerage reports it.
+          nullable: true
+          type: string
+          format: decimal
+          example: "20.82"
+    OtherOrderType:
+      description: An order type SnapTrade could not normalize, or a recognized type whose required price the brokerage did not report. The brokerage's own label is in `raw_type`.
+      type: object
+      required:
+        - kind
+        - raw_type
+      properties:
+        kind:
+          type: string
+          enum:
+            - other
+          example: other
+        raw_type:
+          description: The order type label as reported by the brokerage.
+          type: string
+          example: MarketIfTouched
+        limit_price:
+          nullable: true
+          type: string
+          format: decimal
+          example: "12.34"
+        stop_price:
+          nullable: true
+          type: string
+          format: decimal
+          example: "12.50"
     AccountOrdersV2Response:
       description: Contains a standardized list of account orders in the V2 format.
       type: object
