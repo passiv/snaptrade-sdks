@@ -239,6 +239,151 @@ module SnapTrade
     end
 
 
+    # List all account orders
+    #
+    # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+    # 
+    # Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+    # 
+    # `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+    # 
+    # **Experimental:** this endpoint may change without notice.
+    # 
+    # If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param state [String] defaults to \"all\"
+    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_all_account_orders(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
+      extra[:state] = state if state != SENTINEL
+      extra[:days] = days if days != SENTINEL
+      data, _status_code, _headers = get_all_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
+      data
+    end
+
+    # List all account orders
+    #
+    # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+    # 
+    # Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+    # 
+    # `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+    # 
+    # **Experimental:** this endpoint may change without notice.
+    # 
+    # If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param state [String] defaults to \"all\"
+    # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_all_account_orders_with_http_info(user_id:, user_secret:, account_id:, state: SENTINEL, days: SENTINEL, extra: {})
+      extra[:state] = state if state != SENTINEL
+      extra[:days] = days if days != SENTINEL
+      get_all_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
+    end
+
+    # List all account orders
+    # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.  **Experimental:** this endpoint may change without notice.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :state defaults to \"all\"
+    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+    # @return [AllAccountOrdersResponse]
+    private def get_all_account_orders_impl(user_id, user_secret, account_id, opts = {})
+      data, _status_code, _headers = get_all_account_orders_with_http_info(user_id, user_secret, account_id, opts)
+      data
+    end
+
+    # List all account orders
+    # Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Experimental:** this endpoint may change without notice.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :state defaults to \"all\"
+    # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+    # @return [Array<(AllAccountOrdersResponse, Integer, Hash)>] AllAccountOrdersResponse data, response status code and response headers
+    private def get_all_account_orders_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.get_all_account_orders ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.get_all_account_orders"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.get_all_account_orders"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ExperimentalEndpointsApi.get_all_account_orders"
+      end
+      allowable_values = ["all", "open", "executed"]
+      if @api_client.config.client_side_validation && opts[:'state'] && !allowable_values.include?(opts[:'state'])
+        fail ArgumentError, "invalid value for \"state\", must be one of #{allowable_values}"
+      end
+      if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] > 90
+        fail ArgumentError, 'invalid value for "opts[:"days"]" when calling ExperimentalEndpointsApi.get_all_account_orders, must be smaller than or equal to 90.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'days'].nil? && opts[:'days'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"days"]" when calling ExperimentalEndpointsApi.get_all_account_orders, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/accounts/{accountId}/orders/all'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+      query_params[:'state'] = opts[:'state'] if !opts[:'state'].nil?
+      query_params[:'days'] = opts[:'days'] if !opts[:'days'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AllAccountOrdersResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.get_all_account_orders",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#get_all_account_orders\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get account order detail (V2)
     #
     # Returns the detail of a single order using the brokerage order ID provided as a path parameter.

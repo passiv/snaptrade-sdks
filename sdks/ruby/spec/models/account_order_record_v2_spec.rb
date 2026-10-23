@@ -77,6 +77,10 @@ describe SnapTrade::AccountOrderRecordV2 do
   describe 'test attribute "price_effect"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      # validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["CREDIT", "DEBIT", "EVEN", "UNKNOWN"])
+      # validator.allowable_values.each do |value|
+      #   expect { instance.price_effect = value }.not_to raise_error
+      # end
     end
   end
 
