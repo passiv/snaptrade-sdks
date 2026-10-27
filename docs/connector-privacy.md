@@ -1,6 +1,6 @@
 # SnapTrade Connector Privacy Notice
 
-This notice explains how the SnapTrade MCP server (the "connector") handles data when you connect SnapTrade to an AI assistant such as Claude or ChatGPT. It supplements the [SnapTrade Privacy Policy](https://snaptrade.com/privacy-policy), which governs SnapTrade's services overall and applies in full. SnapTrade is operated by Passiv Inc.
+This notice explains how the SnapTrade MCP server (the "connector") handles data when you connect SnapTrade to an AI assistant such as Claude, ChatGPT, or Codex. It supplements the [SnapTrade Privacy Policy](https://snaptrade.com/privacy-policy), which governs SnapTrade's services overall and applies in full. SnapTrade is operated by Passiv Inc.
 
 The connector reads your account data and can create a one-time link for you to connect a new brokerage. Creating that link does not connect an account on your behalf. The connector cannot place trades, move money, or change account settings.
 
@@ -18,7 +18,7 @@ When your AI assistant calls a connector tool in response to your prompt, the co
 - **Wealth Rank** — a monthly placement based on the value of your connected holdings compared with other SnapTrade Personal members, when available. It does not measure investment performance.
 - **Reference and app directory data** — stock exchanges, partner information, and compatible apps and tools. Directory results may be unavailable for some accounts.
 
-Account-data tools retrieve data in response to prompts you make through your AI assistant. If account events are enabled for your account and your AI client subscribes, the connector can also deliver connection-created, connection-disabled, and daily sync-summary events. Those event payloads contain connection identifiers and brokerage names, not account numbers or account names. Event subscriptions may not be available for every account.
+Account-data tools retrieve data in response to prompts you make through your AI assistant. If account events are enabled for your account and your AI client subscribes, the connector can also deliver connection-created, connection-disabled, and daily sync-summary events. Event payloads can include connection identifiers and brokerage names. Daily sync summaries also include per-connection sync status and last-sync time, plus summary counts. Events do not include account numbers or account names. Event subscriptions may not be available for every account.
 
 ## What the connector does not access
 
@@ -40,7 +40,7 @@ Retention of the underlying account data that SnapTrade holds is governed by the
 
 ## Third-party sharing
 
-When a connector tool returns data, or a subscribed event is delivered, that information goes to the AI provider you chose to use — Anthropic for Claude, or OpenAI for ChatGPT. How those providers handle the data is governed by their own privacy policies:
+When a connector tool returns data, or a subscribed event is delivered, that information goes to the AI provider you chose to use — Anthropic for Claude, or OpenAI for ChatGPT or Codex. How those providers handle the data is governed by their own privacy policies:
 
 - [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy)
 - [OpenAI Privacy Policy](https://openai.com/policies/privacy-policy/)
@@ -62,7 +62,7 @@ You can revoke a connector's access at any time from the SnapTrade dashboard und
 
 ## Contact
 
-For privacy or data questions, contact `support@snaptrade.com`. For security vulnerability reports, contact `security@snaptrade.com`. SnapTrade is operated by Passiv Inc.
+For connector help, see [SnapTrade MCP Connector Support](https://docs.snaptrade.com/docs/mcp-support) or contact `support@snaptrade.com`. For security vulnerability reports, contact `security@snaptrade.com`. SnapTrade is operated by Passiv Inc.
 
 ---
 
@@ -73,3 +73,4 @@ For privacy or data questions, contact `support@snaptrade.com`. For security vul
 - [SnapTrade Security](https://snaptrade.com/security)
 - [SnapTrade Application Compliance Policy](https://snaptrade.com/compliance-policy)
 - [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server)
+- [SnapTrade MCP Connector Support](https://docs.snaptrade.com/docs/mcp-support)

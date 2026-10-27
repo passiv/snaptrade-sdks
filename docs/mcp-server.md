@@ -1,6 +1,6 @@
 # SnapTrade MCP Server
 
-SnapTrade offers a hosted [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets AI assistants like Claude and ChatGPT securely read a user's connected brokerage data through natural-language prompts. Once a user adds SnapTrade as a connector, they can ask their assistant about balances, positions, orders, account activity, portfolio allocation, and investment income in plain language.
+SnapTrade offers a hosted [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets AI assistants like Claude, ChatGPT, and Codex securely read a user's connected brokerage data through natural-language prompts. Once a user adds SnapTrade as a connector, they can ask their assistant about balances, positions, orders, account activity, portfolio allocation, and investment income in plain language.
 
 The MCP server is available at `https://mcp.snaptrade.com/mcp`.
 
@@ -129,7 +129,7 @@ All tools declare explicit read-only, destructive, and open-world hints. `reques
 
 ## Optional account events
 
-When account events are enabled for a user and supported by the AI client, the connector can offer subscriptions to `connection.created`, `connection.disabled`, and `sync.daily_summary`. These can notify the assistant of a new connection, a connection needing attention, or whether connections synced in the last 24 hours. Event payloads contain connection identifiers and brokerage names, not account numbers or account names. This feature is separate from the 19 tools above and may not be available for every account.
+When account events are enabled for a user and supported by the AI client, the connector can offer subscriptions to `connection.created`, `connection.disabled`, and `sync.daily_summary`. These can notify the assistant of a new connection, a connection needing attention, or whether connections synced in the last 24 hours. Event payloads can include connection identifiers and brokerage names. The daily sync summary also includes each connection's sync status and last-sync time, plus summary counts. Events do not include account numbers or account names. This feature is separate from the 19 tools above and may not be available for every account.
 
 ## Manage and revoke access
 
@@ -139,14 +139,14 @@ This is separate from disconnecting a brokerage — revoking connector access re
 
 ## Support
 
-- General support: `support@snaptrade.com`
-- Security vulnerability reports: `security@snaptrade.com`
+For connector setup, sign-in, connection, or data questions, see [SnapTrade MCP connector support](https://docs.snaptrade.com/docs/mcp-support) or email `support@snaptrade.com`. Send security vulnerability reports to `security@snaptrade.com`.
 
 ---
 
 ## Related
 
 - [SnapTrade Connector Privacy Notice](https://docs.snaptrade.com/docs/connector-privacy)
+- [SnapTrade MCP Connector Support](https://docs.snaptrade.com/docs/mcp-support)
 - [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
 - [Brokerage Integrations](https://docs.snaptrade.com/docs/integrations)
 - [Terminology](https://docs.snaptrade.com/docs/terminology)
