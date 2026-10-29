@@ -1129,6 +1129,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/AccountOrderRecord"
+        "404":
+          description: Not Found - the account is unavailable over the brokerage API. It may have been closed, or access over the brokerage API may have been revoked.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404AccountUnavailableResponse"
         "500":
           description: Unexpected error
           content:
@@ -3630,6 +3636,15 @@ components:
           example: The requested resource does not exist.
         default_code:
           example: 1011
+    404AccountUnavailableResponse:
+      description: The account is unavailable over the brokerage API
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          example: Account is currently unavailable over the brokerage API. It may have been closed, or access over the brokerage API may have been revoked
     425FailedRequestResponse:
       description: Example for failed request response
       type: object

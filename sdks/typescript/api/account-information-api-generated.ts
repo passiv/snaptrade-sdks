@@ -107,6 +107,8 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
+import { Model404AccountUnavailableResponse } from '../models';
+// @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model425FailedRequestResponse } from '../models';

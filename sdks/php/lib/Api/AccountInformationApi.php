@@ -4014,7 +4014,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\AccountOrderRecord[]|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
+     * @return \SnapTrade\Model\AccountOrderRecord[]|\SnapTrade\Model\Model404AccountUnavailableResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
      */
     public function getUserAccountOrders(
         $user_id,
@@ -4047,7 +4047,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\AccountOrderRecord[]|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\AccountOrderRecord[]|\SnapTrade\Model\Model404AccountUnavailableResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getUserAccountOrdersWithHttpInfo($user_id, $user_secret, $account_id, $state = null, $days = null, string $contentType = self::contentTypes['getUserAccountOrders'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -4120,6 +4120,21 @@ class AccountInformationApi extends \SnapTrade\CustomApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountOrderRecord[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\SnapTrade\Model\Model404AccountUnavailableResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model404AccountUnavailableResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model404AccountUnavailableResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4207,6 +4222,14 @@ class AccountInformationApi extends \SnapTrade\CustomApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SnapTrade\Model\AccountOrderRecord[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model404AccountUnavailableResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
