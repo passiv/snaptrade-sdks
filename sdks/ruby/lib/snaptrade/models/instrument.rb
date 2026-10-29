@@ -18,6 +18,7 @@ module SnapTrade
       def openapi_one_of
         [
           :'AdrInstrument',
+          :'CashInstrument',
           :'CefInstrument',
           :'CfdInstrument',
           :'CryptoInstrument',
@@ -42,6 +43,7 @@ module SnapTrade
         {
           :'adr' => :'AdrInstrument',
           :'bond' => :'OtherInstrument',
+          :'cash' => :'CashInstrument',
           :'cef' => :'CefInstrument',
           :'cfd' => :'CfdInstrument',
           :'crypto' => :'CryptoInstrument',

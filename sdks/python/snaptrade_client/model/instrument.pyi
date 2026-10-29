@@ -41,6 +41,7 @@ class Instrument(
             return {
                 'kind': {
                     'AdrInstrument': AdrInstrument,
+                    'CashInstrument': CashInstrument,
                     'CefInstrument': CefInstrument,
                     'CfdInstrument': CfdInstrument,
                     'CryptoInstrument': CryptoInstrument,
@@ -54,6 +55,7 @@ class Instrument(
                     'TokenizedAssetInstrument': TokenizedAssetInstrument,
                     'adr': AdrInstrument,
                     'bond': OtherInstrument,
+                    'cash': CashInstrument,
                     'cef': CefInstrument,
                     'cfd': CfdInstrument,
                     'crypto': CryptoInstrument,
@@ -91,6 +93,7 @@ class Instrument(
                 CfdInstrument,
                 TokenizedAssetInstrument,
                 OtherInstrument,
+                CashInstrument,
             ]
 
 
@@ -108,6 +111,7 @@ class Instrument(
         )
 
 from snaptrade_client.model.adr_instrument import AdrInstrument
+from snaptrade_client.model.cash_instrument import CashInstrument
 from snaptrade_client.model.cef_instrument import CefInstrument
 from snaptrade_client.model.cfd_instrument import CfdInstrument
 from snaptrade_client.model.crypto_instrument import CryptoInstrument

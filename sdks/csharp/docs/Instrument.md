@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
 **UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) | The listed stock or ETF underlying a tokenized asset. | 
+**Code** | **string** | ISO-4217 code of the currency. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

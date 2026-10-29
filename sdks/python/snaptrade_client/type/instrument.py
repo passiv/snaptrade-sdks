@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.adr_instrument import AdrInstrument
+from snaptrade_client.type.cash_instrument import CashInstrument
 from snaptrade_client.type.cef_instrument import CefInstrument
 from snaptrade_client.type.cfd_instrument import CfdInstrument
 from snaptrade_client.type.crypto_instrument import CryptoInstrument
@@ -28,4 +29,4 @@ from snaptrade_client.type.other_instrument import OtherInstrument
 from snaptrade_client.type.stock_instrument import StockInstrument
 from snaptrade_client.type.tokenized_asset_instrument import TokenizedAssetInstrument
 
-Instrument = typing.Union[StockInstrument,OptionInstrument,CryptoInstrument,FutureInstrument,FutureOptionInstrument,EtfInstrument,MutualFundInstrument,CefInstrument,AdrInstrument,CfdInstrument,TokenizedAssetInstrument,OtherInstrument]
+Instrument = typing.Union[StockInstrument,OptionInstrument,CryptoInstrument,FutureInstrument,FutureOptionInstrument,EtfInstrument,MutualFundInstrument,CefInstrument,AdrInstrument,CfdInstrument,TokenizedAssetInstrument,OtherInstrument,CashInstrument]

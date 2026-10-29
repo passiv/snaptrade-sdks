@@ -283,6 +283,7 @@ Class | Method | HTTP request | Description
  - [BrokerageInstrumentsResponse](docs/BrokerageInstrumentsResponse.md)
  - [BrokerageType](docs/BrokerageType.md)
  - [CancelOrderResponse](docs/CancelOrderResponse.md)
+ - [CashInstrument](docs/CashInstrument.md)
  - [CefInstrument](docs/CefInstrument.md)
  - [CfdInstrument](docs/CfdInstrument.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)

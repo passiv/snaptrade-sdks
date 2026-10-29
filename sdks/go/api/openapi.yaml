@@ -9713,6 +9713,7 @@ components:
           adr: '#/components/schemas/AdrInstrument'
           cfd: '#/components/schemas/CfdInstrument'
           tokenized_asset: '#/components/schemas/TokenizedAssetInstrument'
+          cash: '#/components/schemas/CashInstrument'
           bond: '#/components/schemas/OtherInstrument'
           other: '#/components/schemas/OtherInstrument'
         propertyName: kind
@@ -9729,6 +9730,7 @@ components:
       - $ref: '#/components/schemas/CfdInstrument'
       - $ref: '#/components/schemas/TokenizedAssetInstrument'
       - $ref: '#/components/schemas/OtherInstrument'
+      - $ref: '#/components/schemas/CashInstrument'
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
       discriminator:
@@ -9951,6 +9953,30 @@ components:
       - kind
       - symbol
       - underlying_instrument
+      type: object
+    CashInstrument:
+      additionalProperties: true
+      description: |
+        A currency traded as the instrument itself, such as the currency bought or sold by a forex order.
+        Quantities on the leg are amounts of this currency; the order's `price_currency` is the currency it was priced in.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - cash
+          example: cash
+          type: string
+          x-konfig-original-example: cash
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CashInstrument-properties-kind
+        code:
+          description: ISO-4217 code of the currency.
+          example: EUR
+          type: string
+          x-konfig-original-example: EUR
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CashInstrument-properties-code
+      required:
+      - code
+      - kind
       type: object
     AdrInstrument:
       additionalProperties: true
@@ -16660,6 +16686,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TokenizedAssetInstrument-properties-description:
       example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CashInstrument-properties-kind:
+      example: cash
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CashInstrument-properties-code:
+      example: EUR
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AdrInstrument-properties-kind:
