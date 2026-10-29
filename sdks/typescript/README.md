@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![npm](https://img.shields.io/badge/npm-v13.1.12-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/13.1.12)
+[![npm](https://img.shields.io/badge/npm-v13.1.13-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/13.1.13)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
