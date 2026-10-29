@@ -100,6 +100,15 @@ class InvestmentAccountTest extends TestCase
     }
 
     /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "display_name"
      */
     public function testPropertyDisplayName()

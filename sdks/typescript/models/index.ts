@@ -67,6 +67,7 @@ export * from './complex-order-leg';
 export * from './complex-order-response';
 export * from './connected-asset-partner-stats';
 export * from './connection-account';
+export * from './connection-account-status';
 export * from './connection-account-sync-status';
 export * from './connection-accounts-response';
 export * from './crypto-instrument';

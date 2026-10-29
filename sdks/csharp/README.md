@@ -291,6 +291,7 @@ Class | Method | HTTP request | Description
  - [ComplexOrderResponse](docs/ComplexOrderResponse.md)
  - [ConnectedAssetPartnerStats](docs/ConnectedAssetPartnerStats.md)
  - [ConnectionAccount](docs/ConnectionAccount.md)
+ - [ConnectionAccountStatus](docs/ConnectionAccountStatus.md)
  - [ConnectionAccountSyncStatus](docs/ConnectionAccountSyncStatus.md)
  - [ConnectionAccountsResponse](docs/ConnectionAccountsResponse.md)
  - [CryptoInstrument](docs/CryptoInstrument.md)

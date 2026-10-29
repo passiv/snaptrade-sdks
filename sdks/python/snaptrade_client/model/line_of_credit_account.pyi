@@ -98,6 +98,10 @@ class LineOfCreditAccount(
             @staticmethod
             def sync_status() -> typing.Type['LineOfCreditAccountSyncStatus']:
                 return LineOfCreditAccountSyncStatus
+        
+            @staticmethod
+            def status() -> typing.Type['ConnectionAccountStatus']:
+                return ConnectionAccountStatus
             
             
             class display_name(
@@ -227,6 +231,7 @@ class LineOfCreditAccount(
                 "connection_id": connection_id,
                 "masked_account_number": masked_account_number,
                 "sync_status": sync_status,
+                "status": status,
                 "display_name": display_name,
                 "institution_account_id": institution_account_id,
                 "institution_id": institution_id,
@@ -261,6 +266,9 @@ class LineOfCreditAccount(
     def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["status"]) -> 'ConnectionAccountStatus': ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["display_name"]) -> MetaOapg.properties.display_name: ...
     
     @typing.overload
@@ -290,7 +298,7 @@ class LineOfCreditAccount(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], typing_extensions.Literal["available_credit"], typing_extensions.Literal["next_payment_date"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["status"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], typing_extensions.Literal["available_credit"], typing_extensions.Literal["next_payment_date"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -308,6 +316,9 @@ class LineOfCreditAccount(
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["status"]) -> typing.Union['ConnectionAccountStatus', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["display_name"]) -> typing.Union[MetaOapg.properties.display_name, schemas.Unset]: ...
@@ -339,7 +350,7 @@ class LineOfCreditAccount(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], typing_extensions.Literal["available_credit"], typing_extensions.Literal["next_payment_date"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["masked_account_number"], typing_extensions.Literal["connection_id"], typing_extensions.Literal["kind"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["id"], typing_extensions.Literal["status"], typing_extensions.Literal["display_name"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["institution_id"], typing_extensions.Literal["opening_date"], typing_extensions.Literal["raw_type"], typing_extensions.Literal["net_value"], typing_extensions.Literal["minimum_payment_amount"], typing_extensions.Literal["available_credit"], typing_extensions.Literal["next_payment_date"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -350,6 +361,7 @@ class LineOfCreditAccount(
         kind: typing.Union[MetaOapg.properties.kind, str, ],
         sync_status: 'LineOfCreditAccountSyncStatus',
         id: typing.Union[MetaOapg.properties.id, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+        status: typing.Union['ConnectionAccountStatus', schemas.Unset] = schemas.unset,
         display_name: typing.Union[MetaOapg.properties.display_name, None, str, schemas.Unset] = schemas.unset,
         institution_account_id: typing.Union[MetaOapg.properties.institution_account_id, None, str, schemas.Unset] = schemas.unset,
         institution_id: typing.Union[MetaOapg.properties.institution_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
@@ -370,6 +382,7 @@ class LineOfCreditAccount(
             kind=kind,
             sync_status=sync_status,
             id=id,
+            status=status,
             display_name=display_name,
             institution_account_id=institution_account_id,
             institution_id=institution_id,
@@ -383,6 +396,7 @@ class LineOfCreditAccount(
             **kwargs,
         )
 
+from snaptrade_client.model.connection_account_status import ConnectionAccountStatus
 from snaptrade_client.model.line_of_credit_account_available_credit import LineOfCreditAccountAvailableCredit
 from snaptrade_client.model.line_of_credit_account_minimum_payment_amount import LineOfCreditAccountMinimumPaymentAmount
 from snaptrade_client.model.line_of_credit_account_net_value import LineOfCreditAccountNetValue

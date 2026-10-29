@@ -24,6 +24,7 @@ type AnnuityAccount struct {
 	Id string `json:"id"`
 	// Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
 	ConnectionId string `json:"connection_id"`
+	Status *ConnectionAccountStatus `json:"status,omitempty"`
 	// A display name for the account. Either assigned by the user or by the institution itself.
 	DisplayName NullableString `json:"display_name,omitempty"`
 	// The account number assigned by the institution, masked to the last 4 characters (e.g. `****4821`).
@@ -135,6 +136,38 @@ func (o *AnnuityAccount) GetConnectionIdOk() (*string, bool) {
 // SetConnectionId sets field value
 func (o *AnnuityAccount) SetConnectionId(v string) {
 	o.ConnectionId = v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *AnnuityAccount) GetStatus() ConnectionAccountStatus {
+	if o == nil || isNil(o.Status) {
+		var ret ConnectionAccountStatus
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnnuityAccount) GetStatusOk() (*ConnectionAccountStatus, bool) {
+	if o == nil || isNil(o.Status) {
+    return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *AnnuityAccount) HasStatus() bool {
+	if o != nil && !isNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given ConnectionAccountStatus and assigns it to the Status field.
+func (o *AnnuityAccount) SetStatus(v ConnectionAccountStatus) {
+	o.Status = &v
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -438,6 +471,9 @@ func (o AnnuityAccount) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["connection_id"] = o.ConnectionId
 	}
+	if !isNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
 	if o.DisplayName.IsSet() {
 		toSerialize["display_name"] = o.DisplayName.Get()
 	}
@@ -483,6 +519,7 @@ func (o *AnnuityAccount) UnmarshalJSON(bytes []byte) error {
 	delete(additionalProperties, "kind")
 	delete(additionalProperties, "id")
 	delete(additionalProperties, "connection_id")
+	delete(additionalProperties, "status")
 	delete(additionalProperties, "display_name")
 	delete(additionalProperties, "masked_account_number")
 	delete(additionalProperties, "institution_account_id")

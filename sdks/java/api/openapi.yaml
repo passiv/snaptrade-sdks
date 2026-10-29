@@ -5447,6 +5447,8 @@ components:
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
+        status:
+          $ref: '#/components/schemas/ConnectionAccountStatus'
         display_name:
           description: A display name for the account. Either assigned by the user
             or by the institution itself.
@@ -5571,6 +5573,8 @@ components:
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
+        status:
+          $ref: '#/components/schemas/ConnectionAccountStatus'
         display_name:
           description: A display name for the account. Either assigned by the user
             or by the institution itself.
@@ -5658,6 +5662,8 @@ components:
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
+        status:
+          $ref: '#/components/schemas/ConnectionAccountStatus'
         display_name:
           description: A display name for the account. Either assigned by the user
             or by the institution itself.
@@ -5763,6 +5769,8 @@ components:
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
+        status:
+          $ref: '#/components/schemas/ConnectionAccountStatus'
         display_name:
           description: A display name for the account. Either assigned by the user
             or by the institution itself.
@@ -5824,6 +5832,22 @@ components:
       - masked_account_number
       - sync_status
       type: object
+    ConnectionAccountStatus:
+      description: |
+        The current status of the account. Omitted when the status is unknown or not provided by the institution.
+        - `open`: The account is open.
+        - `closed`: The account is closed.
+        - `archived`: The account is archived.
+        - `unavailable`: The account is no longer available through the institution's API. Accounts with this status are excluded from account list responses.
+      enum:
+      - open
+      - closed
+      - archived
+      - unavailable
+      example: open
+      type: string
+      x-konfig-original-example: open
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectionAccountStatus
     ConnectionAccountSyncStatus:
       additionalProperties: true
       description: |
@@ -15719,6 +15743,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AnnuityAccount-properties-net_value-properties-currency:
       example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ConnectionAccountStatus:
+      example: open
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountSimple-properties-name:

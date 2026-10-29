@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.annuity_account_net_value import AnnuityAccountNetValue
 from snaptrade_client.type.annuity_account_sync_status import AnnuityAccountSyncStatus
+from snaptrade_client.type.connection_account_status import ConnectionAccountStatus
 
 class RequiredAnnuityAccount(TypedDict):
     # Discriminator for the account kind.
@@ -35,6 +36,8 @@ class RequiredAnnuityAccount(TypedDict):
 
 
 class OptionalAnnuityAccount(TypedDict, total=False):
+    status: ConnectionAccountStatus
+
     # A display name for the account. Either assigned by the user or by the institution itself.
     display_name: typing.Optional[str]
 

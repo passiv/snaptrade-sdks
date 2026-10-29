@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Kind** | **string** | Discriminator for the account kind. | 
 **Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
+**Status** | **ConnectionAccountStatus** |  | [optional] 
 **DisplayName** | **string** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
 **MaskedAccountNumber** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
 **InstitutionAccountId** | **string** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 

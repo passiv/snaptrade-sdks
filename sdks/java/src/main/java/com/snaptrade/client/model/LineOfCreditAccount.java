@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.ConnectionAccountStatus;
 import com.snaptrade.client.model.LineOfCreditAccountAvailableCredit;
 import com.snaptrade.client.model.LineOfCreditAccountMinimumPaymentAmount;
 import com.snaptrade.client.model.LineOfCreditAccountNetValue;
@@ -114,6 +115,10 @@ public class LineOfCreditAccount {
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connection_id";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
   private UUID connectionId;
+
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private ConnectionAccountStatus status;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
@@ -246,6 +251,35 @@ public class LineOfCreditAccount {
     
     
     this.connectionId = connectionId;
+  }
+
+
+  public LineOfCreditAccount status(ConnectionAccountStatus status) {
+    
+    
+    
+    
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public ConnectionAccountStatus getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(ConnectionAccountStatus status) {
+    
+    
+    
+    this.status = status;
   }
 
 
@@ -625,6 +659,7 @@ public class LineOfCreditAccount {
     return Objects.equals(this.kind, lineOfCreditAccount.kind) &&
         Objects.equals(this.id, lineOfCreditAccount.id) &&
         Objects.equals(this.connectionId, lineOfCreditAccount.connectionId) &&
+        Objects.equals(this.status, lineOfCreditAccount.status) &&
         Objects.equals(this.displayName, lineOfCreditAccount.displayName) &&
         Objects.equals(this.maskedAccountNumber, lineOfCreditAccount.maskedAccountNumber) &&
         Objects.equals(this.institutionAccountId, lineOfCreditAccount.institutionAccountId) &&
@@ -645,7 +680,7 @@ public class LineOfCreditAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, connectionId, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, minimumPaymentAmount, availableCredit, nextPaymentDate, additionalProperties);
+    return Objects.hash(kind, id, connectionId, status, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, minimumPaymentAmount, availableCredit, nextPaymentDate, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -662,6 +697,7 @@ public class LineOfCreditAccount {
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    maskedAccountNumber: ").append(toIndentedString(maskedAccountNumber)).append("\n");
     sb.append("    institutionAccountId: ").append(toIndentedString(institutionAccountId)).append("\n");
@@ -700,6 +736,7 @@ public class LineOfCreditAccount {
     openapiFields.add("kind");
     openapiFields.add("id");
     openapiFields.add("connection_id");
+    openapiFields.add("status");
     openapiFields.add("display_name");
     openapiFields.add("masked_account_number");
     openapiFields.add("institution_account_id");

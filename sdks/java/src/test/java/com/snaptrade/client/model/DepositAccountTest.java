@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.ConnectionAccountStatus;
 import com.snaptrade.client.model.DepositAccountNetValue;
 import com.snaptrade.client.model.DepositAccountSyncStatus;
 import io.swagger.annotations.ApiModel;
@@ -65,6 +66,14 @@ public class DepositAccountTest {
     @Test
     public void connectionIdTest() {
         // TODO: test connectionId
+    }
+
+    /**
+     * Test the property 'status'
+     */
+    @Test
+    public void statusTest() {
+        // TODO: test status
     }
 
     /**

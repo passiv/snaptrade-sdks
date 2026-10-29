@@ -54,6 +54,12 @@ namespace SnapTrade.Net.Model
         /// <value>Discriminator for the account kind.</value>
         [DataMember(Name = "kind", IsRequired = true, EmitDefaultValue = true)]
         public KindEnum Kind { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Status
+        /// </summary>
+        [DataMember(Name = "status", EmitDefaultValue = false)]
+        public ConnectionAccountStatus? Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="AnnuityAccount" /> class.
         /// </summary>
@@ -68,6 +74,7 @@ namespace SnapTrade.Net.Model
         /// <param name="kind">Discriminator for the account kind. (required).</param>
         /// <param name="id">Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="connectionId">Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. (required).</param>
+        /// <param name="status">status.</param>
         /// <param name="displayName">A display name for the account. Either assigned by the user or by the institution itself..</param>
         /// <param name="maskedAccountNumber">The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). (required).</param>
         /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections..</param>
@@ -76,7 +83,7 @@ namespace SnapTrade.Net.Model
         /// <param name="syncStatus">syncStatus (required).</param>
         /// <param name="rawType">The account type as provided by the institution..</param>
         /// <param name="netValue">netValue.</param>
-        public AnnuityAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), string displayName = default(string), string maskedAccountNumber = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), AnnuityAccountSyncStatus syncStatus = default(AnnuityAccountSyncStatus), string rawType = default(string), AnnuityAccountNetValue netValue = default(AnnuityAccountNetValue)) : base()
+        public AnnuityAccount(KindEnum kind = default(KindEnum), string id = default(string), string connectionId = default(string), ConnectionAccountStatus? status = default(ConnectionAccountStatus?), string displayName = default(string), string maskedAccountNumber = default(string), string institutionAccountId = default(string), string institutionId = default(string), DateTime? openingDate = default(DateTime?), AnnuityAccountSyncStatus syncStatus = default(AnnuityAccountSyncStatus), string rawType = default(string), AnnuityAccountNetValue netValue = default(AnnuityAccountNetValue)) : base()
         {
             this.Kind = kind;
             // to ensure "id" is required (not null)
@@ -103,6 +110,7 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("syncStatus is a required property for AnnuityAccount and cannot be null");
             }
             this.SyncStatus = syncStatus;
+            this.Status = status;
             this.DisplayName = displayName;
             this.InstitutionAccountId = institutionAccountId;
             this.InstitutionId = institutionId;
@@ -198,6 +206,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Kind: ").Append(Kind).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  ConnectionId: ").Append(ConnectionId).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  MaskedAccountNumber: ").Append(MaskedAccountNumber).Append("\n");
             sb.Append("  InstitutionAccountId: ").Append(InstitutionAccountId).Append("\n");
@@ -255,6 +264,10 @@ namespace SnapTrade.Net.Model
                     this.ConnectionId == input.ConnectionId ||
                     (this.ConnectionId != null &&
                     this.ConnectionId.Equals(input.ConnectionId))
+                ) && base.Equals(input) && 
+                (
+                    this.Status == input.Status ||
+                    this.Status.Equals(input.Status)
                 ) && base.Equals(input) && 
                 (
                     this.DisplayName == input.DisplayName ||
@@ -317,6 +330,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.ConnectionId.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.Status.GetHashCode();
                 if (this.DisplayName != null)
                 {
                     hashCode = (hashCode * 59) + this.DisplayName.GetHashCode();
