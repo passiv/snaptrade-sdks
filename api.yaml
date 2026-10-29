@@ -6328,6 +6328,9 @@ components:
         - $ref: "#/components/schemas/CfdInstrument"
         - $ref: "#/components/schemas/TokenizedAssetInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
+        # New variants go last: the breaking-change check pairs oneOf entries by position,
+        # so inserting one mid-list reads as the shifted variant losing its properties.
+        - $ref: "#/components/schemas/CashInstrument"
       discriminator:
         propertyName: kind
         mapping:
@@ -6342,6 +6345,7 @@ components:
           adr: "#/components/schemas/AdrInstrument"
           cfd: "#/components/schemas/CfdInstrument"
           tokenized_asset: "#/components/schemas/TokenizedAssetInstrument"
+          cash: "#/components/schemas/CashInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
     UnderlyingOptionInstrument:
@@ -6523,6 +6527,25 @@ components:
         - id
         - symbol
         - underlying_instrument
+    CashInstrument:
+      description: |
+        A currency traded as the instrument itself, such as the currency bought or sold by a forex order.
+        Quantities on the leg are amounts of this currency; the order's `price_currency` is the currency it was priced in.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - cash
+          example: cash
+        code:
+          type: string
+          description: ISO-4217 code of the currency.
+          example: EUR
+      required:
+        - kind
+        - code
     AdrInstrument:
       description: Security instrument metadata for ADR positions.
       type: object
