@@ -92,6 +92,8 @@ portal:
               path: docs/mcp-server.md
             - id: connector-privacy
               path: docs/connector-privacy.md
+            - id: mcp-support
+              path: docs/mcp-support.md
         - label: Core Concepts
           links:
             - id: terminology
