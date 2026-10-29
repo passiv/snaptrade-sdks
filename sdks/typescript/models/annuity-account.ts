@@ -69,6 +69,7 @@ import type * as buffer from "buffer"
 
 import { AnnuityAccountNetValue } from './annuity-account-net-value';
 import { AnnuityAccountSyncStatus } from './annuity-account-sync-status';
+import { ConnectionAccountStatus } from './connection-account-status';
 
 /**
  * An annuity contract account under a connection. Akoya accounts returned in the `annuityAccount` category use this kind; investment accounts holding annuity products remain `investment` accounts. `net_value` is the contract\'s surrender/cash value (`netPresentValue` from Akoya), not available cash. It is real-time or cached depending on the caller\'s plan, and always cached on `AccountInformation_listAllUserAccounts`. 
@@ -96,6 +97,12 @@ export interface AnnuityAccount {
      * @memberof AnnuityAccount
      */
     'connection_id': string;
+    /**
+     * The current status of the account. Omitted when the status is unknown or not provided by the institution. - `open`: The account is open. - `closed`: The account is closed. - `archived`: The account is archived. - `unavailable`: The account is no longer available through the institution\'s API. Accounts with this status are excluded from account list responses. 
+     * @type {ConnectionAccountStatus}
+     * @memberof AnnuityAccount
+     */
+    'status'?: ConnectionAccountStatus;
     /**
      * A display name for the account. Either assigned by the user or by the institution itself.
      * @type {string}

@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.connection_account_status import ConnectionAccountStatus
 from snaptrade_client.type.line_of_credit_account_available_credit import LineOfCreditAccountAvailableCredit
 from snaptrade_client.type.line_of_credit_account_minimum_payment_amount import LineOfCreditAccountMinimumPaymentAmount
 from snaptrade_client.type.line_of_credit_account_net_value import LineOfCreditAccountNetValue
@@ -37,6 +38,8 @@ class RequiredLineOfCreditAccount(TypedDict):
 
 
 class OptionalLineOfCreditAccount(TypedDict, total=False):
+    status: ConnectionAccountStatus
+
     # A display name for the account. Either assigned by the user or by the institution itself.
     display_name: typing.Optional[str]
 

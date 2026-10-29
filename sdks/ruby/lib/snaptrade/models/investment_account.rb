@@ -22,6 +22,9 @@ module SnapTrade
     # Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :connection_id
 
+    # The current status of the account. Omitted when the status is unknown or not provided by the institution. - `open`: The account is open. - `closed`: The account is closed. - `archived`: The account is archived. - `unavailable`: The account is no longer available through the institution's API. Accounts with this status are excluded from account list responses. 
+    attr_accessor :status
+
     # A display name for the account. Either assigned by the user or by the institution itself.
     attr_accessor :display_name
 
@@ -59,6 +62,7 @@ module SnapTrade
         :'kind' => :'kind',
         :'id' => :'id',
         :'connection_id' => :'connection_id',
+        :'status' => :'status',
         :'display_name' => :'display_name',
         :'masked_account_number' => :'masked_account_number',
         :'institution_account_id' => :'institution_account_id',
@@ -84,6 +88,7 @@ module SnapTrade
         :'kind' => :'Kind',
         :'id' => :'String',
         :'connection_id' => :'String',
+        :'status' => :'ConnectionAccountStatus',
         :'display_name' => :'String',
         :'masked_account_number' => :'String',
         :'institution_account_id' => :'String',
@@ -135,6 +140,10 @@ module SnapTrade
 
       if attributes.key?(:'connection_id')
         self.connection_id = attributes[:'connection_id']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
       if attributes.key?(:'display_name')
@@ -233,6 +242,7 @@ module SnapTrade
           kind == o.kind &&
           id == o.id &&
           connection_id == o.connection_id &&
+          status == o.status &&
           display_name == o.display_name &&
           masked_account_number == o.masked_account_number &&
           institution_account_id == o.institution_account_id &&
@@ -255,7 +265,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [kind, id, connection_id, display_name, masked_account_number, institution_account_id, institution_id, opening_date, funding_date, sync_status, raw_type, cash_or_margin, is_paper, net_value].hash
+      [kind, id, connection_id, status, display_name, masked_account_number, institution_account_id, institution_id, opening_date, funding_date, sync_status, raw_type, cash_or_margin, is_paper, net_value].hash
     end
 
     # Builds the object from hash

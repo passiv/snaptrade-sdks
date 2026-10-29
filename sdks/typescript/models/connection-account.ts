@@ -70,6 +70,7 @@ import type * as buffer from "buffer"
 import { AnnuityAccount } from './annuity-account';
 import { AnnuityAccountNetValue } from './annuity-account-net-value';
 import { AnnuityAccountSyncStatus } from './annuity-account-sync-status';
+import { ConnectionAccountStatus } from './connection-account-status';
 import { DepositAccount } from './deposit-account';
 import { InvestmentAccount } from './investment-account';
 import { LineOfCreditAccount } from './line-of-credit-account';

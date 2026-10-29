@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Kind** | **string** | Discriminator for the account kind. | 
 **Id** | **string** | Unique identifier for the connected institution account. This is the UUID used to reference the account in SnapTrade. | 
 **ConnectionId** | **string** | Unique identifier for the connection (brokerage_authorization_id). This is the UUID used to reference the connection in SnapTrade. | 
+**Status** | Pointer to [**ConnectionAccountStatus**](ConnectionAccountStatus.md) |  | [optional] 
 **DisplayName** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the institution itself. | [optional] 
 **MaskedAccountNumber** | **string** | The account number assigned by the institution, masked to the last 4 characters (e.g. &#x60;****4821&#x60;). | 
 **InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same institution account across multiple connections. | [optional] 
@@ -94,6 +95,31 @@ and a boolean to check if the value has been set.
 
 SetConnectionId sets ConnectionId field to given value.
 
+
+### GetStatus
+
+`func (o *AnnuityAccount) GetStatus() ConnectionAccountStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *AnnuityAccount) GetStatusOk() (*ConnectionAccountStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *AnnuityAccount) SetStatus(v ConnectionAccountStatus)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *AnnuityAccount) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 ### GetDisplayName
 

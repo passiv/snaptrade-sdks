@@ -214,6 +214,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.Kind`: %v\n", resp.Kind)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.Id`: %v\n", resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.ConnectionId`: %v\n", resp.ConnectionId)
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.DisplayName`: %v\n", *resp.DisplayName)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.MaskedAccountNumber`: %v\n", resp.MaskedAccountNumber)
     fmt.Fprintf(os.Stdout, "Response from `ConnectionAccount.GetAccountDetails.InstitutionAccountId`: %v\n", *resp.InstitutionAccountId)

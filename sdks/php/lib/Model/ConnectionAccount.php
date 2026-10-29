@@ -66,6 +66,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'kind' => 'string',
         'id' => 'string',
         'connection_id' => 'string',
+        'status' => '\SnapTrade\Model\ConnectionAccountStatus',
         'display_name' => 'string',
         'masked_account_number' => 'string',
         'institution_account_id' => 'string',
@@ -93,6 +94,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'kind' => null,
         'id' => null,
         'connection_id' => 'uuid',
+        'status' => null,
         'display_name' => null,
         'masked_account_number' => null,
         'institution_account_id' => null,
@@ -118,6 +120,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'kind' => false,
 		'id' => false,
 		'connection_id' => false,
+		'status' => false,
 		'display_name' => true,
 		'masked_account_number' => false,
 		'institution_account_id' => true,
@@ -223,6 +226,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'kind' => 'kind',
         'id' => 'id',
         'connection_id' => 'connection_id',
+        'status' => 'status',
         'display_name' => 'display_name',
         'masked_account_number' => 'masked_account_number',
         'institution_account_id' => 'institution_account_id',
@@ -248,6 +252,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'kind' => 'setKind',
         'id' => 'setId',
         'connection_id' => 'setConnectionId',
+        'status' => 'setStatus',
         'display_name' => 'setDisplayName',
         'masked_account_number' => 'setMaskedAccountNumber',
         'institution_account_id' => 'setInstitutionAccountId',
@@ -273,6 +278,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'kind' => 'getKind',
         'id' => 'getId',
         'connection_id' => 'getConnectionId',
+        'status' => 'getStatus',
         'display_name' => 'getDisplayName',
         'masked_account_number' => 'getMaskedAccountNumber',
         'institution_account_id' => 'getInstitutionAccountId',
@@ -379,6 +385,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('kind', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('connection_id', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('display_name', $data ?? [], null);
         $this->setIfExists('masked_account_number', $data ?? [], null);
         $this->setIfExists('institution_account_id', $data ?? [], null);
@@ -569,6 +576,35 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
 
         $this->container['connection_id'] = $connection_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return \SnapTrade\Model\ConnectionAccountStatus|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param \SnapTrade\Model\ConnectionAccountStatus|null $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+
+        $this->container['status'] = $status;
 
         return $this;
     }

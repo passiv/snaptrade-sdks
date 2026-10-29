@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AnnuityAccountNetValue;
 import com.snaptrade.client.model.AnnuityAccountSyncStatus;
+import com.snaptrade.client.model.ConnectionAccountStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -111,6 +112,10 @@ public class AnnuityAccount {
   public static final String SERIALIZED_NAME_CONNECTION_ID = "connection_id";
   @SerializedName(SERIALIZED_NAME_CONNECTION_ID)
   private UUID connectionId;
+
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private ConnectionAccountStatus status;
 
   public static final String SERIALIZED_NAME_DISPLAY_NAME = "display_name";
   @SerializedName(SERIALIZED_NAME_DISPLAY_NAME)
@@ -231,6 +236,35 @@ public class AnnuityAccount {
     
     
     this.connectionId = connectionId;
+  }
+
+
+  public AnnuityAccount status(ConnectionAccountStatus status) {
+    
+    
+    
+    
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public ConnectionAccountStatus getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(ConnectionAccountStatus status) {
+    
+    
+    
+    this.status = status;
   }
 
 
@@ -523,6 +557,7 @@ public class AnnuityAccount {
     return Objects.equals(this.kind, annuityAccount.kind) &&
         Objects.equals(this.id, annuityAccount.id) &&
         Objects.equals(this.connectionId, annuityAccount.connectionId) &&
+        Objects.equals(this.status, annuityAccount.status) &&
         Objects.equals(this.displayName, annuityAccount.displayName) &&
         Objects.equals(this.maskedAccountNumber, annuityAccount.maskedAccountNumber) &&
         Objects.equals(this.institutionAccountId, annuityAccount.institutionAccountId) &&
@@ -540,7 +575,7 @@ public class AnnuityAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(kind, id, connectionId, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, additionalProperties);
+    return Objects.hash(kind, id, connectionId, status, displayName, maskedAccountNumber, institutionAccountId, institutionId, openingDate, syncStatus, rawType, netValue, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -557,6 +592,7 @@ public class AnnuityAccount {
     sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    connectionId: ").append(toIndentedString(connectionId)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    maskedAccountNumber: ").append(toIndentedString(maskedAccountNumber)).append("\n");
     sb.append("    institutionAccountId: ").append(toIndentedString(institutionAccountId)).append("\n");
@@ -592,6 +628,7 @@ public class AnnuityAccount {
     openapiFields.add("kind");
     openapiFields.add("id");
     openapiFields.add("connection_id");
+    openapiFields.add("status");
     openapiFields.add("display_name");
     openapiFields.add("masked_account_number");
     openapiFields.add("institution_account_id");

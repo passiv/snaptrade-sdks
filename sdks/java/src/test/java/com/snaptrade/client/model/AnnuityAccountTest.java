@@ -19,6 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AnnuityAccountNetValue;
 import com.snaptrade.client.model.AnnuityAccountSyncStatus;
+import com.snaptrade.client.model.ConnectionAccountStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -65,6 +66,14 @@ public class AnnuityAccountTest {
     @Test
     public void connectionIdTest() {
         // TODO: test connectionId
+    }
+
+    /**
+     * Test the property 'status'
+     */
+    @Test
+    public void statusTest() {
+        // TODO: test status
     }
 
     /**

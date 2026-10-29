@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.ConnectionAccountStatus;
 import com.snaptrade.client.model.LineOfCreditAccountAvailableCredit;
 import com.snaptrade.client.model.LineOfCreditAccountMinimumPaymentAmount;
 import com.snaptrade.client.model.LineOfCreditAccountNetValue;
@@ -68,6 +69,14 @@ public class LineOfCreditAccountTest {
     @Test
     public void connectionIdTest() {
         // TODO: test connectionId
+    }
+
+    /**
+     * Test the property 'status'
+     */
+    @Test
+    public void statusTest() {
+        // TODO: test status
     }
 
     /**

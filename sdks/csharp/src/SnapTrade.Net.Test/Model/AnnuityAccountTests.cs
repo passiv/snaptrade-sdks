@@ -82,6 +82,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ConnectionId'
         }
         /// <summary>
+        /// Test the property 'Status'
+        /// </summary>
+        [Fact]
+        public void StatusTest()
+        {
+            // TODO unit test for the property 'Status'
+        }
+        /// <summary>
         /// Test the property 'DisplayName'
         /// </summary>
         [Fact]

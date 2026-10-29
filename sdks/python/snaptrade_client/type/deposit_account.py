@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.connection_account_status import ConnectionAccountStatus
 from snaptrade_client.type.deposit_account_net_value import DepositAccountNetValue
 from snaptrade_client.type.deposit_account_sync_status import DepositAccountSyncStatus
 
@@ -35,6 +36,8 @@ class RequiredDepositAccount(TypedDict):
 
 
 class OptionalDepositAccount(TypedDict, total=False):
+    status: ConnectionAccountStatus
+
     # A display name for the account. Either assigned by the user or by the institution itself.
     display_name: typing.Optional[str]
 
