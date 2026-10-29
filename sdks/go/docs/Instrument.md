@@ -20,12 +20,13 @@ Name | Type | Description | Notes
 **RootSymbol** | **string** | Root symbol for the future contract. | 
 **ExpirationCode** | **string** | Exchange expiration code for the contract. | 
 **UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) |  | 
+**Code** | **string** | ISO-4217 code of the currency. | 
 
 ## Methods
 
 ### NewInstrument
 
-`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate string, multiplier NullableFloat64, underlying FutureInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingTokenizedAssetInstrument, ) *Instrument`
+`func NewInstrument(kind string, id string, symbol string, rawSymbol string, optionType string, strikePrice float64, expirationDate string, multiplier NullableFloat64, underlying FutureInstrument, rootSymbol string, expirationCode string, underlyingInstrument UnderlyingTokenizedAssetInstrument, code string, ) *Instrument`
 
 NewInstrument instantiates a new Instrument object
 This constructor will assign default values to properties that have it defined,
@@ -428,6 +429,26 @@ and a boolean to check if the value has been set.
 `func (o *Instrument) SetUnderlyingInstrument(v UnderlyingTokenizedAssetInstrument)`
 
 SetUnderlyingInstrument sets UnderlyingInstrument field to given value.
+
+
+### GetCode
+
+`func (o *Instrument) GetCode() string`
+
+GetCode returns the Code field if non-nil, zero value otherwise.
+
+### GetCodeOk
+
+`func (o *Instrument) GetCodeOk() (*string, bool)`
+
+GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCode
+
+`func (o *Instrument) SetCode(v string)`
+
+SetCode sets Code field to given value.
 
 
 

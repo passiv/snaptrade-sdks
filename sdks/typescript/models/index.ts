@@ -59,6 +59,7 @@ export * from './brokerage-instrument';
 export * from './brokerage-instruments-response';
 export * from './brokerage-type';
 export * from './cancel-order-response';
+export * from './cash-instrument';
 export * from './cef-instrument';
 export * from './cfd-instrument';
 export * from './child-brokerage-order-ids';

@@ -46,6 +46,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public const DISCRIMINATOR_MAPPING = [
         'adr' => \SnapTrade\Model\AdrInstrument::class,
         'bond' => \SnapTrade\Model\OtherInstrument::class,
+        'cash' => \SnapTrade\Model\CashInstrument::class,
         'cef' => \SnapTrade\Model\CefInstrument::class,
         'cfd' => \SnapTrade\Model\CfdInstrument::class,
         'crypto' => \SnapTrade\Model\CryptoInstrument::class,
@@ -87,7 +88,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => '\SnapTrade\Model\FutureInstrument',
         'root_symbol' => 'string',
         'expiration_code' => 'string',
-        'underlying_instrument' => '\SnapTrade\Model\UnderlyingTokenizedAssetInstrument'
+        'underlying_instrument' => '\SnapTrade\Model\UnderlyingTokenizedAssetInstrument',
+        'code' => 'string'
     ];
 
     /**
@@ -113,7 +115,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => null,
         'root_symbol' => null,
         'expiration_code' => null,
-        'underlying_instrument' => null
+        'underlying_instrument' => null,
+        'code' => null
     ];
 
     /**
@@ -137,7 +140,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
 		'underlying' => false,
 		'root_symbol' => false,
 		'expiration_code' => false,
-		'underlying_instrument' => false
+		'underlying_instrument' => false,
+		'code' => false
     ];
 
     /**
@@ -241,7 +245,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => 'underlying',
         'root_symbol' => 'root_symbol',
         'expiration_code' => 'expiration_code',
-        'underlying_instrument' => 'underlying_instrument'
+        'underlying_instrument' => 'underlying_instrument',
+        'code' => 'code'
     ];
 
     /**
@@ -265,7 +270,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => 'setUnderlying',
         'root_symbol' => 'setRootSymbol',
         'expiration_code' => 'setExpirationCode',
-        'underlying_instrument' => 'setUnderlyingInstrument'
+        'underlying_instrument' => 'setUnderlyingInstrument',
+        'code' => 'setCode'
     ];
 
     /**
@@ -289,7 +295,8 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'underlying' => 'getUnderlying',
         'root_symbol' => 'getRootSymbol',
         'expiration_code' => 'getExpirationCode',
-        'underlying_instrument' => 'getUnderlyingInstrument'
+        'underlying_instrument' => 'getUnderlyingInstrument',
+        'code' => 'getCode'
     ];
 
     /**
@@ -333,8 +340,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const KIND_BOND = 'bond';
-    public const KIND_OTHER = 'other';
+    public const KIND_CASH = 'cash';
     public const OPTION_TYPE_CALL = 'CALL';
     public const OPTION_TYPE_PUT = 'PUT';
 
@@ -346,8 +352,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_BOND,
-            self::KIND_OTHER,
+            self::KIND_CASH,
         ];
     }
 
@@ -395,6 +400,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('root_symbol', $data ?? [], null);
         $this->setIfExists('expiration_code', $data ?? [], null);
         $this->setIfExists('underlying_instrument', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
 
         // Initialize discriminator property with the model name.
         $this->container['kind'] = static::$openAPIModelName;
@@ -480,6 +486,9 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['underlying_instrument'] === null) {
             $invalidProperties[] = "'underlying_instrument' can't be null";
+        }
+        if ($this->container['code'] === null) {
+            $invalidProperties[] = "'code' can't be null";
         }
         return $invalidProperties;
     }
@@ -1011,6 +1020,35 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['underlying_instrument'] = $underlying_instrument;
+
+        return $this;
+    }
+
+    /**
+     * Gets code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->container['code'];
+    }
+
+    /**
+     * Sets code
+     *
+     * @param string $code ISO-4217 code of the currency.
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
+        }
+
+        $this->container['code'] = $code;
 
         return $this;
     }

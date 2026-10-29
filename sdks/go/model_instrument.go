@@ -19,6 +19,7 @@ import (
 // Instrument - Instrument metadata for a V2 position. Use `kind` to determine which schema is present.
 type Instrument struct {
 	AdrInstrument *AdrInstrument
+	CashInstrument *CashInstrument
 	CefInstrument *CefInstrument
 	CfdInstrument *CfdInstrument
 	CryptoInstrument *CryptoInstrument
@@ -36,6 +37,13 @@ type Instrument struct {
 func AdrInstrumentAsInstrument(v *AdrInstrument) Instrument {
 	return Instrument{
 		AdrInstrument: v,
+	}
+}
+
+// CashInstrumentAsInstrument is a convenience function that returns CashInstrument wrapped in Instrument
+func CashInstrumentAsInstrument(v *CashInstrument) Instrument {
+	return Instrument{
+		CashInstrument: v,
 	}
 }
 
@@ -153,6 +161,12 @@ func (dst *Instrument) UnmarshalJSON(data []byte) error {
 			return fmt.Errorf("failed to unmarshal Instrument as OtherInstrument: %w", err)
 		}
 		dst.OtherInstrument = &value
+	case "cash":
+		var value CashInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal Instrument as CashInstrument: %w", err)
+		}
+		dst.CashInstrument = &value
 	case "cef":
 		var value CefInstrument
 		if err := json.Unmarshal(data, &value); err != nil {
@@ -231,6 +245,10 @@ func (src Instrument) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.AdrInstrument)
 	}
 
+	if src.CashInstrument != nil {
+		return json.Marshal(&src.CashInstrument)
+	}
+
 	if src.CefInstrument != nil {
 		return json.Marshal(&src.CefInstrument)
 	}
@@ -285,6 +303,10 @@ func (obj *Instrument) GetActualInstance() (interface{}) {
 	}
 	if obj.AdrInstrument != nil {
 		return obj.AdrInstrument
+	}
+
+	if obj.CashInstrument != nil {
+		return obj.CashInstrument
 	}
 
 	if obj.CefInstrument != nil {
