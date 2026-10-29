@@ -1837,6 +1837,15 @@ paths:
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404AccountUnavailableResponse'
+          description: "Not Found - the account is unavailable over the brokerage\
+            \ API. It may have been closed, or access over the brokerage API may have\
+            \ been revoked."
+          x-do-not-generate: true
         "429":
           content:
             application/json:
@@ -4946,6 +4955,23 @@ components:
         default_code:
           example: 1011
           x-konfig-original-example: 1011
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    "404AccountUnavailableResponse":
+      additionalProperties: true
+      description: The account is unavailable over the brokerage API
+      properties:
+        error:
+          example: "Account is currently unavailable over the brokerage API. It may\
+            \ have been closed, or access over the brokerage API may have been revoked"
+          type: string
+          x-konfig-original-example: "Account is currently unavailable over the brokerage\
+            \ API. It may have been closed, or access over the brokerage API may have\
+            \ been revoked"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-404AccountUnavailableResponse-properties-error
+      required:
+      - error
       type: object
       x-konfig-is-used-in-non-successful-response: true
       x-do-not-generate: true
@@ -15342,6 +15368,11 @@ components:
     ? konfig-generated-schema-components-requestBodies-CreateTradeDetectionSubscriptionRequestBody-content-application-json-schema-properties-check_interval_seconds
     : example: 300
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-404AccountUnavailableResponse-properties-error:
+      example: "Account is currently unavailable over the brokerage API. It may have\
+        \ been closed, or access over the brokerage API may have been revoked"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
       example: true

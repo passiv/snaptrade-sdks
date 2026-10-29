@@ -134,6 +134,7 @@ export * from './model402-brokerage-auth-already-disabled-exception';
 export * from './model402-brokerage-auth-disabled-response';
 export * from './model403-failed-request-response';
 export * from './model403-feature-not-enabled-response';
+export * from './model404-account-unavailable-response';
 export * from './model404-failed-request-response';
 export * from './model425-failed-request-response';
 export * from './model429-too-many-requests-response';

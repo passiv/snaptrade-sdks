@@ -41,8 +41,10 @@ from snaptrade_client.model.model503_brokerage_request_response import Model503B
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.model501_not_implemented_response import Model501NotImplementedResponse as Model501NotImplementedResponseSchema
 from snaptrade_client.model.model429_too_many_requests_response import Model429TooManyRequestsResponse as Model429TooManyRequestsResponseSchema
+from snaptrade_client.model.model404_account_unavailable_response import Model404AccountUnavailableResponse as Model404AccountUnavailableResponseSchema
 
 from snaptrade_client.type.model503_brokerage_request_response import Model503BrokerageRequestResponse
+from snaptrade_client.type.model404_account_unavailable_response import Model404AccountUnavailableResponse
 from snaptrade_client.type.model429_too_many_requests_response import Model429TooManyRequestsResponse
 from snaptrade_client.type.model501_not_implemented_response import Model501NotImplementedResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
@@ -238,6 +240,27 @@ _response_for_200 = api_client.OpenApiResponse(
             schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
+SchemaFor404ResponseBodyApplicationJson = Model404AccountUnavailableResponseSchema
+
+
+@dataclass
+class ApiResponseFor404(api_client.ApiResponse):
+    body: Model404AccountUnavailableResponse
+
+
+@dataclass
+class ApiResponseFor404Async(api_client.AsyncApiResponse):
+    body: Model404AccountUnavailableResponse
+
+
+_response_for_404 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor404,
+    response_cls_async=ApiResponseFor404Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor404ResponseBodyApplicationJson),
+    },
+)
 RetryAfterSchema = schemas.IntSchema
 retry_after_parameter = api_client.HeaderParameter(
     name="Retry-After",
@@ -387,6 +410,7 @@ _response_for_503 = api_client.OpenApiResponse(
 )
 _status_code_to_response = {
     '200': _response_for_200,
+    '404': _response_for_404,
     '429': _response_for_429,
     '500': _response_for_500,
     '501': _response_for_501,

@@ -358,6 +358,7 @@ Class | Method | HTTP request | Description
  - [Model402BrokerageAuthDisabledResponse](docs/Model402BrokerageAuthDisabledResponse.md)
  - [Model403FailedRequestResponse](docs/Model403FailedRequestResponse.md)
  - [Model403FeatureNotEnabledResponse](docs/Model403FeatureNotEnabledResponse.md)
+ - [Model404AccountUnavailableResponse](docs/Model404AccountUnavailableResponse.md)
  - [Model404FailedRequestResponse](docs/Model404FailedRequestResponse.md)
  - [Model425FailedRequestResponse](docs/Model425FailedRequestResponse.md)
  - [Model429TooManyRequestsResponse](docs/Model429TooManyRequestsResponse.md)
