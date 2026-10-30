@@ -1,11 +1,11 @@
 # SnapTrade MCP Server
 
-SnapTrade offers a hosted [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets AI assistants like Claude and ChatGPT securely read a user's connected brokerage data through natural-language prompts. Once a user adds SnapTrade as a connector, they can ask their assistant about balances, positions, orders, account activity, portfolio allocation, and investment income in plain language.
+SnapTrade offers a hosted [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server that lets AI assistants like Claude and ChatGPT securely read a user's connected brokerage data through natural-language prompts. Once a user adds SnapTrade as a connector, they can ask their assistant about their balances, positions, orders, and account activity in plain language.
 
 The MCP server is available at `https://mcp.snaptrade.com/mcp`.
 
 :::info
-The MCP server reads account data and can generate a one-time link to connect a new brokerage. Generating a link creates a short-lived link, but it does not connect an account on the user's behalf. The server cannot place trades, move money, or change account settings. For programmatic access to the full SnapTrade API, including trading, see [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started).
+The MCP server is **read-only**. It can retrieve account data and generate a link to connect a new brokerage, but it cannot place trades, move money, or change account settings. For programmatic access to the full SnapTrade API, including trading, see [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started).
 :::
 
 ## Before you begin
@@ -23,24 +23,20 @@ With the SnapTrade connector enabled, an AI assistant can:
 - List the brokerages a user is connected to and the accounts under each connection
 - Retrieve account details, balances, and buying power
 - Retrieve positions and holdings across accounts
-- Summarize portfolio value, allocation, and holdings across connected accounts
-- Summarize dividends, interest, fees, and cash flows for a chosen period
-- Show Wealth Rank, when a monthly placement is available
 - Review orders, recent orders, and order details
 - Review historical account activity such as deposits, dividends, and fees
-- Look up SnapTrade's stock-exchange and partner reference data
-- Discover compatible apps and tools in the SnapTrade app directory, when available for the account
+- Look up reference data such as currencies, exchange rates, stock exchanges, and security types
 - Generate a one-time link the user can open to connect a new brokerage
 
 ## How it works
 
-The MCP server is a protocol layer in front of SnapTrade's API. It forwards allowlisted account and reference-data requests, builds cross-account portfolio and income summaries, and exposes SnapTrade's Wealth Rank and app directory where available.
+The MCP server is a thin protocol adapter in front of the SnapTrade Partner API. AI assistants speak MCP; SnapTrade exposes a REST API. The MCP server translates between the two and forwards each request to the same endpoints SnapTrade partners already use.
 
 ```
 AI assistant  →  SnapTrade MCP server  →  SnapTrade Partner API  →  User's brokerages
 ```
 
-The connector exposes a curated set of account reads plus derived summaries and discovery tools. Portfolio and income summaries use current exchange rates for currency conversion, so converted historical amounts may be approximate. Availability and freshness of account data depend on each brokerage.
+No new data surface is introduced — the connector exposes a curated, read-only subset of existing SnapTrade endpoints.
 
 ## Authentication and security
 
@@ -81,15 +77,11 @@ Once the connector is enabled, a user can ask their assistant questions like:
 - *"What brokerages am I connected to through SnapTrade?"*
 - *"Show me my current balances and positions across all my accounts."*
 - *"What were my last 10 orders across all my accounts?"*
-- *"How is my portfolio allocated across my connected accounts?"*
-- *"How much dividend and interest income did I receive this year?"*
-- *"What is my SnapTrade Wealth Rank?"*
-- *"What apps can I use with my SnapTrade accounts?"*
 - *"I'd like to connect my Alpaca account."* — the assistant calls `request_connection_link` and hands the user a one-time URL to open in their browser.
 
 ## Available tools
 
-The connector exposes 19 tools. Eighteen read data; `request_connection_link` creates a one-time connection URL for the user to open. It does not complete the brokerage connection.
+The connector exposes 18 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
 
 **Connections**
 
@@ -98,7 +90,6 @@ The connector exposes 19 tools. Eighteen read data; `request_connection_link` cr
 
 **Account information**
 
-- `AccountInformation_listUserAccounts` — list the user's accounts
 - `AccountInformation_getUserAccountDetails` — account details, including institution name and total value
 - `AccountInformation_getUserAccountBalance` — cash balances and buying power
 - `AccountInformation_getAllAccountPositions` — positions and holdings for an account
@@ -110,26 +101,19 @@ The connector exposes 19 tools. Eighteen read data; `request_connection_link` cr
 
 **Reference data**
 
+- `ReferenceData_listAllCurrencies` — supported currencies
+- `ReferenceData_listAllCurrenciesRates` — exchange rates for all supported currencies
+- `ReferenceData_getCurrencyExchangeRatePair` — exchange rate for a specific currency pair
+- `ReferenceData_getSecurityTypes` — supported security types
 - `ReferenceData_getStockExchanges` — supported stock exchanges
 - `ReferenceData_getPartnerInfo` — brokerages and data access available to the connector
 
-**Portfolio insights**
+**Connection helpers**
 
-- `get_portfolio_summary` — cross-account value, allocation, and top holdings in a reporting currency
-- `get_income_summary` — dividends, interest, fees, and cash flows across accounts for a date range
-- `get_wealth_rank` — monthly placement by holdings value among SnapTrade Personal members, when available; this is not a measure of investment performance
+- `list_supported_brokerages` — list the brokerages the user can connect
+- `request_connection_link` — generate a one-time URL the user opens to connect a new brokerage. The link is single-use and expires after 5 minutes. The assistant cannot complete the connection itself; only the user's browser session can.
 
-**Discovery and connection helpers**
-
-- `list_snaptrade_apps` — compatible apps and tools in the SnapTrade app directory; may be unavailable for some accounts
-- `list_supported_brokerages` — brokerages the user can connect
-- `request_connection_link` — generate a single-use URL that expires after 5 minutes. The user opens it in their browser and completes the connection there.
-
-All tools declare explicit read-only, destructive, and open-world hints. `request_connection_link` is the only tool marked non-read-only because it creates a link; it is non-destructive. Catalog and snapshot reads are marked closed-world, while tools that access external brokerage account data are marked open-world.
-
-## Optional account events
-
-When account events are enabled for a user and supported by the AI client, the connector can offer subscriptions to `connection.created`, `connection.disabled`, and `sync.daily_summary`. These can notify the assistant of a new connection, a connection needing attention, or whether connections synced in the last 24 hours. Event payloads contain connection identifiers and brokerage names, not account numbers or account names. This feature is separate from the 19 tools above and may not be available for every account.
+Every tool is annotated so AI clients and users can tell read operations from write operations. Read tools are marked `readOnlyHint: true` and `destructiveHint: false`; `request_connection_link` is marked `readOnlyHint: false` and `destructiveHint: true`. All tools are marked `openWorldHint: true`.
 
 ## Manage and revoke access
 
