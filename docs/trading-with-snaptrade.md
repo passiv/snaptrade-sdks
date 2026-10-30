@@ -140,4 +140,4 @@ In this example, the order buys `0.01` ETH with EUR.
 
 Not every brokerage supports every trading workflow. Extended-hours sessions, multi-leg options, and crypto trading are all institution-specific. Review the [SnapTrade Institution Support guide](https://support.snaptrade.com/brokerages) before enabling a feature in production.
 
-After placing an order, we recommend you reconcile the latest state by pulling a list of recent orders with :api[AccountInformation_getUserAccountRecentOrders].
+After placing an order, use :api[AccountInformation_getUserAccountOrderDetailV2] with the brokerage order ID returned by the submission to check its latest status. A successful submission does not mean the order has filled.

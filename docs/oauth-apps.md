@@ -340,7 +340,7 @@ Use the trading endpoints with the same Bearer access token described above. Omi
 1. Select the user's account and validate the order details for that brokerage.
 2. Show the user the order details and available impact and fee information, then obtain their confirmation. See [Order Impact and Confirmation](https://docs.snaptrade.com/docs/order-impact-and-confirmation).
 3. Submit the order with the endpoint for the asset: :api[Trading_placeForceOrder] for equities, :api[Trading_placeMlegOrder] for options, or :api[Trading_placeCryptoOrder] for crypto.
-4. Track the order's status with :api[AccountInformation_getUserAccountRecentOrders]. A successful submission does not mean the order has filled.
+4. Track the order's status with :api[AccountInformation_getUserAccountOrderDetailV2], using the brokerage order ID returned by the submission. A successful submission does not mean the order has filled.
 
 See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order payloads and brokerage-specific capabilities. Its Connection Portal setup instructions apply to Commercial integrations; OAuth apps use connections managed by Personal users.
 
