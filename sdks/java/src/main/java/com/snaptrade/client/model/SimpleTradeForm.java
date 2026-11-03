@@ -112,7 +112,7 @@ public class SimpleTradeForm {
   private OrderTypeEnum orderType;
 
   /**
-   * Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+   * Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc.
    */
   @JsonAdapter(TimeInForceEnum.Adapter.class)
  public enum TimeInForceEnum {
@@ -338,11 +338,11 @@ public class SimpleTradeForm {
   }
 
    /**
-   * Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+   * Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc.
    * @return timeInForce
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "DAY", required = true, value = "Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.")
+  @ApiModelProperty(example = "DAY", required = true, value = "Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc.")
 
   public TimeInForceEnum getTimeInForce() {
     return timeInForce;
@@ -488,11 +488,11 @@ public class SimpleTradeForm {
   }
 
    /**
-   * Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+   * Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade and Webull US futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade&#39;s trade audit; the converted value is returned as brokerage_order_id for subsequent order reads.
    * @return clientOrderId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.")
+  @ApiModelProperty(value = "Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade and Webull US futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads.")
 
   public UUID getClientOrderId() {
     return clientOrderId;

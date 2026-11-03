@@ -518,7 +518,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets time_in_force
      *
-     * @param string $time_in_force Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint.
+     * @param string $time_in_force Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc.
      *
      * @return self
      */
@@ -695,7 +695,7 @@ class SimpleTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets client_order_id
      *
-     * @param string|null $client_order_id Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions.
+     * @param string|null $client_order_id Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade and Webull US futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads.
      *
      * @return self
      */

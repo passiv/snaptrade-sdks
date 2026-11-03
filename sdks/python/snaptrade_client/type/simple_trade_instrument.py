@@ -19,7 +19,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 class RequiredSimpleTradeInstrument(TypedDict):
     kind: Literal["equity", "option", "future", "future_option"]
 
-    # Equity ticker, OCC equity-option symbol, or exact tastytrade BrokerageInstrument ticker for a future or future option. Future tickers begin with `/`; future-option tickers begin with `./`. Preserve spaces and punctuation. Universal symbol IDs are not accepted.
+    # Equity ticker, OCC equity-option symbol, or brokerage-native futures symbol. Tastytrade future tickers begin with `/` and future-option tickers begin with `./`; preserve their spaces and punctuation. Webull US futures require a specific unprefixed contract symbol such as ESZ6, without whitespace; slash aliases and continuous/root-only symbols are not accepted. Universal symbol IDs are not accepted.
     symbol: str
 
 class OptionalSimpleTradeInstrument(TypedDict, total=False):
