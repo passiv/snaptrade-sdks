@@ -1671,7 +1671,7 @@ paths:
 
         **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
-        Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
+        Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getAllAccountPositions
@@ -9929,10 +9929,11 @@ components:
         tax_lots:
           description: "List of tax lots for the given position. Disabled by default;\
             \ enable via the Customer Dashboard Add-ons page. When enabled, this field\
-            \ is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions.\
-            \ For these positions, an empty list means no tax lot data is available.\
-            \ Availability varies by brokerage and position. This field is omitted\
-            \ for all other instrument kinds or when the feature is disabled."
+            \ is included for security positions (`stock`, `adr`, `etf`, `mutualfund`,\
+            \ `cef`, `crypto`, `bond`, and `other`). For these positions, an empty\
+            \ list means no tax lot data is available. Availability varies by brokerage\
+            \ and position. This field is omitted for options, futures, future options,\
+            \ CFDs, tokenized assets, and cash, or when the feature is disabled."
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
