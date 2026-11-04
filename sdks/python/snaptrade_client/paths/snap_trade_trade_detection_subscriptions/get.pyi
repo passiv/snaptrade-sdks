@@ -29,11 +29,13 @@ class ListSubscriptions(BaseApi, typing.Generic[TAuth]):
     def list_subscriptions(
         self: "ListSubscriptions[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def list_subscriptions(
         self: "ListSubscriptions[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -42,10 +44,12 @@ class ApiForget(ListSubscriptions[TAuth]):
     def get(
         self: "ApiForget[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
         self: "ApiForget[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

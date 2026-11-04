@@ -193,26 +193,10 @@ class AccountOrder(
                         *args,
                         _configuration=_configuration,
                     )
-            
-            
-            class price_currency(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'price_currency':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
+        
+            @staticmethod
+            def priced_in() -> typing.Type['PricedInInstrumentNullable']:
+                return PricedInInstrumentNullable
             
             
             class total_quantity(
@@ -420,7 +404,7 @@ class AccountOrder(
                 "price_effect": price_effect,
                 "legs": legs,
                 "expiry_date": expiry_date,
-                "price_currency": price_currency,
+                "priced_in": priced_in,
                 "total_quantity": total_quantity,
                 "filled_quantity": filled_quantity,
                 "canceled_quantity": canceled_quantity,
@@ -462,7 +446,7 @@ class AccountOrder(
     def __getitem__(self, name: typing_extensions.Literal["expiry_date"]) -> MetaOapg.properties.expiry_date: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price_currency"]) -> MetaOapg.properties.price_currency: ...
+    def __getitem__(self, name: typing_extensions.Literal["priced_in"]) -> 'PricedInInstrumentNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["total_quantity"]) -> MetaOapg.properties.total_quantity: ...
@@ -494,7 +478,7 @@ class AccountOrder(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["time_in_force"], typing_extensions.Literal["price_effect"], typing_extensions.Literal["legs"], typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["order_type"], typing_extensions.Literal["status"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["price_currency"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["group"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["time_in_force"], typing_extensions.Literal["price_effect"], typing_extensions.Literal["legs"], typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["order_type"], typing_extensions.Literal["status"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["priced_in"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["group"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -520,7 +504,7 @@ class AccountOrder(
     def get_item_oapg(self, name: typing_extensions.Literal["expiry_date"]) -> typing.Union[MetaOapg.properties.expiry_date, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price_currency"]) -> typing.Union[MetaOapg.properties.price_currency, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["priced_in"]) -> typing.Union['PricedInInstrumentNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["total_quantity"]) -> typing.Union[MetaOapg.properties.total_quantity, schemas.Unset]: ...
@@ -552,7 +536,7 @@ class AccountOrder(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["time_in_force"], typing_extensions.Literal["price_effect"], typing_extensions.Literal["legs"], typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["order_type"], typing_extensions.Literal["status"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["price_currency"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["group"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["time_in_force"], typing_extensions.Literal["price_effect"], typing_extensions.Literal["legs"], typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["order_type"], typing_extensions.Literal["status"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["priced_in"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["group"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -565,7 +549,7 @@ class AccountOrder(
         order_type: 'OrderTypeConfiguration',
         status: 'AccountOrderRecordStatusV2',
         expiry_date: typing.Union[MetaOapg.properties.expiry_date, None, str, datetime, schemas.Unset] = schemas.unset,
-        price_currency: typing.Union[MetaOapg.properties.price_currency, None, str, schemas.Unset] = schemas.unset,
+        priced_in: typing.Union['PricedInInstrumentNullable', schemas.Unset] = schemas.unset,
         total_quantity: typing.Union[MetaOapg.properties.total_quantity, None, str, schemas.Unset] = schemas.unset,
         filled_quantity: typing.Union[MetaOapg.properties.filled_quantity, None, str, schemas.Unset] = schemas.unset,
         canceled_quantity: typing.Union[MetaOapg.properties.canceled_quantity, None, str, schemas.Unset] = schemas.unset,
@@ -588,7 +572,7 @@ class AccountOrder(
             order_type=order_type,
             status=status,
             expiry_date=expiry_date,
-            price_currency=price_currency,
+            priced_in=priced_in,
             total_quantity=total_quantity,
             filled_quantity=filled_quantity,
             canceled_quantity=canceled_quantity,
@@ -606,3 +590,4 @@ from snaptrade_client.model.account_order_group_nullable import AccountOrderGrou
 from snaptrade_client.model.account_order_leg import AccountOrderLeg
 from snaptrade_client.model.account_order_record_status_v2 import AccountOrderRecordStatusV2
 from snaptrade_client.model.order_type_configuration import OrderTypeConfiguration
+from snaptrade_client.model.priced_in_instrument_nullable import PricedInInstrumentNullable

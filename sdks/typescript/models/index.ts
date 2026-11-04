@@ -179,6 +179,8 @@ export * from './performance-custom';
 export * from './position';
 export * from './position-currency';
 export * from './position-symbol';
+export * from './priced-in-instrument';
+export * from './priced-in-instrument-nullable';
 export * from './rate-of-return-object';
 export * from './rate-of-return-response';
 export * from './recent-orders-response';

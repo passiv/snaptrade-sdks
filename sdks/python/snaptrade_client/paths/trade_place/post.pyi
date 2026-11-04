@@ -46,6 +46,7 @@ class PlaceForceOrder(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def place_force_order(
@@ -68,6 +69,7 @@ class PlaceForceOrder(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -93,6 +95,7 @@ class ApiForpost(PlaceForceOrder[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
@@ -115,5 +118,6 @@ class ApiForpost(PlaceForceOrder[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

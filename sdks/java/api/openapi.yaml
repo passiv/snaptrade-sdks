@@ -7269,9 +7269,9 @@ components:
             canceled_quantity: "1"
             status: null
           total_quantity: "10"
+          priced_in: ""
           filled_quantity: "9"
           order_type: ""
-          price_currency: USD
           open_quantity: "0"
           status: null
           group:
@@ -7304,9 +7304,9 @@ components:
             canceled_quantity: "1"
             status: null
           total_quantity: "10"
+          priced_in: ""
           filled_quantity: "9"
           order_type: ""
-          price_currency: USD
           open_quantity: "0"
           status: null
           group:
@@ -7358,9 +7358,9 @@ components:
           canceled_quantity: "1"
           status: null
         total_quantity: "10"
+        priced_in: ""
         filled_quantity: "9"
         order_type: ""
-        price_currency: USD
         open_quantity: "0"
         status: null
         group:
@@ -7412,14 +7412,7 @@ components:
           type: string
           x-konfig-original-example: 2026-07-30T22:51:49.000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-expiry_date
-        price_currency:
-          description: ISO-4217 currency code the order prices are denominated in.
-            For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
-          example: USD
-          nullable: true
-          type: string
-          x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-price_currency
+        priced_in: {}
         price_effect:
           description: "Direction of the net order price. CREDIT means cash is received,\
             \ DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN\
@@ -7515,6 +7508,13 @@ components:
       - time_in_force
       type: object
       x-konfig-properties:
+        priced_in:
+          description: |
+            The asset the order prices (`execution_price` and the prices inside `order_type`) are denominated in. Use `kind` to determine which schema is present.
+              - `cash` - a fiat currency identified by its ISO-4217 code. This is the case for equities, options, futures, forex and crypto pairs quoted in fiat (for example `USD` for `BTC-USD`).
+              - `crypto` - a crypto asset, for crypto pairs quoted in another crypto asset, including stablecoins (for example `USDC` for `ETH-USDC` or `BTC` for `ETH-BTC`).
+            `null` when the quote asset could not be determined.
+          nullable: true
         group:
           description: "Set when this order belongs to a complex order group (OCO,\
             \ OTO, OTOCO). Null otherwise."
@@ -7614,6 +7614,7 @@ components:
         status:
           nullable: true
     OrderTypeConfiguration: {}
+    PricedInInstrument: {}
     MarketOrderType:
       additionalProperties: true
       description: A market order. Executes at the best available price.
@@ -10131,9 +10132,7 @@ components:
       type: object
     CashInstrument:
       additionalProperties: true
-      description: |
-        A currency traded as the instrument itself, such as the currency bought or sold by a forex order.
-        Quantities on the leg are amounts of this currency; the order's `price_currency` is the currency it was priced in.
+      description: "A fiat currency, identified by its ISO-4217 code."
       properties:
         kind:
           description: Type of security instrument.
@@ -15933,10 +15932,6 @@ components:
       example: 2026-07-30T22:51:49.000Z
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-AccountOrder-properties-price_currency:
-      example: USD
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-total_quantity:
       example: "10"
       type: string
@@ -20438,6 +20433,7 @@ components:
           x-konfig-original-example: "12345678"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
       type: object
+    PricedInInstrumentNullable: {}
     AccountOrderGroupNullable:
       additionalProperties: true
       description: "Links the orders that make up a complex order (OCO, OTO, OTOCO)."

@@ -403,6 +403,7 @@ class GetPartnerInfo(BaseApi, typing.Generic[TAuth]):
     
     def get_partner_info(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -411,6 +412,7 @@ class GetPartnerInfo(BaseApi, typing.Generic[TAuth]):
         args = self._get_partner_info_mapped_args(
         )
         return self._get_partner_info_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -432,6 +434,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -440,5 +443,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         args = self._get_partner_info_mapped_args(
         )
         return self._get_partner_info_oapg(
+            timeout=timeout,
         )
 

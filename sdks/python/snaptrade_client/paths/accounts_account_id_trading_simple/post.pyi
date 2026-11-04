@@ -45,6 +45,7 @@ class PlaceSimpleOrder(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def place_simple_order(
@@ -66,6 +67,7 @@ class PlaceSimpleOrder(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -90,6 +92,7 @@ class ApiForpost(PlaceSimpleOrder[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
@@ -111,5 +114,6 @@ class ApiForpost(PlaceSimpleOrder[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

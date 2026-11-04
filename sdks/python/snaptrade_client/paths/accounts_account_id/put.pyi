@@ -35,6 +35,7 @@ class UpdateUserAccount(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def update_user_account(
@@ -46,6 +47,7 @@ class UpdateUserAccount(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -60,6 +62,7 @@ class ApiForput(UpdateUserAccount[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def put(
@@ -71,5 +74,6 @@ class ApiForput(UpdateUserAccount[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

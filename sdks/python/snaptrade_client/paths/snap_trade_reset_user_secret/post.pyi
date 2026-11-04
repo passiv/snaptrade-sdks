@@ -29,6 +29,7 @@ class ResetSnapTradeUserSecret(BaseApi, typing.Generic[TAuth]):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -38,5 +39,6 @@ class ApiForpost(ResetSnapTradeUserSecret[TAuth]):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

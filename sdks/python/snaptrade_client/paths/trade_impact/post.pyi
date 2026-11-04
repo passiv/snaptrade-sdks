@@ -42,6 +42,7 @@ class GetOrderImpact(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_order_impact(
@@ -60,6 +61,7 @@ class GetOrderImpact(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -81,6 +83,7 @@ class ApiForpost(GetOrderImpact[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
@@ -99,5 +102,6 @@ class ApiForpost(GetOrderImpact[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

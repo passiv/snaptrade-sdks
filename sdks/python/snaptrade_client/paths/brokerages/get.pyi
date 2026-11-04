@@ -29,11 +29,13 @@ class ListAllBrokerages(BaseApi, typing.Generic[TAuth]):
     def list_all_brokerages(
         self: "ListAllBrokerages[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def list_all_brokerages(
         self: "ListAllBrokerages[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -42,10 +44,12 @@ class ApiForget(ListAllBrokerages[TAuth]):
     def get(
         self: "ApiForget[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
         self: "ApiForget[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

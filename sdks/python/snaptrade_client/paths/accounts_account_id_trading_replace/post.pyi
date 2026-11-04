@@ -43,6 +43,7 @@ class ReplaceOrder(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def replace_order(
@@ -62,6 +63,7 @@ class ReplaceOrder(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -84,6 +86,7 @@ class ApiForpost(ReplaceOrder[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
@@ -103,5 +106,6 @@ class ApiForpost(ReplaceOrder[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

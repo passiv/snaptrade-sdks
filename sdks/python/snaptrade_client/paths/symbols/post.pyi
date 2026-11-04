@@ -30,12 +30,14 @@ class GetSymbols(BaseApi, typing.Generic[TAuth]):
         self: "GetSymbols[CommercialApiKeyAuth]",
         substring: typing.Optional[str] = None,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_symbols(
         self: "GetSymbols[PersonalApiKeyAuth]",
         substring: typing.Optional[str] = None,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -45,11 +47,13 @@ class ApiForpost(GetSymbols[TAuth]):
         self: "ApiForpost[CommercialApiKeyAuth]",
         substring: typing.Optional[str] = None,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
         substring: typing.Optional[str] = None,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

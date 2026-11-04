@@ -412,6 +412,7 @@ class ListAllBrokerageInstruments(BaseApi, typing.Generic[TAuth]):
         self,
         slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -424,6 +425,7 @@ class ListAllBrokerageInstruments(BaseApi, typing.Generic[TAuth]):
         )
         return self._list_all_brokerage_instruments_oapg(
             path_params=args.path,
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -453,6 +455,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         self,
         slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -465,5 +468,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         )
         return self._list_all_brokerage_instruments_oapg(
             path_params=args.path,
+            timeout=timeout,
         )
 

@@ -36,6 +36,7 @@ class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_user_account_option_quotes(
@@ -48,6 +49,7 @@ class GetUserAccountOptionQuotes(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -63,6 +65,7 @@ class ApiForget(GetUserAccountOptionQuotes[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
@@ -75,5 +78,6 @@ class ApiForget(GetUserAccountOptionQuotes[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

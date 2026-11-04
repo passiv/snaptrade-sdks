@@ -28,6 +28,7 @@ class RegisterSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         self: "RegisterSnapTradeUser[CommercialApiKeyAuth]",
         user_id: str,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -36,5 +37,6 @@ class ApiForpost(RegisterSnapTradeUser[TAuth]):
         self: "ApiForpost[CommercialApiKeyAuth]",
         user_id: str,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

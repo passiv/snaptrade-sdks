@@ -31,6 +31,7 @@ class ListAllBrokerageAuthorizationType(BaseApi, typing.Generic[TAuth]):
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def list_all_brokerage_authorization_type(
@@ -38,6 +39,7 @@ class ListAllBrokerageAuthorizationType(BaseApi, typing.Generic[TAuth]):
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -48,6 +50,7 @@ class ApiForget(ListAllBrokerageAuthorizationType[TAuth]):
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
@@ -55,5 +58,6 @@ class ApiForget(ListAllBrokerageAuthorizationType[TAuth]):
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

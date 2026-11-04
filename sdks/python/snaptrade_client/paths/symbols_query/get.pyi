@@ -31,6 +31,7 @@ class GetSymbolsByTicker(BaseApi, typing.Generic[TAuth]):
         query: str,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_symbols_by_ticker(
@@ -38,6 +39,7 @@ class GetSymbolsByTicker(BaseApi, typing.Generic[TAuth]):
         query: str,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -48,6 +50,7 @@ class ApiForget(GetSymbolsByTicker[TAuth]):
         query: str,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
@@ -55,5 +58,6 @@ class ApiForget(GetSymbolsByTicker[TAuth]):
         query: str,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

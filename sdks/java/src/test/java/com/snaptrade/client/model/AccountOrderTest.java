@@ -87,11 +87,11 @@ public class AccountOrderTest {
     }
 
     /**
-     * Test the property 'priceCurrency'
+     * Test the property 'pricedIn'
      */
     @Test
-    public void priceCurrencyTest() {
-        // TODO: test priceCurrency
+    public void pricedInTest() {
+        // TODO: test pricedIn
     }
 
     /**

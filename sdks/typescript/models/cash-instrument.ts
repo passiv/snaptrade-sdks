@@ -69,7 +69,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * A currency traded as the instrument itself, such as the currency bought or sold by a forex order. Quantities on the leg are amounts of this currency; the order\'s `price_currency` is the currency it was priced in. 
+ * A fiat currency, identified by its ISO-4217 code.
  * @export
  * @interface CashInstrument
  */

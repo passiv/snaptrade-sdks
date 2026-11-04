@@ -36,6 +36,7 @@ class CancelOrder(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def cancel_order(
@@ -48,6 +49,7 @@ class CancelOrder(BaseApi, typing.Generic[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -63,6 +65,7 @@ class ApiForpost(CancelOrder[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
@@ -75,5 +78,6 @@ class ApiForpost(CancelOrder[TAuth]):
         header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

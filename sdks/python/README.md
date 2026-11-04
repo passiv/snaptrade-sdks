@@ -80,6 +80,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
 - [Getting Started](#getting-started)
+- [Request timeouts](#request-timeouts)
 - [Async](#async)
 - [Reference](#reference)
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
@@ -254,6 +255,13 @@ else:
 deleted_response = snaptrade.authentication.delete_snap_trade_user(user_id=user_id)
 pprint(deleted_response.body)
 ```
+
+## Request timeouts<a id="request-timeouts"></a>
+
+Synchronous API methods accept an optional `timeout` argument in seconds. Pass
+`timeout=10.0` for a total timeout, or `timeout=(2.0, 10.0)` for separate connection
+and read timeouts. Omitting `timeout` preserves the default transport behavior.
+Timeouts apply to individual HTTP attempts; retries can increase the overall duration.
 
 ## Async<a id="async"></a>
 

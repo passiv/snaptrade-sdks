@@ -507,6 +507,7 @@ class GetStatsLegacy(BaseApi, typing.Generic[TAuth]):
         self,
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -518,6 +519,7 @@ class GetStatsLegacy(BaseApi, typing.Generic[TAuth]):
         )
         return self._get_stats_legacy_oapg(
             query_params=args.query,
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -548,6 +550,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         self,
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -559,5 +562,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         )
         return self._get_stats_legacy_oapg(
             query_params=args.query,
+            timeout=timeout,
         )
 

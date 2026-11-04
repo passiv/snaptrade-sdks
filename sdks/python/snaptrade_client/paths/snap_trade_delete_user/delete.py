@@ -432,6 +432,7 @@ class DeleteSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         user_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         header_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -443,6 +444,7 @@ class DeleteSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         return self._delete_snap_trade_user_oapg(
             query_params=args.query,
             header_params=args.header,
+            timeout=timeout,
         )
 
 class ApiFordelete(BaseApi, typing.Generic[TAuth]):
@@ -473,6 +475,7 @@ class ApiFordelete(BaseApi, typing.Generic[TAuth]):
         user_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         header_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -484,5 +487,6 @@ class ApiFordelete(BaseApi, typing.Generic[TAuth]):
         return self._delete_snap_trade_user_oapg(
             query_params=args.query,
             header_params=args.header,
+            timeout=timeout,
         )
 

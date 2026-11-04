@@ -286,6 +286,7 @@ class Check(BaseApi, typing.Generic[TAuth]):
     
     def check(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -295,6 +296,7 @@ class Check(BaseApi, typing.Generic[TAuth]):
         args = self._check_mapped_args(
         )
         return self._check_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -317,6 +319,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -326,5 +329,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         args = self._check_mapped_args(
         )
         return self._check_oapg(
+            timeout=timeout,
         )
 

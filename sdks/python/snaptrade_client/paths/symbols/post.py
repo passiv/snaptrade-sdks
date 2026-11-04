@@ -425,6 +425,7 @@ class GetSymbols(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[SymbolQuery] = None,
         substring: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -437,6 +438,7 @@ class GetSymbols(BaseApi, typing.Generic[TAuth]):
         )
         return self._get_symbols_oapg(
             body=args.body,
+            timeout=timeout,
         )
 
 class ApiForpost(BaseApi, typing.Generic[TAuth]):
@@ -466,6 +468,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[SymbolQuery] = None,
         substring: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -478,5 +481,6 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         )
         return self._get_symbols_oapg(
             body=args.body,
+            timeout=timeout,
         )
 

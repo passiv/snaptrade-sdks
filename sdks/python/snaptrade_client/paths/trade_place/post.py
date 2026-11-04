@@ -597,6 +597,7 @@ class PlaceForceOrder(BaseApi, typing.Generic[TAuth]):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         header_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -624,6 +625,7 @@ class PlaceForceOrder(BaseApi, typing.Generic[TAuth]):
             body=args.body,
             query_params=args.query,
             header_params=args.header,
+            timeout=timeout,
         )
 
 class ApiForpost(BaseApi, typing.Generic[TAuth]):
@@ -700,6 +702,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         header_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -727,5 +730,6 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             body=args.body,
             query_params=args.query,
             header_params=args.header,
+            timeout=timeout,
         )
 
