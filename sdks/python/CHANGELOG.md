@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 13.1.0
 
 - Add optional `timeout` to synchronous API methods, accepting a number of seconds
   (`timeout=10.0`) or separate connection and read timeouts (`timeout=(2.0, 10.0)`).
