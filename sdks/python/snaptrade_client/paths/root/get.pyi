@@ -26,6 +26,7 @@ class Check(BaseApi, typing.Generic[TAuth]):
     def check(
         self,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -33,5 +34,6 @@ class ApiForget(Check[TAuth]):
     def get(
         self,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

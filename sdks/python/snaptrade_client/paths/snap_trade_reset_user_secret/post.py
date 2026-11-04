@@ -461,6 +461,7 @@ class ResetSnapTradeUserSecret(BaseApi, typing.Generic[TAuth]):
         body: typing.Optional[UserIDandSecret] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -473,6 +474,7 @@ class ResetSnapTradeUserSecret(BaseApi, typing.Generic[TAuth]):
         )
         return self._reset_snap_trade_user_secret_oapg(
             body=args.body,
+            timeout=timeout,
         )
 
 class ApiForpost(BaseApi, typing.Generic[TAuth]):
@@ -504,6 +506,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         body: typing.Optional[UserIDandSecret] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -516,5 +519,6 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         )
         return self._reset_snap_trade_user_secret_oapg(
             body=args.body,
+            timeout=timeout,
         )
 

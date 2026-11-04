@@ -508,6 +508,7 @@ class GetCryptocurrencyPairQuote(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = {},
         header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -524,6 +525,7 @@ class GetCryptocurrencyPairQuote(BaseApi, typing.Generic[TAuth]):
             query_params=args.query,
             header_params=args.header,
             path_params=args.path,
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -567,6 +569,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = {},
         header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -583,5 +586,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
             query_params=args.query,
             header_params=args.header,
             path_params=args.path,
+            timeout=timeout,
         )
 

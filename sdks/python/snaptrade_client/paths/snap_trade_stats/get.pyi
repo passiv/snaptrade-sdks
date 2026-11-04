@@ -31,6 +31,7 @@ class GetStatsLegacy(BaseApi, typing.Generic[TAuth]):
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_stats_legacy(
@@ -38,6 +39,7 @@ class GetStatsLegacy(BaseApi, typing.Generic[TAuth]):
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -48,6 +50,7 @@ class ApiForget(GetStatsLegacy[TAuth]):
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
@@ -55,5 +58,6 @@ class ApiForget(GetStatsLegacy[TAuth]):
         currency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

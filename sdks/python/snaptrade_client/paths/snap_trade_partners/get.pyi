@@ -29,11 +29,13 @@ class GetPartnerInfo(BaseApi, typing.Generic[TAuth]):
     def get_partner_info(
         self: "GetPartnerInfo[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_partner_info(
         self: "GetPartnerInfo[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -42,10 +44,12 @@ class ApiForget(GetPartnerInfo[TAuth]):
     def get(
         self: "ApiForget[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
         self: "ApiForget[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

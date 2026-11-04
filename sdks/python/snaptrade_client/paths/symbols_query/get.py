@@ -436,6 +436,7 @@ class GetSymbolsByTicker(BaseApi, typing.Generic[TAuth]):
         self,
         query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -448,6 +449,7 @@ class GetSymbolsByTicker(BaseApi, typing.Generic[TAuth]):
         )
         return self._get_symbols_by_ticker_oapg(
             path_params=args.path,
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -477,6 +479,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         self,
         query: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -489,5 +492,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         )
         return self._get_symbols_by_ticker_oapg(
             path_params=args.path,
+            timeout=timeout,
         )
 

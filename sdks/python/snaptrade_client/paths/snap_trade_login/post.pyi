@@ -42,6 +42,7 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def login_snap_trade_user(
@@ -60,6 +61,7 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -81,6 +83,7 @@ class ApiForpost(LoginSnapTradeUser[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
@@ -99,5 +102,6 @@ class ApiForpost(LoginSnapTradeUser[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

@@ -30,6 +30,7 @@ class DeleteSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -40,5 +41,6 @@ class ApiFordelete(DeleteSnapTradeUser[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

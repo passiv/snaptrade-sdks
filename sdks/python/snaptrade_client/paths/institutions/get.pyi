@@ -26,6 +26,7 @@ class ListInstitutions(BaseApi, typing.Generic[TAuth]):
     def list_institutions(
         self,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -33,5 +34,6 @@ class ApiForget(ListInstitutions[TAuth]):
     def get(
         self,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

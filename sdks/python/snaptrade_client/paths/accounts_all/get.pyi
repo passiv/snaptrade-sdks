@@ -33,6 +33,7 @@ class ListAllUserAccounts(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def list_all_user_accounts(
@@ -42,6 +43,7 @@ class ListAllUserAccounts(BaseApi, typing.Generic[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -54,6 +56,7 @@ class ApiForget(ListAllUserAccounts[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
@@ -63,5 +66,6 @@ class ApiForget(ListAllUserAccounts[TAuth]):
         query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
