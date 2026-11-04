@@ -439,6 +439,7 @@ class ListAllBrokerageAuthorizationType(BaseApi, typing.Generic[TAuth]):
         self,
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -451,6 +452,7 @@ class ListAllBrokerageAuthorizationType(BaseApi, typing.Generic[TAuth]):
         )
         return self._list_all_brokerage_authorization_type_oapg(
             query_params=args.query,
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -480,6 +482,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         self,
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -492,5 +495,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         )
         return self._list_all_brokerage_authorization_type_oapg(
             query_params=args.query,
+            timeout=timeout,
         )
 

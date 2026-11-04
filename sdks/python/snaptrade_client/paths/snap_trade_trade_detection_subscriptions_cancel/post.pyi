@@ -30,12 +30,14 @@ class CancelSubscription(BaseApi, typing.Generic[TAuth]):
         self: "CancelSubscription[CommercialApiKeyAuth]",
         account_id: str,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def cancel_subscription(
         self: "CancelSubscription[PersonalApiKeyAuth]",
         account_id: str,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -45,11 +47,13 @@ class ApiForpost(CancelSubscription[TAuth]):
         self: "ApiForpost[CommercialApiKeyAuth]",
         account_id: str,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
         account_id: str,
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

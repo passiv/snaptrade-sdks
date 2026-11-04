@@ -433,6 +433,7 @@ class RegisterSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -444,6 +445,7 @@ class RegisterSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         )
         return self._register_snap_trade_user_oapg(
             body=args.body,
+            timeout=timeout,
         )
 
 class ApiForpost(BaseApi, typing.Generic[TAuth]):
@@ -472,6 +474,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         self,
         body: typing.Optional[SnapTradeRegisterUserRequestBody] = None,
         user_id: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -483,5 +486,6 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         )
         return self._register_snap_trade_user_oapg(
             body=args.body,
+            timeout=timeout,
         )
 

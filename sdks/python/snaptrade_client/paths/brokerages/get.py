@@ -368,6 +368,7 @@ class ListAllBrokerages(BaseApi, typing.Generic[TAuth]):
     
     def list_all_brokerages(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -377,6 +378,7 @@ class ListAllBrokerages(BaseApi, typing.Generic[TAuth]):
         args = self._list_all_brokerages_mapped_args(
         )
         return self._list_all_brokerages_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -399,6 +401,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -408,5 +411,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         args = self._list_all_brokerages_mapped_args(
         )
         return self._list_all_brokerages_oapg(
+            timeout=timeout,
         )
 

@@ -29,11 +29,13 @@ class GetStockExchanges(BaseApi, typing.Generic[TAuth]):
     def get_stock_exchanges(
         self: "GetStockExchanges[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get_stock_exchanges(
         self: "GetStockExchanges[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
 
@@ -42,10 +44,12 @@ class ApiForget(GetStockExchanges[TAuth]):
     def get(
         self: "ApiForget[CommercialApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
     @typing.overload
     def get(
         self: "ApiForget[PersonalApiKeyAuth]",
         validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 

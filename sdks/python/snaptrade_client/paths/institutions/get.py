@@ -311,6 +311,7 @@ class ListInstitutions(BaseApi, typing.Generic[TAuth]):
     
     def list_institutions(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -320,6 +321,7 @@ class ListInstitutions(BaseApi, typing.Generic[TAuth]):
         args = self._list_institutions_mapped_args(
         )
         return self._list_institutions_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi, typing.Generic[TAuth]):
@@ -342,6 +344,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -351,5 +354,6 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         args = self._list_institutions_mapped_args(
         )
         return self._list_institutions_oapg(
+            timeout=timeout,
         )
 
