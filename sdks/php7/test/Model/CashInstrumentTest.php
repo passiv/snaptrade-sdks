@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * CashInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description A currency traded as the instrument itself, such as the currency bought or sold by a forex order. Quantities on the leg are amounts of this currency; the order&#39;s &#x60;price_currency&#x60; is the currency it was priced in.
+ * @description A fiat currency, identified by its ISO-4217 code.
  * @package     SnapTrade
  */
 class CashInstrumentTest extends TestCase

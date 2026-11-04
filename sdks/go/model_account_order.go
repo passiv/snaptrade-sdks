@@ -27,8 +27,7 @@ type AccountOrder struct {
 	TimeInForce string `json:"time_in_force"`
 	// When the order expires, for orders with a `time_in_force` of `GTD`.
 	ExpiryDate NullableTime `json:"expiry_date,omitempty"`
-	// ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
-	PriceCurrency NullableString `json:"price_currency,omitempty"`
+	PricedIn NullablePricedInInstrumentNullable `json:"priced_in,omitempty"`
 	// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
 	PriceEffect string `json:"price_effect"`
 	// Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
@@ -216,46 +215,46 @@ func (o *AccountOrder) UnsetExpiryDate() {
 	o.ExpiryDate.Unset()
 }
 
-// GetPriceCurrency returns the PriceCurrency field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrder) GetPriceCurrency() string {
-	if o == nil || isNil(o.PriceCurrency.Get()) {
-		var ret string
+// GetPricedIn returns the PricedIn field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrder) GetPricedIn() PricedInInstrumentNullable {
+	if o == nil || isNil(o.PricedIn.Get()) {
+		var ret PricedInInstrumentNullable
 		return ret
 	}
-	return *o.PriceCurrency.Get()
+	return *o.PricedIn.Get()
 }
 
-// GetPriceCurrencyOk returns a tuple with the PriceCurrency field value if set, nil otherwise
+// GetPricedInOk returns a tuple with the PricedIn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrder) GetPriceCurrencyOk() (*string, bool) {
+func (o *AccountOrder) GetPricedInOk() (*PricedInInstrumentNullable, bool) {
 	if o == nil {
     return nil, false
 	}
-	return o.PriceCurrency.Get(), o.PriceCurrency.IsSet()
+	return o.PricedIn.Get(), o.PricedIn.IsSet()
 }
 
-// HasPriceCurrency returns a boolean if a field has been set.
-func (o *AccountOrder) HasPriceCurrency() bool {
-	if o != nil && o.PriceCurrency.IsSet() {
+// HasPricedIn returns a boolean if a field has been set.
+func (o *AccountOrder) HasPricedIn() bool {
+	if o != nil && o.PricedIn.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPriceCurrency gets a reference to the given NullableString and assigns it to the PriceCurrency field.
-func (o *AccountOrder) SetPriceCurrency(v string) {
-	o.PriceCurrency.Set(&v)
+// SetPricedIn gets a reference to the given NullablePricedInInstrumentNullable and assigns it to the PricedIn field.
+func (o *AccountOrder) SetPricedIn(v PricedInInstrumentNullable) {
+	o.PricedIn.Set(&v)
 }
-// SetPriceCurrencyNil sets the value for PriceCurrency to be an explicit nil
-func (o *AccountOrder) SetPriceCurrencyNil() {
-	o.PriceCurrency.Set(nil)
+// SetPricedInNil sets the value for PricedIn to be an explicit nil
+func (o *AccountOrder) SetPricedInNil() {
+	o.PricedIn.Set(nil)
 }
 
-// UnsetPriceCurrency ensures that no value is present for PriceCurrency, not even an explicit nil
-func (o *AccountOrder) UnsetPriceCurrency() {
-	o.PriceCurrency.Unset()
+// UnsetPricedIn ensures that no value is present for PricedIn, not even an explicit nil
+func (o *AccountOrder) UnsetPricedIn() {
+	o.PricedIn.Unset()
 }
 
 // GetPriceEffect returns the PriceEffect field value
@@ -701,8 +700,8 @@ func (o AccountOrder) MarshalJSON() ([]byte, error) {
 	if o.ExpiryDate.IsSet() {
 		toSerialize["expiry_date"] = o.ExpiryDate.Get()
 	}
-	if o.PriceCurrency.IsSet() {
-		toSerialize["price_currency"] = o.PriceCurrency.Get()
+	if o.PricedIn.IsSet() {
+		toSerialize["priced_in"] = o.PricedIn.Get()
 	}
 	if true {
 		toSerialize["price_effect"] = o.PriceEffect
@@ -788,7 +787,7 @@ func (o *AccountOrder) UnmarshalJSON(bytes []byte) error {
 	delete(additionalProperties, "order_type")
 	delete(additionalProperties, "time_in_force")
 	delete(additionalProperties, "expiry_date")
-	delete(additionalProperties, "price_currency")
+	delete(additionalProperties, "priced_in")
 	delete(additionalProperties, "price_effect")
 	delete(additionalProperties, "total_quantity")
 	delete(additionalProperties, "filled_quantity")

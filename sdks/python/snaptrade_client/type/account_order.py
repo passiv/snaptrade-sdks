@@ -19,6 +19,7 @@ from snaptrade_client.type.account_order_group_nullable import AccountOrderGroup
 from snaptrade_client.type.account_order_leg import AccountOrderLeg
 from snaptrade_client.type.account_order_record_status_v2 import AccountOrderRecordStatusV2
 from snaptrade_client.type.order_type_configuration import OrderTypeConfiguration
+from snaptrade_client.type.priced_in_instrument_nullable import PricedInInstrumentNullable
 
 class RequiredAccountOrder(TypedDict):
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
@@ -42,8 +43,7 @@ class OptionalAccountOrder(TypedDict, total=False):
     # When the order expires, for orders with a `time_in_force` of `GTD`.
     expiry_date: typing.Optional[datetime]
 
-    # ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
-    price_currency: typing.Optional[str]
+    priced_in: typing.Optional[PricedInInstrumentNullable]
 
     # Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
     total_quantity: typing.Optional[str]

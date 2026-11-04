@@ -4155,13 +4155,15 @@ paths:
       description: |
         **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
 
-        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade and Webull US; future options are supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
 
         An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
 
         Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
 
-        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
+        TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
+
+        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
 
         A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
       operationId: Trading_placeSimpleOrder
@@ -4219,6 +4221,32 @@ paths:
                       kind: future
                       symbol: ESZ6
                     action: buy
+                    units: "1"
+              tradestationFutureStopLimit:
+                summary: TradeStation live or SIM single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: gtc
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: '@ESZ26'
+                    action: buy
+                    units: "1"
+              tradestationFutureOptionLimit:
+                summary: TradeStation live or SIM single-leg futures-option limit
+                  order
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "10.25"
+                  legs:
+                  - instrument:
+                      kind: future_option
+                      symbol: ESZ26 C6000
+                    action: buy_to_open
                     units: "1"
               optionSpread:
                 summary: Equity-option debit spread
@@ -7013,9 +7041,9 @@ components:
             canceled_quantity: "1"
             status: null
           total_quantity: "10"
+          priced_in: null
           filled_quantity: "9"
           order_type: null
-          price_currency: USD
           open_quantity: "0"
           status: null
           group:
@@ -7048,9 +7076,9 @@ components:
             canceled_quantity: "1"
             status: null
           total_quantity: "10"
+          priced_in: null
           filled_quantity: "9"
           order_type: null
-          price_currency: USD
           open_quantity: "0"
           status: null
           group:
@@ -7101,9 +7129,9 @@ components:
           canceled_quantity: "1"
           status: null
         total_quantity: "10"
+        priced_in: null
         filled_quantity: "9"
         order_type: null
-        price_currency: USD
         open_quantity: "0"
         status: null
         group:
@@ -7156,14 +7184,8 @@ components:
           type: string
           x-konfig-original-example: 2026-07-30T22:51:49.000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-expiry_date
-        price_currency:
-          description: ISO-4217 currency code the order prices are denominated in.
-            For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
-          example: USD
-          nullable: true
-          type: string
-          x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-price_currency
+        priced_in:
+          $ref: '#/components/schemas/PricedInInstrumentNullable'
         price_effect:
           description: "Direction of the net order price. CREDIT means cash is received,\
             \ DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN\
@@ -7259,6 +7281,13 @@ components:
       - time_in_force
       type: object
       x-konfig-properties:
+        priced_in:
+          description: |
+            The asset the order prices (`execution_price` and the prices inside `order_type`) are denominated in. Use `kind` to determine which schema is present.
+              - `cash` - a fiat currency identified by its ISO-4217 code. This is the case for equities, options, futures, forex and crypto pairs quoted in fiat (for example `USD` for `BTC-USD`).
+              - `crypto` - a crypto asset, for crypto pairs quoted in another crypto asset, including stablecoins (for example `USDC` for `ETH-USDC` or `BTC` for `ETH-BTC`).
+            `null` when the quote asset could not be determined.
+          nullable: true
         group:
           description: "Set when this order belongs to a complex order group (OCO,\
             \ OTO, OTOCO). Null otherwise."
@@ -7379,6 +7408,17 @@ components:
       - $ref: '#/components/schemas/TrailingStopOrderType'
       - $ref: '#/components/schemas/TrailingStopLimitOrderType'
       - $ref: '#/components/schemas/OtherOrderType'
+    PricedInInstrument:
+      description: The asset an order's prices are denominated in. Use `kind` to determine
+        which schema is present.
+      discriminator:
+        mapping:
+          cash: '#/components/schemas/CashInstrument'
+          crypto: '#/components/schemas/CryptoInstrument'
+        propertyName: kind
+      oneOf:
+      - $ref: '#/components/schemas/CashInstrument'
+      - $ref: '#/components/schemas/CryptoInstrument'
     MarketOrderType:
       additionalProperties: true
       description: A market order. Executes at the best available price.
@@ -9973,9 +10013,7 @@ components:
       type: object
     CashInstrument:
       additionalProperties: true
-      description: |
-        A currency traded as the instrument itself, such as the currency bought or sold by a forex order.
-        Quantities on the leg are amounts of this currency; the order's `price_currency` is the currency it was priced in.
+      description: "A fiat currency, identified by its ISO-4217 code."
       properties:
         kind:
           description: Type of security instrument.
@@ -12304,8 +12342,12 @@ components:
             \ futures symbol. Tastytrade future tickers begin with `/` and future-option\
             \ tickers begin with `./`; preserve their spaces and punctuation. Webull\
             \ US futures require a specific unprefixed contract symbol such as ESZ6,\
-            \ without whitespace; slash aliases and continuous/root-only symbols are\
-            \ not accepted. Universal symbol IDs are not accepted."
+            \ without whitespace. TradeStation (live and SIM) requires a specific\
+            \ two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option\
+            \ symbol such as `ESZ26 C6000`, preserving the space and any session alias.\
+            \ TradeStation's optional @ prefix for dated futures contracts is forwarded\
+            \ unchanged. Webull and TradeStation do not accept slash aliases or root-only\
+            \ continuous symbols. Universal symbol IDs are not accepted."
           example: /ESZ6
           minLength: 1
           type: string
@@ -12391,7 +12433,9 @@ components:
             \ gtd requires expiry_date and a non-market single-leg equity/option order.\
             \ Existing single-leg option routing does not support ioc. Futures and\
             \ multi-leg orders do not support gtd through this endpoint. Webull US\
-            \ futures only support day and gtc."
+            \ futures only support day and gtc. TradeStation futures and futures options\
+            \ accept day, gtc, ioc, and fok, subject to the contract and route's supported\
+            \ combinations."
           enum:
           - day
           - gtc
@@ -12443,15 +12487,19 @@ components:
           allOf:
           - $ref: '#/components/schemas/ClientOrderID'
           description: "Optional canonical UUID, forwarded where the existing execution\
-            \ path supports it and for tastytrade and Webull US futures orders. Requires\
-            \ the existing client-order-ID enablement; when disabled the value is\
-            \ ignored. Brokerage behavior on duplicates varies; SnapTrade does not\
-            \ enforce uniqueness. Tastytrade uses this as external-identifier for\
-            \ correlation and does not deduplicate submissions. For Webull US futures,\
-            \ SnapTrade converts the supplied UUID (or its generated order UUID) to\
-            \ lowercase 32-character hexadecimal without hyphens. The original supplied\
-            \ UUID remains in SnapTrade's trade audit; the converted value is returned\
-            \ as brokerage_order_id for subsequent order reads."
+            \ path supports it and for tastytrade, Webull US, and TradeStation futures-family\
+            \ orders. Requires the existing client-order-ID enablement; when disabled\
+            \ the value is ignored. Brokerage behavior on duplicates varies; SnapTrade\
+            \ does not enforce uniqueness. Tastytrade uses this as external-identifier\
+            \ for correlation and does not deduplicate submissions. For Webull US\
+            \ futures, SnapTrade converts the supplied UUID (or its generated order\
+            \ UUID) to lowercase 32-character hexadecimal without hyphens. The original\
+            \ supplied UUID remains in SnapTrade's trade audit; the converted value\
+            \ is returned as brokerage_order_id for subsequent order reads. For TradeStation\
+            \ live and SIM, SnapTrade encodes the supplied UUID (or its generated\
+            \ order UUID) as 22-character URL-safe base64 without padding and sends\
+            \ it as OrderConfirmID for brokerage duplicate prevention; the response\
+            \ contains TradeStation's separate order ID."
         expiry_date:
           description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
             \ other durations. A missing timezone is treated as UTC. Supported only\
@@ -15764,10 +15812,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-expiry_date:
       example: 2026-07-30T22:51:49.000Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-AccountOrder-properties-price_currency:
-      example: USD
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-total_quantity:
@@ -19657,7 +19701,9 @@ components:
             \ gtd requires expiry_date and a non-market single-leg equity/option order.\
             \ Existing single-leg option routing does not support ioc. Futures and\
             \ multi-leg orders do not support gtd through this endpoint. Webull US\
-            \ futures only support day and gtc."
+            \ futures only support day and gtc. TradeStation futures and futures options\
+            \ accept day, gtc, ioc, and fok, subject to the contract and route's supported\
+            \ combinations."
           enum:
           - day
           - gtc
@@ -19709,15 +19755,19 @@ components:
           allOf:
           - $ref: '#/components/schemas/ClientOrderID'
           description: "Optional canonical UUID, forwarded where the existing execution\
-            \ path supports it and for tastytrade and Webull US futures orders. Requires\
-            \ the existing client-order-ID enablement; when disabled the value is\
-            \ ignored. Brokerage behavior on duplicates varies; SnapTrade does not\
-            \ enforce uniqueness. Tastytrade uses this as external-identifier for\
-            \ correlation and does not deduplicate submissions. For Webull US futures,\
-            \ SnapTrade converts the supplied UUID (or its generated order UUID) to\
-            \ lowercase 32-character hexadecimal without hyphens. The original supplied\
-            \ UUID remains in SnapTrade's trade audit; the converted value is returned\
-            \ as brokerage_order_id for subsequent order reads."
+            \ path supports it and for tastytrade, Webull US, and TradeStation futures-family\
+            \ orders. Requires the existing client-order-ID enablement; when disabled\
+            \ the value is ignored. Brokerage behavior on duplicates varies; SnapTrade\
+            \ does not enforce uniqueness. Tastytrade uses this as external-identifier\
+            \ for correlation and does not deduplicate submissions. For Webull US\
+            \ futures, SnapTrade converts the supplied UUID (or its generated order\
+            \ UUID) to lowercase 32-character hexadecimal without hyphens. The original\
+            \ supplied UUID remains in SnapTrade's trade audit; the converted value\
+            \ is returned as brokerage_order_id for subsequent order reads. For TradeStation\
+            \ live and SIM, SnapTrade encodes the supplied UUID (or its generated\
+            \ order UUID) as 22-character URL-safe base64 without padding and sends\
+            \ it as OrderConfirmID for brokerage duplicate prevention; the response\
+            \ contains TradeStation's separate order ID."
         expiry_date:
           description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
             \ other durations. A missing timezone is treated as UTC. Supported only\
@@ -20270,6 +20320,18 @@ components:
           x-konfig-original-example: "12345678"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
       type: object
+    PricedInInstrumentNullable:
+      description: The asset an order's prices are denominated in. Use `kind` to determine
+        which schema is present.
+      discriminator:
+        mapping:
+          cash: '#/components/schemas/CashInstrument'
+          crypto: '#/components/schemas/CryptoInstrument'
+        propertyName: kind
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/CashInstrument'
+      - $ref: '#/components/schemas/CryptoInstrument'
     AccountOrderGroupNullable:
       additionalProperties: true
       description: "Links the orders that make up a complex order (OCO, OTO, OTOCO)."

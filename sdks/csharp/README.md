@@ -403,6 +403,8 @@ Class | Method | HTTP request | Description
  - [Position](docs/Position.md)
  - [PositionCurrency](docs/PositionCurrency.md)
  - [PositionSymbol](docs/PositionSymbol.md)
+ - [PricedInInstrument](docs/PricedInInstrument.md)
+ - [PricedInInstrumentNullable](docs/PricedInInstrumentNullable.md)
  - [RateOfReturnObject](docs/RateOfReturnObject.md)
  - [RateOfReturnResponse](docs/RateOfReturnResponse.md)
  - [RecentOrdersResponse](docs/RecentOrdersResponse.md)

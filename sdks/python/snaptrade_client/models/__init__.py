@@ -226,6 +226,8 @@ from snaptrade_client.model.portfolio_group_id import PortfolioGroupID
 from snaptrade_client.model.position import Position
 from snaptrade_client.model.position_symbol import PositionSymbol
 from snaptrade_client.model.price import Price
+from snaptrade_client.model.priced_in_instrument import PricedInInstrument
+from snaptrade_client.model.priced_in_instrument_nullable import PricedInInstrumentNullable
 from snaptrade_client.model.rate_of_return_object import RateOfReturnObject
 from snaptrade_client.model.rate_of_return_response import RateOfReturnResponse
 from snaptrade_client.model.recent_orders_response import RecentOrdersResponse

@@ -118,9 +118,9 @@ class AccountOrderTest extends TestCase
     }
 
     /**
-     * Test attribute "price_currency"
+     * Test attribute "priced_in"
      */
-    public function testPropertyPriceCurrency()
+    public function testPropertyPricedIn()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

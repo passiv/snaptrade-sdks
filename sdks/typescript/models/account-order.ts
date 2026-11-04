@@ -71,6 +71,7 @@ import { AccountOrderGroupNullable } from './account-order-group-nullable';
 import { AccountOrderLeg } from './account-order-leg';
 import { AccountOrderRecordStatusV2 } from './account-order-record-status-v2';
 import { OrderTypeConfiguration } from './order-type-configuration';
+import { PricedInInstrumentNullable } from './priced-in-instrument-nullable';
 
 /**
  * A single order. Single-leg orders have exactly one entry in `legs`; multi-leg orders (spreads, strangles, covered calls) have one entry per leg.
@@ -111,11 +112,11 @@ export interface AccountOrder {
      */
     'expiry_date'?: string | null;
     /**
-     * ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
-     * @type {string}
+     * 
+     * @type {PricedInInstrumentNullable}
      * @memberof AccountOrder
      */
-    'price_currency'?: string | null;
+    'priced_in'?: PricedInInstrumentNullable | null;
     /**
      * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
      * @type {string}

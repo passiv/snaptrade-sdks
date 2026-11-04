@@ -1,0 +1,19 @@
+# SnapTrade.Net.Model.PricedInInstrument
+The asset an order's prices are denominated in. Use `kind` to determine which schema is present.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Kind** | **string** | Type of security instrument. | 
+**Code** | **string** | ISO-4217 code of the currency. | 
+**Id** | **string** | Unique identifier for the instrument. | 
+**Symbol** | **string** | The formatted trading symbol for the security. | 
+**RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
+**Description** | **string** | Human-readable description of the security. | [optional] 
+**Currency** | **string** | ISO-4217 currency code for the security listing. | [optional] 
+**Exchange** | **string** | Deprecated. Crypto instruments are not tied to a listing exchange, so this field is no longer populated and is omitted from responses. It will be removed in a future version. | [optional] 
+**FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+

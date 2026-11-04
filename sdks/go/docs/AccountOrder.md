@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **OrderType** | [**OrderTypeConfiguration**](OrderTypeConfiguration.md) |  | 
 **TimeInForce** | **string** | How long the order remains active. Brokerage values that cannot be mapped to this list are returned as &#x60;OTHER&#x60;.   - &#x60;DAY&#x60; - valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled.   - &#x60;FOK&#x60; - Fill Or Kill.   - &#x60;IOC&#x60; - Immediate Or Cancel.   - &#x60;GTD&#x60; - Good Til Date; see &#x60;expiry_date&#x60;.   - &#x60;MOO&#x60; - Market On Open.   - &#x60;EHP&#x60; - Extended Hours P.M.   - &#x60;EHA&#x60; - Extended Hours A.M.   - &#x60;OTHER&#x60; - the brokerage reported a value outside this list.  | 
 **ExpiryDate** | Pointer to **NullableTime** | When the order expires, for orders with a &#x60;time_in_force&#x60; of &#x60;GTD&#x60;. | [optional] 
-**PriceCurrency** | Pointer to **NullableString** | ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example &#x60;USDC&#x60; for &#x60;ETH-USDC&#x60;). | [optional] 
+**PricedIn** | Pointer to [**NullablePricedInInstrumentNullable**](PricedInInstrumentNullable.md) |  | [optional] 
 **PriceEffect** | **string** | Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. | 
 **TotalQuantity** | Pointer to **NullableFloat64** | Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities. | [optional] 
 **FilledQuantity** | Pointer to **NullableFloat64** | Quantity filled so far. | [optional] 
@@ -156,41 +156,41 @@ HasExpiryDate returns a boolean if a field has been set.
 `func (o *AccountOrder) UnsetExpiryDate()`
 
 UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
-### GetPriceCurrency
+### GetPricedIn
 
-`func (o *AccountOrder) GetPriceCurrency() string`
+`func (o *AccountOrder) GetPricedIn() PricedInInstrumentNullable`
 
-GetPriceCurrency returns the PriceCurrency field if non-nil, zero value otherwise.
+GetPricedIn returns the PricedIn field if non-nil, zero value otherwise.
 
-### GetPriceCurrencyOk
+### GetPricedInOk
 
-`func (o *AccountOrder) GetPriceCurrencyOk() (*string, bool)`
+`func (o *AccountOrder) GetPricedInOk() (*PricedInInstrumentNullable, bool)`
 
-GetPriceCurrencyOk returns a tuple with the PriceCurrency field if it's non-nil, zero value otherwise
+GetPricedInOk returns a tuple with the PricedIn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPriceCurrency
+### SetPricedIn
 
-`func (o *AccountOrder) SetPriceCurrency(v string)`
+`func (o *AccountOrder) SetPricedIn(v PricedInInstrumentNullable)`
 
-SetPriceCurrency sets PriceCurrency field to given value.
+SetPricedIn sets PricedIn field to given value.
 
-### HasPriceCurrency
+### HasPricedIn
 
-`func (o *AccountOrder) HasPriceCurrency() bool`
+`func (o *AccountOrder) HasPricedIn() bool`
 
-HasPriceCurrency returns a boolean if a field has been set.
+HasPricedIn returns a boolean if a field has been set.
 
-### SetPriceCurrencyNil
+### SetPricedInNil
 
-`func (o *AccountOrder) SetPriceCurrencyNil(b bool)`
+`func (o *AccountOrder) SetPricedInNil(b bool)`
 
- SetPriceCurrencyNil sets the value for PriceCurrency to be an explicit nil
+ SetPricedInNil sets the value for PricedIn to be an explicit nil
 
-### UnsetPriceCurrency
-`func (o *AccountOrder) UnsetPriceCurrency()`
+### UnsetPricedIn
+`func (o *AccountOrder) UnsetPricedIn()`
 
-UnsetPriceCurrency ensures that no value is present for PriceCurrency, not even an explicit nil
+UnsetPricedIn ensures that no value is present for PricedIn, not even an explicit nil
 ### GetPriceEffect
 
 `func (o *AccountOrder) GetPriceEffect() string`

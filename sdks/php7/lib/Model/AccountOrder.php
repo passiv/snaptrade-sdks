@@ -56,7 +56,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => '\SnapTrade\Model\OrderTypeConfiguration',
         'time_in_force' => 'string',
         'expiry_date' => '\DateTime',
-        'price_currency' => 'string',
+        'priced_in' => '\SnapTrade\Model\AccountOrderPricedIn',
         'price_effect' => 'string',
         'total_quantity' => 'float',
         'filled_quantity' => 'float',
@@ -83,7 +83,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => null,
         'time_in_force' => null,
         'expiry_date' => 'date-time',
-        'price_currency' => null,
+        'priced_in' => null,
         'price_effect' => null,
         'total_quantity' => 'decimal',
         'filled_quantity' => 'decimal',
@@ -108,7 +108,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
 		'order_type' => false,
 		'time_in_force' => false,
 		'expiry_date' => true,
-		'price_currency' => true,
+		'priced_in' => true,
 		'price_effect' => false,
 		'total_quantity' => true,
 		'filled_quantity' => true,
@@ -213,7 +213,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'expiry_date' => 'expiry_date',
-        'price_currency' => 'price_currency',
+        'priced_in' => 'priced_in',
         'price_effect' => 'price_effect',
         'total_quantity' => 'total_quantity',
         'filled_quantity' => 'filled_quantity',
@@ -238,7 +238,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'expiry_date' => 'setExpiryDate',
-        'price_currency' => 'setPriceCurrency',
+        'priced_in' => 'setPricedIn',
         'price_effect' => 'setPriceEffect',
         'total_quantity' => 'setTotalQuantity',
         'filled_quantity' => 'setFilledQuantity',
@@ -263,7 +263,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'expiry_date' => 'getExpiryDate',
-        'price_currency' => 'getPriceCurrency',
+        'priced_in' => 'getPricedIn',
         'price_effect' => 'getPriceEffect',
         'total_quantity' => 'getTotalQuantity',
         'filled_quantity' => 'getFilledQuantity',
@@ -387,7 +387,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('expiry_date', $data ?? [], null);
-        $this->setIfExists('price_currency', $data ?? [], null);
+        $this->setIfExists('priced_in', $data ?? [], null);
         $this->setIfExists('price_effect', $data ?? [], null);
         $this->setIfExists('total_quantity', $data ?? [], null);
         $this->setIfExists('filled_quantity', $data ?? [], null);
@@ -646,37 +646,37 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets price_currency
+     * Gets priced_in
      *
-     * @return string|null
+     * @return \SnapTrade\Model\AccountOrderPricedIn|null
      */
-    public function getPriceCurrency()
+    public function getPricedIn()
     {
-        return $this->container['price_currency'];
+        return $this->container['priced_in'];
     }
 
     /**
-     * Sets price_currency
+     * Sets priced_in
      *
-     * @param string|null $price_currency ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
+     * @param \SnapTrade\Model\AccountOrderPricedIn|null $priced_in priced_in
      *
      * @return self
      */
-    public function setPriceCurrency($price_currency)
+    public function setPricedIn($priced_in)
     {
 
-        if (is_null($price_currency)) {
-            array_push($this->openAPINullablesSetToNull, 'price_currency');
+        if (is_null($priced_in)) {
+            array_push($this->openAPINullablesSetToNull, 'priced_in');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('price_currency', $nullablesSetToNull);
+            $index = array_search('priced_in', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        $this->container['price_currency'] = $price_currency;
+        $this->container['priced_in'] = $priced_in;
 
         return $this;
     }

@@ -98,12 +98,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ExpiryDate'
         }
         /// <summary>
-        /// Test the property 'PriceCurrency'
+        /// Test the property 'PricedIn'
         /// </summary>
         [Fact]
-        public void PriceCurrencyTest()
+        public void PricedInTest()
         {
-            // TODO unit test for the property 'PriceCurrency'
+            // TODO unit test for the property 'PricedIn'
         }
         /// <summary>
         /// Test the property 'PriceEffect'
