@@ -14,7 +14,7 @@ module SnapTrade
   class SimpleTradeForm
     attr_accessor :order_type
 
-    # Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc.
+    # Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc. TradeStation futures and futures options accept day, gtc, ioc, and fok, subject to the contract and route's supported combinations.
     attr_accessor :time_in_force
 
     # Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
@@ -29,7 +29,7 @@ module SnapTrade
     # Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
     attr_accessor :price_effect
 
-    # Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade and Webull US futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads.
+    # Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. SnapTrade does not enforce uniqueness, except for requests authenticated with an OAuth access token, where a client_order_id the user has already used returns 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation's separate order ID.
     attr_accessor :client_order_id
 
     # ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
