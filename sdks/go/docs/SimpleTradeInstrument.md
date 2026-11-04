@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Kind** | **string** |  | 
-**Symbol** | **string** | Equity ticker, OCC equity-option symbol, or exact tastytrade BrokerageInstrument ticker for a future or future option. Future tickers begin with &#x60;/&#x60;; future-option tickers begin with &#x60;./&#x60;. Preserve spaces and punctuation. Universal symbol IDs are not accepted. | 
+**Symbol** | **string** | Equity ticker, OCC equity-option symbol, or brokerage-native futures symbol. Tastytrade future tickers begin with &#x60;/&#x60; and future-option tickers begin with &#x60;./&#x60;; preserve their spaces and punctuation. Webull US futures require a specific unprefixed contract symbol such as ESZ6, without whitespace; slash aliases and continuous/root-only symbols are not accepted. Universal symbol IDs are not accepted. | 
 
 ## Methods
 

@@ -82,7 +82,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="SimpleTradeInstrument" /> class.
         /// </summary>
         /// <param name="kind">kind (required).</param>
-        /// <param name="symbol">Equity ticker, OCC equity-option symbol, or exact tastytrade BrokerageInstrument ticker for a future or future option. Future tickers begin with &#x60;/&#x60;; future-option tickers begin with &#x60;./&#x60;. Preserve spaces and punctuation. Universal symbol IDs are not accepted. (required).</param>
+        /// <param name="symbol">Equity ticker, OCC equity-option symbol, or brokerage-native futures symbol. Tastytrade future tickers begin with &#x60;/&#x60; and future-option tickers begin with &#x60;./&#x60;; preserve their spaces and punctuation. Webull US futures require a specific unprefixed contract symbol such as ESZ6, without whitespace; slash aliases and continuous/root-only symbols are not accepted. Universal symbol IDs are not accepted. (required).</param>
         public SimpleTradeInstrument(KindEnum kind = default(KindEnum), string symbol = default(string)) : base()
         {
             this.Kind = kind;
@@ -96,9 +96,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Equity ticker, OCC equity-option symbol, or exact tastytrade BrokerageInstrument ticker for a future or future option. Future tickers begin with &#x60;/&#x60;; future-option tickers begin with &#x60;./&#x60;. Preserve spaces and punctuation. Universal symbol IDs are not accepted.
+        /// Equity ticker, OCC equity-option symbol, or brokerage-native futures symbol. Tastytrade future tickers begin with &#x60;/&#x60; and future-option tickers begin with &#x60;./&#x60;; preserve their spaces and punctuation. Webull US futures require a specific unprefixed contract symbol such as ESZ6, without whitespace; slash aliases and continuous/root-only symbols are not accepted. Universal symbol IDs are not accepted.
         /// </summary>
-        /// <value>Equity ticker, OCC equity-option symbol, or exact tastytrade BrokerageInstrument ticker for a future or future option. Future tickers begin with &#x60;/&#x60;; future-option tickers begin with &#x60;./&#x60;. Preserve spaces and punctuation. Universal symbol IDs are not accepted.</value>
+        /// <value>Equity ticker, OCC equity-option symbol, or brokerage-native futures symbol. Tastytrade future tickers begin with &#x60;/&#x60; and future-option tickers begin with &#x60;./&#x60;; preserve their spaces and punctuation. Webull US futures require a specific unprefixed contract symbol such as ESZ6, without whitespace; slash aliases and continuous/root-only symbols are not accepted. Universal symbol IDs are not accepted.</value>
         [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
         public string Symbol { get; set; }
 

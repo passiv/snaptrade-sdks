@@ -1671,7 +1671,7 @@ paths:
 
         **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
-        Positions counted in account cash balance or buying power include `cash_equivalent: true`. `stock`, `adr`, `etf`, `mutualfund`, and `crypto` positions may include `tax_lots` when tax lot data is enabled for the account. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
+        Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getAllAccountPositions
@@ -4381,11 +4381,13 @@ paths:
       description: |
         **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
 
-        Equity and equity-option orders use the existing brokerage trading capabilities. Futures and future options are currently supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade and Webull US; future options are supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
 
         An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
 
-        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or the exact tastytrade BrokerageInstrument ticker for futures and future options, including any spaces.
+        Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
+
+        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
 
         A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
       operationId: Trading_placeSimpleOrder
@@ -4417,7 +4419,7 @@ paths:
           application/json:
             examples:
               futureStopLimit:
-                summary: Single-leg future stop-limit order
+                summary: Tastytrade single-leg future stop-limit order
                 value:
                   order_type: stop_limit
                   time_in_force: day
@@ -4428,6 +4430,20 @@ paths:
                   - instrument:
                       kind: future
                       symbol: /ESZ6
+                    action: buy
+                    units: "1"
+              webullFutureStopLimit:
+                summary: Webull US single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: gtc
+                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: ESZ6
                     action: buy
                     units: "1"
               optionSpread:
@@ -9929,10 +9945,11 @@ components:
         tax_lots:
           description: "List of tax lots for the given position. Disabled by default;\
             \ enable via the Customer Dashboard Add-ons page. When enabled, this field\
-            \ is included only for stocks, ADRs, ETFs, mutual funds, and crypto positions.\
-            \ For these positions, an empty list means no tax lot data is available.\
-            \ Availability varies by brokerage and position. This field is omitted\
-            \ for all other instrument kinds or when the feature is disabled."
+            \ is included for security positions (`stock`, `adr`, `etf`, `mutualfund`,\
+            \ `cef`, `crypto`, `bond`, and `other`). For these positions, an empty\
+            \ list means no tax lot data is available. Availability varies by brokerage\
+            \ and position. This field is omitted for options, futures, future options,\
+            \ CFDs, tokenized assets, and cash, or when the feature is disabled."
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
@@ -12451,10 +12468,12 @@ components:
           x-konfig-original-example: future
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeInstrument-properties-kind
         symbol:
-          description: "Equity ticker, OCC equity-option symbol, or exact tastytrade\
-            \ BrokerageInstrument ticker for a future or future option. Future tickers\
-            \ begin with `/`; future-option tickers begin with `./`. Preserve spaces\
-            \ and punctuation. Universal symbol IDs are not accepted."
+          description: "Equity ticker, OCC equity-option symbol, or brokerage-native\
+            \ futures symbol. Tastytrade future tickers begin with `/` and future-option\
+            \ tickers begin with `./`; preserve their spaces and punctuation. Webull\
+            \ US futures require a specific unprefixed contract symbol such as ESZ6,\
+            \ without whitespace; slash aliases and continuous/root-only symbols are\
+            \ not accepted. Universal symbol IDs are not accepted."
           example: /ESZ6
           minLength: 1
           type: string
@@ -12539,7 +12558,8 @@ components:
           description: "Order duration, subject to brokerage and execution-path support.\
             \ gtd requires expiry_date and a non-market single-leg equity/option order.\
             \ Existing single-leg option routing does not support ioc. Futures and\
-            \ multi-leg orders do not support gtd through this endpoint."
+            \ multi-leg orders do not support gtd through this endpoint. Webull US\
+            \ futures only support day and gtc."
           enum:
           - day
           - gtc
@@ -12591,11 +12611,15 @@ components:
           allOf:
           - $ref: '#/components/schemas/ClientOrderID'
           description: "Optional canonical UUID, forwarded where the existing execution\
-            \ path supports it and for tastytrade futures orders. Requires the existing\
-            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
-            \ behavior on duplicates varies; SnapTrade does not enforce uniqueness.\
-            \ Tastytrade uses this as external-identifier for correlation and does\
-            \ not deduplicate submissions."
+            \ path supports it and for tastytrade and Webull US futures orders. Requires\
+            \ the existing client-order-ID enablement; when disabled the value is\
+            \ ignored. Brokerage behavior on duplicates varies; SnapTrade does not\
+            \ enforce uniqueness. Tastytrade uses this as external-identifier for\
+            \ correlation and does not deduplicate submissions. For Webull US futures,\
+            \ SnapTrade converts the supplied UUID (or its generated order UUID) to\
+            \ lowercase 32-character hexadecimal without hyphens. The original supplied\
+            \ UUID remains in SnapTrade's trade audit; the converted value is returned\
+            \ as brokerage_order_id for subsequent order reads."
         expiry_date:
           description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
             \ other durations. A missing timezone is treated as UTC. Supported only\
@@ -19799,7 +19823,8 @@ components:
           description: "Order duration, subject to brokerage and execution-path support.\
             \ gtd requires expiry_date and a non-market single-leg equity/option order.\
             \ Existing single-leg option routing does not support ioc. Futures and\
-            \ multi-leg orders do not support gtd through this endpoint."
+            \ multi-leg orders do not support gtd through this endpoint. Webull US\
+            \ futures only support day and gtc."
           enum:
           - day
           - gtc
@@ -19851,11 +19876,15 @@ components:
           allOf:
           - $ref: '#/components/schemas/ClientOrderID'
           description: "Optional canonical UUID, forwarded where the existing execution\
-            \ path supports it and for tastytrade futures orders. Requires the existing\
-            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
-            \ behavior on duplicates varies; SnapTrade does not enforce uniqueness.\
-            \ Tastytrade uses this as external-identifier for correlation and does\
-            \ not deduplicate submissions."
+            \ path supports it and for tastytrade and Webull US futures orders. Requires\
+            \ the existing client-order-ID enablement; when disabled the value is\
+            \ ignored. Brokerage behavior on duplicates varies; SnapTrade does not\
+            \ enforce uniqueness. Tastytrade uses this as external-identifier for\
+            \ correlation and does not deduplicate submissions. For Webull US futures,\
+            \ SnapTrade converts the supplied UUID (or its generated order UUID) to\
+            \ lowercase 32-character hexadecimal without hyphens. The original supplied\
+            \ UUID remains in SnapTrade's trade audit; the converted value is returned\
+            \ as brokerage_order_id for subsequent order reads."
         expiry_date:
           description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
             \ other durations. A missing timezone is treated as UTC. Supported only\
