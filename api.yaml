@@ -4762,11 +4762,15 @@ components:
           type: string
           format: date-time
           example: 2026-07-30T22:51:49Z
-        price_currency:
-          description: ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
+        priced_in:
+          description: |
+            The asset the order prices (`execution_price` and the prices inside `order_type`) are denominated in. Use `kind` to determine which schema is present.
+              - `cash` - a fiat currency identified by its ISO-4217 code. This is the case for equities, options, futures, forex and crypto pairs quoted in fiat (for example `USD` for `BTC-USD`).
+              - `crypto` - a crypto asset, for crypto pairs quoted in another crypto asset, including stablecoins (for example `USDC` for `ETH-USDC` or `BTC` for `ETH-BTC`).
+            `null` when the quote asset could not be determined.
           nullable: true
-          type: string
-          example: USD
+          allOf:
+            - $ref: "#/components/schemas/PricedInInstrument"
         price_effect:
           description: Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
           type: string
@@ -4913,6 +4917,17 @@ components:
           trailing_stop: "#/components/schemas/TrailingStopOrderType"
           trailing_stop_limit: "#/components/schemas/TrailingStopLimitOrderType"
           other: "#/components/schemas/OtherOrderType"
+    PricedInInstrument:
+      description: The asset an order's prices are denominated in. Use `kind` to determine which schema is present.
+      oneOf:
+        - $ref: "#/components/schemas/CashInstrument"
+        # New variants go last: the breaking-change check pairs oneOf entries by position.
+        - $ref: "#/components/schemas/CryptoInstrument"
+      discriminator:
+        propertyName: kind
+        mapping:
+          cash: "#/components/schemas/CashInstrument"
+          crypto: "#/components/schemas/CryptoInstrument"
     MarketOrderType:
       description: A market order. Executes at the best available price.
       type: object
@@ -6544,9 +6559,7 @@ components:
         - symbol
         - underlying_instrument
     CashInstrument:
-      description: |
-        A currency traded as the instrument itself, such as the currency bought or sold by a forex order.
-        Quantities on the leg are amounts of this currency; the order's `price_currency` is the currency it was priced in.
+      description: A fiat currency, identified by its ISO-4217 code.
       type: object
       properties:
         kind:
