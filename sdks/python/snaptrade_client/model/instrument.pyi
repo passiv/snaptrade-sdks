@@ -51,6 +51,7 @@ class Instrument(
                     'MutualFundInstrument': MutualFundInstrument,
                     'OptionInstrument': OptionInstrument,
                     'OtherInstrument': OtherInstrument,
+                    'PreferredStockInstrument': PreferredStockInstrument,
                     'StockInstrument': StockInstrument,
                     'TokenizedAssetInstrument': TokenizedAssetInstrument,
                     'adr': AdrInstrument,
@@ -65,6 +66,7 @@ class Instrument(
                     'mutualfund': MutualFundInstrument,
                     'option': OptionInstrument,
                     'other': OtherInstrument,
+                    'preferred_stock': PreferredStockInstrument,
                     'stock': StockInstrument,
                     'tokenized_asset': TokenizedAssetInstrument,
                 }
@@ -94,6 +96,7 @@ class Instrument(
                 TokenizedAssetInstrument,
                 OtherInstrument,
                 CashInstrument,
+                PreferredStockInstrument,
             ]
 
 
@@ -121,5 +124,6 @@ from snaptrade_client.model.future_option_instrument import FutureOptionInstrume
 from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.option_instrument import OptionInstrument
 from snaptrade_client.model.other_instrument import OtherInstrument
+from snaptrade_client.model.preferred_stock_instrument import PreferredStockInstrument
 from snaptrade_client.model.stock_instrument import StockInstrument
 from snaptrade_client.model.tokenized_asset_instrument import TokenizedAssetInstrument

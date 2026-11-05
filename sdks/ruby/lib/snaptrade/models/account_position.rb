@@ -30,7 +30,7 @@ module SnapTrade
     # Present for mutual fund positions and for other instrument kinds when true. A true value means the position is also counted in cash balance or buying power.
     attr_accessor :cash_equivalent
 
-    # List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
+    # List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
     attr_accessor :tax_lots
 
     # Attribute mapping from ruby-style variable name to JSON key.

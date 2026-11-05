@@ -28,6 +28,7 @@ module SnapTrade
           :'MutualFundInstrument',
           :'OptionInstrument',
           :'OtherInstrument',
+          :'PreferredStockInstrument',
           :'StockInstrument',
           :'TokenizedAssetInstrument'
         ]
@@ -53,6 +54,7 @@ module SnapTrade
           :'mutualfund' => :'MutualFundInstrument',
           :'option' => :'OptionInstrument',
           :'other' => :'OtherInstrument',
+          :'preferred_stock' => :'PreferredStockInstrument',
           :'stock' => :'StockInstrument',
           :'tokenized_asset' => :'TokenizedAssetInstrument'
         }

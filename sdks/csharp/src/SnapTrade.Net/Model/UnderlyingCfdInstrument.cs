@@ -119,6 +119,18 @@ namespace SnapTrade.Net.Model
             this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnderlyingCfdInstrument" /> class
+        /// with the <see cref="PreferredStockInstrument" /> class
+        /// </summary>
+        /// <param name="actualInstance">An instance of PreferredStockInstrument.</param>
+        public UnderlyingCfdInstrument(PreferredStockInstrument actualInstance)
+        {
+            this.IsNullable = false;
+            this.SchemaType= "oneOf";
+            this.ActualInstance = actualInstance ?? throw new ArgumentException("Invalid instance found. Must not be null.");
+        }
+
 
         private Object _actualInstance;
 
@@ -157,13 +169,17 @@ namespace SnapTrade.Net.Model
                 {
                     this._actualInstance = value;
                 }
+                else if (value.GetType() == typeof(PreferredStockInstrument))
+                {
+                    this._actualInstance = value;
+                }
                 else if (value.GetType() == typeof(StockInstrument))
                 {
                     this._actualInstance = value;
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid instance found. Must be the following types: AdrInstrument, CefInstrument, CryptoInstrument, EtfInstrument, MutualFundInstrument, OtherInstrument, StockInstrument");
+                    throw new ArgumentException("Invalid instance found. Must be the following types: AdrInstrument, CefInstrument, CryptoInstrument, EtfInstrument, MutualFundInstrument, OtherInstrument, PreferredStockInstrument, StockInstrument");
                 }
             }
         }
@@ -236,6 +252,16 @@ namespace SnapTrade.Net.Model
         public OtherInstrument GetOtherInstrument()
         {
             return (OtherInstrument)this.ActualInstance;
+        }
+
+        /// <summary>
+        /// Get the actual instance of `PreferredStockInstrument`. If the actual instance is not `PreferredStockInstrument`,
+        /// the InvalidClassException will be thrown
+        /// </summary>
+        /// <returns>An instance of PreferredStockInstrument</returns>
+        public PreferredStockInstrument GetPreferredStockInstrument()
+        {
+            return (PreferredStockInstrument)this.ActualInstance;
         }
 
         /// <summary>
@@ -394,6 +420,26 @@ namespace SnapTrade.Net.Model
             {
                 // deserialization failed, try the next one
                 System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into OtherInstrument: {1}", jsonString, exception.ToString()));
+            }
+
+            try
+            {
+                // if it does not contains "AdditionalProperties", use SerializerSettings to deserialize
+                if (typeof(PreferredStockInstrument).GetProperty("AdditionalProperties") == null)
+                {
+                    newUnderlyingCfdInstrument = new UnderlyingCfdInstrument(JsonConvert.DeserializeObject<PreferredStockInstrument>(jsonString, UnderlyingCfdInstrument.SerializerSettings));
+                }
+                else
+                {
+                    newUnderlyingCfdInstrument = new UnderlyingCfdInstrument(JsonConvert.DeserializeObject<PreferredStockInstrument>(jsonString, UnderlyingCfdInstrument.AdditionalPropertiesSerializerSettings));
+                }
+                matchedTypes.Add("PreferredStockInstrument");
+                match++;
+            }
+            catch (Exception exception)
+            {
+                // deserialization failed, try the next one
+                System.Diagnostics.Debug.WriteLine(string.Format("Failed to deserialize `{0}` into PreferredStockInstrument: {1}", jsonString, exception.ToString()));
             }
 
             try

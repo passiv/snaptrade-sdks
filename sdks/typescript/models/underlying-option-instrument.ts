@@ -74,6 +74,7 @@ import { EtfInstrument } from './etf-instrument';
 import { FigiInstrumentNullable } from './figi-instrument-nullable';
 import { MutualFundInstrument } from './mutual-fund-instrument';
 import { OtherInstrument } from './other-instrument';
+import { PreferredStockInstrument } from './preferred-stock-instrument';
 import { StockInstrument } from './stock-instrument';
 
 /**
@@ -81,6 +82,6 @@ import { StockInstrument } from './stock-instrument';
  * The underlying instrument for an option.
  * @export
  */
-export type UnderlyingOptionInstrument = { kind: 'adr' } & AdrInstrument | { kind: 'bond' } & OtherInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'other' } & OtherInstrument | { kind: 'stock' } & StockInstrument;
+export type UnderlyingOptionInstrument = { kind: 'adr' } & AdrInstrument | { kind: 'bond' } & OtherInstrument | { kind: 'cef' } & CefInstrument | { kind: 'crypto' } & CryptoInstrument | { kind: 'etf' } & EtfInstrument | { kind: 'mutualfund' } & MutualFundInstrument | { kind: 'other' } & OtherInstrument | { kind: 'preferred_stock' } & PreferredStockInstrument | { kind: 'stock' } & StockInstrument;
 
 
