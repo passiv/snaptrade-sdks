@@ -228,7 +228,7 @@ class BaseApi(api_client.Api):
             _query_params["userSecret"] = user_secret
         if account_id is not None:
             _path_params["accountId"] = account_id
-        args.query = _query_params
+        args.query = query_params if query_params else _query_params
         args.header = _header_params
         args.path = path_params if path_params else _path_params
         return args
@@ -510,6 +510,7 @@ class GetUserAccountPositions(BaseApi, typing.Generic[TAuth]):
         AsyncGeneratorResponse,
     ]:
         args = self._get_user_account_positions_mapped_args(
+            query_params=query_params,
             path_params=path_params,
             account_id=account_id,
             user_id=user_id,
@@ -539,6 +540,7 @@ class GetUserAccountPositions(BaseApi, typing.Generic[TAuth]):
     ]:
         """ Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
         args = self._get_user_account_positions_mapped_args(
+            query_params=query_params,
             path_params=path_params,
             account_id=account_id,
             user_id=user_id,
@@ -571,6 +573,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         AsyncGeneratorResponse,
     ]:
         args = self._get_user_account_positions_mapped_args(
+            query_params=query_params,
             path_params=path_params,
             account_id=account_id,
             user_id=user_id,
@@ -600,6 +603,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     ]:
         """ Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  This endpoint is deprecated. Consider using the newer [unified positions endpoint](/reference/Account%20Information/AccountInformation_getAllAccountPositions). This will allow you to get both equity and option positions in a single call, as well as additional asset classes such as futures.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
         args = self._get_user_account_positions_mapped_args(
+            query_params=query_params,
             path_params=path_params,
             account_id=account_id,
             user_id=user_id,
