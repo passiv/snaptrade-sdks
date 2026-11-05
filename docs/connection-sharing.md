@@ -2,7 +2,7 @@
 
 Users with a SnapTrade Personal account can sign in through your app's [Connection Portal](https://docs.snaptrade.com/docs/implement-connection-portal) and share an existing brokerage connection with your app, instead of connecting it again. Users new to SnapTrade can create an account and connect their brokerage there too.
 
-**There are no code changes on your side.** Shared connections work through your existing API integration, and your current connection flows keep working as they do today.
+**Most integrations need no code changes.** Shared connections work through your existing API integration, and your current connection flows keep working as they do today. The exception: if your app automatically refreshes, disables, or syncs transactions on its connections, make sure it can [handle a not found error](#what-works-differently) on those calls.
 
 ## How It Works
 
@@ -60,7 +60,7 @@ The user sees the access level before confirming. Sharing never changes the type
 
 ### What Works Differently
 
-- **Refresh, disable, and transaction sync:** :api[Connections_refreshBrokerageAuthorization], :api[Connections_disableBrokerageAuthorization], and :api[Connections_syncBrokerageAuthorizationTransactions] are owner-only and return a not found error on a shared connection.
+- **Refresh, disable, and transaction sync:** :api[Connections_refreshBrokerageAuthorization], :api[Connections_disableBrokerageAuthorization], and :api[Connections_syncBrokerageAuthorizationTransactions] are owner-only and return a not found error on a shared connection. Since the API doesn't mark connections as shared, don't treat this error as meaning the connection was deleted. You'll receive `CONNECTION_DELETED` when a share ends.
 - **Connection `type`:** This field shows the type of the owner's connection, not your access. A read-only share of a trading connection still shows `trade`, and trading requests on it return a not found error.
 - **Tax lots:** These may be missing on shared connections, even if you have the add-on.
 
