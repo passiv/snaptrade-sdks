@@ -97,7 +97,7 @@ module SnapTrade
         :'order_type' => :'OrderTypeConfiguration',
         :'time_in_force' => :'AccountOrderTimeInForce',
         :'expiry_date' => :'Time',
-        :'priced_in' => :'AccountOrderPricedIn',
+        :'priced_in' => :'PricedInInstrument',
         :'price_effect' => :'PriceEffect',
         :'total_quantity' => :'Float',
         :'filled_quantity' => :'Float',

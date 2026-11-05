@@ -412,7 +412,7 @@ module SnapTrade
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
-    # @param notional_value [ManualTradeFormNotionalValue] 
+    # @param notional_value [NotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -445,7 +445,7 @@ module SnapTrade
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
-    # @param notional_value [ManualTradeFormNotionalValue] 
+    # @param notional_value [NotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact_with_http_info(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -1150,7 +1150,7 @@ module SnapTrade
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
-    # @param notional_value [ManualTradeFormNotionalValue] 
+    # @param notional_value [NotionalValue] 
     # @param client_order_id [String] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -1195,7 +1195,7 @@ module SnapTrade
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
-    # @param notional_value [ManualTradeFormNotionalValue] 
+    # @param notional_value [NotionalValue] 
     # @param client_order_id [String] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name

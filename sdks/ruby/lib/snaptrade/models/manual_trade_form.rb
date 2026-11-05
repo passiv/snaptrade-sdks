@@ -69,7 +69,7 @@ module SnapTrade
         :'price' => :'Float',
         :'stop' => :'Float',
         :'units' => :'Float',
-        :'notional_value' => :'ManualTradeFormNotionalValue'
+        :'notional_value' => :'NotionalValue'
       }
     end
 

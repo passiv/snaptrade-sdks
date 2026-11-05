@@ -78,6 +78,11 @@ export type ApiKey =
   | ((keyParamName: string) => Promise<string>)
   | { [apiKeyName: string]: string | undefined };
 
+export type AccessToken =
+  | string
+  | Promise<string>
+  | ((name?: string, scopes?: string[]) => string)
+  | ((name?: string, scopes?: string[]) => Promise<string>);
 
 /** The FormData methods used by generated multipart requests. */
 export interface FormDataLike {
@@ -123,6 +128,13 @@ export class Configuration<TAuth extends AuthMode> {
      */
     password?: string;
     /**
+     * parameter for oauth2 security
+     * @param name security name
+     * @param scopes oauth2 scope
+     * @memberof Configuration
+     */
+    accessToken?: AccessToken;
+    /**
      * override base path
      *
      * @type {string}
@@ -159,6 +171,9 @@ export class Configuration<TAuth extends AuthMode> {
         if (param.auth.mode === "personalApiKey") {
             this.consumerKey = param.auth.consumerKey;
             if (param.auth.clientId !== undefined) this.apiKey["clientId"] = param.auth.clientId;
+        }
+        if (param.auth.mode === "oauth") {
+            this.accessToken = param.auth.accessToken;
         }
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};

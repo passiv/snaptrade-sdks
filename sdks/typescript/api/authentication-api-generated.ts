@@ -73,7 +73,7 @@ import { AuthMode, Configuration } from '../configuration';
 import type { FormDataLike } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -230,9 +230,13 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -414,7 +418,7 @@ export const AuthenticationApiFp = function<TAuth extends AuthMode>(configuratio
                 connectionPortalVersion: requestParameters.connectionPortalVersion
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.loginSnapTradeUser(snapTradeLoginUserRequestBody, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters. 
@@ -546,16 +550,21 @@ export type AuthenticationApiLoginSnapTradeUserpersonalApiKeyRequest = Authentic
     readonly userId?: never
     readonly userSecret?: never
 }
+export type AuthenticationApiLoginSnapTradeUseroauthRequest = AuthenticationApiLoginSnapTradeUserBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type AuthenticationApiLoginSnapTradeUserRequestByAuthMode = {
     "commercialApiKey": AuthenticationApiLoginSnapTradeUsercommercialApiKeyRequest;
     "personalApiKey": AuthenticationApiLoginSnapTradeUserpersonalApiKeyRequest;
+    "oauth": AuthenticationApiLoginSnapTradeUseroauthRequest;
 }
 export type AuthenticationApiLoginSnapTradeUserRequest<TAuth extends AuthMode> =
     AuthenticationApiLoginSnapTradeUserRequestByAuthMode[TAuth["mode"] & keyof AuthenticationApiLoginSnapTradeUserRequestByAuthMode]
 
 /** Request argument optionality depends on the selected authentication mode. */
 export type AuthenticationApiLoginSnapTradeUserArgs<TAuth extends AuthMode> =
-    TAuth["mode"] extends "personalApiKey"
+    TAuth["mode"] extends "personalApiKey" | "oauth"
         ? [requestParameters?: AuthenticationApiLoginSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: AuthenticationApiLoginSnapTradeUserRequest<TAuth>, options?: AxiosRequestConfig];
 

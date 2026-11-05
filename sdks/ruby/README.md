@@ -2394,7 +2394,7 @@ The limit price for `Limit` and `StopLimit` orders.
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`Float`](./lib/snaptrade/models/float.rb)<a id="units-floatlibsnaptrademodelsfloatrb"></a>
-##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
+##### notional_value: [`NotionalValue`](./lib/snaptrade/models/notional_value.rb)<a id="notional_value-notionalvaluelibsnaptrademodelsnotional_valuerb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [ManualTradeAndImpact](./lib/snaptrade/models/manual_trade_and_impact.rb)
@@ -2765,7 +2765,7 @@ be a decimal for fractional orders. Must be `null` if `notional_value` is
 provided. If placing an Option order, this field represents the number of
 contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
-##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
+##### notional_value: [`NotionalValue`](./lib/snaptrade/models/notional_value.rb)<a id="notional_value-notionalvaluelibsnaptrademodelsnotional_valuerb"></a>
 ##### client_order_id: [`String`](./lib/snaptrade/models/string.rb)<a id="client_order_id-stringlibsnaptrademodelsstringrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 

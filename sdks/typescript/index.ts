@@ -74,3 +74,6 @@ export * from "./configuration";
 export * from "./models";
 export * from "./client";
 export * from "./error";
+
+export { SnaptradeOAuthDevice } from "./oauth-device";
+export type { SnaptradeOAuthDeviceOptions, SnaptradeDeviceAuthorization, SnaptradeDeviceTokens } from "./oauth-device";
