@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.currency_nullable import CurrencyNullable
+from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.option_brokerage_symbol import OptionBrokerageSymbol
 
 class RequiredOptionsPosition(TypedDict):
@@ -33,7 +33,9 @@ class OptionalOptionsPosition(TypedDict, total=False):
     # Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     average_purchase_price: typing.Optional[typing.Union[int, float]]
 
-    currency: typing.Optional[CurrencyNullable]
+    # WARNING: This property is deprecated
+    # The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
+    currency: Currency
 
 class OptionsPosition(RequiredOptionsPosition, OptionalOptionsPosition):
     pass

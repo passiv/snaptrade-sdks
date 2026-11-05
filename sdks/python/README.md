@@ -19,9 +19,6 @@ Connect brokerage accounts to your app for live positions and trading
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Authentication](#authentication)
-  * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
-  * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
 - [Getting Started](#getting-started)
 - [Request timeouts](#request-timeouts)
 - [Async](#async)
@@ -106,38 +103,6 @@ Python >=3.8
 pip install snaptrade-python-sdk==11.0.213
 ```
 
-## Authentication<a id="authentication"></a>
-
-Choose the authentication mode that matches your credentials, then use its client in the reference examples.
-
-### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
-Use commercial authentication when acting on behalf of your application and passing end-user credentials with requests that require them.
-
-```python
-from snaptrade_client import SnapTrade, SnapTradeAuth
-
-commercial_api_key_client = SnapTrade(
-    auth=SnapTradeAuth.commercial_api_key(
-        consumer_key="CONSUMER_KEY",
-        client_id="CLIENT_ID",
-    ),
-)
-```
-
-### Personal API Key Auth authentication<a id="personal-api-key-auth-authentication"></a>
-Use personal authentication when the API key belongs to a single user and user credentials are not passed per request.
-
-```python
-from snaptrade_client import SnapTrade, SnapTradeAuth
-
-personal_api_key_client = SnapTrade(
-    auth=SnapTradeAuth.personal_api_key(
-        consumer_key="CONSUMER_KEY",
-        client_id="CLIENT_ID",
-    ),
-)
-```
-
 ## Getting Started<a id="getting-started"></a>
 
 ```python
@@ -205,10 +170,17 @@ pprint(deleted_response.body)
 
 ## Request timeouts<a id="request-timeouts"></a>
 
-Synchronous API methods accept an optional `timeout` argument in seconds. Pass
-`timeout=10.0` for a total timeout, or `timeout=(2.0, 10.0)` for separate connection
-and read timeouts. Omitting `timeout` preserves the default transport behavior.
-Timeouts apply to individual HTTP attempts; retries can increase the overall duration.
+Synchronous requests accept an optional `timeout` in seconds. Use a float for a single timeout or a `(connect, read)` tuple to configure them separately:
+
+```python
+snaptrade.account_information.list_user_accounts(
+    user_id="USER_ID",
+    user_secret="USER_SECRET",
+    timeout=30.0,
+)
+```
+
+Omitting `timeout` preserves the existing behavior.
 
 ## Async<a id="async"></a>
 
@@ -217,7 +189,7 @@ Timeouts apply to individual HTTP attempts; retries can increase the overall dur
 ```python
 import asyncio
 from pprint import pprint
-from snaptrade_client import SnapTrade, ApiException, SnapTradeAuth
+from snaptrade_client import SnapTrade, ApiException
 
 snaptrade = SnapTrade(
     consumer_key="YOUR_CONSUMER_KEY",
@@ -231,8 +203,10 @@ async def main():
         get_account_activities_response = (
             await snaptrade.account_information.aget_account_activities(
                 account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-                start_date="2022-01-24T00:00:00.000Z",
-                end_date="2022-01-24T00:00:00.000Z",
+                user_id="snaptrade-user-123",
+                user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+                start_date="2022-01-24",
+                end_date="2022-01-24",
                 offset=0,
                 limit=1,
                 type="BUY,SELL,DIVIDEND",
@@ -276,50 +250,26 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_account_activities_response = (
-    commercial_api_key_client.account_information.get_account_activities(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24T00:00:00.000Z",
-        end_date="2022-01-24T00:00:00.000Z",
-        offset=0,
-        limit=1,
-        type="BUY,SELL,DIVIDEND",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_activities_response = snaptrade.account_information.get_account_activities(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    offset=0,
+    limit=1,
+    type="BUY,SELL,DIVIDEND",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_account_activities_response = (
-    personal_api_key_client.account_information.get_account_activities(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24T00:00:00.000Z",
-        end_date="2022-01-24T00:00:00.000Z",
-        offset=0,
-        limit=1,
-        type="BUY,SELL,DIVIDEND",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### start_date: `date`<a id="start_date-date"></a>
 
@@ -360,38 +310,21 @@ An experimental endpoint that returns estimated historical total account value f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_account_balance_history_response = (
-    commercial_api_key_client.account_information.get_account_balance_history(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    snaptrade.account_information.get_account_balance_history(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_account_balance_history_response = (
-    personal_api_key_client.account_information.get_account_balance_history(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -420,38 +353,21 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_all_account_positions_response = (
-    commercial_api_key_client.account_information.get_all_account_positions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    snaptrade.account_information.get_all_account_positions(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_all_account_positions_response = (
-    personal_api_key_client.account_information.get_all_account_positions(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -480,38 +396,19 @@ account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_all_user_holdings_response = (
-    commercial_api_key_client.account_information.get_all_user_holdings(
-        brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_all_user_holdings_response = (
-    personal_api_key_client.account_information.get_all_user_holdings(
-        brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### brokerage_authorizations: `str`<a id="brokerage_authorizations-str"></a>
 
@@ -542,38 +439,21 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_balance_response = (
-    commercial_api_key_client.account_information.get_user_account_balance(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    snaptrade.account_information.get_user_account_balance(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_balance_response = (
-    personal_api_key_client.account_information.get_user_account_balance(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -602,38 +482,21 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_details_response = (
-    commercial_api_key_client.account_information.get_user_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    snaptrade.account_information.get_user_account_details(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_details_response = (
-    personal_api_key_client.account_information.get_user_account_details(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -662,11 +525,9 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_order_detail_response = (
-    commercial_api_key_client.account_information.get_user_account_order_detail(
+    snaptrade.account_information.get_user_account_order_detail(
         brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         user_id="snaptrade-user-123",
@@ -675,26 +536,6 @@ get_user_account_order_detail_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_order_detail_response = (
-    personal_api_key_client.account_information.get_user_account_order_detail(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
@@ -702,6 +543,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### account_id: `str`<a id="account_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -731,31 +576,11 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_orders_response = (
-    commercial_api_key_client.account_information.get_user_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
+    snaptrade.account_information.get_user_account_orders(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_orders_response = (
-    personal_api_key_client.account_information.get_user_account_orders(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
         days=30,
@@ -763,10 +588,11 @@ get_user_account_orders_response = (
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -806,38 +632,21 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_positions_response = (
-    commercial_api_key_client.account_information.get_user_account_positions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    snaptrade.account_information.get_user_account_positions(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_positions_response = (
-    personal_api_key_client.account_information.get_user_account_positions(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -863,40 +672,22 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_recent_orders_response = (
-    commercial_api_key_client.account_information.get_user_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
+    snaptrade.account_information.get_user_account_recent_orders(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_recent_orders_response = (
-    personal_api_key_client.account_information.get_user_account_recent_orders(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         only_executed=True,
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -923,40 +714,22 @@ Returns a list of rate of return percents for a given account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_return_rates_response = (
-    commercial_api_key_client.account_information.get_user_account_return_rates(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        timeframes="ALL,1Y",
+    snaptrade.account_information.get_user_account_return_rates(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_return_rates_response = (
-    personal_api_key_client.account_information.get_user_account_return_rates(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         timeframes="ALL,1Y",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -991,40 +764,21 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_user_holdings_response = (
-    commercial_api_key_client.account_information.get_user_holdings(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_holdings_response = snaptrade.account_information.get_user_holdings(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_holdings_response = (
-    personal_api_key_client.account_information.get_user_holdings(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1047,33 +801,18 @@ This endpoint returns Daily data regardless of the customer's plan. Daily data i
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-list_user_accounts_response = (
-    commercial_api_key_client.account_information.list_user_accounts(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+list_user_accounts_response = snaptrade.account_information.list_user_accounts(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
-Required credentials for this mode:
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+##### user_id: `str`<a id="user_id-str"></a>
 
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_user_accounts_response = (
-    personal_api_key_client.account_information.list_user_accounts()
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1093,38 +832,19 @@ Updates various properties of a specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-update_user_account_response = (
-    commercial_api_key_client.account_information.update_user_account(
-        account_id="accountId_example",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+update_user_account_response = snaptrade.account_information.update_user_account(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="accountId_example",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-update_user_account_response = (
-    personal_api_key_client.account_information.update_user_account(
-        account_id="accountId_example",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -1170,21 +890,15 @@ Deletes a registered user and all associated data. This action is irreversible. 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-This endpoint supports Commercial API Key Auth authentication only.
-
 ```python
-delete_snap_trade_user_response = (
-    commercial_api_key_client.authentication.delete_snap_trade_user(
-        user_id="snaptrade-user-123",
-    )
+delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
+    user_id="snaptrade-user-123",
 )
 ```
 
-Required credentials for this mode:
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
+##### user_id: `str`<a id="user_id-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1204,15 +918,9 @@ Returns a list of all registered user IDs. Please note that the response is not 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-This endpoint supports Commercial API Key Auth authentication only.
-
 ```python
-list_snap_trade_users_response = (
-    commercial_api_key_client.authentication.list_snap_trade_users()
-)
+list_snap_trade_users_response = snaptrade.authentication.list_snap_trade_users()
 ```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1235,52 +943,26 @@ Please note that the returned URL expires in 5 minutes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-login_snap_trade_user_response = (
-    commercial_api_key_client.authentication.login_snap_trade_user(
-        broker="ALPACA",
-        immediate_redirect=True,
-        custom_redirect="https://snaptrade.com",
-        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        connection_type="read",
-        show_close_button=True,
-        dark_mode=True,
-        connection_portal_version="v4",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    broker="ALPACA",
+    immediate_redirect=True,
+    custom_redirect="https://snaptrade.com",
+    reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connection_type="read",
+    show_close_button=True,
+    dark_mode=True,
+    connection_portal_version="v4",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-login_snap_trade_user_response = (
-    personal_api_key_client.authentication.login_snap_trade_user(
-        broker="ALPACA",
-        immediate_redirect=True,
-        custom_redirect="https://snaptrade.com",
-        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        connection_type="read",
-        show_close_button=True,
-        dark_mode=True,
-        connection_portal_version="v4",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### broker: `str`<a id="broker-str"></a>
 
@@ -1333,17 +1015,11 @@ Most SnapTrade operations require a user ID and user secret to be passed in as p
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-This endpoint supports Commercial API Key Auth authentication only.
-
 ```python
-register_snap_trade_user_response = (
-    commercial_api_key_client.authentication.register_snap_trade_user(
-        user_id="snaptrade-user-123",
-    )
+register_snap_trade_user_response = snaptrade.authentication.register_snap_trade_user(
+    user_id="snaptrade-user-123",
 )
 ```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1373,18 +1049,14 @@ Rotates the secret for a SnapTrade user. You might use this if `userSecret` is c
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-This endpoint supports Commercial API Key Auth authentication only.
-
 ```python
 reset_snap_trade_user_secret_response = (
-    commercial_api_key_client.authentication.reset_snap_trade_user_secret(
+    snaptrade.authentication.reset_snap_trade_user_secret(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1417,36 +1089,21 @@ Deletes the SnapTrade connection specified by the ID. This will also remove the 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-delete_connection_response = commercial_api_key_client.connections.delete_connection(
+delete_connection_response = snaptrade.connections.delete_connection(
     connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-delete_connection_response = personal_api_key_client.connections.delete_connection(
-    connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### connection_id: `str`<a id="connection_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1466,11 +1123,9 @@ Returns a single connection for the specified ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 detail_brokerage_authorization_response = (
-    commercial_api_key_client.connections.detail_brokerage_authorization(
+    snaptrade.connections.detail_brokerage_authorization(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1478,28 +1133,13 @@ detail_brokerage_authorization_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-detail_brokerage_authorization_response = (
-    personal_api_key_client.connections.detail_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1523,11 +1163,9 @@ This endpoint is available on test keys. If you would like it enabled on product
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 disable_brokerage_authorization_response = (
-    commercial_api_key_client.connections.disable_brokerage_authorization(
+    snaptrade.connections.disable_brokerage_authorization(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1535,28 +1173,13 @@ disable_brokerage_authorization_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-disable_brokerage_authorization_response = (
-    personal_api_key_client.connections.disable_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1583,11 +1206,9 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 list_brokerage_authorization_accounts_response = (
-    commercial_api_key_client.connections.list_brokerage_authorization_accounts(
+    snaptrade.connections.list_brokerage_authorization_accounts(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1595,28 +1216,13 @@ list_brokerage_authorization_accounts_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_brokerage_authorization_accounts_response = (
-    personal_api_key_client.connections.list_brokerage_authorization_accounts(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1641,33 +1247,20 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 list_brokerage_authorizations_response = (
-    commercial_api_key_client.connections.list_brokerage_authorizations(
+    snaptrade.connections.list_brokerage_authorizations(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
 
-Required credentials for this mode:
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+##### user_id: `str`<a id="user_id-str"></a>
 
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_brokerage_authorizations_response = (
-    personal_api_key_client.connections.list_brokerage_authorizations()
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1692,11 +1285,9 @@ This endpoint will also trigger a transaction sync for the past day if one has n
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 refresh_brokerage_authorization_response = (
-    commercial_api_key_client.connections.refresh_brokerage_authorization(
+    snaptrade.connections.refresh_brokerage_authorization(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1704,28 +1295,13 @@ refresh_brokerage_authorization_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-refresh_brokerage_authorization_response = (
-    personal_api_key_client.connections.refresh_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1745,36 +1321,21 @@ Deletes the SnapTrade connection specified by the ID. This will also remove the 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-commercial_api_key_client.connections.remove_brokerage_authorization(
+snaptrade.connections.remove_brokerage_authorization(
     authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-personal_api_key_client.connections.remove_brokerage_authorization(
-    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1791,36 +1352,20 @@ Returns a list of rate of return percents for a given connection.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-return_rates_response = commercial_api_key_client.connections.return_rates(
-    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    timeframes="ALL,1Y",
+return_rates_response = snaptrade.connections.return_rates(
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-return_rates_response = personal_api_key_client.connections.return_rates(
     authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     timeframes="ALL,1Y",
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
 
@@ -1846,26 +1391,13 @@ Returns a list of session events associated with a user.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-session_events_response = commercial_api_key_client.connections.session_events(
+session_events_response = snaptrade.connections.session_events(
     partner_client_id="SNAPTRADETEST",
     user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-session_events_response = personal_api_key_client.connections.session_events(
-    partner_client_id="SNAPTRADETEST",
-    user_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    session_id="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1894,11 +1426,9 @@ Trigger a transactions sync for all accounts under this connection. Updates will
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 sync_brokerage_authorization_transactions_response = (
-    commercial_api_key_client.connections.sync_brokerage_authorization_transactions(
+    snaptrade.connections.sync_brokerage_authorization_transactions(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1906,28 +1436,13 @@ sync_brokerage_authorization_transactions_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-sync_brokerage_authorization_transactions_response = (
-    personal_api_key_client.connections.sync_brokerage_authorization_transactions(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1949,38 +1464,14 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-add_subscription_response = (
-    commercial_api_key_client.experimental_endpoints.add_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        check_interval_seconds=300,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+add_subscription_response = snaptrade.experimental_endpoints.add_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    check_interval_seconds=300,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-add_subscription_response = (
-    personal_api_key_client.experimental_endpoints.add_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        check_interval_seconds=300,
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1991,6 +1482,10 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 ##### check_interval_seconds: `int`<a id="check_interval_seconds-int"></a>
 
 How often the subscribed account should be checked for new trades. Must match an active Trade Detection plan.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -2015,26 +1510,11 @@ This endpoint requires partner signature authentication only and does not requir
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-cancel_subscription_response = (
-    commercial_api_key_client.experimental_endpoints.cancel_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+cancel_subscription_response = snaptrade.experimental_endpoints.cancel_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-cancel_subscription_response = (
-    personal_api_key_client.experimental_endpoints.cancel_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2071,11 +1551,9 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_order_detail_v2_response = (
-    commercial_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
+    snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
         user_id="snaptrade-user-123",
@@ -2084,31 +1562,15 @@ get_user_account_order_detail_v2_response = (
 )
 ```
 
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_order_detail_v2_response = (
-    personal_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
 ##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2133,31 +1595,11 @@ If the connection has become disabled, it can no longer access the latest data f
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_orders_v2_response = (
-    commercial_api_key_client.experimental_endpoints.get_user_account_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
+    snaptrade.experimental_endpoints.get_user_account_orders_v2(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_orders_v2_response = (
-    personal_api_key_client.experimental_endpoints.get_user_account_orders_v2(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
         days=30,
@@ -2165,10 +1607,11 @@ get_user_account_orders_v2_response = (
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -2203,40 +1646,22 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_recent_orders_v2_response = (
-    commercial_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
+    snaptrade.experimental_endpoints.get_user_account_recent_orders_v2(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_recent_orders_v2_response = (
-    personal_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         only_executed=True,
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -2262,22 +1687,9 @@ Returns active Trade Detection subscriptions for your Client ID. Cancelled subsc
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-list_subscriptions_response = (
-    commercial_api_key_client.experimental_endpoints.list_subscriptions()
-)
+list_subscriptions_response = snaptrade.experimental_endpoints.list_subscriptions()
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_subscriptions_response = (
-    personal_api_key_client.experimental_endpoints.list_subscriptions()
-)
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2305,34 +1717,19 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-list_option_holdings_response = commercial_api_key_client.options.list_option_holdings(
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+list_option_holdings_response = snaptrade.options.list_option_holdings(
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_option_holdings_response = personal_api_key_client.options.list_option_holdings(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -2354,26 +1751,13 @@ Returns an Exchange Rate Pair object for the specified Currency Pair.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_currency_exchange_rate_pair_response = (
-    commercial_api_key_client.reference_data.get_currency_exchange_rate_pair(
+    snaptrade.reference_data.get_currency_exchange_rate_pair(
         currency_pair="currencyPair_example",
     )
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_currency_exchange_rate_pair_response = (
-    personal_api_key_client.reference_data.get_currency_exchange_rate_pair(
-        currency_pair="currencyPair_example",
-    )
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2399,18 +1783,9 @@ Returns configurations for your SnapTrade Client ID, including allowed brokerage
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_partner_info_response = commercial_api_key_client.reference_data.get_partner_info()
+get_partner_info_response = snaptrade.reference_data.get_partner_info()
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_partner_info_response = personal_api_key_client.reference_data.get_partner_info()
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2430,22 +1805,9 @@ Return all available security types supported by SnapTrade.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_security_types_response = (
-    commercial_api_key_client.reference_data.get_security_types()
-)
+get_security_types_response = snaptrade.reference_data.get_security_types()
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_security_types_response = (
-    personal_api_key_client.reference_data.get_security_types()
-)
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2465,22 +1827,9 @@ Returns a list of all supported Exchanges.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_stock_exchanges_response = (
-    commercial_api_key_client.reference_data.get_stock_exchanges()
-)
+get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_stock_exchanges_response = (
-    personal_api_key_client.reference_data.get_stock_exchanges()
-)
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2501,22 +1850,11 @@ Returns a list of Universal Symbol objects that match the given query. The match
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_symbols_response = commercial_api_key_client.reference_data.get_symbols(
+get_symbols_response = snaptrade.reference_data.get_symbols(
     substring="AAPL",
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_symbols_response = personal_api_key_client.reference_data.get_symbols(
-    substring="AAPL",
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2546,26 +1884,11 @@ Returns the Universal Symbol object specified by the ticker or the Universal Sym
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_symbols_by_ticker_response = (
-    commercial_api_key_client.reference_data.get_symbols_by_ticker(
-        query="query_example",
-    )
+get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
+    query="query_example",
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_symbols_by_ticker_response = (
-    personal_api_key_client.reference_data.get_symbols_by_ticker(
-        query="query_example",
-    )
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2591,26 +1914,13 @@ Returns a list of all defined Brokerage authorization Type objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 list_all_brokerage_authorization_type_response = (
-    commercial_api_key_client.reference_data.list_all_brokerage_authorization_type(
+    snaptrade.reference_data.list_all_brokerage_authorization_type(
         brokerage="QUESTRADE,ALPACA",
     )
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_all_brokerage_authorization_type_response = (
-    personal_api_key_client.reference_data.list_all_brokerage_authorization_type(
-        brokerage="QUESTRADE,ALPACA",
-    )
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2636,26 +1946,13 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 list_all_brokerage_instruments_response = (
-    commercial_api_key_client.reference_data.list_all_brokerage_instruments(
+    snaptrade.reference_data.list_all_brokerage_instruments(
         slug="QUESTRADE",
     )
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_all_brokerage_instruments_response = (
-    personal_api_key_client.reference_data.list_all_brokerage_instruments(
-        slug="QUESTRADE",
-    )
-)
-```
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2681,22 +1978,9 @@ Returns a list of all defined Brokerage objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-list_all_brokerages_response = (
-    commercial_api_key_client.reference_data.list_all_brokerages()
-)
+list_all_brokerages_response = snaptrade.reference_data.list_all_brokerages()
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_all_brokerages_response = (
-    personal_api_key_client.reference_data.list_all_brokerages()
-)
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2716,22 +2000,9 @@ Returns a list of all defined Currency objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-list_all_currencies_response = (
-    commercial_api_key_client.reference_data.list_all_currencies()
-)
+list_all_currencies_response = snaptrade.reference_data.list_all_currencies()
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_all_currencies_response = (
-    personal_api_key_client.reference_data.list_all_currencies()
-)
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2751,22 +2022,11 @@ Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 list_all_currencies_rates_response = (
-    commercial_api_key_client.reference_data.list_all_currencies_rates()
+    snaptrade.reference_data.list_all_currencies_rates()
 )
 ```
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-list_all_currencies_rates_response = (
-    personal_api_key_client.reference_data.list_all_currencies_rates()
-)
-```
-
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2789,40 +2049,22 @@ The search results are further limited to the symbols supported by the brokerage
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 symbol_search_user_account_response = (
-    commercial_api_key_client.reference_data.symbol_search_user_account(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        substring="AAPL",
+    snaptrade.reference_data.symbol_search_user_account(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-symbol_search_user_account_response = (
-    personal_api_key_client.reference_data.symbol_search_user_account(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         substring="AAPL",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -2852,40 +2094,24 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-cancel_order_response = commercial_api_key_client.trading.cancel_order(
+cancel_order_response = snaptrade.trading.cancel_order(
     brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-cancel_order_response = personal_api_key_client.trading.cancel_order(
-    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
 
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -2913,44 +2139,24 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-cancel_user_account_order_response = (
-    commercial_api_key_client.trading.cancel_user_account_order(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-cancel_user_account_order_response = (
-    personal_api_key_client.trading.cancel_user_account_order(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
 
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -2976,40 +2182,22 @@ Gets a quote for the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_cryptocurrency_pair_quote_response = (
-    commercial_api_key_client.trading.get_cryptocurrency_pair_quote(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        instrument_symbol="BTC-USD",
+    snaptrade.trading.get_cryptocurrency_pair_quote(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_cryptocurrency_pair_quote_response = (
-    personal_api_key_client.trading.get_cryptocurrency_pair_quote(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         instrument_symbol="BTC-USD",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -3035,10 +2223,8 @@ Only supported for certain enabled brokerages. Please refer to the [brokerage tr
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_option_impact_response = commercial_api_key_client.trading.get_option_impact(
+get_option_impact_response = snaptrade.trading.get_option_impact(
     order_type="MARKET",
     time_in_force="Day",
     legs=[
@@ -3051,46 +2237,14 @@ get_option_impact_response = commercial_api_key_client.trading.get_option_impact
             "units": 1,
         }
     ],
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price="",
-    stop_price="",
-    price_effect="DEBIT",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_option_impact_response = personal_api_key_client.trading.get_option_impact(
-    order_type="MARKET",
-    time_in_force="Day",
-    legs=[
-        {
-            "instrument": {
-                "symbol": "PBI   250718C00006000",
-                "instrument_type": "OPTION",
-            },
-            "action": "BUY_TO_OPEN",
-            "units": 1,
-        }
-    ],
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     limit_price="",
     stop_price="",
     price_effect="DEBIT",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3099,6 +2253,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
 ##### legs: List[`MlegLeg`]<a id="legs-listmlegleg"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -3133,48 +2291,21 @@ Simulates an order and its impact on the account. This endpoint does not place t
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_order_impact_response = commercial_api_key_client.trading.get_order_impact(
+get_order_impact_response = snaptrade.trading.get_order_impact(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     order_type="Market",
     time_in_force="Day",
-    price=31.33,
-    stop=31.33,
-    units=10.5,
-    notional_value=None,
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_order_impact_response = personal_api_key_client.trading.get_order_impact(
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    action="BUY",
-    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    order_type="Market",
-    time_in_force="Day",
     price=31.33,
     stop=31.33,
     units=10.5,
     notional_value=None,
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3191,6 +2322,10 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -3227,40 +2362,22 @@ Returns a quote for a single option contract. The option contract is specified u
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 get_user_account_option_quotes_response = (
-    commercial_api_key_client.trading.get_user_account_option_quotes(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        symbol="AAPL  251219C00150000",
+    snaptrade.trading.get_user_account_option_quotes(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_option_quotes_response = (
-    personal_api_key_client.trading.get_user_account_option_quotes(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         symbol="AAPL  251219C00150000",
     )
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -3295,42 +2412,21 @@ This endpoint is disabled for free plans by default. Please contact support to e
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_user_account_quotes_response = (
-    commercial_api_key_client.trading.get_user_account_quotes(
-        symbols="symbols_example",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        use_ticker=True,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    symbols="symbols_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    use_ticker=True,
 )
 ```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_user_account_quotes_response = (
-    personal_api_key_client.trading.get_user_account_quotes(
-        symbols="symbols_example",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        use_ticker=True,
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### symbols: `str`<a id="symbols-str"></a>
 
@@ -3364,10 +2460,8 @@ use. Only supported on certain brokerages
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-place_bracket_order_response = commercial_api_key_client.trading.place_bracket_order(
+place_bracket_order_response = snaptrade.trading.place_bracket_order(
     action="BUY",
     instrument={
         "symbol": "AAPL",
@@ -3383,47 +2477,13 @@ place_bracket_order_response = commercial_api_key_client.trading.place_bracket_o
         "limit_price": "49.95",
     },
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    price=31.33,
-    stop=31.33,
-    units=10.5,
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_bracket_order_response = personal_api_key_client.trading.place_bracket_order(
-    action="BUY",
-    instrument={
-        "symbol": "AAPL",
-        "type": "EQUITY",
-    },
-    order_type="Market",
-    time_in_force="Day",
-    stop_loss={
-        "stop_price": "48.55",
-        "limit_price": "48.50",
-    },
-    take_profit={
-        "limit_price": "49.95",
-    },
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     price=31.33,
     stop=31.33,
     units=10.5,
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3445,6 +2505,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to execute the trade on.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -3486,10 +2550,8 @@ Please refer to the [brokerage trading support page](https://support.snaptrade.c
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-place_complex_order_response = commercial_api_key_client.trading.place_complex_order(
+place_complex_order_response = snaptrade.trading.place_complex_order(
     type="OTO",
     orders=[
         {
@@ -3507,45 +2569,11 @@ place_complex_order_response = commercial_api_key_client.trading.place_complex_o
         }
     ],
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    client_order_id="550e8400-e29b-41d4-a716-446655440000",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_complex_order_response = personal_api_key_client.trading.place_complex_order(
-    type="OTO",
-    orders=[
-        {
-            "order_role": "TRIGGER",
-            "action": "BUY",
-            "instrument": {
-                "symbol": "AAPL",
-                "type": "EQUITY",
-            },
-            "order_type": "Market",
-            "units": 10.5,
-            "time_in_force": "Day",
-            "price": 31.33,
-            "stop": 29.5,
-        }
-    ],
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     client_order_id="550e8400-e29b-41d4-a716-446655440000",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3560,6 +2588,10 @@ The orders that make up the complex order. Required counts and roles per type: -
 ##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to execute the trade on.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### client_order_id: [`ClientOrderIDNullable`](./snaptrade_client/type/client_order_id_nullable.py)<a id="client_order_id-clientorderidnullablesnaptrade_clienttypeclient_order_id_nullablepy"></a>
 
@@ -3586,10 +2618,8 @@ This endpoint does not compute the impact to the account balance from the order 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-place_crypto_order_response = commercial_api_key_client.trading.place_crypto_order(
+place_crypto_order_response = snaptrade.trading.place_crypto_order(
     instrument={
         "symbol": "BTC",
         "type": "CRYPTOCURRENCY",
@@ -3598,44 +2628,15 @@ place_crypto_order_response = commercial_api_key_client.trading.place_crypto_ord
     type="MARKET",
     time_in_force="GTC",
     amount="123.45",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price="123.45",
-    stop_price="123.45",
-    post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_crypto_order_response = personal_api_key_client.trading.place_crypto_order(
-    instrument={
-        "symbol": "BTC",
-        "type": "CRYPTOCURRENCY",
-    },
-    side="BUY",
-    type="MARKET",
-    time_in_force="GTC",
-    amount="123.45",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3655,6 +2656,10 @@ The Time in Force type for the order. This field indicates how long the order wi
 ##### amount: `str`<a id="amount-str"></a>
 
 The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -3700,42 +2705,14 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-place_force_order_response = commercial_api_key_client.trading.place_force_order(
+place_force_order_response = snaptrade.trading.place_force_order(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
     order_type="Market",
     time_in_force="Day",
-    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    symbol="AAPL",
-    trading_session="REGULAR",
-    expiry_date="2026-08-21T23:27:55.027Z",
-    price=31.33,
-    stop=31.33,
-    units=10.5,
-    notional_value=None,
-    client_order_id="550e8400-e29b-41d4-a716-446655440000",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_force_order_response = personal_api_key_client.trading.place_force_order(
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    action="BUY",
-    order_type="Market",
-    time_in_force="Day",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     symbol="AAPL",
     trading_session="REGULAR",
@@ -3747,9 +2724,6 @@ place_force_order_response = personal_api_key_client.trading.place_force_order(
     client_order_id="550e8400-e29b-41d4-a716-446655440000",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3762,6 +2736,10 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
 ##### time_in_force: [`ManualTradePlaceTimeInForceStrict`](./snaptrade_client/type/manual_trade_place_time_in_force_strict.py)<a id="time_in_force-manualtradeplacetimeinforcestrictsnaptrade_clienttypemanual_trade_place_time_in_force_strictpy"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### universal_symbol_id: [`UniversalSymbolIDNullable`](./snaptrade_client/type/universal_symbol_id_nullable.py)<a id="universal_symbol_id-universalsymbolidnullablesnaptrade_clienttypeuniversal_symbol_id_nullablepy"></a>
 
@@ -3785,7 +2763,7 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
 
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
@@ -3815,10 +2793,8 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-place_mleg_order_response = commercial_api_key_client.trading.place_mleg_order(
+place_mleg_order_response = snaptrade.trading.place_mleg_order(
     order_type="MARKET",
     time_in_force="Day",
     legs=[
@@ -3831,46 +2807,14 @@ place_mleg_order_response = commercial_api_key_client.trading.place_mleg_order(
             "units": 1,
         }
     ],
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price="",
-    stop_price="",
-    price_effect="DEBIT",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_mleg_order_response = personal_api_key_client.trading.place_mleg_order(
-    order_type="MARKET",
-    time_in_force="Day",
-    legs=[
-        {
-            "instrument": {
-                "symbol": "PBI   250718C00006000",
-                "instrument_type": "OPTION",
-            },
-            "action": "BUY_TO_OPEN",
-            "units": 1,
-        }
-    ],
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     limit_price="",
     stop_price="",
     price_effect="DEBIT",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3879,6 +2823,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
 ##### legs: List[`MlegLeg`]<a id="legs-listmlegleg"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -3916,40 +2864,24 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-place_order_response = commercial_api_key_client.trading.place_order(
+place_order_response = snaptrade.trading.place_order(
     trade_id="139e307a-82f7-4402-b39e-4da7baa87758",
-    wait_to_confirm=True,
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_order_response = personal_api_key_client.trading.place_order(
-    trade_id="139e307a-82f7-4402-b39e-4da7baa87758",
     wait_to_confirm=True,
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### trade_id: `str`<a id="trade_id-str"></a>
 
 Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### wait_to_confirm: `Optional[bool]`<a id="wait_to_confirm-optionalbool"></a>
 
@@ -3977,10 +2909,8 @@ Previews an order using the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-preview_crypto_order_response = commercial_api_key_client.trading.preview_crypto_order(
+preview_crypto_order_response = snaptrade.trading.preview_crypto_order(
     instrument={
         "symbol": "BTC",
         "type": "CRYPTOCURRENCY",
@@ -3989,44 +2919,15 @@ preview_crypto_order_response = commercial_api_key_client.trading.preview_crypto
     type="MARKET",
     time_in_force="GTC",
     amount="123.45",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price="123.45",
-    stop_price="123.45",
-    post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-preview_crypto_order_response = personal_api_key_client.trading.preview_crypto_order(
-    instrument={
-        "symbol": "BTC",
-        "type": "CRYPTOCURRENCY",
-    },
-    side="BUY",
-    type="MARKET",
-    time_in_force="GTC",
-    amount="123.45",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4046,6 +2947,10 @@ The Time in Force type for the order. This field indicates how long the order wi
 ##### amount: `str`<a id="amount-str"></a>
 
 The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -4089,48 +2994,21 @@ returned in the response going forward. Only supported on some brokerages
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-replace_order_response = commercial_api_key_client.trading.replace_order(
+replace_order_response = snaptrade.trading.replace_order(
     brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     action="BUY",
     order_type="Market",
     time_in_force="Day",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    price=31.33,
-    symbol="AAPL",
-    stop=31.33,
-    units=10.5,
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-replace_order_response = personal_api_key_client.trading.replace_order(
-    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    action="BUY",
-    order_type="Market",
-    time_in_force="Day",
-    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     price=31.33,
     symbol="AAPL",
     stop=31.33,
     units=10.5,
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4147,6 +3025,10 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to execute the trade on.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -4184,31 +3066,11 @@ Searches cryptocurrency pairs instruments accessible to the specified account. B
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
 search_cryptocurrency_pair_instruments_response = (
-    commercial_api_key_client.trading.search_cryptocurrency_pair_instruments(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        base="BTC",
-        quote="USD",
+    snaptrade.trading.search_cryptocurrency_pair_instruments(
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-search_cryptocurrency_pair_instruments_response = (
-    personal_api_key_client.trading.search_cryptocurrency_pair_instruments(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         base="BTC",
         quote="USD",
@@ -4216,10 +3078,11 @@ search_cryptocurrency_pair_instruments_response = (
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -4251,42 +3114,23 @@ This endpoint returns Daily data. Daily data is cached and refreshed once a day.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_activities_response = commercial_api_key_client.transactions_and_reporting.get_activities(
-    start_date="2022-01-24T00:00:00.000Z",
-    end_date="2022-01-24T00:00:00.000Z",
-    accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    type="BUY,SELL,DIVIDEND",
+get_activities_response = snaptrade.transactions_and_reporting.get_activities(
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_activities_response = personal_api_key_client.transactions_and_reporting.get_activities(
-    start_date="2022-01-24T00:00:00.000Z",
-    end_date="2022-01-24T00:00:00.000Z",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
     accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     type="BUY,SELL,DIVIDEND",
 )
 ```
 
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### start_date: `date`<a id="start_date-date"></a>
 
@@ -4327,46 +3171,27 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
 ```python
-get_reporting_custom_range_response = commercial_api_key_client.transactions_and_reporting.get_reporting_custom_range(
-    start_date="2022-01-24T00:00:00.000Z",
-    end_date="2022-01-24T00:00:00.000Z",
-    accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
-    detailed=True,
-    frequency="monthly",
+get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
+    start_date="2022-01-24",
+    end_date="2022-01-24",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_reporting_custom_range_response = personal_api_key_client.transactions_and_reporting.get_reporting_custom_range(
-    start_date="2022-01-24T00:00:00.000Z",
-    end_date="2022-01-24T00:00:00.000Z",
     accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     detailed=True,
     frequency="monthly",
 )
 ```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### start_date: `date`<a id="start_date-date"></a>
 
 ##### end_date: `date`<a id="end_date-date"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
 
 ##### accounts: `str`<a id="accounts-str"></a>
 

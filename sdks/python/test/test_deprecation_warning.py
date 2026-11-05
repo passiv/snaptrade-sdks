@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 
-from snaptrade_client import SnapTradeAuth
 from snaptrade_client.api_client import ApiClient, DeprecationWarningOnce
 from snaptrade_client.configuration import Configuration
 

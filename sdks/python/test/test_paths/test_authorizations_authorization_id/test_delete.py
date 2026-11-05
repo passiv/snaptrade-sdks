@@ -35,7 +35,7 @@ class TestAuthorizationsAuthorizationId(ApiTestMixin, unittest.TestCase):
         pass
 
     response_status = 204
-    response_payload = ''
+    response_body = ''
 
 
 if __name__ == '__main__':

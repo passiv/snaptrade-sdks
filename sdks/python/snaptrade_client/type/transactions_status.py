@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.sync_status_date import SyncStatusDate
 from snaptrade_client.type.sync_status_date_nullable import SyncStatusDateNullable
 
 class RequiredTransactionsStatus(TypedDict):
@@ -26,7 +27,8 @@ class OptionalTransactionsStatus(TypedDict, total=False):
 
     last_successful_sync: SyncStatusDateNullable
 
-    first_transaction_date: SyncStatusDateNullable
+    # The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
+    first_transaction_date: SyncStatusDate
 
 class TransactionsStatus(RequiredTransactionsStatus, OptionalTransactionsStatus):
     pass

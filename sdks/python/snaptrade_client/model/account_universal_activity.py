@@ -42,14 +42,78 @@ class AccountUniversalActivity(
             @staticmethod
             def symbol() -> typing.Type['SymbolNullable']:
                 return SymbolNullable
-        
-            @staticmethod
-            def currency_universal_symbol() -> typing.Type['SymbolNullable']:
-                return SymbolNullable
-        
-            @staticmethod
-            def option_symbol() -> typing.Type['OptionsSymbolNullable']:
-                return OptionsSymbolNullable
+            
+            
+            class currency_universal_symbol(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            Symbol,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'currency_universal_symbol':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
+            
+            
+            class option_symbol(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            OptionsSymbol,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'option_symbol':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             price = schemas.NumberSchema
             units = schemas.NumberSchema
             
@@ -72,10 +136,42 @@ class AccountUniversalActivity(
                         *args,
                         _configuration=_configuration,
                     )
-        
-            @staticmethod
-            def currency() -> typing.Type['CurrencyNullable']:
-                return CurrencyNullable
+            
+            
+            class currency(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            Currency,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'currency':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             type = schemas.StrSchema
             option_type = schemas.StrSchema
             description = schemas.StrSchema
@@ -175,10 +271,10 @@ class AccountUniversalActivity(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'SymbolNullable': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["currency_universal_symbol"]) -> 'SymbolNullable': ...
+    def __getitem__(self, name: typing_extensions.Literal["currency_universal_symbol"]) -> MetaOapg.properties.currency_universal_symbol: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> 'OptionsSymbolNullable': ...
+    def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> MetaOapg.properties.option_symbol: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
@@ -190,7 +286,7 @@ class AccountUniversalActivity(
     def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> 'CurrencyNullable': ...
+    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> MetaOapg.properties.currency: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
@@ -233,10 +329,10 @@ class AccountUniversalActivity(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['SymbolNullable', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currency_universal_symbol"]) -> typing.Union['SymbolNullable', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["currency_universal_symbol"]) -> typing.Union[MetaOapg.properties.currency_universal_symbol, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union['OptionsSymbolNullable', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union[MetaOapg.properties.option_symbol, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
@@ -248,7 +344,7 @@ class AccountUniversalActivity(
     def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> typing.Union[MetaOapg.properties.amount, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union['CurrencyNullable', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union[MetaOapg.properties.currency, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union[MetaOapg.properties.type, schemas.Unset]: ...
@@ -288,12 +384,12 @@ class AccountUniversalActivity(
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union['SymbolNullable', schemas.Unset] = schemas.unset,
-        currency_universal_symbol: typing.Union['SymbolNullable', schemas.Unset] = schemas.unset,
-        option_symbol: typing.Union['OptionsSymbolNullable', schemas.Unset] = schemas.unset,
+        currency_universal_symbol: typing.Union[MetaOapg.properties.currency_universal_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        option_symbol: typing.Union[MetaOapg.properties.option_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         amount: typing.Union[MetaOapg.properties.amount, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        currency: typing.Union['CurrencyNullable', schemas.Unset] = schemas.unset,
+        currency: typing.Union[MetaOapg.properties.currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         type: typing.Union[MetaOapg.properties.type, str, schemas.Unset] = schemas.unset,
         option_type: typing.Union[MetaOapg.properties.option_type, str, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, str, schemas.Unset] = schemas.unset,
@@ -330,6 +426,7 @@ class AccountUniversalActivity(
             **kwargs,
         )
 
-from snaptrade_client.model.currency_nullable import CurrencyNullable
-from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
+from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.symbol import Symbol
 from snaptrade_client.model.symbol_nullable import SymbolNullable

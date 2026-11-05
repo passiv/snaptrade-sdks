@@ -11,7 +11,6 @@
 """
 
 from dataclasses import dataclass
-import typing
 import typing_extensions
 import urllib3
 from snaptrade_client.request_before_hook import request_before_hook
@@ -20,9 +19,6 @@ from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
-from snaptrade_client.auth import AuthMode
-
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401
@@ -61,32 +57,11 @@ request_body_snap_trade_register_user_request_body = api_client.RequestBody(
     },
     required=True,
 )
-_auth_modes = {
-    "commercialApiKey": [
-        "PartnerClientId",
-        "PartnerTimestamp",
-    ],
-}
-_operation_auth_context = {
-    "auth_modes": [
-        "commercialApiKey",
-    ],
-    "request_signing_by_auth_mode": {
-        "commercialApiKey": {
-            "secret_parameter": "consumer_key",
-            "signed_security_schemes": [
-                "PartnerSignature",
-                "PartnerTimestamp",
-            ],
-        },
-    },
-}
-_legacy_auth = [
+_auth = [
     'PartnerClientId',
     'PartnerSignature',
     'PartnerTimestamp',
 ]
-_auth = None
 SchemaFor200ResponseBodyApplicationJson = UserIDandSecretSchema
 
 
@@ -224,10 +199,6 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
-        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
-            _auth_modes,
-            _legacy_auth,
-        )
         _headers.add('Content-Type', content_type)
     
         if body is schemas.unset:
@@ -242,7 +213,6 @@ class BaseApi(api_client.Api):
             path_template='/snapTrade/registerUser',
             body=body,
             auth_settings=_auth,
-            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
         serialized_data = request_body_snap_trade_register_user_request_body.serialize(body, content_type)
@@ -259,7 +229,6 @@ class BaseApi(api_client.Api):
             serialized_body=_body,
             body=body,
             auth_settings=_auth,
-            operation_auth_context=_operation_auth_context,
             timeout=timeout,
             **kwargs
         )
@@ -344,10 +313,6 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
-        _auth = self.api_client.configuration.auth_settings_for_auth_modes(
-            _auth_modes,
-            _legacy_auth,
-        )
         _headers.add('Content-Type', content_type)
     
         if body is schemas.unset:
@@ -362,7 +327,6 @@ class BaseApi(api_client.Api):
             path_template='/snapTrade/registerUser',
             body=body,
             auth_settings=_auth,
-            operation_auth_context=_operation_auth_context,
             headers=_headers,
         )
         serialized_data = request_body_snap_trade_register_user_request_body.serialize(body, content_type)
@@ -379,7 +343,6 @@ class BaseApi(api_client.Api):
             serialized_body=_body,
             body=body,
             auth_settings=_auth,
-            operation_auth_context=_operation_auth_context,
             timeout=timeout,
         )
     
@@ -407,7 +370,7 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class RegisterSnapTradeUser(BaseApi, typing.Generic[TAuth]):
+class RegisterSnapTradeUser(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     async def aregister_snap_trade_user(
@@ -444,11 +407,11 @@ class RegisterSnapTradeUser(BaseApi, typing.Generic[TAuth]):
             user_id=user_id,
         )
         return self._register_snap_trade_user_oapg(
-            body=args.body,
             timeout=timeout,
+            body=args.body,
         )
 
-class ApiForpost(BaseApi, typing.Generic[TAuth]):
+class ApiForpost(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     async def apost(
@@ -485,7 +448,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             user_id=user_id,
         )
         return self._register_snap_trade_user_oapg(
-            body=args.body,
             timeout=timeout,
+            body=args.body,
         )
 

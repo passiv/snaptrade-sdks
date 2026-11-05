@@ -82,10 +82,42 @@ class OptionsPosition(
                         *args,
                         _configuration=_configuration,
                     )
-        
-            @staticmethod
-            def currency() -> typing.Type['CurrencyNullable']:
-                return CurrencyNullable
+            
+            
+            class currency(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            Currency,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'currency':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             __annotations__ = {
                 "symbol": symbol,
                 "price": price,
@@ -108,7 +140,7 @@ class OptionsPosition(
     def __getitem__(self, name: typing_extensions.Literal["average_purchase_price"]) -> MetaOapg.properties.average_purchase_price: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> 'CurrencyNullable': ...
+    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> MetaOapg.properties.currency: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
@@ -130,7 +162,7 @@ class OptionsPosition(
     def get_item_oapg(self, name: typing_extensions.Literal["average_purchase_price"]) -> typing.Union[MetaOapg.properties.average_purchase_price, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union['CurrencyNullable', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union[MetaOapg.properties.currency, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -145,7 +177,7 @@ class OptionsPosition(
         price: typing.Union[MetaOapg.properties.price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        currency: typing.Union['CurrencyNullable', schemas.Unset] = schemas.unset,
+        currency: typing.Union[MetaOapg.properties.currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'OptionsPosition':
@@ -161,5 +193,5 @@ class OptionsPosition(
             **kwargs,
         )
 
-from snaptrade_client.model.currency_nullable import CurrencyNullable
+from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.option_brokerage_symbol import OptionBrokerageSymbol

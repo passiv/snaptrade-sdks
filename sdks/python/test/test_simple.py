@@ -14,7 +14,7 @@ import unittest
 
 import os
 from pprint import pprint
-from snaptrade_client import SnapTrade, SnapTradeAuth
+from snaptrade_client import SnapTrade
 
 class TestSimple(unittest.TestCase):
     def setUp(self):
