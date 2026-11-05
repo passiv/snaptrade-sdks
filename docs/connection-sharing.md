@@ -2,14 +2,14 @@
 
 Users with a SnapTrade Personal account can sign in through your app's [Connection Portal](https://docs.snaptrade.com/docs/implement-connection-portal) and share an existing brokerage connection with your app, instead of connecting it again. Users new to SnapTrade can create an account and connect their brokerage there too.
 
-**Most integrations need no code changes.** Shared connections work through your existing API integration, and your current connection flows keep working as they do today. The exception: if your app automatically refreshes, disables, or syncs transactions on its connections, make sure it can [handle a not found error](#what-works-differently) on those calls.
+**Most integrations need no code changes.** Shared connections work through your existing API integration, and your current connection flows keep working as they do today. The exception: if your app automatically refreshes, disables, or syncs transactions on its connections, make sure it can [handle a not found error](#connection-sharing-what-works-differently) on those calls.
 
 ## How It Works
 
 1. Your app opens a Connection Portal link as usual. Alongside connecting a new account, the portal offers the user the option to sign in to SnapTrade.
 2. The user signs in, or creates a SnapTrade account and connects their brokerage.
 3. The user picks one connection, reviews what your app will be able to do, and confirms. Their other connections are not shared.
-4. Your app receives the normal success result: a `SUCCESS` window message or a `status=SUCCESS&connection_id=...` redirect.
+4. Your app receives the normal success result, as described in [Window messages](https://docs.snaptrade.com/docs/implement-connection-portal#implement-connection-portal-window-messages).
 
 The connection then appears under your existing SnapTrade user, using the connection ID from the user's SnapTrade Personal account. It stays in that account, and the user who shared it remains its owner.
 
