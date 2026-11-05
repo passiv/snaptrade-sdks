@@ -1,4 +1,4 @@
-import { Snaptrade, SnaptradeAuth } from "./index";
+import { Snaptrade, SnaptradeAuth, SnaptradeOAuthDevice } from "./index";
 import { Configuration } from "./configuration";
 import { ConnectionsApiFactory, ConnectionsApiFp } from "./api/connections-api";
 import { AccountInformationApiFactory, AccountInformationApiFp } from "./api/account-information-api";
@@ -11,7 +11,7 @@ import { AuthenticationApiFactory, AuthenticationApiFp } from "./api/authenticat
 
 async function authModeTypeCoverage() {
 	// Section: client construction.
-	// The SDK exposes only the auth modes listed in konfig.yaml for TypeScript.
+	// Check each authentication mode exposed by the generated TypeScript client.
 	const commercialApiKeyClient = new Snaptrade({
 		auth: SnaptradeAuth.commercialApiKey({
 			consumerKey: "consumer_key",
@@ -25,13 +25,31 @@ async function authModeTypeCoverage() {
 			clientId: "client_id",
 		}),
 	});
+	const oauthClient = new Snaptrade({
+		auth: SnaptradeAuth.oauth({ accessToken: "oauth_test_token" }),
+	});
+	const oauthProviderClient = new Snaptrade({
+		auth: SnaptradeAuth.oauth({ accessToken: async () => "current_access_token" }),
+	});
+
+	await oauthClient.accountInformation.listUserAccounts();
+	await oauthClient.connections.listBrokerageAuthorizations();
+	await oauthProviderClient.accountInformation.getUserAccountBalance({
+		accountId: "account-1",
+	});
 
 	if (false) {
-		// OAuth is present in the OpenAPI spec but is not listed in TypeScript authModes,
-		// so the generated TS SDK must not expose an OAuth auth factory.
-		// @ts-expect-error Personal OAuth auth is not exposed by this SDK config.
-		SnaptradeAuth.personalOAuth({
-			accessToken: "oauth_test_token",
+		// @ts-expect-error OAuth requires an access token or token provider.
+		SnaptradeAuth.oauth({});
+		// @ts-expect-error OAuth cannot list a Commercial integration's users.
+		await oauthClient.authentication.listSnapTradeUsers();
+		// @ts-expect-error OAuth cannot register partner users.
+		await oauthClient.authentication.registerSnapTradeUser({ userId: "user-1" });
+		await oauthClient.accountInformation.listUserAccounts({
+			// @ts-expect-error OAuth uses the token's user instead of user credentials.
+			userId: "user-1",
+			// @ts-expect-error OAuth does not accept a user secret.
+			userSecret: "secret-1",
 		});
 
 		// Commercial auth constructor requires the signing secret.
@@ -194,6 +212,23 @@ async function authModeTypeCoverage() {
 }
 
 void authModeTypeCoverage;
+
+async function oauthDeviceTypeCoverage() {
+  const device = new SnaptradeOAuthDevice();
+  const clientId = "registered-public-client";
+  const authorization = await device.startDeviceAuthorization({ clientId });
+  const tokens = await device.waitForDeviceToken({
+    clientId,
+    authorization,
+    signal: new AbortController().signal,
+  });
+  const client = new Snaptrade({
+    auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }),
+  });
+  await client.accountInformation.listUserAccounts();
+}
+
+void oauthDeviceTypeCoverage;
 
 // Check each surface separately: a union of methods could hide a permissive signature.
 async function requestArgumentTypeCoverage() {

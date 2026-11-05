@@ -59,6 +59,9 @@ portal:
               path: docs/oauth-apps.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
+            - id: connection-sharing
+              label: Connection Sharing (Beta)
+              path: docs/connection-sharing.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
             - id: order-impact-and-confirmation
@@ -350,7 +353,7 @@ generators:
         - pnpm typecheck
         - pnpm test
         - pnpm build
-    version: 13.1.15
+    version: 13.2.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
