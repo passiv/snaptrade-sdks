@@ -1032,11 +1032,11 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
-        Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
+        Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       parameters:
@@ -6382,7 +6382,7 @@ components:
           example: false
         tax_lots:
           type: array
-          description: List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
+          description: List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
           items:
             $ref: "#/components/schemas/TaxLot"
       required:
@@ -6405,6 +6405,7 @@ components:
         # New variants go last: the breaking-change check pairs oneOf entries by position,
         # so inserting one mid-list reads as the shifted variant losing its properties.
         - $ref: "#/components/schemas/CashInstrument"
+        - $ref: "#/components/schemas/PreferredStockInstrument"
       discriminator:
         propertyName: kind
         mapping:
@@ -6422,6 +6423,7 @@ components:
           cash: "#/components/schemas/CashInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
+          preferred_stock: "#/components/schemas/PreferredStockInstrument"
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
       oneOf:
@@ -6432,6 +6434,8 @@ components:
         - $ref: "#/components/schemas/CefInstrument"
         - $ref: "#/components/schemas/AdrInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
+        # New variants go last: the breaking-change check pairs oneOf entries by position.
+        - $ref: "#/components/schemas/PreferredStockInstrument"
       discriminator:
         propertyName: kind
         mapping:
@@ -6443,6 +6447,7 @@ components:
           adr: "#/components/schemas/AdrInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
+          preferred_stock: "#/components/schemas/PreferredStockInstrument"
     UnderlyingCfdInstrument:
       description: The underlying instrument referenced by a CFD contract.
       oneOf:
@@ -6453,6 +6458,8 @@ components:
         - $ref: "#/components/schemas/CefInstrument"
         - $ref: "#/components/schemas/AdrInstrument"
         - $ref: "#/components/schemas/OtherInstrument"
+        # New variants go last: the breaking-change check pairs oneOf entries by position.
+        - $ref: "#/components/schemas/PreferredStockInstrument"
       discriminator:
         propertyName: kind
         mapping:
@@ -6464,6 +6471,7 @@ components:
           adr: "#/components/schemas/AdrInstrument"
           bond: "#/components/schemas/OtherInstrument"
           other: "#/components/schemas/OtherInstrument"
+          preferred_stock: "#/components/schemas/PreferredStockInstrument"
     UnderlyingTokenizedAssetInstrument:
       description: The listed stock or ETF underlying a tokenized asset.
       oneOf:
@@ -6618,6 +6626,53 @@ components:
       required:
         - kind
         - code
+    PreferredStockInstrument:
+      description: Security instrument metadata for preferred stock positions. Preferred shares were previously returned with kind `other`.
+      type: object
+      properties:
+        kind:
+          type: string
+          description: Type of security instrument.
+          enum:
+            - preferred_stock
+          example: preferred_stock
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+        symbol:
+          type: string
+          description: The formatted trading symbol for the security.
+          example: LTSAP
+        raw_symbol:
+          type: string
+          description: The raw symbol without any exchange suffix.
+          example: LTSAP
+        description:
+          type: string
+          nullable: true
+          description: Human-readable description of the security.
+          example: Ladenburg Thalmann Financial Services 8% Series A Cumulative Redeemable Preferred Stock
+        currency:
+          type: string
+          nullable: true
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+        exchange:
+          type: string
+          nullable: true
+          description: Exchange MIC code or exchange code for the security.
+          example: XASE
+        figi_instrument:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/FigiInstrument"
+      required:
+        - kind
+        - id
+        - symbol
+        - raw_symbol
     AdrInstrument:
       description: Security instrument metadata for ADR positions.
       type: object
