@@ -114,42 +114,10 @@ class AccountOrderRecordNullable(
             @staticmethod
             def option_symbol() -> typing.Type['OptionsSymbolNullable']:
                 return OptionsSymbolNullable
-            
-            
-            class quote_universal_symbol(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            UniversalSymbol,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'quote_universal_symbol':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def quote_universal_symbol() -> typing.Type['UniversalSymbolNullable']:
+                return UniversalSymbolNullable
         
             @staticmethod
             def quote_currency() -> typing.Type['CurrencyNullable']:
@@ -462,7 +430,7 @@ class AccountOrderRecordNullable(
     def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> 'OptionsSymbolNullable': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["quote_universal_symbol"]) -> MetaOapg.properties.quote_universal_symbol: ...
+    def __getitem__(self, name: typing_extensions.Literal["quote_universal_symbol"]) -> 'UniversalSymbolNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["quote_currency"]) -> 'CurrencyNullable': ...
@@ -544,7 +512,7 @@ class AccountOrderRecordNullable(
     def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union['OptionsSymbolNullable', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["quote_universal_symbol"]) -> typing.Union[MetaOapg.properties.quote_universal_symbol, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["quote_universal_symbol"]) -> typing.Union['UniversalSymbolNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["quote_currency"]) -> typing.Union['CurrencyNullable', schemas.Unset]: ...
@@ -615,7 +583,7 @@ class AccountOrderRecordNullable(
         status: typing.Union['AccountOrderRecordStatus', schemas.Unset] = schemas.unset,
         universal_symbol: typing.Union['UniversalSymbolNullable', schemas.Unset] = schemas.unset,
         option_symbol: typing.Union['OptionsSymbolNullable', schemas.Unset] = schemas.unset,
-        quote_universal_symbol: typing.Union[MetaOapg.properties.quote_universal_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        quote_universal_symbol: typing.Union['UniversalSymbolNullable', schemas.Unset] = schemas.unset,
         quote_currency: typing.Union['CurrencyNullable', schemas.Unset] = schemas.unset,
         action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
         total_quantity: typing.Union[MetaOapg.properties.total_quantity, None, str, schemas.Unset] = schemas.unset,
@@ -674,5 +642,4 @@ from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBroke
 from snaptrade_client.model.currency_nullable import CurrencyNullable
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.trailing_stop_nullable import TrailingStopNullable
-from snaptrade_client.model.universal_symbol import UniversalSymbol
 from snaptrade_client.model.universal_symbol_nullable import UniversalSymbolNullable

@@ -38,6 +38,7 @@ from snaptrade_client import rest
 from snaptrade_client.api_response import ApiResponse, AsyncApiResponse
 from snaptrade_client.rest import AsyncResponseWrapper, ResponseWrapper
 from snaptrade_client.configuration import Configuration
+from snaptrade_client.auth import AuthMode
 from snaptrade_client.exceptions import ApiTypeError, ApiValueError, MissingRequiredParametersError
 from snaptrade_client.request_after_hook import request_after_hook
 from snaptrade_client.request_before_url_hook import request_before_url_hook
@@ -68,6 +69,9 @@ class RequestField(RequestFieldBase):
         if not isinstance(other, RequestField):
             return False
         return self.__dict__ == other.__dict__
+
+
+TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
 
 def DeprecationWarningOnce(func=None, *, prefix=None):
@@ -284,7 +288,7 @@ class ParameterSerializerBase:
         )
 
     @classmethod
-    def _ref6570_expansion(
+    def _rfc6570_expansion(
         cls,
         variable_name: str,
         in_data: typing.Any,
@@ -340,6 +344,22 @@ class ParameterSerializerBase:
         # bytes, etc
         raise ApiValueError('Unable to generate a ref6570 representation of {}'.format(in_data))
 
+    @classmethod
+    def _query_auth_parameter_expansion(
+        cls,
+        variable_name: str,
+        in_data: typing.Any,
+        prefix_separator_iterator: PrefixSeparatorIterator
+    ) -> str:
+        """Serialize a query authentication value like a regular query parameter."""
+        return cls._rfc6570_expansion(
+            variable_name=variable_name,
+            in_data=in_data,
+            explode=False,
+            percent_encode=True,
+            prefix_separator_iterator=prefix_separator_iterator
+        )
+
 
 class StyleFormSerializer(ParameterSerializerBase):
     @classmethod
@@ -358,7 +378,7 @@ class StyleFormSerializer(ParameterSerializerBase):
     ) -> str:
         if prefix_separator_iterator is None:
             prefix_separator_iterator = PrefixSeparatorIterator('', '&')
-        return self._ref6570_expansion(
+        return self._rfc6570_expansion(
             variable_name=name,
             in_data=in_data,
             explode=explode,
@@ -377,7 +397,7 @@ class StyleSimpleSerializer(ParameterSerializerBase):
         percent_encode: bool
     ) -> str:
         prefix_separator_iterator = PrefixSeparatorIterator('', ',')
-        return self._ref6570_expansion(
+        return self._rfc6570_expansion(
             variable_name=name,
             in_data=in_data,
             explode=explode,
@@ -513,7 +533,7 @@ class PathParameter(ParameterBase, StyleSimpleSerializer):
         in_data: typing.Union[None, int, float, str, bool, dict, list]
     ) -> typing.Dict[str, str]:
         prefix_separator_iterator = PrefixSeparatorIterator('.', '.')
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -527,7 +547,7 @@ class PathParameter(ParameterBase, StyleSimpleSerializer):
         in_data: typing.Union[None, int, float, str, bool, dict, list]
     ) -> typing.Dict[str, str]:
         prefix_separator_iterator = PrefixSeparatorIterator(';', ';')
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -615,7 +635,7 @@ class QueryParameter(ParameterBase, StyleFormSerializer):
     ) -> typing.Dict[str, str]:
         if prefix_separator_iterator is None:
             prefix_separator_iterator = self.get_prefix_separator_iterator()
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -631,7 +651,7 @@ class QueryParameter(ParameterBase, StyleFormSerializer):
     ) -> typing.Dict[str, str]:
         if prefix_separator_iterator is None:
             prefix_separator_iterator = self.get_prefix_separator_iterator()
-        value = self._ref6570_expansion(
+        value = self._rfc6570_expansion(
             variable_name=self.name,
             in_data=in_data,
             explode=self.explode,
@@ -1098,7 +1118,7 @@ class OpenApiResponse(JSONDetector):
                 )
             # Execute validation and throw as a side effect if validation fails
             body_schema.from_openapi_data_oapg(
-                body_data,
+                deserialized_body,
                 _configuration=configuration
             )
 
@@ -1114,7 +1134,7 @@ class OpenApiResponse(JSONDetector):
         )
 
 
-class ApiClient:
+class ApiClient(typing.Generic[TAuth]):
     """Generic API client for OpenAPI client library builds.
 
     OpenAPI generic API client. This client handles the client-
@@ -1138,7 +1158,7 @@ class ApiClient:
 
     def __init__(
         self,
-        configuration: typing.Optional[Configuration] = None,
+        configuration: typing.Optional[Configuration[TAuth]] = None,
         header_name: typing.Optional[str] = None,
         header_value: typing.Optional[str] = None,
         cookie: typing.Optional[str] = None,
@@ -1202,6 +1222,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1213,6 +1234,17 @@ class ApiClient:
         used_headers = HTTPHeaderDict(self.default_headers)
         if self.cookie:
             headers['Cookie'] = self.cookie
+
+        request_before_url_hook(
+            resource_path_ref=[resource_path],
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
+            headers=used_headers,
+        )
 
         # auth setting
         resource_path_ref = [self.update_params_for_auth(
@@ -1228,16 +1260,6 @@ class ApiClient:
         if headers:
             used_headers.update(headers)
 
-        request_before_url_hook(
-            resource_path_ref=resource_path_ref,
-            method=method,
-            configuration=self.configuration,
-            body=body,
-            fields=fields,
-            auth_settings=auth_settings,
-            headers=used_headers,
-        )
-
         # request url
         if host is None:
             url = self.configuration.host + resource_path_ref[0]
@@ -1252,6 +1274,7 @@ class ApiClient:
             body=body,
             fields=fields,
             auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
             headers=used_headers,
         )
 
@@ -1279,6 +1302,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1289,6 +1313,17 @@ class ApiClient:
         used_headers = HTTPHeaderDict(self.default_headers)
         if self.cookie:
             headers['Cookie'] = self.cookie
+
+        request_before_url_hook(
+            resource_path_ref=[resource_path],
+            method=method,
+            configuration=self.configuration,
+            body=body,
+            fields=fields,
+            auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
+            headers=used_headers,
+        )
 
         # auth setting
         resource_path_ref = [self.update_params_for_auth(
@@ -1304,16 +1339,6 @@ class ApiClient:
         if headers:
             used_headers.update(headers)
 
-        request_before_url_hook(
-            resource_path_ref=resource_path_ref,
-            method=method,
-            configuration=self.configuration,
-            body=body,
-            fields=fields,
-            auth_settings=auth_settings,
-            headers=used_headers,
-        )
-
         # request url
         if host is None:
             url = self.configuration.host + resource_path_ref[0]
@@ -1328,6 +1353,7 @@ class ApiClient:
             body=body,
             fields=fields,
             auth_settings=auth_settings,
+            operation_auth_context=operation_auth_context,
             headers=used_headers,
         )
 
@@ -1354,6 +1380,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1392,6 +1419,7 @@ class ApiClient:
             body,
             fields,
             auth_settings,
+            operation_auth_context,
             stream,
             timeout,
             host,
@@ -1408,6 +1436,7 @@ class ApiClient:
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
         stream: bool = False,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         host: typing.Optional[str] = None,
@@ -1445,6 +1474,7 @@ class ApiClient:
             body,
             fields,
             auth_settings,
+            operation_auth_context,
             stream,
             timeout,
             host,
@@ -1605,11 +1635,9 @@ class ApiClient:
                 need to pass in prefix_separator_iterator
                 and need to output resource_path with query params added
                 """
-                resource_path += ParameterSerializerBase._ref6570_expansion(
+                resource_path += ParameterSerializerBase._query_auth_parameter_expansion(
                     variable_name=auth_setting['key'],
                     in_data=auth_setting['value'],
-                    explode=False,
-                    percent_encode=False,
                     prefix_separator_iterator=prefix_separator_iterator
                 )
             else:

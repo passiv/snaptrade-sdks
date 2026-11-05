@@ -6,6 +6,7 @@ authors = ["SnapTrade <api@snaptrade.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "snaptrade_client"}]
+include = ["snaptrade_client/py.typed", "snaptrade_client/**/*.pyi"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
