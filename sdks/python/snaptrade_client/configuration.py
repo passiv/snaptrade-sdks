@@ -112,7 +112,6 @@ conf = snaptrade_client.Configuration(
     _default = None
 
     def __init__(self, host=None,
-                 auth: typing.Optional[TAuth] = None,
                  api_key=None, api_key_prefix=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
@@ -124,6 +123,7 @@ conf = snaptrade_client.Configuration(
                  server_index=None, server_variables=None,
                  server_operation_index=None, server_operation_variables=None,
                  verify_ssl=True,
+                 auth: typing.Optional[TAuth] = None,
                  ):
         """Constructor
         """

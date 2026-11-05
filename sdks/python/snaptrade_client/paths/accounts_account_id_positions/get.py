@@ -211,12 +211,12 @@ class BaseApi(api_client.Api):
 
     def _get_user_account_positions_mapped_args(
         self,
-        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
@@ -236,8 +236,8 @@ class BaseApi(api_client.Api):
     async def _aget_user_account_positions_oapg(
         self,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -381,8 +381,8 @@ class BaseApi(api_client.Api):
     def _get_user_account_positions_oapg(
         self,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -496,12 +496,12 @@ class GetUserAccountPositions(BaseApi, typing.Generic[TAuth]):
     @api_client.DeprecationWarningOnce(prefix="account_information")
     async def aget_user_account_positions(
         self,
-        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -525,12 +525,12 @@ class GetUserAccountPositions(BaseApi, typing.Generic[TAuth]):
     @api_client.DeprecationWarningOnce(prefix="account_information")
     def get_user_account_positions(
         self,
-        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
@@ -557,12 +557,12 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     @api_client.DeprecationWarningOnce(prefix="account_information")
     async def aget(
         self,
-        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -586,12 +586,12 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
     @api_client.DeprecationWarningOnce(prefix="account_information")
     def get(
         self,
-        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
-        header_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        header_params: typing.Optional[dict] = {},
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,

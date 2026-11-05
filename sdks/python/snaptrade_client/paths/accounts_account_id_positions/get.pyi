@@ -11,11 +11,8 @@
 """
 
 import typing
-import typing_extensions
 from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
-from snaptrade_client.auth import CommercialApiKeyAuth
-from snaptrade_client.auth import PersonalApiKeyAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -25,55 +22,48 @@ class BaseApi(api_client.Api):
 
 
 class GetUserAccountPositions(BaseApi, typing.Generic[TAuth]):
-    @typing.overload
     def get_user_account_positions(
-        self: "GetUserAccountPositions[CommercialApiKeyAuth]",
-        account_id: str,
-        user_id: str,
-        user_secret: str,
+        self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
-        header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
-        validate: bool = ...,
-        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
-    ) -> typing.Any: ...
-    @typing.overload
-    def get_user_account_positions(
-        self: "GetUserAccountPositions[PersonalApiKeyAuth]",
-        account_id: str,
-        user_id: typing.Optional[typing_extensions.Never] = None,
-        user_secret: typing.Optional[typing_extensions.Never] = None,
-        query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
-        path_params: typing.Optional[dict] = ...,
-        validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
+    async def aget_user_account_positions(
+        self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        **kwargs: typing.Any,
+    ) -> typing.Any: ...
 
-class ApiForget(GetUserAccountPositions[TAuth]):
-    @typing.overload
+
+class ApiForget(BaseApi, typing.Generic[TAuth]):
     def get(
-        self: "ApiForget[CommercialApiKeyAuth]",
-        account_id: str,
-        user_id: str,
-        user_secret: str,
+        self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = ...,
-        header_params: typing.Optional[dict] = ...,
         path_params: typing.Optional[dict] = ...,
-        validate: bool = ...,
-        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
-    ) -> typing.Any: ...
-    @typing.overload
-    def get(
-        self: "ApiForget[PersonalApiKeyAuth]",
-        account_id: str,
-        user_id: typing.Optional[typing_extensions.Never] = None,
-        user_secret: typing.Optional[typing_extensions.Never] = None,
-        query_params: typing.Optional[dict] = ...,
         header_params: typing.Optional[dict] = ...,
-        path_params: typing.Optional[dict] = ...,
-        validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
 
+    async def aget(
+        self,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
+        query_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        **kwargs: typing.Any,
+    ) -> typing.Any: ...
