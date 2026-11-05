@@ -1,11 +1,6 @@
 name: Regenerate SDKs
 
 on:
-  push:
-    branches:
-      - sdk-regeneration/manual-42030088980
-    paths:
-      - sdks/python/**
   pull_request:
     types:
       - opened
@@ -40,7 +35,7 @@ on:
 jobs:
   prepare:
     name: Prepare regeneration
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false)
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.draft == false
     runs-on: blacksmith-2vcpu-ubuntu-2404
     permissions:
       contents: write
@@ -213,7 +208,6 @@ jobs:
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   test:
-    if: always() && (github.event_name == 'push' || needs.regenerate.result == 'success')
     name: Test ${{ matrix.language }} SDK
     needs: regenerate
     runs-on: blacksmith-2vcpu-ubuntu-2404
@@ -225,7 +219,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ needs.regenerate.outputs.generated_sha || github.sha }}
+          ref: ${{ needs.regenerate.outputs.generated_sha }}
 
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli
