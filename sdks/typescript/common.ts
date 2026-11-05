@@ -142,6 +142,18 @@ export const setBasicAuthToObject = function (object: any, configuration?: Confi
     }
 }
 
+/**
+ *
+ * @export
+ */
+export const setBearerAuthToObject = async function (object: any, configuration?: Configuration<AuthMode>) {
+    if (configuration && configuration.accessToken) {
+        const accessToken = typeof configuration.accessToken === 'function'
+            ? await configuration.accessToken()
+            : await configuration.accessToken;
+        object["Authorization"] = "Bearer " + accessToken;
+    }
+}
 
 function setFlattenedQueryParams(urlSearchParams: URLSearchParams, parameter: any, key: string = ""): void {
     if (typeof parameter === "object") {

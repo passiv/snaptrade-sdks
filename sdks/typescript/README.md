@@ -76,6 +76,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 - [Authentication](#authentication)
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
+  * [OAuth Auth authentication](#oauth-auth-authentication)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
@@ -141,6 +142,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.trading.previewCryptoOrder`](#snaptradetradingpreviewcryptoorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
+  * [Device authorization](#device-authorization)
 
 <!-- tocstop -->
 
@@ -204,6 +206,19 @@ const personalApiKeyClient = new Snaptrade({
   auth: SnaptradeAuth.personalApiKey({
     consumerKey: "CONSUMER_KEY",
     clientId: "CLIENT_ID",
+  }),
+});
+```
+
+### OAuth Auth authentication<a id="oauth-auth-authentication"></a>
+Supply an existing access token. Your application handles token storage, refresh and callback validation.
+
+```typescript
+import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
+
+const oauthClient = new Snaptrade({
+  auth: SnaptradeAuth.oauth({
+    accessToken: "ACCESS_TOKEN",
   }),
 });
 ```
@@ -358,6 +373,22 @@ const getAccountActivitiesResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAccountActivitiesResponse =
+  await oauthClient.accountInformation.getAccountActivities({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    startDate: "2022-01-24T00:00:00.000Z",
+    endDate: "2022-01-24T00:00:00.000Z",
+    offset: 0,
+    limit: 1,
+    type: "BUY,SELL,DIVIDEND",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -427,6 +458,17 @@ Required credentials for this mode:
 ```typescript
 const getAccountBalanceHistoryResponse =
   await personalApiKeyClient.accountInformation.getAccountBalanceHistory({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAccountBalanceHistoryResponse =
+  await oauthClient.accountInformation.getAccountBalanceHistory({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
@@ -557,6 +599,17 @@ const getAccountDetailsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAccountDetailsResponse =
+  await oauthClient.accountInformation.getAccountDetails({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -618,6 +671,17 @@ const getAllAccountPositionsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAllAccountPositionsResponse =
+  await oauthClient.accountInformation.getAllAccountPositions({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -671,6 +735,17 @@ Required credentials for this mode:
 ```typescript
 const getUserAccountBalanceResponse =
   await personalApiKeyClient.accountInformation.getUserAccountBalance({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountBalanceResponse =
+  await oauthClient.accountInformation.getUserAccountBalance({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
 ```
@@ -739,6 +814,17 @@ const getUserAccountDetailsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountDetailsResponse =
+  await oauthClient.accountInformation.getUserAccountDetails({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -793,6 +879,18 @@ Required credentials for this mode:
 ```typescript
 const getUserAccountOrderDetailResponse =
   await personalApiKeyClient.accountInformation.getUserAccountOrderDetail({
+    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountOrderDetailResponse =
+  await oauthClient.accountInformation.getUserAccountOrderDetail({
     brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
@@ -867,6 +965,19 @@ const getUserAccountOrdersResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountOrdersResponse =
+  await oauthClient.accountInformation.getUserAccountOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -926,6 +1037,18 @@ Required credentials for this mode:
 ```typescript
 const getUserAccountRecentOrdersResponse =
   await personalApiKeyClient.accountInformation.getUserAccountRecentOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountRecentOrdersResponse =
+  await oauthClient.accountInformation.getUserAccountRecentOrders({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     onlyExecuted: true,
   });
@@ -1062,6 +1185,17 @@ const getUserHoldingsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserHoldingsResponse =
+  await oauthClient.accountInformation.getUserHoldings({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1112,6 +1246,15 @@ Required credentials for this mode:
 ```typescript
 const listAllUserAccountsResponse =
   await personalApiKeyClient.accountInformation.listAllUserAccounts();
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listAllUserAccountsResponse =
+  await oauthClient.accountInformation.listAllUserAccounts();
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -1167,6 +1310,15 @@ const listUserAccountsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listUserAccountsResponse =
+  await oauthClient.accountInformation.listUserAccounts();
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1209,6 +1361,17 @@ Required credentials for this mode:
 ```typescript
 const updateUserAccountResponse =
   await personalApiKeyClient.accountInformation.updateUserAccount({
+    accountId: "accountId_example",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const updateUserAccountResponse =
+  await oauthClient.accountInformation.updateUserAccount({
     accountId: "accountId_example",
   });
 ```
@@ -1355,6 +1518,25 @@ Required credentials for this mode:
 ```typescript
 const loginSnapTradeUserResponse =
   await personalApiKeyClient.authentication.loginSnapTradeUser({
+    broker: "ALPACA",
+    immediateRedirect: true,
+    customRedirect: "https://snaptrade.com",
+    reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connectionType: "read",
+    showCloseButton: true,
+    darkMode: true,
+    locale: "pt-BR",
+    connectionPortalVersion: "v4",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const loginSnapTradeUserResponse =
+  await oauthClient.authentication.loginSnapTradeUser({
     broker: "ALPACA",
     immediateRedirect: true,
     customRedirect: "https://snaptrade.com",
@@ -1587,6 +1769,17 @@ const detailBrokerageAuthorizationResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const detailBrokerageAuthorizationResponse =
+  await oauthClient.connections.detailBrokerageAuthorization({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1637,6 +1830,17 @@ Required credentials for this mode:
 ```typescript
 const disableBrokerageAuthorizationResponse =
   await personalApiKeyClient.connections.disableBrokerageAuthorization({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const disableBrokerageAuthorizationResponse =
+  await oauthClient.connections.disableBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
@@ -1702,6 +1906,17 @@ const listBrokerageAuthorizationAccountsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listBrokerageAuthorizationAccountsResponse =
+  await oauthClient.connections.listBrokerageAuthorizationAccounts({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1752,6 +1967,15 @@ Required credentials for this mode:
 ```typescript
 const listBrokerageAuthorizationsResponse =
   await personalApiKeyClient.connections.listBrokerageAuthorizations();
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listBrokerageAuthorizationsResponse =
+  await oauthClient.connections.listBrokerageAuthorizations();
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -1813,6 +2037,17 @@ const listConnectionAccountsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listConnectionAccountsResponse =
+  await oauthClient.connections.listConnectionAccounts({
+    connectionId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1864,6 +2099,17 @@ Required credentials for this mode:
 ```typescript
 const refreshBrokerageAuthorizationResponse =
   await personalApiKeyClient.connections.refreshBrokerageAuthorization({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const refreshBrokerageAuthorizationResponse =
+  await oauthClient.connections.refreshBrokerageAuthorization({
     authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
   });
 ```
@@ -1981,6 +2227,17 @@ const syncBrokerageAuthorizationTransactionsResponse =
       authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
     }
   );
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const syncBrokerageAuthorizationTransactionsResponse =
+  await oauthClient.connections.syncBrokerageAuthorizationTransactions({
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -2230,6 +2487,18 @@ const getUserAccountOrderDetailV2Response =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountOrderDetailV2Response =
+  await oauthClient.experimentalEndpoints.getUserAccountOrderDetailV2({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2285,6 +2554,19 @@ Required credentials for this mode:
 ```typescript
 const getUserAccountOrdersV2Response =
   await personalApiKeyClient.experimentalEndpoints.getUserAccountOrdersV2({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountOrdersV2Response =
+  await oauthClient.experimentalEndpoints.getUserAccountOrdersV2({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     state: "all",
     days: 30,
@@ -2360,6 +2642,18 @@ const getUserAccountRecentOrdersV2Response =
       onlyExecuted: true,
     }
   );
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountRecentOrdersV2Response =
+  await oauthClient.experimentalEndpoints.getUserAccountRecentOrdersV2({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+  });
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -2478,6 +2772,36 @@ Required credentials for this mode:
 ```typescript
 const placeSimpleOrderResponse =
   await personalApiKeyClient.experimentalEndpoints.placeSimpleOrder({
+    order_type: "stop_limit",
+    time_in_force: "day",
+    legs: [
+      {
+        instrument: {
+          kind: "future",
+          symbol: "/ESZ6",
+        },
+        action: "buy",
+        units: "1.25",
+      },
+    ],
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "1.25",
+    stop_price: "1.25",
+    price_effect: "debit",
+    client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+    expiry_date: "2026-12-18T20:00:00.000Z",
+    notional_value: "1.25",
+    trading_session: "regular",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const placeSimpleOrderResponse =
+  await oauthClient.experimentalEndpoints.placeSimpleOrder({
     order_type: "stop_limit",
     time_in_force: "day",
     legs: [
@@ -2678,6 +3002,12 @@ const getPartnerInfoResponse =
   await personalApiKeyClient.referenceData.getPartnerInfo();
 ```
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getPartnerInfoResponse = await oauthClient.referenceData.getPartnerInfo();
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2710,6 +3040,13 @@ const getStockExchangesResponse =
 ```typescript
 const getStockExchangesResponse =
   await personalApiKeyClient.referenceData.getStockExchanges();
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getStockExchangesResponse =
+  await oauthClient.referenceData.getStockExchanges();
 ```
 
 
@@ -2746,6 +3083,14 @@ const getSymbolsResponse =
 
 ```typescript
 const getSymbolsResponse = await personalApiKeyClient.referenceData.getSymbols({
+  substring: "AAPL",
+});
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getSymbolsResponse = await oauthClient.referenceData.getSymbols({
   substring: "AAPL",
 });
 ```
@@ -2791,6 +3136,15 @@ const getSymbolsByTickerResponse =
 ```typescript
 const getSymbolsByTickerResponse =
   await personalApiKeyClient.referenceData.getSymbolsByTicker({
+    query: "query_example",
+  });
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getSymbolsByTickerResponse =
+  await oauthClient.referenceData.getSymbolsByTicker({
     query: "query_example",
   });
 ```
@@ -2883,6 +3237,15 @@ const listAllBrokerageInstrumentsResponse =
   });
 ```
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listAllBrokerageInstrumentsResponse =
+  await oauthClient.referenceData.listAllBrokerageInstruments({
+    slug: "QUESTRADE",
+  });
+```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2921,6 +3284,13 @@ const listAllBrokeragesResponse =
 ```typescript
 const listAllBrokeragesResponse =
   await personalApiKeyClient.referenceData.listAllBrokerages();
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const listAllBrokeragesResponse =
+  await oauthClient.referenceData.listAllBrokerages();
 ```
 
 
@@ -3003,6 +3373,18 @@ const symbolSearchUserAccountResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const symbolSearchUserAccountResponse =
+  await oauthClient.referenceData.symbolSearchUserAccount({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    substring: "AAPL",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3053,6 +3435,17 @@ Required credentials for this mode:
 
 ```typescript
 const cancelOrderResponse = await personalApiKeyClient.trading.cancelOrder({
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const cancelOrderResponse = await oauthClient.trading.cancelOrder({
   brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 });
@@ -3112,6 +3505,18 @@ Required credentials for this mode:
 ```typescript
 const getCryptocurrencyPairQuoteResponse =
   await personalApiKeyClient.trading.getCryptocurrencyPairQuote({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrumentSymbol: "BTC-USD",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getCryptocurrencyPairQuoteResponse =
+  await oauthClient.trading.getCryptocurrencyPairQuote({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     instrumentSymbol: "BTC-USD",
   });
@@ -3205,6 +3610,31 @@ const getOptionImpactResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getOptionImpactResponse = await oauthClient.trading.getOptionImpact({
+  order_type: "MARKET",
+  time_in_force: "Day",
+  legs: [
+    {
+      instrument: {
+        symbol: "PBI   250718C00006000",
+        instrument_type: "OPTION",
+      },
+      action: "BUY_TO_OPEN",
+      units: 1,
+    },
+  ],
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "",
+  stop_price: "",
+  price_effect: "DEBIT",
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3289,6 +3719,24 @@ const getOrderImpactResponse =
     units: 10.5,
     notional_value: null,
   });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getOrderImpactResponse = await oauthClient.trading.getOrderImpact({
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  action: "BUY",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  order_type: "Market",
+  time_in_force: "Day",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+  notional_value: null,
+});
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -3451,6 +3899,19 @@ const getUserAccountQuotesResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getUserAccountQuotesResponse =
+  await oauthClient.trading.getUserAccountQuotes({
+    symbols: "symbols_example",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    useTicker: true,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3568,6 +4029,33 @@ const placeComplexOrderResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const placeComplexOrderResponse = await oauthClient.trading.placeComplexOrder({
+  type: "OTO",
+  orders: [
+    {
+      order_role: "TRIGGER",
+      action: "BUY",
+      instrument: {
+        symbol: "AAPL",
+        type: "EQUITY",
+      },
+      order_type: "Market",
+      units: 1,
+      time_in_force: "Day",
+      price: 31.33,
+      stop: 29.5,
+    },
+  ],
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3656,6 +4144,28 @@ const placeCryptoOrderResponse =
     post_only: false,
     expiration_date: "2024-01-01T00:00:00.000Z",
   });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const placeCryptoOrderResponse = await oauthClient.trading.placeCryptoOrder({
+  instrument: {
+    symbol: "BTC",
+    type: "CRYPTOCURRENCY",
+  },
+  side: "BUY",
+  type: "MARKET",
+  time_in_force: "GTC",
+  amount: "123.45",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "123.45",
+  stop_price: "123.45",
+  post_only: false,
+  expiration_date: "2024-01-01T00:00:00.000Z",
+});
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -3771,6 +4281,28 @@ const placeForceOrderResponse =
     notional_value: null,
     client_order_id: "550e8400-e29b-41d4-a716-446655440000",
   });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const placeForceOrderResponse = await oauthClient.trading.placeForceOrder({
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  action: "BUY",
+  order_type: "Market",
+  time_in_force: "Day",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  symbol: "AAPL",
+  trading_session: "REGULAR",
+  expiry_date: "2026-08-21T23:27:55.027Z",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+  notional_value: null,
+  client_order_id: "550e8400-e29b-41d4-a716-446655440000",
+});
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -3906,6 +4438,31 @@ const placeMlegOrderResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const placeMlegOrderResponse = await oauthClient.trading.placeMlegOrder({
+  order_type: "MARKET",
+  time_in_force: "Day",
+  legs: [
+    {
+      instrument: {
+        symbol: "PBI   250718C00006000",
+        instrument_type: "OPTION",
+      },
+      action: "BUY_TO_OPEN",
+      units: 1,
+    },
+  ],
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "",
+  stop_price: "",
+  price_effect: "DEBIT",
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3974,6 +4531,17 @@ Required credentials for this mode:
 
 ```typescript
 const placeOrderResponse = await personalApiKeyClient.trading.placeOrder({
+  tradeId: "139e307a-82f7-4402-b39e-4da7baa87758",
+  wait_to_confirm: true,
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const placeOrderResponse = await oauthClient.trading.placeOrder({
   tradeId: "139e307a-82f7-4402-b39e-4da7baa87758",
   wait_to_confirm: true,
 });
@@ -4060,6 +4628,30 @@ const previewCryptoOrderResponse =
     post_only: false,
     expiration_date: "2024-01-01T00:00:00.000Z",
   });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const previewCryptoOrderResponse = await oauthClient.trading.previewCryptoOrder(
+  {
+    instrument: {
+      symbol: "BTC",
+      type: "CRYPTOCURRENCY",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00.000Z",
+  }
+);
 ```
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
@@ -4167,6 +4759,24 @@ const replaceOrderResponse = await personalApiKeyClient.trading.replaceOrder({
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const replaceOrderResponse = await oauthClient.trading.replaceOrder({
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  action: "BUY",
+  order_type: "Market",
+  time_in_force: "Day",
+  accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  price: 31.33,
+  symbol: "AAPL",
+  stop: 31.33,
+  units: 10.5,
+});
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4258,6 +4868,19 @@ const searchCryptocurrencyPairInstrumentsResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const searchCryptocurrencyPairInstrumentsResponse =
+  await oauthClient.trading.searchCryptocurrencyPairInstruments({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base: "BTC",
+    quote: "USD",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4282,3 +4905,21 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 ## Author<a id="author"></a>
 This TypeScript package is automatically generated by [Konfig](https://konfigthis.com)
+### Device authorization<a id="device-authorization"></a>
+
+For a pre-registered **public OAuth client enabled for the device grant**, use the optional device helper. Device tokens currently grant `read` access only. This helper does not register clients, open a browser, store tokens, or refresh them.
+
+```typescript
+import { SnaptradeOAuthDevice, SnaptradeAuth } from "snaptrade-typescript-sdk";
+
+const device = new SnaptradeOAuthDevice();
+const clientId = process.env.OAUTH_CLIENT_ID!;
+const authorization = await device.startDeviceAuthorization({ clientId });
+console.log(authorization.verificationUri, authorization.userCode);
+// Keep authorization.deviceCode private. Optionally display verificationUriComplete too.
+const tokens = await device.waitForDeviceToken({ clientId, authorization });
+const auth = SnaptradeAuth.oauth({ accessToken: tokens.accessToken });
+// Your application owns secure storage and subsequent token refresh.
+```
+
+Both methods accept an optional `signal: AbortSignal` for cancellation. Polling respects the server interval (five seconds by default), pending approval, slowdown, connection timeout backoff, and the original expiry deadline. Denial and other terminal server errors reject with the Axios error, preserving OAuth error details. Cancellation rejects with `name: "AbortError"`. Use `issuer` in the constructor for another SnapTrade environment; it defaults to the API server's origin.

@@ -73,7 +73,7 @@ import { AuthMode, Configuration } from '../configuration';
 import type { FormDataLike } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -348,9 +348,13 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -408,6 +412,10 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
             if (state !== undefined) {
                 localVarQueryParameter['state'] = state;
             }
@@ -418,7 +426,7 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
 
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -475,13 +483,17 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
             if (onlyExecuted !== undefined) {
                 localVarQueryParameter['only_executed'] = onlyExecuted;
             }
 
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -588,9 +600,13 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -677,7 +693,7 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
         async getUserAccountOrderDetailV2(...args: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountOrderRecordV2, unknown>>> {
             const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetailV2(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -689,7 +705,7 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
         async getUserAccountOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountOrdersV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountOrdersV2Response, unknown>>> {
             const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrdersV2(requestParameters.accountId, requestParameters.state, requestParameters.days, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
@@ -701,7 +717,7 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
         async getUserAccountRecentOrdersV2(...args: ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountOrdersV2Response, unknown>>> {
             const [requestParameters = {} as ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrdersV2(requestParameters.accountId, requestParameters.onlyExecuted, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns active Trade Detection subscriptions for your Client ID. Cancelled subscriptions are not returned.
@@ -736,7 +752,7 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
                 trading_session: requestParameters.trading_session
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeSimpleOrder(requestParameters.accountId, simpleTradeForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
     }
 };
@@ -960,9 +976,14 @@ export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2personalApiKeyReq
     readonly userId?: never
     readonly userSecret?: never
 }
+export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2oauthRequest = ExperimentalEndpointsApiGetUserAccountOrderDetailV2BaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2RequestByAuthMode = {
     "commercialApiKey": ExperimentalEndpointsApiGetUserAccountOrderDetailV2commercialApiKeyRequest;
     "personalApiKey": ExperimentalEndpointsApiGetUserAccountOrderDetailV2personalApiKeyRequest;
+    "oauth": ExperimentalEndpointsApiGetUserAccountOrderDetailV2oauthRequest;
 }
 export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth extends AuthMode> =
     ExperimentalEndpointsApiGetUserAccountOrderDetailV2RequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetUserAccountOrderDetailV2RequestByAuthMode]
@@ -1009,9 +1030,14 @@ export type ExperimentalEndpointsApiGetUserAccountOrdersV2personalApiKeyRequest 
     readonly userId?: never
     readonly userSecret?: never
 }
+export type ExperimentalEndpointsApiGetUserAccountOrdersV2oauthRequest = ExperimentalEndpointsApiGetUserAccountOrdersV2BaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type ExperimentalEndpointsApiGetUserAccountOrdersV2RequestByAuthMode = {
     "commercialApiKey": ExperimentalEndpointsApiGetUserAccountOrdersV2commercialApiKeyRequest;
     "personalApiKey": ExperimentalEndpointsApiGetUserAccountOrdersV2personalApiKeyRequest;
+    "oauth": ExperimentalEndpointsApiGetUserAccountOrdersV2oauthRequest;
 }
 export type ExperimentalEndpointsApiGetUserAccountOrdersV2Request<TAuth extends AuthMode> =
     ExperimentalEndpointsApiGetUserAccountOrdersV2RequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetUserAccountOrdersV2RequestByAuthMode]
@@ -1051,9 +1077,14 @@ export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2personalApiKeyRe
     readonly userId?: never
     readonly userSecret?: never
 }
+export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2oauthRequest = ExperimentalEndpointsApiGetUserAccountRecentOrdersV2BaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2RequestByAuthMode = {
     "commercialApiKey": ExperimentalEndpointsApiGetUserAccountRecentOrdersV2commercialApiKeyRequest;
     "personalApiKey": ExperimentalEndpointsApiGetUserAccountRecentOrdersV2personalApiKeyRequest;
+    "oauth": ExperimentalEndpointsApiGetUserAccountRecentOrdersV2oauthRequest;
 }
 export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request<TAuth extends AuthMode> =
     ExperimentalEndpointsApiGetUserAccountRecentOrdersV2RequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetUserAccountRecentOrdersV2RequestByAuthMode]
@@ -1086,9 +1117,14 @@ export type ExperimentalEndpointsApiPlaceSimpleOrderpersonalApiKeyRequest = Expe
     readonly userId?: never
     readonly userSecret?: never
 }
+export type ExperimentalEndpointsApiPlaceSimpleOrderoauthRequest = ExperimentalEndpointsApiPlaceSimpleOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type ExperimentalEndpointsApiPlaceSimpleOrderRequestByAuthMode = {
     "commercialApiKey": ExperimentalEndpointsApiPlaceSimpleOrdercommercialApiKeyRequest;
     "personalApiKey": ExperimentalEndpointsApiPlaceSimpleOrderpersonalApiKeyRequest;
+    "oauth": ExperimentalEndpointsApiPlaceSimpleOrderoauthRequest;
 }
 export type ExperimentalEndpointsApiPlaceSimpleOrderRequest<TAuth extends AuthMode> =
     ExperimentalEndpointsApiPlaceSimpleOrderRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiPlaceSimpleOrderRequestByAuthMode]

@@ -73,7 +73,7 @@ import { AuthMode, Configuration } from '../configuration';
 import type { FormDataLike } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -134,9 +134,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -182,9 +186,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -231,9 +239,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -288,9 +300,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -393,9 +409,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -441,9 +461,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -540,9 +564,13 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -582,10 +610,10 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PartnerData, unknown>>> {
+        async getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PartnerData, unknown>>> {
             const [options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPartnerInfo(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns a list of all supported Exchanges.
@@ -593,10 +621,10 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStockExchanges(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Exchange>, unknown>>> {
+        async getStockExchanges(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Exchange>, unknown>>> {
             const [options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getStockExchanges(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
@@ -611,7 +639,7 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
                 substring: requestParameters.substring
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbols(symbolQuery, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a \'.TO\' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Share classes and preferred series use SnapTrade\'s canonical dotted form: use `HBND.U.TO` (not Yahoo\'s `HBND-U.TO`), `FTN.PR.A.TO` (not `FTN-PA.TO`), and `ECF.PRA` (not `ECF-P-A`). Please use the ticker with the proper suffix and canonical share-class notation for the best results. 
@@ -623,7 +651,7 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
         async getSymbolsByTicker(...args: ReferenceDataApiGetSymbolsByTickerArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UniversalSymbol, unknown>>> {
             const [requestParameters = {} as ReferenceDataApiGetSymbolsByTickerRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSymbolsByTicker(requestParameters.query, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns a list of all defined Brokerage authorization Type objects.
@@ -647,7 +675,7 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
         async listAllBrokerageInstruments(...args: ReferenceDataApiListAllBrokerageInstrumentsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<BrokerageInstrumentsResponse, unknown>>> {
             const [requestParameters = {} as ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageInstruments(requestParameters.slug, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns a list of all defined Brokerage objects.
@@ -655,10 +683,10 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Brokerage>, unknown>>> {
+        async listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Brokerage>, unknown>>> {
             const [options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerages(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns the public catalog of institutions SnapTrade supports and what each one supports. The response is the same for every caller and needs no authentication. To list the brokerages a specific Client ID can connect to right now, use `GET /brokerages` instead.  A `null` field means the information is not documented yet, never that the institution lacks it. New fields and new enum values may be added over time, so ignore any you don\'t recognize. 
@@ -683,7 +711,7 @@ export const ReferenceDataApiFp = function<TAuth extends AuthMode>(configuration
                 substring: requestParameters.substring
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.symbolSearchUserAccount(requestParameters.accountId, symbolQuery, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
     }
 };
@@ -701,7 +729,7 @@ export const ReferenceDataApiFactory = function<TAuth extends AuthMode>(configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<AxiosResponse<PartnerData, unknown>> {
+        getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]): Promise<AxiosResponse<PartnerData, unknown>> {
             return localVarFp.getPartnerInfo(...args).then((request) => request(axios, basePath));
         },
         /**
@@ -710,7 +738,7 @@ export const ReferenceDataApiFactory = function<TAuth extends AuthMode>(configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStockExchanges(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<AxiosResponse<Array<Exchange>, unknown>> {
+        getStockExchanges(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]): Promise<AxiosResponse<Array<Exchange>, unknown>> {
             return localVarFp.getStockExchanges(...args).then((request) => request(axios, basePath));
         },
         /**
@@ -759,7 +787,7 @@ export const ReferenceDataApiFactory = function<TAuth extends AuthMode>(configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]): Promise<AxiosResponse<Array<Brokerage>, unknown>> {
+        listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]): Promise<AxiosResponse<Array<Brokerage>, unknown>> {
             return localVarFp.listAllBrokerages(...args).then((request) => request(axios, basePath));
         },
         /**
@@ -795,16 +823,19 @@ export type ReferenceDataApiGetSymbolscommercialApiKeyRequest = ReferenceDataApi
 }
 export type ReferenceDataApiGetSymbolspersonalApiKeyRequest = ReferenceDataApiGetSymbolsBaseRequest & {
 }
+export type ReferenceDataApiGetSymbolsoauthRequest = ReferenceDataApiGetSymbolsBaseRequest & {
+}
 export type ReferenceDataApiGetSymbolsRequestByAuthMode = {
     "commercialApiKey": ReferenceDataApiGetSymbolscommercialApiKeyRequest;
     "personalApiKey": ReferenceDataApiGetSymbolspersonalApiKeyRequest;
+    "oauth": ReferenceDataApiGetSymbolsoauthRequest;
 }
 export type ReferenceDataApiGetSymbolsRequest<TAuth extends AuthMode> =
     ReferenceDataApiGetSymbolsRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiGetSymbolsRequestByAuthMode]
 
 /** Request argument optionality depends on the selected authentication mode. */
 export type ReferenceDataApiGetSymbolsArgs<TAuth extends AuthMode> =
-    TAuth["mode"] extends "commercialApiKey" | "personalApiKey"
+    TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth"
         ? [requestParameters?: ReferenceDataApiGetSymbolsRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: ReferenceDataApiGetSymbolsRequest<TAuth>, options?: AxiosRequestConfig];
 
@@ -826,9 +857,12 @@ export type ReferenceDataApiGetSymbolsByTickercommercialApiKeyRequest = Referenc
 }
 export type ReferenceDataApiGetSymbolsByTickerpersonalApiKeyRequest = ReferenceDataApiGetSymbolsByTickerBaseRequest & {
 }
+export type ReferenceDataApiGetSymbolsByTickeroauthRequest = ReferenceDataApiGetSymbolsByTickerBaseRequest & {
+}
 export type ReferenceDataApiGetSymbolsByTickerRequestByAuthMode = {
     "commercialApiKey": ReferenceDataApiGetSymbolsByTickercommercialApiKeyRequest;
     "personalApiKey": ReferenceDataApiGetSymbolsByTickerpersonalApiKeyRequest;
+    "oauth": ReferenceDataApiGetSymbolsByTickeroauthRequest;
 }
 export type ReferenceDataApiGetSymbolsByTickerRequest<TAuth extends AuthMode> =
     ReferenceDataApiGetSymbolsByTickerRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiGetSymbolsByTickerRequestByAuthMode]
@@ -888,9 +922,12 @@ export type ReferenceDataApiListAllBrokerageInstrumentscommercialApiKeyRequest =
 }
 export type ReferenceDataApiListAllBrokerageInstrumentspersonalApiKeyRequest = ReferenceDataApiListAllBrokerageInstrumentsBaseRequest & {
 }
+export type ReferenceDataApiListAllBrokerageInstrumentsoauthRequest = ReferenceDataApiListAllBrokerageInstrumentsBaseRequest & {
+}
 export type ReferenceDataApiListAllBrokerageInstrumentsRequestByAuthMode = {
     "commercialApiKey": ReferenceDataApiListAllBrokerageInstrumentscommercialApiKeyRequest;
     "personalApiKey": ReferenceDataApiListAllBrokerageInstrumentspersonalApiKeyRequest;
+    "oauth": ReferenceDataApiListAllBrokerageInstrumentsoauthRequest;
 }
 export type ReferenceDataApiListAllBrokerageInstrumentsRequest<TAuth extends AuthMode> =
     ReferenceDataApiListAllBrokerageInstrumentsRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiListAllBrokerageInstrumentsRequestByAuthMode]
@@ -923,9 +960,14 @@ export type ReferenceDataApiSymbolSearchUserAccountpersonalApiKeyRequest = Refer
     readonly userId?: never
     readonly userSecret?: never
 }
+export type ReferenceDataApiSymbolSearchUserAccountoauthRequest = ReferenceDataApiSymbolSearchUserAccountBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type ReferenceDataApiSymbolSearchUserAccountRequestByAuthMode = {
     "commercialApiKey": ReferenceDataApiSymbolSearchUserAccountcommercialApiKeyRequest;
     "personalApiKey": ReferenceDataApiSymbolSearchUserAccountpersonalApiKeyRequest;
+    "oauth": ReferenceDataApiSymbolSearchUserAccountoauthRequest;
 }
 export type ReferenceDataApiSymbolSearchUserAccountRequest<TAuth extends AuthMode> =
     ReferenceDataApiSymbolSearchUserAccountRequestByAuthMode[TAuth["mode"] & keyof ReferenceDataApiSymbolSearchUserAccountRequestByAuthMode]
@@ -950,7 +992,7 @@ export class ReferenceDataApiGenerated<TAuth extends AuthMode> extends BaseAPI<T
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
+    public getPartnerInfo(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]) {
         return ReferenceDataApiFp(this.configuration).getPartnerInfo(...args).then((request) => request(this.axios, this.basePath));
     }
 
@@ -961,7 +1003,7 @@ export class ReferenceDataApiGenerated<TAuth extends AuthMode> extends BaseAPI<T
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public getStockExchanges(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
+    public getStockExchanges(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]) {
         return ReferenceDataApiFp(this.configuration).getStockExchanges(...args).then((request) => request(this.axios, this.basePath));
     }
 
@@ -1024,7 +1066,7 @@ export class ReferenceDataApiGenerated<TAuth extends AuthMode> extends BaseAPI<T
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
      */
-    public listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" ? [options?: AxiosRequestConfig] : [never]) {
+    public listAllBrokerages(...args: TAuth["mode"] extends "commercialApiKey" | "personalApiKey" | "oauth" ? [options?: AxiosRequestConfig] : [never]) {
         return ReferenceDataApiFp(this.configuration).listAllBrokerages(...args).then((request) => request(this.axios, this.basePath));
     }
 
