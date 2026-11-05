@@ -547,6 +547,7 @@ class GetAccountActivities(BaseApi):
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -566,6 +567,7 @@ class GetAccountActivities(BaseApi):
             type=type,
         )
         return self._get_account_activities_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -622,6 +624,7 @@ class ApiForget(BaseApi):
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -641,6 +644,7 @@ class ApiForget(BaseApi):
             type=type,
         )
         return self._get_account_activities_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

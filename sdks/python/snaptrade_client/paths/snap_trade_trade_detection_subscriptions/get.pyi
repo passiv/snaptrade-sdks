@@ -385,6 +385,7 @@ class ListSubscriptions(BaseApi):
     
     def list_subscriptions(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -393,6 +394,7 @@ class ListSubscriptions(BaseApi):
         args = self._list_subscriptions_mapped_args(
         )
         return self._list_subscriptions_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi):
@@ -414,6 +416,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -422,5 +425,6 @@ class ApiForget(BaseApi):
         args = self._list_subscriptions_mapped_args(
         )
         return self._list_subscriptions_oapg(
+            timeout=timeout,
         )
 

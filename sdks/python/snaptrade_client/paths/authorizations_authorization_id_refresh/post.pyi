@@ -525,6 +525,7 @@ class RefreshBrokerageAuthorization(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -538,6 +539,7 @@ class RefreshBrokerageAuthorization(BaseApi):
             user_secret=user_secret,
         )
         return self._refresh_brokerage_authorization_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -578,6 +580,7 @@ class ApiForpost(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -591,6 +594,7 @@ class ApiForpost(BaseApi):
             user_secret=user_secret,
         )
         return self._refresh_brokerage_authorization_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

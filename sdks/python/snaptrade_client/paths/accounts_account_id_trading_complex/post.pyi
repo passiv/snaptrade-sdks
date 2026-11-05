@@ -550,6 +550,7 @@ class PlaceComplexOrder(BaseApi):
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -567,6 +568,7 @@ class PlaceComplexOrder(BaseApi):
             client_order_id=client_order_id,
         )
         return self._place_complex_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,
@@ -621,6 +623,7 @@ class ApiForpost(BaseApi):
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -638,6 +641,7 @@ class ApiForpost(BaseApi):
             client_order_id=client_order_id,
         )
         return self._place_complex_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,

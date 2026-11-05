@@ -523,6 +523,7 @@ class GetOrderImpact(BaseApi):
         units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -544,6 +545,7 @@ class GetOrderImpact(BaseApi):
             notional_value=notional_value,
         )
         return self._get_order_impact_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )
@@ -608,6 +610,7 @@ class ApiForpost(BaseApi):
         units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -629,6 +632,7 @@ class ApiForpost(BaseApi):
             notional_value=notional_value,
         )
         return self._get_order_impact_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )

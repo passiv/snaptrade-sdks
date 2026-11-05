@@ -485,6 +485,7 @@ class GetUserAccountOptionQuotes(BaseApi):
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -499,6 +500,7 @@ class GetUserAccountOptionQuotes(BaseApi):
             symbol=symbol,
         )
         return self._get_user_account_option_quotes_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -542,6 +544,7 @@ class ApiForget(BaseApi):
         symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -556,6 +559,7 @@ class ApiForget(BaseApi):
             symbol=symbol,
         )
         return self._get_user_account_option_quotes_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

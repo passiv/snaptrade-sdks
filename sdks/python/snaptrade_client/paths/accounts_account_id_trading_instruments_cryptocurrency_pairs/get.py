@@ -571,6 +571,7 @@ class SearchCryptocurrencyPairInstruments(BaseApi):
         quote: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -586,6 +587,7 @@ class SearchCryptocurrencyPairInstruments(BaseApi):
             quote=quote,
         )
         return self._search_cryptocurrency_pair_instruments_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -632,6 +634,7 @@ class ApiForget(BaseApi):
         quote: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -647,6 +650,7 @@ class ApiForget(BaseApi):
             quote=quote,
         )
         return self._search_cryptocurrency_pair_instruments_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

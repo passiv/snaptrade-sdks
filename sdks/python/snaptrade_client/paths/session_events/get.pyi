@@ -441,6 +441,7 @@ class SessionEvents(BaseApi):
         user_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -454,6 +455,7 @@ class SessionEvents(BaseApi):
             session_id=session_id,
         )
         return self._session_events_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 
@@ -490,6 +492,7 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         session_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -503,6 +506,7 @@ class ApiForget(BaseApi):
             session_id=session_id,
         )
         return self._session_events_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 

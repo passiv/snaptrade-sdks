@@ -563,6 +563,7 @@ class LoginSnapTradeUser(BaseApi):
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -583,6 +584,7 @@ class LoginSnapTradeUser(BaseApi):
             connection_portal_version=connection_portal_version,
         )
         return self._login_snap_trade_user_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )
@@ -644,6 +646,7 @@ class ApiForpost(BaseApi):
         dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -664,6 +667,7 @@ class ApiForpost(BaseApi):
             connection_portal_version=connection_portal_version,
         )
         return self._login_snap_trade_user_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )

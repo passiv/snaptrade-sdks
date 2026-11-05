@@ -487,6 +487,7 @@ class GetActivities(BaseApi):
         brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -504,6 +505,7 @@ class GetActivities(BaseApi):
             type=type,
         )
         return self._get_activities_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 
@@ -554,6 +556,7 @@ class ApiForget(BaseApi):
         brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -571,6 +574,7 @@ class ApiForget(BaseApi):
             type=type,
         )
         return self._get_activities_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 

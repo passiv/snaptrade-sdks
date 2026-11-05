@@ -20,6 +20,7 @@ Connect brokerage accounts to your app for live positions and trading
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
+- [Request timeouts](#request-timeouts)
 - [Async](#async)
 - [Reference](#reference)
   * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
@@ -166,6 +167,20 @@ deleted_response = snaptrade.authentication.delete_snap_trade_user(
 )
 pprint(deleted_response.body)
 ```
+
+## Request timeouts<a id="request-timeouts"></a>
+
+Synchronous requests accept an optional `timeout` in seconds. Use a float for a single timeout or a `(connect, read)` tuple to configure them separately:
+
+```python
+snaptrade.account_information.list_user_accounts(
+    user_id="USER_ID",
+    user_secret="USER_SECRET",
+    timeout=30.0,
+)
+```
+
+Omitting `timeout` preserves the existing behavior.
 
 ## Async<a id="async"></a>
 

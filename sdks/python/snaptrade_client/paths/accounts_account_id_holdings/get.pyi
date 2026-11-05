@@ -520,6 +520,7 @@ class GetUserHoldings(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -533,6 +534,7 @@ class GetUserHoldings(BaseApi):
             user_secret=user_secret,
         )
         return self._get_user_holdings_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -575,6 +577,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -588,6 +591,7 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
         )
         return self._get_user_holdings_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

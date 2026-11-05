@@ -629,6 +629,7 @@ class AddSubscription(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseFor201,
@@ -644,6 +645,7 @@ class AddSubscription(BaseApi):
             user_secret=user_secret,
         )
         return self._add_subscription_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )
@@ -688,6 +690,7 @@ class ApiForpost(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseFor201,
@@ -703,6 +706,7 @@ class ApiForpost(BaseApi):
             user_secret=user_secret,
         )
         return self._add_subscription_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )

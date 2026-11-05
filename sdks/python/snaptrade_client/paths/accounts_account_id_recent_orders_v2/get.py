@@ -508,6 +508,7 @@ class GetUserAccountRecentOrdersV2(BaseApi):
         only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -522,6 +523,7 @@ class GetUserAccountRecentOrdersV2(BaseApi):
             only_executed=only_executed,
         )
         return self._get_user_account_recent_orders_v2_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -565,6 +567,7 @@ class ApiForget(BaseApi):
         only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -579,6 +582,7 @@ class ApiForget(BaseApi):
             only_executed=only_executed,
         )
         return self._get_user_account_recent_orders_v2_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

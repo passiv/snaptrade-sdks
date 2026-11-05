@@ -563,6 +563,7 @@ class PlaceCryptoOrder(BaseApi):
         expiration_date: typing.Optional[datetime] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -586,6 +587,7 @@ class PlaceCryptoOrder(BaseApi):
             expiration_date=expiration_date,
         )
         return self._place_crypto_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,
@@ -658,6 +660,7 @@ class ApiForpost(BaseApi):
         expiration_date: typing.Optional[datetime] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -681,6 +684,7 @@ class ApiForpost(BaseApi):
             expiration_date=expiration_date,
         )
         return self._place_crypto_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,

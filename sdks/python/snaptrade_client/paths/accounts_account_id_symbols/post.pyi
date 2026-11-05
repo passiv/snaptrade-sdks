@@ -520,6 +520,7 @@ class SymbolSearchUserAccount(BaseApi):
         substring: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -536,6 +537,7 @@ class SymbolSearchUserAccount(BaseApi):
             substring=substring,
         )
         return self._symbol_search_user_account_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,
@@ -585,6 +587,7 @@ class ApiForpost(BaseApi):
         substring: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -601,6 +604,7 @@ class ApiForpost(BaseApi):
             substring=substring,
         )
         return self._symbol_search_user_account_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,

@@ -551,6 +551,7 @@ class PlaceForceOrder(BaseApi):
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -576,6 +577,7 @@ class PlaceForceOrder(BaseApi):
             client_order_id=client_order_id,
         )
         return self._place_force_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )
@@ -652,6 +654,7 @@ class ApiForpost(BaseApi):
         notional_value: typing.Optional[NotionalValueNullable] = None,
         client_order_id: typing.Optional[ClientOrderIDNullable] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -677,6 +680,7 @@ class ApiForpost(BaseApi):
             client_order_id=client_order_id,
         )
         return self._place_force_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
         )

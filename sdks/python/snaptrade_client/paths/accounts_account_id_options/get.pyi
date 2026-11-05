@@ -483,6 +483,7 @@ class ListOptionHoldings(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -496,6 +497,7 @@ class ListOptionHoldings(BaseApi):
             account_id=account_id,
         )
         return self._list_option_holdings_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -538,6 +540,7 @@ class ApiForget(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -551,6 +554,7 @@ class ApiForget(BaseApi):
             account_id=account_id,
         )
         return self._list_option_holdings_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

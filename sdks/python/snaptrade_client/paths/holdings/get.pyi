@@ -469,6 +469,7 @@ class GetAllUserHoldings(BaseApi):
         user_secret: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -481,6 +482,7 @@ class GetAllUserHoldings(BaseApi):
             brokerage_authorizations=brokerage_authorizations,
         )
         return self._get_all_user_holdings_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 
@@ -518,6 +520,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         brokerage_authorizations: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -530,6 +533,7 @@ class ApiForget(BaseApi):
             brokerage_authorizations=brokerage_authorizations,
         )
         return self._get_all_user_holdings_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 

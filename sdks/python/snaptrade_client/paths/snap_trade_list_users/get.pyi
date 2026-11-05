@@ -321,6 +321,7 @@ class ListSnapTradeUsers(BaseApi):
     
     def list_snap_trade_users(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -329,6 +330,7 @@ class ListSnapTradeUsers(BaseApi):
         args = self._list_snap_trade_users_mapped_args(
         )
         return self._list_snap_trade_users_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi):
@@ -350,6 +352,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -358,5 +361,6 @@ class ApiForget(BaseApi):
         args = self._list_snap_trade_users_mapped_args(
         )
         return self._list_snap_trade_users_oapg(
+            timeout=timeout,
         )
 

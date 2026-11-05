@@ -466,6 +466,7 @@ class GetUserAccountQuotes(BaseApi):
         use_ticker: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -481,6 +482,7 @@ class GetUserAccountQuotes(BaseApi):
             use_ticker=use_ticker,
         )
         return self._get_user_account_quotes_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -527,6 +529,7 @@ class ApiForget(BaseApi):
         use_ticker: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -542,6 +545,7 @@ class ApiForget(BaseApi):
             use_ticker=use_ticker,
         )
         return self._get_user_account_quotes_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

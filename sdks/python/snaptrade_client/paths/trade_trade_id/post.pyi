@@ -506,6 +506,7 @@ class PlaceOrder(BaseApi):
         wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -521,6 +522,7 @@ class PlaceOrder(BaseApi):
             wait_to_confirm=wait_to_confirm,
         )
         return self._place_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,
@@ -569,6 +571,7 @@ class ApiForpost(BaseApi):
         wait_to_confirm: typing.Optional[typing.Optional[bool]] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -584,6 +587,7 @@ class ApiForpost(BaseApi):
             wait_to_confirm=wait_to_confirm,
         )
         return self._place_order_oapg(
+            timeout=timeout,
             body=args.body,
             query_params=args.query,
             path_params=args.path,

@@ -373,6 +373,7 @@ class GetSymbols(BaseApi):
         self,
         body: typing.Optional[SymbolQuery] = None,
         substring: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -384,6 +385,7 @@ class GetSymbols(BaseApi):
             substring=substring,
         )
         return self._get_symbols_oapg(
+            timeout=timeout,
             body=args.body,
         )
 
@@ -414,6 +416,7 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[SymbolQuery] = None,
         substring: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -425,6 +428,7 @@ class ApiForpost(BaseApi):
             substring=substring,
         )
         return self._get_symbols_oapg(
+            timeout=timeout,
             body=args.body,
         )
 

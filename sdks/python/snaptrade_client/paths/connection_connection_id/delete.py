@@ -483,6 +483,7 @@ class DeleteConnection(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -497,6 +498,7 @@ class DeleteConnection(BaseApi):
             user_secret=user_secret,
         )
         return self._delete_connection_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -538,6 +540,7 @@ class ApiFordelete(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -552,6 +555,7 @@ class ApiFordelete(BaseApi):
             user_secret=user_secret,
         )
         return self._delete_connection_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

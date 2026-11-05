@@ -465,6 +465,7 @@ class GetCryptocurrencyPairQuote(BaseApi):
         instrument_symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -479,6 +480,7 @@ class GetCryptocurrencyPairQuote(BaseApi):
             instrument_symbol=instrument_symbol,
         )
         return self._get_cryptocurrency_pair_quote_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -522,6 +524,7 @@ class ApiForget(BaseApi):
         instrument_symbol: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -536,6 +539,7 @@ class ApiForget(BaseApi):
             instrument_symbol=instrument_symbol,
         )
         return self._get_cryptocurrency_pair_quote_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

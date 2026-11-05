@@ -498,6 +498,7 @@ class GetUserAccountBalance(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -512,6 +513,7 @@ class GetUserAccountBalance(BaseApi):
             account_id=account_id,
         )
         return self._get_user_account_balance_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -553,6 +555,7 @@ class ApiForget(BaseApi):
         account_id: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -567,6 +570,7 @@ class ApiForget(BaseApi):
             account_id=account_id,
         )
         return self._get_user_account_balance_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

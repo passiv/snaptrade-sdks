@@ -277,6 +277,7 @@ class GetStockExchanges(BaseApi):
     
     def get_stock_exchanges(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -285,6 +286,7 @@ class GetStockExchanges(BaseApi):
         args = self._get_stock_exchanges_mapped_args(
         )
         return self._get_stock_exchanges_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi):
@@ -306,6 +308,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -314,5 +317,6 @@ class ApiForget(BaseApi):
         args = self._get_stock_exchanges_mapped_args(
         )
         return self._get_stock_exchanges_oapg(
+            timeout=timeout,
         )
 

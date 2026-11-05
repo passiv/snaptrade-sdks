@@ -321,6 +321,7 @@ class GetCurrencyExchangeRatePair(BaseApi):
         self,
         currency_pair: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -331,6 +332,7 @@ class GetCurrencyExchangeRatePair(BaseApi):
             currency_pair=currency_pair,
         )
         return self._get_currency_exchange_rate_pair_oapg(
+            timeout=timeout,
             path_params=args.path,
         )
 
@@ -360,6 +362,7 @@ class ApiForget(BaseApi):
         self,
         currency_pair: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -370,6 +373,7 @@ class ApiForget(BaseApi):
             currency_pair=currency_pair,
         )
         return self._get_currency_exchange_rate_pair_oapg(
+            timeout=timeout,
             path_params=args.path,
         )
 

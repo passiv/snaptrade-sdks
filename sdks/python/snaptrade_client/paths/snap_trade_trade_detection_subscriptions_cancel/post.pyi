@@ -474,6 +474,7 @@ class CancelSubscription(BaseApi):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -484,6 +485,7 @@ class CancelSubscription(BaseApi):
             account_id=account_id,
         )
         return self._cancel_subscription_oapg(
+            timeout=timeout,
             body=args.body,
         )
 
@@ -513,6 +515,7 @@ class ApiForpost(BaseApi):
         self,
         body: typing.Optional[typing.Any] = None,
         account_id: typing.Optional[str] = None,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -523,6 +526,7 @@ class ApiForpost(BaseApi):
             account_id=account_id,
         )
         return self._cancel_subscription_oapg(
+            timeout=timeout,
             body=args.body,
         )
 

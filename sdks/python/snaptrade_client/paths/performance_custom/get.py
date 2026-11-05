@@ -464,6 +464,7 @@ class GetReportingCustomRange(BaseApi):
         detailed: typing.Optional[bool] = None,
         frequency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -481,6 +482,7 @@ class GetReportingCustomRange(BaseApi):
             frequency=frequency,
         )
         return self._get_reporting_custom_range_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 
@@ -531,6 +533,7 @@ class ApiForget(BaseApi):
         detailed: typing.Optional[bool] = None,
         frequency: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -548,6 +551,7 @@ class ApiForget(BaseApi):
             frequency=frequency,
         )
         return self._get_reporting_custom_range_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 

@@ -405,6 +405,7 @@ class ListUserAccounts(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -417,6 +418,7 @@ class ListUserAccounts(BaseApi):
             user_secret=user_secret,
         )
         return self._list_user_accounts_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 
@@ -450,6 +452,7 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -462,6 +465,7 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
         )
         return self._list_user_accounts_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 

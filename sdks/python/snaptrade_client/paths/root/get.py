@@ -282,6 +282,7 @@ class Check(BaseApi):
     
     def check(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -291,6 +292,7 @@ class Check(BaseApi):
         args = self._check_mapped_args(
         )
         return self._check_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi):
@@ -313,6 +315,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -322,5 +325,6 @@ class ApiForget(BaseApi):
         args = self._check_mapped_args(
         )
         return self._check_oapg(
+            timeout=timeout,
         )
 

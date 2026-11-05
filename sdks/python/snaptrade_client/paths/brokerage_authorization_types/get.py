@@ -387,6 +387,7 @@ class ListAllBrokerageAuthorizationType(BaseApi):
         self,
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -398,6 +399,7 @@ class ListAllBrokerageAuthorizationType(BaseApi):
             brokerage=brokerage,
         )
         return self._list_all_brokerage_authorization_type_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 
@@ -428,6 +430,7 @@ class ApiForget(BaseApi):
         self,
         brokerage: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -439,6 +442,7 @@ class ApiForget(BaseApi):
             brokerage=brokerage,
         )
         return self._list_all_brokerage_authorization_type_oapg(
+            timeout=timeout,
             query_params=args.query,
         )
 

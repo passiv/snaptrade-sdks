@@ -287,6 +287,7 @@ class ListAllCurrenciesRates(BaseApi):
     
     def list_all_currencies_rates(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -295,6 +296,7 @@ class ListAllCurrenciesRates(BaseApi):
         args = self._list_all_currencies_rates_mapped_args(
         )
         return self._list_all_currencies_rates_oapg(
+            timeout=timeout,
         )
 
 class ApiForget(BaseApi):
@@ -316,6 +318,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
@@ -324,5 +327,6 @@ class ApiForget(BaseApi):
         args = self._list_all_currencies_rates_mapped_args(
         )
         return self._list_all_currencies_rates_oapg(
+            timeout=timeout,
         )
 

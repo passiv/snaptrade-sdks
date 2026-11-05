@@ -449,6 +449,7 @@ class DetailBrokerageAuthorization(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -463,6 +464,7 @@ class DetailBrokerageAuthorization(BaseApi):
             user_secret=user_secret,
         )
         return self._detail_brokerage_authorization_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )
@@ -504,6 +506,7 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -518,6 +521,7 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
         )
         return self._detail_brokerage_authorization_oapg(
+            timeout=timeout,
             query_params=args.query,
             path_params=args.path,
         )

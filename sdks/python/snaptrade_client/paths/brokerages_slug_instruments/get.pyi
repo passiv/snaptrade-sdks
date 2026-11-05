@@ -349,6 +349,7 @@ class ListAllBrokerageInstruments(BaseApi):
         self,
         slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -360,6 +361,7 @@ class ListAllBrokerageInstruments(BaseApi):
             slug=slug,
         )
         return self._list_all_brokerage_instruments_oapg(
+            timeout=timeout,
             path_params=args.path,
         )
 
@@ -390,6 +392,7 @@ class ApiForget(BaseApi):
         self,
         slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
@@ -401,6 +404,7 @@ class ApiForget(BaseApi):
             slug=slug,
         )
         return self._list_all_brokerage_instruments_oapg(
+            timeout=timeout,
             path_params=args.path,
         )
 
