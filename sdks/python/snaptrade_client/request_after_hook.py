@@ -28,6 +28,7 @@ def request_after_hook(
         body: typing.Any = None,
         fields: typing.Optional[typing.Tuple[typing.Tuple[str, str], ...]] = None,
         auth_settings: typing.Optional[typing.List[str]] = None,
+        operation_auth_context: typing.Optional[dict] = None,
 ):
     if headers is None:
         return
