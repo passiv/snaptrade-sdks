@@ -2718,13 +2718,15 @@ const listSubscriptionsResponse =
 
 **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
 
-Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade and Webull US; future options are supported only on tastytrade. Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
 
 An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
 
 Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
 
-All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
+TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
+
+All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
 
 A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
 
@@ -2834,7 +2836,7 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 ##### time_in_force: `string`<a id="time_in_force-string"></a>
 
-Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc.
+Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc. TradeStation futures and futures options accept day, gtc, ioc, and fok, subject to the contract and route\\\'s supported combinations.
 
 ##### legs: [`SimpleTradeLeg`](./models/simple-trade-leg.ts)[]<a id="legs-simpletradelegmodelssimple-trade-legts"></a>
 
@@ -2858,7 +2860,7 @@ Only applicable to multi-leg limit and stop_limit orders. Requirements and suppo
 
 ##### client_order_id: [`string`](./models/model-string.ts)<a id="client_order_id-stringmodelsmodel-stringts"></a>
 
-Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade and Webull US futures orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies; SnapTrade does not enforce uniqueness. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade\\\'s trade audit; the converted value is returned as brokerage_order_id for subsequent order reads.
+Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. SnapTrade does not enforce uniqueness, except for requests authenticated with an OAuth access token, where a client_order_id the user has already used returns 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade\\\'s trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation\\\'s separate order ID.
 
 ##### expiry_date: `string`<a id="expiry_date-string"></a>
 

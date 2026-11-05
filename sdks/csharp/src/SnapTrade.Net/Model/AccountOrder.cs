@@ -164,7 +164,7 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">The order type and the prices that belong to it. Use &#x60;kind&#x60; to determine which fields are present. (required).</param>
         /// <param name="timeInForce">How long the order remains active. Brokerage values that cannot be mapped to this list are returned as &#x60;OTHER&#x60;.   - &#x60;DAY&#x60; - valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled.   - &#x60;FOK&#x60; - Fill Or Kill.   - &#x60;IOC&#x60; - Immediate Or Cancel.   - &#x60;GTD&#x60; - Good Til Date; see &#x60;expiry_date&#x60;.   - &#x60;MOO&#x60; - Market On Open.   - &#x60;EHP&#x60; - Extended Hours P.M.   - &#x60;EHA&#x60; - Extended Hours A.M.   - &#x60;OTHER&#x60; - the brokerage reported a value outside this list.  (required).</param>
         /// <param name="expiryDate">When the order expires, for orders with a &#x60;time_in_force&#x60; of &#x60;GTD&#x60;..</param>
-        /// <param name="priceCurrency">ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example &#x60;USDC&#x60; for &#x60;ETH-USDC&#x60;)..</param>
+        /// <param name="pricedIn">The asset an order&#39;s prices are denominated in. Use &#x60;kind&#x60; to determine which schema is present..</param>
         /// <param name="priceEffect">Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. (required).</param>
         /// <param name="totalQuantity">Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities..</param>
         /// <param name="filledQuantity">Quantity filled so far..</param>
@@ -176,7 +176,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeExecuted">The time the order was executed, when available..</param>
         /// <param name="group">group.</param>
         /// <param name="legs">The legs that make up the order. Always has at least one entry. (required).</param>
-        public AccountOrder(string brokerageOrderId = default(string), AccountOrderRecordStatusV2 status = default(AccountOrderRecordStatusV2), OrderTypeConfiguration orderType = default(OrderTypeConfiguration), TimeInForceEnum timeInForce = default(TimeInForceEnum), DateTime? expiryDate = default(DateTime?), string priceCurrency = default(string), PriceEffectEnum priceEffect = default(PriceEffectEnum), decimal? totalQuantity = default(decimal?), decimal? filledQuantity = default(decimal?), decimal? canceledQuantity = default(decimal?), decimal? openQuantity = default(decimal?), decimal? executionPrice = default(decimal?), DateTime? timePlaced = default(DateTime?), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), AccountOrderGroupNullable group = default(AccountOrderGroupNullable), List<AccountOrderLeg> legs = default(List<AccountOrderLeg>)) : base()
+        public AccountOrder(string brokerageOrderId = default(string), AccountOrderRecordStatusV2 status = default(AccountOrderRecordStatusV2), OrderTypeConfiguration orderType = default(OrderTypeConfiguration), TimeInForceEnum timeInForce = default(TimeInForceEnum), DateTime? expiryDate = default(DateTime?), PricedInInstrumentNullable pricedIn = default(PricedInInstrumentNullable), PriceEffectEnum priceEffect = default(PriceEffectEnum), decimal? totalQuantity = default(decimal?), decimal? filledQuantity = default(decimal?), decimal? canceledQuantity = default(decimal?), decimal? openQuantity = default(decimal?), decimal? executionPrice = default(decimal?), DateTime? timePlaced = default(DateTime?), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), AccountOrderGroupNullable group = default(AccountOrderGroupNullable), List<AccountOrderLeg> legs = default(List<AccountOrderLeg>)) : base()
         {
             // to ensure "brokerageOrderId" is required (not null)
             if (brokerageOrderId == null)
@@ -200,7 +200,7 @@ namespace SnapTrade.Net.Model
             }
             this.Legs = legs;
             this.ExpiryDate = expiryDate;
-            this.PriceCurrency = priceCurrency;
+            this.PricedIn = pricedIn;
             this.TotalQuantity = totalQuantity;
             this.FilledQuantity = filledQuantity;
             this.CanceledQuantity = canceledQuantity;
@@ -235,11 +235,11 @@ namespace SnapTrade.Net.Model
         public DateTime? ExpiryDate { get; set; }
 
         /// <summary>
-        /// ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example &#x60;USDC&#x60; for &#x60;ETH-USDC&#x60;).
+        /// The asset an order&#39;s prices are denominated in. Use &#x60;kind&#x60; to determine which schema is present.
         /// </summary>
-        /// <value>ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example &#x60;USDC&#x60; for &#x60;ETH-USDC&#x60;).</value>
-        [DataMember(Name = "price_currency", EmitDefaultValue = true)]
-        public string PriceCurrency { get; set; }
+        /// <value>The asset an order&#39;s prices are denominated in. Use &#x60;kind&#x60; to determine which schema is present.</value>
+        [DataMember(Name = "priced_in", EmitDefaultValue = true)]
+        public PricedInInstrumentNullable PricedIn { get; set; }
 
         /// <summary>
         /// Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
@@ -335,7 +335,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  ExpiryDate: ").Append(ExpiryDate).Append("\n");
-            sb.Append("  PriceCurrency: ").Append(PriceCurrency).Append("\n");
+            sb.Append("  PricedIn: ").Append(PricedIn).Append("\n");
             sb.Append("  PriceEffect: ").Append(PriceEffect).Append("\n");
             sb.Append("  TotalQuantity: ").Append(TotalQuantity).Append("\n");
             sb.Append("  FilledQuantity: ").Append(FilledQuantity).Append("\n");
@@ -407,9 +407,9 @@ namespace SnapTrade.Net.Model
                     this.ExpiryDate.Equals(input.ExpiryDate))
                 ) && base.Equals(input) && 
                 (
-                    this.PriceCurrency == input.PriceCurrency ||
-                    (this.PriceCurrency != null &&
-                    this.PriceCurrency.Equals(input.PriceCurrency))
+                    this.PricedIn == input.PricedIn ||
+                    (this.PricedIn != null &&
+                    this.PricedIn.Equals(input.PricedIn))
                 ) && base.Equals(input) && 
                 (
                     this.PriceEffect == input.PriceEffect ||
@@ -492,9 +492,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.ExpiryDate.GetHashCode();
                 }
-                if (this.PriceCurrency != null)
+                if (this.PricedIn != null)
                 {
-                    hashCode = (hashCode * 59) + this.PriceCurrency.GetHashCode();
+                    hashCode = (hashCode * 59) + this.PricedIn.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.PriceEffect.GetHashCode();
                 if (this.TotalQuantity != null)

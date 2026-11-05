@@ -11,10 +11,19 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  class ManualTradeFormNotionalValue
+  class TradingPlaceSimpleOrder409Response
+    attr_accessor :detail
+
+    attr_accessor :status_code
+
+    attr_accessor :code
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'detail' => :'detail',
+        :'status_code' => :'status_code',
+        :'code' => :'code'
       }
     end
 
@@ -26,6 +35,9 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'detail' => :'String',
+        :'status_code' => :'Integer',
+        :'code' => :'String'
       }
     end
 
@@ -35,27 +47,32 @@ module SnapTrade
       ])
     end
 
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'NotionalValue'
-      ]
-    end
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::ManualTradeFormNotionalValue` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::TradingPlaceSimpleOrder409Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::ManualTradeFormNotionalValue`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::TradingPlaceSimpleOrder409Response`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'detail')
+        self.detail = attributes[:'detail']
+      end
+
+      if attributes.key?(:'status_code')
+        self.status_code = attributes[:'status_code']
+      end
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -75,7 +92,10 @@ module SnapTrade
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
-      self.class == o.class
+      self.class == o.class &&
+          detail == o.detail &&
+          status_code == o.status_code &&
+          code == o.code
     end
 
     # @see the `==` method
@@ -87,7 +107,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [].hash
+      [detail, status_code, code].hash
     end
 
     # Builds the object from hash

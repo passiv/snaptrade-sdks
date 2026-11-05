@@ -27,8 +27,7 @@ module SnapTrade
     # When the order expires, for orders with a `time_in_force` of `GTD`.
     attr_accessor :expiry_date
 
-    # ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).
-    attr_accessor :price_currency
+    attr_accessor :priced_in
 
     # Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
     attr_accessor :price_effect
@@ -70,7 +69,7 @@ module SnapTrade
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'expiry_date' => :'expiry_date',
-        :'price_currency' => :'price_currency',
+        :'priced_in' => :'priced_in',
         :'price_effect' => :'price_effect',
         :'total_quantity' => :'total_quantity',
         :'filled_quantity' => :'filled_quantity',
@@ -98,7 +97,7 @@ module SnapTrade
         :'order_type' => :'OrderTypeConfiguration',
         :'time_in_force' => :'AccountOrderTimeInForce',
         :'expiry_date' => :'Time',
-        :'price_currency' => :'String',
+        :'priced_in' => :'PricedInInstrument',
         :'price_effect' => :'PriceEffect',
         :'total_quantity' => :'Float',
         :'filled_quantity' => :'Float',
@@ -117,7 +116,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'expiry_date',
-        :'price_currency',
+        :'priced_in',
         :'total_quantity',
         :'filled_quantity',
         :'canceled_quantity',
@@ -165,8 +164,8 @@ module SnapTrade
         self.expiry_date = attributes[:'expiry_date']
       end
 
-      if attributes.key?(:'price_currency')
-        self.price_currency = attributes[:'price_currency']
+      if attributes.key?(:'priced_in')
+        self.priced_in = attributes[:'priced_in']
       end
 
       if attributes.key?(:'price_effect')
@@ -288,7 +287,7 @@ module SnapTrade
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           expiry_date == o.expiry_date &&
-          price_currency == o.price_currency &&
+          priced_in == o.priced_in &&
           price_effect == o.price_effect &&
           total_quantity == o.total_quantity &&
           filled_quantity == o.filled_quantity &&
@@ -311,7 +310,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, order_type, time_in_force, expiry_date, price_currency, price_effect, total_quantity, filled_quantity, canceled_quantity, open_quantity, execution_price, time_placed, time_updated, time_executed, group, legs].hash
+      [brokerage_order_id, status, order_type, time_in_force, expiry_date, priced_in, price_effect, total_quantity, filled_quantity, canceled_quantity, open_quantity, execution_price, time_placed, time_updated, time_executed, group, legs].hash
     end
 
     # Builds the object from hash

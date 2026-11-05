@@ -139,9 +139,9 @@ public class AccountOrder {
   @SerializedName(SERIALIZED_NAME_EXPIRY_DATE)
   private OffsetDateTime expiryDate;
 
-  public static final String SERIALIZED_NAME_PRICE_CURRENCY = "price_currency";
-  @SerializedName(SERIALIZED_NAME_PRICE_CURRENCY)
-  private String priceCurrency;
+  public static final String SERIALIZED_NAME_PRICED_IN = "priced_in";
+  @SerializedName(SERIALIZED_NAME_PRICED_IN)
+  private Object pricedIn = null;
 
   /**
    * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
@@ -386,32 +386,32 @@ public class AccountOrder {
   }
 
 
-  public AccountOrder priceCurrency(String priceCurrency) {
+  public AccountOrder pricedIn(Object pricedIn) {
     
     
     
     
-    this.priceCurrency = priceCurrency;
+    this.pricedIn = pricedIn;
     return this;
   }
 
    /**
-   * ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example &#x60;USDC&#x60; for &#x60;ETH-USDC&#x60;).
-   * @return priceCurrency
+   * Get pricedIn
+   * @return pricedIn
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "USD", value = "ISO-4217 currency code the order prices are denominated in. For crypto pairs this is the quote asset (for example `USDC` for `ETH-USDC`).")
+  @ApiModelProperty(value = "")
 
-  public String getPriceCurrency() {
-    return priceCurrency;
+  public Object getPricedIn() {
+    return pricedIn;
   }
 
 
-  public void setPriceCurrency(String priceCurrency) {
+  public void setPricedIn(Object pricedIn) {
     
     
     
-    this.priceCurrency = priceCurrency;
+    this.pricedIn = pricedIn;
   }
 
 
@@ -798,7 +798,7 @@ public class AccountOrder {
         Objects.equals(this.orderType, accountOrder.orderType) &&
         Objects.equals(this.timeInForce, accountOrder.timeInForce) &&
         Objects.equals(this.expiryDate, accountOrder.expiryDate) &&
-        Objects.equals(this.priceCurrency, accountOrder.priceCurrency) &&
+        Objects.equals(this.pricedIn, accountOrder.pricedIn) &&
         Objects.equals(this.priceEffect, accountOrder.priceEffect) &&
         Objects.equals(this.totalQuantity, accountOrder.totalQuantity) &&
         Objects.equals(this.filledQuantity, accountOrder.filledQuantity) &&
@@ -819,7 +819,7 @@ public class AccountOrder {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, orderType, timeInForce, expiryDate, priceCurrency, priceEffect, totalQuantity, filledQuantity, canceledQuantity, openQuantity, executionPrice, timePlaced, timeUpdated, timeExecuted, group, legs, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, orderType, timeInForce, expiryDate, pricedIn, priceEffect, totalQuantity, filledQuantity, canceledQuantity, openQuantity, executionPrice, timePlaced, timeUpdated, timeExecuted, group, legs, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -838,7 +838,7 @@ public class AccountOrder {
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
-    sb.append("    priceCurrency: ").append(toIndentedString(priceCurrency)).append("\n");
+    sb.append("    pricedIn: ").append(toIndentedString(pricedIn)).append("\n");
     sb.append("    priceEffect: ").append(toIndentedString(priceEffect)).append("\n");
     sb.append("    totalQuantity: ").append(toIndentedString(totalQuantity)).append("\n");
     sb.append("    filledQuantity: ").append(toIndentedString(filledQuantity)).append("\n");
@@ -879,7 +879,7 @@ public class AccountOrder {
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
     openapiFields.add("expiry_date");
-    openapiFields.add("price_currency");
+    openapiFields.add("priced_in");
     openapiFields.add("price_effect");
     openapiFields.add("total_quantity");
     openapiFields.add("filled_quantity");
@@ -926,9 +926,6 @@ public class AccountOrder {
       }
       if (!jsonObj.get("time_in_force").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
-      }
-      if (!jsonObj.get("price_currency").isJsonNull() && (jsonObj.get("price_currency") != null && !jsonObj.get("price_currency").isJsonNull()) && !jsonObj.get("price_currency").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `price_currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_currency").toString()));
       }
       if (!jsonObj.get("price_effect").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));

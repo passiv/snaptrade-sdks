@@ -11,13 +11,31 @@ require 'spec_helper'
 require 'json'
 require 'date'
 
-# Unit tests for SnapTrade::ManualTradeFormNotionalValue
-describe SnapTrade::ManualTradeFormNotionalValue do
-  let(:instance) { SnapTrade::ManualTradeFormNotionalValue.new }
+# Unit tests for SnapTrade::TradingPlaceSimpleOrder409Response
+describe SnapTrade::TradingPlaceSimpleOrder409Response do
+  let(:instance) { SnapTrade::TradingPlaceSimpleOrder409Response.new }
 
-  describe 'test an instance of ManualTradeFormNotionalValue' do
-    it 'should create an instance of ManualTradeFormNotionalValue' do
-      expect(instance).to be_instance_of(SnapTrade::ManualTradeFormNotionalValue)
+  describe 'test an instance of TradingPlaceSimpleOrder409Response' do
+    it 'should create an instance of TradingPlaceSimpleOrder409Response' do
+      expect(instance).to be_instance_of(SnapTrade::TradingPlaceSimpleOrder409Response)
     end
   end
+  describe 'test attribute "detail"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "status_code"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "code"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end
