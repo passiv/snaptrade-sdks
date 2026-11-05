@@ -59,6 +59,9 @@ portal:
               path: docs/oauth-apps.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
+            - id: connection-sharing
+              label: Connection Sharing (Beta)
+              path: docs/connection-sharing.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
             - id: order-impact-and-confirmation
