@@ -1,0 +1,21 @@
+name: Install CLI
+description: Installs the Konfig CLI globally
+inputs:
+  node_version:
+    description: The version of Node.js to use
+    required: false
+    default: "24"
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node_version }}
+        registry-url: https://npm.pkg.github.com
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
+
+    - name: Install CLI
+      shell: bash
+      run: npm install -g @passiv/konfig-cli@latest

@@ -1,0 +1,19 @@
+name: Inject testing environment variables
+description: Masks variables from TEST_ENV and adds them to GITHUB_ENV
+inputs:
+  test_env:
+    description: Environment variables to inject
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Mask secrets
+      shell: bash
+      run: |
+        while read -r line; do
+          echo "::add-mask::${line#*=}"
+        done <<< "${{ inputs.test_env }}"
+
+    - name: Set environment variables
+      shell: bash
+      run: echo "${{ inputs.test_env }}" >> "$GITHUB_ENV"
