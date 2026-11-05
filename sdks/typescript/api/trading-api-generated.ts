@@ -73,7 +73,7 @@ import { AuthMode, Configuration } from '../configuration';
 import type { FormDataLike } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, isBrowser } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
@@ -201,9 +201,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -268,9 +272,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -329,9 +337,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -391,9 +403,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -524,6 +540,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
             if (symbols !== undefined) {
                 localVarQueryParameter['symbols'] = symbols;
             }
@@ -534,7 +554,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -593,9 +613,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -659,9 +683,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -721,9 +749,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -787,9 +819,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -851,9 +887,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -917,9 +957,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -983,9 +1027,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
 
@@ -1048,6 +1096,10 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 // authentication PersonalClientId required
                 await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
             }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
             if (base !== undefined) {
                 localVarQueryParameter['base'] = base;
             }
@@ -1058,7 +1110,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
@@ -1100,7 +1152,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 brokerage_order_id: requestParameters.brokerage_order_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.cancelOrder(requestParameters.accountId, accountInformationGetUserAccountOrderDetailRequest, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Gets a quote for the specified account. 
@@ -1112,7 +1164,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
         async getCryptocurrencyPairQuote(...args: TradingApiGetCryptocurrencyPairQuoteArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<CryptocurrencyPairQuote, unknown>>> {
             const [requestParameters = {} as TradingApiGetCryptocurrencyPairQuoteRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCryptocurrencyPairQuote(requestParameters.accountId, requestParameters.instrumentSymbol, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain enabled brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for more information on which brokerages support this endpoint. 
@@ -1132,7 +1184,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 legs: requestParameters.legs
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionImpact(requestParameters.accountId, mlegTradeForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
@@ -1155,7 +1207,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 notional_value: requestParameters.notional_value
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOrderImpact(manualTradeForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.  Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) **Note:** These are derived values and are not suitable for trading purposes. 
@@ -1180,7 +1232,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
         async getUserAccountQuotes(...args: TradingApiGetUserAccountQuotesArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<SymbolsQuotesInner>, unknown>>> {
             const [requestParameters = {} as TradingApiGetUserAccountQuotesRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountQuotes(requestParameters.symbols, requestParameters.accountId, requestParameters.useTicker, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Places a complex conditional order (OCO, OTO, or OTOCO). Only supported on certain brokerages. Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.  - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled. - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order. - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.  Option OCO peers must trade the same OCC option symbol with the same closing action and positive whole-contract quantity.  On tastytrade, option OCO supports closing an existing long or short option position with one `Limit` order and one `Stop` or `StopLimit` order. Both `PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with `Day` or `GTC` time in force. Opening option OCOs are not supported.  On enabled Webull US v3 accounts, option OCO supports closing an existing long option position with one `Limit` take-profit order and one `Stop` stop-loss order. Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol, and the same positive whole-contract quantity. Webull receives these as `STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order. Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs are not supported on Webull. Equity complex-order behavior is unchanged. 
@@ -1197,7 +1249,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 client_order_id: requestParameters.client_order_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeComplexOrder(requestParameters.accountId, manualTradeFormComplex, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -1220,7 +1272,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 expiration_date: requestParameters.expiration_date
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeCryptoOrder(requestParameters.accountId, cryptoOrderForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -1247,7 +1299,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 client_order_id: requestParameters.client_order_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(manualTradeFormWithOptions, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
@@ -1267,7 +1319,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 legs: requestParameters.legs
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeMlegOrder(requestParameters.accountId, mlegTradeForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -1282,7 +1334,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 wait_to_confirm: requestParameters.wait_to_confirm
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeOrder(requestParameters.tradeId, validatedTradeBody, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Previews an order using the specified account. 
@@ -1305,7 +1357,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 expiration_date: requestParameters.expiration_date
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.previewCryptoOrder(requestParameters.accountId, cryptoOrderForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -1327,7 +1379,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
                 units: requestParameters.units
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.replaceOrder(requestParameters.accountId, manualTradeReplaceForm, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
@@ -1339,7 +1391,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
         async searchCryptocurrencyPairInstruments(...args: TradingApiSearchCryptocurrencyPairInstrumentsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TradingSearchCryptocurrencyPairInstruments200Response, unknown>>> {
             const [requestParameters = {} as TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchCryptocurrencyPairInstruments(requestParameters.accountId, requestParameters.base, requestParameters.quote, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
     }
 };
@@ -1517,9 +1569,14 @@ export type TradingApiCancelOrderpersonalApiKeyRequest = TradingApiCancelOrderBa
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiCancelOrderoauthRequest = TradingApiCancelOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiCancelOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiCancelOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiCancelOrderpersonalApiKeyRequest;
+    "oauth": TradingApiCancelOrderoauthRequest;
 }
 export type TradingApiCancelOrderRequest<TAuth extends AuthMode> =
     TradingApiCancelOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiCancelOrderRequestByAuthMode]
@@ -1559,9 +1616,14 @@ export type TradingApiGetCryptocurrencyPairQuotepersonalApiKeyRequest = TradingA
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiGetCryptocurrencyPairQuoteoauthRequest = TradingApiGetCryptocurrencyPairQuoteBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiGetCryptocurrencyPairQuoteRequestByAuthMode = {
     "commercialApiKey": TradingApiGetCryptocurrencyPairQuotecommercialApiKeyRequest;
     "personalApiKey": TradingApiGetCryptocurrencyPairQuotepersonalApiKeyRequest;
+    "oauth": TradingApiGetCryptocurrencyPairQuoteoauthRequest;
 }
 export type TradingApiGetCryptocurrencyPairQuoteRequest<TAuth extends AuthMode> =
     TradingApiGetCryptocurrencyPairQuoteRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetCryptocurrencyPairQuoteRequestByAuthMode]
@@ -1594,9 +1656,14 @@ export type TradingApiGetOptionImpactpersonalApiKeyRequest = TradingApiGetOption
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiGetOptionImpactoauthRequest = TradingApiGetOptionImpactBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiGetOptionImpactRequestByAuthMode = {
     "commercialApiKey": TradingApiGetOptionImpactcommercialApiKeyRequest;
     "personalApiKey": TradingApiGetOptionImpactpersonalApiKeyRequest;
+    "oauth": TradingApiGetOptionImpactoauthRequest;
 }
 export type TradingApiGetOptionImpactRequest<TAuth extends AuthMode> =
     TradingApiGetOptionImpactRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetOptionImpactRequestByAuthMode]
@@ -1622,9 +1689,14 @@ export type TradingApiGetOrderImpactpersonalApiKeyRequest = TradingApiGetOrderIm
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiGetOrderImpactoauthRequest = TradingApiGetOrderImpactBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiGetOrderImpactRequestByAuthMode = {
     "commercialApiKey": TradingApiGetOrderImpactcommercialApiKeyRequest;
     "personalApiKey": TradingApiGetOrderImpactpersonalApiKeyRequest;
+    "oauth": TradingApiGetOrderImpactoauthRequest;
 }
 export type TradingApiGetOrderImpactRequest<TAuth extends AuthMode> =
     TradingApiGetOrderImpactRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetOrderImpactRequestByAuthMode]
@@ -1713,9 +1785,14 @@ export type TradingApiGetUserAccountQuotespersonalApiKeyRequest = TradingApiGetU
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiGetUserAccountQuotesoauthRequest = TradingApiGetUserAccountQuotesBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiGetUserAccountQuotesRequestByAuthMode = {
     "commercialApiKey": TradingApiGetUserAccountQuotescommercialApiKeyRequest;
     "personalApiKey": TradingApiGetUserAccountQuotespersonalApiKeyRequest;
+    "oauth": TradingApiGetUserAccountQuotesoauthRequest;
 }
 export type TradingApiGetUserAccountQuotesRequest<TAuth extends AuthMode> =
     TradingApiGetUserAccountQuotesRequestByAuthMode[TAuth["mode"] & keyof TradingApiGetUserAccountQuotesRequestByAuthMode]
@@ -1748,9 +1825,14 @@ export type TradingApiPlaceComplexOrderpersonalApiKeyRequest = TradingApiPlaceCo
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiPlaceComplexOrderoauthRequest = TradingApiPlaceComplexOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiPlaceComplexOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiPlaceComplexOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiPlaceComplexOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPlaceComplexOrderoauthRequest;
 }
 export type TradingApiPlaceComplexOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceComplexOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceComplexOrderRequestByAuthMode]
@@ -1783,9 +1865,14 @@ export type TradingApiPlaceCryptoOrderpersonalApiKeyRequest = TradingApiPlaceCry
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiPlaceCryptoOrderoauthRequest = TradingApiPlaceCryptoOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiPlaceCryptoOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiPlaceCryptoOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiPlaceCryptoOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPlaceCryptoOrderoauthRequest;
 }
 export type TradingApiPlaceCryptoOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceCryptoOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceCryptoOrderRequestByAuthMode]
@@ -1811,9 +1898,14 @@ export type TradingApiPlaceForceOrderpersonalApiKeyRequest = TradingApiPlaceForc
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiPlaceForceOrderoauthRequest = TradingApiPlaceForceOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiPlaceForceOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiPlaceForceOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiPlaceForceOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPlaceForceOrderoauthRequest;
 }
 export type TradingApiPlaceForceOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceForceOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceForceOrderRequestByAuthMode]
@@ -1846,9 +1938,14 @@ export type TradingApiPlaceMlegOrderpersonalApiKeyRequest = TradingApiPlaceMlegO
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiPlaceMlegOrderoauthRequest = TradingApiPlaceMlegOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiPlaceMlegOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiPlaceMlegOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiPlaceMlegOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPlaceMlegOrderoauthRequest;
 }
 export type TradingApiPlaceMlegOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceMlegOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceMlegOrderRequestByAuthMode]
@@ -1881,9 +1978,14 @@ export type TradingApiPlaceOrderpersonalApiKeyRequest = TradingApiPlaceOrderBase
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiPlaceOrderoauthRequest = TradingApiPlaceOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiPlaceOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiPlaceOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiPlaceOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPlaceOrderoauthRequest;
 }
 export type TradingApiPlaceOrderRequest<TAuth extends AuthMode> =
     TradingApiPlaceOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceOrderRequestByAuthMode]
@@ -1916,9 +2018,14 @@ export type TradingApiPreviewCryptoOrderpersonalApiKeyRequest = TradingApiPrevie
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiPreviewCryptoOrderoauthRequest = TradingApiPreviewCryptoOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiPreviewCryptoOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiPreviewCryptoOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiPreviewCryptoOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPreviewCryptoOrderoauthRequest;
 }
 export type TradingApiPreviewCryptoOrderRequest<TAuth extends AuthMode> =
     TradingApiPreviewCryptoOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPreviewCryptoOrderRequestByAuthMode]
@@ -1951,9 +2058,14 @@ export type TradingApiReplaceOrderpersonalApiKeyRequest = TradingApiReplaceOrder
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiReplaceOrderoauthRequest = TradingApiReplaceOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiReplaceOrderRequestByAuthMode = {
     "commercialApiKey": TradingApiReplaceOrdercommercialApiKeyRequest;
     "personalApiKey": TradingApiReplaceOrderpersonalApiKeyRequest;
+    "oauth": TradingApiReplaceOrderoauthRequest;
 }
 export type TradingApiReplaceOrderRequest<TAuth extends AuthMode> =
     TradingApiReplaceOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiReplaceOrderRequestByAuthMode]
@@ -2000,9 +2112,14 @@ export type TradingApiSearchCryptocurrencyPairInstrumentspersonalApiKeyRequest =
     readonly userId?: never
     readonly userSecret?: never
 }
+export type TradingApiSearchCryptocurrencyPairInstrumentsoauthRequest = TradingApiSearchCryptocurrencyPairInstrumentsBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
 export type TradingApiSearchCryptocurrencyPairInstrumentsRequestByAuthMode = {
     "commercialApiKey": TradingApiSearchCryptocurrencyPairInstrumentscommercialApiKeyRequest;
     "personalApiKey": TradingApiSearchCryptocurrencyPairInstrumentspersonalApiKeyRequest;
+    "oauth": TradingApiSearchCryptocurrencyPairInstrumentsoauthRequest;
 }
 export type TradingApiSearchCryptocurrencyPairInstrumentsRequest<TAuth extends AuthMode> =
     TradingApiSearchCryptocurrencyPairInstrumentsRequestByAuthMode[TAuth["mode"] & keyof TradingApiSearchCryptocurrencyPairInstrumentsRequestByAuthMode]
