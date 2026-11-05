@@ -307,7 +307,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.213
+    version: 11.0.214
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
