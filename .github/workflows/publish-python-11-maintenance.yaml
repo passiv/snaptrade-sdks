@@ -6,6 +6,7 @@ on:
       - maintenance/python-11.x-timeout
     paths:
       - sdks/python/pyproject.toml
+      - .github/workflows/publish-python-11-maintenance.yaml
 
 concurrency:
   group: publish-python-11-maintenance
@@ -23,24 +24,28 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Verify maintenance release version
-        run: |
-          python - <<'PY'
-          import re
-          from pathlib import Path
-          expected = '11.0.214'
-          for name, pattern in [
-              ('sdks/python/pyproject.toml', r'^version = "([^"]+)"'),
-              ('sdks/python/setup.py', r'^VERSION = "([^"]+)"'),
-              ('sdks/python/snaptrade_client/__init__.py', r'^__version__ = "([^"]+)"'),
-              ('konfig.yaml', r'^  python:\n    version: ([^\n]+)'),
-          ]:
-              assert re.search(pattern, Path(name).read_text(), re.M).group(1) == expected, name
-          assert not list(Path('.konfig/changesets').glob('*.md'))
-          PY
-
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli
+
+      - name: Verify maintenance release version
+        run: |
+          node <<'JS'
+          const fs = require('fs');
+          const expected = '11.0.214';
+          for (const [name, pattern] of [
+            ['sdks/python/pyproject.toml', /^version = "([^"]+)"/m],
+            ['sdks/python/setup.py', /^VERSION = "([^"]+)"/m],
+            ['sdks/python/snaptrade_client/__init__.py', /^__version__ = "([^"]+)"/m],
+            ['konfig.yaml', /^  python:\n    version: ([^\n]+)/m],
+          ]) {
+            if (fs.readFileSync(name, 'utf8').match(pattern)?.[1] !== expected) {
+              throw new Error(`Unexpected maintenance release version in ${name}`);
+            }
+          }
+          if (fs.existsSync('.konfig/changesets') && fs.readdirSync('.konfig/changesets').some(name => name.endsWith('.md'))) {
+            throw new Error('Unconsumed changesets remain');
+          }
+          JS
 
       - name: Set up test environment
         uses: ./.github/actions/shared/inject-testing-env-vars
