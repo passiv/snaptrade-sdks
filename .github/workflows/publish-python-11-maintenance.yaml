@@ -1,0 +1,68 @@
+name: Publish Python 11.x maintenance
+
+on:
+  push:
+    branches:
+      - maintenance/python-11.x-timeout
+    paths:
+      - sdks/python/pyproject.toml
+
+concurrency:
+  group: publish-python-11-maintenance
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  publish:
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    container:
+      image: konfigdev/test-and-publish:latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Verify maintenance release version
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          expected = '11.0.214'
+          for name, pattern in [
+              ('sdks/python/pyproject.toml', r'^version = "([^"]+)"'),
+              ('sdks/python/setup.py', r'^VERSION = "([^"]+)"'),
+              ('sdks/python/snaptrade_client/__init__.py', r'^__version__ = "([^"]+)"'),
+              ('konfig.yaml', r'^  python:\n    version: ([^\n]+)'),
+          ]:
+              assert re.search(pattern, Path(name).read_text(), re.M).group(1) == expected, name
+          assert not list(Path('.konfig/changesets').glob('*.md'))
+          PY
+
+      - name: Install CLI
+        uses: ./.github/actions/shared/install-cli
+
+      - name: Set up test environment
+        uses: ./.github/actions/shared/inject-testing-env-vars
+        with:
+          test_env: ${{ secrets.TEST_ENV }}
+
+      - name: Test Python SDK
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_on: error
+          command: konfig test --filter python
+
+      - name: Configure Git
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global user.email "passiv-ops@passiv.com"
+          git config --global user.name "Passiv Ops"
+
+      - name: Publish Python SDK without regeneration
+        run: konfig publish --generator python --skipTests --skipRemoteCheck --ci
+        env:
+          PYPI_TOKEN_1: ${{ secrets.PYPI_TOKEN_1 }}
+          GH_TOKEN: ${{ github.token }}
