@@ -1583,11 +1583,11 @@ paths:
       description: |
         Returns a list of all positions in the specified account.
 
-        The `results` list can contain multiple instrument types in the same response, including stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
+        The `results` list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position's `instrument`.
 
         **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.
 
-        Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
+        Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getAllAccountPositions
@@ -9750,11 +9750,12 @@ components:
         tax_lots:
           description: "List of tax lots for the given position. Disabled by default;\
             \ enable via the Customer Dashboard Add-ons page. When enabled, this field\
-            \ is included for security positions (`stock`, `adr`, `etf`, `mutualfund`,\
-            \ `cef`, `crypto`, `bond`, and `other`). For these positions, an empty\
-            \ list means no tax lot data is available. Availability varies by brokerage\
-            \ and position. This field is omitted for options, futures, future options,\
-            \ CFDs, tokenized assets, and cash, or when the feature is disabled."
+            \ is included for security positions (`stock`, `preferred_stock`, `adr`,\
+            \ `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these\
+            \ positions, an empty list means no tax lot data is available. Availability\
+            \ varies by brokerage and position. This field is omitted for options,\
+            \ futures, future options, CFDs, tokenized assets, and cash, or when the\
+            \ feature is disabled."
           items:
             $ref: '#/components/schemas/TaxLot'
           type: array
@@ -9780,6 +9781,7 @@ components:
           cash: '#/components/schemas/CashInstrument'
           bond: '#/components/schemas/OtherInstrument'
           other: '#/components/schemas/OtherInstrument'
+          preferred_stock: '#/components/schemas/PreferredStockInstrument'
         propertyName: kind
       oneOf:
       - $ref: '#/components/schemas/StockInstrument'
@@ -9795,6 +9797,7 @@ components:
       - $ref: '#/components/schemas/TokenizedAssetInstrument'
       - $ref: '#/components/schemas/OtherInstrument'
       - $ref: '#/components/schemas/CashInstrument'
+      - $ref: '#/components/schemas/PreferredStockInstrument'
     UnderlyingOptionInstrument:
       description: The underlying instrument for an option.
       discriminator:
@@ -9807,6 +9810,7 @@ components:
           adr: '#/components/schemas/AdrInstrument'
           bond: '#/components/schemas/OtherInstrument'
           other: '#/components/schemas/OtherInstrument'
+          preferred_stock: '#/components/schemas/PreferredStockInstrument'
         propertyName: kind
       oneOf:
       - $ref: '#/components/schemas/StockInstrument'
@@ -9816,6 +9820,7 @@ components:
       - $ref: '#/components/schemas/CefInstrument'
       - $ref: '#/components/schemas/AdrInstrument'
       - $ref: '#/components/schemas/OtherInstrument'
+      - $ref: '#/components/schemas/PreferredStockInstrument'
     UnderlyingCfdInstrument:
       description: The underlying instrument referenced by a CFD contract.
       discriminator:
@@ -9828,6 +9833,7 @@ components:
           adr: '#/components/schemas/AdrInstrument'
           bond: '#/components/schemas/OtherInstrument'
           other: '#/components/schemas/OtherInstrument'
+          preferred_stock: '#/components/schemas/PreferredStockInstrument'
         propertyName: kind
       oneOf:
       - $ref: '#/components/schemas/StockInstrument'
@@ -9837,6 +9843,7 @@ components:
       - $ref: '#/components/schemas/CefInstrument'
       - $ref: '#/components/schemas/AdrInstrument'
       - $ref: '#/components/schemas/OtherInstrument'
+      - $ref: '#/components/schemas/PreferredStockInstrument'
     UnderlyingTokenizedAssetInstrument:
       description: The listed stock or ETF underlying a tokenized asset.
       discriminator:
@@ -10040,6 +10047,72 @@ components:
       - code
       - kind
       type: object
+    PreferredStockInstrument:
+      additionalProperties: true
+      description: Security instrument metadata for preferred stock positions. Preferred
+        shares were previously returned with kind `other`.
+      properties:
+        kind:
+          description: Type of security instrument.
+          enum:
+          - preferred_stock
+          example: preferred_stock
+          type: string
+          x-konfig-original-example: preferred_stock
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-kind
+        id:
+          description: Unique identifier for the instrument.
+          example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          format: uuid
+          type: string
+          x-konfig-original-example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-id
+        symbol:
+          description: The formatted trading symbol for the security.
+          example: LTSAP
+          type: string
+          x-konfig-original-example: LTSAP
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-symbol
+        raw_symbol:
+          description: The raw symbol without any exchange suffix.
+          example: LTSAP
+          type: string
+          x-konfig-original-example: LTSAP
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-raw_symbol
+        description:
+          description: Human-readable description of the security.
+          example: Ladenburg Thalmann Financial Services 8% Series A Cumulative Redeemable
+            Preferred Stock
+          nullable: true
+          type: string
+          x-konfig-original-example: Ladenburg Thalmann Financial Services 8% Series
+            A Cumulative Redeemable Preferred Stock
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-description
+        currency:
+          description: ISO-4217 currency code for the security listing.
+          example: USD
+          nullable: true
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-currency
+        exchange:
+          description: Exchange MIC code or exchange code for the security.
+          example: XASE
+          nullable: true
+          type: string
+          x-konfig-original-example: XASE
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-exchange
+        figi_instrument:
+          $ref: '#/components/schemas/FigiInstrumentNullable'
+      required:
+      - id
+      - kind
+      - raw_symbol
+      - symbol
+      type: object
+      x-konfig-properties:
+        figi_instrument:
+          nullable: true
     AdrInstrument:
       additionalProperties: true
       description: Security instrument metadata for ADR positions.
@@ -16784,6 +16857,35 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CashInstrument-properties-code:
       example: EUR
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-kind:
+      example: preferred_stock
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-id:
+      example: 1ef3a5d3-4a9b-40b2-b8d1-cc35f74d6324
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-symbol:
+      example: LTSAP
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-raw_symbol:
+      example: LTSAP
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-description:
+      example: Ladenburg Thalmann Financial Services 8% Series A Cumulative Redeemable
+        Preferred Stock
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PreferredStockInstrument-properties-exchange:
+      example: XASE
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AdrInstrument-properties-kind:

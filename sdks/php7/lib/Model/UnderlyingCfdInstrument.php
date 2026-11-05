@@ -51,6 +51,7 @@ class UnderlyingCfdInstrument implements ModelInterface, ArrayAccess, \JsonSeria
         'etf' => \SnapTrade\Model\EtfInstrument::class,
         'mutualfund' => \SnapTrade\Model\MutualFundInstrument::class,
         'other' => \SnapTrade\Model\OtherInstrument::class,
+        'preferred_stock' => \SnapTrade\Model\PreferredStockInstrument::class,
         'stock' => \SnapTrade\Model\StockInstrument::class,
     ];
 
@@ -280,8 +281,7 @@ class UnderlyingCfdInstrument implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
-    public const KIND_BOND = 'bond';
-    public const KIND_OTHER = 'other';
+    public const KIND_PREFERRED_STOCK = 'preferred_stock';
 
     /**
      * Gets allowable values of the enum
@@ -291,8 +291,7 @@ class UnderlyingCfdInstrument implements ModelInterface, ArrayAccess, \JsonSeria
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_BOND,
-            self::KIND_OTHER,
+            self::KIND_PREFERRED_STOCK,
         ];
     }
 

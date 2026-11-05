@@ -23,6 +23,7 @@ module SnapTrade
           :'EtfInstrument',
           :'MutualFundInstrument',
           :'OtherInstrument',
+          :'PreferredStockInstrument',
           :'StockInstrument'
         ]
       end
@@ -42,6 +43,7 @@ module SnapTrade
           :'etf' => :'EtfInstrument',
           :'mutualfund' => :'MutualFundInstrument',
           :'other' => :'OtherInstrument',
+          :'preferred_stock' => :'PreferredStockInstrument',
           :'stock' => :'StockInstrument'
         }
       end

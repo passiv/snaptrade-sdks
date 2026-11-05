@@ -24,6 +24,7 @@ type UnderlyingCfdInstrument struct {
 	EtfInstrument *EtfInstrument
 	MutualFundInstrument *MutualFundInstrument
 	OtherInstrument *OtherInstrument
+	PreferredStockInstrument *PreferredStockInstrument
 	StockInstrument *StockInstrument
 }
 
@@ -66,6 +67,13 @@ func MutualFundInstrumentAsUnderlyingCfdInstrument(v *MutualFundInstrument) Unde
 func OtherInstrumentAsUnderlyingCfdInstrument(v *OtherInstrument) UnderlyingCfdInstrument {
 	return UnderlyingCfdInstrument{
 		OtherInstrument: v,
+	}
+}
+
+// PreferredStockInstrumentAsUnderlyingCfdInstrument is a convenience function that returns PreferredStockInstrument wrapped in UnderlyingCfdInstrument
+func PreferredStockInstrumentAsUnderlyingCfdInstrument(v *PreferredStockInstrument) UnderlyingCfdInstrument {
+	return UnderlyingCfdInstrument{
+		PreferredStockInstrument: v,
 	}
 }
 
@@ -143,6 +151,12 @@ func (dst *UnderlyingCfdInstrument) UnmarshalJSON(data []byte) error {
 			return fmt.Errorf("failed to unmarshal UnderlyingCfdInstrument as OtherInstrument: %w", err)
 		}
 		dst.OtherInstrument = &value
+	case "preferred_stock":
+		var value PreferredStockInstrument
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal UnderlyingCfdInstrument as PreferredStockInstrument: %w", err)
+		}
+		dst.PreferredStockInstrument = &value
 	case "stock":
 		var value StockInstrument
 		if err := json.Unmarshal(data, &value); err != nil {
@@ -181,6 +195,10 @@ func (src UnderlyingCfdInstrument) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.OtherInstrument)
 	}
 
+	if src.PreferredStockInstrument != nil {
+		return json.Marshal(&src.PreferredStockInstrument)
+	}
+
 	if src.StockInstrument != nil {
 		return json.Marshal(&src.StockInstrument)
 	}
@@ -215,6 +233,10 @@ func (obj *UnderlyingCfdInstrument) GetActualInstance() (interface{}) {
 
 	if obj.OtherInstrument != nil {
 		return obj.OtherInstrument
+	}
+
+	if obj.PreferredStockInstrument != nil {
+		return obj.PreferredStockInstrument
 	}
 
 	if obj.StockInstrument != nil {

@@ -46,6 +46,7 @@ class UnderlyingOptionInstrument(
                     'EtfInstrument': EtfInstrument,
                     'MutualFundInstrument': MutualFundInstrument,
                     'OtherInstrument': OtherInstrument,
+                    'PreferredStockInstrument': PreferredStockInstrument,
                     'StockInstrument': StockInstrument,
                     'adr': AdrInstrument,
                     'bond': OtherInstrument,
@@ -54,6 +55,7 @@ class UnderlyingOptionInstrument(
                     'etf': EtfInstrument,
                     'mutualfund': MutualFundInstrument,
                     'other': OtherInstrument,
+                    'preferred_stock': PreferredStockInstrument,
                     'stock': StockInstrument,
                 }
             }
@@ -76,6 +78,7 @@ class UnderlyingOptionInstrument(
                 CefInstrument,
                 AdrInstrument,
                 OtherInstrument,
+                PreferredStockInstrument,
             ]
 
 
@@ -98,4 +101,5 @@ from snaptrade_client.model.crypto_instrument import CryptoInstrument
 from snaptrade_client.model.etf_instrument import EtfInstrument
 from snaptrade_client.model.mutual_fund_instrument import MutualFundInstrument
 from snaptrade_client.model.other_instrument import OtherInstrument
+from snaptrade_client.model.preferred_stock_instrument import PreferredStockInstrument
 from snaptrade_client.model.stock_instrument import StockInstrument

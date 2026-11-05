@@ -56,6 +56,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         'mutualfund' => \SnapTrade\Model\MutualFundInstrument::class,
         'option' => \SnapTrade\Model\OptionInstrument::class,
         'other' => \SnapTrade\Model\OtherInstrument::class,
+        'preferred_stock' => \SnapTrade\Model\PreferredStockInstrument::class,
         'stock' => \SnapTrade\Model\StockInstrument::class,
         'tokenized_asset' => \SnapTrade\Model\TokenizedAssetInstrument::class,
     ];
@@ -340,7 +341,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
-    public const KIND_CASH = 'cash';
+    public const KIND_PREFERRED_STOCK = 'preferred_stock';
     public const OPTION_TYPE_CALL = 'CALL';
     public const OPTION_TYPE_PUT = 'PUT';
 
@@ -352,7 +353,7 @@ class Instrument implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_CASH,
+            self::KIND_PREFERRED_STOCK,
         ];
     }
 

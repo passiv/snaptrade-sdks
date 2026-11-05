@@ -278,11 +278,11 @@ public class AccountPosition {
   }
 
    /**
-   * List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (&#x60;stock&#x60;, &#x60;adr&#x60;, &#x60;etf&#x60;, &#x60;mutualfund&#x60;, &#x60;cef&#x60;, &#x60;crypto&#x60;, &#x60;bond&#x60;, and &#x60;other&#x60;). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
+   * List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (&#x60;stock&#x60;, &#x60;preferred_stock&#x60;, &#x60;adr&#x60;, &#x60;etf&#x60;, &#x60;mutualfund&#x60;, &#x60;cef&#x60;, &#x60;crypto&#x60;, &#x60;bond&#x60;, and &#x60;other&#x60;). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
    * @return taxLots
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.")
+  @ApiModelProperty(value = "List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.")
 
   public List<TaxLot> getTaxLots() {
     return taxLots;

@@ -543,7 +543,7 @@ class AccountPosition implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tax_lots
      *
-     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
+     * @param \SnapTrade\Model\TaxLot[]|null $tax_lots List of tax lots for the given position. Disabled by default; enable via the Customer Dashboard Add-ons page. When enabled, this field is included for security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`). For these positions, an empty list means no tax lot data is available. Availability varies by brokerage and position. This field is omitted for options, futures, future options, CFDs, tokenized assets, and cash, or when the feature is disabled.
      *
      * @return self
      */
