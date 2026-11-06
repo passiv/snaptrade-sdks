@@ -16,6 +16,7 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
+import com.snaptrade.client.model.AccountOrder;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import com.snaptrade.client.model.AllAccountOrdersResponse;
@@ -82,6 +83,24 @@ public class ExperimentalEndpointsApiTest {
     public void cancelSubscriptionTest() throws ApiException {
         UUID accountId = null;
         TradeDetectionCancelSubscriptionResponse response = api.cancelSubscription(accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Get account order detail
+     *
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountOrderTest() throws ApiException {
+        UUID accountId = null;
+        String brokerageOrderId = null;
+        String userId = null;
+        String userSecret = null;
+        AccountOrder response = api.getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

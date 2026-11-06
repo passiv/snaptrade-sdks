@@ -110,6 +110,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
+  * [`snaptrade.experimentalEndpoints.getAccountOrder`](#snaptradeexperimentalendpointsgetaccountorder)
   * [`snaptrade.experimentalEndpoints.getAllAccountOrders`](#snaptradeexperimentalendpointsgetallaccountorders)
   * [`snaptrade.experimentalEndpoints.getAllAccountRecentOrders`](#snaptradeexperimentalendpointsgetallaccountrecentorders)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
@@ -1591,6 +1592,55 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/tradeDetection/subscriptions/cancel` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.experimentalEndpoints.getAccountOrder`<a id="snaptradeexperimentalendpointsgetaccountorder"></a>
+
+Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+
+The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+
+This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+**Experimental:** this endpoint may change without notice.
+
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```php
+$result = $snaptrade->experimentalEndpoints->getAccountOrder(
+    "917c8734-8470-4a3e-a18f-57c3f2ee6631", 
+    "66a033fa-da74-4fcf-b527-feefdec9257e", 
+    "snaptrade-user-123", 
+    "adf2aa34-8219-40f7-a6b3-60156985cc61"
+);
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+##### user_id: `string`<a id="user_id-string"></a>
+
+##### user_secret: `string`<a id="user_secret-string"></a>
+
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[**AccountOrder**](./lib/Model/AccountOrder.php)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

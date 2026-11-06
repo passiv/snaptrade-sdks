@@ -69,6 +69,7 @@ import type * as buffer from "buffer"
 
 import { AccountOrderGroupNullable } from './account-order-group-nullable';
 import { AccountOrderLeg } from './account-order-leg';
+import { AccountOrderPriceEffectNullable } from './account-order-price-effect-nullable';
 import { AccountOrderRecordStatusV2 } from './account-order-record-status-v2';
 import { OrderTypeConfiguration } from './order-type-configuration';
 import { PricedInInstrumentNullable } from './priced-in-instrument-nullable';
@@ -118,11 +119,11 @@ export interface AccountOrder {
      */
     'priced_in'?: PricedInInstrumentNullable | null;
     /**
-     * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
-     * @type {string}
+     * 
+     * @type {AccountOrderPriceEffectNullable}
      * @memberof AccountOrder
      */
-    'price_effect': AccountOrderPriceEffectEnum;
+    'price_effect': AccountOrderPriceEffectNullable | null;
     /**
      * Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
      * @type {string}
@@ -186,6 +187,5 @@ export interface AccountOrder {
 }
 
 type AccountOrderTimeInForceEnum = 'DAY' | 'GTC' | 'FOK' | 'IOC' | 'GTD' | 'MOO' | 'EHP' | 'EHA' | 'OTHER'
-type AccountOrderPriceEffectEnum = 'CREDIT' | 'DEBIT' | 'EVEN' | 'UNKNOWN'
 
 

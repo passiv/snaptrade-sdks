@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_group_nullable import AccountOrderGroupNullable
 from snaptrade_client.type.account_order_leg import AccountOrderLeg
+from snaptrade_client.type.account_order_price_effect_nullable import AccountOrderPriceEffectNullable
 from snaptrade_client.type.account_order_record_status_v2 import AccountOrderRecordStatusV2
 from snaptrade_client.type.order_type_configuration import OrderTypeConfiguration
 from snaptrade_client.type.priced_in_instrument_nullable import PricedInInstrumentNullable
@@ -32,8 +33,7 @@ class RequiredAccountOrder(TypedDict):
     # How long the order remains active. Brokerage values that cannot be mapped to this list are returned as `OTHER`.   - `DAY` - valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled.   - `FOK` - Fill Or Kill.   - `IOC` - Immediate Or Cancel.   - `GTD` - Good Til Date; see `expiry_date`.   - `MOO` - Market On Open.   - `EHP` - Extended Hours P.M.   - `EHA` - Extended Hours A.M.   - `OTHER` - the brokerage reported a value outside this list. 
     time_in_force: Literal["DAY", "GTC", "FOK", "IOC", "GTD", "MOO", "EHP", "EHA", "OTHER"]
 
-    # Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
-    price_effect: Literal["CREDIT", "DEBIT", "EVEN", "UNKNOWN"]
+    price_effect: typing.Optional[AccountOrderPriceEffectNullable]
 
     # The legs that make up the order. Always has at least one entry.
     legs: typing.List[AccountOrderLeg]

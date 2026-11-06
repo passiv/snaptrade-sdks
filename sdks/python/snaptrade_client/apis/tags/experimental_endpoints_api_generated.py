@@ -11,6 +11,7 @@
 
 from snaptrade_client.paths.snap_trade_trade_detection_subscriptions.post import AddSubscription
 from snaptrade_client.paths.snap_trade_trade_detection_subscriptions_cancel.post import CancelSubscription
+from snaptrade_client.paths.accounts_account_id_orders_brokerage_order_id.get import GetAccountOrder
 from snaptrade_client.paths.accounts_account_id_orders_all.get import GetAllAccountOrders
 from snaptrade_client.paths.accounts_account_id_orders_recent.get import GetAllAccountRecentOrders
 from snaptrade_client.paths.accounts_account_id_orders_details_v2_brokerage_order_id.get import GetUserAccountOrderDetailV2
@@ -27,6 +28,7 @@ TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 class ExperimentalEndpointsApiGenerated(
     AddSubscription[TAuth],
     CancelSubscription[TAuth],
+    GetAccountOrder[TAuth],
     GetAllAccountOrders[TAuth],
     GetAllAccountRecentOrders[TAuth],
     GetUserAccountOrderDetailV2[TAuth],

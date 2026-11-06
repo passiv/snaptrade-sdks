@@ -3002,6 +3002,82 @@ paths:
 
         "429":
           $ref: "#/components/responses/TooManyRequests"
+  /accounts/{accountId}/orders/{brokerageOrderId}:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: Get account order detail
+      operationId: AccountInformation_getAccountOrder
+      description: |
+        Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+
+        The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+
+        This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+
+        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+        **Experimental:** this endpoint may change without notice.
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: path
+          name: brokerageOrderId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BrokerageOrderID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrder"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "501":
+          description: Not Implemented - order details are not supported for this brokerage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/501NotImplementedResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/trading/crypto:
     post:
       tags:
@@ -4886,13 +4962,13 @@ components:
           allOf:
             - $ref: "#/components/schemas/PricedInInstrument"
         price_effect:
-          description: Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
-          type: string
-          enum:
-            - CREDIT
-            - DEBIT
-            - EVEN
-            - UNKNOWN
+          description: |
+            Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+            Null when not applicable, for example for orders containing an outright futures leg (`instrument.kind` of `future`). A futures price is a contract quote, not an upfront cash flow. Futures options retain their price effect.
+          # Konfig drops nullability for inline enums; keep this as a nullable schema reference.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderPriceEffect"
         total_quantity:
           description: Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
           nullable: true
@@ -4952,6 +5028,14 @@ components:
           minItems: 1
           items:
             $ref: "#/components/schemas/AccountOrderLeg"
+    AccountOrderPriceEffect:
+      description: Direction of the net order price when applicable.
+      type: string
+      enum:
+        - CREDIT
+        - DEBIT
+        - EVEN
+        - UNKNOWN
     AccountOrderGroup:
       description: Links the orders that make up a complex order (OCO, OTO, OTOCO).
       type: object

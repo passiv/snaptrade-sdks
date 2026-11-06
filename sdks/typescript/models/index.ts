@@ -14,6 +14,8 @@ export * from './account-order';
 export * from './account-order-group';
 export * from './account-order-group-nullable';
 export * from './account-order-leg';
+export * from './account-order-price-effect';
+export * from './account-order-price-effect-nullable';
 export * from './account-order-record';
 export * from './account-order-record-leg';
 export * from './account-order-record-leg-instrument';

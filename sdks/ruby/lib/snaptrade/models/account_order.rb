@@ -29,7 +29,7 @@ module SnapTrade
 
     attr_accessor :priced_in
 
-    # Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+    # Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. Null when not applicable, for example for orders containing an outright futures leg (`instrument.kind` of `future`). A futures price is a contract quote, not an upfront cash flow. Futures options retain their price effect. 
     attr_accessor :price_effect
 
     # Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
@@ -98,7 +98,7 @@ module SnapTrade
         :'time_in_force' => :'AccountOrderTimeInForce',
         :'expiry_date' => :'Time',
         :'priced_in' => :'PricedInInstrument',
-        :'price_effect' => :'PriceEffect',
+        :'price_effect' => :'AccountOrderPriceEffect',
         :'total_quantity' => :'Float',
         :'filled_quantity' => :'Float',
         :'canceled_quantity' => :'Float',
@@ -117,6 +117,7 @@ module SnapTrade
       Set.new([
         :'expiry_date',
         :'priced_in',
+        :'price_effect',
         :'total_quantity',
         :'filled_quantity',
         :'canceled_quantity',
@@ -235,10 +236,6 @@ module SnapTrade
         invalid_properties.push('invalid value for "time_in_force", time_in_force cannot be nil.')
       end
 
-      if @price_effect.nil?
-        invalid_properties.push('invalid value for "price_effect", price_effect cannot be nil.')
-      end
-
       if @legs.nil?
         invalid_properties.push('invalid value for "legs", legs cannot be nil.')
       end
@@ -257,7 +254,6 @@ module SnapTrade
       return false if @status.nil?
       return false if @order_type.nil?
       return false if @time_in_force.nil?
-      return false if @price_effect.nil?
       return false if @legs.nil?
       return false if @legs.length < 1
       true

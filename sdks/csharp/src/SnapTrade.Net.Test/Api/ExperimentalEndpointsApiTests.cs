@@ -115,6 +115,37 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetAccountOrder
+        /// </summary>
+        [Fact]
+        public void GetAccountOrderTest()
+        {
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            
+            try
+            {
+                // Get account order detail
+                AccountOrder result = client.ExperimentalEndpoints.GetAccountOrder(accountId, brokerageOrderId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAccountOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetAllAccountOrders
         /// </summary>
         [Fact]

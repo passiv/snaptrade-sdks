@@ -187,6 +187,7 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 *ExperimentalEndpointsApi* | [**AddSubscription**](docs/ExperimentalEndpointsApi.md#addsubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**CancelSubscription**](docs/ExperimentalEndpointsApi.md#cancelsubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
+*ExperimentalEndpointsApi* | [**GetAccountOrder**](docs/ExperimentalEndpointsApi.md#getaccountorder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
 *ExperimentalEndpointsApi* | [**GetAllAccountOrders**](docs/ExperimentalEndpointsApi.md#getallaccountorders) | **GET** /accounts/{accountId}/orders/all | List all account orders
 *ExperimentalEndpointsApi* | [**GetAllAccountRecentOrders**](docs/ExperimentalEndpointsApi.md#getallaccountrecentorders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
@@ -239,6 +240,8 @@ Class | Method | HTTP request | Description
  - [AccountOrderGroup](docs/AccountOrderGroup.md)
  - [AccountOrderGroupNullable](docs/AccountOrderGroupNullable.md)
  - [AccountOrderLeg](docs/AccountOrderLeg.md)
+ - [AccountOrderPriceEffect](docs/AccountOrderPriceEffect.md)
+ - [AccountOrderPriceEffectNullable](docs/AccountOrderPriceEffectNullable.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordLeg](docs/AccountOrderRecordLeg.md)
  - [AccountOrderRecordLegInstrument](docs/AccountOrderRecordLegInstrument.md)

@@ -6,6 +6,7 @@ All URIs are relative to *https://api.snaptrade.com*
 |------------- | ------------- | -------------|
 | [**addSubscription**](ExperimentalEndpointsApi.md#addSubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription |
 | [**cancelSubscription**](ExperimentalEndpointsApi.md#cancelSubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription |
+| [**getAccountOrder**](ExperimentalEndpointsApi.md#getAccountOrder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail |
 | [**getAllAccountOrders**](ExperimentalEndpointsApi.md#getAllAccountOrders) | **GET** /accounts/{accountId}/orders/all | List all account orders |
 | [**getAllAccountRecentOrders**](ExperimentalEndpointsApi.md#getAllAccountRecentOrders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only) |
 | [**getUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getUserAccountOrderDetailV2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
@@ -210,6 +211,121 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Cancelled the Trade Detection subscription, or it was already cancelled |  -  |
 | **500** | Unexpected Error |  -  |
+
+<a name="getAccountOrder"></a>
+# **getAccountOrder**
+> AccountOrder getAccountOrder(accountId, brokerageOrderId, userId, userSecret).execute();
+
+Get account order detail
+
+Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ExperimentalEndpointsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e";
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    try {
+      AccountOrder result = client
+              .experimentalEndpoints
+              .getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+      System.out.println(result.getStatus());
+      System.out.println(result.getOrderType());
+      System.out.println(result.getTimeInForce());
+      System.out.println(result.getExpiryDate());
+      System.out.println(result.getPricedIn());
+      System.out.println(result.getPriceEffect());
+      System.out.println(result.getTotalQuantity());
+      System.out.println(result.getFilledQuantity());
+      System.out.println(result.getCanceledQuantity());
+      System.out.println(result.getOpenQuantity());
+      System.out.println(result.getExecutionPrice());
+      System.out.println(result.getTimePlaced());
+      System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
+      System.out.println(result.getGroup());
+      System.out.println(result.getLegs());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountOrder> response = client
+              .experimentalEndpoints
+              .getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**|  | |
+| **brokerageOrderId** | **String**|  | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+[**AccountOrder**](AccountOrder.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="getAllAccountOrders"></a>
 # **getAllAccountOrders**
