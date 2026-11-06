@@ -239,7 +239,7 @@ Commercial API key requests include `clientId`, `timestamp`, a `Signature` heade
 
 ```http
 # Commercial signed requests include the SnapTrade user's credentials.
-GET /api/v1/accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_timestamp>&userId=<user_id>&userSecret=<user_secret>
+GET /accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_timestamp>&userId=<user_id>&userSecret=<user_secret>
 Signature: <signature>
 ```
 
@@ -247,7 +247,7 @@ Personal API key requests include `clientId`, `timestamp`, and a `Signature` hea
 
 ```http
 # Personal signed requests omit user credentials.
-GET /api/v1/accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_timestamp>
+GET /accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_timestamp>
 Signature: <signature>
 ```
 
