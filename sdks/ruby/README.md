@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![npm](https://img.shields.io/badge/gem-v3.0.54-blue)](https://rubygems.org/gems/snaptrade/versions/3.0.54)
+[![npm](https://img.shields.io/badge/gem-v3.0.55-blue)](https://rubygems.org/gems/snaptrade/versions/3.0.55)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -148,7 +148,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 3.0.54'
+gem 'snaptrade', '~> 3.0.55'
 ```
 
 ## Getting Started<a id="getting-started"></a>
