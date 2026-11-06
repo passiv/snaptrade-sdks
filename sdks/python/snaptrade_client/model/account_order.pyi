@@ -96,28 +96,10 @@ class AccountOrder(
                 @schemas.classproperty
                 def OTHER(cls):
                     return cls("OTHER")
-            
-            
-            class price_effect(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-                
-                @schemas.classproperty
-                def CREDIT(cls):
-                    return cls("CREDIT")
-                
-                @schemas.classproperty
-                def DEBIT(cls):
-                    return cls("DEBIT")
-                
-                @schemas.classproperty
-                def EVEN(cls):
-                    return cls("EVEN")
-                
-                @schemas.classproperty
-                def UNKNOWN(cls):
-                    return cls("UNKNOWN")
+        
+            @staticmethod
+            def price_effect() -> typing.Type['AccountOrderPriceEffectNullable']:
+                return AccountOrderPriceEffectNullable
             
             
             class legs(
@@ -394,7 +376,7 @@ class AccountOrder(
         additional_properties = schemas.AnyTypeSchema
     
     time_in_force: MetaOapg.properties.time_in_force
-    price_effect: MetaOapg.properties.price_effect
+    price_effect: 'AccountOrderPriceEffectNullable'
     legs: MetaOapg.properties.legs
     brokerage_order_id: MetaOapg.properties.brokerage_order_id
     order_type: 'OrderTypeConfiguration'
@@ -404,7 +386,7 @@ class AccountOrder(
     def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price_effect"]) -> MetaOapg.properties.price_effect: ...
+    def __getitem__(self, name: typing_extensions.Literal["price_effect"]) -> 'AccountOrderPriceEffectNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
@@ -462,7 +444,7 @@ class AccountOrder(
     def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price_effect"]) -> MetaOapg.properties.price_effect: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["price_effect"]) -> 'AccountOrderPriceEffectNullable': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
@@ -519,7 +501,7 @@ class AccountOrder(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, ],
-        price_effect: typing.Union[MetaOapg.properties.price_effect, str, ],
+        price_effect: 'AccountOrderPriceEffectNullable',
         legs: typing.Union[MetaOapg.properties.legs, list, tuple, ],
         brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, ],
         order_type: 'OrderTypeConfiguration',
@@ -564,6 +546,7 @@ class AccountOrder(
 
 from snaptrade_client.model.account_order_group_nullable import AccountOrderGroupNullable
 from snaptrade_client.model.account_order_leg import AccountOrderLeg
+from snaptrade_client.model.account_order_price_effect_nullable import AccountOrderPriceEffectNullable
 from snaptrade_client.model.account_order_record_status_v2 import AccountOrderRecordStatusV2
 from snaptrade_client.model.order_type_configuration import OrderTypeConfiguration
 from snaptrade_client.model.priced_in_instrument_nullable import PricedInInstrumentNullable

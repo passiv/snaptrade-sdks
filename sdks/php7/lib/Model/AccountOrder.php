@@ -57,7 +57,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'time_in_force' => 'string',
         'expiry_date' => '\DateTime',
         'priced_in' => '\SnapTrade\Model\AccountOrderPricedIn',
-        'price_effect' => 'string',
+        'price_effect' => '\SnapTrade\Model\AccountOrderPriceEffect',
         'total_quantity' => 'float',
         'filled_quantity' => 'float',
         'canceled_quantity' => 'float',
@@ -109,7 +109,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
 		'time_in_force' => false,
 		'expiry_date' => true,
 		'priced_in' => true,
-		'price_effect' => false,
+		'price_effect' => true,
 		'total_quantity' => true,
 		'filled_quantity' => true,
 		'canceled_quantity' => true,
@@ -327,10 +327,6 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TIME_IN_FORCE_EHP = 'EHP';
     public const TIME_IN_FORCE_EHA = 'EHA';
     public const TIME_IN_FORCE_OTHER = 'OTHER';
-    public const PRICE_EFFECT_CREDIT = 'CREDIT';
-    public const PRICE_EFFECT_DEBIT = 'DEBIT';
-    public const PRICE_EFFECT_EVEN = 'EVEN';
-    public const PRICE_EFFECT_UNKNOWN = 'UNKNOWN';
 
     /**
      * Gets allowable values of the enum
@@ -349,21 +345,6 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
             self::TIME_IN_FORCE_EHP,
             self::TIME_IN_FORCE_EHA,
             self::TIME_IN_FORCE_OTHER,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPriceEffectAllowableValues()
-    {
-        return [
-            self::PRICE_EFFECT_CREDIT,
-            self::PRICE_EFFECT_DEBIT,
-            self::PRICE_EFFECT_EVEN,
-            self::PRICE_EFFECT_UNKNOWN,
         ];
     }
 
@@ -452,15 +433,6 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['price_effect'] === null) {
             $invalidProperties[] = "'price_effect' can't be null";
         }
-        $allowedValues = $this->getPriceEffectAllowableValues();
-        if (!is_null($this->container['price_effect']) && !in_array($this->container['price_effect'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'price_effect', must be one of '%s'",
-                $this->container['price_effect'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         if ($this->container['legs'] === null) {
             $invalidProperties[] = "'legs' can't be null";
         }
@@ -684,7 +656,7 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets price_effect
      *
-     * @return string
+     * @return \SnapTrade\Model\AccountOrderPriceEffect
      */
     public function getPriceEffect()
     {
@@ -694,25 +666,22 @@ class AccountOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price_effect
      *
-     * @param string $price_effect Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+     * @param \SnapTrade\Model\AccountOrderPriceEffect $price_effect Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. Null when not applicable, for example for orders containing an outright futures leg (`instrument.kind` of `future`). A futures price is a contract quote, not an upfront cash flow. Futures options retain their price effect.
      *
      * @return self
      */
     public function setPriceEffect($price_effect)
     {
-        $allowedValues = $this->getPriceEffectAllowableValues();
-        if (!in_array($price_effect, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'price_effect', must be one of '%s'",
-                    $price_effect,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
 
         if (is_null($price_effect)) {
-            throw new \InvalidArgumentException('non-nullable price_effect cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'price_effect');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('price_effect', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
 
         $this->container['price_effect'] = $price_effect;

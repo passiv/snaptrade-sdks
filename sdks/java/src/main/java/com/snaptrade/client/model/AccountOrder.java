@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderGroupNullable;
 import com.snaptrade.client.model.AccountOrderLeg;
+import com.snaptrade.client.model.AccountOrderPriceEffectNullable;
 import com.snaptrade.client.model.AccountOrderRecordStatusV2;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -143,60 +144,9 @@ public class AccountOrder {
   @SerializedName(SERIALIZED_NAME_PRICED_IN)
   private Object pricedIn = null;
 
-  /**
-   * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
-   */
-  @JsonAdapter(PriceEffectEnum.Adapter.class)
- public enum PriceEffectEnum {
-    CREDIT("CREDIT"),
-    
-    DEBIT("DEBIT"),
-    
-    EVEN("EVEN"),
-    
-    UNKNOWN("UNKNOWN");
-
-    private String value;
-
-    PriceEffectEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PriceEffectEnum fromValue(String value) {
-      for (PriceEffectEnum b : PriceEffectEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PriceEffectEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PriceEffectEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PriceEffectEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PriceEffectEnum.fromValue(value);
-      }
-    }
-  }
-
   public static final String SERIALIZED_NAME_PRICE_EFFECT = "price_effect";
   @SerializedName(SERIALIZED_NAME_PRICE_EFFECT)
-  private PriceEffectEnum priceEffect;
+  private AccountOrderPriceEffectNullable priceEffect;
 
   public static final String SERIALIZED_NAME_TOTAL_QUANTITY = "total_quantity";
   @SerializedName(SERIALIZED_NAME_TOTAL_QUANTITY)
@@ -415,7 +365,7 @@ public class AccountOrder {
   }
 
 
-  public AccountOrder priceEffect(PriceEffectEnum priceEffect) {
+  public AccountOrder priceEffect(AccountOrderPriceEffectNullable priceEffect) {
     
     
     
@@ -425,18 +375,18 @@ public class AccountOrder {
   }
 
    /**
-   * Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+   * Get priceEffect
    * @return priceEffect
   **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.")
+  @javax.annotation.Nullable
+  @ApiModelProperty(required = true, value = "")
 
-  public PriceEffectEnum getPriceEffect() {
+  public AccountOrderPriceEffectNullable getPriceEffect() {
     return priceEffect;
   }
 
 
-  public void setPriceEffect(PriceEffectEnum priceEffect) {
+  public void setPriceEffect(AccountOrderPriceEffectNullable priceEffect) {
     
     
     
@@ -926,9 +876,6 @@ public class AccountOrder {
       }
       if (!jsonObj.get("time_in_force").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
-      }
-      if (!jsonObj.get("price_effect").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));
       }
       if (!jsonObj.get("total_quantity").isJsonNull() && (jsonObj.get("total_quantity") != null && !jsonObj.get("total_quantity").isJsonNull()) && !jsonObj.get("total_quantity").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `total_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_quantity").toString()));

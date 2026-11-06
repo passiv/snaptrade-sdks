@@ -268,6 +268,16 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/{brokerageOrderId}-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'brokerageOrderId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/all-GET': {
         'parameters': [
             {

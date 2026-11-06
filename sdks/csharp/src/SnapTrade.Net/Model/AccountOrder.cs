@@ -108,46 +108,12 @@ namespace SnapTrade.Net.Model
         /// <value>How long the order remains active. Brokerage values that cannot be mapped to this list are returned as &#x60;OTHER&#x60;.   - &#x60;DAY&#x60; - valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled.   - &#x60;FOK&#x60; - Fill Or Kill.   - &#x60;IOC&#x60; - Immediate Or Cancel.   - &#x60;GTD&#x60; - Good Til Date; see &#x60;expiry_date&#x60;.   - &#x60;MOO&#x60; - Market On Open.   - &#x60;EHP&#x60; - Extended Hours P.M.   - &#x60;EHA&#x60; - Extended Hours A.M.   - &#x60;OTHER&#x60; - the brokerage reported a value outside this list. </value>
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
         public TimeInForceEnum TimeInForce { get; set; }
-        /// <summary>
-        /// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
-        /// </summary>
-        /// <value>Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum PriceEffectEnum
-        {
-            /// <summary>
-            /// Enum CREDIT for value: CREDIT
-            /// </summary>
-            [EnumMember(Value = "CREDIT")]
-            CREDIT = 1,
-
-            /// <summary>
-            /// Enum DEBIT for value: DEBIT
-            /// </summary>
-            [EnumMember(Value = "DEBIT")]
-            DEBIT = 2,
-
-            /// <summary>
-            /// Enum EVEN for value: EVEN
-            /// </summary>
-            [EnumMember(Value = "EVEN")]
-            EVEN = 3,
-
-            /// <summary>
-            /// Enum UNKNOWN for value: UNKNOWN
-            /// </summary>
-            [EnumMember(Value = "UNKNOWN")]
-            UNKNOWN = 4
-
-        }
-
 
         /// <summary>
-        /// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
+        /// Gets or Sets PriceEffect
         /// </summary>
-        /// <value>Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.</value>
         [DataMember(Name = "price_effect", IsRequired = true, EmitDefaultValue = true)]
-        public PriceEffectEnum PriceEffect { get; set; }
+        public AccountOrderPriceEffectNullable PriceEffect { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrder" /> class.
         /// </summary>
@@ -165,7 +131,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">How long the order remains active. Brokerage values that cannot be mapped to this list are returned as &#x60;OTHER&#x60;.   - &#x60;DAY&#x60; - valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled.   - &#x60;FOK&#x60; - Fill Or Kill.   - &#x60;IOC&#x60; - Immediate Or Cancel.   - &#x60;GTD&#x60; - Good Til Date; see &#x60;expiry_date&#x60;.   - &#x60;MOO&#x60; - Market On Open.   - &#x60;EHP&#x60; - Extended Hours P.M.   - &#x60;EHA&#x60; - Extended Hours A.M.   - &#x60;OTHER&#x60; - the brokerage reported a value outside this list.  (required).</param>
         /// <param name="expiryDate">When the order expires, for orders with a &#x60;time_in_force&#x60; of &#x60;GTD&#x60;..</param>
         /// <param name="pricedIn">The asset an order&#39;s prices are denominated in. Use &#x60;kind&#x60; to determine which schema is present..</param>
-        /// <param name="priceEffect">Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined. (required).</param>
+        /// <param name="priceEffect">priceEffect (required).</param>
         /// <param name="totalQuantity">Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities..</param>
         /// <param name="filledQuantity">Quantity filled so far..</param>
         /// <param name="canceledQuantity">Quantity canceled..</param>
@@ -176,7 +142,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeExecuted">The time the order was executed, when available..</param>
         /// <param name="group">group.</param>
         /// <param name="legs">The legs that make up the order. Always has at least one entry. (required).</param>
-        public AccountOrder(string brokerageOrderId = default(string), AccountOrderRecordStatusV2 status = default(AccountOrderRecordStatusV2), OrderTypeConfiguration orderType = default(OrderTypeConfiguration), TimeInForceEnum timeInForce = default(TimeInForceEnum), DateTime? expiryDate = default(DateTime?), PricedInInstrumentNullable pricedIn = default(PricedInInstrumentNullable), PriceEffectEnum priceEffect = default(PriceEffectEnum), decimal? totalQuantity = default(decimal?), decimal? filledQuantity = default(decimal?), decimal? canceledQuantity = default(decimal?), decimal? openQuantity = default(decimal?), decimal? executionPrice = default(decimal?), DateTime? timePlaced = default(DateTime?), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), AccountOrderGroupNullable group = default(AccountOrderGroupNullable), List<AccountOrderLeg> legs = default(List<AccountOrderLeg>)) : base()
+        public AccountOrder(string brokerageOrderId = default(string), AccountOrderRecordStatusV2 status = default(AccountOrderRecordStatusV2), OrderTypeConfiguration orderType = default(OrderTypeConfiguration), TimeInForceEnum timeInForce = default(TimeInForceEnum), DateTime? expiryDate = default(DateTime?), PricedInInstrumentNullable pricedIn = default(PricedInInstrumentNullable), AccountOrderPriceEffectNullable priceEffect = default(AccountOrderPriceEffectNullable), decimal? totalQuantity = default(decimal?), decimal? filledQuantity = default(decimal?), decimal? canceledQuantity = default(decimal?), decimal? openQuantity = default(decimal?), decimal? executionPrice = default(decimal?), DateTime? timePlaced = default(DateTime?), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), AccountOrderGroupNullable group = default(AccountOrderGroupNullable), List<AccountOrderLeg> legs = default(List<AccountOrderLeg>)) : base()
         {
             // to ensure "brokerageOrderId" is required (not null)
             if (brokerageOrderId == null)

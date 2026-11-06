@@ -68,6 +68,9 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
         'cancelSubscription' => [
             'application/json',
         ],
+        'getAccountOrder' => [
+            'application/json',
+        ],
         'getAllAccountOrders' => [
             'application/json',
         ],
@@ -1127,6 +1130,576 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
         );
 
         $method = 'POST';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getAccountOrder
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice.
+     *
+     * @param  string $account_id account_id (required)
+     * @param  string $brokerage_order_id brokerage_order_id (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountOrder'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\AccountOrder|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
+     */
+    public function getAccountOrder(
+        $account_id,
+        $brokerage_order_id,
+        $user_id,
+        $user_secret,
+
+        string $contentType = self::contentTypes['getAccountOrder'][0]
+    )
+    {
+
+        list($response) = $this->getAccountOrderWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAccountOrderWithHttpInfo
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice.
+     *
+     * @param  string $account_id (required)
+     * @param  string $brokerage_order_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\RequestOptions $requestOptions
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\AccountOrder|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model501NotImplementedResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccountOrderWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, string $contentType = self::contentTypes['getAccountOrder'][0], \SnapTrade\RequestOptions $requestOptions = null)
+    {
+        if ($requestOptions == null) $requestOptions = new \SnapTrade\RequestOptions();
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountOrderRequest($account_id, $brokerage_order_id, $user_id, $user_secret, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getAccountOrderWithHttpInfo(
+                        $account_id,
+                        $brokerage_order_id,
+                        $user_id,
+                        $user_secret,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\AccountOrder' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\AccountOrder' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountOrder', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model403FeatureNotEnabledResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model403FeatureNotEnabledResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\SnapTrade\Model\Model404FailedRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model404FailedRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model404FailedRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\SnapTrade\Model\Model429TooManyRequestsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model429TooManyRequestsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model429TooManyRequestsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model500UnexpectedExceptionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model500UnexpectedExceptionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 501:
+                    if ('\SnapTrade\Model\Model501NotImplementedResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model501NotImplementedResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model501NotImplementedResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 503:
+                    if ('\SnapTrade\Model\Model503BrokerageRequestResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model503BrokerageRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model503BrokerageRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\AccountOrder';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\AccountOrder',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model403FeatureNotEnabledResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model404FailedRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model429TooManyRequestsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model500UnexpectedExceptionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 501:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model501NotImplementedResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 503:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model503BrokerageRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccountOrderAsync
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice.
+     *
+     * @param  string $account_id (required)
+     * @param  string $brokerage_order_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountOrder'] to see the possible values for this operation
+     * @param  \SnapTrade\RequestOptions $requestOptions
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountOrderAsync(
+        $account_id,
+        $brokerage_order_id,
+        $user_id,
+        $user_secret,
+
+        string $contentType = self::contentTypes['getAccountOrder'][0]
+    )
+    {
+
+        return $this->getAccountOrderAsyncWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccountOrderAsyncWithHttpInfo
+     *
+     * Get account order detail
+     *
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice.
+     *
+     * @param  string $account_id (required)
+     * @param  string $brokerage_order_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountOrderAsyncWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, string $contentType = self::contentTypes['getAccountOrder'][0], $requestOptions = null)
+    {
+        if ($requestOptions == null) $requestOptions = new \SnapTrade\RequestOptions();
+        $returnType = '\SnapTrade\Model\AccountOrder';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountOrderRequest($account_id, $brokerage_order_id, $user_id, $user_secret, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccountOrder'
+     *
+     * @param  string $account_id (required)
+     * @param  string $brokerage_order_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountOrder'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccountOrderRequest($account_id, $brokerage_order_id, $user_id, $user_secret, string $contentType = self::contentTypes['getAccountOrder'][0])
+    {
+
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getAccountOrder'
+            );
+        }
+        // Check if $brokerage_order_id is a string
+        if ($brokerage_order_id !== SENTINEL_VALUE && !is_string($brokerage_order_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brokerage_order_id, true), gettype($brokerage_order_id)));
+        }
+        // verify the required parameter 'brokerage_order_id' is set
+        if ($brokerage_order_id === SENTINEL_VALUE || (is_array($brokerage_order_id) && count($brokerage_order_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter brokerage_order_id when calling getAccountOrder'
+            );
+        }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getAccountOrder'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getAccountOrder'
+            );
+        }
+
+
+        $resourcePath = '/accounts/{accountId}/orders/{brokerageOrderId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($brokerage_order_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'brokerageOrderId' . '}',
+                ObjectSerializer::toPathValue($brokerage_order_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
         $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
 
         $operationHost = $this->config->getHost();

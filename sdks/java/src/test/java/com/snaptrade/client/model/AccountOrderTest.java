@@ -19,6 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.AccountOrderGroupNullable;
 import com.snaptrade.client.model.AccountOrderLeg;
+import com.snaptrade.client.model.AccountOrderPriceEffectNullable;
 import com.snaptrade.client.model.AccountOrderRecordStatusV2;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

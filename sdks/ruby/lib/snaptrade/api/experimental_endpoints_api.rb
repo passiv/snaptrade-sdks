@@ -239,6 +239,133 @@ module SnapTrade
     end
 
 
+    # Get account order detail
+    #
+    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+    # 
+    # The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+    # 
+    # This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+    # 
+    # This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+    # 
+    # **Experimental:** this endpoint may change without notice.
+    #
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_order(account_id:, brokerage_order_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = get_account_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, extra)
+      data
+    end
+
+    # Get account order detail
+    #
+    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+    # 
+    # The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+    # 
+    # This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+    # 
+    # This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+    # 
+    # **Experimental:** this endpoint may change without notice.
+    #
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_order_with_http_info(account_id:, brokerage_order_id:, user_id:, user_secret:, extra: {})
+      get_account_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, extra)
+    end
+
+    # Get account order detail
+    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [AccountOrder]
+    private def get_account_order_impl(account_id, brokerage_order_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = get_account_order_with_http_info(account_id, brokerage_order_id, user_id, user_secret, opts)
+      data
+    end
+
+    # Get account order detail
+    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AccountOrder, Integer, Hash)>] AccountOrder data, response status code and response headers
+    private def get_account_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.get_account_order ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ExperimentalEndpointsApi.get_account_order"
+      end
+      # verify the required parameter 'brokerage_order_id' is set
+      if @api_client.config.client_side_validation && brokerage_order_id.nil?
+        fail ArgumentError, "Missing the required parameter 'brokerage_order_id' when calling ExperimentalEndpointsApi.get_account_order"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.get_account_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.get_account_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/orders/{brokerageOrderId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'brokerageOrderId' + '}', CGI.escape(brokerage_order_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountOrder'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.get_account_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#get_account_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List all account orders
     #
     # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.

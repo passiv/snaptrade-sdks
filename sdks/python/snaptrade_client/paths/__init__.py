@@ -68,3 +68,4 @@ class PathValues(str, enum.Enum):
     SYMBOLS_QUERY = "/symbols/{query}"
     ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE = "/accounts/{accountId}/trading/simple"
     ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID = "/accounts/{accountId}/orders/details/v2/{brokerageOrderId}"
+    ACCOUNTS_ACCOUNT_ID_ORDERS_BROKERAGE_ORDER_ID = "/accounts/{accountId}/orders/{brokerageOrderId}"

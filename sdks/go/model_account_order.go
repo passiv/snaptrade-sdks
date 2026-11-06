@@ -28,8 +28,7 @@ type AccountOrder struct {
 	// When the order expires, for orders with a `time_in_force` of `GTD`.
 	ExpiryDate NullableTime `json:"expiry_date,omitempty"`
 	PricedIn NullablePricedInInstrumentNullable `json:"priced_in,omitempty"`
-	// Direction of the net order price. CREDIT means cash is received, DEBIT means cash is paid, EVEN means the net price is zero, and UNKNOWN means the direction could not be determined.
-	PriceEffect string `json:"price_effect"`
+	PriceEffect NullableAccountOrderPriceEffectNullable `json:"price_effect"`
 	// Total quantity requested. For multi-leg orders this is the number of spreads, not the sum of leg quantities.
 	TotalQuantity NullableFloat64 `json:"total_quantity,omitempty"`
 	// Quantity filled so far.
@@ -58,7 +57,7 @@ type _AccountOrder AccountOrder
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrder(brokerageOrderId string, status AccountOrderRecordStatusV2, orderType OrderTypeConfiguration, timeInForce string, priceEffect string, legs []AccountOrderLeg) *AccountOrder {
+func NewAccountOrder(brokerageOrderId string, status AccountOrderRecordStatusV2, orderType OrderTypeConfiguration, timeInForce string, priceEffect NullableAccountOrderPriceEffectNullable, legs []AccountOrderLeg) *AccountOrder {
 	this := AccountOrder{}
 	this.BrokerageOrderId = brokerageOrderId
 	this.Status = status
@@ -258,27 +257,29 @@ func (o *AccountOrder) UnsetPricedIn() {
 }
 
 // GetPriceEffect returns the PriceEffect field value
-func (o *AccountOrder) GetPriceEffect() string {
-	if o == nil {
-		var ret string
+// If the value is explicit nil, the zero value for AccountOrderPriceEffectNullable will be returned
+func (o *AccountOrder) GetPriceEffect() AccountOrderPriceEffectNullable {
+	if o == nil || o.PriceEffect.Get() == nil {
+		var ret AccountOrderPriceEffectNullable
 		return ret
 	}
 
-	return o.PriceEffect
+	return *o.PriceEffect.Get()
 }
 
 // GetPriceEffectOk returns a tuple with the PriceEffect field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrder) GetPriceEffectOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrder) GetPriceEffectOk() (*AccountOrderPriceEffectNullable, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.PriceEffect, true
+	return o.PriceEffect.Get(), o.PriceEffect.IsSet()
 }
 
 // SetPriceEffect sets field value
-func (o *AccountOrder) SetPriceEffect(v string) {
-	o.PriceEffect = v
+func (o *AccountOrder) SetPriceEffect(v AccountOrderPriceEffectNullable) {
+	o.PriceEffect.Set(&v)
 }
 
 // GetTotalQuantity returns the TotalQuantity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -704,7 +705,7 @@ func (o AccountOrder) MarshalJSON() ([]byte, error) {
 		toSerialize["priced_in"] = o.PricedIn.Get()
 	}
 	if true {
-		toSerialize["price_effect"] = o.PriceEffect
+		toSerialize["price_effect"] = o.PriceEffect.Get()
 	}
 	if o.TotalQuantity.IsSet() {
 		toSerialize["total_quantity"] = o.TotalQuantity.Get()
