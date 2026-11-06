@@ -1457,6 +1457,77 @@ paths:
                 $ref: "#/components/schemas/503BrokerageRequestResponse"
         "429":
           $ref: "#/components/responses/TooManyRequests"
+  /accounts/{accountId}/orders/recent:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List all account recent orders (last 24 hours only)
+      operationId: AccountInformation_getAllAccountRecentOrders
+      description: |
+        A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+        Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
+        By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+
+        Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
+
+        **Experimental:** this endpoint may change without notice.
+
+        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: only_executed
+          description: Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+          schema:
+            type: boolean
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AllAccountOrdersResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+        "501":
+          description: Not Implemented - recent orders are not supported for this brokerage
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/501NotImplementedResponse"
+        "503":
+          description: Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/503BrokerageRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
   /accounts/{accountId}/returnRates:
     get:
       tags:
@@ -4736,7 +4807,7 @@ components:
           type: string
           example: "15363.23"
     AllAccountOrdersResponse:
-      description: Orders in the `kind`-discriminated format returned by `/accounts/{accountId}/orders/all`.
+      description: A list of account orders together with the freshness of the returned data.
       type: object
       properties:
         results:
