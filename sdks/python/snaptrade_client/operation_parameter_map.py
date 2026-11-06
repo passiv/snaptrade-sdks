@@ -281,6 +281,16 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/recent-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'only_executed'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         'parameters': [
             {

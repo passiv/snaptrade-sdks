@@ -147,6 +147,37 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetAllAccountRecentOrders
+        /// </summary>
+        [Fact]
+        public void GetAllAccountRecentOrdersTest()
+        {
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional) 
+            
+            try
+            {
+                // List all account recent orders (last 24 hours only)
+                AllAccountOrdersResponse result = client.ExperimentalEndpoints.GetAllAccountRecentOrders(userId, userSecret, accountId, onlyExecuted);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAllAccountRecentOrders: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetUserAccountOrderDetailV2
         /// </summary>
         [Fact]

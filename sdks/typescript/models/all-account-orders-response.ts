@@ -71,7 +71,7 @@ import { AccountOrder } from './account-order';
 import { AllAccountOrdersResponseDataFreshness } from './all-account-orders-response-data-freshness';
 
 /**
- * Orders in the `kind`-discriminated format returned by `/accounts/{accountId}/orders/all`.
+ * A list of account orders together with the freshness of the returned data.
  * @export
  * @interface AllAccountOrdersResponse
  */

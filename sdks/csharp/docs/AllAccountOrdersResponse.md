@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.AllAccountOrdersResponse
-Orders in the `kind`-discriminated format returned by `/accounts/{accountId}/orders/all`.
+A list of account orders together with the freshness of the returned data.
 
 ## Properties
 

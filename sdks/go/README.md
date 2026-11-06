@@ -197,6 +197,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**AddSubscription**](docs/ExperimentalEndpointsApi.md#addsubscription) | **Post** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**CancelSubscription**](docs/ExperimentalEndpointsApi.md#cancelsubscription) | **Post** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**GetAllAccountOrders**](docs/ExperimentalEndpointsApi.md#getallaccountorders) | **Get** /accounts/{accountId}/orders/all | List all account orders
+*ExperimentalEndpointsApi* | [**GetAllAccountRecentOrders**](docs/ExperimentalEndpointsApi.md#getallaccountrecentorders) | **Get** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)

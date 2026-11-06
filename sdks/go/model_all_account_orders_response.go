@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// AllAccountOrdersResponse Orders in the `kind`-discriminated format returned by `/accounts/{accountId}/orders/all`.
+// AllAccountOrdersResponse A list of account orders together with the freshness of the returned data.
 type AllAccountOrdersResponse struct {
 	// Orders returned for the request.
 	Results []AccountOrder `json:"results"`

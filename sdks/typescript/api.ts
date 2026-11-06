@@ -382,6 +382,15 @@ export type {
 } from './api/experimental-endpoints-api';
 
 export type {
+    ExperimentalEndpointsApiGetAllAccountRecentOrdersBaseRequest,
+    ExperimentalEndpointsApiGetAllAccountRecentOrderscommercialApiKeyRequest,
+    ExperimentalEndpointsApiGetAllAccountRecentOrderspersonalApiKeyRequest,
+    ExperimentalEndpointsApiGetAllAccountRecentOrdersRequestByAuthMode,
+    ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest,
+    ExperimentalEndpointsApiGetAllAccountRecentOrdersArgs,
+} from './api/experimental-endpoints-api';
+
+export type {
     ExperimentalEndpointsApiGetUserAccountOrderDetailV2BaseRequest,
     ExperimentalEndpointsApiGetUserAccountOrderDetailV2commercialApiKeyRequest,
     ExperimentalEndpointsApiGetUserAccountOrderDetailV2personalApiKeyRequest,

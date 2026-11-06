@@ -39,6 +39,11 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
             super(userId, userSecret, accountId);
         }
     }
+    public class GetAllAccountRecentOrdersRequestBuilder extends GetAllAccountRecentOrdersRequestBuilderGenerated {
+        public GetAllAccountRecentOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
     public class GetUserAccountOrderDetailV2RequestBuilder extends GetUserAccountOrderDetailV2RequestBuilderGenerated {
         public GetUserAccountOrderDetailV2RequestBuilder(UUID accountId, String brokerageOrderId, String userId, String userSecret) {
             super(accountId, brokerageOrderId, userId, userSecret);

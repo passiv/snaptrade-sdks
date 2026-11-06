@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Orders in the &#x60;kind&#x60;-discriminated format returned by &#x60;/accounts/{accountId}/orders/all&#x60;.
+    /// A list of account orders together with the freshness of the returned data.
     /// </summary>
     [DataContract(Name = "AllAccountOrdersResponse")]
     public partial class AllAccountOrdersResponse : IEquatable<AllAccountOrdersResponse>, IValidatableObject
