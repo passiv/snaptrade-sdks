@@ -4,6 +4,8 @@ SnapTrade API requests made with a `clientId` and `consumerKey` are authenticate
 
 The official SnapTrade SDKs generate request signatures automatically. You only need to implement this flow manually if you are calling the SnapTrade API directly without an SDK.
 
+Use `https://api.snaptrade.com` as the base URL for new direct integrations. API endpoints are served from the host root; `/api/v1` is a legacy path prefix retained for existing integrations.
+
 ## Overview
 
 To generate a request signature:
@@ -22,13 +24,15 @@ The signature payload is a JSON object with exactly three fields:
 | Field | Description |
 |---|---|
 | `content` | The JSON request body. Use `null` when the request has no body or the body is empty. |
-| `path` | The request path, including `/api/v1`, excluding the query string. |
+| `path` | The request path exactly as sent, excluding the query string. Use the canonical root path for new requests, for example `/symbols`. |
 | `query` | The raw query string exactly as sent in the request URL, excluding the leading `?`. |
+
+The path in the signature must match the request URL. The examples below use the canonical root path. If an existing integration sends a request through the legacy `/api/v1` alias, include `/api/v1` in both the request URL and the signed `path`; never sign one path form and send the other.
 
 Example request:
 
 ```http
-POST /api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
+POST /symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
 Signature: <generated_signature>
 Content-Type: application/json
 
@@ -42,7 +46,7 @@ The signature payload for this request is:
   "content": {
     "substring": "AAPL"
   },
-  "path": "/api/v1/symbols",
+  "path": "/symbols",
   "query": "clientId=YOUR_CLIENT_ID&timestamp=1715123456"
 }
 ```
@@ -61,13 +65,13 @@ Use these rules:
 The canonical signature string for the example above is:
 
 ```json
-{"content":{"substring":"AAPL"},"path":"/api/v1/symbols","query":"clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
+{"content":{"substring":"AAPL"},"path":"/symbols","query":"clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
 ```
 
 The following string represents the same JSON object, but it is not valid for signing because it contains extra whitespace:
 
 ```json
-{"content": {"substring": "AAPL"}, "path": "/api/v1/symbols", "query": "clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
+{"content": {"substring": "AAPL"}, "path": "/symbols", "query": "clientId=YOUR_CLIENT_ID&timestamp=1715123456"}
 ```
 
 Cryptographic signatures are generated from the exact bytes of the string. Even small formatting differences will produce a different signature.
@@ -79,7 +83,7 @@ The `query` value is the exact query string sent in the request URL, excluding t
 Example:
 
 ```text
-/api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
+/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
 ```
 
 Use:
@@ -97,7 +101,7 @@ For requests without a body, set `content` to `null`. This includes GET requests
 This example signs a direct API request for the symbol search endpoint. Replace `YOUR_CLIENT_ID` and `YOUR_CONSUMER_KEY` with your API key values. If your request includes additional query parameters, include those exact parameters in the URL and in the signature payload's `query` value.
 
 ```http
-POST /api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
+POST /symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456
 Signature: <generated_signature>
 Content-Type: application/json
 
@@ -120,7 +124,7 @@ def compute_request_signature(path: str, consumer_key: str, body: typing.Any = N
     subpath, query = path.split("?", 1)
     sig_object = {
         "content": None if body is None or body == {} else body,
-        "path": "/api/v1%s" % subpath,
+        "path": subpath,
         "query": query,
     }
     sig_content = json.dumps(sig_object, separators=(",", ":"), sort_keys=True)
@@ -163,7 +167,7 @@ const clientId = "YOUR_CLIENT_ID";
 const consumerKey = "YOUR_CONSUMER_KEY";
 const timestamp = Math.floor(Date.now() / 1000);
 
-const requestPath = "/api/v1/symbols";
+const requestPath = "/symbols";
 const requestQuery = new URLSearchParams({
   clientId,
   timestamp: timestamp.toString(),
@@ -209,7 +213,7 @@ public class Example {
         String consumerKey = "YOUR_CONSUMER_KEY";
         long timestamp = System.currentTimeMillis() / 1000L;
 
-        String path = "/api/v1/symbols";
+        String path = "/symbols";
         String queryString = "clientId=" + clientId + "&timestamp=" + timestamp;
         String requestBody = "{\"substring\":\"AAPL\"}";
         String data = String.format("{\"content\":%s,\"path\":\"%s\",\"query\":\"%s\"}", requestBody, path, queryString);
@@ -247,7 +251,7 @@ func main() {
 	consumerKey := "YOUR_CONSUMER_KEY"
 	timestamp := time.Now().Unix()
 
-	requestPath := "/api/v1/symbols"
+	requestPath := "/symbols"
 	query := url.Values{}
 	query.Set("clientId", clientId)
 	query.Set("timestamp", fmt.Sprintf("%d", timestamp))
@@ -286,7 +290,7 @@ func main() {
 The same signing rules apply to every authentication mode that uses `clientId`, `timestamp`, and `Signature`. Sign the exact query string you send. For example, a request with additional query parameters signs those parameters as part of `query`:
 
 ```http
-POST /api/v1/symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456&userId=YOUR_USER_ID&userSecret=YOUR_USER_SECRET
+POST /symbols?clientId=YOUR_CLIENT_ID&timestamp=1715123456&userId=YOUR_USER_ID&userSecret=YOUR_USER_SECRET
 Signature: <generated_signature>
 Content-Type: application/json
 
