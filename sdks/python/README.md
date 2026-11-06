@@ -116,6 +116,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimental_endpoints.add_subscription`](#snaptradeexperimental_endpointsadd_subscription)
   * [`snaptrade.experimental_endpoints.cancel_subscription`](#snaptradeexperimental_endpointscancel_subscription)
   * [`snaptrade.experimental_endpoints.get_all_account_orders`](#snaptradeexperimental_endpointsget_all_account_orders)
+  * [`snaptrade.experimental_endpoints.get_all_account_recent_orders`](#snaptradeexperimental_endpointsget_all_account_recent_orders)
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
@@ -2226,6 +2227,75 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/all` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.get_all_account_recent_orders`<a id="snaptradeexperimental_endpointsget_all_account_recent_orders"></a>
+
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
+By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+
+Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
+
+**Experimental:** this endpoint may change without notice.
+
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_all_account_recent_orders_response = (
+    commercial_api_key_client.experimental_endpoints.get_all_account_recent_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_all_account_recent_orders_response = (
+    personal_api_key_client.experimental_endpoints.get_all_account_recent_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### only_executed: `bool`<a id="only_executed-bool"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AllAccountOrdersResponse`](./snaptrade_client/type/all_account_orders_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/recent` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

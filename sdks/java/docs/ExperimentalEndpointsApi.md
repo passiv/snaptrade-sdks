@@ -7,6 +7,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**addSubscription**](ExperimentalEndpointsApi.md#addSubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription |
 | [**cancelSubscription**](ExperimentalEndpointsApi.md#cancelSubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription |
 | [**getAllAccountOrders**](ExperimentalEndpointsApi.md#getAllAccountOrders) | **GET** /accounts/{accountId}/orders/all | List all account orders |
+| [**getAllAccountRecentOrders**](ExperimentalEndpointsApi.md#getAllAccountRecentOrders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only) |
 | [**getUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getUserAccountOrderDetailV2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**getUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountOrdersV2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**getUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountRecentOrdersV2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
@@ -297,6 +298,108 @@ public class Example {
 | **accountId** | **UUID**|  | |
 | **state** | **String**| defaults to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
 | **days** | **Integer**| Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. | [optional] |
+
+### Return type
+
+[**AllAccountOrdersResponse**](AllAccountOrdersResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+<a name="getAllAccountRecentOrders"></a>
+# **getAllAccountRecentOrders**
+> AllAccountOrdersResponse getAllAccountRecentOrders(userId, userSecret, accountId).onlyExecuted(onlyExecuted).execute();
+
+List all account recent orders (last 24 hours only)
+
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Experimental:** this endpoint may change without notice.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ExperimentalEndpointsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    Boolean onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+    try {
+      AllAccountOrdersResponse result = client
+              .experimentalEndpoints
+              .getAllAccountRecentOrders(userId, userSecret, accountId)
+              .onlyExecuted(onlyExecuted)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getResults());
+      System.out.println(result.getDataFreshness());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAllAccountRecentOrders");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AllAccountOrdersResponse> response = client
+              .experimentalEndpoints
+              .getAllAccountRecentOrders(userId, userSecret, accountId)
+              .onlyExecuted(onlyExecuted)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAllAccountRecentOrders");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+| **onlyExecuted** | **Boolean**| Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well | [optional] |
 
 ### Return type
 

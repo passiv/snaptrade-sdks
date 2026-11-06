@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AllAccountOrdersResponseTest Class Doc Comment
  *
  * @category    Class
- * @description Orders in the &#x60;kind&#x60;-discriminated format returned by &#x60;/accounts/{accountId}/orders/all&#x60;.
+ * @description A list of account orders together with the freshness of the returned data.
  * @package     SnapTrade
  */
 class AllAccountOrdersResponseTest extends TestCase

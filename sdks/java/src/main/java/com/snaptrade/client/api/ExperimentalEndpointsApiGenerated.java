@@ -679,6 +679,207 @@ public class ExperimentalEndpointsApiGenerated {
 
         return ((ExperimentalEndpointsApi) this).new GetAllAccountOrdersRequestBuilder(userId, userSecret, accountId);
     }
+    private okhttp3.Call getAllAccountRecentOrdersCall(String userId, String userSecret, UUID accountId, Boolean onlyExecuted, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/orders/recent"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        if (onlyExecuted != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("only_executed", onlyExecuted));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAllAccountRecentOrdersValidateBeforeCall(String userId, String userSecret, UUID accountId, Boolean onlyExecuted, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getAllAccountRecentOrders(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getAllAccountRecentOrders(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getAllAccountRecentOrders(Async)");
+        }
+
+        return getAllAccountRecentOrdersCall(userId, userSecret, accountId, onlyExecuted, _callback);
+
+    }
+
+
+    private ApiResponse<AllAccountOrdersResponse> getAllAccountRecentOrdersWithHttpInfo(String userId, String userSecret, UUID accountId, Boolean onlyExecuted) throws ApiException {
+        okhttp3.Call localVarCall = getAllAccountRecentOrdersValidateBeforeCall(userId, userSecret, accountId, onlyExecuted, null);
+        Type localVarReturnType = new TypeToken<AllAccountOrdersResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getAllAccountRecentOrdersAsync(String userId, String userSecret, UUID accountId, Boolean onlyExecuted, final ApiCallback<AllAccountOrdersResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAllAccountRecentOrdersValidateBeforeCall(userId, userSecret, accountId, onlyExecuted, _callback);
+        Type localVarReturnType = new TypeToken<AllAccountOrdersResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetAllAccountRecentOrdersRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        Boolean onlyExecuted;
+
+        public GetAllAccountRecentOrdersRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set onlyExecuted
+         * @param onlyExecuted Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)
+         * @return ExperimentalEndpointsApi.GetAllAccountRecentOrdersRequestBuilder
+         */
+        public ExperimentalEndpointsApi.GetAllAccountRecentOrdersRequestBuilder onlyExecuted(Boolean onlyExecuted) {
+            this.onlyExecuted = onlyExecuted;
+            return (ExperimentalEndpointsApi.GetAllAccountRecentOrdersRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for getAllAccountRecentOrders
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getAllAccountRecentOrdersCall(userId, userSecret, accountId, onlyExecuted, _callback);
+        }
+
+
+        /**
+         * Execute getAllAccountRecentOrders request
+         * @return AllAccountOrdersResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public AllAccountOrdersResponse execute() throws ApiException {
+            ApiResponse<AllAccountOrdersResponse> localVarResp = getAllAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId, onlyExecuted);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getAllAccountRecentOrders request with HTTP info returned
+         * @return ApiResponse&lt;AllAccountOrdersResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AllAccountOrdersResponse> executeWithHttpInfo() throws ApiException {
+            return getAllAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId, onlyExecuted);
+        }
+
+        /**
+         * Execute getAllAccountRecentOrders request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AllAccountOrdersResponse> _callback) throws ApiException {
+            return getAllAccountRecentOrdersAsync(userId, userSecret, accountId, onlyExecuted, _callback);
+        }
+    }
+
+    /**
+     * List all account recent orders (last 24 hours only)
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Experimental:** this endpoint may change without notice.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @return GetAllAccountRecentOrdersRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ExperimentalEndpointsApi.GetAllAccountRecentOrdersRequestBuilder getAllAccountRecentOrders(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((ExperimentalEndpointsApi) this).new GetAllAccountRecentOrdersRequestBuilder(userId, userSecret, accountId);
+    }
     private okhttp3.Call getUserAccountOrderDetailV2Call(UUID accountId, String brokerageOrderId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers

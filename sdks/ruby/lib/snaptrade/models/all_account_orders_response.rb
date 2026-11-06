@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Orders in the `kind`-discriminated format returned by `/accounts/{accountId}/orders/all`.
+  # A list of account orders together with the freshness of the returned data.
   class AllAccountOrdersResponse
     # Orders returned for the request.
     attr_accessor :results
