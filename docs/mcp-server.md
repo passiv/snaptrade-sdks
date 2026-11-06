@@ -34,7 +34,11 @@ With the SnapTrade connector enabled, an AI assistant can:
 - Retrieve positions and holdings across accounts
 - Review orders, recent orders, and order details
 - Review historical account activity such as deposits, dividends, and fees
-- Look up reference data such as currencies, exchange rates, stock exchanges, and security types
+- Summarize portfolio value, allocation, and unrealized gains and losses across accounts
+- Summarize dividends, interest, fees, and contributions for a period
+- Show the user's Wealth Rank, when a placement is available
+- List apps and tools from the SnapTrade app directory that work with the user's accounts
+- Look up reference data such as stock exchanges and the brokerages available to the user
 - Generate a one-time link the user can open to connect a new brokerage
 
 On the trading server, an AI assistant can also:
@@ -103,7 +107,9 @@ On the trading server:
 
 ## Available tools
 
-The connector exposes 18 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
+### Portfolio server
+
+The portfolio server exposes 19 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
 
 **Connections**
 
@@ -112,6 +118,7 @@ The connector exposes 18 tools. All are read-only except `request_connection_lin
 
 **Account information**
 
+- `AccountInformation_listUserAccounts` — list all of the user's accounts
 - `AccountInformation_getUserAccountDetails` — account details, including institution name and total value
 - `AccountInformation_getUserAccountBalance` — cash balances and buying power
 - `AccountInformation_getAllAccountPositions` — positions and holdings for an account
@@ -121,23 +128,26 @@ The connector exposes 18 tools. All are read-only except `request_connection_lin
 - `AccountInformation_getUserAccountOrderDetailV2` — details for a single order
 - `AccountInformation_getAccountActivities` — historical account activity such as deposits, dividends, and fees
 
+**Portfolio summaries**
+
+- `get_portfolio_summary` — total value, asset-type and currency allocation, concentration, and unrealized gains and losses across all accounts, in one reporting currency
+- `get_income_summary` — dividends, interest, fees, and contributions across all accounts for a period, in one reporting currency
+- `get_wealth_rank` — where the user's total holdings place them among SnapTrade members, when a placement is available
+
 **Reference data**
 
-- `ReferenceData_listAllCurrencies` — supported currencies
-- `ReferenceData_listAllCurrenciesRates` — exchange rates for all supported currencies
-- `ReferenceData_getCurrencyExchangeRatePair` — exchange rate for a specific currency pair
-- `ReferenceData_getSecurityTypes` — supported security types
 - `ReferenceData_getStockExchanges` — supported stock exchanges
 - `ReferenceData_getPartnerInfo` — brokerages and data access available to the connector
 
-**Connection helpers**
+**Apps and connections**
 
+- `list_snaptrade_apps` — apps and tools from the SnapTrade app directory that work with the user's accounts
 - `list_supported_brokerages` — list the brokerages the user can connect
 - `request_connection_link` — generate a one-time URL the user opens to connect a new brokerage. The link is single-use and expires after 5 minutes. The assistant cannot complete the connection itself; only the user's browser session can.
 
-**Trading server**
+### Trading server
 
-The trading server exposes the same connection, account, reference-data, and connection-helper tools, except that `AccountInformation_getUserAccountOrdersV2` and `AccountInformation_getUserAccountRecentOrdersV2` are replaced by `AccountInformation_getAllAccountOrders`. It adds:
+The trading server exposes the same connection, account, reference-data, portfolio-summary, and app and connection tools, except that `AccountInformation_getUserAccountOrdersV2` and `AccountInformation_getUserAccountRecentOrdersV2` are replaced by `AccountInformation_getAllAccountOrders`. It adds:
 
 - `AccountInformation_getAllAccountOrders` — orders for an account, in the same format used to place orders
 - `Trading_previewSimpleOrder` — validate an order and estimate its cost against the account's quote and cash balance, without placing it. Returns a `preview_token` valid for 5 minutes.
@@ -146,7 +156,7 @@ The trading server exposes the same connection, account, reference-data, and con
 
 Supported securities are stocks and ETFs (fractional shares at eligible brokerages), single-leg and multi-leg options, and futures and futures options on tastytrade, subject to what each brokerage and account allows. Crypto orders are not available. Previews estimate cost for single-equity orders only; other orders are previewed with a "no quote" warning. A placed order is submitted to the brokerage, not necessarily filled.
 
-Every tool is annotated so AI clients and users can tell read operations from write operations. Read tools are marked `readOnlyHint: true` and `destructiveHint: false`; `request_connection_link` is marked `readOnlyHint: false` and `destructiveHint: true`. `Trading_previewSimpleOrder` is marked read-only and idempotent; `Trading_placeSimpleOrder` is marked destructive and not idempotent; `Trading_cancelOrder` is marked destructive and idempotent. All tools are marked `openWorldHint: true`.
+Every tool is annotated so AI clients and users can tell read operations from write operations. Read tools, including `Trading_previewSimpleOrder`, are marked `readOnlyHint: true` and `destructiveHint: false`. `request_connection_link` is marked `readOnlyHint: false` and `destructiveHint: false`: it creates a link but changes no existing data. `Trading_placeSimpleOrder` and `Trading_cancelOrder` are marked `destructiveHint: true`; of the two, only `Trading_cancelOrder` is marked idempotent. Tools that read the user's brokerage data are marked `openWorldHint: true`; reference data, the app directory, `list_supported_brokerages`, and `get_wealth_rank` are marked `openWorldHint: false`.
 
 ## Manage and revoke access
 

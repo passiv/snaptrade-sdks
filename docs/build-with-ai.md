@@ -20,7 +20,7 @@ This guide is for a **SnapTrade Personal** user building an application for thei
 
 | What you want to do | Use |
 | --- | --- |
-| Ask ChatGPT, Claude, or another assistant questions about your accounts | [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server) |
+| Ask ChatGPT, Claude, or another assistant questions about your accounts, or have it place trades | [SnapTrade MCP Server](https://docs.snaptrade.com/docs/mcp-server) |
 | Build a private dashboard or automation for your own accounts | Personal API key and this guide |
 | Build an app that other SnapTrade Personal users can authorize | [SnapTrade OAuth](https://docs.snaptrade.com/docs/oauth-apps) |
 | Build a product that creates and manages brokerage connections for its own users | [SnapTrade Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial) |
