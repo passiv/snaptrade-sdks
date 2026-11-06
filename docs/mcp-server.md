@@ -6,13 +6,13 @@ SnapTrade hosts two MCP servers:
 
 | Server | URL | Access |
 | --- | --- | --- |
-| Portfolio | `https://agent.snaptrade.com/mcp/portfolio` | Read-only account data, plus a link to connect a new brokerage |
+| Read-only | `https://agent.snaptrade.com/mcp/portfolio` | Read-only account data, plus a link to connect a new brokerage |
 | Trading | `https://agent.snaptrade.com/mcp/trading` | The same account data, plus order preview, placement, and cancellation |
 
-`https://mcp.snaptrade.com/mcp` remains available as an alias of the portfolio server for existing connectors.
+`https://mcp.snaptrade.com/mcp` remains available as an alias of the read-only server for existing connectors.
 
 :::info
-The portfolio server is **read-only**: it can retrieve account data and generate a link to connect a new brokerage, but it cannot place trades. The trading server can place and cancel orders in accounts the user has approved for trading. Neither server can move money or change account settings. For programmatic access to the full SnapTrade API, see [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started).
+The read-only server can retrieve account data and generate a link to connect a new brokerage, but it cannot place trades. The trading server can place and cancel orders in accounts the user has approved for trading. Neither server can move money or change account settings. For programmatic access to the full SnapTrade API, see [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started).
 :::
 
 ## Before you begin
@@ -55,11 +55,11 @@ The MCP server is a thin protocol adapter in front of the SnapTrade Partner API.
 AI assistant  →  SnapTrade MCP server  →  SnapTrade Partner API  →  User's brokerages
 ```
 
-No new data surface is introduced — the connector exposes a curated subset of existing SnapTrade endpoints. The portfolio server exposes read operations only; the trading server adds order preview, placement, and cancellation.
+No new data surface is introduced — the connector exposes a curated subset of existing SnapTrade endpoints. The trading server adds order preview, placement, and cancellation to the read-only server's tools.
 
 ## Authentication and security
 
-The connector uses the OAuth 2.0 authorization code grant with PKCE. When a user adds the connector, their AI assistant registers itself automatically using [Dynamic Client Registration (RFC 7591)](https://www.rfc-editor.org/rfc/rfc7591). The user is then redirected to SnapTrade to log in and approve access. Tokens issued to the assistant are scoped to `read` on the portfolio server, and to `read` and `trade` on the trading server when the user approves trading. The MCP server validates every request using [token introspection (RFC 7662)](https://www.rfc-editor.org/rfc/rfc7662) against SnapTrade's authorization server.
+The connector uses the OAuth 2.0 authorization code grant with PKCE. When a user adds the connector, their AI assistant registers itself automatically using [Dynamic Client Registration (RFC 7591)](https://www.rfc-editor.org/rfc/rfc7591). The user is then redirected to SnapTrade to log in and approve access. Tokens issued to the assistant are scoped to `read` on the read-only server, and to `read` and `trade` on the trading server when the user approves trading. The MCP server validates every request using [token introspection (RFC 7662)](https://www.rfc-editor.org/rfc/rfc7662) against SnapTrade's authorization server.
 
 :::info
 The AI assistant never sees a user's SnapTrade `userId` or `userSecret`, and never sees brokerage login credentials. It only receives a short-lived access token limited to the scopes the user approved. SnapTrade resolves the user from that token.
@@ -69,7 +69,7 @@ Clients can discover the connector's OAuth configuration at these endpoints:
 
 | Server | Protected resource metadata | Authorization server metadata |
 | --- | --- | --- |
-| Portfolio | `https://agent.snaptrade.com/.well-known/oauth-protected-resource/mcp/portfolio` | `https://api.snaptrade.com/.well-known/oauth-authorization-server/mcp/portfolio` |
+| Read-only | `https://agent.snaptrade.com/.well-known/oauth-protected-resource/mcp/portfolio` | `https://api.snaptrade.com/.well-known/oauth-authorization-server/mcp/portfolio` |
 | Trading | `https://agent.snaptrade.com/.well-known/oauth-protected-resource/mcp/trading` | `https://api.snaptrade.com/.well-known/oauth-authorization-server/mcp/trading` |
 
 For details on what data the connector accesses and how it is handled, see the [SnapTrade Connector Privacy Notice](https://docs.snaptrade.com/docs/connector-privacy). For SnapTrade's overall security posture, see [snaptrade.com/security](https://snaptrade.com/security).
@@ -80,7 +80,7 @@ For details on what data the connector accesses and how it is handled, see the [
 2. Click **Add**, then **Add custom connector**.
 3. Enter a name (for example, `SnapTrade`) and the MCP server URL: `https://agent.snaptrade.com/mcp/portfolio` for read-only access, or `https://agent.snaptrade.com/mcp/trading` for trading.
 4. Click **Add**, then **Connect**.
-5. Complete the SnapTrade login flow if prompted and approve access: **read** for the portfolio server, or **read** and **Place trades in your accounts** for the trading server.
+5. Complete the SnapTrade login flow if prompted and approve access: **read** for the read-only server, or **read** and **Place trades in your accounts** for the trading server.
 6. After you approve, the SnapTrade tools become available in Claude.
 
 ## Set up the SnapTrade app in ChatGPT
@@ -88,7 +88,7 @@ For details on what data the connector accesses and how it is handled, see the [
 1. Go to [chatgpt.com/plugins](https://chatgpt.com/plugins), click **+**, then **Add custom MCP server**.
 2. Enter a name (for example, `SnapTrade`), a short description, and the MCP server URL: `https://agent.snaptrade.com/mcp/portfolio` for read-only access, or `https://agent.snaptrade.com/mcp/trading` for trading.
 3. Set authentication to **OAuth**, review the warning and select **I understand and want to continue**.
-4. Select **Create as a plugin**, then sign in to SnapTrade and approve access when prompted: **read** for the portfolio server, or **read** and **Place trades in your accounts** for the trading server.
+4. Select **Create as a plugin**, then sign in to SnapTrade and approve access when prompted: **read** for the read-only server, or **read** and **Place trades in your accounts** for the trading server.
 5. In a new chat, type **@** and pick **SnapTrade** to use your portfolio data.
 
 ## Example prompts
@@ -107,9 +107,9 @@ On the trading server:
 
 ## Available tools
 
-### Portfolio server
+### Read-only server
 
-The portfolio server exposes 19 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
+The read-only server exposes 19 tools. All are read-only except `request_connection_link`, which generates a connection link for the user to open.
 
 **Connections**
 
@@ -147,7 +147,7 @@ The portfolio server exposes 19 tools. All are read-only except `request_connect
 
 ### Trading server
 
-The trading server exposes the same connection, account, reference-data, portfolio-summary, and app and connection tools, except that `AccountInformation_getUserAccountOrdersV2` and `AccountInformation_getUserAccountRecentOrdersV2` are replaced by `AccountInformation_getAllAccountOrders`. It adds:
+The trading server exposes 21 tools: the same connection, account, reference-data, portfolio-summary, and app and connection tools, except that `AccountInformation_getUserAccountOrdersV2` and `AccountInformation_getUserAccountRecentOrdersV2` are replaced by `AccountInformation_getAllAccountOrders`. It adds:
 
 - `AccountInformation_getAllAccountOrders` — orders for an account, in the same format used to place orders
 - `Trading_previewSimpleOrder` — validate an order and estimate its cost against the account's quote and cash balance, without placing it. Returns a `preview_token` valid for 5 minutes.
