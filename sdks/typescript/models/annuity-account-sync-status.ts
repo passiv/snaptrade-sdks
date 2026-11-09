@@ -69,7 +69,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Contains sync status for an annuity contract\'s value. Akoya annuity accounts do not expose transactions, orders, or positions, so those fields are omitted. `balances` is derived from the last successful holdings sync and is null if never synced. It tracks the contract value, not available cash. 
+ * Contains sync status for an annuity contract\'s value. Transactions, orders, and positions are omitted. `balances` is derived from the last successful holdings sync and is null if never synced. It tracks the contract value, not available cash. 
  * @export
  * @interface AnnuityAccountSyncStatus
  */

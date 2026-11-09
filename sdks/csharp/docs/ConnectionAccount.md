@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.ConnectionAccount
-A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today. 
+A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, `annuity`, and `mortgage` are implemented today. 
 
 ## Properties
 
@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **InstitutionId** | **string** | Unique identifier for the institution that holds the account. | [optional] 
 **OpeningDate** | **DateTime?** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the institution. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. | [optional] 
 **FundingDate** | **DateTime?** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. Only populated for institutions that expose this data; &#x60;null&#x60; for all other institutions. See [supported institutions](https://support.snaptrade.com/brokerages) for the full list. | [optional] 
-**SyncStatus** | [**AnnuityAccountSyncStatus**](AnnuityAccountSyncStatus.md) |  | 
+**SyncStatus** | [**MortgageAccountSyncStatus**](MortgageAccountSyncStatus.md) |  | 
 **RawType** | **string** | The account type as provided by the institution. | [optional] 
 **CashOrMargin** | **string** | Whether the account is a cash or margin account, normalized across institutions. - &#x60;cash&#x60;: The account cannot borrow on margin. Includes registered, retirement and employer plan accounts that can&#39;t use margin (for example TFSA, RRSP, 401(k) or ISA). - &#x60;margin&#x60;: A margin account, including portfolio margin accounts. Some institutions also report retirement accounts with limited margin (for example, trading before funds settle) as margin accounts. - &#x60;unknown&#x60;: SnapTrade doesn&#39;t have enough information to tell, or the distinction doesn&#39;t apply to the account (for example crypto accounts).  Coverage is limited for Fidelity because its API doesn&#39;t report it for every account; Fidelity accounts default to &#x60;unknown&#x60; where it can&#39;t be determined.  | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
-**NetValue** | [**AnnuityAccountNetValue**](AnnuityAccountNetValue.md) |  | [optional] 
+**NetValue** | [**MortgageAccountNetValue**](MortgageAccountNetValue.md) |  | [optional] 
 **MinimumPaymentAmount** | [**LineOfCreditAccountMinimumPaymentAmount**](LineOfCreditAccountMinimumPaymentAmount.md) |  | [optional] 
 **AvailableCredit** | [**LineOfCreditAccountAvailableCredit**](LineOfCreditAccountAvailableCredit.md) |  | [optional] 
 **NextPaymentDate** | **DateTime?** | The date the account&#39;s next payment is due, in &#x60;YYYY-MM-DD&#x60; format. Omitted when no such data is available. | [optional] 

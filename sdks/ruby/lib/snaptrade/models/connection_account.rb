@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today. 
+  # A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, `annuity`, and `mortgage` are implemented today. 
   module ConnectionAccount
     class << self
       # List of class defined in oneOf (OpenAPI v3)
@@ -20,7 +20,8 @@ module SnapTrade
           :'AnnuityAccount',
           :'DepositAccount',
           :'InvestmentAccount',
-          :'LineOfCreditAccount'
+          :'LineOfCreditAccount',
+          :'MortgageAccount'
         ]
       end
 
@@ -35,7 +36,8 @@ module SnapTrade
           :'annuity' => :'AnnuityAccount',
           :'deposit' => :'DepositAccount',
           :'investment' => :'InvestmentAccount',
-          :'line_of_credit' => :'LineOfCreditAccount'
+          :'line_of_credit' => :'LineOfCreditAccount',
+          :'mortgage' => :'MortgageAccount'
         }
       end
 
