@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Contains sync status for an annuity contract&#39;s value. Akoya annuity accounts do not expose transactions, orders, or positions, so those fields are omitted. &#x60;balances&#x60; is derived from the last successful holdings sync and is null if never synced. It tracks the contract value, not available cash. 
+    /// Contains sync status for an annuity contract&#39;s value. Transactions, orders, and positions are omitted. &#x60;balances&#x60; is derived from the last successful holdings sync and is null if never synced. It tracks the contract value, not available cash. 
     /// </summary>
     [DataContract(Name = "AnnuityAccountSyncStatus")]
     public partial class AnnuityAccountSyncStatus : IEquatable<AnnuityAccountSyncStatus>, IValidatableObject

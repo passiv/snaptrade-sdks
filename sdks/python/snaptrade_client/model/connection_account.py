@@ -35,7 +35,7 @@ used by `Connections_listConnectionAccounts` and
 `AccountInformation_listAllUserAccounts`. Use `kind` to determine
 which schema is present.
 
-`investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today.
+`investment`, `deposit`, `line_of_credit`, `annuity`, and `mortgage` are implemented today.
 
     """
 
@@ -50,10 +50,12 @@ which schema is present.
                     'DepositAccount': DepositAccount,
                     'InvestmentAccount': InvestmentAccount,
                     'LineOfCreditAccount': LineOfCreditAccount,
+                    'MortgageAccount': MortgageAccount,
                     'annuity': AnnuityAccount,
                     'deposit': DepositAccount,
                     'investment': InvestmentAccount,
                     'line_of_credit': LineOfCreditAccount,
+                    'mortgage': MortgageAccount,
                 }
             }
         
@@ -72,6 +74,7 @@ which schema is present.
                 DepositAccount,
                 LineOfCreditAccount,
                 AnnuityAccount,
+                MortgageAccount,
             ]
 
 
@@ -92,3 +95,4 @@ from snaptrade_client.model.annuity_account import AnnuityAccount
 from snaptrade_client.model.deposit_account import DepositAccount
 from snaptrade_client.model.investment_account import InvestmentAccount
 from snaptrade_client.model.line_of_credit_account import LineOfCreditAccount
+from snaptrade_client.model.mortgage_account import MortgageAccount

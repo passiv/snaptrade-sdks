@@ -72,7 +72,7 @@ import { AnnuityAccountSyncStatus } from './annuity-account-sync-status';
 import { ConnectionAccountStatus } from './connection-account-status';
 
 /**
- * An annuity contract account under a connection. Akoya accounts returned in the `annuityAccount` category use this kind; investment accounts holding annuity products remain `investment` accounts. `net_value` is the contract\'s surrender/cash value (`netPresentValue` from Akoya), not available cash. It is real-time or cached depending on the caller\'s plan, and always cached on `AccountInformation_listAllUserAccounts`. 
+ * An annuity contract account under a connection. Investment accounts holding annuity products remain `investment` accounts. `net_value` is the contract\'s surrender/cash value, not available cash. It is real-time or cached depending on the caller\'s plan, and always cached on `AccountInformation_listAllUserAccounts`. 
  * @export
  * @interface AnnuityAccount
  */

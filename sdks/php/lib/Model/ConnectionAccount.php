@@ -30,7 +30,7 @@ use \SnapTrade\ObjectSerializer;
  * ConnectionAccount Class Doc Comment
  *
  * @category Class
- * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, &#x60;line_of_credit&#x60;, and &#x60;annuity&#x60; are implemented today.
+ * @description A single account under a connection, from the &#x60;kind&#x60;-discriminated union used by &#x60;Connections_listConnectionAccounts&#x60; and &#x60;AccountInformation_listAllUserAccounts&#x60;. Use &#x60;kind&#x60; to determine which schema is present.  &#x60;investment&#x60;, &#x60;deposit&#x60;, &#x60;line_of_credit&#x60;, &#x60;annuity&#x60;, and &#x60;mortgage&#x60; are implemented today.
  * @package  SnapTrade
  * @implements \ArrayAccess<string, mixed>
  */
@@ -48,6 +48,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'deposit' => \SnapTrade\Model\DepositAccount::class,
         'investment' => \SnapTrade\Model\InvestmentAccount::class,
         'line_of_credit' => \SnapTrade\Model\LineOfCreditAccount::class,
+        'mortgage' => \SnapTrade\Model\MortgageAccount::class,
     ];
 
     /**
@@ -73,11 +74,11 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         'institution_id' => 'string',
         'opening_date' => '\DateTime',
         'funding_date' => '\DateTime',
-        'sync_status' => '\SnapTrade\Model\AnnuityAccountSyncStatus',
+        'sync_status' => '\SnapTrade\Model\MortgageAccountSyncStatus',
         'raw_type' => 'string',
         'cash_or_margin' => 'string',
         'is_paper' => 'bool',
-        'net_value' => '\SnapTrade\Model\AnnuityAccountNetValue',
+        'net_value' => '\SnapTrade\Model\MortgageAccountNetValue',
         'minimum_payment_amount' => '\SnapTrade\Model\LineOfCreditAccountMinimumPaymentAmount',
         'available_credit' => '\SnapTrade\Model\LineOfCreditAccountAvailableCredit',
         'next_payment_date' => '\DateTime'
@@ -336,7 +337,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
-    public const KIND_ANNUITY = 'annuity';
+    public const KIND_MORTGAGE = 'mortgage';
     public const CASH_OR_MARGIN_CASH = 'cash';
     public const CASH_OR_MARGIN_MARGIN = 'margin';
     public const CASH_OR_MARGIN_UNKNOWN = 'unknown';
@@ -349,7 +350,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function getKindAllowableValues()
     {
         return [
-            self::KIND_ANNUITY,
+            self::KIND_MORTGAGE,
         ];
     }
 
@@ -814,7 +815,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets sync_status
      *
-     * @return \SnapTrade\Model\AnnuityAccountSyncStatus
+     * @return \SnapTrade\Model\MortgageAccountSyncStatus
      */
     public function getSyncStatus()
     {
@@ -824,7 +825,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets sync_status
      *
-     * @param \SnapTrade\Model\AnnuityAccountSyncStatus $sync_status sync_status
+     * @param \SnapTrade\Model\MortgageAccountSyncStatus $sync_status sync_status
      *
      * @return self
      */
@@ -947,7 +948,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Gets net_value
      *
-     * @return \SnapTrade\Model\AnnuityAccountNetValue|null
+     * @return \SnapTrade\Model\MortgageAccountNetValue|null
      */
     public function getNetValue()
     {
@@ -957,7 +958,7 @@ class ConnectionAccount implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets net_value
      *
-     * @param \SnapTrade\Model\AnnuityAccountNetValue|null $net_value net_value
+     * @param \SnapTrade\Model\MortgageAccountNetValue|null $net_value net_value
      *
      * @return self
      */

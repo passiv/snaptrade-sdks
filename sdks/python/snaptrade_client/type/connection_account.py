@@ -19,5 +19,6 @@ from snaptrade_client.type.annuity_account import AnnuityAccount
 from snaptrade_client.type.deposit_account import DepositAccount
 from snaptrade_client.type.investment_account import InvestmentAccount
 from snaptrade_client.type.line_of_credit_account import LineOfCreditAccount
+from snaptrade_client.type.mortgage_account import MortgageAccount
 
-ConnectionAccount = typing.Union[InvestmentAccount,DepositAccount,LineOfCreditAccount,AnnuityAccount]
+ConnectionAccount = typing.Union[InvestmentAccount,DepositAccount,LineOfCreditAccount,AnnuityAccount,MortgageAccount]

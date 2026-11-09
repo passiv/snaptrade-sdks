@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * AnnuityAccountSyncStatusTest Class Doc Comment
  *
  * @category    Class
- * @description Contains sync status for an annuity contract&#39;s value. Akoya annuity accounts do not expose transactions, orders, or positions, so those fields are omitted. &#x60;balances&#x60; is derived from the last successful holdings sync and is null if never synced. It tracks the contract value, not available cash.
+ * @description Contains sync status for an annuity contract&#39;s value. Transactions, orders, and positions are omitted. &#x60;balances&#x60; is derived from the last successful holdings sync and is null if never synced. It tracks the contract value, not available cash.
  * @package     SnapTrade
  */
 class AnnuityAccountSyncStatusTest extends TestCase

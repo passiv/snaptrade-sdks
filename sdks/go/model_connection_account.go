@@ -16,12 +16,13 @@ import (
 	"fmt"
 )
 
-// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, and `annuity` are implemented today. 
+// ConnectionAccount - A single account under a connection, from the `kind`-discriminated union used by `Connections_listConnectionAccounts` and `AccountInformation_listAllUserAccounts`. Use `kind` to determine which schema is present.  `investment`, `deposit`, `line_of_credit`, `annuity`, and `mortgage` are implemented today. 
 type ConnectionAccount struct {
 	AnnuityAccount *AnnuityAccount
 	DepositAccount *DepositAccount
 	InvestmentAccount *InvestmentAccount
 	LineOfCreditAccount *LineOfCreditAccount
+	MortgageAccount *MortgageAccount
 }
 
 // AnnuityAccountAsConnectionAccount is a convenience function that returns AnnuityAccount wrapped in ConnectionAccount
@@ -49,6 +50,13 @@ func InvestmentAccountAsConnectionAccount(v *InvestmentAccount) ConnectionAccoun
 func LineOfCreditAccountAsConnectionAccount(v *LineOfCreditAccount) ConnectionAccount {
 	return ConnectionAccount{
 		LineOfCreditAccount: v,
+	}
+}
+
+// MortgageAccountAsConnectionAccount is a convenience function that returns MortgageAccount wrapped in ConnectionAccount
+func MortgageAccountAsConnectionAccount(v *MortgageAccount) ConnectionAccount {
+	return ConnectionAccount{
+		MortgageAccount: v,
 	}
 }
 
@@ -101,6 +109,12 @@ func (dst *ConnectionAccount) UnmarshalJSON(data []byte) error {
 			return fmt.Errorf("failed to unmarshal ConnectionAccount as LineOfCreditAccount: %w", err)
 		}
 		dst.LineOfCreditAccount = &value
+	case "mortgage":
+		var value MortgageAccount
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("failed to unmarshal ConnectionAccount as MortgageAccount: %w", err)
+		}
+		dst.MortgageAccount = &value
 	default:
 		return fmt.Errorf("unknown ConnectionAccount discriminator kind: %q", *kind)
 	}
@@ -125,6 +139,10 @@ func (src ConnectionAccount) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.LineOfCreditAccount)
 	}
 
+	if src.MortgageAccount != nil {
+		return json.Marshal(&src.MortgageAccount)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -147,6 +165,10 @@ func (obj *ConnectionAccount) GetActualInstance() (interface{}) {
 
 	if obj.LineOfCreditAccount != nil {
 		return obj.LineOfCreditAccount
+	}
+
+	if obj.MortgageAccount != nil {
+		return obj.MortgageAccount
 	}
 
 	// all schemas are nil

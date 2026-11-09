@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// An annuity contract account under a connection. Akoya accounts returned in the &#x60;annuityAccount&#x60; category use this kind; investment accounts holding annuity products remain &#x60;investment&#x60; accounts. &#x60;net_value&#x60; is the contract&#39;s surrender/cash value (&#x60;netPresentValue&#x60; from Akoya), not available cash. It is real-time or cached depending on the caller&#39;s plan, and always cached on &#x60;AccountInformation_listAllUserAccounts&#x60;. 
+    /// An annuity contract account under a connection. Investment accounts holding annuity products remain &#x60;investment&#x60; accounts. &#x60;net_value&#x60; is the contract&#39;s surrender/cash value, not available cash. It is real-time or cached depending on the caller&#39;s plan, and always cached on &#x60;AccountInformation_listAllUserAccounts&#x60;. 
     /// </summary>
     [DataContract(Name = "AnnuityAccount")]
     public partial class AnnuityAccount : IEquatable<AnnuityAccount>, IValidatableObject
