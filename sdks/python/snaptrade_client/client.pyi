@@ -13,6 +13,7 @@ import typing
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 from snaptrade_client.configuration import Configuration
 from snaptrade_client.apis.tags.account_information_api import AccountInformationApi
 from snaptrade_client.apis.tags.api_status_api import APIStatusApi
@@ -36,6 +37,7 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         auth: CommercialApiKeyAuth,
         consumer_key: None = None,
         client_id: None = None,
+        access_token: None = None,
         **kwargs: typing.Any,
     ) -> None: ...
     @typing.overload
@@ -46,6 +48,18 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         auth: PersonalApiKeyAuth,
         consumer_key: None = None,
         client_id: None = None,
+        access_token: None = None,
+        **kwargs: typing.Any,
+    ) -> None: ...
+    @typing.overload
+    def __init__(
+        self: "SnapTrade[OAuthAuth]",
+        configuration: None = None,
+        *,
+        auth: OAuthAuth,
+        consumer_key: None = None,
+        client_id: None = None,
+        access_token: None = None,
         **kwargs: typing.Any,
     ) -> None: ...
     @typing.overload
@@ -56,6 +70,7 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         auth: None,
         consumer_key: None = None,
         client_id: None = None,
+        access_token: None = None,
         **kwargs: typing.Any,
     ) -> None: ...
     def __init__(
@@ -65,6 +80,7 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         auth: typing.Optional[TAuth],
         consumer_key: None = None,
         client_id: None = None,
+        access_token: None = None,
         **kwargs: typing.Any,
     ) -> None:
         ...

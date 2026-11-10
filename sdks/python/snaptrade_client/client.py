@@ -38,6 +38,7 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         auth: typing.Optional[TAuth],
         consumer_key: None = None,
         client_id: None = None,
+        access_token: None = None,
         **kwargs,
     ):
         """Create a client.
@@ -45,11 +46,14 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         Authentication credentials must be provided through ``auth``.
         :param consumer_key: Unsupported. Pass this credential through ``auth``.
         :param client_id: Unsupported. Pass this credential through ``auth``.
+        :param access_token: Unsupported. Pass this credential through ``auth``.
         """
         if consumer_key is not None:
             raise TypeError("consumer_key must be passed through 'auth'")
         if client_id is not None:
             raise TypeError("client_id must be passed through 'auth'")
+        if access_token is not None:
+            raise TypeError("access_token must be passed through 'auth'")
         if len(kwargs) > 0 or configuration is None:
             configuration = Configuration(auth=auth, **kwargs)
         super().__init__(configuration)

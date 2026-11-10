@@ -28,6 +28,10 @@ class PersonalApiKeyAuth(AuthMode):
     pass
 
 
+class OAuthAuth(AuthMode):
+    pass
+
+
 class SnapTradeAuth:
     def __init__(self):
         raise RuntimeError("SnapTradeAuth should not be instantiated")
@@ -46,5 +50,12 @@ class SnapTradeAuth:
             "personalApiKey",
             consumer_key=consumer_key,
             client_id=client_id
+        )
+
+    @staticmethod
+    def oauth(access_token: typing.Optional[str] = None) -> OAuthAuth:
+        return OAuthAuth(
+            "oauth",
+            access_token=access_token
         )
 

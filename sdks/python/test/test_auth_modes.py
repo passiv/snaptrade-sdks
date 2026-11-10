@@ -148,16 +148,40 @@ def test_personal_api_key_real_operation_allows_missing_user_credentials(monkeyp
         assert "Signature" in call["headers"]
 
 
-@pytest.mark.skip(reason="OAuth SDK auth is omitted while PersonalOAuth is not configured.")
-def test_personal_oauth_auth_mode_uses_bearer_without_signing(monkeypatch):
-    # calls = _install_request_spy(monkeypatch)
-    # client = SnapTrade(
-    #     auth=SnapTradeAuth.personal_oauth(access_token="access_token"),
-    #     host="https://api.snaptrade.com/api/v1",
-    # )
-    # assert calls[0]["headers"]["Authorization"] == "Bearer access_token"
-    # assert "Signature" not in calls[0]["headers"]
-    pass
+def test_oauth_auth_mode_uses_bearer_without_signing(monkeypatch):
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    client = SnapTrade(
+        auth=SnapTradeAuth.oauth(access_token="opaque-access-token"),
+        host="https://api.snaptrade.com/api/v1",
+    )
+
+    client.account_information.list_user_accounts()
+    client.connections.list_brokerage_authorizations()
+
+    assert len(calls) == 2
+    assert [call["url"] for call in calls] == [
+        "https://api.snaptrade.com/api/v1/accounts",
+        "https://api.snaptrade.com/api/v1/authorizations",
+    ]
+    for call in calls:
+        assert call["headers"]["Authorization"] == "Bearer opaque-access-token"
+        assert "Signature" not in call["headers"]
+
+
+
+@pytest.mark.parametrize("operation", ["delete_connection", "register_user"])
+def test_oauth_unsupported_operation_fails_before_http(monkeypatch, operation):
+    from snaptrade_client.exceptions import ClientConfigurationError
+
+    calls = _install_request_spy(monkeypatch)
+    client = SnapTrade(auth=SnapTradeAuth.oauth(access_token="access-token"))
+
+    with pytest.raises(ClientConfigurationError, match="does not support.*oauth"):
+        if operation == "delete_connection":
+            client.connections.delete_connection(connection_id="917c8734-8470-4a3e-a18f-57c3f2ee6631")
+        else:
+            client.authentication.register_snap_trade_user(user_id="user-1")
+    assert calls == []
 
 
 def test_public_operation_does_not_use_selected_auth_mode(monkeypatch):
@@ -175,11 +199,3 @@ def test_public_operation_does_not_use_selected_auth_mode(monkeypatch):
     assert len(calls) == 1
     assert calls[0]["url"] == "https://api.snaptrade.com/api/v1/"
     assert "Signature" not in calls[0]["headers"]
-
-
-@pytest.mark.skip(reason="OAuth helper is omitted while PersonalOAuth is not configured.")
-def test_oauth_helper_normalizes_api_base_issuer_to_origin():
-    # oauth = SnapTradeOAuth(issuer="https://api.snaptrade.com/api/v1")
-    #
-    # assert oauth.issuer == "https://api.snaptrade.com"
-    pass

@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -41,6 +42,14 @@ class ListAllBrokerageInstruments(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def list_all_brokerage_instruments(
+        self: "ListAllBrokerageInstruments[OAuthAuth]",
+        slug: str,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForget(ListAllBrokerageInstruments[TAuth]):
@@ -55,6 +64,14 @@ class ApiForget(ListAllBrokerageInstruments[TAuth]):
     @typing.overload
     def get(
         self: "ApiForget[PersonalApiKeyAuth]",
+        slug: str,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def get(
+        self: "ApiForget[OAuthAuth]",
         slug: str,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,
