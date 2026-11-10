@@ -148,6 +148,17 @@ def test_personal_api_key_real_operation_allows_missing_user_credentials(monkeyp
         assert "Signature" in call["headers"]
 
 
+@pytest.mark.parametrize("token", [None, "", "   ", 42, False])
+def test_oauth_rejects_invalid_access_tokens(token):
+    with pytest.raises(ValueError, match="access_token must be a nonempty string"):
+        SnapTradeAuth.oauth(access_token=token)
+
+
+def test_oauth_rejects_missing_access_token():
+    with pytest.raises(ValueError, match="access_token must be a nonempty string"):
+        SnapTradeAuth.oauth()
+
+
 def test_oauth_auth_mode_uses_bearer_without_signing(monkeypatch):
     calls = _install_request_spy(monkeypatch, response_payload=b"[]")
     client = SnapTrade(
