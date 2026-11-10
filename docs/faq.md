@@ -62,7 +62,7 @@ You can do this with the :api[Connections_disableBrokerageAuthorization] endpoin
 
 ### How do I enable connecting to 'X' broker on my API Key?
 
-By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
+By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Fidelity). Please reach out if you need access to one of these.
 
 ---
 
