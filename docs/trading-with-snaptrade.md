@@ -1,6 +1,6 @@
 # Trading with SnapTrade
 
-SnapTrade supports trading workflows for stocks, ETFs, other equities, options, and crypto. The exact feature set depends on the connected brokerage or exchange, so you should always [verify support](https://support.snaptrade.com/brokerages) for the account you are about to trade with.
+SnapTrade supports trading workflows for stocks, ETFs, other equities, options, futures, options on futures, and crypto. The exact feature set depends on the connected brokerage or exchange, so you should always [verify support](https://support.snaptrade.com/brokerages) for the account you are about to trade with.
 
 > 🚧 **Soft Rate Limit**
 >
@@ -17,7 +17,7 @@ Most trading integrations with SnapTrade follow the same high-level flow:
 5. Submit the order to the brokerage or exchange.
 6. Monitor execution status.
 
-The sections below explain how that flow differs for equities, options, and crypto.
+The sections below explain how that flow differs for equities, options, futures, and crypto.
 
 ## Confirm Order Details and Impact
 
@@ -98,6 +98,12 @@ The multi-leg payload lets you submit:
 
 Because brokerages often report each leg separately, downstream order history can appear as multiple records for a single multi-leg submission.
 
+## Futures and Options on Futures (Beta)
+
+Futures trading is available in beta for tastytrade, Webull US, and TradeStation. Options on futures are supported at tastytrade and TradeStation.
+
+See [Futures Trading (Beta)](/docs/futures-trading) for beta access, contract lookup, order examples, and the order endpoints to use for monitoring and cancellation.
+
 ## Crypto
 
 SnapTrade supports specialized crypto trading endpoints for some exchanges such as Kraken, Binance, and Coinbase.
@@ -140,4 +146,6 @@ In this example, the order buys `0.01` ETH with EUR.
 
 Not every brokerage supports every trading workflow. Extended-hours sessions, multi-leg options, and crypto trading are all institution-specific. Review the [SnapTrade Institution Support guide](https://support.snaptrade.com/brokerages) before enabling a feature in production.
 
-After placing an order, use :api[AccountInformation_getUserAccountOrderDetailV2] with the brokerage order ID returned by the submission to check its latest status. A successful submission does not mean the order has filled.
+For equities, equity options, and crypto, use :api[AccountInformation_getUserAccountOrderDetailV2] with the brokerage order ID returned by the submission to check its latest status. A successful submission does not mean the order has filled.
+
+For futures and options on futures, use the order endpoints in [Futures Trading (Beta)](/docs/futures-trading) to retrieve contract details and monitor execution.
