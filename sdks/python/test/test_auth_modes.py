@@ -80,7 +80,7 @@ def test_commercial_api_key_percent_encodes_operation_auth_before_signing(monkey
     assert calls[0]["url"] == "https://api.snaptrade.com/api/v1" + expected_resource_path
     assert "userId=$user-1" not in calls[0]["url"]
     assert calls[0]["headers"]["Signature"] == compute_request_signature(
-        expected_resource_path,
+        "/api/v1" + expected_resource_path,
         "consumer_key",
         None,
     )
