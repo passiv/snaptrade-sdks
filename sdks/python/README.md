@@ -79,6 +79,8 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 - [Authentication](#authentication)
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
+  * [OAuth Auth authentication](#oauth-auth-authentication)
+  * [Device login](#device-login)
 - [Getting Started](#getting-started)
 - [Request timeouts](#request-timeouts)
 - [Async](#async)
@@ -192,6 +194,45 @@ personal_api_key_client = SnapTrade(
     ),
 )
 ```
+
+### OAuth Auth authentication<a id="oauth-auth-authentication"></a>
+Supply an existing access token. Your application handles token storage, refresh and callback validation.
+
+```python
+from snaptrade_client import SnapTrade, SnapTradeAuth
+
+oauth_client = SnapTrade(
+    auth=SnapTradeAuth.oauth(
+        access_token="ACCESS_TOKEN",
+    ),
+)
+```
+
+### Device login<a id="device-login"></a>
+
+Use a pre-registered **public OAuth client enabled for the device grant**.
+Device access is read-only. This helper does not register clients, open a browser,
+store tokens or refresh them. Run polling in a worker thread in asynchronous apps.
+
+```python
+import os
+from snaptrade_client import SnapTrade, SnapTradeAuth, SnapTradeOAuthDevice
+
+device = SnapTradeOAuthDevice()
+client_id = os.environ["SNAPTRADE_OAUTH_DEVICE_CLIENT_ID"]
+authorization = device.start_device_authorization(client_id=client_id)
+print(authorization.verification_uri, authorization.user_code)
+# Keep authorization.device_code private; do not persist authorization.
+tokens = device.wait_for_device_token(client_id=client_id, authorization=authorization)
+client = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
+```
+
+Polling respects the server interval, backs off on `slow_down` and timeouts,
+and stops on expiry or terminal errors. Pass a `threading.Event` as `cancel` to
+interrupt polling waits. An in-flight request is bounded by the HTTP timeout
+(30 seconds by default) and remaining authorization lifetime. Catch
+`SnapTradeOAuthDeviceError` and inspect `.error` for denial, expiry or cancellation.
+Applications own token storage and refresh, including refresh-token rotation.
 
 ## Getting Started<a id="getting-started"></a>
 
@@ -375,6 +416,23 @@ get_account_activities_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_account_activities_response = (
+    oauth_client.account_information.get_account_activities(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        start_date="2022-01-24T00:00:00.000Z",
+        end_date="2022-01-24T00:00:00.000Z",
+        offset=0,
+        limit=1,
+        type="BUY,SELL,DIVIDEND",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -444,6 +502,18 @@ Required credentials for this mode:
 ```python
 get_account_balance_history_response = (
     personal_api_key_client.account_information.get_account_balance_history(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_account_balance_history_response = (
+    oauth_client.account_information.get_account_balance_history(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
@@ -577,6 +647,16 @@ get_account_details_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_account_details_response = oauth_client.account_information.get_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -639,6 +719,18 @@ get_all_account_positions_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_all_account_positions_response = (
+    oauth_client.account_information.get_all_account_positions(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -692,6 +784,18 @@ Required credentials for this mode:
 ```python
 get_user_account_balance_response = (
     personal_api_key_client.account_information.get_user_account_balance(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_balance_response = (
+    oauth_client.account_information.get_user_account_balance(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
@@ -762,6 +866,18 @@ get_user_account_details_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_details_response = (
+    oauth_client.account_information.get_user_account_details(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -816,6 +932,19 @@ Required credentials for this mode:
 ```python
 get_user_account_order_detail_response = (
     personal_api_key_client.account_information.get_user_account_order_detail(
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_order_detail_response = (
+    oauth_client.account_information.get_user_account_order_detail(
         brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
@@ -895,6 +1024,20 @@ get_user_account_orders_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_orders_response = (
+    oauth_client.account_information.get_user_account_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        state="all",
+        days=30,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -954,6 +1097,19 @@ Required credentials for this mode:
 ```python
 get_user_account_recent_orders_response = (
     personal_api_key_client.account_information.get_user_account_recent_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_recent_orders_response = (
+    oauth_client.account_information.get_user_account_recent_orders(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         only_executed=True,
     )
@@ -1093,6 +1249,16 @@ get_user_holdings_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_holdings_response = oauth_client.account_information.get_user_holdings(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1143,6 +1309,16 @@ Required credentials for this mode:
 ```python
 list_all_user_accounts_response = (
     personal_api_key_client.account_information.list_all_user_accounts()
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_all_user_accounts_response = (
+    oauth_client.account_information.list_all_user_accounts()
 )
 ```
 
@@ -1200,6 +1376,14 @@ list_user_accounts_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_user_accounts_response = oauth_client.account_information.list_user_accounts()
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1244,6 +1428,16 @@ update_user_account_response = (
     personal_api_key_client.account_information.update_user_account(
         account_id="accountId_example",
     )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+update_user_account_response = oauth_client.account_information.update_user_account(
+    account_id="accountId_example",
 )
 ```
 
@@ -1402,6 +1596,24 @@ login_snap_trade_user_response = (
         locale="pt-BR",
         connection_portal_version="v4",
     )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+login_snap_trade_user_response = oauth_client.authentication.login_snap_trade_user(
+    broker="ALPACA",
+    immediate_redirect=True,
+    custom_redirect="https://snaptrade.com",
+    reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connection_type="read",
+    show_close_button=True,
+    dark_mode=True,
+    locale="pt-BR",
+    connection_portal_version="v4",
 )
 ```
 
@@ -1628,6 +1840,18 @@ detail_brokerage_authorization_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+detail_brokerage_authorization_response = (
+    oauth_client.connections.detail_brokerage_authorization(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1678,6 +1902,18 @@ Required credentials for this mode:
 ```python
 disable_brokerage_authorization_response = (
     personal_api_key_client.connections.disable_brokerage_authorization(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+disable_brokerage_authorization_response = (
+    oauth_client.connections.disable_brokerage_authorization(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     )
 )
@@ -1745,6 +1981,18 @@ list_brokerage_authorization_accounts_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_brokerage_authorization_accounts_response = (
+    oauth_client.connections.list_brokerage_authorization_accounts(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1795,6 +2043,16 @@ Required credentials for this mode:
 ```python
 list_brokerage_authorizations_response = (
     personal_api_key_client.connections.list_brokerage_authorizations()
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_brokerage_authorizations_response = (
+    oauth_client.connections.list_brokerage_authorizations()
 )
 ```
 
@@ -1858,6 +2116,16 @@ list_connection_accounts_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_connection_accounts_response = oauth_client.connections.list_connection_accounts(
+    connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -1909,6 +2177,18 @@ Required credentials for this mode:
 ```python
 refresh_brokerage_authorization_response = (
     personal_api_key_client.connections.refresh_brokerage_authorization(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+refresh_brokerage_authorization_response = (
+    oauth_client.connections.refresh_brokerage_authorization(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     )
 )
@@ -2019,6 +2299,18 @@ Required credentials for this mode:
 ```python
 sync_brokerage_authorization_transactions_response = (
     personal_api_key_client.connections.sync_brokerage_authorization_transactions(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+sync_brokerage_authorization_transactions_response = (
+    oauth_client.connections.sync_brokerage_authorization_transactions(
         authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     )
 )
@@ -2414,6 +2706,19 @@ get_user_account_order_detail_v2_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_order_detail_v2_response = (
+    oauth_client.experimental_endpoints.get_user_account_order_detail_v2(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -2469,6 +2774,20 @@ Required credentials for this mode:
 ```python
 get_user_account_orders_v2_response = (
     personal_api_key_client.experimental_endpoints.get_user_account_orders_v2(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        state="all",
+        days=30,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_orders_v2_response = (
+    oauth_client.experimental_endpoints.get_user_account_orders_v2(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
         days=30,
@@ -2538,6 +2857,19 @@ Required credentials for this mode:
 ```python
 get_user_account_recent_orders_v2_response = (
     personal_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_recent_orders_v2_response = (
+    oauth_client.experimental_endpoints.get_user_account_recent_orders_v2(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         only_executed=True,
     )
@@ -2684,6 +3016,35 @@ place_simple_order_response = (
         notional_value="1.25",
         trading_session="regular",
     )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_simple_order_response = oauth_client.experimental_endpoints.place_simple_order(
+    order_type="stop_limit",
+    time_in_force="day",
+    legs=[
+        {
+            "instrument": {
+                "kind": "future",
+                "symbol": "/ESZ6",
+            },
+            "action": "buy",
+            "units": "1.25",
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="1.25",
+    stop_price="1.25",
+    price_effect="debit",
+    client_order_id="550e8400-e29b-41d4-a716-446655440000",
+    expiry_date="2026-12-18T20:00:00.000Z",
+    notional_value="1.25",
+    trading_session="regular",
 )
 ```
 
@@ -2860,6 +3221,12 @@ get_partner_info_response = commercial_api_key_client.reference_data.get_partner
 get_partner_info_response = personal_api_key_client.reference_data.get_partner_info()
 ```
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_partner_info_response = oauth_client.reference_data.get_partner_info()
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2895,6 +3262,12 @@ get_stock_exchanges_response = (
 )
 ```
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_stock_exchanges_response = oauth_client.reference_data.get_stock_exchanges()
+```
+
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2927,6 +3300,14 @@ get_symbols_response = commercial_api_key_client.reference_data.get_symbols(
 
 ```python
 get_symbols_response = personal_api_key_client.reference_data.get_symbols(
+    substring="AAPL",
+)
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_symbols_response = oauth_client.reference_data.get_symbols(
     substring="AAPL",
 )
 ```
@@ -2977,6 +3358,14 @@ get_symbols_by_ticker_response = (
     personal_api_key_client.reference_data.get_symbols_by_ticker(
         query="query_example",
     )
+)
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_symbols_by_ticker_response = oauth_client.reference_data.get_symbols_by_ticker(
+    query="query_example",
 )
 ```
 
@@ -3070,6 +3459,16 @@ list_all_brokerage_instruments_response = (
 )
 ```
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_all_brokerage_instruments_response = (
+    oauth_client.reference_data.list_all_brokerage_instruments(
+        slug="QUESTRADE",
+    )
+)
+```
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3109,6 +3508,12 @@ list_all_brokerages_response = (
 list_all_brokerages_response = (
     personal_api_key_client.reference_data.list_all_brokerages()
 )
+```
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+list_all_brokerages_response = oauth_client.reference_data.list_all_brokerages()
 ```
 
 
@@ -3190,6 +3595,19 @@ symbol_search_user_account_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+symbol_search_user_account_response = (
+    oauth_client.reference_data.symbol_search_user_account(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        substring="AAPL",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3242,6 +3660,17 @@ Required credentials for this mode:
 
 ```python
 cancel_order_response = personal_api_key_client.trading.cancel_order(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+cancel_order_response = oauth_client.trading.cancel_order(
     brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
@@ -3304,6 +3733,19 @@ Required credentials for this mode:
 ```python
 get_cryptocurrency_pair_quote_response = (
     personal_api_key_client.trading.get_cryptocurrency_pair_quote(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        instrument_symbol="BTC-USD",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_cryptocurrency_pair_quote_response = (
+    oauth_client.trading.get_cryptocurrency_pair_quote(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         instrument_symbol="BTC-USD",
     )
@@ -3395,6 +3837,31 @@ get_option_impact_response = personal_api_key_client.trading.get_option_impact(
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_option_impact_response = oauth_client.trading.get_option_impact(
+    order_type="MARKET",
+    time_in_force="Day",
+    legs=[
+        {
+            "instrument": {
+                "symbol": "PBI   250718C00006000",
+                "instrument_type": "OPTION",
+            },
+            "action": "BUY_TO_OPEN",
+            "units": 1,
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="",
+    stop_price="",
+    price_effect="DEBIT",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3465,6 +3932,24 @@ Required credentials for this mode:
 
 ```python
 get_order_impact_response = personal_api_key_client.trading.get_order_impact(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action="BUY",
+    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    order_type="Market",
+    time_in_force="Day",
+    price=31.33,
+    stop=31.33,
+    units=10.5,
+    notional_value=None,
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_order_impact_response = oauth_client.trading.get_order_impact(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -3634,6 +4119,18 @@ get_user_account_quotes_response = (
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+get_user_account_quotes_response = oauth_client.trading.get_user_account_quotes(
+    symbols="symbols_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    use_ticker=True,
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3748,6 +4245,33 @@ place_complex_order_response = personal_api_key_client.trading.place_complex_ord
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_complex_order_response = oauth_client.trading.place_complex_order(
+    type="OTO",
+    orders=[
+        {
+            "order_role": "TRIGGER",
+            "action": "BUY",
+            "instrument": {
+                "symbol": "AAPL",
+                "type": "EQUITY",
+            },
+            "order_type": "Market",
+            "units": 1,
+            "time_in_force": "Day",
+            "price": 31.33,
+            "stop": 29.5,
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    client_order_id="550e8400-e29b-41d4-a716-446655440000",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -3820,6 +4344,28 @@ Required credentials for this mode:
 
 ```python
 place_crypto_order_response = personal_api_key_client.trading.place_crypto_order(
+    instrument={
+        "symbol": "BTC",
+        "type": "CRYPTOCURRENCY",
+    },
+    side="BUY",
+    type="MARKET",
+    time_in_force="GTC",
+    amount="123.45",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="123.45",
+    stop_price="123.45",
+    post_only=False,
+    expiration_date="2024-01-01T00:00:00.000Z",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_crypto_order_response = oauth_client.trading.place_crypto_order(
     instrument={
         "symbol": "BTC",
         "type": "CRYPTOCURRENCY",
@@ -3934,6 +4480,28 @@ Required credentials for this mode:
 
 ```python
 place_force_order_response = personal_api_key_client.trading.place_force_order(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action="BUY",
+    order_type="Market",
+    time_in_force="Day",
+    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    symbol="AAPL",
+    trading_session="REGULAR",
+    expiry_date="2026-08-21T23:27:55.027Z",
+    price=31.33,
+    stop=31.33,
+    units=10.5,
+    notional_value=None,
+    client_order_id="550e8400-e29b-41d4-a716-446655440000",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_force_order_response = oauth_client.trading.place_force_order(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
     order_type="Market",
@@ -4073,6 +4641,31 @@ place_mleg_order_response = personal_api_key_client.trading.place_mleg_order(
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_mleg_order_response = oauth_client.trading.place_mleg_order(
+    order_type="MARKET",
+    time_in_force="Day",
+    legs=[
+        {
+            "instrument": {
+                "symbol": "PBI   250718C00006000",
+                "instrument_type": "OPTION",
+            },
+            "action": "BUY_TO_OPEN",
+            "units": 1,
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="",
+    stop_price="",
+    price_effect="DEBIT",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4146,6 +4739,17 @@ place_order_response = personal_api_key_client.trading.place_order(
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_order_response = oauth_client.trading.place_order(
+    trade_id="139e307a-82f7-4402-b39e-4da7baa87758",
+    wait_to_confirm=True,
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4211,6 +4815,28 @@ Required credentials for this mode:
 
 ```python
 preview_crypto_order_response = personal_api_key_client.trading.preview_crypto_order(
+    instrument={
+        "symbol": "BTC",
+        "type": "CRYPTOCURRENCY",
+    },
+    side="BUY",
+    type="MARKET",
+    time_in_force="GTC",
+    amount="123.45",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="123.45",
+    stop_price="123.45",
+    post_only=False,
+    expiration_date="2024-01-01T00:00:00.000Z",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+preview_crypto_order_response = oauth_client.trading.preview_crypto_order(
     instrument={
         "symbol": "BTC",
         "type": "CRYPTOCURRENCY",
@@ -4333,6 +4959,24 @@ replace_order_response = personal_api_key_client.trading.replace_order(
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+replace_order_response = oauth_client.trading.replace_order(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    action="BUY",
+    order_type="Market",
+    time_in_force="Day",
+    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    price=31.33,
+    symbol="AAPL",
+    stop=31.33,
+    units=10.5,
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -4411,6 +5055,20 @@ Required credentials for this mode:
 ```python
 search_cryptocurrency_pair_instruments_response = (
     personal_api_key_client.trading.search_cryptocurrency_pair_instruments(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        base="BTC",
+        quote="USD",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+search_cryptocurrency_pair_instruments_response = (
+    oauth_client.trading.search_cryptocurrency_pair_instruments(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         base="BTC",
         quote="USD",

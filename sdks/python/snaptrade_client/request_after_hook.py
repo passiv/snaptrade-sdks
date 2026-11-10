@@ -3,6 +3,7 @@ import hashlib
 import hmac
 import json
 import typing
+from urllib.parse import urlsplit
 from urllib3._collections import HTTPHeaderDict
 
 from snaptrade_client import schemas
@@ -45,7 +46,7 @@ def request_after_hook(
     if not isinstance(consumer_key, str):
         raise ValueError("%s is required" % secret_parameter)
     headers['Signature'] = compute_request_signature(
-        path=resource_path,
+        path=urlsplit(configuration.host).path.rstrip("/") + resource_path,
         consumer_key=consumer_key,
         body=body
     )

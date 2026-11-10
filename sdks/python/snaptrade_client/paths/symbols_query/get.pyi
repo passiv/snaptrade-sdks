@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -41,6 +42,14 @@ class GetSymbolsByTicker(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def get_symbols_by_ticker(
+        self: "GetSymbolsByTicker[OAuthAuth]",
+        query: str,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForget(GetSymbolsByTicker[TAuth]):
@@ -55,6 +64,14 @@ class ApiForget(GetSymbolsByTicker[TAuth]):
     @typing.overload
     def get(
         self: "ApiForget[PersonalApiKeyAuth]",
+        query: str,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def get(
+        self: "ApiForget[OAuthAuth]",
         query: str,
         path_params: typing.Optional[dict] = ...,
         validate: bool = ...,

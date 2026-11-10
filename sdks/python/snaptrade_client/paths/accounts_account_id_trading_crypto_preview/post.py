@@ -98,11 +98,15 @@ _auth_modes = {
         "PersonalClientId",
         "PersonalTimestamp",
     ],
+    "oauth": [
+        "OAuthBearer",
+    ],
 }
 _operation_auth_context = {
     "auth_modes": [
         "commercialApiKey",
         "personalApiKey",
+        "oauth",
     ],
     "request_signing_by_auth_mode": {
         "commercialApiKey": {
@@ -122,6 +126,7 @@ _operation_auth_context = {
     },
 }
 _legacy_auth = [
+    'OAuthBearer',
     'PartnerClientId',
     'PartnerSignature',
     'PartnerTimestamp',

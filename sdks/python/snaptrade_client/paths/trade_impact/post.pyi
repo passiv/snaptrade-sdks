@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -63,6 +64,25 @@ class GetOrderImpact(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def get_order_impact(
+        self: "GetOrderImpact[OAuthAuth]",
+        account_id: str,
+        action: ActionStrict,
+        universal_symbol_id: str,
+        order_type: OrderTypeStrict,
+        time_in_force: TimeInForceStrict,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForpost(GetOrderImpact[TAuth]):
@@ -88,6 +108,25 @@ class ApiForpost(GetOrderImpact[TAuth]):
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
+        account_id: str,
+        action: ActionStrict,
+        universal_symbol_id: str,
+        order_type: OrderTypeStrict,
+        time_in_force: TimeInForceStrict,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def post(
+        self: "ApiForpost[OAuthAuth]",
         account_id: str,
         action: ActionStrict,
         universal_symbol_id: str,

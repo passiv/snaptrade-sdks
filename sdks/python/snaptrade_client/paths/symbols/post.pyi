@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -39,6 +40,13 @@ class GetSymbols(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def get_symbols(
+        self: "GetSymbols[OAuthAuth]",
+        substring: typing.Optional[str] = None,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForpost(GetSymbols[TAuth]):
@@ -52,6 +60,13 @@ class ApiForpost(GetSymbols[TAuth]):
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
+        substring: typing.Optional[str] = None,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def post(
+        self: "ApiForpost[OAuthAuth]",
         substring: typing.Optional[str] = None,
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,

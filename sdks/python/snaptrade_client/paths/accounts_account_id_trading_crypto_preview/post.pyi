@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -67,6 +68,27 @@ class PreviewCryptoOrder(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def preview_crypto_order(
+        self: "PreviewCryptoOrder[OAuthAuth]",
+        instrument: CryptoTradingInstrument,
+        side: ActionStrict,
+        type: str,
+        time_in_force: str,
+        amount: str,
+        account_id: str,
+        limit_price: typing.Optional[str] = None,
+        stop_price: typing.Optional[str] = None,
+        post_only: typing.Optional[bool] = None,
+        expiration_date: typing.Optional[datetime] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForpost(PreviewCryptoOrder[TAuth]):
@@ -94,6 +116,27 @@ class ApiForpost(PreviewCryptoOrder[TAuth]):
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
+        instrument: CryptoTradingInstrument,
+        side: ActionStrict,
+        type: str,
+        time_in_force: str,
+        amount: str,
+        account_id: str,
+        limit_price: typing.Optional[str] = None,
+        stop_price: typing.Optional[str] = None,
+        post_only: typing.Optional[bool] = None,
+        expiration_date: typing.Optional[datetime] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def post(
+        self: "ApiForpost[OAuthAuth]",
         instrument: CryptoTradingInstrument,
         side: ActionStrict,
         type: str,

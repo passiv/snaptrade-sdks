@@ -114,6 +114,7 @@ conf = snaptrade_client.Configuration(
     def __init__(self, host=None,
                  auth: typing.Optional[TAuth] = None,
                  api_key=None, api_key_prefix=None,
+                 access_token=None,
                  username=None, password=None,
                  discard_unknown_keys=False,
                                   client_id=None,
@@ -154,6 +155,9 @@ conf = snaptrade_client.Configuration(
                 client_id = getattr(auth, "client_id")
             if getattr(auth, "consumer_key", None) is not None:
                 self.consumer_key = getattr(auth, "consumer_key")
+        if self.auth_mode == "oauth":
+            if getattr(auth, "access_token", None) is not None:
+                access_token = getattr(auth, "access_token")
         self.server_variables = server_variables or {}
         self.server_operation_variables = server_operation_variables or {}
         """Default server variables
@@ -191,6 +195,9 @@ conf = snaptrade_client.Configuration(
         """
         self.refresh_api_key_hook = None
         """function hook to refresh API key if expired
+        """
+        self.access_token = access_token
+        """Token for HTTP Basic Bearer Authentication
         """
         self.username = username
         """Username for HTTP basic authentication
@@ -426,6 +433,13 @@ conf = snaptrade_client.Configuration(
         :return: The Auth Settings information dict.
         """
         auth = {}
+        if self.access_token is not None:
+            auth['OAuthBearer'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
         if 'PartnerClientId' in self.api_key:
             auth['PartnerClientId'] = {
                 'type': 'api_key',
@@ -508,7 +522,11 @@ conf = snaptrade_client.Configuration(
             return fallback_auth_settings
         if self.auth_mode is None:
             return fallback_auth_settings
-        return auth_modes.get(self.auth_mode, [])
+        if self.auth_mode not in auth_modes:
+            raise ClientConfigurationError(
+                "This operation does not support the selected auth mode: %s" % self.auth_mode
+            )
+        return auth_modes[self.auth_mode]
 
     def to_debug_report(self):
         """Gets the essential information for debugging.

@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -61,6 +62,24 @@ class GetOptionImpact(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def get_option_impact(
+        self: "GetOptionImpact[OAuthAuth]",
+        order_type: MlegOrderTypeStrict,
+        time_in_force: TimeInForceStrict,
+        legs: typing.List[MlegLeg],
+        account_id: str,
+        limit_price: typing.Optional[typing.Optional[str]] = None,
+        stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForpost(GetOptionImpact[TAuth]):
@@ -85,6 +104,24 @@ class ApiForpost(GetOptionImpact[TAuth]):
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
+        order_type: MlegOrderTypeStrict,
+        time_in_force: TimeInForceStrict,
+        legs: typing.List[MlegLeg],
+        account_id: str,
+        limit_price: typing.Optional[typing.Optional[str]] = None,
+        stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def post(
+        self: "ApiForpost[OAuthAuth]",
         order_type: MlegOrderTypeStrict,
         time_in_force: TimeInForceStrict,
         legs: typing.List[MlegLeg],

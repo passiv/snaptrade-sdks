@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -63,6 +64,25 @@ class LoginSnapTradeUser(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def login_snap_trade_user(
+        self: "LoginSnapTradeUser[OAuthAuth]",
+        broker: typing.Optional[str] = None,
+        immediate_redirect: typing.Optional[bool] = None,
+        custom_redirect: typing.Optional[str] = None,
+        reconnect: typing.Optional[str] = None,
+        connection_type: typing.Optional[str] = None,
+        show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForpost(LoginSnapTradeUser[TAuth]):
@@ -88,6 +108,25 @@ class ApiForpost(LoginSnapTradeUser[TAuth]):
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
+        broker: typing.Optional[str] = None,
+        immediate_redirect: typing.Optional[bool] = None,
+        custom_redirect: typing.Optional[str] = None,
+        reconnect: typing.Optional[str] = None,
+        connection_type: typing.Optional[str] = None,
+        show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
+        locale: typing.Optional[str] = None,
+        connection_portal_version: typing.Optional[str] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def post(
+        self: "ApiForpost[OAuthAuth]",
         broker: typing.Optional[str] = None,
         immediate_redirect: typing.Optional[bool] = None,
         custom_redirect: typing.Optional[str] = None,

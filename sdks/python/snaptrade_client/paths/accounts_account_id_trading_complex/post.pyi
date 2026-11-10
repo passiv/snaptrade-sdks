@@ -16,6 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 from snaptrade_client.auth import PersonalApiKeyAuth
+from snaptrade_client.auth import OAuthAuth
 
 TAuth = typing.TypeVar("TAuth", bound=AuthMode)
 
@@ -55,6 +56,21 @@ class PlaceComplexOrder(BaseApi, typing.Generic[TAuth]):
         validate: bool = ...,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
     ) -> typing.Any: ...
+    @typing.overload
+    def place_complex_order(
+        self: "PlaceComplexOrder[OAuthAuth]",
+        type: str,
+        orders: typing.List[ComplexOrderLeg],
+        account_id: str,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
 
 
 class ApiForpost(PlaceComplexOrder[TAuth]):
@@ -76,6 +92,21 @@ class ApiForpost(PlaceComplexOrder[TAuth]):
     @typing.overload
     def post(
         self: "ApiForpost[PersonalApiKeyAuth]",
+        type: str,
+        orders: typing.List[ComplexOrderLeg],
+        account_id: str,
+        client_order_id: typing.Optional[ClientOrderIDNullable] = None,
+        user_id: typing.Optional[typing_extensions.Never] = None,
+        user_secret: typing.Optional[typing_extensions.Never] = None,
+        query_params: typing.Optional[dict] = ...,
+        header_params: typing.Optional[dict] = ...,
+        path_params: typing.Optional[dict] = ...,
+        validate: bool = ...,
+        timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
+    ) -> typing.Any: ...
+    @typing.overload
+    def post(
+        self: "ApiForpost[OAuthAuth]",
         type: str,
         orders: typing.List[ComplexOrderLeg],
         account_id: str,
