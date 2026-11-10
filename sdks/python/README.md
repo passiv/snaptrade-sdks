@@ -80,6 +80,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
   * [OAuth Auth authentication](#oauth-auth-authentication)
+  * [Device login](#device-login)
 - [Getting Started](#getting-started)
 - [Request timeouts](#request-timeouts)
 - [Async](#async)
@@ -206,6 +207,32 @@ oauth_client = SnapTrade(
     ),
 )
 ```
+
+### Device login<a id="device-login"></a>
+
+Use a pre-registered **public OAuth client enabled for the device grant**.
+Device access is read-only. This helper does not register clients, open a browser,
+store tokens or refresh them. Run polling in a worker thread in asynchronous apps.
+
+```python
+import os
+from snaptrade_client import SnapTrade, SnapTradeAuth, SnapTradeOAuthDevice
+
+device = SnapTradeOAuthDevice()
+client_id = os.environ["SNAPTRADE_OAUTH_DEVICE_CLIENT_ID"]
+authorization = device.start_device_authorization(client_id=client_id)
+print(authorization.verification_uri, authorization.user_code)
+# Keep authorization.device_code private; do not persist authorization.
+tokens = device.wait_for_device_token(client_id=client_id, authorization=authorization)
+client = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
+```
+
+Polling respects the server interval, backs off on `slow_down` and timeouts,
+and stops on expiry or terminal errors. Pass a `threading.Event` as `cancel` to
+interrupt polling waits. An in-flight request is bounded by the HTTP timeout
+(30 seconds by default) and remaining authorization lifetime. Catch
+`SnapTradeOAuthDeviceError` and inspect `.error` for denial, expiry or cancellation.
+Applications own token storage and refresh, including refresh-token rotation.
 
 ## Getting Started<a id="getting-started"></a>
 

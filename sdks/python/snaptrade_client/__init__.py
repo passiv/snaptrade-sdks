@@ -20,6 +20,7 @@ from snaptrade_client.api_client import ApiClient
 # import Configuration
 from snaptrade_client.configuration import Configuration
 from snaptrade_client.auth import SnapTradeAuth, AuthMode, CommercialApiKeyAuth, PersonalApiKeyAuth, OAuthAuth
+from snaptrade_client.oauth_device import SnapTradeOAuthDevice, SnapTradeDeviceAuthorization, SnapTradeDeviceTokens, SnapTradeOAuthDeviceError
 
 # import exceptions
 from snaptrade_client.exceptions import OpenApiException
