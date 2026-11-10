@@ -54,6 +54,8 @@ class SnapTradeAuth:
 
     @staticmethod
     def oauth(access_token: typing.Optional[str] = None) -> OAuthAuth:
+        if not isinstance(access_token, str) or not access_token.strip():
+            raise ValueError("access_token must be a nonempty string.")
         return OAuthAuth(
             "oauth",
             access_token=access_token
