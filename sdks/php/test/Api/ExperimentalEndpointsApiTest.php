@@ -83,42 +83,6 @@ class ExperimentalEndpointsApiTest extends TestCase
     }
 
     /**
-     * Test case for getAccountOrder
-     *
-     * Get account order detail.
-     *
-     */
-    public function testGetAccountOrder()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getAllAccountOrders
-     *
-     * List all account orders.
-     *
-     */
-    public function testGetAllAccountOrders()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getAllAccountRecentOrders
-     *
-     * List all account recent orders (last 24 hours only).
-     *
-     */
-    public function testGetAllAccountRecentOrders()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getUserAccountOrderDetailV2
      *
      * Get account order detail (V2).

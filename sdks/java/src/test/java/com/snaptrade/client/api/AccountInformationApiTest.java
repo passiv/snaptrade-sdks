@@ -20,8 +20,10 @@ import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.AccountBalancesV2Response;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
+import com.snaptrade.client.model.AccountOrder;
 import com.snaptrade.client.model.AccountOrderRecord;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.AllAccountOrdersResponse;
 import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.AllUserAccountsResponse;
 import com.snaptrade.client.model.Balance;
@@ -133,6 +135,45 @@ public class AccountInformationApiTest {
     }
 
     /**
+     * Get account order detail
+     *
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountOrderTest() throws ApiException {
+        UUID accountId = null;
+        String brokerageOrderId = null;
+        String userId = null;
+        String userSecret = null;
+        AccountOrder response = api.getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List all account orders
+     *
+     * Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAllAccountOrdersTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        String state = null;
+        Integer days = null;
+        AllAccountOrdersResponse response = api.getAllAccountOrders(userId, userSecret, accountId)
+                .state(state)
+                .days(days)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * List all account positions
      *
      * Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  **Beta:** future option positions (&#x60;instrument.kind: future_option&#x60;) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The &#x60;FutureOptionInstrument&#x60; schema may change.  Positions counted in account cash balance or buying power include &#x60;cash_equivalent: true&#x60;. Security positions (&#x60;stock&#x60;, &#x60;preferred_stock&#x60;, &#x60;adr&#x60;, &#x60;etf&#x60;, &#x60;mutualfund&#x60;, &#x60;cef&#x60;, &#x60;crypto&#x60;, &#x60;bond&#x60;, and &#x60;other&#x60;) may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -145,6 +186,25 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         AllAccountPositionsResponse response = api.getAllAccountPositions(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List all account recent orders (last 24 hours only)
+     *
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAllAccountRecentOrdersTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        Boolean onlyExecuted = null;
+        AllAccountOrdersResponse response = api.getAllAccountRecentOrders(userId, userSecret, accountId)
+                .onlyExecuted(onlyExecuted)
                 .execute();
         // TODO: test validations
     }

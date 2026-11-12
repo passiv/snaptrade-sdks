@@ -159,7 +159,10 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetAccountBalanceHistory**](docs/AccountInformationApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value
 *AccountInformationApi* | [**GetAccountBalancesV2**](docs/AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | List account balances (V2)
 *AccountInformationApi* | [**GetAccountDetails**](docs/AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details
+*AccountInformationApi* | [**GetAccountOrder**](docs/AccountInformationApi.md#getaccountorder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
+*AccountInformationApi* | [**GetAllAccountOrders**](docs/AccountInformationApi.md#getallaccountorders) | **GET** /accounts/{accountId}/orders/all | List all account orders
 *AccountInformationApi* | [**GetAllAccountPositions**](docs/AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions
+*AccountInformationApi* | [**GetAllAccountRecentOrders**](docs/AccountInformationApi.md#getallaccountrecentorders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only)
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Get account detail
 *AccountInformationApi* | [**GetUserAccountOrderDetail**](docs/AccountInformationApi.md#getuseraccountorderdetail) | **POST** /accounts/{accountId}/orders/details | Get account order detail
@@ -187,9 +190,6 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**SyncBrokerageAuthorizationTransactions**](docs/ConnectionsApi.md#syncbrokerageauthorizationtransactions) | **POST** /authorizations/{authorizationId}/transactions/sync | Sync transactions for a connection
 *ExperimentalEndpointsApi* | [**AddSubscription**](docs/ExperimentalEndpointsApi.md#addsubscription) | **POST** /snapTrade/tradeDetection/subscriptions | Add a Trade Detection subscription
 *ExperimentalEndpointsApi* | [**CancelSubscription**](docs/ExperimentalEndpointsApi.md#cancelsubscription) | **POST** /snapTrade/tradeDetection/subscriptions/cancel | Cancel a Trade Detection subscription
-*ExperimentalEndpointsApi* | [**GetAccountOrder**](docs/ExperimentalEndpointsApi.md#getaccountorder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
-*ExperimentalEndpointsApi* | [**GetAllAccountOrders**](docs/ExperimentalEndpointsApi.md#getallaccountorders) | **GET** /accounts/{accountId}/orders/all | List all account orders
-*ExperimentalEndpointsApi* | [**GetAllAccountRecentOrders**](docs/ExperimentalEndpointsApi.md#getallaccountrecentorders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrderDetailV2**](docs/ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)

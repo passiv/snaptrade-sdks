@@ -67,58 +67,6 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
         */
     })
 
-    t.Run("Test ExperimentalEndpointsApiService GetAccountOrder", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ExperimentalEndpointsApi.GetAccountOrder(
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-            ""66a033fa-da74-4fcf-b527-feefdec9257e"",
-            ""snaptrade-user-123"",
-            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test ExperimentalEndpointsApiService GetAllAccountOrders", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ExperimentalEndpointsApi.GetAllAccountOrders(
-            ""snaptrade-user-123"",
-            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        )
-        request.State("state_example")
-        request.Days(30)
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
-    t.Run("Test ExperimentalEndpointsApiService GetAllAccountRecentOrders", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.ExperimentalEndpointsApi.GetAllAccountRecentOrders(
-            ""snaptrade-user-123"",
-            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        )
-        request.OnlyExecuted(true)
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
     t.Run("Test ExperimentalEndpointsApiService GetUserAccountOrderDetailV2", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetUserAccountOrderDetailV2(

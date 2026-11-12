@@ -8,7 +8,10 @@ Method | Path | Description
 [**GetAccountBalanceHistory**](AccountInformationApi.md#GetAccountBalanceHistory) | **Get** /accounts/{accountId}/balanceHistory | List historical account total value
 [**GetAccountBalancesV2**](AccountInformationApi.md#GetAccountBalancesV2) | **Get** /accounts/{accountId}/balances/v2 | List account balances (V2)
 [**GetAccountDetails**](AccountInformationApi.md#GetAccountDetails) | **Get** /accounts/{accountId}/details | Get account details
+[**GetAccountOrder**](AccountInformationApi.md#GetAccountOrder) | **Get** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
+[**GetAllAccountOrders**](AccountInformationApi.md#GetAllAccountOrders) | **Get** /accounts/{accountId}/orders/all | List all account orders
 [**GetAllAccountPositions**](AccountInformationApi.md#GetAllAccountPositions) | **Get** /accounts/{accountId}/positions/all | List all account positions
+[**GetAllAccountRecentOrders**](AccountInformationApi.md#GetAllAccountRecentOrders) | **Get** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only)
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
 [**GetUserAccountOrderDetail**](AccountInformationApi.md#GetUserAccountOrderDetail) | **Post** /accounts/{accountId}/orders/details | Get account order detail
@@ -237,6 +240,118 @@ func main() {
 [[Back to README]](../README.md)
 
 
+## GetAccountOrder
+
+Get account order detail
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAccountOrder(
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""66a033fa-da74-4fcf-b527-feefdec9257e"",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAccountOrder`: AccountOrder
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.Status`: %v\n", resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.OrderType`: %v\n", resp.OrderType)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.TimeInForce`: %v\n", resp.TimeInForce)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.PricedIn`: %v\n", *resp.PricedIn)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.PriceEffect`: %v\n", resp.PriceEffect)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.TimePlaced`: %v\n", *resp.TimePlaced)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.Group`: %v\n", *resp.Group)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrder.GetAccountOrder.Legs`: %v\n", resp.Legs)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllAccountOrders
+
+List all account orders
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAllAccountOrders(
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+    request.State("state_example")
+    request.Days(30)
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAllAccountOrders``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAllAccountOrders`: AllAccountOrdersResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllAccountOrders`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountOrdersResponse.GetAllAccountOrders.Results`: %v\n", resp.Results)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountOrdersResponse.GetAllAccountOrders.DataFreshness`: %v\n", resp.DataFreshness)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAllAccountPositions
 
 List all account positions
@@ -276,6 +391,54 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllAccountPositions`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.Results`: %v\n", resp.Results)
     fmt.Fprintf(os.Stdout, "Response from `AllAccountPositionsResponse.GetAllAccountPositions.DataFreshness`: %v\n", resp.DataFreshness)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllAccountRecentOrders
+
+List all account recent orders (last 24 hours only)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAllAccountRecentOrders(
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+    request.OnlyExecuted(true)
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAllAccountRecentOrders``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAllAccountRecentOrders`: AllAccountOrdersResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllAccountRecentOrders`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountOrdersResponse.GetAllAccountRecentOrders.Results`: %v\n", resp.Results)
+    fmt.Fprintf(os.Stdout, "Response from `AllAccountOrdersResponse.GetAllAccountRecentOrders.DataFreshness`: %v\n", resp.DataFreshness)
 }
 ```
 

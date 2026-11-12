@@ -108,7 +108,7 @@ public class Status {
    * @return timestamp
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-11-04T01:47:00.377Z", value = "")
+  @ApiModelProperty(example = "2022-11-04T01:47:00.377969Z", value = "")
 
   public String getTimestamp() {
     return timestamp;

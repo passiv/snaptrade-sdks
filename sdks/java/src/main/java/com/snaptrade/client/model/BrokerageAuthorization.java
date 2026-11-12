@@ -147,7 +147,7 @@ public class BrokerageAuthorization {
    * @return createdDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-08-20T21:56:19.123Z", value = "Timestamp of when the connection was established in SnapTrade.")
+  @ApiModelProperty(example = "2024-08-20T21:56:19.123935Z", value = "Timestamp of when the connection was established in SnapTrade.")
 
   public OffsetDateTime getCreatedDate() {
     return createdDate;
@@ -292,7 +292,7 @@ public class BrokerageAuthorization {
    * @return disabledDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-21T20:11:19.217Z", value = "Timestamp of when the connection was disabled in SnapTrade.")
+  @ApiModelProperty(example = "2022-01-21T15:11:19.217-05:00", value = "Timestamp of when the connection was disabled in SnapTrade.")
 
   public OffsetDateTime getDisabledDate() {
     return disabledDate;
@@ -362,7 +362,7 @@ public class BrokerageAuthorization {
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-08-20T21:56:20.057Z", value = "Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.")
+  @ApiModelProperty(example = "2024-08-20T21:56:20.057224Z", value = "Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.")
 
   public OffsetDateTime getUpdatedDate() {
     return updatedDate;

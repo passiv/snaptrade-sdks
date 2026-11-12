@@ -83,7 +83,10 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAccountBalancesV2`](#snaptradeaccountinformationgetaccountbalancesv2)
   * [`snaptrade.accountInformation.getAccountDetails`](#snaptradeaccountinformationgetaccountdetails)
+  * [`snaptrade.accountInformation.getAccountOrder`](#snaptradeaccountinformationgetaccountorder)
+  * [`snaptrade.accountInformation.getAllAccountOrders`](#snaptradeaccountinformationgetallaccountorders)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
+  * [`snaptrade.accountInformation.getAllAccountRecentOrders`](#snaptradeaccountinformationgetallaccountrecentorders)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
@@ -111,9 +114,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
-  * [`snaptrade.experimentalEndpoints.getAccountOrder`](#snaptradeexperimentalendpointsgetaccountorder)
-  * [`snaptrade.experimentalEndpoints.getAllAccountOrders`](#snaptradeexperimentalendpointsgetallaccountorders)
-  * [`snaptrade.experimentalEndpoints.getAllAccountRecentOrders`](#snaptradeexperimentalendpointsgetallaccountrecentorders)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
@@ -343,8 +343,8 @@ If the connection has become disabled, it can no longer access the latest data f
 const getAccountActivitiesResponse =
   await commercialApiKeyClient.accountInformation.getAccountActivities({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    startDate: "2022-01-24T00:00:00.000Z",
-    endDate: "2022-01-24T00:00:00.000Z",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
     offset: 0,
     limit: 1,
     type: "BUY,SELL,DIVIDEND",
@@ -365,8 +365,8 @@ Required credentials for this mode:
 const getAccountActivitiesResponse =
   await personalApiKeyClient.accountInformation.getAccountActivities({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    startDate: "2022-01-24T00:00:00.000Z",
-    endDate: "2022-01-24T00:00:00.000Z",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
     offset: 0,
     limit: 1,
     type: "BUY,SELL,DIVIDEND",
@@ -381,8 +381,8 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 const getAccountActivitiesResponse =
   await oauthClient.accountInformation.getAccountActivities({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    startDate: "2022-01-24T00:00:00.000Z",
-    endDate: "2022-01-24T00:00:00.000Z",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
     offset: 0,
     limit: 1,
     type: "BUY,SELL,DIVIDEND",
@@ -630,6 +630,144 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 ---
 
 
+### `snaptrade.accountInformation.getAccountOrder`<a id="snaptradeaccountinformationgetaccountorder"></a>
+
+Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+
+The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+
+This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+**Beta:** this endpoint and its response schema may change.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const getAccountOrderResponse =
+  await commercialApiKeyClient.accountInformation.getAccountOrder({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAccountOrderResponse =
+  await personalApiKeyClient.accountInformation.getAccountOrder({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrder](./models/account-order.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAllAccountOrders`<a id="snaptradeaccountinformationgetallaccountorders"></a>
+
+Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+
+Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+
+`order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+
+**Beta:** this endpoint and its response schema may change.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const getAllAccountOrdersResponse =
+  await commercialApiKeyClient.accountInformation.getAllAccountOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAllAccountOrdersResponse =
+  await personalApiKeyClient.accountInformation.getAllAccountOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### state: `'all' | 'open' | 'executed'`<a id="state-all--open--executed"></a>
+
+defaults to \"all\"
+
+##### days: `number`<a id="days-number"></a>
+
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountOrdersResponse](./models/all-account-orders-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/all` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.accountInformation.getAllAccountPositions`<a id="snaptradeaccountinformationgetallaccountpositions"></a>
 
 Returns a list of all positions in the specified account.
@@ -696,6 +834,74 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAllAccountRecentOrders`<a id="snaptradeaccountinformationgetallaccountrecentorders"></a>
+
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
+By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+
+Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
+
+**Beta:** this endpoint and its response schema may change.
+
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const getAllAccountRecentOrdersResponse =
+  await commercialApiKeyClient.accountInformation.getAllAccountRecentOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAllAccountRecentOrdersResponse =
+  await personalApiKeyClient.accountInformation.getAllAccountRecentOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### onlyExecuted: `boolean`<a id="onlyexecuted-boolean"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountOrdersResponse](./models/all-account-orders-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/recent` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2370,212 +2576,6 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 ---
 
 
-### `snaptrade.experimentalEndpoints.getAccountOrder`<a id="snaptradeexperimentalendpointsgetaccountorder"></a>
-
-Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
-
-The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
-
-This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
-
-This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-**Experimental:** this endpoint may change without notice.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```typescript
-const getAccountOrderResponse =
-  await commercialApiKeyClient.experimentalEndpoints.getAccountOrder({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-Required credentials for this mode:
-
-- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```typescript
-const getAccountOrderResponse =
-  await personalApiKeyClient.experimentalEndpoints.getAccountOrder({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
-  });
-```
-
-The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrder](./models/account-order.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getAllAccountOrders`<a id="snaptradeexperimentalendpointsgetallaccountorders"></a>
-
-Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
-
-Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
-
-`order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
-
-**Experimental:** this endpoint may change without notice.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```typescript
-const getAllAccountOrdersResponse =
-  await commercialApiKeyClient.experimentalEndpoints.getAllAccountOrders({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    state: "all",
-    days: 30,
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-Required credentials for this mode:
-
-- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```typescript
-const getAllAccountOrdersResponse =
-  await personalApiKeyClient.experimentalEndpoints.getAllAccountOrders({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    state: "all",
-    days: 30,
-  });
-```
-
-The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### state: `'all' | 'open' | 'executed'`<a id="state-all--open--executed"></a>
-
-defaults to \"all\"
-
-##### days: `number`<a id="days-number"></a>
-
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AllAccountOrdersResponse](./models/all-account-orders-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getAllAccountRecentOrders`<a id="snaptradeexperimentalendpointsgetallaccountrecentorders"></a>
-
-A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
-By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-
-Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-**Experimental:** this endpoint may change without notice.
-
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```typescript
-const getAllAccountRecentOrdersResponse =
-  await commercialApiKeyClient.experimentalEndpoints.getAllAccountRecentOrders({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    onlyExecuted: true,
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  });
-```
-
-Required credentials for this mode:
-
-- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```typescript
-const getAllAccountRecentOrdersResponse =
-  await personalApiKeyClient.experimentalEndpoints.getAllAccountRecentOrders({
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    onlyExecuted: true,
-  });
-```
-
-The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-##### onlyExecuted: `boolean`<a id="onlyexecuted-boolean"></a>
-
-Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AllAccountOrdersResponse](./models/all-account-orders-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/recent` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`<a id="snaptradeexperimentalendpointsgetuseraccountorderdetailv2"></a>
 
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
@@ -2890,7 +2890,7 @@ const placeSimpleOrderResponse =
     stop_price: "1.25",
     price_effect: "debit",
     client_order_id: "550e8400-e29b-41d4-a716-446655440000",
-    expiry_date: "2026-12-18T20:00:00.000Z",
+    expiry_date: "2026-12-18T20:00:00Z",
     notional_value: "1.25",
     trading_session: "regular",
     userId: "snaptrade-user-123",
@@ -2926,7 +2926,7 @@ const placeSimpleOrderResponse =
     stop_price: "1.25",
     price_effect: "debit",
     client_order_id: "550e8400-e29b-41d4-a716-446655440000",
-    expiry_date: "2026-12-18T20:00:00.000Z",
+    expiry_date: "2026-12-18T20:00:00Z",
     notional_value: "1.25",
     trading_session: "regular",
   });
@@ -2956,7 +2956,7 @@ const placeSimpleOrderResponse =
     stop_price: "1.25",
     price_effect: "debit",
     client_order_id: "550e8400-e29b-41d4-a716-446655440000",
-    expiry_date: "2026-12-18T20:00:00.000Z",
+    expiry_date: "2026-12-18T20:00:00Z",
     notional_value: "1.25",
     trading_session: "regular",
   });
@@ -4250,7 +4250,7 @@ const placeCryptoOrderResponse =
     limit_price: "123.45",
     stop_price: "123.45",
     post_only: false,
-    expiration_date: "2024-01-01T00:00:00.000Z",
+    expiration_date: "2024-01-01T00:00:00Z",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
@@ -4279,7 +4279,7 @@ const placeCryptoOrderResponse =
     limit_price: "123.45",
     stop_price: "123.45",
     post_only: false,
-    expiration_date: "2024-01-01T00:00:00.000Z",
+    expiration_date: "2024-01-01T00:00:00Z",
   });
 ```
 
@@ -4301,7 +4301,7 @@ const placeCryptoOrderResponse = await oauthClient.trading.placeCryptoOrder({
   limit_price: "123.45",
   stop_price: "123.45",
   post_only: false,
-  expiration_date: "2024-01-01T00:00:00.000Z",
+  expiration_date: "2024-01-01T00:00:00Z",
 });
 ```
 
@@ -4734,7 +4734,7 @@ const previewCryptoOrderResponse =
     limit_price: "123.45",
     stop_price: "123.45",
     post_only: false,
-    expiration_date: "2024-01-01T00:00:00.000Z",
+    expiration_date: "2024-01-01T00:00:00Z",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
@@ -4763,7 +4763,7 @@ const previewCryptoOrderResponse =
     limit_price: "123.45",
     stop_price: "123.45",
     post_only: false,
-    expiration_date: "2024-01-01T00:00:00.000Z",
+    expiration_date: "2024-01-01T00:00:00Z",
   });
 ```
 
@@ -4786,7 +4786,7 @@ const previewCryptoOrderResponse = await oauthClient.trading.previewCryptoOrder(
     limit_price: "123.45",
     stop_price: "123.45",
     post_only: false,
-    expiration_date: "2024-01-01T00:00:00.000Z",
+    expiration_date: "2024-01-01T00:00:00Z",
   }
 );
 ```

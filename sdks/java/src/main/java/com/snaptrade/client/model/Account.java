@@ -426,7 +426,7 @@ public class Account {
    * @return createdDate
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "2024-07-23T22:50:22.761Z", required = true, value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.")
+  @ApiModelProperty(example = "2024-07-23T22:50:22.761390Z", required = true, value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.")
 
   public OffsetDateTime getCreatedDate() {
     return createdDate;

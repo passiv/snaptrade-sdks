@@ -202,7 +202,7 @@ public class RateOfReturnObject {
    * @return createdDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-07-30T22:51:49.746Z", value = "The date this was fetched")
+  @ApiModelProperty(example = "2024-07-30T22:51:49.746270Z", value = "The date this was fetched")
 
   public OffsetDateTime getCreatedDate() {
     return createdDate;

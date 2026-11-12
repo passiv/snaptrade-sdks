@@ -1826,6 +1826,139 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
+  /accounts/{accountId}/orders/all:
+    get:
+      description: |
+        Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+
+        Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+
+        `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+
+        **Beta:** this endpoint and its response schema may change.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      operationId: AccountInformation_getAllAccountOrders
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: defaults to "all"
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          enum:
+          - all
+          - open
+          - executed
+          type: string
+        style: form
+      - description: Number of days in the past to fetch the most recent orders. Defaults
+          to the last 30 days if no value is passed in. Values greater than 90 will
+          be capped at 90.
+        explode: true
+        in: query
+        name: days
+        required: false
+        schema:
+          example: 30
+          format: int32
+          maximum: 90
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-all-get-parameters-3-schema
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllAccountOrdersResponse'
+          description: OK
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429TooManyRequestsResponse'
+          description: |
+            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
+            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
+            hit, then wait for the matching `*-Reset` value before retrying.
+
+            Not every header listed below appears on every operation. The
+            `X-RateLimit-Account-*` headers are sent only where the per-account limit
+            is enforced, and OAuth-authenticated requests never receive the
+            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
+            `X-RateLimit-Reset`.
+
+            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
+            header, covers OAuth-authenticated requests and signed requests not
+            governed by the customer-level limit; it does not stack on top of that
+            limit. So a 429 can arrive with every reported counter above zero — or
+            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
+            case.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              explode: false
+              schema:
+                example: 7
+                type: integer
+                x-konfig-original-example: 7
+                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
+              style: simple
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/X-RateLimit-Reset'
+            X-RateLimit-Account-Limit:
+              $ref: '#/components/headers/X-RateLimit-Account-Limit'
+            X-RateLimit-Account-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
+            X-RateLimit-Account-Reset:
+              $ref: '#/components/headers/X-RateLimit-Account-Reset'
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
+      summary: List all account orders
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-all
   /accounts/{accountId}/balanceHistory:
     get:
       description: |
@@ -1995,6 +2128,134 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders
+  /accounts/{accountId}/orders/recent:
+    get:
+      description: |
+        A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+        Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
+        By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+
+        Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
+
+        **Beta:** this endpoint and its response schema may change.
+
+        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+      operationId: AccountInformation_getAllAccountRecentOrders
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: Defaults to true. Indicates if request should fetch only executed
+          orders. Set to false to retrieve non executed orders as well
+        explode: true
+        in: query
+        name: only_executed
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllAccountOrdersResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429TooManyRequestsResponse'
+          description: |
+            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
+            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
+            hit, then wait for the matching `*-Reset` value before retrying.
+
+            Not every header listed below appears on every operation. The
+            `X-RateLimit-Account-*` headers are sent only where the per-account limit
+            is enforced, and OAuth-authenticated requests never receive the
+            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
+            `X-RateLimit-Reset`.
+
+            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
+            header, covers OAuth-authenticated requests and signed requests not
+            governed by the customer-level limit; it does not stack on top of that
+            limit. So a 429 can arrive with every reported counter above zero — or
+            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
+            case.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              explode: false
+              schema:
+                example: 7
+                type: integer
+                x-konfig-original-example: 7
+                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
+              style: simple
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/X-RateLimit-Reset'
+            X-RateLimit-Account-Limit:
+              $ref: '#/components/headers/X-RateLimit-Account-Limit'
+            X-RateLimit-Account-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
+            X-RateLimit-Account-Reset:
+              $ref: '#/components/headers/X-RateLimit-Account-Reset'
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501NotImplementedResponse'
+          description: Not Implemented - recent orders are not supported for this
+            brokerage
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
+      summary: List all account recent orders (last 24 hours only)
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-recent
   /accounts/{accountId}/returnRates:
     get:
       description: |
@@ -2353,6 +2614,137 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details
+  /accounts/{accountId}/orders/{brokerageOrderId}:
+    get:
+      description: |
+        Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+
+        The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+
+        This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+
+        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+        **Beta:** this endpoint and its response schema may change.
+      operationId: AccountInformation_getAccountOrder
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: false
+        in: path
+        name: brokerageOrderId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrder'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429TooManyRequestsResponse'
+          description: |
+            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
+            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
+            hit, then wait for the matching `*-Reset` value before retrying.
+
+            Not every header listed below appears on every operation. The
+            `X-RateLimit-Account-*` headers are sent only where the per-account limit
+            is enforced, and OAuth-authenticated requests never receive the
+            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
+            `X-RateLimit-Reset`.
+
+            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
+            header, covers OAuth-authenticated requests and signed requests not
+            governed by the customer-level limit; it does not stack on top of that
+            limit. So a 429 can arrive with every reported counter above zero — or
+            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
+            case.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              explode: false
+              schema:
+                example: 7
+                type: integer
+                x-konfig-original-example: 7
+                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
+              style: simple
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/X-RateLimit-Reset'
+            X-RateLimit-Account-Limit:
+              $ref: '#/components/headers/X-RateLimit-Account-Limit'
+            X-RateLimit-Account-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
+            X-RateLimit-Account-Reset:
+              $ref: '#/components/headers/X-RateLimit-Account-Reset'
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501NotImplementedResponse'
+          description: Not Implemented - order details are not supported for this
+            brokerage
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503BrokerageRequestResponse'
+          description: Service Unavailable - the brokerage connection is busy syncing
+            (sync lock held) or the brokerage API is temporarily unavailable. Safe
+            to retry.
+      summary: Get account order detail
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId
   /accounts/{accountId}/quotes:
     get:
       description: |
@@ -3655,139 +4047,6 @@ paths:
       - Experimental endpoints
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2
-  /accounts/{accountId}/orders/all:
-    get:
-      description: |
-        Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
-
-        Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
-
-        `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
-
-        **Experimental:** this endpoint may change without notice.
-
-        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-      operationId: AccountInformation_getAllAccountOrders
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: defaults to "all"
-        explode: true
-        in: query
-        name: state
-        required: false
-        schema:
-          enum:
-          - all
-          - open
-          - executed
-          type: string
-        style: form
-      - description: Number of days in the past to fetch the most recent orders. Defaults
-          to the last 30 days if no value is passed in. Values greater than 90 will
-          be capped at 90.
-        explode: true
-        in: query
-        name: days
-        required: false
-        schema:
-          example: 30
-          format: int32
-          maximum: 90
-          minimum: 1
-          type: integer
-          x-konfig-original-example: 30
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-all-get-parameters-3-schema
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AllAccountOrdersResponse'
-          description: OK
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/429TooManyRequestsResponse'
-          description: |
-            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
-            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
-            hit, then wait for the matching `*-Reset` value before retrying.
-
-            Not every header listed below appears on every operation. The
-            `X-RateLimit-Account-*` headers are sent only where the per-account limit
-            is enforced, and OAuth-authenticated requests never receive the
-            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
-            `X-RateLimit-Reset`.
-
-            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
-            header, covers OAuth-authenticated requests and signed requests not
-            governed by the customer-level limit; it does not stack on top of that
-            limit. So a 429 can arrive with every reported counter above zero — or
-            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
-            case.
-          headers:
-            Retry-After:
-              description: Seconds to wait before retrying.
-              explode: false
-              schema:
-                example: 7
-                type: integer
-                x-konfig-original-example: 7
-                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
-              style: simple
-            X-RateLimit-Limit:
-              $ref: '#/components/headers/X-RateLimit-Limit'
-            X-RateLimit-Remaining:
-              $ref: '#/components/headers/X-RateLimit-Remaining'
-            X-RateLimit-Reset:
-              $ref: '#/components/headers/X-RateLimit-Reset'
-            X-RateLimit-Account-Limit:
-              $ref: '#/components/headers/X-RateLimit-Account-Limit'
-            X-RateLimit-Account-Remaining:
-              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
-            X-RateLimit-Account-Reset:
-              $ref: '#/components/headers/X-RateLimit-Account-Reset'
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/503BrokerageRequestResponse'
-          description: Service Unavailable - the brokerage connection is busy syncing
-            (sync lock held) or the brokerage API is temporarily unavailable. Safe
-            to retry.
-      summary: List all account orders
-      tags:
-      - Experimental endpoints
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-all
   /accounts/{accountId}/recentOrders/v2:
     get:
       description: |
@@ -3904,134 +4163,6 @@ paths:
       - Experimental endpoints
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders-v2
-  /accounts/{accountId}/orders/recent:
-    get:
-      description: |
-        A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
-        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-        Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
-        By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-
-        Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-        **Experimental:** this endpoint may change without notice.
-
-        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-      operationId: AccountInformation_getAllAccountRecentOrders
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: Defaults to true. Indicates if request should fetch only executed
-          orders. Set to false to retrieve non executed orders as well
-        explode: true
-        in: query
-        name: only_executed
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AllAccountOrdersResponse'
-          description: OK
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
-          description: Forbidden
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/429TooManyRequestsResponse'
-          description: |
-            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
-            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
-            hit, then wait for the matching `*-Reset` value before retrying.
-
-            Not every header listed below appears on every operation. The
-            `X-RateLimit-Account-*` headers are sent only where the per-account limit
-            is enforced, and OAuth-authenticated requests never receive the
-            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
-            `X-RateLimit-Reset`.
-
-            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
-            header, covers OAuth-authenticated requests and signed requests not
-            governed by the customer-level limit; it does not stack on top of that
-            limit. So a 429 can arrive with every reported counter above zero — or
-            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
-            case.
-          headers:
-            Retry-After:
-              description: Seconds to wait before retrying.
-              explode: false
-              schema:
-                example: 7
-                type: integer
-                x-konfig-original-example: 7
-                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
-              style: simple
-            X-RateLimit-Limit:
-              $ref: '#/components/headers/X-RateLimit-Limit'
-            X-RateLimit-Remaining:
-              $ref: '#/components/headers/X-RateLimit-Remaining'
-            X-RateLimit-Reset:
-              $ref: '#/components/headers/X-RateLimit-Reset'
-            X-RateLimit-Account-Limit:
-              $ref: '#/components/headers/X-RateLimit-Account-Limit'
-            X-RateLimit-Account-Remaining:
-              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
-            X-RateLimit-Account-Reset:
-              $ref: '#/components/headers/X-RateLimit-Account-Reset'
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-        "501":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/501NotImplementedResponse'
-          description: Not Implemented - recent orders are not supported for this
-            brokerage
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/503BrokerageRequestResponse'
-          description: Service Unavailable - the brokerage connection is busy syncing
-            (sync lock held) or the brokerage API is temporarily unavailable. Safe
-            to retry.
-      summary: List all account recent orders (last 24 hours only)
-      tags:
-      - Experimental endpoints
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-recent
   /accounts/{accountId}/symbols:
     post:
       description: |
@@ -4565,137 +4696,6 @@ paths:
       - Experimental endpoints
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-details-v2-brokerageOrderId
-  /accounts/{accountId}/orders/{brokerageOrderId}:
-    get:
-      description: |
-        Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
-
-        The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
-
-        This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
-
-        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-        **Experimental:** this endpoint may change without notice.
-      operationId: AccountInformation_getAccountOrder
-      parameters:
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: false
-        in: path
-        name: brokerageOrderId
-        required: true
-        schema:
-          $ref: '#/components/schemas/BrokerageOrderID'
-        style: simple
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrder'
-          description: OK
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Not Found
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/429TooManyRequestsResponse'
-          description: |
-            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
-            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
-            hit, then wait for the matching `*-Reset` value before retrying.
-
-            Not every header listed below appears on every operation. The
-            `X-RateLimit-Account-*` headers are sent only where the per-account limit
-            is enforced, and OAuth-authenticated requests never receive the
-            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
-            `X-RateLimit-Reset`.
-
-            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
-            header, covers OAuth-authenticated requests and signed requests not
-            governed by the customer-level limit; it does not stack on top of that
-            limit. So a 429 can arrive with every reported counter above zero — or
-            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
-            case.
-          headers:
-            Retry-After:
-              description: Seconds to wait before retrying.
-              explode: false
-              schema:
-                example: 7
-                type: integer
-                x-konfig-original-example: 7
-                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
-              style: simple
-            X-RateLimit-Limit:
-              $ref: '#/components/headers/X-RateLimit-Limit'
-            X-RateLimit-Remaining:
-              $ref: '#/components/headers/X-RateLimit-Remaining'
-            X-RateLimit-Reset:
-              $ref: '#/components/headers/X-RateLimit-Reset'
-            X-RateLimit-Account-Limit:
-              $ref: '#/components/headers/X-RateLimit-Account-Limit'
-            X-RateLimit-Account-Remaining:
-              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
-            X-RateLimit-Account-Reset:
-              $ref: '#/components/headers/X-RateLimit-Account-Reset'
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-        "501":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/501NotImplementedResponse'
-          description: Not Implemented - order details are not supported for this
-            brokerage
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/503BrokerageRequestResponse'
-          description: Service Unavailable - the brokerage connection is busy syncing
-            (sync lock held) or the brokerage API is temporarily unavailable. Safe
-            to retry.
-      summary: Get account order detail
-      tags:
-      - Experimental endpoints
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId
 components:
   headers:
     X-RateLimit-Limit:
@@ -5247,7 +5247,7 @@ components:
             initial_sync_completed: true
             first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: ""
-        created_date: 2024-07-23T22:50:22.761Z
+        created_date: 2024-07-23T22:50:22.76139Z
         funding_date: 2024-07-25T12:00:00Z
         cash_restrictions: []
         opening_date: 2024-07-20T09:30:00Z
@@ -5303,10 +5303,10 @@ components:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
             \ format indicating when the account was created in SnapTrade. This is\
             \ _not_ the account opening date at the brokerage."
-          example: 2024-07-23T22:50:22.761Z
+          example: 2024-07-23T22:50:22.76139Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-07-23T22:50:22.761Z
+          x-konfig-original-example: 2024-07-23T22:50:22.761390Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-created_date
         funding_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
@@ -5317,7 +5317,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-07-25T12:00:00.000Z
+          x-konfig-original-example: 2024-07-25T12:00:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-funding_date
         opening_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
@@ -5328,7 +5328,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-07-20T09:30:00.000Z
+          x-konfig-original-example: 2024-07-20T09:30:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-opening_date
         sync_status:
           $ref: '#/components/schemas/AccountSyncStatus'
@@ -5556,7 +5556,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-07-20T09:30:00.000Z
+          x-konfig-original-example: 2024-07-20T09:30:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-opening_date
         funding_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
@@ -5568,7 +5568,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-07-25T12:00:00.000Z
+          x-konfig-original-example: 2024-07-25T12:00:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-InvestmentAccount-properties-funding_date
         sync_status:
           $ref: '#/components/schemas/ConnectionAccountSyncStatus'
@@ -5681,7 +5681,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2018-06-04T00:00:00.000Z
+          x-konfig-original-example: 2018-06-04T00:00:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DepositAccount-properties-opening_date
         sync_status:
           $ref: '#/components/schemas/DepositAccountSyncStatus'
@@ -5770,7 +5770,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2019-11-15T00:00:00.000Z
+          x-konfig-original-example: 2019-11-15T00:00:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-opening_date
         sync_status:
           $ref: '#/components/schemas/LineOfCreditAccountSyncStatus'
@@ -5876,7 +5876,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2018-06-04T00:00:00.000Z
+          x-konfig-original-example: 2018-06-04T00:00:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AnnuityAccount-properties-opening_date
         sync_status:
           $ref: '#/components/schemas/AnnuityAccountSyncStatus'
@@ -5968,7 +5968,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2018-06-04T00:00:00.000Z
+          x-konfig-original-example: 2018-06-04T00:00:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MortgageAccount-properties-opening_date
         sync_status:
           $ref: '#/components/schemas/MortgageAccountSyncStatus'
@@ -6485,7 +6485,7 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -6586,7 +6586,7 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -6713,7 +6713,7 @@ components:
               initial_sync_completed: true
               first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: ""
-          created_date: 2024-07-23T22:50:22.761Z
+          created_date: 2024-07-23T22:50:22.76139Z
           funding_date: 2024-07-25T12:00:00Z
           cash_restrictions: []
           opening_date: 2024-07-20T09:30:00Z
@@ -6760,7 +6760,7 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -6861,7 +6861,7 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -6974,10 +6974,10 @@ components:
         data:
         - timeframe: ALL
           return_percent: 5.97
-          created_date: 2024-07-30T22:51:49.746Z
+          created_date: 2024-07-30T22:51:49.74627Z
         - timeframe: ALL
           return_percent: 5.97
-          created_date: 2024-07-30T22:51:49.746Z
+          created_date: 2024-07-30T22:51:49.74627Z
       properties:
         data:
           description: List of return percentages
@@ -6991,7 +6991,7 @@ components:
       example:
         timeframe: ALL
         return_percent: 5.97
-        created_date: 2024-07-30T22:51:49.746Z
+        created_date: 2024-07-30T22:51:49.74627Z
       properties:
         timeframe:
           description: The timeframe this return percent is reflecting
@@ -7015,10 +7015,10 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-RateOfReturnObject-properties-return_percent
         created_date:
           description: The date this was fetched
-          example: 2024-07-30T22:51:49.746Z
+          example: 2024-07-30T22:51:49.74627Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-original-example: 2024-07-30T22:51:49.746270Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-RateOfReturnObject-properties-created_date
       type: object
     AccountOrderRecord:
@@ -7029,7 +7029,7 @@ components:
       example:
         time_executed: 2024-08-05T00:05:57.409Z
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        time_placed: 2024-07-30T22:51:49.746Z
+        time_placed: 2024-07-30T22:51:49.74627Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         order_role: TRIGGER
         stop_price: "12.50"
@@ -7268,10 +7268,10 @@ components:
         time_placed:
           description: The time the order was placed. This is the time the order was
             submitted to the brokerage.
-          example: 2024-07-30T22:51:49.746Z
+          example: 2024-07-30T22:51:49.74627Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-original-example: 2024-07-30T22:51:49.746270Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed
         time_updated:
           description: The time the order was last updated in the brokerage system.
@@ -7280,7 +7280,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated
         time_executed:
           description: The time the order was executed in the brokerage system. This
@@ -7289,7 +7289,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed
         expiry_date:
           description: The time the order expires. This value is not always available
@@ -7298,7 +7298,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date
         symbol:
           deprecated: true
@@ -7565,7 +7565,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2026-07-30T22:51:49.000Z
+          x-konfig-original-example: 2026-07-30T22:51:49Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-expiry_date
         priced_in:
           $ref: '#/components/schemas/PricedInInstrumentNullable'
@@ -7620,7 +7620,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2026-07-30T22:51:49.000Z
+          x-konfig-original-example: 2026-07-30T22:51:49Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-time_placed
         time_updated:
           description: "The time the order was last updated at the brokerage, when\
@@ -7629,7 +7629,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2026-07-30T22:52:10.000Z
+          x-konfig-original-example: 2026-07-30T22:52:10Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-time_updated
         time_executed:
           description: "The time the order was executed, when available."
@@ -7637,7 +7637,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2026-08-05T00:05:57.000Z
+          x-konfig-original-example: 2026-08-05T00:05:57Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrder-properties-time_executed
         group:
           $ref: '#/components/schemas/AccountOrderGroupNullable'
@@ -8002,7 +8002,7 @@ components:
         orders:
         - brokerage_group_order_id: "1234567890"
           time_executed: 2024-08-05T00:05:57.409Z
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: "12.34"
           order_role: TRIGGER
@@ -8045,7 +8045,7 @@ components:
           status: null
         - brokerage_group_order_id: "1234567890"
           time_executed: 2024-08-05T00:05:57.409Z
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: "12.34"
           order_role: TRIGGER
@@ -8101,7 +8101,7 @@ components:
       example:
         brokerage_group_order_id: "1234567890"
         time_executed: 2024-08-05T00:05:57.409Z
-        time_placed: 2024-07-30T22:51:49.746Z
+        time_placed: 2024-07-30T22:51:49.74627Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         limit_price: "12.34"
         order_role: TRIGGER
@@ -8192,10 +8192,10 @@ components:
         time_placed:
           description: The time the order was placed. This is the time the order was
             submitted to the brokerage.
-          example: 2024-07-30T22:51:49.746Z
+          example: 2024-07-30T22:51:49.74627Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-original-example: 2024-07-30T22:51:49.746270Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_placed
         time_executed:
           description: The time the order was executed in the brokerage system. This
@@ -8204,7 +8204,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_executed
         price_currency:
           description: Price currency code for the order.
@@ -8738,15 +8738,15 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
         time_placed:
           description: Time
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
         time_updated:
           description: Time
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
       type: object
     SnapTradeHoldingsAccount:
@@ -9352,7 +9352,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2026-10-08T02:47:00.000Z
+          x-konfig-original-example: 2026-10-08T02:47:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerStats-properties-assets_under_management_calculated_at
       required:
       - assets_under_management
@@ -9500,7 +9500,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2026-10-08T02:47:00.000Z
+          x-konfig-original-example: 2026-10-08T02:47:00.000000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets_calculated_at
       required:
       - connected_assets
@@ -9916,7 +9916,7 @@ components:
           - currency: USD
             amount: "72658.27"
         data_freshness:
-          as_of: 2026-10-15T11:03:35.000Z
+          as_of: 2026-10-15T11:03:35Z
       properties:
         account_id:
           description: Unique identifier for the connected brokerage account. This
@@ -9993,7 +9993,7 @@ components:
           - currency: USD
             amount: "72658.27"
         data_freshness:
-          as_of: 2026-10-15T11:03:35.000Z
+          as_of: 2026-10-15T11:03:35Z
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalancesV2Response
     AllAccountPositionsResponse:
       additionalProperties: true
@@ -11770,7 +11770,7 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           slug: ROBINHOOD
           aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
-        disabled_date: 2022-01-21T20:11:19.217Z
+        disabled_date: 2022-01-21T15:11:19.217-05:00
         meta:
           identifier: 123456
         data_freshness_mode:
@@ -11779,8 +11779,8 @@ components:
         name: Connection-1
         disabled: false
         id: 87b24961-b51e-4db8-9226-f198f6518a89
-        created_date: 2024-08-20T21:56:19.123Z
-        updated_date: 2024-08-20T21:56:20.057Z
+        created_date: 2024-08-20T21:56:19.123935Z
+        updated_date: 2024-08-20T21:56:20.057224Z
         type: trade
         is_eligible_for_payout: true
       properties:
@@ -11794,10 +11794,10 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
         created_date:
           description: Timestamp of when the connection was established in SnapTrade.
-          example: 2024-08-20T21:56:19.123Z
+          example: 2024-08-20T21:56:19.123935Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-08-20T21:56:19.123Z
+          x-konfig-original-example: 2024-08-20T21:56:19.123935Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date
         brokerage:
           $ref: '#/components/schemas/Brokerage'
@@ -11830,11 +11830,11 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-disabled
         disabled_date:
           description: Timestamp of when the connection was disabled in SnapTrade.
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217-05:00
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-disabled_date
         meta:
           additionalProperties: true
@@ -11853,10 +11853,10 @@ components:
           description: Timestamp of when the connection was last updated in SnapTrade.
             This field is deprecated. Please let us know if you have a valid use case
             for this field.
-          example: 2024-08-20T21:56:20.057Z
+          example: 2024-08-20T21:56:20.057224Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-08-20T21:56:20.057Z
+          x-konfig-original-example: 2024-08-20T21:56:20.057224Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date
         is_eligible_for_payout:
           description: Whether the connection is eligible for a payout. This is an
@@ -11980,9 +11980,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserID
         created_date:
           description: Time
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
         brokerage_status_code:
           example: 400
@@ -12349,7 +12349,7 @@ components:
       example:
         online: true
         version: 153
-        timestamp: 2022-11-04T01:47:00.377Z
+        timestamp: 2022-11-04T01:47:00.377969Z
       properties:
         version:
           example: 153
@@ -12357,9 +12357,9 @@ components:
           x-konfig-original-example: 153
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Status-properties-version
         timestamp:
-          example: 2022-11-04T01:47:00.377Z
+          example: 2022-11-04T01:47:00.377969Z
           type: string
-          x-konfig-original-example: 2022-11-04T01:47:00.377Z
+          x-konfig-original-example: 2022-11-04T01:47:00.377969Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Status-properties-timestamp
         online:
           example: true
@@ -13963,7 +13963,7 @@ components:
           example: 2024-01-24T15:00:00Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-01-24T15:00:00.000Z
+          x-konfig-original-example: 2024-01-24T15:00:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyPairQuote-properties-timestamp
       required:
       - ask
@@ -13987,7 +13987,7 @@ components:
         order:
           time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -14139,7 +14139,7 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -14240,7 +14240,7 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_placed: 2024-07-30T22:51:49.746Z
+          time_placed: 2024-07-30T22:51:49.74627Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           order_role: TRIGGER
           stop_price: "12.50"
@@ -14733,14 +14733,14 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-03-22T16:27:55.000Z
+          x-konfig-original-example: 2024-03-22T16:27:55Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-trade_date
         settlement_date:
           description: The date on which the transaction is settled.
           example: 2024-03-26T00:00:00Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-03-26T00:00:00.000Z
+          x-konfig-original-example: 2024-03-26T00:00:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-settlement_date
         fee:
           description: Any fee associated with the transaction if provided by the
@@ -14902,14 +14902,14 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-03-22T16:27:55.000Z
+          x-konfig-original-example: 2024-03-22T16:27:55Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-trade_date
         settlement_date:
           description: The date on which the transaction is settled.
           example: 2024-03-26T00:00:00Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-03-26T00:00:00.000Z
+          x-konfig-original-example: 2024-03-26T00:00:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-settlement_date
         fee:
           description: Any fee associated with the transaction if provided by the
@@ -15351,9 +15351,9 @@ components:
       type: object
     Time:
       description: Time
-      example: 2022-01-21T20:11:19.217Z
+      example: 2022-01-21T15:11:19.217000-05:00
       type: string
-      x-konfig-original-example: 2022-01-21T20:11:19.217Z
+      x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
     BrokerageType:
       additionalProperties: true
@@ -15396,10 +15396,10 @@ components:
           x-konfig-original-example: portfolio-app
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-oauthClientId
         eventTimestamp:
-          example: 2026-08-18T14:31:55.858Z
+          example: 2026-08-18T14:31:55.85882Z
           format: date-time
           type: string
-          x-konfig-original-example: 2026-08-18T14:31:55.858Z
+          x-konfig-original-example: 2026-08-18T14:31:55.858820+00:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-eventTimestamp
         userId:
           description: "The SnapTrade Personal user UUID, matching the `sub` claim\
@@ -15713,6 +15713,10 @@ components:
       example: 30
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-orders-all-get-parameters-3-schema:
+      example: 30
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-returnRates-get-parameters-3-schema:
       example: "ALL,1Y"
       type: string
@@ -15738,10 +15742,6 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema:
-      example: 30
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-orders-all-get-parameters-3-schema:
       example: 30
       type: number
       x-do-not-generate: true
@@ -15840,15 +15840,15 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-created_date:
-      example: 2024-07-23T22:50:22.761Z
+      example: 2024-07-23T22:50:22.761390Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-funding_date:
-      example: 2024-07-25T12:00:00.000Z
+      example: 2024-07-25T12:00:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-opening_date:
-      example: 2024-07-20T09:30:00.000Z
+      example: 2024-07-20T09:30:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-status:
@@ -15911,11 +15911,11 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-opening_date:
-      example: 2024-07-20T09:30:00.000Z
+      example: 2024-07-20T09:30:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-funding_date:
-      example: 2024-07-25T12:00:00.000Z
+      example: 2024-07-25T12:00:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-InvestmentAccount-properties-raw_type:
@@ -15973,7 +15973,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-DepositAccount-properties-opening_date:
-      example: 2018-06-04T00:00:00.000Z
+      example: 2018-06-04T00:00:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-DepositAccount-properties-raw_type:
@@ -16023,7 +16023,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-opening_date:
-      example: 2019-11-15T00:00:00.000Z
+      example: 2019-11-15T00:00:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-LineOfCreditAccount-properties-raw_type:
@@ -16121,7 +16121,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AnnuityAccount-properties-opening_date:
-      example: 2018-06-04T00:00:00.000Z
+      example: 2018-06-04T00:00:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AnnuityAccount-properties-raw_type:
@@ -16171,7 +16171,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-MortgageAccount-properties-opening_date:
-      example: 2018-06-04T00:00:00.000Z
+      example: 2018-06-04T00:00:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-MortgageAccount-properties-raw_type:
@@ -16257,7 +16257,7 @@ components:
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-RateOfReturnObject-properties-created_date:
-      example: 2024-07-30T22:51:49.746Z
+      example: 2024-07-30T22:51:49.746270Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-brokerage_group_order_id:
@@ -16301,19 +16301,19 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed:
-      example: 2024-07-30T22:51:49.746Z
+      example: 2024-07-30T22:51:49.746270Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated:
-      example: 2024-08-05T00:05:57.409Z
+      example: 2024-08-05T00:05:57.409000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed:
-      example: 2024-08-05T00:05:57.409Z
+      example: 2024-08-05T00:05:57.409000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date:
-      example: 2024-08-05T00:05:57.409Z
+      example: 2024-08-05T00:05:57.409000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountValueHistoryResponse-properties-currency:
@@ -16329,7 +16329,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AllAccountOrdersResponse-properties-data_freshness-properties-as_of:
-      example: 2026-06-02T14:30:00.000Z
+      example: 2026-06-02T14:30:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-time_in_force:
@@ -16337,7 +16337,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-expiry_date:
-      example: 2026-07-30T22:51:49.000Z
+      example: 2026-07-30T22:51:49Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-total_quantity:
@@ -16361,15 +16361,15 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-time_placed:
-      example: 2026-07-30T22:51:49.000Z
+      example: 2026-07-30T22:51:49Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-time_updated:
-      example: 2026-07-30T22:52:10.000Z
+      example: 2026-07-30T22:52:10Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrder-properties-time_executed:
-      example: 2026-08-05T00:05:57.000Z
+      example: 2026-08-05T00:05:57Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderGroup-properties-id:
@@ -16473,11 +16473,11 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_placed:
-      example: 2024-07-30T22:51:49.746Z
+      example: 2024-07-30T22:51:49.746270Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_executed:
-      example: 2024-08-05T00:05:57.409Z
+      example: 2024-08-05T00:05:57.409000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-price_currency:
@@ -16897,7 +16897,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerStats-properties-assets_under_management_calculated_at:
-      example: 2026-10-08T02:47:00.000Z
+      example: 2026-10-08T02:47:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-total_users:
@@ -16959,7 +16959,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ConnectedAssetPartnerStats-properties-connected_assets_calculated_at:
-      example: 2026-10-08T02:47:00.000Z
+      example: 2026-10-08T02:47:00.000000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerData-properties-slug:
@@ -17096,7 +17096,7 @@ components:
           - currency: USD
             amount: "72658.27"
         data_freshness:
-          as_of: 2026-10-15T11:03:35.000Z
+          as_of: 2026-10-15T11:03:35Z
       properties:
         account_id:
           example: 378eb9a5-448b-4fbc-ab61-29d2bcf0ec09
@@ -17161,7 +17161,7 @@ components:
           additionalProperties: true
           properties:
             as_of:
-              example: 2026-10-15T11:03:35.000Z
+              example: 2026-10-15T11:03:35Z
               type: string
           type: object
       type: object
@@ -17183,11 +17183,11 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountBalancesV2Response-properties-data_freshness-properties-as_of:
-      example: 2026-10-15T11:03:35.000Z
+      example: 2026-10-15T11:03:35Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-data_freshness-properties-as_of:
-      example: 2026-06-02T14:30:00.000Z
+      example: 2026-06-02T14:30:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountPosition-properties-units:
@@ -17802,7 +17802,7 @@ components:
       type: array
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date:
-      example: 2024-08-20T21:56:19.123Z
+      example: 2024-08-20T21:56:19.123935Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-name:
@@ -17818,7 +17818,7 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-disabled_date:
-      example: 2022-01-21T20:11:19.217Z
+      example: 2022-01-21T15:11:19.217000-05:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-meta:
@@ -17832,7 +17832,7 @@ components:
       type: object
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date:
-      example: 2024-08-20T21:56:20.057Z
+      example: 2024-08-20T21:56:20.057224Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-is_eligible_for_payout:
@@ -17907,7 +17907,7 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionChain-items-properties-expiryDate:
-      example: 2022-07-08T04:00:00.000Z
+      example: 2022-07-08T00:00:00.000000-04:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionChain-items-properties-description:
@@ -18027,7 +18027,7 @@ components:
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Status-properties-timestamp:
-      example: 2022-11-04T01:47:00.377Z
+      example: 2022-11-04T01:47:00.377969Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Status-properties-online:
@@ -18343,7 +18343,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CryptocurrencyPairQuote-properties-timestamp:
-      example: 2024-01-24T15:00:00.000Z
+      example: 2024-01-24T15:00:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-CryptoOrderPreview-properties-estimated_fee-properties-amount:
@@ -18405,11 +18405,11 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-trade_date:
-      example: 2024-03-22T16:27:55.000Z
+      example: 2024-03-22T16:27:55Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-settlement_date:
-      example: 2024-03-26T00:00:00.000Z
+      example: 2024-03-26T00:00:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-fee:
@@ -18457,11 +18457,11 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalActivity-properties-trade_date:
-      example: 2024-03-22T16:27:55.000Z
+      example: 2024-03-22T16:27:55Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalActivity-properties-settlement_date:
-      example: 2024-03-26T00:00:00.000Z
+      example: 2024-03-26T00:00:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalActivity-properties-fee:
@@ -18561,7 +18561,7 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Time:
-      example: 2022-01-21T20:11:19.217Z
+      example: 2022-01-21T15:11:19.217000-05:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageType-properties-name:
@@ -18577,7 +18577,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp:
-      example: 2022-01-21T20:11:19.217Z
+      example: 2022-01-21T15:11:19.217000-05:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-WebhookBase-properties-userId:
@@ -18593,7 +18593,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-eventTimestamp:
-      example: 2026-08-18T14:31:55.858Z
+      example: 2026-08-18T14:31:55.858820+00:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OAuthWebhookBase-properties-userId:
@@ -19193,6 +19193,41 @@ components:
       - state
       - days
       - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-all:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        state:
+          enum:
+          - all
+          - open
+          - executed
+          type: string
+        days:
+          example: 30
+          format: int32
+          maximum: 90
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-all-get-parameters-3-schema
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - state
+      - days
+      - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balanceHistory:
       additionalProperties: true
       properties:
@@ -19213,6 +19248,28 @@ components:
       - userSecret
       - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        only_executed:
+          type: boolean
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - only_executed
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-recent:
       additionalProperties: true
       properties:
         userId:
@@ -19320,6 +19377,29 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - accountId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - accountId
+      - brokerageOrderId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - brokerageOrderId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes:
@@ -20083,64 +20163,7 @@ components:
       - state
       - days
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-all:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        state:
-          enum:
-          - all
-          - open
-          - executed
-          type: string
-        days:
-          example: 30
-          format: int32
-          maximum: 90
-          minimum: 1
-          type: integer
-          x-konfig-original-example: 30
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-all-get-parameters-3-schema
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - state
-      - days
-      - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders-v2:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        only_executed:
-          type: boolean
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - only_executed
-      - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-recent:
       additionalProperties: true
       properties:
         userId:
@@ -20411,29 +20434,6 @@ components:
       - brokerageOrderId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId:
-      additionalProperties: true
-      properties:
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        brokerageOrderId:
-          $ref: '#/components/schemas/BrokerageOrderID'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - accountId
-      - brokerageOrderId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - accountId
-      - brokerageOrderId
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-post--connectionAdded:
       additionalProperties: true
       properties:
@@ -20448,9 +20448,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20474,9 +20474,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20500,9 +20500,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20526,9 +20526,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20552,9 +20552,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20578,9 +20578,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20604,9 +20604,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -20630,9 +20630,9 @@ components:
           x-konfig-original-example: WEALTHYCHIPMUNK
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-clientId
         eventTimestamp:
-          example: 2022-01-21T20:11:19.217Z
+          example: 2022-01-21T15:11:19.217000-05:00
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-original-example: 2022-01-21T15:11:19.217000-05:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-WebhookBase-properties-eventTimestamp
         userId:
           example: external_user@test.com
@@ -21143,7 +21143,7 @@ components:
       example:
         time_executed: 2024-08-05T00:05:57.409Z
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        time_placed: 2024-07-30T22:51:49.746Z
+        time_placed: 2024-07-30T22:51:49.74627Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         order_role: TRIGGER
         stop_price: "12.50"
@@ -21383,10 +21383,10 @@ components:
         time_placed:
           description: The time the order was placed. This is the time the order was
             submitted to the brokerage.
-          example: 2024-07-30T22:51:49.746Z
+          example: 2024-07-30T22:51:49.74627Z
           format: date-time
           type: string
-          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-original-example: 2024-07-30T22:51:49.746270Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed
         time_updated:
           description: The time the order was last updated in the brokerage system.
@@ -21395,7 +21395,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated
         time_executed:
           description: The time the order was executed in the brokerage system. This
@@ -21404,7 +21404,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed
         expiry_date:
           description: The time the order expires. This value is not always available
@@ -21413,7 +21413,7 @@ components:
           format: date-time
           nullable: true
           type: string
-          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-original-example: 2024-08-05T00:05:57.409000Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date
         symbol:
           deprecated: true
@@ -21866,7 +21866,7 @@ components:
           example: 2026-06-02T14:30:00Z
           format: date-time
           type: string
-          x-konfig-original-example: 2026-06-02T14:30:00.000Z
+          x-konfig-original-example: 2026-06-02T14:30:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AllAccountOrdersResponse-properties-data_freshness-properties-as_of
       required:
       - as_of
@@ -22041,7 +22041,7 @@ components:
           example: 2026-10-15T11:03:35Z
           format: date-time
           type: string
-          x-konfig-original-example: 2026-10-15T11:03:35.000Z
+          x-konfig-original-example: 2026-10-15T11:03:35Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalancesV2Response-properties-data_freshness-properties-as_of
       required:
       - as_of
@@ -22057,7 +22057,7 @@ components:
           example: 2026-06-02T14:30:00Z
           format: date-time
           type: string
-          x-konfig-original-example: 2026-06-02T14:30:00.000Z
+          x-konfig-original-example: 2026-06-02T14:30:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AllAccountPositionsResponse-properties-data_freshness-properties-as_of
       required:
       - as_of
@@ -22183,9 +22183,9 @@ components:
       additionalProperties: true
       properties:
         expiryDate:
-          example: 2022-07-08T04:00:00.000Z
+          example: 2022-07-08T00:00:00.000000-04:00
           type: string
-          x-konfig-original-example: 2022-07-08T04:00:00.000Z
+          x-konfig-original-example: 2022-07-08T00:00:00.000000-04:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionChain-items-properties-expiryDate
         description:
           example: APPLE INC

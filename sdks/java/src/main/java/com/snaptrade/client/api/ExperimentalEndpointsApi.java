@@ -1,10 +1,8 @@
 package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
-import com.snaptrade.client.model.AccountOrder;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
-import com.snaptrade.client.model.AllAccountOrdersResponse;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import com.snaptrade.client.model.SimpleTradeForm;
@@ -33,21 +31,6 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
     public class CancelSubscriptionRequestBuilder extends CancelSubscriptionRequestBuilderGenerated {
         public CancelSubscriptionRequestBuilder(UUID accountId) {
             super(accountId);
-        }
-    }
-    public class GetAccountOrderRequestBuilder extends GetAccountOrderRequestBuilderGenerated {
-        public GetAccountOrderRequestBuilder(UUID accountId, String brokerageOrderId, String userId, String userSecret) {
-            super(accountId, brokerageOrderId, userId, userSecret);
-        }
-    }
-    public class GetAllAccountOrdersRequestBuilder extends GetAllAccountOrdersRequestBuilderGenerated {
-        public GetAllAccountOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
-        }
-    }
-    public class GetAllAccountRecentOrdersRequestBuilder extends GetAllAccountRecentOrdersRequestBuilderGenerated {
-        public GetAllAccountRecentOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
         }
     }
     public class GetUserAccountOrderDetailV2RequestBuilder extends GetUserAccountOrderDetailV2RequestBuilderGenerated {

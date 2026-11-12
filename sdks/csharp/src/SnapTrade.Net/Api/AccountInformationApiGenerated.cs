@@ -146,6 +146,66 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of ConnectionAccount</returns>
         ApiResponse<ConnectionAccount> GetAccountDetailsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
+        /// Get account order detail
+        /// </summary>
+        /// <remarks>
+        /// Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AccountOrder</returns>
+        AccountOrder GetAccountOrder(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
+
+        /// <summary>
+        /// Get account order detail
+        /// </summary>
+        /// <remarks>
+        /// Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AccountOrder</returns>
+        ApiResponse<AccountOrder> GetAccountOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
+        /// <summary>
+        /// List all account orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AllAccountOrdersResponse</returns>
+        AllAccountOrdersResponse GetAllAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
+
+        /// <summary>
+        /// List all account orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AllAccountOrdersResponse</returns>
+        ApiResponse<AllAccountOrdersResponse> GetAllAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
+        /// <summary>
         /// List all account positions
         /// </summary>
         /// <remarks>
@@ -172,6 +232,35 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AllAccountPositionsResponse</returns>
         ApiResponse<AllAccountPositionsResponse> GetAllAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
+        /// <summary>
+        /// List all account recent orders (last 24 hours only)
+        /// </summary>
+        /// <remarks>
+        /// A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AllAccountOrdersResponse</returns>
+        AllAccountOrdersResponse GetAllAccountRecentOrders(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
+
+        /// <summary>
+        /// List all account recent orders (last 24 hours only)
+        /// </summary>
+        /// <remarks>
+        /// A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AllAccountOrdersResponse</returns>
+        ApiResponse<AllAccountOrdersResponse> GetAllAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
         /// <summary>
         /// List account balances
         /// </summary>
@@ -590,6 +679,70 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (ConnectionAccount)</returns>
         System.Threading.Tasks.Task<ApiResponse<ConnectionAccount>> GetAccountDetailsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
+        /// Get account order detail
+        /// </summary>
+        /// <remarks>
+        /// Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AccountOrder</returns>
+        System.Threading.Tasks.Task<AccountOrder> GetAccountOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get account order detail
+        /// </summary>
+        /// <remarks>
+        /// Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AccountOrder)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AccountOrder>> GetAccountOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// List all account orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AllAccountOrdersResponse</returns>
+        System.Threading.Tasks.Task<AllAccountOrdersResponse> GetAllAccountOrdersAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// List all account orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AllAccountOrdersResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AllAccountOrdersResponse>> GetAllAccountOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// List all account positions
         /// </summary>
         /// <remarks>
@@ -618,6 +771,37 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AllAccountPositionsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<AllAccountPositionsResponse>> GetAllAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// List all account recent orders (last 24 hours only)
+        /// </summary>
+        /// <remarks>
+        /// A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AllAccountOrdersResponse</returns>
+        System.Threading.Tasks.Task<AllAccountOrdersResponse> GetAllAccountRecentOrdersAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// List all account recent orders (last 24 hours only)
+        /// </summary>
+        /// <remarks>
+        /// A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AllAccountOrdersResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AllAccountOrdersResponse>> GetAllAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account balances
         /// </summary>
@@ -1941,6 +2125,468 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
+        /// Get account order detail Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AccountOrder</returns>
+        public AccountOrder GetAccountOrder(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<AccountOrder> localVarResponse = GetAccountOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get account order detail Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AccountOrder</returns>
+        public SnapTrade.Net.Client.ApiResponse<AccountOrder> GetAccountOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0)
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            // verify the required parameter 'brokerageOrderId' is set
+            if (brokerageOrderId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAccountOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<AccountOrder>("/accounts/{accountId}/orders/{brokerageOrderId}", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAccountOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get account order detail Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AccountOrder</returns>
+        public async System.Threading.Tasks.Task<AccountOrder> GetAccountOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<AccountOrder> localVarResponse = await GetAccountOrderWithHttpInfoAsync(accountId, brokerageOrderId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get account order detail Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AccountOrder)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrder>> GetAccountOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            // verify the required parameter 'brokerageOrderId' is set
+            if (brokerageOrderId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAccountOrder");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAccountOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<AccountOrder>("/accounts/{accountId}/orders/{brokerageOrderId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAccountOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List all account orders Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AllAccountOrdersResponse</returns>
+        public AllAccountOrdersResponse GetAllAccountOrders(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse> localVarResponse = GetAllAccountOrdersWithHttpInfo(userId, userSecret, accountId, state, days);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all account orders Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AllAccountOrdersResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse> GetAllAccountOrdersWithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAllAccountOrders");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAllAccountOrders");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAllAccountOrders");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (state != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "state", state, ""));
+            }
+            if (days != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "days", days, "int32"));
+            }
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAllAccountOrders";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<AllAccountOrdersResponse>("/accounts/{accountId}/orders/all", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAllAccountOrders", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List all account orders Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AllAccountOrdersResponse</returns>
+        public async System.Threading.Tasks.Task<AllAccountOrdersResponse> GetAllAccountOrdersAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse> localVarResponse = await GetAllAccountOrdersWithHttpInfoAsync(userId, userSecret, accountId, state, days, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all account orders Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="state">defaults to \&quot;all\&quot; (optional)</param>
+        /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AllAccountOrdersResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse>> GetAllAccountOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAllAccountOrders");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAllAccountOrders");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAllAccountOrders");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (state != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "state", state, ""));
+            }
+            if (days != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "days", days, "int32"));
+            }
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAllAccountOrders";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<AllAccountOrdersResponse>("/accounts/{accountId}/orders/all", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAllAccountOrders", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// List all account positions Returns a list of all positions in the specified account.  The &#x60;results&#x60; list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the &#x60;instrument.kind&#x60; discriminator to determine the schema for each position&#39;s &#x60;instrument&#x60;.  **Beta:** future option positions (&#x60;instrument.kind: future_option&#x60;) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The &#x60;FutureOptionInstrument&#x60; schema may change.  Positions counted in account cash balance or buying power include &#x60;cash_equivalent: true&#x60;. Security positions (&#x60;stock&#x60;, &#x60;preferred_stock&#x60;, &#x60;adr&#x60;, &#x60;etf&#x60;, &#x60;mutualfund&#x60;, &#x60;cef&#x60;, &#x60;crypto&#x60;, &#x60;bond&#x60;, and &#x60;other&#x60;) may include &#x60;tax_lots&#x60; when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2141,6 +2787,228 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetAllAccountPositions", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List all account recent orders (last 24 hours only) A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AllAccountOrdersResponse</returns>
+        public AllAccountOrdersResponse GetAllAccountRecentOrders(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse> localVarResponse = GetAllAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId, onlyExecuted);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all account recent orders (last 24 hours only) A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AllAccountOrdersResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse> GetAllAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAllAccountRecentOrders");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAllAccountRecentOrders");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAllAccountRecentOrders");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (onlyExecuted != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "only_executed", onlyExecuted, ""));
+            }
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAllAccountRecentOrders";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<AllAccountOrdersResponse>("/accounts/{accountId}/orders/recent", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAllAccountRecentOrders", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List all account recent orders (last 24 hours only) A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AllAccountOrdersResponse</returns>
+        public async System.Threading.Tasks.Task<AllAccountOrdersResponse> GetAllAccountRecentOrdersAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse> localVarResponse = await GetAllAccountRecentOrdersWithHttpInfoAsync(userId, userSecret, accountId, onlyExecuted, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all account recent orders (last 24 hours only) A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AllAccountOrdersResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AllAccountOrdersResponse>> GetAllAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAllAccountRecentOrders");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAllAccountRecentOrders");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAllAccountRecentOrders");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (onlyExecuted != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "only_executed", onlyExecuted, ""));
+            }
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAllAccountRecentOrders";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<AllAccountOrdersResponse>("/accounts/{accountId}/orders/recent", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAllAccountRecentOrders", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

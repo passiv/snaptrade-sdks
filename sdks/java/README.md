@@ -83,7 +83,10 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.accountInformation.getAccountBalanceHistory`](#snaptradeaccountinformationgetaccountbalancehistory)
   * [`snaptrade.accountInformation.getAccountBalancesV2`](#snaptradeaccountinformationgetaccountbalancesv2)
   * [`snaptrade.accountInformation.getAccountDetails`](#snaptradeaccountinformationgetaccountdetails)
+  * [`snaptrade.accountInformation.getAccountOrder`](#snaptradeaccountinformationgetaccountorder)
+  * [`snaptrade.accountInformation.getAllAccountOrders`](#snaptradeaccountinformationgetallaccountorders)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
+  * [`snaptrade.accountInformation.getAllAccountRecentOrders`](#snaptradeaccountinformationgetallaccountrecentorders)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
@@ -111,9 +114,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.syncBrokerageAuthorizationTransactions`](#snaptradeconnectionssyncbrokerageauthorizationtransactions)
   * [`snaptrade.experimentalEndpoints.addSubscription`](#snaptradeexperimentalendpointsaddsubscription)
   * [`snaptrade.experimentalEndpoints.cancelSubscription`](#snaptradeexperimentalendpointscancelsubscription)
-  * [`snaptrade.experimentalEndpoints.getAccountOrder`](#snaptradeexperimentalendpointsgetaccountorder)
-  * [`snaptrade.experimentalEndpoints.getAllAccountOrders`](#snaptradeexperimentalendpointsgetallaccountorders)
-  * [`snaptrade.experimentalEndpoints.getAllAccountRecentOrders`](#snaptradeexperimentalendpointsgetallaccountrecentorders)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`](#snaptradeexperimentalendpointsgetuseraccountorderdetailv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
@@ -481,6 +481,104 @@ Object result = client
 ---
 
 
+### `snaptrade.accountInformation.getAccountOrder`<a id="snaptradeaccountinformationgetaccountorder"></a>
+
+Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+
+The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+
+This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+**Beta:** this endpoint and its response schema may change.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AccountOrder result = client
+        .accountInformation
+        .getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrder](./src/main/java/com/snaptrade/client/model/AccountOrder.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAllAccountOrders`<a id="snaptradeaccountinformationgetallaccountorders"></a>
+
+Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+
+Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+
+`order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+
+**Beta:** this endpoint and its response schema may change.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AllAccountOrdersResponse result = client
+        .accountInformation
+        .getAllAccountOrders(userId, userSecret, accountId)
+        .state(state)
+        .days(days)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### state: `String`<a id="state-string"></a>
+
+defaults to \"all\"
+
+##### days: `Integer`<a id="days-integer"></a>
+
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountOrdersResponse](./src/main/java/com/snaptrade/client/model/AllAccountOrdersResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/all` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.accountInformation.getAllAccountPositions`<a id="snaptradeaccountinformationgetallaccountpositions"></a>
 
 Returns a list of all positions in the specified account.
@@ -518,6 +616,55 @@ AllAccountPositionsResponse result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAllAccountRecentOrders`<a id="snaptradeaccountinformationgetallaccountrecentorders"></a>
+
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
+By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+
+Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
+
+**Beta:** this endpoint and its response schema may change.
+
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AllAccountOrdersResponse result = client
+        .accountInformation
+        .getAllAccountRecentOrders(userId, userSecret, accountId)
+        .onlyExecuted(onlyExecuted)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### onlyExecuted: `Boolean`<a id="onlyexecuted-boolean"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AllAccountOrdersResponse](./src/main/java/com/snaptrade/client/model/AllAccountOrdersResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/recent` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1585,153 +1732,6 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/tradeDetection/subscriptions/cancel` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getAccountOrder`<a id="snaptradeexperimentalendpointsgetaccountorder"></a>
-
-Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
-
-The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
-
-This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
-
-This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-**Experimental:** this endpoint may change without notice.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AccountOrder result = client
-        .experimentalEndpoints
-        .getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrder](./src/main/java/com/snaptrade/client/model/AccountOrder.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getAllAccountOrders`<a id="snaptradeexperimentalendpointsgetallaccountorders"></a>
-
-Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
-
-Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
-
-`order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
-
-**Experimental:** this endpoint may change without notice.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AllAccountOrdersResponse result = client
-        .experimentalEndpoints
-        .getAllAccountOrders(userId, userSecret, accountId)
-        .state(state)
-        .days(days)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### state: `String`<a id="state-string"></a>
-
-defaults to \"all\"
-
-##### days: `Integer`<a id="days-integer"></a>
-
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AllAccountOrdersResponse](./src/main/java/com/snaptrade/client/model/AllAccountOrdersResponse.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/all` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.experimentalEndpoints.getAllAccountRecentOrders`<a id="snaptradeexperimentalendpointsgetallaccountrecentorders"></a>
-
-A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
-By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-
-Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-**Experimental:** this endpoint may change without notice.
-
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-AllAccountOrdersResponse result = client
-        .experimentalEndpoints
-        .getAllAccountRecentOrders(userId, userSecret, accountId)
-        .onlyExecuted(onlyExecuted)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### onlyExecuted: `Boolean`<a id="onlyexecuted-boolean"></a>
-
-Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AllAccountOrdersResponse](./src/main/java/com/snaptrade/client/model/AllAccountOrdersResponse.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/recent` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
