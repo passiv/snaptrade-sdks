@@ -141,6 +141,12 @@ portal:
       get: true
     /accounts/{accountId}/orders/v2:
       get: true
+    /accounts/{accountId}/orders/all:
+      get: true
+    /accounts/{accountId}/orders/recent:
+      get: true
+    /accounts/{accountId}/orders/{brokerageOrderId}:
+      get: true
     /accounts/{accountId}/recentOrders/v2:
       get: true
     /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
