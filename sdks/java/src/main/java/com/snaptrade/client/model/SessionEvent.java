@@ -285,7 +285,7 @@ public class SessionEvent {
    * @return createdDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-21T20:11:19.217Z", value = "Time")
+  @ApiModelProperty(example = "2022-01-21T15:11:19.217000-05:00", value = "Time")
 
   public String getCreatedDate() {
     return createdDate;

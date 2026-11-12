@@ -89,7 +89,10 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.account_information.get_account_balance_history`](#snaptradeaccount_informationget_account_balance_history)
   * [`snaptrade.account_information.get_account_balances_v2`](#snaptradeaccount_informationget_account_balances_v2)
   * [`snaptrade.account_information.get_account_details`](#snaptradeaccount_informationget_account_details)
+  * [`snaptrade.account_information.get_account_order`](#snaptradeaccount_informationget_account_order)
+  * [`snaptrade.account_information.get_all_account_orders`](#snaptradeaccount_informationget_all_account_orders)
   * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
+  * [`snaptrade.account_information.get_all_account_recent_orders`](#snaptradeaccount_informationget_all_account_recent_orders)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
   * [`snaptrade.account_information.get_user_account_order_detail`](#snaptradeaccount_informationget_user_account_order_detail)
@@ -117,9 +120,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.connections.sync_brokerage_authorization_transactions`](#snaptradeconnectionssync_brokerage_authorization_transactions)
   * [`snaptrade.experimental_endpoints.add_subscription`](#snaptradeexperimental_endpointsadd_subscription)
   * [`snaptrade.experimental_endpoints.cancel_subscription`](#snaptradeexperimental_endpointscancel_subscription)
-  * [`snaptrade.experimental_endpoints.get_account_order`](#snaptradeexperimental_endpointsget_account_order)
-  * [`snaptrade.experimental_endpoints.get_all_account_orders`](#snaptradeexperimental_endpointsget_all_account_orders)
-  * [`snaptrade.experimental_endpoints.get_all_account_recent_orders`](#snaptradeexperimental_endpointsget_all_account_recent_orders)
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
@@ -329,8 +329,8 @@ async def main():
         get_account_activities_response = (
             await snaptrade.account_information.aget_account_activities(
                 account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-                start_date="2022-01-24T00:00:00.000Z",
-                end_date="2022-01-24T00:00:00.000Z",
+                start_date="2022-01-24",
+                end_date="2022-01-24",
                 offset=0,
                 limit=1,
                 type="BUY,SELL,DIVIDEND",
@@ -382,8 +382,8 @@ If the connection has become disabled, it can no longer access the latest data f
 get_account_activities_response = (
     commercial_api_key_client.account_information.get_account_activities(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24T00:00:00.000Z",
-        end_date="2022-01-24T00:00:00.000Z",
+        start_date="2022-01-24",
+        end_date="2022-01-24",
         offset=0,
         limit=1,
         type="BUY,SELL,DIVIDEND",
@@ -405,8 +405,8 @@ Required credentials for this mode:
 get_account_activities_response = (
     personal_api_key_client.account_information.get_account_activities(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24T00:00:00.000Z",
-        end_date="2022-01-24T00:00:00.000Z",
+        start_date="2022-01-24",
+        end_date="2022-01-24",
         offset=0,
         limit=1,
         type="BUY,SELL,DIVIDEND",
@@ -422,8 +422,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 get_account_activities_response = (
     oauth_client.account_information.get_account_activities(
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24T00:00:00.000Z",
-        end_date="2022-01-24T00:00:00.000Z",
+        start_date="2022-01-24",
+        end_date="2022-01-24",
         offset=0,
         limit=1,
         type="BUY,SELL,DIVIDEND",
@@ -674,6 +674,146 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 ---
 
+### `snaptrade.account_information.get_account_order`<a id="snaptradeaccount_informationget_account_order"></a>
+
+Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
+
+The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
+
+This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+**Beta:** this endpoint and its response schema may change.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_account_order_response = (
+    commercial_api_key_client.account_information.get_account_order(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_account_order_response = (
+    personal_api_key_client.account_information.get_account_order(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrder`](./snaptrade_client/type/account_order.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.account_information.get_all_account_orders`<a id="snaptradeaccount_informationget_all_account_orders"></a>
+
+Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
+
+Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
+
+`order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
+
+**Beta:** this endpoint and its response schema may change.
+
+If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_all_account_orders_response = (
+    commercial_api_key_client.account_information.get_all_account_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        state="all",
+        days=30,
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_all_account_orders_response = (
+    personal_api_key_client.account_information.get_all_account_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        state="all",
+        days=30,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### state: `str`<a id="state-str"></a>
+
+defaults to \"all\"
+
+##### days: `int`<a id="days-int"></a>
+
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AllAccountOrdersResponse`](./snaptrade_client/type/all_account_orders_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/all` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.account_information.get_all_account_positions`<a id="snaptradeaccount_informationget_all_account_positions"></a>
 
 Returns a list of all positions in the specified account.
@@ -743,6 +883,75 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions/all` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.account_information.get_all_account_recent_orders`<a id="snaptradeaccount_informationget_all_account_recent_orders"></a>
+
+A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
+By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+
+Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
+
+**Beta:** this endpoint and its response schema may change.
+
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_all_account_recent_orders_response = (
+    commercial_api_key_client.account_information.get_all_account_recent_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_all_account_recent_orders_response = (
+    personal_api_key_client.account_information.get_all_account_recent_orders(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### only_executed: `bool`<a id="only_executed-bool"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AllAccountOrdersResponse`](./snaptrade_client/type/all_account_orders_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/recent` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2451,215 +2660,6 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 ---
 
-### `snaptrade.experimental_endpoints.get_account_order`<a id="snaptradeexperimental_endpointsget_account_order"></a>
-
-Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.
-
-The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.
-
-This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
-
-This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-**Experimental:** this endpoint may change without notice.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```python
-get_account_order_response = (
-    commercial_api_key_client.experimental_endpoints.get_account_order(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_account_order_response = (
-    personal_api_key_client.experimental_endpoints.get_account_order(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AccountOrder`](./snaptrade_client/type/account_order.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/{brokerageOrderId}` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.get_all_account_orders`<a id="snaptradeexperimental_endpointsget_all_account_orders"></a>
-
-Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.
-
-Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
-
-`order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
-
-**Experimental:** this endpoint may change without notice.
-
-If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```python
-get_all_account_orders_response = (
-    commercial_api_key_client.experimental_endpoints.get_all_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_all_account_orders_response = (
-    personal_api_key_client.experimental_endpoints.get_all_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### state: `str`<a id="state-str"></a>
-
-defaults to \"all\"
-
-##### days: `int`<a id="days-int"></a>
-
-Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AllAccountOrdersResponse`](./snaptrade_client/type/all_account_orders_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/all` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.experimental_endpoints.get_all_account_recent_orders`<a id="snaptradeexperimental_endpointsget_all_account_recent_orders"></a>
-
-A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
-Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days.
-By default only returns executed orders, but that can be changed by setting *only_executed* to false.
-
-Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-**Experimental:** this endpoint may change without notice.
-
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```python
-get_all_account_recent_orders_response = (
-    commercial_api_key_client.experimental_endpoints.get_all_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-get_all_account_recent_orders_response = (
-    personal_api_key_client.experimental_endpoints.get_all_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### only_executed: `bool`<a id="only_executed-bool"></a>
-
-Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`AllAccountOrdersResponse`](./snaptrade_client/type/all_account_orders_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/orders/recent` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
 ### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
 
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
@@ -2975,7 +2975,7 @@ place_simple_order_response = (
         stop_price="1.25",
         price_effect="debit",
         client_order_id="550e8400-e29b-41d4-a716-446655440000",
-        expiry_date="2026-12-18T20:00:00.000Z",
+        expiry_date="2026-12-18T20:00:00Z",
         notional_value="1.25",
         trading_session="regular",
         user_id="snaptrade-user-123",
@@ -3012,7 +3012,7 @@ place_simple_order_response = (
         stop_price="1.25",
         price_effect="debit",
         client_order_id="550e8400-e29b-41d4-a716-446655440000",
-        expiry_date="2026-12-18T20:00:00.000Z",
+        expiry_date="2026-12-18T20:00:00Z",
         notional_value="1.25",
         trading_session="regular",
     )
@@ -3042,7 +3042,7 @@ place_simple_order_response = oauth_client.experimental_endpoints.place_simple_o
     stop_price="1.25",
     price_effect="debit",
     client_order_id="550e8400-e29b-41d4-a716-446655440000",
-    expiry_date="2026-12-18T20:00:00.000Z",
+    expiry_date="2026-12-18T20:00:00Z",
     notional_value="1.25",
     trading_session="regular",
 )
@@ -4328,7 +4328,7 @@ place_crypto_order_response = commercial_api_key_client.trading.place_crypto_ord
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
@@ -4356,7 +4356,7 @@ place_crypto_order_response = personal_api_key_client.trading.place_crypto_order
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
 )
 ```
 
@@ -4378,7 +4378,7 @@ place_crypto_order_response = oauth_client.trading.place_crypto_order(
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
 )
 ```
 
@@ -4799,7 +4799,7 @@ preview_crypto_order_response = commercial_api_key_client.trading.preview_crypto
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
@@ -4827,7 +4827,7 @@ preview_crypto_order_response = personal_api_key_client.trading.preview_crypto_o
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
 )
 ```
 
@@ -4849,7 +4849,7 @@ preview_crypto_order_response = oauth_client.trading.preview_crypto_order(
     limit_price="123.45",
     stop_price="123.45",
     post_only=False,
-    expiration_date="2024-01-01T00:00:00.000Z",
+    expiration_date="2024-01-01T00:00:00Z",
 )
 ```
 

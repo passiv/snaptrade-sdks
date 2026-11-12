@@ -87,9 +87,13 @@ import { AccountInformationGetUserAccountOrderDetailRequest } from '../models';
 // @ts-ignore
 import { AccountInformationGetUserHoldings409Response } from '../models';
 // @ts-ignore
+import { AccountOrder } from '../models';
+// @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
 import { AccountValueHistoryResponse } from '../models';
+// @ts-ignore
+import { AllAccountOrdersResponse } from '../models';
 // @ts-ignore
 import { AllAccountPositionsResponse } from '../models';
 // @ts-ignore
@@ -409,6 +413,136 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
+         * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+         * @summary Get account order detail
+         * @param {string} accountId 
+         * @param {string} brokerageOrderId 
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountOrder: async (accountId: string, brokerageOrderId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAccountOrder', 'accountId', accountId)
+            // verify required parameter 'brokerageOrderId' is not null or undefined
+            assertParamExists('getAccountOrder', 'brokerageOrderId', brokerageOrderId)
+            const localVarPath = `/accounts/{accountId}/orders/{brokerageOrderId}`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
+                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/orders/{brokerageOrderId}',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary List all account orders
+         * @param {string} accountId 
+         * @param {'all' | 'open' | 'executed'} [state] defaults to \&quot;all\&quot;
+         * @param {number} [days] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllAccountOrders: async (accountId: string, state?: 'all' | 'open' | 'executed', days?: number, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAllAccountOrders', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/orders/all`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+            if (state !== undefined) {
+                localVarQueryParameter['state'] = state;
+            }
+
+            if (days !== undefined) {
+                localVarQueryParameter['days'] = days;
+            }
+
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/orders/all',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.  Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account positions
          * @param {string} accountId 
@@ -460,6 +594,69 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/positions/all',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+         * @summary List all account recent orders (last 24 hours only)
+         * @param {string} accountId 
+         * @param {boolean} [onlyExecuted] Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllAccountRecentOrders: async (accountId: string, onlyExecuted?: boolean, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAllAccountRecentOrders', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/orders/recent`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+            if (onlyExecuted !== undefined) {
+                localVarQueryParameter['only_executed'] = onlyExecuted;
+            }
+
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/orders/recent',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -1168,6 +1365,30 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+         * @summary Get account order detail
+         * @param {AccountInformationApiGetAccountOrderRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountOrder(...args: AccountInformationApiGetAccountOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountOrder, unknown>>> {
+            const [requestParameters = {} as AccountInformationApiGetAccountOrderRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountOrder(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
+         * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary List all account orders
+         * @param {AccountInformationApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllAccountOrders(...args: AccountInformationApiGetAllAccountOrdersArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AllAccountOrdersResponse, unknown>>> {
+            const [requestParameters = {} as AccountInformationApiGetAllAccountOrdersRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountOrders(requestParameters.accountId, requestParameters.state, requestParameters.days, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
          * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.  Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account positions
          * @param {AccountInformationApiGetAllAccountPositionsRequest<TAuth>} requestParameters Request parameters.
@@ -1178,6 +1399,18 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
             const [requestParameters = {} as AccountInformationApiGetAllAccountPositionsRequest<TAuth>, options] = args;
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountPositions(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
+         * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+         * @summary List all account recent orders (last 24 hours only)
+         * @param {AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllAccountRecentOrders(...args: AccountInformationApiGetAllAccountRecentOrdersArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AllAccountOrdersResponse, unknown>>> {
+            const [requestParameters = {} as AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountRecentOrders(requestParameters.accountId, requestParameters.onlyExecuted, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
          * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1356,6 +1589,26 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
             return localVarFp.getAccountDetails(...args).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+         * @summary Get account order detail
+         * @param {AccountInformationApiGetAccountOrderRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountOrder(...args: AccountInformationApiGetAccountOrderArgs<TAuth>): Promise<AxiosResponse<AccountOrder, unknown>> {
+            return localVarFp.getAccountOrder(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+         * @summary List all account orders
+         * @param {AccountInformationApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllAccountOrders(...args: AccountInformationApiGetAllAccountOrdersArgs<TAuth>): Promise<AxiosResponse<AllAccountOrdersResponse, unknown>> {
+            return localVarFp.getAllAccountOrders(...args).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.  Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account positions
          * @param {AccountInformationApiGetAllAccountPositionsRequest<TAuth>} requestParameters Request parameters.
@@ -1364,6 +1617,16 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
          */
         getAllAccountPositions(...args: AccountInformationApiGetAllAccountPositionsArgs<TAuth>): Promise<AxiosResponse<AllAccountPositionsResponse, unknown>> {
             return localVarFp.getAllAccountPositions(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+         * @summary List all account recent orders (last 24 hours only)
+         * @param {AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllAccountRecentOrders(...args: AccountInformationApiGetAllAccountRecentOrdersArgs<TAuth>): Promise<AxiosResponse<AllAccountOrdersResponse, unknown>> {
+            return localVarFp.getAllAccountRecentOrders(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1662,6 +1925,97 @@ export type AccountInformationApiGetAccountDetailsArgs<TAuth extends AuthMode> =
         : [requestParameters: AccountInformationApiGetAccountDetailsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
+ * Request parameters for getAccountOrder operation in AccountInformationApi.
+ * @export
+ */
+export type AccountInformationApiGetAccountOrderBaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountOrder
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountOrder
+    */
+    readonly brokerageOrderId: string
+    
+}
+export type AccountInformationApiGetAccountOrdercommercialApiKeyRequest = AccountInformationApiGetAccountOrderBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type AccountInformationApiGetAccountOrderpersonalApiKeyRequest = AccountInformationApiGetAccountOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type AccountInformationApiGetAccountOrderRequestByAuthMode = {
+    "commercialApiKey": AccountInformationApiGetAccountOrdercommercialApiKeyRequest;
+    "personalApiKey": AccountInformationApiGetAccountOrderpersonalApiKeyRequest;
+}
+export type AccountInformationApiGetAccountOrderRequest<TAuth extends AuthMode> =
+    AccountInformationApiGetAccountOrderRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAccountOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAccountOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAccountOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAccountOrderRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
+ * Request parameters for getAllAccountOrders operation in AccountInformationApi.
+ * @export
+ */
+export type AccountInformationApiGetAllAccountOrdersBaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAllAccountOrders
+    */
+    readonly accountId: string
+    
+    /**
+    * defaults to \"all\"
+    * @type {'all' | 'open' | 'executed'}
+    * @memberof AccountInformationApiGetAllAccountOrders
+    */
+    readonly state?: 'all' | 'open' | 'executed'
+    
+    /**
+    * Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
+    * @type {number}
+    * @memberof AccountInformationApiGetAllAccountOrders
+    */
+    readonly days?: number
+    
+}
+export type AccountInformationApiGetAllAccountOrderscommercialApiKeyRequest = AccountInformationApiGetAllAccountOrdersBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type AccountInformationApiGetAllAccountOrderspersonalApiKeyRequest = AccountInformationApiGetAllAccountOrdersBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type AccountInformationApiGetAllAccountOrdersRequestByAuthMode = {
+    "commercialApiKey": AccountInformationApiGetAllAccountOrderscommercialApiKeyRequest;
+    "personalApiKey": AccountInformationApiGetAllAccountOrderspersonalApiKeyRequest;
+}
+export type AccountInformationApiGetAllAccountOrdersRequest<TAuth extends AuthMode> =
+    AccountInformationApiGetAllAccountOrdersRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAllAccountOrdersRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAllAccountOrdersArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAllAccountOrdersRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAllAccountOrdersRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
  * Request parameters for getAllAccountPositions operation in AccountInformationApi.
  * @export
  */
@@ -1700,6 +2054,48 @@ export type AccountInformationApiGetAllAccountPositionsArgs<TAuth extends AuthMo
     TAuth["mode"] extends never
         ? [requestParameters?: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: AccountInformationApiGetAllAccountPositionsRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
+ * Request parameters for getAllAccountRecentOrders operation in AccountInformationApi.
+ * @export
+ */
+export type AccountInformationApiGetAllAccountRecentOrdersBaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAllAccountRecentOrders
+    */
+    readonly accountId: string
+    
+    /**
+    * Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+    * @type {boolean}
+    * @memberof AccountInformationApiGetAllAccountRecentOrders
+    */
+    readonly onlyExecuted?: boolean
+    
+}
+export type AccountInformationApiGetAllAccountRecentOrderscommercialApiKeyRequest = AccountInformationApiGetAllAccountRecentOrdersBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type AccountInformationApiGetAllAccountRecentOrderspersonalApiKeyRequest = AccountInformationApiGetAllAccountRecentOrdersBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type AccountInformationApiGetAllAccountRecentOrdersRequestByAuthMode = {
+    "commercialApiKey": AccountInformationApiGetAllAccountRecentOrderscommercialApiKeyRequest;
+    "personalApiKey": AccountInformationApiGetAllAccountRecentOrderspersonalApiKeyRequest;
+}
+export type AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth extends AuthMode> =
+    AccountInformationApiGetAllAccountRecentOrdersRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAllAccountRecentOrdersRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAllAccountRecentOrdersArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountBalance operation in AccountInformationApi.
@@ -2170,6 +2566,32 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
     }
 
     /**
+     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+     * @summary Get account order detail
+     * @param {AccountInformationApiGetAccountOrderRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAccountOrder(...args: AccountInformationApiGetAccountOrderArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAccountOrder(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * @summary List all account orders
+     * @param {AccountInformationApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAllAccountOrders(...args: AccountInformationApiGetAllAccountOrdersArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAllAccountOrders(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
      * Returns a list of all positions in the specified account.  The `results` list can contain multiple instrument types in the same response, including stocks, preferred stocks, ADRs, ETFs, mutual funds, closed-end funds, bonds, crypto, futures, option positions, future option positions, CFD positions, and tokenized asset positions. Use the `instrument.kind` discriminator to determine the schema for each position\'s `instrument`.  **Beta:** future option positions (`instrument.kind: future_option`) are in beta. They are currently returned only for tastytrade and Interactive Brokers connections, and only for partners they have been enabled for — please contact the SnapTrade team to enable them. The `FutureOptionInstrument` schema may change.  Positions counted in account cash balance or buying power include `cash_equivalent: true`. Security positions (`stock`, `preferred_stock`, `adr`, `etf`, `mutualfund`, `cef`, `crypto`, `bond`, and `other`) may include `tax_lots` when tax lot data is enabled for the account; derivative, CFD, tokenized asset, and cash positions never do. To see which institutions support tax lot data, please see our [supported institutions doc](https://support.snaptrade.com/brokerages).  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @summary List all account positions
      * @param {AccountInformationApiGetAllAccountPositionsRequest<TAuth>} requestParameters Request parameters.
@@ -2179,6 +2601,19 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
      */
     public getAllAccountPositions(...args: AccountInformationApiGetAllAccountPositionsArgs<TAuth>) {
         return AccountInformationApiFp(this.configuration).getAllAccountPositions(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Beta:** this endpoint and its response schema may change.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
+     * @summary List all account recent orders (last 24 hours only)
+     * @param {AccountInformationApiGetAllAccountRecentOrdersRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAllAccountRecentOrders(...args: AccountInformationApiGetAllAccountRecentOrdersArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAllAccountRecentOrders(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

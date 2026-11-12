@@ -247,7 +247,7 @@ public class OAuthWebhookBase {
    * @return eventTimestamp
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "2026-08-18T14:31:55.858Z", required = true, value = "")
+  @ApiModelProperty(example = "2026-08-18T14:31:55.858820Z", required = true, value = "")
 
   public OffsetDateTime getEventTimestamp() {
     return eventTimestamp;

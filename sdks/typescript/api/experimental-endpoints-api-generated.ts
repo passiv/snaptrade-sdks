@@ -77,13 +77,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { AccountOrder } from '../models';
-// @ts-ignore
 import { AccountOrderRecordV2 } from '../models';
 // @ts-ignore
 import { AccountOrdersV2Response } from '../models';
-// @ts-ignore
-import { AllAccountOrdersResponse } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
@@ -98,8 +94,6 @@ import { Model404FailedRequestResponse } from '../models';
 import { Model429TooManyRequestsResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
-// @ts-ignore
-import { Model501NotImplementedResponse } from '../models';
 // @ts-ignore
 import { Model503BrokerageRequestResponse } from '../models';
 // @ts-ignore
@@ -238,199 +232,6 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 operationAuth: localVarOperationAuth
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradeDetectionCancelSubscriptionRequest, localVarRequestOptions, configuration)
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
-         * @summary Get account order detail
-         * @param {string} accountId 
-         * @param {string} brokerageOrderId 
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountOrder: async (accountId: string, brokerageOrderId: string, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getAccountOrder', 'accountId', accountId)
-            // verify required parameter 'brokerageOrderId' is not null or undefined
-            assertParamExists('getAccountOrder', 'brokerageOrderId', brokerageOrderId)
-            const localVarPath = `/accounts/{accountId}/orders/{brokerageOrderId}`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
-                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/orders/{brokerageOrderId}',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Experimental:** this endpoint may change without notice.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-         * @summary List all account orders
-         * @param {string} accountId 
-         * @param {'all' | 'open' | 'executed'} [state] defaults to \&quot;all\&quot;
-         * @param {number} [days] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllAccountOrders: async (accountId: string, state?: 'all' | 'open' | 'executed', days?: number, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getAllAccountOrders', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/orders/all`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (state !== undefined) {
-                localVarQueryParameter['state'] = state;
-            }
-
-            if (days !== undefined) {
-                localVarQueryParameter['days'] = days;
-            }
-
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/orders/all',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Experimental:** this endpoint may change without notice.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
-         * @summary List all account recent orders (last 24 hours only)
-         * @param {string} accountId 
-         * @param {boolean} [onlyExecuted] Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-         * @param {string} [userId] 
-         * @param {string} [userSecret] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllAccountRecentOrders: async (accountId: string, onlyExecuted?: boolean, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getAllAccountRecentOrders', 'accountId', accountId)
-            const localVarPath = `/accounts/{accountId}/orders/recent`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (configuration?.authMode === "commercialApiKey") {
-                // authentication PartnerClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-                // authentication userId required
-                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
-                // authentication userSecret required
-                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
-            }
-            if (configuration?.authMode === "personalApiKey") {
-                // authentication PersonalClientId required
-                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            }
-            if (onlyExecuted !== undefined) {
-                localVarQueryParameter['only_executed'] = onlyExecuted;
-            }
-
-
-    
-            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/orders/recent',
-                httpMethod: 'GET',
-                operationAuth: localVarOperationAuth
-            });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -803,42 +604,6 @@ export const ExperimentalEndpointsApiFp = function<TAuth extends AuthMode>(confi
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
-         * @summary Get account order detail
-         * @param {ExperimentalEndpointsApiGetAccountOrderRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAccountOrder(...args: ExperimentalEndpointsApiGetAccountOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountOrder, unknown>>> {
-            const [requestParameters = {} as ExperimentalEndpointsApiGetAccountOrderRequest<TAuth>, options] = args;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountOrder(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Experimental:** this endpoint may change without notice.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-         * @summary List all account orders
-         * @param {ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllAccountOrders(...args: ExperimentalEndpointsApiGetAllAccountOrdersArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AllAccountOrdersResponse, unknown>>> {
-            const [requestParameters = {} as ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth>, options] = args;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountOrders(requestParameters.accountId, requestParameters.state, requestParameters.days, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
-         * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Experimental:** this endpoint may change without notice.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
-         * @summary List all account recent orders (last 24 hours only)
-         * @param {ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getAllAccountRecentOrders(...args: ExperimentalEndpointsApiGetAllAccountRecentOrdersArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AllAccountOrdersResponse, unknown>>> {
-            const [requestParameters = {} as ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth>, options] = args;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAccountRecentOrders(requestParameters.accountId, requestParameters.onlyExecuted, requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
-        },
-        /**
          * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail (V2)
          * @param {ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request<TAuth>} requestParameters Request parameters.
@@ -938,36 +703,6 @@ export const ExperimentalEndpointsApiFactory = function<TAuth extends AuthMode>(
          */
         cancelSubscription(...args: ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth>): Promise<AxiosResponse<TradeDetectionCancelSubscriptionResponse, unknown>> {
             return localVarFp.cancelSubscription(...args).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
-         * @summary Get account order detail
-         * @param {ExperimentalEndpointsApiGetAccountOrderRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAccountOrder(...args: ExperimentalEndpointsApiGetAccountOrderArgs<TAuth>): Promise<AxiosResponse<AccountOrder, unknown>> {
-            return localVarFp.getAccountOrder(...args).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Experimental:** this endpoint may change without notice.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-         * @summary List all account orders
-         * @param {ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllAccountOrders(...args: ExperimentalEndpointsApiGetAllAccountOrdersArgs<TAuth>): Promise<AxiosResponse<AllAccountOrdersResponse, unknown>> {
-            return localVarFp.getAllAccountOrders(...args).then((request) => request(axios, basePath));
-        },
-        /**
-         * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Experimental:** this endpoint may change without notice.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
-         * @summary List all account recent orders (last 24 hours only)
-         * @param {ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth>} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAllAccountRecentOrders(...args: ExperimentalEndpointsApiGetAllAccountRecentOrdersArgs<TAuth>): Promise<AxiosResponse<AllAccountOrdersResponse, unknown>> {
-            return localVarFp.getAllAccountRecentOrders(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
@@ -1072,139 +807,6 @@ export type ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth extends AuthMod
     TAuth["mode"] extends never
         ? [requestParameters?: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: ExperimentalEndpointsApiCancelSubscriptionRequest<TAuth>, options?: AxiosRequestConfig];
-
-/**
- * Request parameters for getAccountOrder operation in ExperimentalEndpointsApi.
- * @export
- */
-export type ExperimentalEndpointsApiGetAccountOrderBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountOrder
-    */
-    readonly accountId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAccountOrder
-    */
-    readonly brokerageOrderId: string
-    
-}
-export type ExperimentalEndpointsApiGetAccountOrdercommercialApiKeyRequest = ExperimentalEndpointsApiGetAccountOrderBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type ExperimentalEndpointsApiGetAccountOrderpersonalApiKeyRequest = ExperimentalEndpointsApiGetAccountOrderBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type ExperimentalEndpointsApiGetAccountOrderRequestByAuthMode = {
-    "commercialApiKey": ExperimentalEndpointsApiGetAccountOrdercommercialApiKeyRequest;
-    "personalApiKey": ExperimentalEndpointsApiGetAccountOrderpersonalApiKeyRequest;
-}
-export type ExperimentalEndpointsApiGetAccountOrderRequest<TAuth extends AuthMode> =
-    ExperimentalEndpointsApiGetAccountOrderRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetAccountOrderRequestByAuthMode]
-
-/** Request argument optionality depends on the selected authentication mode. */
-export type ExperimentalEndpointsApiGetAccountOrderArgs<TAuth extends AuthMode> =
-    TAuth["mode"] extends never
-        ? [requestParameters?: ExperimentalEndpointsApiGetAccountOrderRequest<TAuth>, options?: AxiosRequestConfig]
-        : [requestParameters: ExperimentalEndpointsApiGetAccountOrderRequest<TAuth>, options?: AxiosRequestConfig];
-
-/**
- * Request parameters for getAllAccountOrders operation in ExperimentalEndpointsApi.
- * @export
- */
-export type ExperimentalEndpointsApiGetAllAccountOrdersBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAllAccountOrders
-    */
-    readonly accountId: string
-    
-    /**
-    * defaults to \"all\"
-    * @type {'all' | 'open' | 'executed'}
-    * @memberof ExperimentalEndpointsApiGetAllAccountOrders
-    */
-    readonly state?: 'all' | 'open' | 'executed'
-    
-    /**
-    * Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90.
-    * @type {number}
-    * @memberof ExperimentalEndpointsApiGetAllAccountOrders
-    */
-    readonly days?: number
-    
-}
-export type ExperimentalEndpointsApiGetAllAccountOrderscommercialApiKeyRequest = ExperimentalEndpointsApiGetAllAccountOrdersBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type ExperimentalEndpointsApiGetAllAccountOrderspersonalApiKeyRequest = ExperimentalEndpointsApiGetAllAccountOrdersBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type ExperimentalEndpointsApiGetAllAccountOrdersRequestByAuthMode = {
-    "commercialApiKey": ExperimentalEndpointsApiGetAllAccountOrderscommercialApiKeyRequest;
-    "personalApiKey": ExperimentalEndpointsApiGetAllAccountOrderspersonalApiKeyRequest;
-}
-export type ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth extends AuthMode> =
-    ExperimentalEndpointsApiGetAllAccountOrdersRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetAllAccountOrdersRequestByAuthMode]
-
-/** Request argument optionality depends on the selected authentication mode. */
-export type ExperimentalEndpointsApiGetAllAccountOrdersArgs<TAuth extends AuthMode> =
-    TAuth["mode"] extends never
-        ? [requestParameters?: ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth>, options?: AxiosRequestConfig]
-        : [requestParameters: ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth>, options?: AxiosRequestConfig];
-
-/**
- * Request parameters for getAllAccountRecentOrders operation in ExperimentalEndpointsApi.
- * @export
- */
-export type ExperimentalEndpointsApiGetAllAccountRecentOrdersBaseRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof ExperimentalEndpointsApiGetAllAccountRecentOrders
-    */
-    readonly accountId: string
-    
-    /**
-    * Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
-    * @type {boolean}
-    * @memberof ExperimentalEndpointsApiGetAllAccountRecentOrders
-    */
-    readonly onlyExecuted?: boolean
-    
-}
-export type ExperimentalEndpointsApiGetAllAccountRecentOrderscommercialApiKeyRequest = ExperimentalEndpointsApiGetAllAccountRecentOrdersBaseRequest & {
-    readonly userId: string
-    readonly userSecret: string
-}
-export type ExperimentalEndpointsApiGetAllAccountRecentOrderspersonalApiKeyRequest = ExperimentalEndpointsApiGetAllAccountRecentOrdersBaseRequest & {
-    readonly userId?: never
-    readonly userSecret?: never
-}
-export type ExperimentalEndpointsApiGetAllAccountRecentOrdersRequestByAuthMode = {
-    "commercialApiKey": ExperimentalEndpointsApiGetAllAccountRecentOrderscommercialApiKeyRequest;
-    "personalApiKey": ExperimentalEndpointsApiGetAllAccountRecentOrderspersonalApiKeyRequest;
-}
-export type ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth extends AuthMode> =
-    ExperimentalEndpointsApiGetAllAccountRecentOrdersRequestByAuthMode[TAuth["mode"] & keyof ExperimentalEndpointsApiGetAllAccountRecentOrdersRequestByAuthMode]
-
-/** Request argument optionality depends on the selected authentication mode. */
-export type ExperimentalEndpointsApiGetAllAccountRecentOrdersArgs<TAuth extends AuthMode> =
-    TAuth["mode"] extends never
-        ? [requestParameters?: ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth>, options?: AxiosRequestConfig]
-        : [requestParameters: ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getUserAccountOrderDetailV2 operation in ExperimentalEndpointsApi.
@@ -1424,45 +1026,6 @@ export class ExperimentalEndpointsApiGenerated<TAuth extends AuthMode> extends B
      */
     public cancelSubscription(...args: ExperimentalEndpointsApiCancelSubscriptionArgs<TAuth>) {
         return ExperimentalEndpointsApiFp(this.configuration).cancelSubscription(...args).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Experimental:** this endpoint may change without notice. 
-     * @summary Get account order detail
-     * @param {ExperimentalEndpointsApiGetAccountOrderRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ExperimentalEndpointsApiGenerated
-     */
-    public getAccountOrder(...args: ExperimentalEndpointsApiGetAccountOrderArgs<TAuth>) {
-        return ExperimentalEndpointsApiFp(this.configuration).getAccountOrder(...args).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Experimental:** this endpoint may change without notice.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
-     * @summary List all account orders
-     * @param {ExperimentalEndpointsApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ExperimentalEndpointsApiGenerated
-     */
-    public getAllAccountOrders(...args: ExperimentalEndpointsApiGetAllAccountOrdersArgs<TAuth>) {
-        return ExperimentalEndpointsApiFp(this.configuration).getAllAccountOrders(...args).then((request) => request(this.axios, this.basePath));
-
-    }
-
-    /**
-     * A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Experimental:** this endpoint may change without notice.  **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)** 
-     * @summary List all account recent orders (last 24 hours only)
-     * @param {ExperimentalEndpointsApiGetAllAccountRecentOrdersRequest<TAuth>} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ExperimentalEndpointsApiGenerated
-     */
-    public getAllAccountRecentOrders(...args: ExperimentalEndpointsApiGetAllAccountRecentOrdersArgs<TAuth>) {
-        return ExperimentalEndpointsApiFp(this.configuration).getAllAccountRecentOrders(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

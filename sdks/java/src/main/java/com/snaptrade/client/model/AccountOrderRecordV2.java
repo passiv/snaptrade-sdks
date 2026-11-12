@@ -361,7 +361,7 @@ public class AccountOrderRecordV2 {
    * @return timePlaced
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-07-30T22:51:49.746Z", value = "The time the order was placed. This is the time the order was submitted to the brokerage.")
+  @ApiModelProperty(example = "2024-07-30T22:51:49.746270Z", value = "The time the order was placed. This is the time the order was submitted to the brokerage.")
 
   public OffsetDateTime getTimePlaced() {
     return timePlaced;

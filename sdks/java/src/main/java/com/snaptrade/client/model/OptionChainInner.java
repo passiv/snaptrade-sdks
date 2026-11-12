@@ -89,7 +89,7 @@ public class OptionChainInner {
    * @return expiryDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-07-08T04:00:00.000Z", value = "")
+  @ApiModelProperty(example = "2022-07-08T00:00:00.000000-04:00", value = "")
 
   public String getExpiryDate() {
     return expiryDate;

@@ -1225,7 +1225,7 @@ paths:
   /accounts/{accountId}/orders/all:
     get:
       tags:
-        - Experimental endpoints
+        - Account Information
       summary: List all account orders
       operationId: AccountInformation_getAllAccountOrders
       description: |
@@ -1235,7 +1235,7 @@ paths:
 
         `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
 
-        **Experimental:** this endpoint may change without notice.
+        **Beta:** this endpoint and its response schema may change.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       parameters:
@@ -1460,7 +1460,7 @@ paths:
   /accounts/{accountId}/orders/recent:
     get:
       tags:
-        - Experimental endpoints
+        - Account Information
       summary: List all account recent orders (last 24 hours only)
       operationId: AccountInformation_getAllAccountRecentOrders
       description: |
@@ -1471,7 +1471,7 @@ paths:
 
         Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
 
-        **Experimental:** this endpoint may change without notice.
+        **Beta:** this endpoint and its response schema may change.
 
         **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
       parameters:
@@ -3005,7 +3005,7 @@ paths:
   /accounts/{accountId}/orders/{brokerageOrderId}:
     get:
       tags:
-        - Experimental endpoints
+        - Account Information
       summary: Get account order detail
       operationId: AccountInformation_getAccountOrder
       description: |
@@ -3017,7 +3017,7 @@ paths:
 
         This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
-        **Experimental:** this endpoint may change without notice.
+        **Beta:** this endpoint and its response schema may change.
       parameters:
         - in: path
           name: accountId

@@ -5,8 +5,10 @@ import com.snaptrade.client.model.Account;
 import com.snaptrade.client.model.AccountBalancesV2Response;
 import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
+import com.snaptrade.client.model.AccountOrder;
 import com.snaptrade.client.model.AccountOrderRecord;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
+import com.snaptrade.client.model.AllAccountOrdersResponse;
 import com.snaptrade.client.model.AllAccountPositionsResponse;
 import com.snaptrade.client.model.AllUserAccountsResponse;
 import com.snaptrade.client.model.Balance;
@@ -45,8 +47,23 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
             super(userId, userSecret, accountId);
         }
     }
+    public class GetAccountOrderRequestBuilder extends GetAccountOrderRequestBuilderGenerated {
+        public GetAccountOrderRequestBuilder(UUID accountId, String brokerageOrderId, String userId, String userSecret) {
+            super(accountId, brokerageOrderId, userId, userSecret);
+        }
+    }
+    public class GetAllAccountOrdersRequestBuilder extends GetAllAccountOrdersRequestBuilderGenerated {
+        public GetAllAccountOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
     public class GetAllAccountPositionsRequestBuilder extends GetAllAccountPositionsRequestBuilderGenerated {
         public GetAllAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
+    public class GetAllAccountRecentOrdersRequestBuilder extends GetAllAccountRecentOrdersRequestBuilderGenerated {
+        public GetAllAccountRecentOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
         }
     }

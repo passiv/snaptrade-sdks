@@ -42,10 +42,43 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/{brokerageOrderId}-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'brokerageOrderId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/orders/all-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'state'
+            },
+            {
+                'name': 'days'
+            },
+        ]
+    },
     '/accounts/{accountId}/positions/all-GET': {
         'parameters': [
             {
                 'name': 'accountId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/orders/recent-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'only_executed'
             },
         ]
     },
@@ -265,39 +298,6 @@ operation_parameter_map = {
         'parameters': [
             {
                 'name': 'account_id'
-            },
-        ]
-    },
-    '/accounts/{accountId}/orders/{brokerageOrderId}-GET': {
-        'parameters': [
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'brokerageOrderId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/orders/all-GET': {
-        'parameters': [
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'state'
-            },
-            {
-                'name': 'days'
-            },
-        ]
-    },
-    '/accounts/{accountId}/orders/recent-GET': {
-        'parameters': [
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'only_executed'
             },
         ]
     },
