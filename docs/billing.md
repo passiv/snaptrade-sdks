@@ -4,6 +4,8 @@ This document explains every component of SnapTrade's Commercial billing process
 
 Personal users are currently completely free. Commercial customers may be billed based on connected users, API usage, platform fees, or monthly minimums depending on their agreement. If you are deciding which customer model applies to your integration, start with [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
+The Launch plan includes a **$100 USD monthly platform fee**. Personal/OAuth users currently have no per-user charge for a limited time; this does not waive the platform fee. The Build plan is free for development and testing, and Custom pricing depends on your agreement. See [Pricing](https://snaptrade.com/pricing) for current rates.
+
 ---
 
 ## Billing Cycle
@@ -20,7 +22,7 @@ A Commercial monthly invoice can include up to four types of charges:
 
 The primary component of a Commercial bill is based on the number of **unique users** who had an active or inactive brokerage connection during the billing period. A "user" is identified by the `user_id` assigned when creating users in your application. For more details on user creation, see the [SnapTrade user creation documentation](https://docs.snaptrade.com/docs/getting-started#getting-started-users).
 
-By default, Commercial customers start with a single flat rate of **$2.00 per connected user per month**. As your business scales, you can negotiate volume-based tiered pricing where additional users above certain thresholds are charged at progressively lower rates. Contact support if you're interested in negotiating bulk tiered pricing.
+On Launch, app-managed users cost **$2.00 per connected user per month** with Real-time data or **$1.00 per connected user per month** with Daily data, in addition to the platform fee. As your business scales, you can negotiate volume-based tiered pricing where additional users above certain thresholds are charged at progressively lower rates. Contact support if you're interested in negotiating bulk tiered pricing.
 
 **Example of tiered pricing:**
 
@@ -30,10 +32,10 @@ By default, Commercial customers start with a single flat rate of **$2.00 per co
 | 2    | 101 - 500 | $1.75        |
 | 3    | 501+      | $1.50        |
 
-With 250 connected users in this example, the Commercial bill would be:
+With 250 connected users in this example, the connected-user charge would be:
 - 100 users x $2.00 = $200.00
 - 150 users x $1.75 = $262.50
-- **Total: $462.50**
+- **Connected-user subtotal: $462.50**, before any platform fee, other usage charges, or taxes.
 
 **What counts as a billable user:** A user is counted if they had at least one completed brokerage connection or [periodic sync event](https://docs.snaptrade.com/docs/syncing) during the billing period. Incomplete connections are not billed.
 
@@ -41,15 +43,17 @@ With 250 connected users in this example, the Commercial bill would be:
 
 If your Commercial agreement with SnapTrade contains pricing for manual refreshes, they will be charged according to the following details.
 
-When your application triggers a manual data refresh (sync) for a user's account, each refresh is recorded as a billable event. The default rate is set per Commercial customer based on their agreement with SnapTrade. Manual Sync is available for Pay-as-you-go Daily plans at **$0.05 per sync**. This feature remains disabled for free plans.
+When your application triggers a manual data refresh (sync) for a user's account, billing depends on your plan. Manual Sync is included with Launch Real-time and costs **$0.05 per connection per sync** with Launch Daily. Custom pricing depends on your agreement.
 
 ### 3. Recent Orders API Calls
 
 If your Commercial plan includes provisions for the `/recentOrders` endpoint, each API call to this endpoint is billed at a per-call rate defined in your agreement.
 
-Pay as You Go customers have this feature included at no extra charge although this feature may be subject to rate limits at higher volumes.
+Launch plan real-time customers have this feature included at no extra charge although this feature may be subject to rate limits at higher volumes.
 
 ### 4. Platform Fee / Monthly Minimum
+
+The Launch plan has a **$100 USD platform fee per month**, including for OAuth apps. This fee applies regardless of the number of connected users or API call volume.
 
 Custom plans may include a fixed **platform fee** that is charged every month regardless of usage. This fee is independent of your user count or API call volume. On custom plans it is possible to bundle in a certain number of connected users with the Platform Fee.
 

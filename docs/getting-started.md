@@ -140,7 +140,9 @@ Use this path when you are building an application for your own end users. Choos
 | Per-user credentials | Tokens issued when the user approves access | A `userId` and `userSecret` your app stores for each user |
 | Request authentication | Standard Bearer token | Each request signed with your `consumerKey` |
 | Trading | In beta, with the `trade` scope | Available where enabled |
-| Pricing | Free during the limited-time OAuth preview | Per-user pricing; see [Billing](https://docs.snaptrade.com/docs/billing) |
+| Pricing | Launch: $100 USD/month platform fee; no per-user charge for a limited time | Launch: $100 USD/month platform fee plus per-user pricing; see [Billing](https://docs.snaptrade.com/docs/billing) |
+
+The Build plan is free for development and testing. Custom pricing depends on your agreement. See [Pricing](https://snaptrade.com/pricing) for current rates.
 
 - [Build with OAuth](#commercial-oauth-quickstart)
 - [Build with a Commercial API key](#commercial-api-key-quickstart)
