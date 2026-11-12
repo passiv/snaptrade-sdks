@@ -2,12 +2,6 @@
 
 SnapTrade OAuth lets your app request access to brokerage accounts that a user already manages in [SnapTrade Personal](https://dashboard.snaptrade.com). The user signs in to SnapTrade, reviews the requested access, and grants your app permission. Your app receives OAuth tokens instead of creating a second SnapTrade user or handling a SnapTrade consumer key for that person.
 
-:::info{title="Limited-time free preview"}
-OAuth app access is free for a limited time while we work with developers to test and improve the platform. There is no per-user OAuth fee during the preview, so this is a good time to build an integration, test it with real SnapTrade Personal users, and help shape the product before paid pricing is introduced.
-
-We expect the free preview to run for a few months while we learn from early integrations. Future pricing and timing will be announced separately.
-:::
-
 ## Why Build With OAuth
 
 - **A shorter integration:** Your app does not register SnapTrade users, store `userSecret` values, sign API requests, or embed the Connection Portal just to access accounts the user already connected.
@@ -16,9 +10,8 @@ We expect the free preview to run for a few months while we learn from early int
 - **User-controlled access:** Users manage their brokerage connections in the [SnapTrade Dashboard](https://dashboard.snaptrade.com) and explicitly approve access for each app.
 - **Sign-in included:** SnapTrade is also an OpenID Connect provider, so the same authorization request that grants account access can sign the user in to your app and return a verified email address.
 - **A path to distribution:** Eligible OAuth apps may be featured to SnapTrade Personal users as SnapTrade expands app discovery and distribution.
-- **Free while you build:** During the limited-time preview, you can develop, test, and launch an OAuth integration without per-user OAuth fees.
 
-Because OAuth apps can reuse connections that users already maintain with SnapTrade, future OAuth pricing can be lower than traditional per-user Commercial pricing. Pricing after the preview has not been finalized.
+Because OAuth apps can reuse connections that users already maintain with SnapTrade, OAuth pricing is typically lower than traditional per-user Commercial pricing.
 
 ## OAuth or a Commercial Integration?
 
@@ -440,4 +433,4 @@ await fetch(revocationEndpoint, {
 - Link users to the SnapTrade Dashboard to add, repair, or remove brokerage connections.
 - Explain what brokerage data your app uses and link to a privacy policy.
 
-The OAuth preview is the best time to start building: access is free, the integration is smaller than a traditional Commercial implementation, and early apps can give direct feedback on the platform. When your integration is ready, contact SnapTrade to discuss app discovery eligibility.
+When your integration is ready, contact SnapTrade to discuss app discovery eligibility.
