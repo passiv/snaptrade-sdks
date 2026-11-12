@@ -79,7 +79,10 @@ To enable Schwab OAuth with Trading access:
 
 1. Register for Accounts and Trading commercial access [on the Schwab developer portal](https://developer.schwab.com/products/trader-api--commercial).
 2. When prompted, set the callback URL to `https://connect.snaptrade.com/oauth/callback`.
-3. Once approved by Schwab, send your API keys securely to SnapTrade (for example, via Bitwarden) at [support@snaptrade.com](mailto:support@snaptrade.com).
+
+Note: You’ll need to apply for your own Schwab API credentials solely using your company and app details. In your application, describe your use case and how users will interact with Schwab through your app, since **Schwab is granting access directly to your company, not SnapTrade**.
+
+Once approved by Schwab, send your API keys securely to SnapTrade (for example, via Bitwarden) at [support@snaptrade.com](mailto:support@snaptrade.com).
 
 ### Alpaca
 

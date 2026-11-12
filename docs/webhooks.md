@@ -478,7 +478,7 @@ Example payload is below:
 
 ## TRADE_UPDATE
 
-Beta webhook that gets sent when the status of trade placed through SnapTrade changes. For example, will be sent if a trade gets cancelled, executed, partitally filled, etc. Please contact support@snaptrade.com (or reach out on discord/slack) to try out this experimental webhook. Only trades placed through SnapTrade will be monitored for status updates.
+Webhook that gets sent when the status of trade placed through SnapTrade changes. For example, will be sent if a trade gets cancelled, executed, partitally filled, etc. Please contact support@snaptrade.com (or reach out on discord/slack) to try out this experimental webhook. Only trades placed through SnapTrade will be monitored for status updates.
 
 Returns a the current order detail in the webhook body
 
