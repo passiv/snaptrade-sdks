@@ -1,6 +1,6 @@
 # Trading with SnapTrade
 
-SnapTrade supports trading workflows for stocks, ETFs, other equities, options, and crypto. The exact feature set depends on the connected brokerage or exchange, so you should always [verify support](https://support.snaptrade.com/brokerages) for the account you are about to trade with.
+SnapTrade supports trading workflows for stocks, ETFs, other equities, options, futures, futures options, and crypto. The exact feature set depends on the connected brokerage or exchange, so you should always [verify support](https://support.snaptrade.com/brokerages) for the account you are about to trade with.
 
 > 🚧 **Soft Rate Limit**
 >
@@ -15,9 +15,9 @@ Most trading integrations with SnapTrade follow the same high-level flow:
 3. Build the order payload for the asset class you want to trade.
 4. Validate the order details in your application.
 5. Submit the order to the brokerage or exchange.
-6. Monitor execution status.
+6. Monitor execution status, and cancel the order if needed.
 
-The sections below explain how that flow differs for equities, options, and crypto.
+The sections below explain how that flow differs for equities, options, futures, and crypto. [Monitor and Manage Orders](#monitor-and-manage-orders) covers the last step, which is the same for every asset class.
 
 ## Confirm Order Details and Impact
 
@@ -96,7 +96,89 @@ The multi-leg payload lets you submit:
 - a `price_effect` such as debit or credit
 - a `legs` array containing the option instruments, actions, and contract quantities
 
-Because brokerages often report each leg separately, downstream order history can appear as multiple records for a single multi-leg submission.
+Because brokerages often report each leg separately, downstream order history can appear as multiple records for a single multi-leg submission. The [newer order endpoints](#monitor-and-manage-orders) return a multi-leg order as a single order with a `legs` list.
+
+## Futures and Futures Options (Beta)
+
+> 🚧 **Beta**
+>
+> Futures and futures options trading is in beta. The endpoint and its request format may change. If you use an SDK, update to the latest version before you start.
+
+Futures and futures options are placed with :api[Trading_placeSimpleOrder]. It takes one request format for equities, equity options, futures, and futures options, but it is the only endpoint that supports futures and futures options.
+
+### Supported Brokerages
+
+Futures and futures options trading is rolling out one brokerage at a time, and futures options are not available everywhere futures are. See the [SnapTrade Institution Support guide](https://support.snaptrade.com/brokerages) for the brokerages that currently support each one.
+
+### Typical Futures Workflow
+
+1. Identify the account that will place the order. It must be on a trading-enabled connection to a [supported brokerage](https://support.snaptrade.com/brokerages), and the account must be approved for futures at the brokerage.
+2. Find the contract. Call :api[ReferenceData_listAllBrokerageInstruments] with the brokerage slug to pull the futures and futures options available at that brokerage, and take the `symbol` of the contract you want to trade.
+3. Build the order details:
+   - `order_type`: `market`, `limit`, `stop`, or `stop_limit`
+   - `time_in_force`: for example `day` or `gtc`
+   - `limit_price` and `stop_price`, as required by the order type
+   - `legs`: one entry per leg, each with an `instrument`, an `action`, and `units`
+4. Validate the order details in your application before submission.
+5. Submit the order with :api[Trading_placeSimpleOrder].
+6. Store the `brokerage_order_id` from the response. It is the only field returned, so use it to [check the order's status](#monitor-and-manage-orders).
+
+All string values in the request are lower snake_case and case-sensitive, and prices and quantities are sent as decimal strings.
+
+```json
+{
+  "order_type": "stop_limit",
+  "time_in_force": "day",
+  "stop_price": "6000.00",
+  "limit_price": "6000.25",
+  "legs": [
+    {
+      "instrument": {
+        "kind": "future",
+        "symbol": "/ESZ6"
+      },
+      "action": "buy",
+      "units": "1"
+    }
+  ]
+}
+```
+
+This example buys one E-mini S&P 500 December 2026 contract on tastytrade once the price reaches `6000.00`, with a limit of `6000.25`.
+
+### Legs, Actions, and Quantities
+
+Each leg sets `instrument.kind` to `future` or `future_option`:
+
+- **Futures** use the `buy` and `sell` actions.
+- **Futures options** use `buy_to_open`, `buy_to_close`, `sell_to_open`, and `sell_to_close`.
+- `units` is a positive whole number of contracts. Fractional quantities are not supported.
+
+A single order cannot mix futures or futures options legs with equity or equity option legs.
+
+### Futures Symbols
+
+Futures symbols are not normalized between brokerages. Pass the symbol in the brokerage's own format, exactly as written, including any prefix and spaces:
+
+| Brokerage | Futures | Futures options |
+| --- | --- | --- |
+| tastytrade | Begins with `/`, for example `/ESZ6` | Begins with `./`. Use the exact symbol returned by :api[ReferenceData_listAllBrokerageInstruments], including its spaces. |
+| TradeStation | Two-digit year, with an optional `@` prefix, for example `ESZ26` or `@ESZ26` | For example `ESZ26 C6000`, keeping the space |
+| Webull US | No prefix and no spaces, for example `ESZ6` | Not supported |
+
+Always name a specific contract. Root-only and continuous symbols such as `@ES` are not accepted on TradeStation or Webull, and neither are slash-prefixed aliases. Universal symbol IDs are not accepted for futures on any brokerage.
+
+### Brokerage-Specific Limits
+
+- **tastytrade**: single-leg futures orders, and futures options orders with up to four legs. Multi-leg orders cannot be market orders, and multi-leg `limit` and `stop_limit` orders must set `price_effect` to `credit` or `debit`.
+- **TradeStation**: single-leg futures and futures options orders only. `time_in_force` can be `day`, `gtc`, `ioc`, or `fok`, depending on the contract and route.
+- **Webull US**: single-leg futures orders only. `time_in_force` can be `day` or `gtc`.
+
+These limits apply on every supported brokerage:
+
+- `gtd` orders and `trading_session="extended"` are not available for futures or futures options.
+- Trailing stop orders are not supported.
+- SnapTrade forwards prices without rounding. The brokerage decides contract availability, permissions, margin requirements, and valid price increments, and rejects orders that do not meet them.
 
 ## Crypto
 
@@ -136,8 +218,29 @@ For most crypto integrations, validating the request in your own application is 
 
 In this example, the order buys `0.01` ETH with EUR.
 
-## Brokerage Support and Reconciliation
+## Monitor and Manage Orders
 
-Not every brokerage supports every trading workflow. Extended-hours sessions, multi-leg options, and crypto trading are all institution-specific. Review the [SnapTrade Institution Support guide](https://support.snaptrade.com/brokerages) before enabling a feature in production.
+A successful submission does not mean the order has filled. After placing an order, use the brokerage order ID returned by the submission to follow it.
 
-After placing an order, use :api[AccountInformation_getUserAccountOrderDetailV2] with the brokerage order ID returned by the submission to check its latest status. A successful submission does not mean the order has filled.
+> 🚧 **Beta**
+>
+> The order endpoints in this section are in beta, and their response schema may change. They replace the earlier order endpoints, such as :api[AccountInformation_getUserAccountOrderDetailV2], and are the ones we recommend for new integrations.
+
+| Goal | Endpoint | Notes |
+| --- | --- | --- |
+| Check one order | :api[AccountInformation_getAccountOrder] | Always realtime. Only returns orders placed through SnapTrade. |
+| List the last 24 hours of orders | :api[AccountInformation_getAllAccountRecentOrders] | Lightweight and always realtime. Returns executed orders only unless you set `only_executed=false`. Each call incurs an additional charge. |
+| List up to 90 days of orders | :api[AccountInformation_getAllAccountOrders] | Defaults to the last 30 days. Filter with `state` and `days`. |
+| Cancel a pending order | :api[Trading_cancelOrder] | Accepts order IDs for all asset types. |
+
+All three order endpoints return the same order format, for every asset class:
+
+- Every order has a `legs` list with at least one leg. A multi-leg order is a single order with several legs, not one record per leg.
+- Each leg's `instrument` is discriminated by `kind`, for example `future` or `future_option`. Check `instrument.kind` to know which fields are present.
+- `order_type` is an object discriminated by `kind`, and each kind carries only the price fields that apply to it.
+- `status` reports where the order stands, for example `PENDING`, `PARTIALLY_EXECUTED`, `EXECUTED`, `CANCELED`, or `REJECTED`.
+- `price_effect` is `null` for orders that contain a futures leg, because a futures price is a contract quote and not an upfront cash flow. Futures options keep their price effect.
+
+## Brokerage Support
+
+Not every brokerage supports every trading workflow. Extended-hours sessions, multi-leg options, futures, futures options, and crypto trading are all institution-specific. Review the [SnapTrade Institution Support guide](https://support.snaptrade.com/brokerages) before enabling a feature in production.
