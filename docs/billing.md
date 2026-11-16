@@ -10,7 +10,19 @@ The Launch plan includes a **$100 USD monthly platform fee**. Personal/OAuth use
 
 ## Billing Cycle
 
-SnapTrade bills Commercial customers on a **monthly** cycle. Each invoice covers usage from the 1st through the last day of the previous calendar month. Invoices are generated on the **1st of each month**.
+SnapTrade bills Commercial customers on a **monthly** cycle. Each regular monthly invoice covers usage from the 1st through the last day of the previous calendar month. Regular monthly invoices are generated on the **1st of each month**. If you cancel your plan, a final invoice is generated at cancellation.
+
+### First-month proration
+
+If you activate your Launch plan partway through a calendar month, your first platform fee is prorated from your activation date. Your first invoice includes this prorated fee plus any applicable usage charges.
+
+### Cancellation and your final invoice
+
+When you cancel your Launch plan, a final invoice is generated for the current billing month. The full **$100 USD monthly platform fee** applies, even if you cancel before the end of the month. **The platform fee is not prorated in the month you cancel.** Your final invoice also includes any applicable usage charges for that billing period.
+
+For example, if you cancel on November 11, your November platform fee is $100 USD, plus applicable usage charges.
+
+Your cancellation invoice is separate from invoices for previous months. An invoice generated on November 1 covers October, while an invoice generated when you cancel in November covers November. Cancelling does not remove any outstanding balance from earlier invoices.
 
 ---
 
