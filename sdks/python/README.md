@@ -81,6 +81,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
   * [OAuth Auth authentication](#oauth-auth-authentication)
   * [Device login](#device-login)
+  * [Browser OAuth and explicit refresh](#browser-oauth-and-explicit-refresh)
 - [Getting Started](#getting-started)
 - [Request timeouts](#request-timeouts)
 - [Async](#async)
@@ -233,6 +234,32 @@ interrupt polling waits. An in-flight request is bounded by the HTTP timeout
 (30 seconds by default) and remaining authorization lifetime. Catch
 `SnapTradeOAuthDeviceError` and inspect `.error` for denial, expiry or cancellation.
 Applications own token storage and refresh, including refresh-token rotation.
+
+### Browser OAuth and explicit refresh<a id="browser-oauth-and-explicit-refresh"></a>
+
+Configure confidential-client credentials on your backend. The synchronous helper generates fresh state and S256 PKCE and uses server discovery by default. Run blocking calls in a worker thread in asynchronous apps.
+
+```python
+from snaptrade_client import SnapTrade, SnapTradeAuth, SnapTradeOAuth
+
+oauth = SnapTradeOAuth(
+    client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri
+)
+flow = oauth.create_authorization_url(scope="read")
+# Save flow in the user's login session, then redirect to flow.url.
+# In the callback, handle OAuth errors, validate state, and consume that saved flow.
+tokens = oauth.exchange_code(code=code, code_verifier=flow.code_verifier)
+client = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
+
+# Refresh explicitly and atomically replace the stored response, including the rotated refresh token.
+assert tokens.refresh_token is not None
+refreshed = oauth.refresh_token(refresh_token=tokens.refresh_token)
+refreshed_client = SnapTrade(
+    auth=SnapTradeAuth.oauth(access_token=refreshed.access_token)
+)
+```
+
+Token responses include `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw`. Applications own token storage, callback validation, refresh scheduling and concurrency. A configured secret defaults to `client_secret_basic`; public clients omit the secret. Browser code must never receive a confidential-client secret.
 
 ## Getting Started<a id="getting-started"></a>
 
