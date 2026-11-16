@@ -77,3 +77,6 @@ export * from "./error";
 
 export { SnaptradeOAuthDevice } from "./oauth-device";
 export type { SnaptradeOAuthDeviceOptions, SnaptradeDeviceAuthorization, SnaptradeDeviceTokens } from "./oauth-device";
+
+export { SnaptradeOAuth } from "./oauth";
+export type { SnaptradeOAuthScope, SnaptradeOAuthClientAuthMethod, SnaptradeOAuthOptions, SnaptradeOAuthCreateAuthorizationUrlParams, SnaptradeOAuthAuthorizationFlow, SnaptradeOAuthExchangeCodeParams, SnaptradeOAuthRefreshTokenParams, SnaptradeOAuthTokenResponse } from "./oauth";

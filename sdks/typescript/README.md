@@ -77,6 +77,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
   * [OAuth Auth authentication](#oauth-auth-authentication)
+  * [Browser OAuth and explicit refresh](#browser-oauth-and-explicit-refresh)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
@@ -224,6 +225,40 @@ const oauthClient = new Snaptrade({
   }),
 });
 ```
+
+### Browser OAuth and explicit refresh<a id="browser-oauth-and-explicit-refresh"></a>
+
+Configure confidential-client credentials on your backend. The helper generates fresh state and S256 PKCE and uses server discovery by default.
+
+```typescript
+import {
+  Snaptrade,
+  SnaptradeAuth,
+  SnaptradeOAuth,
+} from "snaptrade-typescript-sdk";
+
+const oauth = new SnaptradeOAuth({ clientId, clientSecret, redirectUri });
+const flow = await oauth.createAuthorizationUrl({ scope: "read" });
+// Save flow in the user's login session, then redirect to flow.url.
+// In the callback, handle OAuth errors, validate state, and consume that saved flow.
+const tokens = await oauth.exchangeCode({
+  code,
+  codeVerifier: flow.codeVerifier,
+});
+const client = new Snaptrade({
+  auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }),
+});
+
+// Refresh explicitly and atomically replace the stored response, including the rotated refresh token.
+const refreshed = await oauth.refreshToken({
+  refreshToken: tokens.refreshToken!,
+});
+const refreshedClient = new Snaptrade({
+  auth: SnaptradeAuth.oauth({ accessToken: refreshed.accessToken }),
+});
+```
+
+Token responses include `accessToken`, `refreshToken`, `expiresIn`, `tokenType`, `scope`, and `raw`. Applications own token storage, callback validation, refresh scheduling and concurrency. A configured secret defaults to `client_secret_basic`; public clients omit the secret. Browser code must never receive a confidential-client secret.
 
 ## Getting Started<a id="getting-started"></a>
 
