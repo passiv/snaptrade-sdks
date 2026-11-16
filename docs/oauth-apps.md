@@ -69,6 +69,91 @@ https://app.example.com/oauth/snaptrade/callback
 http://127.0.0.1:3000/oauth/snaptrade/callback
 ```
 
+## Use the SDK Helpers
+
+TypeScript `snaptrade-typescript-sdk` **13.3.0** and Python `snaptrade-python-sdk` **13.3.0** include explicit browser authorization-code helpers. Install these versions or later:
+
+```sh
+npm install snaptrade-typescript-sdk@^13.3.0
+# For Python projects:
+pip install "snaptrade-python-sdk>=13.3.0"
+```
+
+The helpers discover authorization and token endpoints, generate fresh state and S256 PKCE values, exchange a code, and explicitly refresh tokens. Providing a client secret uses HTTP Basic client authentication by default. They do not register an app, handle callbacks, validate state or ID tokens, store tokens, or refresh automatically. Existing device authorization helpers remain available separately.
+
+These examples use `read` for brokerage data access. Keep the helper and confidential client secret on your backend. Each `flow` belongs to one authorization attempt: store its state and verifier in the user's server-side session before redirecting, then retrieve and consume them only for that callback. A module-global flow shared between users is not a session store.
+
+### TypeScript
+
+```typescript
+import { Snaptrade, SnaptradeAuth, SnaptradeOAuth } from "snaptrade-typescript-sdk";
+
+const oauth = new SnaptradeOAuth({
+  clientId: process.env.SNAPTRADE_OAUTH_CLIENT_ID!,
+  clientSecret: process.env.SNAPTRADE_OAUTH_CLIENT_SECRET!,
+  redirectUri: "https://app.example.com/oauth/snaptrade/callback",
+});
+
+// Authorization handler: save flow.state and flow.codeVerifier in this user's
+// server-side session, then redirect their browser to flow.url.
+const flow = await oauth.createAuthorizationUrl({ scope: "read" });
+
+// Callback handler: restore that attempt from the session. Reject missing or
+// mismatched state and handle OAuth errors before exchanging a code.
+// Consume the attempt once. code and codeVerifier below are validated callback
+// and session values, respectively.
+const tokens = await oauth.exchangeCode({ code, codeVerifier });
+
+const snaptrade = new Snaptrade({
+  auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }),
+});
+const accounts = await snaptrade.accountInformation.listUserAccounts();
+
+// Later, explicitly refresh with the current stored refresh token.
+if (!tokens.refreshToken) throw new Error("Authorization did not return a refresh token");
+const refreshed = await oauth.refreshToken({ refreshToken: tokens.refreshToken });
+// Atomically persist refreshed.accessToken, refreshed.refreshToken, and expiry.
+// Build a new API client with refreshed.accessToken for subsequent requests.
+```
+
+### Python
+
+```python
+import os
+from snaptrade_client import SnapTrade, SnapTradeAuth, SnapTradeOAuth
+
+oauth = SnapTradeOAuth(
+    client_id=os.environ["SNAPTRADE_OAUTH_CLIENT_ID"],
+    client_secret=os.environ["SNAPTRADE_OAUTH_CLIENT_SECRET"],
+    redirect_uri="https://app.example.com/oauth/snaptrade/callback",
+)
+
+# Authorization handler: save flow.state and flow.code_verifier in this user's
+# server-side session, then redirect their browser to flow.url.
+flow = oauth.create_authorization_url(scope="read")
+
+# Callback handler: restore and consume that session attempt after validating
+# state and handling OAuth errors. code comes from the validated callback;
+# code_verifier comes from the session, not from the callback query string.
+tokens = oauth.exchange_code(code=code, code_verifier=code_verifier)
+
+snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
+accounts = snaptrade.account_information.list_user_accounts()
+
+# Later, explicitly refresh with the current stored refresh token.
+if not tokens.refresh_token:
+    raise RuntimeError("Authorization did not return a refresh token")
+refreshed = oauth.refresh_token(refresh_token=tokens.refresh_token)
+# Atomically persist refreshed.access_token, refreshed.refresh_token, and expiry.
+# Build a new API client with refreshed.access_token for subsequent requests.
+```
+
+Token results expose `accessToken`, `refreshToken`, `expiresIn`, `tokenType`, `scope`, and `raw` in TypeScript, and `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw` in Python. Optional fields may be absent. Compute expiry from the time the response arrives plus `expiresIn` / `expires_in` seconds. Store the complete new token pair on refresh; serialize refreshes for a grant so concurrent calls cannot reuse a rotated refresh token. If refresh fails because the grant is expired or revoked, require authorization again.
+
+For OpenID Connect sign-in, use a standard OIDC client or follow the nonce and ID-token validation steps below. The SDK authorization helper does not add a nonce; if extending its returned URL with one, generate it freshly, bind it to the same session attempt, and validate the ID token yourself. Additional response fields such as `id_token` are available through `tokens.raw`; they are not verified by the helper.
+
+The following sections describe the underlying protocol and application responsibilities, including OIDC, revocation, and callback handling.
+
 ## 2. Discover the OAuth Endpoints
 
 Read the authorization server metadata instead of hard-coding individual endpoints:

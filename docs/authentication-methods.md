@@ -1,12 +1,14 @@
 # Authentication Methods
 
-SnapTrade supports two SDK authentication modes for API key integrations: Commercial API key and Personal API key. The selected SDK auth mode controls whether `userId` and `userSecret` are valid operation parameters.
+SnapTrade supports three SDK authentication modes: Commercial API Key, Personal API Key, and Commercial OAuth. The selected mode controls how requests authenticate and whether `userId` and `userSecret` are valid operation parameters.
 
 Commercial apps own many SnapTrade users. They register or authenticate a SnapTrade user, then fetch account data by passing that user's `userId` and `userSecret`.
 
 Your Personal API key identifies your SnapTrade account directly. Account data is fetched without `userId` or `userSecret`.
 
-In both modes, generate a Connection Portal URL and connect a brokerage account before calling account-data APIs.
+For both API key modes, generate a Connection Portal URL and connect a brokerage account before calling account-data APIs.
+
+With Commercial OAuth, your app requests permission to access accounts a user already manages in SnapTrade Personal. The resulting access token identifies the user. Your app does not register another SnapTrade user or pass API key credentials on OAuth requests.
 
 ## Quick Comparison
 
@@ -14,6 +16,8 @@ In both modes, generate a Connection Portal URL and connect a brokerage account 
 | --- | --- | --- | --- |
 | Commercial API key | Apps managing many end users | `SnaptradeAuth.commercialApiKey(...)` / `SnapTradeAuth.commercial_api_key(...)` | Pass `userId` and `userSecret` |
 | Personal API key | You, when calling SnapTrade with your own API key | `SnaptradeAuth.personalApiKey(...)` / `SnapTradeAuth.personal_api_key(...)` | Omit `userId` and `userSecret` |
+
+| Commercial OAuth | Apps accessing accounts with a Personal user’s consent | `SnaptradeAuth.oauth(...)` / `SnapTradeAuth.oauth(...)` | Bearer access token; omit `userId` and `userSecret` |
 
 For a broader product-model comparison, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
@@ -214,6 +218,47 @@ Rules:
 - Omit `userId` and `userSecret` on account-data operations.
 - Do not call :api[Authentication_registerSnapTradeUser]. User registration is for Commercial apps managing SnapTrade users for their own end users.
 
+## Commercial OAuth Authentication
+
+Use TypeScript `snaptrade-typescript-sdk` **13.3.0 or later**, or Python `snaptrade-python-sdk` **13.3.0 or later**, for the explicit authorization-code and refresh helpers.
+
+Register your own OAuth app in the Dashboard, then use `SnaptradeOAuth` (TypeScript) or `SnapTradeOAuth` (Python) to create an authorization URL with fresh state and S256 PKCE, exchange the callback code, and explicitly refresh tokens. Your application owns callback validation, token storage, expiry tracking, and refresh scheduling. See [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps#use-the-sdk-helpers) for the complete flow.
+
+Once your backend has an access token, initialize the API client with the OAuth auth factory:
+
+### TypeScript
+
+```typescript
+import { Snaptrade, SnaptradeAuth } from "snaptrade-typescript-sdk";
+
+const snaptrade = new Snaptrade({
+  auth: SnaptradeAuth.oauth({
+    accessToken: process.env.SNAPTRADE_ACCESS_TOKEN!,
+  }),
+});
+
+const accounts = await snaptrade.accountInformation.listUserAccounts();
+console.log(accounts.data);
+```
+
+### Python
+
+```python
+import os
+from snaptrade_client import SnapTrade, SnapTradeAuth
+
+snaptrade = SnapTrade(
+    auth=SnapTradeAuth.oauth(
+        access_token=os.environ["SNAPTRADE_ACCESS_TOKEN"],
+    )
+)
+
+accounts = snaptrade.account_information.list_user_accounts()
+print(accounts.body)
+```
+
+Use OAuth only on endpoints that support it. Available operations also depend on granted scopes and the connected brokerage's capabilities. Trading requires `trade` permission and any applicable app approval; requesting a scope does not guarantee access. User registration and Commercial user management use Commercial API Key authentication.
+
 ## Credential Rules
 
 Commercial API key:
@@ -230,6 +275,13 @@ Personal API key:
 - Connection Portal login uses the Personal API key context and does not require `userId` or `userSecret`.
 - Account-data calls omit `userId` and `userSecret`.
 - Direct HTTP requests are signed with the Personal `consumerKey`.
+
+Commercial OAuth:
+
+- SDK initialization uses an access token through the OAuth auth factory.
+- OAuth requests send `Authorization: Bearer <access_token>` without signing.
+- Omit `clientId`, `consumerKey`, `userId`, `userSecret`, `timestamp`, and `Signature`.
+- Refresh explicitly and replace the stored token pair after rotation. The API client does not refresh automatically.
 
 ## Direct HTTP Reference
 
@@ -251,9 +303,19 @@ GET /accounts/<account_id>/activities?clientId=<client_id>&timestamp=<unix_times
 Signature: <signature>
 ```
 
+OAuth requests include only the Bearer credential:
+
+```http
+GET /api/v1/accounts
+Authorization: Bearer <access_token>
+Accept: application/json
+```
+
 For signature details, see [Request Signatures](https://docs.snaptrade.com/docs/request-signatures).
 
 ## Related
+
+- [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps)
 
 - [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial)
 - [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
