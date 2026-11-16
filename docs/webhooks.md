@@ -416,9 +416,9 @@ Example payload is below:
 }
 ```
 
-## TRADE_DETECTION
+## [TRADE_DETECTION](https://docs.snaptrade.com/docs/trade-detection)
 
-Gets sent seconds after a trade has been executed in a specific account. Requires an account specific subscription. Please contact support@snaptrade.com (or reach out on discord/slack) for more information about pricing and setting up subscriptions. Only available on certain brokerages.
+Sent when SnapTrade detects an executed trade in a subscribed account. Requires an account-specific subscription and is available only on supported brokerages. See the [Trade Detection documentation](https://docs.snaptrade.com/docs/trade-detection) for supported brokerages, detection frequencies, pricing, and subscription setup.
 
 Returns a list of orders placed
 
