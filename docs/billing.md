@@ -18,9 +18,9 @@ If you activate your Launch plan partway through a calendar month, your first pl
 
 ### Cancellation and your final invoice
 
-When you cancel your Launch plan, a final invoice is generated for the current billing month. The full **$100 USD monthly platform fee** applies, even if you cancel before the end of the month. **The platform fee is not prorated in the month you cancel.** Your final invoice also includes any applicable usage charges for that billing period.
+When you cancel your plan, a final invoice is generated for the current billing month. Your platform fee, if applicable, is prorated based on when you cancel, so you only pay for the portion of the month your plan was active.
 
-For example, if you cancel on November 11, your November platform fee is $100 USD, plus applicable usage charges.
+Your final invoice also includes any applicable usage charges for that billing period.
 
 Your cancellation invoice is separate from invoices for previous months. An invoice generated on November 1 covers October, while an invoice generated when you cancel in November covers November. Cancelling does not remove any outstanding balance from earlier invoices.
 
