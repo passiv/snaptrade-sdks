@@ -101,12 +101,12 @@ Use the helpers below to obtain tokens, then call the API and manage the token l
 
 ### Use the SDK Helpers
 
-TypeScript `snaptrade-typescript-sdk` **13.3.0** and Python `snaptrade-python-sdk` **13.3.0** include explicit authorization-code helpers. Install these versions or later:
+The TypeScript and Python SDKs include authorization-code helpers. Install the SDK for your project:
 
 ```sh
-npm install snaptrade-typescript-sdk@^13.3.0
+npm install snaptrade-typescript-sdk
 # For Python projects:
-pip install "snaptrade-python-sdk>=13.3.0"
+pip install snaptrade-python-sdk
 ```
 
 The helpers discover endpoints, generate fresh state and S256 PKCE values, exchange a code, and explicitly refresh tokens. Providing a client secret uses HTTP Basic client authentication by default. Keep the helper and confidential client secret on your backend. Existing device authorization helpers remain available separately.
@@ -428,8 +428,6 @@ A refresh response never contains an `id_token`, even when the grant includes `o
 
 ## 11. Revoke Access
 
-**Unreleased dependency:** The revocation helpers below are proposed in [Konfig PR #245](https://github.com/passiv/konfig-snaptrade/pull/245) and are not available in SDK 13.3.0. This draft guide must remain blocked until that change is approved, released, and these examples are checked against the published versions. No release version has been assigned here.
-
 Let users disconnect SnapTrade from inside your app. Use the current refresh token from your store, revoke it from the backend, and only after success remove that authorization's locally stored tokens. Coordinate disconnect with in-flight refreshes so a rotated pair cannot survive the disconnect. The following fragments belong inside that application-owned operation and reuse the `oauth` and `current` values from the SDK examples:
 
 ```typescript
@@ -459,7 +457,7 @@ Revoking an access token invalidates every copy of that access token; its refres
 11. Add, reconnect, refresh, or remove a test connection and confirm your listener receives an `oauth_v1` payload with the expected `oauthClientId` and `userId`.
 12. Verify the same account is still visible in the SnapTrade Dashboard and can be granted to another test app without creating another brokerage connection.
 13. Test refresh-token rotation, a forced `401`, denial at the consent screen, a mismatched `state`, an expired code, and an unregistered redirect URI.
-14. After the revocation helper is released, revoke a refresh token and confirm it and its paired access token stop working. Confirm independently issued pairs are unaffected; Dashboard-wide revocation is a separate test.
+14. Revoke a refresh token and confirm it and its paired access token stop working. Confirm independently issued pairs are unaffected; Dashboard-wide revocation is a separate test.
 
 ## Production Checklist
 
