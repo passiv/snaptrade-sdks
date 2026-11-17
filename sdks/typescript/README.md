@@ -77,7 +77,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
   * [OAuth Auth authentication](#oauth-auth-authentication)
-  * [Browser OAuth and explicit refresh](#browser-oauth-and-explicit-refresh)
+  * [Browser OAuth, explicit refresh and revocation](#browser-oauth-explicit-refresh-and-revocation)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
   * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
@@ -226,7 +226,7 @@ const oauthClient = new Snaptrade({
 });
 ```
 
-### Browser OAuth and explicit refresh<a id="browser-oauth-and-explicit-refresh"></a>
+### Browser OAuth, explicit refresh and revocation<a id="browser-oauth-explicit-refresh-and-revocation"></a>
 
 Configure confidential-client credentials on your backend. The helper generates fresh state and S256 PKCE and uses server discovery by default.
 
@@ -259,6 +259,8 @@ const refreshedClient = new Snaptrade({
 ```
 
 Token responses include `accessToken`, `refreshToken`, `expiresIn`, `tokenType`, `scope`, and `raw`. Applications own token storage, callback validation, refresh scheduling and concurrency. A configured secret defaults to `client_secret_basic`; public clients omit the secret. Browser code must never receive a confidential-client secret.
+
+To revoke a token explicitly, call `await oauth.revokeToken({ token, tokenTypeHint: "refresh_token" })`. The hint is optional (`"access_token"` or `"refresh_token"`). Success returns no value, including for unknown or already revoked tokens. Revoking a refresh token also invalidates its paired access token; independent token pairs remain valid. The helper discovers `revocation_endpoint` or uses the constructor's `revocationEndpoint` override and reuses the configured client authentication. OAuth errors remain Axios errors.
 
 ## Getting Started<a id="getting-started"></a>
 

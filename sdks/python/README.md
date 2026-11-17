@@ -81,7 +81,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
   * [OAuth Auth authentication](#oauth-auth-authentication)
   * [Device login](#device-login)
-  * [Browser OAuth and explicit refresh](#browser-oauth-and-explicit-refresh)
+  * [Browser OAuth, explicit refresh and revocation](#browser-oauth-explicit-refresh-and-revocation)
 - [Getting Started](#getting-started)
 - [Request timeouts](#request-timeouts)
 - [Async](#async)
@@ -235,7 +235,7 @@ interrupt polling waits. An in-flight request is bounded by the HTTP timeout
 `SnapTradeOAuthDeviceError` and inspect `.error` for denial, expiry or cancellation.
 Applications own token storage and refresh, including refresh-token rotation.
 
-### Browser OAuth and explicit refresh<a id="browser-oauth-and-explicit-refresh"></a>
+### Browser OAuth, explicit refresh and revocation<a id="browser-oauth-explicit-refresh-and-revocation"></a>
 
 Configure confidential-client credentials on your backend. The synchronous helper generates fresh state and S256 PKCE and uses server discovery by default. Run blocking calls in a worker thread in asynchronous apps.
 
@@ -260,6 +260,8 @@ refreshed_client = SnapTrade(
 ```
 
 Token responses include `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw`. Applications own token storage, callback validation, refresh scheduling and concurrency. A configured secret defaults to `client_secret_basic`; public clients omit the secret. Browser code must never receive a confidential-client secret.
+
+To revoke a token explicitly, call `oauth.revoke_token(token=token, token_type_hint="refresh_token")`. The hint is optional (`"access_token"` or `"refresh_token"`). Success returns `None`, including for unknown or already revoked tokens. Revoking a refresh token also invalidates its paired access token; independent token pairs remain valid. The helper discovers `revocation_endpoint` or uses the constructor's `revocation_endpoint` override and reuses the configured client authentication. OAuth errors raise `RuntimeError` with the HTTP status and response body.
 
 ## Getting Started<a id="getting-started"></a>
 
