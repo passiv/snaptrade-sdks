@@ -135,11 +135,13 @@ class SnapTradeOAuth:
         issuer: typing.Optional[str] = None,
         authorization_endpoint: typing.Optional[str] = None,
         token_endpoint: typing.Optional[str] = None,
+        revocation_endpoint: typing.Optional[str] = None,
         timeout: typing.Optional[float] = None,
     ):
         self.issuer = _trim_trailing_slash(_origin(issuer or "https://api.snaptrade.com"))
         self.authorization_endpoint = authorization_endpoint
         self.token_endpoint = token_endpoint
+        self.revocation_endpoint = revocation_endpoint
         self.client_id = client_id
         self.redirect_uri = redirect_uri
         self.client_secret = client_secret
@@ -206,6 +208,27 @@ class SnapTradeOAuth:
             },
         )
 
+    def revoke_token(
+        self,
+        *,
+        token: str,
+        token_type_hint: typing.Optional[typing.Literal["access_token", "refresh_token"]] = None,
+    ) -> None:
+        """Revoke the supplied token; unknown tokens succeed.
+
+        Refresh-token revocation also invalidates its paired access token.
+        Independent token pairs remain valid.
+        """
+        endpoint = self.revocation_endpoint
+        if not endpoint:
+            endpoint = self._fetch_server_metadata().get("revocation_endpoint")
+        if not endpoint:
+            raise RuntimeError("OAuth server metadata did not include revocation_endpoint.")
+        body = {"token": token, "client_id": self.client_id}
+        if token_type_hint is not None:
+            body["token_type_hint"] = token_type_hint
+        self._post_form_request(endpoint, body)
+
     def _resolve_endpoints(self) -> _ResolvedEndpoints:
         if self.authorization_endpoint and self.token_endpoint:
             return _ResolvedEndpoints(
@@ -240,6 +263,14 @@ class SnapTradeOAuth:
         body: typing.Dict[str, str],
     ) -> SnapTradeOAuthTokenResponse:
         endpoints = self._resolve_endpoints()
+        raw = self._post_form_request(endpoints.token_endpoint, body)
+        return _normalize_token_response(raw)
+
+    def _post_form_request(
+        self,
+        endpoint: str,
+        body: typing.Dict[str, str],
+    ) -> typing.Dict[str, typing.Any]:
         client_id = self.client_id
         client_secret = self.client_secret
         resolved_client_auth_method = self.client_auth_method or ("client_secret_basic" if client_secret else "none")
@@ -257,11 +288,10 @@ class SnapTradeOAuth:
         elif resolved_client_auth_method != "none":
             raise RuntimeError(f"Unsupported OAuth client_auth_method: {resolved_client_auth_method}")
 
-        raw = _json_request(
-            endpoints.token_endpoint,
+        return _json_request(
+            endpoint,
             method="POST",
             body=urllib.parse.urlencode(request_body),
             headers=headers,
             timeout=self.timeout,
         )
-        return _normalize_token_response(raw)

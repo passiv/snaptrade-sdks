@@ -82,6 +82,7 @@ export interface SnaptradeOAuthOptions {
     issuer?: string;
     authorizationEndpoint?: string;
     tokenEndpoint?: string;
+    revocationEndpoint?: string;
     axios?: AxiosInstance;
 }
 
@@ -108,6 +109,11 @@ export interface SnaptradeOAuthRefreshTokenParams {
     refreshToken: string;
 }
 
+export interface SnaptradeOAuthRevokeTokenParams {
+    token: string;
+    tokenTypeHint?: "access_token" | "refresh_token";
+}
+
 export interface SnaptradeOAuthTokenResponse {
     accessToken: string;
     refreshToken?: string;
@@ -120,6 +126,7 @@ export interface SnaptradeOAuthTokenResponse {
 interface OAuthServerMetadata {
     authorization_endpoint?: string;
     token_endpoint?: string;
+    revocation_endpoint?: string;
 }
 
 interface ResolvedEndpoints {
@@ -201,6 +208,7 @@ export class SnaptradeOAuth {
     private readonly issuer: string;
     private readonly authorizationEndpoint?: string;
     private readonly tokenEndpoint?: string;
+    private readonly revocationEndpoint?: string;
     private readonly clientId: string;
     private readonly redirectUri: string;
     private readonly clientSecret?: string;
@@ -213,6 +221,7 @@ export class SnaptradeOAuth {
         this.issuer = trimTrailingSlash(options.issuer ?? new URL(BASE_PATH).origin);
         this.authorizationEndpoint = options.authorizationEndpoint;
         this.tokenEndpoint = options.tokenEndpoint;
+        this.revocationEndpoint = options.revocationEndpoint;
         this.clientId = options.clientId;
         this.redirectUri = options.redirectUri;
         this.clientSecret = options.clientSecret;
@@ -262,6 +271,25 @@ export class SnaptradeOAuth {
         });
     }
 
+    /**
+     * Revoke the supplied token. Revoking a refresh token also invalidates its paired
+     * access token; independent token pairs remain valid. Unknown tokens succeed.
+     */
+    async revokeToken(params: SnaptradeOAuthRevokeTokenParams): Promise<void> {
+        let endpoint = this.revocationEndpoint;
+        if (!endpoint) {
+            endpoint = (await this.fetchServerMetadata()).revocation_endpoint;
+        }
+        if (!endpoint) {
+            throw new Error("OAuth server metadata did not include revocation_endpoint.");
+        }
+        const body: Record<string, string> = { token: params.token, client_id: this.clientId };
+        if (params.tokenTypeHint !== undefined) {
+            body.token_type_hint = params.tokenTypeHint;
+        }
+        await this.postFormRequest(endpoint, body);
+    }
+
     private async resolveEndpoints(): Promise<ResolvedEndpoints> {
         if (this.authorizationEndpoint && this.tokenEndpoint) {
             return {
@@ -296,8 +324,13 @@ export class SnaptradeOAuth {
     private async postTokenRequest(
         body: Record<string, string>,
     ): Promise<SnaptradeOAuthTokenResponse> {
-        const { clientId, clientSecret, clientAuthMethod } = this;
         const endpoints = await this.resolveEndpoints();
+        const response = await this.postFormRequest(endpoints.tokenEndpoint, body);
+        return normalizeTokenResponse(response.data);
+    }
+
+    private async postFormRequest(endpoint: string, body: Record<string, string>) {
+        const { clientId, clientSecret, clientAuthMethod } = this;
         const resolvedClientAuthMethod = clientAuthMethod ?? (clientSecret ? "client_secret_basic" : "none");
         const requestBody = new URLSearchParams(body);
         const headers: Record<string, string> = {
@@ -316,11 +349,10 @@ export class SnaptradeOAuth {
             headers.Authorization = `Basic ${encodeBasicAuth(clientId, clientSecret)}`;
         }
 
-        const response = await this.httpClient.post<Record<string, unknown>>(
-            endpoints.tokenEndpoint,
+        return this.httpClient.post<Record<string, unknown>>(
+            endpoint,
             requestBody.toString(),
             { headers },
         );
-        return normalizeTokenResponse(response.data);
     }
 }
