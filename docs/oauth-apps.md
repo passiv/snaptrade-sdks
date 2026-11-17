@@ -17,9 +17,11 @@ Because OAuth apps can reuse connections that users already maintain with SnapTr
 
 <a id="oauth-or-a-commercial-integration"></a>
 
-## Commercial OAuth or a Commercial API-Key Integration?
+<a id="commercial-oauth-or-a-commercial-api-key-integration"></a>
 
-| Choose Commercial OAuth when                                                     | Choose a Commercial API-key integration when                                     |
+## OAuth or a Commercial API-Key Integration?
+
+| Choose OAuth when                                                     | Choose a Commercial API-key integration when                                     |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Users have or can create a SnapTrade Personal account                 | Your app must create and own the SnapTrade user lifecycle                |
 | Users can manage their brokerage connections in SnapTrade             | Your app must fully own the brokerage connection experience              |
