@@ -2,6 +2,16 @@
 
 ## Overview
 
+The Connection Portal connects users to their brokerages. Brokerage OAuth redirects within the portal are separate from [SnapTrade OAuth authorization](https://docs.snaptrade.com/docs/oauth-apps), which grants your app access to a user's SnapTrade accounts.
+
+Portal-link authentication depends on your integration:
+
+- **Commercial API Key:** provide the end user's `userId` and `userSecret`.
+- **Personal API Key:** the key identifies the account owner.
+- **OAuth:** the access token identifies the consenting user.
+
+A read-only OAuth token cannot create a trading-enabled connection.
+
 The Connection Portal is the front-end interface users interact with to link brokerage accounts to the SnapTrade API.
 
 <img src="./assets/portal-overview.png" alt="connection portal overview" width="700"/>
