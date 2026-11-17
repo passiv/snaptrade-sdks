@@ -4,7 +4,10 @@ When sending requests to SnapTrade, we recommend using an SDK. You can also send
 
 ## SDKs
 
-It is possible to integrate without an SDK, but you will need to generate a request signature for each API request. See [Request Signatures](https://docs.snaptrade.com/docs/request-signatures) for the signing algorithm and code examples.
+When making API requests directly:
+
+- **Commercial API Key / Personal API Key:** sign each request. See [Request Signatures](https://docs.snaptrade.com/docs/request-signatures).
+- **OAuth:** send the access token as `Authorization: Bearer <access_token>`. See [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
 
 SnapTrade provides the following SDKs for you to use.
 
