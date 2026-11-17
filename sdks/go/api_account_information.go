@@ -1541,8 +1541,6 @@ Every order carries a `legs` list with at least one leg; switch on `legs[].instr
 
 **Beta:** this endpoint and its response schema may change.
 
-**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
-
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
