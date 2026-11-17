@@ -6,22 +6,24 @@ SnapTrade OAuth lets your app request access to brokerage accounts that a user a
 
 - **A shorter integration:** Your app does not register SnapTrade users, store `userSecret` values, sign API requests, or embed the Connection Portal just to access accounts the user already connected.
 - **Reusable connections:** A user can share the same SnapTrade-managed brokerage connection with multiple apps instead of creating a separate upstream connection for every app.
-- **Immediate broker access:** All brokers supported by SnapTrade Personal are available to your app immediately because Personal users manage their own connections. Your app does not need separate broker approvals or wait for broker onboarding. See the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide) for the approval steps and delays that apply to Commercial integrations.
+- **Immediate broker access:** All brokers supported by SnapTrade Personal are available to your app immediately because Personal users manage their own connections. Your app does not need separate broker approvals or wait for broker onboarding. See the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide) for the approval steps and delays that apply to Commercial API-key integrations.
 - **User-controlled access:** Users manage their brokerage connections in the [SnapTrade Dashboard](https://dashboard.snaptrade.com) and explicitly approve access for each app.
 - **Sign-in included:** SnapTrade is also an OpenID Connect provider, so the same authorization request that grants account access can sign the user in to your app and return a verified email address.
 - **A path to distribution:** Eligible OAuth apps may be featured to SnapTrade Personal users as SnapTrade expands app discovery and distribution.
 
-Because OAuth apps can reuse connections that users already maintain with SnapTrade, OAuth pricing is typically lower than traditional per-user Commercial pricing.
+Because OAuth apps can reuse connections that users already maintain with SnapTrade, OAuth pricing is typically lower than traditional per-user Commercial API-key pricing.
 
-## OAuth or a Commercial Integration?
+<a id="oauth-or-a-commercial-integration"></a>
 
-| Choose OAuth when                                                     | Choose a Commercial integration when                                     |
+## Commercial OAuth or a Commercial API-Key Integration?
+
+| Choose Commercial OAuth when                                                     | Choose a Commercial API-key integration when                                     |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Users have or can create a SnapTrade Personal account                 | Your app must create and own the SnapTrade user lifecycle                |
 | Users can manage their brokerage connections in SnapTrade             | Your app must fully own the brokerage connection experience              |
 | You want users to grant access to existing connections                | Each connection must belong exclusively to your app's integration        |
 
-OAuth supports account data and connection-management workflows, optional asynchronous event notifications, and OpenID Connect sign-in. Apps that request the `trade` scope can also place, modify, and cancel trades where supported by the connected brokerage. Trading is currently in beta. Commercial credentials support apps that manage SnapTrade users and connections themselves.
+OAuth supports account data and connection-management workflows, optional asynchronous event notifications, and OpenID Connect sign-in. Apps that request the `trade` scope can also place, modify, and cancel trades where supported by the connected brokerage. Trading is currently in beta. Commercial API Key credentials support apps that manage SnapTrade users and connections themselves.
 
 ## Scopes
 
@@ -69,9 +71,34 @@ https://app.example.com/oauth/snaptrade/callback
 http://127.0.0.1:3000/oauth/snaptrade/callback
 ```
 
+## Choose an Implementation Path
+
+After registering your app, choose **one** path:
+
+- [SDK helpers](#use-the-sdk-helpers) (recommended for TypeScript and Python): the SDK handles discovery, PKCE generation, and token requests.
+- [Raw HTTP](#use-raw-http): implement the same protocol with another language, a standard OAuth client, or requests you can inspect while debugging.
+
+Both paths share the [application responsibilities](#application-responsibilities) and [refresh rules](#10-refresh-tokens). [OIDC sign-in](#6-verify-the-id-token) is optional for either path.
+
+## Application Responsibilities
+
+Your backend owns the user's session, callback validation, encrypted token storage, expiry tracking, and refresh coordination. The SDK does not provide these or refresh automatically.
+
+These **application-owned helpers are not SDK exports**. Implement them in your session and storage layer:
+
+| Application helper (TypeScript / Python) | Required behavior |
+| --- | --- |
+| `saveAttempt` / `save_attempt` | Save state and PKCE verifier per attempt in the user's server-side session, with a short expiry; never share a global flow. |
+| `consumeAttempt` / `consume_attempt` | Atomically match and remove an unexpired attempt in this user's session. Return no attempt for invalid or reused state. |
+| `saveTokens` / `save_tokens` | Encrypt and atomically replace the token pair, scope, and expiry (response arrival time + `expiresIn` / `expires_in` seconds). Discard raw ID tokens. |
+| `loadTokens` / `load_tokens` | Read the current saved tokens for this user's authorization. |
+| `withUserRefresh` / `with_user_refresh` | Coordinate concurrent refreshes and failures per [Refresh Tokens](#10-refresh-tokens). |
+
+`userId` / `user_id` here identifies your app's signed-in user, not a SnapTrade operation parameter. Validate and consume state before handling callback errors or exchanging a code. Never log codes, tokens, or the client secret.
+
 ## Use the SDK Helpers
 
-TypeScript `snaptrade-typescript-sdk` **13.3.0** and Python `snaptrade-python-sdk` **13.3.0** include explicit browser authorization-code helpers. Install these versions or later:
+TypeScript `snaptrade-typescript-sdk` **13.3.0** and Python `snaptrade-python-sdk` **13.3.0** include explicit authorization-code helpers. Install these versions or later:
 
 ```sh
 npm install snaptrade-typescript-sdk@^13.3.0
@@ -79,82 +106,147 @@ npm install snaptrade-typescript-sdk@^13.3.0
 pip install "snaptrade-python-sdk>=13.3.0"
 ```
 
-The helpers discover authorization and token endpoints, generate fresh state and S256 PKCE values, exchange a code, and explicitly refresh tokens. Providing a client secret uses HTTP Basic client authentication by default. They do not register an app, handle callbacks, validate state or ID tokens, store tokens, or refresh automatically. Existing device authorization helpers remain available separately.
-
-These examples use `read` for brokerage data access. Keep the helper and confidential client secret on your backend. Each `flow` belongs to one authorization attempt: store its state and verifier in the user's server-side session before redirecting, then retrieve and consume them only for that callback. A module-global flow shared between users is not a session store.
+The helpers discover endpoints, generate fresh state and S256 PKCE values, exchange a code, and explicitly refresh tokens. Providing a client secret uses HTTP Basic client authentication by default. Keep the helper and confidential client secret on your backend. Existing device authorization helpers remain available separately.
 
 ### TypeScript
 
+**Setup.** Import the session and storage helpers from your own application module.
+
 ```typescript
 import { Snaptrade, SnaptradeAuth, SnaptradeOAuth } from "snaptrade-typescript-sdk";
+import { saveAttempt, consumeAttempt, saveTokens, loadTokens, withUserRefresh } from "./app-oauth-store";
 
 const oauth = new SnaptradeOAuth({
   clientId: process.env.SNAPTRADE_OAUTH_CLIENT_ID!,
   clientSecret: process.env.SNAPTRADE_OAUTH_CLIENT_SECRET!,
   redirectUri: "https://app.example.com/oauth/snaptrade/callback",
 });
+```
 
-// Authorization handler: save flow.state and flow.codeVerifier in this user's
-// server-side session, then redirect their browser to flow.url.
-const flow = await oauth.createAuthorizationUrl({ scope: "read" });
+**Start authorization.** Redirect the user's browser to the returned URL.
 
-// Callback handler: restore that attempt from the session. Reject missing or
-// mismatched state and handle OAuth errors before exchanging a code.
-// Consume the attempt once. code and codeVerifier below are validated callback
-// and session values, respectively.
-const tokens = await oauth.exchangeCode({ code, codeVerifier });
+```typescript
+async function startAuthorization(userId: string) {
+  const flow = await oauth.createAuthorizationUrl({ scope: "read" });
+  await saveAttempt(userId, flow);
+  return flow.url;
+}
+```
 
-const snaptrade = new Snaptrade({
-  auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }),
-});
-const accounts = await snaptrade.accountInformation.listUserAccounts();
+**Handle the callback.** Pass the callback query and the user identified by your server-side session.
 
-// Later, explicitly refresh with the current stored refresh token.
-if (!tokens.refreshToken) throw new Error("Authorization did not return a refresh token");
-const refreshed = await oauth.refreshToken({ refreshToken: tokens.refreshToken });
-// Atomically persist refreshed.accessToken, refreshed.refreshToken, and expiry.
-// Build a new API client with refreshed.accessToken for subsequent requests.
+```typescript
+async function handleCallback(userId: string, query: URLSearchParams) {
+  const state = query.get("state");
+  if (!state) throw new Error("Missing OAuth state");
+  const attempt = await consumeAttempt(userId, state);
+  if (!attempt) throw new Error("Invalid or already used OAuth state");
+  if (query.has("error")) throw new Error("OAuth authorization was denied or failed");
+  const code = query.get("code");
+  if (!code) throw new Error("Missing authorization code");
+
+  const tokens = await oauth.exchangeCode({ code, codeVerifier: attempt.codeVerifier });
+  await saveTokens(userId, tokens);
+  const snaptrade = new Snaptrade({
+    auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }),
+  });
+  return snaptrade.accountInformation.listUserAccounts();
+}
+```
+
+**Refresh explicitly.** Load current tokens inside the coordination helper, save the replacement pair, then use the refreshed access token.
+
+```typescript
+async function refreshAccounts(userId: string) {
+  const refreshed = await withUserRefresh(userId, async () => {
+    const current = await loadTokens(userId);
+    if (!current.refreshToken) throw new Error("Authorization required");
+    const replacement = await oauth.refreshToken({ refreshToken: current.refreshToken });
+    await saveTokens(userId, replacement);
+    return replacement;
+  });
+  const snaptrade = new Snaptrade({
+    auth: SnaptradeAuth.oauth({ accessToken: refreshed.accessToken }),
+  });
+  return snaptrade.accountInformation.listUserAccounts();
+}
 ```
 
 ### Python
 
+**Setup.** `app_oauth_store` is your own application module.
+
 ```python
 import os
 from snaptrade_client import SnapTrade, SnapTradeAuth, SnapTradeOAuth
+from app_oauth_store import save_attempt, consume_attempt, save_tokens, load_tokens, with_user_refresh
 
 oauth = SnapTradeOAuth(
     client_id=os.environ["SNAPTRADE_OAUTH_CLIENT_ID"],
     client_secret=os.environ["SNAPTRADE_OAUTH_CLIENT_SECRET"],
     redirect_uri="https://app.example.com/oauth/snaptrade/callback",
 )
-
-# Authorization handler: save flow.state and flow.code_verifier in this user's
-# server-side session, then redirect their browser to flow.url.
-flow = oauth.create_authorization_url(scope="read")
-
-# Callback handler: restore and consume that session attempt after validating
-# state and handling OAuth errors. code comes from the validated callback;
-# code_verifier comes from the session, not from the callback query string.
-tokens = oauth.exchange_code(code=code, code_verifier=code_verifier)
-
-snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
-accounts = snaptrade.account_information.list_user_accounts()
-
-# Later, explicitly refresh with the current stored refresh token.
-if not tokens.refresh_token:
-    raise RuntimeError("Authorization did not return a refresh token")
-refreshed = oauth.refresh_token(refresh_token=tokens.refresh_token)
-# Atomically persist refreshed.access_token, refreshed.refresh_token, and expiry.
-# Build a new API client with refreshed.access_token for subsequent requests.
 ```
 
-Token results expose `accessToken`, `refreshToken`, `expiresIn`, `tokenType`, `scope`, and `raw` in TypeScript, and `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw` in Python. Optional fields may be absent. Compute expiry from the time the response arrives plus `expiresIn` / `expires_in` seconds. Store the complete new token pair on refresh; serialize refreshes for a grant so concurrent calls cannot reuse a rotated refresh token. If refresh fails because the grant is expired or revoked, require authorization again.
+**Start authorization.** Redirect the user's browser to the returned URL.
 
-For OpenID Connect sign-in, use a standard OIDC client or follow the nonce and ID-token validation steps below. The SDK authorization helper does not add a nonce; if extending its returned URL with one, generate it freshly, bind it to the same session attempt, and validate the ID token yourself. Additional response fields such as `id_token` are available through `tokens.raw`; they are not verified by the helper.
+```python
+def start_authorization(user_id: str):
+    flow = oauth.create_authorization_url(scope="read")
+    save_attempt(user_id, flow)
+    return flow.url
+```
 
-The following sections describe the underlying protocol and application responsibilities, including OIDC, revocation, and callback handling.
+**Handle the callback.** `query` contains the callback query parameters; identify the user through your server-side session.
 
-## 2. Discover the OAuth Endpoints
+```python
+def handle_callback(user_id: str, query: dict[str, str]):
+    state = query.get("state")
+    if not state:
+        raise ValueError("Missing OAuth state")
+    attempt = consume_attempt(user_id, state)
+    if attempt is None:
+        raise ValueError("Invalid or already used OAuth state")
+    if "error" in query:
+        raise ValueError("OAuth authorization was denied or failed")
+    code = query.get("code")
+    if not code:
+        raise ValueError("Missing authorization code")
+
+    tokens = oauth.exchange_code(code=code, code_verifier=attempt.code_verifier)
+    save_tokens(user_id, tokens)
+    snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
+    return snaptrade.account_information.list_user_accounts()
+```
+
+**Refresh explicitly.** The app's per-user helper coordinates calls and shares the result.
+
+```python
+def refresh_accounts(user_id: str):
+    def refresh_current():
+        current = load_tokens(user_id)
+        if not current.refresh_token:
+            raise RuntimeError("Authorization required")
+        replacement = oauth.refresh_token(refresh_token=current.refresh_token)
+        save_tokens(user_id, replacement)
+        return replacement
+
+    refreshed = with_user_refresh(user_id, refresh_current)
+    snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=refreshed.access_token))
+    return snaptrade.account_information.list_user_accounts()
+```
+
+Token results expose `accessToken`, `refreshToken`, `expiresIn`, `tokenType`, `scope`, and `raw` in TypeScript, and `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw` in Python. Optional fields may be absent. Follow the shared [Refresh Tokens](#10-refresh-tokens) rules when a refresh fails.
+
+For optional sign-in, follow [Verify the ID Token](#6-verify-the-id-token), including its SDK nonce instructions.
+
+SDK users can skip raw HTTP and continue with [Call the SnapTrade API](#7-call-the-snaptrade-api) and the shared lifecycle guidance.
+
+## Use Raw HTTP
+
+This alternative implements the authorization-code flow without the SDK. Keep the [application responsibilities](#application-responsibilities) above, then continue with the shared API and lifecycle guidance.
+
+### 2. Discover the OAuth Endpoints
 
 Read the authorization server metadata instead of hard-coding individual endpoints:
 
@@ -200,7 +292,7 @@ Most OIDC client libraries and identity providers can configure themselves from 
 
 SnapTrade does not expose a `userinfo` endpoint. Every identity claim your app receives is carried in the `id_token`.
 
-## 3. Start Authorization With PKCE
+### 3. Start Authorization With PKCE
 
 Generate a new high-entropy `state` and PKCE `code_verifier` for every authorization attempt. Store them in the user's server-side login session. Derive the `code_challenge` using SHA-256 and base64url encoding without padding.
 
@@ -239,7 +331,7 @@ Store `nonce` in the same server-side login session as `state` and `code_verifie
 
 Redirect the user's browser to `authorizationUrl`. The user signs in to SnapTrade and approves or denies your app's request. The consent screen lists each requested permission, including sign-in and email access.
 
-## 4. Handle the Callback
+### 4. Handle the Callback
 
 SnapTrade redirects the browser to the registered `redirect_uri` with either:
 
@@ -253,13 +345,9 @@ or an OAuth error such as:
 ?error=access_denied&state=ORIGINAL_STATE
 ```
 
-Before exchanging the code:
+Apply the state validation and one-use consumption rules in [Application Responsibilities](#application-responsibilities). Handle any OAuth error without exchanging a code; otherwise require a non-empty `code` and use the verifier from that matched session attempt.
 
-1. Reject the callback if `state` is missing or does not exactly match the value in the user's login session.
-2. Handle an `error` response without attempting a token exchange.
-3. Consume the stored `state` and `code_verifier` so they cannot be reused.
-
-## 5. Exchange the Code
+### 5. Exchange the Code
 
 Exchange the one-time code from your backend. Authenticate the OAuth client with HTTP Basic and send the body as `application/x-www-form-urlencoded`.
 
@@ -291,7 +379,7 @@ if (!response.ok) {
 const tokens = await response.json();
 ```
 
-When the authorization included `openid`, the response also contains an `id_token`: a signed JWT that identifies the user. Verify it before trusting any claim in it (step 6).
+When the authorization included `openid`, the response also contains an `id_token`: a signed JWT that identifies the user. Verify it before trusting any claim in it ([Verify the ID Token](#6-verify-the-id-token)).
 
 ```json
 {
@@ -304,25 +392,19 @@ When the authorization included `openid`, the response also contains an `id_toke
 }
 ```
 
-Store the following encrypted and associated with the signed-in user in your app:
-
-- `access_token`
-- `refresh_token`
-- an expiry timestamp computed from `expires_in`
-- `scope`
-- the SnapTrade Personal user ID, taken from the verified `id_token` `sub` claim
-
-Access tokens are valid for 10 hours (`expires_in` is `36000`). Refresh tokens do not have a fixed time-based expiry. A refresh token remains valid until it is successfully used, revoked, or otherwise invalidated. Because refresh tokens rotate, successfully using one invalidates it and returns a new refresh token that your app must store.
-
-The `id_token` is a sign-in assertion, not a credential to keep. Verify it during the callback, copy the claims you need, and discard it. It is never sent to the SnapTrade API.
-
-Never log authorization codes, access tokens, refresh tokens, ID tokens, or the client secret.
+Store the token response using the encrypted, atomic storage contract in [Application Responsibilities](#application-responsibilities), using the HTTP field names `access_token`, `refresh_token`, `expires_in`, and `scope`. Access tokens are valid for 10 hours (`expires_in` is `36000`). See [Refresh Tokens](#10-refresh-tokens) for rotation and refresh-token lifetime.
 
 :::info{title="The non-standard `sub` object is deprecated"}
 Token responses also include a top-level `sub` object holding `email` and `snaptrade_user_id`. It predates OIDC support and will be removed after a deprecation window. Request `openid` (plus `email` when you need the address) and read identity from the verified `id_token` instead. Its `sub` claim carries exactly the same SnapTrade user ID.
 :::
 
 ## 6. Verify the ID Token
+
+For either implementation path, skip this section unless you request `openid`. The SDK helpers do not validate ID tokens.
+
+When using the SDK authorization helper for sign-in, generate a fresh nonce, add it to the returned authorization URL, and bind it to that same session attempt; the helper does not add one for you.
+
+The `id_token` is a sign-in assertion, not an API credential. Verify it during the callback, associate its `sub` with your local user, retain only the claims your app needs, and discard the token. SDK code reads it from `tokens.raw`; raw HTTP code reads `tokens.id_token`.
 
 Never trust an `id_token` you have not verified. Use a standard OIDC or JWT library rather than decoding the JWT yourself.
 
@@ -420,7 +502,7 @@ Use the trading endpoints with the same Bearer access token described above. Omi
 3. Submit the order with the endpoint for the asset: :api[Trading_placeForceOrder] for equities, :api[Trading_placeMlegOrder] for options, or :api[Trading_placeCryptoOrder] for crypto.
 4. Track the order's status with :api[AccountInformation_getUserAccountOrderDetailV2], using the brokerage order ID returned by the submission. A successful submission does not mean the order has filled.
 
-See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order payloads and brokerage-specific capabilities. Its Connection Portal setup instructions apply to Commercial integrations; OAuth apps use connections managed by Personal users.
+See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order payloads and brokerage-specific capabilities. Its Connection Portal setup instructions apply to Commercial API-key integrations; OAuth apps use connections managed by Personal users.
 
 ## 9. Receive Webhooks
 
@@ -455,9 +537,16 @@ const response = await fetch(tokenEndpoint, {
 });
 
 const refreshedTokens = await response.json();
+if (!response.ok) {
+  throw new Error(`Refresh failed: ${refreshedTokens.error ?? response.status}`);
+}
 ```
 
-SnapTrade rotates refresh tokens. Refreshing invalidates the token you sent and returns a new refresh token with no fixed time-based expiry. Replace the stored refresh token atomically whenever a refresh succeeds; do not keep using the previous value. If an API request returns `401`, refresh once and retry once. If that fails, clear the stored tokens and ask the user to authorize again.
+SnapTrade rotates refresh tokens: a successful refresh invalidates the token you sent and returns a replacement. Refresh tokens have no fixed time-based expiry; they remain valid until used, revoked, or otherwise invalidated.
+
+For both SDK and raw HTTP integrations, your app must allow **only one refresh at a time per user's authorization**. Concurrent requests share that result; different users refresh independently. Load the current saved refresh token, then atomically persist the full replacement pair and expiry before allowing another refresh. The SDK does not coordinate this for you.
+
+On a network or `5xx` failure, retain the saved tokens for retry. An expired or revoked authorization, including `invalid_grant`, requires clearing unusable tokens and asking the user to authorize again. If an API request returns `401`, refresh once and retry that API request **at most once after a successful refresh**. Do not loop, or clear tokens solely because of a transient refresh failure or a failed API retry.
 
 A refresh response never contains an `id_token`, even when the grant includes `openid`. An `id_token` asserts that the user authenticated, and a refresh happens without them present, so re-issuing one there would misstate when they last signed in. Your app receives its `id_token` at the authorization code exchange. If you need a fresh authentication assertion, for example to satisfy a session policy or a `max_age` requirement, send the user through the authorization flow again.
 
