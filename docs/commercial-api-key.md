@@ -1,6 +1,6 @@
 # Build With a Commercial API Key
 
-Your backend creates a SnapTrade user for each end user and sends them through the Connection Portal. You own onboarding, user mapping, connection support, and credential storage. For apps using users’ existing SnapTrade Personal connections, consider [Commercial OAuth](https://docs.snaptrade.com/docs/oauth-apps).
+Your backend creates a SnapTrade user for each end user and sends them through the Connection Portal. You own onboarding, user mapping, connection support, and credential storage. For apps using users’ existing SnapTrade Personal connections, consider [OAuth](https://docs.snaptrade.com/docs/oauth-apps).
 
 ## Get Your Credentials
 

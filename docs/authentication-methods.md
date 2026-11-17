@@ -2,9 +2,11 @@
 
 ## Building for Users
 
-Both **Commercial API Key** and **Commercial OAuth** support third-party commercial apps. Choose based on the user journey and the integration responsibilities your app needs to own.
+Both **Commercial API Key** and **OAuth** support third-party commercial apps. Choose based on the user journey and the integration responsibilities your app needs to own.
 
-### Commercial OAuth
+<a id="commercial-oauth"></a>
+
+### OAuth
 
 Use OAuth when users will authorize access to brokerage accounts they manage in SnapTrade Personal. The user signs in to SnapTrade, reviews your app’s requested permissions, and approves or denies access. Your app receives tokens for that authorization.
 
@@ -30,7 +32,7 @@ Use a **Personal API Key** for scripts and tools that access your own brokerage 
 
 | Integration | User journey | Your app owns |
 | --- | --- | --- |
-| Commercial OAuth | User signs in to SnapTrade and grants access to their Personal connections | App registration, callback validation, token storage and refresh |
+| OAuth | User signs in to SnapTrade and grants access to their Personal connections | App registration, callback validation, token storage and refresh |
 | Commercial API Key | User connects a brokerage through your app’s Connection Portal flow | SnapTrade user lifecycle, per-user credentials, connection experience and support |
 | Personal API Key | You connect and access your own brokerage accounts | Your own key and tools |
 

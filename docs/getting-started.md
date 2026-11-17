@@ -7,7 +7,7 @@ Start with [Choose Your Integration](https://docs.snaptrade.com/docs/authenticat
 
 ## Choose a Guide
 
-- [Commercial OAuth](https://docs.snaptrade.com/docs/oauth-apps): users authorize access to their SnapTrade Personal connections.
+- [OAuth](https://docs.snaptrade.com/docs/oauth-apps): users authorize access to their SnapTrade Personal connections.
 - [Commercial API Key](https://docs.snaptrade.com/docs/commercial-api-key): your app manages SnapTrade users and its connection experience.
 - [Personal API Key](https://docs.snaptrade.com/docs/personal-api-key): access your own accounts from scripts and tools.
 
