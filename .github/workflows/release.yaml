@@ -210,6 +210,8 @@ jobs:
           user: snaptrade
 
       - name: Publish SDK
+        # Temporarily pause Java publishing until the Sonatype release quota is resolved.
+        if: matrix.language != 'java'
         uses: nick-fields/retry@v4
         env:
           NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
