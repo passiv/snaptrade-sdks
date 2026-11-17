@@ -1,8 +1,12 @@
 # Request Signatures
 
-SnapTrade API requests made with a `clientId` and `consumerKey` are authenticated with a Unix `timestamp` query parameter and a `Signature` header.
+This guide applies to **Commercial API Key** and **Personal API Key** authentication. Requests include `clientId`, a Unix `timestamp` query parameter, and a `Signature` header generated with the `consumerKey`.
 
-The official SnapTrade SDKs generate request signatures automatically. You only need to implement this flow manually if you are calling the SnapTrade API directly without an SDK.
+The official SnapTrade SDKs sign API-key requests automatically. Implement these steps manually only when making API-key requests directly without an SDK.
+
+OAuth API requests use a Bearer access token instead of request signatures. See [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
+
+Incoming webhook signatures are separate. OAuth webhooks still require [webhook signature verification](https://docs.snaptrade.com/docs/webhooks#verifying-webhook-authenticity).
 
 Use `https://api.snaptrade.com` as the base URL for new direct integrations. API endpoints are served from the host root; `/api/v1` is a legacy path prefix retained for existing integrations.
 
