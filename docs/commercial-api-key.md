@@ -15,7 +15,7 @@ For plan limits and production requirements, see [Billing](https://docs.snaptrad
 
 ## Connect and Read Account Data
 
-The following TypeScript and Python examples use SDK 13.3.0. Open the portal URL in a browser, complete the connection, then resume the account-data calls. Keep API credentials on your backend. Use a stable, immutable user ID from your app; avoid email addresses.
+Open the portal URL in a browser, complete the connection, then resume the account-data calls. Keep API credentials on your backend. Use a stable, immutable user ID from your app; avoid email addresses.
 
 Use Commercial API Key authentication when your backend manages brokerage connections for your own end users.
 

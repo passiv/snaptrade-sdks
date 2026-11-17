@@ -13,7 +13,7 @@ If your brokerage is already connected in the Dashboard, skip generating a porta
 
 ## Connect and Read Account Data
 
-The following TypeScript and Python examples use SDK 13.3.0. Open the portal URL in a browser, complete the connection, then resume the account-data calls. Keep API credentials on a trusted backend or, for your own Personal tools, in secure local storage.
+Open the portal URL in a browser, complete the connection, then resume the account-data calls. Keep API credentials on a trusted backend or, for your own Personal tools, in secure local storage.
 
 Your Personal `clientId` and `consumerKey` identify your SnapTrade account. There is no separate SnapTrade end-user record to register or pass on account-data calls. Generate a Connection Portal URL, connect your brokerage account, then fetch account data directly.
 
