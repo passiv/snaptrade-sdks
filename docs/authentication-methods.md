@@ -12,11 +12,11 @@ With Commercial OAuth, your app requests permission to access accounts a user al
 
 ## Quick Comparison
 
-| Method | Best for | SDK auth setup | Account-data operation credentials |
+| Method | Request authentication | User context | Connection management |
 | --- | --- | --- | --- |
-| Commercial API Key | Apps managing many end users | `SnaptradeAuth.commercialApiKey(...)` / `SnapTradeAuth.commercial_api_key(...)` | Pass `userId` and `userSecret` |
-| Personal API Key | You, when calling SnapTrade with your own API key | `SnaptradeAuth.personalApiKey(...)` / `SnapTradeAuth.personal_api_key(...)` | Omit `userId` and `userSecret` |
-| Commercial OAuth | Apps accessing accounts with a Personal user’s consent | `SnaptradeAuth.oauth(...)` / `SnapTradeAuth.oauth(...)` | Bearer access token; omit `userId` and `userSecret` |
+| Commercial API Key | Signed request using `clientId` and `consumerKey` | Pass each end user's `userId` and `userSecret` | Your app registers users and connects their brokerages |
+| Personal API Key | Signed request using your `clientId` and `consumerKey` | Your own SnapTrade account; omit `userId` and `userSecret` | You connect your own brokerages |
+| Commercial OAuth | Bearer access token granted to your app | The consenting SnapTrade Personal user; omit `userId` and `userSecret` | The user manages brokerage connections in SnapTrade Personal |
 
 For a broader product-model comparison, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial).
 
@@ -219,11 +219,9 @@ Rules:
 
 ## Commercial OAuth Authentication
 
-Use TypeScript `snaptrade-typescript-sdk` **13.3.0 or later**, or Python `snaptrade-python-sdk` **13.3.0 or later**, for the explicit authorization-code and refresh helpers.
+Register your OAuth app, authorize the user with state and PKCE, and exchange the callback code for tokens. Use the access token for supported API operations, refresh it when needed, and revoke access when the user disconnects. See [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps) for the lifecycle using SDKs or raw HTTP. Your application owns callback validation, token storage, expiry tracking, and refresh coordination.
 
-Register your own OAuth app in the Dashboard, then use `SnaptradeOAuth` (TypeScript) or `SnapTradeOAuth` (Python) to create an authorization URL with fresh state and S256 PKCE, exchange the callback code, and explicitly refresh tokens. Your application owns callback validation, token storage, expiry tracking, and refresh scheduling. See [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps#use-the-sdk-helpers) for the complete flow.
-
-After the callback exchanges the code and stores the tokens, load the current token for your signed-in user. `loadTokens` / `load_tokens` below is your application-owned encrypted storage helper, not an SDK export; see the [storage contract and phased SDK examples](https://docs.snaptrade.com/docs/oauth-apps#application-responsibilities).
+The SDK examples below use TypeScript `snaptrade-typescript-sdk` **13.3.0 or later**, or Python `snaptrade-python-sdk` **13.3.0 or later**. After the callback exchanges the code and stores the tokens, load the current token for your signed-in user. `loadTokens` / `load_tokens` is your application-owned storage helper, not an SDK export; see the [phased SDK examples and helper contracts](https://docs.snaptrade.com/docs/oauth-apps#use-the-sdk-helpers).
 
 ### TypeScript
 
@@ -280,7 +278,7 @@ Commercial OAuth:
 
 ## Direct HTTP Reference
 
-Prefer the SDKs unless you need to debug a raw request.
+Use these request shapes with your HTTP client.
 
 Commercial API Key requests include `clientId`, `timestamp`, a `Signature` header, and user credentials for user-scoped endpoints:
 
