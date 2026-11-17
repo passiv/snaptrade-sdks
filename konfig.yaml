@@ -335,7 +335,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 13.3.0
+    version: 13.4.0
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -359,7 +359,7 @@ generators:
         - pnpm typecheck
         - pnpm test
         - pnpm build
-    version: 13.3.0
+    version: 13.4.0
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
