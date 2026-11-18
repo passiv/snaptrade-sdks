@@ -31,6 +31,7 @@ from snaptrade_client.apis.paths.accounts_account_id_recent_orders import Accoun
 from snaptrade_client.apis.paths.accounts_account_id_orders_recent import AccountsAccountIdOrdersRecent
 from snaptrade_client.apis.paths.accounts_account_id_return_rates import AccountsAccountIdReturnRates
 from snaptrade_client.apis.paths.accounts_account_id_activities import AccountsAccountIdActivities
+from snaptrade_client.apis.paths.accounts_account_id_transactions import AccountsAccountIdTransactions
 from snaptrade_client.apis.paths.accounts_account_id_orders_details import AccountsAccountIdOrdersDetails
 from snaptrade_client.apis.paths.accounts_account_id_orders_brokerage_order_id import AccountsAccountIdOrdersBrokerageOrderId
 from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccountIdQuotes
@@ -98,6 +99,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_RECENT: AccountsAccountIdOrdersRecent,
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRANSACTIONS: AccountsAccountIdTransactions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersBrokerageOrderId,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
@@ -166,6 +168,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_RECENT: AccountsAccountIdOrdersRecent,
         PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_ACTIVITIES: AccountsAccountIdActivities,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRANSACTIONS: AccountsAccountIdTransactions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersBrokerageOrderId,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,

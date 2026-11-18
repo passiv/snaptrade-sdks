@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**GetAccountBalancesV2**](AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | List account balances (V2) |
 | [**GetAccountDetails**](AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details |
 | [**GetAccountOrder**](AccountInformationApi.md#getaccountorder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail |
+| [**GetAccountTransactions**](AccountInformationApi.md#getaccounttransactions) | **GET** /accounts/{accountId}/transactions | List account transactions |
 | [**GetAllAccountOrders**](AccountInformationApi.md#getallaccountorders) | **GET** /accounts/{accountId}/orders/all | List all account orders |
 | [**GetAllAccountPositions**](AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
 | [**GetAllAccountRecentOrders**](AccountInformationApi.md#getallaccountrecentorders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only) |
@@ -519,6 +520,112 @@ catch (ApiException e)
 | **500** | Unexpected error |  -  |
 | **501** | Not Implemented - order details are not supported for this brokerage |  -  |
 | **503** | Service Unavailable - the brokerage connection is busy syncing (sync lock held) or the brokerage API is temporarily unavailable. Safe to retry. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **GetAccountTransactions**
+
+
+
+Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class GetAccountTransactionsExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var startDate = DateTime.Parse("2022-01-24"); // First trade date to include (UTC). Defaults to the earliest available transaction. (optional) 
+            var endDate = DateTime.Parse("2022-01-24"); // Last trade date to include (UTC). Defaults to the latest available transaction. (optional) 
+            var type = "BUY_TO_OPEN,DIVIDEND"; // Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional) 
+            var offset = 0; // Number of matching transactions to skip. (optional)  (default to 0)
+            var limit = 1000; // Maximum number of transactions to return in this page. (optional)  (default to 1000)
+            
+            try
+            {
+                // List account transactions
+                AccountTransactionsResponse result = client.AccountInformation.GetAccountTransactions(accountId, userId, userSecret, startDate, endDate, type, offset, limit);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling AccountInformationApi.GetAccountTransactions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetAccountTransactionsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List account transactions
+    ApiResponse<AccountTransactionsResponse> response = apiInstance.GetAccountTransactionsWithHttpInfo(accountId, userId, userSecret, startDate, endDate, type, offset, limit);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AccountInformationApi.GetAccountTransactionsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **accountId** | **string** |  |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **startDate** | **DateTime?** | First trade date to include (UTC). Defaults to the earliest available transaction. | [optional]  |
+| **endDate** | **DateTime?** | Last trade date to include (UTC). Defaults to the latest available transaction. | [optional]  |
+| **type** | **string** | Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  | [optional]  |
+| **offset** | **int?** | Number of matching transactions to skip. | [optional] [default to 0] |
+| **limit** | **int?** | Maximum number of transactions to return in this page. | [optional] [default to 1000] |
+
+### Return type
+
+[**AccountTransactionsResponse**](AccountTransactionsResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A page of matching transactions and the total count across all pages. |  -  |
+| **429** | Rate limit exceeded. Check &#x60;X-RateLimit-Remaining&#x60; (customer-level) and &#x60;X-RateLimit-Account-Remaining&#x60; (account-level) to see which limit you hit, then wait for the matching &#x60;*-Reset&#x60; value before retrying.  Not every header listed below appears on every operation. The &#x60;X-RateLimit-Account-*&#x60; headers are sent only where the per-account limit is enforced, and OAuth-authenticated requests never receive the customer-level &#x60;X-RateLimit-Limit&#x60;, &#x60;X-RateLimit-Remaining&#x60; or &#x60;X-RateLimit-Reset&#x60;.  A separate per-authenticated-user limit, reported in no &#x60;X-RateLimit-*&#x60; header, covers OAuth-authenticated requests and signed requests not governed by the customer-level limit; it does not stack on top of that limit. So a 429 can arrive with every reported counter above zero — or with no &#x60;X-RateLimit-*&#x60; headers at all. Honour &#x60;Retry-After&#x60; in that case.  |  * Retry-After - Seconds to wait before retrying. <br>  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  * X-RateLimit-Account-Limit -  <br>  * X-RateLimit-Account-Remaining -  <br>  * X-RateLimit-Account-Reset -  <br>  |
+| **0** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

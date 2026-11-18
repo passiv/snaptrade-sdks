@@ -112,6 +112,27 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test AccountInformationApiService GetAccountTransactions", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.AccountInformationApi.GetAccountTransactions(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        )
+        request.StartDate(Mon Jan 24 00:00:00 UTC 2022)
+        request.EndDate(Mon Jan 24 00:00:00 UTC 2022)
+        request.Type(""BUY_TO_OPEN,DIVIDEND"")
+        request.Offset(0)
+        request.Limit(1000)
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test AccountInformationApiService GetAllAccountOrders", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetAllAccountOrders(

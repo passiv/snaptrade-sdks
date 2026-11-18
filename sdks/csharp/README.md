@@ -160,6 +160,7 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetAccountBalancesV2**](docs/AccountInformationApi.md#getaccountbalancesv2) | **GET** /accounts/{accountId}/balances/v2 | List account balances (V2)
 *AccountInformationApi* | [**GetAccountDetails**](docs/AccountInformationApi.md#getaccountdetails) | **GET** /accounts/{accountId}/details | Get account details
 *AccountInformationApi* | [**GetAccountOrder**](docs/AccountInformationApi.md#getaccountorder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
+*AccountInformationApi* | [**GetAccountTransactions**](docs/AccountInformationApi.md#getaccounttransactions) | **GET** /accounts/{accountId}/transactions | List account transactions
 *AccountInformationApi* | [**GetAllAccountOrders**](docs/AccountInformationApi.md#getallaccountorders) | **GET** /accounts/{accountId}/orders/all | List all account orders
 *AccountInformationApi* | [**GetAllAccountPositions**](docs/AccountInformationApi.md#getallaccountpositions) | **GET** /accounts/{accountId}/positions/all | List all account positions
 *AccountInformationApi* | [**GetAllAccountRecentOrders**](docs/AccountInformationApi.md#getallaccountrecentorders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only)
@@ -256,11 +257,13 @@ Class | Method | HTTP request | Description
  - [AccountPosition](docs/AccountPosition.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
+ - [AccountTransactionsResponse](docs/AccountTransactionsResponse.md)
  - [AccountUniversalActivity](docs/AccountUniversalActivity.md)
  - [AccountValueHistoryItem](docs/AccountValueHistoryItem.md)
  - [AccountValueHistoryResponse](docs/AccountValueHistoryResponse.md)
  - [ActionStrict](docs/ActionStrict.md)
  - [ActionStrictWithOptions](docs/ActionStrictWithOptions.md)
+ - [Activity](docs/Activity.md)
  - [AdrInstrument](docs/AdrInstrument.md)
  - [AllAccountOrdersResponse](docs/AllAccountOrdersResponse.md)
  - [AllAccountOrdersResponseDataFreshness](docs/AllAccountOrdersResponseDataFreshness.md)
@@ -328,6 +331,7 @@ Class | Method | HTTP request | Description
  - [InstitutionConnection](docs/InstitutionConnection.md)
  - [InstitutionConnectionNullable](docs/InstitutionConnectionNullable.md)
  - [Instrument](docs/Instrument.md)
+ - [InstrumentNullable](docs/InstrumentNullable.md)
  - [InvestmentAccount](docs/InvestmentAccount.md)
  - [InvestmentAccountNetValue](docs/InvestmentAccountNetValue.md)
  - [LimitOrderType](docs/LimitOrderType.md)

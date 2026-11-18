@@ -58,6 +58,28 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/transactions-GET': {
+        parameters: [
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'startDate'
+            },
+            {
+                name: 'endDate'
+            },
+            {
+                name: 'type'
+            },
+            {
+                name: 'offset'
+            },
+            {
+                name: 'limit'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/all-GET': {
         parameters: [
             {

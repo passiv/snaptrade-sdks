@@ -91,6 +91,8 @@ import { AccountOrder } from '../models';
 // @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
+import { AccountTransactionsResponse } from '../models';
+// @ts-ignore
 import { AccountValueHistoryResponse } from '../models';
 // @ts-ignore
 import { AllAccountOrdersResponse } from '../models';
@@ -464,6 +466,93 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}/orders/{brokerageOrderId}',
+                httpMethod: 'GET',
+                operationAuth: localVarOperationAuth
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+         * @summary List account transactions
+         * @param {string} accountId 
+         * @param {string | Date} [startDate] First trade date to include (UTC). Defaults to the earliest available transaction.
+         * @param {string | Date} [endDate] Last trade date to include (UTC). Defaults to the latest available transaction.
+         * @param {string} [type] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+         * @param {number} [offset] Number of matching transactions to skip.
+         * @param {number} [limit] Maximum number of transactions to return in this page.
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountTransactions: async (accountId: string, startDate?: string | Date, endDate?: string | Date, type?: string, offset?: number, limit?: number, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAccountTransactions', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/transactions`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString().substr(0,10) :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString().substr(0,10) :
+                    endDate;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/transactions',
                 httpMethod: 'GET',
                 operationAuth: localVarOperationAuth
             });
@@ -1377,6 +1466,18 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+         * @summary List account transactions
+         * @param {AccountInformationApiGetAccountTransactionsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountTransactions(...args: AccountInformationApiGetAccountTransactionsArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AccountTransactionsResponse, unknown>>> {
+            const [requestParameters = {} as AccountInformationApiGetAccountTransactionsRequest<TAuth>, options] = args;
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountTransactions(requestParameters.accountId, requestParameters.startDate, requestParameters.endDate, requestParameters.type, requestParameters.offset, requestParameters.limit, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
          * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
          * @summary List all account orders
          * @param {AccountInformationApiGetAllAccountOrdersRequest<TAuth>} requestParameters Request parameters.
@@ -1597,6 +1698,16 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
          */
         getAccountOrder(...args: AccountInformationApiGetAccountOrderArgs<TAuth>): Promise<AxiosResponse<AccountOrder, unknown>> {
             return localVarFp.getAccountOrder(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+         * @summary List account transactions
+         * @param {AccountInformationApiGetAccountTransactionsRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountTransactions(...args: AccountInformationApiGetAccountTransactionsArgs<TAuth>): Promise<AxiosResponse<AccountTransactionsResponse, unknown>> {
+            return localVarFp.getAccountTransactions(...args).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg\'s `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage\'s own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
@@ -1965,6 +2076,76 @@ export type AccountInformationApiGetAccountOrderArgs<TAuth extends AuthMode> =
     TAuth["mode"] extends never
         ? [requestParameters?: AccountInformationApiGetAccountOrderRequest<TAuth>, options?: AxiosRequestConfig]
         : [requestParameters: AccountInformationApiGetAccountOrderRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
+ * Request parameters for getAccountTransactions operation in AccountInformationApi.
+ * @export
+ */
+export type AccountInformationApiGetAccountTransactionsBaseRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountTransactions
+    */
+    readonly accountId: string
+    
+    /**
+    * First trade date to include (UTC). Defaults to the earliest available transaction.
+    * @type {string | Date}
+    * @memberof AccountInformationApiGetAccountTransactions
+    */
+    readonly startDate?: string | Date
+    
+    /**
+    * Last trade date to include (UTC). Defaults to the latest available transaction.
+    * @type {string | Date}
+    * @memberof AccountInformationApiGetAccountTransactions
+    */
+    readonly endDate?: string | Date
+    
+    /**
+    * Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountTransactions
+    */
+    readonly type?: string
+    
+    /**
+    * Number of matching transactions to skip.
+    * @type {number}
+    * @memberof AccountInformationApiGetAccountTransactions
+    */
+    readonly offset?: number
+    
+    /**
+    * Maximum number of transactions to return in this page.
+    * @type {number}
+    * @memberof AccountInformationApiGetAccountTransactions
+    */
+    readonly limit?: number
+    
+}
+export type AccountInformationApiGetAccountTransactionscommercialApiKeyRequest = AccountInformationApiGetAccountTransactionsBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type AccountInformationApiGetAccountTransactionspersonalApiKeyRequest = AccountInformationApiGetAccountTransactionsBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type AccountInformationApiGetAccountTransactionsRequestByAuthMode = {
+    "commercialApiKey": AccountInformationApiGetAccountTransactionscommercialApiKeyRequest;
+    "personalApiKey": AccountInformationApiGetAccountTransactionspersonalApiKeyRequest;
+}
+export type AccountInformationApiGetAccountTransactionsRequest<TAuth extends AuthMode> =
+    AccountInformationApiGetAccountTransactionsRequestByAuthMode[TAuth["mode"] & keyof AccountInformationApiGetAccountTransactionsRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type AccountInformationApiGetAccountTransactionsArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: AccountInformationApiGetAccountTransactionsRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: AccountInformationApiGetAccountTransactionsRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
  * Request parameters for getAllAccountOrders operation in AccountInformationApi.
@@ -2575,6 +2756,19 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
      */
     public getAccountOrder(...args: AccountInformationApiGetAccountOrderArgs<TAuth>) {
         return AccountInformationApiFp(this.configuration).getAccountOrder(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+     * @summary List account transactions
+     * @param {AccountInformationApiGetAccountTransactionsRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAccountTransactions(...args: AccountInformationApiGetAccountTransactionsArgs<TAuth>) {
+        return AccountInformationApiFp(this.configuration).getAccountTransactions(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

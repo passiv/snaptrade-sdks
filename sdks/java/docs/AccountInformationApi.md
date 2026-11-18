@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**getAccountBalancesV2**](AccountInformationApi.md#getAccountBalancesV2) | **GET** /accounts/{accountId}/balances/v2 | List account balances (V2) |
 | [**getAccountDetails**](AccountInformationApi.md#getAccountDetails) | **GET** /accounts/{accountId}/details | Get account details |
 | [**getAccountOrder**](AccountInformationApi.md#getAccountOrder) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail |
+| [**getAccountTransactions**](AccountInformationApi.md#getAccountTransactions) | **GET** /accounts/{accountId}/transactions | List account transactions |
 | [**getAllAccountOrders**](AccountInformationApi.md#getAllAccountOrders) | **GET** /accounts/{accountId}/orders/all | List all account orders |
 | [**getAllAccountPositions**](AccountInformationApi.md#getAllAccountPositions) | **GET** /accounts/{accountId}/positions/all | List all account positions |
 | [**getAllAccountRecentOrders**](AccountInformationApi.md#getAllAccountRecentOrders) | **GET** /accounts/{accountId}/orders/recent | List all account recent orders (last 24 hours only) |
@@ -553,6 +554,125 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+
+<a name="getAccountTransactions"></a>
+# **getAccountTransactions**
+> AccountTransactionsResponse getAccountTransactions(accountId, userId, userSecret).startDate(startDate).endDate(endDate).type(type).offset(offset).limit(limit).execute();
+
+List account transactions
+
+Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    LocalDate startDate = LocalDate.parse("Mon Jan 24 00:00:00 UTC 2022"); // First trade date to include (UTC). Defaults to the earliest available transaction.
+    LocalDate endDate = LocalDate.parse("Mon Jan 24 00:00:00 UTC 2022"); // Last trade date to include (UTC). Defaults to the latest available transaction.
+    String type = "BUY_TO_OPEN,DIVIDEND"; // Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    Integer offset = 0; // Number of matching transactions to skip.
+    Integer limit = 1000; // Maximum number of transactions to return in this page.
+    try {
+      AccountTransactionsResponse result = client
+              .accountInformation
+              .getAccountTransactions(accountId, userId, userSecret)
+              .startDate(startDate)
+              .endDate(endDate)
+              .type(type)
+              .offset(offset)
+              .limit(limit)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getData());
+      System.out.println(result.getPagination());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getAccountTransactions");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountTransactionsResponse> response = client
+              .accountInformation
+              .getAccountTransactions(accountId, userId, userSecret)
+              .startDate(startDate)
+              .endDate(endDate)
+              .type(type)
+              .offset(offset)
+              .limit(limit)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getAccountTransactions");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**|  | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **startDate** | **LocalDate**| First trade date to include (UTC). Defaults to the earliest available transaction. | [optional] |
+| **endDate** | **LocalDate**| Last trade date to include (UTC). Defaults to the latest available transaction. | [optional] |
+| **type** | **String**| Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  | [optional] |
+| **offset** | **Integer**| Number of matching transactions to skip. | [optional] [default to 0] |
+| **limit** | **Integer**| Maximum number of transactions to return in this page. | [optional] [default to 1000] |
+
+### Return type
+
+[**AccountTransactionsResponse**](AccountTransactionsResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | A page of matching transactions and the total count across all pages. |  -  |
+| **0** | Unexpected error |  -  |
 
 <a name="getAllAccountOrders"></a>
 # **getAllAccountOrders**

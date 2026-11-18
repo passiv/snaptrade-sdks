@@ -81,6 +81,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.account_information.get_account_balances_v2`](#snaptradeaccount_informationget_account_balances_v2)
   * [`snaptrade.account_information.get_account_details`](#snaptradeaccount_informationget_account_details)
   * [`snaptrade.account_information.get_account_order`](#snaptradeaccount_informationget_account_order)
+  * [`snaptrade.account_information.get_account_transactions`](#snaptradeaccount_informationget_account_transactions)
   * [`snaptrade.account_information.get_all_account_orders`](#snaptradeaccount_informationget_all_account_orders)
   * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
   * [`snaptrade.account_information.get_all_account_recent_orders`](#snaptradeaccount_informationget_all_account_recent_orders)
@@ -439,6 +440,66 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.account_information.get_account_transactions`<a id="snaptradeaccount_informationget_account_transactions"></a>
+
+Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+
+History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_account_transactions(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  start_date: "2022-01-24",
+  end_date: "2022-01-24",
+  type: "BUY_TO_OPEN,DIVIDEND",
+  offset: 0,
+  limit: 1000,
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `String`<a id="account_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### start_date: `Date`<a id="start_date-date"></a>
+First trade date to include (UTC). Defaults to the earliest available
+transaction.
+
+##### end_date: `Date`<a id="end_date-date"></a>
+Last trade date to include (UTC). Defaults to the latest available transaction.
+
+##### type: `String`<a id="type-string"></a>
+Comma-separated activity types. A transaction matches its base type or its
+option action, case-insensitively. For example, BUY includes opening and closing
+option purchases, while BUY_TO_OPEN selects only opening purchases. A
+transaction matching multiple values appears once.
+
+##### offset: `Integer`<a id="offset-integer"></a>
+Number of matching transactions to skip.
+
+##### limit: `Integer`<a id="limit-integer"></a>
+Maximum number of transactions to return in this page.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountTransactionsResponse](./lib/snaptrade/models/account_transactions_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/transactions` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

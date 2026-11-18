@@ -2495,6 +2495,155 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-activities
+  /accounts/{accountId}/transactions:
+    get:
+      description: |
+        Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+
+        History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+      operationId: AccountInformation_getAccountTransactions
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: First trade date to include (UTC). Defaults to the earliest available
+          transaction.
+        explode: true
+        in: query
+        name: startDate
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: Last trade date to include (UTC). Defaults to the latest available
+          transaction.
+        explode: true
+        in: query
+        name: endDate
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: |
+          Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively.
+          For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases.
+          A transaction matching multiple values appears once.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          example: "BUY_TO_OPEN,DIVIDEND"
+          type: string
+          x-konfig-original-example: "BUY_TO_OPEN,DIVIDEND"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-5-schema
+        style: form
+      - description: Number of matching transactions to skip.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          example: 0
+          format: int32
+          minimum: 0
+          type: integer
+          x-konfig-original-example: 0
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-6-schema
+        style: form
+      - description: Maximum number of transactions to return in this page.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 1000
+          example: 1000
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 1000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-7-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountTransactionsResponse'
+          description: A page of matching transactions and the total count across
+            all pages.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429TooManyRequestsResponse'
+          description: |
+            Rate limit exceeded. Check `X-RateLimit-Remaining` (customer-level) and
+            `X-RateLimit-Account-Remaining` (account-level) to see which limit you
+            hit, then wait for the matching `*-Reset` value before retrying.
+
+            Not every header listed below appears on every operation. The
+            `X-RateLimit-Account-*` headers are sent only where the per-account limit
+            is enforced, and OAuth-authenticated requests never receive the
+            customer-level `X-RateLimit-Limit`, `X-RateLimit-Remaining` or
+            `X-RateLimit-Reset`.
+
+            A separate per-authenticated-user limit, reported in no `X-RateLimit-*`
+            header, covers OAuth-authenticated requests and signed requests not
+            governed by the customer-level limit; it does not stack on top of that
+            limit. So a 429 can arrive with every reported counter above zero — or
+            with no `X-RateLimit-*` headers at all. Honour `Retry-After` in that
+            case.
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              explode: false
+              schema:
+                example: 7
+                type: integer
+                x-konfig-original-example: 7
+                x-konfig-generated-schema: konfig-generated-schema-components-responses-TooManyRequests-headers-Retry-After-schema
+              style: simple
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            X-RateLimit-Reset:
+              $ref: '#/components/headers/X-RateLimit-Reset'
+            X-RateLimit-Account-Limit:
+              $ref: '#/components/headers/X-RateLimit-Account-Limit'
+            X-RateLimit-Account-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Account-Remaining'
+            X-RateLimit-Account-Reset:
+              $ref: '#/components/headers/X-RateLimit-Account-Reset'
+        default:
+          description: Unexpected error
+      summary: List account transactions
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-transactions
   /accounts/{accountId}/orders/details:
     post:
       description: |
@@ -14380,6 +14529,164 @@ components:
           x-konfig-original-example: 1000
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PaginationDetails-properties-total
       type: object
+    AccountTransactionsResponse:
+      additionalProperties: true
+      description: A page of account transactions.
+      example:
+        pagination:
+          total: 1000
+          offset: 0
+          limit: 100
+        data:
+        - transaction_id: TXN-20261116-003
+          date: 2026-11-16T15:42:18.123456Z
+          amount: "-651.3"
+          price: "3.25"
+          fee: "1.3"
+          description: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          instrument: null
+          priced_in: null
+          units: "2"
+          type: BUY_TO_OPEN
+          fx_rate: "1.032"
+        - transaction_id: TXN-20261116-003
+          date: 2026-11-16T15:42:18.123456Z
+          amount: "-651.3"
+          price: "3.25"
+          fee: "1.3"
+          description: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          instrument: null
+          priced_in: null
+          units: "2"
+          type: BUY_TO_OPEN
+          fx_rate: "1.032"
+      properties:
+        data:
+          description: Matching transactions in descending date order.
+          items:
+            $ref: '#/components/schemas/Activity'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/PaginationDetails'
+      required:
+      - data
+      - pagination
+      type: object
+    Activity:
+      additionalProperties: true
+      description: A recorded transaction in a brokerage account.
+      example:
+        transaction_id: TXN-20261116-003
+        date: 2026-11-16T15:42:18.123456Z
+        amount: "-651.3"
+        price: "3.25"
+        fee: "1.3"
+        description: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+        instrument: null
+        priced_in: null
+        units: "2"
+        type: BUY_TO_OPEN
+        fx_rate: "1.032"
+      properties:
+        transaction_id:
+          description: "Brokerage transaction reference, when available. Related transactions\
+            \ such as a fill and a fee can share this value."
+          example: TXN-20261116-003
+          nullable: true
+          type: string
+          x-konfig-original-example: TXN-20261116-003
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-transaction_id
+        type:
+          description: |
+            Best-effort activity classification. A reported option action takes precedence over its base type.
+            Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND,
+            INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.
+          example: BUY_TO_OPEN
+          type: string
+          x-konfig-original-example: BUY_TO_OPEN
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-type
+        date:
+          description: Recorded trade date and time in UTC. Precision depends on what
+            the brokerage supplies.
+          example: 2026-11-16T15:42:18.123456Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2026-11-16T15:42:18.123456Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-date
+        description:
+          description: "Brokerage activity description, including an unresolved brokerage\
+            \ symbol's name when available."
+          example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          type: string
+          x-konfig-original-example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-description
+        instrument:
+          $ref: '#/components/schemas/InstrumentNullable'
+        priced_in:
+          $ref: '#/components/schemas/PricedInInstrumentNullable'
+        amount:
+          description: "Signed amount recorded for the transaction. Use this value\
+            \ directly. Price, units and fees may be insufficient to reconstruct it."
+          example: "-651.3"
+          format: decimal
+          type: string
+          x-konfig-original-example: "-651.3"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-amount
+        price:
+          description: Recorded unit price. For options this is the price per underlying
+            share. Some missing brokerage prices are stored as zero.
+          example: "3.25"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "3.25"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-price
+        units:
+          description: Signed quantity recorded for the transaction. For options the
+            quantity counts contracts.
+          example: "2"
+          format: decimal
+          type: string
+          x-konfig-original-example: "2"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-units
+        fee:
+          description: Recorded fee. Some missing brokerage fees are stored as zero.
+          example: "1.3"
+          format: decimal
+          type: string
+          x-konfig-original-example: "1.3"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-fee
+        fx_rate:
+          description: "Foreign exchange rate recorded for the transaction, when available."
+          example: "1.032"
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: "1.032"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-fx_rate
+      required:
+      - amount
+      - date
+      - description
+      - fee
+      - fx_rate
+      - instrument
+      - price
+      - priced_in
+      - transaction_id
+      - type
+      - units
+      type: object
+      x-konfig-properties:
+        instrument:
+          description: "Instrument involved in the transaction. Null when the activity\
+            \ has no identifiable instrument, as with a cash deposit."
+          nullable: true
+        priced_in:
+          description: "Denomination of amount, price and fee. A fiat currency or\
+            \ a crypto quote asset, independent of the instrument's listing currency.\
+            \ Null when unknown."
+          nullable: true
     PaginatedUniversalActivity:
       additionalProperties: true
       description: A paginated list of UniversalActivity objects.
@@ -15721,6 +16028,18 @@ components:
     konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-5-schema:
       example: "BUY,SELL,DIVIDEND"
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-5-schema:
+      example: "BUY_TO_OPEN,DIVIDEND"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-6-schema:
+      example: 0
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-7-schema:
+      example: 1000
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
       example: AAPL  251219C00150000
@@ -18373,6 +18692,42 @@ components:
       example: 1000
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-transaction_id:
+      example: TXN-20261116-003
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-type:
+      example: BUY_TO_OPEN
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-date:
+      example: 2026-11-16T15:42:18.123456Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-description:
+      example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-amount:
+      example: "-651.3"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-price:
+      example: "3.25"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-units:
+      example: "2"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-fee:
+      example: "1.3"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Activity-properties-fx_rate:
+      example: "1.032"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-id:
       example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
       type: string
@@ -19354,6 +19709,56 @@ components:
       - type
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-transactions:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        startDate:
+          $ref: '#/components/schemas/ReportingDate'
+        endDate:
+          $ref: '#/components/schemas/ReportingDate'
+        type:
+          example: "BUY_TO_OPEN,DIVIDEND"
+          type: string
+          x-konfig-original-example: "BUY_TO_OPEN,DIVIDEND"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-5-schema
+        offset:
+          default: 0
+          example: 0
+          format: int32
+          minimum: 0
+          type: integer
+          x-konfig-original-example: 0
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-6-schema
+        limit:
+          default: 1000
+          example: 1000
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 1000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-7-schema
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
+      - startDate
+      - endDate
+      - type
+      - offset
+      - limit
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details:
       additionalProperties: true
       properties:
@@ -21453,6 +21858,43 @@ components:
           nullable: true
         child_brokerage_order_ids:
           nullable: true
+    InstrumentNullable:
+      description: Instrument metadata for a V2 position. Use `kind` to determine
+        which schema is present.
+      discriminator:
+        mapping:
+          stock: '#/components/schemas/StockInstrument'
+          option: '#/components/schemas/OptionInstrument'
+          crypto: '#/components/schemas/CryptoInstrument'
+          future: '#/components/schemas/FutureInstrument'
+          future_option: '#/components/schemas/FutureOptionInstrument'
+          etf: '#/components/schemas/EtfInstrument'
+          mutualfund: '#/components/schemas/MutualFundInstrument'
+          cef: '#/components/schemas/CefInstrument'
+          adr: '#/components/schemas/AdrInstrument'
+          cfd: '#/components/schemas/CfdInstrument'
+          tokenized_asset: '#/components/schemas/TokenizedAssetInstrument'
+          cash: '#/components/schemas/CashInstrument'
+          bond: '#/components/schemas/OtherInstrument'
+          other: '#/components/schemas/OtherInstrument'
+          preferred_stock: '#/components/schemas/PreferredStockInstrument'
+        propertyName: kind
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/StockInstrument'
+      - $ref: '#/components/schemas/OptionInstrument'
+      - $ref: '#/components/schemas/CryptoInstrument'
+      - $ref: '#/components/schemas/FutureInstrument'
+      - $ref: '#/components/schemas/FutureOptionInstrument'
+      - $ref: '#/components/schemas/EtfInstrument'
+      - $ref: '#/components/schemas/MutualFundInstrument'
+      - $ref: '#/components/schemas/CefInstrument'
+      - $ref: '#/components/schemas/AdrInstrument'
+      - $ref: '#/components/schemas/CfdInstrument'
+      - $ref: '#/components/schemas/TokenizedAssetInstrument'
+      - $ref: '#/components/schemas/OtherInstrument'
+      - $ref: '#/components/schemas/CashInstrument'
+      - $ref: '#/components/schemas/PreferredStockInstrument'
     SymbolNullable:
       additionalProperties: true
       description: Uniquely describes a single security + exchange combination across

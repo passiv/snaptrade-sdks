@@ -14,6 +14,7 @@ from snaptrade_client.paths.accounts_account_id_balance_history.get import GetAc
 from snaptrade_client.paths.accounts_account_id_balances_v2.get import GetAccountBalancesV2
 from snaptrade_client.paths.accounts_account_id_details.get import GetAccountDetails
 from snaptrade_client.paths.accounts_account_id_orders_brokerage_order_id.get import GetAccountOrder
+from snaptrade_client.paths.accounts_account_id_transactions.get import GetAccountTransactions
 from snaptrade_client.paths.accounts_account_id_orders_all.get import GetAllAccountOrders
 from snaptrade_client.paths.accounts_account_id_positions_all.get import GetAllAccountPositions
 from snaptrade_client.paths.accounts_account_id_orders_recent.get import GetAllAccountRecentOrders
@@ -39,6 +40,7 @@ class AccountInformationApiGenerated(
     GetAccountBalancesV2[TAuth],
     GetAccountDetails[TAuth],
     GetAccountOrder[TAuth],
+    GetAccountTransactions[TAuth],
     GetAllAccountOrders[TAuth],
     GetAllAccountPositions[TAuth],
     GetAllAccountRecentOrders[TAuth],

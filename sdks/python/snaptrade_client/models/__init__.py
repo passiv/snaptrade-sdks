@@ -44,6 +44,7 @@ from snaptrade_client.model.account_orders_v2_response import AccountOrdersV2Res
 from snaptrade_client.model.account_position import AccountPosition
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
+from snaptrade_client.model.account_transactions_response import AccountTransactionsResponse
 from snaptrade_client.model.account_universal_activity import AccountUniversalActivity
 from snaptrade_client.model.account_value_history_item import AccountValueHistoryItem
 from snaptrade_client.model.account_value_history_response import AccountValueHistoryResponse
@@ -51,6 +52,7 @@ from snaptrade_client.model.action import Action
 from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.action_strict_v2 import ActionStrictV2
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
+from snaptrade_client.model.activity import Activity
 from snaptrade_client.model.adr_instrument import AdrInstrument
 from snaptrade_client.model.all_account_orders_response import AllAccountOrdersResponse
 from snaptrade_client.model.all_account_orders_response_data_freshness import AllAccountOrdersResponseDataFreshness
@@ -141,6 +143,7 @@ from snaptrade_client.model.institution_connection_nullable import InstitutionCo
 from snaptrade_client.model.institution_connection_scopes import InstitutionConnectionScopes
 from snaptrade_client.model.institution_regions import InstitutionRegions
 from snaptrade_client.model.instrument import Instrument
+from snaptrade_client.model.instrument_nullable import InstrumentNullable
 from snaptrade_client.model.investment_account import InvestmentAccount
 from snaptrade_client.model.investment_account_net_value import InvestmentAccountNetValue
 from snaptrade_client.model.limit_order_type import LimitOrderType

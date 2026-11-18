@@ -1684,6 +1684,79 @@ paths:
           description: Unexpected error
         "429":
           $ref: "#/components/responses/TooManyRequests"
+  /accounts/{accountId}/transactions:
+    get:
+      tags:
+        - Account Information
+      summary: List account transactions
+      operationId: AccountInformation_getAccountTransactions
+      description: |
+        Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+
+        History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          name: userSecret
+          required: true
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: startDate
+          description: First trade date to include (UTC). Defaults to the earliest available transaction.
+          schema:
+            $ref: "#/components/schemas/ReportingDate"
+        - in: query
+          name: endDate
+          description: Last trade date to include (UTC). Defaults to the latest available transaction.
+          schema:
+            $ref: "#/components/schemas/ReportingDate"
+        - in: query
+          name: type
+          description: |
+            Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively.
+            For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases.
+            A transaction matching multiple values appears once.
+          schema:
+            type: string
+            example: BUY_TO_OPEN,DIVIDEND
+        - in: query
+          name: offset
+          description: Number of matching transactions to skip.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            default: 0
+        - in: query
+          name: limit
+          description: Maximum number of transactions to return in this page.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 1000
+            default: 1000
+      responses:
+        "200":
+          description: A page of matching transactions and the total count across all pages.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountTransactionsResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        default:
+          description: Unexpected error
   /authorizations/{authorizationId}/returnRates:
     get:
       tags:
@@ -9131,6 +9204,81 @@ components:
           type: integer
           example: 1000
           description: The total number of items available to be returned over the API.
+    AccountTransactionsResponse:
+      description: A page of account transactions.
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          description: Matching transactions in descending date order.
+          type: array
+          items:
+            $ref: "#/components/schemas/Activity"
+        pagination:
+          $ref: "#/components/schemas/PaginationDetails"
+    Activity:
+      description: A recorded transaction in a brokerage account.
+      type: object
+      required: [transaction_id, type, date, description, instrument, priced_in, amount, price, units, fee, fx_rate]
+      properties:
+        transaction_id:
+          type: string
+          nullable: true
+          description: Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.
+          example: TXN-20261116-003
+        type:
+          type: string
+          description: |
+            Best-effort activity classification. A reported option action takes precedence over its base type.
+            Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND,
+            INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.
+          example: BUY_TO_OPEN
+        date:
+          type: string
+          format: date-time
+          description: Recorded trade date and time in UTC. Precision depends on what the brokerage supplies.
+          example: "2026-11-16T15:42:18.123456Z"
+        description:
+          type: string
+          description: Brokerage activity description, including an unresolved brokerage symbol's name when available.
+          example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+        instrument:
+          description: Instrument involved in the transaction. Null when the activity has no identifiable instrument, as with a cash deposit.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Instrument"
+        priced_in:
+          description: Denomination of amount, price and fee. A fiat currency or a crypto quote asset, independent of the instrument's listing currency. Null when unknown.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/PricedInInstrument"
+        amount:
+          type: string
+          format: decimal
+          description: Signed amount recorded for the transaction. Use this value directly. Price, units and fees may be insufficient to reconstruct it.
+          example: "-651.3"
+        price:
+          type: string
+          format: decimal
+          nullable: true
+          description: Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.
+          example: "3.25"
+        units:
+          type: string
+          format: decimal
+          description: Signed quantity recorded for the transaction. For options the quantity counts contracts.
+          example: "2"
+        fee:
+          type: string
+          format: decimal
+          description: Recorded fee. Some missing brokerage fees are stored as zero.
+          example: "1.3"
+        fx_rate:
+          type: string
+          format: decimal
+          nullable: true
+          description: Foreign exchange rate recorded for the transaction, when available.
+          example: "1.032"
     PaginatedUniversalActivity:
       description: A paginated list of UniversalActivity objects.
       type: object

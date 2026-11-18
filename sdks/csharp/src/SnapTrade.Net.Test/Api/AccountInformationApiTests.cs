@@ -203,6 +203,41 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetAccountTransactions
+        /// </summary>
+        [Fact]
+        public void GetAccountTransactionsTest()
+        {
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var userId = "snaptrade-user-123";
+            var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+            var startDate = DateTime.Parse("2022-01-24"); // First trade date to include (UTC). Defaults to the earliest available transaction. (optional) 
+            var endDate = DateTime.Parse("2022-01-24"); // Last trade date to include (UTC). Defaults to the latest available transaction. (optional) 
+            var type = "BUY_TO_OPEN,DIVIDEND"; // Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional) 
+            var offset = 0; // Number of matching transactions to skip. (optional)  (default to 0)
+            var limit = 1000; // Maximum number of transactions to return in this page. (optional)  (default to 1000)
+            
+            try
+            {
+                // List account transactions
+                AccountTransactionsResponse result = client.AccountInformation.GetAccountTransactions(accountId, userId, userSecret, startDate, endDate, type, offset, limit);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling AccountInformationApi.GetAccountTransactions: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetAllAccountOrders
         /// </summary>
         [Fact]

@@ -7,6 +7,7 @@ import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrder;
 import com.snaptrade.client.model.AccountOrderRecord;
+import com.snaptrade.client.model.AccountTransactionsResponse;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
 import com.snaptrade.client.model.AllAccountOrdersResponse;
 import com.snaptrade.client.model.AllAccountPositionsResponse;
@@ -50,6 +51,11 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     public class GetAccountOrderRequestBuilder extends GetAccountOrderRequestBuilderGenerated {
         public GetAccountOrderRequestBuilder(UUID accountId, String brokerageOrderId, String userId, String userSecret) {
             super(accountId, brokerageOrderId, userId, userSecret);
+        }
+    }
+    public class GetAccountTransactionsRequestBuilder extends GetAccountTransactionsRequestBuilderGenerated {
+        public GetAccountTransactionsRequestBuilder(UUID accountId, String userId, String userSecret) {
+            super(accountId, userId, userSecret);
         }
     }
     public class GetAllAccountOrdersRequestBuilder extends GetAllAccountOrdersRequestBuilderGenerated {

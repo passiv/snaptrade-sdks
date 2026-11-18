@@ -175,6 +175,43 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrder</returns>
         ApiResponse<AccountOrder> GetAccountOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
+        /// List account transactions
+        /// </summary>
+        /// <remarks>
+        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AccountTransactionsResponse</returns>
+        AccountTransactionsResponse GetAccountTransactions(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+
+        /// <summary>
+        /// List account transactions
+        /// </summary>
+        /// <remarks>
+        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AccountTransactionsResponse</returns>
+        ApiResponse<AccountTransactionsResponse> GetAccountTransactionsWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        /// <summary>
         /// List all account orders
         /// </summary>
         /// <remarks>
@@ -709,6 +746,45 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrder)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrder>> GetAccountOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// List account transactions
+        /// </summary>
+        /// <remarks>
+        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AccountTransactionsResponse</returns>
+        System.Threading.Tasks.Task<AccountTransactionsResponse> GetAccountTransactionsAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// List account transactions
+        /// </summary>
+        /// <remarks>
+        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AccountTransactionsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AccountTransactionsResponse>> GetAccountTransactionsWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List all account orders
         /// </summary>
@@ -2343,6 +2419,276 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetAccountOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AccountTransactionsResponse</returns>
+        public AccountTransactionsResponse GetAccountTransactions(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<AccountTransactionsResponse> localVarResponse = GetAccountTransactionsWithHttpInfo(accountId, userId, userSecret, startDate, endDate, type, offset, limit);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AccountTransactionsResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<AccountTransactionsResponse> GetAccountTransactionsWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAccountTransactions");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAccountTransactions");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAccountTransactions");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (startDate != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate, "date"));
+            }
+            if (endDate != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
+            }
+            if (type != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "type", type, ""));
+            }
+            if (offset != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "offset", offset, "int32"));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "limit", limit, "int32"));
+            }
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAccountTransactions";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<AccountTransactionsResponse>("/accounts/{accountId}/transactions", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAccountTransactions", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AccountTransactionsResponse</returns>
+        public async System.Threading.Tasks.Task<AccountTransactionsResponse> GetAccountTransactionsAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<AccountTransactionsResponse> localVarResponse = await GetAccountTransactionsWithHttpInfoAsync(accountId, userId, userSecret, startDate, endDate, type, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
+        /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
+        /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AccountTransactionsResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountTransactionsResponse>> GetAccountTransactionsWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetAccountTransactions");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetAccountTransactions");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetAccountTransactions");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (startDate != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "startDate", startDate, "date"));
+            }
+            if (endDate != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
+            }
+            if (type != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "type", type, ""));
+            }
+            if (offset != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "offset", offset, "int32"));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "limit", limit, "int32"));
+            }
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetAccountTransactions";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<AccountTransactionsResponse>("/accounts/{accountId}/transactions", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAccountTransactions", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

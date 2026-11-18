@@ -103,6 +103,25 @@ describe 'AccountInformationApi' do
     end
   end
 
+  # unit tests for get_account_transactions
+  # List account transactions
+  # Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+  # @param account_id 
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Date] :start_date First trade date to include (UTC). Defaults to the earliest available transaction.
+  # @option opts [Date] :end_date Last trade date to include (UTC). Defaults to the latest available transaction.
+  # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+  # @option opts [Integer] :offset Number of matching transactions to skip.
+  # @option opts [Integer] :limit Maximum number of transactions to return in this page.
+  # @return [AccountTransactionsResponse]
+  describe 'get_account_transactions test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_all_account_orders
   # List all account orders
   # Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
