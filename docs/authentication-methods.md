@@ -1,5 +1,7 @@
 # Choose Your Integration
 
+<a id="authentication-methods"></a>
+
 ## Building for Users
 
 Both **Commercial API Key** and **OAuth** support third-party commercial apps. Choose based on the user journey and the integration responsibilities your app needs to own.
@@ -14,6 +16,10 @@ Users manage their connections in the SnapTrade Dashboard. This typically requir
 
 Users can reuse their connections across apps and revoke an app’s access from the Dashboard without deleting those connections. OAuth apps do not need separate broker approvals.
 
+<a id="commercial-oauth-authentication"></a>
+<a id="typescript-2"></a>
+<a id="python-2"></a>
+
 [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps)
 
 ### Commercial API Key
@@ -24,13 +30,23 @@ This gives your app more control over onboarding and the connection experience, 
 
 Some brokers require separate approval or your own broker API credentials. See the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide).
 
+<a id="commercial-api-key-authentication"></a>
+<a id="typescript"></a>
+<a id="python"></a>
+
 [Build With a Commercial API Key](https://docs.snaptrade.com/docs/commercial-api-key)
 
 ## Building for Yourself
 
 Use a **Personal API Key** for scripts and tools that access your own brokerage accounts. Your key identifies your SnapTrade account; you do not register separate end users. Connect your brokerage in the Dashboard or through the Connection Portal, then call the API with your key.
 
+<a id="personal-api-key-authentication"></a>
+<a id="typescript-1"></a>
+<a id="python-1"></a>
+
 [Use a Personal API Key](https://docs.snaptrade.com/docs/personal-api-key)
+
+<a id="quick-comparison"></a>
 
 ## Compare Responsibilities
 
@@ -41,27 +57,6 @@ Use a **Personal API Key** for scripts and tools that access your own brokerage 
 | Personal API Key | You connect and access your own brokerage accounts | Your own key and tools |
 
 For customer accounts and billing context, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). Scope, brokerage capability, and production requirements are covered in each implementation guide.
-
-<!-- Preserve inbound links to the former authentication reference sections. -->
-<a id="authentication-methods"></a>
-<a id="quick-comparison"></a>
-<a id="commercial-api-key-authentication"></a>
-<a id="typescript"></a>
-<a id="python"></a>
-
-Commercial API-key examples moved to the [Commercial API Key guide](https://docs.snaptrade.com/docs/commercial-api-key#connect-and-read-account-data).
-
-<a id="personal-api-key-authentication"></a>
-<a id="typescript-1"></a>
-<a id="python-1"></a>
-
-Personal API-key examples moved to the [Personal API Key guide](https://docs.snaptrade.com/docs/personal-api-key#connect-and-read-account-data).
-
-<a id="commercial-oauth-authentication"></a>
-<a id="typescript-2"></a>
-<a id="python-2"></a>
-
-OAuth examples are in [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps#use-the-sdk-helpers).
 
 <a id="credential-rules"></a>
 <a id="direct-http-reference"></a>
