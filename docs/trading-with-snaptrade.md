@@ -27,6 +27,8 @@ See [Order impact and confirmation](/docs/order-impact-and-confirmation) for con
 
 ## Set Up Trading Access
 
+Commercial API Key, Personal API Key, and OAuth integrations all require a trading-enabled brokerage connection. OAuth additionally requires your app to be approved for trading and the user to grant `read trade`. See [OAuth trading permissions](https://docs.snaptrade.com/docs/oauth-apps#8-trading).
+
 ### Create a Trading Connection
 
 By default, connections are created with read-only permissions. To create a trading-enabled connection, set the `connectionType` body parameter to `trade` when calling :api[Authentication_loginSnapTradeUser].
