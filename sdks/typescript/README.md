@@ -750,7 +750,7 @@ const getAccountTransactionsResponse =
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     startDate: "2022-01-24",
     endDate: "2022-01-24",
-    type: "BUY_TO_OPEN,DIVIDEND",
+    type: "BUY,DIVIDEND",
     offset: 0,
     limit: 1000,
     userId: "snaptrade-user-123",
@@ -772,7 +772,7 @@ const getAccountTransactionsResponse =
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     startDate: "2022-01-24",
     endDate: "2022-01-24",
-    type: "BUY_TO_OPEN,DIVIDEND",
+    type: "BUY,DIVIDEND",
     offset: 0,
     limit: 1000,
   });

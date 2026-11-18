@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.snaptrade.client.model.AccountTransactionsResponsePagination;
 import com.snaptrade.client.model.Activity;
-import com.snaptrade.client.model.PaginationDetails;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -60,7 +60,7 @@ public class AccountTransactionsResponse {
 
   public static final String SERIALIZED_NAME_PAGINATION = "pagination";
   @SerializedName(SERIALIZED_NAME_PAGINATION)
-  private PaginationDetails pagination;
+  private AccountTransactionsResponsePagination pagination;
 
   public AccountTransactionsResponse() {
   }
@@ -99,7 +99,7 @@ public class AccountTransactionsResponse {
   }
 
 
-  public AccountTransactionsResponse pagination(PaginationDetails pagination) {
+  public AccountTransactionsResponse pagination(AccountTransactionsResponsePagination pagination) {
     
     
     
@@ -115,12 +115,12 @@ public class AccountTransactionsResponse {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public PaginationDetails getPagination() {
+  public AccountTransactionsResponsePagination getPagination() {
     return pagination;
   }
 
 
-  public void setPagination(PaginationDetails pagination) {
+  public void setPagination(AccountTransactionsResponsePagination pagination) {
     
     
     
@@ -261,7 +261,7 @@ public class AccountTransactionsResponse {
         Activity.validateJsonObject(jsonArraydata.get(i).getAsJsonObject());
       };
       // validate the required field `pagination`
-      PaginationDetails.validateJsonObject(jsonObj.getAsJsonObject("pagination"));
+      AccountTransactionsResponsePagination.validateJsonObject(jsonObj.getAsJsonObject("pagination"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

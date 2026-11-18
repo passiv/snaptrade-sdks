@@ -67,21 +67,53 @@ class AccountTransactionsResponse(
             
                 def __getitem__(self, i: int) -> 'Activity':
                     return super().__getitem__(i)
-        
-            @staticmethod
-            def pagination() -> typing.Type['PaginationDetails']:
-                return PaginationDetails
+            
+            
+            class pagination(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            PaginationDetails,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'pagination':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             __annotations__ = {
                 "data": data,
                 "pagination": pagination,
             }
         additional_properties = schemas.AnyTypeSchema
     
-    pagination: 'PaginationDetails'
+    pagination: MetaOapg.properties.pagination
     data: MetaOapg.properties.data
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["pagination"]) -> 'PaginationDetails': ...
+    def __getitem__(self, name: typing_extensions.Literal["pagination"]) -> MetaOapg.properties.pagination: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["data"]) -> MetaOapg.properties.data: ...
@@ -94,7 +126,7 @@ class AccountTransactionsResponse(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["pagination"]) -> 'PaginationDetails': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["pagination"]) -> MetaOapg.properties.pagination: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["data"]) -> MetaOapg.properties.data: ...
@@ -108,7 +140,7 @@ class AccountTransactionsResponse(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        pagination: 'PaginationDetails',
+        pagination: typing.Union[MetaOapg.properties.pagination, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
         data: typing.Union[MetaOapg.properties.data, list, tuple, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],

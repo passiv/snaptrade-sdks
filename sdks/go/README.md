@@ -267,6 +267,7 @@ Class | Method | HTTP request | Description
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [AccountTransactionsResponse](docs/AccountTransactionsResponse.md)
+ - [AccountTransactionsResponsePagination](docs/AccountTransactionsResponsePagination.md)
  - [AccountUniversalActivity](docs/AccountUniversalActivity.md)
  - [AccountValueHistoryItem](docs/AccountValueHistoryItem.md)
  - [AccountValueHistoryResponse](docs/AccountValueHistoryResponse.md)

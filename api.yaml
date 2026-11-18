@@ -1728,7 +1728,7 @@ paths:
             A transaction matching multiple values appears once.
           schema:
             type: string
-            example: BUY_TO_OPEN,DIVIDEND
+            example: BUY,DIVIDEND
         - in: query
           name: offset
           description: Number of matching transactions to skip.
@@ -9215,7 +9215,12 @@ components:
           items:
             $ref: "#/components/schemas/Activity"
         pagination:
-          $ref: "#/components/schemas/PaginationDetails"
+          allOf:
+            - $ref: "#/components/schemas/PaginationDetails"
+          example:
+            offset: 0
+            limit: 1000
+            total: 1
     Activity:
       description: A recorded transaction in a brokerage account.
       type: object
@@ -9232,7 +9237,7 @@ components:
             Best-effort activity classification. A reported option action takes precedence over its base type.
             Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND,
             INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.
-          example: BUY_TO_OPEN
+          example: BUY
         date:
           type: string
           format: date-time
@@ -9241,7 +9246,7 @@ components:
         description:
           type: string
           description: Brokerage activity description, including an unresolved brokerage symbol's name when available.
-          example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          example: Bought 2 AAPL shares
         instrument:
           description: Instrument involved in the transaction. Null when the activity has no identifiable instrument, as with a cash deposit.
           nullable: true
@@ -9262,7 +9267,7 @@ components:
           format: decimal
           nullable: true
           description: Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.
-          example: "3.25"
+          example: "325"
         units:
           type: string
           format: decimal

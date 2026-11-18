@@ -335,7 +335,7 @@ func main() {
     )
     request.StartDate(Mon Jan 24 00:00:00 UTC 2022)
     request.EndDate(Mon Jan 24 00:00:00 UTC 2022)
-    request.Type(""BUY_TO_OPEN,DIVIDEND"")
+    request.Type(""BUY,DIVIDEND"")
     request.Offset(0)
     request.Limit(1000)
     

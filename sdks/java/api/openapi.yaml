@@ -2670,9 +2670,9 @@ paths:
         name: type
         required: false
         schema:
-          example: "BUY_TO_OPEN,DIVIDEND"
+          example: "BUY,DIVIDEND"
           type: string
-          x-konfig-original-example: "BUY_TO_OPEN,DIVIDEND"
+          x-konfig-original-example: "BUY,DIVIDEND"
           x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-5-schema
         style: form
       - description: Number of matching transactions to skip.
@@ -14697,31 +14697,31 @@ components:
       description: A page of account transactions.
       example:
         pagination:
-          total: 1000
           offset: 0
-          limit: 100
+          limit: 1000
+          total: 1
         data:
         - transaction_id: TXN-20261116-003
           date: 2026-11-16T15:42:18.123456Z
           amount: "-651.3"
-          price: "3.25"
+          price: "325"
           fee: "1.3"
-          description: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          description: Bought 2 AAPL shares
           instrument: ""
           priced_in: ""
           units: "2"
-          type: BUY_TO_OPEN
+          type: BUY
           fx_rate: "1.032"
         - transaction_id: TXN-20261116-003
           date: 2026-11-16T15:42:18.123456Z
           amount: "-651.3"
-          price: "3.25"
+          price: "325"
           fee: "1.3"
-          description: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          description: Bought 2 AAPL shares
           instrument: ""
           priced_in: ""
           units: "2"
-          type: BUY_TO_OPEN
+          type: BUY
           fx_rate: "1.032"
       properties:
         data:
@@ -14730,7 +14730,7 @@ components:
             $ref: '#/components/schemas/Activity'
           type: array
         pagination:
-          $ref: '#/components/schemas/PaginationDetails'
+          $ref: '#/components/schemas/AccountTransactionsResponse_pagination'
       required:
       - data
       - pagination
@@ -14743,13 +14743,13 @@ components:
         transaction_id: TXN-20261116-003
         date: 2026-11-16T15:42:18.123456Z
         amount: "-651.3"
-        price: "3.25"
+        price: "325"
         fee: "1.3"
-        description: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+        description: Bought 2 AAPL shares
         instrument: ""
         priced_in: ""
         units: "2"
-        type: BUY_TO_OPEN
+        type: BUY
         fx_rate: "1.032"
       properties:
         transaction_id:
@@ -14765,9 +14765,9 @@ components:
             Best-effort activity classification. A reported option action takes precedence over its base type.
             Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND,
             INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.
-          example: BUY_TO_OPEN
+          example: BUY
           type: string
-          x-konfig-original-example: BUY_TO_OPEN
+          x-konfig-original-example: BUY
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-type
         date:
           description: Recorded trade date and time in UTC. Precision depends on what
@@ -14780,9 +14780,9 @@ components:
         description:
           description: "Brokerage activity description, including an unresolved brokerage\
             \ symbol's name when available."
-          example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          example: Bought 2 AAPL shares
           type: string
-          x-konfig-original-example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+          x-konfig-original-example: Bought 2 AAPL shares
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-description
         instrument: {}
         priced_in: {}
@@ -14797,11 +14797,11 @@ components:
         price:
           description: Recorded unit price. For options this is the price per underlying
             share. Some missing brokerage prices are stored as zero.
-          example: "3.25"
+          example: "325"
           format: decimal
           nullable: true
           type: string
-          x-konfig-original-example: "3.25"
+          x-konfig-original-example: "325"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-price
         units:
           description: Signed quantity recorded for the transaction. For options the
@@ -16194,7 +16194,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-5-schema:
-      example: "BUY_TO_OPEN,DIVIDEND"
+      example: "BUY,DIVIDEND"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-6-schema:
@@ -18861,7 +18861,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Activity-properties-type:
-      example: BUY_TO_OPEN
+      example: BUY
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Activity-properties-date:
@@ -18869,7 +18869,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Activity-properties-description:
-      example: Bought 2 AAPL Dec 18 2026 240 CALL contracts
+      example: Bought 2 AAPL shares
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Activity-properties-amount:
@@ -18877,7 +18877,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Activity-properties-price:
-      example: "3.25"
+      example: "325"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Activity-properties-units:
@@ -19887,9 +19887,9 @@ components:
         endDate:
           $ref: '#/components/schemas/ReportingDate'
         type:
-          example: "BUY_TO_OPEN,DIVIDEND"
+          example: "BUY,DIVIDEND"
           type: string
-          x-konfig-original-example: "BUY_TO_OPEN,DIVIDEND"
+          x-konfig-original-example: "BUY,DIVIDEND"
           x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-transactions-get-parameters-5-schema
         offset:
           default: 0
@@ -22844,6 +22844,17 @@ components:
       - amount
       - currency
       type: object
+    AccountTransactionsResponse_pagination:
+      allOf:
+      - $ref: '#/components/schemas/PaginationDetails'
+      example:
+        offset: 0
+        limit: 1000
+        total: 1
+      x-konfig-original-example:
+        offset: 0
+        limit: 1000
+        total: 1
     UnderlyingSymbol_exchange:
       allOf:
       - $ref: '#/components/schemas/USExchange'

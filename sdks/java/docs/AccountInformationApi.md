@@ -590,7 +590,7 @@ public class Example {
     String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     LocalDate startDate = LocalDate.parse("Mon Jan 24 00:00:00 UTC 2022"); // First trade date to include (UTC). Defaults to the earliest available transaction.
     LocalDate endDate = LocalDate.parse("Mon Jan 24 00:00:00 UTC 2022"); // Last trade date to include (UTC). Defaults to the latest available transaction.
-    String type = "BUY_TO_OPEN,DIVIDEND"; // Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    String type = "BUY,DIVIDEND"; // Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
     Integer offset = 0; // Number of matching transactions to skip.
     Integer limit = 1000; // Maximum number of transactions to return in this page.
     try {

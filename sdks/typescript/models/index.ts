@@ -31,6 +31,7 @@ export * from './account-position';
 export * from './account-simple';
 export * from './account-sync-status';
 export * from './account-transactions-response';
+export * from './account-transactions-response-pagination';
 export * from './account-universal-activity';
 export * from './account-value-history-item';
 export * from './account-value-history-response';

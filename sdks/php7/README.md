@@ -482,7 +482,7 @@ $result = $snaptrade->accountInformation->getAccountTransactions(
     "adf2aa34-8219-40f7-a6b3-60156985cc61", 
     "2022-01-24", 
     "2022-01-24", 
-    "BUY_TO_OPEN,DIVIDEND", 
+    "BUY,DIVIDEND", 
     0, 
     1000
 );

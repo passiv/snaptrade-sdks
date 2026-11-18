@@ -19,7 +19,7 @@ import (
 type AccountTransactionsResponse struct {
 	// Matching transactions in descending date order.
 	Data []Activity `json:"data"`
-	Pagination PaginationDetails `json:"pagination"`
+	Pagination AccountTransactionsResponsePagination `json:"pagination"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -29,7 +29,7 @@ type _AccountTransactionsResponse AccountTransactionsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountTransactionsResponse(data []Activity, pagination PaginationDetails) *AccountTransactionsResponse {
+func NewAccountTransactionsResponse(data []Activity, pagination AccountTransactionsResponsePagination) *AccountTransactionsResponse {
 	this := AccountTransactionsResponse{}
 	this.Data = data
 	this.Pagination = pagination
@@ -69,9 +69,9 @@ func (o *AccountTransactionsResponse) SetData(v []Activity) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *AccountTransactionsResponse) GetPagination() PaginationDetails {
+func (o *AccountTransactionsResponse) GetPagination() AccountTransactionsResponsePagination {
 	if o == nil {
-		var ret PaginationDetails
+		var ret AccountTransactionsResponsePagination
 		return ret
 	}
 
@@ -80,7 +80,7 @@ func (o *AccountTransactionsResponse) GetPagination() PaginationDetails {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *AccountTransactionsResponse) GetPaginationOk() (*PaginationDetails, bool) {
+func (o *AccountTransactionsResponse) GetPaginationOk() (*AccountTransactionsResponsePagination, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *AccountTransactionsResponse) GetPaginationOk() (*PaginationDetails, boo
 }
 
 // SetPagination sets field value
-func (o *AccountTransactionsResponse) SetPagination(v PaginationDetails) {
+func (o *AccountTransactionsResponse) SetPagination(v AccountTransactionsResponsePagination) {
 	o.Pagination = v
 }
 

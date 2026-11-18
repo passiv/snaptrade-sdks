@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="data">Matching transactions in descending date order. (required).</param>
         /// <param name="pagination">pagination (required).</param>
-        public AccountTransactionsResponse(List<Activity> data = default(List<Activity>), PaginationDetails pagination = default(PaginationDetails)) : base()
+        public AccountTransactionsResponse(List<Activity> data = default(List<Activity>), AccountTransactionsResponsePagination pagination = default(AccountTransactionsResponsePagination)) : base()
         {
             // to ensure "data" is required (not null)
             if (data == null)
@@ -73,7 +73,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Pagination
         /// </summary>
         [DataMember(Name = "pagination", IsRequired = true, EmitDefaultValue = true)]
-        public PaginationDetails Pagination { get; set; }
+        public AccountTransactionsResponsePagination Pagination { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
