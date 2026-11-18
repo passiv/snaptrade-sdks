@@ -8,10 +8,7 @@ Your backend creates a SnapTrade user for each end user and sends them through t
 2. Verify your email.
 3. Enable two-factor authentication.
 4. Create a test API key from the [API Key page](https://dashboard.snaptrade.com/api-key).
-5. When you are ready for production, complete the required approval and billing steps in the Dashboard and create a production key.
-6. Store the `clientId` and `consumerKey` on a secure backend.
-
-For plan limits and production requirements, see [Billing](https://docs.snaptrade.com/docs/billing).
+5. Store the `clientId` and `consumerKey` on a secure backend.
 
 ## Connect and Read Account Data
 
@@ -144,6 +141,12 @@ print(positions.body)
 After connection, list accounts, choose an account ID, and retrieve positions with :api[AccountInformation_getAllAccountPositions]. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
 
 For trading, create the connection with `connectionType` / `connection_type` set to `trade-if-available`. The default `read` connection type only supports data access. Trading also depends on the key, brokerage, connection, and account capabilities. Build the order with the account ID and brokerage ticker, show the user its details and impact, obtain confirmation, then use :api[Trading_placeForceOrder]. See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order types and supported assets.
+
+## Go to Production
+
+When you are ready for production, complete the [Production Access Application](https://dashboard.snaptrade.com/production-access) and required billing setup, then create a production key.
+
+For plan limits and production requirements, see [Billing](https://docs.snaptrade.com/docs/billing).
 
 ## Requests and Next Steps
 
