@@ -35,8 +35,11 @@ const login = await snaptrade.authentication.loginSnapTradeUser();
 
 if (!("redirectURI" in login.data)) throw new Error("Expected a Connection Portal URL");
 console.log("Open this Connection Portal URL:", login.data.redirectURI);
+```
 
-// After you connect your account, fetch data directly.
+After you complete the Connection Portal, run the following code. Reuse your initialized SDK client.
+
+```typescript
 const accounts = await snaptrade.accountInformation.listUserAccounts();
 
 if (!accounts.data.length) throw new Error("No connected accounts yet");
@@ -70,8 +73,11 @@ snaptrade = SnapTrade(
 login = snaptrade.authentication.login_snap_trade_user()
 
 print("Open this Connection Portal URL:", login.body["redirectURI"])
+```
 
-# After you connect your account, fetch data directly.
+After you complete the Connection Portal, run the following code. Reuse your initialized SDK client.
+
+```python
 accounts = snaptrade.account_information.list_user_accounts()
 
 if not accounts.body:

@@ -57,8 +57,11 @@ const login = await snaptrade.authentication.loginSnapTradeUser({
 
 if (!("redirectURI" in login.data)) throw new Error("Expected a Connection Portal URL");
 console.log("Send this Connection Portal URL to your user:", login.data.redirectURI);
+```
 
-// Resume after the user completes the portal; use their stored credentials.
+After the user completes the Connection Portal, run the following code. Reuse your initialized SDK client and the user's stored credentials.
+
+```typescript
 const accounts = await snaptrade.accountInformation.listUserAccounts({
   // Commercial account-data calls include the user's credentials.
   userId,
@@ -109,8 +112,11 @@ login = snaptrade.authentication.login_snap_trade_user(
 )
 
 print("Send this Connection Portal URL to your user:", login.body["redirectURI"])
+```
 
-# Resume after the user completes the portal; use their stored credentials.
+After the user completes the Connection Portal, run the following code. Reuse your initialized SDK client and the user's stored credentials.
+
+```python
 accounts = snaptrade.account_information.list_user_accounts(
     # Commercial account-data calls include the user's credentials.
     user_id=user_id,
