@@ -162,6 +162,8 @@ portal:
     /accounts/{accountId}/balances/v2:
       get: true
   hideOperations:
+    /accounts/{accountId}/transactions:
+      get: true
     /accounts/{accountId}/trading/simple:
       post: true
     /accounts/{accountId}/positions:
