@@ -20,7 +20,7 @@ Users can reuse their connections across apps and revoke an app’s access from 
 
 Use a Commercial API key when your app needs to control the SnapTrade user lifecycle and its own connection experience. Your backend registers a SnapTrade user for each end user, stores their credentials, and opens or embeds the Connection Portal for them.
 
-This gives your app more control over onboarding and connection support, with more integration responsibility. Your backend signs requests and supplies the appropriate end-user credentials.
+This gives your app more control over onboarding and the connection experience, with more integration responsibility.
 
 Some brokers require separate approval or your own broker API credentials. See the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide).
 
@@ -37,7 +37,7 @@ Use a **Personal API Key** for scripts and tools that access your own brokerage 
 | Integration | User journey | Your app owns |
 | --- | --- | --- |
 | OAuth | User signs in to SnapTrade and grants access to their Personal connections | App registration, callback validation, token storage and refresh |
-| Commercial API Key | User connects a brokerage through your app’s Connection Portal flow | SnapTrade user lifecycle, per-user credentials, connection experience and support |
+| Commercial API Key | User connects a brokerage through your app’s Connection Portal flow | SnapTrade user lifecycle, per-user credentials, and connection experience |
 | Personal API Key | You connect and access your own brokerage accounts | Your own key and tools |
 
 For customer accounts and billing context, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). Scope, brokerage capability, and production requirements are covered in each implementation guide.
