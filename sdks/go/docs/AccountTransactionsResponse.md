@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | [**[]Activity**](Activity.md) | Matching transactions in descending date order. | 
-**Pagination** | [**PaginationDetails**](PaginationDetails.md) |  | 
+**Pagination** | [**AccountTransactionsResponsePagination**](AccountTransactionsResponsePagination.md) |  | 
 
 ## Methods
 
 ### NewAccountTransactionsResponse
 
-`func NewAccountTransactionsResponse(data []Activity, pagination PaginationDetails, ) *AccountTransactionsResponse`
+`func NewAccountTransactionsResponse(data []Activity, pagination AccountTransactionsResponsePagination, ) *AccountTransactionsResponse`
 
 NewAccountTransactionsResponse instantiates a new AccountTransactionsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetData sets Data field to given value.
 
 ### GetPagination
 
-`func (o *AccountTransactionsResponse) GetPagination() PaginationDetails`
+`func (o *AccountTransactionsResponse) GetPagination() AccountTransactionsResponsePagination`
 
 GetPagination returns the Pagination field if non-nil, zero value otherwise.
 
 ### GetPaginationOk
 
-`func (o *AccountTransactionsResponse) GetPaginationOk() (*PaginationDetails, bool)`
+`func (o *AccountTransactionsResponse) GetPaginationOk() (*AccountTransactionsResponsePagination, bool)`
 
 GetPaginationOk returns a tuple with the Pagination field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPagination
 
-`func (o *AccountTransactionsResponse) SetPagination(v PaginationDetails)`
+`func (o *AccountTransactionsResponse) SetPagination(v AccountTransactionsResponsePagination)`
 
 SetPagination sets Pagination field to given value.
 

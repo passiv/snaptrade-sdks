@@ -787,7 +787,7 @@ get_account_transactions_response = (
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         start_date="2022-01-24",
         end_date="2022-01-24",
-        type="BUY_TO_OPEN,DIVIDEND",
+        type="BUY,DIVIDEND",
         offset=0,
         limit=1000,
         user_id="snaptrade-user-123",
@@ -810,7 +810,7 @@ get_account_transactions_response = (
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         start_date="2022-01-24",
         end_date="2022-01-24",
-        type="BUY_TO_OPEN,DIVIDEND",
+        type="BUY,DIVIDEND",
         offset=0,
         limit=1000,
     )

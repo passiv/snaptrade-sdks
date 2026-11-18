@@ -52,7 +52,7 @@ class AccountTransactionsResponse implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'data' => '\SnapTrade\Model\Activity[]',
-        'pagination' => '\SnapTrade\Model\PaginationDetails'
+        'pagination' => '\SnapTrade\Model\AccountTransactionsResponsePagination'
     ];
 
     /**
@@ -328,7 +328,7 @@ class AccountTransactionsResponse implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Gets pagination
      *
-     * @return \SnapTrade\Model\PaginationDetails
+     * @return \SnapTrade\Model\AccountTransactionsResponsePagination
      */
     public function getPagination()
     {
@@ -338,7 +338,7 @@ class AccountTransactionsResponse implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets pagination
      *
-     * @param \SnapTrade\Model\PaginationDetails $pagination pagination
+     * @param \SnapTrade\Model\AccountTransactionsResponsePagination $pagination pagination
      *
      * @return self
      */

@@ -35,7 +35,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'data' => :'Array<Activity>',
-        :'pagination' => :'PaginationDetails'
+        :'pagination' => :'AccountTransactionsResponsePagination'
       }
     end
 

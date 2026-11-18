@@ -142,7 +142,7 @@ public class Activity {
    * @return type
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "BUY_TO_OPEN", required = true, value = "Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values. ")
+  @ApiModelProperty(example = "BUY", required = true, value = "Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values. ")
 
   public String getType() {
     return type;
@@ -200,7 +200,7 @@ public class Activity {
    * @return description
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "Bought 2 AAPL Dec 18 2026 240 CALL contracts", required = true, value = "Brokerage activity description, including an unresolved brokerage symbol's name when available.")
+  @ApiModelProperty(example = "Bought 2 AAPL shares", required = true, value = "Brokerage activity description, including an unresolved brokerage symbol's name when available.")
 
   public String getDescription() {
     return description;
@@ -316,7 +316,7 @@ public class Activity {
    * @return price
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "3.25", required = true, value = "Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.")
+  @ApiModelProperty(example = "325", required = true, value = "Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.")
 
   public BigDecimal getPrice() {
     return price;

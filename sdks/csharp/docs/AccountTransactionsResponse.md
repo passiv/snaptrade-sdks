@@ -6,7 +6,7 @@ A page of account transactions.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | [**List&lt;Activity&gt;**](Activity.md) | Matching transactions in descending date order. | 
-**Pagination** | [**PaginationDetails**](PaginationDetails.md) |  | 
+**Pagination** | [**AccountTransactionsResponsePagination**](AccountTransactionsResponsePagination.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

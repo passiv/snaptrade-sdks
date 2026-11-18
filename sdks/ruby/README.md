@@ -462,7 +462,7 @@ result = snaptrade.account_information.get_account_transactions(
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   start_date: "2022-01-24",
   end_date: "2022-01-24",
-  type: "BUY_TO_OPEN,DIVIDEND",
+  type: "BUY,DIVIDEND",
   offset: 0,
   limit: 1000,
 )
