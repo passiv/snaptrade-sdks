@@ -12,6 +12,8 @@ Use OAuth when users will authorize access to brokerage accounts they manage in 
 
 Users manage their connections in the SnapTrade Dashboard. This typically requires less custom integration work: your app handles authorization, token storage, and refresh rather than registering SnapTrade users and building a connection flow.
 
+Users can reuse their connections across apps and revoke an app’s access from the Dashboard without deleting those connections. OAuth apps do not need separate broker approvals.
+
 [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps)
 
 ### Commercial API Key
@@ -19,6 +21,8 @@ Users manage their connections in the SnapTrade Dashboard. This typically requir
 Use a Commercial API key when your app needs to control the SnapTrade user lifecycle and its own connection experience. Your backend registers a SnapTrade user for each end user, stores their credentials, and opens or embeds the Connection Portal for them.
 
 This gives your app more control over onboarding and connection support, with more integration responsibility. Your backend signs requests and supplies the appropriate end-user credentials.
+
+Some brokers require separate approval or your own broker API credentials. See the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide).
 
 [Build With a Commercial API Key](https://docs.snaptrade.com/docs/commercial-api-key)
 
