@@ -155,6 +155,8 @@ portal:
       post: true
     /authorizations/{authorizationId}/transactions/sync:
       post: true
+    /accounts/{accountId}/transactions:
+      get: true
     /accounts/{accountId}/balanceHistory:
       get: true
     /accounts/{accountId}/balances/v2:
