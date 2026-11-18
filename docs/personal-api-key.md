@@ -48,15 +48,12 @@ const accounts = await snaptrade.accountInformation.listUserAccounts();
 
 if (!accounts.data.length) throw new Error("No connected accounts yet");
 
-const activities = await snaptrade.accountInformation.getAccountActivities({
+const positions = await snaptrade.accountInformation.getAllAccountPositions({
   // No userId or userSecret for Personal account-data calls.
   accountId: accounts.data[0].id!,
-  startDate: "2026-01-01",
-  endDate: "2026-01-31",
-  limit: 100,
 });
 
-console.log(activities.data);
+console.log(positions.data);
 ```
 
 ## Python
@@ -91,15 +88,12 @@ accounts = snaptrade.account_information.list_user_accounts()
 if not accounts.body:
     raise RuntimeError("No connected accounts yet")
 
-activities = snaptrade.account_information.get_account_activities(
+positions = snaptrade.account_information.get_all_account_positions(
     # No user_id or user_secret for Personal account-data calls.
     account_id=accounts.body[0]["id"],
-    start_date="2026-01-01",
-    end_date="2026-01-31",
-    limit=100,
 )
 
-print(activities.body)
+print(positions.body)
 ```
 
 ## Credential Rules
@@ -112,7 +106,7 @@ print(activities.body)
 
 ## Accounts and Trading
 
-After connection, list accounts, choose an account ID, and retrieve positions with :api[AccountInformation_getAllAccountPositions]. The examples also show retrieving account activities. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
+After connection, list accounts, choose an account ID, and retrieve positions with :api[AccountInformation_getAllAccountPositions]. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
 
 For trading, create the connection with `connectionType` / `connection_type` set to `trade-if-available`. The default `read` connection type only supports data access. Trading also depends on the key, brokerage, connection, and account capabilities. Build the order with the account ID and brokerage ticker, show the user its details and impact, obtain confirmation, then use :api[Trading_placeForceOrder]. See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order types and supported assets.
 
