@@ -29,7 +29,11 @@ const snaptrade = new Snaptrade({
     consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
   }),
 });
+```
 
+If your brokerage is already connected in the Dashboard, skip this block. Otherwise, generate a portal URL and complete the connection in your browser.
+
+```typescript
 // Generate connection URL.
 const login = await snaptrade.authentication.loginSnapTradeUser();
 
@@ -37,7 +41,7 @@ if (!("redirectURI" in login.data)) throw new Error("Expected a Connection Porta
 console.log("Open this Connection Portal URL:", login.data.redirectURI);
 ```
 
-After you complete the Connection Portal, run the following code. Reuse your initialized SDK client.
+Once your brokerage is connected through the Dashboard or Connection Portal, run the following code. Reuse your initialized SDK client.
 
 ```typescript
 const accounts = await snaptrade.accountInformation.listUserAccounts();
@@ -68,14 +72,18 @@ snaptrade = SnapTrade(
         consumer_key=os.environ["SNAPTRADE_CONSUMER_KEY"],
     )
 )
+```
 
+If your brokerage is already connected in the Dashboard, skip this block. Otherwise, generate a portal URL and complete the connection in your browser.
+
+```python
 # Generate connection URL.
 login = snaptrade.authentication.login_snap_trade_user()
 
 print("Open this Connection Portal URL:", login.body["redirectURI"])
 ```
 
-After you complete the Connection Portal, run the following code. Reuse your initialized SDK client.
+Once your brokerage is connected through the Dashboard or Connection Portal, run the following code. Reuse your initialized SDK client.
 
 ```python
 accounts = snaptrade.account_information.list_user_accounts()
