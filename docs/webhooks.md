@@ -65,6 +65,8 @@ The OAuth schema does not include the API-key schema's `clientId`, `brokerageAut
 
 You can verify the authenticity of any SnapTrade webhook by using the `Signature` header contained in the webhook headers, and comparing that to the expected signature generated using your **consumer key**. Note that the consumer key is different from the webhook secret that is being deprecated.
 
+This applies to Commercial API Key, Personal API Key, and OAuth webhooks. For OAuth, use the consumer key of the SnapTrade customer that owns the app—not its OAuth client secret or access token.
+
 The `Signature` header contains an HMAC SHA256 hash of the request body, using your consumer key as the key.
 
 Here's an example implementation of a Flask webhook handler that verifies the authenticity of incoming webhooks:
