@@ -27,7 +27,9 @@ If your app uses webhooks, you poll the API correctly (using the proper endpoint
 
 ### 3. User Onboarding
 
-For Commercial API key integrations, you should have a user onboarding flow that handles registering a SnapTrade user and storing the generated user secret. Personal API key integrations should not register users or store `userSecret` values.
+- **Commercial API Key:** register a SnapTrade user and securely store their `userSecret`.
+- **Personal API Key:** use your own key; do not register users or store `userSecret` values.
+- **OAuth:** direct users through authorization and securely store the resulting tokens. See [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps).
 
 SnapTrade allows read-only access or trading access for brokerage connections. Making the user explicitly decide as part of the authentication flow helps them understand the nature of the connection they're creating, and ensures a good user experience.
 
@@ -35,10 +37,12 @@ SnapTrade allows read-only access or trading access for brokerage connections. M
 
 The ability to view and delete existing connections is critical to allow users to manage their authorizations, and to stay compliant with GDPR and privacy guidelines.
 
-The following endpoints have the information you need for this:
+API-key integrations can list and delete connections using:
 
 - :api[Connections_listBrokerageAuthorizations]
 - :api[Connections_removeBrokerageAuthorization]
+
+OAuth integrations can list connections, but cannot delete them through the API. Direct users to the [SnapTrade Dashboard](https://dashboard.snaptrade.com) to manage or delete their connections.
 
 ### 5. Handle Disabled Connections
 
@@ -68,5 +72,5 @@ You have set your webhook listener URL in the [SnapTrade Dashboard](https://dash
 
 ## Next Steps
 
-- Get your Production Keys through the [SnapTrade Dashboard](https://dashboard.snaptrade.com)
+- For Commercial API Key integrations, get your Production Keys through the [SnapTrade Dashboard](https://dashboard.snaptrade.com)
 - Reach out to us at [support@snaptrade.com](mailto:support@snaptrade.com) or over [Discord](https://discord.gg/UDwzZUuQ)
