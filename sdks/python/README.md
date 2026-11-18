@@ -91,6 +91,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.account_information.get_account_balances_v2`](#snaptradeaccount_informationget_account_balances_v2)
   * [`snaptrade.account_information.get_account_details`](#snaptradeaccount_informationget_account_details)
   * [`snaptrade.account_information.get_account_order`](#snaptradeaccount_informationget_account_order)
+  * [`snaptrade.account_information.get_account_transactions`](#snaptradeaccount_informationget_account_transactions)
   * [`snaptrade.account_information.get_all_account_orders`](#snaptradeaccount_informationget_all_account_orders)
   * [`snaptrade.account_information.get_all_account_positions`](#snaptradeaccount_informationget_all_account_positions)
   * [`snaptrade.account_information.get_all_account_recent_orders`](#snaptradeaccount_informationget_all_account_recent_orders)
@@ -764,6 +765,92 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/{brokerageOrderId}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.account_information.get_account_transactions`<a id="snaptradeaccount_informationget_account_transactions"></a>
+
+Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+
+History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+get_account_transactions_response = (
+    commercial_api_key_client.account_information.get_account_transactions(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        start_date="2022-01-24",
+        end_date="2022-01-24",
+        type="BUY_TO_OPEN,DIVIDEND",
+        offset=0,
+        limit=1000,
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+get_account_transactions_response = (
+    personal_api_key_client.account_information.get_account_transactions(
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        start_date="2022-01-24",
+        end_date="2022-01-24",
+        type="BUY_TO_OPEN,DIVIDEND",
+        offset=0,
+        limit=1000,
+    )
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### start_date: `date`<a id="start_date-date"></a>
+
+First trade date to include (UTC). Defaults to the earliest available transaction.
+
+##### end_date: `date`<a id="end_date-date"></a>
+
+Last trade date to include (UTC). Defaults to the latest available transaction.
+
+##### type: `str`<a id="type-str"></a>
+
+Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+
+##### offset: `int`<a id="offset-int"></a>
+
+Number of matching transactions to skip.
+
+##### limit: `int`<a id="limit-int"></a>
+
+Maximum number of transactions to return in this page.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountTransactionsResponse`](./snaptrade_client/type/account_transactions_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/transactions` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

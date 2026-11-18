@@ -84,6 +84,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.accountInformation.getAccountBalancesV2`](#snaptradeaccountinformationgetaccountbalancesv2)
   * [`snaptrade.accountInformation.getAccountDetails`](#snaptradeaccountinformationgetaccountdetails)
   * [`snaptrade.accountInformation.getAccountOrder`](#snaptradeaccountinformationgetaccountorder)
+  * [`snaptrade.accountInformation.getAccountTransactions`](#snaptradeaccountinformationgetaccounttransactions)
   * [`snaptrade.accountInformation.getAllAccountOrders`](#snaptradeaccountinformationgetallaccountorders)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
   * [`snaptrade.accountInformation.getAllAccountRecentOrders`](#snaptradeaccountinformationgetallaccountrecentorders)
@@ -520,6 +521,68 @@ AccountOrder result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAccountTransactions`<a id="snaptradeaccountinformationgetaccounttransactions"></a>
+
+Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+
+History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AccountTransactionsResponse result = client
+        .accountInformation
+        .getAccountTransactions(accountId, userId, userSecret)
+        .startDate(startDate)
+        .endDate(endDate)
+        .type(type)
+        .offset(offset)
+        .limit(limit)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### startDate: `LocalDate`<a id="startdate-localdate"></a>
+
+First trade date to include (UTC). Defaults to the earliest available transaction.
+
+##### endDate: `LocalDate`<a id="enddate-localdate"></a>
+
+Last trade date to include (UTC). Defaults to the latest available transaction.
+
+##### type: `String`<a id="type-string"></a>
+
+Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+
+##### offset: `Integer`<a id="offset-integer"></a>
+
+Number of matching transactions to skip.
+
+##### limit: `Integer`<a id="limit-integer"></a>
+
+Maximum number of transactions to return in this page.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountTransactionsResponse](./src/main/java/com/snaptrade/client/model/AccountTransactionsResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/transactions` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

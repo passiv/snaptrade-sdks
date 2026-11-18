@@ -22,6 +22,7 @@ import com.snaptrade.client.model.AccountHoldingsAccount;
 import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrder;
 import com.snaptrade.client.model.AccountOrderRecord;
+import com.snaptrade.client.model.AccountTransactionsResponse;
 import com.snaptrade.client.model.AccountValueHistoryResponse;
 import com.snaptrade.client.model.AllAccountOrdersResponse;
 import com.snaptrade.client.model.AllAccountPositionsResponse;
@@ -148,6 +149,33 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         AccountOrder response = api.getAccountOrder(accountId, brokerageOrderId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List account transactions
+     *
+     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountTransactionsTest() throws ApiException {
+        UUID accountId = null;
+        String userId = null;
+        String userSecret = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        String type = null;
+        Integer offset = null;
+        Integer limit = null;
+        AccountTransactionsResponse response = api.getAccountTransactions(accountId, userId, userSecret)
+                .startDate(startDate)
+                .endDate(endDate)
+                .type(type)
+                .offset(offset)
+                .limit(limit)
                 .execute();
         // TODO: test validations
     }

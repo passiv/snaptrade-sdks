@@ -659,6 +659,160 @@ module SnapTrade
     end
 
 
+    # List account transactions
+    #
+    # Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+    # 
+    # History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+    #
+    # @param account_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param start_date [Date] First trade date to include (UTC). Defaults to the earliest available transaction.
+    # @param end_date [Date] Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @param type [String] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    # @param offset [Integer] Number of matching transactions to skip.
+    # @param limit [Integer] Maximum number of transactions to return in this page.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_transactions(account_id:, user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, type: SENTINEL, offset: 0, limit: 1000, extra: {})
+      extra[:start_date] = start_date if start_date != SENTINEL
+      extra[:end_date] = end_date if end_date != SENTINEL
+      extra[:type] = type if type != SENTINEL
+      extra[:offset] = offset if offset != SENTINEL
+      extra[:limit] = limit if limit != SENTINEL
+      data, _status_code, _headers = get_account_transactions_with_http_info_impl(account_id, user_id, user_secret, extra)
+      data
+    end
+
+    # List account transactions
+    #
+    # Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+    # 
+    # History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+    #
+    # @param account_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param start_date [Date] First trade date to include (UTC). Defaults to the earliest available transaction.
+    # @param end_date [Date] Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @param type [String] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    # @param offset [Integer] Number of matching transactions to skip.
+    # @param limit [Integer] Maximum number of transactions to return in this page.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_transactions_with_http_info(account_id:, user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, type: SENTINEL, offset: 0, limit: 1000, extra: {})
+      extra[:start_date] = start_date if start_date != SENTINEL
+      extra[:end_date] = end_date if end_date != SENTINEL
+      extra[:type] = type if type != SENTINEL
+      extra[:offset] = offset if offset != SENTINEL
+      extra[:limit] = limit if limit != SENTINEL
+      get_account_transactions_with_http_info_impl(account_id, user_id, user_secret, extra)
+    end
+
+    # List account transactions
+    # Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+    # @param account_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :start_date First trade date to include (UTC). Defaults to the earliest available transaction.
+    # @option opts [Date] :end_date Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    # @option opts [Integer] :offset Number of matching transactions to skip. (default to 0)
+    # @option opts [Integer] :limit Maximum number of transactions to return in this page. (default to 1000)
+    # @return [AccountTransactionsResponse]
+    private def get_account_transactions_impl(account_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = get_account_transactions_with_http_info(account_id, user_id, user_secret, opts)
+      data
+    end
+
+    # List account transactions
+    # Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+    # @param account_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :start_date First trade date to include (UTC). Defaults to the earliest available transaction.
+    # @option opts [Date] :end_date Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    # @option opts [Integer] :offset Number of matching transactions to skip. (default to 0)
+    # @option opts [Integer] :limit Maximum number of transactions to return in this page. (default to 1000)
+    # @return [Array<(AccountTransactionsResponse, Integer, Hash)>] AccountTransactionsResponse data, response status code and response headers
+    private def get_account_transactions_with_http_info_impl(account_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_account_transactions ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountInformationApi.get_account_transactions"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling AccountInformationApi.get_account_transactions"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling AccountInformationApi.get_account_transactions"
+      end
+      if @api_client.config.client_side_validation && !opts[:'offset'].nil? && opts[:'offset'] < 0
+        fail ArgumentError, 'invalid value for "opts[:"offset"]" when calling AccountInformationApi.get_account_transactions, must be greater than or equal to 0.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 1000
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AccountInformationApi.get_account_transactions, must be smaller than or equal to 1000.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling AccountInformationApi.get_account_transactions, must be greater than or equal to 1.'
+      end
+
+      # resource path
+      local_var_path = '/accounts/{accountId}/transactions'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+      query_params[:'startDate'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'endDate'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+      query_params[:'type'] = opts[:'type'] if !opts[:'type'].nil?
+      query_params[:'offset'] = opts[:'offset'] if !opts[:'offset'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountTransactionsResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"AccountInformationApi.get_account_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountInformationApi#get_account_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List all account orders
     #
     # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.

@@ -77,6 +77,9 @@ class AccountInformationApi extends \SnapTrade\CustomApi
         'getAccountOrder' => [
             'application/json',
         ],
+        'getAccountTransactions' => [
+            'application/json',
+        ],
         'getAllAccountOrders' => [
             'application/json',
         ],
@@ -2616,6 +2619,539 @@ class AccountInformationApi extends \SnapTrade\CustomApi
             $resourcePath = str_replace(
                 '{' . 'brokerageOrderId' . '}',
                 ObjectSerializer::toPathValue($brokerage_order_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('clientId');
+        if ($apiKey !== null) {
+            $queryParams['clientId'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Signature');
+        if ($apiKey !== null) {
+            $headers['Signature'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('timestamp');
+        if ($apiKey !== null) {
+            $queryParams['timestamp'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $method = 'GET';
+        $this->beforeCreateRequestHook($method, $resourcePath, $queryParams, $headers, $httpBody);
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return [
+            "request" => new Request(
+                $method,
+                $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+                $headers,
+                $httpBody
+            ),
+            "serializedBody" => $httpBody
+        ];
+    }
+
+    /**
+     * Operation getAccountTransactions
+     *
+     * List account transactions
+     *
+     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     *
+     * @param  string $account_id account_id (required)
+     * @param  string $user_id user_id (required)
+     * @param  string $user_secret user_secret (required)
+     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
+     * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
+     * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactions'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SnapTrade\Model\AccountTransactionsResponse|\SnapTrade\Model\Model429TooManyRequestsResponse
+     */
+    public function getAccountTransactions(
+        $account_id,
+        $user_id,
+        $user_secret,
+        $start_date = SENTINEL_VALUE,
+        $end_date = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
+        $offset = 0,
+        $limit = 1000,
+
+        string $contentType = self::contentTypes['getAccountTransactions'][0]
+    )
+    {
+
+        list($response) = $this->getAccountTransactionsWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $offset, $limit, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAccountTransactionsWithHttpInfo
+     *
+     * List account transactions
+     *
+     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
+     * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
+     * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactions'] to see the possible values for this operation
+     *
+     * @throws \SnapTrade\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SnapTrade\Model\AccountTransactionsResponse|\SnapTrade\Model\Model429TooManyRequestsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAccountTransactionsWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $type = null, $offset = 0, $limit = 1000, string $contentType = self::contentTypes['getAccountTransactions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountTransactionsRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $offset, $limit, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                if (
+                    ($e->getCode() == 401 || $e->getCode() == 403) &&
+                    !empty($this->getConfig()->getAccessToken()) &&
+                    $requestOptions->shouldRetryOAuth()
+                ) {
+                    return $this->getAccountTransactionsWithHttpInfo(
+                        $account_id,
+                        $user_id,
+                        $user_secret,
+                        $start_date,
+                        $end_date,
+                        $type,
+                        $offset,
+                        $limit,
+                        $contentType,
+                        $requestOptions->setRetryOAuth(false)
+                    );
+                }
+
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\SnapTrade\Model\AccountTransactionsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\AccountTransactionsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\AccountTransactionsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\SnapTrade\Model\Model429TooManyRequestsResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\Model429TooManyRequestsResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\Model429TooManyRequestsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\SnapTrade\Model\AccountTransactionsResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\AccountTransactionsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\Model429TooManyRequestsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAccountTransactionsAsync
+     *
+     * List account transactions
+     *
+     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
+     * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
+     * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountTransactionsAsync(
+        $account_id,
+        $user_id,
+        $user_secret,
+        $start_date = SENTINEL_VALUE,
+        $end_date = SENTINEL_VALUE,
+        $type = SENTINEL_VALUE,
+        $offset = 0,
+        $limit = 1000,
+
+        string $contentType = self::contentTypes['getAccountTransactions'][0]
+    )
+    {
+
+        return $this->getAccountTransactionsAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $offset, $limit, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAccountTransactionsAsyncWithHttpInfo
+     *
+     * List account transactions
+     *
+     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
+     * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
+     * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAccountTransactionsAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $type = null, $offset = 0, $limit = 1000, string $contentType = self::contentTypes['getAccountTransactions'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
+    {
+        $returnType = '\SnapTrade\Model\AccountTransactionsResponse';
+        ["request" => $request, "serializedBody" => $serializedBody] = $this->getAccountTransactionsRequest($account_id, $user_id, $user_secret, $start_date, $end_date, $type, $offset, $limit, $contentType);
+
+        // Customization hook
+        $this->beforeSendHook($request, $requestOptions, $this->config);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAccountTransactions'
+     *
+     * @param  string $account_id (required)
+     * @param  string $user_id (required)
+     * @param  string $user_secret (required)
+     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
+     * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
+     * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAccountTransactions'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAccountTransactionsRequest($account_id, $user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $type = SENTINEL_VALUE, $offset = 0, $limit = 1000, string $contentType = self::contentTypes['getAccountTransactions'][0])
+    {
+
+        // Check if $account_id is a string
+        if ($account_id !== SENTINEL_VALUE && !is_string($account_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($account_id, true), gettype($account_id)));
+        }
+        // verify the required parameter 'account_id' is set
+        if ($account_id === SENTINEL_VALUE || (is_array($account_id) && count($account_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter account_id when calling getAccountTransactions'
+            );
+        }
+        // Check if $user_id is a string
+        if ($user_id !== SENTINEL_VALUE && !is_string($user_id)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_id, true), gettype($user_id)));
+        }
+        // verify the required parameter 'user_id' is set
+        if ($user_id === SENTINEL_VALUE || (is_array($user_id) && count($user_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_id when calling getAccountTransactions'
+            );
+        }
+        // Check if $user_secret is a string
+        if ($user_secret !== SENTINEL_VALUE && !is_string($user_secret)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($user_secret, true), gettype($user_secret)));
+        }
+        // verify the required parameter 'user_secret' is set
+        if ($user_secret === SENTINEL_VALUE || (is_array($user_secret) && count($user_secret) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter user_secret when calling getAccountTransactions'
+            );
+        }
+        // Check if $type is a string
+        if ($type !== SENTINEL_VALUE && !is_string($type)) {
+            throw new \InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($type, true), gettype($type)));
+        }
+        if ($offset !== SENTINEL_VALUE && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "offset" when calling AccountInformationApi.getAccountTransactions, must be bigger than or equal to 0.');
+        }
+                if ($limit !== SENTINEL_VALUE && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "limit" when calling AccountInformationApi.getAccountTransactions, must be smaller than or equal to 1000.');
+        }
+        if ($limit !== SENTINEL_VALUE && $limit < 1) {
+            throw new \InvalidArgumentException('invalid value for "limit" when calling AccountInformationApi.getAccountTransactions, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/accounts/{accountId}/transactions';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        if ($user_id !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_id,
+                'userId', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($user_secret !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $user_secret,
+                'userSecret', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                true // required
+            ) ?? []);
+        }
+        if ($start_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $start_date,
+                'startDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($end_date !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $end_date,
+                'endDate', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($type !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $type,
+                'type', // param base name
+                'string', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($offset !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $offset,
+                'offset', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+        if ($limit !== SENTINEL_VALUE) {
+            // query params
+            $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+                $limit,
+                'limit', // param base name
+                'integer', // openApiType
+                'form', // style
+                true, // explode
+                false // required
+            ) ?? []);
+        }
+
+
+        // path params
+        if ($account_id !== SENTINEL_VALUE) {
+            $resourcePath = str_replace(
+                '{' . 'accountId' . '}',
+                ObjectSerializer::toPathValue($account_id),
                 $resourcePath
             );
         }

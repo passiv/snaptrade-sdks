@@ -1,0 +1,27 @@
+# SnapTrade.Net.Model.InstrumentNullable
+Instrument metadata for a V2 position. Use `kind` to determine which schema is present.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Kind** | **string** | Type of security instrument. | 
+**Id** | **string** | Unique identifier for the instrument. | 
+**Symbol** | **string** | The formatted trading symbol for the security. | 
+**RawSymbol** | **string** | The raw symbol without any exchange suffix. | 
+**Description** | **string** | Human-readable description of the security. | [optional] 
+**Currency** | **string** | ISO-4217 currency code for the security listing. | [optional] 
+**Exchange** | **string** | Exchange MIC code or exchange code for the security. | [optional] 
+**FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
+**OptionType** | **string** | Whether the contract is a call or put. | 
+**StrikePrice** | **decimal** | Strike price for the option contract. | 
+**ExpirationDate** | **DateTime** | Expiration date of the option contract. | 
+**Multiplier** | **decimal?** | Notional multiplier for the option contract. | 
+**Underlying** | [**FutureInstrument**](FutureInstrument.md) |  | 
+**RootSymbol** | **string** | Root symbol for the future contract. | 
+**ExpirationCode** | **string** | Exchange expiration code for the contract. | 
+**UnderlyingInstrument** | [**UnderlyingTokenizedAssetInstrument**](UnderlyingTokenizedAssetInstrument.md) | The listed stock or ETF underlying a tokenized asset. | 
+**Code** | **string** | ISO-4217 code of the currency. | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+

@@ -121,6 +121,15 @@ export type {
 } from './api/account-information-api';
 
 export type {
+    AccountInformationApiGetAccountTransactionsBaseRequest,
+    AccountInformationApiGetAccountTransactionscommercialApiKeyRequest,
+    AccountInformationApiGetAccountTransactionspersonalApiKeyRequest,
+    AccountInformationApiGetAccountTransactionsRequestByAuthMode,
+    AccountInformationApiGetAccountTransactionsRequest,
+    AccountInformationApiGetAccountTransactionsArgs,
+} from './api/account-information-api';
+
+export type {
     AccountInformationApiGetAllAccountOrdersBaseRequest,
     AccountInformationApiGetAllAccountOrderscommercialApiKeyRequest,
     AccountInformationApiGetAllAccountOrderspersonalApiKeyRequest,

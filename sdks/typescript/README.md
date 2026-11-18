@@ -85,6 +85,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.accountInformation.getAccountBalancesV2`](#snaptradeaccountinformationgetaccountbalancesv2)
   * [`snaptrade.accountInformation.getAccountDetails`](#snaptradeaccountinformationgetaccountdetails)
   * [`snaptrade.accountInformation.getAccountOrder`](#snaptradeaccountinformationgetaccountorder)
+  * [`snaptrade.accountInformation.getAccountTransactions`](#snaptradeaccountinformationgetaccounttransactions)
   * [`snaptrade.accountInformation.getAllAccountOrders`](#snaptradeaccountinformationgetallaccountorders)
   * [`snaptrade.accountInformation.getAllAccountPositions`](#snaptradeaccountinformationgetallaccountpositions)
   * [`snaptrade.accountInformation.getAllAccountRecentOrders`](#snaptradeaccountinformationgetallaccountrecentorders)
@@ -726,6 +727,91 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getAccountTransactions`<a id="snaptradeaccountinformationgetaccounttransactions"></a>
+
+Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+
+History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```typescript
+const getAccountTransactionsResponse =
+  await commercialApiKeyClient.accountInformation.getAccountTransactions({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
+    type: "BUY_TO_OPEN,DIVIDEND",
+    offset: 0,
+    limit: 1000,
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+Required credentials for this mode:
+
+- `userId` (string, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `userSecret` (string, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```typescript
+const getAccountTransactionsResponse =
+  await personalApiKeyClient.accountInformation.getAccountTransactions({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
+    type: "BUY_TO_OPEN,DIVIDEND",
+    offset: 0,
+    limit: 1000,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### startDate: `string | Date`<a id="startdate-string--date"></a>
+
+First trade date to include (UTC). Defaults to the earliest available transaction.
+
+##### endDate: `string | Date`<a id="enddate-string--date"></a>
+
+Last trade date to include (UTC). Defaults to the latest available transaction.
+
+##### type: `string`<a id="type-string"></a>
+
+Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+
+##### offset: `number`<a id="offset-number"></a>
+
+Number of matching transactions to skip.
+
+##### limit: `number`<a id="limit-number"></a>
+
+Maximum number of transactions to return in this page.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountTransactionsResponse](./models/account-transactions-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/transactions` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

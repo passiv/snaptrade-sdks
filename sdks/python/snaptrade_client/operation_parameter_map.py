@@ -52,6 +52,28 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/transactions-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'startDate'
+            },
+            {
+                'name': 'endDate'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'offset'
+            },
+            {
+                'name': 'limit'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/all-GET': {
         'parameters': [
             {
