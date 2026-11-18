@@ -15,9 +15,9 @@ If you need to know when transactions—or holdings data on Daily plans—have s
 
 ## API account status
 
-[List accounts for a connection](https://docs.snaptrade.com/reference/Connections/Connections_listBrokerageAuthorizationAccounts) returns a `sync_status` object for each account. It reports when the daily holdings sync last ran and the last day for which transactions **have been fully synced** from 00:00 through 23:59.
+[List accounts](https://docs.snaptrade.com/reference/Connections/Connections_listConnectionAccounts) returns a `sync_status` object for each account. It reports when positions, balances, and orders were last successfully synced, and the last day for which transactions **have been fully synced** from 00:00 through 23:59. Deposit and line of credit accounts omit `positions` and `orders`.
 
-If a user has multiple connections, first call :api[Connections_listBrokerageAuthorizations], then call :api[Connections_listBrokerageAuthorizationAccounts] for each connection.
+If a user has multiple connections, first call :api[Connections_listBrokerageAuthorizations], then call :api[Connections_listConnectionAccounts] for each connection.
 
 ```json
 {
@@ -27,10 +27,9 @@ If a user has multiple connections, first call :api[Connections_listBrokerageAut
       "last_successful_sync": "2022-01-24",
       "first_transaction_date": "2022-01-24"
     },
-    "holdings": {
-      "initial_sync_completed": true,
-      "last_successful_sync": "2024-06-28 18:42:46.561408+00:00"
-    }
+    "positions": "2024-06-28 18:42:46.561408+00:00",
+    "balances": "2024-06-28 18:42:46.561408+00:00",
+    "orders": "2024-06-28 18:42:46.561408+00:00"
   }
 }
 ```

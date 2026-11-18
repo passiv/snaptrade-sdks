@@ -4,9 +4,9 @@ An account represents a unique account at a brokerage, like an individual accoun
 
 ## Account Details
 
-:api[AccountInformation_getUserAccountDetails]
+:api[AccountInformation_getAccountDetails]
 
-The account object contains information such as the institution name, the sync status of the account and the total market value of the account.
+The account object contains information such as the account `kind`, institution, sync status, and balance information. It supports investment, deposit, line of credit, annuity, and mortgage accounts; use the `kind` field to determine which other fields are present.
 
 ## Positions
 

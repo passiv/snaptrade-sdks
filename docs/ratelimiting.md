@@ -46,14 +46,17 @@ Account-level rate limiting is scoped to the combination of your `clientId` and 
 
 Account-level rate limiting applies to the following endpoints:
 
-- :api[AccountInformation_getUserHoldings]
-- :api[AccountInformation_getUserAccountDetails]
+- :api[AccountInformation_getAccountDetails]
 - :api[AccountInformation_getUserAccountBalance]
+- :api[AccountInformation_getAccountBalancesV2]
 - :api[AccountInformation_getAllAccountPositions]
 - :api[AccountInformation_getUserAccountOrders]
+- :api[AccountInformation_getAllAccountOrders]
 - :api[AccountInformation_getUserAccountRecentOrders]
-- :api[AccountInformation_getAccountActivities]
+- :api[AccountInformation_getAllAccountRecentOrders]
 - :api[AccountInformation_getUserAccountOrderDetail]
+- :api[AccountInformation_getAccountOrder]
+- :api[AccountInformation_getAccountActivities]
 - :api[Trading_getUserAccountQuotes]
 
 > **Note:** While the per-account rate limit allows up to 10 requests per minute, these endpoints should not be polled at this frequency. See [API Polling Patterns](https://docs.snaptrade.com/docs/launching-your-application#3-api-polling-patterns) for recommended usage patterns.
