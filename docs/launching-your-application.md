@@ -40,7 +40,7 @@ The ability to view and delete existing connections is critical to allow users t
 API-key integrations can list and delete connections using:
 
 - :api[Connections_listBrokerageAuthorizations]
-- :api[Connections_removeBrokerageAuthorization]
+- :api[Connections_deleteConnection]
 
 OAuth integrations can list connections, but cannot delete them through the API. Direct users to the [SnapTrade Dashboard](https://dashboard.snaptrade.com) to manage or delete their connections.
 
