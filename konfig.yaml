@@ -166,7 +166,11 @@ portal:
       get: true
     /accounts/{accountId}/balances/v2:
       get: true
+    /management/stats:
+      get: true
   hideOperations:
+    /snapTrade/stats:
+      get: true
     /accounts/{accountId}/transactions:
       get: true
     /accounts/{accountId}/trading/simple:
