@@ -160,4 +160,4 @@ The SDK signs API-key requests for you. For direct HTTP, follow [Request Signatu
 - Configure the [Connection Portal](https://docs.snaptrade.com/docs/implement-connection-portal).
 - Read [Account Data](https://docs.snaptrade.com/docs/account-data) and manage [Connections](https://docs.snaptrade.com/docs/connections).
 - Configure [Webhooks](https://docs.snaptrade.com/docs/webhooks).
-- Prepare for production with [Launching Your Application](https://docs.snaptrade.com/docs/launching-your-application) and the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide).
+- Prepare for production with [Launching Your Application](https://docs.snaptrade.com/docs/launch-guide) and the [Broker Access Guide](https://docs.snaptrade.com/docs/broker-access-guide).
